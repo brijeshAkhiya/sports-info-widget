@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+
+/******* Fonts Face CSS Start **********/
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+/* @font-face {
+    font-family: 'BebasNeueBold';
+    src: url('../fonts/BebasNeueBold.eot');
+    src: url('../fonts/BebasNeueBold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/BebasNeueBold.woff2') format('woff2'),
+        url('../fonts/BebasNeueBold.woff') format('woff'),
+        url('../fonts/BebasNeueBold.ttf') format('truetype'),
+        url('../fonts/BebasNeueBold.svg#BebasNeueBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+} */
+@font-face {
+    font-family: 'BebasNeueBold';
+    src: url('../fonts/bebasneue_bold-webfont.woff2') format('woff2'),
+         url('../fonts/bebasneue_bold-webfont.woff') format('woff'),
+         url('../fonts/bebasneue_bold-webfont.ttf') format('truetype'),
+         url('../fonts/bebasneue_bold-webfont.svg#bebas_neuebold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/********* Fonts Face CSS End **********/
+
+/******* Common Element CSS Start ******/
+*                       { margin: 0px; padding: 0px; outline: none; }
+body                    { font-family: 'IBM Plex Sans', sans-serif; font-size: 18px; line-height: 26px; color: #3D3D3D;}
+.clear                  { clear:both;}
+img                     { border: 0px;}
+ul,ol                   { list-style: none;}
+a                       { text-decoration: none; outline: none;}
+a:focus, a:active, a:visited, 
+a:hover	                { text-decoration: none; outline: none; }
+h1                      { margin: 0px 0px 32px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; font-size-adjust: auto; text-transform: uppercase; }
+h2                      { margin: 0px 0px 8px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; text-transform: uppercase;}
+h3                      { margin: 0px 0px 8px; font-size: 48px; line-height: 58px; font-family: 'BebasNeueBold'; text-transform: uppercase; }
+/* h4                      { }
+h5                      { }
+h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
+p                       { }
+img                     { max-width: 100%; }
+/******* Common Element CSS End *********/
+/* .common-overlay         { } */
+/* -------- Title Style ------- */
+/* -------- Button Style ------- */
+
+/******* Header Section CSS Start *******/
+
+/******* Header Section CSS End *********/
+
+/******* Banner Section CSS Start *******/
+
+/******* Banner Section CSS End *********/
+
+/******* Middle Section CSS Start ******/
+.row.sidebar-row            { margin: 0px -12px; }
+.sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 350px); }
+.sidebar-row .sidebar-col   { padding: 0px 12px; width: 350px; }
+.sidebar-col .ad-block      { margin-bottom: 24px;}
+.common-section             { padding: 48px 0px; }
+/* -------- Inner Page ------- */
+
+
+
+/******** Middle Section CSS End *******/
+
+/***** Bottom Section CSS Start *******/
+
+/* -------- Footer Inner Section ------- */
+/****** Bottom Section CSS End *******/
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1380px) {
+    .container                  { max-width: 1350px; }
+}	
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	
+}
+
+@media (max-width: 991px) {
+	
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	
+	
+}
+
+@media (max-width: 767px) {
+	
+}

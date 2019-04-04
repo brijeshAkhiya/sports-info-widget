@@ -22,9 +22,12 @@
               "src/manifest.json"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/sports-info-main.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/bootstrap.min.js" 
+            ]
           },
           "configurations": {
             "production": {
@@ -40,7 +43,16 @@
              
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
-            }
+            },
+            "hmr": {
+              "fileReplacements": [
+                  {
+                      "replace": "src/environments/environment.ts",
+                      "with": "src/environments/environment.hmr.ts"
+                  }
+              ]
+          }
+
           }
         },
         "serve": {
@@ -53,9 +65,9 @@
               "browserTarget": "sports-web:build:production"
             },
             "hmr": {
-              "hmr": false,
-              "hmrWarning": false
-            }
+              "hmr": true,
+              "browserTarget": "sports-web:build:hmr"
+          }
           }
         },
         "extract-i18n": {
@@ -71,9 +83,12 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
+            "scripts": [
+             
+            ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+             
             ],
             "assets": [
               "src/assets",

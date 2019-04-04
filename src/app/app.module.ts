@@ -6,11 +6,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { SocialLoginModule, AuthServiceConfig, AuthService } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 //store configuration modules import 
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from "./app-reducer";
+import { SlugifyPipe } from './pipes/slugpipe';
+
 
 let config = new AuthServiceConfig([
   {
@@ -29,12 +31,14 @@ export function provideConfig() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SlugifyPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+  
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({

@@ -12,6 +12,11 @@ const routes: Routes = [
         path: 'writer',
         loadChildren: './components/writer/writer.module#WriterModule',
 
+    },
+    {
+        path: '',
+        loadChildren: './components/home/home.module#HomeModule',
+
     }
 
 ]
