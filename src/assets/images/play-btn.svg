@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="138px" height="138px" viewBox="0 0 138 138" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>play-btn</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M68.8522702,48.7067989 L87.7319237,77.4958979 C88.221729,78.2427895 88.0133194,79.2453305 87.2664279,79.7351358 C87.0029216,79.907941 86.6946714,80 86.3795568,80 L48.6202499,80 C47.7270778,80 47.0030188,79.275941 47.0030188,78.3827689 C47.0030188,78.0676544 47.0950778,77.7594042 47.267883,77.4958979 L66.1475365,48.7067989 C66.6373418,47.9599074 67.6398828,47.7514978 68.3867744,48.2413031 C68.5722134,48.3629125 68.7306608,48.5213599 68.8522702,48.7067989 Z" id="path-1"></path>
+        <filter x="-61.0%" y="-90.7%" width="236.6%" height="275.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="4" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="3" dy="-1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.115411932 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="00-00-00-Home" transform="translate(-666.000000, -2936.000000)">
+            <g id="Group-28" transform="translate(0.000000, 2600.000000)">
+                <g id="Group-27" transform="translate(300.000000, 160.000000)">
+                    <g id="Group-25">
+                        <g id="Rectangle-3">
+                            <g id="Group-22">
+                                <g id="play-btn" transform="translate(372.000000, 182.000000)">
+                                    <circle id="Oval" stroke="#FFFFFF" stroke-width="12" opacity="0.949999988" cx="63" cy="63" r="63"></circle>
+                                    <g id="Polygon" transform="translate(67.500000, 64.000000) rotate(-270.000000) translate(-67.500000, -64.000000) ">
+                                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                        <use stroke="#FFFFFF" stroke-width="8" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

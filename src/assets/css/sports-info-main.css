@@ -34,22 +34,31 @@ body                    { font-family: 'IBM Plex Sans', sans-serif; font-size: 1
 .clear                  { clear:both;}
 img                     { border: 0px;}
 ul,ol                   { list-style: none;}
-a                       { text-decoration: none; outline: none;}
+a                       { text-decoration: none; outline: none; cursor: pointer;}
 a:focus, a:active, a:visited, 
 a:hover	                { text-decoration: none; outline: none; }
 h1                      { margin: 0px 0px 32px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; font-size-adjust: auto; text-transform: uppercase; }
 h2                      { margin: 0px 0px 8px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; text-transform: uppercase;}
 h3                      { margin: 0px 0px 8px; font-size: 48px; line-height: 58px; font-family: 'BebasNeueBold'; text-transform: uppercase; }
-/* h4                      { }
-h5                      { }
-h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
+/* h4                      { } */
+h5                      { font-size: 24px; line-height: 32px; color: #3D3D3D; font-weight: 500; }
+h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
+h6 a                    { color: #3D3D3D; }
+h6 a:not([href]):not([tabindex]):hover,
+h6 a:not([href]):not([tabindex]):focus              { color: #2384E9;}
+/* h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
 p                       { }
+p.small-text            { font-size: 16px; line-height: 22px; }
 img                     { max-width: 100%; }
 /******* Common Element CSS End *********/
 /* .common-overlay         { } */
-/* -------- Title Style ------- */
+/* -------- Color Style ------- */
+.white-text             { color: #fff; }
 /* -------- Button Style ------- */
-
+button                  { outline: none !important; cursor: pointer; }
+.theme-btn              { display: inline-block; min-width: 127px; padding: 12px; background: #ECECEC; font-size: 14px; line-height: 18px; color: #3D3D3D; font-weight: 500; border: none; text-transform: uppercase; text-align: center; border-radius: 0px; }
+.theme-btn:hover,
+.theme-btn:focus        { background: #2384E9; color: #fff; border: none;  }
 /******* Header Section CSS Start *******/
 
 /******* Header Section CSS End *********/
@@ -63,6 +72,8 @@ img                     { max-width: 100%; }
 .sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 350px); }
 .sidebar-row .sidebar-col   { padding: 0px 12px; width: 350px; }
 .sidebar-col .ad-block      { margin-bottom: 24px;}
+.row.row-size8              { margin: 0px -8px; }
+.row-size8 [class*="col-"]  { padding: 0px 8px; }
 .common-section             { padding: 48px 0px; }
 /* -------- Inner Page ------- */
 

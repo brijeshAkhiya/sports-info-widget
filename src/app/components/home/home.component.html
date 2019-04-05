@@ -7,7 +7,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-10">
-                    <h1><span style="background: #EFBD68;" >Chennai Super Kings defeat Rajasthan Royals by 8 runs</span></h1>
+                    <h1><span style="background: #EFBD68;">Chennai Super Kings defeat Rajasthan Royals by 8 runs</span>
+                    </h1>
                 </div>
             </div>
             <div class="banner-item-list">
@@ -45,17 +46,141 @@
         <div class="row sidebar-row">
             <div class="content-col">
                 <div class="popular-item">
-                    <img src="../../../assets/images/popular-article1.jpg" >
+                    <div class="item-img">
+                        <img src="../../../assets/images/popular-article1.jpg">
+                    </div>
                     <div class="blog-desc">
                         <div class="border-block"></div>
-                        <h3>Twitter reacts as RCB register their fourth consecutive loss against RR</h3>
-                        <p>Royal Challengers Bangalore went to Jaipur in search of their first of IPL 2019 but it was the Rajasthan Royals that opened their tally on the IPL Points Table. After Shreyas Gopal spun a web to demolish top order, Bangalore could post only 158 in 20 overs. During the chase, Rajasthan lost only three wickets and ended up chasing down…</p>
+                        <h3><a>Twitter reacts as RCB register their fourth consecutive loss against RR</a></h3>
+                        <p>Royal Challengers Bangalore went to Jaipur in search of their first of IPL 2019 but it was
+                            the Rajasthan Royals that opened their tally on the IPL Points Table. After Shreyas Gopal
+                            spun a web to demolish top order, Bangalore could post only 158 in 20 overs. During the
+                            chase, Rajasthan lost only three wickets …</p>
+                        <p class="author small-text"><span>Wen Yahui</span> 12 mins ago</p>
+                    </div>
+                </div>
+                <div class="home-popular-title d-flex justify-content-between align-items-center">
+                    <h5>Related news</h5>
+                    <button class="theme-btn">View All</button>
+                </div>
+                <div class="home-popular-list">
+                    <div class="row row-size8">
+                        <div class="col-md-4">
+                            <div class="popular-item">
+                                <div class="img-block" style="background-image: url(../../../assets/images/news-1.jpg)">
+                                </div>
+                                <h6><a>From Slap Gate to Lalit Modi: IPL controversies (Part 1)</a></h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="popular-item">
+                                <div class="img-block" style="background-image: url(../../../assets/images/news-2.jpg)">
+                                </div>
+                                <h6><a>From Slap Gate to Lalit Modi: IPL controversies (Part 1)</a></h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="popular-item">
+                                <div class="img-block" style="background-image: url(../../../assets/images/news-3.jpg)">
+                                </div>
+                                <h6><a>From Slap Gate to Lalit Modi: IPL controversies (Part 1)</a></h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="sidebar-col">
                 <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
                 <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="common-section popular-video-section">
+    <div class="container">
+        <div class="home-video-title d-flex justify-content-between align-items-center">
+            <h2 class="white-text">Popular Articles</h2>
+            <button class="theme-btn">View All</button>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="main-popular-video">
+                    <video id="videobtn" width="100%" height="489" preload="none"
+                        poster="../../../assets/images/video-thumb.jpg" #videoele controlsList="nodownload">
+                        <source src="../../../assets/video/CSK.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-btn-block" [ngClass]="{'video-play-hide': !isPlayBtn}"><button
+                            (click)="playvideo()"></button></div>
+                </div>
+                <h3><a>Unsung Deepak Chahar pivotal to the Dhoni-Fleming plan</a></h3>
+            </div>
+            <div class="col-md-4">
+                <ng-scrollbar class="custom-scrollbar">
+                    <div class="home-popular-vid-list">
+                        <div class="video-item d-flex align-items-center">
+                            <div class="video-img"
+                                style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+                            </div>
+                            <p class="small-text"><a>Haven't found the perfect team balance yet - Virat Kohli</a></p>
+                        </div>
+                        <div class="video-item d-flex align-items-center">
+                            <div class="video-img"
+                                style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                            </div>
+                            <p class="small-text"><a>Five IPL players who have successfully auditioned for CWC19</a></p>
+                        </div>
+                        <div class="video-item d-flex align-items-center">
+                            <div class="video-img"
+                                style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+                            </div>
+                            <p class="small-text"><a>How Bumrah upstaged the Kohli-de Villiers symphony</a></p>
+                        </div>
+                        <div class="video-item d-flex align-items-center">
+                            <div class="video-img"
+                                style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                            </div>
+                            <p class="small-text"><a>Talking points: Gayle turns middle overs into death overs</a></p>
+                        </div>
+                        <div class="video-item d-flex align-items-center">
+                            <div class="video-img"
+                                style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+                            </div>
+                            <p class="small-text"><a>Talking points: Gayle turns middle overs into death overs</a></p>
+                        </div>
+                        <div class="video-item d-flex align-items-center">
+                            <div class="video-img"
+                                style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                            </div>
+                            <p class="small-text"><a>Talking points: Gayle turns middle overs into death overs</a></p>
+                        </div>
+                    </div>
+                </ng-scrollbar>
+            </div>
+        </div>
+    </div>
+    <img class="pattern" src="../../../assets/images/video-pattern.svg">
+</section>
+<div class="container">
+    <img src="../../../assets/images/ad-1320-300.jpg" alt="AD">
+</div>
+<section class="common-section -section">
+    <div class="container">
+        <div class="row sidebar-row">
+            <div class="sidebar-col"></div>
+            <div class="content-col">
+                <div class="home-recentnews-title d-flex justify-content-between align-items-center">
+                    <h2>RECENT news</h2>
+                    <button class="theme-btn">View All</button>
+                </div>
+            </div>
+        </div>
+        <div class="row sidebar-row">
+            <div class="sidebar-col">
+                <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+                <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+            </div>
+            <div class="content-col">
+                
             </div>
         </div>
     </div>
