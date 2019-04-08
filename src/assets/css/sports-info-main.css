@@ -34,7 +34,7 @@ body                    { font-family: 'IBM Plex Sans', sans-serif; font-size: 1
 .clear                  { clear:both;}
 img                     { border: 0px;}
 ul,ol                   { list-style: none;}
-a                       { text-decoration: none; outline: none; cursor: pointer;}
+a                       { text-decoration: none; outline: none; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 a:focus, a:active, a:visited, 
 a:hover	                { text-decoration: none; outline: none; }
 h1                      { margin: 0px 0px 32px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; font-size-adjust: auto; text-transform: uppercase; }
@@ -45,20 +45,24 @@ h5                      { font-size: 24px; line-height: 32px; color: #3D3D3D; fo
 h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
 h6 a                    { color: #3D3D3D; }
 h6 a:not([href]):not([tabindex]):hover,
-h6 a:not([href]):not([tabindex]):focus              { color: #2384E9;}
+h6 a:not([href]):not([tabindex]):focus              { color: #ED1A33;}
 /* h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
-p                       { }
+p                       { margin-bottom: 15px; }
 p.small-text            { font-size: 16px; line-height: 22px; }
 img                     { max-width: 100%; }
 /******* Common Element CSS End *********/
 /* .common-overlay         { } */
 /* -------- Color Style ------- */
 .white-text             { color: #fff; }
+.theme-color            { color: #ED1A33;}
+.theme-bg               { background: #ED1A33; }
+
 /* -------- Button Style ------- */
-button                  { outline: none !important; cursor: pointer; }
-.theme-btn              { display: inline-block; min-width: 127px; padding: 12px; background: #ECECEC; font-size: 14px; line-height: 18px; color: #3D3D3D; font-weight: 500; border: none; text-transform: uppercase; text-align: center; border-radius: 0px; }
+button                  { outline: none !important; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.theme-btn              { display: inline-block; min-width: 127px; padding: 12px; background: #ECECEC; font-size: 14px; line-height: 18px; color: #3D3D3D; font-weight: 500; border: none; text-transform: uppercase; text-align: center; border-radius: 2px;  }
 .theme-btn:hover,
-.theme-btn:focus        { background: #2384E9; color: #fff; border: none;  }
+.theme-btn:focus        { background: #ED1A33; color: #fff; border: none;  }
+.full-btn.theme-btn     { padding: 18px 18px 17px; width: 100%; font-size: 22px; line-height: 29px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;  }
 /******* Header Section CSS Start *******/
 
 /******* Header Section CSS End *********/
@@ -69,15 +73,54 @@ button                  { outline: none !important; cursor: pointer; }
 
 /******* Middle Section CSS Start ******/
 .row.sidebar-row            { margin: 0px -12px; }
-.sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 350px); }
-.sidebar-row .sidebar-col   { padding: 0px 12px; width: 350px; }
+.sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 344px); }
+.sidebar-row .sidebar-col   { padding: 0px 12px; width: 344px; }
 .sidebar-col .ad-block      { margin-bottom: 24px;}
 .row.row-size8              { margin: 0px -8px; }
 .row-size8 [class*="col-"]  { padding: 0px 8px; }
 .common-section             { padding: 48px 0px; }
-/* -------- Inner Page ------- */
 
+/* -------- Common Widget Block ------- */
+.common-widget                      { margin-bottom: 24px; }
+.common-widget .widget-title        { padding: 16px; border-radius: 8px 8px 0px 0px; text-align: center; text-transform: uppercase;  }
+.common-widget .widget-title h5     { margin: 0px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; }
+.common-widget .common-list         { margin: 0px; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
+.common-widget .common-list li      { border: 1px solid #E6E6E6; border-bottom: none; }
+.common-widget .common-list li a    { padding: 12px 16px; display: block; }
+.common-widget .common-list li:first-child  { border-top: none; }
+.common-widget .common-list li:last-child   { border-bottom: 1px solid #E6E6E6; border-radius: 0px 0px 8px 8px; }
+.common-widget .common-list li button   { margin: 12px; padding: 14px 16px; width: calc(100% - 24px); display: block; background: #EBEBEB; color: #A3A3A3; text-align: center; border: none; border-radius: 4px; font-weight: 500; text-transform: uppercase; }
+.common-widget .common-list li button:hover,
+.common-widget .common-list li button:focus     { background: #ED1A33; color: #fff; }
 
+/* -------- Tab Widget Block ------- */
+.tab-widget.common-widget .widget-title     { padding: 14px; }
+.tab-widget .nav-tabs                       { padding: 0px 4px; background: #ED1A33; text-align: center; border: none; }
+.tab-widget .nav-tabs .nav-item             { margin: 0px; width: 50%;   }
+.tab-widget .nav-tabs .nav-link             { margin: 0px 4px; padding: 12px 8px 8px; background: #970C1C; font-size: 14px; line-height: 18px; font-weight: 500; color: #fff; border: none; border-radius: 6px 6px 0px 0px; }
+.tab-widget .nav-tabs .nav-link.active      { background: #fff; color: #ED1A33; border: none;}
+.common-widget .cricket-list li             { padding: 8px; font-family: 'IBM Plex Sans', sans-serif; }
+.common-widget .cricket-list li:last-child  { padding: 0px; }
+.common-widget .cricket-list .title p       { font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
+.common-widget .cricket-list .title p b     { color: #595959;}
+.common-widget .cricket-list .match-info.match-winner           { position: relative;}
+.common-widget .cricket-list .match-info.match-winner::before   { content: ""; display: block; position: absolute; left: -8px; top: 0px; height: 24px; border-left: 4px solid #ED1A33; border-top: 2px solid transparent; border-bottom: 2px solid transparent !important;}
+.common-widget .cricket-list .match-info img    { margin: -3px 4px 0px 0px; }
+.common-widget .cricket-list .match-info p      { margin-bottom: 12px; }
+.common-widget .cricket-list .result-line   { margin: 0px; font-size: 12px; line-height: 18px; font-family: 'IBM Plex Sans Condensed', sans-serif; }
+
+/* -------- Common News Section ------- */
+.common-news-list .common-news-item     { margin-bottom: 24px; padding-bottom: 24px; box-shadow: inset 0px -2px 0px 0px #EDEDED; -webkit-box-shadow: inset 0px -2px 0px 0px #EDEDED; }
+.common-news-list .common-news-img      { width: 320px; height: 181px; border-radius: 2px; cursor: pointer; }
+.common-news-list .common-news-pic      { height: 100%; background: no-repeat center center / cover; position: relative;}
+.common-news-list .common-news-video:after     { content: ""; position: absolute; display: block; width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: url(../../assets/images/play-btn.svg) no-repeat center center / cover; }
+.common-news-list .common-news-desc     { width: calc(100% - 320px); padding: 0px 16px; }
+.common-news-list h5                    { font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
+.common-news-list .news-excerpt         { min-height: 142px; }
+.common-news-list p                     { font-size: 16px; line-height: 24px; }
+.common-news-list .common-news-bootom p { margin: 0px; font-size: 14px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;}
+.common-news-list .common-news-bootom p.author span     { margin-right: 4px; font-weight: 600; text-transform: uppercase;  }
+.common-news-list .common-news-bootom .view:before      { content: ""; margin: 0px 4px 2px 0px; display: inline-block; width: 20px; height: 20px; background: url(../../assets/images/view-icon.svg) no-repeat center center / 20px auto; vertical-align: middle; }
 
 /******** Middle Section CSS End *******/
 

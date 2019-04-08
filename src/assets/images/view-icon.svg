@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="12px" viewBox="0 0 18 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group 31</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="elements/article/normal" transform="translate(-899.000000, -165.000000)">
+            <g id="Group-4">
+                <g id="Stacked-Group">
+                    <g id="Group-5" transform="translate(336.000000, 0.000000)">
+                        <g id="Group-32" transform="translate(562.000000, 161.000000)">
+                            <g id="Group-31">
+                                <rect id="Rectangle" fill="#ECECEC" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                                <g id="Group-14" transform="translate(1.428571, 4.285714)">
+                                    <path d="M8.57142857,11.4285714 C11.4285714,11.4285714 14.2857143,9.52380952 17.1428571,5.71428571 C14.2857143,1.9047619 11.4285714,-1.77635684e-15 8.57142857,-1.77635684e-15 C5.71428571,-1.54309078e-15 2.85714286,1.9047619 -1.62536651e-13,5.71428571 C2.85714286,9.52380952 5.71428571,11.4285714 8.57142857,11.4285714 Z" id="Oval" fill="#979797"></path>
+                                    <circle id="Oval-Copy-3" fill="#FFFFFF" cx="8.57142857" cy="5.71428571" r="4.28571429"></circle>
+                                    <circle id="Oval" fill="#979797" cx="8.57142857" cy="5.71428571" r="2.85714286"></circle>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
