@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md">
   <div class="container">
-    <a class="navbar-brand" href="#">Sports.info</a>
+    <a class="navbar-brand" (click)="routing('/')"><img src="../../../assets/images/logo.svg" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,9 +8,66 @@
     <div class="collapse navbar-collapse">
       <div class="navbar-nav-container" id="navbar-nav">
         <ul class="navbar-nav mr-auto" #navbarnav>
-          <li class="nav-item" id="nav-link{{sport.id}}" *ngFor="let sport of Sportsnames" routerLinkActive="active" (click)="linkactive(sport.id)">
-            <a class="nav-link">{{sport.name}}</a>
+          <li class="nav-item" >
+            <a class="nav-link" [routerLink]="['/cricket']" 
+            routerLinkActive="active">Cricket</a>
           </li>
+          <li class="nav-item" >
+              <a class="nav-link" [routerLink]="['/comingsoon']" 
+              routerLinkActive="active">Soccer</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link" [routerLink]="['/comingsoon']" 
+                routerLinkActive="active">Badminton</a>
+              </li>
+            
+            <li class="nav-item" >
+                <a class="nav-link" [routerLink]="['/comingsoon']" 
+                routerLinkActive="active">Basketball</a>
+              </li>
+            
+            <li class="nav-item" >
+                <a class="nav-link" [routerLink]="['/comingsoon']" 
+                routerLinkActive="active">Field Hockey</a>
+              </li>
+           
+
+            <li class="nav-item" >
+                <a class="nav-link" [routerLink]="['/comingsoon']" 
+                routerLinkActive="active">Racing</a>
+              </li>
+              <li class="nav-item" >
+                <a class="nav-link" [routerLink]="['/comingsoon']" 
+                routerLinkActive="active">Tennis sports</a>
+              </li>
+            
+         
+
+
+          <!-- <li class="nav-item" 
+             routerLinkActive="active">
+            <a class="nav-link">Soccer</a>
+          </li>
+          <li class="nav-item"
+             routerLinkActive="active">
+            <a class="nav-link">Badminton</a>
+          </li>
+          <li class="nav-item"
+             routerLinkActive="active">
+            <a class="nav-link">Basketball</a>
+          </li>
+          <li class="nav-item"
+            routerLinkActive="active">
+            <a class="nav-link">Field Hockey</a>
+          </li>
+          <li class="nav-item"
+             routerLinkActive="active">
+            <a class="nav-link">Racing</a>
+          </li>
+          <li class="nav-item"
+             routerLinkActive="active">
+            <a class="nav-link">Tennis sports</a>
+        </li> -->
         </ul>
         <div id="nav-pointer" #navpointer></div>
       </div>

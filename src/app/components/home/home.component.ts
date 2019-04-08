@@ -29,4 +29,9 @@ export class HomeComponent implements OnInit {
     this.isPlayBtn = false; //hide play button once video getting played.
   }
 
+  fn(val){
+    console.log(val);
+    
+  }
+
 }

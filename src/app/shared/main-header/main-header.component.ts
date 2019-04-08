@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-header',
@@ -10,7 +11,7 @@ export class MainHeaderComponent implements OnInit {
   @ViewChild('navbarnav') navbarnav: ElementRef
 
   Sportsnames = [
-    { "name": "Cricket", "id": "1" },
+    { "name": "Cricket", "id": "1", "route": "/cricket" },
     { "name": "Soccer", "id": "2" },
     { "name": "Badminton", "id": "3" },
     { "name": "Basketball", "id": "4" },
@@ -19,7 +20,7 @@ export class MainHeaderComponent implements OnInit {
     { "name": "Tennis sports", "id": "7" },
   ]
 
-  constructor(private renderer2: Renderer2, private el: ElementRef) { }
+  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router) { }
 
   ngOnInit() {
   }
@@ -34,4 +35,15 @@ export class MainHeaderComponent implements OnInit {
     this.renderer2.setStyle(this.navpointer.nativeElement, 'width', rect.width + "px"); //set
     this.renderer2.setStyle(this.navpointer.nativeElement, 'left', curPoint + "px");
   }
+
+  //dynamic routing
+  routing(routerlink) {
+    if (routerlink) {
+      this.router.navigate([`${routerlink}`]);
+    }
+    else {
+      this.router.navigate(['/'])
+    }
+  }
+
 }

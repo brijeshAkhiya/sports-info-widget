@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { MainHeaderComponent } from './shared/main-header/main-header.component';
+import { MainFooterComponent } from './shared/main-footer/main-footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +14,9 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from "./app-reducer";
 import { SlugifyPipe } from './pipes/slugpipe';
+import { SharedModule } from './shared/shared.module';
+
+
 
 
 let config = new AuthServiceConfig([
@@ -37,8 +42,8 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     HttpClientModule,
-  
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
@@ -51,6 +56,9 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     }
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   bootstrap: [AppComponent]
 })
