@@ -8,27 +8,30 @@
       <div class="row">
         <div class="col-sm-10">
           <span class="justin-block">just in</span>
-          <h1><span style="background: #EFBD68;">Chennai Super Kings defeat Rajasthan Royals by 8 runs</span>
+          <h1><a><span style="background: #EFBD68;">Chennai Super Kings defeat Rajasthan Royals by 8 runs</span></a>
           </h1>
         </div>
       </div>
       <div class="banner-item-list">
         <div class="row">
           <div class="col-md-4">
-            <div class="banner-item align-items-end d-flex"
-              style="background-image: url(../../../assets/images/banner/home-banner1.jpg)">
-              <p>SRH vs RCB | David Warner and Jonny Bairstow Hurricane</p>
+            <div class="banner-item align-items-end d-flex common-zoom-container">
+              <div class="common-zoom-img"
+                style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
+              <p [ngClass]="{'video': true}">SRH vs RCB | David Warner and Jonny Bairstow Hurricane</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="banner-item align-items-end d-flex"
-              style="background-image: url(../../../assets/images/banner/home-banner1.jpg)">
+            <div class="banner-item align-items-end d-flex common-zoom-container">
+              <div class="common-zoom-img"
+                style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
               <p>Krunal Pandya wins plaudits from cricket fraternity by warning Mayank Agarwal</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="banner-item align-items-end d-flex"
-              style="background-image: url(../../../assets/images/banner/home-banner1.jpg)">
+            <div class="banner-item align-items-end d-flex common-zoom-container">
+              <div class="common-zoom-img"
+                style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
               <p class="video"><img src="../../../assets/images/video-small-icon.svg">Sam Curran claims
                 first hat-trick of IPL 2019</p>
             </div>
@@ -46,18 +49,18 @@
     <h2>Popular Articles</h2>
     <div class="row sidebar-row">
       <div class="content-col">
-        <div class="popular-item">
+        <div class="popular-main-item">
           <div class="item-img">
-            <img src="../../../assets/images/popular-article1.jpg">
+            <div class="item-img-pic common-zoom-container">
+              <div class="common-zoom-img" [style.background-image]="'url(' + ArticleUrl + ')'">
+              </div>
+            </div>
           </div>
           <div class="blog-desc">
             <div class="border-block"></div>
-            <h3><a>Twitter reacts as RCB register their fourth consecutive loss against RR</a></h3>
-            <p>Royal Challengers Bangalore went to Jaipur in search of their first of IPL 2019 but it was
-              the Rajasthan Royals that opened their tally on the IPL Points Table. After Shreyas Gopal
-              spun a web to demolish top order, Bangalore could post only 158 in 20 overs. During the
-              chase, Rajasthan lost only three wickets and ended up…</p>
-            <p class="author small-text"><span class="theme-color">Wen Yahui</span> 12 mins ago</p>
+            <h3><a>{{populararticles[0]?.sTitle}}</a></h3>
+            <p>{{populararticles[0]?.sDescription |  truncate:[300,'...']}}</p>
+            <p class="author small-text"><span class="theme-color">{{populararticles[0]?.iId?.sFirstName}} {{populararticles[0]?.iId?.sLastName}}</span>{{populararticles[0]?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
           </div>
         </div>
         <div class="home-popular-title d-flex justify-content-between align-items-center">
@@ -66,25 +69,12 @@
         </div>
         <div class="home-popular-list">
           <div class="row row-size8">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngFor="let item of populararticles | slice:1:4">
               <div class="popular-item">
-                <div class="img-block" style="background-image: url(../../../assets/images/news-1.jpg)">
+                <div class="img-block common-zoom-container">
+                  <div class="common-zoom-img" [style.background-image]="'url(' + item.sImage + ')'"></div>
                 </div>
-                <h6><a>From Slap Gate to Lalit Modi: IPL controversies (Part 1)</a></h6>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="popular-item">
-                <div class="img-block" style="background-image: url(../../../assets/images/news-2.jpg)">
-                </div>
-                <h6><a>From Slap Gate to Lalit Modi: IPL controversies (Part 1)</a></h6>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="popular-item">
-                <div class="img-block" style="background-image: url(../../../assets/images/news-3.jpg)">
-                </div>
-                <h6><a>From Slap Gate to Lalit Modi: IPL controversies (Part 1)</a></h6>
+                <h6><a>{{item?.sTitle}}</a></h6>
               </div>
             </div>
           </div>
@@ -216,54 +206,67 @@
 <section class="common-section popular-video-section">
   <div class="container">
     <div class="home-video-title d-flex justify-content-between align-items-center">
-      <h2 class="white-text">Popular Articles</h2>
+      <h2 class="white-text">Popular Video</h2>
       <button class="theme-btn">View All</button>
     </div>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-lg-8 col-md-7">
         <div class="main-popular-video">
-          <video id="videobtn" width="100%" height="489" preload="none" poster="../../../assets/images/video-thumb.jpg"
+          <video id="videobtn" width="100%" height="489" preload="none" [poster]="popularvideos[0]?.sImage
+          "
             #videoele controlsList="nodownload">
-            <source src="../../../assets/video/CSK.mp4" type="video/mp4">
+            <source [src]="popularvideos[0]?.sVideo" type="video/mp4">
           </video>
           <div class="play-btn-block" [ngClass]="{'video-play-hide': !isPlayBtn}"><button
               (click)="playvideo()"></button></div>
         </div>
-        <h3><a>Unsung Deepak Chahar pivotal to the Dhoni-Fleming plan</a></h3>
+        <h3><a>{{popularvideos[0]?.sTitle}}</a></h3>
       </div>
-      <div class="col-md-4">
+      <div class="col-lg-4 col-md-5">
         <ng-scrollbar class="custom-scrollbar">
           <div class="home-popular-vid-list">
-            <div class="video-item d-flex align-items-center">
-              <div class="video-img" style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+            <div class="video-item d-flex align-items-center" *ngFor="let item of popularvideos">
+              <div class="video-img common-zoom-container">
+                <div class="common-zoom-img" [style.background-image]="'url(' + item.sImage + ')'">
+                </div>
               </div>
-              <p class="small-text"><a>Haven't found the perfect team balance yet - Virat Kohli</a></p>
+              <p class="small-text"><a>{{item.sTitle}}</a></p>
             </div>
-            <div class="video-item d-flex align-items-center">
-              <div class="video-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+            <!-- <div class="video-item d-flex align-items-center">
+              <div class="video-img common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                </div>
               </div>
               <p class="small-text"><a>Five IPL players who have successfully auditioned for CWC19</a></p>
             </div>
             <div class="video-item d-flex align-items-center">
-              <div class="video-img" style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+              <div class="video-img common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+                </div>
               </div>
               <p class="small-text"><a>How Bumrah upstaged the Kohli-de Villiers symphony</a></p>
             </div>
             <div class="video-item d-flex align-items-center">
-              <div class="video-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+              <div class="video-img common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                </div>
               </div>
               <p class="small-text"><a>Talking points: Gayle turns middle overs into death overs</a></p>
             </div>
             <div class="video-item d-flex align-items-center">
-              <div class="video-img" style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+              <div class="video-img common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+                </div>
               </div>
               <p class="small-text"><a>Talking points: Gayle turns middle overs into death overs</a></p>
             </div>
             <div class="video-item d-flex align-items-center">
-              <div class="video-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+              <div class="video-img common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                </div>
               </div>
               <p class="small-text"><a>Talking points: Gayle turns middle overs into death overs</a></p>
-            </div>
+            </div> -->
           </div>
         </ng-scrollbar>
       </div>
@@ -304,55 +307,18 @@
       </div>
       <div class="content-col">
         <div class="common-news-list">
-          <div class="common-news-item d-flex">
-            <div class="common-news-img">
-              <div class="common-news-pic" style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
+          <div class="common-news-item d-flex" *ngFor="let item of recentposts">
+            <div class="common-news-img common-zoom-container">
+              <div class="common-zoom-img" [ngClass]="{'common-news-video': item.eType == 'Video'}" [style.background-image]="'url(' + item.sImage + ')'"></div>
             </div>
             <div class="common-news-desc">
               <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with
-                  the
-                  victory. Haris Sohail's career-best score of 130…</p>
+                <h5><a>{{item.sTitle}}</a></h5>
+                <p>{{item.sDescription | truncate:[160,'...']}}</p>
               </div>
               <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Ezequiel Dengra</span> 3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img">
-              <div class="common-news-pic common-news-video"
-                style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with
-                  the
-                  victory. Haris Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Ezequiel Dengra</span> 3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img">
-              <div class="common-news-pic" style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with
-                  the
-                  victory. Haris Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Ezequiel Dengra</span> 3hrs ago</p>
-                <p class="view">3.2K</p>
+                <p class="author"><span class="theme-color">{{item.iId.sFirstName}} {{item.iId.sLastName}}</span>{{item.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                <p class="view">{{item.nViewCounts}}</p>
               </div>
             </div>
           </div>

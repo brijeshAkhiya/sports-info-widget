@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CricketComponent } from './cricket.component';
 import { CricketRoutingModule } from './cricket-routing.module';
-import { MainHeaderComponent } from '../../shared/main-header/main-header.component';
-import { MainFooterComponent } from '../../shared/main-footer/main-footer.component';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
@@ -11,7 +10,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
-    CricketRoutingModule
+    CricketRoutingModule,
+    ScrollingModule
   ]
 })
 export class CricketModule { }

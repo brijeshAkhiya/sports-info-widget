@@ -63,6 +63,11 @@ button                  { outline: none !important; cursor: pointer; transition:
 .theme-btn:hover,
 .theme-btn:focus        { background: #ED1A33; color: #fff; border: none;  }
 .full-btn.theme-btn     { padding: 18px 18px 17px; width: 100%; font-size: 22px; line-height: 29px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;  }
+
+.common-zoom-container  { overflow: hidden; }
+.common-zoom-img        { height: 100%; background: no-repeat center center / cover; transition: all 0.3s ease-in-out; }
+.common-zoom-img:hover  { transform: scale(1.05); -webkit-transform: scale(1.05); }
+
 /******* Header Section CSS Start *******/
 
 /******* Header Section CSS End *********/
@@ -72,10 +77,11 @@ button                  { outline: none !important; cursor: pointer; transition:
 /******* Banner Section CSS End *********/
 
 /******* Middle Section CSS Start ******/
+
+/* -------- Custom Grid CSS ------- */
 .row.sidebar-row            { margin: 0px -12px; }
 .sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 344px); }
 .sidebar-row .sidebar-col   { padding: 0px 12px; width: 344px; }
-.sidebar-col .ad-block      { margin-bottom: 24px;}
 .row.row-size8              { margin: 0px -8px; }
 .row-size8 [class*="col-"]  { padding: 0px 8px; }
 .common-section             { padding: 48px 0px; }
@@ -92,6 +98,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-widget .common-list li button   { margin: 12px; padding: 14px 16px; width: calc(100% - 24px); display: block; background: #EBEBEB; color: #A3A3A3; text-align: center; border: none; border-radius: 4px; font-weight: 500; text-transform: uppercase; }
 .common-widget .common-list li button:hover,
 .common-widget .common-list li button:focus     { background: #ED1A33; color: #fff; }
+.sidebar-col .ad-block              { margin-top: 24px; text-align: center; }
 
 /* -------- Tab Widget Block ------- */
 .tab-widget.common-widget .widget-title     { padding: 14px; }
@@ -99,7 +106,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .tab-widget .nav-tabs .nav-item             { margin: 0px; width: 50%;   }
 .tab-widget .nav-tabs .nav-link             { margin: 0px 4px; padding: 12px 8px 8px; background: #970C1C; font-size: 14px; line-height: 18px; font-weight: 500; color: #fff; border: none; border-radius: 6px 6px 0px 0px; }
 .tab-widget .nav-tabs .nav-link.active      { background: #fff; color: #ED1A33; border: none;}
-.common-widget .cricket-list li             { padding: 8px; font-family: 'IBM Plex Sans', sans-serif; }
+.common-widget .cricket-list li             { padding: 8px; font-family: 'IBM Plex Sans', sans-serif; cursor: pointer; }
 .common-widget .cricket-list li:last-child  { padding: 0px; }
 .common-widget .cricket-list .title p       { font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
 .common-widget .cricket-list .title p b     { color: #595959;}
@@ -111,13 +118,12 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /* -------- Common News Section ------- */
 .common-news-list .common-news-item     { margin-bottom: 24px; padding-bottom: 24px; box-shadow: inset 0px -2px 0px 0px #EDEDED; -webkit-box-shadow: inset 0px -2px 0px 0px #EDEDED; }
-.common-news-list .common-news-img      { width: 320px; height: 181px; border-radius: 2px; cursor: pointer; }
-.common-news-list .common-news-pic      { height: 100%; background: no-repeat center center / cover; position: relative;}
+.common-news-list .common-news-img      { width: 320px; height: 181px; border-radius: 2px; cursor: pointer; position: relative; }
 .common-news-list .common-news-video:after     { content: ""; position: absolute; display: block; width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: url(../../assets/images/play-btn.svg) no-repeat center center / cover; }
-.common-news-list .common-news-desc     { width: calc(100% - 320px); padding: 0px 16px; }
+.common-news-list .common-news-desc     { width: calc(100% - 320px); padding: 0px 16px 20px; position: relative; }
 .common-news-list h5                    { font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
-.common-news-list .news-excerpt         { min-height: 142px; }
 .common-news-list p                     { font-size: 16px; line-height: 24px; }
+.common-news-list .common-news-bootom   { padding: 0px 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
 .common-news-list .common-news-bootom p { margin: 0px; font-size: 14px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;}
 .common-news-list .common-news-bootom p.author span     { margin-right: 4px; font-weight: 600; text-transform: uppercase;  }
 .common-news-list .common-news-bootom .view:before      { content: ""; margin: 0px 4px 2px 0px; display: inline-block; width: 20px; height: 20px; background: url(../../assets/images/view-icon.svg) no-repeat center center / 20px auto; vertical-align: middle; }
@@ -135,19 +141,102 @@ button                  { outline: none !important; cursor: pointer; transition:
     .container                  { max-width: 1350px; }
 }	
 
+@media (min-width: 1200px) and (max-width: 1379px) {
+    body                    { font-size: 16px; line-height: 24px; }
+    h1                      { margin: 0px 0px 28px; font-size: 70px; line-height: 70px; }
+    h2                      { font-size: 70px; line-height: 70px; }
+    h3                      { font-size: 42px; line-height: 52px; }
+    h5                      { font-size: 22px; line-height: 30px; }
+
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {
-	
+    body                    { font-size: 16px; line-height: 24px; }
+    h1                      { margin: 0px 0px 24px; font-size: 60px; line-height: 60px; }
+    h2                      { font-size: 60px; line-height: 60px; }
+    h3                      { font-size: 36px; line-height: 46px; }
+    h5                      { font-size: 21px; line-height: 29px; }
+    h6                      { font-size: 16px; line-height: 23px; }	
+    p.small-text            { font-size: 14px; line-height: 20px; }
+
+/* -------- Common News Section ------- */
+    .common-news-list .common-news-img      { width: 240px; height: 181px; }
+    .common-news-list .common-news-desc     { width: calc(100% - 240px); padding: 0px 16px; }
+    .common-news-list p                     { font-size: 15px; line-height: 23px; }
+
 }
 
 @media (max-width: 991px) {
-	
+/* -------- Custom Grid CSS ------- */
+    .sidebar-row .content-col,
+    .sidebar-row .sidebar-col   { width: 100%; }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-	
-	
+    body                    { font-size: 15px; line-height: 23px; }
+    h1                      { margin: 0px 0px 22px; font-size: 48px; line-height: 48px; }
+    h2                      { font-size: 48px; line-height: 48px; }
+    h3                      { font-size: 32px; line-height: 42px; }
+    h5                      { font-size: 20px; line-height: 28px; }
+    h6                      { font-size: 15px; line-height: 22px; }	
+    p.small-text            { font-size: 13px; line-height: 19px; }
+    .full-btn.theme-btn     { padding: 14px 14px 13px; font-size: 18px; line-height: 25px;}
+/* -------- Custom Grid CSS ------- */
+    .common-section             { padding: 36px 0px; }
+/* -------- Common Widget Block ------- */
+    .common-widget                      { margin: 32px 0px; }
+    .common-widget .widget-title        { padding: 12px; }
+    .common-widget .common-list         { font-size: 15px; line-height: 19px; }
+    .common-widget .common-list li a    { padding: 10px 16px;}
+    .common-widget .common-list li button   { margin: 10px; padding: 12px 16px;}
+/* -------- Tab Widget Block ------- */
+    .tab-widget.common-widget .widget-title     { padding: 12px; }
+    /* .common-widget .cricket-list li             { width: 33.333%; float: left; border-top: none; border-left: none; }
+    .common-widget .cricket-list li:first-child { border-left: 1px solid #E6E6E6; }
+    .common-widget .cricket-list li:last-child  { width: 100%; border-top: 1px solid #E6E6E6; border-left: 1px solid #E6E6E6; }
+    .common-widget .cricket-list:after          { content: ""; display: block; clear: both;} */
+/* -------- Common News Section ------- */
+    .common-news-list .common-news-img      { width: 280px; }
+    .common-news-list .common-news-desc     { width: calc(100% - 280px); }    
+    .common-news-list p                     { font-size: 15px; line-height: 23px; }
+
 }
 
 @media (max-width: 767px) {
-	
+    body                    { font-size: 14px; line-height: 21px; }
+    h1                      { margin: 0px 0px 22px; font-size: 32px; line-height: 40px; }
+    h2                      { font-size: 32px; line-height: 32px; }
+    h3                      { font-size: 26px; line-height: 36px; }
+    h5                      { font-size: 17px; line-height: 25px; }
+    h6                      { font-size: 16px; line-height: 22px; }	
+    p.small-text            { font-size: 13px; line-height: 19px; }
+    .full-btn.theme-btn     { padding: 12px 14px 11px; font-size: 16px; line-height: 22px;}
+/* -------- Custom Grid CSS ------- */
+    .common-section             { padding: 30px 0px; }
+/* -------- Common Widget Block ------- */
+    .common-widget                      { margin: 30px 0px; }
+    .common-widget .widget-title        { padding: 10px; }
+    .common-widget .common-list         { font-size: 14px; line-height: 18px; }
+    .common-widget .common-list li a    { padding: 8px 16px;}
+    .common-widget .common-list li button   { margin: 8px; padding: 10px 16px;}
+/* -------- Tab Widget Block ------- */
+    .tab-widget.common-widget .widget-title     { padding: 10px; }
+/* -------- Common News Section ------- */
+    .common-news-list .common-news-img      { width: 200px; }
+    .common-news-list .common-news-desc     { width: calc(100% - 200px); }    
+    .common-news-list p                     { font-size: 15px; line-height: 23px; }
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+@media (max-width: 575px) {
+    h2                      { font-size: 32px; line-height: 30px; }
+/* -------- Common News Section ------- */
+    .common-news-list .common-news-item       { flex-direction: column; -webkit-flex-direction: column; }
+    .common-news-list .common-news-img,
+    .common-news-list .common-news-desc     { width: 100%; } 
+    .common-news-list .common-news-img      { margin-bottom: 20px;}
 }

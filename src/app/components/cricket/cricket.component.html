@@ -1,2 +1,10 @@
 <app-main-header></app-main-header>
+<cdk-virtual-scroll-viewport  style="height:100vh;" itemSize="90" >
+    <ng-container *cdkVirtualFor="let n of numbers">
+      <li class="list-item"> {{n}} </li>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+  <!-- <li *ngFor="let item of numbers">
+    {{item}}
+  </li> -->
 <app-main-footer></app-main-footer>

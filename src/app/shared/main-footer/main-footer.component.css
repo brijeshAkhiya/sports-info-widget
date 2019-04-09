@@ -1,14 +1,46 @@
-footer                              { font-family: 'BebasNeueBold'; text-align: center; }
+footer                              { font-family: 'IBM Plex Sans Condensed', sans-serif; text-align: center; }
 footer p                            { color: #fff;  }
-footer .footer-inner                { padding: 56px 0px; background: #3D3D3D; }
+footer .footer-inner                { padding: 56px 0px; background: #292929; }
 footer .footer-nav-links            { margin-bottom: 32px; }
 footer .footer-social-links li,
 footer .footer-nav-links li         { display: inline-block; }
-footer .footer-nav-links li a:not([href]):not([tabindex])       { margin: 0px 16px; font-size: 24px; line-height: 29px; color: #8C8C8C; }
+footer .footer-nav-links li a:not([href]):not([tabindex])       { margin: 0px 16px; display: block; font-size: 18px; line-height: 23px; color: #7A7A7A; font-weight: 500; text-transform: uppercase; }
 footer .footer-nav-links li a:not([href]):not([tabindex]):hover,
 footer .footer-nav-links li a:not([href]):not([tabindex]):focus { color: #fff; }
 footer .footer-social-links         { margin-bottom: 0px; }
-footer .footer-social-links li a    { margin: 0px 12px; opacity: 0.4; }
+footer .footer-social-links li a    { margin: 0px 12px; display: block; opacity: 0.4; }
 footer .footer-social-links li a:hover  { opacity: 1;}
-footer .copyright                   { padding: 32px 0px; background: #121212; }
-footer .copyright p                 { margin: 0px; font-size: 18px; line-height: 22px;  }
+footer .copyright                   { padding: 24px 0px; background: #121212; }
+footer .copyright p                 { margin: 0px; font-size: 18px; line-height: 23px; text-transform: capitalize; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    footer .footer-nav-links li a:not([href]):not([tabindex])       { margin: 0px 12px; }
+}
+
+@media (max-width: 991px) {
+	
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    footer .footer-inner                { padding: 40px 0px;}
+    footer .footer-nav-links            { margin-bottom: 20px; }
+	footer .footer-nav-links li a:not([href]):not([tabindex])       { margin: 0px 16px 8px; font-size: 16px; }
+	footer .copyright                   { padding: 18px 0px; }
+    footer .copyright p                 { font-size: 14px; line-height: 20px; }
+}
+
+@media (max-width: 767px) {
+	footer .footer-inner                { padding: 30px 0px;}
+    footer .footer-nav-links            { margin-bottom: 20px; }
+    footer .footer-nav-links li a:not([href]):not([tabindex])       { margin: 0px 10px 4px; font-size: 14px; line-height: 18px; }
+    footer .footer-social-links li a    { margin: 0px 10px; max-width: 26px; }
+	footer .copyright                   { padding: 15px 0px; }
+    footer .copyright p                 { font-size: 13px; line-height: 19px; }
+}
+
+
+@media (max-width: 575px) {
+	
+}

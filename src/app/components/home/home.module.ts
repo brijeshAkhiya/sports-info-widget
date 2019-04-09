@@ -4,20 +4,24 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { SlugifyPipe } from '../../pipes/slugpipe';
+import { TruncatePipe } from '../../pipes/truncatepipe';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MomentModule } from 'ngx-moment';
+import { SportsService } from '../../providers/sports-service';
+
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent,TruncatePipe],
   imports: [
     CommonModule,
     SharedModule,
     HomeRoutingModule,
     NgScrollbarModule,
-    NgbModule
-  
+    NgbModule,
+    MomentModule
   ],
-  providers:[SlugifyPipe]
+  providers: [SlugifyPipe,TruncatePipe,SportsService]
 })
 
 export class HomeModule { }
