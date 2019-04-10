@@ -1,10 +1,71 @@
 <app-main-header></app-main-header>
-<cdk-virtual-scroll-viewport  style="height:100vh;" itemSize="90" >
-    <ng-container *cdkVirtualFor="let n of numbers">
-      <li class="list-item"> {{n}} </li>
-    </ng-container>
-  </cdk-virtual-scroll-viewport>
-  <!-- <li *ngFor="let item of numbers">
-    {{item}}
-  </li> -->
+<div class="sub-navabar">
+  <div class="container">
+    <a class="subemnu-back">Cricket</a>
+    <div class="sub-navbar-container" id="sub-navbar-nav">
+      <ul>
+        <li><a class="active">Home</a></li>
+        <li><a>Fixtures</a></li>
+        <li><a>Series</a></li>
+        <li><a>World Cup 2019</a></li>
+      </ul>
+    </div>
+    <div id="subnav-pointer"></div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<button class="add-to-fav-btn"><span>Add to favorites</span></button>
+<section class="common-section recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="sidebar-col"></div>
+      <div class="content-col">
+        <div class="home-recentnews-title d-flex justify-content-between align-items-center">
+          <h2>Cricket</h2>
+          <button class="add-to-fav-btn"><span>Add to favorites</span></button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row sidebar-row">
+      <div class="sidebar-col">
+        <div class="common-widget">
+          <div class="widget-title theme-bg">
+            <h5 class="white-text">Popular Right Now</h5>
+          </div>
+          <ul class="common-list">
+            <li><a>IPL 2019</a></li>
+            <li><a>Australia vs Pakistan</a></li>
+            <li><a>Sri Lanka vs South Africa</a></li>
+            <li><a>Virat Kohli</a></li>
+            <li><a>Mumbai Indians</a></li>
+            <li><button>View all</button></li>
+          </ul>
+        </div>
+        <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+      </div>
+      <div class="content-col">
+        <div class="common-news-list">
+          <div class="common-news-item d-flex" *ngFor="let item of recentposts">
+            <div class="common-news-img common-zoom-container">
+              <div class="common-zoom-img" [ngClass]="{'common-news-video': item.eType == 'Video'}"
+                [style.background-image]="'url(' + item.sImage + ')'"></div>
+            </div>
+            <div class="common-news-desc">
+              <div class="news-excerpt">
+                <h5><a>{{item.sTitle}}</a></h5>
+                <p>{{item.sDescription | truncate:[160,'...']}}</p>
+              </div>
+              <div class="common-news-bootom d-flex justify-content-between align-items-center">
+                <p class="author"><span class="theme-color">{{item.iId.sFirstName}}
+                    {{item.iId.sLastName}}</span>{{item.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                <p class="view">{{item.nViewCounts}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="theme-btn full-btn">MORE STORIES</button>
+      </div>
+    </div> -->
+  </div>
+</section>
 <app-main-footer></app-main-footer>

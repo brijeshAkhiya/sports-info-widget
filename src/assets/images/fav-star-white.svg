@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Star</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="elements/buttons/add_favorite/inactive" transform="translate(-18.000000, -18.000000)" fill="#FFFFFF">
+            <g id="Group-2">
+                <g id="Group" transform="translate(8.000000, 8.000000)">
+                    <polygon id="Star" points="20 25.0681269 14.1221475 28.0901699 15.1799249 21.5661373 10.4894348 16.9098301 17.0210298 15.8997992 20 10 22.9789702 15.8997992 29.5105652 16.9098301 24.8200751 21.5661373 25.8778525 28.0901699"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

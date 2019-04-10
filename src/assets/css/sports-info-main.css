@@ -63,7 +63,14 @@ button                  { outline: none !important; cursor: pointer; transition:
 .theme-btn:hover,
 .theme-btn:focus        { background: #ED1A33; color: #fff; border: none;  }
 .full-btn.theme-btn     { padding: 18px 18px 17px; width: 100%; font-size: 22px; line-height: 29px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;  }
+.add-to-fav-btn         { display: inline-block; min-width: 196px; padding: 18px 33px 18px 56px; background: transparent; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #A3A3A3; font-weight: 500; border: 2px solid #E8E8E8; border-radius: 2em; position: relative;}
+.add-to-fav-btn span    { display: block; }
+.add-to-fav-btn:before  { content: ""; display: block; position: absolute; left: 8px; top: 8px; width: 40px; height: 40px; background: #E1E1E1 url(../../assets/images/fav-star-white.svg) no-repeat center center / 20px 20px; border-radius: 50%; transition: all 0.4s ease-in-out 0s; -webkit-transition: all 0.4s ease-in-out 0s; }
+.add-to-fav-btn:hover,
+.add-to-fav-btn:focus   { padding: 18px 56px 18px 33px; background: #FFC800; color: #fff; border-color: #FFC800;  }
+.add-to-fav-btn:hover:before    { transform: translateX(140px) rotate(360deg); background-color: #fff; background-image: url(../../assets/images/fav-star-yellow.svg); }
 
+/* -------- Image Zoom Style ------- */
 .common-zoom-container  { overflow: hidden; }
 .common-zoom-img        { height: 100%; background: no-repeat center center / cover; transition: all 0.3s ease-in-out; }
 .common-zoom-img:hover  { transform: scale(1.05); -webkit-transform: scale(1.05); }
@@ -161,7 +168,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /* -------- Common News Section ------- */
     .common-news-list .common-news-img      { width: 240px; height: 181px; }
-    .common-news-list .common-news-desc     { width: calc(100% - 240px); padding: 0px 16px; }
+    .common-news-list .common-news-desc     { width: calc(100% - 240px); padding: 0px 16px 20px; }
     .common-news-list p                     { font-size: 15px; line-height: 23px; }
 
 }

@@ -22,4 +22,11 @@ export class SportsService {
         return this.http.post(environment.apiUrl + environment.version + '/posts/recent',data);
      }
 
+     //get banner posts - HOME 
+
+     getbannerpost(){
+      return this.http.get(environment.apiUrl + environment.version + '/posts/banner');
+
+     }
+
 }

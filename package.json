@@ -33,6 +33,7 @@
     "moment": "^2.24.0",
     "ngx-moment": "^3.4.0",
     "ngx-scrollbar": "^4.1.1",
+    "node-vibrant": "^3.2.0-alpha",
     "rxjs": "^6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "^0.8.29"

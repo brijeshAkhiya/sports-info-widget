@@ -1,8 +1,8 @@
 <app-main-header></app-main-header>
 <section class="home-banner">
   <div class="home-banner-lightbg" style="background: #250668;"></div>
-  <div class="home-banner-pic" style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
-  <div class="home-banner-bg" style="background: #FFCA00;"></div>
+  <div class="home-banner-pic" [style.background-image]="'url(' + bannerurl + ')'"></div>
+  <div class="home-banner-bg" style="background: #FFCA00;" ></div>
   <div class="banner-inner">
     <div class="container">
       <div class="row">
@@ -329,3 +329,4 @@
   </div>
 </section>
 <app-main-footer></app-main-footer>
+	<img #img style="display:none;" crossOrigin="Anonymous" (load)="myfn()">

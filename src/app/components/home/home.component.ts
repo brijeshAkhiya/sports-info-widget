@@ -1,7 +1,9 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { SportsService } from '../../providers/sports-service';
 import { SlugifyPipe } from '../../pipes/slugpipe'; //import it from your path
-import {TruncatePipe} from '../../pipes/truncatepipe';
+declare var Vibrant: any;
+import '../../../assets/js/vibrant.js';
+
 
 @Component({
   selector: 'app-home',
@@ -10,18 +12,40 @@ import {TruncatePipe} from '../../pipes/truncatepipe';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('videoele') videoele: ElementRef
+  @ViewChild('img') img: ElementRef
+
   isPlayBtn: boolean = true
   populararticles = []
   popularvideos = []
   recentposts = []
   ArticleUrl: any;
+  mainBannerObj: {};
   constructor(private slugifyPipe: SlugifyPipe, private renderer2: Renderer2, private sportsService: SportsService) { }
 
   ngOnInit() {
+    this.getBannerPost();
     this.getPopularArticles();
     this.getPopularVideos();
     this.getRecentPosts();
   }
+
+
+  //get banner posts 
+
+  getBannerPost() {
+    this.sportsService.getbannerpost().subscribe((res) => {
+      if (res['data']) {
+        console.log(res['data']);
+        this.mainBannerObj = res['data'].oMainBanner;
+        setTimeout(() => {
+          let bannerurl = this.mainBannerObj['sImage']
+          this.getDominantColor(bannerurl);
+
+        }, 1000);
+      }
+    })
+  }
+
 
   //get popular posts 
 
@@ -52,7 +76,7 @@ export class HomeComponent implements OnInit {
 
   //get recent posts 
 
-  getRecentPosts(){
+  getRecentPosts() {
     let data = {
       eType: ''
     }
@@ -79,7 +103,62 @@ export class HomeComponent implements OnInit {
   }
 
   fn(val) {
-    console.log(val);
+    console.log('fnnn');
+
+    var vibrant = new Vibrant()
+    console.log(vibrant);
+
+    var swatches = vibrant.swatches()
+    console.log('swa', swatches);
+  }
+
+  //get dominant color of image - vibrant
+
+  getDominantColor(image) {
+    let img = this.img.nativeElement;
+    this.renderer2.setAttribute(img, 'src', image)
+    var canvas = this.renderer2.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/jpeg");
+    dataURL.replace(/^data:image\/(png|jpeg);base64,/, "");
+    this.renderer2.setAttribute(img, 'src', dataURL)
+
+      console.log(img);
+
+
+    // setTimeout(() => {
+    //   this.fn(img);
+    // },2000);
+
+
+    // for (var swatch in swatches) {
+    //   console.log(swatch);
+
+    //   if (swatches.hasOwnProperty(swatch) && swatches[swatch])
+    //     console.log(swatch, swatches[swatch].getHex())
+    //   console.log('2a');
+
+    //   console.log('rr', swatches[swatch].getRgb())
+    // }
+
+  }
+
+  myfn() {
+    // const ele:HTMLImageElement = <HTMLImageElement>document.getElementById('img');
+    console.log('my fn');
+    
+    let img = this.img.nativeElement;
+
+    var vibrant = new Vibrant(img);
+    var swatches = vibrant.swatches()
+    for (var swatch in swatches)
+      console.log(swatch);
+
+    if (swatches.hasOwnProperty(swatch) && swatches[swatch])
+      console.log(swatch, swatches[swatch].getHex())
 
   }
 

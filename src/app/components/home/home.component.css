@@ -80,7 +80,7 @@ ng-scrollbar.custom-scrollbar                           { border-left: 2px solid
     .popular-article-section .popular-main-item .blog-desc                  { padding: 20px 0px 0px 20px; }
     .home-popular-list .img-block                                           { height: 120px; }
 /* -------- Popular Video Section ------- */
-    .main-popular-video video                               { height: 344px; }
+    .main-popular-video video                               { height: 410px; }
     .home-popular-vid-list                                  { height: 474px; }
     .home-popular-vid-list .video-img                       { width: 136px; height: 92px; } 
     .home-popular-vid-list .video-item p                    { padding: 0px 10px; width: calc(100% - 126px); }	
@@ -120,7 +120,7 @@ ng-scrollbar.custom-scrollbar                           { border-left: 2px solid
     .home-popular-list .popular-item                                    { margin-bottom: 24px; }
     .home-popular-list [class*="col-"]:last-child .popular-item         { margin-bottom: 0px; }
 /* -------- Popular Video Section ------- */
-    .main-popular-video video                               { height: 340px; }
+    .main-popular-video video                               { height: 342px; }
     .main-popular-video .play-btn-block button              { width: 88px; height: 88px; }
     .home-popular-vid-list                                  { margin-top: 15px; }
     .home-popular-vid-list                                  { padding-left: 10px; height: 340px; }
