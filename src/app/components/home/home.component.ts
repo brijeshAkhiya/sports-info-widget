@@ -18,8 +18,10 @@ export class HomeComponent implements OnInit {
   populararticles = []
   popularvideos = []
   recentposts = []
-  ArticleUrl: any;
-  mainBannerObj: {};
+  bannerposts: any;
+  bannerimages = []
+  imageindex: number = 0;
+  listindex: number = 0;
   constructor(private slugifyPipe: SlugifyPipe, private renderer2: Renderer2, private sportsService: SportsService) { }
 
   ngOnInit() {
@@ -35,13 +37,10 @@ export class HomeComponent implements OnInit {
   getBannerPost() {
     this.sportsService.getbannerpost().subscribe((res) => {
       if (res['data']) {
-        console.log(res['data']);
-        this.mainBannerObj = res['data'].oMainBanner;
-        setTimeout(() => {
-          let bannerurl = this.mainBannerObj['sImage']
-          this.getDominantColor(bannerurl);
-
-        }, 1000);
+        this.bannerposts = res['data'];
+        this.bannerposts.map((data, i) => {
+          this.bannerimages[i] = data.sImage
+        })
       }
     })
   }
@@ -56,7 +55,6 @@ export class HomeComponent implements OnInit {
     this.sportsService.getpopularpost(data).subscribe((res) => {
       if (res['data']) {
         this.populararticles = res['data'];
-        this.ArticleUrl = this.populararticles[0].sImage
       }
     })
   }
@@ -65,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   getPopularVideos() {
     let data = {
-      eType: 'Videos'
+      eType: 'Video'
     }
     this.sportsService.getpopularpost(data).subscribe((res) => {
       if (res['data']) {
@@ -87,79 +85,26 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  //change image dynamically form list hover
+  onmouseover(index) {
+    this.imageindex = index //dyanmic image index value
+    this.listindex = index
+  }
 
   slugify(input: string) {
     var your_new_slug = this.slugifyPipe.transform(input);
-    console.log(your_new_slug);
   }
 
   //video play event
 
   playvideo() {
-    let videoEle = this.videoele.nativeElement;
-    videoEle.play();
+    let videoEle: HTMLVideoElement = this.videoele.nativeElement;
+    console.log(videoEle);
+    setTimeout(() => {
+      videoEle.play();
+    }, 1000);
     this.renderer2.setAttribute(this.videoele.nativeElement, 'controls', '');
     this.isPlayBtn = false; //hide play button once video getting played.
-  }
-
-  fn(val) {
-    console.log('fnnn');
-
-    var vibrant = new Vibrant()
-    console.log(vibrant);
-
-    var swatches = vibrant.swatches()
-    console.log('swa', swatches);
-  }
-
-  //get dominant color of image - vibrant
-
-  getDominantColor(image) {
-    let img = this.img.nativeElement;
-    this.renderer2.setAttribute(img, 'src', image)
-    var canvas = this.renderer2.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/jpeg");
-    dataURL.replace(/^data:image\/(png|jpeg);base64,/, "");
-    this.renderer2.setAttribute(img, 'src', dataURL)
-
-      console.log(img);
-
-
-    // setTimeout(() => {
-    //   this.fn(img);
-    // },2000);
-
-
-    // for (var swatch in swatches) {
-    //   console.log(swatch);
-
-    //   if (swatches.hasOwnProperty(swatch) && swatches[swatch])
-    //     console.log(swatch, swatches[swatch].getHex())
-    //   console.log('2a');
-
-    //   console.log('rr', swatches[swatch].getRgb())
-    // }
-
-  }
-
-  myfn() {
-    // const ele:HTMLImageElement = <HTMLImageElement>document.getElementById('img');
-    console.log('my fn');
-    
-    let img = this.img.nativeElement;
-
-    var vibrant = new Vibrant(img);
-    var swatches = vibrant.swatches()
-    for (var swatch in swatches)
-      console.log(swatch);
-
-    if (swatches.hasOwnProperty(swatch) && swatches[swatch])
-      console.log(swatch, swatches[swatch].getHex())
-
   }
 
 }

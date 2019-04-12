@@ -1,7 +1,7 @@
-nav.navbar                      { padding: 0px 15px; background: #fff; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
+nav.navbar                      { padding: 0px 15px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
 nav .navbar-brand               { display: inline-block; padding-top: 0px; padding-bottom: 0px; margin-right: 16px; font-weight: bold; color: red; }
 .navbar-nav                     { position: relative; }
-.navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #292929; cursor: pointer; opacity: 0.3; }
+.navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; }
 .navbar-nav li .nav-link.active,
 .navbar-nav li .nav-link:hover,
 .navbar-nav li .nav-link:focus   { opacity: 1; }

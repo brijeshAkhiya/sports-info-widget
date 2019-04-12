@@ -4,50 +4,29 @@
 /******* Fonts Face CSS Start **********/
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
-/* @font-face {
-    font-family: 'BebasNeueBold';
-    src: url('../fonts/BebasNeueBold.eot');
-    src: url('../fonts/BebasNeueBold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/BebasNeueBold.woff2') format('woff2'),
-        url('../fonts/BebasNeueBold.woff') format('woff'),
-        url('../fonts/BebasNeueBold.ttf') format('truetype'),
-        url('../fonts/BebasNeueBold.svg#BebasNeueBold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-} */
-@font-face {
-    font-family: 'BebasNeueBold';
-    src: url('../fonts/bebasneue_bold-webfont.woff2') format('woff2'),
-         url('../fonts/bebasneue_bold-webfont.woff') format('woff'),
-         url('../fonts/bebasneue_bold-webfont.ttf') format('truetype'),
-         url('../fonts/bebasneue_bold-webfont.svg#bebas_neuebold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
+@import url('https://fonts.googleapis.com/css?family=Muli:600,700,800,900,900i');
 /********* Fonts Face CSS End **********/
 
 /******* Common Element CSS Start ******/
 *                       { margin: 0px; padding: 0px; outline: none; }
-body                    { font-family: 'IBM Plex Sans', sans-serif; font-size: 18px; line-height: 26px; color: #3D3D3D;}
+body                    { font-family: 'IBM Plex Sans', sans-serif; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252;}
 .clear                  { clear:both;}
 img                     { border: 0px;}
 ul,ol                   { list-style: none;}
 a                       { text-decoration: none; outline: none; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 a:focus, a:active, a:visited, 
 a:hover	                { text-decoration: none; outline: none; }
-h1                      { margin: 0px 0px 32px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; font-size-adjust: auto; text-transform: uppercase; }
-h2                      { margin: 0px 0px 8px; font-size: 80px; line-height: 80px; font-family: 'BebasNeueBold'; text-transform: uppercase;}
-h3                      { margin: 0px 0px 8px; font-size: 48px; line-height: 58px; font-family: 'BebasNeueBold'; text-transform: uppercase; }
-/* h4                      { } */
-h5                      { font-size: 24px; line-height: 32px; color: #3D3D3D; font-weight: 500; }
+h1                      { margin: 0px 0px 24px; font-size: 48px; line-height: 64px; font-family: 'Muli', sans-serif; font-weight: 900; text-transform: uppercase; font-style: italic; }
+h2                      { margin: 0px 0px 8px; font-size: 40px; line-height: 50px; font-family: 'Muli', sans-serif; font-weight: 800; text-transform: uppercase;}
+h3                      { margin: 0px 0px 8px; font-size: 32px; line-height: 58px; font-family: 'Muli', sans-serif; font-weight: 800; text-transform: uppercase; }
+h4                      { margin: 0px 0px 8px; font-size: 24px; line-height: 32px; color: #3D3D3D; font-weight: 500; }
+h5                      { font-size: 20px; line-height: 32px; color: #3D3D3D; font-weight: 500; }
 h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
 h6 a                    { color: #3D3D3D; }
 h6 a:not([href]):not([tabindex]):hover,
 h6 a:not([href]):not([tabindex]):focus              { color: #ED1A33;}
 /* h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
-p                       { margin-bottom: 15px; }
+p                       { margin-bottom: 24px; }
 p.small-text            { font-size: 16px; line-height: 22px; }
 img                     { max-width: 100%; }
 /******* Common Element CSS End *********/
@@ -55,13 +34,20 @@ img                     { max-width: 100%; }
 /* -------- Color Style ------- */
 .white-text             { color: #fff; }
 .theme-color            { color: #ED1A33;}
+.light-blue-color       { color: #2990F8; }
 .theme-bg               { background: #ED1A33; }
 
 /* -------- Button Style ------- */
 button                  { outline: none !important; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
-.theme-btn              { display: inline-block; min-width: 127px; padding: 12px; background: #ECECEC; font-size: 14px; line-height: 18px; color: #3D3D3D; font-weight: 500; border: none; text-transform: uppercase; text-align: center; border-radius: 2px;  }
+.theme-btn              { display: inline-block; padding: 12px 60px 12px 16px; background: #ED1A33; font-size: 16px; line-height: 20px; color: #fff; font-family: 'Muli', sans-serif; font-weight: 800; border: none; text-transform: capitalize; text-align: center; border-radius: 4px; box-shadow: 0px 2px 8px rgba(208,16,39,0.24); -webkit-box-shadow: 0px 2px 8px rgba(208,16,39,0.24); position: relative; }
 .theme-btn:hover,
 .theme-btn:focus        { background: #ED1A33; color: #fff; border: none;  }
+.theme-btn span         { position: absolute; display: block; width: 44px; height: 100%; top: 0px; right: 0px; border-radius: 4px; overflow: hidden; }
+.theme-btn span:before,
+.theme-btn span:after   { content: ""; position: absolute; display: block; width: 100%; height: 100%; top: 0px; left: 0px; background: #B80E23 url(../../assets/images/right-arrow.svg) no-repeat center center / 14px auto; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.theme-btn span:before  { left: -100%; }
+.theme-btn:hover span:before  { left: 0px; }
+.theme-btn:hover span:after   { left: 100%; }
 .full-btn.theme-btn     { padding: 18px 18px 17px; width: 100%; font-size: 22px; line-height: 29px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;  }
 .add-to-fav-btn         { display: inline-block; min-width: 196px; padding: 18px 33px 18px 56px; background: transparent; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #A3A3A3; font-weight: 500; border: 2px solid #E8E8E8; border-radius: 2em; position: relative;}
 .add-to-fav-btn span    { display: block; }
@@ -89,9 +75,37 @@ button                  { outline: none !important; cursor: pointer; transition:
 .row.sidebar-row            { margin: 0px -12px; }
 .sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 344px); }
 .sidebar-row .sidebar-col   { padding: 0px 12px; width: 344px; }
-.row.row-size8              { margin: 0px -8px; }
-.row-size8 [class*="col-"]  { padding: 0px 8px; }
+.row.row-size12             { margin: 0px -12px; }
+.row-size12 [class*="col-"] { padding: 0px 12px; }
 .common-section             { padding: 48px 0px; }
+
+/* -------- Popular Articles Section ------- */
+.popular-main-item                      { margin-bottom: 32px; padding: 16px; background: #fff; border-radius: 4px; }
+.popular-main-item .item-img            { margin-bottom: 16px; height: 480px; cursor: pointer;  }
+.author-info p                          { margin: 0px; font-size: 14px; line-height: 18px; color: #7A7A7A; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;}
+.author-info p.author a                 { margin-right: 4px; color: #2990F8; font-weight: 600; text-transform: uppercase;  }
+.author-info p.author a:hover,
+.author-info p.author a:focus           { color: #22336F; }
+.author-info .view:before               { content: ""; margin: 0px 4px 2px 0px; display: inline-block; width: 20px; height: 18px; background: url(../../assets/images/view-icon.svg) no-repeat center center / 20px auto; vertical-align: middle; }
+.common-title-btn                       { margin-bottom: 24px; }
+.common-title-btn h4                    { margin: 0px; }
+.common-popular-list .popular-item      { border-radius: 4px; background: #fff; }
+.common-popular-list .img-block         { height: 196px; cursor: pointer; border-radius: 4px; }
+.common-popular-list .item-desc         { padding: 12px; }
+.common-popular-list .item-desc p       { margin: 0px; }
+
+/* -------- Common News Section ------- */
+.common-news-list .common-news-item     { margin-bottom: 24px; padding-bottom: 24px; box-shadow: inset 0px -2px 0px 0px #EDEDED; -webkit-box-shadow: inset 0px -2px 0px 0px #EDEDED; }
+.common-news-list .common-news-img      { width: 320px; height: 181px; border-radius: 2px; cursor: pointer; position: relative; }
+.common-news-list .common-news-video:after     { content: ""; position: absolute; display: block; width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: url(../../assets/images/play-btn.svg) no-repeat center center / cover; }
+.common-news-list .common-news-desc     { width: calc(100% - 320px); padding: 0px 16px 20px; position: relative; }
+.common-news-list h5                    { font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
+.common-news-list p                     { font-size: 16px; line-height: 24px; }
+.common-news-list .common-news-bootom   { padding: 0px 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
+.common-news-list .common-news-bootom p { margin: 0px; font-size: 14px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;}
+.common-news-list .common-news-bootom p.author span     { margin-right: 4px; font-weight: 600; text-transform: uppercase;  }
+.common-news-list .common-news-bootom .view:before      { content: ""; margin: 0px 4px 2px 0px; display: inline-block; width: 20px; height: 20px; background: url(../../assets/images/view-icon.svg) no-repeat center center / 20px auto; vertical-align: middle; }
+
 
 /* -------- Common Widget Block ------- */
 .common-widget                      { margin-bottom: 24px; }
@@ -105,7 +119,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-widget .common-list li button   { margin: 12px; padding: 14px 16px; width: calc(100% - 24px); display: block; background: #EBEBEB; color: #A3A3A3; text-align: center; border: none; border-radius: 4px; font-weight: 500; text-transform: uppercase; }
 .common-widget .common-list li button:hover,
 .common-widget .common-list li button:focus     { background: #ED1A33; color: #fff; }
-.sidebar-col .ad-block              { margin-top: 24px; text-align: center; }
+.ad-block                           { margin: 24px 0px; text-align: center; }
+.ad-block:last-child                { margin-bottom: 0px;}
 
 /* -------- Tab Widget Block ------- */
 .tab-widget.common-widget .widget-title     { padding: 14px; }
@@ -123,17 +138,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-widget .cricket-list .match-info p      { margin-bottom: 12px; }
 .common-widget .cricket-list .result-line   { margin: 0px; font-size: 12px; line-height: 18px; font-family: 'IBM Plex Sans Condensed', sans-serif; }
 
-/* -------- Common News Section ------- */
-.common-news-list .common-news-item     { margin-bottom: 24px; padding-bottom: 24px; box-shadow: inset 0px -2px 0px 0px #EDEDED; -webkit-box-shadow: inset 0px -2px 0px 0px #EDEDED; }
-.common-news-list .common-news-img      { width: 320px; height: 181px; border-radius: 2px; cursor: pointer; position: relative; }
-.common-news-list .common-news-video:after     { content: ""; position: absolute; display: block; width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: url(../../assets/images/play-btn.svg) no-repeat center center / cover; }
-.common-news-list .common-news-desc     { width: calc(100% - 320px); padding: 0px 16px 20px; position: relative; }
-.common-news-list h5                    { font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
-.common-news-list p                     { font-size: 16px; line-height: 24px; }
-.common-news-list .common-news-bootom   { padding: 0px 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
-.common-news-list .common-news-bootom p { margin: 0px; font-size: 14px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500;}
-.common-news-list .common-news-bootom p.author span     { margin-right: 4px; font-weight: 600; text-transform: uppercase;  }
-.common-news-list .common-news-bootom .view:before      { content: ""; margin: 0px 4px 2px 0px; display: inline-block; width: 20px; height: 20px; background: url(../../assets/images/view-icon.svg) no-repeat center center / 20px auto; vertical-align: middle; }
+
 
 /******** Middle Section CSS End *******/
 

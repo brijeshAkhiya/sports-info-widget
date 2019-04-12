@@ -1,80 +1,60 @@
 <app-main-header></app-main-header>
 <section class="home-banner">
-  <div class="home-banner-lightbg" style="background: #250668;"></div>
-  <div class="home-banner-pic" [style.background-image]="'url(' + bannerurl + ')'"></div>
-  <div class="home-banner-bg" style="background: #FFCA00;" ></div>
-  <div class="banner-inner">
+  <div class="banner-text">
     <div class="container">
       <div class="row">
-        <div class="col-sm-10">
-          <span class="justin-block">just in</span>
-          <h1><a><span style="background: #EFBD68;">Chennai Super Kings defeat Rajasthan Royals by 8 runs</span></a>
-          </h1>
-        </div>
-      </div>
-      <div class="banner-item-list">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="banner-item align-items-end d-flex common-zoom-container">
-              <div class="common-zoom-img"
-                style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
-              <p [ngClass]="{'video': true}">SRH vs RCB | David Warner and Jonny Bairstow Hurricane</p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="banner-item align-items-end d-flex common-zoom-container">
-              <div class="common-zoom-img"
-                style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
-              <p>Krunal Pandya wins plaudits from cricket fraternity by warning Mayank Agarwal</p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="banner-item align-items-end d-flex common-zoom-container">
-              <div class="common-zoom-img"
-                style="background-image: url(../../../assets/images/banner/home-banner1.jpg)"></div>
-              <p class="video"><img src="../../../assets/images/video-small-icon.svg">Sam Curran claims
-                first hat-trick of IPL 2019</p>
-            </div>
-          </div>
+        <div class="col-md-5">
+          <h1 class="white-text">Top Highlights</h1>
+          <ul class="banner-news-list">
+            <li *ngFor="let post of bannerposts;let i = index;"><a [ngClass]="{'active': i===listindex}"
+                (mouseover)="onmouseover(i)">{{post.sTitle}}</a></li>
+          </ul>
         </div>
       </div>
     </div>
+  </div>
+  <div class="banner-images">
+    <div class="banner-image" *ngFor="let item of bannerimages; let i=index;" [ngClass]="{'active': i===imageindex}"
+      [style.background-image]="'url(' + item + ')'"></div>
   </div>
 </section>
 <div class="container">
   <img src="../../../assets/images/ad-1320-300.jpg" alt="AD">
 </div>
-<section class="common-section popular-article-section">
+<section class="common-section home-popular-article">
   <div class="container">
-    <h2>Popular Articles</h2>
     <div class="row sidebar-row">
       <div class="content-col">
-        <div class="popular-main-item">
-          <div class="item-img">
-            <div class="item-img-pic common-zoom-container">
-              <div class="common-zoom-img" [style.background-image]="'url(' + ArticleUrl + ')'">
-              </div>
+        <div class="popular-main-item" *ngFor="let article of populararticles | slice:0:1">
+          <div class="item-img common-zoom-container">
+            <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'">
             </div>
           </div>
           <div class="blog-desc">
-            <div class="border-block"></div>
-            <h3><a>{{populararticles[0]?.sTitle}}</a></h3>
-            <p>{{populararticles[0]?.sDescription |  truncate:[300,'...']}}</p>
-            <p class="author small-text"><span class="theme-color">{{populararticles[0]?.iId?.sFirstName}} {{populararticles[0]?.iId?.sLastName}}</span>{{populararticles[0]?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+            <h4><a>{{article.sTitle}}</a></h4>
+            <p>{{article.sDescription | truncate:[240,'...']}}</p>
+            <div class="author-info d-flex justify-content-between align-items-center">
+              <p class="author"><a>{{article.iId.sFirstName}}
+                  {{article.iId.sLastName}}</a>{{article.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+              <p class="view">{{article.nViewCounts}}</p>
+            </div>
           </div>
         </div>
-        <div class="home-popular-title d-flex justify-content-between align-items-center">
-          <h5>Related news</h5>
-          <button class="theme-btn">View All</button>
+        <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+        <div class="common-title-btn d-flex justify-content-between align-items-center">
+          <h4>Related news</h4>
+          <button class="theme-btn">View All<span></span></button>
         </div>
-        <div class="home-popular-list">
-          <div class="row row-size8">
-            <div class="col-md-4" *ngFor="let item of populararticles | slice:1:4">
+        <div class="common-popular-list">
+          <div class="row row-size12">
+            <div class="col-md-3">
               <div class="popular-item">
                 <div class="img-block common-zoom-container">
-                  <div class="common-zoom-img" [style.background-image]="'url(' + item.sImage + ')'"></div>
+                  <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
                 </div>
-                <h6><a>{{item?.sTitle}}</a></h6>
+                <div class="item-desc">
+                  <p><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></p>
+                </div>
               </div>
             </div>
           </div>
@@ -213,8 +193,7 @@
       <div class="col-lg-8 col-md-7">
         <div class="main-popular-video">
           <video id="videobtn" width="100%" height="489" preload="none" [poster]="popularvideos[0]?.sImage
-          "
-            #videoele controlsList="nodownload">
+          " #videoele controlsList="nodownload">
             <source [src]="popularvideos[0]?.sVideo" type="video/mp4">
           </video>
           <div class="play-btn-block" [ngClass]="{'video-play-hide': !isPlayBtn}"><button
@@ -309,7 +288,8 @@
         <div class="common-news-list">
           <div class="common-news-item d-flex" *ngFor="let item of recentposts">
             <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" [ngClass]="{'common-news-video': item.eType == 'Video'}" [style.background-image]="'url(' + item.sImage + ')'"></div>
+              <div class="common-zoom-img" [ngClass]="{'common-news-video': item.eType == 'Video'}"
+                [style.background-image]="'url(' + item.sImage + ')'"></div>
             </div>
             <div class="common-news-desc">
               <div class="news-excerpt">
@@ -317,7 +297,8 @@
                 <p>{{item.sDescription | truncate:[160,'...']}}</p>
               </div>
               <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">{{item.iId.sFirstName}} {{item.iId.sLastName}}</span>{{item.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                <p class="author"><span class="theme-color">{{item.iId.sFirstName}}
+                    {{item.iId.sLastName}}</span>{{item.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
                 <p class="view">{{item.nViewCounts}}</p>
               </div>
             </div>
@@ -328,5 +309,56 @@
     </div>
   </div>
 </section>
+<!-- <section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="sidebar-col"></div>
+      <div class="content-col">
+        <div class="home-recentnews-title d-flex justify-content-between align-items-center">
+          <h2>RECENT news</h2>
+          <button class="theme-btn">View All</button>
+        </div>
+      </div>
+    </div>
+    <div class="row sidebar-row">
+      <div class="sidebar-col">
+        <div class="common-widget">
+          <div class="widget-title theme-bg">
+            <h5 class="white-text">Popular Right Now</h5>
+          </div>
+          <ul class="common-list">
+            <li><a>IPL 2019</a></li>
+            <li><a>Australia vs Pakistan</a></li>
+            <li><a>Sri Lanka vs South Africa</a></li>
+            <li><a>Virat Kohli</a></li>
+            <li><a>Mumbai Indians</a></li>
+            <li><button>View all</button></li>
+          </ul>
+        </div>
+        <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+      </div>
+      <div class="content-col">
+        <div class="common-news-list">
+          <div class="common-news-item d-flex">
+            <div class="common-news-img common-zoom-container">
+              <div class="common-zoom-img"></div>
+            </div>
+            <div class="common-news-desc">
+              <div class="news-excerpt">
+                <h5><a>The time has come for Mumbai Indians to look beyond Kieron Pollard</a></h5>
+                <p>Another new season, and another dismal start for the Mumbai Indians. Year after year, it has become a pattern for the Mumbai-based franchise…</p>
+              </div>
+              <div class="common-news-bootom d-flex justify-content-between align-items-center">
+                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
+                <p class="view">3.2K</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="theme-btn full-btn">MORE STORIES</button>
+      </div>
+    </div>
+  </div>
+</section> -->
 <app-main-footer></app-main-footer>
-	<img #img style="display:none;" crossOrigin="Anonymous" (load)="myfn()">
+<img #img style="display:none;" crossOrigin="Anonymous" (load)="myfn()">
