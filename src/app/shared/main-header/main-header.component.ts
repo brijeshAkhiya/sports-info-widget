@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import {NgxTinySliderSettingsInterface} from 'ngx-tiny-slider';
 
 @Component({
   selector: 'app-main-header',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class MainHeaderComponent implements OnInit {
   @ViewChild('navpointer') navpointer: ElementRef
   @ViewChild('navbarnav') navbarnav: ElementRef
+  tinySliderConfig: NgxTinySliderSettingsInterface;
 
   Sportsnames = [
     { "name": "Cricket", "id": "1", "route": "/cricket" },
@@ -20,7 +22,25 @@ export class MainHeaderComponent implements OnInit {
     { "name": "Tennis sports", "id": "7" },
   ]
 
-  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router) { }
+  slides = [
+    {img: "http://placehold.it/350x150/000000"},
+    {img: "http://placehold.it/350x150/111111"},
+    {img: "http://placehold.it/350x150/333333"},
+    {img: "http://placehold.it/350x150/666666"},
+    {img: "http://placehold.it/350x150/666666"},
+    {img: "http://placehold.it/350x150/666666"}
+  ];
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1};
+  
+
+  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router) {
+    this.tinySliderConfig = {
+      arrowKeys: true,
+      nav: false,
+      items:4,
+      mouseDrag:true
+    };
+   }
 
   ngOnInit() {
   }

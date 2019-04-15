@@ -13,7 +13,7 @@ export class SportsService {
     //get popular posts - HOME
 
      getpopularpost(data){
-        return this.http.post(environment.apiUrl + environment.version + '/posts/populer',data);
+        return this.http.post(environment.apiUrl + environment.version + '/posts/popular',data);
      }
 
      //get recent posts - HOME
@@ -27,6 +27,12 @@ export class SportsService {
      getbannerpost(){
       return this.http.get(environment.apiUrl + environment.version + '/posts/banner');
 
+     }
+
+     //get popular tags - HOME 
+
+     getpopulartags(data){
+        return this.http.post(environment.apiUrl + environment.version + '/populartags',data);
      }
 
 }

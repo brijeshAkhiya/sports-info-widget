@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   bannerimages = []
   imageindex: number = 0;
   listindex: number = 0;
+  populartags = [];
   constructor(private slugifyPipe: SlugifyPipe, private renderer2: Renderer2, private sportsService: SportsService) { }
 
   ngOnInit() {
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
     this.getPopularArticles();
     this.getPopularVideos();
     this.getRecentPosts();
+    this.getPopularTags();
   }
 
 
@@ -50,7 +52,8 @@ export class HomeComponent implements OnInit {
 
   getPopularArticles() {
     let data = {
-      eType: 'Article'
+      eType: 'Article',
+      nLimit: 5
     }
     this.sportsService.getpopularpost(data).subscribe((res) => {
       if (res['data']) {
@@ -76,11 +79,25 @@ export class HomeComponent implements OnInit {
 
   getRecentPosts() {
     let data = {
-      eType: ''
+      eType: '',
+      nLimit: 10
     }
     this.sportsService.getrecentpost(data).subscribe((res) => {
       if (res['data']) {
         this.recentposts = res['data'];
+      }
+    })
+  }
+
+  //get popular topics tags - 
+
+  getPopularTags() {
+    let data = {
+      eSport: ''
+    }
+    this.sportsService.getpopulartags(data).subscribe((res) => {
+      if (res['data']) {
+        this.populartags = res['data']
       }
     })
   }

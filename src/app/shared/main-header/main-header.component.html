@@ -1,6 +1,47 @@
-<nav class="navbar navbar-expand-md">
+<div class="header-live-section">
   <div class="container">
-    <a class="navbar-brand" (click)="routing('/')"><img src="../../../assets/images/logo-white.svg" alt=""></a>
+    <ngx-tiny-slider [config]="tinySliderConfig">
+      <ng-container class="items">
+        <div class="slider-item">
+          <a target="_blank" href="google.com">
+            <img src="http://www.mattsorger.com/newsletterpics/gsw07_01.jpg">
+          </a>
+        </div>
+
+        <div class="slider-item">
+          <a target="_blank" href="google.com">
+            <img src="http://www.mattsorger.com/newsletterpics/gsw07_01.jpg">
+          </a>
+        </div>
+
+        <div class="slider-item">
+          <a target="_blank" href="google.com">
+            <img src="http://www.mattsorger.com/newsletterpics/gsw07_01.jpg">
+          </a>
+        </div>
+
+        <div class="slider-item">
+          <a target="_blank" href="google.com">
+            <img src="http://www.mattsorger.com/newsletterpics/gsw07_01.jpg">
+          </a>
+        </div>
+
+        <div class="slider-item">
+          <a target="_blank" href="google.com">
+            <img src="http://www.mattsorger.com/newsletterpics/gsw07_01.jpg">
+          </a>
+        </div>
+        <div class="slider-item">
+          <a target="_blank" href="google.com">
+            <img src="http://www.mattsorger.com/newsletterpics/gsw07_01.jpg">
+          </a>
+        </div>
+      </ng-container>
+    </ngx-tiny-slider>
+  </div>
+</div>
+<nav class="navbar navbar-expand-md">
+    <a class="navbar-brand" (click)="routing('/')"><img src="../../../assets/images/logo.svg" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,40 +49,33 @@
     <div class="collapse navbar-collapse">
       <div class="navbar-nav-container" id="navbar-nav">
         <ul class="navbar-nav mr-auto" #navbarnav>
-          <li class="nav-item" >
-            <a class="nav-link" [routerLink]="['/cricket']" 
-            routerLinkActive="active">Cricket</a>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/cricket']" routerLinkActive="active">Cricket</a>
           </li>
-          <li class="nav-item" >
-              <a class="nav-link" [routerLink]="['/comingsoon']" 
-              routerLinkActive="active">Soccer</a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" [routerLink]="['/comingsoon']" 
-                routerLinkActive="active">Badminton</a>
-              </li>
-            
-            <li class="nav-item" >
-                <a class="nav-link" [routerLink]="['/comingsoon']" 
-                routerLinkActive="active">Basketball</a>
-              </li>
-            
-            <li class="nav-item" >
-                <a class="nav-link" [routerLink]="['/comingsoon']" 
-                routerLinkActive="active">Field Hockey</a>
-              </li>
-           
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Soccer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Badminton</a>
+          </li>
 
-            <li class="nav-item" >
-                <a class="nav-link" [routerLink]="['/comingsoon']" 
-                routerLinkActive="active">Racing</a>
-              </li>
-              <li class="nav-item" >
-                <a class="nav-link" [routerLink]="['/comingsoon']" 
-                routerLinkActive="active">Tennis sports</a>
-              </li>
-            
-         
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Basketball</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Field Hockey</a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Racing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Tennis sports</a>
+          </li>
+
+
 
 
           <!-- <li class="nav-item" 
@@ -72,5 +106,4 @@
         <div id="nav-pointer" #navpointer></div>
       </div>
     </div>
-  </div>
 </nav>

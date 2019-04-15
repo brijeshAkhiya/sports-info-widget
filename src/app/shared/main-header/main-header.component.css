@@ -1,5 +1,7 @@
-nav.navbar                      { padding: 0px 15px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
-nav .navbar-brand               { display: inline-block; padding-top: 0px; padding-bottom: 0px; margin-right: 16px; font-weight: bold; color: red; }
+.header-live-section            { padding: 12px 0px; background: #1B2A5A; }
+
+nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
+nav .navbar-brand               { padding: 6px 48px; display: inline-block; background: #fff; }
 .navbar-nav                     { position: relative; }
 .navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; }
 .navbar-nav li .nav-link.active,

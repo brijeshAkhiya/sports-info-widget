@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="18px" height="12px" viewBox="0 0 18 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
-    <title>Group 31</title>
+    <title>Artboard</title>
     <desc>Created with Sketch.</desc>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="elements/article/normal" transform="translate(-899.000000, -165.000000)">
-            <g id="Group-4">
-                <g id="Stacked-Group">
-                    <g id="Group-5" transform="translate(336.000000, 0.000000)">
-                        <g id="Group-32" transform="translate(562.000000, 161.000000)">
-                            <g id="Group-31">
-                                <rect id="Rectangle" fill="#ECECEC" opacity="0" x="0" y="0" width="20" height="20"></rect>
-                                <g id="Group-14" transform="translate(1.428571, 4.285714)">
-                                    <path d="M8.57142857,11.4285714 C11.4285714,11.4285714 14.2857143,9.52380952 17.1428571,5.71428571 C14.2857143,1.9047619 11.4285714,-1.77635684e-15 8.57142857,-1.77635684e-15 C5.71428571,-1.54309078e-15 2.85714286,1.9047619 -1.62536651e-13,5.71428571 C2.85714286,9.52380952 5.71428571,11.4285714 8.57142857,11.4285714 Z" id="Oval" fill="#979797"></path>
-                                    <circle id="Oval-Copy-3" fill="#FFFFFF" cx="8.57142857" cy="5.71428571" r="4.28571429"></circle>
-                                    <circle id="Oval" fill="#979797" cx="8.57142857" cy="5.71428571" r="2.85714286"></circle>
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                </g>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-17">
+            <rect id="Rectangle" fill="#ECECEC" opacity="0" x="0" y="0" width="20" height="20"></rect>
+            <g id="Group-14" transform="translate(1.428571, 4.285714)" fill="#979797">
+                <path d="M8.57142857,11.4285714 C5.71428571,11.4285714 2.85714286,9.52380952 -4.36095604e-13,5.71428571 C2.85714286,1.9047619 5.71428571,-1.54309078e-15 8.57142857,-1.77635684e-15 C11.4285714,-1.77635684e-15 14.2857143,1.9047619 17.1428571,5.71428571 C14.2857143,9.52380952 11.4285714,11.4285714 8.57142857,11.4285714 Z M8.57142857,10 C10.9383632,10 12.8571429,8.08122036 12.8571429,5.71428571 C12.8571429,3.34735107 10.9383632,1.42857143 8.57142857,1.42857143 C6.20449393,1.42857143 4.28571429,3.34735107 4.28571429,5.71428571 C4.28571429,8.08122036 6.20449393,10 8.57142857,10 Z M8.57142857,8.57142857 C6.99347214,8.57142857 5.71428571,7.29224214 5.71428571,5.71428571 C5.71428571,4.13632929 6.99347214,2.85714286 8.57142857,2.85714286 C10.149385,2.85714286 11.4285714,4.13632929 11.4285714,5.71428571 C11.4285714,7.29224214 10.149385,8.57142857 8.57142857,8.57142857 Z" id="Combined-Shape"></path>
             </g>
         </g>
     </g>

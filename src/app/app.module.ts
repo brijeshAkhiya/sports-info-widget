@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from "./app-reducer";
 import { SlugifyPipe } from './pipes/slugpipe';
 import { SharedModule } from './shared/shared.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 
@@ -44,6 +45,7 @@ export function provideConfig() {
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+    SlickCarouselModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
