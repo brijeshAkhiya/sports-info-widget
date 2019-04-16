@@ -3,7 +3,7 @@
   <div class="banner-text">
     <div class="container">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-xl-5 col-md-7 col-sm-9 col-10">
           <h1 class="white-text">Top Highlights</h1>
           <ul class="banner-news-list">
             <li *ngFor="let post of bannerposts;let i = index;"><a [ngClass]="{'active': i===listindex}"
@@ -45,15 +45,15 @@
           <h4>Related news</h4>
           <button class="theme-btn">View All<span></span></button>
         </div>
-        <div class="common-popular-list">
+        <div class="common-popular-list home-popular-list">
           <div class="row row-size12">
-            <div class="col-md-3" *ngFor="let article of populararticles | slice:1:5 ">
+            <div class="col-sm-6 col-xl-3" *ngFor="let article of populararticles | slice:1:5 ">
               <div class="popular-item common-shadow">
                 <div class="img-block common-zoom-container">
                   <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'"></div>
                 </div>
                 <div class="item-desc">
-                  <p class="bold-text"><a>{{article.sTitle | truncate:[60,'...']}}</a></p>
+                  <p class="bold-text"><a>{{article.sTitle | truncate:[56,'...']}}</a></p>
                 </div>
               </div>
             </div>
@@ -130,29 +130,32 @@
                 </ul>
               </ng-template>
             </ngb-tab>
-            <ngb-tab title="Results">
+            <ngb-tab>
+                <ng-template ngbTabTitle>
+                    <div (click)="getMatchResults()">Results</div>
+                </ng-template>
               <ng-template ngbTabContent>
-                <ul class="common-list cricket-list">
-                  <li>
+                <ul class="common-list cricket-list" >
+                  <li *ngFor="let result of matchresults">
                     <div class="title d-flex justify-content-between align-items-center">
-                      <p><b>IPL2019</b></p>
-                      <p>Today | Match 8</p>
+                      <p><b>{{result.season_name}}</b></p>
+                      <p>{{result.scheduled | amCalendar}}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p class="match-winner"><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                      <p>187/5(20.0 ov)</p>
+                      <p [ngClass]="{'match-winner': result.competitors[0].winner}"><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{result.competitors[0].abbreviation}}</p>
+                      <p>{{result.period_scores[0]?.display_score}}({{result.period_scores[0]?.display_overs}} ov)</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                      <p>188/2(19.2 ov)</p>
+                      <p [ngClass]="{'match-winner': result.competitors[1].winner}"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">{{result.competitors[1].abbreviation}}</p>
+                      <p>{{result.period_scores[1]?.display_score}}({{result.period_scores[1]?.display_overs}} ov)</p>
                     </div>
                     <div class="row">
                       <div class="col-md-9">
-                        <p class="result-line">Kings XI Punjab beat Royal Challengers Bangalore by 4 wickets</p>
+                        <p class="result-line">{{result?.match_result}}</p>
                       </div>
                     </div>
                   </li>
-                  <li>
+                  <!-- <li>
                     <div class="title d-flex justify-content-between align-items-center">
                       <p><b>IPL2019</b></p>
                       <p>Today | Match 8</p>
@@ -170,7 +173,7 @@
                         <p class="result-line">Kings XI Punjab beat Royal Challengers Bangalore by 4 wickets</p>
                       </div>
                     </div>
-                  </li>
+                  </li> -->
                   <li><button>View all</button></li>
                 </ul>
               </ng-template>
@@ -194,7 +197,7 @@
       </div>
     </div>
     <div class="row row-size12">
-      <div class="col-lg-9 col-md-7" *ngFor="let video of popularvideos | slice:0:1">
+      <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
         <div class="main-popular-video common-zoom-container common-full-img">
           <div class="common-zoom-img common-overlay" [style.background-image]="'url(' + video.sImage + ')'">
           </div>
@@ -211,7 +214,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-5">
+      <div class="col-lg-3 col-md-4">
         <ng-scrollbar class="custom-scrollbar">
           <div class="home-popular-vid-list">
             <div class="video-item" *ngFor="let video of popularvideos">
@@ -240,7 +243,7 @@
             <div class="common-news-desc">
               <div class="news-excerpt">
                 <h5><a>{{post.sTitle}}</a></h5>
-                <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                <p>{{post.sDescription | truncate:[218,'...']}}</p>
               </div>
               <div class="author-info d-flex justify-content-between align-items-center">
                 <p class="author"><a>{{post.iId.sFirstName}}
@@ -265,4 +268,3 @@
   </div>
 </section>
 <app-main-footer></app-main-footer>
-<img #img style="display:none;" crossOrigin="Anonymous" (load)="myfn()">

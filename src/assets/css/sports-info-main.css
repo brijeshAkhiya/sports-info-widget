@@ -64,6 +64,14 @@ button                  { outline: none !important; cursor: pointer; transition:
 .add-to-fav-btn:hover,
 .add-to-fav-btn:focus   { padding: 18px 56px 18px 33px; background: #FFC800; color: #fff; border-color: #FFC800;  }
 .add-to-fav-btn:hover:before    { transform: translateX(140px) rotate(360deg); background-color: #fff; background-image: url(../../assets/images/fav-star-yellow.svg); }
+/* -------- Slider Button Style ------- */
+.tns-controls           { position: absolute; left: 0px; top: 50%; width: 100%; }
+.tns-controls button    { position: absolute; width: 44px; height: 44px; background: rgba(255,255,255,0.10); font-size: 0px; transform: translateY(-50%); -webkit-transform: translateY(-50%); border: none; border-radius: 16px;}
+.tns-controls button:hover          { background-color: rgba(255,255,255,0.20);}
+.tns-controls button:first-child    { left: 0px; }
+.tns-controls button:last-child     { right: 0px;}
+.tns-controls button:after          { content: ""; position: absolute; left: 0px; top: 0px; height: 100%; width: 100%; background: url(../../assets/images/right-arrow.svg) no-repeat center center;}
+.tns-controls button:first-child:after  { transform: rotate(180deg); -webkit-transform: rotate(180deg); }
 
 /* -------- Image Zoom Style ------- */
 .common-zoom-container  { overflow: hidden; }
@@ -106,8 +114,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-news-list .common-news-img          { width: 280px; height: 181px; border-radius: 2px 2px 0px 0px; cursor: pointer; position: relative; }
 .common-news-list .common-news-img:before   { content: ""; position: absolute; display: block; width: 60px; height: 40px; right: -40px; bottom: 0px; transform: skewX(-45deg); transform: skewX(-45deg); background: #fff; z-index: 1;}
 .common-news-list .common-news-video:after  { content: ""; position: absolute; display: block; width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: url(../../assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
-.common-news-list .common-news-desc         { width: calc(100% - 280px); padding: 0px 16px 20px; position: relative; }
-.common-news-list p                         { font-size: 16px; line-height: 24px; }
+.common-news-list .common-news-desc         { width: calc(100% - 280px); padding: 0px 0px 16px 16px; position: relative; }
 .common-news-list .author-info              { padding: 0px 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
 
 /* -------- Common Widget Block ------- */
@@ -134,7 +141,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .tab-widget .nav-tabs .nav-link.active:after{ bottom: 0px; }
 .common-widget .cricket-list li             { padding: 8px; font-family: 'IBM Plex Sans', sans-serif; cursor: pointer; }
 .common-widget .cricket-list li:last-child  { padding: 0px; }
-.common-widget .cricket-list .title p       { font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
+.common-widget .cricket-list .title p       { margin-bottom: 12px; font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
 .common-widget .cricket-list .title p b     { color: #595959;}
 .common-widget .cricket-list .match-winner::after   { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background:url(../../assets/images/winner-cup.svg); vertical-align: middle; }
 .common-widget .cricket-list .match-info img    { margin: -3px 4px 0px 0px; }
@@ -166,27 +173,36 @@ button                  { outline: none !important; cursor: pointer; transition:
 }	
 
 @media (min-width: 1200px) and (max-width: 1379px) {
-    body                    { font-size: 16px; line-height: 24px; }
-    h1                      { margin: 0px 0px 28px; font-size: 70px; line-height: 70px; }
-    h2                      { font-size: 70px; line-height: 70px; }
-    h3                      { font-size: 42px; line-height: 52px; }
-    h5                      { font-size: 22px; line-height: 30px; }
+    h1                      { font-size: 44px; line-height: 60px; }
+    h2                      { font-size: 38px; line-height: 48px;}
+/* -------- Popular Articles Section ------- */
+    .popular-main-item .item-img            { height: 440px; }
+    .common-popular-list .img-block         { height: 160px; }
+    .common-popular-list .item-desc         { min-height: 112px; }
 
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
-    body                    { font-size: 16px; line-height: 24px; }
-    h1                      { margin: 0px 0px 24px; font-size: 60px; line-height: 60px; }
-    h2                      { font-size: 60px; line-height: 60px; }
-    h3                      { font-size: 36px; line-height: 46px; }
-    h5                      { font-size: 21px; line-height: 29px; }
-    h6                      { font-size: 16px; line-height: 23px; }	
-    p.small-text            { font-size: 14px; line-height: 20px; }
+@media (max-width: 1199px) {
+/* -------- Popular Articles Section ------- */
+    .common-popular-list .popular-item      { margin-bottom: 24px;}
+    .common-popular-list [class*="col-"]:last-child .popular-item      { margin-bottom: 0px;}
+}
 
+@media (min-width: 992px) and (max-width: 1199px) {
+    body                    { font-size: 15px; line-height: 25px; }
+    h1                      { font-size: 40px; line-height: 56px; }
+    h2                      { font-size: 36px; line-height: 46px;}
+    h4                      { font-size: 22px; line-height: 30px; }
+    h5                      { font-size: 19px; line-height: 24px;}
+/* -------- Custom Grid CSS ------- */
+    .common-section             { padding: 40px 0px; }
+/* -------- Popular Articles Section ------- */
+    .home-popular-list [class*="col-"]:nth-child(3) .popular-item      { margin-bottom: 0px;}
+    .popular-main-item .item-img            { height: 380px; }
+    .common-popular-list .item-desc         { min-height: 70px; }
 /* -------- Common News Section ------- */
-    .common-news-list .common-news-img      { width: 240px; height: 181px; }
-    .common-news-list .common-news-desc     { width: calc(100% - 240px); padding: 0px 16px 20px; }
-    .common-news-list p                     { font-size: 15px; line-height: 23px; }
+    .common-news-list .common-news-img          { width: 220px; height: 181px;}
+    .common-news-list .common-news-desc         { width: calc(100% - 220px);}
 
 }
 
@@ -194,73 +210,69 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Custom Grid CSS ------- */
     .sidebar-row .content-col,
     .sidebar-row .sidebar-col   { width: 100%; }
+/* -------- Common Widget Block ------- */
+    .common-stories-widget,
+    .common-widget                      { margin: 24px 0px;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    body                    { font-size: 15px; line-height: 23px; }
-    h1                      { margin: 0px 0px 22px; font-size: 48px; line-height: 48px; }
-    h2                      { font-size: 48px; line-height: 48px; }
-    h3                      { font-size: 32px; line-height: 42px; }
-    h5                      { font-size: 20px; line-height: 28px; }
-    h6                      { font-size: 15px; line-height: 22px; }	
-    p.small-text            { font-size: 13px; line-height: 19px; }
-    .full-btn.theme-btn     { padding: 14px 14px 13px; font-size: 18px; line-height: 25px;}
+    body                    { font-size: 14px; line-height: 24px; }
+    h1                      { font-size: 36px; line-height: 50px; }
+    h2                      { font-size: 32px; line-height: 42px;}
+    h4                      { font-size: 20px; line-height: 28px; }
+    h5                      { font-size: 18px; line-height: 22px;}
 /* -------- Custom Grid CSS ------- */
-    .common-section             { padding: 36px 0px; }
-/* -------- Common Widget Block ------- */
-    .common-widget                      { margin: 32px 0px; }
-    .common-widget .widget-title        { padding: 12px; }
-    .common-widget .common-list         { font-size: 15px; line-height: 19px; }
-    .common-widget .common-list li a    { padding: 10px 16px;}
-    .common-widget .common-list li button   { margin: 10px; padding: 12px 16px;}
-/* -------- Tab Widget Block ------- */
-    .tab-widget.common-widget .widget-title     { padding: 12px; }
-    /* .common-widget .cricket-list li             { width: 33.333%; float: left; border-top: none; border-left: none; }
-    .common-widget .cricket-list li:first-child { border-left: 2px solid #F5F5F5; }
-    .common-widget .cricket-list li:last-child  { width: 100%; border-top: 2px solid #F5F5F5; border-left: 2px solid #F5F5F5; }
-    .common-widget .cricket-list:after          { content: ""; display: block; clear: both;} */
+    .common-section         { padding: 36px 0px; }
+/* -------- Popular Articles Section ------- */
+    .popular-main-item .item-img            { height: 360px; }
+    .common-popular-list .item-desc         { min-height: 70px; }
 /* -------- Common News Section ------- */
-    .common-news-list .common-news-img      { width: 280px; }
-    .common-news-list .common-news-desc     { width: calc(100% - 280px); }    
-    .common-news-list p                     { font-size: 15px; line-height: 23px; }
-
+    .common-news-list .common-news-img          { width: 220px; height: 181px;}
+    .common-news-list .common-news-desc         { width: calc(100% - 220px);}
 }
 
 @media (max-width: 767px) {
-    body                    { font-size: 14px; line-height: 21px; }
-    h1                      { margin: 0px 0px 22px; font-size: 32px; line-height: 40px; }
-    h2                      { font-size: 32px; line-height: 32px; }
-    h3                      { font-size: 26px; line-height: 36px; }
-    h5                      { font-size: 17px; line-height: 25px; }
-    h6                      { font-size: 16px; line-height: 22px; }	
-    p.small-text            { font-size: 13px; line-height: 19px; }
-    .full-btn.theme-btn     { padding: 12px 14px 11px; font-size: 16px; line-height: 22px;}
+    body                    { font-size: 14px; line-height: 24px; }
+    h1                      { margin: 0px 0px 20px; font-size: 27px; line-height: 40px; }
+    h2                      { font-size: 26px; line-height: 36px;}
+    h4                      { font-size: 18px; line-height: 26px; }
+    h5                      { font-size: 17px; line-height: 21px;}
+    p                       { margin-bottom: 20px;}
+/* -------- Button Style ------- */
+    .theme-btn              { padding: 10px 52px 10px 14px; font-size: 15px; line-height: 18px; }
+    .theme-btn span         { width: 38px; }
 /* -------- Custom Grid CSS ------- */
-    .common-section             { padding: 30px 0px; }
-/* -------- Common Widget Block ------- */
-    .common-widget                      { margin: 30px 0px; }
-    .common-widget .widget-title        { padding: 10px; }
-    .common-widget .common-list         { font-size: 14px; line-height: 18px; }
-    .common-widget .common-list li a    { padding: 8px 16px;}
-    .common-widget .common-list li button   { margin: 8px; padding: 10px 16px;}
-/* -------- Tab Widget Block ------- */
-    .tab-widget.common-widget .widget-title     { padding: 10px; }
+    .common-section         { padding: 30px 0px; }
+/* -------- Popular Articles Section ------- */
+    .popular-main-item .item-img { height: 320px;}
 /* -------- Common News Section ------- */
-    .common-news-list .common-news-img      { width: 200px; }
-    .common-news-list .common-news-desc     { width: calc(100% - 200px); }    
-    .common-news-list p                     { font-size: 15px; line-height: 23px; }
+    .common-news-list .common-news-item     { -ms-flex-direction: column; flex-direction: column; }
+    .common-news-list .common-news-img,
+    .common-news-list .common-news-desc     { width: 100%; }
+    .common-news-list .common-news-img      { margin-bottom: 16px;}
+    .common-news-list .common-news-desc     { padding: 0px 0px 16px 0px; }
+    .common-news-list .author-info          { padding: 0px; }
+/* -------- Common Widget Block ------- */
+    .common-widget .widget-title                { padding: 6px 6px 8px; }
+    .common-widget .common-list li button       { margin: 12px; padding: 10px 12px;}
+/* -------- Tab Widget Block ------- */
+    .tab-widget.common-widget .widget-title     { padding: 6px; }
+    .tab-widget .nav-tabs .nav-link             { padding: 0px 0px 14px;}
+/* -------- Common Stories Widget Block ------- */
+    .common-stories-widget                      { padding: 16px 20px 20px;}
+    .common-stories-widget li a:not([href]):not([tabindex]) { margin-bottom: 10px; padding-bottom: 10px;}
 
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
+/* -------- Popular Articles Section ------- */
+    .home-popular-list [class*="col-"]:nth-child(3) .popular-item      { margin-bottom: 0px;}
 
 }
 
 @media (max-width: 575px) {
-    h2                      { font-size: 32px; line-height: 30px; }
-/* -------- Common News Section ------- */
-    .common-news-list .common-news-item       { flex-direction: column; -webkit-flex-direction: column; }
-    .common-news-list .common-news-img,
-    .common-news-list .common-news-desc     { width: 100%; } 
-    .common-news-list .common-news-img      { margin-bottom: 20px;}
+/* -------- Popular Articles Section ------- */
+    .popular-main-item .item-img        { height: 240px;}
+    .common-popular-list .item-desc     { min-height: initial; }
+
 }

@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   imageindex: number = 0;
   listindex: number = 0;
   populartags = [];
+  matchresults: any;
   constructor(private slugifyPipe: SlugifyPipe, private renderer2: Renderer2, private sportsService: SportsService) { }
 
   ngOnInit() {
@@ -108,20 +109,14 @@ export class HomeComponent implements OnInit {
     this.listindex = index
   }
 
-  slugify(input: string) {
-    var your_new_slug = this.slugifyPipe.transform(input);
-  }
+  //get 3 days results -HOME 
 
-  //video play event
-
-  playvideo() {
-    let videoEle: HTMLVideoElement = this.videoele.nativeElement;
-    console.log(videoEle);
-    setTimeout(() => {
-      videoEle.play();
-    }, 1000);
-    this.renderer2.setAttribute(this.videoele.nativeElement, 'controls', '');
-    this.isPlayBtn = false; //hide play button once video getting played.
+  getMatchResults() {
+    this.sportsService.getmatchresults().subscribe((res) => {
+      if (res['data']) {
+        this.matchresults = res['data']
+      }
+    })
   }
 
 }
