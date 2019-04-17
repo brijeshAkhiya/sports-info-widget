@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxTinySliderSettingsInterface } from 'ngx-tiny-slider';
+import { SportsService } from '../../providers/sports-service';
 
 @Component({
   selector: 'app-main-header',
@@ -31,18 +32,32 @@ export class MainHeaderComponent implements OnInit {
     { img: "http://placehold.it/350x150/666666" }
   ];
   slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
+  sliderdata: any;
 
 
-  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router) {
+  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService) {
     this.tinySliderConfig = {
       arrowKeys: true,
       nav: false,
-      items: 4,
-      mouseDrag: true
+      items: 1,
+      mouseDrag: true,
+      autoHeight: true,
+      responsive: {
+        1400: {
+          items: 4
+        },
+        1200: {
+          items: 3
+        },
+        768: {
+          items: 2
+        }
+      }
     };
   }
 
   ngOnInit() {
+    this.getHeaderSliderData();
   }
 
   //nav bar click event 
@@ -64,6 +79,17 @@ export class MainHeaderComponent implements OnInit {
     else {
       this.router.navigate(['/'])
     }
+  }
+
+  //get header slider data
+
+  getHeaderSliderData() {
+    this.sportsService.getheaderslider().subscribe((res)=>{
+      if(res['data']){
+        this.sliderdata = res['data']
+      }
+
+    })
   }
 
 }

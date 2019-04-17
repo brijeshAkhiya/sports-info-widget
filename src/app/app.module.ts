@@ -17,9 +17,6 @@ import { SlugifyPipe } from './pipes/slugpipe';
 import { SharedModule } from './shared/shared.module';
 
 
-
-
-
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,

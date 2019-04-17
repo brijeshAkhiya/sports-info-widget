@@ -1,12 +1,14 @@
 .header-live-section                                    { background: #1B2A5A; }
 .header-live-slider                                     { padding: 12px 74px; position: relative; }
-.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; background: #fff;  cursor: pointer; border-radius: 4px; }
+.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 121.7px; background: #fff;  cursor: pointer; border-radius: 4px; }
 .header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 14px; line-height: 18px; font-weight: 500; font-family: 'IBM Plex Sans', sans-serif;}
 .header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
 .header-live-slider .slider-item .title p b             { color: #595959;}
 .header-live-slider .slider-item .match-winner::after   { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background: url(../../../assets/images/winner-cup.svg); vertical-align: middle; }
 .header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; }
 .header-live-slider .slider-item .result-line           { margin: 0px; font-size: 12px; line-height: 18px; font-family: 'IBM Plex Sans Condensed', sans-serif; }
+.header-live-slider .slider-item .live-result           { padding-left: 10px;}
+.header-live-slider .slider-item .live-result:before    { content: ""; margin: 6px 4px 0px -10px; width: 6px; height: 6px; background: #6DD400; display: inline-block; vertical-align: top; border-radius: 50%; }
 nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
 nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block; background: #fff; position: relative; }
 nav .navbar-brand:before        { content: ""; position: absolute; width: calc(100% + 48px); height: 100%; left: 0px; top: 0px; background: #fff; border-radius: 0px 50px 0px 0px/ 0px 100% 0px 0px; z-index: 0; transform: skewX(10deg); -webkit-transform: skewX(10deg); }
@@ -16,5 +18,15 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .navbar-nav li .nav-link.active,
 .navbar-nav li .nav-link:hover,
 .navbar-nav li .nav-link:focus   { opacity: 1; }
-.navbar-nav-container           { position: relative;}
-#nav-pointer     			    { display: block; position: absolute; opacity: 0; left: 0px; bottom: 0px; height: 0px; border-bottom: 6px solid red !important; border-left: 4px solid transparent !important; border-right: 4px solid transparent !important; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.navbar-nav-container           { position: absolute; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
+.navbar-rightside               { margin-left: auto; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+    .header-live-slider .slider-item-inner                  { min-height: initial; }
+}
+
+@media (max-width: 575px) {
+.header-live-slider                                     { padding: 12px 24px;}
+}

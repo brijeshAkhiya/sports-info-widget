@@ -12,7 +12,7 @@ import { SportsService } from '../../providers/sports-service';
 
 
 @NgModule({
-  declarations: [HomeComponent,TruncatePipe],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -21,7 +21,7 @@ import { SportsService } from '../../providers/sports-service';
     NgbModule,
     MomentModule
   ],
-  providers: [SlugifyPipe,TruncatePipe,SportsService]
+  providers: [SlugifyPipe,SportsService]
 })
 
 export class HomeModule { }

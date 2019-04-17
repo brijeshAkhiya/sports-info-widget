@@ -1,8 +1,6 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { SportsService } from '../../providers/sports-service';
-import { SlugifyPipe } from '../../pipes/slugpipe'; //import it from your path
-declare var Vibrant: any;
-import '../../../assets/js/vibrant.js';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -24,12 +22,15 @@ export class HomeComponent implements OnInit {
   listindex: number = 0;
   populartags = [];
   matchresults: any;
-  constructor(private slugifyPipe: SlugifyPipe, private renderer2: Renderer2, private sportsService: SportsService) { }
+  period_score: any;
+  matchfixtures: any;
+  constructor(private renderer2: Renderer2, private sportsService: SportsService) { }
 
   ngOnInit() {
     this.getBannerPost();
     this.getPopularArticles();
     this.getPopularVideos();
+    this.getMatchFixtures();
     this.getRecentPosts();
     this.getPopularTags();
   }
@@ -112,9 +113,39 @@ export class HomeComponent implements OnInit {
   //get 3 days results -HOME 
 
   getMatchResults() {
-    this.sportsService.getmatchresults().subscribe((res) => {
-      if (res['data']) {
+    this.sportsService.getmatchresults().pipe(distinctUntilChanged()).subscribe((res) => {
+      if (res['data'].length != 0) {
         this.matchresults = res['data']
+        //manipulate received data array
+        this.matchresults = this.matchresults.map(data => {
+          let obj = {};
+          let team_arr = data["competitors"]
+          team_arr.map(single => {
+            obj[single.qualifier] = single
+          })
+
+          let period_score_new = data["period_scores"]
+          period_score_new = period_score_new.map(singleb => {
+            if (singleb.away_score !== undefined) {
+              return { ...singleb, team: obj["away"], teamFlag: true }
+            } else {
+              return { ...singleb, team: obj["home"], teamFlag: false }
+            }
+          })
+          return { ...data, period_score_new }
+        })
+      }
+      else {
+       // this.getMatchResults();
+      }
+    })
+  }
+
+  //get 3 days matches fixtures - HOME
+  getMatchFixtures() {
+    this.sportsService.getmatchfixtures().subscribe((res) => {
+      if (res['data']) {
+        this.matchfixtures = res['data']
       }
     })
   }

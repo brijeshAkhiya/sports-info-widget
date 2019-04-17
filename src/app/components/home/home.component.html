@@ -26,7 +26,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="popular-main-item common-shadow" *ngFor="let article of populararticles | slice:0:1">
-          <div class="item-img common-zoom-container">
+          <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': article.eType == 'Video'}">
             <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'">
             </div>
           </div>
@@ -49,7 +49,8 @@
           <div class="row row-size12">
             <div class="col-sm-6 col-xl-3" *ngFor="let article of populararticles | slice:1:5 ">
               <div class="popular-item common-shadow">
-                <div class="img-block common-zoom-container">
+                <div class="img-block common-zoom-container"
+                  [ngClass]="{'common-news-video': article.eType == 'Video'}">
                   <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'"></div>
                 </div>
                 <div class="item-desc">
@@ -65,64 +66,26 @@
           <div class="widget-title">
             <h5>Cricket</h5>
           </div>
-          <ngb-tabset>
+          <ngb-tabset class="common-tabs">
             <ngb-tab title="Fixtures">
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                  <li>
+                  <li *ngFor="let item of matchfixtures | slice:0:4">
                     <div class="title d-flex justify-content-between align-items-center">
-                      <p><b>IPL2019</b></p>
-                      <p>Today | Match 8</p>
+                      <p><b>{{item.season_name}}</b></p>
+                      <p>{{item.scheduled | amCalendar }}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                      <p>187/5(20.0 ov)</p>
+                      <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{item.competitors[0].name}}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                      <p>188/2(19.2 ov)</p>
+                      <p><img src="../../../assets/images/kxip-icon.svg" alt="kxip">{{item.competitors[1].name}}
+                      </p>
                     </div>
                     <div class="row">
                       <div class="col-md-9">
-                        <p class="result-line">Kings XI Punjab beat Royal Challengers Bangalore by 4 wickets</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="title d-flex justify-content-between align-items-center">
-                      <p><b>IPL2019</b></p>
-                      <p>Today | Match 8</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                      <p>187/5(20.0 ov)</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                      <p>188/2(19.2 ov)</p>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-9">
-                        <p class="result-line">Kings XI Punjab beat Royal Challengers Bangalore by 4 wickets</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="title d-flex justify-content-between align-items-center">
-                      <p><b>IPL2019</b></p>
-                      <p>Today | Match 8</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                      <p>187/5(20.0 ov)</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                      <p>188/2(19.2 ov)</p>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-9">
-                        <p class="result-line">Kings XI Punjab beat Royal Challengers Bangalore by 4 wickets</p>
+                        <p class="result-line">Starts {{item.scheduled | amLocal | amDateFormat:'LT'}} |
+                          {{item.city_name}}</p>
                       </div>
                     </div>
                   </li>
@@ -131,23 +94,28 @@
               </ng-template>
             </ngb-tab>
             <ngb-tab>
-                <ng-template ngbTabTitle>
-                    <div (click)="getMatchResults()">Results</div>
-                </ng-template>
+              <ng-template ngbTabTitle>
+                <div (click)="getMatchResults()">Results</div>
+              </ng-template>
               <ng-template ngbTabContent>
-                <ul class="common-list cricket-list" >
+                <ul class="common-list cricket-list">
                   <li *ngFor="let result of matchresults">
                     <div class="title d-flex justify-content-between align-items-center">
                       <p><b>{{result.season_name}}</b></p>
                       <p>{{result.scheduled | amCalendar}}</p>
                     </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p [ngClass]="{'match-winner': result.competitors[0].winner}"><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{result.competitors[0].abbreviation}}</p>
-                      <p>{{result.period_scores[0]?.display_score}}({{result.period_scores[0]?.display_overs}} ov)</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p [ngClass]="{'match-winner': result.competitors[1].winner}"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">{{result.competitors[1].abbreviation}}</p>
-                      <p>{{result.period_scores[1]?.display_score}}({{result.period_scores[1]?.display_overs}} ov)</p>
+                    <div *ngFor="let item of result.period_score_new">
+                      <div class="match-info d-flex justify-content-between align-items-center" *ngIf="!item.teamFlag">
+                        <p [ngClass]="{'match-winner': item.team.winner}"><img src="../../../assets/images/rcb-icon.svg"
+                            alt="rcb">{{item.team.abbreviation}}</p>
+                        <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                      </div>
+                      <div class="match-info d-flex justify-content-between align-items-center" *ngIf="item.teamFlag">
+                        <p [ngClass]="{'match-winner': item.team.winner}"><img
+                            src="../../../assets/images/kxip-icon.svg" alt="kxip">{{item.team.abbreviation}}
+                        </p>
+                        <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-9">
@@ -155,25 +123,6 @@
                       </div>
                     </div>
                   </li>
-                  <!-- <li>
-                    <div class="title d-flex justify-content-between align-items-center">
-                      <p><b>IPL2019</b></p>
-                      <p>Today | Match 8</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p class="match-winner"><img src="../../../assets/images/rcb-icon.svg" alt="rcb">CSK</p>
-                      <p>187/5(20.0 ov)</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                      <p>188/2(19.2 ov)</p>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-9">
-                        <p class="result-line">Kings XI Punjab beat Royal Challengers Bangalore by 4 wickets</p>
-                      </div>
-                    </div>
-                  </li> -->
                   <li><button>View all</button></li>
                 </ul>
               </ng-template>
@@ -189,7 +138,7 @@
 <section class="common-section popular-video-section">
   <div class="container">
     <div class="row row-size12">
-      <div class="col-lg-9 col-md-7">
+      <div class="col-lg-9 col-md-8">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4 class="white-text">Popular Videos</h4>
           <button class="theme-btn">View All<span></span></button>
@@ -237,7 +186,7 @@
       <div class="content-col">
         <div class="common-news-list">
           <div class="common-news-item d-flex common-shadow" *ngFor="let post of recentposts | slice:0:4">
-            <div class="common-news-img common-zoom-container">
+            <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
               <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
             </div>
             <div class="common-news-desc">

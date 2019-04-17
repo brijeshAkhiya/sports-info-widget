@@ -1,521 +1,206 @@
 <app-main-header></app-main-header>
-<div class="sub-navabar">
-  <div class="container">
-    <a class="subemnu-back">Cricket</a>
-    <div class="sub-navbar-container" id="sub-navbar-nav">
-      <ul>
-        <li><a class="active">Home</a></li>
-        <li><a>Fixtures</a></li>
-        <li><a>Series</a></li>
-        <li><a>World Cup 2019</a></li>
-      </ul>
-    </div>
-    <div id="subnav-pointer"></div>
-    <div class="clearfix"></div>
-  </div>
-</div>
-<div class="container">
-  <img src="../../../assets/images/ad-1320-300.jpg" alt="AD">
-</div>
-<!-- <div class="cricket-ball-ani">
-  <img src="../../../assets/images/cricket.svg">
-</div> -->
-<div class="flash-com-ani">
-  <img src="../../../assets/images/cric-sticker.svg">
-</div>
+<app-cricket-menu></app-cricket-menu>
+
 <section class="common-section cricket-recentnews recentnews-section">
   <div class="container">
-    <div class="home-recentnews-title d-flex justify-content-between align-items-center">
-      <h2>Cricket</h2>
-      <button class="add-to-fav-btn"><span>Add to favorites</span></button>
-    </div>
     <div class="row sidebar-row">
       <div class="content-col">
-        <ngb-tabset>
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+          <h1>Cricket</h1>
+          <button class="add-to-fav-btn"><span>Add to favorites</span></button>
+        </div>
+        <ngb-tabset class="common-tabs">
           <ngb-tab title="Recommended">
             <ng-template ngbTabContent>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Recommended Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
+              <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
+                <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                  <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
                   </div>
                 </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
+                <div class="blog-desc">
+                  <h4><a>{{post.sTitle}}</a></h4>
+                  <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                  <div class="author-info d-flex justify-content-between align-items-center">
+                    <p class="author"><a>{{post.iId.sFirstName}}
+                        {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                    <p class="view">{{post.nViewCounts}}</p>
                   </div>
                 </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
+              </div>
+              <div class="common-popular-list">
+                <div class="row row-size12">
+                  <div class="col-sm-6 col-xl-3" *ngFor="let post of populararticles | slice:1:5">
+                    <div class="popular-item common-shadow">
+                      <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                        <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
+                      </div>
+                      <div class="item-desc">
+                        <p class="bold-text"><a>{{post.sTitle | truncate:[56,'...']}}</a></p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <div class="common-news-list">
+                <div class="common-news-item d-flex common-shadow" *ngFor="let post of populararticles | slice:5:9">
+                  <div class="common-news-img common-zoom-container"
+                    [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                    <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
+                    </div>
+                  </div>
+                  <div class="common-news-desc">
+                    <div class="news-excerpt">
+                      <h5><a>{{post.sTitle}}</a></h5>
+                      <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                    </div>
+                    <div class="author-info d-flex justify-content-between align-items-center">
+                      <p class="author"><a>{{post.iId.sFirstName}}
+                          {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                      <p class="view">{{post.nViewCounts}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Latest">
+          <!--Latest Article Tab-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="getRecentPosts()">Latest</div>
+            </ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Latest Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
+              <div class="popular-main-item common-shadow" *ngFor="let post of latestposts | slice:0:1">
+                <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                  <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
                   </div>
                 </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
+                <div class="blog-desc">
+                  <h4><a>{{post.sTitle}}</a></h4>
+                  <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                  <div class="author-info d-flex justify-content-between align-items-center">
+                    <p class="author"><a>{{post.iId.sFirstName}}
+                        {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                    <p class="view">{{post.nViewCounts}}</p>
                   </div>
                 </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
+              </div>
+              <div class="common-popular-list">
+                <div class="row row-size12">
+                  <div class="col-md-3" *ngFor="let post of latestposts | slice:1:5">
+                    <div class="popular-item common-shadow">
+                      <div class="img-block common-zoom-container"
+                        [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                        <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
+                      </div>
+                      <div class="item-desc">
+                        <p class="bold-text"><a>{{post.sTitle | truncate:[56,'...']}}</a></p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <div class="common-news-list">
+                <div class="common-news-item d-flex common-shadow" *ngFor="let post of latestposts | slice:5:9">
+                  <div class="common-news-img common-zoom-container"
+                    [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                    <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
+                    </div>
+                  </div>
+                  <div class="common-news-desc">
+                    <div class="news-excerpt">
+                      <h5><a>{{post.sTitle}}</a></h5>
+                      <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                    </div>
+                    <div class="author-info d-flex justify-content-between align-items-center">
+                      <p class="author"><a>{{post.iId.sFirstName}}
+                          {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                      <p class="view">{{post.nViewCounts}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Videos">
+          <!--Videos tab start-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="getVideoPosts()">Videos</div>
+            </ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Videos Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
+              <div class="popular-main-item common-shadow" *ngFor="let video of popularvideos | slice:0:1">
+                <div class="item-img common-zoom-container common-news-video">
+                  <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
                   </div>
                 </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
+                <div class="blog-desc">
+                  <h4><a>{{video.sTitle}}</a></h4>
+                  <p>{{video.sDescription | truncate:[240,'...']}}</p>
+                  <div class="author-info d-flex justify-content-between align-items-center">
+                    <p class="author"><a>{{video.iId.sFirstName}}
+                        {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                    <p class="view">{{video.nViewCounts}}</p>
                   </div>
                 </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img common-news-video"
-                      style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                      <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory.
-                        Haris
-                        Sohail's career-best score of 130…</p>
-                    </div>
-                    <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                      <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                      <p class="view">3.2K</p>
+              </div>
+              <div class="common-popular-list">
+                <div class="row row-size12">
+                  <div class="col-md-3" *ngFor="let video of popularvideos | slice:1:5">
+                    <div class="popular-item common-shadow">
+                      <div class="img-block common-zoom-container common-news-video">
+                        <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'"></div>
+                      </div>
+                      <div class="item-desc">
+                        <p class="bold-text"><a>{{video.sTitle | truncate:[56,'...']}}</a></p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <div class="common-news-list">
+                <div class="common-news-item d-flex common-shadow" *ngFor="let video of popularvideos | slice:5:9">
+                  <div class="common-news-img common-zoom-container common-news-video">
+                    <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
+                    </div>
+                  </div>
+                  <div class="common-news-desc">
+                    <div class="news-excerpt">
+                      <h5><a>{{video.sTitle}}</a></h5>
+                      <p>{{video.sDescription | truncate:[240,'...']}}</p>
+                    </div>
+                    <div class="author-info d-flex justify-content-between align-items-center">
+                      <p class="author"><a>{{video.iId.sFirstName}}
+                          {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                      <p class="view">{{video.nViewCounts}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
-        <!-- <div class="common-news-list">
-          <div class="common-news-item d-flex">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory. Haris
-                  Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img common-news-video"
-                style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory. Haris
-                  Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory. Haris
-                  Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img common-news-video"
-                style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory. Haris
-                  Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory. Haris
-                  Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img common-news-video"
-                style="background-image: url(../../../assets/images/re-news-1.jpg)"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>Haris Sohail's ton in vain as Australia complete clean sweep</a></h5>
-                <p>Once more, it was Pakistan who had the centurion, while Australia walked away with the victory. Haris
-                  Sohail's career-best score of 130…</p>
-              </div>
-              <div class="common-news-bootom d-flex justify-content-between align-items-center">
-                <p class="author"><span class="theme-color">Alexander Ljung</span>3hrs ago</p>
-                <p class="view">3.2K</p>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <button class="theme-btn full-btn">MORE STORIES</button>
       </div>
       <div class="sidebar-col">
-        <div class="common-widget">
-          <div class="widget-title theme-bg">
-            <h5 class="white-text">Current Series</h5>
+        <div class="sticky-sidebar">
+          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+          <div class="common-stories-widget common-shadow rounded-box">
+            <h5>Current Series</h5>
+            <ul class="common-list">
+              <li *ngFor="let series of cricketseries | slice:0:5"><a>{{series.name}}</a></li>
+            </ul>
           </div>
-          <ul class="common-list">
-            <li><a>IPL 2019</a></li>
-            <li><a>Australia vs Pakistan</a></li>
-            <li><a>Sri Lanka vs South Africa</a></li>
-            <li><a>India A vs President XI</a></li>
-          </ul>
-        </div>
-        <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-        <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-        <div class="common-widget">
-          <div class="widget-title theme-bg">
-            <h5 class="white-text">Current Series</h5>
+          <div class="common-stories-widget common-shadow rounded-box">
+            <h5>Popular Right Now</h5>
+            <ul class="common-list">
+              <li *ngFor="let tags of populartags | slice:0:5"><a>{{tags.name}}</a></li>
+            </ul>
           </div>
-          <ul class="common-list">
-            <li><a>India</a></li>
-            <li><a>Australia</a></li>
-            <li><a>Sri Lanka</a></li>
-            <li><a>England</a></li>
-            <li><button>View all</button></li>
-          </ul>
-        </div>
-        <div class="common-widget">
-          <div class="widget-title theme-bg">
-            <h5 class="white-text">Popular Right Now</h5>
-          </div>
-          <ul class="common-list">
-            <li><a>IPL 2019</a></li>
-            <li><a>Australia vs Pakistan</a></li>
-            <li><a>Sri Lanka vs South Africa</a></li>
-            <li><a>Virat Kohli</a></li>
-            <li><a>Mumbai Indians</a></li>
-            <li><button>View all</button></li>
-          </ul>
         </div>
       </div>
     </div>
