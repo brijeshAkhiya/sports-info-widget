@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CricketComponent } from './cricket.component';
 import { CricketFixturesComponent } from './cricket-fixtures/cricket-fixtures.component';
 import { CricketSeriesComponent } from './cricket-series/cricket-series.component';
-import { CricketTeamsComponent } from './cricket-teams/cricket-teams.component';
+import { CricketHomeComponent } from './cricket-home/cricket-home.component';
 
 const childRoutes: Routes = [
     {
@@ -17,10 +17,6 @@ const childRoutes: Routes = [
     {
         path: 'series',
         component: CricketSeriesComponent
-    },
-    {
-        path: 'teams',
-        component: CricketTeamsComponent
     }
 ];
 

@@ -36,25 +36,54 @@ export class MainHeaderComponent implements OnInit {
 
 
   constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService) {
-    this.tinySliderConfig = {
-      arrowKeys: true,
-      nav: false,
-      items: 1,
-      mouseDrag: true,
-      autoHeight: true,
-      responsive: {
-        1400: {
-          items: 4
-        },
-        1200: {
-          items: 3
-        },
-        768: {
-          items: 2
-        }
-      }
-    };
+    // this.tinySliderConfig = {
+    //   arrowKeys: true,
+    //   nav: false,
+    //   items: 1,
+    //   mouseDrag: true,
+    //   autoHeight: true,
+    //   responsive: {
+    //     1400: {
+    //       items: 4
+    //     },
+    //     1200: {
+    //       items: 3
+    //     },
+    //     768: {
+    //       items: 2
+    //     }
+    //   }
+    // };
   }
+
+
+  customOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    lazyLoad: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      540: {
+        items: 2,
+      },
+      783: {
+        items: 3,
+      },
+      1150: {
+        items: 4,
+      }
+    },
+    nav: true
+  }
+
 
   ngOnInit() {
     this.getHeaderSliderData();
@@ -84,8 +113,8 @@ export class MainHeaderComponent implements OnInit {
   //get header slider data
 
   getHeaderSliderData() {
-    this.sportsService.getheaderslider().subscribe((res)=>{
-      if(res['data']){
+    this.sportsService.getheaderslider().subscribe((res) => {
+      if (res['data']) {
         this.sliderdata = res['data']
       }
 

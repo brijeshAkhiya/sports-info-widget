@@ -125,18 +125,24 @@ export class HomeComponent implements OnInit {
           })
 
           let period_score_new = data["period_scores"]
-          period_score_new = period_score_new.map(singleb => {
-            if (singleb.away_score !== undefined) {
-              return { ...singleb, team: obj["away"], teamFlag: true }
-            } else {
-              return { ...singleb, team: obj["home"], teamFlag: false }
-            }
-          })
-          return { ...data, period_score_new }
+          if (period_score_new) {
+            period_score_new = period_score_new.map(singleb => {
+              if (singleb.away_score !== undefined) {
+                return { ...singleb, team: obj["away"], teamFlag: true }
+              } else {
+                return { ...singleb, team: obj["home"], teamFlag: false }
+              }
+            })
+            return { ...data, period_score_new }
+          }
+          else {
+            return data;
+          }
         })
+
       }
       else {
-       // this.getMatchResults();
+        // this.getMatchResults();
       }
     })
   }

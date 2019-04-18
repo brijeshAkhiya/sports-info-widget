@@ -2,209 +2,209 @@
 <app-cricket-menu></app-cricket-menu>
 
 <section class="common-section cricket-recentnews recentnews-section">
-  <div class="container">
-    <div class="row sidebar-row">
-      <div class="content-col">
-        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>Cricket</h1>
-          <button class="add-to-fav-btn"><span>Add to favorites</span></button>
-        </div>
-        <ngb-tabset class="common-tabs">
-          <ngb-tab title="Recommended">
-            <ng-template ngbTabContent>
-              <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
-                <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-                  <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
-                  </div>
-                </div>
-                <div class="blog-desc">
-                  <h4><a>{{post.sTitle}}</a></h4>
-                  <p>{{post.sDescription | truncate:[240,'...']}}</p>
-                  <div class="author-info d-flex justify-content-between align-items-center">
-                    <p class="author"><a>{{post.iId.sFirstName}}
-                        {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                    <p class="view">{{post.nViewCounts}}</p>
-                  </div>
-                </div>
+        <div class="container">
+          <div class="row sidebar-row">
+            <div class="content-col">
+              <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+                <h1>Cricket</h1>
+                <button class="add-to-fav-btn"><span>Add to favorites</span></button>
               </div>
-              <div class="common-popular-list">
-                <div class="row row-size12">
-                  <div class="col-sm-6 col-xl-3" *ngFor="let post of populararticles | slice:1:5">
-                    <div class="popular-item common-shadow">
-                      <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-                        <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
+              <ngb-tabset class="common-tabs">
+                <ngb-tab title="Recommended">
+                  <ng-template ngbTabContent>
+                    <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
+                      <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                        <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
+                        </div>
                       </div>
-                      <div class="item-desc">
-                        <p class="bold-text"><a>{{post.sTitle | truncate:[56,'...']}}</a></p>
+                      <div class="blog-desc">
+                        <h4><a>{{post.sTitle}}</a></h4>
+                        <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                        <div class="author-info d-flex justify-content-between align-items-center">
+                          <p class="author"><a>{{post.iId.sFirstName}}
+                              {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                          <p class="view">{{post.nViewCounts}}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex common-shadow" *ngFor="let post of populararticles | slice:5:9">
-                  <div class="common-news-img common-zoom-container"
-                    [ngClass]="{'common-news-video': post.eType == 'Video'}">
-                    <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>{{post.sTitle}}</a></h5>
-                      <p>{{post.sDescription | truncate:[240,'...']}}</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>{{post.iId.sFirstName}}
-                          {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                      <p class="view">{{post.nViewCounts}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
-            </ng-template>
-          </ngb-tab>
-          <!--Latest Article Tab-->
-          <ngb-tab>
-            <ng-template ngbTabTitle>
-              <div (click)="getRecentPosts()">Latest</div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <div class="popular-main-item common-shadow" *ngFor="let post of latestposts | slice:0:1">
-                <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-                  <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
-                  </div>
-                </div>
-                <div class="blog-desc">
-                  <h4><a>{{post.sTitle}}</a></h4>
-                  <p>{{post.sDescription | truncate:[240,'...']}}</p>
-                  <div class="author-info d-flex justify-content-between align-items-center">
-                    <p class="author"><a>{{post.iId.sFirstName}}
-                        {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                    <p class="view">{{post.nViewCounts}}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="common-popular-list">
-                <div class="row row-size12">
-                  <div class="col-md-3" *ngFor="let post of latestposts | slice:1:5">
-                    <div class="popular-item common-shadow">
-                      <div class="img-block common-zoom-container"
-                        [ngClass]="{'common-news-video': post.eType == 'Video'}">
-                        <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
-                      </div>
-                      <div class="item-desc">
-                        <p class="bold-text"><a>{{post.sTitle | truncate:[56,'...']}}</a></p>
+                    <div class="common-popular-list popular-list-4">
+                      <div class="row row-size12">
+                        <div class="col-sm-6 col-xl-3" *ngFor="let post of populararticles | slice:1:5">
+                          <div class="popular-item common-shadow">
+                            <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                              <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
+                            </div>
+                            <div class="item-desc">
+                              <p class="bold-text"><a>{{post.sTitle | truncate:[56,'...']}}</a></p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex common-shadow" *ngFor="let post of latestposts | slice:5:9">
-                  <div class="common-news-img common-zoom-container"
-                    [ngClass]="{'common-news-video': post.eType == 'Video'}">
-                    <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>{{post.sTitle}}</a></h5>
-                      <p>{{post.sDescription | truncate:[240,'...']}}</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>{{post.iId.sFirstName}}
-                          {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                      <p class="view">{{post.nViewCounts}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
-            </ng-template>
-          </ngb-tab>
-          <!--Videos tab start-->
-          <ngb-tab>
-            <ng-template ngbTabTitle>
-              <div (click)="getVideoPosts()">Videos</div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <div class="popular-main-item common-shadow" *ngFor="let video of popularvideos | slice:0:1">
-                <div class="item-img common-zoom-container common-news-video">
-                  <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
-                  </div>
-                </div>
-                <div class="blog-desc">
-                  <h4><a>{{video.sTitle}}</a></h4>
-                  <p>{{video.sDescription | truncate:[240,'...']}}</p>
-                  <div class="author-info d-flex justify-content-between align-items-center">
-                    <p class="author"><a>{{video.iId.sFirstName}}
-                        {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                    <p class="view">{{video.nViewCounts}}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="common-popular-list">
-                <div class="row row-size12">
-                  <div class="col-md-3" *ngFor="let video of popularvideos | slice:1:5">
-                    <div class="popular-item common-shadow">
-                      <div class="img-block common-zoom-container common-news-video">
-                        <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'"></div>
-                      </div>
-                      <div class="item-desc">
-                        <p class="bold-text"><a>{{video.sTitle | truncate:[56,'...']}}</a></p>
+                    <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+                    <div class="common-news-list">
+                      <div class="common-news-item d-flex common-shadow" *ngFor="let post of populararticles | slice:5:9">
+                        <div class="common-news-img common-zoom-container"
+                          [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                          <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
+                          </div>
+                        </div>
+                        <div class="common-news-desc">
+                          <div class="news-excerpt">
+                            <h5><a>{{post.sTitle}}</a></h5>
+                            <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                          </div>
+                          <div class="author-info d-flex justify-content-between align-items-center">
+                            <p class="author"><a>{{post.iId.sFirstName}}
+                                {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                            <p class="view">{{post.nViewCounts}}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+                  </ng-template>
+                </ngb-tab>
+                <!--Latest Article Tab-->
+                <ngb-tab>
+                  <ng-template ngbTabTitle>
+                    <div (click)="getRecentPosts()">Latest</div>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="popular-main-item common-shadow" *ngFor="let post of latestposts | slice:0:1">
+                      <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                        <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
+                        </div>
+                      </div>
+                      <div class="blog-desc">
+                        <h4><a>{{post.sTitle}}</a></h4>
+                        <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                        <div class="author-info d-flex justify-content-between align-items-center">
+                          <p class="author"><a>{{post.iId.sFirstName}}
+                              {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                          <p class="view">{{post.nViewCounts}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="common-popular-list">
+                      <div class="row row-size12">
+                        <div class="col-md-3" *ngFor="let post of latestposts | slice:1:5">
+                          <div class="popular-item common-shadow">
+                            <div class="img-block common-zoom-container"
+                              [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                              <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
+                            </div>
+                            <div class="item-desc">
+                              <p class="bold-text"><a>{{post.sTitle | truncate:[56,'...']}}</a></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+                    <div class="common-news-list">
+                      <div class="common-news-item d-flex common-shadow" *ngFor="let post of latestposts | slice:5:9">
+                        <div class="common-news-img common-zoom-container"
+                          [ngClass]="{'common-news-video': post.eType == 'Video'}">
+                          <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'">
+                          </div>
+                        </div>
+                        <div class="common-news-desc">
+                          <div class="news-excerpt">
+                            <h5><a>{{post.sTitle}}</a></h5>
+                            <p>{{post.sDescription | truncate:[240,'...']}}</p>
+                          </div>
+                          <div class="author-info d-flex justify-content-between align-items-center">
+                            <p class="author"><a>{{post.iId.sFirstName}}
+                                {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                            <p class="view">{{post.nViewCounts}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+                  </ng-template>
+                </ngb-tab>
+                <!--Videos tab start-->
+                <ngb-tab>
+                  <ng-template ngbTabTitle>
+                    <div (click)="getVideoPosts()">Videos</div>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="popular-main-item common-shadow" *ngFor="let video of popularvideos | slice:0:1">
+                      <div class="item-img common-zoom-container common-news-video">
+                        <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
+                        </div>
+                      </div>
+                      <div class="blog-desc">
+                        <h4><a>{{video.sTitle}}</a></h4>
+                        <p>{{video.sDescription | truncate:[240,'...']}}</p>
+                        <div class="author-info d-flex justify-content-between align-items-center">
+                          <p class="author"><a>{{video.iId.sFirstName}}
+                              {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                          <p class="view">{{video.nViewCounts}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="common-popular-list">
+                      <div class="row row-size12">
+                        <div class="col-md-3" *ngFor="let video of popularvideos | slice:1:5">
+                          <div class="popular-item common-shadow">
+                            <div class="img-block common-zoom-container common-news-video">
+                              <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'"></div>
+                            </div>
+                            <div class="item-desc">
+                              <p class="bold-text"><a>{{video.sTitle | truncate:[56,'...']}}</a></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+                    <div class="common-news-list">
+                      <div class="common-news-item d-flex common-shadow" *ngFor="let video of popularvideos | slice:5:9">
+                        <div class="common-news-img common-zoom-container common-news-video">
+                          <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
+                          </div>
+                        </div>
+                        <div class="common-news-desc">
+                          <div class="news-excerpt">
+                            <h5><a>{{video.sTitle}}</a></h5>
+                            <p>{{video.sDescription | truncate:[240,'...']}}</p>
+                          </div>
+                          <div class="author-info d-flex justify-content-between align-items-center">
+                            <p class="author"><a>{{video.iId.sFirstName}}
+                                {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                            <p class="view">{{video.nViewCounts}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+            </div>
+            <div class="sidebar-col">
+              <div class="sticky-sidebar">
+                <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+                <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+                <div class="common-stories-widget common-shadow rounded-box">
+                  <h5>Current Series</h5>
+                  <ul class="common-list">
+                    <li *ngFor="let series of cricketseries | slice:0:5"><a>{{series.name}}</a></li>
+                  </ul>
+                </div>
+                <div class="common-stories-widget common-shadow rounded-box">
+                  <h5>Popular Right Now</h5>
+                  <ul class="common-list">
+                    <li *ngFor="let tags of populartags | slice:0:5"><a>{{tags.name}}</a></li>
+                  </ul>
                 </div>
               </div>
-              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex common-shadow" *ngFor="let video of popularvideos | slice:5:9">
-                  <div class="common-news-img common-zoom-container common-news-video">
-                    <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>{{video.sTitle}}</a></h5>
-                      <p>{{video.sDescription | truncate:[240,'...']}}</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>{{video.iId.sFirstName}}
-                          {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                      <p class="view">{{video.nViewCounts}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
-      </div>
-      <div class="sidebar-col">
-        <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-          <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Current Series</h5>
-            <ul class="common-list">
-              <li *ngFor="let series of cricketseries | slice:0:5"><a>{{series.name}}</a></li>
-            </ul>
+            </div>
           </div>
-          <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Popular Right Now</h5>
-            <ul class="common-list">
-              <li *ngFor="let tags of populartags | slice:0:5"><a>{{tags.name}}</a></li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
 <app-main-footer></app-main-footer>

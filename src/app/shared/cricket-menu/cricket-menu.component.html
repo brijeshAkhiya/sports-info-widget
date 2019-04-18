@@ -1,16 +1,15 @@
 <div class="sub-navabar">
   <div class="container">
     <div class="sub-navabar-inner d-flex">
-      <a class="subemnu-back">Cricket</a>
+      <a class="submenu-back" [routerLink]="['/cricket']" >Cricket</a>
       <div class="sub-navbar-container" id="sub-navbar-nav">
-        <ul>
-          <li><a [routerLink]="['/cricket']" routerLinkActive="active" >Home</a></li>
+        <ul #subnavbarmenu>
+          <li><a [routerLink]="['/cricket']" routerLinkActive="active">Home</a></li>
           <li><a [routerLink]="['/cricket/fixtures']" routerLinkActive="active">Fixtures</a></li>
-          <li><a [routerLink]="['/cricket/teams']" routerLinkActive="active">Teams</a></li>
-          <li><a [routerLink]="['/cricket/series']" routerLinkActive="active">Series</a></li>
+          <li><a>Series</a></li>
           <li><a>World Cup 2019</a></li>
         </ul>
-        <div id="subnav-pointer"></div>
+        <div id="subnav-pointer" #subnavpointer></div>
       </div>
       <div class="clearfix"></div>
     </div>

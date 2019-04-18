@@ -45,7 +45,7 @@
           <h4>Related news</h4>
           <button class="theme-btn">View All<span></span></button>
         </div>
-        <div class="common-popular-list home-popular-list">
+        <div class="common-popular-list popular-list-4">
           <div class="row row-size12">
             <div class="col-sm-6 col-xl-3" *ngFor="let article of populararticles | slice:1:5 ">
               <div class="popular-item common-shadow">
@@ -99,7 +99,7 @@
               </ng-template>
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                  <li *ngFor="let result of matchresults">
+                  <li *ngFor="let result of matchresults | slice:1:5 ">
                     <div class="title d-flex justify-content-between align-items-center">
                       <p><b>{{result.season_name}}</b></p>
                       <p>{{result.scheduled | amCalendar}}</p>
@@ -192,7 +192,7 @@
             <div class="common-news-desc">
               <div class="news-excerpt">
                 <h5><a>{{post.sTitle}}</a></h5>
-                <p>{{post.sDescription | truncate:[218,'...']}}</p>
+                <p>{{post.sDescription | truncate:[164,'...']}}</p>
               </div>
               <div class="author-info d-flex justify-content-between align-items-center">
                 <p class="author"><a>{{post.iId.sFirstName}}
