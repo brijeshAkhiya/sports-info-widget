@@ -142,7 +142,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Tab Widget Block ------- */
 .common-tabs .nav-tabs                          { background: #fff; border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
 .common-tabs .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden;} 
-.common-tabs .nav-tabs .nav-link:after          { content: ""; position: absolute; display: block; width: 100%; left: 0px; bottom: -6px; border-bottom: 6px solid red !important; border-left: 4px solid transparent !important; border-right: 4px solid transparent !important; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out;}
+.common-tabs .nav-tabs .nav-link:after          { content: ""; position: absolute; display: block; width: 100%; left: 0px; bottom: -6px; border-bottom: 6px solid #ED1A33; border-left: 2px solid transparent; border-right: 2px solid transparent; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out;}
 .common-tabs .nav-tabs .nav-link.active         { background: #fff; border: none; opacity: 1; }
 .common-tabs .nav-tabs .nav-link.active:after   { bottom: 0px; }
 .tab-widget.common-widget .widget-title         { padding: 8px; border-bottom: none; }
@@ -295,6 +295,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 }
 
 @media (max-width: 575px) {
+    body                                { font-size: 13px; line-height: 20px; }
 /* -------- Slider Button Style ------- */
     .owl-theme .owl-nav [class*="owl-"] { width: 32px; height: 32px; border-radius: 10px;}
     .owl-theme .owl-nav .owl-prev       { left: -30px; }

@@ -115,20 +115,20 @@
             <div class="slider-item" *ngIf="slide.slider_status == 'live'">
                 <div class="slider-item-inner">
                   <div class="title d-flex justify-content-between align-items-center">
-                    <p><b>IPL2019</b></p>
-                    <p>Today | Match 8</p>
+                    <p><b>{{slide.season_name}}</b></p>
+                    <p>{{slide.scheduled | amCalendar}}</p>
                   </div>
                   <div class="match-info d-flex justify-content-between align-items-center">
-                    <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                    <p>187/5(20.0 ov)</p>
+                    <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{slide.competitors[0].abbreviation}}</p>
+                    <p>{{slide.match_data.display_score}}({{slide.match_data.display_overs}} ov)</p>
                   </div>
                   <div class="match-info d-flex justify-content-between align-items-center">
-                    <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                    <p>188/2(19.2 ov)</p>
+                    <p ><img src="../../../assets/images/kxip-icon.svg" alt="kxip">{{slide.competitors[1].abbreviation}}</p>
+                    <!-- <p>188/2(19.2 ov)</p> -->
                   </div>
                   <div class="row">
                     <div class="col-lg-9">
-                        <p class="result-line live-result">Live <br>India</p>
+                        <p class="result-line live-result">Live <br>{{slide.venue_name}}</p>
                     </div>
                   </div>
                 </div>
@@ -202,7 +202,7 @@
           <a class="nav-link" [routerLink]="['/cricket']" routerLinkActive="active">Cricket</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Soccer</a>
+          <a class="nav-link" [routerLink]="['/comingsoon']" [routerLinkActive]="active">Soccer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active">Badminton</a>

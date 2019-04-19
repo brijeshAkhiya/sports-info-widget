@@ -16,7 +16,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from "./app-reducer";
 import { SlugifyPipe } from './pipes/slugpipe';
 import { SharedModule } from './shared/shared.module';
-
+import { MomentModule } from 'ngx-moment';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 let config = new AuthServiceConfig([
   {
@@ -36,6 +37,8 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
+    MainHeaderComponent,
+    MainFooterComponent,
     SlugifyPipe,
   ],
   imports: [
@@ -43,6 +46,8 @@ export function provideConfig() {
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
+    MomentModule,
+    CarouselModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers),

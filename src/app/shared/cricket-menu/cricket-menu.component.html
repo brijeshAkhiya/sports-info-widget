@@ -4,7 +4,7 @@
       <a class="submenu-back" [routerLink]="['/cricket']" >Cricket</a>
       <div class="sub-navbar-container" id="sub-navbar-nav">
         <ul #subnavbarmenu>
-          <li><a [routerLink]="['/cricket']" routerLinkActive="active">Home</a></li>
+          <li><a [routerLink]="['/cricket']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
           <li><a [routerLink]="['/cricket/fixtures']" routerLinkActive="active">Fixtures</a></li>
           <li><a>Series</a></li>
           <li><a>World Cup 2019</a></li>

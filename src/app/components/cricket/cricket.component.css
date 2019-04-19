@@ -1,4 +1,42 @@
+.schedule-list .schedule-month              { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 2px solid rgba(0,0,0,0.05); }
+.schedule-list .schedule-month:last-child   { margin-bottom: 0px; padding-bottom: 0px; border: none; }
+.schedule-list .month-title                 { width: 174px; padding-right: 16px; }
+.schedule-list .schedule-items              { width: calc(100% - 174px);  }
+.schedule-list .month-title h5              { margin-top: 4px; font-family: 'IBM Plex Sans Condensed', sans-serif; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out; opacity: 0.3; text-transform: uppercase;}
+.schedule-list .month-title .sticky-month   { position: sticky; top: 0; }
+.schedule-month:hover .month-title h5       { color: #ED1A33; opacity: 1;  }
+.schedule-list .schedule-item               { margin-bottom: 16px; padding: 16px 24px 24px; background: #fff; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; cursor: pointer;}
+.schedule-list .schedule-item:last-child    { margin-bottom: 0px; }
+.schedule-list .schedule-item h4            { color: #292929; font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; text-transform: uppercase; }
+.schedule-list .schedule-item h5            { color: #A3A3A3; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; }
+.schedule-list .schedule-item .schedule-date { margin: 0px; font-size: 18px; line-height: 23px; font-weight: 500; color: #A3A3A3;} 
+.schedule-list .schedule-item:hover         { background: #ED1A33; box-shadow: 0px 2px 8px rgba(237,26,51,0.16); -webkit-box-shadow: 0px 2px 8px rgba(237,26,51,0.16); }
+.schedule-list .schedule-item *             { transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.schedule-list .schedule-item:hover *       { color: #fff !important; }
 
+/***** Responsive CSS Start ******/
 
+@media (min-width: 992px) and (max-width: 1199px) {
+    .schedule-list .month-title                 { width: 120px; }
+    .schedule-list .schedule-items              { width: calc(100% - 120px);  }
+}
 
+@media (min-width: 768px) and (max-width: 991px) {
+    .schedule-list .month-title                 { width: 120px; }
+    .schedule-list .schedule-items              { width: calc(100% - 120px); }
+}
 
+@media (max-width: 767px) {
+    .schedule-list .schedule-month              { margin-bottom: 24px; padding-bottom: 24px;}
+    .schedule-list .month-title                 { width: 100px; }
+    .schedule-list .schedule-items              { width: calc(100% - 100px); }
+    .schedule-list .schedule-item .schedule-date { font-size: 15px; line-height: 20px;}
+}
+
+@media (max-width: 575px) {
+    .schedule-list .schedule-month              { flex-direction: column; -webkit-flex-direction: column; }
+    .schedule-list .month-title,
+    .schedule-list .schedule-items              { width: 100%; }
+    .schedule-list .schedule-item               { padding: 16px;}
+    .schedule-list .month-title h5              { margin-bottom: 16px;}
+}

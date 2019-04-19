@@ -58,7 +58,7 @@ export class MainHeaderComponent implements OnInit {
 
 
   customOptions: any = {
-    loop: true,
+    loop: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
