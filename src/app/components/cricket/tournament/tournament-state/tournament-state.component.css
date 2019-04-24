@@ -1,0 +1,24 @@
+.tour-stats-table .table tr th:first-child,
+.tour-stats-table .table tr td:first-child      { width: 60px;  }
+.tour-stats-table .table tr th:nth-child(2),
+.tour-stats-table .table tr td:nth-child(2)     { text-align: left; width: 25%;  font-weight: 500;  }
+.tour-stats-table .table tr td:first-child      { font-weight: 500; }
+.tour-stats-table .table tr th:nth-child(2)     { padding-left: 50px; }
+.tour-stats-table .table tr td:nth-child(2)     { padding-right: 32px; }
+.tour-stats-table .table tr td:nth-child(2) img { height: 32px; width: auto; margin: -12px 8px -9px 0px; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+    .tour-stats-table .table tr td:nth-child(2) img { height: 28px; }
+    .tour-stats-table .table tr th:nth-child(2)     { padding-left: 44px; }
+
+}
+
+@media (max-width: 1199px) {
+    .tour-stats-table .table tr td:nth-child(2) img { height: 24px; }
+    .tour-stats-table .table tr th:nth-child(2)     { padding-left: 36px; }
+
+}
+
+

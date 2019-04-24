@@ -18,7 +18,7 @@ a:focus, a:active, a:visited,
 a:hover	                { text-decoration: none; outline: none; }
 h1                      { margin: 0px 0px 24px; font-size: 48px; line-height: 64px; font-family: 'Muli', sans-serif; font-weight: 900; text-transform: uppercase; color: #292929; font-style: italic; }
 h2                      { margin: 0px 0px 8px; font-size: 40px; line-height: 50px; font-family: 'Muli', sans-serif; font-weight: 800; }
-h3                      { margin: 0px 0px 8px; font-size: 32px; line-height: 58px; font-family: 'Muli', sans-serif; font-weight: 800; text-transform: uppercase; }
+h3                      { margin: 0px 0px 8px; font-size: 32px; line-height: 42px; font-family: 'Muli', sans-serif; color: #292929; font-weight: 800; text-transform: uppercase; }
 h4                      { margin: 0px 0px 8px; font-size: 24px; line-height: 32px; color: #3D3D3D; font-family: 'Muli', sans-serif; font-weight: 800; }
 h5                      { margin: 0px 0px 4px; font-size: 20px; line-height: 25px; color: #292929; font-family: 'Muli', sans-serif; font-weight: 700; }
 h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
@@ -61,8 +61,10 @@ button                  { outline: none !important; cursor: pointer; transition:
 .add-to-fav-btn         { display: inline-block; min-width: 196px; padding: 18px 33px 18px 56px; background: transparent; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #A3A3A3; font-weight: 500; border: 2px solid #E8E8E8; border-radius: 2em; position: relative;}
 .add-to-fav-btn span    { display: block; }
 .add-to-fav-btn:before  { content: ""; display: block; position: absolute; left: 8px; top: 8px; width: 40px; height: 40px; background: #E1E1E1 url(../../assets/images/fav-star-white.svg) no-repeat center center / 20px 20px; border-radius: 50%; transition: all 0.4s ease-in-out 0s; -webkit-transition: all 0.4s ease-in-out 0s; }
+.add-to-fav-btn.added,
 .add-to-fav-btn:hover,
 .add-to-fav-btn:focus   { padding: 18px 56px 18px 33px; background: #FFC800; color: #fff; border-color: #FFC800;  }
+.add-to-fav-btn.added:before,
 .add-to-fav-btn:focus:before,
 .add-to-fav-btn:hover:before    { transform: translateX(140px) rotate(360deg); background-color: #fff; background-image: url(../../assets/images/fav-star-yellow.svg); }
 
@@ -83,6 +85,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
+.main-container             { min-height: calc(100vh - 200px);}
 .row.sidebar-row            { margin: 0px -12px; }
 .sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 344px); }
 .sidebar-row .sidebar-col   { padding: 0px 12px; width: 344px; }
@@ -139,14 +142,27 @@ button                  { outline: none !important; cursor: pointer; transition:
 .ad-block:first-child               { margin-top: 0px; }
 .ad-block:last-child                { margin-bottom: 0px;}
 
-/* -------- Tab Widget Block ------- */
+/* -------- Common Tab ------- */
 .common-tabs .nav-tabs                          { background: #fff; border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
-.common-tabs .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden;} 
+.common-tabs .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; background: transparent; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden;} 
 .common-tabs .nav-tabs .nav-link:after          { content: ""; position: absolute; display: block; width: 100%; left: 0px; bottom: -6px; border-bottom: 6px solid #ED1A33; border-left: 2px solid transparent; border-right: 2px solid transparent; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out;}
-.common-tabs .nav-tabs .nav-link.active         { background: #fff; border: none; opacity: 1; }
+.common-tabs .nav-tabs .nav-link.active         { background: transparent; border: none; opacity: 1; }
 .common-tabs .nav-tabs .nav-link.active:after   { bottom: 0px; }
+.common-tabs.black-filled .nav-tabs             { margin: 0px; padding-top: 15px; background: #3D3D3D; border-radius: 4px 4px 0px 0px; }
+.common-tabs.black-filled .nav-tabs .nav-link   { color: #fff; opacity: 0.4; }
+.common-tabs.black-filled .nav-tabs .nav-link.active   { opacity: 1;  }
+
+/* -------- Filled Tab ------- */
+.filled-tabs > .nav-tabs                        { border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; }
+.filled-tabs > .nav-tabs .nav-item              { width: 100%; }
+.filled-tabs > .nav-tabs .nav-link              { padding: 19px 15px 18px; background: #E4E5E8; font-size: 20px; line-height: 25px; font-weight: 500; color: #A3A3A3; border: none; border-right: 1px solid #fff; text-align: center; border-radius: 0px; }
+.filled-tabs > .nav-tabs .nav-item:first-child .nav-link    { border-radius: 4px 0px 0px 4px; }
+.filled-tabs > .nav-tabs .nav-item:last-child .nav-link     { border: none; border-radius: 0px 4px 4px 0px;}
+.filled-tabs > .nav-tabs .nav-link.active       { background: #fff; color: #ED1A33; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); }
+
+/* -------- Tab Widget Block ------- */
 .tab-widget.common-widget .widget-title         { padding: 8px; border-bottom: none; }
-.tab-widget .common-tabs .nav-tabs              { padding: 0px 4px; text-align: center; border-bottom: 2px solid #F5F5F5; justify-content: space-around !important; -webkit-justify-content: space-around !important; }
+.tab-widget .common-tabs .nav-tabs              { margin: 0px; padding: 0px 4px; text-align: center; border-bottom: 2px solid #F5F5F5; justify-content: space-around !important; -webkit-justify-content: space-around !important; }
 .tab-widget .common-tabs .nav-tabs .nav-item    { margin: 0px; }
 .tab-widget .common-tabs .nav-tabs .nav-link    { padding: 0px 0px 16px;  }
 .common-widget .cricket-list li                 { padding: 8px; font-family: 'IBM Plex Sans', sans-serif; cursor: pointer; }
@@ -166,10 +182,22 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-stories-widget li a:not([href]):not([tabindex])             { margin-bottom: 12px; padding-bottom: 12px; display: block; font-size: 14px; line-height: 22px; color: rgba(41,41,41,0.5); font-family: 'Muli', sans-serif; font-weight: 700; border-bottom: 1px solid #ECECEC; }
 .common-stories-widget li a:not([href]):not([tabindex]):focus,
 .common-stories-widget li a:not([href]):not([tabindex]):hover       { color: rgba(41,41,41,1);}
-.common-stories-widget li a:before      { content: ""; display: inline-block; width: 0px; height: 2px; vertical-align: middle; background: #292929; transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; }
+.common-stories-widget li a:before      { margin-top: -3px; content: ""; display: inline-block; width: 0px; height: 2px; vertical-align: middle; background: #292929; transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; }
 .common-stories-widget li a:hover:before{ margin-right: 8px; width: 18px;}
 .common-stories-widget li:last-child a:not([href]):not([tabindex])  { margin-bottom: 0px; padding-bottom: 0px; border: none; }
 
+/* -------- Table Style ------- */
+.common-table                           { background: #fff; text-align: center; }
+.common-table table                     { margin: 0px; }
+.common-table .table tr                 { border-bottom: 1px solid #EBEBEB; }
+.common-table .table tbody tr:last-child{ border: none; }
+.common-table .table thead tr           { background: #3D3D3D; }
+.common-table .table th,
+.common-table .table td                 { padding: 13px 10px 12px; font-size: 16px; line-height: 20px; border: none; white-space: nowrap; }
+.common-table .table th                 { color: #A3A3A3; font-weight: 500; }
+.common-table.striped-table .table tr   { border: none; }
+.common-table .table thead .light-row,
+.common-table.striped-table .table tr:nth-child(even)   { background: #F4F4F5; }
 /******** Middle Section CSS End *******/
 
 /***** Bottom Section CSS Start *******/
@@ -190,18 +218,26 @@ button                  { outline: none !important; cursor: pointer; transition:
     .popular-main-item .item-img            { height: 440px; }
     .common-popular-list .img-block         { height: 160px; }
     .common-popular-list .item-desc         { min-height: 112px; }
-
+/* -------- Table Style ------- */
+    .common-table .table th,
+    .common-table .table td                 { font-size: 15px; line-height: 19px; }
 }
 
 @media (max-width: 1199px) {
 /* -------- Button Style ------- */
     .add-to-fav-btn         { min-width: 188px; padding: 14px 29px 14px 52px; font-size: 16px; line-height: 20px;}
     .add-to-fav-btn:before  { width: 32px; height: 32px; }
+    .add-to-fav-btn.added,
     .add-to-fav-btn:hover,
     .add-to-fav-btn:focus   { padding: 14px 52px 14px 29px;}
 /* -------- Popular Articles Section ------- */
     .common-popular-list .popular-item      { margin-bottom: 24px;}
     .common-popular-list [class*="col-"]:last-child .popular-item      { margin-bottom: 0px;}
+/* -------- Filled Tab ------- */
+    .filled-tabs > .nav-tabs .nav-link          { padding: 15px 14px 14px; font-size: 18px; line-height: 22px;}
+/* -------- Table Style ------- */
+    .common-table .table th,
+    .common-table .table td                     { padding: 12px 6px 11px; font-size: 14px; line-height: 18px; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -247,22 +283,26 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Common News Section ------- */
     .common-news-list .common-news-img          { width: 220px; height: 181px;}
     .common-news-list .common-news-desc         { width: calc(100% - 220px);}
+
 }
 
 @media (max-width: 767px) {
     body                    { font-size: 14px; line-height: 24px; }
-    h1                      { margin: 0px 0px 20px; font-size: 27px; line-height: 40px; }
-    h2                      { font-size: 26px; line-height: 36px;}
-    h4                      { font-size: 18px; line-height: 26px; }
+    h1                      { margin: 0px 0px 20px; font-size: 27px; line-height: 36px; }
+    h2                      { font-size: 26px; line-height: 34px;}
+    h4                      { font-size: 18px; line-height: 24px; }
     h5                      { font-size: 17px; line-height: 21px;}
-    p                       { margin-bottom: 20px;}
+    p                       { margin-bottom: 16px;}
+    p.bold-text             { line-height: 20px;}
 /* -------- Button Style ------- */
     .theme-btn              { padding: 10px 52px 10px 14px; font-size: 15px; line-height: 18px; }
     .theme-btn span         { width: 38px; }
     .add-to-fav-btn         { min-width: 172px; padding: 10px 22px 10px 44px; font-size: 16px; line-height: 20px;}
     .add-to-fav-btn:before  { width: 26px; height: 26px; background-size: 14px 14px; }
+    .add-to-fav-btn.added,
     .add-to-fav-btn:hover,
     .add-to-fav-btn:focus   { padding: 10px 44px 10px 22px;}
+    .add-to-fav-btn.added:before,
     .add-to-fav-btn:hover::before { -webkit-transform: translateX(132px) rotate(360deg); transform: translateX(132px) rotate(360deg);}
 
 /* -------- Custom Grid CSS ------- */
@@ -285,7 +325,11 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Common Stories Widget Block ------- */
     .common-stories-widget                      { padding: 16px 20px 20px;}
     .common-stories-widget li a:not([href]):not([tabindex]) { margin-bottom: 10px; padding-bottom: 10px;}
-
+/* -------- Filled Tab ------- */
+    .filled-tabs > .nav-tabs .nav-link          { padding: 14px 12px 13px; font-size: 16px; line-height: 20px;}
+/* -------- Table Style ------- */
+    .common-table .table th,
+    .common-table .table td                     { padding: 10px 4px 10px; font-size: 13px; line-height: 16px; }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
@@ -306,5 +350,12 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Popular Articles Section ------- */
     .popular-main-item .item-img        { height: 240px;}
     .common-popular-list .item-desc     { min-height: initial; }
-
+/* -------- Common Tab ------- */
+    .common-tabs .nav-tabs .nav-link            { font-size: 15px; }
+    .common-tabs.black-filled .nav-tabs         { padding-top: 10px;}
+/* -------- Filled Tab ------- */
+    .filled-tabs > .nav-tabs .nav-link          { padding: 11px 11px 10px; font-size: 14px; line-height: 18px;}
+/* -------- Table Style ------- */
+    .common-table .table th,
+    .common-table .table td                     { padding: 10px 4px 10px; font-size: 12px; line-height: 16px; }
 }
