@@ -19,6 +19,7 @@ import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { TournamentCricketComponent } from './tournament/tournament-cricket/tournament-cricket.component';
 import { CricketTourMenuComponent } from '../../shared/cricket-tour-menu/cricket-tour-menu.component';
+import { SlugifyPipe } from '../../pipes/slugpipe';
 
 @NgModule({
   declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent],
@@ -30,6 +31,6 @@ import { CricketTourMenuComponent } from '../../shared/cricket-tour-menu/cricket
     CricketRoutingModule,
     ScrollingModule,
   ],
-  providers: [SportsService]
+  providers: [SportsService,SlugifyPipe]
 })
 export class CricketModule { }

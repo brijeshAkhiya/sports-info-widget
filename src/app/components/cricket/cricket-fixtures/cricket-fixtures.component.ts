@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../providers/sports-service';
-
+import * as moment from 'moment';
+import { Router } from '@angular/router';
+import { SlugifyPipe } from '../../../pipes/slugpipe';
 
 @Component({
   selector: 'app-cricket-fixtures',
@@ -9,21 +11,76 @@ import { SportsService } from '../../../providers/sports-service';
 })
 export class CricketFixturesComponent implements OnInit {
   cricketseries: any;
-  constructor(private sportsService: SportsService) { }
+  internationalschedual = []
+  domesticschedual = [];
+  internationalresult:any;
+  domesticresult: any;
+  constructor(private sportsService: SportsService,private router:Router,private slugifyPipe: SlugifyPipe) { }
 
   ngOnInit() {
     this.getCricketSeries();
   }
 
 
-   //get current cricket series 
+  //get current cricket series 
 
-   getCricketSeries() {
-    this.sportsService.getcurrentseries().subscribe((res) => {
+  getCricketSeries() {
+    this.sportsService.getcricketfixtures().subscribe((res) => {
       if (res['data']) {
         this.cricketseries = res['data']
+        this.cricketseries.map((data) => {
+          if (data.category == 'International') {
+            this.internationalschedual.push(data);
+          }
+        })
+        let dateObj = {} 
+        this.internationalschedual.map((data)=>{
+          let mdate = moment(data.start_date).format('MMMM YYYY');   
+          if(!dateObj[mdate]){
+            dateObj[mdate] = []
+          }
+        })
+        this.internationalschedual.map((data)=>{
+          let mdate = moment(data.start_date).format('MMMM YYYY');
+          dateObj[mdate].push(data)
+        })
+        this.internationalresult = Object.keys(dateObj).map(month => ({ month, data: dateObj[month] }));
       }
     })
+  }
+
+  //get domestic schedual
+
+  getDomesticSchedual() {
+    this.cricketseries.map((data) => {
+      if (data.category != 'International') {
+        this.domesticschedual.push(data)
+      }
+    })
+    let dateObj = {} 
+    this.domesticschedual.map((data)=>{
+      let mdate = moment(data.start_date).format('MMMM YYYY');  
+      if(!dateObj[mdate]){
+        dateObj[mdate] = []
+      }
+    })
+    this.domesticschedual.map((data)=>{
+      let mdate = moment(data.start_date).format('MMMM YYYY');
+      dateObj[mdate].push(data)
+    })
+    this.domesticresult = Object.keys(dateObj).map(month => ({ month, data: dateObj[month] }));
+    this.domesticschedual = [];
+  }
+
+  //get tournament info
+
+  getFixturesInfo(id,name){
+    console.log(name);
+    
+    let slugname  =  this.slugifyPipe.transform(name);
+   
+    
+    this.router.navigate(['/cricket/tournament',btoa(id),slugname]);
   }
 
 

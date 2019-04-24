@@ -8,15 +8,18 @@ import { NgxTinySliderModule } from 'ngx-tiny-slider';
 import { TruncatePipe } from '../pipes/truncatepipe';
 import { SportsService } from '../providers/sports-service';
 import { MomentModule } from 'ngx-moment';
+import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
+import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         NgxTinySliderModule,
+        MomentModule
     ],
-    declarations: [TruncatePipe],
+    declarations: [TruncatePipe, CommonStoryWidgetComponent, CommonNewsListComponent],
     providers: [TruncatePipe, SportsService],
-    exports: [NgxTinySliderModule, TruncatePipe]
+    exports: [NgxTinySliderModule, TruncatePipe,CommonNewsListComponent,CommonStoryWidgetComponent]
 })
 export class SharedModule { }

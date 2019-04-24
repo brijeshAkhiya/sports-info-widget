@@ -11,7 +11,7 @@
 .header-live-slider .slider-item .live-result:before    { content: ""; margin: 6px 4px 0px -10px; width: 6px; height: 6px; background: #6DD400; display: inline-block; vertical-align: top; border-radius: 50%; }
 nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
 nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block; background: #fff; position: relative; }
-nav .navbar-brand:before        { content: ""; position: absolute; width: calc(100% + 48px); height: 100%; left: 0px; top: 0px; background: #fff; border-radius: 0px 50px 0px 0px/ 0px 100% 0px 0px; z-index: 0; transform: skewX(10deg); -webkit-transform: skewX(10deg); }
+nav .navbar-brand:before        { content: ""; position: absolute; width: calc(100% + 48px); height: 100%; left: 0px; top: 0px; background: #fff; border-radius: 0px 40px 0px 0px/ 0px 100% 0px 0px; z-index: 0; transform: skewX(15deg); -webkit-transform: skewX(15deg); }
 nav .navbar-brand img           { position: relative; z-index: 1;}
 .navbar-nav                     { position: relative; } 
 .navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; }

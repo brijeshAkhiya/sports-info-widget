@@ -79,5 +79,12 @@ export class SportsService {
       return this.http.get(environment.apiUrl + environment.version + '/cricket/tournaments/current');
    }
 
+   //get all fixtures - CRICKET
+
+   getcricketfixtures(){
+      return this.http.get(environment.apiUrl + environment.version + '/cricket/fixtures/all');
+
+   }
+
    
 }

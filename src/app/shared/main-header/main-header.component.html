@@ -113,71 +113,71 @@
           <ng-template carouselSlide *ngFor="let slide of sliderdata">
             <!--Live matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'live'">
-                <div class="slider-item-inner">
-                  <div class="title d-flex justify-content-between align-items-center">
-                    <p><b>{{slide.season_name}}</b></p>
-                    <p>{{slide.scheduled | amCalendar}}</p>
-                  </div>
-                  <div class="match-info d-flex justify-content-between align-items-center">
-                    <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{slide.competitors[0].abbreviation}}</p>
-                    <p>{{slide.match_data.display_score}}({{slide.match_data.display_overs}} ov)</p>
-                  </div>
-                  <div class="match-info d-flex justify-content-between align-items-center">
-                    <p ><img src="../../../assets/images/kxip-icon.svg" alt="kxip">{{slide.competitors[1].abbreviation}}</p>
-                    <!-- <p>188/2(19.2 ov)</p> -->
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9">
-                        <p class="result-line live-result">Live <br>{{slide.venue_name}}</p>
-                    </div>
+              <div class="slider-item-inner">
+                <div class="title d-flex justify-content-between align-items-center">
+                  <p><b>{{slide.season_name}}</b></p>
+                  <p>{{slide.scheduled | amCalendar}}</p>
+                </div>
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{slide.competitors[0].abbreviation}}</p>
+                  <p>{{slide.match_data.display_score}}({{slide.match_data.display_overs}} ov)</p>
+                </div>
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/kxip-icon.svg" alt="kxip">{{slide.competitors[1].abbreviation}}
+                  </p>
+                  <!-- <p>188/2(19.2 ov)</p> -->
+                </div>
+                <div class="row">
+                  <div class="col-lg-9">
+                    <p class="result-line live-result">Live <br>{{slide.venue_name}}</p>
                   </div>
                 </div>
               </div>
+            </div>
             <!--upcoming matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'">
-                <div class="slider-item-inner">
-                  <div class="title d-flex justify-content-between align-items-center">
-                    <p><b>{{slide.season_name}}</b></p>
-                    <p>{{slide.scheduled | amCalendar}}</p>
-                  </div>
-                  <div class="match-info d-flex justify-content-between align-items-center">
-                    <p><img src="../../../assets/images/rcb-icon.svg" alt="flag">{{slide.competitors[0].name}}</p>
-                  </div>
-                  <div class="match-info d-flex justify-content-between align-items-center">
-                    <p><img src="../../../assets/images/kxip-icon.svg" alt="flag">{{slide.competitors[1].name}}</p>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <p class="result-line">Starts {{slide.scheduled | amLocal | amDateFormat:'LT'}}<br>{{slide.city_name}}</p>
-                    </div>
+              <div class="slider-item-inner">
+                <div class="title d-flex justify-content-between align-items-center">
+                  <p><b>{{slide.season_name}}</b></p>
+                  <p>{{slide.scheduled | amCalendar}}</p>
+                </div>
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/rcb-icon.svg" alt="flag">{{slide.competitors[0].name}}</p>
+                </div>
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/kxip-icon.svg" alt="flag">{{slide.competitors[1].name}}</p>
+                </div>
+                <div class="row">
+                  <div class="col-lg-9">
+                    <p class="result-line">Starts
+                      {{slide.scheduled | amLocal | amDateFormat:'LT'}}<br>{{slide.city_name}}</p>
                   </div>
                 </div>
               </div>
-              <!--Results-->
-              <div class="slider-item" *ngIf="slide.slider_status == 'results'">
-                  <div class="slider-item-inner">
-                    <div class="title d-flex justify-content-between align-items-center">
-                      <p><b>{{slide.season_name}}</b></p>
-                      <p>{{slide.scheduled | amDuration :'hours'}}</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                      <p>187/5(20.0 ov)</p>
-                    </div>
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                      <p>188/2(19.2 ov)</p>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-9">
-                        <p class="result-line">{{slide.match_result}}</p>
-                      </div>
-                    </div>
+            </div>
+            <!--Results-->
+            <div class="slider-item" *ngIf="slide.slider_status == 'results'">
+              <div class="slider-item-inner">
+                <div class="title d-flex justify-content-between align-items-center">
+                  <p><b>{{slide.season_name}}</b></p>
+                  <p>{{slide.scheduled | amDuration :'hours'}}</p>
+                </div>
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
+                  <p>187/5(20.0 ov)</p>
+                </div>
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
+                  <p>188/2(19.2 ov)</p>
+                </div>
+                <div class="row">
+                  <div class="col-lg-9">
+                    <p class="result-line">{{slide.match_result}}</p>
                   </div>
                 </div>
+              </div>
+            </div>
           </ng-template>
-         
-
         </ng-container>
         <!-- <ng-container *ngFor="let slide of slides">
           <ng-template carouselSlide>

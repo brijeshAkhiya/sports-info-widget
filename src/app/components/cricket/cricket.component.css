@@ -39,8 +39,8 @@
 .schedule-item:hover .details-btn       { right: 0px;}
 
 /* -------- Teams List ------- */
-.team-list .team-item               { margin-bottom: 24px; padding: 24px; background: #fff; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;  }
-.team-list .team-item:hover         { padding-left: 32px; border-left: 8px solid #ED1A33;}
+.team-list .team-item               { margin-bottom: 24px; padding: 24px 24px 24px 16px; background: #fff; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; border-left: 8px solid transparent; }
+.team-list .team-item:hover         { padding-left: 24px; border-left-color: #ED1A33;}
 .team-list [class*="col-"]:nth-last-child(2) .team-item,
 .team-list [class*="col-"]:last-child .team-item    { margin-bottom: 0; }
 .team-list .team-item .team-flag img{ height: 80px; width: auto; box-shadow: 0px 4px 6px rgba(0,0,0,0.14), 0px 6px 26px rgba(0,0,0,0.14); border-radius: 3.33px;}
@@ -92,7 +92,7 @@
     .schedule-tour-list p                   { margin-bottom: 10px;}
 /* -------- Teams List ------- */  
     .team-list .team-item .team-flag img{ height: 64px;}
-    .team-list .team-item:hover         { padding-left: 28px; }
+    .team-list .team-item:hover         { padding-left: 20px; }
     .team-list .team-item .team-name    { padding-left: 12px;}
 }
 

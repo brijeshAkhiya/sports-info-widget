@@ -33,6 +33,7 @@ export class MainHeaderComponent implements OnInit {
   ];
   slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
   sliderdata: any;
+  sliderresults = [];
 
 
   constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService) {
@@ -115,7 +116,36 @@ export class MainHeaderComponent implements OnInit {
   getHeaderSliderData() {
     this.sportsService.getheaderslider().subscribe((res) => {
       if (res['data']) {
-        this.sliderdata = res['data']
+        this.sliderdata = res['data'];
+        this.sliderdata.map((data) => {
+          if (data.slider_status == 'results') {
+            this.sliderresults.push(data);
+          }
+        })
+        this.sliderresults = this.sliderresults.map(data => {
+          let obj = {};
+          let team_arr = data["competitors"]
+          team_arr.map(single => {
+            obj[single.qualifier] = single
+          })
+
+          let period_score_new = data["period_scores"]
+          if (period_score_new) {
+            period_score_new = period_score_new.map(singleb => {
+              if (singleb.away_score !== undefined) {
+                return { ...singleb, team: obj["away"], teamFlag: true }
+              } else {
+                return { ...singleb, team: obj["home"], teamFlag: false }
+              }
+            })
+            return { ...data, period_score_new }
+          }
+          else {
+            return data;
+          }
+        })
+        console.log(this.sliderresults);
+
       }
 
     })

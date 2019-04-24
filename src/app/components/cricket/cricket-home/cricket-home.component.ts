@@ -11,7 +11,10 @@ export class CricketHomeComponent implements OnInit {
   populararticles: any;
   latestposts: any;
   popularvideos: any;
-
+  widget1title = 'Current Series';
+  widget1type = 'currentseries'
+  widget2title = 'Popular Right Now'
+  widget2type = 'populartags'
   constructor(private sportsService: SportsService) { }
 
   ngOnInit() {
@@ -29,6 +32,8 @@ export class CricketHomeComponent implements OnInit {
     this.sportsService.getcurrentseries().subscribe((res) => {
       if (res['data']) {
         this.cricketseries = res['data']
+        console.log(this.cricketseries);
+        
       }
     })
   }
