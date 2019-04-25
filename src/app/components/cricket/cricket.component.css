@@ -31,7 +31,7 @@
 .schedule-tour-list .result-line        { font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; }
 .schedule-tour-list .time-line          { font-size: 16px; line-height: 20px; color: #525252; }
 .match-teams .match-team                { width: calc(50% - 36px); }
-.match-teams .match-team:first-child    { text-align: right; justify-content: end; -webkit-justify-content: end; }
+.match-teams .match-team:first-child    { text-align: right;  -webkit-justify-content: flex-end; -moz-justify-content: flex-end; -ms-justify-content: flex-end; justify-content: flex-end; }
 .match-teams .team-info                 { padding: 0px 12px; }
 .match-teams .team-flag                 { height: 48px; width: auto; box-shadow: 0px 4px 6px rgba(0,0,0,0.14), 0px 6px 26px rgba(0,0,0,0.14); border-radius: 2px; }
 .schedule-item .details-btn             { position: absolute; width: 32px; height: 100%; background: #ED1A33; font-size: 14px; line-height: 32px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: #fff; right: -32px; top: 0px; border-radius: 4px; text-transform: uppercase; }
@@ -160,7 +160,8 @@
 /* -------- Teams List ------- */
     .team-list .team-item .team-flag img{ height: 54px;}
     .team-list [class*="col-"]:nth-last-child(2) .team-item,
-    .team-list .team-item                   { margin-bottom: 16px; padding: 16px; }
-    .team-list .team-item:hover             { padding-left: 20px; border-left-width: 6px;}
+    .team-list .team-item                   { margin-bottom: 16px; }
+    .team-list .team-item                   { padding: 16px 16px 16px 10px; border-left-width: 6px; }
+    .team-list .team-item:hover             { padding-left: 18px;}
 
 }

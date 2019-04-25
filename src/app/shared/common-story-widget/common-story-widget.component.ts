@@ -51,5 +51,14 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
     })
   }
 
+  route(id,type,name){
+    console.log(id);
+    
+    console.log(type);
+    console.log(name);
+    
+    
+  }
+
 
 }

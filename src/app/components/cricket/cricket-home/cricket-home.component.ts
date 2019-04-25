@@ -20,8 +20,8 @@ export class CricketHomeComponent implements OnInit {
   ngOnInit() {
     this.getPopularArticles();
     // this.getRecentPosts();
-    this.getCricketSeries();
-    this.getPopularTags();
+    //this.getCricketSeries();
+   // this.getPopularTags();
 
   }
 

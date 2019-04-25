@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SportsService } from '../../../../providers/sports-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tournament-home',
@@ -6,10 +8,40 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./tournament-home.component.css']
 })
 export class TournamentHomeComponent implements OnInit {
+  tournamentid: any;
 
-  constructor() { }
+  battingleaders: any;
+  bowlingleaders: any;
+  pointstable: any;
+
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.tournamentid = atob(this.activatedroute.snapshot.params.id)
+    this.getTournamentsLeader();
+    this.getTournamentPointsTable();
   }
+
+  getTournamentsLeader() {
+    this.sportsService.gettournamentleaders(this.tournamentid).subscribe((res) => {
+      if (res['data']) {
+        this.battingleaders = res['data'].batting;
+        this.bowlingleaders = res['data'].bowling;
+      }
+    })
+  }
+
+  //get tournaments points table
+
+  getTournamentPointsTable() {
+    this.sportsService.gettournamentpointstable(this.tournamentid).subscribe((res) => {
+      if (res['data']) {
+        res['data'].map((data) => {
+          this.pointstable = data.team_standings
+        })
+      }
+    })
+  }
+
 
 }

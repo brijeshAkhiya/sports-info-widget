@@ -20,9 +20,11 @@ import { PlayerHomeComponent } from './player/player-home/player-home.component'
 import { TournamentCricketComponent } from './tournament/tournament-cricket/tournament-cricket.component';
 import { CricketTourMenuComponent } from '../../shared/cricket-tour-menu/cricket-tour-menu.component';
 import { SlugifyPipe } from '../../pipes/slugpipe';
+import { TournamentStandingsComponent } from './tournament/tournament-standings/tournament-standings.component';
+import { SplitPipe } from '../../pipes/stringsplitpipe';
 
 @NgModule({
-  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent],
+  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent, TournamentStandingsComponent,SplitPipe],
   imports: [
     CommonModule,
     NgbModule,
@@ -31,6 +33,6 @@ import { SlugifyPipe } from '../../pipes/slugpipe';
     CricketRoutingModule,
     ScrollingModule,
   ],
-  providers: [SportsService,SlugifyPipe]
+  providers: [SportsService,SlugifyPipe,SplitPipe]
 })
 export class CricketModule { }

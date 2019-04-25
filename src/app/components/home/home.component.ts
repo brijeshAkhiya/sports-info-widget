@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   matchresults: any;
   period_score: any;
   matchfixtures: any;
-  commonnewstype:any = ''
+  commonnewstype: any = ''
   constructor(private renderer2: Renderer2, private sportsService: SportsService) { }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.getPopularArticles();
     this.getPopularVideos();
     this.getMatchFixtures();
-    //this.getRecentPosts(this.commonnewstype);
+    this.getRecentPosts();
     this.getPopularTags();
   }
 

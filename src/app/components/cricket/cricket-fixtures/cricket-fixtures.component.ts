@@ -15,6 +15,8 @@ export class CricketFixturesComponent implements OnInit {
   domesticschedual = [];
   internationalresult:any;
   domesticresult: any;
+  widget1title = 'Current Series';
+  widget1type = 'currentseries'
   constructor(private sportsService: SportsService,private router:Router,private slugifyPipe: SlugifyPipe) { }
 
   ngOnInit() {

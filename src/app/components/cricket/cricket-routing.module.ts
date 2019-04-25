@@ -11,6 +11,7 @@ import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { TeamsHomeComponent } from './teams/teams-home/teams-home.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { TournamentCricketComponent } from './tournament/tournament-cricket/tournament-cricket.component';
+import { TournamentStandingsComponent } from './tournament/tournament-standings/tournament-standings.component';
 
 const childRoutes: Routes = [
     {
@@ -44,6 +45,10 @@ const childRoutes: Routes = [
                     {
                         path: 'stats',
                         component: TournamentStateComponent
+                    },
+                    {
+                        path:'standings',
+                        component:TournamentStandingsComponent
                     }
                 ]
             },

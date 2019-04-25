@@ -1,6 +1,6 @@
 <div class="common-stories-widget common-shadow rounded-box">
     <h5>{{title}}</h5>
     <ul class="common-list">
-      <li *ngFor="let item of dataitems"><a>{{item.name}}</a></li>
+      <li *ngFor="let item of dataitems | slice:0:5"><a (click)="route(item._id,item.eType,item.name)">{{item.name}}</a></li>
     </ul>
   </div>

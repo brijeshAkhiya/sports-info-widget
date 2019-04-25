@@ -86,5 +86,18 @@ export class SportsService {
 
    }
 
+   //get cricket tournament leaders
+
+   gettournamentleaders(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/leaders`);
+   }
+
+   //get cricket tournament points table
+
+   gettournamentpointstable(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/point-table`);
+
+   }
+
    
 }
