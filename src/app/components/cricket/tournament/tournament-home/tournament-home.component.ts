@@ -13,6 +13,7 @@ export class TournamentHomeComponent implements OnInit {
   battingleaders: any;
   bowlingleaders: any;
   pointstable: any;
+  teamsname: any;
 
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) { }
 
@@ -20,13 +21,14 @@ export class TournamentHomeComponent implements OnInit {
     this.tournamentid = atob(this.activatedroute.snapshot.params.id)
     this.getTournamentsLeader();
     this.getTournamentPointsTable();
+    this.getTournamentTeams();
   }
 
   getTournamentsLeader() {
     this.sportsService.gettournamentleaders(this.tournamentid).subscribe((res) => {
       if (res['data']) {
-        this.battingleaders = res['data'].batting;
-        this.bowlingleaders = res['data'].bowling;
+        this.battingleaders = res['data'].batting.top_runs;
+        this.bowlingleaders = res['data'].bowling.top_wickets;
       }
     })
   }
@@ -38,6 +40,18 @@ export class TournamentHomeComponent implements OnInit {
       if (res['data']) {
         res['data'].map((data) => {
           this.pointstable = data.team_standings
+        })
+      }
+    })
+  }
+
+  //get tournament teams
+
+  getTournamentTeams(){
+    this.sportsService.gettournamentteams(this.tournamentid).subscribe((res) => {
+      if (res['data']) {
+        res['data'].groups.map((data) => {
+            this.teamsname = data.teams
         })
       }
     })

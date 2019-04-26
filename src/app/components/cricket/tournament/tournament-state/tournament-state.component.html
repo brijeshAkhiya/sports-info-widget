@@ -19,130 +19,15 @@
                             <tr class="light-row">
                               <th>POS</th>
                               <th>Player</th>
-                              <th>MAT</th>
-                              <th>INN</th>
-                              <th>R</th>
-                              <th>AVG</th>
-                              <th>SRR</th>
-                              <th>HS</th>
-                              <th>100s</th>
-                              <th>50s</th>
-                              <th>4s</th>
-                              <th>6s</th>
+                              <th>High Score</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">bat Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>5</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>6</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>7</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>8</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
+                            <tr *ngFor="let item of battingleaders?.highest_score">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg"
+                                  alt="logo">{{item.player.name | split}}</td>
+                              <td>{{item.total}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -160,130 +45,15 @@
                             <tr class="light-row">
                               <th>POS</th>
                               <th>Player</th>
-                              <th>MAT</th>
-                              <th>INN</th>
-                              <th>R</th>
-                              <th>AVG</th>
-                              <th>SRR</th>
-                              <th>HS</th>
-                              <th>100s</th>
-                              <th>50s</th>
-                              <th>4s</th>
-                              <th>6s</th>
+                              <th>Runs</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>5</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>6</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>7</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>8</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
+                            <tr *ngFor="let item of battingleaders.top_runs">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg"
+                                  alt="logo">{{item.player.name | split}}</td>
+                              <td>{{item.total}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -301,130 +71,15 @@
                             <tr class="light-row">
                               <th>POS</th>
                               <th>Player</th>
-                              <th>MAT</th>
-                              <th>INN</th>
-                              <th>R</th>
-                              <th>AVG</th>
-                              <th>SRR</th>
-                              <th>HS</th>
-                              <th>100s</th>
-                              <th>50s</th>
-                              <th>4s</th>
-                              <th>6s</th>
+                              <th>Average</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>5</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>6</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>7</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
-                            </tr>
-                            <tr>
-                              <td>8</td>
-                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                              <td>120</td>
-                              <td>10</td>
-                              <td>1200</td>
-                              <td>38.06</td>
-                              <td>96.23</td>
-                              <td><b>183*</b></td>
-                              <td>30</td>
-                              <td>50</td>
-                              <td>1624</td>
-                              <td>104</td>
+                            <tr *ngFor="let item of battingleaders?.top_average">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg"
+                                  alt="logo">{{item.player.name | split }}</td>
+                              <td>{{item.average}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -435,862 +90,120 @@
               </ngb-tabset>
             </ng-template>
           </ngb-tab>
+          <!--Bowling stats-->
           <ngb-tab title="Bowling">
             <ng-template ngbTabContent>
-                <ngb-tabset class="common-tabs black-filled">
-                    <ngb-tab>
-                      <ng-template ngbTabTitle>Score</ng-template>
-                      <ng-template ngbTabContent>
-                        <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr class="light-row">
-                                  <th>POS</th>
-                                  <th>Player</th>
-                                  <th>MAT</th>
-                                  <th>INN</th>
-                                  <th>R</th>
-                                  <th>AVG</th>
-                                  <th>SRR</th>
-                                  <th>HS</th>
-                                  <th>100s</th>
-                                  <th>50s</th>
-                                  <th>4s</th>
-                                  <th>6s</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Bowl Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </ngb-tab>
-                    <ngb-tab>
-                      <ng-template ngbTabTitle>Runs</ng-template>
-                      <ng-template ngbTabContent>
-                        <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr class="light-row">
-                                  <th>POS</th>
-                                  <th>Player</th>
-                                  <th>MAT</th>
-                                  <th>INN</th>
-                                  <th>R</th>
-                                  <th>AVG</th>
-                                  <th>SRR</th>
-                                  <th>HS</th>
-                                  <th>100s</th>
-                                  <th>50s</th>
-                                  <th>4s</th>
-                                  <th>6s</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </ngb-tab>
-                    <ngb-tab>
-                      <ng-template ngbTabTitle>Average</ng-template>
-                      <ng-template ngbTabContent>
-                        <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr class="light-row">
-                                  <th>POS</th>
-                                  <th>Player</th>
-                                  <th>MAT</th>
-                                  <th>INN</th>
-                                  <th>R</th>
-                                  <th>AVG</th>
-                                  <th>SRR</th>
-                                  <th>HS</th>
-                                  <th>100s</th>
-                                  <th>50s</th>
-                                  <th>4s</th>
-                                  <th>6s</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </ngb-tab>
-                  </ngb-tabset>
+              <ngb-tabset class="common-tabs black-filled">
+                <!--Top wickets-->
+                <ngb-tab>
+                  <ng-template ngbTabTitle>Top</ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr class="light-row">
+                              <th>POS</th>
+                              <th>Player</th>
+                              <th>Wickets</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of bowlingleaders?.top_wickets">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">{{item.player.name | split}}</td>
+                              <td>{{item.total}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+                <!--Bowling average-->
+                <ngb-tab>
+                  <ng-template ngbTabTitle>Average</ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr class="light-row">
+                              <th>POS</th>
+                              <th>Player</th>
+                              <th>Average</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of bowlingleaders.top_bowling_average">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">{{item.player.name | split}}</td>
+                              <td>{{item.average}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                  <ng-template ngbTabTitle>Economy</ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr class="light-row">
+                              <th>POS</th>
+                              <th>Player</th>
+                              <th>Economy Rate</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of bowlingleaders.top_economy">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">{{item.player.name | split}}</td>
+                              <td>{{item.rate}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
             </ng-template>
           </ngb-tab>
+          <!--Fielding stats-->
           <ngb-tab title="Fielding">
             <ng-template ngbTabContent>
-                <ngb-tabset class="common-tabs black-filled">
-                    <ngb-tab>
-                      <ng-template ngbTabTitle>Score</ng-template>
-                      <ng-template ngbTabContent>
-                        <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr class="light-row">
-                                  <th>POS</th>
-                                  <th>Player</th>
-                                  <th>MAT</th>
-                                  <th>INN</th>
-                                  <th>R</th>
-                                  <th>AVG</th>
-                                  <th>SRR</th>
-                                  <th>HS</th>
-                                  <th>100s</th>
-                                  <th>50s</th>
-                                  <th>4s</th>
-                                  <th>6s</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Field Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </ngb-tab>
-                    <ngb-tab>
-                      <ng-template ngbTabTitle>Runs</ng-template>
-                      <ng-template ngbTabContent>
-                        <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr class="light-row">
-                                  <th>POS</th>
-                                  <th>Player</th>
-                                  <th>MAT</th>
-                                  <th>INN</th>
-                                  <th>R</th>
-                                  <th>AVG</th>
-                                  <th>SRR</th>
-                                  <th>HS</th>
-                                  <th>100s</th>
-                                  <th>50s</th>
-                                  <th>4s</th>
-                                  <th>6s</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </ngb-tab>
-                    <ngb-tab>
-                      <ng-template ngbTabTitle>Average</ng-template>
-                      <ng-template ngbTabContent>
-                        <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <thead>
-                                <tr class="light-row">
-                                  <th>POS</th>
-                                  <th>Player</th>
-                                  <th>MAT</th>
-                                  <th>INN</th>
-                                  <th>R</th>
-                                  <th>AVG</th>
-                                  <th>SRR</th>
-                                  <th>HS</th>
-                                  <th>100s</th>
-                                  <th>50s</th>
-                                  <th>4s</th>
-                                  <th>6s</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>5</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>6</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>7</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                                <tr>
-                                  <td>8</td>
-                                  <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">Jonny Bairstow</td>
-                                  <td>120</td>
-                                  <td>10</td>
-                                  <td>1200</td>
-                                  <td>38.06</td>
-                                  <td>96.23</td>
-                                  <td><b>183*</b></td>
-                                  <td>30</td>
-                                  <td>50</td>
-                                  <td>1624</td>
-                                  <td>104</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </ng-template>
-                    </ngb-tab>
-                  </ngb-tabset>
+              <ngb-tabset class="common-tabs black-filled">
+                <ngb-tab>
+                  <ng-template ngbTabTitle>Top Catches</ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr class="light-row">
+                              <th>POS</th>
+                              <th>Player</th>
+                              <th>Catches</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of fieldingleaders?.top_catches">
+                              <td>{{item.rank}}</td>
+                              <td><img class="" src="../../../../../assets/images/ipl-rr-logo.svg" alt="logo">{{item.player.name | split}}</td>
+                              <td>{{item.total}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
             </ng-template>
           </ngb-tab>
 
@@ -1300,16 +213,9 @@
         <div class="sticky-sidebar">
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-          <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Recommended links</h5>
-            <ul class="common-list">
-              <li><a>West Indies</a></li>
-              <li><a>IPL 2019</a></li>
-              <li><a>World Cup 2019</a></li>
-              <li><a>Sri Lanka vs South Africa</a></li>
-              <li><a>India vs England</a></li>
-            </ul>
-          </div>
+          <!--Recommended links-->
+          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
+            *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>
       </div>
     </div>

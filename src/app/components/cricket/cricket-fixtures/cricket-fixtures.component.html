@@ -63,14 +63,7 @@
         <div class="sticky-sidebar">
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-          <!-- <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Current Series</h5>
-            <ul class="common-list">
-              <li *ngFor="let series of cricketseries | slice:0:5"><a>{{series.name}}</a></li>
-            </ul>
-          </div> -->
-          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries" *ngIf="widget1type && widget1title"></app-common-story-widget>
-
+          <app-common-story-widget [title]="widget1title" [type]="widget1type" *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>
       </div>
     </div>

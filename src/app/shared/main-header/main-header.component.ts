@@ -144,8 +144,6 @@ export class MainHeaderComponent implements OnInit {
             return data;
           }
         })
-        console.log(this.sliderresults);
-
       }
 
     })

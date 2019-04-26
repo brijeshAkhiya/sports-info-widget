@@ -1,0 +1,19 @@
+.tour-stand-table .table tr th,
+.tour-stand-table .table tr td                  { width: 8%;}
+.tour-stand-table .table tr td:first-child      { width: 8%; font-weight: 500; }
+.tour-stand-table .table tr th:nth-child(2),
+.tour-stand-table .table tr td:nth-child(2)     { text-align: left; width: 40%; }
+.tour-stand-table .table tr td:nth-child(2) img { margin: -12px 8px -9px 0px; height: 32px; width: auto; border-radius: 2px; }
+.tour-stand-table .table tr td:nth-child(2)     { padding-right: 48px; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+    .tour-stand-table .table tr td:nth-child(2) img { height: 28px; }
+}
+
+@media (max-width: 1199px) {
+    .tour-stand-table .table tr td:nth-child(2) img { height: 24px; }
+}
+
+

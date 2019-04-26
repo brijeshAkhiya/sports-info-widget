@@ -499,90 +499,12 @@
         <div class="sticky-sidebar">
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-          <div class="common-widget point-table-widget">
-            <div class="widget-title">
-              <h5>Points Table</h5>
-            </div>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>TEAM</th>
-                    <th>M</th>
-                    <th>w</th>
-                    <th>l</th>
-                    <th>t</th>
-                    <th>p</th>
-                    <th>NRR</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of pointstable">
-                    <td>{{item.team.abbreviation}}</td>
-                    <td>{{item.played}}</td>
-                    <td>{{item.win}}</td>
-                    <td>{{item.loss}}</td>
-                    <td>{{item.draw}}</td>
-                    <td>{{item.points}}</td>
-                    <td>{{item.net_run_rate}}</td>
-                  </tr>
-                  <!-- <tr>
-                    <td>KXIP</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>6</td>
-                    <td>0.164</td>
-                  </tr>
-                  <tr>
-                    <td>KXIP</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>6</td>
-                    <td>0.164</td>
-                  </tr>
-                  <tr>
-                    <td>KXIP</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>6</td>
-                    <td>0.164</td>
-                  </tr>
-                  <tr>
-                    <td>KXIP</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>6</td>
-                    <td>0.164</td>
-                  </tr>
-                  <tr>
-                    <td>KXIP</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>6</td>
-                    <td>0.164</td>
-                  </tr> -->
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <!--Points table widget-->
+          <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>Teams</h5>
             <ul class="common-list">
-              <li><a>Mumbai Indians</a></li>
-              <li><a>Kolkata Knight Riders</a></li>
-              <li><a>Royal Challengers Bangalore</a></li>
-              <li><a>Chennai Super Kings</a></li>
-              <li><a>Kings XI Punjab</a></li>
+              <li *ngFor="let item of teamsname | slice:0:5"><a>{{item.name}}</a></li>
             </ul>
           </div>
           <div class="common-widget tab-widget">

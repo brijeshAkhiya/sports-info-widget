@@ -7,9 +7,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tournament-cricket.component.css']
 })
 export class TournamentCricketComponent implements OnInit {
-  master:any = 'WC 2019'
+  master:any = 'ipl 2019'
   constructor(private activatedRoute:ActivatedRoute) { 
     console.log('ROUTEPRA',this.activatedRoute.snapshot.params.slug);
+      // let unslug = this.activatedRoute.snapshot.params.slug
+      // console.log(unslug.replace(/-/i, ""));
+      
+      
    }
 
   ngOnInit() {

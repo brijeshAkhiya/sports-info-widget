@@ -7,75 +7,12 @@
         </div>
         <div class="team-list">
           <div class="row row-size12">
-            <div class="col-md-6 col-lg-12 col-xl-6">
+            <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let team of teamsname">
               <div class="team-item rounded-box common-shadow d-flex">
                 <div class="team-flag"><img src="../../../../../assets/images/flag-ind.svg" alt="team-flag"></div>
                 <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-wi.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-ind.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-wi.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-ind.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-wi.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-ind.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-12 col-xl-6">
-              <div class="team-item rounded-box common-shadow d-flex">
-                <div class="team-flag"><img src="../../../../../assets/images/flag-wi.svg" alt="team-flag"></div>
-                <div class="team-name">
-                  <h4>West Indies</h4>
-                  <h5>WI</h5>
+                  <h4>{{team.name}}</h4>
+                  <h5>{{team.abbreviation}}</h5>
                 </div>
               </div>
             </div>
@@ -86,16 +23,9 @@
         <div class="sticky-sidebar">
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-          <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Current Series</h5>
-            <ul class="common-list">
-              <li><a>Australia vs Pakistan</a></li>
-              <li><a>IPL 2019</a></li>
-              <li><a>World Cup 2019</a></li>
-              <li><a>Sri Lanka vs South Africa</a></li>
-              <li><a>India vs England</a></li>
-            </ul>
-          </div>
+          <!--Current series widget-->
+          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
+            *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>
       </div>
     </div>

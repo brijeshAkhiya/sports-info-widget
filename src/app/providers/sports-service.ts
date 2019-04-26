@@ -96,8 +96,18 @@ export class SportsService {
 
    gettournamentpointstable(id){
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/point-table`);
-
    }
 
+   //get tournament teams
+
+   gettournamentteams(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/teams`);
+   }
+
+   //get tournament fixtures
+
+   gettournamentfixtures(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/fixtures`);
+   }
    
 }
