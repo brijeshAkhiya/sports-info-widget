@@ -109,5 +109,13 @@ export class SportsService {
    gettournamentfixtures(id){
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/fixtures`);
    }
+
+   //get player profile 
+
+   getplayerprofile(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/player/${id}`);
+
+   }
+
    
 }

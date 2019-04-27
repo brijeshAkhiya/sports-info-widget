@@ -143,14 +143,14 @@ button                  { outline: none !important; cursor: pointer; transition:
 .ad-block:last-child                { margin-bottom: 0px;}
 
 /* -------- Common Tab ------- */
-.common-tabs .nav-tabs                          { background: #fff; border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
-.common-tabs .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; background: transparent; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden;} 
-.common-tabs .nav-tabs .nav-link:after          { content: ""; position: absolute; display: block; width: 100%; left: 0px; bottom: -6px; border-bottom: 6px solid #ED1A33; border-left: 2px solid transparent; border-right: 2px solid transparent; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out;}
-.common-tabs .nav-tabs .nav-link.active         { background: transparent; border: none; opacity: 1; }
-.common-tabs .nav-tabs .nav-link.active:after   { bottom: 0px; }
-.common-tabs.black-filled .nav-tabs             { margin: 0px; padding-top: 15px; background: #3D3D3D; border-radius: 4px 4px 0px 0px; }
-.common-tabs.black-filled .nav-tabs .nav-link   { color: #fff; opacity: 0.4; }
-.common-tabs.black-filled .nav-tabs .nav-link.active   { opacity: 1;  }
+.common-tabs > .nav-tabs                          { background: #fff; border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
+.common-tabs > .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; background: transparent; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden;} 
+.common-tabs > .nav-tabs .nav-link:after          { content: ""; position: absolute; display: block; width: 100%; left: 0px; bottom: -6px; border-bottom: 6px solid #ED1A33; border-left: 2px solid transparent; border-right: 2px solid transparent; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out;}
+.common-tabs > .nav-tabs .nav-link.active         { background: transparent; border: none; opacity: 1; }
+.common-tabs > .nav-tabs .nav-link.active:after   { bottom: 0px; }
+.common-tabs.black-filled > .nav-tabs             { margin: 0px; padding-top: 15px; background: #3D3D3D; border-radius: 4px 4px 0px 0px; }
+.common-tabs.black-filled > .nav-tabs .nav-link   { color: #fff; opacity: 0.4; }
+.common-tabs.black-filled > .nav-tabs .nav-link.active   { opacity: 1;  }
 
 /* -------- Filled Tab ------- */
 .filled-tabs > .nav-tabs                        { border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; }
@@ -353,8 +353,8 @@ button                  { outline: none !important; cursor: pointer; transition:
     .popular-main-item .item-img        { height: 240px;}
     .common-popular-list .item-desc     { min-height: initial; }
 /* -------- Common Tab ------- */
-    .common-tabs .nav-tabs .nav-link            { font-size: 15px; }
-    .common-tabs.black-filled .nav-tabs         { padding-top: 10px;}
+    .common-tabs > .nav-tabs .nav-link            { font-size: 15px; }
+    .common-tabs.black-filled > .nav-tabs         { padding-top: 10px;}
 /* -------- Filled Tab ------- */
     .filled-tabs > .nav-tabs .nav-link          { padding: 11px 11px 10px; font-size: 14px; line-height: 18px;}
 /* -------- Table Style ------- */

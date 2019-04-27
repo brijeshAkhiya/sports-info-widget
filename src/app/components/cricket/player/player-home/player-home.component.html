@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>MS DHONI</h1>
+          <h1>{{playerbasic?.name | split}}</h1>
           <button class="add-to-fav-btn added"><span>Add to favorites</span></button>
         </div>
         <ngb-tabset class="common-tabs">
@@ -17,19 +17,19 @@
                 <div class="player-info d-flex common-shadow rounded-box">
                   <div class="info-col">
                     <p class="light-title">Full Name</p>
-                    <p>Mahendra Singh Dhoni</p>
+                    <p>{{playerbasic?.full_name}}</p>
                     <p class="light-title">Born</p>
-                    <p>July 7, 1981</p>
+                    <p>{{playerbasic?.date_of_birth | date}}</p>
                     <p class="light-title">Nationality</p>
-                    <p>India</p>
+                    <p>{{playerbasic?.nationality}}</p>
                   </div>
                   <div class="info-col">
                     <p class="light-title">Batting Style</p>
-                    <p>Right Handed Batsman</p>
+                    <p>{{playerbasic?.batting_style}}</p>
                     <p class="light-title">Bowling Style</p>
-                    <p>Right Arm Medium</p>
+                    <p>{{playerbasic.bowling_style ? playerbasic.bowling_style : '-'}}</p>
                     <p class="light-title">Role</p>
-                    <p>wicket keeper</p>
+                    <p>{{playerbasic?.type}}</p>
                   </div>
                   <div class="info-col">
                     <p class="light-title">jersey no</p>
@@ -42,19 +42,19 @@
                 <div class="row row-size12">
                   <div class="col-md-4">
                     <div class="common-shadow rounded-box stat-item">
-                      <h1>1380</h1>
+                      <h1>{{totalmatches}}</h1>
                       <p>Matches</p>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="common-shadow rounded-box stat-item">
-                      <h1>43436</h1>
+                      <h1>{{totalruns}}</h1>
                       <p>Runs</p>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="common-shadow rounded-box stat-item">
-                      <h1>03</h1>
+                      <h1>{{totalwicket}}</h1>
                       <p>Wickets</p>
                     </div>
                   </div>
@@ -63,21 +63,12 @@
               <h4>Major Teams</h4>
               <div class="team-list">
                 <div class="row row-size12">
-                  <div class="col-md-6 col-lg-12 col-xl-6">
+                  <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let item of playerprofile.teams">
                     <div class="team-item rounded-box common-shadow d-flex">
                       <div class="team-flag"><img src="../../../../../assets/images/flag-ind.svg" alt="team-flag"></div>
                       <div class="team-name">
-                        <h4>West Indies</h4>
-                        <h5>WI</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-12 col-xl-6">
-                    <div class="team-item rounded-box common-shadow d-flex">
-                      <div class="team-flag"><img src="../../../../../assets/images/flag-wi.svg" alt="team-flag"></div>
-                      <div class="team-name">
-                        <h4>West Indies</h4>
-                        <h5>WI</h5>
+                        <h4>{{item.name}}</h4>
+                        <h5>{{item.abbreviation}}</h5>
                       </div>
                     </div>
                   </div>

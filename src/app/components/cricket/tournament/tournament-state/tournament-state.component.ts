@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SlugifyPipe } from '../../../../pipes/slugpipe';
+import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 
 @Component({
   selector: 'app-tournament-state',
@@ -16,7 +18,7 @@ export class TournamentStateComponent implements OnInit {
   fieldingleaders: any;
 
 
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe, private router: Router, private splitpipe: SplitPipe) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.snapshot.parent.params.id)
@@ -31,6 +33,14 @@ export class TournamentStateComponent implements OnInit {
         this.fieldingleaders = res['data'].fielding
       }
     })
+  }
+
+  //get player information
+
+  playerinfo(id, name) {
+    let playername = this.splitpipe.transform(name)
+    let slugname = this.slugifyPipe.transform(playername);
+    this.router.navigate(['/cricket/player', btoa(id), slugname]);
   }
 
 

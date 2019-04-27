@@ -77,11 +77,7 @@ export class CricketFixturesComponent implements OnInit {
   //get tournament info
 
   getFixturesInfo(id,name){
-    console.log(name);
-    
-    let slugname  =  this.slugifyPipe.transform(name);
-   
-    
+    let slugname  =  this.slugifyPipe.transform(name); 
     this.router.navigate(['/cricket/tournament',btoa(id),slugname]);
   }
 

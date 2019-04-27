@@ -27,9 +27,18 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .navbar-nav-container           { position: relative; left: 15px; transform: translateX(0%); -webkit-transform: translateX(0%); }
 
 }
+
 @media (min-width: 1200px) and (max-width: 1379px) {
     nav .navbar-brand               { padding: 6px 0px 6px 24px;}
     nav .navbar-brand:before        { left: 48px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    nav .navbar-brand               { padding: 6px 0px 6px 24px;}
+    nav .navbar-brand:before        { left: 48px; }
+    .navbar-nav .nav-link           { padding: 16px 8px; font-size: 14px; }
+    nav .navbar-brand img           { width: 160px;}
+
 }
 @media (max-width: 767px) {
     .header-live-slider .slider-item-inner                  { min-height: initial; }

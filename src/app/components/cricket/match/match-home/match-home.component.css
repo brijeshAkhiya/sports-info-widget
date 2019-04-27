@@ -1,0 +1,4 @@
+.scorecard-tables .common-table .table th       { text-transform: uppercase; }
+.bowler-table.common-table .table td            { width: 8%; }
+.bowler-table.common-table .table tr th:first-child,
+.bowler-table.common-table .table tr td:first-child        { padding-left: 2%; width: 40%; text-align: left; }

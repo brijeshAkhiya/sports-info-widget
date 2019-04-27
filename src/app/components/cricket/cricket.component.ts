@@ -14,9 +14,7 @@ export class CricketComponent implements OnInit {
   latestposts: any;
   popularvideos: any;
 
-  constructor(private sportsService: SportsService) {
-
-  }
+  constructor(private sportsService: SportsService) { }
 
   ngOnInit() {
     this.getPopularArticles();
