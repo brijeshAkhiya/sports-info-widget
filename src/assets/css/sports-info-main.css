@@ -169,7 +169,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-widget .cricket-list li:last-child      { padding: 0px; }
 .common-widget .cricket-list .title p           { margin-bottom: 12px; font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
 .common-widget .cricket-list .title p b         { color: #595959;}
-.common-widget .cricket-list .match-winner::after       { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background:url(../../assets/images/winner-cup.svg); vertical-align: middle; }
+.common-widget .cricket-list .match-winner::after       { content: ""; margin: 0px 5px 4px; display: inline-block; height: 14px; width: 14px; background: url(../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle; }
 .common-widget .cricket-list .match-info img    { margin: -3px 4px 0px 0px; width: 20px; display: inline-block;}
 .common-widget .cricket-list .match-info p      { margin-bottom: 12px; }
 .common-widget .cricket-list .result-line       { margin: 0px; font-size: 12px; line-height: 18px; font-family: 'IBM Plex Sans Condensed', sans-serif; }
@@ -189,7 +189,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Table Style ------- */
 .common-table                           { background: #fff; overflow: hidden; }
 .table-title                            { padding: 12px 16px; background: #3D3D3D; }
-.table-title h6                         { margin: 0px; line-height: 23px; color: #fff; }
+.table-title h6                         { margin: 0px; line-height: 23px; color: #A3A3A3; }
 .common-table table                     { margin: 0px; text-align: center; }
 .common-table .table tr                 { border-bottom: 1px solid #EBEBEB; }
 .common-table .table tbody tr:last-child{ border: none; }

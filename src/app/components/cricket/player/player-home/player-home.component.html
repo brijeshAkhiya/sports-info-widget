@@ -27,7 +27,7 @@
                     <p class="light-title">Batting Style</p>
                     <p>{{playerbasic?.batting_style}}</p>
                     <p class="light-title">Bowling Style</p>
-                    <p>{{playerbasic.bowling_style ? playerbasic.bowling_style : '-'}}</p>
+                    <p>{{playerbasic?.bowling_style ? playerbasic.bowling_style : '-'}}</p>
                     <p class="light-title">Role</p>
                     <p>{{playerbasic?.type}}</p>
                   </div>
@@ -63,12 +63,12 @@
               <h4>Major Teams</h4>
               <div class="team-list">
                 <div class="row row-size12">
-                  <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let item of playerprofile.teams">
+                  <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let item of playerprofile?.teams">
                     <div class="team-item rounded-box common-shadow d-flex">
                       <div class="team-flag"><img src="../../../../../assets/images/flag-ind.svg" alt="team-flag"></div>
                       <div class="team-name">
-                        <h4>{{item.name}}</h4>
-                        <h5>{{item.abbreviation}}</h5>
+                        <h4>{{item?.name}}</h4>
+                        <h5>{{item?.abbreviation}}</h5>
                       </div>
                     </div>
                   </div>
@@ -102,20 +102,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Test</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>38.06</td>
-                        <td>96.23</td>
-                        <td>183*</td>
-                        <td>30</td>
-                        <td>50</td>
-                        <td>1624</td>
-                        <td>104</td>
+                      <tr *ngFor="let item of playerstats ">
+                        <td>{{item.type}}</td>
+                        <td>{{item.batting.matches}}</td>
+                        <td>{{item.batting.innings}}</td>
+                        <td>{{item.batting.runs}}</td>
+                        <td>{{item.batting.average}}</td>
+                        <td>{{item.batting.strike_rate}}</td>
+                        <td>{{item.batting.highest_score}}</td>
+                        <td>{{item.batting.hundreds}}</td>
+                        <td>{{item.batting.fifties}}</td>
+                        <td>{{item.batting.fours}}</td>
+                        <td>{{item.batting.sixes}}</td>
                       </tr>
-                      <tr>
+                      <!-- <tr>
                         <td>ODI</td>
                         <td>120</td>
                         <td>10</td>
@@ -179,7 +179,7 @@
                         <td>50</td>
                         <td>1624</td>
                         <td>104</td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -207,21 +207,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Test</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>120</td>
-                        <td>38.08</td>
-                        <td>5</td>
-                        <td>35.5</td>
-                        <td>36.0</td>
-                        <td>5.12</td>
-                        <td>12</td>
-                        <td>-</td>
+                      <tr *ngFor="let item of playerstats">
+                        <td>{{item.type}}</td>
+                        <td>{{item.bowling.matches}}</td>
+                        <td>{{item.bowling.innings}}</td>
+                        <td>{{item.bowling.overs}}</td>
+                        <td>{{item.bowling.maidens}}</td>
+                        <td>{{item.bowling.runs}}</td>
+                        <td>{{item.bowling.wickets}}</td>
+                        <td>{{item.bowling.average}}</td>
+                        <td>{{item.bowling.strike_rate}}</td>
+                        <td>{{item.bowling.economy}}</td>
+                        <td>{{item.bowling.five_wicket_hauls}}</td>
+                        <td>{{item.bowling.ten_wicket_hauls}}</td>
                       </tr>
-                      <tr>
+                      <!-- <tr>
                         <td>ODI</td>
                         <td>120</td>
                         <td>10</td>
@@ -290,7 +290,7 @@
                         <td>5.12</td>
                         <td>12</td>
                         <td>-</td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -300,7 +300,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
+              <!-- <div class="common-news-list">
                 <div class="common-news-item d-flex common-shadow">
                   <div class="common-news-img common-zoom-container">
                     <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
@@ -383,7 +383,9 @@
                 </div>
               </div>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div>
+              </div> -->
+               <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams"></app-common-news-list>
+            
             </ng-template>
           </ngb-tab>
         </ngb-tabset>

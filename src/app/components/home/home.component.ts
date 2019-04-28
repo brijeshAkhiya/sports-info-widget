@@ -24,8 +24,10 @@ export class HomeComponent implements OnInit {
   matchresults: any;
   period_score: any;
   matchfixtures: any;
-  commonnewstype: any = ''
-  constructor(private renderer2: Renderer2, private sportsService: SportsService) { }
+  commonnewstype: any ;
+  constructor(private renderer2: Renderer2, private sportsService: SportsService) { 
+    this.commonnewstype = 'any'
+  }
 
   ngOnInit() {
     this.getBannerPost();

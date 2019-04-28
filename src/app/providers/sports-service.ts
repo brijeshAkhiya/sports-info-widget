@@ -30,6 +30,12 @@ export class SportsService {
       return this.http.post(environment.apiUrl + environment.version + '/posts/recent', data);
    }
 
+   //get related posts / specific id wise -common
+
+   getrelatedpost(data) {
+      return this.http.post(environment.apiUrl + environment.version + '/posts/related', data);
+   }
+
    //get banner posts - HOME 
 
    getbannerpost() {
@@ -44,9 +50,9 @@ export class SportsService {
    }
 
    //get header slider 
-   getheaderslider(){
+   getheaderslider() {
       return this.http.get(environment.apiUrl + environment.version + '/upperslider');
-      
+
    }
 
    //get 3 days match results - HOME
@@ -81,41 +87,46 @@ export class SportsService {
 
    //get all fixtures - CRICKET
 
-   getcricketfixtures(){
+   getcricketfixtures() {
       return this.http.get(environment.apiUrl + environment.version + '/cricket/fixtures/all');
 
    }
 
    //get cricket tournament leaders
 
-   gettournamentleaders(id){
+   gettournamentleaders(id) {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/leaders`);
    }
 
    //get cricket tournament points table
 
-   gettournamentpointstable(id){
+   gettournamentpointstable(id) {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/point-table`);
    }
 
    //get tournament teams
 
-   gettournamentteams(id){
+   gettournamentteams(id) {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/teams`);
    }
 
    //get tournament fixtures
 
-   gettournamentfixtures(id){
+   gettournamentfixtures(id) {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/fixtures`);
+   }
+
+   //get tournament results 
+   gettournamentresults(id) {
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/results`);
    }
 
    //get player profile 
 
-   getplayerprofile(id){
+   getplayerprofile(id) {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/player/${id}`);
 
    }
 
-   
+
 }

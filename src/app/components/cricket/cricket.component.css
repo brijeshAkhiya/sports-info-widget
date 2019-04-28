@@ -20,9 +20,11 @@
 .schedule-tour-list .schedule-item      { padding-bottom: 16px; overflow: hidden; position: relative;}
 .schedule-item .match-desc              { width: 200px;}
 .schedule-item .match-teams             { width: calc(100% - 208px); }
-.schedule-tour-list .schedule-item *:last-child        { margin-bottom: 0px; }
+.schedule-tour-list .schedule-item *:last-child         { margin-bottom: 0px; }
 .schedule-tour-list h6,
-.schedule-tour-list .complete-match h5  { margin-bottom: 4px; font-size: 16px; line-height: 20px; color: #292929; font-weight: 700; }
+.schedule-tour-list .complete-match h5                  { margin-bottom: 4px; font-size: 16px; line-height: 20px; color: #292929; font-weight: 700; }
+.schedule-tour-list .complete-match h5.winner:after     { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background:url(../../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle; }
+
 .schedule-tour-list .schedule-item h5   { color: #292929; }
 .schedule-tour-list h6                  { margin-bottom: 1px; color: #292929; font-weight: 600; }
 .match-teams .vs-block h6               { margin: 0px 28px; color: #CCCCCC; }

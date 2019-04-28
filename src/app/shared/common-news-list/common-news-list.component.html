@@ -1,5 +1,5 @@
 <div class="common-news-list">
-    <div class="common-news-item d-flex common-shadow" *ngFor="let post of recentposts | slice:0:4">
+    <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts | slice:0:4">
       <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
         <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
       </div>

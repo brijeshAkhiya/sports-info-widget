@@ -8,12 +8,21 @@ import { SportsService } from '../../providers/sports-service';
   styleUrls: ['./common-news-list.component.css']
 })
 export class CommonNewsListComponent implements OnInit {
-  recentposts: any;
+  posts: any;
   @Input() type: any;
+  @Input() reqparams: {};
   constructor(private sportsService: SportsService) { }
 
   ngOnInit() {
-    this.getRecentPosts(this.type);
+     if (this.reqparams) { 
+      this.posts = []
+      this.getRelatedPosts(this.reqparams)
+    }
+    else if(this.type == 'any'){
+      this.posts = []
+      this.getRecentPosts(this.type);
+    }
+
   }
 
 
@@ -26,7 +35,19 @@ export class CommonNewsListComponent implements OnInit {
     }
     this.sportsService.getrecentpost(data).subscribe((res) => {
       if (res['data']) {
-        this.recentposts = res['data'];
+        this.posts = res['data'];
+      }
+    })
+  }
+
+  //get related posts / specific id 
+
+  getRelatedPosts(data) {
+    this.sportsService.getrelatedpost(data).subscribe((res) => {
+      if (res['data']) {
+        this.posts = res['data'];
+        console.log('data', this.posts);
+
       }
     })
   }
