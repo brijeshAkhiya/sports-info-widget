@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SlugifyPipe } from '../../../../pipes/slugpipe';
 
 @Component({
   selector: 'app-tournament-teams',
@@ -12,7 +13,7 @@ export class TournamentTeamsComponent implements OnInit {
   teamsname: any;
   widget1title = 'Current Series';
   widget1type = 'currentseries'
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.parent.snapshot.params.id)
@@ -29,6 +30,13 @@ export class TournamentTeamsComponent implements OnInit {
         })
       }
     })
+  }
+
+  //get team info 
+
+  teamInfo(id,name){
+    let slugname = this.slugifyPipe.transform(name);
+    this.router.navigate(['/cricket/team', btoa(id), slugname]);
   }
 
 }
