@@ -31,9 +31,7 @@ export class CricketHomeComponent implements OnInit {
    getCricketSeries() {
     this.sportsService.getcurrentseries().subscribe((res) => {
       if (res['data']) {
-        this.cricketseries = res['data']
-        console.log(this.cricketseries);
-        
+        this.cricketseries = res['data']        
       }
     })
   }

@@ -34,27 +34,10 @@ export class MainHeaderComponent implements OnInit {
   slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
   sliderdata: any;
   sliderresults = [];
+  isapply: boolean = false;
 
 
   constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService) {
-    // this.tinySliderConfig = {
-    //   arrowKeys: true,
-    //   nav: false,
-    //   items: 1,
-    //   mouseDrag: true,
-    //   autoHeight: true,
-    //   responsive: {
-    //     1400: {
-    //       items: 4
-    //     },
-    //     1200: {
-    //       items: 3
-    //     },
-    //     768: {
-    //       items: 2
-    //     }
-    //   }
-    // };
   }
 
 
@@ -148,5 +131,6 @@ export class MainHeaderComponent implements OnInit {
 
     })
   }
+
 
 }

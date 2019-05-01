@@ -7,8 +7,8 @@ import { Store } from '@ngrx/store'
 import * as fromRoot from './app-reducer'
 import * as Auth from './store/auth/auth.actions';
 //vibrant import 
-declare var Vibrant: any;
-import '../assets/js/vibrant.js';
+// declare var Vibrant: any;
+// import '../assets/js/vibrant.js';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -71,33 +71,33 @@ export class AppComponent implements OnInit {
     })
   }
 
-  myfn(){
-    const ele:HTMLImageElement = <HTMLImageElement>document.getElementById('img');
+  // myfn(){
+  //   const ele:HTMLImageElement = <HTMLImageElement>document.getElementById('img');
   
-    var vibrant = new Vibrant(ele);
-    var swatches = vibrant.swatches()
+  //   var vibrant = new Vibrant(ele);
+  //   var swatches = vibrant.swatches()
     
     
-    for (var swatch in swatches){
-        if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "Vibrant"){
-            console.log(swatch, swatches[swatch].getHex())
+  //   for (var swatch in swatches){
+  //       if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "Vibrant"){
+  //           console.log(swatch, swatches[swatch].getHex())
 
-            this.vibrantcolor = swatches[swatch].getHex();
-            console.log('vibrant',this.vibrantcolor);
+  //           this.vibrantcolor = swatches[swatch].getHex();
+  //           console.log('vibrant',this.vibrantcolor);
             
 
-        }
-        if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "DarkMuted"){
-          console.log(swatch, swatches[swatch].getHex())
+  //       }
+  //       if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "DarkMuted"){
+  //         console.log(swatch, swatches[swatch].getHex())
 
-          this.mutedcolor = swatches[swatch].getHex();
-          console.log('muted',this.mutedcolor);
+  //         this.mutedcolor = swatches[swatch].getHex();
+  //         console.log('muted',this.mutedcolor);
           
 
-      }
-           // console.log('111',swatches[swatch].getHex()[0]);
-    }    
-  }
+  //     }
+  //          // console.log('111',swatches[swatch].getHex()[0]);
+  //   }    
+  // }
 
 
 }

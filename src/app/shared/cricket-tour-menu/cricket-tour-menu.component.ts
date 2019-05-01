@@ -10,7 +10,7 @@ export class CricketTourMenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-   console.log(this.dataToChild);
+ 
    
     
   }

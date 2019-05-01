@@ -2,14 +2,25 @@
 /* CSS Document */
 
 /******* Fonts Face CSS Start **********/
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700');
+/* @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Muli:600,700,800,900,900i');
-/********* Fonts Face CSS End **********/
+@import url('https://fonts.googleapis.com/css?family=Muli:600,700,800,900,900i'); */
+@font-face {
+    font-family: 'ibm_plex_sansregular';
+    src: url('../fonts/ibmplexsans-regular-webfont.eot');
+    src: url('../fonts/ibmplexsans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ibmplexsans-regular-webfont.woff2') format('woff2'),
+         url('../fonts/ibmplexsans-regular-webfont.woff') format('woff'),
+         url('../fonts/ibmplexsans-regular-webfont.svg#ibm_plex_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
+}
+/********* Fonts Face CSS End **********/
+/* font-family: 'IBM Plex Sans', sans-serif; font-family: 'ibm_plex_sansregular'; */
 /******* Common Element CSS Start ******/
 *                       { margin: 0px; padding: 0px; outline: none; }
-body                    { font-family: 'IBM Plex Sans', sans-serif; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252;}
+body                    { font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252;}
 .clear                  { clear:both;}
 img                     { border: 0px;}
 ul,ol                   { list-style: none;}
@@ -38,6 +49,7 @@ img                     { max-width: 100%; }
 
 /* -------- Color Style ------- */
 .white-text             { color: #fff; }
+.light-text             { color: #A3A3A3; }
 .theme-color            { color: #ED1A33;}
 .light-blue-color       { color: #2990F8; }
 .theme-bg               { background: #ED1A33; }
@@ -58,7 +70,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .theme-btn.down-btn span:before { left: 0%; top: -100%; }
 .theme-btn.down-btn:hover span:before  { left: 0px; top: 0px; }
 .theme-btn.down-btn:hover span:after   { left: 0px; top: 100%; }
-.add-to-fav-btn         { display: inline-block; min-width: 196px; padding: 18px 33px 18px 56px; background: transparent; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #A3A3A3; font-weight: 500; border: 2px solid #E8E8E8; border-radius: 2em; position: relative;}
+.add-to-fav-btn         { display: inline-block; min-width: 196px; padding: 18px 33px 18px 56px; background: transparent; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #A3A3A3; font-weight: 500; border: 2px solid #E8E8E8; border-radius: 2em; position: relative; flex-shrink: 0; -webkit-flex-shrink: 0;}
 .add-to-fav-btn span    { display: block; }
 .add-to-fav-btn:before  { content: ""; display: block; position: absolute; left: 8px; top: 8px; width: 40px; height: 40px; background: #E1E1E1 url(../../assets/images/fav-star-white.svg) no-repeat center center / 20px 20px; border-radius: 50%; transition: all 0.4s ease-in-out 0s; -webkit-transition: all 0.4s ease-in-out 0s; }
 .add-to-fav-btn.added,
@@ -144,7 +156,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /* -------- Common Tab ------- */
 .common-tabs > .nav-tabs                          { background: #fff; border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
-.common-tabs > .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; background: transparent; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden;} 
+.common-tabs > .nav-tabs .nav-link                { margin: 0px 16px; padding: 0px 0px 12px; background: transparent; display: block; font-size: 16px; line-height: 20px; font-weight: 500; color: #292929; border: none; position: relative; opacity: 0.3; overflow: hidden; white-space: nowrap; } 
 .common-tabs > .nav-tabs .nav-link:after          { content: ""; position: absolute; display: block; width: 100%; left: 0px; bottom: -6px; border-bottom: 6px solid #ED1A33; border-left: 2px solid transparent; border-right: 2px solid transparent; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out;}
 .common-tabs > .nav-tabs .nav-link.active         { background: transparent; border: none; opacity: 1; }
 .common-tabs > .nav-tabs .nav-link.active:after   { bottom: 0px; }
@@ -324,6 +336,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Tab Widget Block ------- */
     .tab-widget.common-widget .widget-title     { padding: 6px; }
     .tab-widget .nav-tabs .nav-link             { padding: 0px 0px 14px;}
+/* -------- Common Tab ------- */
+    .common-tabs > .nav-tabs .nav-link          { margin: 0px 14px; font-size: 15px; }
 /* -------- Common Stories Widget Block ------- */
     .common-stories-widget                      { padding: 16px 20px 20px;}
     .common-stories-widget li a:not([href]):not([tabindex]) { margin-bottom: 10px; padding-bottom: 10px;}
@@ -337,7 +351,6 @@ button                  { outline: none !important; cursor: pointer; transition:
 @media (min-width: 576px) and (max-width: 767px) {
 /* -------- Popular Articles Section ------- */
     .popular-list-4 [class*="col-"]:nth-child(3) .popular-item      { margin-bottom: 0px;}
-
 }
 
 @media (max-width: 575px) {
@@ -353,7 +366,6 @@ button                  { outline: none !important; cursor: pointer; transition:
     .popular-main-item .item-img        { height: 240px;}
     .common-popular-list .item-desc     { min-height: initial; }
 /* -------- Common Tab ------- */
-    .common-tabs > .nav-tabs .nav-link            { font-size: 15px; }
     .common-tabs.black-filled > .nav-tabs         { padding-top: 10px;}
 /* -------- Filled Tab ------- */
     .filled-tabs > .nav-tabs .nav-link          { padding: 11px 11px 10px; font-size: 14px; line-height: 18px;}

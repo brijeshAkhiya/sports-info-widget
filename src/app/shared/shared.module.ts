@@ -11,6 +11,7 @@ import { MomentModule } from 'ngx-moment';
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
 import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
 import { PointstableWidgetComponent } from './pointstable-widget/pointstable-widget.component';
+import { SplitPipe } from '../pipes/stringsplitpipe';
 
 @NgModule({
     imports: [
@@ -19,8 +20,8 @@ import { PointstableWidgetComponent } from './pointstable-widget/pointstable-wid
         NgxTinySliderModule,
         MomentModule
     ],
-    declarations: [TruncatePipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent],
-    providers: [TruncatePipe, SportsService],
-    exports: [NgxTinySliderModule, TruncatePipe,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent]
+    declarations: [TruncatePipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe],
+    providers: [TruncatePipe, SportsService,SplitPipe],
+    exports: [NgxTinySliderModule, TruncatePipe,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe]
 })
 export class SharedModule { }

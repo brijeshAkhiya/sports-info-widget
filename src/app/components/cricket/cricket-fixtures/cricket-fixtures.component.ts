@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../providers/sports-service';
+import { distinctUntilChanged } from 'rxjs/operators';
+
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { SlugifyPipe } from '../../../pipes/slugpipe';
@@ -27,7 +29,7 @@ export class CricketFixturesComponent implements OnInit {
   //get current cricket series 
 
   getCricketSeries() {
-    this.sportsService.getcricketfixtures().subscribe((res) => {
+    this.sportsService.getcricketfixtures().pipe(distinctUntilChanged()).subscribe((res) => {
       if (res['data']) {
         this.cricketseries = res['data']
         this.cricketseries.map((data) => {

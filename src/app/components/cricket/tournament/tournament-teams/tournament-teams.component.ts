@@ -36,7 +36,7 @@ export class TournamentTeamsComponent implements OnInit {
 
   teamInfo(id,name){
     let slugname = this.slugifyPipe.transform(name);
-    this.router.navigate(['/cricket/team', btoa(id), slugname]);
+    this.router.navigate(['/cricket/team',btoa(this.tournamentid),btoa(id), slugname]);
   }
 
 }

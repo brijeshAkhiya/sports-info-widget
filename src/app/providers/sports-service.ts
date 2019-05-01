@@ -13,6 +13,7 @@ export interface Config {
 @Injectable()
 export class SportsService {
    configs: Observable<any>;
+   currentseries: Observable<any>;
    constructor(public http: HttpClient) { }
 
 
@@ -81,14 +82,30 @@ export class SportsService {
 
    //get current cricket tournaments - CRICKET Page API --------------->
 
-   getcurrentseries() {
-      return this.http.get(environment.apiUrl + environment.version + '/cricket/tournaments/current');
+   getcurrentseries():Observable<any> {
+       return this.http.get(environment.apiUrl + environment.version + '/cricket/tournaments/current');
+   //    if (!this.currentseries) {
+   //       this.configs = this.http.get(environment.apiUrl + environment.version + '/cricket/tournaments/current').pipe(
+   //          map(data => data),
+   //          publishReplay(1), // this tells Rx to cache the latest emitted
+   //          refCount() // and this tells Rx to keep the Observable alive as long as there are any Subscribers
+   //       );
+   // }
+   // return this.currentseries;
    }
-
    //get all fixtures - CRICKET
 
-   getcricketfixtures() {
-      return this.http.get(environment.apiUrl + environment.version + '/cricket/fixtures/all');
+   getcricketfixtures() :Observable<Config[]>{
+     // return this.http.get(environment.apiUrl + environment.version + '/cricket/fixtures/all');
+
+     if (!this.configs) {
+      this.configs = this.http.get(environment.apiUrl + environment.version + '/cricket/fixtures/all').pipe(
+         map(data => data),
+         publishReplay(1), // this tells Rx to cache the latest emitted
+         refCount() // and this tells Rx to keep the Observable alive as long as there are any Subscribers
+      );
+   }
+   return this.configs;
 
    }
 
@@ -119,6 +136,12 @@ export class SportsService {
    //get tournament results 
    gettournamentresults(id) {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${id}/results`);
+   }
+
+   //get team fixtures 
+
+   getteamfixtures(id) {
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/team/${id}/fixtures`);
    }
 
    //get player profile 

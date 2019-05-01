@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SportsService } from '../../providers/sports-service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
    //get current cricket series 
 
    getCricketSeries() {
-    this.sportsService.getcurrentseries().subscribe((res) => {
+    this.sportsService.getcurrentseries().pipe(distinctUntilChanged()).subscribe((res) => {
       if (res['data']) {
         this.dataitems = res['data']        
       }
@@ -52,10 +53,7 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
   }
 
   route(id,type,name){
-    console.log(id);
     
-    console.log(type);
-    console.log(name);
     
     
   }

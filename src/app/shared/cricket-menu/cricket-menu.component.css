@@ -11,4 +11,6 @@
 .sub-navabar ul li a:focus:after,
 .sub-navabar ul li a.active:after   { bottom: 0px; }
 .sub-navbar-container               { margin-left: 32px; position: relative;}
+.sub-navabar ul li a.special-nav-item       { color: #FFC800; }
+.sub-navabar ul li a.special-nav-item:after { display: none; }
 /* #subnav-pointer     			    { display: block; position: absolute; width: 40px; opacity: 1; left: 0px; bottom: 0px; height: 0px; border-bottom: 6px solid red !important; border-left: 4px solid transparent !important; border-right: 4px solid transparent !important; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;} */

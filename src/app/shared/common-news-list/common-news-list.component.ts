@@ -46,7 +46,6 @@ export class CommonNewsListComponent implements OnInit {
     this.sportsService.getrelatedpost(data).subscribe((res) => {
       if (res['data']) {
         this.posts = res['data'];
-        console.log('data', this.posts);
 
       }
     })

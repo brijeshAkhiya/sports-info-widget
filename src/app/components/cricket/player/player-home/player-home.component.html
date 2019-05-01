@@ -25,11 +25,11 @@
                   </div>
                   <div class="info-col">
                     <p class="light-title">Batting Style</p>
-                    <p>{{playerbasic?.batting_style}}</p>
+                    <p>{{playerbasic?.batting_style | stringunder}}</p>
                     <p class="light-title">Bowling Style</p>
-                    <p>{{playerbasic?.bowling_style ? playerbasic.bowling_style : '-'}}</p>
+                    <p>{{playerbasic?.bowling_style | stringunder}}</p>
                     <p class="light-title">Role</p>
-                    <p>{{playerbasic?.type}}</p>
+                    <p>{{playerbasic?.type | stringunder}}</p>
                   </div>
                   <div class="info-col">
                     <p class="light-title">jersey no</p>
@@ -103,7 +103,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of playerstats ">
-                        <td>{{item.type}}</td>
+                        <td>{{item.type | stringunder}}</td>
                         <td>{{item.batting.matches}}</td>
                         <td>{{item.batting.innings}}</td>
                         <td>{{item.batting.runs}}</td>
@@ -208,7 +208,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of playerstats">
-                        <td>{{item.type}}</td>
+                        <td>{{item.type | stringunder}}</td>
                         <td>{{item.bowling.matches}}</td>
                         <td>{{item.bowling.innings}}</td>
                         <td>{{item.bowling.overs}}</td>

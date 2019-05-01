@@ -14,6 +14,7 @@ export class TournamentHomeComponent implements OnInit {
   bowlingleaders: any;
   pointstable: any;
   teamsname: any;
+  tournamentname: any;
 
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) { }
 
@@ -50,6 +51,7 @@ export class TournamentHomeComponent implements OnInit {
   getTournamentTeams(){
     this.sportsService.gettournamentteams(this.tournamentid).subscribe((res) => {
       if (res['data']) {
+        this.tournamentname = res['data'].season_name;
         res['data'].groups.map((data) => {
             this.teamsname = data.teams
         })

@@ -57,7 +57,7 @@ const childRoutes: Routes = [
                 component: MatchHomeComponent
             },
             {
-                path: 'team/:id/:slug',
+                path: 'team/:tournamentid/:teamid/:slug',
                 component: TeamsHomeComponent
             },
             {

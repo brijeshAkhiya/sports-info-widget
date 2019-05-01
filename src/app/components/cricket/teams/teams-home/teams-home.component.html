@@ -10,119 +10,39 @@
           <ngb-tab>
             <ng-template ngbTabTitle>About</ng-template>
             <ng-template ngbTabContent>
-                About
+              About
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabTitle>
+              <div (click)="getarticles()">News</div>
+            </ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-news-video common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle>Fixtures</ng-template>
+            <ng-template ngbTabTitle><div (click)="getTeamFixtures()">Fixtures</div></ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <div class="schedule-month d-flex">
+                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
                   <div class="month-title">
                     <div class="sticky-month">
-                      <h5>31st <br>May 2019</h5>
+                      <h5>{{item.day}}</h5>
                     </div>
                   </div>
                   <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow" *ngFor="let item of item.data">
                       <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">08:00 PM</p>
+                        <!-- <h6>Match 2</h6> -->
+                        <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="time-line">{{item.scheduled | date:'h:mm a'}}</p>
                       </div>
                       <div class="match-teams d-flex align-items-center">
                         <div class="match-team d-flex align-items-center">
                           <div class="team-info">
-                            <h5>WI</h5>
+                            <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
                           <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
                         </div>
@@ -132,32 +52,7 @@
                         <div class="match-team d-flex align-items-center">
                           <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
                           <div class="team-info">
-                            <h5>IND</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
-                    </div>
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
-                      <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">08:00 PM</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>WI</h5>
-                          </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                          <div class="team-info">
-                            <h5>IND</h5>
+                            <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
                         </div>
                       </div>
@@ -165,65 +60,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="schedule-month d-flex">
-                  <div class="month-title">
-                    <div class="sticky-month">
-                      <h5>1st <br>June 2019</h5>
-                    </div>
-                  </div>
-                  <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
-                      <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">08:00 PM</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>WI</h5>
-                          </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                          <div class="team-info">
-                            <h5>IND</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
-                    </div>
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
-                      <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">03:00 PM</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>WI</h5>
-                          </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                          <div class="team-info">
-                            <h5>IND</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
-                    </div>
-                  </div>
-                </div>
+            
               </div>
             </ng-template>
           </ngb-tab>

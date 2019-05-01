@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>IPL 2019</h1>
+          <h1>{{tournamentname ? tournamentname : ''}}</h1>
           <button class="add-to-fav-btn added"><span>Add to favorites</span></button>
         </div>
         <ngb-tabset class="common-tabs">
@@ -173,7 +173,7 @@
             <ng-template ngbTabContent>
               <div class="popular-main-item common-shadow">
                 <div class="item-img common-zoom-container">
-                  <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-1.jpg)">
+                  <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
                   </div>
                 </div>
                 <div class="blog-desc">
@@ -335,7 +335,7 @@
             <ng-template ngbTabContent>
               <div class="popular-main-item common-shadow">
                 <div class="item-img common-zoom-container">
-                  <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb-2.jpg)">
+                  <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
                   </div>
                 </div>
                 <div class="blog-desc">

@@ -2,9 +2,20 @@
 .match-main-title                           { flex-wrap: wrap; -webkit-flex-wrap: wrap;}
 .match-main-title h1,
 .match-main-title .match-update             { margin-bottom: 32px; }
-.match-main-title .match-update p           { margin-bottom: 4px; }
+.match-main-title .match-update p           { line-height: 24px; margin-bottom: 4px; font-weight: 500; }
 .match-main-title .current-match            { width: 100%; border-bottom: 2px solid #ECECEC; }
-.match-main-title .current-teams            { width: 70%; }
+.match-main-title .current-teams            { padding-right: 32px; width: 58%; }
+.match-main-title .current-team             { margin-bottom: 24px; }
+.match-main-title .current-team img         { margin-right: 12px; height: 40px; width: auto; border-radius: 2px; box-shadow: 0px 2px 3px rgba(0,0,0,0.14), 0px 3px 15px rgba(0,0,0,0.11); -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.14), 0px 3px 15px rgba(0,0,0,0.11);  }
+.match-main-title .current-team h4          { font-family: 'IBM Plex Sans', sans-serif; text-transform: uppercase; }
+.match-main-title .current-team h4.score    { color: rgba(41,41,41,0.5); font-weight: 600; }
+.match-main-title .current-team h4.winner:after{ content: ""; margin: 0px 5px 4px; display: inline-block; height: 28px; width: 28px; background:url(../../../../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle;  }
+.match-main-title .match-win-player         { padding-left: 32px; border-left: 2px solid #ECECEC;}
+.match-main-title .player-pic               { margin-right: 16px; width: 96px; }
+.match-main-title .player-pic img           { border-radius: 2px; }
+.match-main-title .player-pic .player-info  { border-radius: 2px; flex: 1; -webkit-flex: 1; -ms-flex: 1;}
+.match-main-title .match-win-player p       { margin-bottom: 8px; font-size: 12px; line-height: 15px; font-weight: 600; text-transform: uppercase; }
+.match-main-title .match-win-player p.player-team   { font-size: 14px; line-height: 18px; color: #7A7A7A; font-weight: 500; }
 /* -------- Commentary Section ------- */
 .match-counter                                  { text-align: center; }
 .match-counter p                                { font-size: 18px; line-height: 23px; color: rgba(41,41,41,0.5); }
@@ -61,3 +72,58 @@
 .bowler-table.common-table .table td                    { width: 8%; }
 .bowler-table.common-table .table tr th:first-child,
 .bowler-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
+
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+/* -------- Facts & Figures Section ------- */
+    .probability-section .team-block img            { height: 86px; }
+    .probability-section .team-block h3             { margin: 0px 32px; font-size: 48px; line-height: 68px; }
+}
+
+@media (max-width: 1199px) {
+/* -------- Match Title List ------- */
+    .match-main-title .match-update p           { font-size: 14px; line-height: 20px;}
+    .match-main-title .current-teams            { padding-right: 12px;}
+    .match-main-title .current-team h4          { font-size: 18px; line-height: 26px;}
+    .match-main-title .current-team h4.winner:after{ height: 20px; width: 20px;   }
+    .match-main-title .match-win-player         { padding-left: 12px;}
+    .match-main-title .player-pic               { margin-right: 12px; width: 84px; }
+/* -------- Commentary Section ------- */
+    .commentary-title span                      { margin-right: 16px; font-size: 16px; line-height: 22px; }
+/* -------- Facts & Figures Section ------- */
+    .probability-section .team-block img        { height: 72px; }
+    .probability-section .team-block h3         { margin: 0px 24px; font-size: 32px; line-height: 42px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+/* -------- Commentary Section ------- */
+    .this-over-block ul li                      { width: 48px; height: 48px; font-size: 18px; line-height: 48px; }
+
+}
+
+@media (max-width: 767px) {
+/* -------- Match Title List ------- */
+    .match-main-title h1,
+    .match-main-title .match-update             { margin-bottom: 16px; }
+    .match-main-title .current-team             { margin-bottom: 12px; }
+    .match-main-title .match-win-player         { padding-left: 0px; border-left: none;}
+    .match-main-title .player-pic               { width: 74px; }
+/* -------- Commentary Section ------- */
+    .match-main-title .current-match            { flex-direction: column; -webkit-flex-direction: column; }
+    .match-main-title .current-teams            { padding: 0px; width: 100%; }
+    .this-over-block ul li                      { width: 36px; height: 36px; font-size: 14px; line-height: 36px; }
+    .commentary-title span                      { margin-right: 14px; font-size: 14px; line-height: 20px; }
+/* -------- Facts & Figures Section ------- */
+    .venue-info p                               { font-size: 16px; line-height: 22px; }
+}
+
+@media (max-width: 767px) {
+/* -------- Match Title List ------- */
+    .match-main-title h1,
+    .match-main-title .match-update             { margin-bottom: 12px; }
+    .match-main-title .current-team             { margin-bottom: 8px; }
+    .match-main-title .match-win-player         {}
+    .match-main-title .player-pic               { width: 66px; }
+}

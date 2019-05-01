@@ -7,9 +7,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tournament-cricket.component.css']
 })
 export class TournamentCricketComponent implements OnInit {
-  master:any = 'ipl 2019'
+  master:any 
   constructor(private activatedRoute:ActivatedRoute) { 
-    console.log('ROUTEPRA',this.activatedRoute.snapshot.params.slug);
+    let name = this.activatedRoute.snapshot.params.slug
+    this.master =  name.replace(/-/g," ")
+    // var trigger = "88888-99-89";
+    // var regex = /^\(?([0-9]{5})\)?-?([0-9]{4})-?([0-9]{2})$/g;
+    // alert(regex.test('55555-8888-77'))
    }
 
   ngOnInit() {

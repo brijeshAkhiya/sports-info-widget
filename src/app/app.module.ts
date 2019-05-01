@@ -18,6 +18,7 @@ import { SlugifyPipe } from './pipes/slugpipe';
 import { SharedModule } from './shared/shared.module';
 import { MomentModule } from 'ngx-moment';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { SplitPipe } from './pipes/stringsplitpipe';
 
 let config = new AuthServiceConfig([
   {
@@ -57,6 +58,7 @@ export function provideConfig() {
   ],
   providers: [
     AuthService,
+    SplitPipe,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
