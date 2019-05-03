@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
 
@@ -16,7 +16,7 @@ export class TournamentFixturesComponent implements OnInit {
   tournamentresult: any;
   finalresultsdata: any;
 
-  constructor(private activatedroute: ActivatedRoute, private sportsService: SportsService, ) { }
+  constructor(private activatedroute: ActivatedRoute, private sportsService: SportsService,private router:Router) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.parent.snapshot.params.id) //get parent route params
@@ -85,6 +85,14 @@ export class TournamentFixturesComponent implements OnInit {
       })
       this.finalresultsdata = Object.keys(dateObj).map(day => ({ day, data: dateObj[day] }))
     })
+  }
+
+  //get match detail
+  matchDetail(id,team1,team2){
+    let teams =  team1.concat('-',team2)
+    console.log(teams);
+    
+    this.router.navigate(['/cricket/match',btoa(id),teams])
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { SportsService } from '../../providers/sports-service';
+import { SlugifyPipe } from '../../pipes/slugpipe';
 
 @Component({
   selector: 'app-cricket-menu',
@@ -16,8 +18,9 @@ export class CricketMenuComponent implements OnInit {
     { "name": 'Series', "id": "3" },
 
   ]
+  cricketseries: any;
 
-  constructor(private renderer2: Renderer2, private router: Router) { }
+  constructor(private renderer2: Renderer2, private router: Router,private sportsService:SportsService,private slugifyPipe: SlugifyPipe) { }
 
   ngOnInit() {
   }
@@ -39,8 +42,18 @@ export class CricketMenuComponent implements OnInit {
         this.router.navigate(['/cricket'])
       }
     },1000);
-   
   }
+
+
+    //get current cricket series 
+
+    getCricketSeries() {
+      this.sportsService.getcurrentseries().subscribe((res) => {
+        if (res['data']) {
+          this.cricketseries = res['data']           
+        }
+      })
+    }
 
   //dynamic routing
   routing(routerlink) {
@@ -50,6 +63,13 @@ export class CricketMenuComponent implements OnInit {
     else {
       this.router.navigate(['/'])
     }
+  }
+
+  //get tournament info
+
+  getournamentInfo(id,name){
+    let slugname  =  this.slugifyPipe.transform(name); 
+    this.router.navigate(['/cricket/tournament',btoa(id),slugname]);
   }
 
 }

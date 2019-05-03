@@ -31,6 +31,7 @@
     "core-js": "^2.4.1",
     "http-server": "^0.11.1",
     "moment": "^2.24.0",
+    "ng2-adsense": "^5.4.2",
     "ngx-moment": "^3.4.0",
     "ngx-owl-carousel-o": "^1.1.2",
     "ngx-scrollbar": "^4.1.1",

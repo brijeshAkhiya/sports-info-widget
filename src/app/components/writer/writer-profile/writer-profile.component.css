@@ -1,0 +1,32 @@
+.writer-profile .writer-pic             { width: 168px; flex-shrink: 0; -webkit-flex-shrink: 0;}
+.writer-profile .writer-info            { margin-left: 24px; padding: 12px 16px 10px; background: #fff; justify-content: space-between; -webkit-justify-content: space-between; }
+.writer-profile h1                      { margin-bottom: 4px; font-size: 32px; line-height: 40px; }
+.writer-profile p                       { margin-bottom: 12px; font-size: 14px; line-height: 20px; font-weight: 500; color: #7A7A7A; }
+.writer-profile p b                     { font-weight: 700; color: #292929; }
+.writer-profile .view-info              { margin: 0px; text-align: right; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+    .writer-profile h1                  { font-size: 24px; line-height: 32px; }
+}
+
+@media (max-width: 1199px) {
+    .writer-profile .writer-pic         { width: 136px;}
+    .writer-profile h1                  { font-size: 20px; line-height: 28px; }
+}
+
+@media (max-width: 767px) {
+    .writer-profile .writer-pic         { width: 124px;}
+    .writer-profile .writer-info        { margin-left: 16px; padding-bottom: 52px; }
+    .writer-profile h1                  { font-size: 19px; line-height: 26px; }
+}
+
+@media (max-width: 575px) {
+    .writer-profile                     { flex-direction: column; -webkit-flex-direction: column; }
+    .writer-profile .writer-pic         { margin-bottom: 16px; width: 80px;}
+    .writer-profile .writer-info        { margin-left: 0px;}
+    .writer-profile h1                  { font-size: 18px; line-height: 24px; }
+    .writer-profile p                   { font-size: 13px; line-height: 19px;}
+
+}

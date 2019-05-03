@@ -26,7 +26,7 @@
 .match-counter-block p .time-unit               { padding-right: 12px;}
 .match-counter-block p:last-child .time-unit    { padding-right: 0px;}
 .this-over-block                                { margin-bottom: 24px; padding-bottom: 24px; font-family: 'IBM Plex Sans Condensed', sans-serif; text-transform: uppercase; border-bottom: 2px solid #ECECEC; }
-.this-over-block h5                             { margin: 0px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
+.this-over-block h5                             { margin: 0px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .this-over-block ul                             { margin: 0px; }
 .this-over-block ul li                          { margin-left: 16px; display: inline-block; width: 56px; height: 56px; background: #3D3D3D; font-size: 20px; line-height: 56px; font-weight: 700; color: #fff; text-align: center; border-radius: 50%; }
 .commentary-item                                { margin-bottom: 24px; padding: 16px 32px; background: #fff; }
@@ -34,7 +34,7 @@
 .commentary-item ul li                          { margin-bottom: 16px; }
 .commentary-item ul li:last-child               { margin-bottom: 0px; }
 .commentary-item p                              { margin: 0px; }
-.commentary-item .over-ball                     { padding-right: 4px; width: 58px; line-height: 34px; font-weight: 500; }
+.commentary-item .over-ball                     { padding-right: 4px; min-width: 58px; line-height: 34px; font-weight: 500; }
 .commentary-item .over-run                      { width: 34px; height: 34px; background: #ECECEC; line-height: 34px; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; text-align: center; border-radius: 50%;}
 .commentary-item .over-run.hightlight           { background: #ED1A33; color: #fff; }
 .commentary-item .commentary-line               { margin-top: 5px; padding-left: 24px; line-height: 24px; color: #3D3D3D; flex: 1; -webkit-flex: 1; -ms-flex: 1; }
@@ -108,22 +108,32 @@
     .match-main-title h1,
     .match-main-title .match-update             { margin-bottom: 16px; }
     .match-main-title .current-team             { margin-bottom: 12px; }
+    .match-main-title .current-team img         { height: 32px;}
     .match-main-title .match-win-player         { padding-left: 0px; border-left: none;}
     .match-main-title .player-pic               { width: 74px; }
+
 /* -------- Commentary Section ------- */
+    .match-counter p                            { font-size: 16px; line-height: 20px;  }
+    .match-counter-block                        { width: 220px; height: 220px; border-width: 6px;  }
+    .match-counter-block p .time-num            { font-size: 40px; line-height: 54px; }
+    .match-counter-block p .time-unit           { padding-right: 10px;}
     .match-main-title .current-match            { flex-direction: column; -webkit-flex-direction: column; }
     .match-main-title .current-teams            { padding: 0px; width: 100%; }
     .this-over-block ul li                      { width: 36px; height: 36px; font-size: 14px; line-height: 36px; }
+    .commentary-item                            { padding: 16px; }
     .commentary-title span                      { margin-right: 14px; font-size: 14px; line-height: 20px; }
 /* -------- Facts & Figures Section ------- */
     .venue-info p                               { font-size: 16px; line-height: 22px; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 575px) {
 /* -------- Match Title List ------- */
-    .match-main-title h1,
-    .match-main-title .match-update             { margin-bottom: 12px; }
-    .match-main-title .current-team             { margin-bottom: 8px; }
-    .match-main-title .match-win-player         {}
     .match-main-title .player-pic               { width: 66px; }
+/* -------- Commentary Section ------- */
+    .this-over-block                            { padding-bottom: 20px; }
+    .this-over-block h5                         { margin: 5px 0px; -ms-flex-item-align: start; align-self: flex-start; -webkit-align-self: flex-start; }
+    .this-over-block ul li                      { margin: 0px 0px 4px 10px; width: 32px; height: 32px; font-size: 12px; line-height: 32px;}
+    .commentary-item ul li                      { margin-bottom: 10px; }
+    .commentary-item .over-ball                 { min-width: 46px;}
+    .commentary-item .commentary-line           { margin-top: 3px; padding-left: 16px; line-height: 20px;}
 }

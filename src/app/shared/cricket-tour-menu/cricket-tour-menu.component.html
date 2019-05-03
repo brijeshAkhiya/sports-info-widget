@@ -1,18 +1,16 @@
 <div class="sub-navabar">
-    <div class="container">
-      <div class="sub-navabar-inner d-flex">
-        <a class="submenu-back" [routerLink]="['/cricket']">{{dataToChild}}</a>
-        <div class="sub-navbar-container" id="sub-navbar-nav">
-          <ul #subnavbarmenu>
-            <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-            <li><a [routerLink]="['./fixtures']" routerLinkActive="active">Fixtures</a></li>
-            <li><a [routerLink]="['./teams']" routerLinkActive="active">Teams</a></li>
-            <li><a [routerLink]="['./stats']" routerLinkActive="active">Stats</a></li>
-             <li><a [routerLink]="['./standings']" routerLinkActive="active">Standings</a></li>
-          </ul>
-          <div id="subnav-pointer" #subnavpointer></div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
+  <div class="sub-navabar-inner d-flex">
+    <a class="submenu-back" [routerLink]="['/cricket']">{{dataToChild}}</a>
+    <div class="sub-navbar-container" id="sub-navbar-nav">
+      <ul #subnavbarmenu class="subnavbarmenu">
+        <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a [routerLink]="['./fixtures']" routerLinkActive="active">Fixtures</a></li>
+        <li><a [routerLink]="['./teams']" routerLinkActive="active">Teams</a></li>
+        <li><a [routerLink]="['./stats']" routerLinkActive="active">Stats</a></li>
+        <li><a [routerLink]="['./standings']" routerLinkActive="active">Standings</a></li>
+      </ul>
+      <div id="subnav-pointer" #subnavpointer></div>
     </div>
+    <div class="clearfix"></div>
   </div>
+</div>

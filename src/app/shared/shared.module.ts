@@ -12,13 +12,18 @@ import { CommonStoryWidgetComponent } from './common-story-widget/common-story-w
 import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
 import { PointstableWidgetComponent } from './pointstable-widget/pointstable-widget.component';
 import { SplitPipe } from '../pipes/stringsplitpipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         NgxTinySliderModule,
-        MomentModule
+        MomentModule,
+        NgbModule,
+        ReactiveFormsModule,
+        FormsModule,
     ],
     declarations: [TruncatePipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe],
     providers: [TruncatePipe, SportsService,SplitPipe],

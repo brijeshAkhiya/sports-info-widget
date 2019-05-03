@@ -13,6 +13,16 @@ footer .footer-social-links li a:hover  { opacity: 1;}
 footer .copyright                   { padding: 24px 0px; background: #121212; }
 footer .copyright p                 { margin: 0px; font-size: 18px; line-height: 23px; text-transform: capitalize; }
 
+/* -------- Favourite Block CSS ------- */
+.fav-btn                            { position: fixed; width: 80px; height: 80px; right: 32px; bottom: 24px; background: #FFC800 url(../../../assets/images/fav-star-white.svg) no-repeat center center / 40px 40px; border-radius: 50%; box-shadow: 0px 4px 16px rgba(229,160,1,0.6); -webkit-box-shadow: 0px 4px 16px rgba(229,160,1,0.6); border: none !important; z-index: 1; }
+.fav-btn:hover                      { box-shadow: none; -webkit-box-shadow: none; transform: rotate(360deg); -webkit-transform: rotate(360deg); }
+.fav-block                          { padding: 16px; width: 320px;background: #fff; position: fixed; right: 32px; bottom: 0px; border-radius: 4px 4px 0px 0px; z-index: 2;  }
+.fav-block .text-box                { padding: 10px 8px; width: 100%; font-size: 16px; line-height: 20px; font-weight: 500; border: 2px solid #EBEBEB; border-radius: 4px; }
+.fav-block .fav-list                { margin: 16px 0px 0px;}
+.fav-block .fav-list li             { display: inline-block}
+.fav-block .fav-list button         { margin: 0px 6px 6px 0px; padding: 7px; background: transparent; font-size: 14px; line-height: 18px; color: #292929; font-weight: 500; border-radius: 4px; border: 2px solid #EBEBEB;  }
+.fav-block .fav-list button.selected,
+.fav-block .fav-list button:hover   { background: #ED1A33; color: #fff; border-color: #ED1A33; }
 /***** Responsive CSS Start ******/
 
 @media (min-width: 992px) and (max-width: 1199px) {

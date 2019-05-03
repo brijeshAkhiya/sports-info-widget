@@ -151,5 +151,17 @@ export class SportsService {
 
    }
 
+   //get match probability
+   getmatchprobability(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/match/${id}/probablities`);
+
+   }
+
+   //get match timeline
+   getmatchtimeline(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/match/${id}/timeline`);
+
+   }
+
 
 }

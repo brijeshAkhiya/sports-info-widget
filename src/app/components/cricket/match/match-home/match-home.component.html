@@ -4,13 +4,25 @@
       <div class="content-col">
         <div
           class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>WI vs PAK</h1>
+          <h1>{{sportevent?.competitors[0].abbreviation}} vs {{sportevent?.competitors[1].abbreviation}}</h1>
           <div class="match-update">
-            <p class="light-text">Match 2, Oval, London | 30th May 2019</p>
-            <p>West Indies won the match by 99 runs</p>
+            <p class="light-text">{{sportevent?.venue.name}}, {{sportevent?.venue.city_name}} |
+              {{sportevent?.scheduled | date}}</p>
+            <p *ngIf="matchstatus == 'closed'">West Indies won the match by 99 runs</p>
           </div>
           <div class="current-match d-flex">
-            <div class="current-teams">
+            <div class="current-teams" *ngIf="matchstatus == 'not_started'">
+              <div class="current-team d-flex justify-content-between align-items-center">
+                <h4><img src="../../../../../assets/images/flag-wi.svg">{{sportevent?.competitors[0].abbreviation}}</h4>
+                <!-- <h4 class="score">192/4 (50.0 ov)</h4> -->
+              </div>
+              <div class="current-team d-flex justify-content-between align-items-center">
+                <h4><img src="../../../../../assets/images/flag-wi.svg">{{sportevent?.competitors[1].abbreviation}}</h4>
+                <!-- <h4 class="score">192/4 (50.0 ov)</h4> -->
+              </div>
+            </div>
+            <!--If match is ended-->
+            <div class="current-teams" *ngIf="matchstatus == 'closed'">
               <div class="current-team d-flex justify-content-between align-items-center">
                 <h4 class="winner"><img src="../../../../../assets/images/flag-wi.svg">WI</h4>
                 <h4 class="score">192/4 (50.0 ov)</h4>
@@ -20,14 +32,14 @@
                 <h4 class="score">192/4 (50.0 ov)</h4>
               </div>
             </div>
-            <div class="match-win-player d-flex">
+            <div class="match-win-player d-flex" *ngIf="matchstatus == 'closed'">
               <div class="player-pic">
                 <img src="../../../../../assets/images/jasprit-bumrah.jpg">
               </div>
               <div class="player-info">
-                  <p class="light-text">Player of the Match</p>
-                  <h5 class="theme-color">Chris Gayle</h5>
-                  <p class="player-team">West Indies</p>
+                <p class="light-text">Player of the Match</p>
+                <h5 class="theme-color">Chris Gayle</h5>
+                <p class="player-team">West Indies</p>
               </div>
             </div>
           </div>
@@ -36,15 +48,16 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <div class="match-counter">
+              <div class="match-counter"  *ngIf="matchstatus == 'not_started'">
                 <p>Match starts in ...</p>
                 <div class="match-counter-block d-flex align-items-center justify-content-center">
-                  <p><span class="time-num">05:</span><span class="time-unit">H</span></p>
-                  <p><span class="time-num">45:</span><span class="time-unit">M</span></p>
-                  <p><span class="time-num">32</span><span class="time-unit">S</span></p>
+                  <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>
+                  <p><span class="time-num">{{minutes}}:</span><span class="time-unit">M</span></p>
+                  <p><span class="time-num">{{seconds}}</span><span class="time-unit">S</span></p>
                 </div>
               </div>
               <div class="ad-block"><img src="../../../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <div *ngIf="matchstatus != 'not_started'">
               <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
                 <div class="table-responsive">
                   <table class="table">
@@ -236,10 +249,13 @@
                 </ul>
               </div>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+              </div>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle>Facts & Figures</ng-template>
+            <ng-template ngbTabTitle>
+              <div (click)="getMatchProbability()">Facts & Figures</div>
+            </ng-template>
             <ng-template ngbTabContent>
               <h4 class="line-title">Probability</h4>
               <div class="probability-section rounded-box common-shadow">
@@ -377,7 +393,7 @@
               </section>
             </ng-template>
           </ngb-tab>
-          <ngb-tab>
+          <ngb-tab *ngIf="matchstatus != 'not_started'">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs">
@@ -809,90 +825,10 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-news-video common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div>
+
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
+
             </ng-template>
           </ngb-tab>
           <ngb-tab>

@@ -143,7 +143,6 @@
     .schedule-tour-list p                   { margin-bottom: 5px; font-size: 13px; line-height: 18px;}
 /* -------- Teams List ------- */  
     .team-list .team-item                   { margin-bottom: 16px; padding: 16px; }
-
 }
 
 @media (max-width: 575px) {

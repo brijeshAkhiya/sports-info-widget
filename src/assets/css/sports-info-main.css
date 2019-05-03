@@ -172,6 +172,9 @@ button                  { outline: none !important; cursor: pointer; transition:
 .filled-tabs > .nav-tabs .nav-item:last-child .nav-link     { border: none; border-radius: 0px 4px 4px 0px;}
 .filled-tabs > .nav-tabs .nav-link.active       { background: #fff; color: #ED1A33; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); }
 
+/* -------- Writer Tab ------- */
+.common-tabs.writer-tab > .nav-tabs             { margin: -31px 0px 24px 192px;}
+
 /* -------- Tab Widget Block ------- */
 .tab-widget.common-widget .widget-title         { padding: 8px; border-bottom: none; }
 .tab-widget .common-tabs .nav-tabs              { margin: 0px; padding: 0px 4px; text-align: center; border-bottom: 2px solid #F5F5F5; justify-content: space-around !important; -webkit-justify-content: space-around !important; }
@@ -269,6 +272,9 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Common News Section ------- */
     .common-news-list .common-news-img          { width: 220px; height: 181px;}
     .common-news-list .common-news-desc         { width: calc(100% - 220px);}
+/* -------- Writer Tab ------- */
+    .common-tabs.writer-tab > .nav-tabs             { margin: -31px 0px 24px 160px;}
+    .common-tabs.writer-tab > .nav-tabs .nav-link   { margin: 0px 14px; font-size: 15px;}
 
 }
 
@@ -297,6 +303,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Common News Section ------- */
     .common-news-list .common-news-img          { width: 220px; height: 181px;}
     .common-news-list .common-news-desc         { width: calc(100% - 220px);}
+/* -------- Writer Tab ------- */
+    .common-tabs.writer-tab > .nav-tabs         { margin: -31px 0px 24px 160px;}
 
 }
 
@@ -343,9 +351,12 @@ button                  { outline: none !important; cursor: pointer; transition:
     .common-stories-widget li a:not([href]):not([tabindex]) { margin-bottom: 10px; padding-bottom: 10px;}
 /* -------- Filled Tab ------- */
     .filled-tabs > .nav-tabs .nav-link          { padding: 14px 12px 13px; font-size: 16px; line-height: 20px;}
+/* -------- Writer Tab ------- */
+    .common-tabs.writer-tab > .nav-tabs             { margin: -31px 0px 24px 140px; }
+    .common-tabs.writer-tab > .nav-tabs .nav-link   { margin: 0px 14px; font-size: 15px;}
 /* -------- Table Style ------- */
     .common-table .table th,
-    .common-table .table td                     { padding: 10px 4px 10px; font-size: 13px; line-height: 16px; }
+    .common-table .table td                         { padding: 10px 4px 10px; font-size: 13px; line-height: 16px; }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
@@ -366,9 +377,12 @@ button                  { outline: none !important; cursor: pointer; transition:
     .popular-main-item .item-img        { height: 240px;}
     .common-popular-list .item-desc     { min-height: initial; }
 /* -------- Common Tab ------- */
+    .common-tabs > .nav-tabs .nav-link          { margin: 0px 12px; }
     .common-tabs.black-filled > .nav-tabs         { padding-top: 10px;}
 /* -------- Filled Tab ------- */
     .filled-tabs > .nav-tabs .nav-link          { padding: 11px 11px 10px; font-size: 14px; line-height: 18px;}
+/* -------- Writer Tab ------- */
+    .common-tabs.writer-tab > .nav-tabs         { margin: -31px 0px 24px 0px;}
 /* -------- Table Style ------- */
     .common-table .table th,
     .common-table .table td                     { padding: 10px 4px 10px; font-size: 12px; line-height: 16px; }
