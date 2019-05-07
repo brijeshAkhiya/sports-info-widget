@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>close-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24"></rect>
+        <rect id="path-3" x="0" y="0" width="24" height="24"></rect>
+    </defs>
+    <g id="close-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Rectangle" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+        <g id="Group-41" mask="url(#mask-2)">
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <use id="Rectangle" fill="#D8D8D8" opacity="0" xlink:href="#path-3"></use>
+            <g id="Group-40" mask="url(#mask-4)" fill="#FFFFFF">
+                <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(3.000000, 3.000000)">
+                    <rect id="Rectangle" x="7" y="0" width="4" height="18"></rect>
+                    <rect id="Rectangle-Copy-4" transform="translate(9.000000, 9.000000) rotate(-270.000000) translate(-9.000000, -9.000000) " x="7" y="0" width="4" height="18"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

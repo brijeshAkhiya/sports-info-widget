@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>facebook-share-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="facebook-share-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-17" transform="translate(1.000000, 1.000000)">
+            <rect id="Rectangle" fill="#ECECEC" opacity="0" x="0" y="0" width="48" height="48"></rect>
+            <circle id="Oval" stroke="#000000" stroke-width="2" fill-rule="nonzero" cx="23.8292389" cy="23.8292389" r="23.8292389"></circle>
+            <path d="M29.8198938,24.7620531 L25.5678584,24.7620531 L25.5678584,40.3395398 L19.1256637,40.3395398 L19.1256637,24.7620531 L16.0617345,24.7620531 L16.0617345,19.2875044 L19.1256637,19.2875044 L19.1256637,15.7448496 C19.1256637,13.211469 20.3290619,9.24446018 25.6252035,9.24446018 L30.3971681,9.26442478 L30.3971681,14.5784071 L26.9347965,14.5784071 C26.3668673,14.5784071 25.5682832,14.8621593 25.5682832,16.0706549 L25.5682832,19.2926018 L30.3827257,19.2926018 L29.8198938,24.7620531 Z" id="Path" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

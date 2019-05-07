@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogListComponent } from './blog-list/blog-list.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
 
 
 const childRoutes: Routes = [
   {
     path: '',
     component:BlogListComponent
+  },
+  {
+    path:':id/:type',
+    component:BlogViewComponent
   }
 ];
 

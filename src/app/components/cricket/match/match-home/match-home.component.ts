@@ -16,11 +16,34 @@ export class MatchHomeComponent implements OnInit {
   hours: any;
   minutes: any;
   seconds: any;
+  team1id: any;
+  team2id: any;
+  nextmatches: { day: string; data: any }[];
+  lastmatches: any;
+  matchesresultdata: any;
+  venuedetails: any;
+  manofthematch: any;
+  scorecards: any;
+  teams: { id: string; data: any; }[];
+  teamsbytype: { qualifier: string; data: any; }[];
+  matcheventstatus: any;
+  battingteam1 = []
+  battingteam2 = []
+  bowlingteam1 = [];
+  bowlingteam2 = [];
   constructor(
     private activatedroute: ActivatedRoute,
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    private router: Router
   ) {
     this.matchid = atob(this.activatedroute.snapshot.params.id);
+    this.activatedroute.params.subscribe(params => {
+      // if (params.categoryId != Id) {
+
+      this.matchid = atob(params.id);
+     // this.getMatchTimeline();
+      // }
+    });
   }
 
   ngOnInit() {
@@ -31,10 +54,44 @@ export class MatchHomeComponent implements OnInit {
   getMatchTimeline() {
     this.sportsService.getmatchtimeline(this.matchid).subscribe(res => {
       if (res["data"]) {
-        console.log(res["data"]);
+        console.log('data',res["data"]);
         this.matchstatus = res["data"]["sport_event_status"].status;
         this.sportevent = res["data"]["sport_event"];
-        console.log(this.sportevent);
+        this.venuedetails = res["data"]["sport_event"]["venue"];
+        //teams array
+        let obj = {};
+        let team_arr = res["data"]["sport_event"]["competitors"];
+        team_arr.map(single => {
+          if (!obj[single.id]) {
+            obj[single.id] = [];
+          }
+        });
+        team_arr.map(data => {
+          obj[data.id].push(data);
+        });
+        
+        this.teams = Object.keys(obj).map(id => ({ id, data: obj[id] }))  
+        let team_arr2 = []
+        let obj2 = {}
+        team_arr2 = res["data"]["sport_event"]["competitors"];
+        team_arr2.map(single => {
+          if (!obj2[single.qualifier]) {
+            obj2[single.qualifier] = [];
+          }
+        });
+        team_arr2.map(data => {
+          obj2[data.qualifier].push(data);
+        });
+
+        this.teamsbytype = Object.keys(obj2).map(qualifier => ({ qualifier, data: obj2[qualifier] }))
+
+        console.log("arrnew", Object.keys(obj2).map(qualifier => ({ qualifier, data: obj2[qualifier] })));
+
+        this.team1id = res["data"]["sport_event"]["competitors"][0].id;
+        this.team2id = res["data"]["sport_event"]["competitors"][1].id;
+        if (this.team1id && this.team2id) {
+          this.getTeamvsTeamdata(); //to get team vs team data
+        }
 
         if (this.matchstatus == "not_started") {
           let date = this.sportevent.scheduled;
@@ -52,7 +109,37 @@ export class MatchHomeComponent implements OnInit {
               this.seconds = Math.floor((time % (1000 * 60)) / 1000);
             }
           }, 1000);
-        } else if (this.matchstatus == "closed") {
+        } 
+        else if (this.matchstatus == "closed") {
+          this.manofthematch = res["data"]["statistics"]["man_of_the_match"];
+          this.matcheventstatus = res["data"]["sport_event_status"];
+          this.scorecards = res["data"]["statistics"]["innings"];
+      
+          this.scorecards.map((data)=>{
+            
+            
+            if(data.batting_team == this.teams[0].data[0].id){
+                this.battingteam1.push(data)
+            }
+            else if(data.batting_team == this.teams[1].data[0].id){
+              this.battingteam2.push(data)
+            }
+
+            if(data.bowling_team == this.teams[0].data[0].id){
+             
+              
+              this.bowlingteam1.push(data)
+            }
+            else if(data.bowling_team == this.teams[1].data[0].id){
+              this.bowlingteam2.push(data)
+            }
+          })
+          this.battingteam1 = this.battingteam1[0]['teams'][0]['statistics']['batting']
+          this.battingteam2 = this.battingteam2[0]['teams'][0]['statistics']['batting']
+          this.bowlingteam1 = this.bowlingteam1[0]['teams'][1]['statistics']['bowling']
+          this.bowlingteam2 = this.bowlingteam2[0]['teams'][1]['statistics']['bowling']
+          console.log(this.bowlingteam1);
+          
         }
       }
     });
@@ -61,9 +148,7 @@ export class MatchHomeComponent implements OnInit {
   //get match probablities
 
   getMatchProbability() {
-    this.sportsService.getmatchprobability(this.matchid).subscribe(res => {
-      console.log(res["data"]);
-    });
+    this.sportsService.getmatchprobability(this.matchid).subscribe(res => {});
   }
 
   //get match related articles
@@ -72,5 +157,79 @@ export class MatchHomeComponent implements OnInit {
       eSport: "Cricket",
       aIds: [this.matchid]
     };
+  }
+  //get team versus team data
+
+  getTeamvsTeamdata() {
+    this.sportsService
+      .getteamvsteamdata(this.team1id, this.team2id)
+      .subscribe(res => {
+        if (res["data"]) {
+          let dataarray = [];
+          dataarray = res["data"].next_meetings;
+          let dateObj = {};
+          dataarray.map(data => {
+            let mdate = moment(data.scheduled).format("Do MMMM YYYY");
+            if (!dateObj[mdate]) {
+              dateObj[mdate] = [];
+            }
+          });
+          dataarray.map(data => {
+            let mdate = moment(data.scheduled).format("Do MMMM YYYY");
+            dateObj[mdate].push(data);
+          });
+          this.nextmatches = Object.keys(dateObj).map(day => ({
+            day,
+            data: dateObj[day]
+          }));
+
+          //map array for last matches
+
+          this.lastmatches = res["data"].last_meetings;
+          this.lastmatches = this.lastmatches.map(data => {
+            let obj = {};
+            let team_arr = data["competitors"];
+            team_arr.map(single => {
+              obj[single.qualifier] = single;
+            });
+            let period_score_new = data["period_scores"];
+            if (period_score_new) {
+              period_score_new = period_score_new.map(singleb => {
+                if (singleb.away_score !== undefined) {
+                  return { ...singleb, team: obj["away"], teamFlag: true };
+                } else {
+                  return { ...singleb, team: obj["home"], teamFlag: false };
+                }
+              });
+              return { ...data, period_score_new };
+            } else {
+              return data;
+            }
+          });
+        }
+
+        //sort matches result by date
+        let dateObj = {};
+        this.lastmatches.map(data => {
+          let mdate = moment(data.scheduled).format("Do MMMM YYYY");
+          if (!dateObj[mdate]) {
+            dateObj[mdate] = [];
+          }
+        });
+        this.lastmatches.map(data => {
+          let mdate = moment(data.scheduled).format("Do MMMM YYYY");
+          dateObj[mdate].push(data);
+        });
+        this.matchesresultdata = Object.keys(dateObj).map(day => ({
+          day,
+          data: dateObj[day]
+        }));
+      });
+  }
+
+  //get match detail
+  matchDetail(id, team1, team2) {
+    let teams = team1.concat("-", team2);
+    this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
 }

@@ -8,8 +8,9 @@
           <div class="match-update">
             <p class="light-text">{{sportevent?.venue.name}}, {{sportevent?.venue.city_name}} |
               {{sportevent?.scheduled | date}}</p>
-            <p *ngIf="matchstatus == 'closed'">West Indies won the match by 99 runs</p>
+            <p *ngIf="matchstatus == 'closed'">{{matcheventstatus.match_result}}</p>
           </div>
+          <!--If match not started-->
           <div class="current-match d-flex">
             <div class="current-teams" *ngIf="matchstatus == 'not_started'">
               <div class="current-team d-flex justify-content-between align-items-center">
@@ -23,13 +24,20 @@
             </div>
             <!--If match is ended-->
             <div class="current-teams" *ngIf="matchstatus == 'closed'">
-              <div class="current-team d-flex justify-content-between align-items-center">
-                <h4 class="winner"><img src="../../../../../assets/images/flag-wi.svg">WI</h4>
-                <h4 class="score">192/4 (50.0 ov)</h4>
+              <div class="current-team d-flex justify-content-between align-items-center"
+                *ngFor="let item of teamsbytype |slice:0:1">
+                <h4 [ngClass]="{'winner': matcheventstatus.winner_id == item.data[0].id}"><img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
+                </h4>
+                <h4 class="score" *ngIf="matcheventstatus.period_scores[0].home_score && item.qualifier == 'home'">
+                  {{matcheventstatus.period_scores[0].display_score}}({{matcheventstatus.period_scores[0].display_overs}}
+                  ov)</h4>
               </div>
-              <div class="current-team d-flex justify-content-between align-items-center">
-                <h4><img src="../../../../../assets/images/flag-wi.svg">PAK</h4>
-                <h4 class="score">192/4 (50.0 ov)</h4>
+              <div class="current-team d-flex justify-content-between align-items-center"
+                *ngFor="let item of teamsbytype |slice:1:2">
+                <h4 [ngClass]="{'winner': matcheventstatus.winner_id == item.data[0].id}"><img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}</h4>
+                <h4 class="score" *ngIf="matcheventstatus.period_scores[1].away_score && item.qualifier == 'away'">
+                  {{matcheventstatus.period_scores[1].display_score}}({{matcheventstatus.period_scores[1].display_overs}}
+                  ov)</h4>
               </div>
             </div>
             <div class="match-win-player d-flex" *ngIf="matchstatus == 'closed'">
@@ -38,8 +46,8 @@
               </div>
               <div class="player-info">
                 <p class="light-text">Player of the Match</p>
-                <h5 class="theme-color">Chris Gayle</h5>
-                <p class="player-team">West Indies</p>
+                <h5 class="theme-color">{{manofthematch[0]?.name | split}}</h5>
+                <!-- <p class="player-team">West Indies</p> -->
               </div>
             </div>
           </div>
@@ -48,7 +56,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <div class="match-counter"  *ngIf="matchstatus == 'not_started'">
+              <div class="match-counter" *ngIf="matchstatus == 'not_started'">
                 <p>Match starts in ...</p>
                 <div class="match-counter-block d-flex align-items-center justify-content-center">
                   <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>
@@ -58,197 +66,204 @@
               </div>
               <div class="ad-block"><img src="../../../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
               <div *ngIf="matchstatus != 'not_started'">
-              <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th class="text-uppercase">Batsman</th>
-                        <th>R</th>
-                        <th>B</th>
-                        <th>4s</th>
-                        <th>6s</th>
-                        <th>SRR</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Sarfaraz Ahmed (C)</td>
-                        <td>120</td>
-                        <td>130</td>
-                        <td>6</td>
-                        <td>8</td>
-                        <td>110.23</td>
-                      </tr>
-                      <tr>
-                        <td>Sarfaraz Ahmed</td>
-                        <td>120</td>
-                        <td>130</td>
-                        <td>6</td>
-                        <td>8</td>
-                        <td>110.23</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box"
+                  *ngIf="matchstatus == 'live'">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="text-uppercase">Batsman</th>
+                          <th>R</th>
+                          <th>B</th>
+                          <th>4s</th>
+                          <th>6s</th>
+                          <th>SRR</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Sarfaraz Ahmed (C)</td>
+                          <td>120</td>
+                          <td>130</td>
+                          <td>6</td>
+                          <td>8</td>
+                          <td>110.23</td>
+                        </tr>
+                        <tr>
+                          <td>Sarfaraz Ahmed</td>
+                          <td>120</td>
+                          <td>130</td>
+                          <td>6</td>
+                          <td>8</td>
+                          <td>110.23</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-              <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Bowler</th>
-                        <th>Ov</th>
-                        <th>M</th>
-                        <th>R</th>
-                        <th>W</th>
-                        <th>ECO</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Jason Holder</td>
-                        <td>4.3</td>
-                        <td>1</td>
-                        <td>56</td>
-                        <td>1</td>
-                        <td>6.23</td>
-                      </tr>
-                      <tr>
-                        <td>Jason Holder</td>
-                        <td>4</td>
-                        <td>1</td>
-                        <td>66</td>
-                        <td>1</td>
-                        <td>6.23</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box"
+                  *ngIf="matchstatus == 'live'">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Bowler</th>
+                          <th>Ov</th>
+                          <th>M</th>
+                          <th>R</th>
+                          <th>W</th>
+                          <th>ECO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Jason Holder</td>
+                          <td>4.3</td>
+                          <td>1</td>
+                          <td>56</td>
+                          <td>1</td>
+                          <td>6.23</td>
+                        </tr>
+                        <tr>
+                          <td>Jason Holder</td>
+                          <td>4</td>
+                          <td>1</td>
+                          <td>66</td>
+                          <td>1</td>
+                          <td>6.23</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-              <div class="this-over-block d-flex align-items-center">
-                <h5>This over :</h5>
-                <ul>
-                  <li>4WD</li>
-                  <li>0</li>
-                  <li>1</li>
-                </ul>
-              </div>
-              <div class="commentary-item common-shadow rounded-box">
-                <ul>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front foot
-                    </p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run hightlight">4WD</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                </ul>
-              </div>
-              <div class="commentary-title">
-                <span>End of over : 25</span>
-                <span>PAK : 90/8</span>
-                <span>RR : 8.00</span>
-                <span>Summary : 6 Runs 0 Wickets</span>
-              </div>
-              <div class="commentary-item common-shadow rounded-box">
-                <ul>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front foot
-                    </p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run hightlight">4WD</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front foot
-                    </p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run hightlight">4WD</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                </ul>
-              </div>
-              <div class="commentary-title">
-                <span>End of over : 25</span>
-                <span>PAK : 90/8</span>
-                <span>RR : 8.00</span>
-                <span>Summary : 6 Runs 0 Wickets</span>
-              </div>
-              <div class="commentary-item common-shadow rounded-box">
-                <ul>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front foot
-                    </p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run hightlight">4WD</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front foot
-                    </p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run hightlight">4WD</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                  <li class="d-flex">
-                    <p class="over-ball">25.3</p>
-                    <p class="over-run">1</p>
-                    <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
-                      front foot driving, to extra cover for no runs, fielded by Rahane.</p>
-                  </li>
-                </ul>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+                <div class="this-over-block d-flex align-items-center" *ngIf="matchstatus == 'live'">
+                  <h5>This over :</h5>
+                  <ul>
+                    <li>4WD</li>
+                    <li>0</li>
+                    <li>1</li>
+                  </ul>
+                </div>
+                <div class="commentary-item common-shadow rounded-box">
+                  <ul>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front
+                        foot
+                      </p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run hightlight">4WD</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="commentary-title">
+                  <span>End of over : 25</span>
+                  <span>PAK : 90/8</span>
+                  <span>RR : 8.00</span>
+                  <span>Summary : 6 Runs 0 Wickets</span>
+                </div>
+                <div class="commentary-item common-shadow rounded-box">
+                  <ul>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front
+                        foot
+                      </p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run hightlight">4WD</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front
+                        foot
+                      </p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run hightlight">4WD</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="commentary-title">
+                  <span>End of over : 25</span>
+                  <span>PAK : 90/8</span>
+                  <span>RR : 8.00</span>
+                  <span>Summary : 6 Runs 0 Wickets</span>
+                </div>
+                <div class="commentary-item common-shadow rounded-box">
+                  <ul>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front
+                        foot
+                      </p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run hightlight">4WD</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Gopal to Uthappa, no run, length on off stump, blocked on the front
+                        foot
+                      </p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run hightlight">4WD</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                    <li class="d-flex">
+                      <p class="over-ball">25.3</p>
+                      <p class="over-run">1</p>
+                      <p class="commentary-line">Ben Stokes to Shubman Gill. Back of a length, outside off stump on the
+                        front foot driving, to extra cover for no runs, fielded by Rahane.</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
               </div>
             </ng-template>
           </ngb-tab>
@@ -274,111 +289,43 @@
               <section class="last-meetings-section">
                 <h4 class="line-title">Last meetings</h4>
                 <div class="schedule-list schedule-tour-list">
-                  <div class="schedule-month d-flex">
+                  <div class="schedule-month d-flex" *ngFor="let item of matchesresultdata">
                     <div class="month-title">
                       <div class="sticky-month">
-                        <h5>30th <br>May 2019</h5>
+                        <h5>{{item.day}}</h5>
                       </div>
                     </div>
                     <div class="schedule-items">
-                      <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow">
+                      <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
+                        *ngFor="let item of item.data">
                         <div class="match-desc">
-                          <h6>WI VS IND</h6>
-                          <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                          <p class="result-line">South Africa won by 2 wickets.</p>
+                          <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
+                          <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
+                          <p class="result-line">{{item.match_result}}</p>
                         </div>
                         <div class="match-teams d-flex align-items-center">
-                          <div class="match-team d-flex align-items-center">
-                            <div class="team-info">
-                              <h5 class="winner">WI</h5>
-                              <p>192/4 (50.0 ov)</p>
+                          <div class="match-team d-flex align-items-center"
+                            *ngFor="let item of item.period_score_new | slice:0:1">
+                            <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
+                              <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
+                              <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                             </div>
                             <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
                           </div>
                           <div class="vs-block">
                             <h6>vs</h6>
                           </div>
-                          <div class="match-team d-flex align-items-center">
+                          <div class="match-team d-flex align-items-center"
+                            *ngFor="let item of item.period_score_new | slice:1:2">
                             <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                            <div class="team-info">
-                              <h5>IND</h5>
-                              <p>192/4 (50.0 ov)</p>
+                            <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
+                              <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
+                              <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                             </div>
                           </div>
                         </div>
-                        <a class="details-btn" routerLink=""><span>Details</span></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="schedule-month d-flex">
-                    <div class="month-title">
-                      <div class="sticky-month">
-                        <h5>30th <br>May 2019</h5>
-                      </div>
-                    </div>
-                    <div class="schedule-items">
-                      <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow">
-                        <div class="match-desc">
-                          <h6>WI VS IND</h6>
-                          <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                          <p class="result-line">South Africa won by 2 wickets.</p>
-                        </div>
-                        <div class="match-teams d-flex align-items-center">
-                          <div class="match-team d-flex align-items-center">
-                            <div class="team-info">
-                              <h5>WI</h5>
-                              <p>192/4 (50.0 ov)</p>
-                            </div>
-                            <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                          </div>
-                          <div class="vs-block">
-                            <h6>vs</h6>
-                          </div>
-                          <div class="match-team d-flex align-items-center">
-                            <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                            <div class="team-info">
-                              <h5 class="winner">IND</h5>
-                              <p>192/4 (50.0 ov)</p>
-                            </div>
-                          </div>
-                        </div>
-                        <a class="details-btn" routerLink=""><span>Details</span></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="schedule-month d-flex">
-                    <div class="month-title">
-                      <div class="sticky-month">
-                        <h5>30th <br>May 2019</h5>
-                      </div>
-                    </div>
-                    <div class="schedule-items">
-                      <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow">
-                        <div class="match-desc">
-                          <h6>WI VS IND</h6>
-                          <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                          <p class="result-line">South Africa won by 2 wickets.</p>
-                        </div>
-                        <div class="match-teams d-flex align-items-center">
-                          <div class="match-team d-flex align-items-center">
-                            <div class="team-info">
-                              <h5>WI</h5>
-                              <p>192/4 (50.0 ov)</p>
-                            </div>
-                            <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                          </div>
-                          <div class="vs-block">
-                            <h6>vs</h6>
-                          </div>
-                          <div class="match-team d-flex align-items-center">
-                            <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                            <div class="team-info">
-                              <h5>IND</h5>
-                              <p>192/4 (50.0 ov)</p>
-                            </div>
-                          </div>
-                        </div>
-                        <a class="details-btn" routerLink=""><span>Details</span></a>
+                        <a class="details-btn"
+                          (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                       </div>
                     </div>
                   </div>
@@ -387,9 +334,11 @@
               <h4 class="line-title">Venue Details</h4>
               <section class="venue-info rounded-box common-shadow">
                 <img src="../../../../../assets/images/map-thumb.jpg">
-                <p><span>Venue :</span>Buffalo Park, East London, South Africa</p>
-                <p><span>Capacity :</span>Buffalo Park, East London, South Africa</p>
-                <p><span>End names :</span>Buffalo Park, East London, South Africa</p>
+                <p><span>Venue :</span>{{venuedetails?.name}}, {{venuedetails?.city_name}},
+                  {{venuedetails?.country_name}}</p>
+                <p><span>Capacity :</span>{{venuedetails?.capacity}}</p>
+                <p><span>End names :</span>{{venuedetails?.bowling_ends[0].name}},
+                  {{venuedetails?.bowling_ends[1].name}}</p>
               </section>
             </ng-template>
           </ngb-tab>
@@ -397,8 +346,8 @@
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs">
-                <ngb-tab>
-                  <ng-template ngbTabTitle>West Indies</ng-template>
+                <ngb-tab *ngFor="let item of teamsbytype|slice:0:1">
+                  <ng-template ngbTabTitle >{{item.data[0].name}}</ng-template>
                   <ng-template ngbTabContent>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
                       <div class="table-responsive">
@@ -414,73 +363,21 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
+                            <tr *ngFor="let batting of battingteam1.players">
                               <td>
-                                Sarfaraz Ahmed (C)<p class="batsman-text">c Jason Holder b Chris Gayle</p>
+                                {{batting.name | split}}<p class="batsman-text">c Jason Holder b Chris Gayle</p>
                               </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
+                              <td>{{batting.statistics.runs ? batting.statistics.runs : '-'}}</td>
+                              <td>{{batting.statistics.balls_faced ? batting.statistics.balls_faced : '-'}}</td>
+                              <td>{{batting.statistics.fours ? batting.statistics.fours : '-'}}</td>
+                              <td>{{batting.statistics.sixes ? batting.statistics.sixes : '-'}}</td>
+                              <td>{{batting.statistics.strike_rate ? batting.statistics.strike_rate : '-'}}</td>
                             </tr>
                             <tr>
                               <td>
-                                Sarfaraz Ahmed<p class="batsman-text">c Jason Holder b Chris Gayle</p>
+                                Extras<p class="batsman-text">b - {{bowlingteam1.byes}}, w - {{bowlingteam1.wides}}, no - {{bowlingteam1.no_balls}})</p>
                               </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Sarfaraz Ahmed<p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Sarfaraz Ahmed<p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <b>Sarfaraz Ahmed</b>
-                                <p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <b>Sarfaraz Ahmed </b>
-                                <p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Extras<p class="batsman-text">b - 0, w - 3, no - 1, lb - 1, penalty - 0)</p>
-                              </td>
-                              <td>5</td>
+                              <td>{{bowlingteam1.extras}}</td>
                               <td colspan="4"></td>
                             </tr>
                             <tr>
@@ -491,12 +388,12 @@
                               <td><b>150</b></td>
                               <td colspan="4"></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                               <td colspan="6">
                                 <b>Did not bat : </b><span class="batsman-text"> Opi Watihana, Emiliya Perevalova, Opi
                                   Watihana, Emiliya Perevalova</span>
                               </td>
-                            </tr>
+                            </tr> -->
                           </tbody>
                         </table>
                       </div>
@@ -555,52 +452,20 @@
                             <tr>
                               <th>Bowler</th>
                               <th>Ov</th>
-                              <th>M</th>
+                              <th>DB</th>
                               <th>R</th>
                               <th>W</th>
                               <th>ECO</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4.3</td>
-                              <td>1</td>
-                              <td>56</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Chris Gayle</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
+                            <tr *ngFor="let bowling of bowlingteam1.players">
+                              <td>{{bowling.name | split}}</td>
+                              <td>{{bowling.statistics.overs_bowled ? bowling.statistics.overs_bowled : '-'}}</td>
+                              <td>{{bowling.statistics.dot_balls ? bowling.statistics.dot_balls : '-'}}</td>
+                              <td>{{bowling.statistics.runs_conceded ? bowling.statistics.runs_conceded : '-'}}</td>
+                              <td>{{bowling.statistics.wickets ? bowling.statistics.wickets : '-'}}</td>
+                              <td>{{bowling.statistics.economy_rate ? bowling.statistics.economy_rate : '-'}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -608,8 +473,8 @@
                     </div>
                   </ng-template>
                 </ngb-tab>
-                <ngb-tab>
-                  <ng-template ngbTabTitle>Pakistan</ng-template>
+                <ngb-tab *ngFor="let item of teamsbytype|slice:1:2">
+                  <ng-template ngbTabTitle >{{item.data[0].name}}</ng-template>
                   <ng-template ngbTabContent>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
                       <div class="table-responsive">
@@ -625,73 +490,21 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>
-                                Sarfaraz Ahmed (C)<p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>0</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
+                            <tr *ngFor="let batting of battingteam2.players">
+                                <td>
+                                    {{batting.name | split}}<p class="batsman-text">c Jason Holder b Chris Gayle</p>
+                                  </td>
+                                  <td>{{batting.statistics.runs ? batting.statistics.runs : '-'}}</td>
+                                  <td>{{batting.statistics.balls_faced ? batting.statistics.balls_faced : '-'}}</td>
+                                  <td>{{batting.statistics.fours ? batting.statistics.fours : '-'}}</td>
+                                  <td>{{batting.statistics.sixes ? batting.statistics.sixes : '-'}}</td>
+                                  <td>{{batting.statistics.strike_rate ? batting.statistics.strike_rate : '-'}}</td>
                             </tr>
                             <tr>
                               <td>
-                                Sarfaraz Ahmed<p class="batsman-text">c Jason Holder b Chris Gayle</p>
+                                Extras<p class="batsman-text">b - {{bowlingteam2.byes}}, w - {{bowlingteam2.wides}}, no - {{bowlingteam2.no_balls}})</p>
                               </td>
-                              <td>0</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Sarfaraz Ahmed<p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>0</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Sarfaraz Ahmed<p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>12</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <b>Sarfaraz Ahmed</b>
-                                <p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>12</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <b>Sarfaraz Ahmed </b>
-                                <p class="batsman-text">c Jason Holder b Chris Gayle</p>
-                              </td>
-                              <td>120</td>
-                              <td>130</td>
-                              <td>6</td>
-                              <td>8</td>
-                              <td>110.23</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                Extras<p class="batsman-text">b - 0, w - 3, no - 1, lb - 1, penalty - 0)</p>
-                              </td>
-                              <td>5</td>
+                              <td>{{bowlingteam2.extras}}</td>
                               <td colspan="4"></td>
                             </tr>
                             <tr>
@@ -766,53 +579,21 @@
                             <tr>
                               <th>Bowler</th>
                               <th>Ov</th>
-                              <th>M</th>
+                              <th>DB</th>
                               <th>R</th>
                               <th>W</th>
                               <th>ECO</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4.3</td>
-                              <td>1</td>
-                              <td>56</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Jason Holder</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
-                            <tr>
-                              <td>Chris Gayle</td>
-                              <td>4</td>
-                              <td>1</td>
-                              <td>66</td>
-                              <td>1</td>
-                              <td>6.23</td>
-                            </tr>
+                              <tr *ngFor="let bowling of bowlingteam2.players">
+                                  <td>{{bowling.name | split}}</td>
+                                  <td>{{bowling.statistics.overs_bowled ? bowling.statistics.overs_bowled : '-'}}</td>
+                                  <td>{{bowling.statistics.dot_balls ? bowling.statistics.dot_balls : '-'}}</td>
+                                  <td>{{bowling.statistics.runs_conceded ? bowling.statistics.runs_conceded : '-'}}</td>
+                                  <td>{{bowling.statistics.wickets ? bowling.statistics.wickets : '-'}}</td>
+                                  <td>{{bowling.statistics.economy_rate ? bowling.statistics.economy_rate : '-'}}</td>
+                              </tr>
                           </tbody>
                         </table>
                       </div>
@@ -825,33 +606,32 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-
               <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
               </app-common-news-list>
-
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>Upcoming</ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <div class="schedule-month d-flex">
+                <div class="schedule-month d-flex" *ngFor="let item of nextmatches">
                   <div class="month-title">
                     <div class="sticky-month">
-                      <h5>31st <br>May 2019</h5>
+                      <h5>{{item.day}}</h5>
                     </div>
                   </div>
                   <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data">
                       <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">08:00 PM</p>
+                        <!-- <h6>Match 2</h6> -->
+                        <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="time-line">{{item.scheduled | date:'h:mm a'}}</p>
                       </div>
                       <div class="match-teams d-flex align-items-center">
                         <div class="match-team d-flex align-items-center">
                           <div class="team-info">
-                            <h5>WI</h5>
+                            <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
                           <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
                         </div>
@@ -861,95 +641,12 @@
                         <div class="match-team d-flex align-items-center">
                           <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
                           <div class="team-info">
-                            <h5>IND</h5>
+                            <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
                         </div>
                       </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
-                    </div>
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
-                      <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">08:00 PM</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>WI</h5>
-                          </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                          <div class="team-info">
-                            <h5>IND</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="schedule-month d-flex">
-                  <div class="month-title">
-                    <div class="sticky-month">
-                      <h5>1st <br>June 2019</h5>
-                    </div>
-                  </div>
-                  <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
-                      <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">08:00 PM</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>WI</h5>
-                          </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                          <div class="team-info">
-                            <h5>IND</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
-                    </div>
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow">
-                      <div class="match-desc">
-                        <h6>Match 2</h6>
-                        <p class="stadium-nm">The Riverside Durham, Chester-le-Street</p>
-                        <p class="time-line">03:00 PM</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>WI</h5>
-                          </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                          <div class="team-info">
-                            <h5>IND</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
+                      <a class="details-btn"
+                        (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                     </div>
                   </div>
                 </div>

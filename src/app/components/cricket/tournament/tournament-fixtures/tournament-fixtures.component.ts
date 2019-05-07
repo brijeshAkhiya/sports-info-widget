@@ -39,6 +39,7 @@ export class TournamentFixturesComponent implements OnInit {
           dateObj[mdate].push(data)
         })
         this.fixturesresult = Object.keys(dateObj).map(day => ({ day, data: dateObj[day] }))
+        
       }
     })
   }
@@ -84,6 +85,8 @@ export class TournamentFixturesComponent implements OnInit {
         dateObj[mdate].push(data)
       })
       this.finalresultsdata = Object.keys(dateObj).map(day => ({ day, data: dateObj[day] }))
+
+      
     })
   }
 
@@ -91,6 +94,8 @@ export class TournamentFixturesComponent implements OnInit {
   matchDetail(id,team1,team2){
     let teams =  team1.concat('-',team2)
     console.log(teams);
+    console.log(id);
+    
     
     this.router.navigate(['/cricket/match',btoa(id),teams])
   }

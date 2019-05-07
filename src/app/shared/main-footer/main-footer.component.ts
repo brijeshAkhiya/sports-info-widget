@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-footer.component.css']
 })
 export class MainFooterComponent implements OnInit {
-
+  isapply:boolean
   constructor() { }
 
   ngOnInit() {

@@ -1,12 +1,12 @@
 /* -------- Banner Section ------- */
-.home-banner                                        { margin-bottom: 48px; padding: 104px 0px 123px; background: #1B2A5A; position: relative; }
+.home-banner                                        { margin-bottom: 48px; padding: 104px 0px 123px; background: #1B2A5A; position: relative; overflow: hidden;}
 .home-banner:after                                  { content: ""; display: block; position: absolute; width: 100%; height: 32px; left: 0px; bottom: 0px; background: url(../../../assets/images/bottom-round-shape.svg) no-repeat center center / 100% 100%; z-index: 1; }
 .home-banner .banner-text                           { position: relative; z-index: 3;}
 .home-banner .banner-images                         { position: absolute; width: 66%; height: 100%; top: 0px; right: 0px; z-index: 1; opacity: 0.79; }
 .home-banner .banner-image                          { position: absolute; width: 100%; height: 100%; background: no-repeat center center / cover; transition: all 0.5s ease-in-out; -webkit-transition: all 0.5s ease-in-out; }
 .home-banner .banner-image:after                    { content: ""; display: block; position: absolute; width: 100%; height: 100%; top: 0%; left: 0px; background-image: linear-gradient( to right, #1B2A5A 8%, rgba(27,42,90,0.00) 56%); }
-.home-banner .banner-images .banner-image           { opacity: 0; }
-.home-banner .banner-images .banner-image.active    { opacity: 1; }
+.home-banner .banner-images .banner-image           { opacity: 0; transform: scale(1.2); -webkit-transform: scale(1.2); }
+.home-banner .banner-images .banner-image.active    { opacity: 1;  transform: scale(1); -webkit-transform: scale(1); }
 .home-banner .banner-news-list                      { border-left: 4px solid rgba(236,236,236,0.1); }
 .home-banner .banner-news-list li a                 { margin-bottom: 24px; padding: 0px 24px; display: block; font-size: 20px; line-height: 25px; color: rgba(255,255,255,0.5); font-family: 'IBM Plex Sans Condensed', sans-serif; position: relative; }
 .home-banner .banner-news-list li a.active,
@@ -80,14 +80,15 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { margin-bottom: 24px; height: 300px; }
     .main-popular-video .play-btn           { width: 100px;}
-    .home-popular-vid-list                  { padding: 0px 12%; height: 360px; }
+    .home-popular-vid-list                    { padding: 0px; height: initial; display: flex;}
+    .home-popular-vid-list .video-item        { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+    /* .home-popular-vid-list                  { padding: 0px 12%; height: 360px; } */
     .home-popular-vid-list .video-img       { height: 120px; }
 }
 
 @media (max-width: 575px) {
 /* -------- Banner Section ------- */
     .home-banner:after                      { height: 16px;}
-
 
 }
 

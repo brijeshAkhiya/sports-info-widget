@@ -24,18 +24,24 @@
 		</div>
 	</div>
 </footer>
-<button class="fav-btn"></button>
-<div class="fav-block">
-	<form>
-		<div>
-			<input class="text-box" type="text" placeholder="Search favorites ...">
-			<button type="submit"></button>
-		</div>
-	</form>
-	<ul class="fav-list">
-		<li><button>Virat Kohli</button></li>
-		<li><button>Indian Premier League 2019</button></li>
-		<li><button class="selected">MS Dhoni</button></li>
-		<li><button>Arsenal</button></li>
-	</ul>
+<button class="fav-btn" (click)="isapply = !isapply"></button>
+<div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
+	<div class="head-btn-list">
+		<button class="delete-btn edit-btn"></button>
+		<button class="close-btn" (click)="isapply = false"></button>
+	</div>
+	<div class="fav-block">
+		<form>
+			<div class="search-box">
+				<input type="text" placeholder="Search favorites ...">
+				<button type="submit"></button>
+			</div>
+		</form>
+		<ul class="fav-list">
+			<li><button >Virat Kohli</button></li>
+			<li><button>Indian Premier League 2019</button></li>
+			<li><button class="selected">MS Dhoni</button></li>
+			<li><button>Arsenal</button></li>
+		</ul>
+	</div>
 </div>
