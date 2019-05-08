@@ -18,6 +18,7 @@ import {
   FacebookLoginProvider,
   LinkedInLoginProvider
 } from "angularx-social-login";
+import { AgmCoreModule } from '@agm/core';
 //store configuration modules import
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
@@ -68,6 +69,9 @@ export function provideConfig() {
     ReactiveFormsModule,
     FormsModule,
     NgbModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
+    }),
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
     }),

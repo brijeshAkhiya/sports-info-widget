@@ -112,7 +112,7 @@
         <ng-container class="items">
           <ng-template carouselSlide *ngFor="let slide of sliderdata">
             <!--Live matches-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'live'">
+            <div class="slider-item" *ngIf="slide.slider_status == 'live'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between align-items-center">
                   <p><b>{{slide.season_name}}</b></p>
@@ -135,7 +135,7 @@
               </div>
             </div>
             <!--upcoming matches-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'">
+            <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between align-items-center">
                   <p><b>{{slide.season_name}}</b></p>
@@ -156,7 +156,7 @@
               </div>
             </div>
             <!--Results-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'results'">
+            <div class="slider-item" *ngIf="slide.slider_status == 'results'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between align-items-center">
                   <p><b>{{slide.season_name}}</b></p>

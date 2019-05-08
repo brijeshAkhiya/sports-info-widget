@@ -133,4 +133,11 @@ export class MainHeaderComponent implements OnInit {
   }
 
 
+  //get match detail
+  getmatchdetail(id,team1,team2){
+    let teams =  team1.concat('-',team2)
+    this.router.navigate(['/cricket/match',btoa(id),teams])
+  }
+
+
 }

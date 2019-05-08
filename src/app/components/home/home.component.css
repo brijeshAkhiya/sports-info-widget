@@ -29,8 +29,9 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 .home-popular-vid-list .video-img                       { height: 180px; border-radius: 4px; cursor: pointer; } 
 .home-popular-vid-list .video-item p                    { margin: 0px; padding: 8px 12px; position: absolute; width: 100%; left: 0px; bottom: 0px; z-index: 2; }
 .popular-video-section .container                       { position: relative; z-index: 2;}
-.popular-video-section .pattern                         { position: absolute; width: 88%; right: -19%; bottom: -62%; z-index: 1;}
-
+.popular-video-section .pattern                         { position: absolute; width: 50%; z-index: 1;}
+.popular-video-section .pattern-left                    { width: 44%; left: -20%; top: -60%; transform: rotate(-92deg); -webkit-transform: rotate(-92deg); }
+.popular-video-section .pattern-right                   { right: -25%; bottom: -65%; transform: rotate(120deg); -webkit-transform: rotate(120deg); }
 /***** Responsive CSS Start ******/
 
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -41,6 +42,8 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .main-popular-video                         { height: 520px; }
     .home-popular-vid-list                      { padding-right: 26px; height: 520px; }
     .home-popular-vid-list .video-img           { height: 166px; }
+    .popular-video-section .pattern-left        { left: -20%; top: -37%; }
+    .popular-video-section .pattern-right       { right: -26%; bottom: -42%; }
 
 }
 
@@ -52,7 +55,8 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .main-popular-video                         { height: 480px; }
     .home-popular-vid-list                      { padding-right: 30px; height: 480px; }
     .home-popular-vid-list .video-img           { height: 146px; }
-
+    .popular-video-section .pattern-left        { left: -20%; top: -37%; }
+    .popular-video-section .pattern-right       { right: -26%; bottom: -42%; }
 }
 
 @media (max-width: 991px) {
@@ -69,7 +73,8 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .main-popular-video .play-btn           { width: 120px;}
     .home-popular-vid-list                  { padding-right: 20px; height: 360px; }
     .home-popular-vid-list .video-img       { height: 120px; }
-
+    .popular-video-section .pattern-left    { left: -20%; top: -37%; }
+    .popular-video-section .pattern-right   { right: -26%; bottom: -42%; }
 }
 
 @media (max-width: 767px) {
@@ -84,11 +89,14 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-popular-vid-list .video-item        { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
     /* .home-popular-vid-list                  { padding: 0px 12%; height: 360px; } */
     .home-popular-vid-list .video-img       { height: 120px; }
+    .popular-video-section .pattern-left    { left: -20%; top: -37%; }
+    .popular-video-section .pattern-right   { right: -26%; bottom: -42%; }
 }
 
 @media (max-width: 575px) {
 /* -------- Banner Section ------- */
     .home-banner:after                      { height: 16px;}
+    .popular-video-section .pattern         { display: none; }
 
 }
 

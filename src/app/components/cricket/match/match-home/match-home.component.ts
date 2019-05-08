@@ -31,6 +31,11 @@ export class MatchHomeComponent implements OnInit {
   battingteam2 = []
   bowlingteam1 = [];
   bowlingteam2 = [];
+  objnew = {}
+  objnew2 = {}
+  venuelat: any;
+  venuelong: any;
+  matchprobability: any;
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -58,6 +63,11 @@ export class MatchHomeComponent implements OnInit {
         this.matchstatus = res["data"]["sport_event_status"].status;
         this.sportevent = res["data"]["sport_event"];
         this.venuedetails = res["data"]["sport_event"]["venue"];
+        if(this.venuedetails.map_coordinates){
+        let cordinates = this.venuedetails.map_coordinates.split(',');
+        this.venuelat = Number(cordinates[0])
+        this.venuelong = Number(cordinates[1])
+        }
         //teams array
         let obj = {};
         let team_arr = res["data"]["sport_event"]["competitors"];
@@ -85,8 +95,6 @@ export class MatchHomeComponent implements OnInit {
 
         this.teamsbytype = Object.keys(obj2).map(qualifier => ({ qualifier, data: obj2[qualifier] }))
 
-        console.log("arrnew", Object.keys(obj2).map(qualifier => ({ qualifier, data: obj2[qualifier] })));
-
         this.team1id = res["data"]["sport_event"]["competitors"][0].id;
         this.team2id = res["data"]["sport_event"]["competitors"][1].id;
         if (this.team1id && this.team2id) {
@@ -109,37 +117,63 @@ export class MatchHomeComponent implements OnInit {
               this.seconds = Math.floor((time % (1000 * 60)) / 1000);
             }
           }, 1000);
+          this.getMatchProbability();
         } 
         else if (this.matchstatus == "closed") {
           this.manofthematch = res["data"]["statistics"]["man_of_the_match"];
           this.matcheventstatus = res["data"]["sport_event_status"];
+
+          console.log('mes',this.matcheventstatus);
+          
           this.scorecards = res["data"]["statistics"]["innings"];
       
-          this.scorecards.map((data)=>{
-            
-            
+          this.scorecards.map((data)=>{ 
             if(data.batting_team == this.teams[0].data[0].id){
                 this.battingteam1.push(data)
             }
             else if(data.batting_team == this.teams[1].data[0].id){
               this.battingteam2.push(data)
             }
-
-            if(data.bowling_team == this.teams[0].data[0].id){
-             
-              
+            if(data.bowling_team == this.teams[0].data[0].id){ 
               this.bowlingteam1.push(data)
             }
             else if(data.bowling_team == this.teams[1].data[0].id){
               this.bowlingteam2.push(data)
             }
           })
+
           this.battingteam1 = this.battingteam1[0]['teams'][0]['statistics']['batting']
           this.battingteam2 = this.battingteam2[0]['teams'][0]['statistics']['batting']
           this.bowlingteam1 = this.bowlingteam1[0]['teams'][1]['statistics']['bowling']
           this.bowlingteam2 = this.bowlingteam2[0]['teams'][1]['statistics']['bowling']
-          console.log(this.bowlingteam1);
+
+          console.log(this.battingteam1);
           
+        
+          let arrnew = []
+          arrnew = this.battingteam2["players"]
+          arrnew.map(single => {
+            if (!this.objnew[single.id]) {
+              this.objnew[single.id] = [];
+            }
+          });
+          arrnew.map(data => {
+            this.objnew[data.id].push(data);
+          });
+          //map array for team 2 bowlers name
+
+          let playerarr = []
+          playerarr = this.battingteam1["players"]
+          playerarr.map(single => {
+            if (!this.objnew2[single.id]) {
+              this.objnew2[single.id] = [];
+            }
+          });
+          playerarr.map(data => {
+            this.objnew2[data.id].push(data);
+          });
+
+      
         }
       }
     });
@@ -148,7 +182,10 @@ export class MatchHomeComponent implements OnInit {
   //get match probablities
 
   getMatchProbability() {
-    this.sportsService.getmatchprobability(this.matchid).subscribe(res => {});
+    this.sportsService.getmatchprobability(this.matchid).subscribe(res => {
+      this.matchprobability = res['data']
+      
+    });
   }
 
   //get match related articles
@@ -232,4 +269,16 @@ export class MatchHomeComponent implements OnInit {
     let teams = team1.concat("-", team2);
     this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
+
+
+  getTeam1playername(id){    
+    this.battingteam2['players'].map((data)=>{
+        if(id === data.id){
+          console.log(data.name);
+          return data.name
+        }
+    })
+  }
+
+
 }

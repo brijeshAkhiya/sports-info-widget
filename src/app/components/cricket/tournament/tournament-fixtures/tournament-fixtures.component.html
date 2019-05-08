@@ -18,7 +18,7 @@
                   </div>
                   <div class="schedule-items">
                     <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
-                      *ngFor="let item of item.data">
+                      *ngFor="let item of item.data" (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
@@ -67,7 +67,7 @@
                   </div>
                   <div class="schedule-items">
                     <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
-                      *ngFor="let item of item.data" >
+                      *ngFor="let item of item.data" (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>

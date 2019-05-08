@@ -92,11 +92,7 @@ export class TournamentFixturesComponent implements OnInit {
 
   //get match detail
   matchDetail(id,team1,team2){
-    let teams =  team1.concat('-',team2)
-    console.log(teams);
-    console.log(id);
-    
-    
+    let teams =  team1.concat('-',team2)  
     this.router.navigate(['/cricket/match',btoa(id),teams])
   }
 

@@ -137,3 +137,7 @@
     .commentary-item .over-ball                 { min-width: 46px;}
     .commentary-item .commentary-line           { margin-top: 3px; padding-left: 16px; line-height: 20px;}
 }
+
+agm-map {
+    height: 300px;
+  }

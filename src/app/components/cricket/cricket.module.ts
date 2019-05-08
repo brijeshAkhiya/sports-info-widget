@@ -6,6 +6,7 @@ import { CricketComponent } from './cricket.component';
 import { CricketRoutingModule } from './cricket-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 import { SportsService } from '../../providers/sports-service';
 import { CricketFixturesComponent } from './cricket-fixtures/cricket-fixtures.component';
 import { CricketHomeComponent } from './cricket-home/cricket-home.component';
@@ -31,6 +32,7 @@ import { StringUnder } from '../../pipes/underlinepipe';
     NgbModule,
     SharedModule,
     MomentModule,
+    AgmCoreModule,
     CricketRoutingModule,
     ScrollingModule,
   ],
