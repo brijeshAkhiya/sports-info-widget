@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "hmr": "ng serve --configuration hmr"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "core-js": "^2.4.1",
     "http-server": "^0.11.1",
     "moment": "^2.24.0",
+    "ng-lazyload-image": "^5.1.2",
     "ng2-adsense": "^5.4.2",
     "ngx-moment": "^3.4.0",
     "ngx-owl-carousel-o": "^1.1.2",
