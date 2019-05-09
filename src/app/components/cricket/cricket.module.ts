@@ -24,6 +24,7 @@ import { SlugifyPipe } from '../../pipes/slugpipe';
 import { TournamentStandingsComponent } from './tournament/tournament-standings/tournament-standings.component';
 import { SplitPipe } from '../../pipes/stringsplitpipe';
 import { StringUnder } from '../../pipes/underlinepipe';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent, TournamentStandingsComponent,StringUnder],
@@ -35,6 +36,7 @@ import { StringUnder } from '../../pipes/underlinepipe';
     AgmCoreModule,
     CricketRoutingModule,
     ScrollingModule,
+    LazyLoadImageModule
   ],
   providers: [SportsService,SlugifyPipe,StringUnder]
 })

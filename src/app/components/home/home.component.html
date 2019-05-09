@@ -15,7 +15,7 @@
   </div>
   <div class="banner-images">
     <div class="banner-image" *ngFor="let item of bannerimages; let i=index;" [ngClass]="{'active': i===imageindex}"
-    [lazyLoad]="item | resizeImage:['m','url']"  ></div>
+    [lazyLoad]="item | resizeImage:['m']"  ></div>
   </div>
 </section>
 <!-- End  Top Highlight -->
@@ -33,7 +33,7 @@
       <div class="content-col">
         <div class="popular-main-item common-shadow" *ngFor="let article of populararticles | slice:0:1">
           <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': article.eType == 'Video'}">
-            <div class="common-zoom-img" [lazyLoad]="article.sImage | resizeImage:['m','url']">
+            <div class="common-zoom-img" [lazyLoad]="article.sImage | resizeImage:['m']">
             </div>
           </div>
           <div class="blog-desc">
@@ -57,7 +57,7 @@
               <div class="popular-item common-shadow">
                 <div class="img-block common-zoom-container"
                   [ngClass]="{'common-news-video': article.eType == 'Video'}">
-                  <div class="common-zoom-img" [lazyLoad]="article.sImage | resizeImage:['s','url']" ></div>
+                  <div class="common-zoom-img" [lazyLoad]="article.sImage | resizeImage:['s']" ></div>
                   <!-- <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage | resizeImage:'300x300' + ')'"></div> -->
                 </div>
                 <div class="item-desc">
@@ -162,7 +162,7 @@
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
         <div class="main-popular-video common-zoom-container common-full-img">
-          <div class="common-zoom-img common-overlay"  [lazyLoad]="video.sImage | resizeImage:['m','url']" >
+          <div class="common-zoom-img common-overlay"  [lazyLoad]="video.sImage | resizeImage:['m']" >
           </div>
           <a class="play-btn"><img src="../../../assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
@@ -182,7 +182,7 @@
           <div class="home-popular-vid-list">
             <div class="video-item" *ngFor="let video of popularvideos">
               <div class="video-img common-overlay common-zoom-container common-full-img">
-                <div class="common-zoom-img"  [lazyLoad]="video.sImage | resizeImage:['s','url']" >
+                <div class="common-zoom-img"  [lazyLoad]="video.sImage | resizeImage:['s']" >
                 </div>
                 <p class="bold-text white-text">{{video.sTitle}}</p>
               </div>
