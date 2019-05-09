@@ -1,29 +1,29 @@
-<section class="blog-banner">
+<section class="blog-banner" *ngIf="blogtype == 'Article'" [style.background-image]="'url(' + blogdata?.sImage + ')'">
   <div class="banner-inner">
     <div class="container">
         <div class="banner-desc">
-          <h1 class="white-text">Resurgent Kieron Pollard hopes for West Indies recall</h1>
+          <h1 class="white-text">{{blogdata?.sTitle}}</h1>
           <div class="author-info d-flex justify-content-between align-items-center">
-            <p class="author"><a>Thakurjeet Bharwana</a>3 hrs ago</p>
-            <p class="view white-view">6.5K</p>
+            <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}} </a>{{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+            <p class="view white-view">{{blogdata?.nViewCounts}}</p>
           </div>
         </div>
     </div>
   </div>
 </section>
-<section class="blog-banner">
+<section class="blog-banner" *ngIf="blogtype == 'Video'" [style.background-image]="'url(' + blogdata?.sImage + ')'">
   <video class="" controls>
-    <source src="../../../../assets/video/dawn-runner.mp4" type="video/mp4">
+    <source [src]="blogdata?.sVideo" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <button class="video-play-btn"></button>
   <div class="banner-inner">
     <div class="container">
         <div class="banner-desc">
-          <h1 class="white-text">Resurgent Kieron Pollard hopes for West Indies recall</h1>
+          <h1 class="white-text">{{blogdata?.sTitle}}</h1>
           <div class="author-info d-flex justify-content-between align-items-center">
-            <p class="author"><a>Thakurjeet Bharwana</a>3 hrs ago</p>
-            <p class="view white-view">6.5K</p>
+            <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}} </a>{{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+            <p class="view white-view">{{blogdata?.nViewCounts}}</p>
           </div>
         </div>
     </div>
@@ -36,81 +36,22 @@
         <div class="blog-inner d-flex">
           <div class="social-block">
             <ul class="sticky-social-list">
-              <li><button><img src="../../../../assets/images/facebook-share-icon.svg"></button></li>
-              <li><button><img src="../../../../assets/images/twitter-share-icon.svg"></button></li>
-              <li><button><img src="../../../../assets/images/whatsapp-share-icon.svg"></button></li>
+              <li><button (click)="sharablelink('facebook')"><img src="../../../../assets/images/facebook-share-icon.svg"></button></li>
+              <li><button (click)="sharablelink('twitter')"><img src="../../../../assets/images/twitter-share-icon.svg"></button></li>
+              <li><button (click)="sharablelink('whatsapp')"><img src="../../../../assets/images/whatsapp-share-icon.svg"></button></li>
             </ul>
           </div>
           <div class="blog-content-block">
-            <div class="blog-content">
-              <p>On Wednesday evening Hardik Pandya was his normal self. He was prancing and dancing around Wankhede
-                stadium. And why not. It was Pandya's thundering cameo at the death that put Mumbai Indians in a winning
-                position,
-                which he sealed with a three-wicket bowling spell that broke Chennai Super Kings' back.</p>
-              <p>Pandya's eight-ball 25 was equal to 39 Smart runs, his Smart Strike rate was a whopping 487.50, while
-                his
-                Smart economy was 1.75. The performance allowed Pandya his first Man-of-the-Match award in T20s in 16
-                matches
-                (including IPL and internationals). Importantly, it gave Pandya a reason to smile. A reason to believe
-                in
-                himself having endured a difficult past seven months.</p>
-              <p>Pandya aborted the Asia Cup last September after suffering a back injury. That forced him to miss
-                selection
-                for the T20 and Test series in Australia. The selectors did pick him eventually for the fourth Test, but
-                Pandya just carried the drinks. Then on the eve of ODI series in Australia, in January, Pandya, along
-                with
-                friend and team-mate KL Rahul were suspended by the BCCI for their offensive remarks on a television
-                chat
-                show, which were condemned in public as well as the India dressing room.</p>
-              <p>Although the ban was provisionally lifted on January 24, both players are yet to be cleared. <a>Pandya
-                  has
-                  been asked by the BCCI ombudsman</a> to be present for an in-person hearing on April 9.</p>
-              <p>Evidently, then, Pandya was thrilled at having been the catalyst in Mumbai's victory. "It feels pretty
-                good
-                to having helped the team to win and contributed. It is a fantastic feeling," Pandya told Sanjay
-                Manjrekar
-                in
-                the post-match presentation.</p>
-              <p>Even without the gentle prod from Manjrekar, Pandya was willing to pour out his emotions of the most
-                difficult phase of his career so far. "It has been seven months that I have hardly played games. I've
-                just
-                batted and batted and batted, and touch wood the game is getting improved. I am someone who wants to
-                improve
-                day by day. That is something I was focusing all that time I was out. Touch wood it is helping me. It is
-                a
-                fantastic feeling when you hit the ball like that and make your team win."</p>
-              <figure>
-                <img src="../../../../assets/images/blog-inner1.jpg" alt="blog">
-                <figcaption>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
-                  ©BCCI
-                </figcaption>
-              </figure>
-              <p>On Wednesday evening Hardik Pandya was his normal self. He was prancing and dancing around Wankhede
-                stadium.
-                And why not. It was Pandya's thundering cameo at the death that put Mumbai Indians in a winning
-                position,
-                which he sealed with a three-wicket bowling spell that broke Chennai Super Kings' back.</p>
-              <p>Pandya's eight-ball 25 was equal to 39 Smart runs, his Smart Strike rate was a whopping 487.50, while
-                his
-                Smart economy was 1.75. The performance allowed Pandya his first Man-of-the-Match award in T20s in 16
-                matches
-                (including IPL and internationals). Importantly, it gave Pandya a reason to smile. A reason to believe
-                in
-                himself having endured a difficult past seven months.</p>
+            <div class="blog-content" [innerHTML]="blogdata?.sDescription">
             </div>
             <ul class="tag-list">
-              <li><button>IPL2019</button></li>
-              <li><button>Mumbai Indians</button></li>
-              <li><button>Chennai Super Kings</button></li>
-              <li><button>IPL2019</button></li>
+              <li *ngFor="let item of blogdata?.aTags"><button (click)="tagview(item.id,item.type,item.name)">{{item?.name | split}}</button></li>
             </ul>
             <div class="blog-author d-flex align-items-center">
-              <img class="author-img" src="../../../../assets/images/dhoni-profile.jpg">
+              <img class="author-img" [src]="blogdata?.iId?.sProfilePicture">
               <div class="author-desc">
-                <h6>Takamaru Ayako</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et
-                  dolore magna aliqua.</p>
+                <h6>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</h6>
+                <p>{{blogdata?.iId?.sBio}}</p>
               </div>
             </div>
           </div>
@@ -146,40 +87,15 @@
             <img class="commenter-img" src="../../../../assets/images/dhoni-profile.jpg" alt="commenter">
             <textarea class="expand" placeholder="Add a comment…"></textarea>
           </div>
-          <div class="comment-list">
-            <div class="comment-item d-flex align-items-start">
+          <div class="comment-list" *ngIf="blogcomments?.length != 0">
+            <div class="comment-item d-flex align-items-start" *ngFor="let comment of blogcomments">
               <img class="commenter-img" src="../../../../assets/images/dhoni-profile.jpg" alt="commenter">
               <div class="comment-desc">
-                <p class="commenter-info"><span class="light-blue-color">Phạm Quốc Hùng</span>12 mins ago</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip
-                  ex ea commodo consequat.</p>
+                <p class="commenter-info"><span class="light-blue-color">{{comment.sFirstName}} {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                <p>{{comment.sComment}}</p>
               </div>
             </div>
-            <div class="comment-item d-flex align-items-start">
-              <img class="commenter-img" src="../../../../assets/images/dhoni-profile.jpg" alt="commenter">
-              <div class="comment-desc">
-                <p class="commenter-info"><span class="light-blue-color">Phạm Quốc Hùng</span>12 mins ago</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip
-                  ex ea commodo consequat.</p>
-              </div>
-            </div>
-            <div class="comment-item d-flex align-items-start">
-              <img class="commenter-img" src="../../../../assets/images/dhoni-profile.jpg" alt="commenter">
-              <div class="comment-desc">
-                <p class="commenter-info"><span class="light-blue-color">Phạm Quốc Hùng</span>12 mins ago</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip
-                  ex ea commodo consequat.</p>
-              </div>
-            </div>
+            <button class="cmt-view-btn" (click)="viewmorecomments()">VIEW MORE</button>
           </div>
         </div>
       </div>

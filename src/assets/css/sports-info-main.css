@@ -91,9 +91,23 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /* -------- Image Zoom Style ------- */
 .common-zoom-container  { overflow: hidden; }
-.common-zoom-img        { height: 100%; background: no-repeat center center / cover; transition: all 0.3s ease-in-out; }
+.common-zoom-img        { height: 100%; background: #F4F4F5 no-repeat center center / cover; transition: all 0.3s ease-in-out; }
 .common-zoom-container.common-full-img:hover .common-zoom-img,
 .common-zoom-img:hover  { transform: scale(1.05); -webkit-transform: scale(1.05); }
+
+/******* Header Section CSS Start ******/
+.modal-backdrop.show                { opacity: 0.65; }
+.modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
+.modal.show .modal-dialog           { left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
+.signin-modal h1                    { opacity: 0.20; font-style: normal; }
+.signin-modal .modal-body           { padding: 24px; text-align: center; }
+.signin-modal ul                    { margin-bottom: 0px; }
+.signin-modal button                { margin-bottom: 22px; width: 100%; padding: 18px; border: 2px solid #EBEBEB; background: transparent; font-size: 20px; line-height: 40px; border-radius: 4px; }
+.signin-modal button img            { margin-top: -2px; margin-right: 16px; width: 40px; }
+.signin-modal button.fb-button      { background: #1778F2; color: #fff; border-color: #1778F2; }
+.signin-modal p a                   { color: #ED1A33; font-weight: 700; text-decoration: underline; }
+.signin-modal p a:hover             { text-decoration: none; }
+.signin-modal .signin-text          { margin: 0px; }
 
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
@@ -137,6 +151,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-news-video:after                    { content: ""; position: absolute; display: block; width: 90px; height: 90px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: url(../../assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
 .common-news-video:hover:after              { background-image: url(../../assets/images/play-btn-anim.png);}
 .common-news-list .common-news-desc         { width: calc(100% - 280px); padding: 0px 0px 16px 16px; position: relative; }
+.common-news-list .news-excerpt p           { cursor: pointer;} 
 .common-news-list .author-info              { padding: 0px 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
 
 /* -------- Common Widget Block ------- */
@@ -215,6 +230,10 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-table.striped-table .table tr   { border: none; }
 .common-table .table thead .light-row,
 .common-table.striped-table .table tr:nth-child(even)   { background: #F4F4F5; }
+
+
+/* .blog-content p             { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; } */
+
 /******** Middle Section CSS End *******/
 
 /***** Bottom Section CSS Start *******/
@@ -231,6 +250,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 @media (min-width: 1200px) and (max-width: 1379px) {
     h1                      { font-size: 44px; line-height: 60px; }
     h2                      { font-size: 38px; line-height: 48px;}
+
+/******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .popular-main-item .item-img            { height: 440px; }
     .common-popular-list .img-block         { height: 160px; }
@@ -247,6 +268,8 @@ button                  { outline: none !important; cursor: pointer; transition:
     .add-to-fav-btn.added,
     .add-to-fav-btn:hover,
     .add-to-fav-btn:focus   { padding: 14px 52px 14px 29px;}
+
+/******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .common-popular-list .popular-item      { margin-bottom: 24px;}
     .common-popular-list [class*="col-"]:last-child .popular-item      { margin-bottom: 0px;}
@@ -263,6 +286,8 @@ button                  { outline: none !important; cursor: pointer; transition:
     h2                      { font-size: 36px; line-height: 46px;}
     h4                      { font-size: 22px; line-height: 30px; }
     h5                      { font-size: 19px; line-height: 24px;}
+
+/******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .common-section             { padding: 40px 0px; }
 /* -------- Popular Articles Section ------- */
@@ -279,6 +304,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 }
 
 @media (max-width: 991px) {
+/******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .sidebar-row .content-col,
     .sidebar-row .sidebar-col   { width: 100%; }
@@ -294,6 +320,8 @@ button                  { outline: none !important; cursor: pointer; transition:
     h2                      { font-size: 32px; line-height: 42px;}
     h4                      { font-size: 20px; line-height: 28px; }
     h5                      { font-size: 18px; line-height: 22px;}
+
+/******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .common-section         { padding: 36px 0px; }
 /* -------- Popular Articles Section ------- */
@@ -326,7 +354,12 @@ button                  { outline: none !important; cursor: pointer; transition:
     .add-to-fav-btn:focus   { padding: 10px 44px 10px 22px;}
     .add-to-fav-btn.added:before,
     .add-to-fav-btn:hover::before { -webkit-transform: translateX(132px) rotate(360deg); transform: translateX(132px) rotate(360deg);}
+/******* Header Section CSS Start ******/
+    .signin-modal .modal-body           { padding: 16px; }
+    .signin-modal button                { margin-bottom: 10px; width: 100%; padding: 10px; font-size: 16px; line-height: 24px; }
+    .signin-modal button img            { margin-right: 8px; width: 24px; }
 
+/******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .common-section         { padding: 30px 0px; }
 /* -------- Popular Articles Section ------- */
@@ -338,6 +371,7 @@ button                  { outline: none !important; cursor: pointer; transition:
     .common-news-list .common-news-img      { margin-bottom: 16px;}
     .common-news-list .common-news-desc     { padding: 0px 0px 16px 0px; }
     .common-news-list .author-info          { padding: 0px; }
+
 /* -------- Common Widget Block ------- */
     .common-widget .widget-title                { padding: 6px 6px 8px; }
     .common-widget .common-list li button       { margin: 12px; padding: 10px 12px;}
@@ -360,6 +394,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
+/******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .popular-list-4 [class*="col-"]:nth-child(3) .popular-item      { margin-bottom: 0px;}
 }
@@ -373,6 +408,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 /* -------- Title / Button CSS ------- */
     .common-title-btn.big-title-btn     { -ms-flex-direction: column; flex-direction: column; align-items: start !important; }
     .big-title-btn button               { margin-top: 4px; }
+
+/******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .popular-main-item .item-img        { height: 240px;}
     .common-popular-list .item-desc     { min-height: initial; }

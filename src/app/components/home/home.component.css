@@ -1,6 +1,6 @@
 /* -------- Banner Section ------- */
 .home-banner                                        { margin-bottom: 48px; padding: 104px 0px 123px; background: #1B2A5A; position: relative; overflow: hidden;}
-.home-banner:after                                  { content: ""; display: block; position: absolute; width: 100%; height: 32px; left: 0px; bottom: 0px; background: url(../../../assets/images/bottom-round-shape.svg) no-repeat center center / 100% 100%; z-index: 1; }
+.home-banner:after                                  { content: ""; display: block; position: absolute; width: 100%; height: 32px; left: 0px; bottom: 0px; background: url(../../../assets/images/bottom-round-shape.svg) no-repeat center center / 100% 100%; z-index: 5; }
 .home-banner .banner-text                           { position: relative; z-index: 3;}
 .home-banner .banner-images                         { position: absolute; width: 66%; height: 100%; top: 0px; right: 0px; z-index: 1; opacity: 0.79; }
 .home-banner .banner-image                          { position: absolute; width: 100%; height: 100%; background: no-repeat center center / cover; transition: all 0.5s ease-in-out; -webkit-transition: all 0.5s ease-in-out; }
@@ -14,13 +14,24 @@
 .home-banner .banner-news-list li a:before          { content: ""; position: absolute; width: 4px; height: 0%; background: red; left: -4px; bottom: 0px; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 .home-banner .banner-news-list li a:hover:before,
 .home-banner .banner-news-list li a.active:before   { bottom: 0px; top: 0px; height: 100%; }
+.home-banner .common-banner-pattern                 { z-index: 3; width: 110%;
+    position: absolute;
+    left: -100%;
+    top: -24%;
+    transform: rotate(-165deg) translate(-50% , 50%) scale(1.2);
+    -webkit-transform: rotate(-165deg) translate(-50% , 50%) scale(1.2);
+    transform-origin: center center;
+    opacity: 0.24; }
 
 /* -------- Popular Video Section ------- */
 .popular-video-section                                  { background: #060332; position: relative; overflow: hidden; }
 .home-video-title                                       { margin-bottom: 32px;}
 .main-popular-video                                     { height: 550px; position: relative; cursor: pointer; border-radius: 4px;}
 .main-popular-video .video-desc                         { padding: 24px; position: absolute; width: 100%; bottom: 0px; }
-.main-popular-video .play-btn                           { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }
+.main-popular-video:before,
+.main-popular-video:after                               { content: ""; position: absolute; display: block; width: 190px; height: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  background: url(../../../assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
+.main-popular-video:before                              { opacity: 0; background-image: url(../../../assets/images/play-btn-anim.png); }
+.main-popular-video:hover:before                        { opacity: 1; }
 .main-popular-video .author-info p,
 .main-popular-video .author-info p.author a             { color: #fff;}
 .home-popular-vid-list                                  { padding-right: 16px; height: 550px; }
@@ -70,7 +81,8 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-banner .banner-news-list li a     { margin-bottom: 20px; padding: 0px 0px 0px 18px; font-size: 17px; line-height: 22px;}
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { height: 360px; }
-    .main-popular-video .play-btn           { width: 120px;}
+    .main-popular-video:before,
+    .main-popular-video:after               { width: 120px; height: 120px; }
     .home-popular-vid-list                  { padding-right: 20px; height: 360px; }
     .home-popular-vid-list .video-img       { height: 120px; }
     .popular-video-section .pattern-left    { left: -20%; top: -37%; }
@@ -84,9 +96,10 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-banner .banner-news-list li a     { margin-bottom: 15px; padding: 0px 0px 0px 14px; font-size: 16px; line-height: 22px;}
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { margin-bottom: 24px; height: 300px; }
-    .main-popular-video .play-btn           { width: 100px;}
-    .home-popular-vid-list                    { padding: 0px; height: initial; display: flex;}
-    .home-popular-vid-list .video-item        { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+    .main-popular-video:before,
+    .main-popular-video:after               { width: 100px;}
+    .home-popular-vid-list                  { padding: 0px; height: initial; display: flex;}
+    .home-popular-vid-list .video-item      { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
     /* .home-popular-vid-list                  { padding: 0px 12%; height: 360px; } */
     .home-popular-vid-list .video-img       { height: 120px; }
     .popular-video-section .pattern-left    { left: -20%; top: -37%; }

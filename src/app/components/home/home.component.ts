@@ -7,6 +7,8 @@ import {
 } from "@angular/core";
 import { SportsService } from "../../providers/sports-service";
 import { distinctUntilChanged } from "rxjs/operators";
+import { ActivatedRoute, Router } from "@angular/router";
+import { SlugifyPipe } from "../../pipes/slugpipe";
 
 @Component({
   selector: "app-home",
@@ -29,12 +31,17 @@ export class HomeComponent implements OnInit {
   matchresults: any;
   period_score: any;
   matchfixtures: any;
-  commonnewstype: any;
+  commonnewsparams: any;
   constructor(
     private renderer2: Renderer2,
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    private router: Router,
+    private slugifyPipe: SlugifyPipe
   ) {
-    this.commonnewstype = "any";
+    this.commonnewsparams = {
+      nStart:0,
+      nLimit:4
+    };
   }
 
   ngOnInit() {
@@ -114,6 +121,7 @@ export class HomeComponent implements OnInit {
   }
 
   //change image dynamically form list hover
+
   onmouseover(index) {
     this.imageindex = index; //dyanmic image index value
     this.listindex = index;
@@ -163,5 +171,12 @@ export class HomeComponent implements OnInit {
         this.matchfixtures = res["data"];
       }
     });
+  }
+
+  //blog view
+
+  blogview(id, type, title) {
+    let slugname = this.slugifyPipe.transform(title);
+    this.router.navigate(["/blog", type, btoa(id),slugname]);
   }
 }

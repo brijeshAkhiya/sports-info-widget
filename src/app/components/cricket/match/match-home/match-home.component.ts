@@ -192,6 +192,8 @@ export class MatchHomeComponent implements OnInit {
   getarticles() {
     this.commonnewsparams = {
       eSport: "Cricket",
+      nStart:0,
+      nLimit:4,
       aIds: [this.matchid]
     };
   }

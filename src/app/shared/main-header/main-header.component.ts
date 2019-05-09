@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxTinySliderSettingsInterface } from 'ngx-tiny-slider';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SportsService } from '../../providers/sports-service';
 
 @Component({
@@ -37,7 +38,7 @@ export class MainHeaderComponent implements OnInit {
   isapply: boolean = false;
 
 
-  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService) {
+  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService, private modalService: NgbModal) {
   }
 
 
@@ -139,5 +140,24 @@ export class MainHeaderComponent implements OnInit {
     this.router.navigate(['/cricket/match',btoa(id),teams])
   }
 
+  //Social login modal
+  closeResult: string;
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title' , windowClass : "signin-modal"}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 
 }

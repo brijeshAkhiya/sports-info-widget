@@ -10,7 +10,7 @@ const childRoutes: Routes = [
     component:BlogListComponent
   },
   {
-    path:':id/:type',
+    path:':type/:id/:slug',
     component:BlogViewComponent
   }
 ];

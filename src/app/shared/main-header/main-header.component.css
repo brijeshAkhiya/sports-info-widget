@@ -71,8 +71,11 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     nav .navbar-toggler.active .icon-bar:nth-child(3)   { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
     nav .navbar-toggler.active .icon-bar:nth-child(1),
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
+    .navbar-nav-container                               { margin-top: 50px; left: 0px;}
     .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
     .navbar-collapse.collapse.menu-open                 { left: 0px; }
+    .navbar-nav .nav-link                               { padding: 8px 30px; }
+    .login-search li a                                  { margin: 8px 30px;}
 }
 
 @media (max-width: 575px) {
