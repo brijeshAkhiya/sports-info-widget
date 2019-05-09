@@ -24,6 +24,8 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { reducers } from "./app-reducer";
 import { SlugifyPipe } from "./pipes/slugpipe";
+import { TruncatePipe } from "./pipes/truncatepipe";
+
 import { SharedModule } from "./shared/shared.module";
 import { MomentModule } from "ngx-moment";
 import { CarouselModule } from "ngx-owl-carousel-o";
@@ -83,6 +85,8 @@ export function provideConfig() {
   providers: [
     AuthService,
     SplitPipe,
+    TruncatePipe,
+    SlugifyPipe,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

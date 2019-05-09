@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
+import { SlugifyPipe } from "../../../../pipes/slugpipe";
 
 @Component({
   selector: 'app-tournament-home',
@@ -15,11 +16,15 @@ export class TournamentHomeComponent implements OnInit {
   pointstable: any;
   teamsname: any;
   tournamentname: any;
+  latestposts: any;
+  popularvideos: any;
+  populararticles: any;
 
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.snapshot.params.id)
+    this.getPopularArticles();
     this.getTournamentsLeader();
     this.getTournamentPointsTable();
     this.getTournamentTeams();
@@ -57,6 +62,59 @@ export class TournamentHomeComponent implements OnInit {
         })
       }
     })
+  }
+
+   //get popular posts
+
+   getPopularArticles() {
+    let data = {
+      nLimit: 10,
+      aIds: [this.tournamentid]
+    };
+    this.sportsService.getpopularpost(data).subscribe(res => {
+      if (res["data"]) {
+        this.populararticles = res["data"];
+      }
+    });
+  }
+
+  //get recent posts
+
+  getRecentPosts() {
+    let data = {
+      eType: "",
+      nLimit: 10,
+      eSport: "Cricket",
+      aIds: [this.tournamentid]
+    };
+    this.sportsService.getrecentpost(data).subscribe(res => {
+      if (res["data"]) {
+        this.latestposts = res["data"];
+      }
+    });
+  }
+
+  //get video posts
+
+  getVideoPosts() {
+    let data = {
+      nLimit: 10,
+      eType: "Video",
+      aIds: [this.tournamentid]
+    };
+    this.sportsService.getpopularpost(data).subscribe(res => {
+      if (res["data"]) {
+        this.popularvideos = res["data"];
+      }
+    });
+  }
+
+
+  //blog view
+
+  blogview(id, type, title) {
+    let slugname = this.slugifyPipe.transform(title);
+    this.router.navigate(["/blog", type, btoa(id),slugname]);
   }
 
 

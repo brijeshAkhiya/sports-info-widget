@@ -1,12 +1,13 @@
 <section class="home-banner">
+  <img class="common-banner-pattern" src="../../../assets/images/common-banner-pattern.svg">
   <div class="banner-text">
     <div class="container">
       <div class="row">
         <div class="col-xl-5 col-md-7 col-sm-9 col-10">
           <h1 class="white-text">Top Highlights</h1>
           <ul class="banner-news-list">
-            <li *ngFor="let post of bannerposts;let i = index;"><a [ngClass]="{'active': i===listindex}"
-                (mouseover)="onmouseover(i)">{{post.sTitle}}</a></li>
+            <li *ngFor="let post of bannerposts;let i = index;" (click)="blogview(post._id,post.eType,post.sTitle)"><a
+                [ngClass]="{'active': i===listindex}" (mouseover)="onmouseover(i)">{{post.sTitle}}</a></li>
           </ul>
         </div>
       </div>
@@ -26,12 +27,14 @@
       <div class="content-col">
         <div class="popular-main-item common-shadow" *ngFor="let article of populararticles | slice:0:1">
           <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': article.eType == 'Video'}">
-            <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'">
+            <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'"
+              (click)="blogview(article._id,article.eType,article.sTitle)">
             </div>
           </div>
           <div class="blog-desc">
-            <h4><a>{{article.sTitle}}</a></h4>
-            <p>{{article.sDescription | truncate:[240,'...']}}</p>
+            <h4><a (click)="blogview(article._id,article.eType,article.sTitle)">{{article.sTitle}}</a></h4>
+            <p [innerHtml]="article.sDescription | truncate:[240,'...']"
+              (click)="blogview(article._id,article.eType,article.sTitle)"></p>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author"><a>{{article.iId.sFirstName}}
                   {{article.iId.sLastName}}</a>{{article.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
@@ -42,7 +45,7 @@
         <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4>Related news</h4>
-          <button class="theme-btn">View All<span></span></button>
+          <button class="theme-btn" [routerLink]="['/blog']">View All<span></span></button>
         </div>
         <div class="common-popular-list popular-list-4">
           <div class="row row-size12">
@@ -50,10 +53,13 @@
               <div class="popular-item common-shadow">
                 <div class="img-block common-zoom-container"
                   [ngClass]="{'common-news-video': article.eType == 'Video'}">
-                  <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'"></div>
+                  <div class="common-zoom-img" [style.background-image]="'url(' + article.sImage + ')'"
+                    (click)="blogview(article._id,article.eType,article.sTitle)"></div>
                 </div>
                 <div class="item-desc">
-                  <p class="bold-text"><a>{{article.sTitle | truncate:[56,'...']}}</a></p>
+                  <p class="bold-text"><a
+                      (click)="blogview(article._id,article.eType,article.sTitle)">{{article.sTitle | truncate:[56,'...']}}</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -88,7 +94,7 @@
                       </div>
                     </div>
                   </li>
-                  <li><button>View all</button></li>
+                  <li><button [routerLink]="['/cricket/fixtures']">View all</button></li>
                 </ul>
               </ng-template>
             </ngb-tab>
@@ -122,7 +128,7 @@
                       </div>
                     </div>
                   </li>
-                  <li><button>View all</button></li>
+                  <li><button [routerLink]="['/cricket/fixtures']">View all</button></li>
                 </ul>
               </ng-template>
             </ngb-tab>
@@ -137,21 +143,22 @@
 <section class="common-section popular-video-section">
   <div class="container">
     <div class="row row-size12">
-      <div class="col-lg-9 col-md-8">
+      <div class="col-xl-9">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4 class="white-text">Popular Videos</h4>
-          <button class="theme-btn">View All<span></span></button>
+          <button class="theme-btn" [routerLink]="['/blog']">View All<span></span></button>
         </div>
       </div>
     </div>
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
         <div class="main-popular-video common-zoom-container common-full-img">
-          <div class="common-zoom-img common-overlay" [style.background-image]="'url(' + video.sImage + ')'">
+          <div class="common-zoom-img common-overlay" [style.background-image]="'url(' + video.sImage + ')'"
+            (click)="blogview(video._id,video.eType,video.sTitle)">
           </div>
           <a class="play-btn"><img src="../../../assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
-            <h2 class="white-text"><a>{{video.sTitle}}</a></h2>
+            <h2 class="white-text"><a (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle}}</a></h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
                 <a>{{video.iId.sFirstName}}
@@ -165,11 +172,13 @@
       <div class="col-lg-3 col-md-4">
         <ng-scrollbar class="custom-scrollbar">
           <div class="home-popular-vid-list">
-            <div class="video-item" *ngFor="let video of popularvideos">
+            <div class="video-item" *ngFor="let video of popularvideos"
+              (click)="blogview(video._id,video.eType,video.sTitle)">
               <div class="video-img common-overlay common-zoom-container common-full-img">
                 <div class="common-zoom-img" [style.background-image]="'url(' + video.sImage + ')'">
                 </div>
-                <p class="bold-text white-text">{{video.sTitle}}</p>
+                <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle}}
+                </p>
               </div>
             </div>
           </div>
@@ -184,32 +193,14 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <!-- <div class="common-news-list">
-          <div class="common-news-item d-flex common-shadow" *ngFor="let post of recentposts | slice:0:4">
-            <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-              <div class="common-zoom-img" [style.background-image]="'url(' + post.sImage + ')'"></div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>{{post.sTitle}}</a></h5>
-                <p>{{post.sDescription | truncate:[164,'...']}}</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>{{post.iId.sFirstName}}
-                    {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                <p class="view">{{post.nViewCounts}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
-     <app-common-news-list [type]="commonnewstype" *ngIf="commonnewstype"></app-common-news-list>
+        <app-common-news-list [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
       </div>
       <div class="sidebar-col">
         <div class="common-stories-widget common-shadow rounded-box">
           <h5>Recommended Stories</h5>
           <ul class="common-list">
-            <li *ngFor="let post of recentposts | slice:4:9"><a>{{post.sTitle | truncate:[60,'...']}}</a></li>
+            <li *ngFor="let post of recentposts | slice:4:9"><a
+                (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle | truncate:[60,'...']}}</a></li>
           </ul>
         </div>
         <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>

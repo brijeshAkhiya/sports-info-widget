@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from '../../providers/sports-service';
-
+import { SlugifyPipe } from "../../pipes/slugpipe";
 
 @Component({
   selector: 'app-common-news-list',
@@ -11,7 +12,8 @@ export class CommonNewsListComponent implements OnInit {
   posts: any;
   @Input() type: any;
   @Input() reqparams: {};
-  constructor(private sportsService: SportsService) { }
+  loadnewposts: any;
+  constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe, private router: Router) { }
 
   ngOnInit() {
      if (this.reqparams) { 
@@ -49,5 +51,27 @@ export class CommonNewsListComponent implements OnInit {
 
       }
     })
+  }
+
+  //load more blogs
+
+  loadmore(){
+    let start = this.posts.length
+    let data = {
+      nStart:start,
+      nLimit:4
+    }
+    this.sportsService.getrelatedpost(data).subscribe((res) => {
+      if (res['data']) {
+        this.loadnewposts = res['data'];
+        this.posts = this.posts.concat(this.loadnewposts)
+      }
+    })
+  }
+
+
+  blogview(id, type, title) {
+    let slugname = this.slugifyPipe.transform(title);
+    this.router.navigate(["/blog", type, btoa(id),slugname]);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router ,NavigationEnd} from "@angular/router";
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from "angularx-social-login";
@@ -22,11 +23,18 @@ export class AppComponent implements OnInit {
   vibrantcolor:any
   mutedcolor:any
   imgurl = "../images/banner/9S6A5434.jpg"
-  constructor(private http:HttpClient,private socialLoginService: AuthService,private store: Store<fromRoot.State>){
+  constructor(private http:HttpClient,private router: Router,private socialLoginService: AuthService,private store: Store<fromRoot.State>){
 
   }
 
   ngOnInit(){
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+  });
+
     this.users$ = this.http.get('https://jsonplaceholder.typicode.com/posts');
     this.socialLoginService.authState.subscribe((user) => {
      // console.log('user',user);

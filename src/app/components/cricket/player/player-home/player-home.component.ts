@@ -22,6 +22,8 @@ export class PlayerHomeComponent implements OnInit {
     this.playerid = atob(this.activatedroute.snapshot.params.id)
     this.commonnewsparams = {
       eSport: 'Cricket',
+      nStart:0,
+      nLimit:3,
       aIds: [this.playerid]
     }
     this.getPlayerInfo();

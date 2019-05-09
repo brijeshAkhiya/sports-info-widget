@@ -6,168 +6,25 @@
           <h1>Blogs</h1>
         </div>
         <div class="common-news-list">
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
+          <div class="common-news-item d-flex common-shadow" *ngFor="let blog of blogs">
+            <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
+              <div class="common-zoom-img" [style.background-image]="'url(' + blog.sImage + ')'" (click)="blogview(blog._id,blog.eType,blog.sTitle)">
               </div>
             </div>
             <div class="common-news-desc">
               <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
+                <h5><a (click)="blogview(blog._id,blog.eType,blog.sTitle)">{{blog.sTitle}}</a></h5>
+                <p [innerHtml]="blog.sDescription | truncate:[164,'...']" (click)="blogview(blog._id,blog.eType,blog.sTitle)"></p>
               </div>
               <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-news-video common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-news-video common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
-              </div>
-            </div>
-          </div>
-          <div class="common-news-item d-flex common-shadow">
-            <div class="common-news-img common-zoom-container">
-              <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-              </div>
-            </div>
-            <div class="common-news-desc">
-              <div class="news-excerpt">
-                <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                  hopes of making it to the
-                  West
-                  Indies World Cup squad because of a new set-up running Cricket West
-                  Indies…</p>
-              </div>
-              <div class="author-info d-flex justify-content-between align-items-center">
-                <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                <p class="view">6.5K</p>
+                <p class="author"><a>{{blog.iId.sFirstName}}
+                    {{blog.iId.sLastName}}</a>{{blog.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                <p class="view">{{blog.nViewCounts}}</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
+        <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()">Load More<span></span></button>
         </div>
         <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
       </div>

@@ -160,14 +160,30 @@ export class SportsService {
    //get match timeline
    getmatchtimeline(id){
       return this.http.get(environment.apiUrl + environment.version + `/cricket/match/${id}/timeline`);
-
    }
 
    //get team vs team data 
    getteamvsteamdata(team1id,team2id){
       return this.http.get(environment.apiUrl + environment.version + `/cricket/team/${team1id}/team/${team2id}`);
-
    }  
+
+   //get blog view 
+   getblogview(id){
+      return this.http.get(environment.apiUrl + environment.version + `/posts/view/${id}`);
+   }
+
+   //update post view count
+
+   updatepostviewcount(id){
+      return this.http.put(environment.apiUrl + environment.version + `/posts/view/${id}`,null);
+   }
+
+   //get blog comments 
+   getblogcommnets(data){
+      return this.http.post(environment.apiUrl + environment.version + `/comments/list`,data);
+
+   }
+   
 
 
 
