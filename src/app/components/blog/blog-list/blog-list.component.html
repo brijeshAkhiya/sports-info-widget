@@ -8,7 +8,7 @@
         <div class="common-news-list">
           <div class="common-news-item d-flex common-shadow" *ngFor="let blog of blogs">
             <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
-              <div class="common-zoom-img" [style.background-image]="'url(' + blog.sImage + ')'" (click)="blogview(blog._id,blog.eType,blog.sTitle)">
+              <div class="common-zoom-img" [lazyLoad]="blog.sImage | resizeImage:['s']" (click)="blogview(blog._id,blog.eType,blog.sTitle)">
               </div>
             </div>
             <div class="common-news-desc">

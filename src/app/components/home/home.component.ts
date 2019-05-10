@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
   getPopularArticles() {
     let data = {
       eType: "Article",
-      nLimit: 5
+      nLimit: 10
     };
     this.sportsService.getpopularpost(data).subscribe(res => {
       if (res["data"]) {

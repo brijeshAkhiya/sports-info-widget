@@ -33,6 +33,13 @@ import { SplitPipe } from "./pipes/stringsplitpipe";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { WriterProfileComponent } from './components/writer/writer-profile/writer-profile.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AdvertiseWithUsComponent } from './components/advertise-with-us/advertise-with-us.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 let config = new AuthServiceConfig([
@@ -58,7 +65,14 @@ export function provideConfig() {
     MainHeaderComponent,
     MainFooterComponent,
     SlugifyPipe,
-    WriterProfileComponent
+    WriterProfileComponent,
+    ComingSoonComponent,
+    AboutComponent,
+    ContactComponent,
+    AdvertiseWithUsComponent,
+    TermsAndConditionsComponent,
+    PrivacyPolicyComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

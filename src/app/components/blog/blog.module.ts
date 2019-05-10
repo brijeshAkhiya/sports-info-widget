@@ -7,6 +7,7 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MomentModule } from 'ngx-moment';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [BlogListComponent, BlogViewComponent],
@@ -15,7 +16,8 @@ import { MomentModule } from 'ngx-moment';
     NgbModule,
     SharedModule,
     MomentModule,
-    BlogRoutingModule
+    BlogRoutingModule,
+    LazyLoadImageModule
   ],
   providers:[],
   exports:[]

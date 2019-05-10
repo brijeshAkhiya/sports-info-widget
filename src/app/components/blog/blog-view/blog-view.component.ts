@@ -20,7 +20,9 @@ export class BlogViewComponent implements OnInit {
   blogslug: any;
   blogcomments: any;
   newcommnets: any;
-
+  isplay:boolean = false
+  s3videobaseurl = 'https://d1ldsx0apuyt84.cloudfront.net/'
+  widgetblogs: any;
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
@@ -37,6 +39,7 @@ export class BlogViewComponent implements OnInit {
     this.updatePostCount();
     this.getBlogview();
     this.getBlogComments();
+    this.getPopularArticles();
   }
 
   getBlogview() {
@@ -47,12 +50,15 @@ export class BlogViewComponent implements OnInit {
     }
   }
 
+  //update post view count
+
   updatePostCount() {
     if (this.blogid) {
       this.sportsService.updatepostviewcount(this.blogid).subscribe(res => {});
     }
   }
 
+  //to get blog comments
   getBlogComments(){
     if (this.blogid) {
       let data = {
@@ -63,8 +69,6 @@ export class BlogViewComponent implements OnInit {
       this.sportsService.getblogcommnets(data).subscribe(res => {
         if(res['data']){
           this.blogcomments = res['data'];
-          console.log(this.blogcomments);
-          
         }
       });
     }
@@ -87,6 +91,38 @@ export class BlogViewComponent implements OnInit {
     });
   }
 
+  //video play event 
+  videoplay(){
+    this.isplay = true
+  }
+
+  //get related stories 
+
+  getPopularArticles() {
+    let data = {
+      nstart: 0,
+      nLimit: 10
+    };
+    this.sportsService.getpopularpost(data).subscribe(res => {
+      if (res["data"]) {
+        this.widgetblogs = res["data"];
+      }
+    });
+  }
+
+  // get widget blogs view 
+  getwidgetblogsview(id,type,title){
+    this.blogid = id
+    let slug = this.slugifypipe.transform(title);
+    this.router.navigate(["/blog",type, btoa(id),slug]);
+    this.updatePostCount();
+    this.getBlogview();
+    this.getBlogComments();
+    this.getPopularArticles();
+  }
+
+
+  //tags view 
   tagview(id,type,title){
     let slugname = this.slugifypipe.transform(title);
     if(type == 'Player'){

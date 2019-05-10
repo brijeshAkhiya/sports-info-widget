@@ -3,7 +3,7 @@ import { Router ,NavigationEnd} from "@angular/router";
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from '@ngrx/store'
 import * as fromRoot from './app-reducer'
 import * as Auth from './store/auth/auth.actions';

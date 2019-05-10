@@ -36,13 +36,17 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 .popular-video-section .pattern                         { position: absolute; width: 50%; z-index: 1;}
 .popular-video-section .pattern-left                    { width: 44%; left: -20%; top: -60%; transform: rotate(-92deg); -webkit-transform: rotate(-92deg); }
 .popular-video-section .pattern-right                   { right: -25%; bottom: -65%; transform: rotate(120deg); -webkit-transform: rotate(120deg); }
+
 /***** Responsive CSS Start ******/
+@media (min-width: 1380px) and (max-width: 1499px) {
+    .home-banner .common-banner-pattern     { left: -94%; top: -14%; }
+}
 
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Banner Section ------- */
     .home-banner                            { padding: 94px 0px 112px;} 
     .home-banner .banner-news-list li a     { padding: 0px 0px 0px 24px; font-size: 19px; line-height: 24px;}
-    .home-banner .common-banner-pattern     { left: -98%; top: 0%; }
+    .home-banner .common-banner-pattern     { left: -96%; top: -10%; }
 /* -------- Popular Video Section ------- */
     .main-popular-video                         { height: 520px; }
     .home-popular-vid-list                      { padding-right: 26px; height: 520px; }
@@ -90,7 +94,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-banner                            { margin-bottom: 30px; padding: 40px 0px;} 
     .home-banner:after                      { height: 20px;}
     .home-banner .banner-news-list li a     { margin-bottom: 15px; padding: 0px 0px 0px 14px; font-size: 16px; line-height: 22px;}
-    .home-banner .common-banner-pattern     { left: -98%; top: 0%; }
+    .home-banner .common-banner-pattern     { left: -98%; top: 4%; }
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { margin-bottom: 24px; height: 300px; }
     .main-popular-video:before,

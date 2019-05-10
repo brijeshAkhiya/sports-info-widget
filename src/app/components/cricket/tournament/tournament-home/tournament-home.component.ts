@@ -71,7 +71,7 @@ export class TournamentHomeComponent implements OnInit {
       nLimit: 10,
       aIds: [this.tournamentid]
     };
-    this.sportsService.getpopularpost(data).subscribe(res => {
+    this.sportsService.getrelatedpost(data).subscribe(res => {
       if (res["data"]) {
         this.populararticles = res["data"];
       }
@@ -85,9 +85,10 @@ export class TournamentHomeComponent implements OnInit {
       eType: "",
       nLimit: 10,
       eSport: "Cricket",
+      eSort:'Latest',
       aIds: [this.tournamentid]
     };
-    this.sportsService.getrecentpost(data).subscribe(res => {
+    this.sportsService.getrelatedpost(data).subscribe(res => {
       if (res["data"]) {
         this.latestposts = res["data"];
       }
@@ -102,7 +103,7 @@ export class TournamentHomeComponent implements OnInit {
       eType: "Video",
       aIds: [this.tournamentid]
     };
-    this.sportsService.getpopularpost(data).subscribe(res => {
+    this.sportsService.getrelatedpost(data).subscribe(res => {
       if (res["data"]) {
         this.popularvideos = res["data"];
       }

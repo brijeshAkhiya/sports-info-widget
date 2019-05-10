@@ -1,8 +1,14 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxTinySliderSettingsInterface } from 'ngx-tiny-slider';
+import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+import { Store } from '@ngrx/store'
+import * as fromRoot from '../../app-reducer'
+import * as Auth from '../../store/auth/auth.actions';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SportsService } from '../../providers/sports-service';
+import { Observable ,interval} from 'rxjs';
 
 @Component({
   selector: 'app-main-header',
@@ -36,9 +42,11 @@ export class MainHeaderComponent implements OnInit {
   sliderdata: any;
   sliderresults = [];
   isapply: boolean = false;
+  socialUser: import("/Users/yudizsolutions/Documents/sports-info-web/node_modules/angularx-social-login/src/entities/user").SocialUser;
 
 
-  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService, private modalService: NgbModal) {
+  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService, 
+    private modalService: NgbModal,private socialLoginService: AuthService,private store: Store<fromRoot.State>) {
   }
 
 
@@ -101,9 +109,15 @@ export class MainHeaderComponent implements OnInit {
     this.sportsService.getheaderslider().subscribe((res) => {
       if (res['data']) {
         this.sliderdata = res['data'];
+        
         this.sliderdata.map((data) => {
           if (data.slider_status == 'results') {
             this.sliderresults.push(data);
+          }
+          if(data.slider_status == 'live' || data.slider_status == 'upcoming' ){
+            // interval(5000).subscribe((x)=>{
+            //   this.getHeaderSliderData();
+            // })
           }
         })
         this.sliderresults = this.sliderresults.map(data => {
@@ -139,6 +153,34 @@ export class MainHeaderComponent implements OnInit {
     let teams =  team1.concat('-',team2)
     this.router.navigate(['/cricket/match',btoa(id),teams])
   }
+
+
+  signInWithFB(): void {
+    this.socialLoginService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res)=>{
+      if(res){
+        console.log(res);
+        
+      this.socialUser = res
+      this.store.dispatch(new Auth.SetAuthenticated());
+      }
+    });
+  }
+
+  signInWithGoogle(): void {
+    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res)=>{
+      if(res){
+      this.store.dispatch(new Auth.SetAuthenticated());
+
+      this.socialUser = res
+      }
+      
+    }).catch(error=>{
+      console.log(error);
+      
+    });
+  }
+
 
   //Social login modal
   closeResult: string;

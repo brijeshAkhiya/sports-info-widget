@@ -7,7 +7,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StringUnder implements PipeTransform {
 
     transform(input: string): any {
-        
+        if(input){
         return input.replace(/_/g," ")
+        }
+
     }
 }

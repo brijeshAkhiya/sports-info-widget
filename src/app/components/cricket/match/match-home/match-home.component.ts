@@ -46,6 +46,9 @@ export class MatchHomeComponent implements OnInit {
       // if (params.categoryId != Id) {
 
       this.matchid = atob(params.id);
+      if(this.matchid){
+        this.getMatchTimeline();
+      }
      // this.getMatchTimeline();
       // }
     });

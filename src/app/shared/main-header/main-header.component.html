@@ -205,22 +205,22 @@
           <a class="nav-link" [routerLink]="['/cricket']" routerLinkActive="active" (click)="!isapply">Cricket</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active" (click)="!isapply">Soccer</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/Soccer']" routerLinkActive="active" (click)="isapply = !isapply">Soccer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active" (click)="isapply = !isapply">Badminton</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/Badminton']" routerLinkActive="active" (click)="isapply = !isapply">Badminton</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active" (click)="isapply = !isapply">Basketball</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/Basketball']" routerLinkActive="active" (click)="isapply = !isapply">Basketball</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active" (click)="isapply = !isapply">Field Hockey</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/Field-Hockey']" routerLinkActive="active" (click)="isapply = !isapply">Field Hockey</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active" (click)="isapply = !isapply">Racing</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/Racing']" routerLinkActive="active" (click)="isapply = !isapply">Racing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/comingsoon']" routerLinkActive="active" (click)="isapply = !isapply">Tennis sports</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/Tennis-sports']" routerLinkActive="active" (click)="isapply = !isapply">Tennis sports</a>
         </li>
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
@@ -235,10 +235,10 @@
   <div class="modal-body">
     <h1>Sign In</h1>
     <ul>
-      <li><button><img src="../../../assets/images/google-signin.svg">Sign in with Google</button></li>
-      <li><button class="fb-button"><img src="../../../assets/images/facebook-signin.svg">Continue with Facebook</button></li>
+      <li><button (click)="signInWithGoogle()"><img src="../../../assets/images/google-signin.svg">Sign in with Google</button></li>
+      <li><button class="fb-button" (click)="signInWithFB()"><img src="../../../assets/images/facebook-signin.svg">Continue with Facebook</button></li>
     </ul>
     <p class="signin-text">By signing in with Google or Facebook, you agree to
-      SportsInfo’s <a [routerLink]="" >Terms</a> and <a [routerLink]="">Privacy Policies</a>.</p>
+      SportsInfo’s <a [routerLink]="['/terms-and-conditions']" >Terms</a> and <a [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>
   </div>
 </ng-template>

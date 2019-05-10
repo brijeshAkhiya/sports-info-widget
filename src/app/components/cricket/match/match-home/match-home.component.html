@@ -280,10 +280,10 @@
                 <div class="probability-block d-flex align-items-center justify-content-between">
                   <div class="team-block">
                     <img class="team-flag" src="../../../../../assets/images/flag-ind.svg">
-                    <h3 *ngIf="matchprobability">{{matchprobability[0].probability}}%</h3>
+                    <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
                   </div>
                   <div class="team-block">
-                    <h3 *ngIf="matchprobability">{{matchprobability[1].probability}}%</h3>
+                    <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
                     <img class="team-flag" src="../../../../../assets/images/flag-wi.svg">
                   </div>
                 </div>

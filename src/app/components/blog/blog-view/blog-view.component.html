@@ -1,4 +1,4 @@
-<section class="blog-banner" *ngIf="blogtype == 'Article'" [style.background-image]="'url(' + blogdata?.sImage + ')'">
+<section class="blog-banner" *ngIf="blogtype == 'Article'" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
   <div class="banner-inner">
     <div class="container">
         <div class="banner-desc">
@@ -11,12 +11,12 @@
     </div>
   </div>
 </section>
-<section class="blog-banner" *ngIf="blogtype == 'Video'" [style.background-image]="'url(' + blogdata?.sImage + ')'">
-  <video class="" controls>
-    <source [src]="blogdata?.sVideo" type="video/mp4">
+<section class="blog-banner" *ngIf="blogtype == 'Video'" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
+  <video controls [ngClass]="{'show': isplay}">
+    <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata.sVideo">
     Your browser does not support the video tag.
   </video>
-  <button class="video-play-btn"></button>
+  <button class="video-play-btn" (click)="videoplay()"></button>
   <div class="banner-inner">
     <div class="container">
         <div class="banner-desc">
@@ -48,7 +48,7 @@
               <li *ngFor="let item of blogdata?.aTags"><button (click)="tagview(item.id,item.type,item.name)">{{item?.name | split}}</button></li>
             </ul>
             <div class="blog-author d-flex align-items-center">
-              <img class="author-img" [src]="blogdata?.iId?.sProfilePicture">
+              <img class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']">
               <div class="author-desc">
                 <h6>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</h6>
                 <p>{{blogdata?.iId?.sBio}}</p>
@@ -64,11 +64,7 @@
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>Readlist</h5>
             <ul class="common-list">
-              <li><a>MS Dhoni overcomes Rajasthan Royals and dew with vintage assault</a></li>
-              <li><a>Resurgent Kieron Pollard hopes for West Indies recall</a></li>
-              <li><a>Royal Challengers Bangalore</a></li>
-              <li><a>Resurgent Kieron Pollard hopes for West Indies recall</a></li>
-              <li><a>Kings XI Punjab</a></li>
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a (click)="getwidgetblogsview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
