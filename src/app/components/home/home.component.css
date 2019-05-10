@@ -14,14 +14,7 @@
 .home-banner .banner-news-list li a:before          { content: ""; position: absolute; width: 4px; height: 0%; background: red; left: -4px; bottom: 0px; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 .home-banner .banner-news-list li a:hover:before,
 .home-banner .banner-news-list li a.active:before   { bottom: 0px; top: 0px; height: 100%; }
-.home-banner .common-banner-pattern                 { z-index: 3; width: 110%;
-    position: absolute;
-    left: -100%;
-    top: -24%;
-    transform: rotate(-165deg) translate(-50% , 50%) scale(1.2);
-    -webkit-transform: rotate(-165deg) translate(-50% , 50%) scale(1.2);
-    transform-origin: center center;
-    opacity: 0.24; }
+.home-banner .common-banner-pattern                 { width: 100%; position: absolute; left: -90%; top: -21%; transform: rotate(-164deg) translate(-30% , 43%) scale(1.1); -webkit-transform: rotate(-164deg) translate(-30% , 43%) scale(1.1); transform-origin: center center; opacity: 0.24; z-index: 3; }
 
 /* -------- Popular Video Section ------- */
 .popular-video-section                                  { background: #060332; position: relative; overflow: hidden; }
@@ -49,6 +42,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Banner Section ------- */
     .home-banner                            { padding: 94px 0px 112px;} 
     .home-banner .banner-news-list li a     { padding: 0px 0px 0px 24px; font-size: 19px; line-height: 24px;}
+    .home-banner .common-banner-pattern     { left: -98%; top: 0%; }
 /* -------- Popular Video Section ------- */
     .main-popular-video                         { height: 520px; }
     .home-popular-vid-list                      { padding-right: 26px; height: 520px; }
@@ -62,6 +56,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Banner Section ------- */
     .home-banner                            { margin-bottom: 40px; padding: 84px 0px 102px;} 
     .home-banner .banner-news-list li a     { padding: 0px 0px 0px 22px; font-size: 18px; line-height: 23px;}
+    .home-banner .common-banner-pattern     { left: -98%; top: 0%; }
 /* -------- Popular Video Section ------- */
     .main-popular-video                         { height: 480px; }
     .home-popular-vid-list                      { padding-right: 30px; height: 480px; }
@@ -79,6 +74,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-banner                            { margin-bottom: 36px; padding: 60px 0px 80px;} 
     .home-banner:after                      { height: 26px;}
     .home-banner .banner-news-list li a     { margin-bottom: 20px; padding: 0px 0px 0px 18px; font-size: 17px; line-height: 22px;}
+    .home-banner .common-banner-pattern     { left: -98%; top: 0%; }
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { height: 360px; }
     .main-popular-video:before,
@@ -94,6 +90,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-banner                            { margin-bottom: 30px; padding: 40px 0px;} 
     .home-banner:after                      { height: 20px;}
     .home-banner .banner-news-list li a     { margin-bottom: 15px; padding: 0px 0px 0px 14px; font-size: 16px; line-height: 22px;}
+    .home-banner .common-banner-pattern     { left: -98%; top: 0%; }
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { margin-bottom: 24px; height: 300px; }
     .main-popular-video:before,
@@ -110,6 +107,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Banner Section ------- */
     .home-banner:after                      { height: 16px;}
     .popular-video-section .pattern         { display: none; }
+    .home-banner .common-banner-pattern     { left: -105%; top: 40%; transform: rotate(-164deg) translate(-40% , 43%) scale(1.1); -webkit-transform: rotate(-164deg) translate(-40% , 43%) scale(1.1); }
 
 }
 
