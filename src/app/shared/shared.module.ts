@@ -6,6 +6,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { NgxTinySliderModule } from 'ngx-tiny-slider';
 import { TruncatePipe } from '../pipes/truncatepipe';
+import { ResizeImagePipe } from '../pipes/resize-image.pipe';
 import { SportsService } from '../providers/sports-service';
 import { MomentModule } from 'ngx-moment';
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
@@ -14,6 +15,7 @@ import { PointstableWidgetComponent } from './pointstable-widget/pointstable-wid
 import { SplitPipe } from '../pipes/stringsplitpipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
     imports: [
@@ -24,9 +26,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         NgbModule,
         ReactiveFormsModule,
         FormsModule,
+        LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe],
-    providers: [TruncatePipe, SportsService,SplitPipe],
-    exports: [NgxTinySliderModule, TruncatePipe,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe]
+    declarations: [TruncatePipe, ResizeImagePipe,  CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe],
+    providers: [TruncatePipe, ResizeImagePipe,  SportsService,SplitPipe],
+    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe, CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe]
 })
 export class SharedModule { }

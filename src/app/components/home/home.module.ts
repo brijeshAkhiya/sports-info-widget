@@ -9,6 +9,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MomentModule } from 'ngx-moment';
 import { SportsService } from '../../providers/sports-service';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SportsService } from '../../providers/sports-service';
     HomeRoutingModule,
     NgScrollbarModule,
     NgbModule,
-    MomentModule
+    MomentModule,
+    LazyLoadImageModule
   ],
   providers: [SlugifyPipe,SportsService]
 })
