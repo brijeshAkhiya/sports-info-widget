@@ -26,14 +26,14 @@
             <ng-template ngbTabTitle><div (click)="getTeamFixtures()">Fixtures</div></ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
+                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata" >
                   <div class="month-title">
                     <div class="sticky-month">
                       <h5>{{item.day}}</h5>
                     </div>
                   </div>
                   <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow" *ngFor="let item of item.data">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow" *ngFor="let item of item.data" (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
@@ -56,7 +56,7 @@
                           </div>
                         </div>
                       </div>
-                      <a class="details-btn" routerLink=""><span>Details</span></a>
+                      <a class="details-btn" (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)"><span>Details</span></a>
                     </div>
                   </div>
                 </div>

@@ -149,7 +149,7 @@
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
-                          <p class="name">{{item.player.name | split}}</p>
+                          <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split}}</p>
                           <p class="team">{{item.team.abbreviation}}</p>
                         </div>
                         <div class="player-score">
@@ -162,7 +162,7 @@
                       *ngFor="let item of battingleaders | slice:1:10">
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
-                        <p class="name">{{item.player.name | split }}</p>
+                        <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split }}</p>
                         <p class="team">{{item.team.abbreviation}}</p>
                       </div>
                       <div class="player-score">
@@ -170,7 +170,7 @@
                         <p class="score-property">Runs</p>
                       </div>
                     </li>
-                    <li><button>View all</button></li>
+                    <li><button [routerLink]="['./stats']">View all</button></li>
                   </ul>
                 </ng-template>
               </ngb-tab>
@@ -183,7 +183,7 @@
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
-                          <p class="name">{{item.player.name | split}}</p>
+                          <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split}}</p>
                           <p class="team">{{item.team.abbreviation}}</p>
                         </div>
                         <div class="player-score">
@@ -196,7 +196,7 @@
                       *ngFor="let item of bowlingleaders | slice:1:10">
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
-                        <p class="name">{{item.player.name | split}}</p>
+                        <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split}}</p>
                         <p class="team">{{item.team.abbreviation}}</p>
                       </div>
                       <div class="player-score">

@@ -231,8 +231,15 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-table .table thead .light-row,
 .common-table.striped-table .table tr:nth-child(even)   { background: #F4F4F5; }
 
-
-/* .blog-content p             { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; } */
+/* -------- Form Elements Style ------- */
+form .form-group                    { margin-bottom: 24px;  }
+form .form-control                  { padding: 12px 16px; font-size: 20px; line-height: 24px; color: #292929; border: 2px solid #EBEBEB; border-radius: 4px; outline: none !important; }
+form textarea.form-control          { height: 120px; overflow: auto; resize: none; }
+form .form-control:focus            { color: #292929; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.04); border-color: #292929;  } 
+form ::-webkit-input-placeholder    { color: #292929; opacity: 1; }
+form ::-moz-placeholder             { color: #292929; opacity: 1; }
+form :-ms-input-placeholder         { color: #292929; opacity: 1; }
+form :-moz-placeholder              { color: #292929; opacity: 1; }
 
 /******** Middle Section CSS End *******/
 

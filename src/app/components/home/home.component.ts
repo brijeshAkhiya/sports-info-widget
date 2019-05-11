@@ -169,6 +169,8 @@ export class HomeComponent implements OnInit {
     this.sportsService.getmatchfixtures().subscribe(res => {
       if (res["data"]) {
         this.matchfixtures = res["data"];
+        console.log(this.matchfixtures);
+        
       }
     });
   }
@@ -179,4 +181,11 @@ export class HomeComponent implements OnInit {
     let slugname = this.slugifyPipe.transform(title);
     this.router.navigate(["/blog", type, btoa(id),slugname]);
   }
+
+   //get match detail
+   matchDetail(id,team1,team2){
+    let teams =  team1.concat('-',team2)  
+    this.router.navigate(['/cricket/match',btoa(id),teams])
+  }
+
 }

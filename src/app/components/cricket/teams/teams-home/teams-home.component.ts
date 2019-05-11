@@ -14,7 +14,7 @@ export class TeamsHomeComponent implements OnInit {
   teamid: any;
   tournamentid: any;
   fixturesdata: any;
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute) {
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private router: Router) {
     this.tournamentid = atob(this.activatedroute.snapshot.params.tournamentid)
     this.teamid = atob(this.activatedroute.snapshot.params.teamid)
   }
@@ -42,7 +42,12 @@ export class TeamsHomeComponent implements OnInit {
         this.fixturesdata = Object.keys(dateObj).map(day => ({ day, data: dateObj[day] }))
         
       }
-    })
+    },
+    (error)=>{
+      if(error['error'].status == 500){
+        this.router.navigate(['/page-not-found'])
+      }
+  })
   }
 
   getarticles() {
@@ -53,5 +58,10 @@ export class TeamsHomeComponent implements OnInit {
       aIds: [this.teamid]
     }
   }
-
+  
+   //get match detail
+   matchDetail(id,team1,team2){
+    let teams =  team1.concat('-',team2)  
+    this.router.navigate(['/cricket/match',btoa(id),teams])
+  }
 }

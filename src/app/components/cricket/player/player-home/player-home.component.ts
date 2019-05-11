@@ -42,7 +42,12 @@ export class PlayerHomeComponent implements OnInit {
           this.totalwicket += s.bowling.wickets
         })
       }
-    })
+    },
+    (error)=>{
+      if(error['error'].status == 500){
+        this.router.navigate(['/page-not-found'])
+      }
+  })
   }
 
 

@@ -13,10 +13,12 @@ export class BlogListComponent implements OnInit {
   nlimit:any= 10;
   blogs: any;
   data: any;
+  widgetblogs: any;
   constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router) {}
 
   ngOnInit() {
     this.getPopularArticles(this.nstart, this.nlimit);
+    this.getRecentArticles();
   }
   //get popular posts
 
@@ -47,6 +49,18 @@ export class BlogListComponent implements OnInit {
     });
   }
 
+//
+  getRecentArticles() {
+    let data = {
+      nstart: 0,
+      nLimit: 10
+    };
+    this.sportsService.getrecentpost(data).subscribe(res => {
+      if (res["data"]) {
+        this.widgetblogs = res["data"];
+      }
+    });
+  }
    //blog view
 
    blogview(id, type, title) {
