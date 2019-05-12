@@ -33,13 +33,9 @@
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
           <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Recommended Stories</h5>
+            <h5>Recent Stories</h5>
             <ul class="common-list">
-              <li><a>Mumbai Indians</a></li>
-              <li><a>Kolkata Knight Riders</a></li>
-              <li><a>Royal Challengers Bangalore</a></li>
-              <li><a>Chennai Super Kings</a></li>
-              <li><a>Kings XI Punjab</a></li>
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a (click)="blogview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>

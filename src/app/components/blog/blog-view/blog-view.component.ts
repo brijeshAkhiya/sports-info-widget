@@ -46,6 +46,10 @@ export class BlogViewComponent implements OnInit {
     if (this.blogid) {
       this.sportsService.getblogview(this.blogid).subscribe(res => {
         this.blogdata = res["data"];
+      },(error)=>{
+          if(error['error'].status == 500){
+            this.router.navigate(['/page-not-found'])
+          }
       });
     }
   }

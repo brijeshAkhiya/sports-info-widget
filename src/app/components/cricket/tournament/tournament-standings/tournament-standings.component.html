@@ -22,8 +22,8 @@
               <tbody>
                 <tr *ngFor="let item of pointstable">
                   <td>{{item.rank}}</td>
-                  <td><img class="" src="../../../../../assets/images/flag-ind.svg" alt="logo">{{item.team.name}}
-                  </td>
+                  <td><a (click)="teamInfo(item.team.id,item.team.name)"><img class="" src="../../../../../assets/images/flag-ind.svg" alt="logo">{{item.team.name}}
+                  </a></td>
                   <td>{{item.played}}</td>
                   <td>{{item.win}}</td>
                   <td>{{item.loss}}</td>

@@ -67,7 +67,7 @@
             <ngb-tab title="Fixtures">
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                  <li *ngFor="let item of matchfixtures | slice:0:4">
+                  <li *ngFor="let item of matchfixtures | slice:0:4" (click)="matchDetail(item.match_id,item.competitors[0].name,item.competitors[1].name)">
                     <div class="title d-flex justify-content-between align-items-center">
                       <p><b>{{item.season_name}}</b></p>
                       <p>{{item.scheduled | amCalendar }}</p>
@@ -96,7 +96,7 @@
               </ng-template>
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                  <li *ngFor="let result of matchresults | slice:1:5 ">
+                  <li *ngFor="let result of matchresults | slice:1:5" (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">
                     <div class="title d-flex justify-content-between align-items-center">
                       <p><b>{{result.season_name}}</b></p>
                       <p>{{result.scheduled | amCalendar}}</p>

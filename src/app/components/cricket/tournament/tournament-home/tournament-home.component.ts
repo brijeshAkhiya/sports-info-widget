@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { SlugifyPipe } from "../../../../pipes/slugpipe";
+import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 
 @Component({
   selector: 'app-tournament-home',
@@ -20,7 +21,7 @@ export class TournamentHomeComponent implements OnInit {
   popularvideos: any;
   populararticles: any;
 
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private router: Router) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.snapshot.params.id)
@@ -116,6 +117,14 @@ export class TournamentHomeComponent implements OnInit {
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
     this.router.navigate(["/blog", type, btoa(id),slugname]);
+  }
+
+   //get player information
+
+   playerinfo(id, name) {
+    let playername = this.splitpipe.transform(name)
+    let slugname = this.slugifyPipe.transform(playername);
+    this.router.navigate(['/cricket/player', btoa(id), slugname]);
   }
 
 

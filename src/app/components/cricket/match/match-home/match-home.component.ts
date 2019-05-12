@@ -36,9 +36,7 @@ export class MatchHomeComponent implements OnInit {
   venuelat: any;
   venuelong: any;
   matchprobability: any;
-
   matchdata: any;
-
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -128,10 +126,7 @@ export class MatchHomeComponent implements OnInit {
         } 
         else if (this.matchstatus == "closed") {
           this.manofthematch = res["data"]["statistics"]["man_of_the_match"];
-          this.matcheventstatus = res["data"]["sport_event_status"];
-
-          console.log('mes',this.matcheventstatus);
-          
+          this.matcheventstatus = res["data"]["sport_event_status"];   
           this.scorecards = res["data"]["statistics"]["innings"];
       
           this.scorecards.map((data)=>{ 
@@ -154,9 +149,6 @@ export class MatchHomeComponent implements OnInit {
           this.bowlingteam1 = this.bowlingteam1[0]['teams'][1]['statistics']['bowling']
           this.bowlingteam2 = this.bowlingteam2[0]['teams'][1]['statistics']['bowling']
 
-          console.log(this.battingteam1);
-          
-        
           let arrnew = []
           arrnew = this.battingteam2["players"]
           arrnew.map(single => {
@@ -183,7 +175,12 @@ export class MatchHomeComponent implements OnInit {
       
         }
       }
-    });
+    },
+    (error)=>{
+      if(error['error'].status == 400){
+        this.router.navigate(['/page-not-found'])
+      }
+  });
   }
 
   //get match probablities
