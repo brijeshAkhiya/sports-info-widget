@@ -16,6 +16,8 @@ import { SplitPipe } from '../pipes/stringsplitpipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { CommonBlogCardComponent } from './common-blog-card/common-blog-card.component';
+import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
 
 @NgModule({
     imports: [
@@ -28,8 +30,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
         FormsModule,
         LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, ResizeImagePipe,  CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe],
+    declarations: [TruncatePipe, ResizeImagePipe,  CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent],
     providers: [TruncatePipe, ResizeImagePipe,  SportsService,SplitPipe],
-    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe, CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe]
+    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe, CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent]
 })
 export class SharedModule { }

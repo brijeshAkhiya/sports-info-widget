@@ -1,0 +1,85 @@
+<section class="common-section">
+  <div class="container">
+    <div class="common-desc-block common-shadow rounded-box ">
+      <div class="row row-size12">
+        <div class="col-lg-7">
+          <h1>Advertise with us</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="col-lg-5">
+          <img src="../../../assets/images/about-img.jpg" alt="about">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="common-form-section">
+  <div class="container">
+    <div class="common-section">
+      <div class="common-desc-block common-shadow rounded-box">
+        <div class="row row-size12">
+          <div class="col-lg-4">
+            <div class="title-block">
+              <h1>Ready to reach our audience?</h1>
+              <p>Fill up this form and our staff will contact you soon.</p>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <form [formGroup]="advertiseForm" (ngSubmit)="submit()" novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.fullname.errors}">
+                    <input type="text" class="form-control" placeholder="Full Name" formControlName="fullname">
+                    <span  *ngIf="submitted && f.fullname.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.company.errors}">
+                    <input type="text" class="form-control" placeholder="Company" formControlName="company">
+                    <span  *ngIf="submitted && f.company.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.email.errors}">
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email"> 
+                    <span  *ngIf="submitted && f.email.hasError('required')">This field is required!</span>
+                    <span  *ngIf="submitted && f.email.hasError('email')">Please enter valid email address</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.phone.errors}">
+                    <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
+                    <span  *ngIf="submitted && f.phone.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.textareavalue.errors}">
+                    <textarea type="text" class="form-control" placeholder="How can we help ?" formControlName="textareavalue"></textarea>
+                    <span *ngIf="submitted && f.textareavalue.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+              </div>
+              <button class="theme-btn" type="submit" [disabled]="btnDisable">Submit<span></span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -20,7 +20,7 @@ export class TournamentHomeComponent implements OnInit {
   latestposts: any;
   popularvideos: any;
   populararticles: any;
-
+  commonnewsparams:any
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router) { }
 
   ngOnInit() {
@@ -29,6 +29,13 @@ export class TournamentHomeComponent implements OnInit {
     this.getTournamentsLeader();
     this.getTournamentPointsTable();
     this.getTournamentTeams();
+    this.commonnewsparams= {
+      eType: "",
+      nLimit: 10,
+      eSport: "Cricket",
+      eSort:'Latest',
+      aIds: [this.tournamentid]
+    };
   }
 
   getTournamentsLeader() {
@@ -82,33 +89,29 @@ export class TournamentHomeComponent implements OnInit {
   //get recent posts
 
   getRecentPosts() {
-    let data = {
+    this.commonnewsparams= {
       eType: "",
       nLimit: 10,
       eSport: "Cricket",
       eSort:'Latest',
       aIds: [this.tournamentid]
     };
-    this.sportsService.getrelatedpost(data).subscribe(res => {
-      if (res["data"]) {
-        this.latestposts = res["data"];
-      }
-    });
+    // this.commonnewstype = 'any'
   }
 
   //get video posts
 
   getVideoPosts() {
-    let data = {
+    this.commonnewsparams= {
       nLimit: 10,
       eType: "Video",
       aIds: [this.tournamentid]
     };
-    this.sportsService.getrelatedpost(data).subscribe(res => {
-      if (res["data"]) {
-        this.popularvideos = res["data"];
-      }
-    });
+    // this.sportsService.getrelatedpost(data).subscribe(res => {
+    //   if (res["data"]) {
+    //     this.popularvideos = res["data"];
+    //   }
+    // });
   }
 
 

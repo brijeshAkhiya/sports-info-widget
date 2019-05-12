@@ -1,0 +1,28 @@
+.contact-item                           { padding: 16px; min-height: 166px; background: #fff; justify-content: space-between; -webkit-justify-content: space-between; }
+.contact-item img                       { margin-bottom: 8px; width: 48px; filter: grayscale(100%); -webkit-filter: grayscale(100%); opacity: 0.3; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.contact-item:hover img                 { filter: grayscale(0%) drop-shadow(0px 2px 8px rgba(239, 29, 58, 0.32)); -webkit-filter: grayscale(0%) drop-shadow(0px 2px 8px rgba(239, 29, 58, 0.32));  opacity: 1; }
+.contact-item h5                        { margin: 0px; }
+.contact-item h5 a                      { color: #292929; }
+.contact-item h5 a:hover,
+.contact-item h5 a:focus                { color: #ED1A33; }
+.common-desc-block                      { padding: 24px; background: #fff; }
+.common-form-section .common-section    { border-top: 2px solid #E5E5EC; }
+.common-form-section .title-block       { margin-bottom: 24px; }
+.common-form-section h1                 { margin-bottom: 8px; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .contact-item                       { min-height: 156px; }
+    .contact-item img                   { width: 40px;}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .contact-item                       { min-height: 136px; }
+    .contact-item img                   { width: 32px;}
+    .contact-item h5                    { font-size: 16px; line-height: 21px; }
+}
+@media (max-width: 767px) {
+    .contact-item                       { margin-bottom: 16px; min-height: initial; }
+    .row [class*="col-"]:last-child .contact-item   { margin-bottom: 0px;}
+    .contact-item img                   { width: 32px; }
+}

@@ -13,26 +13,24 @@ export class CommonNewsListComponent implements OnInit {
   @Input() type: any;
   @Input() reqparams: {};
   loadnewposts: any;
-  constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe, private router: Router) { }
+  constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() { 
      if (this.reqparams) { 
       this.posts = []
       this.getRelatedPosts(this.reqparams)
     }
     else if(this.type == 'any'){
       this.posts = []
-      this.getRecentPosts(this.type);
+      this.getRecentPosts();
     }
-
   }
 
 
   //get recent posts 
 
-  getRecentPosts(type) {
+  getRecentPosts() {
     let data = {
-      eType: type,
       nLimit: 10
     }
     this.sportsService.getrecentpost(data).subscribe((res) => {
@@ -69,6 +67,7 @@ export class CommonNewsListComponent implements OnInit {
     })
   }
 
+  //blog view 
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);

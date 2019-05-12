@@ -36,7 +36,7 @@ export class MatchHomeComponent implements OnInit {
   venuelat: any;
   venuelong: any;
   matchprobability: any;
-  matchcommentry: any;
+  matchdata: any;
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -63,6 +63,7 @@ export class MatchHomeComponent implements OnInit {
   getMatchTimeline() {
     this.sportsService.getmatchtimeline(this.matchid).subscribe(res => {
       if (res["data"]) {
+        this.matchdata = res['data'];
         console.log('data',res["data"]);
         this.matchstatus = res["data"]["sport_event_status"].status;
         this.sportevent = res["data"]["sport_event"];
@@ -170,12 +171,6 @@ export class MatchHomeComponent implements OnInit {
           playerarr.map(data => {
             this.objnew2[data.id].push(data);
           });
-
-          this.matchcommentry = res['data']['timeline'];
-          console.log(this.matchcommentry);
-          
-
-
 
       
         }
