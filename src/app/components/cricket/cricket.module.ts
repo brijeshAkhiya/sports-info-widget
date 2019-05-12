@@ -25,9 +25,10 @@ import { TournamentStandingsComponent } from './tournament/tournament-standings/
 import { SplitPipe } from '../../pipes/stringsplitpipe';
 import { StringUnder } from '../../pipes/underlinepipe';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { MatchCommentryComponent } from './match/match-commentry/match-commentry.component';
 
 @NgModule({
-  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent, TournamentStandingsComponent,StringUnder],
+  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent, TournamentStandingsComponent,StringUnder, MatchCommentryComponent],
   imports: [
     CommonModule,
     NgbModule,
