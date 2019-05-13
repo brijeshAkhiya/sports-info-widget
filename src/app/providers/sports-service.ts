@@ -184,6 +184,18 @@ export class SportsService {
 
    }
    
+   //post website inquiries
+
+   postinquiries(data){
+      return this.http.post(environment.apiUrl + environment.version + `/inquiries`,data);
+
+   }
+
+   //get custom ads data 
+
+   getcustomadsbanner(){
+      return this.http.get(environment.apiUrl + environment.version + `/ads`);
+   }
 
 
 

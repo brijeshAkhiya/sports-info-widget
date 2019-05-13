@@ -98,7 +98,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { margin-bottom: 24px; height: 300px; }
     .main-popular-video:before,
-    .main-popular-video:after               { width: 100px;}
+    .main-popular-video:after               { width: 100px; height: 100px;}
     .home-popular-vid-list                  { padding: 0px; height: initial; display: flex;}
     .home-popular-vid-list .video-item      { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
     /* .home-popular-vid-list                  { padding: 0px 12%; height: 360px; } */

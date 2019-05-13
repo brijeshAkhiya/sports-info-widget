@@ -1,0 +1,82 @@
+<section class="common-section">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <div class="row row-size12">
+      <div class="col-md-4">
+        <div class="contact-item d-flex flex-column common-shadow rounded-box">
+          <div>
+            <img src="../../../../assets/images/message-red.svg" alt="mail">
+          </div>
+          <h5><a href="mailto:contact@sportsinfo.com">contact@sportsinfo.com</a></h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item d-flex flex-column common-shadow rounded-box">
+          <div>
+            <img src="../../../../assets/images/telephone-red.svg" alt="telephone">
+          </div>
+          <h5><a href="tel:+911234567890">+91 12345 67890</a></h5>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item d-flex flex-column common-shadow rounded-box">
+          <div>
+            <img src="../../../../assets/images/map-red.svg" alt="address">
+          </div>
+          <h5>2202, Beaumonde Business Hub, Kolkata, West Bengal, India</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="common-form-section">
+  <div class="container">
+    <div class="common-section">
+      <div class="common-desc-block common-shadow rounded-box">
+        <div class="row row-size12">
+          <div class="col-lg-4">
+            <div class="title-block">
+              <h1>Send us a message</h1>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <form [formGroup]="contactForm" (ngSubmit)="submit()" novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.fullname.errors}">
+                    <input type="text" class="form-control" placeholder="Full Name" formControlName="fullname">
+                    <span  *ngIf="submitted && f.fullname.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.email.errors}">
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                    <span  *ngIf="submitted && f.email.hasError('required')">This field is required!</span>
+                    <span  *ngIf="submitted && f.email.hasError('email')">Please enter valid email address</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.subject.errors}">
+                    <input type="text" class="form-control" placeholder="Subject" formControlName="subject">
+                    <span  *ngIf="submitted && f.subject.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.msgvalue.errors}">
+                    <textarea type="text" class="form-control" placeholder="Message" formControlName="msgvalue"></textarea>
+                    <span *ngIf="submitted && f.msgvalue.hasError('required')">This field is required!</span>
+                  </div>
+                </div>
+              </div>
+              <button class="theme-btn" type="submit" [disabled]="btnDisable">Submit<span></span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

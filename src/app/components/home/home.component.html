@@ -23,7 +23,7 @@
 
 <!-- Start Ads -->
 <div class="container">
-  <img src="../../../assets/images/ad-1320-300.jpg" alt="AD">
+  <a ><img [src]="adsObj['Large'][0].sImage | resizeImage" alt="AD"></a>
 </div>
 <!-- End Ads -->
 
@@ -48,7 +48,9 @@
             </div>
           </div>
         </div>
-        <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+        <div class="ad-block">
+            <a><img [src]="adsObj['Large'][0].sImage | resizeImage" alt="AD"></a>
+        </div>
         
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4>Related news</h4>
@@ -126,11 +128,10 @@
             </ngb-tab>
           </ngb-tabset>
         </div>
-        <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-        <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+        <div class="ad-block"><a><img [src]="adsObj['Rectangle'][0].sImage | resizeImage" alt="AD"></a></div>
+        <div class="ad-block"><a><img [src]="adsObj['Banner'][0].sImage | resizeImage" alt="AD"></a></div>
       </div>
       <!-- End Cricket sidebar -->
-
     </div>
   </div>
 </section>
@@ -202,7 +203,7 @@
                 (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle | truncate:[60,'...']}}</a></li>
           </ul>
         </div>
-        <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+        <div class="ad-block"><a><img [src]="adsObj['Banner'][1].sImage | resizeImage" alt="AD"></a></div>
       </div>
     </div>
   </div>

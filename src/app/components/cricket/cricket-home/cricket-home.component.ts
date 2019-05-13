@@ -19,11 +19,18 @@ export class CricketHomeComponent implements OnInit {
   widget1type = "currentseries";
   widget2title = "Popular Right Now";
   widget2type = "populartags";
+  commonnewsparams:any
+  commonnewstype:any
   constructor(private sportsService: SportsService,private router: Router,
     private slugifyPipe: SlugifyPipe) {}
 
   ngOnInit() {
     this.getPopularArticles();
+    this.commonnewsparams= {
+      eType: "",
+      nLimit: 10,
+      eSport: "Cricket",
+    };
   }
 
   //get current cricket series
@@ -82,30 +89,16 @@ export class CricketHomeComponent implements OnInit {
   //get recent posts
 
   getRecentPosts() {
-    let data = {
-      eType: "",
-      nLimit: 10,
-      eSport: "Cricket"
-    };
-    this.sportsService.getrecentpost(data).subscribe(res => {
-      if (res["data"]) {
-        this.latestposts = res["data"];
-      }
-    });
+    this.commonnewstype = 'any'
   }
 
   //get video posts
 
   getVideoPosts() {
-    let data = {
-      nLimit: 10,
-      eType: "Video"
-    };
-    this.sportsService.getpopularpost(data).subscribe(res => {
-      if (res["data"]) {
-        this.popularvideos = res["data"];
-      }
-    });
+    this.commonnewsparams = {
+      nLimit:10,
+      eType:'Video'
+    }
   }
 
 

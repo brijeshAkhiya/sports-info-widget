@@ -233,19 +233,18 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /* -------- Form Elements Style ------- */
 form .form-group                    { margin-bottom: 24px;  }
-form .form-control                  { padding: 12px 16px; font-size: 20px; line-height: 24px; color: #292929; border: 2px solid #EBEBEB; border-radius: 4px; outline: none !important; }
+form .form-control                  { padding: 12px 16px; font-size: 20px; line-height: 24px; color: #292929; border: 2px solid #EBEBEB; font-weight: 400; border-radius: 4px; outline: none !important; }
 form textarea.form-control          { height: 120px; overflow: auto; resize: none; }
-form .form-control:focus            { color: #292929; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.04); border-color: #292929;  } 
+form .form-control:focus            { color: #292929; box-shadow: none; -webkit-box-shadow: none; border-color: #292929;  } 
 form ::-webkit-input-placeholder    { color: #292929; opacity: 1; }
 form ::-moz-placeholder             { color: #292929; opacity: 1; }
 form :-ms-input-placeholder         { color: #292929; opacity: 1; }
 form :-moz-placeholder              { color: #292929; opacity: 1; }
-
+form .has-error .form-control       { color: #ED1A33; border-color: #ED1A33; }
+form .has-error span                { margin: 4px 0px 0px; display: block; color: #ED1A33; }
 /******** Middle Section CSS End *******/
 
 /***** Bottom Section CSS Start *******/
-
-/* -------- Footer Inner Section ------- */
 /****** Bottom Section CSS End *******/
 
 /***** Responsive CSS Start ******/
@@ -398,6 +397,10 @@ form :-moz-placeholder              { color: #292929; opacity: 1; }
 /* -------- Table Style ------- */
     .common-table .table th,
     .common-table .table td                         { padding: 10px 4px 10px; font-size: 13px; line-height: 16px; }
+/* -------- Form Elements Style ------- */
+    form .form-group                    { margin-bottom: 16px;  }
+    form .form-control                  { padding: 9px 15px; font-size: 16px; line-height: 20px;  }
+    form textarea.form-control          { height: 100px; }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {

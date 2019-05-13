@@ -10,6 +10,9 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SportsService } from '../../providers/sports-service';
 import { Observable ,interval} from 'rxjs';
 
+import * as Ads from '../../store/ads-management/ads.actions';
+
+
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
@@ -20,33 +23,18 @@ export class MainHeaderComponent implements OnInit {
   @ViewChild('navbarnav') navbarnav: ElementRef
   tinySliderConfig: NgxTinySliderSettingsInterface;
 
-  Sportsnames = [
-    { "name": "Cricket", "id": "1", "route": "/cricket" },
-    { "name": "Soccer", "id": "2" },
-    { "name": "Badminton", "id": "3" },
-    { "name": "Basketball", "id": "4" },
-    { "name": "Field Hockey", "id": "5" },
-    { "name": "Racing", "id": "6" },
-    { "name": "Tennis sports", "id": "7" },
-  ]
-
-  slides = [
-    { img: "http://placehold.it/350x150/000000" },
-    { img: "http://placehold.it/350x150/111111" },
-    { img: "http://placehold.it/350x150/333333" },
-    { img: "http://placehold.it/350x150/666666" },
-    { img: "http://placehold.it/350x150/666666" },
-    { img: "http://placehold.it/350x150/666666" }
-  ];
-  slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };
+ 
   sliderdata: any;
   sliderresults = [];
   isapply: boolean = false;
-  socialUser: import("/Users/yudizsolutions/Documents/sports-info-web/node_modules/angularx-social-login/src/entities/user").SocialUser;
+  socialUser: any;
 
 
   constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService, 
     private modalService: NgbModal,private socialLoginService: AuthService,private store: Store<fromRoot.State>) {
+      //get custom ads data Funtion call --->
+      this.getCustomAds();
+
   }
 
 
@@ -80,6 +68,19 @@ export class MainHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.getHeaderSliderData();
+    
+  }
+
+  //get custom ads api call -Ngrx Store 
+  getCustomAds(){
+    this.sportsService.getcustomadsbanner().subscribe((res)=>{
+        if(res['data']){
+          this.store.dispatch(new Ads.SaveAds(res['data']));
+        }
+    },
+    (error)=>{
+      this.getCustomAds();
+    })
   }
 
   //nav bar click event 

@@ -26,7 +26,7 @@
                   </div>
                 </div>
               </div>
-              <div class="common-popular-list popular-list-4">
+              <!-- <div class="common-popular-list popular-list-4">
                 <div class="row row-size12">
                   <div class="col-sm-6 col-xl-3" *ngFor="let post of populararticles | slice:1:5">
                     <div class="popular-item common-shadow">
@@ -43,11 +43,15 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
+              <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
               <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
 
-              <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9"></app-common-blog-card>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+
+              <!-- <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9"></app-common-blog-card>
+              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
+
             </ng-template>
           </ngb-tab>
           <!--Latest Article Tab-->
@@ -56,8 +60,9 @@
               <div (click)="getRecentPosts()">Latest</div>
             </ng-template>
             <ng-template ngbTabContent>
-                <app-common-blog-card [posts]="latestposts" [start]="0" [end]="5"></app-common-blog-card>
-                <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+                <!-- <app-common-blog-card [posts]="latestposts" [start]="0" [end]="5"></app-common-blog-card>
+                <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Videos tab start-->
@@ -66,8 +71,10 @@
               <div (click)="getVideoPosts()">Videos</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-blog-card [posts]="popularvideos" [start]="0" [end]="5"></app-common-blog-card>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+              <!-- <app-common-blog-card [posts]="popularvideos" [start]="0" [end]="5"></app-common-blog-card>
+              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
+
             </ng-template>
           </ngb-tab>
         </ngb-tabset>

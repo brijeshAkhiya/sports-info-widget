@@ -9,6 +9,7 @@ import { SportsService } from "../../providers/sports-service";
 import { distinctUntilChanged } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from "../../pipes/slugpipe";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: "app-home",
@@ -32,19 +33,24 @@ export class HomeComponent implements OnInit {
   period_score: any;
   matchfixtures: any;
   commonnewsparams: any;
+  customads: any;
+  adsObj: {};
+  ad: any;
   constructor(
     private renderer2: Renderer2,
     private sportsService: SportsService,
     private router: Router,
-    private slugifyPipe: SlugifyPipe
+    private slugifyPipe: SlugifyPipe,
+    private store: Store<any>
   ) {
     this.commonnewsparams = {
-      nStart:0,
-      nLimit:4
+      nStart: 0,
+      nLimit: 4
     };
   }
 
   ngOnInit() {
+    this.getCustomAds();
     this.getBannerPost();
     this.getPopularArticles();
     this.getPopularVideos();
@@ -53,6 +59,35 @@ export class HomeComponent implements OnInit {
     this.getPopularTags();
   }
 
+  //get custom ads data from Ngrx
+
+  getCustomAds() {
+    this.store.subscribe(data => {
+      let arr = data["ads"].Ads;
+      this.adsObj = {};
+      arr.map(data => {
+        if (!this.adsObj[data.eType]) {
+          this.adsObj[data.eType] = [];
+        }
+      });
+      arr.map(data => {
+        this.adsObj[data.eType].push(data);
+      });
+    });
+    console.log(this.adsObj);
+    
+  }
+
+  // getrandom(type){
+  //   console.log('function call ');
+  //   let number = Math.floor(Math.random() * this.adsObj[type].length)
+  //   return number;  
+  // }
+
+  displayAd(type) {
+    this.ad = this.adsObj[type][Math.floor(Math.random() * this.adsObj[type].length)];
+    return this.ad ? this.ad : {};
+  }
   //get banner posts
 
   getBannerPost() {
@@ -170,7 +205,6 @@ export class HomeComponent implements OnInit {
       if (res["data"]) {
         this.matchfixtures = res["data"];
         console.log(this.matchfixtures);
-        
       }
     });
   }
@@ -179,13 +213,12 @@ export class HomeComponent implements OnInit {
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id),slugname]);
+    this.router.navigate(["/blog", type, btoa(id), slugname]);
   }
 
-   //get match detail
-   matchDetail(id,team1,team2){
-    let teams =  team1.concat('-',team2)  
-    this.router.navigate(['/cricket/match',btoa(id),teams])
+  //get match detail
+  matchDetail(id, team1, team2) {
+    let teams = team1.concat("-", team2);
+    this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
-
 }
