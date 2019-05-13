@@ -197,6 +197,11 @@ export class SportsService {
       return this.http.get(environment.apiUrl + environment.version + `/ads`);
    }
 
+   //update adclick count
+   updateaddclickcount(id){
+      return this.http.get(environment.apiUrl + environment.version + `/ads/${id}`)
+   }
+
 
 
 }

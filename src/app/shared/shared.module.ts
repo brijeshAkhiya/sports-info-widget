@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CommonBlogCardComponent } from './common-blog-card/common-blog-card.component';
 import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
+import { CustomAdsWidgetComponent } from './custom-ads-widget/custom-ads-widget.component';
 
 @NgModule({
     imports: [
@@ -30,8 +31,8 @@ import { CommonRelatedBlogCardComponent } from './common-related-blog-card/commo
         FormsModule,
         LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, ResizeImagePipe,  CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent],
+    declarations: [TruncatePipe, ResizeImagePipe,  CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent],
     providers: [TruncatePipe, ResizeImagePipe,  SportsService,SplitPipe],
-    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe, CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent]
+    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe, CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent]
 })
 export class SharedModule { }

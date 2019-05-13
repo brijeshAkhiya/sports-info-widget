@@ -49,7 +49,7 @@
               </div>
             </div>
             <!--Results-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'results'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
+            <!-- <div class="slider-item" *ngIf="slide.slider_status == 'results'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between align-items-center">
                   <p><b>{{slide.season_name}}</b></p>
@@ -69,15 +69,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </ng-template>
         </ng-container>
-        <!-- <ng-container *ngFor="let slide of slides">
-          <ng-template carouselSlide>
-            <img [src]="slide.img">
-          </ng-template>
-        </ng-container> -->
-
       </owl-carousel-o>
     </div>
   </div>

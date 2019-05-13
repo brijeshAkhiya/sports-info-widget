@@ -165,9 +165,9 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-widget .common-list li button           { margin: 12px; padding: 14px 16px; width: calc(100% - 24px); background: #ED1A33; color: #fff; text-align: center; border: none; border-radius: 4px; font-weight: 500; text-transform: uppercase; }
 .common-widget .common-list li button:hover,
 .common-widget .common-list li button:focus     { background: #B80E23; color: #fff; }
-.ad-block                           { margin: 24px 0px; text-align: center; }
-.ad-block:first-child               { margin-top: 0px; }
-.ad-block:last-child                { margin-bottom: 0px;}
+app-custom-ads-widget               { margin: 24px 0px; display: block; text-align: center; }
+app-custom-ads-widget:first-child   { margin-top: 0px; }
+app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 
 /* -------- Common Tab ------- */
 .common-tabs > .nav-tabs                          { background: #fff; border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; }
@@ -317,7 +317,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 /* -------- Common Widget Block ------- */
     .common-stories-widget,
     .common-widget                      { margin: 24px 0px;}
-    .ad-block:first-child               { margin-top: 24px; }
+    app-custom-ads-widget:first-child   { margin-top: 24px; }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {

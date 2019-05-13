@@ -45,10 +45,8 @@
                 </div>
               </div> -->
               <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
-              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
               <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
-
-
               <!-- <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9"></app-common-blog-card>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
 
@@ -80,8 +78,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--Points table widget-->
           <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
@@ -165,7 +163,7 @@
               </ngb-tab>
             </ngb-tabset>
           </div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
         </div>
       </div>
     </div>

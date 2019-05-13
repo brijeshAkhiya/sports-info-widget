@@ -391,18 +391,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
-          <!-- <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Other players</h5>
-            <ul class="common-list">
-              <li><a>Virat Kohli</a></li>
-              <li><a>Ravindra Jadeja</a></li>
-              <li><a>Mohammed Shami</a></li>
-              <li><a>Irfan Pathan</a></li>
-              <li><a>Yuvraj Singh</a></li>
-            </ul>
-          </div> -->
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
           *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>

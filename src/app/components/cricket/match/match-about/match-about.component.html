@@ -1,24 +1,24 @@
-<div
+<!-- <div
   class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
   <h1>{{matchdata.matchdata.sportevent?.competitors[0].abbreviation}} vs {{matchdata.sportevent?.competitors[1].abbreviation}}</h1>
   <div class="match-update">
     <p class="light-text">{{matchdata.sportevent?.venue.name}}, {{matchdata.sportevent?.venue.city_name}} |
       {{matchdata.sportevent?.scheduled | date}}</p>
     <p *ngIf="matchstatus == 'closed'">{{matcheventstatus.match_result}}</p>
-  </div>
+  </div> -->
 
   <!--If match not started-->
-  <div class="current-match d-flex">
+  <!-- <div class="current-match d-flex">
     <div class="current-teams" *ngIf="matchstatus == 'not_started'">
       <div class="current-team d-flex justify-content-between align-items-center">
         <h4><img src="../../../../../assets/images/flag-wi.svg">{{matchdata.sportevent?.competitors[0].abbreviation}}</h4>
-        <!-- <h4 class="score">192/4 (50.0 ov)</h4> -->
+      
       </div>
       <div class="current-team d-flex justify-content-between align-items-center">
         <h4><img src="../../../../../assets/images/flag-wi.svg">{{matchdata.sportevent?.competitors[1].abbreviation}}</h4>
-        <!-- <h4 class="score">192/4 (50.0 ov)</h4> -->
+      
       </div>
-    </div>
+    </div> -->
     <!--If match is ended-->
     <!-- <div class="current-teams" *ngIf="matchstatus == 'closed'">
       <div class="current-team d-flex justify-content-between align-items-center"
@@ -46,8 +46,8 @@
       <div class="player-info">
         <p class="light-text">Player of the Match</p>
         <h5 class="theme-color">{{manofthematch[0]?.name | split}}</h5>
-        <!-- <p class="player-team">West Indies</p> 
+        <p class="player-team">West Indies</p> 
       </div>
     </div>
   </div> -->
-</div>
+<!-- </div> -->

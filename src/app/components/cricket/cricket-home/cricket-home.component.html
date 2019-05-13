@@ -49,7 +49,7 @@
                   </div>
                 </div>
               </div> -->
-              <div class="ad-block"><img src="../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+              <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
 
               <!-- <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9" (loadmore)="loadmor"></app-common-blog-card>
               <div class="text-center"><button class="theme-btn down-btn" (click)="loadpopular()">Load
@@ -84,8 +84,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
             *ngIf="widget1type && widget1title"></app-common-story-widget>
           <app-common-story-widget [title]="widget2title" [type]="widget2type" [data]="populartags"

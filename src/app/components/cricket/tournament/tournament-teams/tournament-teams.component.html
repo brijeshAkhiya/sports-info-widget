@@ -21,8 +21,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--Current series widget-->
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
             *ngIf="widget1type && widget1title"></app-common-story-widget>

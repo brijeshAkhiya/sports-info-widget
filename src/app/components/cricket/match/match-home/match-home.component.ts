@@ -37,6 +37,8 @@ export class MatchHomeComponent implements OnInit {
   venuelong: any;
   matchprobability: any;
   matchdata: any;
+  widget1title = "Recommended Links";
+  widget1type = "currentseries";
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,

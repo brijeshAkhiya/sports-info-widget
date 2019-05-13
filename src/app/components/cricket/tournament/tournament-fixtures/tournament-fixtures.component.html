@@ -101,8 +101,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--points table widget-->
           <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
         </div>

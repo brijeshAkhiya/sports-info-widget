@@ -11,6 +11,8 @@ export class MatchAboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.matchdata);
+    
   }
 
 }
