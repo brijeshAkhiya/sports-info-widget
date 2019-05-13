@@ -6,7 +6,7 @@
           class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>{{sportevent?.competitors[0].abbreviation}} vs {{sportevent?.competitors[1].abbreviation}}</h1>
           <div class="match-update">
-            <p class="light-text">{{sportevent?.venue.name}}, {{sportevent?.venue.city_name}} |
+            <p class="light-text">{{sportevent?.venue.name}}{{sportevent?.venue_name ? ',' : ' '}} {{sportevent?.venue.city_name}} |
               {{sportevent?.scheduled | date}}</p>
             <p *ngIf="matchstatus == 'closed'">{{matcheventstatus.match_result}}</p>
           </div>
@@ -85,7 +85,9 @@
               <section class="last-meetings-section">
                 <h4 class="line-title">Last meetings</h4>
                 <div class="schedule-list schedule-tour-list">
-                  <div class="schedule-month d-flex" *ngFor="let item of matchesresultdata">
+                  <div class="schedule-list-inner" *ngFor="let item of matchesresultdata">
+                  <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
+                   
                     <div class="month-title">
                       <div class="sticky-month">
                         <h5>{{item.day}}</h5>
@@ -96,7 +98,7 @@
                         *ngFor="let item of item.data">
                         <div class="match-desc">
                           <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
-                          <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
+                          <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',' : ''}} {{item.city_name}}</p>
                           <p class="result-line">{{item.match_result}}</p>
                         </div>
                         <div class="match-teams d-flex align-items-center">
@@ -126,6 +128,8 @@
                     </div>
                   </div>
                 </div>
+                </div>
+              
               </section>
               <h4 class="line-title">Venue Details</h4>
               <section class="venue-info rounded-box common-shadow">

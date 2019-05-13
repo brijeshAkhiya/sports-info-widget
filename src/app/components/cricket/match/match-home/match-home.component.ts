@@ -75,6 +75,10 @@ export class MatchHomeComponent implements OnInit {
         this.venuelat = Number(cordinates[0])
         this.venuelong = Number(cordinates[1])
         }
+        else{
+          this.venuelat = 22.5726
+          this.venuelong = 88.363
+        }
         //teams array
         let obj = {};
         let team_arr = res["data"]["sport_event"]["competitors"];

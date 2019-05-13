@@ -12,8 +12,8 @@
   </div>
 </section>
 <section class="blog-banner" *ngIf="blogtype == 'Video'" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
-  <video controls [ngClass]="{'show': isplay}">
-    <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata.sVideo">
+  <video controls [ngClass]="{'show': isplay}" controlsList="nodownload">
+    <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
     Your browser does not support the video tag.
   </video>
   <button class="video-play-btn" (click)="videoplay()"></button>
@@ -91,7 +91,7 @@
                 <p>{{comment.sComment}}</p>
               </div>
             </div>
-            <button class="cmt-view-btn" (click)="viewmorecomments()">VIEW MORE</button>
+            <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="!hideBtn">VIEW MORE</button>
           </div>
         </div>
       </div>

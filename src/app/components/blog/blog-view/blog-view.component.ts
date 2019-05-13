@@ -23,6 +23,7 @@ export class BlogViewComponent implements OnInit {
   isplay:boolean = false
   s3videobaseurl = 'https://d1ldsx0apuyt84.cloudfront.net/'
   widgetblogs: any;
+  hideBtn: boolean = false;
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
@@ -46,6 +47,9 @@ export class BlogViewComponent implements OnInit {
     if (this.blogid) {
       this.sportsService.getblogview(this.blogid).subscribe(res => {
         this.blogdata = res["data"];
+        if(this.blogdata.length == 4){
+          this.hideBtn = true
+        }
       },(error)=>{
           if(error['error'].status == 500){
             this.router.navigate(['/page-not-found'])
@@ -90,9 +94,15 @@ export class BlogViewComponent implements OnInit {
     this.sportsService.getblogcommnets(data).subscribe(res => {
       if(res['data']){
         this.newcommnets = res['data'];
+        if(this.newcommnets.length == 0){
+            this.hideBtn = true
+        }
+       
+       
         this.blogcomments = this.blogcomments.concat(this.newcommnets)
       }
     });
+
   }
 
   //video play event 

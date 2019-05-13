@@ -1,12 +1,22 @@
 <section class="home-banner">
   <img class="common-banner-pattern" src="../../../assets/images/common-banner-pattern.svg">
+  <!-- <img src="../../../assets/images/badminton.jpg"> -->
   <div class="banner-text">
     <div class="container">
       <h1>Coming Soon</h1>
     </div>
   </div>
+  <!-- style="background-image: url(../../../assets/images/video-thumb.jpg)" -->
   <div class="banner-images">
-    <div class="banner-image active" style="background-image: url(../../../assets/images/video-thumb.jpg)"></div>
+    <div class="banner-image active" [style.background-image]="sport == 'Soccer' ? 'url(\'../../../assets/images/football.jpg\')' : '' || 
+    sport == 'Badminton' ? 'url(\'../../../assets/images/badminton.jpg\')' : ''  ||
+    sport == 'Basketball' ? 'url(\'../../../assets/images/basketball.jpg\')' : '' ||
+    sport == 'Field-Hockey' ? 'url(\'../../../assets/images/hockey.jpg\')' : '' ||
+    sport == 'Racing' ? 'url(\'../../../assets/images/racing.jpg\')' : '' ||
+    sport == 'Tennis-sports' ? 'url(\'../../../assets/images/tennis.jpg\')' : '' 
+    "></div>
   </div>
 </section>
+<lottie-animation-view [options]="lottieConfig" [width]="300" [height]="600" (animCreated)="handleAnimation($event)">
+</lottie-animation-view>
 <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>

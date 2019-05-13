@@ -34,6 +34,7 @@
     "http-server": "^0.11.1",
     "moment": "^2.24.0",
     "ng-lazyload-image": "^5.1.2",
+    "ng-lottie": "^0.3.2",
     "ng2-adsense": "^5.4.2",
     "ngx-moment": "^3.4.0",
     "ngx-owl-carousel-o": "^1.1.2",

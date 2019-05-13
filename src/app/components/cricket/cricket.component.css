@@ -1,5 +1,7 @@
 /* -------- Fixtures List ------- */
+.schedule-list .schedule-list-inner .schedule-month:last-child,
 .schedule-list .schedule-month              { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 2px solid rgba(0,0,0,0.05); }
+.schedule-list .schedule-list-inner:last-child .schedule-month,
 .schedule-list .schedule-month:last-child   { margin-bottom: 0px; padding-bottom: 0px; border: none; }
 .schedule-list .month-title                 { width: 174px; padding-right: 16px; }
 .schedule-list .schedule-items              { width: calc(100% - 174px);  }
@@ -132,6 +134,7 @@
 
 @media (max-width: 767px) {
 /* -------- Fixtures List ------- */
+    .schedule-list .schedule-list-inner .schedule-month:last-child,
     .schedule-list .schedule-month              { margin-bottom: 24px; padding-bottom: 24px;}
     .schedule-list .month-title                 { width: 90px; }
     .schedule-list .schedule-items              { width: calc(100% - 90px); }
