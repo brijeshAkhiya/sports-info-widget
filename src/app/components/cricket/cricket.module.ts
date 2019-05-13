@@ -26,9 +26,16 @@ import { SplitPipe } from '../../pipes/stringsplitpipe';
 import { StringUnder } from '../../pipes/underlinepipe';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MatchCommentryComponent } from './match/match-commentry/match-commentry.component';
+import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
+import { MatchCounterComponent } from './match/match-commentry/match-counter/match-counter.component';
+import { MatchFactsFiguresComponent } from './match/match-facts-figures/match-facts-figures.component';
+import { MatchScorecardComponent } from './match/match-scorecard/match-scorecard.component';
+import { UpcomingComponent } from './match/upcoming/upcoming.component';
+import { RecommendedComponent } from './match/recommended/recommended.component';
+import { MatchAboutComponent } from './match/match-about/match-about.component';
 
 @NgModule({
-  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent,CricketTourMenuComponent, TournamentStandingsComponent,StringUnder, MatchCommentryComponent],
+  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent, CricketTourMenuComponent, TournamentStandingsComponent, StringUnder, MatchCommentryComponent, CommentryComponent, MatchCounterComponent, MatchFactsFiguresComponent, MatchScorecardComponent, UpcomingComponent, RecommendedComponent, MatchAboutComponent],
   imports: [
     CommonModule,
     NgbModule,
@@ -39,6 +46,7 @@ import { MatchCommentryComponent } from './match/match-commentry/match-commentry
     ScrollingModule,
     LazyLoadImageModule
   ],
-  providers: [SportsService,SlugifyPipe,StringUnder]
+  providers: [SportsService, SlugifyPipe, StringUnder],
+  exports: [CommentryComponent, MatchCounterComponent, MatchAboutComponent]
 })
 export class CricketModule { }

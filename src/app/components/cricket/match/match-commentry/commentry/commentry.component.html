@@ -1,0 +1,28 @@
+<div class="commentary-title">
+  <span>End of over : {{commentaries.stats.over_number}} </span>
+  <span>PAK : </span>   <!-- TODO - display_score-->
+  <!-- <span>RR : 8.00</span> -->  <!-- TODO - Run Rate-->
+  <span>Summary : {{commentaries.stats.runs}} Runs {{commentaries.stats.wickets}} Wickets</span>
+</div>
+
+<div class="commentary-item common-shadow rounded-box">
+  <ul>
+    <li class="d-flex" *ngFor="let commentary of commentaries.data">
+
+      <!-- Display overs-->
+      <p class="over-ball" *ngIf="commentary.display_overs">
+        {{ commentary.display_overs }} </p>
+
+      <!-- Run-->
+      <!-- TODO - class for wicket too-->
+      <p class="over-run" [ngClass]="{'hightlight': commentary.type=='wicket'}" *ngIf="commentary.batting_params">
+        {{ commentary.type != 'wicket' || (commentary.type == 'wicket' && commentary.batting_params.runs_scored != 0) ? commentary.batting_params.runs_scored : '' }}
+        {{ commentary.type == 'wicket' ? 'W' : (commentary.bowling_params.extra_runs_conceded == 1 ? 'WD' : '')  }}
+      </p>
+
+      <!-- Commentry-->
+      <p class="commentary-line" *ngIf="commentary.commentaries">{{commentary.commentaries[0].text}}</p>
+
+    </li>
+  </ul>
+</div>
