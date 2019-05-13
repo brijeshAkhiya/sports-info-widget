@@ -74,7 +74,6 @@
               <!-- <app-common-blog-card [posts]="popularvideos" [start]="0" [end]="5"></app-common-blog-card>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
               <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
-
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
@@ -85,13 +84,13 @@
           <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
           <!--Points table widget-->
           <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
-          <div class="common-stories-widget common-shadow rounded-box">
+          <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
             <h5>Teams</h5>
             <ul class="common-list">
-              <li *ngFor="let item of teamsname | slice:0:5"><a>{{item.name}}</a></li>
+              <li *ngFor="let item of teamsname | slice:0:5"><a (click)="teamsview(item.id,item.name)">{{item.name}}</a></li>
             </ul>
           </div>
-          <div class="common-widget tab-widget">
+          <div class="common-widget tab-widget" *ngIf="battingleaders && bowlingleaders">
             <div class="widget-title">
               <h5>Cricket</h5>
             </div>

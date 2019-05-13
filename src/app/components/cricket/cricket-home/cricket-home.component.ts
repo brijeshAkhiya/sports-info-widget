@@ -101,9 +101,6 @@ export class CricketHomeComponent implements OnInit {
     }
   }
 
-
-
-
   //blog view
 
   blogview(id, type, title) {

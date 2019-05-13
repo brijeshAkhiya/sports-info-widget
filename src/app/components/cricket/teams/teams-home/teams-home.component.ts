@@ -14,6 +14,8 @@ export class TeamsHomeComponent implements OnInit {
   teamid: any;
   tournamentid: any;
   fixturesdata: any;
+  widget1title = "Current Series";
+  widget1type = "currentseries";
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private router: Router) {
     this.tournamentid = atob(this.activatedroute.snapshot.params.tournamentid)
     this.teamid = atob(this.activatedroute.snapshot.params.teamid)

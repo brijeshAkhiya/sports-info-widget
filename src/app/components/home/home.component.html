@@ -51,14 +51,12 @@
         <div class="ad-block">
             <a><img [src]="adsObj['Large'][0].sImage | resizeImage" alt="AD"></a>
         </div>
-        
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4>Related news</h4>
           <button class="theme-btn" [routerLink]="['/blog']">View All<span></span></button>
         </div>
         <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
       </div>
-
       <!-- Start Cricket sidebar -->
       <div class="sidebar-col">
         <div class="common-widget tab-widget">

@@ -48,7 +48,7 @@
               <li *ngFor="let item of blogdata?.aTags"><button (click)="tagview(item.id,item.type,item.name)">{{item?.name | split}}</button></li>
             </ul>
             <div class="blog-author d-flex align-items-center">
-              <img class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']">
+              <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"></div>
               <div class="author-desc">
                 <h6>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</h6>
                 <p>{{blogdata?.iId?.sBio}}</p>

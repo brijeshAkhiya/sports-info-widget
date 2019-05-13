@@ -1,4 +1,4 @@
-<div class="common-widget point-table-widget">
+<div class="common-widget point-table-widget" *ngIf="pointstable">
   <div class="widget-title">
     <h5>Points Table</h5>
   </div>
@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of pointstable">
-          <td>{{item.team.abbreviation}}</td>
+          <td>{{item.team.abbreviation ? item.team.abbreviation : item.team.name}}</td>
           <td>{{item.played}}</td>
           <td>{{item.win}}</td>
           <td>{{item.loss}}</td>

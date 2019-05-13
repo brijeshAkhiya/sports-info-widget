@@ -11,7 +11,6 @@ import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 })
 export class TournamentHomeComponent implements OnInit {
   tournamentid: any;
-
   battingleaders: any;
   bowlingleaders: any;
   pointstable: any;
@@ -63,10 +62,10 @@ export class TournamentHomeComponent implements OnInit {
 
   getTournamentTeams(){
     this.sportsService.gettournamentteams(this.tournamentid).subscribe((res) => {
-      if (res['data']) {
+      if (res['data']) { 
         this.tournamentname = res['data'].season_name;
         res['data'].groups.map((data) => {
-            this.teamsname = data.teams
+            this.teamsname = data.teams  
         })
       }
     })
@@ -96,7 +95,6 @@ export class TournamentHomeComponent implements OnInit {
       eSort:'Latest',
       aIds: [this.tournamentid]
     };
-    // this.commonnewstype = 'any'
   }
 
   //get video posts
@@ -107,11 +105,6 @@ export class TournamentHomeComponent implements OnInit {
       eType: "Video",
       aIds: [this.tournamentid]
     };
-    // this.sportsService.getrelatedpost(data).subscribe(res => {
-    //   if (res["data"]) {
-    //     this.popularvideos = res["data"];
-    //   }
-    // });
   }
 
 
@@ -128,6 +121,11 @@ export class TournamentHomeComponent implements OnInit {
     let playername = this.splitpipe.transform(name)
     let slugname = this.slugifyPipe.transform(playername);
     this.router.navigate(['/cricket/player', btoa(id), slugname]);
+  }
+
+  teamsview(id,name){  
+    let slugname = this.slugifyPipe.transform(name);
+    this.router.navigate(['/cricket/team',btoa(this.tournamentid),btoa(id),slugname]);
   }
 
 

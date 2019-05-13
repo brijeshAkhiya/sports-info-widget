@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SportsService } from '../../providers/sports-service';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { SlugifyPipe } from '../../pipes/slugpipe';
 
 
 @Component({
@@ -14,7 +16,7 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
   @Input() data: any;
   dataitems: any;
 
-  constructor(private sportsService: SportsService) { }
+  constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe,private router:Router) { }
 
   ngOnInit() { }
 
@@ -34,7 +36,9 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
    getCricketSeries() {
     this.sportsService.getcurrentseries().pipe(distinctUntilChanged()).subscribe((res) => {
       if (res['data']) {
-        this.dataitems = res['data']        
+        this.dataitems = res['data']      
+        console.log('series',this.dataitems);
+          
       }
     })
   }
@@ -48,12 +52,18 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
     this.sportsService.getpopulartags(data).subscribe((res) => {
       if (res['data']) {
         this.dataitems = res['data']
+        console.log('tags',this.dataitems);
+
       }
     })
   }
 
-  route(id,type,name){
-    
+  route(id,tournamentid,type,name){
+     if(tournamentid){
+      let tournamentslug  =  this.slugifyPipe.transform(name); 
+      this.router.navigate(['/cricket/tournament',btoa(tournamentid),tournamentslug]);
+     }
+      
     
     
   }

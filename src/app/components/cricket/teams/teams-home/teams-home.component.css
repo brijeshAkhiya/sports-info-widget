@@ -8,4 +8,5 @@
 .team-about-head .match-result              { margin: 0px; display: inline-block; }
 .team-about-head .match-result li           { margin-right: 8px; display: inline-block; width: 24px; height: 24px; background: #292929; font-size: 14px; line-height: 24px; font-weight: 600; color: #fff; border-radius: 50%; text-transform: uppercase; text-align: center; }
 .team-about-head .match-result li.win       { background: #ED1A33; }
+
 /***** Responsive CSS Start ******/

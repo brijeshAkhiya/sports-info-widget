@@ -16,6 +16,8 @@ export class PlayerHomeComponent implements OnInit {
   totalruns = 0;
   totalwicket = 0
   commonnewsparams = {}
+  widget1title = "Current Series";
+  widget1type = "currentseries";
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
