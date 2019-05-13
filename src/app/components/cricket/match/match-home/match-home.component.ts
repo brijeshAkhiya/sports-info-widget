@@ -107,21 +107,21 @@ export class MatchHomeComponent implements OnInit {
         }
 
         if (this.matchstatus == "not_started") {
-          let date = this.sportevent.scheduled;
-          setInterval(() => {
-            let enddate = new Date(date).getTime();
-            let now = new Date().getTime();
-            let time = enddate - now;
-            if (time >= 0) {
-              this.hours = Math.floor(
-                (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-              );
-              this.minutes = Math.floor(
-                (time % (1000 * 60 * 60)) / (1000 * 60)
-              );
-              this.seconds = Math.floor((time % (1000 * 60)) / 1000);
-            }
-          }, 1000);
+          // let date = this.sportevent.scheduled;
+          // setInterval(() => {
+          //   let enddate = new Date(date).getTime();
+          //   let now = new Date().getTime();
+          //   let time = enddate - now;
+          //   if (time >= 0) {
+          //     this.hours = Math.floor(
+          //       (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          //     );
+          //     this.minutes = Math.floor(
+          //       (time % (1000 * 60 * 60)) / (1000 * 60)
+          //     );
+          //     this.seconds = Math.floor((time % (1000 * 60)) / 1000);
+          //   }
+          // }, 1000);
           this.getMatchProbability();
         } 
         else if (this.matchstatus == "closed") {

@@ -1,0 +1,6 @@
+<p>Match starts in ...</p>
+<div class="match-counter-block d-flex align-items-center justify-content-center" *ngIf="hours || minutes || seconds">
+  <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>
+  <p><span class="time-num">{{minutes}}:</span><span class="time-unit">M</span></p>
+  <p><span class="time-num">{{seconds}}</span><span class="time-unit">S</span></p>
+</div>

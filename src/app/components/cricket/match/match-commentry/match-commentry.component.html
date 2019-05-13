@@ -1,146 +1,101 @@
-<div class="match-counter" *ngIf="matchstatus == 'not_started'">
-  <p>Match starts in ...</p>
-  <div class="match-counter-block d-flex align-items-center justify-content-center">
-    <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>
-    <p><span class="time-num">{{minutes}}:</span><span class="time-unit">M</span></p>
-    <p><span class="time-num">{{seconds}}</span><span class="time-unit">S</span></p>
-  </div>
+<div class="match-counter" *ngIf="data.sport_event_status.status == 'not_started'">
+  <app-match-counter [scheduled]="data.sport_event.scheduled"></app-match-counter>
 </div>
+
 <div class="ad-block"><img src="../../../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
-<div *ngIf="matchstatus != 'not_started'">
-  <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box"
-    *ngIf="matchstatus == 'live'">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="text-uppercase">Batsman</th>
-            <th>R</th>
-            <th>B</th>
-            <th>4s</th>
-            <th>6s</th>
-            <th>SRR</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Sarfaraz Ahmed (C)</td>
-            <td>120</td>
-            <td>130</td>
-            <td>6</td>
-            <td>8</td>
-            <td>110.23</td>
-          </tr>
-          <tr>
-            <td>Sarfaraz Ahmed</td>
-            <td>120</td>
-            <td>130</td>
-            <td>6</td>
-            <td>8</td>
-            <td>110.23</td>
-          </tr>
-        </tbody>
-      </table>
+<div>
+
+  <!-- Match is live-->
+  <ng-container *ngIf="data.sport_event_status.status == 'live'">
+    <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-uppercase">Batsman</th>
+              <th>R</th>
+              <th>B</th>
+              <th>4s</th>
+              <th>6s</th>
+              <th>SRR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sarfaraz Ahmed (C)</td>
+              <td>120</td>
+              <td>130</td>
+              <td>6</td>
+              <td>8</td>
+              <td>110.23</td>
+            </tr>
+            <tr>
+              <td>Sarfaraz Ahmed</td>
+              <td>120</td>
+              <td>130</td>
+              <td>6</td>
+              <td>8</td>
+              <td>110.23</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box"
-    *ngIf="matchstatus == 'live'">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Bowler</th>
-            <th>Ov</th>
-            <th>M</th>
-            <th>R</th>
-            <th>W</th>
-            <th>ECO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Jason Holder</td>
-            <td>4.3</td>
-            <td>1</td>
-            <td>56</td>
-            <td>1</td>
-            <td>6.23</td>
-          </tr>
-          <tr>
-            <td>Jason Holder</td>
-            <td>4</td>
-            <td>1</td>
-            <td>66</td>
-            <td>1</td>
-            <td>6.23</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Bowler</th>
+              <th>Ov</th>
+              <th>M</th>
+              <th>R</th>
+              <th>W</th>
+              <th>ECO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jason Holder</td>
+              <td>4.3</td>
+              <td>1</td>
+              <td>56</td>
+              <td>1</td>
+              <td>6.23</td>
+            </tr>
+            <tr>
+              <td>Jason Holder</td>
+              <td>4</td>
+              <td>1</td>
+              <td>66</td>
+              <td>1</td>
+              <td>6.23</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="this-over-block d-flex align-items-center" *ngIf="matchstatus == 'live'">
+    <div class="this-over-block d-flex align-items-center">
     <h5>This over :</h5>
     <ul>
       <li>4WD</li>
       <li>0</li>
       <li>1</li>
     </ul>
-  </div>
-
-
-  <div class="commentary-item common-shadow rounded-box">
-      <ul>
-        <li class="d-flex" *ngFor="let commentary of data">
-          
-          <!-- Display overs-->
-          <p class="over-ball" *ngIf="commentary.display_overs">
-            {{ commentary.display_overs }} </p>
-  
-          <!-- Run-->
-          <!-- TODO - class for wicket too-->
-          <p class="over-run" [ngClass]="{'hightlight': commentary.type=='wicket'}" *ngIf="commentary.batting_params">
-            {{ commentary.batting_params.runs_scored }} 
-            {{ commentary.type == 'wicket' ? 'W' : (commentary.bowling_params.extra_runs_conceded == 1 ? 'WD' : '')  }}
-          </p>
-  
-          <!-- Commentry-->
-          <p class="commentary-line" *ngIf="commentary.commentaries">{{commentary.commentaries[0].text}}</p>
-  
-        </li>
-      </ul>
     </div>
+  </ng-container>
 
+  <!-- START - COMMENTRY -->
+  <!-- Second Innning -->
+  <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
+    <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
+  </ng-container>
 
-  <div class="commentary-item common-shadow rounded-box" *ngFor="let commentaries of secondInning">
-    <ul>
-      <li class="d-flex" *ngFor="let commentary of commentaries">
-        
-        <!-- Display overs-->
-        <p class="over-ball" *ngIf="commentary.display_overs">
-          {{ commentary.display_overs }} </p>
+  <!-- First Innning -->
+  <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
+    <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
+  </ng-container>
+  <!-- END - COMMENTRY -->
 
-        <!-- Run-->
-        <!-- TODO - class for wicket too-->
-        <p class="over-run" [ngClass]="{'hightlight': commentary.type=='wicket'}" *ngIf="commentary.batting_params">
-          {{ commentary.batting_params.runs_scored }} 
-          {{ commentary.type == 'wicket' ? 'W' : (commentary.bowling_params.extra_runs_conceded == 1 ? 'WD' : '')  }}
-        </p>
-
-        <!-- Commentry-->
-        <p class="commentary-line">{{commentary.commentaries[0].text}}</p>
-
-      </li>
-    </ul>
-  </div>
-
-
-  <div class="commentary-title">
-    <span>End of over : 25</span>
-    <span>PAK : 90/8</span>
-    <span>RR : 8.00</span>
-    <span>Summary : 6 Runs 0 Wickets</span>
-  </div>
-
-
-  <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div>
+  <!-- <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
 </div>
