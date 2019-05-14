@@ -12,16 +12,20 @@ export class MatchCounterComponent implements OnInit {
   hours: number;
   minutes: number;
   seconds: number;
+  days: number;
   constructor() { }
 
   ngOnInit() {
 
     let date = this.scheduled;
+    let oneDay = 24*60*60*1000; 
     console.log()
     setInterval(() => {
       let enddate = new Date(date).getTime();
       let now = new Date().getTime();
       let time = enddate - now;
+      this.days = Math.round(Math.abs((enddate - now)/(oneDay)));
+      // this.days = time.Date() -1
       if (time >= 0) {
         this.hours = Math.floor(
           (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)

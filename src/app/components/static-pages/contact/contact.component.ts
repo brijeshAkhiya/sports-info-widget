@@ -20,10 +20,12 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   submitted: boolean;
   btnDisable: boolean;
+  contactObj: {};
   constructor(private _formBuilder: FormBuilder,private sportsService: SportsService,) {}
 
   ngOnInit() {
     this.fnInitContactForm();
+    this.getContactDetails();
   }
 
   fnInitContactForm() {
@@ -61,6 +63,17 @@ export class ContactComponent implements OnInit {
         })
         }
       }
+    }
+
+    getContactDetails(){
+      this.sportsService.getcontactdetails().subscribe((res)=>{
+          if(res['data']){
+            this.contactObj = {};
+            res['data'].map((s)=>{
+              this.contactObj[s.sKey] = s.sValue
+            })
+          }
+      })
     }
 
 }

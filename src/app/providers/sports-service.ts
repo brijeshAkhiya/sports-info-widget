@@ -202,6 +202,16 @@ export class SportsService {
       return this.http.get(environment.apiUrl + environment.version + `/ads/${id}`)
    }
 
+   //get contact details
+   getcontactdetails(){
+      return this.http.get(environment.apiUrl + environment.version + `/contact-details`)
+   }
+
+   //get admin posts 
+   getadminposts(data){
+      return this.http.post(environment.apiUrl + environment.version + `/posts/adminposts`,data);
+   }
+
 
 
 }

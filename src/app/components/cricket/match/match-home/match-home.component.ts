@@ -235,6 +235,8 @@ export class MatchHomeComponent implements OnInit {
           //map array for last matches
 
           this.lastmatches = res["data"].last_meetings;
+          console.log(this.lastmatches);
+          
           this.lastmatches = this.lastmatches.map(data => {
             let obj = {};
             let team_arr = data["competitors"];

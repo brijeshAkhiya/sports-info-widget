@@ -6,8 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-not-found.component.css']
 })
 export class PageNotFoundComponent implements OnInit {
+  lottieConfig:any;
 
-  constructor() { }
+  constructor() {
+    this.lottieConfig = {
+      path: '../../../assets/json/404.json',
+      autoplay: true,
+      loop: true
+  };
+   }
 
   ngOnInit() {
   }
