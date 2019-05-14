@@ -16,6 +16,7 @@ export class TournamentStateComponent implements OnInit {
   battingleaders: any;
   bowlingleaders: any;
   fieldingleaders: any;
+  nostatistics: boolean = false;
 
 
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe, private router: Router, private splitpipe: SplitPipe) { }
@@ -31,6 +32,10 @@ export class TournamentStateComponent implements OnInit {
         this.battingleaders = res['data'].batting;
         this.bowlingleaders = res['data'].bowling;
         this.fieldingleaders = res['data'].fielding
+      }
+    },(error)=>{
+      if(error['error'].status == 400){
+        this.nostatistics = true
       }
     })
   }

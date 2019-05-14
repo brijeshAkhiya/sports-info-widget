@@ -97,8 +97,6 @@ export class BlogViewComponent implements OnInit {
         if(this.newcommnets.length == 0){
             this.hideBtn = true
         }
-       
-       
         this.blogcomments = this.blogcomments.concat(this.newcommnets)
       }
     });

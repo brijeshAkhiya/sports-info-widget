@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>INDIA</h1>
+          <h1>{{teamprofiledata?.name}}</h1>
           <button class="add-to-fav-btn added"><span>Add to favorites</span></button>
         </div>
         <ngb-tabset class="common-tabs">
@@ -15,16 +15,12 @@
                   <img src="../../../../../assets/images/ind-logo.svg" alt="india-logo">
                 </div>
                 <div class="team-info align-items-center rounded-box common-shadow">
-                  <h5><span class="title light-text">Abbreviation : </span>IND</h5>
-                  <h5><span class="title light-text">Manager : </span>Chineze Afamefuna</h5>
+                  <h5><span class="title light-text">Abbreviation : </span>{{teamprofiledata?.abbreviation}}</h5>
+                  <h5><span class="title light-text">Manager : </span>{{teamprofiledata?.manager_name | split}}</h5>
                   <h5>
                     <span class="title light-text">Recent Matches : </span>
                     <ul class="match-result">
-                      <li class="win">w</li>
-                      <li>w</li>
-                      <li>l</li>
-                      <li>w</li>
-                      <li>w</li>
+                      <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamprofiledata?.results">{{item}}</li>
                     </ul>
                   </h5>
                 </div>
@@ -32,12 +28,12 @@
               <section class="common-section">
                 <h4>Squad</h4>
                 <div class="row row-size12">
-                  <div class="col-xl-3 col-lg-4 col-sm-6">
-                    <div class="squad-item">
+                  <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let player of teamprofiledata?.players">
+                    <div class="squad-item rounded-box common-shadow">
                       <img src="../../../../../assets/images/dhoni-sqad.jpg" alt="dhoni">
                       <div class="item-desc">
-                        <p>MS Dhoni <span>Batsman</span></p>
-                        <button class="theme-btn">View Player<span></span></button>
+                        <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
+                        <button class="theme-btn" (click)="playerview(player.id,player.name)">View Player<span></span></button>
                       </div>
                     </div>
                   </div>
@@ -58,7 +54,8 @@
             <ng-template ngbTabTitle>
               <div (click)="getTeamFixtures()">Fixtures</div>
             </ng-template>
-            <ng-template ngbTabContent>
+            <div *ngIf="noteamfixtures || !fixturesdata">No data available!</div>
+            <ng-template ngbTabContent *ngIf="!noteamfixtures">
               <div class="schedule-list schedule-tour-list">
                 <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
                   <div class="month-title">
@@ -97,7 +94,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </ng-template>
           </ngb-tab>
@@ -107,16 +103,6 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          <!-- <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Teams</h5>
-            <ul class="common-list">
-              <li><a>West Indies</a></li>
-              <li><a>Bangladesh</a></li>
-              <li><a>Pakistan</a></li>
-              <li><a>Bangladesh</a></li>
-              <li><a>Bangladesh</a></li>
-            </ul>
-          </div> -->
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
             *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>

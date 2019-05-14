@@ -41,6 +41,7 @@ import { AdvertiseWithUsComponent } from './components/static-pages/advertise-wi
 import { TermsAndConditionsComponent } from './components/static-pages/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './components/static-pages/privacy-policy/privacy-policy.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { StripHtmlPipe } from './pipes/striphtmlpipe';
 
 
 let config = new AuthServiceConfig([
@@ -103,6 +104,7 @@ export function provideConfig() {
     SplitPipe,
     TruncatePipe,
     SlugifyPipe,
+    StripHtmlPipe,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

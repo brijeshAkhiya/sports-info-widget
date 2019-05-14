@@ -5,7 +5,8 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>Statistics</h1>
         </div>
-        <ngb-tabset class="filled-tabs">
+        <div *ngIf="nostatistics">No player statistics available!</div>
+        <ngb-tabset class="filled-tabs" *ngIf="!nostatistics">
           <ngb-tab title="Batting">
             <ng-template ngbTabContent>
               <ngb-tabset class="common-tabs black-filled">
