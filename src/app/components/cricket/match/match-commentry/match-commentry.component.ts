@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { stat } from 'fs';
 
 @Component({
   selector: 'app-match-commentry',
@@ -21,7 +20,6 @@ export class MatchCommentryComponent implements OnInit {
 
   ngOnInit() {
     
-
     if(this.data.sport_event_status.status == 'closed')
       this.getCommentry()
 
@@ -52,21 +50,23 @@ export class MatchCommentryComponent implements OnInit {
     let InningCommentry = []
     let firstIndex = 0;
     let lastIndex;
-
+    
     for (let i = 1; i <= currentInningStats.overs_completed + 1; i++) {
       lastIndex = inning.findIndex((ele) => ele.over_number == i + 1);
       let currentOverData = inning.slice(firstIndex, lastIndex)
       firstIndex = lastIndex;
       let currentOverStats = currentInningStats.overs.filter(over => { return over.number == i });
-      
-      InningCommentry.push(
-        {'data' : currentOverData.reverse(), 
-        'stats' : { 
-            'over_number' : typeof currentOverStats[0].number != 'undefined' ? currentOverStats[0].number : 0,
-          'runs' : typeof currentOverStats[0].runs != 'undefined' ? currentOverStats[0].runs : 0,
-          'wickets' :typeof currentOverStats[0].wickets != 'undefined' ? currentOverStats[0].wickets : 0
-          }
-        });
+
+      if(currentOverData.length > 0){
+        InningCommentry.push(
+          {'data' : currentOverData.reverse(), 
+          'stats' : { 
+              'over_number' : typeof currentOverStats[0].number != 'undefined' ? currentOverStats[0].number : 0,
+            'runs' : typeof currentOverStats[0].runs != 'undefined' ? currentOverStats[0].runs : 0,
+            'wickets' :typeof currentOverStats[0].wickets != 'undefined' ? currentOverStats[0].wickets : 0
+            }
+          });
+      }
     }
     return InningCommentry.reverse();
   }
