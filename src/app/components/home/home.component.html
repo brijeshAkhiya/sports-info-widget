@@ -171,7 +171,7 @@
               <div class="video-img common-overlay common-zoom-container common-full-img">
                 <div class="common-zoom-img"  [lazyLoad]="video.sImage | resizeImage:['s']" >
                 </div>
-                <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle}}
+                <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle | truncate:[60,'...'] }}
                 </p>
               </div>
             </div>

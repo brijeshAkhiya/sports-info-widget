@@ -1,7 +1,7 @@
 .contact-item                           { padding: 16px; min-height: 166px; background: #fff; justify-content: space-between; -webkit-justify-content: space-between; }
 .contact-item img                       { margin-bottom: 8px; width: 48px; filter: grayscale(100%); -webkit-filter: grayscale(100%); opacity: 0.3; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 .contact-item:hover img                 { filter: grayscale(0%) drop-shadow(0px 2px 8px rgba(239, 29, 58, 0.32)); -webkit-filter: grayscale(0%) drop-shadow(0px 2px 8px rgba(239, 29, 58, 0.32));  opacity: 1; }
-.contact-item h5                        { margin: 0px; }
+.contact-item h5                        { margin: 0px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; }
 .contact-item h5 a                      { color: #292929; }
 .contact-item h5 a:hover,
 .contact-item h5 a:focus                { color: #ED1A33; }

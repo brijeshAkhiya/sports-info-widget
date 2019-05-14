@@ -1,10 +1,11 @@
 <div class="match-counter" *ngIf="data.sport_event_status.status == 'not_started'">
   <app-match-counter [scheduled]="data.sport_event.scheduled"></app-match-counter>
 </div>
-
-<div class="ad-block"><img src="../../../../../assets/images/ad-1320-300.jpg" alt="AD"></div>
+<div *ngIf="!data.timeline && data.sport_event_status.status == 'closed'">
+  No commentary data available for this match!
+</div>
+<app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
 <div>
-
   <!-- Match is live-->
   <ng-container *ngIf="data.sport_event_status.status == 'live'">
     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">

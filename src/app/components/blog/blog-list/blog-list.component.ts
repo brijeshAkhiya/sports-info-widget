@@ -14,6 +14,7 @@ export class BlogListComponent implements OnInit {
   blogs: any;
   data: any;
   widgetblogs: any;
+  total: any;
   constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router) {}
 
   ngOnInit() {
@@ -24,12 +25,14 @@ export class BlogListComponent implements OnInit {
 
   getPopularArticles(start, limit) {
     let data = {
+      eType:'Article',
       nstart: start,
       nLimit: limit
     };
-    this.sportsService.getpopularpost(data).subscribe(res => {
+    this.sportsService.getadminposts(data).subscribe(res => {
       if (res["data"]) {
         this.blogs = res["data"];
+        this.total = res['data']
       }
     });
   }
@@ -39,11 +42,13 @@ export class BlogListComponent implements OnInit {
     let start = this.blogs.length
     let data = {
       nstart: start,
-      nLimit: 10
+      nLimit: 10,
+      eType:'Article'
     };
-    this.sportsService.getpopularpost(data).subscribe(res => {
+    this.sportsService.getadminposts(data).subscribe(res => {
       if (res["data"]) {
         this.data = res["data"];
+        this.total = res['data']
         this.blogs = this.blogs.concat(this.data);
        }
     });

@@ -19,24 +19,28 @@
             <ng-template ngbTabContent>
               <div *ngIf="matchstatus == 'not_started'">
               <h4 class="line-title">Probability</h4>
-              <div class="probability-section rounded-box common-shadow">
+              <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length != 0">
                 <div class="probability-block d-flex align-items-center justify-content-between">
-                  <div class="team-block">
+                  <div class="team-block" *ngIf="matchprobability.length != 0">
                     <img class="team-flag" src="../../../../../assets/images/flag-ind.svg">
                     <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
                   </div>
-                  <div class="team-block">
+                  <div class="team-block" *ngIf="matchprobability.length != 0">
                     <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
                     <img class="team-flag" src="../../../../../assets/images/flag-wi.svg">
                   </div>
                 </div>
                 <div class="team-probability" style="width: 56%;"></div>
               </div>
+              <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
+                  No probability data available for this match!
+              </div>
               </div>
               <section class="last-meetings-section">
                 <h4 class="line-title">Last meetings</h4>
                 <div class="schedule-list schedule-tour-list">
-                  <div class="schedule-month d-flex" *ngFor="let item of matchesresultdata">
+                  <div class="schedule-list-inner" *ngFor="let item of matchesresultdata">
+                  <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
                     <div class="month-title">
                       <div class="sticky-month">
                         <h5>{{item.day}}</h5>
@@ -47,7 +51,7 @@
                         *ngFor="let item of item.data">
                         <div class="match-desc">
                           <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
-                          <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
+                          <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',' : ''}} {{item.city_name}}</p>
                           <p class="result-line">{{item.match_result}}</p>
                         </div>
                         <div class="match-teams d-flex align-items-center">
@@ -76,7 +80,12 @@
                       </div>
                     </div>
                   </div>
+                  <!-- <div *ngIf="!item.data[0].period_scores">
+                    No data available!
+                  </div> -->
                 </div>
+                </div>
+              
               </section>
               <h4 class="line-title">Venue Details</h4>
               <section class="venue-info rounded-box common-shadow">
@@ -375,7 +384,8 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Upcoming</ng-template>
             <ng-template ngbTabContent>
-              <div class="schedule-list schedule-tour-list">
+              <div *ngIf="!nextmatches">No data available!</div>
+              <div class="schedule-list schedule-tour-list" *ngIf="nextmatches">
                 <div class="schedule-month d-flex" *ngFor="let item of nextmatches">
                   <div class="month-title">
                     <div class="sticky-month">

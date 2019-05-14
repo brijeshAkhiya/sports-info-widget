@@ -7,7 +7,7 @@
           <div>
             <img src="../../../../assets/images/message-red.svg" alt="mail">
           </div>
-          <h5><a href="mailto:contact@sportsinfo.com">contact@sportsinfo.com</a></h5>
+          <h5 *ngIf="contactObj"><a href="mailto:contactObj['sContactEmail']">{{contactObj['sContactEmail']}}</a></h5>
         </div>
       </div>
       <div class="col-md-4">
@@ -15,7 +15,7 @@
           <div>
             <img src="../../../../assets/images/telephone-red.svg" alt="telephone">
           </div>
-          <h5><a href="tel:+911234567890">+91 12345 67890</a></h5>
+          <h5 *ngIf="contactObj"><a href="tel:contactObj['sContactNumber']">+91 {{contactObj['sContactNumber']}}</a></h5>
         </div>
       </div>
       <div class="col-md-4">
@@ -23,7 +23,7 @@
           <div>
             <img src="../../../../assets/images/map-red.svg" alt="address">
           </div>
-          <h5>2202, Beaumonde Business Hub, Kolkata, West Bengal, India</h5>
+          <h5 *ngIf="contactObj">{{contactObj['sAddress']}}</h5>
         </div>
       </div>
     </div>

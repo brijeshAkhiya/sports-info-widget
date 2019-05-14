@@ -15,18 +15,32 @@
                   <img src="../../../../../assets/images/ind-logo.svg" alt="india-logo">
                 </div>
                 <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5><span class="title light-text">Abbreviation : </span>IND</h5>
-                    <h5><span class="title light-text">Manager : </span>Chineze Afamefuna</h5>
-                    <h5>
-                      <span class="title light-text">Recent Matches : </span>
-                      <ul class="match-result">
-                        <li class="win">w</li>
-                        <li>w</li>
-                        <li>l</li>
-                        <li>w</li>
-                        <li>w</li>
-                      </ul>
-                    </h5>
+                  <h5><span class="title light-text">Abbreviation : </span>IND</h5>
+                  <h5><span class="title light-text">Manager : </span>Chineze Afamefuna</h5>
+                  <h5>
+                    <span class="title light-text">Recent Matches : </span>
+                    <ul class="match-result">
+                      <li class="win">w</li>
+                      <li>w</li>
+                      <li>l</li>
+                      <li>w</li>
+                      <li>w</li>
+                    </ul>
+                  </h5>
+                </div>
+              </section>
+              <section class="common-section">
+                <h4>Squad</h4>
+                <div class="row row-size12">
+                  <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="squad-item">
+                      <img src="../../../../../assets/images/dhoni-sqad.jpg" alt="dhoni">
+                      <div class="item-desc">
+                        <p>MS Dhoni <span>Batsman</span></p>
+                        <button class="theme-btn">View Player<span></span></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
             </ng-template>
@@ -41,17 +55,21 @@
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle><div (click)="getTeamFixtures()">Fixtures</div></ng-template>
+            <ng-template ngbTabTitle>
+              <div (click)="getTeamFixtures()">Fixtures</div>
+            </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata" >
+                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
                   <div class="month-title">
                     <div class="sticky-month">
                       <h5>{{item.day}}</h5>
                     </div>
                   </div>
                   <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow" *ngFor="let item of item.data" (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
@@ -74,11 +92,12 @@
                           </div>
                         </div>
                       </div>
-                      <a class="details-btn" (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)"><span>Details</span></a>
+                      <a class="details-btn"
+                        (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)"><span>Details</span></a>
                     </div>
                   </div>
                 </div>
-            
+
               </div>
             </ng-template>
           </ngb-tab>
@@ -86,8 +105,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!-- <div class="common-stories-widget common-shadow rounded-box">
             <h5>Teams</h5>
             <ul class="common-list">

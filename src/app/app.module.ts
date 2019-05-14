@@ -19,6 +19,7 @@ import {
   LinkedInLoginProvider
 } from "angularx-social-login";
 import { AgmCoreModule } from '@agm/core';
+import { LottieAnimationViewModule } from 'ng-lottie';
 //store configuration modules import
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
@@ -84,6 +85,7 @@ export function provideConfig() {
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    LottieAnimationViewModule.forRoot(),
     NgbModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'

@@ -11,6 +11,10 @@ export class CustomAdsWidgetComponent implements OnInit {
   @Input()type:any
   adsObj: {};
   addata: any;
+  defaultImageLarge:'../../../assets/images/ad-1320-300.jpg'
+  defaultImageRectangle:'../../../assets/images/ad-320-267.jpg'
+  defaultImageBanner:'../../../assets/images/ad-320-80.jpg'
+
   constructor(private store: Store<any>,private sportsService: SportsService,) { }
 
   ngOnInit() {
