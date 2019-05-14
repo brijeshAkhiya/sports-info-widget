@@ -7,12 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MatchAboutComponent implements OnInit {
 
-  @Input() matchdata;
+  @Input() data: any;
+  @Input() teams: any;
+
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.matchdata);
-    
+  ngOnInit() {    
   }
 
 }

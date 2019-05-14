@@ -1,53 +1,71 @@
-<!-- <div
-  class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-  <h1>{{matchdata.matchdata.sportevent?.competitors[0].abbreviation}} vs {{matchdata.sportevent?.competitors[1].abbreviation}}</h1>
-  <div class="match-update">
-    <p class="light-text">{{matchdata.sportevent?.venue.name}}, {{matchdata.sportevent?.venue.city_name}} |
-      {{matchdata.sportevent?.scheduled | date}}</p>
-    <p *ngIf="matchstatus == 'closed'">{{matcheventstatus.match_result}}</p>
-  </div> -->
+<div class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center" *ngIf="data">
 
-  <!--If match not started-->
-  <!-- <div class="current-match d-flex">
-    <div class="current-teams" *ngIf="matchstatus == 'not_started'">
-      <div class="current-team d-flex justify-content-between align-items-center">
-        <h4><img src="../../../../../assets/images/flag-wi.svg">{{matchdata.sportevent?.competitors[0].abbreviation}}</h4>
-      
-      </div>
-      <div class="current-team d-flex justify-content-between align-items-center">
-        <h4><img src="../../../../../assets/images/flag-wi.svg">{{matchdata.sportevent?.competitors[1].abbreviation}}</h4>
-      
-      </div>
-    </div> -->
-    <!--If match is ended-->
-    <!-- <div class="current-teams" *ngIf="matchstatus == 'closed'">
-      <div class="current-team d-flex justify-content-between align-items-center"
-        *ngFor="let item of teamsbytype |slice:0:1">
-        <h4 [ngClass]="{'winner': matcheventstatus.winner_id == item.data[0].id}"><img
-            src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
-        </h4>
-        <h4 class="score" *ngIf="matcheventstatus.period_scores[1].home_score && item.qualifier == 'home'">
-          {{matcheventstatus.period_scores[1].display_score}}({{matcheventstatus.period_scores[1].display_overs}}
-          ov)</h4>
-      </div>
-      <div class="current-team d-flex justify-content-between align-items-center"
-        *ngFor="let item of teamsbytype |slice:1:2">
-        <h4 [ngClass]="{'winner': matcheventstatus.winner_id == item.data[0].id}"><img
-            src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}</h4>
-        <h4 class="score" *ngIf="matcheventstatus.period_scores[0].away_score && item.qualifier == 'away'">
-          {{matcheventstatus.period_scores[0].display_score}}({{matcheventstatus.period_scores[0].display_overs}}
-          ov)</h4>
-      </div>
-    </div> -->
-    <!-- <div class="match-win-player d-flex" *ngIf="matchstatus == 'closed'">
-      <div class="player-pic">
-        <img src="../../../../../assets/images/jasprit-bumrah.jpg">
-      </div>
-      <div class="player-info">
-        <p class="light-text">Player of the Match</p>
-        <h5 class="theme-color">{{manofthematch[0]?.name | split}}</h5>
-        <p class="player-team">West Indies</p> 
-      </div>
+    <h1 *ngIf="data.sport_event.competitors">
+        {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
+    </h1>
+
+    <div class="match-update">
+        <p class="light-text">
+            <ng-container *ngIf="data.sport_event.venue">
+                <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
+            </ng-container>
+            {{data.sport_event.scheduled | date}}
+        </p>
+        <p *ngIf="data.sport_event_status.status == 'closed'">{{data.sport_event_status.match_result}}</p>
     </div>
-  </div> -->
-<!-- </div> -->
+
+    <div class="current-match d-flex">
+
+        <!--If match not started-->
+        <div class="current-teams" *ngIf="data.sport_event_status.status == 'not_started'">
+            <div class="current-team d-flex justify-content-between align-items-center">
+                <h4 *ngIf="data.sport_event.competitors">
+                    <img src="../../../../../assets/images/flag-wi.svg">
+                    {{data.sport_event.competitors[0].abbreviation}}
+                </h4>
+            </div>
+            <div class="current-team d-flex justify-content-between align-items-center">
+                <h4>
+                    <img src="../../../../../assets/images/flag-wi.svg">
+                    {{data.sport_event.competitors[1].abbreviation}}
+                </h4>
+
+            </div>
+        </div>
+
+
+        <!--If match is ended-->
+        <div class="current-teams" *ngIf="data.sport_event_status.status == 'closed'">
+            <div class="current-team d-flex justify-content-between align-items-center" *ngFor="let item of teams |slice:0:1">
+                <h4 [ngClass]="{'winner': data.sport_event_status.winner_id == item.data[0].id}">
+                    <img src="../../../../../assets/images/flag-wi.svg"> {{item.data[0].abbreviation}}
+                </h4>
+                <h4 class="score" *ngIf="data.sport_event_status.period_scores[1].home_score && item.qualifier == 'home'">
+                    {{data.sport_event_status.period_scores[1].display_score}}({{data.sport_event_status.period_scores[1].display_overs}} ov)
+                </h4>
+            </div>
+            <div class="current-team d-flex justify-content-between align-items-center" *ngFor="let item of teams |slice:1:2">
+                <h4 [ngClass]="{'winner': data.sport_event_status.status.winner_id == item.data[0].id}">
+                    <img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
+                </h4>
+                <h4 class="score" *ngIf="data.sport_event_status.period_scores[0].away_score && item.qualifier == 'away'">
+                    {{data.sport_event_status.period_scores[0].display_score}}({{data.sport_event_status.period_scores[0].display_overs}} ov)
+                </h4>
+            </div>
+        </div>
+
+        <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'closed'">
+            <div class="player-pic">
+                <img src="../../../../../assets/images/jasprit-bumrah.jpg">
+            </div>
+            <div class="player-info">
+                <p class="light-text">Player of the Match</p>
+                <h5 class="theme-color">{{data.statistics.man_of_the_match[0]?.name | split}}</h5>
+                <!-- <p class="player-team">West Indies</p> -->
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
