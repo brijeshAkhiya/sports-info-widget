@@ -7,7 +7,7 @@
           <div>
             <img src="../../../../assets/images/message-red.svg" alt="mail">
           </div>
-          <h5 *ngIf="contactObj"><a href="mailto:contactObj['sContactEmail']">{{contactObj['sContactEmail']}}</a></h5>
+          <h5 *ngIf="contactObj"><a href="mailto:{{contactObj['sContactEmail']}}">{{contactObj['sContactEmail']}}</a></h5>
         </div>
       </div>
       <div class="col-md-4">
@@ -15,7 +15,7 @@
           <div>
             <img src="../../../../assets/images/telephone-red.svg" alt="telephone">
           </div>
-          <h5 *ngIf="contactObj"><a href="tel:contactObj['sContactNumber']">+91 {{contactObj['sContactNumber']}}</a></h5>
+          <h5 *ngIf="contactObj"><a href="tel:{{contactObj['sContactNumber']}}">+91 {{contactObj['sContactNumber']}}</a></h5>
         </div>
       </div>
       <div class="col-md-4">

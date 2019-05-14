@@ -27,8 +27,8 @@ export class MatchHomeComponent implements OnInit {
   teams: { id: string; data: any; }[];
   teamsbytype: { qualifier: string; data: any; }[];
   matcheventstatus: any;
-  battingteam1 = []
-  battingteam2 = []
+  battingteam1 = [];
+  battingteam2 = [];
   bowlingteam1 = [];
   bowlingteam2 = [];
   objnew = {}
@@ -70,7 +70,7 @@ export class MatchHomeComponent implements OnInit {
         this.matchstatus = res["data"]["sport_event_status"].status;
         this.sportevent = res["data"]["sport_event"];
         this.venuedetails = res["data"]["sport_event"]["venue"];
-        if(this.venuedetails.map_coordinates){
+        if(this.venuedetails.map_coordinates && this.venuedetails){
         let cordinates = this.venuedetails.map_coordinates.split(',');
         this.venuelat = Number(cordinates[0])
         this.venuelong = Number(cordinates[1])
@@ -138,9 +138,13 @@ export class MatchHomeComponent implements OnInit {
           this.scorecards.map((data)=>{ 
             if(data.batting_team == this.teams[0].data[0].id){
                 this.battingteam1.push(data)
+              console.log('battingt1',this.battingteam1);
+
             }
             else if(data.batting_team == this.teams[1].data[0].id){
               this.battingteam2.push(data)
+              console.log('battingt2',this.battingteam2);
+              
             }
             if(data.bowling_team == this.teams[0].data[0].id){ 
               this.bowlingteam1.push(data)
