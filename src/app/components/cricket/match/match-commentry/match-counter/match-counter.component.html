@@ -1,7 +1,10 @@
-<p>Match starts in ...</p>
-<div class="match-counter-block d-flex align-items-center justify-content-center" *ngIf="days || hours || minutes || seconds">
-  <p *ngIf="days != 0"><span class="time-num">{{days}}:</span><span class="time-unit">D</span></p>
-  <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>
-  <p><span class="time-num">{{minutes}}:</span><span class="time-unit">M</span></p>
-  <p><span class="time-num">{{seconds}}</span><span class="time-unit">S</span></p>
+<div class="match-counter">
+  <p>Match starts in ...</p>
+  <div class="match-counter-block d-flex align-items-center justify-content-center"
+    *ngIf="days || hours || minutes || seconds">
+    <p *ngIf="days != 0"><span class="time-num">{{days}}:</span><span class="time-unit">D</span></p>
+    <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>
+    <p><span class="time-num">{{minutes}}:</span><span class="time-unit">M</span></p>
+    <p><span class="time-num">{{seconds}}</span><span class="time-unit">S</span></p>
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SportsService } from "../../../../providers/sports-service";
 
 @Component({
   selector: 'app-match-commentry',
@@ -11,39 +12,73 @@ export class MatchCommentryComponent implements OnInit {
 
   timeline: any;
   statistics: any;
-  firstInning = [];
-  firstInningCommentry = [];
-  secondInning = [];
-  secondInningCommentry = [];
 
-  constructor() { }
+  // firstInning = [];
+  // firstInningCommentry = [];
+  // secondInning = [];
+  // secondInningCommentry = [];
+
+  inningWiseCommentry = [];
+  showCommetry:boolean = false;
+  constructor(
+    public sportsService: SportsService
+    ) {
+      console.log(this);
+      
+     }
 
   ngOnInit() {
     
     if(this.data.sport_event_status.status == 'closed')
       this.getCommentry()
-    if(this.data.coverage_info.live_coverage)
-      this.getCommentry()
-
+    else if(this.data.sport_event_status.status == 'not_started')
+      this.startLiveUpdateAfterTime();    
+    else if(this.data.sport_event_status.status == 'live'){
+      this.getLiveUpdate(this);
+      this.getCommentry();
+    }    
+    this.getLiveUpdate(this);
   }
 
   getCommentry(){
-
+    console.log("get commentry");
+    this.inningWiseCommentry = [];
     this.timeline = this.data.timeline;
     this.statistics = this.data.statistics;
-    // let indexOfMatchStarted = this.timeline.findIndex((commentry) => commentry.type == 'match_started');
-    // this.beforeStartCommentry = this.timeline.splice(0, indexOfMatchStarted);
 
-    let indexOfSecondInning = this.timeline.findIndex((commentry) => commentry.inning == 2);
+    let prevIndex = 0;
+    this.data.statistics.innings.forEach((inning, index) =>{
+      let indexOfInning = this.timeline.findIndex((commentry) => commentry.inning == inning.number + 1);
+      console.log(indexOfInning);
+      let currentInning
+      if(indexOfInning > 0)
+        currentInning = this.timeline.slice(prevIndex, indexOfInning);
+      else
+        currentInning = this.timeline.slice(prevIndex);
+      console.log(currentInning)
+      prevIndex = indexOfInning;
+      this.inningWiseCommentry.push(this.createCommentry(currentInning, index));
+    });
+    this.inningWiseCommentry = this.inningWiseCommentry.reverse();
     
-    this.firstInning = this.timeline.slice(0, indexOfSecondInning);
-    let statsFirstIndex = this.statistics.innings.findIndex((stats) => stats.number == 1);
-    this.firstInningCommentry = this.createCommentry(this.firstInning, statsFirstIndex);
+    if(this.inningWiseCommentry.filter(comm => comm.length > 0).length > 0)
+      this.showCommetry = true;
+    
+    console.log(this.inningWiseCommentry);
+    
+    
+    // let indexOfSecondInning = this.timeline.findIndex((commentry) => commentry.inning == 2);
+    
+    // this.firstInning = this.timeline.slice(0, indexOfSecondInning);
+    // let statsFirstIndex = this.statistics.innings.findIndex((stats) => stats.number == 1);
+    // this.firstInningCommentry = this.createCommentry(this.firstInning, statsFirstIndex);
+    // console.log(this.firstInningCommentry);
 
-    this.secondInning = this.timeline.slice(indexOfSecondInning);
-    let statsSecondIndex = this.statistics.innings.findIndex((stats) => stats.number == 2);
-    if(statsSecondIndex> -1)
-    this.secondInningCommentry = this.createCommentry(this.secondInning, statsSecondIndex);
+    // this.secondInning = this.timeline.slice(indexOfSecondInning);
+    // let statsSecondIndex = this.statistics.innings.findIndex((stats) => stats.number == 2);
+    // if(statsSecondIndex> -1)
+    // this.secondInningCommentry = this.createCommentry(this.secondInning, statsSecondIndex);
+    // console.log(this.secondInningCommentry);
 
   }
 
@@ -59,25 +94,78 @@ export class MatchCommentryComponent implements OnInit {
       lastIndex = inning.findIndex((ele) => ele.over_number == i + 1);
       let currentOverData = inning.slice(firstIndex, lastIndex)
       firstIndex = lastIndex;
-      let currentOverStats = currentInningStats.overs.filter(over => { return over.number == i });
+      // console.log(currentInningStats);
+      if( typeof currentInningStats.overs != 'undefined' && currentInningStats.overs.length > 0){
+        let currentOverStats = currentInningStats.overs.filter(over => { return over.number == i });
 
-      if(currentOverData.length > 0){
-        InningCommentry.push(
-          {'data' : currentOverData.reverse(), 
-          'stats' : { 
-              'over_number' : typeof currentOverStats[0].number != 'undefined' ? currentOverStats[0].number : 0,
-            'runs' : typeof currentOverStats[0].runs != 'undefined' ? currentOverStats[0].runs : 0,
-            'wickets' :typeof currentOverStats[0].wickets != 'undefined' ? currentOverStats[0].wickets : 0
-            }
-          });
+        if(currentOverData.length > 0){
+          InningCommentry.push(
+            {'data' : currentOverData.reverse(), 
+            'stats' : { 
+                'over_number' : typeof currentOverStats[0].number != 'undefined' ? currentOverStats[0].number : 0,
+              'runs' : typeof currentOverStats[0].runs != 'undefined' ? currentOverStats[0].runs : 0,
+              'wickets' :typeof currentOverStats[0].wickets != 'undefined' ? currentOverStats[0].wickets : 0
+              }
+            });
+        }
       }
     }
     return InningCommentry.reverse();
   }
 
-  liveCoverage(){
+  startLiveUpdateAfterTime(){
+    
+    let remainingTime = this.getRemainigTimeofMatch();
+    console.log(remainingTime);
+    let remainingMiliSec = this.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds)
+    if(remainingTime.days == 0 && remainingTime.hours < 5 ){
+      setTimeout(()=>{this.getLiveUpdate(this)}, remainingMiliSec);
+    }
+  }
+  getLiveUpdate(classThis){
+    console.log("getLiveUpdate");
+    setInterval(() => { 
+      classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
+        console.log(res);
+        if(res.data.timeline.length > 0){
+          this.data = res.data;
+          this.getCommentry();
+        }
+      });
+    }, 10000);
+  }
+
+  getRemainigTimeofMatch(){
+    let date = this.data.sport_event.scheduled;
+    let oneDay = 24*60*60*1000;
+    let remainingdays ={days:0, hours:0, minutes:0, seconds:0};
+  
+    let enddate = new Date(date).getTime();
+    let now = new Date().getTime();
+    console.log("now", now);
+    
+    let time = enddate - now;
+    remainingdays.days = Math.round(Math.abs((enddate - now)/(oneDay)));
+    // this.days = time.Date() -1
+    if (time >= 0) {
+      remainingdays.hours = Math.floor(
+        (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      remainingdays.minutes = Math.floor(
+        (time % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      remainingdays.seconds = Math.floor((time % (1000 * 60)) / 1000);
+    }
+
+    return remainingdays;
 
   }
+
+  miliseconds(hrs,min,sec){
+      return((hrs*60*60+min*60+sec)*1000);
+  }
+
+
 }
 
 

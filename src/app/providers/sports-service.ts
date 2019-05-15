@@ -162,6 +162,11 @@ export class SportsService {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/match/${id}/timeline`);
    }
 
+   //get match timeline Delta - live
+   getmatchtimelineDetla(id){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/match/${id}/timelinedelta`);
+   }
+
    //get team vs team data 
    getteamvsteamdata(team1id,team2id){
       return this.http.get(environment.apiUrl + environment.version + `/cricket/team/${team1id}/team/${team2id}`);
