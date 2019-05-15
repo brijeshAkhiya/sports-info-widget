@@ -19,6 +19,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CommonBlogCardComponent } from './common-blog-card/common-blog-card.component';
 import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
 import { CustomAdsWidgetComponent } from './custom-ads-widget/custom-ads-widget.component';
+import { StripHtmlPipe } from '../pipes/striphtmlpipe';
 
 @NgModule({
     imports: [
@@ -31,8 +32,8 @@ import { CustomAdsWidgetComponent } from './custom-ads-widget/custom-ads-widget.
         FormsModule,
         LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, ResizeImagePipe,  CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent],
+    declarations: [TruncatePipe, ResizeImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent],
     providers: [TruncatePipe, ResizeImagePipe,  SportsService,SplitPipe],
-    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe, CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent]
+    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent]
 })
 export class SharedModule { }

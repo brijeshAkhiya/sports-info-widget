@@ -21,7 +21,7 @@
             <div class="current-team d-flex justify-content-between align-items-center">
                 <h4 *ngIf="data.sport_event.competitors">
                     <img src="../../../../../assets/images/flag-wi.svg">
-                    {{data.sport_event.competitors[0].abbreviation}}
+                {{data.sport_event.competitors[0].abbreviation}}
                 </h4>
             </div>
             <div class="current-team d-flex justify-content-between align-items-center">
@@ -38,7 +38,7 @@
         <div class="current-teams" *ngIf="data.sport_event_status.status == 'closed'">
             <div class="current-team d-flex justify-content-between align-items-center" *ngFor="let item of teams |slice:0:1">
                 <h4 [ngClass]="{'winner': data.sport_event_status.winner_id == item.data[0].id}">
-                    <img src="../../../../../assets/images/flag-wi.svg"> {{item.data[0].abbreviation}}
+                    <img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
                 </h4>
                 <h4 class="score" *ngIf="data.sport_event_status.period_scores[1].home_score && item.qualifier == 'home'">
                     {{data.sport_event_status.period_scores[1].display_score}}({{data.sport_event_status.period_scores[1].display_overs}} ov)
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'closed'">
+        <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'closed' && data.statistics.man_of_the_match">
             <div class="player-pic">
                 <img src="../../../../../assets/images/jasprit-bumrah.jpg">
             </div>
@@ -64,8 +64,6 @@
                 <!-- <p class="player-team">West Indies</p> -->
             </div>
         </div>
-
-
     </div>
 
 </div>

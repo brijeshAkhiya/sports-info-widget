@@ -8,7 +8,7 @@
     <div class="common-news-desc">
       <div class="news-excerpt">
         <h5><a (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle}} {{slice}}</a></h5>
-        <p [innerHtml]="post.sDescription | truncate:[240,'...']"></p>
+        <p [innerHtml]="post.sDescription | truncate:[240,'...'] | striphtml"></p>
       </div>
       <div class="author-info d-flex justify-content-between align-items-center">
         <p class="author"><a>{{post.iId.sFirstName}}

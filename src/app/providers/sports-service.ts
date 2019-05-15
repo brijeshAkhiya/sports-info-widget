@@ -212,6 +212,9 @@ export class SportsService {
       return this.http.post(environment.apiUrl + environment.version + `/posts/adminposts`,data);
    }
 
-
+   //get tournament team profile
+   getteamprofile(tournamentid,teamid){
+      return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${tournamentid}/teams/${teamid}`)      
+   }
 
 }

@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCustomAds();
     this.getBannerPost();
     this.getPopularArticles();
     this.getPopularVideos();
@@ -59,35 +58,6 @@ export class HomeComponent implements OnInit {
     this.getPopularTags();
   }
 
-  //get custom ads data from Ngrx
-
-  getCustomAds() {
-    this.store.subscribe(data => {
-      let arr = data["ads"].Ads;
-      this.adsObj = {};
-      arr.map(data => {
-        if (!this.adsObj[data.eType]) {
-          this.adsObj[data.eType] = [];
-        }
-      });
-      arr.map(data => {
-        this.adsObj[data.eType].push(data);
-      });
-    });
-    console.log(this.adsObj);
-    
-  }
-
-  // getrandom(type){
-  //   console.log('function call ');
-  //   let number = Math.floor(Math.random() * this.adsObj[type].length)
-  //   return number;  
-  // }
-
-  displayAd(type) {
-    this.ad = this.adsObj[type][Math.floor(Math.random() * this.adsObj[type].length)];
-    return this.ad ? this.ad : {};
-  }
   //get banner posts
 
   getBannerPost() {
@@ -204,7 +174,6 @@ export class HomeComponent implements OnInit {
     this.sportsService.getmatchfixtures().subscribe(res => {
       if (res["data"]) {
         this.matchfixtures = res["data"];
-        console.log(this.matchfixtures);
       }
     });
   }

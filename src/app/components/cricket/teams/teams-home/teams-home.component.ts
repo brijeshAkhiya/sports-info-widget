@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-
+import { SlugifyPipe } from '../../../../pipes/slugpipe';
+import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 
 @Component({
   selector: 'app-teams-home',
@@ -16,12 +17,30 @@ export class TeamsHomeComponent implements OnInit {
   fixturesdata: any;
   widget1title = "Current Series";
   widget1type = "currentseries";
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private router: Router) {
+  noteamfixtures: boolean = false;
+  teamprofiledata: any;
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private router: Router,private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe) {
     this.tournamentid = atob(this.activatedroute.snapshot.params.tournamentid)
     this.teamid = atob(this.activatedroute.snapshot.params.teamid)
   }
 
   ngOnInit() {
+    this.getTournamentTeamProfile();
+  }
+
+  //get tournament team profile
+  getTournamentTeamProfile(){
+    if(this.tournamentid && this.teamid){
+    this.sportsService.getteamprofile(this.tournamentid,this.teamid).subscribe((res)=>{
+      if(res['data']){
+          this.teamprofiledata = res['data'];  
+      }
+    },(error)=>{
+      if(error['error'].status == 500){
+        this.router.navigate(['/page-not-found'])
+      }
+    })
+  }
   }
 
   //get team fixtures
@@ -49,6 +68,9 @@ export class TeamsHomeComponent implements OnInit {
       if(error['error'].status == 500){
         this.router.navigate(['/page-not-found'])
       }
+      if(error['error'].status == 400){
+        this.noteamfixtures = true
+      }
   })
   }
 
@@ -66,4 +88,12 @@ export class TeamsHomeComponent implements OnInit {
     let teams =  team1.concat('-',team2)  
     this.router.navigate(['/cricket/match',btoa(id),teams])
   }
+
+  //player view profile
+  playerview(id,name){
+    let playername = this.splitpipe.transform(name)
+    let slugname = this.slugifyPipe.transform(playername);
+    this.router.navigate(['/cricket/player', btoa(id), slugname]);
+  }
+
 }

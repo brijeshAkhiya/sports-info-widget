@@ -1,5 +1,4 @@
-.team-about-head                            {  }
-.team-about-head .team-logo                 { width: 208px; padding: 14px; background: #fff; }
+.team-about-head .team-logo                 { width: 208px; padding: 14px; background: #fff; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .team-about-head .team-logo img             { width: 100%; }
 .team-about-head .team-info                 { margin-left: 24px; padding: 32px; background: #fff; flex-grow: 1; -webkit-flex-grow: 1; }
 .team-about-head .team-info h5              { margin-bottom: 32px; font-weight: 500; font-family: 'IBM Plex Sans', sans-serif;}
@@ -9,4 +8,76 @@
 .team-about-head .match-result li           { margin-right: 8px; display: inline-block; width: 24px; height: 24px; background: #292929; font-size: 14px; line-height: 24px; font-weight: 600; color: #fff; border-radius: 50%; text-transform: uppercase; text-align: center; }
 .team-about-head .match-result li.win       { background: #ED1A33; }
 
+/* -------- Squad List ------- */
+h4                              { margin-bottom: 24px; }
+.squad-item                     { margin-bottom: 24px; height: 340px; background: #fff; overflow: hidden; cursor: pointer; }
+.squad-item .item-desc          { padding: 16px; background: #fff; text-align: center; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.squad-item:hover .item-desc    { transform: translateY(-64px); -webkit-transform: translateY(-64px); }
+.squad-item p                   { margin-bottom: 16px; line-height: 20px; font-weight: 500; }
+.squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
+
 /***** Responsive CSS Start ******/
+@media (min-width: 1200px) and (max-width: 1379px) {
+    .team-about-head .team-logo         { width: 190px; }
+    .team-about-head .team-info         { padding: 28px;}
+    .team-about-head .team-info h5      { margin-bottom: 28px;}
+/* -------- Squad List ------- */
+    .squad-item                         { margin-bottom: 24px; height: 270px; background: #fff; overflow: hidden; cursor: pointer; }
+    .squad-item .item-desc              { padding: 12px 2px; }
+    .squad-item:hover .item-desc        { transform: translateY(-64px); -webkit-transform: translateY(-64px); }
+    .squad-item .theme-btn              { font-size: 14px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .team-about-head .team-logo         { width: 180px; padding: 12px;}
+    .team-about-head .team-info         { padding: 24px;}
+    .team-about-head .team-info h5      { margin-bottom: 16px;}
+    .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
+/* -------- Squad List ------- */
+    .squad-item                         { margin-bottom: 24px; height: 276px; background: #fff; overflow: hidden; cursor: pointer; }
+    .squad-item .item-desc              { padding: 12px 2px; }
+    .squad-item:hover .item-desc        { transform: translateY(-58px); -webkit-transform: translateY(-58px); }
+    .squad-item p                       { margin-bottom: 12px; }
+    .squad-item .theme-btn              { font-size: 14px; }  
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .team-about-head .team-logo         { width: 154px; padding: 12px;}
+    .team-about-head .team-info         { margin-left: 16px; padding: 22px 16px;}
+    .team-about-head .team-info h5      { margin-bottom: 20px;}
+/* -------- Squad List ------- */
+    .squad-item                         { margin-bottom: 24px; height: 320px; background: #fff; overflow: hidden; cursor: pointer; }
+    .squad-item .item-desc              { padding: 12px 2px; }
+    .squad-item:hover .item-desc        { transform: translateY(-60px); -webkit-transform: translateY(-60px); }
+}
+
+@media (max-width: 767px) {
+/* -------- Squad List ------- */
+    .team-about-head .team-logo         { width: 130px; padding: 8px;}
+    .team-about-head .team-info         { margin-left: 16px; padding: 10px 16px;}
+    .team-about-head .team-info h5      { margin-bottom: 8px;}
+    .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
+/* -------- Squad List ------- */
+    .squad-item                         { margin-bottom: 24px; height: 246px; background: #fff; overflow: hidden; cursor: pointer; }
+    .squad-item .item-desc              { padding: 12px 2px; }
+    .squad-item:hover .item-desc        { transform: translateY(-52px); -webkit-transform: translateY(-52px); }
+    .squad-item p                       { margin-bottom: 12px; }
+    .squad-item .theme-btn              { font-size: 13px; }
+}
+
+@media (max-width: 575px) {
+    .team-about-head                            { flex-direction: column; -webkit-flex-direction: column; }
+    .team-about-head .team-logo                 { margin-bottom: 8px; }
+    .team-about-head .team-info                 { margin-left: 0px; }
+    .team-about-head .match-result li           { margin-bottom: 8px;}
+/* -------- Squad List ------- */
+    .squad-list .row-size12                     { justify-content: space-evenly; -webkit-justify-content: space-evenly; }
+    .squad-list .row-size12 [class*="col-"]     { width: 156px; }
+    .squad-item                                 { height: 216px; }
+    .squad-item .item-desc                      { padding: 10px 2px; }
+    .squad-item:hover .item-desc                { transform: translateY(-48px); -webkit-transform: translateY(-48px); }
+    .squad-item p                               { margin-bottom: 10px; }
+    .squad-item .theme-btn                      { font-size: 13px; padding: 8px 40px 8px 8px;  }
+    .squad-item .theme-btn span                 { width: 32px; }
+
+}

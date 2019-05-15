@@ -31,7 +31,7 @@ export class CustomAdsWidgetComponent implements OnInit {
       });
     });  
     //pick random custom ad from ngrx store data obj
-    this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
+    this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];    
   }
 
   adclick(id,adlink){
