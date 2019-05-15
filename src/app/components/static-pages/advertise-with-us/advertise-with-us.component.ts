@@ -19,6 +19,7 @@ export class AdvertiseWithUsComponent implements OnInit {
   advertiseForm: FormGroup;
   submitted: boolean;
   btnDisable: boolean;
+  submitsuccess: boolean = false;
   constructor(private _formBuilder: FormBuilder,private sportsService: SportsService,) {}
 
   ngOnInit() {
@@ -53,14 +54,21 @@ export class AdvertiseWithUsComponent implements OnInit {
       this.btnDisable = true
       this.sportsService.postinquiries(data).subscribe((res)=>{
         if(res['data']){
-          this.advertiseForm.reset();
-           // reset the errors of all the controls
-          for (let name in this.advertiseForm.controls) {
-         this.advertiseForm.controls[name].setErrors(null);
-        }
+          this.submitsuccess = true
         }
       })
       }
     }
   }
+
+  anothersubmit(){
+    setTimeout(() => {
+      this.advertiseForm.reset();
+      for (let name in this.advertiseForm.controls) {
+          this.advertiseForm.controls[name].setErrors(null);
+         }
+    },100);
+    this.submitsuccess = false   
+  }
+
 }

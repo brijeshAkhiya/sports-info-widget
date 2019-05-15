@@ -5,12 +5,11 @@ import { SlugifyPipe } from '../../../pipes/slugpipe';
 import { SplitPipe } from '../../../pipes/stringsplitpipe';
 
 @Component({
-  selector: "app-blog-view",
-  templateUrl: "./blog-view.component.html",
-  styleUrls: ["./blog-view.component.css"],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-blog-preview',
+  templateUrl: './blog-preview.component.html',
+  styleUrls: ['./blog-preview.component.css']
 })
-export class BlogViewComponent implements OnInit {
+export class BlogPreviewComponent implements OnInit {
   blogid: any;
   blogtype: any;
   blogdata: any;
@@ -38,7 +37,6 @@ export class BlogViewComponent implements OnInit {
     this.blogslug = this.activatedroute.snapshot.params.slug
     this.blogid = atob(this.activatedroute.snapshot.params.id);
     this.blogtype = this.activatedroute.snapshot.params.type;
-    this.updatePostCount();
     this.getBlogview();
     this.getBlogComments();
     this.getPopularArticles();
@@ -56,14 +54,6 @@ export class BlogViewComponent implements OnInit {
             this.router.navigate(['/page-not-found'])
           }
       });
-    }
-  }
-
-  //update post view count
-
-  updatePostCount() {
-    if (this.blogid) {
-      this.sportsService.updatepostviewcount(this.blogid).subscribe(res => {});
     }
   }
 
@@ -127,8 +117,7 @@ export class BlogViewComponent implements OnInit {
   getwidgetblogsview(id,type,title){
     this.blogid = id
     let slug = this.slugifypipe.transform(title);
-    this.router.navigate(["/blog",type, btoa(id),slug]);
-    this.updatePostCount();
+    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slug]);
     this.getBlogview();
     this.getBlogComments();
     this.getPopularArticles();
@@ -157,7 +146,7 @@ export class BlogViewComponent implements OnInit {
    //sharable link 
 
    sharablelink(platform) {
-    this.blogUrl = `http://dev.sports.info/blog/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
+    this.blogUrl = `http://dev.sports.info/blog/blog-preview/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
     if (platform == 'facebook') {
       window.open(`http://www.facebook.com/sharer.php?u=${this.blogUrl}`, '_blank');
     }
@@ -169,5 +158,4 @@ export class BlogViewComponent implements OnInit {
     }
 
   }
-
 }

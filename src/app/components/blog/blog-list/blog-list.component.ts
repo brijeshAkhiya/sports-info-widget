@@ -15,6 +15,7 @@ export class BlogListComponent implements OnInit {
   data: any;
   widgetblogs: any;
   total: any;
+  smallblogdeafault = '../../../../assets/images/placeholder_blog_small.svg'
   constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router) {}
 
   ngOnInit() {
@@ -70,6 +71,6 @@ export class BlogListComponent implements OnInit {
 
    blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id),slugname]);
+    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
   }
 }

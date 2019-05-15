@@ -12,7 +12,7 @@
               <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
                 <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"
                   (click)="blogview(post._id,post.eType,post.sTitle)">
-                  <div class="common-zoom-img" [lazyLoad]="post.sImage | resizeImage:['m']">
+                  <div class="common-zoom-img" [defaultImage]="largeblogdefault"  [lazyLoad]="post.sImage | resizeImage:['m']">
                   </div>
                 </div>
                 <div class="blog-desc">
@@ -26,30 +26,9 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="common-popular-list popular-list-4">
-                <div class="row row-size12">
-                  <div class="col-sm-6 col-xl-3" *ngFor="let post of populararticles | slice:1:5">
-                    <div class="popular-item common-shadow">
-                      <div class="img-block common-zoom-container"
-                        [ngClass]="{'common-news-video': post.eType == 'Video'}"
-                        (click)="blogview(post._id,post.eType,post.sTitle)">
-                        <div class="common-zoom-img" [lazyLoad]="post.sImage | resizeImage:['s']"></div>
-                      </div>
-                      <div class="item-desc">
-                        <p class="bold-text"><a
-                            (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle | truncate:[56,'...']}}</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
               <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
               <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
-              <!-- <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9"></app-common-blog-card>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
-
             </ng-template>
           </ngb-tab>
           <!--Latest Article Tab-->
@@ -132,7 +111,7 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of bowlingleaders | slice:0:1">
-                      <img src="../../../../../assets/images/jasprit-bumrah.jpg" alt="player">
+                      <img src="../../../../../assets/images/placeholder-sqad.svg" alt="player">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">

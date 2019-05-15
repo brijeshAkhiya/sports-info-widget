@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="280px" height="158px" viewBox="0 0 280 158" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>placeholder_blog_small</title>
+    <desc>Created with Sketch.</desc>
+    <g id="placeholder_blog_small" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-17" transform="translate(100.000000, 39.000000)" fill="#DBDBEB">
+            <rect id="Rectangle" opacity="0" x="0" y="0" width="80" height="80"></rect>
+            <g id="Group-8" transform="translate(8.000000, 12.000000)">
+                <rect id="Rectangle" x="0" y="0" width="32" height="32" rx="2"></rect>
+                <rect id="Rectangle-Copy-4" x="36" y="0" width="28" height="8" rx="2"></rect>
+                <rect id="Rectangle-Copy-12" x="36" y="24" width="28" height="8" rx="2"></rect>
+                <rect id="Rectangle-Copy-14" x="0" y="36" width="64" height="8" rx="2"></rect>
+                <rect id="Rectangle-Copy-15" x="0" y="48" width="64" height="8" rx="2"></rect>
+                <rect id="Rectangle-Copy-13" x="36" y="12" width="28" height="8" rx="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

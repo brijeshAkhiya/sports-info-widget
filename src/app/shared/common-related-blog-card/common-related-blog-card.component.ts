@@ -14,6 +14,8 @@ export class CommonRelatedBlogCardComponent implements OnInit {
   @Input() posts: any;
   @Input() start: any;
   @Input() end: any;
+  smallblogdeafault = '../../../assets/images/placeholder_blog_small.svg'
+  
   constructor(private slugifyPipe: SlugifyPipe, private router: Router) { }
 
   ngOnInit() {
@@ -23,7 +25,7 @@ export class CommonRelatedBlogCardComponent implements OnInit {
 
    blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id),slugname]);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
   }
 
 }

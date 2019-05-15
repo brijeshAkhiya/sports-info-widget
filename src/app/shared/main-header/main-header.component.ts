@@ -1,36 +1,35 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxTinySliderSettingsInterface } from 'ngx-tiny-slider';
+import { SlidesOutputData } from 'ngx-owl-carousel-o';
 import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from '@ngrx/store'
 import * as fromRoot from '../../app-reducer'
 import * as Auth from '../../store/auth/auth.actions';
+import * as Ads from '../../store/ads-management/ads.actions';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SportsService } from '../../providers/sports-service';
-import { Observable ,interval} from 'rxjs';
-
-import * as Ads from '../../store/ads-management/ads.actions';
-
 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.css']
+  styleUrls: ['./main-header.component.css'],
+  host:{
+    '(window:resize)':'onResize($event)'
+  }
 })
 export class MainHeaderComponent implements OnInit {
-  @ViewChild('navpointer') navpointer: ElementRef
-  @ViewChild('navbarnav') navbarnav: ElementRef
-  tinySliderConfig: NgxTinySliderSettingsInterface;
 
- 
+  @ViewChild('navpointer') navpointer: ElementRef
+  @ViewChild('navbarnav') navbarnav: ElementRef 
   sliderdata: any;
   sliderresults = [];
   isapply: boolean = false;
   socialUser: any;
+  activeSlides: SlidesOutputData;
+ 
 
-
-  constructor(private renderer2: Renderer2, private el: ElementRef, private router: Router, private sportsService: SportsService, 
+  constructor(private renderer2: Renderer2, private el: ElementRef,private changeDetector: ChangeDetectorRef, private router: Router, private sportsService: SportsService, 
     private modalService: NgbModal,private socialLoginService: AuthService,private store: Store<fromRoot.State>) {
       //get custom ads data Funtion call --->
       this.getCustomAds();
@@ -67,8 +66,20 @@ export class MainHeaderComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('22');
+    
     this.getHeaderSliderData();
     
+  }
+
+  getData(event){
+  
+    
+  }
+
+  onResize(event){
+   this.activeSlides = this.sliderdata
+   
   }
 
   //get custom ads api call -Ngrx Store 

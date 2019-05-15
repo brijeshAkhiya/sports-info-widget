@@ -20,6 +20,8 @@ export class TournamentHomeComponent implements OnInit {
   popularvideos: any;
   populararticles: any;
   commonnewsparams:any
+  largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
+
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router) { }
 
   ngOnInit() {
@@ -112,7 +114,7 @@ export class TournamentHomeComponent implements OnInit {
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id),slugname]);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
   }
 
    //get player information

@@ -3,10 +3,9 @@
 .blog-banner .banner-inner  { width: 100%; position: absolute; bottom: 0px; z-index: 2;}
 .blog-banner .banner-desc   { padding: 32px 0px 32px 88px; max-width: 72.6%; }
 .blog-banner h1             { margin-bottom: 8px; }
+.blog-banner .author-info p.author a,
+.blog-banner .author-info p { color: #fff; }
 .blog-banner .author-info p { font-size: 18px; line-height: 23px; }
-.blog-banner .author-info p             { color: #fff; opacity: 0.7; }
-.blog-banner .author-info p.author      { color: #BEC2CB; opacity: 1; }
-.blog-banner .author-info p.author a    { color: #fff; }
 .video-play-btn             { position: absolute; display: block; width: 144px; height: 144px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: url(../../../../assets/images/play-btn.svg) no-repeat center center / cover; z-index: 3; border: none; }
 .blog-banner video          { position: absolute; display: none; height: 100%; top: 50%; left: 50%; transform: translate(-50% , -50%); -webkit-transform: translate(-50% , -50%); z-index: 4;}
 .blog-banner video.show     { display: block; }
@@ -15,8 +14,8 @@
 .blog-content-section       { background: #fff; }
 .social-block               { width: 88px; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .sticky-social-list         { position: sticky; position: -webkit-sticky; top: 278px; }
-.sticky-social-list button  { margin: 20px 0px; width: 48px; background: transparent; border: none; opacity: 0.2; filter: grayscale(100%); -webkit-filter: grayscale(100%); }
-.sticky-social-list button:hover { opacity: 1; filter: grayscale(0%); -webkit-filter: grayscale(0%);}
+.sticky-social-list button  { margin: 20px 0px; width: 48px; background: transparent; border: none; opacity: 0.2; }
+.sticky-social-list button:hover { opacity: 1;}
 .blog-content p             { margin-bottom: 28px; font-size: 18px !important; line-height: 28px; color: #3D3D3D; }
 .blog-content p:last-child  { margin: 0px; }
 .blog-content a             { color: #ED1A33; text-decoration: underline; }

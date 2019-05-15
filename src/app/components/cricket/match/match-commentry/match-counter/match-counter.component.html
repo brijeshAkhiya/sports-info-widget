@@ -1,4 +1,5 @@
-<p>Match starts in ...</p>
+<p *ngIf="!matchstartedcase">Match starts in ...</p>
+<p *ngIf="matchstartedcase">Stay tuned for match updates...</p>
 <div class="match-counter-block d-flex align-items-center justify-content-center" *ngIf="days || hours || minutes || seconds">
   <p *ngIf="days != 0"><span class="time-num">{{days}}:</span><span class="time-unit">D</span></p>
   <p><span class="time-num">{{hours}}:</span><span class="time-unit">H</span></p>

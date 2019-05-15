@@ -10,7 +10,7 @@
             <ng-template ngbTabTitle>Results</ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <div *ngIf="finalresultsdata?.length == 0">No data available!</div>
+                <div *ngIf="finalresultsdata?.length == 0 || noresultdata">No data available!</div>
                 <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
                   <div class="month-title">
                     <div class="sticky-month">

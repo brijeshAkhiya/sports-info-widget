@@ -21,6 +21,8 @@ export class CricketHomeComponent implements OnInit {
   widget2type = "populartags";
   commonnewsparams:any
   commonnewstype:any
+  largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
+  smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
   constructor(private sportsService: SportsService,private router: Router,
     private slugifyPipe: SlugifyPipe) {}
 
@@ -105,6 +107,6 @@ export class CricketHomeComponent implements OnInit {
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id),slugname]);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
   }
 }
