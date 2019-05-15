@@ -22,6 +22,8 @@ export class MatchCommentryComponent implements OnInit {
     
     if(this.data.sport_event_status.status == 'closed')
       this.getCommentry()
+    if(this.data.coverage_info.live_coverage)
+      this.getCommentry()
 
   }
 
@@ -40,12 +42,14 @@ export class MatchCommentryComponent implements OnInit {
 
     this.secondInning = this.timeline.slice(indexOfSecondInning);
     let statsSecondIndex = this.statistics.innings.findIndex((stats) => stats.number == 2);
+    if(statsSecondIndex> -1)
     this.secondInningCommentry = this.createCommentry(this.secondInning, statsSecondIndex);
 
   }
 
   createCommentry(inning, statsIndex) {
-
+    console.log(statsIndex);
+    
     let currentInningStats = this.statistics.innings[statsIndex];
     let InningCommentry = []
     let firstIndex = 0;
@@ -69,6 +73,10 @@ export class MatchCommentryComponent implements OnInit {
       }
     }
     return InningCommentry.reverse();
+  }
+
+  liveCoverage(){
+
   }
 }
 
