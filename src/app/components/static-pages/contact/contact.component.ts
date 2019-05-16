@@ -21,6 +21,7 @@ export class ContactComponent implements OnInit {
   submitted: boolean;
   btnDisable: boolean;
   contactObj: {};
+  submitsuccess:boolean = false
   constructor(private _formBuilder: FormBuilder,private sportsService: SportsService,) {}
 
   ngOnInit() {
@@ -54,11 +55,7 @@ export class ContactComponent implements OnInit {
         this.btnDisable = true
         this.sportsService.postinquiries(data).subscribe((res)=>{
           if(res['data']){
-            this.contactForm.reset();
-             // reset the errors of all the controls
-            for (let name in this.contactForm.controls) {
-           this.contactForm.controls[name].setErrors(null);
-          }
+            this.submitsuccess = true
           }
         })
         }
@@ -74,6 +71,16 @@ export class ContactComponent implements OnInit {
             })
           }
       })
+    }
+
+    anothersubmit(){
+      setTimeout(() => {
+        this.contactForm.reset();
+        for (let name in this.contactForm.controls) {
+            this.contactForm.controls[name].setErrors(null);
+           }
+      },100);
+      this.submitsuccess = false   
     }
 
 }

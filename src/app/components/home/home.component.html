@@ -34,7 +34,7 @@
       <div class="content-col">
         <div class="popular-main-item common-shadow" *ngFor="let article of populararticles | slice:0:1">
           <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': article.eType == 'Video'}">
-            <div class="common-zoom-img" [lazyLoad]="article.sImage | resizeImage:['m']" (click)="blogview(article._id,article.eType,article.sTitle)">
+            <div class="common-zoom-img" [defaultImage]="largeblogdefault" [lazyLoad]="article.sImage | resizeImage:['m']" (click)="blogview(article._id,article.eType,article.sTitle)">
             </div>
           </div>
           <div class="blog-desc">
@@ -148,7 +148,7 @@
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
         <div class="main-popular-video common-zoom-container common-full-img">
-          <div class="common-zoom-img common-overlay"  [lazyLoad]="video.sImage | resizeImage:['m']" (click)="blogview(video._id,video.eType,video.sTitle)">
+          <div class="common-zoom-img common-overlay" [defaultImage]="largeblogdefault"  [lazyLoad]="video.sImage | resizeImage:['m']" (click)="blogview(video._id,video.eType,video.sTitle)">
           </div>
           <a class="play-btn"><img src="../../../assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
@@ -169,7 +169,7 @@
             <div class="video-item" *ngFor="let video of popularvideos"
               (click)="blogview(video._id,video.eType,video.sTitle)">
               <div class="video-img common-overlay common-zoom-container common-full-img">
-                <div class="common-zoom-img"  [lazyLoad]="video.sImage | resizeImage:['s']" >
+                <div class="common-zoom-img" [defaultImage]="smallblogdefault"  [lazyLoad]="video.sImage | resizeImage:['s']" >
                 </div>
                 <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle | truncate:[60,'...'] }}
                 </p>

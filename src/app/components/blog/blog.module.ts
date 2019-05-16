@@ -8,9 +8,10 @@ import { BlogViewComponent } from './blog-view/blog-view.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MomentModule } from 'ngx-moment';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
 
 @NgModule({
-  declarations: [BlogListComponent, BlogViewComponent],
+  declarations: [BlogListComponent, BlogViewComponent, BlogPreviewComponent],
   imports: [
     CommonModule,
     NgbModule,

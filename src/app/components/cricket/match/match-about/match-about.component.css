@@ -18,28 +18,28 @@
 .match-main-title .match-win-player p.player-team   { font-size: 14px; line-height: 18px; color: #7A7A7A; font-weight: 500; }
 
 @media (max-width: 1199px) {
-    /* -------- Match Title List ------- */
-        .match-main-title .match-update p           { font-size: 14px; line-height: 20px;}
-        .match-main-title .current-teams            { padding-right: 12px;}
-        .match-main-title .current-team h4          { font-size: 18px; line-height: 26px;}
-        .match-main-title .current-team h4.winner:after{ height: 20px; width: 20px;   }
-        .match-main-title .match-win-player         { padding-left: 12px;}
-        .match-main-title .player-pic               { margin-right: 12px; width: 84px; }
-    }
+/* -------- Match Title List ------- */
+    .match-main-title .match-update p           { font-size: 14px; line-height: 20px;}
+    .match-main-title .current-teams            { padding-right: 12px;}
+    .match-main-title .current-team h4          { font-size: 18px; line-height: 26px;}
+    .match-main-title .current-team h4.winner:after{ height: 20px; width: 20px;   }
+    .match-main-title .match-win-player         { padding-left: 12px;}
+    .match-main-title .player-pic               { margin-right: 12px; width: 84px; }
+}
 
 
 @media (max-width: 767px) {
-    /* -------- Match Title List ------- */
-        .match-main-title h1,
-        .match-main-title .match-update             { margin-bottom: 16px; }
-        .match-main-title .current-team             { margin-bottom: 12px; }
-        .match-main-title .current-team img         { height: 32px;}
-        .match-main-title .match-win-player         { padding-left: 0px; border-left: none;}
-        .match-main-title .player-pic               { width: 74px; }
+/* -------- Match Title List ------- */
+    .match-main-title h1,
+    .match-main-title .match-update             { margin-bottom: 16px; }
+    .match-main-title .current-team             { margin-bottom: 12px; }
+    .match-main-title .current-team img         { height: 32px;}
+    .match-main-title .match-win-player         { padding-left: 0px; border-left: none;}
+    .match-main-title .player-pic               { width: 74px; }
 }
 
 @media (max-width: 575px) {
-    /* -------- Match Title List ------- */
-        .match-main-title .player-pic               { width: 66px; }
+/* -------- Match Title List ------- */
+    .match-main-title .player-pic               { width: 66px; }
 }    
     

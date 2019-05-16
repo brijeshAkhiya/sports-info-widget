@@ -10,7 +10,6 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from "../../pipes/slugpipe";
 import { Store } from "@ngrx/store";
-
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -36,6 +35,9 @@ export class HomeComponent implements OnInit {
   customads: any;
   adsObj: {};
   ad: any;
+  largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
+  smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
+
   constructor(
     private renderer2: Renderer2,
     private sportsService: SportsService,
@@ -182,7 +184,7 @@ export class HomeComponent implements OnInit {
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id), slugname]);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);
   }
 
   //get match detail

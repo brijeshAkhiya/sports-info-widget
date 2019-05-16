@@ -20,17 +20,19 @@ export class TeamsHomeComponent implements OnInit {
   noteamfixtures: boolean = false;
   teamprofiledata: any;
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private router: Router,private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe) {
-    this.tournamentid = atob(this.activatedroute.snapshot.params.tournamentid)
-    this.teamid = atob(this.activatedroute.snapshot.params.teamid)
   }
 
   ngOnInit() {
+    this.tournamentid = atob(this.activatedroute.snapshot.params.tournamentid)
+    this.teamid = atob(this.activatedroute.snapshot.params.teamid)
     this.getTournamentTeamProfile();
   }
 
   //get tournament team profile
   getTournamentTeamProfile(){
     if(this.tournamentid && this.teamid){
+      console.log('11');
+      
     this.sportsService.getteamprofile(this.tournamentid,this.teamid).subscribe((res)=>{
       if(res['data']){
           this.teamprofiledata = res['data'];  

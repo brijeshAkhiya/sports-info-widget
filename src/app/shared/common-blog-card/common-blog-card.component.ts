@@ -11,6 +11,7 @@ export class CommonBlogCardComponent implements OnInit {
   @Input() start: any;
   @Input() end: any;
   @Input() loadmore: any;
+  smallblogdeafault = '../../../assets/images/placeholder_blog_small.svg'
   constructor() { }
 
   ngOnInit() {

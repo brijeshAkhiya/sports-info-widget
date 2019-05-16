@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from '../../providers/sports-service';
 import { SlugifyPipe } from "../../pipes/slugpipe";
-
 @Component({
   selector: 'app-common-news-list',
   templateUrl: './common-news-list.component.html',
@@ -13,6 +12,7 @@ export class CommonNewsListComponent implements OnInit {
   @Input() type: any;
   @Input() reqparams: {};
   loadnewposts: any;
+  smallblogdeafault = '../../../assets/images/placeholder_blog_small.svg'
   constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() { 
@@ -71,6 +71,6 @@ export class CommonNewsListComponent implements OnInit {
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type, btoa(id),slugname]);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
   }
 }

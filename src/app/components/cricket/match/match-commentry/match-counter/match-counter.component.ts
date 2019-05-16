@@ -13,13 +13,19 @@ export class MatchCounterComponent implements OnInit {
   minutes: number;
   seconds: number;
   days: number;
+  matchstartedcase: boolean = false;
   constructor() { }
 
   ngOnInit() {
 
     let date = this.scheduled;
     let oneDay = 24*60*60*1000; 
-    console.log()
+    let starttime = new Date(date).getTime();
+    let currenttime = new Date().getTime();
+    if(currenttime > starttime){
+        this.matchstartedcase = true;
+    }
+    else{
     setInterval(() => {
       let enddate = new Date(date).getTime();
       let now = new Date().getTime();
@@ -37,5 +43,6 @@ export class MatchCounterComponent implements OnInit {
       }
     }, 1000);
   }
+}
 
 }

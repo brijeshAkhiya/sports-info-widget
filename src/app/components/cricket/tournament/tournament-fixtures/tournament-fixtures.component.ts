@@ -16,6 +16,7 @@ export class TournamentFixturesComponent implements OnInit {
   tournamentresult: any;
   finalresultsdata: any;
   nofixturesdata: boolean = false;
+  noresultdata: boolean = false;
 
   constructor(private activatedroute: ActivatedRoute, private sportsService: SportsService,private router:Router) { }
 
@@ -92,8 +93,10 @@ export class TournamentFixturesComponent implements OnInit {
       this.finalresultsdata = Object.keys(dateObj).map(day => ({ day, data: dateObj[day] }))
 
       console.log(this.finalresultsdata);
-      
-      
+    },(error)=>{
+      if(error['error'].status == 400){
+        this.noresultdata = true
+      }
     })
   }
 

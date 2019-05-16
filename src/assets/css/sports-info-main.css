@@ -235,13 +235,17 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 form .form-group                    { margin-bottom: 24px;  }
 form .form-control                  { padding: 12px 16px; font-size: 20px; line-height: 24px; color: #292929; border: 2px solid #EBEBEB; font-weight: 400; border-radius: 4px; outline: none !important; }
 form textarea.form-control          { height: 120px; overflow: auto; resize: none; }
-form .form-control:focus            { color: #292929; box-shadow: none; -webkit-box-shadow: none; border-color: #292929;  } 
+form .form-control:focus            { color: #292929; box-shadow: none; -webkit-box-shadow: none; border-color: #d0d0d0;  } 
 form ::-webkit-input-placeholder    { color: #292929; opacity: 1; }
 form ::-moz-placeholder             { color: #292929; opacity: 1; }
 form :-ms-input-placeholder         { color: #292929; opacity: 1; }
 form :-moz-placeholder              { color: #292929; opacity: 1; }
 form .has-error .form-control       { color: #ED1A33; border-color: #ED1A33; }
 form .has-error span                { margin: 4px 0px 0px; display: block; color: #ED1A33; }
+.form-sucess-block                  { padding: 12px 0px; text-align: center; }
+.form-sucess-block img              { margin-bottom: 16px; border-radius: 50%; box-shadow: 0px 2px 16px rgba(80, 186, 57,0.39); -webkit-box-shadow: 0px 2px 16px rgba(80, 186, 57,0.39); }
+.form-sucess-block p                { font-size: 18px; line-height: 23px; font-weight: 500; }
+
 /******** Middle Section CSS End *******/
 
 /***** Bottom Section CSS Start *******/
@@ -401,6 +405,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     form .form-group                    { margin-bottom: 16px;  }
     form .form-control                  { padding: 9px 15px; font-size: 16px; line-height: 20px;  }
     form textarea.form-control          { height: 100px; }
+    .form-sucess-block img              { width: 80px; }
+    .form-sucess-block p                { font-size: 16px; line-height: 21px; }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
