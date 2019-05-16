@@ -6,7 +6,7 @@
           <h1>Statistics</h1>
         </div>
         <div *ngIf="nostatistics">No player statistics available!</div>
-        <ngb-tabset class="filled-tabs" *ngIf="!nostatistics">
+        <ngb-tabset class="filled-tabs" *ngIf="!nostatistics && isdata">
           <ngb-tab title="Batting">
             <ng-template ngbTabContent>
               <ngb-tabset class="common-tabs black-filled">
@@ -218,7 +218,6 @@
               </ngb-tabset>
             </ng-template>
           </ngb-tab>
-
         </ngb-tabset>
       </div>
       <div class="sidebar-col">

@@ -2,6 +2,7 @@
 .match-main-title                           { flex-wrap: wrap; -webkit-flex-wrap: wrap;}
 .match-main-title h1,
 .match-main-title .match-update             { margin-bottom: 32px; }
+.match-main-title .match-update             { flex-grow: 1; -webkit-flex-grow: 1; text-align: right;  }
 .match-main-title .match-update p           { line-height: 24px; margin-bottom: 4px; font-weight: 500; }
 .match-main-title .current-match            { width: 100%; border-bottom: 2px solid #ECECEC; }
 .match-main-title .current-teams            { padding-right: 32px; width: 58%; }
@@ -36,6 +37,8 @@
     .match-main-title .current-team img         { height: 32px;}
     .match-main-title .match-win-player         { padding-left: 0px; border-left: none;}
     .match-main-title .player-pic               { width: 74px; }
+    .match-main-title .current-match            { flex-direction: column; -webkit-flex-direction: column; }
+    .match-main-title .current-teams            { padding: 0px; width: 100%; }
 }
 
 @media (max-width: 575px) {

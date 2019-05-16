@@ -6,6 +6,7 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Sports.info website">
+  <link rel="alternate" hreflang="en" href="https://dev.sports.info"/>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -15,11 +16,17 @@
   <link rel="dns-prefetch" href="https://d1ldsx0apuyt84.cloudfront.net">
   <meta name="theme-color" content="#ED1A33">
 </head>
-
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('ngsw-worker.js')
+      .then(() => console.log('service worker installed'))
+      .catch(err => console.error('Error', err));
+  }
+</script>
 <body>
   <app-root>
     <div>
-      Loading.....
+     <img src="./assets/images/loader.gif"/>
     </div>
   </app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>

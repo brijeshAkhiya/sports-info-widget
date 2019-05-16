@@ -1,7 +1,7 @@
 {
-  "name": "sports-web",
-  "short_name": "sports-web",
-  "theme_color": "#1976d2",
+  "name": "Sports.Info",
+  "short_name": "Sports.info",
+  "theme_color": "#ED1A33",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

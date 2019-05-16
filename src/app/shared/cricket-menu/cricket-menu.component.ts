@@ -23,6 +23,7 @@ export class CricketMenuComponent implements OnInit {
   constructor(private renderer2: Renderer2, private router: Router,private sportsService:SportsService,private slugifyPipe: SlugifyPipe) { }
 
   ngOnInit() {
+    this.getCricketSeries();
   }
 
   //nav bar click event 

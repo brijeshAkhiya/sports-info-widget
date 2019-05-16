@@ -3,21 +3,20 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="writer-profile d-flex">
-          <img class="writer-pic rounded-box common-shadow align-self-start" src="../../../../assets/images/dhoni-profile.jpg">
+          <img *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start" [lazyLoad]="writerdata?.writerData?.sProfilePicture ? writerdata?.writerData?.sProfilePicture : ''">
           <div class="writer-info rounded-box common-shadow d-flex flex-column">
             <div>
-              <h1>Amish Shiravadakar</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
+              <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
+              <p>{{writerdata?.writerData?.sBio}}</p>
             </div>
-            <p class="view-info">Posts : <b>52</b> | Views : <b>4.2K</b> </p>
+            <p class="view-info">Posts : <b>{{writerdata?.writerData?.nPostsCount}}</b> | Views : <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
           </div>
         </div>
         <ngb-tabset class="common-tabs writer-tab">
           <ngb-tab>
             <ng-template ngbTabTitle>Latest</ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
+              <!-- <div class="common-news-list">
                 <div class="common-news-item d-flex common-shadow">
                   <div class="common-news-img common-zoom-container">
                     <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
@@ -99,14 +98,14 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div>
+              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button> -->
+                <app-common-news-list [type]="'writerrecent'" [reqparams]="commonrecentparams"></app-common-news-list>  
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle>Most Read</ng-template>
+            <ng-template ngbTabTitle><div (click)="getWriteropularblogs()">Most Read</div></ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
+              <!-- <div class="common-news-list">
                 <div class="common-news-item d-flex common-shadow">
                   <div class="common-news-img common-zoom-container">
                     <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
@@ -189,13 +188,14 @@
                 </div>
               </div>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div>
+              </div> -->
+              <app-common-news-list [type]="'writerpopular'" [reqparams]="commonpopularparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle>Videos</ng-template>
+            <ng-template ngbTabTitle><div (click)="getWritervideos()">Videos</div></ng-template>
             <ng-template ngbTabContent>
-              <div class="common-news-list">
+              <!-- <div class="common-news-list">
                 <div class="common-news-item d-flex common-shadow">
                   <div class="common-news-img common-zoom-container">
                     <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
@@ -278,15 +278,16 @@
                 </div>
               </div>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div>
+              </div> -->
+              <app-common-news-list [type]="'writervideos'" [reqparams]="commonvideoparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-267.jpg" alt="AD"></div>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>From this writer</h5>
             <ul class="common-list">
@@ -297,7 +298,7 @@
               <li><a>Kings XI Punjab</a></li>
             </ul>
           </div>
-          <div class="ad-block"><img src="../../../assets/images/ad-320-80.jpg" alt="AD"></div>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
         </div>
       </div>
     </div>

@@ -16,8 +16,8 @@ export class TournamentStateComponent implements OnInit {
   battingleaders: any;
   bowlingleaders: any;
   fieldingleaders: any;
-  nostatistics: boolean = false;
-
+  nostatistics: boolean ;
+  isdata:boolean
 
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe, private router: Router, private splitpipe: SplitPipe) { }
 
@@ -27,8 +27,10 @@ export class TournamentStateComponent implements OnInit {
   }
 
   getTournamentsLeader() {
+    this.isdata = false
     this.sportsService.gettournamentleaders(this.tournamentid).subscribe((res) => {
       if (res['data']) {
+        this.isdata = true
         this.battingleaders = res['data'].batting;
         this.bowlingleaders = res['data'].bowling;
         this.fieldingleaders = res['data'].fielding

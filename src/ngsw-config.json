@@ -27,7 +27,7 @@
   "dataGroups": [{
     "name": "api-freshness",
     "urls": [
-        "https://jsonplaceholder.typicode.com/posts"
+        "https://https://sports.bhavin.cf/api/v1"
     ],
     "cacheConfig": {
         "maxSize": 100,

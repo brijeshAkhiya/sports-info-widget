@@ -31,14 +31,12 @@ export class TeamsHomeComponent implements OnInit {
   //get tournament team profile
   getTournamentTeamProfile(){
     if(this.tournamentid && this.teamid){
-      console.log('11');
-      
     this.sportsService.getteamprofile(this.tournamentid,this.teamid).subscribe((res)=>{
       if(res['data']){
           this.teamprofiledata = res['data'];  
       }
     },(error)=>{
-      if(error['error'].status == 500){
+      if(error['error'].status == 500 || error['error'].status == 400){
         this.router.navigate(['/page-not-found'])
       }
     })

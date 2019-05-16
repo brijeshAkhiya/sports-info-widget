@@ -16,13 +16,22 @@ export class CommonNewsListComponent implements OnInit {
   constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() { 
-     if (this.reqparams) { 
-      this.posts = []
-      this.getRelatedPosts(this.reqparams)
-    }
-    else if(this.type == 'any'){
+    if(this.type == 'any'){
       this.posts = []
       this.getRecentPosts();
+    }
+    else if(this.type == 'writerrecent'){
+      this.getWriterblogs(this.reqparams);
+    }
+    else if(this.type == 'writerpopular'){
+      this.getWriterblogs(this.reqparams)
+    }
+    else if(this.type == 'writervideos'){
+      this.getWriterblogs(this.reqparams);
+    }
+    else { 
+      this.posts = []
+      this.getRelatedPosts(this.reqparams)
     }
   }
 
@@ -50,6 +59,18 @@ export class CommonNewsListComponent implements OnInit {
       }
     })
   }
+
+  //get writer blogs
+  getWriterblogs(data){
+    if(data){
+      this.sportsService.getwriterprofile(data).subscribe((res) => {
+        if (res['data']) {
+          this.posts = res['data']['posts'].posts;
+        }
+      })
+    }
+  }
+
 
   //load more blogs
 

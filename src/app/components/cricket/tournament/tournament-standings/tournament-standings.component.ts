@@ -13,7 +13,6 @@ export class TournamentStandingsComponent implements OnInit {
   widget1type = 'currentseries'
   tournamentid: any;
   pointstable: any;
-
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() {

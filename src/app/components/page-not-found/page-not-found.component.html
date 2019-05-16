@@ -1,3 +1,13 @@
-<lottie-animation-view [options]="lottieConfig" [width]="512">
-</lottie-animation-view>
-<app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+<section class="common-section page-not-found">
+    <div class="animation-container">
+        <lottie-animation-view [options]="lottieConfig" [width]="300">
+        </lottie-animation-view>
+    </div>
+    <h4>Ooops ! Page not found.</h4>
+    <button class="theme-btn" [routerLink]="['/']">Back to Homepage <span></span></button>
+</section>
+<div class="container">
+    <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+</div>
+<section class="common-section">
+</section>

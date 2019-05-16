@@ -7,7 +7,7 @@
         </li>
         <li><a [routerLink]="['/cricket/fixtures']" routerLinkActive="active">Fixtures</a></li>
         <li ngbDropdown>
-          <a id="dropdownBasic1" ngbDropdownToggle (click)="getCricketSeries()">Series</a>
+          <a id="dropdownBasic1" ngbDropdownToggle>Series</a>
           <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <li ngbDropdownItem *ngFor="let item of cricketseries | slice:0:4"><a
                 (click)="getournamentInfo(item.tournament_id,item.name)">{{item.name}}</a></li>

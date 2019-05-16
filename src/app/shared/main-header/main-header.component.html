@@ -7,7 +7,7 @@
             <!--Live matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'live'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between align-items-center">
+                <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amCalendar}}</p>
                 </div>
@@ -30,7 +30,7 @@
             <!--upcoming matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between align-items-center">
+                <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
@@ -51,7 +51,7 @@
             <!--Results-->
             <!-- <div class="slider-item" *ngIf="slide.slider_status == 'results'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between align-items-center">
+                <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amDuration :'hours'}}</p>
                 </div>
@@ -112,10 +112,10 @@
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
     </div>
-    <ul class="navbar-nav navbar-rightside login-search">
+    <!-- <ul class="navbar-nav navbar-rightside login-search">
       <li><a class="search"></a></li>
       <li><a class="login" (click)="open(content)"></a></li>
-    </ul>
+    </ul> -->
   </div>
 </nav>
 <ng-template #content let-modal>

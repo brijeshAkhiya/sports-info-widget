@@ -50,7 +50,7 @@
             <div class="blog-author d-flex align-items-center">
               <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"></div>
               <div class="author-desc">
-                <h6>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</h6>
+                <h6><a (click)="writerview(blogdata?.iId?._id)">{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</a></h6>
                 <p>{{blogdata?.iId?.sBio}}</p>
               </div>
             </div>
@@ -73,7 +73,7 @@
     </div>
   </div>
 </section>
-<section class="common-section comments-section">
+<!-- <section class="common-section comments-section">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
@@ -97,4 +97,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
