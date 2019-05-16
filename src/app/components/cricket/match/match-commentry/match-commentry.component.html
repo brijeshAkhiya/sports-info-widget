@@ -85,7 +85,8 @@
     </ul>
     </div>
   </ng-container>
-  <!-- START - COMMENTRY -->
+
+  <!-- START - COMMENTRY For Closed Match -->
   <!-- Second Innning -->
   <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
     <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
@@ -95,7 +96,20 @@
   <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
     <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
   </ng-container>
-  <!-- END - COMMENTRY -->
+  <!-- END - COMMENTRY For Closed Match -->
+
+
+  <!-- START - COMMENTRY For Live Match -->
+  <!-- Second Innning -->
+  <ng-container *ngIf="data.sport_event_status.status == 'live'" >
+      <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
+    </ng-container>
+  
+    <!-- First Innning -->
+    <ng-container *ngIf="data.sport_event_status.status == 'live'" >
+      <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
+    </ng-container>
+    <!-- END - COMMENTRY For Live Match -->
 
   <!-- <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
 </div>
