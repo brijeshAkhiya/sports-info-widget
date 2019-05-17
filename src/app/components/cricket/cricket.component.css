@@ -159,8 +159,9 @@
 /* -------- Tournament Fixtures List ------- */
     .match-teams .team-flag                         { height: 30px; }
     .schedule-item.complete-match .match-teams      { flex-direction: column; }
-    .schedule-tour-list .schedule-item              { padding-left: 20px; padding-right: 40px;}
+    .schedule-tour-list .schedule-item              { padding-left: 20px; padding-right: 32px;}
     .complete-match .match-teams .match-team:first-child            { text-align: left; justify-content: start; -webkit-justify-content: start; }
+    .complete-match .match-teams .match-team .team-info     { display: flex; flex-grow: 1; -webkit-flex-grow: 1; justify-content: space-between; -webkit-justify-content: space-between;}
     .complete-match .match-teams .match-team:first-child .team-info     { order: 2; }
     .complete-match .match-teams .match-team                { width: 100%; }
     .match-teams .vs-block h6                       { padding: 2px; }

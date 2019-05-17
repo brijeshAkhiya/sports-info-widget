@@ -10,12 +10,42 @@ import { getAdsState} from '../../../app-reducer';
 })
 export class AboutComponent implements OnInit {
   customads: any;
- 
+  slides = [
+    {id:'1'},
+    {id:'2'},
+    {id:'3'},
+    {id:'4'},
+
+  ]
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
     this.getCustomAds();
   }
+
+  customOptions: any = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    lazyLoad: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      540: {
+        items: 2,
+      },
+      872: {
+        items: 2,
+      }
+    },
+    nav: true
+  }
+
 
   //get custom ads data from Ngrx 
   

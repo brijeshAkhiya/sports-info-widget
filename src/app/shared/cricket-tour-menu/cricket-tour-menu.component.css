@@ -1,5 +1,5 @@
 .sub-navabar                                    { background: #1B2A5A; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; white-space: nowrap;}
-.submenu-back                                   { padding: 12px 32px 12px 12px; display: block; color: #fff;  font-weight: 600; text-transform: uppercase; border-right: 4px solid #294089; }
+.submenu-back                                   { padding: 12px 32px 12px 12px; display: block; color: #fff;  font-weight: 600; text-transform: uppercase; border-right: 4px solid #294089; max-width: 45%; overflow: hidden; text-overflow: ellipsis;}
 .sub-navabar .sub-navabar-inner                 { justify-content: center; -webkit-justify-content: center; }
 .sub-navabar .subnavbarmenu                     { margin: 0px;}
 .sub-navabar .subnavbarmenu:after               { content: ""; display: block; clear: both;}
@@ -26,11 +26,13 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
     .sub-navabar .dropdown-menu li a,
-    .sub-navabar                { font-size: 15px; }
+    .sub-navabar                                { font-size: 15px; }
+    .sub-navabar .subnavbarmenu > li > a        { margin: 0px 12px;}
+    .sub-navabar .dropdown-menu li a            { padding: 10px 15px; }
 }
 
 @media (max-width: 767px) {
-    .submenu-back                               { padding: 12px;}
+    .submenu-back                               { padding: 12px; }
     .sub-navbar-container                       { margin-left: 16px; }
     .sub-navabar .dropdown-menu li a,
     .sub-navabar                                { font-size: 15px; }

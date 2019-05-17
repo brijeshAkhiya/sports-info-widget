@@ -14,3 +14,15 @@
 .reader-item                        { margin-top: 52px; padding: 24px; background: #fff; text-align: center; }
 .reader-item img                    { margin: -72px 0px 12px; width: 104px; border-radius: 50%; }
 .reader-item p:last-child           { margin: 0px; }
+
+@media (max-width: 991px) {
+    .common-desc-block img              { margin-top: 24px; }
+    .about-count .count-item:after      { height: 6px; }
+}
+
+@media (max-width: 767px) {
+    .common-desc-block                  { padding: 16px; }
+    .about-count .count-item            { margin-bottom: 16px; padding: 16px; }
+    .about-count [class*="col-"]:last-child .count-item  { margin-bottom: 0px; }
+    .about-count .count-item:after      { height: 4px; }
+}   

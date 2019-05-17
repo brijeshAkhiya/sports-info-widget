@@ -12,6 +12,7 @@ export class CommonNewsListComponent implements OnInit {
   @Input() type: any;
   @Input() reqparams: {};
   loadnewposts: any;
+  isdisplay:boolean;
   smallblogdeafault = '../../../assets/images/placeholder_blog_small.svg'
   constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
@@ -42,9 +43,11 @@ export class CommonNewsListComponent implements OnInit {
     let data = {
       nLimit: 10
     }
+    this.isdisplay = false
     this.sportsService.getrecentpost(data).subscribe((res) => {
       if (res['data']) {
         this.posts = res['data'];
+        this.isdisplay = true
       }
     })
   }
@@ -52,9 +55,12 @@ export class CommonNewsListComponent implements OnInit {
   //get related posts / specific id 
 
   getRelatedPosts(data) {
+    this.isdisplay = false
+
     this.sportsService.getrelatedpost(data).subscribe((res) => {
       if (res['data']) {
         this.posts = res['data'];
+        this.isdisplay = true
 
       }
     })
@@ -63,9 +69,13 @@ export class CommonNewsListComponent implements OnInit {
   //get writer blogs
   getWriterblogs(data){
     if(data){
+    this.isdisplay = false
+
       this.sportsService.getwriterprofile(data).subscribe((res) => {
         if (res['data']) {
           this.posts = res['data']['posts'].posts;
+        this.isdisplay = true
+
         }
       })
     }
@@ -80,10 +90,13 @@ export class CommonNewsListComponent implements OnInit {
       nStart:start,
       nLimit:4
     }
+    this.isdisplay = false
     this.sportsService.getrelatedpost(data).subscribe((res) => {
       if (res['data']) {
         this.loadnewposts = res['data'];
         this.posts = this.posts.concat(this.loadnewposts)
+        this.isdisplay = true
+
       }
     })
   }
@@ -93,5 +106,10 @@ export class CommonNewsListComponent implements OnInit {
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
     this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
+  }
+
+  //writer view 
+  writerview(id){
+    this.router.navigate(['/writer',btoa(id)])
   }
 }

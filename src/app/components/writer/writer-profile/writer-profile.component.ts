@@ -29,7 +29,8 @@ export class WriterProfileComponent implements OnInit {
   //get writer info 
   getWriterProfile() {
     let data = {
-      _id:this.writerid
+      _id:this.writerid,
+      nLimit:20
     };
     this.sportsService.getwriterprofile(data).subscribe(res => {
       if (res["data"]) {
@@ -54,6 +55,13 @@ export class WriterProfileComponent implements OnInit {
       eType:'Videos',
       nLimit:10
     }
+  }
+
+   //blog view 
+
+   blogview(id, type, title) {
+    let slugname = this.slugifyPipe.transform(title);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
   }
 
 }

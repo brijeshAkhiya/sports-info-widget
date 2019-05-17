@@ -34,6 +34,10 @@ h4                      { margin: 0px 0px 8px; font-size: 24px; line-height: 32p
 h5                      { margin: 0px 0px 4px; font-size: 20px; line-height: 25px; color: #292929; font-family: 'Muli', sans-serif; font-weight: 700; }
 h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
 h6 a                    { color: #3D3D3D; }
+h4 a:not([href]):not([tabindex]):hover,
+h4 a:not([href]):not([tabindex]):focus,
+h5 a:not([href]):not([tabindex]):hover,
+h5 a:not([href]):not([tabindex]):focus,
 h6 a:not([href]):not([tabindex]):hover,
 h6 a:not([href]):not([tabindex]):focus              { color: #ED1A33;}
 /* h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
@@ -95,6 +99,19 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-zoom-container.common-full-img:hover .common-zoom-img,
 .common-zoom-img:hover  { transform: scale(1.05); -webkit-transform: scale(1.05); }
 
+/* -------- Loader Style ------- */
+.small-loader                                       { margin: 16px auto; }
+.small-loader span                                  { margin: 0px auto; width: 56px; height: 56px; display: block; background: url(../../assets/images/small-loader-icon.svg) no-repeat center center; position: relative;}
+.small-loader span:before                           { content: ""; position: absolute; width: 100%; height: 100%; display: block; border: 3px solid #E6E6E6; border-top-color: #ED1A33; border-radius: 50%; animation: smallLoader 1s ease-in-out infinite; -webkit-animation: smallLoader 1s ease-in-out infinite;}
+@-webkit-keyframes smallLoader {
+    0%      { transform: rotate(0deg); }
+    100%    { transform: rotate(360deg); }
+}
+@keyframes smallLoader {
+    0%      { transform: rotate(0deg); }
+    100%    { transform: rotate(360deg); }
+}
+
 /******* Header Section CSS Start ******/
 .modal-backdrop.show                { opacity: 0.65; }
 .modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
@@ -143,7 +160,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-popular-list .item-desc         { padding: 12px; min-height: 90px; }
 .common-popular-list .item-desc p       { margin: 0px; }
 .common-popular-list .item-desc p a     { display: block; color: #292929; }
-
+.common-popular-list a:not([href]):not([tabindex]):focus, 
+.common-popular-list a:not([href]):not([tabindex]):hover    { color: #ED1A33; }
 /* -------- Common News Section ------- */
 .common-news-list .common-news-item         { margin-bottom: 24px; padding: 16px; background: #fff; border-radius: 4px; }
 .common-news-list .common-news-img          { width: 280px; height: 181px; border-radius: 2px 2px 0px 0px; cursor: pointer; position: relative; }
@@ -199,6 +217,7 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .common-widget .cricket-list li:last-child      { padding: 0px; }
 .common-widget .cricket-list .title p           { margin-bottom: 12px; font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; }
 .common-widget .cricket-list .title p b         { color: #595959;}
+.common-widget .cricket-list .title p:last-child        { flex-shrink: 0; -webkit-flex-shrink: 0; }
 .common-widget .cricket-list .match-winner::after       { content: ""; margin: 0px 5px 4px; display: inline-block; height: 14px; width: 14px; background: url(../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle; }
 .common-widget .cricket-list .match-info img    { margin: -3px 4px 0px 0px; width: 20px; display: inline-block;}
 .common-widget .cricket-list .match-info p      { margin-bottom: 12px; }

@@ -46,6 +46,8 @@ agm-map                                         { height: 300px; }
 /* -------- Facts & Figures Section ------- */
     .probability-section .team-block img        { height: 72px; }
     .probability-section .team-block h3         { margin: 0px 24px; font-size: 32px; line-height: 42px; }
+/* -------- Scorecard Section ------- */
+    .batsman-text                               { margin: 3px 0px 0px; font-size: 12px; line-height: 16px;}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -65,6 +67,8 @@ agm-map                                         { height: 300px; }
     .commentary-title span                      { margin-right: 14px; font-size: 14px; line-height: 20px; }
 /* -------- Facts & Figures Section ------- */
     .venue-info p                               { font-size: 16px; line-height: 22px; }
+/* -------- Scorecard Section ------- */
+    .batsman-text                               { font-size: 11px; line-height: 14px;}
 }
 
 @media (max-width: 575px) {

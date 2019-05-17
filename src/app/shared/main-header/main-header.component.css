@@ -27,6 +27,10 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .login-search li a.search       { background-image: url(../../../assets/images/search-icon.svg); }
 .login-search li a.login        { background-image: url(../../../assets/images/user-icon.svg); }
 
+.serch-box                      { position: absolute; width: 100%; min-height: calc(100vh - 207px); background: rgba(27, 42, 90, 0.9); z-index: 6;}
+.serch-bar                      { padding: 48px 0px; background: #fff;}
+.search-result                  { padding: 50px 0px; }
+
 /***** Responsive CSS Start ******/
 
 @media (max-width: 1379px) {

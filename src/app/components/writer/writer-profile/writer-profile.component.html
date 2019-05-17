@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="writer-profile d-flex">
-          <img *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start" [lazyLoad]="writerdata?.writerData?.sProfilePicture ? writerdata?.writerData?.sProfilePicture : ''">
+          <img *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start" [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']">
           <div class="writer-info rounded-box common-shadow d-flex flex-column">
             <div>
               <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
@@ -291,11 +291,7 @@
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>From this writer</h5>
             <ul class="common-list">
-              <li><a>MS Dhoni overcomes Rajasthan Royals and dew with vintage assault</a></li>
-              <li><a>Kolkata Knight Riders</a></li>
-              <li><a>MS Dhoni overcomes Rajasthan Royals and dew with vintage assault</a></li>
-              <li><a>Chennai Super Kings</a></li>
-              <li><a>Kings XI Punjab</a></li>
+              <li *ngFor="let item of writerdata.posts.posts | slice:0:5"><a (click)="blogview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
