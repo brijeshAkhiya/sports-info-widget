@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-common-blog-card',
@@ -12,9 +13,14 @@ export class CommonBlogCardComponent implements OnInit {
   @Input() end: any;
   @Input() loadmore: any;
   smallblogdeafault = '../../../assets/images/placeholder_blog_small.svg'
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+   //writer view 
+   writerview(id){
+    this.router.navigate(['/writer',btoa(id)])
   }
 
 }

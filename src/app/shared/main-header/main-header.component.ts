@@ -13,10 +13,7 @@ import { SportsService } from '../../providers/sports-service';
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.css'],
-  host:{
-    '(window:resize)':'onResize($event)'
-  }
+  styleUrls: ['./main-header.component.css']
 })
 export class MainHeaderComponent implements OnInit {
 
@@ -26,15 +23,14 @@ export class MainHeaderComponent implements OnInit {
   sliderresults = [];
   isapply: boolean = false;
   socialUser: any;
-  activeSlides: SlidesOutputData;
- 
-
+  issearch:boolean
   constructor(private renderer2: Renderer2, private el: ElementRef,private changeDetector: ChangeDetectorRef, private router: Router, private sportsService: SportsService, 
     private modalService: NgbModal,private socialLoginService: AuthService,private store: Store<fromRoot.State>) {
       //get custom ads data Funtion call --->
       this.getCustomAds();
 
   }
+
 
 
   customOptions: any = {
@@ -66,20 +62,8 @@ export class MainHeaderComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('22');
-    
     this.getHeaderSliderData();
     
-  }
-
-  getData(event){
-  
-    
-  }
-
-  onResize(event){
-   this.activeSlides = this.sliderdata
-   
   }
 
   //get custom ads api call -Ngrx Store 
@@ -211,6 +195,18 @@ export class MainHeaderComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return  `with: ${reason}`;
+    }
+  }
+
+  //search bar open 
+  searchopen(){
+    if(!this.issearch){
+      this.issearch = true
+      this.renderer2.addClass(document.body,'search-box-open');
+    }
+    else{
+      this.issearch = false
+      this.renderer2.removeClass(document.body,'search-box-open');
     }
   }
 

@@ -130,5 +130,10 @@ export class TournamentHomeComponent implements OnInit {
     this.router.navigate(['/cricket/team',btoa(this.tournamentid),btoa(id),slugname]);
   }
 
+  //writer view 
+  writerview(id){
+    this.router.navigate(['/writer',btoa(id)])
+  }
+
 
 }

@@ -1,31 +1,39 @@
-<section class="blog-banner" *ngIf="blogtype == 'article'" [defaultImage]="largeblogdefault" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
+<section class="blog-banner" *ngIf="blogtype == 'article'" [defaultImage]="largeblogdefault"
+  [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
   <div class="banner-inner">
     <div class="container">
-        <div class="banner-desc">
-          <h1 class="white-text">{{blogdata?.sTitle}}</h1>
-          <div class="author-info d-flex justify-content-between align-items-center">
-            <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}} </a>{{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-            <p class="view white-view">{{blogdata?.nViewCounts}}</p>
-          </div>
+      <div class="banner-desc">
+        <h1 class="white-text">{{blogdata?.sTitle}}</h1>
+        <div class="author-info d-flex justify-content-between align-items-center">
+          <p class="author"><a (click)="writerview(blogdata?.iId?._id)">{{blogdata?.iId?.sFirstName}}
+              {{blogdata?.iId?.sLastName}} </a>{{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+          <p class="view white-view">{{blogdata?.nViewCounts}}</p>
         </div>
+      </div>
     </div>
   </div>
 </section>
-<section class="blog-banner" *ngIf="blogtype == 'video'" [defaultImage]="largeblogdefault" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
-  <video controls [ngClass]="{'show': isplay}" controlsList="nodownload" autoplay>
-    <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
-    Your browser does not support the video tag.
-  </video>
+<section class="blog-banner" *ngIf="blogtype == 'video'" [defaultImage]="largeblogdefault"
+  [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
+  <div class="video-container" [ngClass]="{'show': isplay}">
+    <!-- <img class="pattern pattern-left" src="../../../../assets/images/video-pattern-img.svg">
+    <img class="pattern pattern-right" src="../../../../assets/images/video-pattern-img.svg"> -->
+    <video controls controlsList="nodownload" autoplay>
+      <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
+      Your browser does not support the video tag.
+    </video>
+  </div>
   <button class="video-play-btn" (click)="videoplay()"></button>
   <div class="banner-inner">
     <div class="container">
-        <div class="banner-desc">
-          <h1 class="white-text">{{blogdata?.sTitle}}</h1>
-          <div class="author-info d-flex justify-content-between align-items-center">
-            <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}} </a>{{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-            <p class="view white-view">{{blogdata?.nViewCounts}}</p>
-          </div>
+      <div class="banner-desc">
+        <h1 class="white-text">{{blogdata?.sTitle}}</h1>
+        <div class="author-info d-flex justify-content-between align-items-center">
+          <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}
+            </a>{{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+          <p class="view white-view">{{blogdata?.nViewCounts}}</p>
         </div>
+      </div>
     </div>
   </div>
 </section>
@@ -36,21 +44,26 @@
         <div class="blog-inner d-flex">
           <div class="social-block">
             <ul class="sticky-social-list">
-              <li><button (click)="sharablelink('facebook')"><img src="../../../../assets/images/facebook-share-icon-color.svg"></button></li>
-              <li><button (click)="sharablelink('twitter')"><img src="../../../../assets/images/twitter-share-icon-color.svg"></button></li>
-              <li><button (click)="sharablelink('whatsapp')"><img src="../../../../assets/images/whatsapp-share-icon-color.svg"></button></li>
+              <li><button (click)="sharablelink('facebook')"><img
+                    src="../../../../assets/images/facebook-share-icon-color.svg"></button></li>
+              <li><button (click)="sharablelink('twitter')"><img
+                    src="../../../../assets/images/twitter-share-icon-color.svg"></button></li>
+              <li><button (click)="sharablelink('whatsapp')"><img
+                    src="../../../../assets/images/whatsapp-share-icon-color.svg"></button></li>
             </ul>
           </div>
           <div class="blog-content-block">
             <div class="blog-content" [innerHTML]="blogdata?.sDescription">
             </div>
             <ul class="tag-list">
-              <li *ngFor="let item of blogdata?.aTags"><button (click)="tagview(item.id,item.type,item.name)">{{item?.name | split}}</button></li>
+              <li *ngFor="let item of blogdata?.aTags"><button
+                  (click)="tagview(item.id,item.type,item.name)">{{item?.name | split}}</button></li>
             </ul>
             <div class="blog-author d-flex align-items-center">
               <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"></div>
               <div class="author-desc">
-                <h6>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</h6>
+                <h6><a (click)="writerview(blogdata?.iId?._id)">{{blogdata?.iId?.sFirstName}}
+                    {{blogdata?.iId?.sLastName}}</a></h6>
                 <p>{{blogdata?.iId?.sBio}}</p>
               </div>
             </div>
@@ -59,12 +72,13 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>Readlist</h5>
             <ul class="common-list">
-              <li *ngFor="let item of widgetblogs | slice:0:5"><a (click)="getwidgetblogsview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a
+                  (click)="getwidgetblogsview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
@@ -73,7 +87,7 @@
     </div>
   </div>
 </section>
-<section class="common-section comments-section">
+<!-- <section class="common-section comments-section">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
@@ -97,4 +111,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

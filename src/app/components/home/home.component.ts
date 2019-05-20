@@ -192,4 +192,9 @@ export class HomeComponent implements OnInit {
     let teams = team1.concat("-", team2);
     this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
+
+  //writer view 
+  writerview(id){
+    this.router.navigate(['/writer',btoa(id)])
+  }
 }

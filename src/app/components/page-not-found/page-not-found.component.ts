@@ -12,7 +12,8 @@ export class PageNotFoundComponent implements OnInit {
     this.lottieConfig = {
       path: '../../../assets/json/404.json',
       autoplay: true,
-      loop: true
+      loop: true,
+      renderer: 'canvas'
   };
    }
 

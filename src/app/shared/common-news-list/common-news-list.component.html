@@ -1,19 +1,23 @@
-<div class="common-news-list">
+  <app-data-loader-widget *ngIf="!isdisplay"></app-data-loader-widget>
+  <div class="common-news-list">
     <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
       <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-        <div class="common-zoom-img" [defaultImage]="smallblogdeafault" [lazyLoad]="post.sImage | resizeImage:['s']"  (click)="blogview(post._id,post.eType,post.sTitle)"></div>
+        <div class="common-zoom-img" [defaultImage]="smallblogdeafault" [lazyLoad]="post.sImage | resizeImage:['s']"
+          (click)="blogview(post._id,post.eType,post.sTitle)"></div>
       </div>
       <div class="common-news-desc">
         <div class="news-excerpt">
           <h5><a (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle}}</a></h5>
-          <p [innerHtml]="post.sDescription | truncate:[164,'...'] | striphtml"  (click)="blogview(post._id,post.eType,post.sTitle)"></p>
+          <p [innerHtml]="post.sDescription | truncate:[164,'...'] | striphtml"
+            (click)="blogview(post._id,post.eType,post.sTitle)"></p>
         </div>
         <div class="author-info d-flex justify-content-between align-items-center">
-          <p class="author"><a>{{post.iId.sFirstName}}
+          <p class="author"><a (click)="writerview(post?.iId?._id)">{{post.iId.sFirstName}}
               {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
           <p class="view">{{post.nViewCounts}}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()" *ngIf="posts">Load More<span></span></button></div>
+  <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()" *ngIf="posts && isdisplay">Load
+      More<span></span></button></div>

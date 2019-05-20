@@ -1,0 +1,15 @@
+.page-not-found             { text-align: center; overflow: hidden; }
+.page-not-found h4          { margin: 24px 0px; font-family: 'IBM Plex Sans', sans-serif; color: #3D3D3D; opacity: 0.5; }
+app-custom-ads-widget       { margin-top: 0px; }
+
+/***** Responsive CSS Start ******/
+@media (min-width: 992px) {
+    .animation-container    { transform: scale(1.5); -webkit-transform: scale(1.5); }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .animation-container    { transform: scale(1.2); -webkit-transform: scale(1.2); }
+}
+
+@media (max-width: 575px) {
+    .page-not-found h4          { margin: 12px 0px 24px;}
+}

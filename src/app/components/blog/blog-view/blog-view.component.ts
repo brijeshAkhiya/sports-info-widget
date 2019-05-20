@@ -127,7 +127,7 @@ export class BlogViewComponent implements OnInit {
   getwidgetblogsview(id,type,title){
     this.blogid = id
     let slug = this.slugifypipe.transform(title);
-    this.router.navigate(["/blog",type, btoa(id),slug]);
+    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slug]);
     this.updatePostCount();
     this.getBlogview();
     this.getBlogComments();
@@ -167,7 +167,11 @@ export class BlogViewComponent implements OnInit {
     else {
       window.open(`http://twitter.com/share?text=This is our new blog !!! &url=${this.blogUrl}&hashtags=Sports.info,Cricketblogs,sportslatest`, '_blank')
     }
+  }
 
+  //writer view 
+  writerview(id){
+    this.router.navigate(['/writer',btoa(id)])
   }
 
 }

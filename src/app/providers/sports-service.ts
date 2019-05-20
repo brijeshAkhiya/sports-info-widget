@@ -228,4 +228,10 @@ export class SportsService {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/tournament/${tournamentid}/teams/${teamid}`)      
    }
 
+   //get writer profile
+   getwriterprofile(data){
+      return this.http.post(environment.apiUrl + environment.version + `/writerprofile`,data);
+      
+   }
+
 }

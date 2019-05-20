@@ -187,7 +187,7 @@ export class MatchHomeComponent implements OnInit {
       }
     },
     (error)=>{
-      if(error['error'].status == 400){
+      if(error['error'].status == 400 || error['error'].status == 403){
         this.router.navigate(['/page-not-found'])
       }
   });

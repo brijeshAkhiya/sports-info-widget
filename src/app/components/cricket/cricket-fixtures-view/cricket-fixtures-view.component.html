@@ -1,0 +1,112 @@
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+          <h1>Recent Fixtures</h1>
+        </div>
+        <ngb-tabset class="common-tabs">
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Upcoming</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div class="schedule-list schedule-tour-list">
+                <div *ngIf="fixturesdata?.length == 0 || nofixturesdata">No data available!</div>
+                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
+                  <div class="month-title">
+                    <div class="sticky-month">
+                      <h5>{{item.day}}</h5>
+                    </div>
+                  </div>
+                  <div class="schedule-items">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data" (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      <div class="match-desc">
+                        <!-- <h6>Match 2</h6> -->
+                        <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="time-line">{{item.scheduled | date:'h:mm a'}}</p>
+                      </div>
+                      <div class="match-teams d-flex align-items-center">
+                        <div class="match-team d-flex align-items-center">
+                          <div class="team-info">
+                            <h5>{{item.competitors[0].abbreviation}}</h5>
+                          </div>
+                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
+                        </div>
+                        <div class="vs-block">
+                          <h6>vs</h6>
+                        </div>
+                        <div class="match-team d-flex align-items-center">
+                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
+                          <div class="team-info">
+                            <h5>{{item.competitors[1].abbreviation}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="details-btn" (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><div (click)="getMatchResults()">Results</div></ng-template>
+            <ng-template ngbTabContent>
+              <div class="schedule-list schedule-tour-list">
+                <div *ngIf="finalresultsdata?.length == 0 || noresultdata">No data available!</div>
+                <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
+                  <div class="month-title">
+                    <div class="sticky-month">
+                      <h5>{{item.day}}</h5>
+                    </div>
+                  </div>
+                  <div class="schedule-items">
+                    <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data" (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      <div class="match-desc">
+                        <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="result-line">{{item.match_result}}</p>
+                      </div>
+                      <div class="match-teams d-flex align-items-center">
+                        <div class="match-team d-flex align-items-center"
+                          *ngFor="let item of item.period_score_new | slice:0:1">
+                          <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
+                            <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
+                            <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                          </div>
+                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
+                        </div>
+                        <div class="vs-block">
+                          <h6>vs</h6>
+                        </div>
+                        <div class="match-team d-flex align-items-center"
+                          *ngFor="let item of item.period_score_new | slice:1:2">
+                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
+                          <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
+                            <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
+                            <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                          </div>
+                        </div>
+                        <a class="details-btn" (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!--points table widget-->
+          <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

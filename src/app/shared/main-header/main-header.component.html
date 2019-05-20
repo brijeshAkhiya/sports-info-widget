@@ -1,13 +1,14 @@
 <div class="header-live-section">
   <div class="container">
     <div class="header-live-slider">
-      <owl-carousel-o [options]="customOptions">
-        <ng-container class="items">
-          <ng-template carouselSlide *ngFor="let slide of sliderdata">
+      <owl-carousel-o [options]="customOptions" *ngIf="sliderdata">
+        <ng-container class="items" *ngFor="let slide of sliderdata">
+          <ng-template carouselSlide>
             <!--Live matches-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'live'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
+            <div class="slider-item" *ngIf="slide.slider_status == 'live'"
+              (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between align-items-center">
+                <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amCalendar}}</p>
                 </div>
@@ -28,9 +29,10 @@
               </div>
             </div>
             <!--upcoming matches-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
+            <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'"
+              (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between align-items-center">
+                <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
@@ -51,7 +53,7 @@
             <!--Results-->
             <!-- <div class="slider-item" *ngIf="slide.slider_status == 'results'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
               <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between align-items-center">
+                <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amDuration :'hours'}}</p>
                 </div>
@@ -71,15 +73,17 @@
               </div>
             </div> -->
           </ng-template>
-        </ng-container>
+          </ng-container>
+     
       </owl-carousel-o>
     </div>
   </div>
 </div>
 <nav class="navbar navbar-expand-md">
   <a class="navbar-brand" (click)="routing('/')"><img src="../../../assets/images/logo.svg" alt=""></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"  [ngClass]="{'active': isapply}"  (click)="isapply = !isapply"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    [ngClass]="{'active': isapply}" (click)="isapply = !isapply" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -89,36 +93,112 @@
     <div class="navbar-nav-container" id="navbar-nav">
       <ul class="navbar-nav" #navbarnav>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/cricket']" routerLinkActive="active" (click)="isapply = false">Cricket</a>
+          <a class="nav-link" [routerLink]="['/cricket']" routerLinkActive="active"
+            (click)="isapply = false">Cricket</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/coming-soon/soccer']" routerLinkActive="active" (click)="isapply = false">Soccer</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/soccer']" routerLinkActive="active"
+            (click)="isapply = false">Soccer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/coming-soon/badminton']" routerLinkActive="active" (click)="isapply = false">Badminton</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/badminton']" routerLinkActive="active"
+            (click)="isapply = false">Badminton</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/coming-soon/basketball']" routerLinkActive="active" (click)="isapply = false">Basketball</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/basketball']" routerLinkActive="active"
+            (click)="isapply = false">Basketball</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/coming-soon/field-Hockey']" routerLinkActive="active" (click)="isapply = false">Field Hockey</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/field-Hockey']" routerLinkActive="active"
+            (click)="isapply = false">Field Hockey</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/coming-soon/racing']" routerLinkActive="active" (click)="isapply = false">Racing</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/racing']" routerLinkActive="active"
+            (click)="isapply = false">Racing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/coming-soon/tennis-sports']" routerLinkActive="active" (click)="isapply = false">Tennis sports</a>
+          <a class="nav-link" [routerLink]="['/coming-soon/tennis-sports']" routerLinkActive="active"
+            (click)="isapply = false">Tennis sports</a>
         </li>
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
     </div>
     <ul class="navbar-nav navbar-rightside login-search">
-      <li><a class="search"></a></li>
-      <li><a class="login" (click)="open(content)"></a></li>
+      <li><a class="search" (click)="searchopen()"></a></li>
+      <!-- <li><a class="login" (click)="open(content)"></a></li> -->
     </ul>
   </div>
 </nav>
-<ng-template #content let-modal>
+<div class="common-serch-box" [ngClass]="{'show': issearch}">
+  <div class="search-bar">
+    <div class="container">
+      <div class="search-box">
+        <input type="text" placeholder="Search something …">
+        <button type="submit"></button>
+      </div>
+    </div>
+  </div>
+  <div class="search-result">
+    <div class="container">
+      <div class="common-title-btn d-flex justify-content-between align-items-center">
+        <h3 class="white-text">Recent Blogs</h3>
+        <button class="theme-btn">View All<span></span></button>
+      </div>
+      <div class="common-popular-list popular-list-4">
+        <div class="row row-size12">
+          <div class="col-sm-3">
+            <div class="popular-item common-shadow">
+              <div class="img-block common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
+                </div>
+              </div>
+              <div class="item-desc">
+                <p class="bold-text"><a>Haris Sohail's ton in vain as Australia complete
+                    clean sweep</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="popular-item common-shadow">
+              <div class="img-block common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
+                </div>
+              </div>
+              <div class="item-desc">
+                <p class="bold-text"><a>Haris Sohail's ton in vain as Australia complete
+                    clean sweep</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="popular-item common-shadow">
+              <div class="img-block common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
+                </div>
+              </div>
+              <div class="item-desc">
+                <p class="bold-text"><a>Haris Sohail's Australia</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="popular-item common-shadow">
+              <div class="img-block common-zoom-container">
+                <div class="common-zoom-img" style="background-image: url(../../../assets/images/re-news-1.jpg)">
+                </div>
+              </div>
+              <div class="item-desc">
+                <p class="bold-text"><a>Haris Sohail's ton in vain as Australia complete
+                    clean sweep</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <ng-template #content let-modal>
   <div class="modal-body">
     <h1>Sign In</h1>
     <ul>
@@ -128,4 +208,4 @@
     <p class="signin-text">By signing in with Google or Facebook, you agree to
       SportsInfo’s <a [routerLink]="['/terms-and-conditions']" >Terms</a> and <a [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>
   </div>
-</ng-template>
+</ng-template> -->

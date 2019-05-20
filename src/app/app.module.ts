@@ -29,6 +29,7 @@ import { TruncatePipe } from "./pipes/truncatepipe";
 
 import { SharedModule } from "./shared/shared.module";
 import { MomentModule } from "ngx-moment";
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CarouselModule } from "ngx-owl-carousel-o";
 import { SplitPipe } from "./pipes/stringsplitpipe";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -82,6 +83,7 @@ export function provideConfig() {
     AppRoutingModule,
     SharedModule,
     MomentModule,
+    LazyLoadImageModule,
     CarouselModule,
     HttpClientModule,
     ReactiveFormsModule,

@@ -34,6 +34,9 @@ footer .copyright p                 { margin: 0px; font-size: 18px; line-height:
 .fav-block .fav-list button.selected,
 .fav-block .fav-list button:hover   { background: #ED1A33; color: #fff; border-color: #ED1A33; }
 
+.fav-btn.scroll-top                 { width: 64px; height: 64px; background-image: none;  }
+.fav-btn.scroll-top img             { width: 32%; transform: rotate(-90deg); -webkit-transform: rotate(-90deg);}
+.fav-btn.scroll-top:hover           { transform: rotate(0deg); -webkit-transform: rotate(0deg); }
 /***** Responsive CSS Start ******/
 
 @media (min-width: 992px) and (max-width: 1199px) {

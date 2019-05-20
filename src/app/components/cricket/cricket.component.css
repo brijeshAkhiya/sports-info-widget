@@ -26,7 +26,7 @@
 .schedule-tour-list h6,
 .schedule-tour-list .complete-match h5                  { margin-bottom: 4px; font-size: 16px; line-height: 20px; color: #292929; font-weight: 700; }
 .schedule-tour-list .complete-match h5.winner:after     { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background:url(../../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle; }
-.schedule-tour-list .schedule-item h5   { color: #292929; }
+.schedule-tour-list .schedule-item h5   { padding: 0px; color: #292929; }
 .schedule-tour-list h6                  { margin-bottom: 1px; color: #292929; font-weight: 600; }
 .match-teams .vs-block h6               { margin: 0px 28px; color: #CCCCCC; }
 .schedule-tour-list p                   { margin-bottom: 16px; font-size: 14px; line-height: 20px; color: #292929; font-weight: 500;}
@@ -157,12 +157,14 @@
     .schedule-list .month-title h5              { margin-bottom: 16px;}
     .schedule-list .month-title .sticky-month   { position: static; }
 /* -------- Tournament Fixtures List ------- */
-    .schedule-item .match-teams             { flex-direction: column; }
-    .schedule-tour-list .schedule-item      { padding-left: 24px; padding-right: 40px;}
-    .match-teams .match-team:first-child    { text-align: left; justify-content: start; -webkit-justify-content: start; }
-    .match-teams .match-team:first-child .team-info     { order: 2; }
-    .match-teams .match-team                { width: 100%; }
-    .match-teams .vs-block h6               { padding: 2px; }
+    .match-teams .team-flag                         { height: 30px; }
+    .schedule-item.complete-match .match-teams      { flex-direction: column; }
+    .schedule-tour-list .schedule-item              { padding-left: 20px; padding-right: 32px;}
+    .complete-match .match-teams .match-team:first-child            { text-align: left; justify-content: start; -webkit-justify-content: start; }
+    .complete-match .match-teams .match-team .team-info     { display: flex; flex-grow: 1; -webkit-flex-grow: 1; justify-content: space-between; -webkit-justify-content: space-between;}
+    .complete-match .match-teams .match-team:first-child .team-info     { order: 2; }
+    .complete-match .match-teams .match-team                { width: 100%; }
+    .match-teams .vs-block h6                       { padding: 2px; }
 /* -------- Teams List ------- */
     .team-list .team-item .team-flag    { width: 81px; }
     .team-list .team-item .team-flag img{ height: 54px;}
