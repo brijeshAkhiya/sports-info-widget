@@ -10,7 +10,8 @@
             <ng-template ngbTabTitle>Results</ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-              <app-no-data-widget *ngIf="finalresultsdata?.length == 0 || noresultdata"></app-no-data-widget>
+                <app-data-loader-widget *ngIf="!finalresultsdata"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="finalresultsdata?.length == 0 || noresultdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
                   <div class="month-title">
                     <div class="sticky-month">
@@ -19,7 +20,8 @@
                   </div>
                   <div class="schedule-items">
                     <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
-                      *ngFor="let item of item.data" (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
@@ -45,7 +47,8 @@
                             <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                           </div>
                         </div>
-                        <a class="details-btn" (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                        <a class="details-btn"
+                          (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                       </div>
                     </div>
                   </div>
@@ -59,7 +62,8 @@
             </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-              <app-no-data-widget *ngIf="fixturesresult?.length == 0 || nofixturesdata"></app-no-data-widget>
+                <app-data-loader-widget *ngIf="!fixturesresult"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="fixturesresult?.length == 0 || nofixturesdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of fixturesresult">
                   <div class="month-title">
                     <div class="sticky-month">
@@ -68,7 +72,8 @@
                   </div>
                   <div class="schedule-items">
                     <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
-                      *ngFor="let item of item.data" (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
@@ -91,7 +96,8 @@
                           </div>
                         </div>
                       </div>
-                      <a class="details-btn" (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                      <a class="details-btn"
+                        (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                     </div>
                   </div>
                 </div>
@@ -102,8 +108,8 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--points table widget-->
           <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
         </div>

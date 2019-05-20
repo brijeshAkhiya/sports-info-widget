@@ -36,6 +36,6 @@ import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widg
     ],
     declarations: [TruncatePipe, ResizeImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent],
     providers: [TruncatePipe, ResizeImagePipe,  SportsService,SplitPipe],
-    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent]
+    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent]
 })
 export class SharedModule { }

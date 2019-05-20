@@ -200,6 +200,7 @@ export class MainHeaderComponent implements OnInit {
 
   //search bar open 
   searchopen(){
+    this.isapply = false
     if(!this.issearch){
       this.issearch = true
       this.renderer2.addClass(document.body,'search-box-open');
