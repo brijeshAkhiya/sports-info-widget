@@ -167,6 +167,12 @@ export class SportsService {
       return this.http.get(environment.apiUrl + environment.version + `/cricket/match/${id}/timelinedelta`);
    }
 
+
+   //get match timeline Delta - live
+   getmatchtimelineDetlaDirect(id){
+      return this.http.get(`http://api.sportradar.us/cricket-t2/en/matches/${id}/timeline/delta.json?api_key=j2skxacnm2uf5g6g5645p43u`);
+   }
+
    //get team vs team data 
    getteamvsteamdata(team1id,team2id){
       return this.http.get(environment.apiUrl + environment.version + `/cricket/team/${team1id}/team/${team2id}`);
