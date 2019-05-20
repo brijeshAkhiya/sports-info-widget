@@ -86,9 +86,9 @@
   </ng-container>
 
    <!-- START - COMMENTRY For Closed Match -->
-  <ng-container *ngIf="inningWiseCommentry && showCommetry" >
+  <ng-container *ngIf="inningWiseCommentry" >
       <ng-container *ngFor="let temp of inningWiseCommentry" >
-        <app-commentry *ngFor="let commentaries of temp; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
+        <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
       </ng-container>
   </ng-container>
   <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry" >

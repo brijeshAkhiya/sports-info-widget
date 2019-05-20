@@ -20,22 +20,23 @@ export class MatchCommentryComponent implements OnInit {
 
   inningWiseCommentry = [];
   showCommetry:boolean = false;
+  interval;
+  timeout;
+
   constructor(
     public sportsService: SportsService
-    ) {
-      console.log(this);
-      
-     }
+    ) {}
 
   ngOnInit() {
     
-    if(this.data.sport_event_status.status == 'closed')
-      this.getCommentry()
+    if(this.data.sport_event_status.status == 'closed' || this.data.sport_event_status.status == 'ended')
+      this.getLiveCommentries()
     else if(this.data.sport_event_status.status == 'not_started')
       this.startLiveUpdateAfterTime();    
     else if(this.data.sport_event_status.status == 'live'){
       this.getLiveUpdate(this);
-      this.getCommentry();
+      // this.getCommentry();
+      this.getLiveCommentries();
     }    
     this.getLiveUpdate(this);
   }
@@ -82,6 +83,62 @@ export class MatchCommentryComponent implements OnInit {
 
   }
 
+  getLiveCommentries(){
+    console.log("getLiveCommentries");
+    
+    let allCommentry;
+    // for loop of innings
+    this.data.statistics.innings.forEach((innings, index) =>{
+      console.log(index);
+      console.log(innings);
+
+      //for loop of overs_completd in inning current inning
+      this.inningWiseCommentry[index] = {'inning' : innings.number, 'commentry' : [] };
+      innings.overs.forEach((over, inningIndex) => {
+
+        console.log("inningIndex" +inningIndex);
+        console.log(over);
+        let currentInningCommentry = this.data.timeline.filter((commentry) => commentry.inning == innings.number);
+        console.log(currentInningCommentry);
+        let firstIndex = currentInningCommentry.findIndex((commentry) => commentry.over_number == over.number && commentry.inning == innings.number);
+        console.log(firstIndex);
+        let temp = over.number + 1;
+        let lastIndex = currentInningCommentry.findIndex((commentry) => commentry.over_number == temp && commentry.inning == innings.number);
+        console.log(lastIndex);
+
+        let overCommentry
+        if(innings.number == 1 && over.number == 1)
+          overCommentry = currentInningCommentry.slice(0, lastIndex);
+        else if(lastIndex > 0)
+           overCommentry = currentInningCommentry.slice(firstIndex, lastIndex);
+        else   
+          overCommentry = currentInningCommentry.slice(firstIndex);
+        
+          console.log(overCommentry)
+        this.inningWiseCommentry[index].commentry.push(
+          {
+            'stats' : {
+              over_number : typeof over.number != 'undefined' ?  over.number : 0, 
+              runs: typeof over.runs != 'undefined' ? over.runs : 0, 
+              wickets: typeof over.wickets != 'undefined' ?  over.wickets : 0
+            },
+            'data' : overCommentry.reverse(),
+            'overs': over.number
+          }
+        )
+        // get commentry of current overs to prevIndex
+
+      });
+      this.inningWiseCommentry[index].commentry = this.inningWiseCommentry[index].commentry.reverse();
+
+    })
+    this.inningWiseCommentry = this.inningWiseCommentry.reverse();
+    if(this.inningWiseCommentry.filter(comm => comm.length > 0).length > 0)
+      this.showCommetry = true;
+    console.log(this.inningWiseCommentry);
+
+  }
+
   createCommentry(inning, statsIndex) {
     console.log(statsIndex);
     
@@ -114,26 +171,89 @@ export class MatchCommentryComponent implements OnInit {
   }
 
   startLiveUpdateAfterTime(){
+    console.log("startLiveUpdateAfterTime");
     
     let remainingTime = this.getRemainigTimeofMatch();
     console.log(remainingTime);
     let remainingMiliSec = this.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds)
     if(remainingTime.days == 0 && remainingTime.hours < 5 ){
-      setTimeout(()=>{this.getLiveUpdate(this)}, remainingMiliSec);
+      this.timeout = setTimeout(()=>{this.getLiveUpdate(this)}, remainingMiliSec);
     }
   }
   getLiveUpdate(classThis){
     console.log("getLiveUpdate");
-    setInterval(() => { 
+    this.interval =  setInterval(() => { 
       classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
         console.log(res);
-        if(res.data.timeline.length > 0){
+        if(res.data.timeline && res.data.timeline.length > 0){
           this.data = res.data;
-          this.getCommentry();
+          this.getUpdate();
+          // this.getLiveCommentries();
         }
       });
-    }, 10000);
+    }, 30000);
   }
+
+  getUpdate(){
+    console.log(this.data.sport_event_status.status);
+    
+    if(this.data.sport_event_status.status == 'ended')
+      this.clearTimeInterval();
+    else{  
+
+    this.data.timeline.forEach((timeline, index) => {
+
+      let currentStatsInning = this.data.statistics.innings.filter((stats) => stats.number == timeline.inning);
+      console.log("currentStatsInning" , currentStatsInning);    
+      let currentStatsOver  
+      if(currentStatsInning.length > 0){
+        currentStatsOver = currentStatsInning[0].overs.filter((overs) => overs.number == timeline.over_number);
+        console.log("currentStatsOver" , currentStatsOver);      
+      }
+
+      console.log(timeline);
+      console.log(index);
+      // this.inningWiseCommentry[timeline.inning]
+      console.log(this.inningWiseCommentry[timeline.inning]);
+      let currentInningIndex = this.inningWiseCommentry.findIndex((innings) => innings.inning == timeline.inning)
+      console.log("currentInningIndex" , currentInningIndex);      
+      if(currentInningIndex >= 0){
+        let currentOverIndex = this.inningWiseCommentry[currentInningIndex].commentry.findIndex((overs) => overs.overs == timeline.over_number)
+        console.log("currentOverIndex" , currentOverIndex);     
+        if(currentOverIndex >= 0){
+          console.log(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data)
+          let currentBallIndex = this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data.findIndex((data) => timeline.ball_number == data.ball_number);
+          console.log("currentBallIndex" , currentBallIndex);     
+          console.log(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data[currentBallIndex]); 
+          if(currentBallIndex >= 0){
+            // this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data = timeline;
+          } else{
+            this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data.unshift(timeline);
+            this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].stats = {
+              over_number : (currentStatsOver.length > 0) ?  currentStatsOver[0].number : 0, 
+              runs: (currentStatsOver.length > 0) && typeof currentStatsOver[0].runs != 'undefined' ? currentStatsOver[0].runs : 0, 
+              wickets: (currentStatsOver.length > 0) && typeof currentStatsOver[0].wickets != 'undefined'  ?  currentStatsOver[0].wickets : 0
+            }
+          }          
+        } 
+        else{
+          let temp = [];
+          temp.unshift(timeline)
+          let currentStats = {
+            over_number : (currentStatsOver.length > 0) ?  currentStatsOver[0].number : 0, 
+            runs: (currentStatsOver.length > 0) && typeof currentStatsOver[0].runs != 'undefined' ? currentStatsOver[0].runs : 0, 
+            wickets: (currentStatsOver.length > 0) && typeof currentStatsOver[0].wickets != 'undefined'  ?  currentStatsOver[0].wickets : 0
+          }
+
+          this.inningWiseCommentry[currentInningIndex].commentry.unshift({'overs': timeline.over_number, 'data' : temp, 'stats':currentStats}) ;
+        }
+      }
+      
+    })
+  
+    }
+  }
+
 
   getRemainigTimeofMatch(){
     let date = this.data.sport_event.scheduled;
@@ -164,7 +284,17 @@ export class MatchCommentryComponent implements OnInit {
   miliseconds(hrs,min,sec){
       return((hrs*60*60+min*60+sec)*1000);
   }
+  ngOnDestroy(){
+    console.log("ngOnDestroy");
+    this.clearTimeInterval();
+  }
 
+  clearTimeInterval(){
+    console.log("clearTimeInterval");
+    
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
+  }
 
 }
 
