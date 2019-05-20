@@ -12,6 +12,7 @@ import { SportsService } from '../../providers/sports-service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
+
 @NgModule({
   declarations: [HomeComponent],
   imports: [

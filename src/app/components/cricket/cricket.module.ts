@@ -33,9 +33,11 @@ import { MatchScorecardComponent } from './match/match-scorecard/match-scorecard
 import { UpcomingComponent } from './match/upcoming/upcoming.component';
 import { RecommendedComponent } from './match/recommended/recommended.component';
 import { MatchAboutComponent } from './match/match-about/match-about.component';
+import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
+
 
 @NgModule({
-  declarations: [CricketComponent, CricketFixturesComponent, CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent, CricketTourMenuComponent, TournamentStandingsComponent, StringUnder, MatchCommentryComponent, CommentryComponent, MatchCounterComponent, MatchFactsFiguresComponent, MatchScorecardComponent, UpcomingComponent, RecommendedComponent, MatchAboutComponent],
+  declarations: [CricketComponent, CricketFixturesComponent,CricketFixturesViewComponent,CricketHomeComponent, CricketMenuComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentTeamsComponent, TournamentStateComponent, TeamsHomeComponent, MatchHomeComponent, PlayerHomeComponent, TournamentCricketComponent, CricketTourMenuComponent, TournamentStandingsComponent, StringUnder, MatchCommentryComponent, CommentryComponent, MatchCounterComponent, MatchFactsFiguresComponent, MatchScorecardComponent, UpcomingComponent, RecommendedComponent, MatchAboutComponent],
   imports: [
     CommonModule,
     NgbModule,

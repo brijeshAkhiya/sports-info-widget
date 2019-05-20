@@ -5,32 +5,51 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>Blogs</h1>
         </div>
-        <div class="common-news-list">
+        <div class="web-news-list">
+          <div class="row row-size12">
+            <div class="col-sm-6" *ngFor="let blog of blogs">
+              <div class="web-news-item common-shadow rounded-box">
+                <div class="web-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
+                  <div class="common-zoom-img" [defaultImage]="smallblogdeafault" [lazyLoad]="blog.sImage | resizeImage:['s']" (click)="blogview(blog._id,'Article',blog.sTitle)">
+                  </div>
+                </div>
+                <div class="news-desc">
+                  <h5><a (click)="blogview(blog._id,'Article',blog.sTitle)">{{blog.sTitle}}</a></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="common-news-list">
           <div class="common-news-item d-flex common-shadow" *ngFor="let blog of blogs">
             <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
-              <div class="common-zoom-img" [defaultImage]="smallblogdeafault" [lazyLoad]="blog.sImage | resizeImage:['s']" (click)="blogview(blog._id,'Article',blog.sTitle)">
+              <div class="common-zoom-img" [defaultImage]="smallblogdeafault"
+                [lazyLoad]="blog.sImage | resizeImage:['s']" (click)="blogview(blog._id,'Article',blog.sTitle)">
               </div>
             </div>
             <div class="common-news-desc">
               <div class="news-excerpt">
                 <h5><a (click)="blogview(blog._id,blog.eType,blog.sTitle)">{{blog.sTitle}}</a></h5>
-                <p [innerHtml]="blog.sDescription | truncate:[164,'...'] | striphtml" (click)="blogview(blog._id,'Article',blog.sTitle)"></p>
+                <p [innerHtml]="blog.sDescription | truncate:[164,'...'] | striphtml"
+                  (click)="blogview(blog._id,'Article',blog.sTitle)"></p>
               </div>
             </div>
           </div>
-        </div>
-        <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()" *ngIf="blogs && total > nlimit">Load More<span></span></button>
+        </div> -->
+        <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()"
+            *ngIf="blogs && total > nlimit">Load More<span></span></button>
         </div>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <div class="common-stories-widget common-shadow rounded-box">
-            <h5>Recent Stories</h5>
+            <h5>Related Blogs</h5>
             <ul class="common-list">
-              <li *ngFor="let item of widgetblogs | slice:0:5"><a (click)="blogview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a
+                  (click)="blogview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>

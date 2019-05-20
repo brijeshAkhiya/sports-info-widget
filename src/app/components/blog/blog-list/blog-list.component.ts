@@ -61,7 +61,7 @@ export class BlogListComponent implements OnInit {
       nstart: 0,
       nLimit: 10
     };
-    this.sportsService.getrecentpost(data).subscribe(res => {
+    this.sportsService.getadminposts(data).subscribe(res => {
       if (res["data"]) {
         this.widgetblogs = res["data"];
       }

@@ -36,14 +36,11 @@ export class AboutComponent implements OnInit {
       0: {
         items: 1,
       },
-      540: {
-        items: 2,
-      },
-      872: {
+      612: {
         items: 2,
       }
     },
-    nav: true
+    nav: false
   }
 
 

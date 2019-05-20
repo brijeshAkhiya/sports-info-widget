@@ -11,6 +11,7 @@
 .header-live-slider .slider-item .result-line           { margin: 0px; font-size: 12px; line-height: 18px; }
 .header-live-slider .slider-item .live-result           { padding-left: 10px;}
 .header-live-slider .slider-item .live-result:before    { content: ""; margin: 6px 4px 0px -10px; width: 6px; height: 6px; background: #6DD400; display: inline-block; vertical-align: top; border-radius: 50%; }
+
 /* -------- Navbar CSS ------- */
 nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
 nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block; background: #fff; position: relative; }
@@ -27,9 +28,19 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .login-search li a.search       { background-image: url(../../../assets/images/search-icon.svg); }
 .login-search li a.login        { background-image: url(../../../assets/images/user-icon.svg); }
 
-.serch-box                      { position: absolute; width: 100%; min-height: calc(100vh - 207px); background: rgba(27, 42, 90, 0.9); z-index: 6;}
-.serch-bar                      { padding: 48px 0px; background: #fff;}
+/* -------- Serch Box CSS ------- */
+
+.common-serch-box               { display: none; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); z-index: 6;}
+.common-serch-box.show          { display: block; }
+.search-bar                     { padding: 48px 0px; background: #fff;}
+.search-bar .search-box         { margin: 0px auto; width: 60%; position: relative;}
+.search-bar input               { padding: 0px 50px 8px 0px; width: 100%; font-size: 40px; line-height: 50px; font-weight: 400; border: none; border-bottom: 2px solid #EBEBEB; border-radius: 0px; }
+.search-bar input:focus         { border-color: #ED1A33; }
+.search-bar .search-box button  { position: absolute; width: 44px; height: 44px; top: 50%; right: 10px; transform: translateY(-50%); background: url(../../../assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; opacity: 0.5; }
+.search-result .common-title-btn        { padding-bottom: 16px; border-bottom: 2px solid rgba(255,255,255,0.2);  }
+.search-result .common-title-btn h3     { margin: 0px; }
 .search-result                  { padding: 50px 0px; }
+.search-result .common-popular-list .item-desc  { min-height: 68px; }
 
 /***** Responsive CSS Start ******/
 
@@ -41,6 +52,13 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { padding: 7px 0px 6px 24px;}
+/* -------- Serch Box CSS ------- */
+    .search-bar                     { padding: 32px 0px; background: #fff;}
+    .search-bar input               { font-size: 26px; line-height: 34px; }
+    .search-result                  { padding: 32px 0px; }
+    .search-bar .search-box button  { width: 26px; height: 26px;}
+    .search-result .common-popular-list .item-desc  { min-height: 90px; }
+
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -51,7 +69,29 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     nav .navbar-brand img           { width: 140px;}
     .login-search                   { margin: 0px 16px 0px auto; }
     .login-search li a              { margin: 0px 8px; width: 24px; height: 24px; }
+/* -------- Serch Box CSS ------- */
+    .search-bar                     { padding: 16px 0px; background: #fff;}
+    .search-bar input               { font-size: 20px; line-height: 26px; }
+    .search-result                  { padding: 20px 0px; }
+    .search-bar .search-box button  { width: 20px; height: 20px;}
+    .search-result .common-popular-list .img-block  { height: 110px; }
+    .search-result .common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
 }
+
+
+@media (max-width: 991px) {
+/* -------- Serch Box CSS ------- */
+    .search-bar                                     { padding: 12px 0px; background: #fff;}
+    .search-bar .search-box                         { width: 80%; }
+    .search-bar input                               { font-size: 18px; line-height: 22px; }
+    .search-result                                  { padding: 20px 0px; }
+    .search-bar .search-box button                  { width: 20px; height: 20px;}
+    .search-result .common-popular-list .img-block  { height: 110px; }
+    .search-result .common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
+    .search-result .common-popular-list > .row      { flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow: scroll; }
+    .search-result .common-popular-list > .row > [class*="col-"] { min-width: 220px;}
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { margin-right: 30px; padding: 8px 0px 10px 18px; }
@@ -61,6 +101,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .login-search                   { margin: 0px 14px 0px auto; }
     .login-search li a              { margin: 0px 6px; width: 16px; height: 16px; }
 }
+
 @media (max-width: 767px) {
 /* -------- Header Slider CSS ------- */
     .header-live-slider .slider-item-inner              { min-height: initial; }
@@ -81,6 +122,8 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .navbar-collapse.collapse.menu-open                 { left: 0px; }
     .navbar-nav .nav-link                               { padding: 8px 30px; }
     .login-search li a                                  { margin: 8px 30px;}
+/* -------- Serch Box CSS ------- */
+    .search-result                                      { padding: 16px 0px; }
 }
 
 @media (max-width: 575px) {
@@ -88,4 +131,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 /* -------- Navbar CSS ------- */
     nav .navbar-brand:before                            { width: 36px; right: -34px; }
     nav .navbar-brand img                               { width: 140px;}
+/* -------- Serch Box CSS ------- */
+    .search-bar input                               { font-size: 16px; line-height: 20px; }
+    .search-result .common-title-btn h3             {font-size: 18px; }
 }

@@ -69,7 +69,7 @@
                   <li *ngFor="let item of matchfixtures | slice:0:4" (click)="matchDetail(item.match_id,item.competitors[0].name,item.competitors[1].name)">
                     <div class="title d-flex justify-content-between">
                       <p><b>{{item.season_name}}</b></p>
-                      <p>{{item.scheduled | amCalendar }}</p>
+                      <p>{{item.scheduled | amTimeAgo }}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">{{item.competitors[0].name}}</p>
@@ -85,7 +85,7 @@
                       </div>
                     </div>
                   </li>
-                  <li><button [routerLink]="['/cricket/fixtures']" *ngIf="matchfixtures?.length != 0">View all</button></li>
+                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchfixtures?.length != 0">View all</button></li>
                 </ul>
               </ng-template>
             </ngb-tab>
@@ -94,11 +94,12 @@
                 <div (click)="getMatchResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
+                 <app-no-data-widget *ngIf="!matchresults"></app-no-data-widget>
                 <ul class="common-list cricket-list">
                   <li *ngFor="let result of matchresults | slice:1:5" (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">
                     <div class="title d-flex justify-content-between">
                       <p><b>{{result.season_name}}</b></p>
-                      <p>{{result.scheduled | amCalendar}}</p>
+                      <p>{{result.scheduled | amTimeAgo}}</p>
                     </div>
                     <div *ngFor="let item of result.period_score_new">
                       <div class="match-info d-flex justify-content-between align-items-center" *ngIf="!item.teamFlag">
@@ -119,7 +120,7 @@
                       </div>
                     </div>
                   </li>
-                  <li><button [routerLink]="['/cricket/fixtures']" *ngIf="matchresults">View all</button></li>
+                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchresults">View all</button></li>
                 </ul>
               </ng-template>
             </ngb-tab>

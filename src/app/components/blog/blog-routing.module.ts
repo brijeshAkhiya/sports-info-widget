@@ -18,10 +18,10 @@ const childRoutes: Routes = [
     path:':type/:id/:slug',
     component:BlogViewComponent
   },
-  {
-    path:'blog-preview/:type/:id/:slug',
-    component:BlogPreviewComponent
-  }
+  // {
+  //   path:'blog-preview/:type/:id/:slug',
+  //   component:BlogPreviewComponent
+  // }
  
 ];
 

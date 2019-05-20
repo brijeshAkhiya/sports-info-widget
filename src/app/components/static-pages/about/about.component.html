@@ -54,14 +54,24 @@
   <div class="container">
     <div class="reader-inner">
       <div class="row row-size12">
-        <div class="col-md-4">
+        <div class="col-lg-4">
           <div class="title-block">
             <h1>What our readers say ...</h1>
+            <div class="owl-theme reader-slider-nav">
+              <ul class="owl-nav">
+                <li>
+                  <button class="owl-prev common-shadow" (click)="owlCar.prev()">prev</button>
+                </li>
+                <li>
+                  <button class="owl-next common-shadow" (click)="owlCar.next()">next</button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="col-md-8">
-          <!-- <div class="header-live-slider">
-            <owl-carousel-o [options]="customOptions">
+        <div class="col-lg-8">
+          <div class="reader-slider">
+            <owl-carousel-o [options]="customOptions" #owlCar>
               <ng-container class="items">
                 <ng-template carouselSlide>
                   <div class="reader-item common-shadow rounded-box">
@@ -115,29 +125,29 @@
                 </ng-template>
               </ng-container>
             </owl-carousel-o>
-          </div> -->
-          <div class="row row-size12">
-            <div class="col-md-6">
-              <div class="reader-item common-shadow rounded-box">
-                <img src="../../../assets/images/reader1.jpg">
-                <h5>Hal Jordan</h5>
-                <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                  labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. ”</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="reader-item common-shadow rounded-box">
-                <img src="../../../assets/images/reader1.jpg">
-                <h5>Hal Jordan</h5>
-                <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                  labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. ”</p>
-              </div>
-            </div>
           </div>
+          <!-- <div class="row row-size12">
+            <div class="col-md-6">
+              <div class="reader-item common-shadow rounded-box">
+                <img src="../../../assets/images/reader1.jpg">
+                <h5>Hal Jordan</h5>
+                <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                  labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. ”</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="reader-item common-shadow rounded-box">
+                <img src="../../../assets/images/reader1.jpg">
+                <h5>Hal Jordan</h5>
+                <p>“ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                  labore
+                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. ”</p>
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>

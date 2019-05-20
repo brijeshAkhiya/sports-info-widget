@@ -14,6 +14,8 @@ export class CommonNewsListComponent implements OnInit {
   loadnewposts: any;
   isdisplay:boolean;
   smallblogdeafault = '../../../assets/images/placeholder_blog_small.svg'
+  writerid: any;
+  iswritervideo: boolean;
   constructor(private sportsService: SportsService,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() { 
@@ -22,12 +24,18 @@ export class CommonNewsListComponent implements OnInit {
       this.getRecentPosts();
     }
     else if(this.type == 'writerrecent'){
+      this.writerid = this.reqparams['_id']
+      
       this.getWriterblogs(this.reqparams);
     }
     else if(this.type == 'writerpopular'){
+      this.writerid = this.reqparams['_id']
+      
       this.getWriterblogs(this.reqparams)
     }
     else if(this.type == 'writervideos'){
+      this.writerid = this.reqparams['_id']
+      this.iswritervideo = true
       this.getWriterblogs(this.reqparams);
     }
     else { 
@@ -72,10 +80,12 @@ export class CommonNewsListComponent implements OnInit {
     this.isdisplay = false
 
       this.sportsService.getwriterprofile(data).subscribe((res) => {
-        if (res['data']) {
+        if (res['data']['posts'].posts) {
           this.posts = res['data']['posts'].posts;
-        this.isdisplay = true
-
+          this.isdisplay = true
+        }
+        else{
+          this.isdisplay = false
         }
       })
     }
@@ -85,6 +95,26 @@ export class CommonNewsListComponent implements OnInit {
   //load more blogs
 
   loadmore(){
+    if(this.type && this.type != 'any'){
+        let data = {
+          _id:this.writerid,
+          nStart:this.posts.length,
+          nLimit:10,
+          eType:this.iswritervideo ? 'Videos' : ''
+        }
+          this.isdisplay = false
+          this.sportsService.getwriterprofile(data).subscribe((res) => {
+            if (res['data']['posts'].posts) {
+              this.loadnewposts = res['data']['posts'].posts;
+              this.posts = this.posts.concat(this.loadnewposts)
+               this.isdisplay = true
+            }
+            else{
+              this.isdisplay = false
+            }
+          })
+    }
+    else{
     let start = this.posts.length
     let data = {
       nStart:start,
@@ -99,6 +129,7 @@ export class CommonNewsListComponent implements OnInit {
 
       }
     })
+  }
   }
 
   //blog view 

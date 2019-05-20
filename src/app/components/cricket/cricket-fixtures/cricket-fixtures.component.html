@@ -10,6 +10,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>International</ng-template>
             <ng-template ngbTabContent>
+              <app-no-data-widget *ngIf="!internationalresult"></app-no-data-widget>
               <div class="schedule-list">
                 <div class="schedule-month d-flex" *ngFor="let item of internationalresult">
                   <div class="month-title">
@@ -18,7 +19,8 @@
                     </div>
                   </div>
                   <div class="schedule-items">
-                    <div class="schedule-item schedule-hover rounded-box common-shadow" *ngFor="let item of item.data" (click)="getFixturesInfo(item.tournament_id,item.name)">
+                    <div class="schedule-item schedule-hover rounded-box common-shadow" *ngFor="let item of item.data"
+                      (click)="getFixturesInfo(item.tournament_id,item.name)">
                       <div class="schedule-title d-flex justify-content-between">
                         <h4>{{item.name}}</h4>
                         <h5>{{item.matches}} Matches</h5>
@@ -37,6 +39,8 @@
             </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list">
+                <app-no-data-widget *ngIf="!domesticresult"></app-no-data-widget>
+
                 <div class="schedule-month d-flex" *ngFor="let item of domesticresult">
                   <div class="month-title">
                     <div class="sticky-month">
@@ -44,7 +48,8 @@
                     </div>
                   </div>
                   <div class="schedule-items">
-                    <div class="schedule-item schedule-hover rounded-box common-shadow" *ngFor="let item of item.data" (click)="getFixturesInfo(item.tournament_id,item.name)">
+                    <div class="schedule-item schedule-hover rounded-box common-shadow" *ngFor="let item of item.data"
+                      (click)="getFixturesInfo(item.tournament_id,item.name)">
                       <div class="schedule-title d-flex justify-content-between">
                         <h4>{{item.name}}</h4>
                         <h5>{{item.matches}} Matches</h5>
@@ -61,9 +66,10 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          <app-common-story-widget [title]="widget1title" [type]="widget1type" *ngIf="widget1type && widget1title"></app-common-story-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-common-story-widget [title]="widget1title" [type]="widget1type" *ngIf="widget1type && widget1title">
+          </app-common-story-widget>
         </div>
       </div>
     </div>
