@@ -6,7 +6,9 @@
           <h1>{{playerbasic?.name | split}}</h1>
           <!-- <button class="add-to-fav-btn added"><span>Add to favorites</span></button> -->
         </div>
-        <ngb-tabset class="common-tabs">
+        <app-data-loader-widget *ngIf="!playerprofile"></app-data-loader-widget>
+        <app-no-data-widget *ngIf="playerprofile?.length == 0"></app-no-data-widget>
+        <ngb-tabset class="common-tabs" *ngIf="playerprofile">
           <ngb-tab>
             <ng-template ngbTabTitle>Profile</ng-template>
             <ng-template ngbTabContent>
@@ -79,8 +81,9 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
-
-              <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box">
+                <app-data-loader-widget *ngIf="!playerstats"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="playerstats?.length == 0"></app-no-data-widget>
+              <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box" *ngIf="playerstats">
                 <div class="table-title">
                   <h6>Batting Stats</h6>
                 </div>

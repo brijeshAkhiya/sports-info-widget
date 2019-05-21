@@ -1,4 +1,5 @@
   <app-data-loader-widget *ngIf="!isdisplay"></app-data-loader-widget>
+  <!-- <app-no-data-widget *ngIf="!posts || posts?.length == 0"></app-no-data-widget> -->
   <div class="common-news-list">
     <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
       <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
@@ -11,7 +12,7 @@
           <p [innerHtml]="post.sDescription | truncate:[164,'...'] | striphtml"
             (click)="blogview(post._id,post.eType,post.sTitle)"></p>
         </div>
-        <div class="author-info d-flex justify-content-between align-items-center">
+        <div class="author-info d-flex justify-content-between align-items-center"> 
           <p class="author"><a (click)="writerview(post?.iId?._id)">{{post.iId.sFirstName}}
               {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
           <p class="view">{{post.nViewCounts}}</p>

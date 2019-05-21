@@ -16,7 +16,7 @@
   </div>
   <div class="banner-images">
     <div class="banner-image" *ngFor="let item of bannerimages; let i=index;" [ngClass]="{'active': i===imageindex}"
-    [lazyLoad]="item | resizeImage:['m']"  ></div>
+      [lazyLoad]="item | resizeImage:['m']"></div>
   </div>
 </section>
 <!-- End  Top Highlight -->
@@ -34,7 +34,9 @@
       <div class="content-col">
         <div class="popular-main-item common-shadow" *ngFor="let article of populararticles | slice:0:1">
           <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': article.eType == 'Video'}">
-            <div class="common-zoom-img" [defaultImage]="largeblogdefault" [lazyLoad]="article.sImage | resizeImage:['m']" (click)="blogview(article._id,article.eType,article.sTitle)">
+            <div class="common-zoom-img" [defaultImage]="largeblogdefault"
+              [lazyLoad]="article.sImage | resizeImage:['m']"
+              (click)="blogview(article._id,article.eType,article.sTitle)">
             </div>
           </div>
           <div class="blog-desc">
@@ -42,7 +44,7 @@
             <p [innerHtml]="article.sDescription | truncate:[240,'...'] | striphtml"
               (click)="blogview(article._id,article.eType,article.sTitle)"></p>
             <div class="author-info d-flex justify-content-between align-items-center">
-              <p class="author"><a (click)="writerview(post?.iId?._id)" >{{article.iId.sFirstName}}
+              <p class="author"><a (click)="writerview(post?.iId?._id)">{{article.iId.sFirstName}}
                   {{article.iId.sLastName}}</a>{{article.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
               <p class="view">{{article.nViewCounts}}</p>
             </div>
@@ -66,7 +68,10 @@
             <ngb-tab title="Fixtures">
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                  <li *ngFor="let item of matchfixtures | slice:0:4" (click)="matchDetail(item.match_id,item.competitors[0].name,item.competitors[1].name)">
+                    <app-data-loader-widget *ngIf="!matchfixtures"></app-data-loader-widget>
+                    <app-no-data-widget *ngIf="matchfixtures?.length == 0"></app-no-data-widget>
+                  <li *ngFor="let item of matchfixtures | slice:0:4"
+                    (click)="matchDetail(item.match_id,item.competitors[0].name,item.competitors[1].name)">
                     <div class="title d-flex justify-content-between">
                       <p><b>{{item.season_name}}</b></p>
                       <p>{{item.scheduled | amTimeAgo }}</p>
@@ -85,7 +90,8 @@
                       </div>
                     </div>
                   </li>
-                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchfixtures?.length != 0">View all</button></li>
+                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchfixtures?.length != 0">View
+                      all</button></li>
                 </ul>
               </ng-template>
             </ngb-tab>
@@ -94,9 +100,11 @@
                 <div (click)="getMatchResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
-                 <app-no-data-widget *ngIf="!matchresults"></app-no-data-widget>
+                <app-data-loader-widget *ngIf="!matchresults"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="matchresults?.length == 0"></app-no-data-widget>
                 <ul class="common-list cricket-list">
-                  <li *ngFor="let result of matchresults | slice:1:5" (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">
+                  <li *ngFor="let result of matchresults | slice:1:5"
+                    (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">
                     <div class="title d-flex justify-content-between">
                       <p><b>{{result.season_name}}</b></p>
                       <p>{{result.scheduled | amTimeAgo}}</p>
@@ -120,7 +128,8 @@
                       </div>
                     </div>
                   </li>
-                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchresults">View all</button></li>
+                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchresults">View all</button>
+                  </li>
                 </ul>
               </ng-template>
             </ngb-tab>
@@ -149,7 +158,8 @@
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
         <div class="main-popular-video common-zoom-container common-full-img">
-          <div class="common-zoom-img common-overlay" [defaultImage]="largeblogdefault"  [lazyLoad]="video.sImage | resizeImage:['m']" (click)="blogview(video._id,video.eType,video.sTitle)">
+          <div class="common-zoom-img common-overlay" [defaultImage]="largeblogdefault"
+            [lazyLoad]="video.sImage | resizeImage:['m']" (click)="blogview(video._id,video.eType,video.sTitle)">
           </div>
           <a class="play-btn"><img src="../../../assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
@@ -170,9 +180,11 @@
             <div class="video-item" *ngFor="let video of popularvideos"
               (click)="blogview(video._id,video.eType,video.sTitle)">
               <div class="video-img common-overlay common-zoom-container common-full-img">
-                <div class="common-zoom-img" [defaultImage]="smallblogdefault"  [lazyLoad]="video.sImage | resizeImage:['s']" >
+                <div class="common-zoom-img" [defaultImage]="smallblogdefault"
+                  [lazyLoad]="video.sImage | resizeImage:['s']">
                 </div>
-                <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle | truncate:[60,'...'] }}
+                <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">
+                  {{video.sTitle | truncate:[60,'...'] }}
                 </p>
               </div>
             </div>
@@ -206,4 +218,3 @@
     </div>
   </div>
 </section>
-

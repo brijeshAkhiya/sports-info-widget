@@ -2,14 +2,15 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-
+        <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
         <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype"></app-match-about>
-        
-        <ngb-tabset class="common-tabs">
+
+        <ngb-tabset class="common-tabs" *ngIf="matchdata">
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <app-match-commentry *ngIf="matchdata" [data]="matchdata" ></app-match-commentry>
+              <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
+              <app-match-commentry *ngIf="matchdata" [data]="matchdata"></app-match-commentry>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
@@ -18,74 +19,75 @@
             </ng-template>
             <ng-template ngbTabContent>
               <div *ngIf="matchstatus == 'not_started'">
-              <h4 class="line-title">Win Probability</h4>
-              <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length != 0">
-                <div class="probability-block d-flex align-items-center justify-content-between">
-                  <div class="team-block" *ngIf="matchprobability.length != 0">
-                    <img class="team-flag" src="../../../../../assets/images/flag-ind.svg">
-                    <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
+                <h4 class="line-title">Win Probability</h4>
+                <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length != 0">
+                  <div class="probability-block d-flex align-items-center justify-content-between">
+                    <div class="team-block" *ngIf="matchprobability.length != 0">
+                      <img class="team-flag" src="../../../../../assets/images/flag-ind.svg">
+                      <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
+                    </div>
+                    <div class="team-block" *ngIf="matchprobability.length != 0">
+                      <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
+                      <img class="team-flag" src="../../../../../assets/images/flag-wi.svg">
+                    </div>
                   </div>
-                  <div class="team-block" *ngIf="matchprobability.length != 0">
-                    <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
-                    <img class="team-flag" src="../../../../../assets/images/flag-wi.svg">
-                  </div>
+                  <div class="team-probability" style="width: 56%;"></div>
                 </div>
-                <div class="team-probability" style="width: 56%;"></div>
-              </div>
-              <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
+                <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
                   No probability data available for this match!
-              </div>
+                </div>
               </div>
               <section class="last-meetings-section">
                 <h4 class="line-title">Last meetings</h4>
                 <div class="schedule-list schedule-tour-list">
+                  <app-data-loader-widget *ngIf="!matchesresultdata"></app-data-loader-widget>
                   <div class="schedule-list-inner" *ngFor="let item of matchesresultdata">
-                  <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
-                    <div class="month-title">
-                      <div class="sticky-month">
-                        <h5>{{item.day}}</h5>
+                    <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
+                      <div class="month-title">
+                        <div class="sticky-month">
+                          <h5>{{item.day}}</h5>
+                        </div>
+                      </div>
+                      <div class="schedule-items">
+                        <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
+                          *ngFor="let item of item.data">
+                          <div class="match-desc">
+                            <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
+                            <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',' : ''}} {{item.city_name}}
+                            </p>
+                            <p class="result-line">{{item.match_result}}</p>
+                          </div>
+                          <div class="match-teams d-flex align-items-center">
+                            <div class="match-team d-flex align-items-center"
+                              *ngFor="let item of item.period_score_new | slice:0:1">
+                              <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
+                                <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
+                                <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                              </div>
+                              <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
+                            </div>
+                            <div class="vs-block">
+                              <h6>vs</h6>
+                            </div>
+                            <div class="match-team d-flex align-items-center"
+                              *ngFor="let item of item.period_score_new | slice:1:2">
+                              <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
+                              <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
+                                <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
+                                <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="details-btn"
+                            (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                        </div>
                       </div>
                     </div>
-                    <div class="schedule-items">
-                      <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
-                        *ngFor="let item of item.data">
-                        <div class="match-desc">
-                          <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
-                          <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',' : ''}} {{item.city_name}}</p>
-                          <p class="result-line">{{item.match_result}}</p>
-                        </div>
-                        <div class="match-teams d-flex align-items-center">
-                          <div class="match-team d-flex align-items-center"
-                            *ngFor="let item of item.period_score_new | slice:0:1">
-                            <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
-                              <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
-                              <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
-                            </div>
-                            <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
-                          </div>
-                          <div class="vs-block">
-                            <h6>vs</h6>
-                          </div>
-                          <div class="match-team d-flex align-items-center"
-                            *ngFor="let item of item.period_score_new | slice:1:2">
-                            <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
-                            <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
-                              <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
-                              <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
-                            </div>
-                          </div>
-                        </div>
-                        <a class="details-btn"
-                          (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- <div *ngIf="!item.data[0].period_scores">
+                    <!-- <div *ngIf="!item.data[0].period_scores">
                     No data available!
                   </div> -->
+                  </div>
                 </div>
-                </div>
-              
               </section>
               <h4 class="line-title">Venue Details</h4>
               <section class="venue-info rounded-box common-shadow" *ngIf="venuedetails">
@@ -104,11 +106,118 @@
               </div>
             </ng-template>
           </ngb-tab>
+          <!-- Scorecard starts-->
+
           <ngb-tab *ngIf="matchstatus != 'not_started'">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs">
-                <ngb-tab *ngFor="let item of teamsbytype|slice:0:1">
+                <ngb-tab *ngFor="let item of scorecards,let i = index">
+                  <ng-template ngbTabTitle *ngIf="scorecards">{{teamObj[item.batting_team].data[0].name}}
+                    {{sportevent.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
+                   </ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="text-uppercase">Batsman</th>
+                              <th>R</th>
+                              <th>B</th>
+                              <th>4s</th>
+                              <th>6s</th>
+                              <th>SRR</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngIf="scorecards">
+                            <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
+                              <td>
+                                {{batting.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}<p
+                                  class="batsman-text">
+                                  {{batting?.statistics?.dismissal?.type == 'caught' ? 'c' : ''}}
+                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) : ''}}
+                                  {{ batting.statistics.dismissal ? 'b' : '' }}
+                                  {{ batting?.statistics?.dismissal ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''  }}
+                                </p>
+                              </td>
+                              <td>{{batting?.statistics.runs ? batting.statistics.runs : '-'}}</td>
+                              <td>{{batting?.statistics.balls_faced ? batting.statistics.balls_faced : '-'}}</td>
+                              <td>{{batting?.statistics.fours ? batting.statistics.fours : '-'}}</td>
+                              <td>{{batting?.statistics.sixes ? batting.statistics.sixes : '-'}}</td>
+                              <td>{{batting?.statistics.strike_rate ? batting.statistics.strike_rate : '-'}}</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                Extras<p class="batsman-text">b - {{item?.teams[1]?.statistics?.bowling?.byes}}, w -
+                                  {{item?.teams[1]?.statistics?.bowling?.wides}},
+                                  no
+                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls}})</p>
+                              </td>
+                              <td>{{item?.teams[1]?.statistics?.bowling?.extras}}</td>
+                              <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <b>Total</b>
+                                <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} runs per
+                                  over)</p>
+                              </td>
+                              <td><b>{{item?.teams[0]?.statistics?.batting?.runs}}</b></td>
+                              <td colspan="4"></td>
+                            </tr>
+                            <!-- <tr>
+                              <td colspan="6">
+                                <b>Did not bat : </b><span class="batsman-text"> Opi Watihana, Emiliya Perevalova, Opi
+                                  Watihana, Emiliya Perevalova</span>
+                              </td>
+                            </tr> -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="common-table common-shadow rounded-box" *ngIf="sportevent.tournament.type != 'first_class'">
+                      <div class="table-title" *ngIf="fallofwicket2data">
+                        <h6 class="text-uppercase">Fall of Wickets</h6>
+                      </div>
+                      <ul class="fall-wicket-list" *ngIf="fallofwicket2data">
+                        <li *ngFor="let item of item.number == 1 ? fallofwicket1data : fallofwicket2data">
+                          <p class="fall-wicket">{{item.displayscore}}</p>
+                          <p class="title">{{item.playername | split}}</p>
+                          <p>{{item.displayover}} OV</p>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Bowler</th>
+                              <th>Ov</th>
+                              <th>DB</th>
+                              <th>R</th>
+                              <th>W</th>
+                              <th>ECO</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let bowling of item?.teams[1]?.statistics?.bowling?.players">
+                              <td>{{bowling?.name | split}}</td>
+                              <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '-'}}</td>
+                              <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '-'}}</td>
+                              <td>{{bowling?.statistics?.runs_conceded ? bowling?.statistics.runs_conceded : '-'}}</td>
+                              <td>{{bowling?.statistics?.wickets ? bowling?.statistics.wickets : '-'}}</td>
+                              <td>{{bowling?.statistics?.economy_rate ? bowling?.statistics.economy_rate : '-'}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+                <!--old scorecard logic-->
+                <!-- <ngb-tab *ngFor="let item of teamsbytype|slice:0:1">
                   <ng-template ngbTabTitle>{{item?.data[0]?.name}}</ng-template>
                   <ng-template ngbTabContent>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
@@ -127,11 +236,12 @@
                           <tbody>
                             <tr *ngFor="let batting of battingteam1?.players">
                               <td>
-                                {{batting?.name | split}}{{batting?.statistics.not_out == true ? '*' : ''}}<p class="batsman-text">
+                                {{batting?.name | split}}{{batting?.statistics.not_out == true ? '*' : ''}}<p
+                                  class="batsman-text">
                                   {{batting?.statistics?.dismissal?.type == 'caught' ? 'c' : ''}}
-                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew[batting?.statistics?.dismissal?.fieldsman_id][0]?.name | split) : ''}}
+                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0]?.name | split) : ''}}
                                   {{ batting.statistics.dismissal ? 'b' : '' }}
-                                  {{ batting?.statistics?.dismissal ? (objnew[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''  }}
+                                  {{ batting?.statistics?.dismissal ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''  }}
                                 </p>
                               </td>
                               <td>{{batting?.statistics.runs ? batting.statistics.runs : '-'}}</td>
@@ -142,7 +252,8 @@
                             </tr>
                             <tr>
                               <td>
-                                Extras<p class="batsman-text">b - {{bowlingteam1?.byes}}, w - {{bowlingteam1?.wides}}, no
+                                Extras<p class="batsman-text">b - {{bowlingteam1?.byes}}, w - {{bowlingteam1?.wides}},
+                                  no
                                   - {{bowlingteam1?.no_balls}})</p>
                               </td>
                               <td>{{bowlingteam1?.extras}}</td>
@@ -156,60 +267,25 @@
                               <td><b>{{battingteam1?.runs}}</b></td>
                               <td colspan="4"></td>
                             </tr>
-                            <!-- <tr>
+                            <tr>
                               <td colspan="6">
                                 <b>Did not bat : </b><span class="batsman-text"> Opi Watihana, Emiliya Perevalova, Opi
                                   Watihana, Emiliya Perevalova</span>
                               </td>
-                            </tr> -->
+                            </tr>
                           </tbody>
                         </table>
                       </div>
                     </div>
                     <div class="common-table common-shadow rounded-box">
-                      <div class="table-title">
+                      <div class="table-title" *ngIf="fallofwicket2data">
                         <h6 class="text-uppercase">Fall of Wickets</h6>
                       </div>
-                      <ul class="fall-wicket-list">
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">322/10</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">ImranImran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">ImranImran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
+                      <ul class="fall-wicket-list" *ngIf="fallofwicket2data">
+                        <li *ngFor="let item of fallofwicket2data">
+                          <p class="fall-wicket">{{item.displayscore}}</p>
+                          <p class="title">{{item.playername | split}}</p>
+                          <p>{{item.displayover}} OV</p>
                         </li>
                       </ul>
                     </div>
@@ -240,8 +316,8 @@
                       </div>
                     </div>
                   </ng-template>
-                </ngb-tab>
-                <ngb-tab *ngFor="let item of teamsbytype|slice:1:2">
+                </ngb-tab> -->
+                <!-- <ngb-tab *ngFor="let item of teamsbytype|slice:1:2">
                   <ng-template ngbTabTitle>{{item.data[0].name}}</ng-template>
                   <ng-template ngbTabContent>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
@@ -260,11 +336,12 @@
                           <tbody>
                             <tr *ngFor="let batting of battingteam2?.players">
                               <td>
-                                {{batting?.name | split}}{{batting?.statistics.not_out == true ? '*' : ''}}<p class="batsman-text">
+                                {{batting?.name | split}}{{batting?.statistics.not_out == true ? '*' : ''}}<p
+                                  class="batsman-text">
                                   {{batting?.statistics?.dismissal?.type == 'caught' ? 'c' : ''}}
-                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew2[batting?.statistics?.dismissal?.fieldsman_id][0]?.name | split) : ''}}
+                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew32[batting?.statistics?.dismissal?.fieldsman_id][0]?.name | split) : ''}}
                                   {{ batting.statistics.dismissal ? 'b' : '' }}
-                                  {{ batting?.statistics?.dismissal ? (objnew2[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''  }}
+                                  {{ batting?.statistics?.dismissal ? (objnew32[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''  }}
                                 </p>
                               </td>
                               <td>{{batting?.statistics.runs ? batting.statistics.runs : '-'}}</td>
@@ -275,7 +352,8 @@
                             </tr>
                             <tr>
                               <td>
-                                Extras<p class="batsman-text">b - {{bowlingteam2?.byes}}, w - {{bowlingteam2?.wides}}, no
+                                Extras<p class="batsman-text">b - {{bowlingteam2?.byes}}, w - {{bowlingteam2?.wides}},
+                                  no
                                   - {{bowlingteam2?.no_balls}})</p>
                               </td>
                               <td>{{bowlingteam2?.extras}}</td>
@@ -289,60 +367,25 @@
                               <td><b>{{battingteam2?.runs}}</b></td>
                               <td colspan="4"></td>
                             </tr>
-                            <!-- <tr>
+                            <tr>
                               <td colspan="6">
                                 <b>Did not bat : </b><span class="batsman-text"> Opi Watihana, Emiliya Perevalova, Opi
                                   Watihana, Emiliya Perevalova</span>
                               </td>
-                            </tr> -->
+                            </tr>
                           </tbody>
                         </table>
                       </div>
                     </div>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-title">
+                      <div class="table-title" *ngIf="fallofwicket1data">
                         <h6 class="text-uppercase">Fall of Wickets</h6>
                       </div>
-                      <ul class="fall-wicket-list">
-                        <li>
-                          <p class="fall-wicket">0/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">0/10</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">ImranImran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">ImranImran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
-                        </li>
-                        <li>
-                          <p class="fall-wicket">12/1</p>
-                          <p class="title">Imran Nazir</p>
-                          <p>0.5 OV</p>
+                      <ul class="fall-wicket-list" *ngIf="fallofwicket1data">
+                        <li *ngFor="let item of fallofwicket1data">
+                          <p class="fall-wicket">{{item.displayscore}}</p>
+                          <p class="title">{{item.playername | split}}</p>
+                          <p>{{item.displayover}} OV</p>
                         </li>
                       </ul>
                     </div>
@@ -373,10 +416,12 @@
                       </div>
                     </div>
                   </ng-template>
-                </ngb-tab>
+                </ngb-tab> -->
               </ngb-tabset>
             </ng-template>
           </ngb-tab>
+
+          <!--News tabs starts-->
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
@@ -384,9 +429,13 @@
               </app-common-news-list>
             </ng-template>
           </ngb-tab>
+
+          <!--Upcoming tab starts-->
           <ngb-tab>
             <ng-template ngbTabTitle>Upcoming</ng-template>
             <ng-template ngbTabContent>
+              <app-data-loader-widget *ngIf="!nextmatches"></app-data-loader-widget>
+              <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
               <div *ngIf="nextmatches.length == 0">No data available!</div>
               <div class="schedule-list schedule-tour-list" *ngIf="nextmatches">
                 <div class="schedule-month d-flex" *ngFor="let item of nextmatches">
@@ -432,10 +481,10 @@
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
-          *ngIf="widget1type && widget1title"></app-common-story-widget>
+            *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>
       </div>
     </div>

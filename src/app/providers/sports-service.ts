@@ -234,4 +234,9 @@ export class SportsService {
       
    }
 
+   //get search results
+   getsearchresult(data){
+      return this.http.post(environment.apiUrl + environment.version + `/search`,data);   
+   }
+
 }

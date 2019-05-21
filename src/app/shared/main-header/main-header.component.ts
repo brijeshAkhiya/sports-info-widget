@@ -1,37 +1,56 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { SlidesOutputData } from 'ngx-owl-carousel-o';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  ViewChild,
+  ChangeDetectorRef
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { SlidesOutputData } from "ngx-owl-carousel-o";
 import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-import { Store } from '@ngrx/store'
-import * as fromRoot from '../../app-reducer'
-import * as Auth from '../../store/auth/auth.actions';
-import * as Ads from '../../store/ads-management/ads.actions';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { SportsService } from '../../providers/sports-service';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from "angularx-social-login";
+import { Store } from "@ngrx/store";
+import * as fromRoot from "../../app-reducer";
+import * as Auth from "../../store/auth/auth.actions";
+import * as Ads from "../../store/ads-management/ads.actions";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { SlugifyPipe } from "../../pipes/slugpipe";
+import { SportsService } from "../../providers/sports-service";
 
 @Component({
-  selector: 'app-main-header',
-  templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.css']
+  selector: "app-main-header",
+  templateUrl: "./main-header.component.html",
+  styleUrls: ["./main-header.component.css"]
 })
 export class MainHeaderComponent implements OnInit {
-
-  @ViewChild('navpointer') navpointer: ElementRef
-  @ViewChild('navbarnav') navbarnav: ElementRef 
-  sliderdata: any;
+  @ViewChild("navpointer") navpointer: ElementRef;
+  @ViewChild("navbarnav") navbarnav: ElementRef;
+  sliderdata = [];
   sliderresults = [];
   isapply: boolean = false;
   socialUser: any;
-  issearch:boolean
-  constructor(private renderer2: Renderer2, private el: ElementRef,private changeDetector: ChangeDetectorRef, private router: Router, private sportsService: SportsService, 
-    private modalService: NgbModal,private socialLoginService: AuthService,private store: Store<fromRoot.State>) {
-      //get custom ads data Funtion call --->
-      this.getCustomAds();
-
+  issearch: boolean;
+  searchkey: string;
+  searchdata: any;
+  noresults: boolean;
+  constructor(
+    private renderer2: Renderer2,
+    private el: ElementRef,
+    private changeDetector: ChangeDetectorRef,
+    private router: Router,
+    private slugifyPipe: SlugifyPipe,
+    private sportsService: SportsService,
+    private modalService: NgbModal,
+    private socialLoginService: AuthService,
+    private store: Store<fromRoot.State>
+  ) {
+    //get custom ads data Funtion call --->
+    this.getCustomAds();
   }
-
-
 
   customOptions: any = {
     loop: false,
@@ -42,173 +61,251 @@ export class MainHeaderComponent implements OnInit {
     autoHeight: true,
     lazyLoad: true,
     navSpeed: 700,
-    navText: ['', ''],
+    navText: ["", ""],
     responsive: {
       0: {
-        items: 1,
+        items: 1
       },
       540: {
-        items: 2,
+        items: 2
       },
       783: {
-        items: 3,
+        items: 3
       },
       1150: {
-        items: 4,
+        items: 4
       }
     },
     nav: true
-  }
-
+  };
 
   ngOnInit() {
     this.getHeaderSliderData();
-    
   }
 
-  //get custom ads api call -Ngrx Store 
-  getCustomAds(){
-    this.sportsService.getcustomadsbanner().subscribe((res)=>{
-        if(res['data']){
-          this.store.dispatch(new Ads.SaveAds(res['data']));
+  //get custom ads api call -Ngrx Store
+  getCustomAds() {
+    this.sportsService.getcustomadsbanner().subscribe(
+      res => {
+        if (res["data"]) {
+          this.store.dispatch(new Ads.SaveAds(res["data"]));
         }
-    },
-    (error)=>{
-      this.getCustomAds();
-    })
+      },
+      error => {
+        this.getCustomAds();
+      }
+    );
   }
 
-  //nav bar click event 
+  //nav bar click event
   linkactive(linkid) {
-    var navel = this.navbarnav.nativeElement
+    var navel = this.navbarnav.nativeElement;
     var navrect = navel.getBoundingClientRect();
     var el = document.getElementById(`nav-link${linkid}`); //get particular id nav-element
     var rect = el.getBoundingClientRect();
-    var curPoint = rect['x'] - navrect['x'];
-    this.renderer2.setStyle(this.navpointer.nativeElement, 'width', rect.width + "px"); //set
-    this.renderer2.setStyle(this.navpointer.nativeElement, 'left', curPoint + "px");
+    var curPoint = rect["x"] - navrect["x"];
+    this.renderer2.setStyle(
+      this.navpointer.nativeElement,
+      "width",
+      rect.width + "px"
+    ); //set
+    this.renderer2.setStyle(
+      this.navpointer.nativeElement,
+      "left",
+      curPoint + "px"
+    );
   }
 
   //dynamic routing
   routing(routerlink) {
     if (routerlink) {
       this.router.navigate([`${routerlink}`]);
-    }
-    else {
-      this.router.navigate(['/'])
+    } else {
+      this.router.navigate(["/"]);
     }
   }
 
   //get header slider data
 
   getHeaderSliderData() {
-    this.sportsService.getheaderslider().subscribe((res) => {
-      if (res['data']) {
-        this.sliderdata = res['data'];
-        
-        this.sliderdata.map((data) => {
-          if (data.slider_status == 'results') {
-            this.sliderresults.push(data);
-          }
-          if(data.slider_status == 'live' || data.slider_status == 'upcoming' ){
-            // interval(5000).subscribe((x)=>{
-            //   this.getHeaderSliderData();
-            // })
-          }
-        })
-        this.sliderresults = this.sliderresults.map(data => {
-          let obj = {};
-          let team_arr = data["competitors"]
-          team_arr.map(single => {
-            obj[single.qualifier] = single
-          })
+    this.sportsService.getheaderslider().subscribe(res => {
+      if (res["data"]) {
+        if (res["data"]) {
+          res["data"].map(data => {
+            if (
+              data.slider_status == "upcoming" ||
+              data.slider_status == "live"
+            ) {
+              this.sliderdata.push(data);
+            }
+          });
+        }
 
-          let period_score_new = data["period_scores"]
-          if (period_score_new) {
-            period_score_new = period_score_new.map(singleb => {
-              if (singleb.away_score !== undefined) {
-                return { ...singleb, team: obj["away"], teamFlag: true }
-              } else {
-                return { ...singleb, team: obj["home"], teamFlag: false }
-              }
-            })
-            return { ...data, period_score_new }
-          }
-          else {
-            return data;
-          }
-        })
-      }
+        let newArry = [];
 
-    })
-  }
+        newArry = this.sliderdata.map(sData => {
+          sData.competitors.map(sComp => {
+            if (sComp.qualifier === "home" && sData.match_data) {
+              sData.match_data.period_scores.map(sPScore => {
+                if (sPScore.home_score) {
+                  sComp.display_score = sPScore.display_score;
+                }
+              });
+            } else if (sComp.qualifier === "away" && sData.match_data) {
+              sData.match_data.period_scores.map(sPScore => {
+                if (sPScore.away_score) {
+                  sComp.display_score = sPScore.display_score;
+                }
+              });
+            } else {
+              return null;
+            }
+          });
+        });
 
+        // this.sliderdata.map((data) => {
+        //   if (data.slider_status == 'live') {
+        //     this.sliderresults.push(data);
+        //   }
+        //
 
-  //get match detail
-  getmatchdetail(id,team1,team2){
-    let teams =  team1.concat('-',team2)
-    this.router.navigate(['/cricket/match',btoa(id),teams])
-  }
+        //   if(data.slider_status == 'live' || data.slider_status == 'upcoming' ){
+        //     // interval(5000).subscribe((x)=>{
+        //     //   this.getHeaderSliderData();
+        //     // })
+        //   }
+        // })
+        // this.sliderresults = this.sliderresults.map(data => {
+        //   let obj = {};
+        //   let team_arr = data["competitors"]
+        //   team_arr.map(single => {
+        //     obj[single.qualifier] = single
+        //   })
 
-
-  signInWithFB(): void {
-    this.socialLoginService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res)=>{
-      if(res){
-        console.log(res);
-        
-      this.socialUser = res
-      this.store.dispatch(new Auth.SetAuthenticated());
+        //   let period_score_new = data["period_scores"]
+        //   if (period_score_new) {
+        //     period_score_new = period_score_new.map(singleb => {
+        //       if (singleb.away_score !== undefined) {
+        //         return { ...singleb, team: obj["away"], teamFlag: true }
+        //       } else {
+        //         return { ...singleb, team: obj["home"], teamFlag: false }
+        //       }
+        //     })
+        //     return { ...data, period_score_new }
+        //   }
+        //   else {
+        //     return data;
+        //   }
+        // })
       }
     });
+  }
+
+  //get match detail
+  getmatchdetail(id, team1, team2) {
+    let teams = team1.concat("-", team2);
+    this.router.navigate(["/cricket/match", btoa(id), teams]);
+  }
+
+  signInWithFB(): void {
+    this.socialLoginService
+      .signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then(res => {
+        if (res) {
+          this.socialUser = res;
+          this.store.dispatch(new Auth.SetAuthenticated());
+        }
+      });
   }
 
   signInWithGoogle(): void {
     this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res)=>{
-      if(res){
-      this.store.dispatch(new Auth.SetAuthenticated());
+    this.socialLoginService
+      .signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then(res => {
+        if (res) {
+          this.store.dispatch(new Auth.SetAuthenticated());
 
-      this.socialUser = res
-      }
-      
-    }).catch(error=>{
-      console.log(error);
-      
-    });
+          this.socialUser = res;
+        }
+      })
+      .catch(error => {});
   }
-
 
   //Social login modal
   closeResult: string;
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title' , windowClass : "signin-modal"}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: "modal-basic-title",
+        windowClass: "signin-modal"
+      })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
+      return "by pressing ESC";
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
+      return "by clicking on a backdrop";
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
-  //search bar open 
-  searchopen(){
-    this.isapply = false
-    if(!this.issearch){
-      this.issearch = true
-      this.renderer2.addClass(document.body,'search-box-open');
-    }
-    else{
-      this.issearch = false
-      this.renderer2.removeClass(document.body,'search-box-open');
+  //search bar open
+  searchopen() {
+    this.isapply = false;
+    if (!this.issearch) {
+      this.issearch = true;
+      this.renderer2.addClass(document.body, "search-box-open");
+    } else {
+      this.issearch = false;
+      this.renderer2.removeClass(document.body, "search-box-open");
     }
   }
 
+  //search close
+  closesearch() {
+    this.issearch = false;
+    this.searchkey = "";
+    this.renderer2.removeClass(document.body, "search-box-open");
+  }
+
+  //search api call
+  search() {
+    if (this.searchkey.trim()) {
+      let data = {
+        sSearch: this.searchkey,
+        nLimit: 5,
+        nStart: 0
+      };
+      this.searchdata = [];
+      this.sportsService.getsearchresult(data).subscribe(res => {
+        if (res["data"].length != 0) {
+          this.searchdata = res["data"];
+        } else {
+          this.noresults = true;
+        }
+      });
+    }
+  }
+
+  //blog view
+
+  blogview(id, type, title) {
+    let slugname = this.slugifyPipe.transform(title);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);
+    this.issearch = false;
+    this.searchkey = "";
+    this.searchdata = [];
+    this.renderer2.removeClass(document.body, "search-box-open");
+  }
 }

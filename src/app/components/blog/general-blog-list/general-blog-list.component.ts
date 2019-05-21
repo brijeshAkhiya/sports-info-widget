@@ -33,6 +33,7 @@ export class GeneralBlogListComponent implements OnInit {
     else{
       this.router.navigate(['/page-not-found'])
     }
+    this.getRecentArticles(this.nstart,this.nlimit);
 
   }
 

@@ -42,7 +42,7 @@ export class MatchCommentryComponent implements OnInit {
   }
 
   getCommentry(){
-    console.log("get commentry");
+    // console.log("get commentry");
     this.inningWiseCommentry = [];
     this.timeline = this.data.timeline;
     this.statistics = this.data.statistics;
@@ -50,13 +50,13 @@ export class MatchCommentryComponent implements OnInit {
     let prevIndex = 0;
     this.data.statistics.innings.forEach((inning, index) =>{
       let indexOfInning = this.timeline.findIndex((commentry) => commentry.inning == inning.number + 1);
-      console.log(indexOfInning);
+      // console.log(indexOfInning);
       let currentInning
       if(indexOfInning > 0)
         currentInning = this.timeline.slice(prevIndex, indexOfInning);
       else
         currentInning = this.timeline.slice(prevIndex);
-      console.log(currentInning)
+      // console.log(currentInning)
       prevIndex = indexOfInning;
       this.inningWiseCommentry.push(this.createCommentry(currentInning, index));
     });
@@ -65,7 +65,7 @@ export class MatchCommentryComponent implements OnInit {
     if(this.inningWiseCommentry.filter(comm => comm.length > 0).length > 0)
       this.showCommetry = true;
     
-    console.log(this.inningWiseCommentry);
+    // console.log(this.inningWiseCommentry);
     
     
     // let indexOfSecondInning = this.timeline.findIndex((commentry) => commentry.inning == 2);
@@ -73,38 +73,38 @@ export class MatchCommentryComponent implements OnInit {
     // this.firstInning = this.timeline.slice(0, indexOfSecondInning);
     // let statsFirstIndex = this.statistics.innings.findIndex((stats) => stats.number == 1);
     // this.firstInningCommentry = this.createCommentry(this.firstInning, statsFirstIndex);
-    // console.log(this.firstInningCommentry);
+  //  console.log(this.firstInningCommentry);
 
     // this.secondInning = this.timeline.slice(indexOfSecondInning);
     // let statsSecondIndex = this.statistics.innings.findIndex((stats) => stats.number == 2);
     // if(statsSecondIndex> -1)
     // this.secondInningCommentry = this.createCommentry(this.secondInning, statsSecondIndex);
-    // console.log(this.secondInningCommentry);
+   // console.log(this.secondInningCommentry);
 
   }
 
   getLiveCommentries(){
-    console.log("getLiveCommentries");
+    // console.log("getLiveCommentries");
     
     let allCommentry;
     // for loop of innings
     this.data.statistics.innings.forEach((innings, index) =>{
-      console.log(index);
-      console.log(innings);
+      // console.log(index);
+      // console.log(innings);
 
       //for loop of overs_completd in inning current inning
       this.inningWiseCommentry[index] = {'inning' : innings.number, 'commentry' : [] };
       innings.overs.forEach((over, inningIndex) => {
 
-        console.log("inningIndex" +inningIndex);
-        console.log(over);
+        // console.log("inningIndex" +inningIndex);
+        // console.log(over);
         let currentInningCommentry = this.data.timeline.filter((commentry) => commentry.inning == innings.number);
-        console.log(currentInningCommentry);
+        // console.log(currentInningCommentry);
         let firstIndex = currentInningCommentry.findIndex((commentry) => commentry.over_number == over.number && commentry.inning == innings.number);
-        console.log(firstIndex);
+        // console.log(firstIndex);
         let temp = over.number + 1;
         let lastIndex = currentInningCommentry.findIndex((commentry) => commentry.over_number == temp && commentry.inning == innings.number);
-        console.log(lastIndex);
+        // console.log(lastIndex);
 
         let overCommentry
         if(innings.number == 1 && over.number == 1)
@@ -114,7 +114,7 @@ export class MatchCommentryComponent implements OnInit {
         else   
           overCommentry = currentInningCommentry.slice(firstIndex);
         
-          console.log(overCommentry)
+          // console.log(overCommentry)
         this.inningWiseCommentry[index].commentry.push(
           {
             'stats' : {
@@ -135,12 +135,12 @@ export class MatchCommentryComponent implements OnInit {
     this.inningWiseCommentry = this.inningWiseCommentry.reverse();
     if(this.inningWiseCommentry.filter(comm => comm.length > 0).length > 0)
       this.showCommetry = true;
-    console.log(this.inningWiseCommentry);
+    // console.log(this.inningWiseCommentry);
 
   }
 
   createCommentry(inning, statsIndex) {
-    console.log(statsIndex);
+    // console.log(statsIndex);
     
     let currentInningStats = this.statistics.innings[statsIndex];
     let InningCommentry = []
@@ -151,7 +151,7 @@ export class MatchCommentryComponent implements OnInit {
       lastIndex = inning.findIndex((ele) => ele.over_number == i + 1);
       let currentOverData = inning.slice(firstIndex, lastIndex)
       firstIndex = lastIndex;
-      // console.log(currentInningStats);
+      console.log(currentInningStats);
       if( typeof currentInningStats.overs != 'undefined' && currentInningStats.overs.length > 0){
         let currentOverStats = currentInningStats.overs.filter(over => { return over.number == i });
 
@@ -171,20 +171,20 @@ export class MatchCommentryComponent implements OnInit {
   }
 
   startLiveUpdateAfterTime(){
-    console.log("startLiveUpdateAfterTime");
+    // console.log("startLiveUpdateAfterTime");
     
     let remainingTime = this.getRemainigTimeofMatch();
-    console.log(remainingTime);
+    // console.log(remainingTime);
     let remainingMiliSec = this.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds)
     if(remainingTime.days == 0 && remainingTime.hours < 5 ){
       this.timeout = setTimeout(()=>{this.getLiveUpdate(this)}, remainingMiliSec);
     }
   }
   getLiveUpdate(classThis){
-    console.log("getLiveUpdate");
+    // console.log("getLiveUpdate");
     this.interval =  setInterval(() => { 
       classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
-        console.log(res);
+        // console.log(res);
         if(res.data.timeline && res.data.timeline.length > 0){
           this.data = res.data;
           this.getUpdate();
@@ -195,7 +195,7 @@ export class MatchCommentryComponent implements OnInit {
   }
 
   getUpdate(){
-    console.log(this.data.sport_event_status.status);
+    // console.log(this.data.sport_event_status.status);
     
     if(this.data.sport_event_status.status == 'ended')
       this.clearTimeInterval();
@@ -204,27 +204,27 @@ export class MatchCommentryComponent implements OnInit {
     this.data.timeline.forEach((timeline, index) => {
 
       let currentStatsInning = this.data.statistics.innings.filter((stats) => stats.number == timeline.inning);
-      console.log("currentStatsInning" , currentStatsInning);    
+      // console.log("currentStatsInning" , currentStatsInning);    
       let currentStatsOver  
       if(currentStatsInning.length > 0){
         currentStatsOver = currentStatsInning[0].overs.filter((overs) => overs.number == timeline.over_number);
-        console.log("currentStatsOver" , currentStatsOver);      
+        // console.log("currentStatsOver" , currentStatsOver);      
       }
 
-      console.log(timeline);
-      console.log(index);
+      // console.log(timeline);
+      // console.log(index);
       // this.inningWiseCommentry[timeline.inning]
-      console.log(this.inningWiseCommentry[timeline.inning]);
+      // console.log(this.inningWiseCommentry[timeline.inning]);
       let currentInningIndex = this.inningWiseCommentry.findIndex((innings) => innings.inning == timeline.inning)
-      console.log("currentInningIndex" , currentInningIndex);      
+      // console.log("currentInningIndex" , currentInningIndex);      
       if(currentInningIndex >= 0){
         let currentOverIndex = this.inningWiseCommentry[currentInningIndex].commentry.findIndex((overs) => overs.overs == timeline.over_number)
-        console.log("currentOverIndex" , currentOverIndex);     
+        // console.log("currentOverIndex" , currentOverIndex);     
         if(currentOverIndex >= 0){
-          console.log(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data)
+          // console.log(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data)
           let currentBallIndex = this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data.findIndex((data) => timeline.ball_number == data.ball_number);
-          console.log("currentBallIndex" , currentBallIndex);     
-          console.log(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data[currentBallIndex]); 
+          // console.log("currentBallIndex" , currentBallIndex);     
+          // console.log(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data[currentBallIndex]); 
           if(currentBallIndex >= 0){
             // this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data = timeline;
           } else{
@@ -262,7 +262,7 @@ export class MatchCommentryComponent implements OnInit {
   
     let enddate = new Date(date).getTime();
     let now = new Date().getTime();
-    console.log("now", now);
+    // console.log("now", now);
     
     let time = enddate - now;
     remainingdays.days = Math.round(Math.abs((enddate - now)/(oneDay)));
@@ -285,12 +285,12 @@ export class MatchCommentryComponent implements OnInit {
       return((hrs*60*60+min*60+sec)*1000);
   }
   ngOnDestroy(){
-    console.log("ngOnDestroy");
+    // console.log("ngOnDestroy");
     this.clearTimeInterval();
   }
 
   clearTimeInterval(){
-    console.log("clearTimeInterval");
+    // console.log("clearTimeInterval");
     
     clearInterval(this.interval);
     clearTimeout(this.timeout);
@@ -314,7 +314,7 @@ export class MatchCommentryComponent implements OnInit {
     //       overRun += comment.batting_params.runs_scored;
 
     //       if(this.overIndexes.length>0 && !(this.overIndexes.includes(comment.over_number))){
-    //         console.log(overCommentry);
+            // console.log(overCommentry);
 
     //         this.allCommentry.push(overCommentry);
     //         this.overIndexes[comment.over_number] = {'overwicket' : overWicket, 'display_score' : comment.display_score, 'runs_scored' : overRun};
@@ -342,7 +342,7 @@ export class MatchCommentryComponent implements OnInit {
         //     this.allCommentry.push(temp);
         //     temp =[];
         //     temp.push(comment);
-        //     console.log(this.allCommentry)
+            // console.log(this.allCommentry)
         //   }
         // }
         // else{

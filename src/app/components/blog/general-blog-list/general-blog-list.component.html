@@ -5,7 +5,9 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{blogcategory ? blogcategory : 'blogs'}} {{ blogtype == 'video' ? 'Videos' : '' || blogtype == 'article' ? 'Articles' : '' }}</h1>
         </div>
-        <div class="common-news-list">
+        <app-data-loader-widget *ngIf="!blogs"></app-data-loader-widget>
+        <app-no-data-widget *ngIf="blogs?.length == 0"></app-no-data-widget>
+        <div class="common-news-list" *ngIf="blogs">
           <div class="common-news-item d-flex common-shadow" *ngFor="let blog of blogs">
             <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
               <div class="common-zoom-img" [defaultImage]="smallblogdeafault" [lazyLoad]="blog?.sImage | resizeImage:['s']" (click)="blogview(blog._id,'Article',blog.sTitle)">
@@ -19,7 +21,7 @@
             </div>
           </div>
         </div>
-        <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()" *ngIf="blogs?.length != 0">Load More<span></span></button>
+        <div class="text-center"><button class="theme-btn down-btn" (click)="loadmore()" *ngIf="blogs?.length != 0 && blogs">Load More<span></span></button>
         </div>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
       </div>

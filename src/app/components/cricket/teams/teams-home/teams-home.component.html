@@ -2,13 +2,16 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center" *ngIf="teamprofiledata">
           <h1>{{teamprofiledata?.name}}</h1>
           <!-- <button class="add-to-fav-btn added"><span>Add to favorites</span></button> -->
         </div>
-        <ngb-tabset class="common-tabs">
+        <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
+        <ngb-tabset class="common-tabs" *ngIf="teamprofiledata">
           <ngb-tab>
             <ng-template ngbTabTitle>About</ng-template>
+            <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
+            <app-no-data-widget *ngIf="teamprofiledata?.length == 0"></app-no-data-widget>
             <ng-template ngbTabContent>
               <section class="team-about-head d-flex">
                 <div class="team-logo align-self-start rounded-box common-shadow">
@@ -27,13 +30,15 @@
               </section>
               <section class="common-section squad-list" *ngIf="teamprofiledata?.players">
                 <h4>Squad</h4>
+                <app-data-loader-widget *ngIf="!teamprofiledata?.players"></app-data-loader-widget>
                 <div class="row row-size12">
                   <div class="col-xl-3 col-sm-4" *ngFor="let player of teamprofiledata?.players">
                     <div class="squad-item rounded-box common-shadow">
                       <img src="../../../../../assets/images/placeholder-sqad.svg" alt="dhoni">
                       <div class="item-desc">
                         <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
-                        <button class="theme-btn" (click)="playerview(player.id,player.name)">View Player<span></span></button>
+                        <button class="theme-btn" (click)="playerview(player.id,player.name)">View
+                          Player<span></span></button>
                       </div>
                     </div>
                   </div>
@@ -54,7 +59,9 @@
             <ng-template ngbTabTitle>
               <div (click)="getTeamFixtures()">Fixtures</div>
             </ng-template>
-            <div *ngIf="noteamfixtures || !fixturesdata">No data available!</div>
+            <app-data-loader-widget *ngIf="!fixturesdata || noteamfixtures"></app-data-loader-widget>
+            <app-no-data-widget *ngIf="fixturesdata?.length == 0"></app-no-data-widget>
+            <!-- <div *ngIf="noteamfixtures || !fixturesdata">No data available!</div> -->
             <ng-template ngbTabContent *ngIf="!noteamfixtures">
               <div class="schedule-list schedule-tour-list">
                 <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
