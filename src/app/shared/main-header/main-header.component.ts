@@ -137,6 +137,7 @@ export class MainHeaderComponent implements OnInit {
               data.slider_status == "live"
             ) {
               this.sliderdata.push(data);
+              this.sliderdata.reverse();
             }
           });
         }
@@ -153,16 +154,17 @@ export class MainHeaderComponent implements OnInit {
               });
             } else if (sComp.qualifier === "away" && sData.match_data) {
               sData.match_data.period_scores.map(sPScore => {
-                if (sPScore.away_score) {
+                if (sPScore.away_score) {          
                   sComp.display_score = sPScore.display_score;
                 }
               });
             } else {
               return null;
             }
-          });
+          }); 
         });
-
+       
+        
         // this.sliderdata.map((data) => {
         //   if (data.slider_status == 'live') {
         //     this.sliderresults.push(data);

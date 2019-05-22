@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainHeaderComponent } from './main-header/main-header.component';
-import { MainFooterComponent } from './main-footer/main-footer.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { NgxTinySliderModule } from 'ngx-tiny-slider';
+import { SocketIoModule} from 'ngx-socket-io';
 import { TruncatePipe } from '../pipes/truncatepipe';
 import { ResizeImagePipe } from '../pipes/resize-image.pipe';
 import { SportsService } from '../providers/sports-service';
+import { SocketService } from '../providers/socket.service';
 import { MomentModule } from 'ngx-moment';
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
 import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
@@ -30,12 +29,13 @@ import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widg
         NgxTinySliderModule,
         MomentModule,
         NgbModule,
+        SocketIoModule,
         ReactiveFormsModule,
         FormsModule,
         LazyLoadImageModule
     ],
     declarations: [TruncatePipe, ResizeImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent],
-    providers: [TruncatePipe, ResizeImagePipe,  SportsService,SplitPipe],
+    providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService,SplitPipe],
     exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent]
 })
 export class SharedModule { }

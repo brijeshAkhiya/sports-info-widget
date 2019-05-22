@@ -9,6 +9,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MomentModule } from 'ngx-moment';
 import { SportsService } from '../../providers/sports-service';
+import { SocketService } from '../../providers/socket.service';
+
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
@@ -24,7 +26,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     MomentModule,
     LazyLoadImageModule
   ],
-  providers: [SlugifyPipe,SportsService]
+  providers: [SlugifyPipe,SportsService,SocketService]
 })
 
 export class HomeModule { }

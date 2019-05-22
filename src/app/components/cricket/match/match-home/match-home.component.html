@@ -133,19 +133,19 @@
                           <tbody *ngIf="scorecards">
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <td>
-                                {{batting.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}<p
+                                {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}<p
                                   class="batsman-text">
                                   {{batting?.statistics?.dismissal?.type == 'caught' ? 'c' : ''}}
-                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) : ''}}
-                                  {{ batting.statistics.dismissal ? 'b' : '' }}
-                                  {{ batting?.statistics?.dismissal ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''  }}
+                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) : '' : ''}}
+                                  {{ batting?.statistics?.dismissal ? 'b' : '' }}
+                                  {{ batting?.statistics?.dismissal ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : ''  }}
                                 </p>
                               </td>
-                              <td>{{batting?.statistics.runs ? batting.statistics.runs : '-'}}</td>
-                              <td>{{batting?.statistics.balls_faced ? batting.statistics.balls_faced : '-'}}</td>
-                              <td>{{batting?.statistics.fours ? batting.statistics.fours : '-'}}</td>
-                              <td>{{batting?.statistics.sixes ? batting.statistics.sixes : '-'}}</td>
-                              <td>{{batting?.statistics.strike_rate ? batting.statistics.strike_rate : '-'}}</td>
+                              <td>{{batting?.statistics?.runs ? batting.statistics.runs : '-'}}</td>
+                              <td>{{batting?.statistics?.balls_faced ? batting.statistics.balls_faced : '-'}}</td>
+                              <td>{{batting?.statistics?.fours ? batting.statistics.fours : '-'}}</td>
+                              <td>{{batting?.statistics?.sixes ? batting.statistics.sixes : '-'}}</td>
+                              <td>{{batting?.statistics?.strike_rate ? batting.statistics.strike_rate : '-'}}</td>
                             </tr>
                             <tr>
                               <td>
@@ -436,7 +436,6 @@
             <ng-template ngbTabContent>
               <app-data-loader-widget *ngIf="!nextmatches"></app-data-loader-widget>
               <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
-              <div *ngIf="nextmatches.length == 0">No data available!</div>
               <div class="schedule-list schedule-tour-list" *ngIf="nextmatches">
                 <div class="schedule-month d-flex" *ngFor="let item of nextmatches">
                   <div class="month-title">

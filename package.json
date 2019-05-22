@@ -39,6 +39,7 @@
     "ngx-moment": "^3.4.0",
     "ngx-owl-carousel-o": "^1.1.2",
     "ngx-scrollbar": "^4.1.1",
+    "ngx-socket-io": "^2.1.1",
     "ngx-tiny-slider": "0.0.5",
     "node-vibrant": "^3.2.0-alpha",
     "rxjs": "^6.4.0",

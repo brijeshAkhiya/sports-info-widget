@@ -92,7 +92,8 @@
       </ng-container>
   </ng-container>
   <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry" >
-      No commentary data available for this match!
+      <!-- No commentary data available for this match! -->
+      <app-no-data-widget></app-no-data-widget>
   </ng-container>
   <!-- END - COMMENTRY For Closed Match -->
 

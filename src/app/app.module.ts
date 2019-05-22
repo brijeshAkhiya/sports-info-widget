@@ -18,8 +18,8 @@ import {
   FacebookLoginProvider,
   LinkedInLoginProvider
 } from "angularx-social-login";
-import { AgmCoreModule } from '@agm/core';
-import { LottieAnimationViewModule } from 'ng-lottie';
+import { AgmCoreModule } from "@agm/core";
+import { LottieAnimationViewModule } from "ng-lottie";
 //store configuration modules import
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
@@ -29,23 +29,28 @@ import { TruncatePipe } from "./pipes/truncatepipe";
 
 import { SharedModule } from "./shared/shared.module";
 import { MomentModule } from "ngx-moment";
-import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { LazyLoadImageModule } from "ng-lazyload-image";
 import { CarouselModule } from "ngx-owl-carousel-o";
+import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { SplitPipe } from "./pipes/stringsplitpipe";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { WriterProfileComponent } from './components/writer/writer-profile/writer-profile.component';
-import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
-import { AboutComponent } from './components/static-pages/about/about.component';
-import { ContactComponent } from './components/static-pages/contact/contact.component';
-import { AdvertiseWithUsComponent } from './components/static-pages/advertise-with-us/advertise-with-us.component';
-import { TermsAndConditionsComponent } from './components/static-pages/terms-and-conditions/terms-and-conditions.component';
-import { PrivacyPolicyComponent } from './components/static-pages/privacy-policy/privacy-policy.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { StripHtmlPipe } from './pipes/striphtmlpipe';
+import { WriterProfileComponent } from "./components/writer/writer-profile/writer-profile.component";
+import { ComingSoonComponent } from "./components/coming-soon/coming-soon.component";
+import { AboutComponent } from "./components/static-pages/about/about.component";
+import { ContactComponent } from "./components/static-pages/contact/contact.component";
+import { AdvertiseWithUsComponent } from "./components/static-pages/advertise-with-us/advertise-with-us.component";
+import { TermsAndConditionsComponent } from "./components/static-pages/terms-and-conditions/terms-and-conditions.component";
+import { PrivacyPolicyComponent } from "./components/static-pages/privacy-policy/privacy-policy.component";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { StripHtmlPipe } from "./pipes/striphtmlpipe";
 
+//socket config
 
-let config = new AuthServiceConfig([
+const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
+
+//social login firebase
+let authconfig = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider(
@@ -59,7 +64,7 @@ let config = new AuthServiceConfig([
 ]);
 
 export function provideConfig() {
-  return config;
+  return authconfig;
 }
 
 @NgModule({
@@ -79,6 +84,7 @@ export function provideConfig() {
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
@@ -91,7 +97,7 @@ export function provideConfig() {
     LottieAnimationViewModule.forRoot(),
     NgbModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
+      apiKey: "AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY"
     }),
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production

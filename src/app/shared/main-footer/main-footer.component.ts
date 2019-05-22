@@ -1,5 +1,8 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { SportsService } from "../../providers/sports-service";
+import { SocketService } from '../../providers/socket.service';
+import { Socket } from "ngx-socket-io";
+
 
 @Component({
   selector: "app-main-footer",
@@ -10,14 +13,45 @@ export class MainFooterComponent implements OnInit {
   isapply: boolean;
   contactObj: {};
 
-  constructor(private sportsService: SportsService) {}
+  constructor(private sportsService: SportsService,private socketservice:SocketService,private socket: Socket) {
+  }
 
   isShow: boolean;
   topPosToStartShowing = 100;
 
   ngOnInit() {
     this.getContactDetails();
+    this.initSocketConnection();
   }
+
+  //socket connection 
+  initSocketConnection(){
+    console.log('ca;;');
+    
+    this.socket.on('connect',(res,error)=>{
+      console.log(res);
+      
+      if(res){
+      this.socket.emit('reqFetchRooms',{},(data)=>{
+        if(data){
+          console.log(data);
+          
+        }
+
+
+      })
+
+
+
+
+
+      }
+
+
+    })
+
+  }
+
 
   getContactDetails() {
     this.sportsService.getcontactdetails().subscribe(res => {

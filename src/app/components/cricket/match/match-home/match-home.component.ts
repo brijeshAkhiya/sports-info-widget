@@ -136,71 +136,97 @@ export class MatchHomeComponent implements OnInit {
             //   }
             // }, 1000);
             this.getMatchProbability();
-          } else if (this.matchstatus == "closed" || this.matchstatus == "live" ) {
+          } else if (
+            this.matchstatus == "closed" ||
+            this.matchstatus == "live"
+          ) {
             this.manofthematch = res["data"]["statistics"]["man_of_the_match"];
             this.matcheventstatus = res["data"]["sport_event_status"];
             this.scorecards = res["data"]["statistics"]["innings"];
+            let objBatting = {};
+            let objBowling = {};
 
-            //old logic for scorecard
-            this.scorecards.map(data => {
-              if (data.batting_team === this.teams[0].data[0].id) {
-                this.battingteam1.push(data);
-              } else if (data.batting_team === this.teams[1].data[0].id) {
-                this.battingteam2.push(data);
-              }
-              if (data.bowling_team == this.teams[0].data[0].id) {
-                this.bowlingteam1.push(data);
-              } else if (data.bowling_team == this.teams[1].data[0].id) {
-                this.bowlingteam2.push(data);
-              }
-            });
-
-            console.log("scorecards", this.scorecards);
-            this.battingteam1 = this.battingteam1[0]["teams"][0]["statistics"][
-              "batting"
-            ];
-            console.log("battin1", this.battingteam1);
-
-            this.battingteam2 = this.battingteam2[0]["teams"][0]["statistics"][
-              "batting"
-            ];
-            this.bowlingteam1 = this.bowlingteam1[0]["teams"][1]["statistics"][
-              "bowling"
-            ];
-            this.bowlingteam2 = this.bowlingteam2[0]["teams"][1]["statistics"][
-              "bowling"
-            ];
-
-            let arrnew = [];
-            arrnew = this.battingteam2["players"];
-            arrnew.map(single => {
-              if (!this.objnew[single.id]) {
-                this.objnew[single.id] = [];
-              }
-            });
-            arrnew.map(data => {
-              this.objnew[data.id].push(data);
-            });
-            console.log("objnew", this.objnew);
-
-            //map array for team 2 bowlers name
-
-            let playerarr = [];
-            playerarr = this.battingteam1["players"];
-            playerarr.map(single => {
-              if (!this.objnew2[single.id]) {
-                this.objnew2[single.id] = [];
-              }
-            });
-            playerarr.map(data => {
-              this.objnew2[data.id].push(data);
+            this.scorecards.map((data, key) => {
+              data["teams"][0]["statistics"]["batting"]["players"].map(
+                single => {
+                  if (!objBatting[single.id]) {
+                    objBatting[single.id] = [];
+                    objBatting[single.id].push(single);
+                  }
+                }
+              );
+              data["teams"][1]["statistics"]["bowling"]["players"].map(
+                single => {
+                  if (!objBowling[single.id]) {
+                    objBowling[single.id] = [];
+                    objBowling[single.id].push(single);
+                  }
+                }
+              );
             });
 
             //players name object
             this.objnew3 = {
-              ...this.objnew,
-              ...this.objnew2
+              ...objBowling,
+              ...objBatting
             };
+            //<------------old logic for scorecard ----------->>>>>>
+            // this.scorecards.map(data => {
+            //   if (data.batting_team === this.teams[0].data[0].id) {
+            //     this.battingteam1.push(data);
+            //   } else if (data.batting_team === this.teams[1].data[0].id) {
+            //     this.battingteam2.push(data);
+            //   }
+            //   if (data.bowling_team == this.teams[0].data[0].id) {
+            //     this.bowlingteam1.push(data);
+            //   } else if (data.bowling_team == this.teams[1].data[0].id) {
+            //     this.bowlingteam2.push(data);
+            //   }
+            // });
+
+            // console.log("scorecards", this.scorecards);
+            // this.battingteam1 = this.battingteam1[0]["teams"][0]["statistics"][
+            //   "batting"
+            // ];
+            // console.log("battin1", this.battingteam1);
+
+            // this.battingteam2 = this.battingteam2[0]["teams"][0]["statistics"][
+            //   "batting"
+            // ];
+            // this.bowlingteam1 = this.bowlingteam1[0]["teams"][1]["statistics"][
+            //   "bowling"
+            // ];
+            // this.bowlingteam2 = this.bowlingteam2[0]["teams"][1]["statistics"][
+            //   "bowling"
+            // ];
+
+            // let arrnew = [];
+
+            // arrnew = this.battingteam2["players"];
+            // arrnew.map(single => {
+            //   if (!this.objnew[single.id]) {
+            //     this.objnew[single.id] = [];
+            //   }
+            // });
+            // arrnew.map(data => {
+            //   this.objnew[data.id].push(data);
+            // });
+            // console.log("objnew", this.objnew);
+
+            //map array for team 2 bowlers name
+
+            // let playerarr = [];
+            // playerarr = this.battingteam1["players"];
+            // playerarr.map(single => {
+            //   if (!this.objnew2[single.id]) {
+            //     this.objnew2[single.id] = [];
+            //   }
+            // });
+            // playerarr.map(data => {
+            //   this.objnew2[data.id].push(data);
+            // });
+
+            //<<<<<----------old scorecard logic over ------->>>>>>
 
             //calculate fall of wickets data
             let fallofwircket1 = [];
