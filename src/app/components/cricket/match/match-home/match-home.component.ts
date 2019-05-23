@@ -71,14 +71,26 @@ export class MatchHomeComponent implements OnInit {
           this.matchstatus = res["data"]["sport_event_status"].status;
           this.sportevent = res["data"]["sport_event"];
           this.venuedetails = res["data"]["sport_event"]["venue"];
-          if (this.venuedetails.map_coordinates && this.venuedetails) {
+          this.team1id = res["data"]["sport_event"]["competitors"][0].id;
+          this.team2id = res["data"]["sport_event"]["competitors"][1].id;
+          
+          if (this.team1id && this.team2id) {
+            console.log('teamvstaem');
+            
+            this.getTeamvsTeamdata(); //to get team vs team data
+          }
+
+          if (this.venuedetails) {
+            if(this.venuedetails.map_coordinates){
             let cordinates = this.venuedetails.map_coordinates.split(",");
             this.venuelat = Number(cordinates[0]);
             this.venuelong = Number(cordinates[1]);
-          } else {
-            this.venuelat = 22.5726;
-            this.venuelong = 88.363;
-          }
+            }
+            else {
+              this.venuelat = 22.5726;
+              this.venuelong = 88.363;
+            }
+          } 
           //teams array
           let obj = {};
           let team_arr = res["data"]["sport_event"]["competitors"];
@@ -113,12 +125,7 @@ export class MatchHomeComponent implements OnInit {
             this.teamObj[data.data[0].id] = data;
           });
 
-          this.team1id = res["data"]["sport_event"]["competitors"][0].id;
-          this.team2id = res["data"]["sport_event"]["competitors"][1].id;
-          if (this.team1id && this.team2id) {
-            this.getTeamvsTeamdata(); //to get team vs team data
-          }
-
+         
           if (this.matchstatus == "not_started") {
             // let date = this.sportevent.scheduled;
             // setInterval(() => {
@@ -311,8 +318,8 @@ export class MatchHomeComponent implements OnInit {
           //map array for last matches
 
           this.lastmatches = res["data"].last_meetings;
-          console.log(this.lastmatches);
-
+          console.log('last meeting',this.lastmatches);
+          
           this.lastmatches = this.lastmatches.map(data => {
             let obj = {};
             let team_arr = data["competitors"];

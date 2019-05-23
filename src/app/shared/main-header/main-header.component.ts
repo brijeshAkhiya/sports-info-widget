@@ -37,6 +37,10 @@ export class MainHeaderComponent implements OnInit {
   searchkey: string;
   searchdata: any;
   noresults: boolean;
+  isanylivematch: boolean;
+  interval;
+  sliderdata1 = [];
+  livedataarray = [];
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -141,64 +145,94 @@ export class MainHeaderComponent implements OnInit {
             }
           });
         }
-
-        let newArry = [];
-
-        newArry = this.sliderdata.map(sData => {
-          sData.competitors.map(sComp => {
-            if (sComp.qualifier === "home" && sData.match_data) {
+        let newArray = [];
+        newArray = this.sliderdata.map(sData => {
+          if (sData.slider_status !== "results") {
+            let compObj = {};
+            sData.competitors.map(s => (compObj[s.qualifier] = s));
+            if (sData.match_data) {
               sData.match_data.period_scores.map(sPScore => {
                 if (sPScore.home_score) {
-                  sComp.display_score = sPScore.display_score;
+                  if (!compObj["home"].period_scores) {
+                    compObj["home"].period_scores = [];
+                  }
+                  compObj["home"].period_scores.push(sPScore);
+                } else if (sPScore.away_score) {
+                  if (!compObj["away"].period_scores) {
+                    compObj["away"].period_scores = [];
+                  }
+                  compObj["away"].period_scores.push(sPScore);
                 }
               });
-            } else if (sComp.qualifier === "away" && sData.match_data) {
-              sData.match_data.period_scores.map(sPScore => {
-                if (sPScore.away_score) {          
-                  sComp.display_score = sPScore.display_score;
-                }
-              });
-            } else {
-              return null;
             }
-          }); 
+            sData.competitors = compObj;
+            return sData;
+          } else {
+            return sData;
+          }
         });
-       
-        
-        // this.sliderdata.map((data) => {
-        //   if (data.slider_status == 'live') {
-        //     this.sliderresults.push(data);
-        //   }
-        //
 
-        //   if(data.slider_status == 'live' || data.slider_status == 'upcoming' ){
-        //     // interval(5000).subscribe((x)=>{
-        //     //   this.getHeaderSliderData();
-        //     // })
-        //   }
-        // })
-        // this.sliderresults = this.sliderresults.map(data => {
-        //   let obj = {};
-        //   let team_arr = data["competitors"]
-        //   team_arr.map(single => {
-        //     obj[single.qualifier] = single
-        //   })
+        this.sliderdata1 = newArray;
+        this.isanylivematch = this.sliderdata.some(
+          type => type.slider_status === "live"
+        );
 
-        //   let period_score_new = data["period_scores"]
-        //   if (period_score_new) {
-        //     period_score_new = period_score_new.map(singleb => {
-        //       if (singleb.away_score !== undefined) {
-        //         return { ...singleb, team: obj["away"], teamFlag: true }
-        //       } else {
-        //         return { ...singleb, team: obj["home"], teamFlag: false }
-        //       }
-        //     })
-        //     return { ...data, period_score_new }
-        //   }
-        //   else {
-        //     return data;
-        //   }
-        // })
+        if (this.isanylivematch == true) {
+          console.log("1");
+
+          this.interval = setInterval(() => {
+            console.log("live update");
+            this.getLiveUpdates();
+          }, 30000);
+        }
+      }
+    });
+  }
+
+  //get live match data slider - call every defined seconds of interval -->
+  getLiveUpdates() {
+    this.sportsService.getheaderslider().subscribe(res => {
+      if (res["data"]) {
+        let newArray = [];
+        let dataarr = [];
+        res["data"].map(data => {
+          if (
+            data.slider_status == "live" ||
+            data.slider_status == "upcoming"
+          ) {
+            dataarr.push(data);
+            dataarr.reverse();
+          }
+        });
+        newArray = dataarr.map(sData => {
+          if (
+            sData.slider_status == "live" ||
+            sData.slider_status == "upcoming"
+          ) {
+            let compObj = {};
+            sData.competitors.map(s => (compObj[s.qualifier] = s));
+            if (sData.match_data) {
+              sData.match_data.period_scores.map(sPScore => {
+                if (sPScore.home_score) {
+                  if (!compObj["home"].period_scores) {
+                    compObj["home"].period_scores = [];
+                  }
+                  compObj["home"].period_scores.push(sPScore);
+                } else if (sPScore.away_score) {
+                  if (!compObj["away"].period_scores) {
+                    compObj["away"].period_scores = [];
+                  }
+                  compObj["away"].period_scores.push(sPScore);
+                }
+              });
+            }
+            sData.competitors = compObj;
+            return sData;
+          } else {
+            return sData;
+          }
+        });
+        this.sliderdata1 = newArray;
       }
     });
   }
@@ -290,6 +324,7 @@ export class MainHeaderComponent implements OnInit {
         nStart: 0
       };
       this.searchdata = [];
+      this.noresults = false;
       this.sportsService.getsearchresult(data).subscribe(res => {
         if (res["data"].length != 0) {
           this.searchdata = res["data"];
@@ -311,3 +346,40 @@ export class MainHeaderComponent implements OnInit {
     this.renderer2.removeClass(document.body, "search-box-open");
   }
 }
+
+//old logic for upper slider
+
+// this.sliderdata.map((data) => {
+//   if (data.slider_status == 'live') {
+//     this.sliderresults.push(data);
+//   }
+//
+
+//   if(data.slider_status == 'live' || data.slider_status == 'upcoming' ){
+//     // interval(5000).subscribe((x)=>{
+//     //   this.getHeaderSliderData();
+//     // })
+//   }
+// })
+// this.sliderresults = this.sliderresults.map(data => {
+//   let obj = {};
+//   let team_arr = data["competitors"]
+//   team_arr.map(single => {
+//     obj[single.qualifier] = single
+//   })
+
+//   let period_score_new = data["period_scores"]
+//   if (period_score_new) {
+//     period_score_new = period_score_new.map(singleb => {
+//       if (singleb.away_score !== undefined) {
+//         return { ...singleb, team: obj["away"], teamFlag: true }
+//       } else {
+//         return { ...singleb, team: obj["home"], teamFlag: false }
+//       }
+//     })
+//     return { ...data, period_score_new }
+//   }
+//   else {
+//     return data;
+//   }
+// })

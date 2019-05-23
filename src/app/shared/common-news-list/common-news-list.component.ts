@@ -16,6 +16,7 @@ export class CommonNewsListComponent implements OnInit {
   smallblogdeafault = "../../../assets/images/placeholder_blog_small.svg";
   writerid: any;
   iswritervideo: boolean;
+  relatedids: any;
   constructor(
     private sportsService: SportsService,
     private slugifyPipe: SlugifyPipe,
@@ -23,6 +24,8 @@ export class CommonNewsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('type',this.type);
+    
     if (this.type == "any") {
       this.posts = [];
       this.getRecentPosts();
@@ -40,6 +43,8 @@ export class CommonNewsListComponent implements OnInit {
       this.getWriterblogs(this.reqparams);
     } else {
       this.posts = [];
+      console.log('related',this.reqparams);
+      this.relatedids = this.reqparams['aIds']
       this.getRelatedPosts(this.reqparams);
     }
   }
@@ -107,9 +112,10 @@ export class CommonNewsListComponent implements OnInit {
           this.isdisplay = false;
         }
       });
-    } else {
+    } else if(this.type == undefined){
       let start = this.posts.length;
       let data = {
+        aIds:this.relatedids,
         nStart: start,
         nLimit: 4
       };
