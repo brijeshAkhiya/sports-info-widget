@@ -22,7 +22,7 @@
             <div class="current-team d-flex justify-content-between align-items-center">
                 <h4 *ngIf="data.sport_event.competitors">
                     <img src="../../../../../assets/images/flag-wi.svg">
-                        {{competitor.home.name}}
+                        {{competitor.home.abbreviation}}
                 </h4> 
                 <h4 class="score" *ngIf="competitor.home.period_scores && competitor.home.period_scores[0]">
                     {{competitor.home.period_scores[0].display_score}} ({{competitor.home.period_scores[0].display_overs}} ov)
@@ -31,7 +31,7 @@
             <div class="current-team d-flex justify-content-between align-items-center">
                 <h4>
                     <img src="../../../../../assets/images/flag-wi.svg">
-                    {{competitor.away.name}}
+                    {{competitor.away.abbreviation}}
                 </h4>
                 <h4 class="score" *ngIf="competitor.away.period_scores && competitor.away.period_scores[0]">
                     {{competitor.away.period_scores[0].display_score}} ({{competitor.away.period_scores[0].display_overs}} ov)
