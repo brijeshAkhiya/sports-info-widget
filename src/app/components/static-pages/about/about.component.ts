@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-
-import { getAdsState} from '../../../app-reducer';
+import { SportsService } from "../../../providers/sports-service";
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  customads: any;
+
   slides = [
     {id:'1'},
     {id:'2'},
@@ -17,10 +14,22 @@ export class AboutComponent implements OnInit {
     {id:'4'},
 
   ]
-  constructor(private store: Store<any>) { }
+  cmsdata;
+  constructor(private sportsService: SportsService,) { }
 
   ngOnInit() {
-    this.getCustomAds();
+    this.getCMSContent();
+  }
+
+  getCMSContent(){
+    let sKey = 'About Us'
+    this.sportsService.getcmscontent(sKey).subscribe((res)=>{
+      if(res){
+        this.cmsdata = res
+        console.log(this.cmsdata);
+        
+      }
+    })
   }
 
   customOptions: any = {
@@ -42,14 +51,4 @@ export class AboutComponent implements OnInit {
     },
     nav: false
   }
-
-
-  //get custom ads data from Ngrx 
-  
-    getCustomAds(){
-    this.store.subscribe((data)=>{
-        this.customads = data['ads'].Ads
-     })
-    }
-
 }

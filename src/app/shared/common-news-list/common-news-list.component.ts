@@ -23,9 +23,7 @@ export class CommonNewsListComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    console.log('type',this.type);
-    
+  ngOnInit() {   
     if (this.type == "any") {
       this.posts = [];
       this.getRecentPosts();
@@ -43,7 +41,6 @@ export class CommonNewsListComponent implements OnInit {
       this.getWriterblogs(this.reqparams);
     } else {
       this.posts = [];
-      console.log('related',this.reqparams);
       this.relatedids = this.reqparams['aIds']
       this.getRelatedPosts(this.reqparams);
     }

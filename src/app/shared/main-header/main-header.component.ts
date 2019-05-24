@@ -39,7 +39,7 @@ export class MainHeaderComponent implements OnInit {
   noresults: boolean;
   isanylivematch: boolean;
   interval;
-  sliderdata1 = [];
+  sliderdata1: any;
   livedataarray = [];
   constructor(
     private renderer2: Renderer2,
@@ -156,10 +156,16 @@ export class MainHeaderComponent implements OnInit {
                   if (!compObj["home"].period_scores) {
                     compObj["home"].period_scores = [];
                   }
+                  if (sPScore.number === 1) {
+                    compObj["home"].show_first = true  
+                  }
                   compObj["home"].period_scores.push(sPScore);
                 } else if (sPScore.away_score) {
                   if (!compObj["away"].period_scores) {
                     compObj["away"].period_scores = [];
+                  }
+                  if (sPScore.number === 1) {
+                    compObj["away"].show_first = true  
                   }
                   compObj["away"].period_scores.push(sPScore);
                 }
@@ -171,9 +177,13 @@ export class MainHeaderComponent implements OnInit {
             return sData;
           }
         });
-
+        newArray = newArray.sort((a, b) =>
+          a.slider_status === "live" ? -1 : 0
+        );
+        console.log('array', newArray)
         this.sliderdata1 = newArray;
-        this.isanylivematch = this.sliderdata.some(
+
+        this.isanylivematch = this.sliderdata1.some(
           type => type.slider_status === "live"
         );
 
@@ -183,7 +193,7 @@ export class MainHeaderComponent implements OnInit {
           this.interval = setInterval(() => {
             console.log("live update");
             this.getLiveUpdates();
-          }, 30000);
+          }, 40000);
         }
       }
     });
@@ -217,10 +227,16 @@ export class MainHeaderComponent implements OnInit {
                   if (!compObj["home"].period_scores) {
                     compObj["home"].period_scores = [];
                   }
+                  if (sPScore.number === 1) {
+                    compObj["home"].show_first = true  
+                  }
                   compObj["home"].period_scores.push(sPScore);
                 } else if (sPScore.away_score) {
                   if (!compObj["away"].period_scores) {
                     compObj["away"].period_scores = [];
+                  }
+                  if (sPScore.number === 1) {
+                    compObj["away"].show_first = true  
                   }
                   compObj["away"].period_scores.push(sPScore);
                 }
@@ -232,6 +248,9 @@ export class MainHeaderComponent implements OnInit {
             return sData;
           }
         });
+        newArray = newArray.sort((a, b) =>
+          a.slider_status === "live" ? -1 : 0
+        );
         this.sliderdata1 = newArray;
       }
     });

@@ -318,4 +318,15 @@ export class SportsService {
     );
   }
 
+  //get CMS Content
+  getcmscontent(sKey){
+    let headers = new HttpHeaders({
+      'Content-Type': 'text/html'
+  });
+    return this.http.get(
+      environment.apiUrl + environment.version + `/cms/${sKey}`, {headers:headers,responseType:'text'}
+    );
+  }
+
+
 }

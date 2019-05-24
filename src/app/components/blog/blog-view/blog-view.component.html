@@ -18,7 +18,7 @@
   <div class="video-container" [ngClass]="{'show': isplay}">
     <!-- <img class="pattern pattern-left" src="../../../../assets/images/video-pattern-img.svg">
     <img class="pattern pattern-right" src="../../../../assets/images/video-pattern-img.svg"> -->
-    <video controls controlsList="nodownload" autoplay>
+    <video controls controlsList="nodownload" #videoPlayer>
       <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
       Your browser does not support the video tag.
     </video>

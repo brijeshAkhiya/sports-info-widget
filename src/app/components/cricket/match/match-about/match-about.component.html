@@ -1,6 +1,6 @@
 <div class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center" *ngIf="data">
 
-    <h1 *ngIf="data.sport_event.competitors">
+    <h1 *ngIf="data.sport_event.competitors && data.sport_event_status != 'not_started'">
         {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
     </h1>
 
@@ -36,8 +36,10 @@
                 <h4 class="score" *ngIf="competitor.away.period_scores && competitor.away.period_scores[0]">
                     {{competitor.away.period_scores[0].display_score}} ({{competitor.away.period_scores[0].display_overs}} ov)
                 </h4>
+
             </div>
         </div>
+
 
         <div class="match-win-player d-flex" *ngIf="data.statistics && data.statistics.man_of_the_match">
             <div class="player-pic">

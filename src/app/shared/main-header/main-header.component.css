@@ -37,7 +37,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .search-bar input               { padding: 0px 50px 8px 0px; width: 100%; font-size: 40px; line-height: 50px; font-weight: 400; border: none; border-bottom: 2px solid #EBEBEB; border-radius: 0px; }
 .search-bar input:focus         { border-color: #ED1A33; }
 .search-bar .search-box button  { position: absolute; width: 44px; height: 44px; top: 50%; right: 4px; transform: translateY(-50%); background: url(../../../assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; opacity: 0.5; }
-.search-bar .search-close       { margin-left: 8px; width: 24px; height: 24px; background: url(../../../assets/images/close-icon.svg) no-repeat center center; filter: invert(1); -webkit-filter: invert(1); opacity: 0.3; vertical-align: middle; border: none; }
+.search-bar .search-close       { display: none; margin-left: 8px; width: 24px; height: 24px; background: url(../../../assets/images/close-icon.svg) no-repeat center center; filter: invert(1); -webkit-filter: invert(1); opacity: 0.3; vertical-align: middle; border: none; }
 .search-bar .search-close:hover { opacity: 0.6;}
 .search-result .common-title-btn        { padding-bottom: 16px; border-bottom: 2px solid rgba(255,255,255,0.2);  }
 .search-result .common-title-btn h3     { margin: 0px; }
@@ -125,6 +125,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .navbar-nav .nav-link                               { padding: 8px 30px; }
     .login-search li a                                  { margin: 8px 30px;}
 /* -------- Serch Box CSS ------- */
+    .search-bar .search-close                           { display: inline-block; }
     .search-result                                      { padding: 16px 0px; }
 }
 

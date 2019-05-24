@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
-        <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype" [competitor]="competitor"></app-match-about>
+        <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype"></app-match-about>
 
         <ngb-tabset class="common-tabs" *ngIf="matchdata">
           <ngb-tab>
@@ -23,12 +23,12 @@
                 <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length != 0">
                   <div class="probability-block d-flex align-items-center justify-content-between">
                     <div class="team-block" *ngIf="matchprobability?.length != 0 ">
-                      <img class="team-flag" src="../../../../../assets/images/flag-ind.svg">
+                      <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
                       <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
                     </div>
                     <div class="team-block" *ngIf="matchprobability?.length != 0">
                       <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
-                      <img class="team-flag" src="../../../../../assets/images/flag-wi.svg">
+                      <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
                     </div>
                   </div>
                   <div class="team-probability" style="width: 56%;"></div>
@@ -65,14 +65,14 @@
                                 <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                                 <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                               </div>
-                              <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
+                              <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
                             </div>
                             <div class="vs-block">
                               <h6>vs</h6>
                             </div>
                             <div class="match-team d-flex align-items-center"
                               *ngFor="let item of item.period_score_new | slice:1:2">
-                              <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
+                              <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
                               <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
                                 <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                                 <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
@@ -457,13 +457,13 @@
                           <div class="team-info">
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" src="../../../../../assets/images/flag-wi.svg" alt="team-flag">
+                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/flag-ind.svg" alt="team-flag">
+                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
