@@ -56,6 +56,8 @@ export class MatchHomeComponent implements OnInit {
   LiveOverSummery = [];
   ballerList: any;
   competitor: any;
+  closeofCommentry: any;
+
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -399,14 +401,15 @@ export class MatchHomeComponent implements OnInit {
 
   /** Init Match */
   initMatch(){
-    if(this.data.sport_event_status.status == 'closed' || this.data.sport_event_status.status == 'ended')
+    if(this.data.sport_event_status.status == 'closed' || this.data.sport_event_status.status == 'ended'){
       this.getCommentries()
-    else if(this.data.sport_event_status.status == 'not_started')
+      this.getScores()
+    }else if(this.data.sport_event_status.status == 'not_started')
       this.startLiveUpdateAfterTime();    
     else if(this.data.sport_event_status.status == 'live'){
       this.getLiveUpdate(this);
       this.getCommentries();
-      this.getLiveScores();
+      this.getScores();
     }   
   }
 
@@ -444,8 +447,15 @@ export class MatchHomeComponent implements OnInit {
         else if(lastOverIndex > 0)
            overCommentry = currentInningCommentry.slice(firstOverIndex, lastOverIndex);
         else if (firstOverIndex > 0){  
+          console.log("else if");
           let lastOverIndex = currentInningCommentry.findIndex((commentry) => commentry.type == 'match_ended' || commentry.type == 'close_of_play');
-          overCommentry = currentInningCommentry.slice(firstOverIndex, lastOverIndex);
+          
+          console.log("lastOverIndex", lastOverIndex);
+          console.log("firstOverIndex", firstOverIndex);    
+          if(lastOverIndex > 0)    
+            overCommentry = currentInningCommentry.slice(firstOverIndex, lastOverIndex);
+          else
+            overCommentry = currentInningCommentry.slice(firstOverIndex);
         }
         /** Display Over Display Score */
         let overDisplayScore = [];
@@ -472,18 +482,24 @@ export class MatchHomeComponent implements OnInit {
       this.inningWiseCommentry[index].commentry = this.inningWiseCommentry[index].commentry.reverse();
     })
 
-    // Reverse inning
-    this.inningWiseCommentry = this.inningWiseCommentry.reverse();
     
+    console.log("this.inningWiseCommentry");      
+    console.log(this.inningWiseCommentry);
     // If there is no any commentry - Do not show commentry
-    if(this.inningWiseCommentry.filter(comm => comm.length > 0).length > 0){
+    if(this.inningWiseCommentry.filter(comm => comm.length > 0)){
       this.showCommetry = true;
-
-      let closeofCommentry = this.data.timeline.filter((commentry) => commentry.type == 'close_of_play');
-      console.log(closeofCommentry);
+      let temp = this.data.timeline.filter((commentry) => commentry.type == 'close_of_play');
+      console.log(temp);
+      console.log(this.inningWiseCommentry.length - 1 )
+      this.inningWiseCommentry[this.inningWiseCommentry.length - 1 ].commentry.push(
+        { 'data' :  temp }
+        );
       
     }
 
+
+    // Reverse inning
+    this.inningWiseCommentry = this.inningWiseCommentry.reverse();
 
 
     console.log("this.inningWiseCommentry");      
@@ -590,7 +606,8 @@ export class MatchHomeComponent implements OnInit {
     }
   }
 
-  getLiveScores(){
+  /** Get Live scores in match detail header */
+  getScores(){
 
     console.log(this.data.sport_event.competitors);
     let compObj = {};
@@ -617,6 +634,7 @@ export class MatchHomeComponent implements OnInit {
 
   }
 
+  /** Get current Batsman and Ballers */
   getCurrentPlayers(currentInning){
     console.log(currentInning);
     
@@ -636,7 +654,7 @@ export class MatchHomeComponent implements OnInit {
         if(res.data.timeline && res.data.timeline.length > 0){
           this.data = res.data;
           this.getUpdate();
-          this.getLiveScores();
+          this.getScores();
         }
       });
     }, 50000);
