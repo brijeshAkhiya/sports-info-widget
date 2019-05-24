@@ -1,11 +1,14 @@
+<!-- currentOverStats
+{{currentOverStats | json}} -->
+
 <div class="commentary-title">
   <span>End of over : {{commentaries.stats.over_number}} </span>
-  <span>PAK : </span>   <!-- TODO - display_score-->
+  <span>{{commentaries.stats.abbreviation}} : {{commentaries.stats.display_score}}</span>   <!-- TODO - display_score-->
   <!-- <span>RR : 8.00</span> -->  <!-- TODO - Run Rate-->
   <span>Summary : {{commentaries.stats.runs}} Runs {{commentaries.stats.wickets}} Wickets</span>
 </div>
 
-<div class="commentary-item common-shadow rounded-box" *ngIf="commentaries.data">
+<div class="commentary-item common-shadow rounded-box" *ngIf="commentaries.data.length > 0">
   <ul>
     <li class="d-flex" *ngFor="let commentary of commentaries.data">
 

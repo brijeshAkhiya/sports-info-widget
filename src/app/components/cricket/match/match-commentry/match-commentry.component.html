@@ -75,13 +75,13 @@
         </table>
       </div>
     </div>
-    <div class="this-over-block d-flex align-items-center">
-    <h5>This over :</h5>
-    <ul>
-      <li>4WD</li>
-      <li>0</li>
-      <li>1</li>
-    </ul>
+
+    <div class="this-over-block d-flex align-items-center"   *ngIf="LiveOverSummery.length > 0">
+      <h5>This over :</h5>
+      <ul *ngFor="let over of LiveOverSummery">
+        <li>{{over.run}}</li>
+        <li>{{over.run}}</li>
+      </ul>
     </div>
   </ng-container>
 
@@ -91,37 +91,10 @@
         <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
       </ng-container>
   </ng-container>
+
   <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry" >
       <!-- No commentary data available for this match! -->
       <app-no-data-widget></app-no-data-widget>
   </ng-container>
   <!-- END - COMMENTRY For Closed Match -->
-
-
-  <!-- START - COMMENTRY For Closed Match -->
-  <!-- Second Innning -->
-  <!-- <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
-    <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-  </ng-container> -->
-
-  <!-- First Innning -->
-  <!-- <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
-    <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-  </ng-container> -->
-  <!-- END - COMMENTRY For Closed Match -->
-
-
-  <!-- START - COMMENTRY For Live Match -->
-  <!-- Second Innning -->
-  <!-- <ng-container *ngIf="data.sport_event_status.status == 'live'" >
-      <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-    </ng-container> -->
-  
-    <!-- First Innning -->
-    <!-- <ng-container *ngIf="data.sport_event_status.status == 'live'" >
-      <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-    </ng-container> -->
-    <!-- END - COMMENTRY For Live Match -->
-
-  <!-- <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
 </div>

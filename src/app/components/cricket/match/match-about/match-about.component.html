@@ -11,13 +11,13 @@
             </ng-container>
             {{data.sport_event.scheduled | date}}
         </p>
-        <p *ngIf="data.sport_event_status.status == 'closed'">{{data.sport_event_status.match_result}}</p>
+        <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
     </div>
 
     <div class="current-match d-flex">
 
         <!--If match not started-->
-        <div class="current-teams" *ngIf="data.sport_event_status.status == 'not_started'">
+        <div class="current-teams">
             <div class="current-team d-flex justify-content-between align-items-center">
                 <h4 *ngIf="data.sport_event.competitors">
                     <img src="../../../../../assets/images/flag-wi.svg">
@@ -29,7 +29,6 @@
                     <img src="../../../../../assets/images/flag-wi.svg">
                     {{data.sport_event.competitors[1].abbreviation}}
                 </h4>
-
             </div>
         </div>
 
@@ -40,7 +39,7 @@
                 <h4 [ngClass]="{'winner': data.sport_event_status.winner_id == item.data[0].id}">
                     <img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
                 </h4>
-                <h4 class="score" *ngIf="data.sport_event_status.period_scores[1].home_score && item.qualifier == 'home'">
+                <h4 class="score" *ngIf="data.sport_event_status.period_scores && data.sport_event_status.period_scores[1].home_score && item.qualifier == 'home'">
                     {{data.sport_event_status.period_scores[1].display_score}}({{data.sport_event_status.period_scores[1].display_overs}} ov)
                 </h4>
             </div>
@@ -48,13 +47,13 @@
                 <h4 [ngClass]="{'winner': data.sport_event_status.status.winner_id == item.data[0].id}">
                     <img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
                 </h4>
-                <h4 class="score" *ngIf="data.sport_event_status.period_scores[0].away_score && item.qualifier == 'away'">
+                <h4 class="score" *ngIf="data.sport_event_status.period_scores && data.sport_event_status.period_scores[0].away_score && item.qualifier == 'away'">
                     {{data.sport_event_status.period_scores[0].display_score}}({{data.sport_event_status.period_scores[0].display_overs}} ov)
                 </h4>
             </div>
         </div>
 
-        <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'closed' && data.statistics.man_of_the_match">
+        <div class="match-win-player d-flex" *ngIf="data.statistics && data.statistics.man_of_the_match">
             <div class="player-pic">
                 <img src="../../../../../assets/images/placeholder-sqad.svg">
             </div>
