@@ -1,6 +1,6 @@
 <div class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center" *ngIf="data">
 
-    <h1 *ngIf="data.sport_event.competitors">
+    <h1 *ngIf="data.sport_event.competitors && data.sport_event_status != 'not_started'">
         {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
     </h1>
 
@@ -20,14 +20,14 @@
         <div class="current-teams" *ngIf="data.sport_event_status.status == 'not_started'">
             <div class="current-team d-flex justify-content-between align-items-center">
                 <h4 *ngIf="data.sport_event.competitors">
-                    <img src="../../../../../assets/images/flag-wi.svg">
-                {{data.sport_event.competitors[0].abbreviation}}
+                    <img src="../../../../../assets/images/logo-placeholder.svg">
+                {{data.sport_event.competitors[0].name}}
                 </h4>
             </div>
             <div class="current-team d-flex justify-content-between align-items-center">
                 <h4>
-                    <img src="../../../../../assets/images/flag-wi.svg">
-                    {{data.sport_event.competitors[1].abbreviation}}
+                    <img src="../../../../../assets/images/logo-placeholder.svg">
+                    {{data.sport_event.competitors[1].name}}
                 </h4>
 
             </div>
@@ -36,20 +36,22 @@
 
         <!--If match is ended-->
         <div class="current-teams" *ngIf="data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended'">
-            <div class="current-team d-flex justify-content-between align-items-center" *ngFor="let item of teams |slice:0:1">
-                <h4 [ngClass]="{'winner': data.sport_event_status.winner_id == item.data[0].id}">
-                    <img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
+            <div class="current-team d-flex justify-content-between align-items-center">
+                <h4 [ngClass]="{'winner': data.sport_event_status.winner_id == teamsresultsscore['home'].id}">
+                    <img src="../../../../../assets/images/logo-placeholder.svg">{{teamsresultsscore['home'].abbreviation}}
                 </h4>
                 <h4 class="score" *ngIf="data.sport_event_status.period_scores[1].home_score && item.qualifier == 'home'">
-                    {{data.sport_event_status.period_scores[1].display_score}}({{data.sport_event_status.period_scores[1].display_overs}} ov)
+                    <!-- {{data.sport_event_status.period_scores[1].display_score}}({{data.sport_event_status.period_scores[1].display_overs}} ov) -->
+                    {{teamsresultsscore['home']['period_scores'][0].display_score}}({{teamsresultsscore['home']['period_scores'][0].display_overs}} ov)
                 </h4>
             </div>
-            <div class="current-team d-flex justify-content-between align-items-center" *ngFor="let item of teams |slice:1:2">
-                <h4 [ngClass]="{'winner': data.sport_event_status.status.winner_id == item.data[0].id}">
-                    <img src="../../../../../assets/images/flag-wi.svg">{{item.data[0].abbreviation}}
+            <div class="current-team d-flex justify-content-between align-items-center">
+                <h4 [ngClass]="{'winner': data.sport_event_status.status.winner_id == teamsresultsscore['away'].id}">
+                    <img src="../../../../../assets/images/logo-placeholder.svg">{{teamsresultsscore['away'].abbreviation}}
                 </h4>
                 <h4 class="score" *ngIf="data.sport_event_status.period_scores[0].away_score && item.qualifier == 'away'">
-                    {{data.sport_event_status.period_scores[0].display_score}}({{data.sport_event_status.period_scores[0].display_overs}} ov)
+                    {{teamsresultsscore['away']['period_scores'][0].display_score}}({{teamsresultsscore['away']['period_scores'][0].display_overs}} ov)
+                    <!-- {{data.sport_event_status.period_scores[0].display_score}}({{data.sport_event_status.period_scores[0].display_overs}} ov) -->
                 </h4>
             </div>
         </div>

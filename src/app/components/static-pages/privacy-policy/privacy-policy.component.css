@@ -1,0 +1,8 @@
+.common-section { background: #fff; }
+h5              { font-family: 'IBM Plex Sans', sans-serif;  }
+p,ul            { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; }
+p:last-child,
+ul:last-child   { margin-bottom: 0px; }
+ul              { padding-left: 48px; }
+ul li           { position: relative; }
+ul li::before   { content: ""; position: absolute; display: block; width: 8px; height: 8px; left: -24px; top: 10px; background: #3D3D3D; border-radius: 50%; }

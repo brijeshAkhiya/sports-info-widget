@@ -45,5 +45,6 @@ h4                                      { margin-bottom: 19px;}
     .player-profile                         { flex-direction: column; -webkit-flex-direction: column; }
     .player-profile .player-info            { margin-left: 0px; margin-top: 16px;}
     .player-profile p:last-child            { margin-bottom: 18px; }
-    .quick-stats .stat-item                 { padding: 10px 15px; border-bottom-width: 4px;}
+    .quick-stats .stat-item                 { padding: 10px 15px; }
+    .quick-stats .stat-item:after           { height: 4px; }
 }

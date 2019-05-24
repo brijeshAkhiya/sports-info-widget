@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy } from "@angular/core";
 import { SportsService } from "../../../providers/sports-service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from '../../../pipes/slugpipe';
@@ -10,7 +10,7 @@ import { SplitPipe } from '../../../pipes/stringsplitpipe';
   styleUrls: ["./blog-view.component.css"],
   encapsulation: ViewEncapsulation.None,
 })
-export class BlogViewComponent implements OnInit {
+export class BlogViewComponent implements OnInit ,OnDestroy{
   blogid: any;
   blogtype: any;
   blogdata: any;
@@ -24,7 +24,7 @@ export class BlogViewComponent implements OnInit {
   widgetblogs: any;
   hideBtn: boolean = false;
   largeblogdefault = '../../../../assets/images/placeholder_blog_large.svg'
-
+  @ViewChild('videoPlayer') videoplayer: ElementRef;
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
@@ -107,6 +107,7 @@ export class BlogViewComponent implements OnInit {
   //video play event 
   videoplay(){
     this.isplay = true
+    this.videoplayer.nativeElement.play();
   }
 
   //get related stories 
@@ -172,6 +173,12 @@ export class BlogViewComponent implements OnInit {
   //writer view 
   writerview(id){
     this.router.navigate(['/writer',btoa(id)])
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // this.videoplayer.nativeElement.stop();
   }
 
 }

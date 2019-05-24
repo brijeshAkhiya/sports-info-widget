@@ -1,4 +1,4 @@
-.blog-banner                { height: 670px; background: #1B2A5A no-repeat center center / cover; position: relative; }
+.blog-banner                { height: 670px; background: #1B2A5A no-repeat top center / cover; position: relative; }
 .blog-banner:after          { content: ""; position: absolute; width: 100%; height: 50%; bottom: 0px; background-image: linear-gradient( to bottom, rgba(27,42,90,0.00), rgba(27,42,90,1)); z-index: 1;}
 .blog-banner .banner-inner  { width: 100%; position: absolute; bottom: 0px; z-index: 2;}
 .blog-banner .banner-desc   { padding: 32px 0px 32px 88px; max-width: 72.6%; }

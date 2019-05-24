@@ -76,6 +76,8 @@ export class CricketFixturesViewComponent implements OnInit {
           dateObj1[mdate].push(data)
         })
         this.finalresultsdata = Object.keys(dateObj1).map(day => ({ day, data: dateObj1[day] }))
+        console.log('resultsview::',this.finalresultsdata);
+        
       }
       },(error)=>{
         if(error['error'].status == 400){
@@ -110,7 +112,7 @@ export class CricketFixturesViewComponent implements OnInit {
   //get match detail
   matchDetail(id,team1,team2){
     let teams =  team1.concat('-',team2)  
-    this.router.navigate(['/cricket/match',btoa(id),teams])
+   this.router.navigate(['/cricket/match',btoa(id),teams])
   }
 
 
