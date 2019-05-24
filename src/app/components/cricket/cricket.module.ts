@@ -59,6 +59,7 @@ import { CricketFixturesViewComponent } from "./cricket-fixtures-view/cricket-fi
     MatchCounterComponent,
     MatchFactsFiguresComponent,
     MatchScorecardComponent,
+    MatchAboutComponent,
     UpcomingComponent,
     RecommendedComponent,
     MatchAboutComponent

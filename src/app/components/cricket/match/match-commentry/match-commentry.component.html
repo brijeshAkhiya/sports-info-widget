@@ -7,7 +7,7 @@
 <div>
   <!-- Match is live-->
   <ng-container *ngIf="data.sport_event_status.status == 'live'">
-    <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
+    <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box" *ngIf="batsmanList">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -41,9 +41,9 @@
         </table>
       </div>
     </div>
-    <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box">
+    <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box" *ngIf="ballerList">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table" *ngIf="ballerList.length > 0">
           <thead>
             <tr>
               <th>Bowler</th>
@@ -55,19 +55,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Jason Holder</td>
+            <tr *ngFor="let baller of ballerList">
+              <td>{{baller.name}}</td>
               <td>4.3</td>
               <td>1</td>
               <td>56</td>
-              <td>1</td>
-              <td>6.23</td>
-            </tr>
-            <tr>
-              <td>Jason Holder</td>
-              <td>4</td>
-              <td>1</td>
-              <td>66</td>
               <td>1</td>
               <td>6.23</td>
             </tr>
@@ -75,53 +67,26 @@
         </table>
       </div>
     </div>
-    <div class="this-over-block d-flex align-items-center">
-    <h5>This over :</h5>
-    <ul>
-      <li>4WD</li>
-      <li>0</li>
-      <li>1</li>
-    </ul>
+
+    <div class="this-over-block d-flex align-items-center"   *ngIf="LiveOverSummery && LiveOverSummery.length > 0">
+      <h5>This over :</h5>
+      <ul *ngFor="let over of LiveOverSummery">
+        <li>{{over.run}}</li>
+        <li>{{over.run}}</li>
+      </ul>
     </div>
   </ng-container>
 
    <!-- START - COMMENTRY For Closed Match -->
-  <ng-container *ngIf="inningWiseCommentry" >
-      <ng-container *ngFor="let temp of inningWiseCommentry" >
+  <ng-container *ngIf="commentry" >
+      <ng-container *ngFor="let temp of commentry" >
         <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
       </ng-container>
   </ng-container>
+
   <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry" >
       <!-- No commentary data available for this match! -->
       <app-no-data-widget></app-no-data-widget>
   </ng-container>
   <!-- END - COMMENTRY For Closed Match -->
-
-
-  <!-- START - COMMENTRY For Closed Match -->
-  <!-- Second Innning -->
-  <!-- <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
-    <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-  </ng-container> -->
-
-  <!-- First Innning -->
-  <!-- <ng-container *ngIf="data.sport_event_status.status == 'closed'" >
-    <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-  </ng-container> -->
-  <!-- END - COMMENTRY For Closed Match -->
-
-
-  <!-- START - COMMENTRY For Live Match -->
-  <!-- Second Innning -->
-  <!-- <ng-container *ngIf="data.sport_event_status.status == 'live'" >
-      <app-commentry *ngFor="let commentaries of secondInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-    </ng-container> -->
-  
-    <!-- First Innning -->
-    <!-- <ng-container *ngIf="data.sport_event_status.status == 'live'" >
-      <app-commentry *ngFor="let commentaries of firstInningCommentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
-    </ng-container> -->
-    <!-- END - COMMENTRY For Live Match -->
-
-  <!-- <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
 </div>
