@@ -403,14 +403,15 @@ export class MatchHomeComponent implements OnInit {
   initMatch(){
     if(this.data.sport_event_status.status == 'closed' || this.data.sport_event_status.status == 'ended'){
       this.getCommentries()
-      this.getScores()
+      // this.getScores()
     }else if(this.data.sport_event_status.status == 'not_started')
       this.startLiveUpdateAfterTime();    
     else if(this.data.sport_event_status.status == 'live'){
       this.getLiveUpdate(this);
       this.getCommentries();
-      this.getScores();
+      // this.getScores();
     }   
+    this.getScores()
   }
 
   /** Get all Commentries inning wise - support for more than 2 innings */
@@ -612,7 +613,7 @@ export class MatchHomeComponent implements OnInit {
     console.log(this.data.sport_event.competitors);
     let compObj = {};
     this.data.sport_event.competitors.map(s => (compObj[s.qualifier] = s));
-    if ( this.data.sport_event_status) {
+    if ( this.data.sport_event_status.period_scores) {
       this.data.sport_event_status.period_scores.map(sPScore => {
         if (sPScore.home_score) {
           if (!compObj["home"].period_scores) {
