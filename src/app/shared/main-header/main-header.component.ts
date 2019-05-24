@@ -193,7 +193,7 @@ export class MainHeaderComponent implements OnInit {
           this.interval = setInterval(() => {
             console.log("live update");
             this.getLiveUpdates();
-          }, 40000);
+          },7000);
         }
       }
     });
