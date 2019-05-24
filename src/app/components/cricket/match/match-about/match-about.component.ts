@@ -8,7 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MatchAboutComponent implements OnInit {
 
   @Input() data: any;
-  @Input() teams: any;
+  @Input() teams: any;  
+  @Input() competitor: any;
+
   teamsresultsscore;
 
   constructor() { }

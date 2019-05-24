@@ -1,7 +1,7 @@
 <!-- currentOverStats
 {{currentOverStats | json}} -->
 
-<div class="commentary-title">
+<div class="commentary-title" *ngIf="commentaries.stats">
   <span>End of over : {{commentaries.stats.over_number}} </span>
   <span>{{commentaries.stats.abbreviation}} : {{commentaries.stats.display_score}}</span>   <!-- TODO - display_score-->
   <!-- <span>RR : 8.00</span> -->  <!-- TODO - Run Rate-->

@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
-        <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype"></app-match-about>
+        <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype" [competitor]="competitor"></app-match-about>
 
         <ngb-tabset class="common-tabs" *ngIf="matchdata">
           <ngb-tab>
