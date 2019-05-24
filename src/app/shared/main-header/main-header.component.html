@@ -1,23 +1,22 @@
 <div class="header-live-section">
   <div class="container">
     <div class="header-live-slider">
-      <owl-carousel-o [options]="customOptions" *ngIf="sliderdata">
-        <ng-container class="items" *ngFor="let slide of sliderdata">
+      <owl-carousel-o [options]="customOptions" *ngIf="sliderdata1">
+        <ng-container class="items" *ngFor="let slide of sliderdata1">
           <ng-template carouselSlide>
-
             <!--upcoming matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'"
-              (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
+              (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
                 <div class="match-info d-flex justify-content-between align-items-center">
-                  <p><img src="../../../assets/images/rcb-icon.svg" alt="flag">{{slide.competitors[0].name}}</p>
+                  <p><img src="../../../assets/images/rcb-icon.svg" alt="flag">{{slide.competitors.home.name}}</p>
                 </div>
                 <div class="match-info d-flex justify-content-between align-items-center">
-                  <p><img src="../../../assets/images/kxip-icon.svg" alt="flag">{{slide.competitors[1].name}}</p>
+                  <p><img src="../../../assets/images/kxip-icon.svg" alt="flag">{{slide.competitors.away.name}}</p>
                 </div>
                 <div class="row">
                   <div class="col-lg-9">
@@ -27,28 +26,24 @@
                 </div>
               </div>
             </div>
-
             <!--Live matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'live'"
-              (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
+              (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
                   <p><b>{{slide.season_name}}</b></p>
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
-                <div class="match-info d-flex justify-content-between align-items-center"
-                  *ngFor="let item of slide.period_score_new | slice:0:1">
-                  <p *ngIf="!item.teamFlag || item.teamFlag"><img src="../../../assets/images/rcb-icon.svg"
-                      alt="rcb">{{item.team.abbreviation}}</p>
-                  <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
-
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/rcb-icon.svg"
+                      alt="rcb">{{slide.competitors.home.name}}</p>
+                  <p>{{slide.competitors.home.period_scores[0].display_score}}({{slide.competitors.home.period_scores[0].display_overs}} ov)</p>
                 </div>
-                <div class="match-info d-flex justify-content-between align-items-center"
-                  *ngFor="let item of slide.period_score_new | slice:1:2">
-                  <p *ngIf="!item.teamFlag || item.teamFlag"><img src="../../../assets/images/kxip-icon.svg"
-                      alt="kxip">{{item.team.abbreviation}}
+                <div class="match-info d-flex justify-content-between align-items-center">
+                  <p><img src="../../../assets/images/kxip-icon.svg"
+                      alt="kxip">{{slide.competitors.away.name}}
                   </p>
-                  <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                  <p>{{slide.competitors.away.period_scores[0].display_score}}({{slide.competitors.away.period_scores[0].display_overs}} ov)</p>
                 </div>
                 <div class="row">
                   <div class="col-lg-9">
@@ -57,28 +52,6 @@
                 </div>
               </div>
             </div>
-            <!--Results-->
-            <!-- <div class="slider-item" *ngIf="slide.slider_status == 'results'" (click)="getmatchdetail(slide.match_id,slide.competitors[0].abbreviation,slide.competitors[1].abbreviation)">
-              <div class="slider-item-inner">
-                <div class="title d-flex justify-content-between">
-                  <p><b>{{slide.season_name}}</b></p>
-                  <p>{{slide.scheduled | amDuration :'hours'}}</p>
-                </div>
-                <div class="match-info d-flex justify-content-between align-items-center">
-                  <p><img src="../../../assets/images/rcb-icon.svg" alt="rcb">RCB</p>
-                  <p>187/5(20.0 ov)</p>
-                </div>
-                <div class="match-info d-flex justify-content-between align-items-center">
-                  <p class="match-winner"><img src="../../../assets/images/kxip-icon.svg" alt="kxip">KXIP</p>
-                  <p>188/2(19.2 ov)</p>
-                </div>
-                <div class="row">
-                  <div class="col-lg-9">
-                    <p class="result-line">{{slide.match_result}}</p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </ng-template>
         </ng-container>
 
@@ -141,8 +114,8 @@
     <div class="container">
       <div class="search-box">
         <form>
-          <input type="text" placeholder="Search something …" [(ngModel)]="searchkey"
-            [ngModelOptions]="{standalone: true}">
+          <input type="text" placeholder="Search articles …" [(ngModel)]="searchkey"
+            [ngModelOptions]="{standalone: true}" autofocus>
           <button type="submit" (click)="search()"></button>
         </form>
       </div>
