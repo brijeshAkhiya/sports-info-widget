@@ -10,7 +10,7 @@
             <ng-template ngbTabTitle>Results</ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <app-data-loader-widget *ngIf="!finalresultsdata"></app-data-loader-widget>
+                <app-data-loader-widget *ngIf="!finalresultsdata && !noresultdata"></app-data-loader-widget>
                 <app-no-data-widget *ngIf="finalresultsdata?.length == 0 || noresultdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
                   <div class="month-title">
@@ -104,7 +104,7 @@
             </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                <app-data-loader-widget *ngIf="!fixturesresult"></app-data-loader-widget>
+                <app-data-loader-widget *ngIf="!fixturesresult && !nofixturesdata"></app-data-loader-widget>
                 <app-no-data-widget *ngIf="fixturesresult?.length == 0 || nofixturesdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of fixturesresult">
                   <div class="month-title">

@@ -14,7 +14,7 @@ footer .copyright                   { padding: 24px 0px; background: #121212; }
 footer .copyright p                 { margin: 0px; font-size: 18px; line-height: 23px; text-transform: capitalize; }
 
 /* -------- Favourite Block CSS ------- */
-.fav-btn                            { position: fixed; width: 80px; height: 80px; right: 32px; bottom: 24px; background: #FFC800 url(../../../assets/images/fav-star-white.svg) no-repeat center center / 40px 40px; border-radius: 50%; box-shadow: 0px 4px 16px rgba(229,160,1,0.6); -webkit-box-shadow: 0px 4px 16px rgba(229,160,1,0.6); border: none !important; z-index: 5; }
+.fav-btn                            { position: fixed; width: 64px; height: 64px; right: 32px; bottom: 24px; background: #FFC800 url(../../../assets/images/fav-star-white.svg) no-repeat center center / 50% 50%; border-radius: 50%; box-shadow: 0px 4px 16px rgba(229,160,1,0.6); -webkit-box-shadow: 0px 4px 16px rgba(229,160,1,0.6); border: none !important; z-index: 5; }
 .fav-btn:hover                      { box-shadow: none; -webkit-box-shadow: none; transform: rotate(72deg); -webkit-transform: rotate(72deg); }
 .fav-block-box                      { width: 320px; position: fixed; right: 16px; bottom: 0px; z-index: 5; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; transform: translateY(100%); -webkit-transform: translateY(100%); }
 .fav-block-box.fav-show             { transform: translateY(0%); -webkit-transform: translateY(0%);}
@@ -34,9 +34,11 @@ footer .copyright p                 { margin: 0px; font-size: 18px; line-height:
 .fav-block .fav-list button.selected,
 .fav-block .fav-list button:hover   { background: #ED1A33; color: #fff; border-color: #ED1A33; }
 
-.fav-btn.scroll-top                 { width: 64px; height: 64px; background-image: none;  }
+/* -------- Scroll Top CSS ------- */
+.fav-btn.scroll-top                 { right: 112px; background-image: none;  }
 .fav-btn.scroll-top img             { width: 32%; transform: rotate(-90deg); -webkit-transform: rotate(-90deg);}
 .fav-btn.scroll-top:hover           { transform: rotate(0deg); -webkit-transform: rotate(0deg); }
+
 /***** Responsive CSS Start ******/
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -63,14 +65,15 @@ footer .copyright p                 { margin: 0px; font-size: 18px; line-height:
 	footer .copyright                   { padding: 15px 0px; }
     footer .copyright p                 { font-size: 13px; line-height: 19px; }
 /* -------- Favourite Block CSS ------- */
-    .fav-btn                            { width: 48px; height: 48px; background-size: 24px 24px; }
+    .fav-btn                            { width: 48px; height: 48px; right: 16px; bottom: 16px; }
     .fav-block-box                      { width: 280px; }
     .head-btn-list button               { margin-bottom: 10px; width: 36px; height: 36px; background-size: 20px 20px;}
     .fav-block input                    { padding: 8px 44px 8px 8px; font-size: 14px; line-height: 18px; }
     .fav-block .search-box button       { width: 24px; height: 24px; }
     .fav-block .fav-list                { margin: 12px 0px 0px;}
     .fav-block .fav-list button         { margin: 0px 5px 5px 0px; padding: 6px; background: transparent; font-size: 13px; line-height: 17px; }
-
+/* -------- Scroll Top CSS ------- */
+    .fav-btn.scroll-top                 { right: 70px; }
 }
 
 

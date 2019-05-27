@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   ad: any;
   largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
   smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
+  nofixturesdata: boolean;
 
   constructor(
     private renderer2: Renderer2,
@@ -176,6 +177,10 @@ export class HomeComponent implements OnInit {
     this.sportsService.getmatchfixtures().subscribe(res => {
       if (res["data"]) {
         this.matchfixtures = res["data"];
+      }
+    },(error)=>{
+      if(error['error'].status = 400){
+        this.nofixturesdata = true
       }
     });
   }

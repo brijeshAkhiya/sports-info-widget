@@ -13,7 +13,7 @@
 .header-live-slider .slider-item .live-result:before    { content: ""; margin: 6px 4px 0px -10px; width: 6px; height: 6px; background: #6DD400; display: inline-block; vertical-align: top; border-radius: 50%; }
 
 /* -------- Navbar CSS ------- */
-nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase;  }
+nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase; position: sticky; top: 0; z-index: 1111; }
 nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block; background: #fff; position: relative; }
 nav .navbar-brand:before        { content: ""; position: absolute; width: 52px; height: 100%; right: -50px; top: 0px; background: url(../../../assets/images/logo-shape.svg) no-repeat center center / 100% 100%; }
 nav .navbar-brand img           { position: relative; z-index: 1;}
@@ -29,8 +29,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .login-search li a.login        { background-image: url(../../../assets/images/user-icon.svg); }
 
 /* -------- Serch Box CSS ------- */
-
-.common-serch-box               { display: none; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); z-index: 6;}
+.common-serch-box               { display: none; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); z-index: 112;}
 .common-serch-box.show          { display: block; }
 .search-bar                     { padding: 48px 0px; background: #fff; text-align: center; }
 .search-bar .search-box         { width: 60%; display: inline-block; position: relative;  vertical-align: middle; }
@@ -65,7 +64,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 
 @media (min-width: 992px) and (max-width: 1199px) {
 /* -------- Navbar CSS ------- */
-    nav .navbar-brand               { padding: 12px 0px 11px 24px;}
+    nav .navbar-brand               { padding: 11px 0px 11px 24px;}
     nav .navbar-brand:before        { width: 42px; right: -40px; }
     .navbar-nav .nav-link           { padding: 16px 9px; font-size: 15px; }
     nav .navbar-brand img           { width: 140px;}
@@ -120,7 +119,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     nav .navbar-toggler.active .icon-bar:nth-child(1),
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
     .navbar-nav-container                               { margin-top: 50px; left: 0px;}
-    .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+    .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
     .navbar-collapse.collapse.menu-open                 { left: 0px; }
     .navbar-nav .nav-link                               { padding: 8px 30px; }
     .login-search li a                                  { margin: 8px 30px;}

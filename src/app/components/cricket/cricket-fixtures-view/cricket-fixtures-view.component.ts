@@ -4,6 +4,7 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
 import { SportsService } from "../../../providers/sports-service";
 import * as moment from 'moment';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class CricketFixturesViewComponent implements OnInit {
   fixturesdata: { day: string; data: any; }[];
   finalresultsdata: { day: string; data: any; }[];
   noresultdata: boolean = false;
+  t: NgbTabset;
   constructor(
     private sportsService: SportsService,
     private router: Router,
@@ -24,6 +26,7 @@ export class CricketFixturesViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+   this.t.select('2')
     this.getMatchFixtures();
   }
 
@@ -89,7 +92,7 @@ export class CricketFixturesViewComponent implements OnInit {
   //get 3 days matches fixtures - HOME
   getMatchFixtures() {
     this.sportsService.getmatchfixtures().subscribe(res => {
-      if (res["data"]) {
+      if (res["data"].length != 0) {
         this.matchfixtures = res["data"];
         console.log(this.matchfixtures);
         this.matchfixtures = res['data']

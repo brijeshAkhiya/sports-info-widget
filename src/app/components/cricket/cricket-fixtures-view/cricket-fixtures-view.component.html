@@ -5,14 +5,14 @@
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>Recent Fixtures</h1>
         </div>
-        <ngb-tabset class="common-tabs">
-          <ngb-tab>
+        <ngb-tabset class="common-tabs"  #t="ngbTabset" >
+          <ngb-tab id="1">
             <ng-template ngbTabTitle>
               <div>Upcoming</div>
             </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                  <app-data-loader-widget *ngIf="!fixturesdata"></app-data-loader-widget>
+                  <app-data-loader-widget *ngIf="!fixturesdata || fixturesdata.length != 0"></app-data-loader-widget>
                   <app-no-data-widget *ngIf="fixturesdata?.length == 0 || nofixturesdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
                   <div class="month-title">
@@ -52,11 +52,11 @@
               </div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab>
+          <ngb-tab id="2">
             <ng-template ngbTabTitle><div (click)="getMatchResults()">Results</div></ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                  <app-data-loader-widget *ngIf="!finalresultsdata"></app-data-loader-widget>
+                  <app-data-loader-widget *ngIf="!finalresultsdata "></app-data-loader-widget>
                   <app-no-data-widget *ngIf="finalresultsdata?.length == 0 || noresultdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
                   <div class="month-title">

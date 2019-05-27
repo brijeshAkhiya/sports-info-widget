@@ -25,8 +25,9 @@
 	</div>
 </footer>
 <button class="fav-btn scroll-top" *ngIf="isShow" (click)="gotoTop()"><img src="../../../assets/images/right-arrow.svg"></button>
-<!-- <button class="fav-btn" (click)="isapply = !isapply"></button>
-<div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
+<app-flash-commentary></app-flash-commentary>
+<!-- <button class="fav-btn" (click)="isapply = !isapply"></button> -->
+<!-- <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
 	<div class="head-btn-list">
 		<button class="delete-btn edit-btn"></button>
 		<button class="close-btn" (click)="isapply = false"></button>

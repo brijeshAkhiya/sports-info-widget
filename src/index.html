@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <title>Sports.info</title>
@@ -8,6 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Sports.info website">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:title" content="Sports.info" />
+  <meta property="og:url" content="https://dev.sports.info" />
+  <meta property="og:description" content="Sports.info website">
+  <meta property="og:image" content="https://dummyimage.com/600x400/000/fff">
+  <meta property="og:type" content="article" />
   <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
   <meta http-equiv="expires" content="0">
   <meta http-equiv="pragma" content="no-cache">
@@ -78,15 +82,14 @@
 
   </style>
 </head>
+<script type="application/javascript" src="https://widgets.sir.sportradar.com/sportradar/widgetloader" data-sr-language="en" async></script>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('ngsw-worker.js')
       .then(() => console.log('service worker installed'))
       .catch(err => console.error('Error', err));
   }
-
 </script>
-
 <body ontouchstart>
   <app-root>
     <div class="root-loader">

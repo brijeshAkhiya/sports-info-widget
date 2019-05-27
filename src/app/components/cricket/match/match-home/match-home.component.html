@@ -4,7 +4,6 @@
       <div class="content-col">
         <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
         <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype" [competitor]="competitor"></app-match-about>
-
         <ngb-tabset class="common-tabs" *ngIf="matchdata">
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
@@ -42,7 +41,7 @@
                 <div class="schedule-list schedule-tour-list">
                   <app-data-loader-widget *ngIf="!matchesresultdata"></app-data-loader-widget>
                   <app-no-data-widget *ngIf="lastmatches?.length == 0"></app-no-data-widget>
-                  <div class="schedule-list-inner" *ngFor="let item of matchesresultdata">
+                  <div class="schedule-list-inner" *ngFor="let item of matchesresultdata" >
                     <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
                       <div class="month-title">
                         <div class="sticky-month">
@@ -51,7 +50,7 @@
                       </div>
                       <div class="schedule-items">
                         <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
-                          *ngFor="let item of item.data">
+                          *ngFor="let item of item.data" (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                           <div class="match-desc">
                             <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
                             <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',' : ''}} {{item.city_name}}
@@ -421,7 +420,15 @@
               </ngb-tabset>
             </ng-template>
           </ngb-tab>
-
+          <!--Live match tracker starts-->
+          <ngb-tab>
+            <ng-template ngbTabTitle><div>Hawk Eye</div></ng-template>
+            <ng-template ngbTabContent>
+              <app-live-match-tracker  [data]="matchdata">
+              </app-live-match-tracker>
+            </ng-template>
+          </ngb-tab>
+          
           <!--News tabs starts-->
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>

@@ -169,7 +169,7 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
       window.open(`http://twitter.com/share?text=This is our new blog !!! &url=${this.blogUrl}&hashtags=Sports.info,Cricketblogs,sportslatest`, '_blank')
     }
   }
-
+ 
   //writer view 
   writerview(id){
     this.router.navigate(['/writer',btoa(id)])

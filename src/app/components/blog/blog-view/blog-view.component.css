@@ -22,7 +22,10 @@
 .sticky-social-list         { position: sticky; position: -webkit-sticky; top: 278px; }
 .sticky-social-list button  { margin: 20px 0px; width: 48px; background: transparent; border: none; opacity: 0.2; filter: grayscale(100%); -webkit-filter: grayscale(100%); }
 .sticky-social-list button:hover { opacity: 1; filter: grayscale(0%); -webkit-filter: grayscale(0%);}
-.blog-content p             { margin-bottom: 28px; font-size: 18px !important; line-height: 28px; color: #3D3D3D; }
+.blog-content h2,
+.blog-content h3,
+.blog-content h4            { margin: 0px 0px 8px; font-size: 20px; line-height: 25px; font-family: 'IBM Plex Sans', sans-serif; }
+.blog-content p             { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; }
 .blog-content p:last-child  { margin: 0px; }
 .blog-content a             { color: #ED1A33; text-decoration: underline; }
 .blog-content figure        { margin-bottom: 40px; position: relative; overflow: hidden; }
@@ -71,6 +74,9 @@
 /* -------- Article Content Section ------- */
     .sticky-social-list button      { margin: 15px 0px; width: 32px;}
     .blog-content p                 { margin-bottom: 24px; font-size: 16px; line-height: 26px; }
+    .blog-content h2,
+    .blog-content h3,
+    .blog-content h4                { font-size: 18px; line-height: 24px; }
     .social-block                   { width: 48px; }
     .blog-content figcaption        { padding: 10px 10px 10px 32px;  }
     .blog-content figcaption:after  { left: 15px; transform: skew(-28deg); -webkit-transform: skew(-28deg); } 
@@ -96,6 +102,10 @@
     .sticky-social-list                 { text-align: center; }
     .sticky-social-list li              { display: inline-block; }
     .sticky-social-list button          { margin: 0px 8px 8px; }
+    .blog-content p                     { margin-bottom: 16px; font-size: 14px; line-height: 22px; }
+    .blog-content h2,
+    .blog-content h3,
+    .blog-content h4                    { font-size: 17px; line-height: 22px; }
     .tag-list li button                 { padding: 7px 10px; font-size: 12px; line-height: 16px; }
 /* -------- Comment Section ------- */
     .comments-inner                     { padding-left: 0px; }

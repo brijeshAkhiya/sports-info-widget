@@ -1,0 +1,53 @@
+.flash-comm-btn-box                 { position: fixed; right: 32px; bottom: 24px; z-index: 6;}
+.flash-comm-btn                     { width: 64px; height: 64px; background: #ED1A33 url(../../../assets/images/flash-comm-icon.svg) no-repeat center center / 50% 50%; border-radius: 50%; box-shadow: 0px 4px 16px rgba(239,29,58,0.6); -webkit-box-shadow: 0px 4px 16px rgba(239,29,58,0.6); border: none !important; position: relative; z-index: 6; }
+.flash-comm-btn span                { display: none; margin: 0px 6px; padding-bottom: 2px; font-size: 14px; line-height: 20px; font-weight: 500; color: #fff; position: relative; }
+.flash-comm-btn span:first-child    { border-bottom: 2px solid #D4172E; }
+.flash-comm-btn.active              { background-image: none; }
+.flash-comm-btn.active span         { display: block; }
+.flash-run                          { margin: 0px; opacity: 0; position: absolute; top: 2px; left: 15px; font-size: 52px; line-height: 60px; font-weight: 700; -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: #fff; text-shadow: 0px 2px 4px rgba(0,0,0,0.5); -webkit-text-shadow: 0px 2px 4px rgba(0,0,0,0.5); z-index: 5;}
+.flash-run.active                   { animation: flash-run 2s ease-in-out; -webkit-animation: flash-run 2s ease-in-out; }
+@-webkit-keyframes flash-run {
+    0%      { transform: rotate(0deg); opacity: 0; }
+    10%     { opacity: 1;}
+    90%     { transform: rotate(360deg); opacity: 1; top: -100px; }
+    100%    { transform: rotate(360deg); opacity: 0; top: -100px; }
+}
+@keyframes flash-run {
+    0%      { transform: rotate(0deg); opacity: 0; }
+    10%     { opacity: 1;}
+    90%     { transform: rotate(360deg); opacity: 1; top: -100px; }
+    100%    { transform: rotate(360deg); opacity: 0; top: -100px; }
+}
+.flash-comm-box                     { width: 320px; position: fixed; right: 16px; bottom: 0px; z-index: 6; transform: translateY(100%); -webkit-transform: translateY(100%); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;  }
+.flash-comm-box.flash-comm-show     { transform: translateY(0%); -webkit-transform: translateY(0%);}
+.flash-comm-box .head-btn-list      { text-align: right; }
+.head-btn-list button               { margin: 0px 0px 16px 16px; width: 48px; height: 48px; background: #292929 no-repeat center center / 24px 24px; border: none; border-radius: 50%; box-shadow: 0px 4px 8px rgba(0,0,0,0.24); -webkit-box-shadow: 0px 4px 8px rgba(0,0,0,0.24); }
+.head-btn-list button:hover         { background-color: #ED1A33; box-shadow: none; -webkit-box-shadow: none; }
+.head-btn-list button.close-btn     { background-image: url(../../../assets/images/close-icon.svg); }
+.head-btn-list button.delete-btn    { background-image: url(../../../assets/images/delete-icon.svg); }
+.head-btn-list button.edit-btn      { background-image: url(../../../assets/images/edit-icon.svg); }
+.flash-comm-block                           { padding: 16px 14px 10px; background: #fff; border-radius: 4px 4px 0px 0px; box-shadow: 0px 2px 16px rgba(0,0,0,0.16); -webkit-box-shadow: 0px 2px 16px rgba(0,0,0,0.16); }
+h5                                          { margin-bottom: 8px; font-family: 'IBM Plex Sans Condensed', sans-serif; text-transform: uppercase; }
+.flash-comm-block .search-box               { position: relative;}
+.flash-comm-block input                     { padding: 10px 44px 10px 8px; width: 100%; font-size: 16px; line-height: 20px; font-weight: 500; border: 2px solid #EBEBEB; border-radius: 4px; }
+.flash-comm-block .search-box button        { position: absolute; width: 28px; height: 28px; top: 50%; right: 10px; transform: translateY(-50%); background: url(../../../assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; }
+.flash-comm-block .flash-comm-list                { margin: 16px 0px 0px;}
+.flash-comm-block .flash-comm-list li             { display: inline-block}
+.flash-comm-block .flash-comm-list button         { margin: 0px 6px 6px 0px; padding: 7px; background: transparent; font-size: 14px; line-height: 18px; color: #292929; font-weight: 500; border-radius: 4px; border: 2px solid #EBEBEB;  }
+.flash-comm-block .flash-comm-list button.selected,
+.flash-comm-block .flash-comm-list button:hover   { background: #ED1A33; color: #fff; border-color: #ED1A33; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+    .flash-comm-btn-box                         { right: 16px; bottom: 16px; }
+    .flash-comm-btn                             { width: 48px; height: 48px; }
+    .flash-comm-btn span                        { font-size: 12px; line-height: 16px;}
+    .flash-run                                  { font-size: 36px; line-height: 40px; }
+    .flash-comm-box                             { width: 280px; }
+    .head-btn-list button                       { margin-bottom: 10px; width: 36px; height: 36px; background-size: 20px 20px;}
+    .flash-comm-block input                     { padding: 8px 44px 8px 8px; font-size: 14px; line-height: 18px; }
+    .flash-comm-block .search-box button        { width: 24px; height: 24px; }
+    .flash-comm-block .flash-comm-list          { margin: 12px 0px 0px;}
+    .flash-comm-block .flash-comm-list button   { margin: 0px 5px 5px 0px; padding: 6px; background: transparent; font-size: 13px; line-height: 17px; }
+}

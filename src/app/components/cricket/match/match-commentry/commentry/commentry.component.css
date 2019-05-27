@@ -15,3 +15,37 @@
 .commentary-title                               { margin-bottom: 24px; padding: 12px 16px; background: #3D3D3D; }
 .commentary-title span                          { margin-right: 32px; font-size: 18px; line-height: 23px; color: #fff; font-weight: 500;  }
 .commentary-title span:last-child               { margin: 0px; }
+
+/***** Responsive CSS Start ******/
+    
+@media (max-width: 1199px) {
+/* -------- Commentary Section ------- */
+    .commentary-title span                      { margin-right: 16px; font-size: 16px; line-height: 22px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+/* -------- Commentary Section ------- */
+    .this-over-block ul li                      { width: 48px; height: 48px; font-size: 18px; line-height: 48px; }
+}
+
+@media (max-width: 767px) {
+/* -------- Commentary Section ------- */
+    .match-counter p                            { font-size: 16px; line-height: 20px;  }
+    .match-counter-block                        { width: 220px; height: 220px; border-width: 6px;  }
+    .match-counter-block p .time-num            { font-size: 40px; line-height: 54px; }
+    .match-counter-block p .time-unit           { padding-right: 10px;}
+    .this-over-block ul li                      { width: 36px; height: 36px; font-size: 14px; line-height: 36px; }
+    .commentary-item                            { padding: 16px; }
+    .commentary-title span                      { margin-right: 14px; font-size: 14px; line-height: 20px; }
+
+}
+
+@media (max-width: 575px) {
+/* -------- Commentary Section ------- */
+    .this-over-block                            { padding-bottom: 20px; }
+    .this-over-block h5                         { margin: 5px 0px; -ms-flex-item-align: start; align-self: flex-start; -webkit-align-self: flex-start; }
+    .this-over-block ul li                      { margin: 0px 0px 4px 10px; width: 32px; height: 32px; font-size: 12px; line-height: 32px;}
+    .commentary-item ul li                      { margin-bottom: 10px; }
+    .commentary-item .over-ball                 { min-width: 46px;}
+    .commentary-item .commentary-line           { margin-top: 3px; padding-left: 16px; line-height: 20px;}
+}

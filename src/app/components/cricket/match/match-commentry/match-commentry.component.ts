@@ -11,7 +11,7 @@ export class MatchCommentryComponent implements OnInit {
   @Input() commentry: any;
   @Input() oversummery: any;
   @Input() ballerList: any;
-
+  showCommetry;
   ballers: any;
   constructor() {}
 

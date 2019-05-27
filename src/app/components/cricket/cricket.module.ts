@@ -35,6 +35,7 @@ import { UpcomingComponent } from "./match/upcoming/upcoming.component";
 import { RecommendedComponent } from "./match/recommended/recommended.component";
 import { MatchAboutComponent } from "./match/match-about/match-about.component";
 import { CricketFixturesViewComponent } from "./cricket-fixtures-view/cricket-fixtures-view.component";
+import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CricketFixturesViewComponent } from "./cricket-fixtures-view/cricket-fi
     MatchAboutComponent,
     UpcomingComponent,
     RecommendedComponent,
-    MatchAboutComponent
+    MatchAboutComponent,
+    LiveMatchTrackerComponent
   ],
   imports: [
     CommonModule,

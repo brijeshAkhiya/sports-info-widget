@@ -44,7 +44,7 @@
             <p [innerHtml]="article.sDescription | truncate:[240,'...'] | striphtml"
               (click)="blogview(article._id,article.eType,article.sTitle)"></p>
             <div class="author-info d-flex justify-content-between align-items-center">
-              <p class="author"><a (click)="writerview(post?.iId?._id)">{{article.iId.sFirstName}}
+              <p class="author"><a (click)="writerview(article?.iId?._id)">{{article.iId.sFirstName}}
                   {{article.iId.sLastName}}</a>{{article.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
               <p class="view">{{article.nViewCounts}}</p>
             </div>
@@ -100,8 +100,8 @@
                 <div (click)="getMatchResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="!matchresults"></app-data-loader-widget>
-                <app-no-data-widget *ngIf="matchresults?.length == 0"></app-no-data-widget>
+                <app-data-loader-widget *ngIf="matchresults.length != 0"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="matchresults?.length == 0 || !matchresults"></app-no-data-widget>
                 <ul class="common-list cricket-list">
                   <li *ngFor="let result of matchresults | slice:1:5"
                     (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">
@@ -166,7 +166,7 @@
             <h2 class="white-text"><a (click)="blogview(video._id,video.eType,video.sTitle)">{{video.sTitle}}</a></h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
-                <a (click)="writerview(post?.iId?._id)">{{video.iId.sFirstName}}
+                <a (click)="writerview(video?.iId?._id)">{{video.iId.sFirstName}}
                   {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
               </p>
               <p class="view white-view">{{video.nViewCounts}}</p>
