@@ -12,7 +12,7 @@ declare var window: any;
 //   name: string;
 //   src: string;
 // }
-export class LiveMatchTrackerComponent implements AfterContentInit{
+export class LiveMatchTrackerComponent implements AfterContentInit,OnInit{
   @Input() data: any
   matchid: any;
 
@@ -20,7 +20,7 @@ export class LiveMatchTrackerComponent implements AfterContentInit{
   ScriptStore: any = [
     { name: 'widgetloader', src: 'https://widgets.sir.sportradar.com/046d029afbaa353404d1b7a898dc5f0b/widgetloader' }
   ];
-  constructor() {
+  constructor() { 
     this.ScriptStore.forEach((script: any) => {
       this.scripts[script.name] = {
         loaded: false,
@@ -29,10 +29,15 @@ export class LiveMatchTrackerComponent implements AfterContentInit{
     });
   }
 
-  ngAfterContentInit() {
-    console.log('tracker', this.data);
-    this.matchid = this.data['sport_event']['id'];
+  ngOnInit(): void {
+    let Id = this.data['sport_event'].id
+    if(Id){
+        this.matchid = Id.split(':')[2]
+    }
+  }
 
+  ngAfterContentInit() {
+   
     this.load('widgetloader').then(data => {      
       console.log('script loaded ', data);              
       window.SIR("addWidget", ".sr-widget-1", "match.lmtPlus", {
@@ -41,7 +46,7 @@ export class LiveMatchTrackerComponent implements AfterContentInit{
         scoreboard: "extended",
         momentum: "bars",
         tabsPosition: "top",
-        matchId: 18000077
+        matchId: this.matchid
     });
 
     }).catch(error => console.log(error));

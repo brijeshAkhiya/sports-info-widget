@@ -430,7 +430,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle><div>Hawk Eye</div></ng-template>
             <ng-template ngbTabContent>
-              <app-live-match-tracker  [data]="matchdata">
+              <app-live-match-tracker [data]="data" *ngIf="data">
               </app-live-match-tracker>
             </ng-template>
           </ngb-tab>
