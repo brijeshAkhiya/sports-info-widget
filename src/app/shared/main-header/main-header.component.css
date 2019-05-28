@@ -1,7 +1,7 @@
 /* -------- Header Slider CSS ------- */
 .header-live-section                                    { background: #1B2A5A; }
 .header-live-slider                                     { padding: 12px 74px; position: relative; }
-.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 121.7px; background: #fff;  cursor: pointer; border-radius: 4px; }
+.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 118px; background: #fff;  cursor: pointer; border-radius: 4px; }
 .header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 14px; line-height: 18px; font-weight: 500; font-family: 'IBM Plex Sans', sans-serif;}
 .header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif;  }
 .header-live-slider .slider-item .title p:last-child    { padding-left: 4px; flex-shrink: 0; -webkit-flex-shrink: 0; }
@@ -129,7 +129,14 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 }
 
 @media (max-width: 575px) {
-    .header-live-slider                                 { padding: 12px 24px;}
+    .header-live-slider                                     { padding: 12px 24px;}
+    .header-live-slider .slider-item-inner                  { min-height: 106px; }
+    .header-live-slider .slider-item-inner p                { margin-bottom: 3px; font-size: 13px; line-height: 17px;}
+    .header-live-slider .slider-item .title p               { font-size: 11px; line-height: 14px;   }
+    .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
+    .header-live-slider .slider-item .match-info img        { width: 18px; }
+    .header-live-slider .slider-item .result-line           { font-size: 11px; line-height: 16px; }
+
 /* -------- Navbar CSS ------- */
     nav .navbar-brand:before                            { width: 36px; right: -34px; }
     nav .navbar-brand img                               { width: 140px;}

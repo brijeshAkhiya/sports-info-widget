@@ -30,7 +30,7 @@
                       <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
                     </div>
                   </div>
-                  <div class="team-probability" style="width: 56%;"></div>
+                  <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage"></div>
                 </div>
                 <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
                   No probability data available for this match!
@@ -111,10 +111,11 @@
           <ngb-tab *ngIf="matchstatus != 'not_started'">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
-              <ngb-tabset class="filled-tabs">
+              <ngb-tabset class="filled-tabs scorecard-tab" [ngClass]="{'test-match': sportevent.tournament.type == 'first_class'}">
                 <ngb-tab *ngFor="let item of scorecards,let i = index">
-                  <ng-template ngbTabTitle *ngIf="scorecards">{{teamObj[item.batting_team].data[0].name}}
-                    {{sportevent.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
+                  <ng-template ngbTabTitle *ngIf="scorecards">
+                    <span>{{teamObj[item.batting_team].data[0].name}}
+                    <span class="test-inng">{{sportevent.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}</span></span>
                    </ng-template>
                   <ng-template ngbTabContent>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
@@ -135,10 +136,15 @@
                               <td>
                                 {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}<p
                                   class="batsman-text">
-                                  {{batting?.statistics?.dismissal?.type == 'caught' ? 'c' : ''}}
-                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) : '' : ''}}
-                                  {{ batting?.statistics?.dismissal ? 'b' : '' }}
-                                  {{ batting?.statistics?.dismissal ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : ''  }}
+                                  {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}
+                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? 'c' : '' || batting?.statistics?.dismissal?.type == 'retired_hurt' ? 'retired hurt' : ''}}
+                                  {{ batting?.statistics?.dismissal?.type == 'caught' ? batting?.statistics?.dismissal?.fieldsman_id ?
+                                    (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
+                                      (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                        : ''  
+                                    : (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                  {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? 'b' : '' : '' }}
+                                  {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : '' : '' }}
                                 </p>
                               </td>
                               <td>{{batting?.statistics?.runs ? batting.statistics.runs : '-'}}</td>
