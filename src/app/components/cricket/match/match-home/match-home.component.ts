@@ -63,6 +63,10 @@ export class MatchHomeComponent implements OnInit {
     private router: Router
   ) {
     console.log("constructor");
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+
     this.matchid = atob(this.activatedroute.snapshot.params.id);
     this.activatedroute.params.subscribe(params => {
 
@@ -431,7 +435,7 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get all Commentries inning wise - support for more than 2 innings */
   getCommentries() {
-    console.log("getCommentries");
+    // console.log("getCommentries");
 
     // check if commentry exists
     if(this.checkCommentry().length <= 0){
@@ -457,7 +461,7 @@ export class MatchHomeComponent implements OnInit {
         if(typeof this.inningWiseCommentry[0] == 'undefined')
           this.inningWiseCommentry[0] = {'commentry' : []} ;
           
-        console.log(this.inningWiseCommentry[0].commentry)
+        // console.log(this.inningWiseCommentry[0].commentry)
         if(this.inningWiseCommentry[0].commentry.length <= 0)
           this.inningWiseCommentry[0].commentry[0] = {};
 
@@ -485,8 +489,8 @@ export class MatchHomeComponent implements OnInit {
         );
 
         // Single Over commentry of Inning - get commentry of current overs to Next Over
-        console.log("lastOverIndex", lastOverIndex);
-        console.log("firstOverIndex", firstOverIndex);
+        // console.log("lastOverIndex", lastOverIndex);
+        // console.log("firstOverIndex", firstOverIndex);
         let overCommentry = [];
         if (innings.number == 1 && over.number == 1)
           overCommentry = currentInningCommentry.slice(0, lastOverIndex);
@@ -496,15 +500,15 @@ export class MatchHomeComponent implements OnInit {
             lastOverIndex
           );
         else if (firstOverIndex > 0) {
-          console.log("else if");
+          // console.log("else if");
           let lastOverIndex = currentInningCommentry.findIndex(
             commentry =>
               commentry.type == "match_ended" ||
               commentry.type == "close_of_play"
           );
 
-          console.log("lastOverIndex", lastOverIndex);
-          console.log("firstOverIndex", firstOverIndex);
+          // console.log("lastOverIndex", lastOverIndex);
+          // console.log("firstOverIndex", firstOverIndex);
           if (lastOverIndex > 0)
             overCommentry = currentInningCommentry.slice(
               firstOverIndex,
@@ -561,9 +565,11 @@ export class MatchHomeComponent implements OnInit {
   /** Get Live Commentries inning wise*/
   getUpdate() {
     this.data.timeline.forEach((timeline, index) => {
-      
+      // console.log(timeline);
+      // console.log(index);
+
       // When inning is not yet started
-      console.log(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined');
+      // console.log(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined');
       
       if(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined'){
         if(typeof this.inningWiseCommentry[0] == 'undefined')
@@ -575,11 +581,11 @@ export class MatchHomeComponent implements OnInit {
 
       // Get Innings data of current inning 
       let currentInning = this.data.statistics.innings.filter((stats) => stats.number == timeline.inning);
-      console.log("currentInning" , currentInning);    
+      // console.log("currentInning" , currentInning);    
       let currentInningOver = []  
       if(currentInning.length > 0 && typeof currentInning[0].overs != 'undefined'){
         currentInningOver = currentInning[0].overs.filter((overs) => overs.number == timeline.over_number);
-        console.log("currentInningOver" , currentInningOver);      
+        // console.log("currentInningOver" , currentInningOver);      
       }
       // This ball statistics
       let timelineStats  =  {
@@ -589,25 +595,23 @@ export class MatchHomeComponent implements OnInit {
         abbreviation : (currentInning.length > 0)  ? this.getAbbreviation(currentInning[0].batting_team) : '',
         display_score : (typeof timeline.display_score != 'undefined' ? timeline.display_score : 0)
       }
-      console.log(timeline);
-      console.log(index);
 
       this.inningWiseCommentry[timeline.inning];
-      console.log(this.inningWiseCommentry[timeline.inning]);
+      // console.log(this.inningWiseCommentry[timeline.inning]);
 
       // find index of current Inning
       let currentInningIndex = this.inningWiseCommentry.findIndex(
         innings => innings.inning == timeline.inning
       );
-      console.log("currentInningIndex", currentInningIndex);
+      // console.log("currentInningIndex", currentInningIndex);
 
       // Check if current inning is already exists in Array
-      if (currentInningIndex >= 0) {
+      if (currentInningIndex >= 0 && typeof timeline.over_number != 'undefined') {
         // Find Index of current Over in current Inning
         let currentOverIndex = this.inningWiseCommentry[
           currentInningIndex
         ].commentry.findIndex(overs => overs.overs == timeline.over_number);
-        console.log("currentOverIndex", currentOverIndex);
+        // console.log("currentOverIndex", currentOverIndex);
 
         //
         let thisBallStats = {
@@ -620,13 +624,13 @@ export class MatchHomeComponent implements OnInit {
         // Check if current over is already exists in innings Array
         if (currentOverIndex >= 0) {
           // Find Index of current Ball in current over in current Inning
-          console.log( this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data)
+          // console.log( this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data)
           let currentBallIndex 
           if(this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data.length > 0)
             currentBallIndex = this.inningWiseCommentry[currentInningIndex].commentry[currentOverIndex].data.findIndex((data) => timeline.ball_number == data.ball_number);
           else
             currentBallIndex = 0;
-          console.log("currentBallIndex" , currentBallIndex);     
+          // console.log("currentBallIndex" , currentBallIndex);     
 
           // Check if current ball is already exists in over of innings Array
           if(currentBallIndex < 0){
@@ -647,32 +651,37 @@ export class MatchHomeComponent implements OnInit {
             stats: currentStats
           });
         }
-        console.log(this.LiveOverSummery);
+        // console.log(this.LiveOverSummery);
       } else {
         // TODO - Create array of current Innings
-
+        // console.log("else");
         if(typeof this.inningWiseCommentry[0] == 'undefined')
           this.inningWiseCommentry[0] = {'commentry' : []} ;
+
+        if(this.data.sport_event_status.current_inning)
+          this.inningWiseCommentry[0].inning = this.data.sport_event_status.current_inning;
           
-        console.log(timeline)
-        console.log(this.inningWiseCommentry[0].commentry.length, this.inningWiseCommentry[0].commentry.length <= 0);
+        // console.log(timeline)
+        // console.log(this.inningWiseCommentry[0].commentry.length, this.inningWiseCommentry[0].commentry.length <= 0);
         
         if(this.inningWiseCommentry[0].commentry.length <= 0){
           let temp = [];
           temp.unshift(timeline)
           this.inningWiseCommentry[0].commentry[0] = {'data' : temp};
         }else{
-          let isExist = this.inningWiseCommentry[0].commentry[0].data.filter((comment) => {return comment.id == timeline.id})
+          let lengthComm = this.inningWiseCommentry[0].commentry.length - 1;
+          let isExist = this.inningWiseCommentry[0].commentry[lengthComm].data.filter((comment) => {return comment.id == timeline.id})
           if(isExist.length <= 0)
             this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);
         }
-        return false;
       }
 
+    // console.log("************************");
+    // console.log(this.inningWiseCommentry);
       // Get current batsman and ballers
       // this.getCurrentPlayers(currentInning)
     });
-    console.log("this.inningWiseCommentry");
+    console.log("************************this.inningWiseCommentry************************");
     console.log(this.inningWiseCommentry);
 
     // Stop live update if Match is ended
@@ -727,8 +736,8 @@ export class MatchHomeComponent implements OnInit {
   getLiveUpdate(classThis) {
     console.log("getLiveUpdate");
     this.interval =  setInterval(() => { 
-      classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
-
+      classThis.sportsService.getmatchtimelineDetlaDirect(classThis.data.sport_event.id).subscribe(res => {
+        res = res.result;
         // If no live coverage then no need to call API again
         if(typeof res.data.coverage_info != 'undefined' && res.data.coverage_info.live_coverage == false){
           this.clearTimeInterval();
@@ -753,7 +762,7 @@ export class MatchHomeComponent implements OnInit {
       remainingTime.minutes,
       remainingTime.seconds
     );
-    remainingMiliSec = remainingMiliSec - this.miliseconds(0, 30, 0); // Start timer before 30 min of match start
+    remainingMiliSec = remainingMiliSec - this.miliseconds(5, 30, 0); // Start timer before 30 min of match start
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
