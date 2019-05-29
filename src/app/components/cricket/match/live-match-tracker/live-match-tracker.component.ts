@@ -93,5 +93,8 @@ export class LiveMatchTrackerComponent implements AfterContentInit,OnInit{
       }
     });
   }
+  ngOnDestroy(){
+    window.SIR('removeWidget', document.querySelector('.sr-widget'));
+  }
 
 }
