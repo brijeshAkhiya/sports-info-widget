@@ -6,19 +6,19 @@ import { SportsService } from "../../../providers/sports-service";
 import * as moment from 'moment';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-cricket-fixtures-view',
   templateUrl: './cricket-fixtures-view.component.html',
   styleUrls: ['./cricket-fixtures-view.component.css']
 })
 export class CricketFixturesViewComponent implements OnInit {
-  matchresults: any;
+  matchresults = [];
   matchfixtures: any;
   fixturesdata: { day: string; data: any; }[];
   finalresultsdata: { day: string; data: any; }[];
   noresultdata: boolean = false;
   t: NgbTabset;
+  nofixtures: boolean;
   constructor(
     private sportsService: SportsService,
     private router: Router,
@@ -26,7 +26,7 @@ export class CricketFixturesViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   this.t.select('2')
+  //  this.t.select('2')
     this.getMatchFixtures();
   }
 
@@ -38,9 +38,14 @@ export class CricketFixturesViewComponent implements OnInit {
       .pipe(distinctUntilChanged())
       .subscribe(res => {
         if (res["data"].length != 0) {
-          this.matchresults = res["data"];
+            res['data'].map((data)=>{
+              if(data.match_status == 'ended'){
+                this.matchresults.push(data)
+              }
+            })
           //manipulate received data array
           this.matchresults = this.matchresults.map(data => {
+            if(data.match_status == 'ended'){
             let obj = {};
             let team_arr = data["competitors"];
             team_arr.map(single => {
@@ -60,7 +65,7 @@ export class CricketFixturesViewComponent implements OnInit {
             } else {
               return data;
             }
-          });
+          }});
         } 
         else{
           this.noresultdata = true
@@ -68,6 +73,8 @@ export class CricketFixturesViewComponent implements OnInit {
            //sort matches result by date
       let dateObj1 = {}    
       if(res['data'].length != 0){
+        console.log('afterloop:::',this.matchresults);
+        
         this.matchresults.map((data) => {
           let mdate = moment(data.scheduled).format('Do MMMM YYYY');
           if (!dateObj1[mdate]) {
@@ -78,9 +85,7 @@ export class CricketFixturesViewComponent implements OnInit {
           let mdate = moment(data.scheduled).format('Do MMMM YYYY');
           dateObj1[mdate].push(data)
         })
-        this.finalresultsdata = Object.keys(dateObj1).map(day => ({ day, data: dateObj1[day] }))
-        console.log('resultsview::',this.finalresultsdata);
-        
+        this.finalresultsdata = Object.keys(dateObj1).map(day => ({ day, data: dateObj1[day] }))        
       }
       },(error)=>{
         if(error['error'].status == 400){
@@ -90,11 +95,9 @@ export class CricketFixturesViewComponent implements OnInit {
   }
 
   //get 3 days matches fixtures - HOME
-  getMatchFixtures() {
+  getMatchFixtures() { 
     this.sportsService.getmatchfixtures().subscribe(res => {
       if (res["data"].length != 0) {
-        this.matchfixtures = res["data"];
-        console.log(this.matchfixtures);
         this.matchfixtures = res['data']
         let dateObj = {}
         this.matchfixtures.map((data) => {
@@ -109,6 +112,11 @@ export class CricketFixturesViewComponent implements OnInit {
         })
         this.fixturesdata = Object.keys(dateObj).map(day => ({ day, data: dateObj[day] }))
       }
+      else{
+          this.nofixtures = true
+      }
+    },(error)=>{
+        this.nofixtures = true
     });
   }
 

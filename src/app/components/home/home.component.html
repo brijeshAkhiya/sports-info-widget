@@ -68,8 +68,8 @@
             <ngb-tab title="Fixtures">
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                    <app-data-loader-widget *ngIf="!matchfixtures"></app-data-loader-widget>
-                    <app-no-data-widget *ngIf="matchfixtures?.length == 0"></app-no-data-widget>
+                    <app-data-loader-widget *ngIf="!matchfixtures || nofixturesdata"></app-data-loader-widget>
+                    <app-no-data-widget *ngIf="matchfixtures?.length == 0 || nofixturesdata"></app-no-data-widget>
                   <li *ngFor="let item of matchfixtures | slice:0:4"
                     (click)="matchDetail(item.match_id,item.competitors[0].name,item.competitors[1].name)">
                     <div class="title d-flex justify-content-between">
@@ -100,8 +100,8 @@
                 <div (click)="getMatchResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="matchresults.length != 0"></app-data-loader-widget>
-                <app-no-data-widget *ngIf="matchresults?.length == 0 || !matchresults"></app-no-data-widget>
+                <app-data-loader-widget *ngIf="!matchresults || isnodata"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="matchresults?.length == 0 || isnodata"></app-no-data-widget>
                 <ul class="common-list cricket-list">
                   <li *ngFor="let result of matchresults | slice:1:5"
                     (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">

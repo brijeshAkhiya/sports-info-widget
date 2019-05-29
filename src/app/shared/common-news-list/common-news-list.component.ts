@@ -65,7 +65,6 @@ export class CommonNewsListComponent implements OnInit {
 
   getRelatedPosts(data) {
     this.isdisplay = false;
-
     this.sportsService.getrelatedpost(data).subscribe(res => {
       if (res["data"]) {
         this.posts = res["data"];
@@ -79,11 +78,15 @@ export class CommonNewsListComponent implements OnInit {
     if (data) {
       this.isdisplay = false;
       this.sportsService.getwriterprofile(data).subscribe(res => {
-        if (res["data"]) {
+        if (res["data"]["posts"].posts) {
           this.posts = res["data"]["posts"].posts;
+          console.log(this.posts);
+          
           this.isdisplay = true;
         } else {
-          this.isdisplay = false;
+          console.log('no video posts');
+          
+          this.isdisplay = true;
         }
       });
     }
@@ -106,7 +109,7 @@ export class CommonNewsListComponent implements OnInit {
           this.posts = this.posts.concat(this.loadnewposts);
           this.isdisplay = true;
         } else {
-          this.isdisplay = false;
+          this.isdisplay = true;
         }
       });
     } else if(this.type == undefined){

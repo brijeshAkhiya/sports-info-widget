@@ -1,4 +1,6 @@
-  <app-data-loader-widget *ngIf="!isdisplay"></app-data-loader-widget>
+  <app-data-loader-widget *ngIf="!isdisplay && type == 'any' && type == 'undefined'"></app-data-loader-widget>
+  <app-data-loader-widget *ngIf="!isdisplay && type != 'any' && type != 'undefined'"></app-data-loader-widget>
+
   <!-- <app-no-data-widget *ngIf="!posts || posts?.length == 0"></app-no-data-widget> -->
   <div class="common-news-list">
     <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
