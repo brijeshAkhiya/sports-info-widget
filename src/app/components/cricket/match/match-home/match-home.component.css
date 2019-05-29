@@ -11,6 +11,7 @@
 .venue-info p                                   { margin: 16px 0px 0px 8px; font-size: 18px; line-height: 23px; font-weight: 500;}
 .venue-info p span                              { margin-right: 8px; color: #A3A3A3; font-weight: 400; }
 agm-map                                         { height: 300px; }
+
 /* -------- Scorecard Section ------- */
 .common-table                                   { margin-bottom: 24px;}
 .common-table:last-child                        { margin-bottom: 0px;}

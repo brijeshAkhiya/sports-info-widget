@@ -9,7 +9,7 @@
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p><b>{{slide.season_name}}</b></p>
+                  <p><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
                 <div *ngIf="slide?.competitors?.home?.show_first == true">
@@ -50,7 +50,7 @@
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p><b>{{slide.season_name}}</b></p>
+                  <p><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
                 <div class="match-info d-flex justify-content-between align-items-center">

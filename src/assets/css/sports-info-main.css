@@ -199,6 +199,12 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .filled-tabs > .nav-tabs .nav-item:last-child .nav-link     { border: none; border-radius: 0px 4px 4px 0px;}
 .filled-tabs > .nav-tabs .nav-link.active       { background: #fff; color: #ED1A33; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); }
 
+/* -------- Scorecard Tab ------- */
+.filled-tabs.scorecard-tab > .nav-tabs .nav-link            { height: 100%; display: flex; justify-content: center; -webkit-justify-content: center; align-items: center; -webkit-align-items: center; }
+.filled-tabs.test-match > .nav-tabs .nav-link               { font-size: 16px; line-height: 22px; }
+.scorecard-tab .test-inng                                   { display: block; }
+.scorecard-tab > .nav-tabs .nav-link.active .test-inng      { color: #292929; }
+
 /* -------- Writer Tab ------- */
 .common-tabs.writer-tab > .nav-tabs             { margin: -31px 0px 24px 192px;}
 
@@ -336,6 +342,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .common-stories-widget,
     .common-widget                      { margin: 24px 0px;}
     app-custom-ads-widget:first-child   { margin-top: 24px; }
+/* -------- Scorecard Tab ------- */
+    .filled-tabs.test-match > .nav-tabs .nav-link            { font-size: 15px; line-height: 21px; }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -453,6 +461,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .common-tabs.black-filled > .nav-tabs         { padding-top: 10px;}
 /* -------- Filled Tab ------- */
     .filled-tabs > .nav-tabs .nav-link          { padding: 11px 11px 10px; font-size: 14px; line-height: 18px;}
+/* -------- Scorecard Tab ------- */
+    .filled-tabs.test-match > .nav-tabs .nav-link            { font-size: 12px; line-height: 16px; }
 /* -------- Writer Tab ------- */
     .common-tabs.writer-tab > .nav-tabs         { margin: -31px 0px 24px 0px;}
 /* -------- Table Style ------- */

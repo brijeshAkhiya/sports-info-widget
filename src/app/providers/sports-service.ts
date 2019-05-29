@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Observable } from "rxjs";
 import { map, publishReplay, refCount } from "rxjs/operators";
-import { Socket } from "ngx-socket-io";
+import * as io from 'socket.io-client';
 
 export interface Config {
   componentType: string;
@@ -14,7 +14,7 @@ export interface Config {
 export class SportsService {
   configs: Observable<any>;
   currentseries: Observable<any>;
-  constructor(public http: HttpClient, private socket: Socket) {}
+  constructor(public http: HttpClient) {}
 
   //<----home page services starts -------->
 
@@ -326,6 +326,11 @@ export class SportsService {
     return this.http.get(
       environment.apiUrl + environment.version + `/cms/${sKey}`, {headers:headers,responseType:'text'}
     );
+  }
+
+  connect(){
+    return io(environment.socket.baseUrl)
+    
   }
 
 

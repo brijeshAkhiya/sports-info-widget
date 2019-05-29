@@ -24,7 +24,7 @@
 .sticky-social-list button:hover { opacity: 1; filter: grayscale(0%); -webkit-filter: grayscale(0%);}
 .blog-content h2,
 .blog-content h3,
-.blog-content h4            { margin: 0px 0px 8px; font-size: 20px; line-height: 25px; font-family: 'IBM Plex Sans', sans-serif; }
+.blog-content h4            { margin: 0px 0px 8px; font-size: 20px; line-height: 25px; font-family: 'IBM Plex Sans', sans-serif; text-transform: unset; }
 .blog-content p             { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; }
 .blog-content p:last-child  { margin: 0px; }
 .blog-content a             { color: #ED1A33; text-decoration: underline; }
