@@ -31,7 +31,6 @@ const childRoutes: Routes = [
                 path: 'fixtures',
                 component: CricketFixturesComponent
             },
-           
             {
                 path: 'tournament/:id/:slug',
                 component: TournamentCricketComponent,

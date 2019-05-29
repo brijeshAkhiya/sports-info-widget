@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
   smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
   nofixturesdata: boolean;
+  isnodata: boolean;
 
   constructor(
     private renderer2: Renderer2,
@@ -144,6 +145,7 @@ export class HomeComponent implements OnInit {
       .subscribe(res => {
         if (res["data"].length != 0) {
           this.matchresults = res["data"];
+          this.isnodata = false
           //manipulate received data array
           this.matchresults = this.matchresults.map(data => {
             let obj = {};
@@ -167,7 +169,12 @@ export class HomeComponent implements OnInit {
             }
           });
         } else {
+          this.isnodata = true
           // this.getMatchResults();
+        }
+      },(error)=>{
+        if(error){
+          this.isnodata = true
         }
       });
   }
@@ -177,9 +184,10 @@ export class HomeComponent implements OnInit {
     this.sportsService.getmatchfixtures().subscribe(res => {
       if (res["data"]) {
         this.matchfixtures = res["data"];
+        this.nofixturesdata = false
       }
     },(error)=>{
-      if(error['error'].status = 400){
+      if(error){
         this.nofixturesdata = true
       }
     });

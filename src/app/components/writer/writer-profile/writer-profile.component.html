@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="writer-profile d-flex">
-          <img *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start" [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']">
+          <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start" [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']" [defaultImage]="defaultwriterimg"></div>
           <div class="writer-info rounded-box common-shadow d-flex flex-column">
             <div>
               <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>

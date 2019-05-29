@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SportsService } from "../../providers/sports-service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-flash-commentary",
@@ -22,6 +23,7 @@ export class FlashCommentaryComponent implements OnInit {
     this.socket.on("connect", res => {
       this.reqFetchRooms();
     });
+    this.onNewScore().subscribe(res => {});
   }
 
   //request fetch rooms/matches
@@ -48,24 +50,30 @@ export class FlashCommentaryComponent implements OnInit {
     this.teamsname = teams.split("vs");
     this.socket.emit("reqJoinRoom", matchid, (error, res) => {
       if (res) {
-        console.log("reqjoin::", res);
         this.isshow = true;
         this.isapply = false;
-        this.listenEventroom("echoEvent");
+        this.onNewScore();
       }
     });
   }
 
   //listen event from particular match
-  listenEventroom(echoEvent) {
-    this.socket.on("echoEvent", res => {
-      if (this.flashvalue) {
+
+  public onNewScore(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.socket.on("echoEvent", (data: any) => {
+        observer.next(data);
+        if (this.flashvalue) {
         this.isnewflashvalue = false;
-        this.isnewflashvalue = true;
-        this.flashvalue = res;
-      }
-      this.isnewflashvalue = true;
-      this.flashvalue = res;
+        this.flashvalue = data.data;
+        setTimeout(() => {
+          this.isnewflashvalue = true;
+        }, 100);
+        } else {
+          this.isnewflashvalue = true;
+          this.flashvalue = data.data;
+        }
+      });
     });
   }
 }

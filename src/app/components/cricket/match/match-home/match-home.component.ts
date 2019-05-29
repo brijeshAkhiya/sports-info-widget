@@ -20,7 +20,7 @@ export class MatchHomeComponent implements OnInit {
   team1id: any;
   team2id: any;
   nextmatches: { day: string; data: any }[];
-  lastmatches: any;
+  lastmatches = [];
   matchesresultdata: any;
   venuedetails: any;
   manofthematch: any;
@@ -57,7 +57,7 @@ export class MatchHomeComponent implements OnInit {
   competitor: any;
   closeofCommentry: any;
   stylepercentage:any;
-
+  isshow:boolean;
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -78,9 +78,11 @@ export class MatchHomeComponent implements OnInit {
 
   //get matchtimeline
   getMatchTimeline() {
+    this.isshow = true
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       res => {
         if (res["data"]) {
+          this.isshow = false
           this.data = res["data"];
           this.initMatch();
 
@@ -288,6 +290,7 @@ export class MatchHomeComponent implements OnInit {
       },
       error => {
         if (error["error"].status == 400 || error["error"].status == 403) {
+          this.isshow = false
           this.router.navigate(["/page-not-found"]);
         }
       }
@@ -347,9 +350,12 @@ export class MatchHomeComponent implements OnInit {
 
           //map array for last matches
 
-          this.lastmatches = res["data"].last_meetings;
-          console.log("last meeting", this.lastmatches);
-
+          // this.lastmatches = res["data"].last_meetings;
+          res['data'].last_meetings.map((data)=>{
+            if(data.match_status && data.match_status == 'ended'){
+                this.lastmatches.push(data)
+            }
+          })
           this.lastmatches = this.lastmatches.map(data => {
             let obj = {};
             let team_arr = data["competitors"];

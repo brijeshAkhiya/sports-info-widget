@@ -97,9 +97,9 @@
     .blog-banner video              { height: auto; width: 86%; }
     .blog-banner .author-info p     { font-size: 13px; line-height: 18px; }
 /* -------- Article Content Section ------- */
-    .blog-content-section .blog-inner   { flex-direction: column; -webkit-flex-direction: column; }
+    .blog-content-section .blog-inner   { flex-direction: column-reverse; -webkit-flex-direction: column-reverse; }
     .social-block                       { width: 100%; flex-shrink: 0; -webkit-flex-shrink: 0; }
-    .sticky-social-list                 { text-align: center; }
+    .sticky-social-list                 { margin: 16px 0px 0px; text-align: center; }
     .sticky-social-list li              { display: inline-block; }
     .sticky-social-list button          { margin: 0px 8px 8px; }
     .blog-content p                     { margin-bottom: 16px; font-size: 14px; line-height: 22px; }

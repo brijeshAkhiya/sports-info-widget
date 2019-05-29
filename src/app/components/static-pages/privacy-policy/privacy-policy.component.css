@@ -1,8 +1,11 @@
-.common-section { background: #fff; }
-h5              { font-family: 'IBM Plex Sans', sans-serif;  }
-p,ul            { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; }
-p:last-child,
-ul:last-child   { margin-bottom: 0px; }
-ul              { padding-left: 48px; }
-ul li           { position: relative; }
-ul li::before   { content: ""; position: absolute; display: block; width: 8px; height: 8px; left: -24px; top: 10px; background: #3D3D3D; border-radius: 50%; }
+.privacy-policy-section .common-section { background: #fff; }
+.privacy-policy-section h2,
+.privacy-policy-section h3,
+.privacy-policy-section h4,
+.privacy-policy-section h5              { margin: 0px; font-size: 20px; line-height: 28px; font-family: 'IBM Plex Sans', sans-serif;  }
+.privacy-policy-section p,ul            { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; }
+.privacy-policy-section p:last-child,
+.privacy-policy-section ul:last-child   { margin-bottom: 0px; }
+.privacy-policy-section ul              { padding-left: 48px; }
+.privacy-policy-section ul li           { position: relative; }
+.privacy-policy-section ul li::before   { content: ""; position: absolute; display: block; width: 8px; height: 8px; left: -24px; top: 10px; background: #3D3D3D; border-radius: 50%; }

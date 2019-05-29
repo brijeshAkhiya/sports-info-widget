@@ -1,5 +1,5 @@
 .team-about-head .team-logo                 { width: 208px; padding: 14px; background: #fff; flex-shrink: 0; -webkit-flex-shrink: 0; }
-.team-about-head .team-logo img             { width: 100%; }
+.team-about-head .team-logo .team-logo-img  { padding-top: 100%; background: no-repeat center center / cover; }
 .team-about-head .team-info                 { margin-left: 24px; padding: 32px; background: #fff; flex-grow: 1; -webkit-flex-grow: 1; }
 .team-about-head .team-info h5              { margin-bottom: 32px; font-weight: 500; font-family: 'IBM Plex Sans', sans-serif;}
 .team-about-head .team-info h5:last-child   { margin-bottom: 0px; }
