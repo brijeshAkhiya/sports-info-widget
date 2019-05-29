@@ -737,7 +737,7 @@ export class MatchHomeComponent implements OnInit {
     console.log("getLiveUpdate");
     this.interval =  setInterval(() => { 
       classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
-        res = res.result;
+        // res = res.result;
         // If no live coverage then no need to call API again
         if(typeof res.data.coverage_info != 'undefined' && res.data.coverage_info.live_coverage == false){
           this.clearTimeInterval();
