@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../../providers/sports-service";
 import * as moment from "moment";
-import { ReturnStatement } from "@angular/compiler";
 
 @Component({
   selector: "app-match-home",
@@ -66,8 +65,6 @@ export class MatchHomeComponent implements OnInit {
     console.log("constructor");
     this.matchid = atob(this.activatedroute.snapshot.params.id);
     this.activatedroute.params.subscribe(params => {
-      
-      this.initData();
 
       this.matchid = atob(params.id);
       if (this.matchid) {
@@ -414,22 +411,6 @@ export class MatchHomeComponent implements OnInit {
     });
   }
 
-  initData(){
-    console.log("initdata");
-    
-    this.data = "";
-    this.timeline;
-    this.statistics;
-    this.inningWiseCommentry;
-    this.showCommetry;
-    this.interval;
-    this.timeout;
-    this.LiveOverSummery;
-    this.ballerList;
-    this.competitor;
-    this.closeofCommentry;
-  }
-
   /** Init Match */
   initMatch(){
     if(this.data.sport_event_status.status == 'closed' || this.data.sport_event_status.status == 'ended'){
@@ -443,9 +424,20 @@ export class MatchHomeComponent implements OnInit {
     this.getScores()
   }
 
+  /** Check if there is no commentry from API */
+  checkCommentry(){
+    return this.data.timeline.filter((timeline) => {return timeline.commentaries});
+  }
+
   /** Get all Commentries inning wise - support for more than 2 innings */
   getCommentries() {
     console.log("getCommentries");
+
+    // check if commentry exists
+    if(this.checkCommentry().length <= 0){
+      this.showCommetry = false;
+      return false;
+    }
 
     // loop of innings from statistics
     this.data.statistics.innings.forEach((innings, index) => {
