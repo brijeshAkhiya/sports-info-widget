@@ -1,4 +1,4 @@
-  <app-match-counter  *ngIf="data.sport_event_status.status == 'not_started'" [scheduled]="data.sport_event.scheduled"></app-match-counter>
+<app-match-counter  *ngIf="data.sport_event_status.status == 'not_started'" [scheduled]="data.sport_event.scheduled"></app-match-counter>
 
   <!-- <div *ngIf="!data.timeline && data.sport_event_status.status == 'closed'">
   No commentary data available for this match!
@@ -77,16 +77,28 @@
     </div>
   </ng-container>
 
-   <!-- START - COMMENTRY For Closed Match -->
+   <!-- START - COMMENTRY -->
   <ng-container *ngIf="commentry" >
       <ng-container *ngFor="let temp of commentry" >
         <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries" [index]="i"></app-commentry>
       </ng-container>
   </ng-container>
 
+  <!-- No commentary data available for this match! -->
   <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry" >
-      <!-- No commentary data available for this match! -->
       <app-no-data-widget></app-no-data-widget>
   </ng-container>
-  <!-- END - COMMENTRY For Closed Match -->
+  <!-- END - COMMENTRY -->
+
+  <!--If Match is cancelled -->
+  <ng-container *ngIf="data.sport_event_status.status == 'cancelled'" >
+      Match abandoned
+      <app-no-data-widget></app-no-data-widget>
+  </ng-container>
+
+  <!--If Match is cancelled -->
+  <ng-container *ngIf="data.coverage_info != undefined && data.coverage_info.live_coverage == false" >
+      'Ooops ! Sorry we don't provide live coverage to this match' 
+      <app-no-data-widget></app-no-data-widget>
+  </ng-container>
 </div>
