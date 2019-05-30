@@ -84,7 +84,10 @@ export class FlashCommentaryComponent implements OnInit {
     return new Observable<any>(observer => {
       this.socket.on("newCommentry", (data: any) => {
         observer.next(data);
-        this.livematches = this.livematches.concat(data);
+        console.log('newcommw',data);
+        
+        this.livematches = []
+        this.livematches = data
       });
     });
   }

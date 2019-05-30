@@ -16,7 +16,7 @@
 /* -------- Navbar CSS ------- */
 nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase; position: sticky; top: 0; z-index: 1111; }
 nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block; background: #fff; position: relative; }
-nav .navbar-brand:before        { content: ""; position: absolute; width: 52px; height: 100%; right: -50px; top: 0px; background: url(../../../assets/images/logo-shape.svg) no-repeat center center / 100% 100%; }
+nav .navbar-brand:before        { content: ""; position: absolute; width: 52px; height: calc(100% + 1px); right: -50px; top: 0px; background: url(../../../assets/images/logo-shape.svg) no-repeat center center / 100% 100%; }
 nav .navbar-brand img           { position: relative; z-index: 1;}
 .navbar-nav                     { position: relative; } 
 .navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; white-space: nowrap; }
