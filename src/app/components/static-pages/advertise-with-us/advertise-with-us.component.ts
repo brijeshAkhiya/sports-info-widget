@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { SportsService } from "../../../providers/sports-service";
 
 import {
@@ -13,17 +13,21 @@ import {
 @Component({
   selector: "app-advertise-with-us",
   templateUrl: "./advertise-with-us.component.html",
-  styleUrls: ["./advertise-with-us.component.css"]
+  styleUrls: ["./advertise-with-us.component.css"],
+  encapsulation:ViewEncapsulation.None
+
 })
 export class AdvertiseWithUsComponent implements OnInit {
   advertiseForm: FormGroup;
   submitted: boolean;
   btnDisable: boolean;
   submitsuccess: boolean = false;
+  cmsdata: string;
   constructor(private _formBuilder: FormBuilder,private sportsService: SportsService,) {}
 
   ngOnInit() {
     this.fnInitAdvertiseForm();
+    this.getCMSContent();
   }
 
   fnInitAdvertiseForm() {
@@ -69,6 +73,15 @@ export class AdvertiseWithUsComponent implements OnInit {
          }
     },100);
     this.submitsuccess = false   
+  }
+
+  getCMSContent(){
+    let sKey = 'Advertise With Us'
+    this.sportsService.getcmscontent(sKey).subscribe((res)=>{
+      if(res){
+        this.cmsdata = res
+      }
+    })
   }
 
 }

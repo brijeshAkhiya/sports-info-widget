@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { SportsService } from '../../providers/sports-service';
-import { SlugifyPipe } from '../../pipes/slugpipe';
+import { SportsService } from '../../../providers/sports-service';
+import { SlugifyPipe } from '../../../pipes/slugpipe';
 
 @Component({
   selector: 'app-cricket-menu',

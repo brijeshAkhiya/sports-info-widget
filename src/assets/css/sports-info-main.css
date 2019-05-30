@@ -129,7 +129,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .row.row-size12             { margin: 0px -12px; }
 .row-size12 [class*="col-"] { padding: 0px 12px; }
 .common-section             { padding: 48px 0px; }
-.sticky-sidebar             { position: sticky; top: 0px; }
+.sticky-sidebar             { position: sticky; top: 100px; }
 
 /* -------- Title / Button CSS ------- */
 .common-title-btn                       { margin-bottom: 24px; }

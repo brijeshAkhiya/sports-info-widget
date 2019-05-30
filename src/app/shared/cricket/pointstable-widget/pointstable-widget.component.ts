@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SportsService } from '../../providers/sports-service';
+import { SportsService } from '../../../providers/sports-service';
 @Component({
   selector: 'app-pointstable-widget',
   templateUrl: './pointstable-widget.component.html',

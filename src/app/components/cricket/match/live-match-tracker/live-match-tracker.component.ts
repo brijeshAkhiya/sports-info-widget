@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, AfterContentInit, ViewEncapsulation } from '@angular/core';
 declare var document: any;
 declare var window: any;
 
 @Component({
   selector: 'app-live-match-tracker',
   templateUrl: './live-match-tracker.component.html',
-  styleUrls: ['./live-match-tracker.component.css']
+  styleUrls: ['./live-match-tracker.component.css'],
+  encapsulation:ViewEncapsulation.None
 })
 
 // interface Scripts {

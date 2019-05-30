@@ -73,28 +73,24 @@ export class MatchHomeComponent implements OnInit {
       this.matchid = atob(params.id);
       if (this.matchid) {
         this.getMatchTimeline();
+        this.getmatchteamlineup();
       }
     });
   }
 
   ngOnInit() {
     console.log("ngOnInit");
-    
-    // this.getMatchTimeline();
   }
 
   //get matchtimeline
   getMatchTimeline() {
     this.isshow = true
-    console.log("getMatchTimeline");
-    
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       res => {
         if (res["data"]) {
           this.isshow = false
           this.data = res["data"];
           this.initMatch();
-
           this.matchdata = res["data"];
           console.log("data", res["data"]);
           this.matchstatus = res["data"]["sport_event_status"].status;
@@ -102,13 +98,11 @@ export class MatchHomeComponent implements OnInit {
           this.venuedetails = res["data"]["sport_event"]["venue"];
           this.team1id = res["data"]["sport_event"]["competitors"][0].id;
           this.team2id = res["data"]["sport_event"]["competitors"][1].id;
-
           if (this.team1id && this.team2id) {
             console.log("teamvstaem");
-
             this.getTeamvsTeamdata(); //to get team vs team data
           }
-
+          //get venue details
           if (this.venuedetails) {
             if (this.venuedetails.map_coordinates) {
               let cordinates = this.venuedetails.map_coordinates.split(",");
@@ -156,22 +150,8 @@ export class MatchHomeComponent implements OnInit {
           });
 
           if (this.matchstatus == "not_started") {
+            console.log('status::',this.matchstatus);
             this.getMatchProbability();
-            // let date = this.sportevent.scheduled;
-            // setInterval(() => {
-            //   let enddate = new Date(date).getTime();
-            //   let now = new Date().getTime();
-            //   let time = enddate - now;
-            //   if (time >= 0) {
-            //     this.hours = Math.floor(
-            //       (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            //     );
-            //     this.minutes = Math.floor(
-            //       (time % (1000 * 60 * 60)) / (1000 * 60)
-            //     );
-            //     this.seconds = Math.floor((time % (1000 * 60)) / 1000);
-            //   }
-            // }, 1000);
           } else if (
             this.matchstatus == "closed" ||
             this.matchstatus == "live"
@@ -205,68 +185,10 @@ export class MatchHomeComponent implements OnInit {
             this.objnew3 = {
               ...objBowling,
               ...objBatting
-            };
-
-            console.log('obj3:::',this.objnew3);
+            };    
             
-            //<------------old logic for scorecard ----------->>>>>>
-            // this.scorecards.map(data => {
-            //   if (data.batting_team === this.teams[0].data[0].id) {
-            //     this.battingteam1.push(data);
-            //   } else if (data.batting_team === this.teams[1].data[0].id) {
-            //     this.battingteam2.push(data);
-            //   }
-            //   if (data.bowling_team == this.teams[0].data[0].id) {
-            //     this.bowlingteam1.push(data);
-            //   } else if (data.bowling_team == this.teams[1].data[0].id) {
-            //     this.bowlingteam2.push(data);
-            //   }
-            // });
-
-            // console.log("scorecards", this.scorecards);
-            // this.battingteam1 = this.battingteam1[0]["teams"][0]["statistics"][
-            //   "batting"
-            // ];
-            // console.log("battin1", this.battingteam1);
-
-            // this.battingteam2 = this.battingteam2[0]["teams"][0]["statistics"][
-            //   "batting"
-            // ];
-            // this.bowlingteam1 = this.bowlingteam1[0]["teams"][1]["statistics"][
-            //   "bowling"
-            // ];
-            // this.bowlingteam2 = this.bowlingteam2[0]["teams"][1]["statistics"][
-            //   "bowling"
-            // ];
-
-            // let arrnew = [];
-
-            // arrnew = this.battingteam2["players"];
-            // arrnew.map(single => {
-            //   if (!this.objnew[single.id]) {
-            //     this.objnew[single.id] = [];
-            //   }
-            // });
-            // arrnew.map(data => {
-            //   this.objnew[data.id].push(data);
-            // });
-            // console.log("objnew", this.objnew);
-
-            //map array for team 2 bowlers name
-
-            // let playerarr = [];
-            // playerarr = this.battingteam1["players"];
-            // playerarr.map(single => {
-            //   if (!this.objnew2[single.id]) {
-            //     this.objnew2[single.id] = [];
-            //   }
-            // });
-            // playerarr.map(data => {
-            //   this.objnew2[data.id].push(data);
-            // });
-
-            //<<<<<----------old scorecard logic over ------->>>>>>
-
+            console.log('obj3::',this.objnew3);
+            
             //calculate fall of wickets data
             let fallofwircket1 = [];
             fallofwircket1 = this.matchdata["timeline"];
@@ -768,7 +690,7 @@ export class MatchHomeComponent implements OnInit {
       remainingTime.minutes,
       remainingTime.seconds
     );
-    remainingMiliSec = remainingMiliSec - this.miliseconds(5, 30, 0); // Start timer before 30 min of match start
+    remainingMiliSec = remainingMiliSec - this.miliseconds(0, 40, 0); // Start timer before 30 min of match start
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
@@ -822,3 +744,81 @@ export class MatchHomeComponent implements OnInit {
     this.clearTimeInterval();
   }
 }
+
+
+//<------------old logic for scorecard ----------->>>>>>
+            // this.scorecards.map(data => {
+            //   if (data.batting_team === this.teams[0].data[0].id) {
+            //     this.battingteam1.push(data);
+            //   } else if (data.batting_team === this.teams[1].data[0].id) {
+            //     this.battingteam2.push(data);
+            //   }
+            //   if (data.bowling_team == this.teams[0].data[0].id) {
+            //     this.bowlingteam1.push(data);
+            //   } else if (data.bowling_team == this.teams[1].data[0].id) {
+            //     this.bowlingteam2.push(data);
+            //   }
+            // });
+
+            // console.log("scorecards", this.scorecards);
+            // this.battingteam1 = this.battingteam1[0]["teams"][0]["statistics"][
+            //   "batting"
+            // ];
+            // console.log("battin1", this.battingteam1);
+
+            // this.battingteam2 = this.battingteam2[0]["teams"][0]["statistics"][
+            //   "batting"
+            // ];
+            // this.bowlingteam1 = this.bowlingteam1[0]["teams"][1]["statistics"][
+            //   "bowling"
+            // ];
+            // this.bowlingteam2 = this.bowlingteam2[0]["teams"][1]["statistics"][
+            //   "bowling"
+            // ];
+
+            // let arrnew = [];
+
+            // arrnew = this.battingteam2["players"];
+            // arrnew.map(single => {
+            //   if (!this.objnew[single.id]) {
+            //     this.objnew[single.id] = [];
+            //   }
+            // });
+            // arrnew.map(data => {
+            //   this.objnew[data.id].push(data);
+            // });
+            // console.log("objnew", this.objnew);
+
+            //map array for team 2 bowlers name
+
+            // let playerarr = [];
+            // playerarr = this.battingteam1["players"];
+            // playerarr.map(single => {
+            //   if (!this.objnew2[single.id]) {
+            //     this.objnew2[single.id] = [];
+            //   }
+            // });
+            // playerarr.map(data => {
+            //   this.objnew2[data.id].push(data);
+            // });
+
+            //<<<<<----------old scorecard logic over ------->>>>>>
+
+
+            //old logic for timer 
+
+             // let date = this.sportevent.scheduled;
+            // setInterval(() => {
+            //   let enddate = new Date(date).getTime();
+            //   let now = new Date().getTime();
+            //   let time = enddate - now;
+            //   if (time >= 0) {
+            //     this.hours = Math.floor(
+            //       (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            //     );
+            //     this.minutes = Math.floor(
+            //       (time % (1000 * 60 * 60)) / (1000 * 60)
+            //     );
+            //     this.seconds = Math.floor((time % (1000 * 60)) / 1000);
+            //   }
+            // }, 1000);

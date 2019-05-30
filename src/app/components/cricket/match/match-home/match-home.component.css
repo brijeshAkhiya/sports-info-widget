@@ -32,6 +32,14 @@ agm-map                                         { height: 300px; }
 .bowler-table.common-table .table tr th:first-child,
 .bowler-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
 
+/* -------- Match Information Section ------- */
+.match-info-table tr td                 { width: 50%; padding-left: 16px; text-align: left; }
+.match-info-table tr td:last-child      { border-left: 1px solid #EBEBEB; }
+.match-info-table tr td p               { margin-bottom: 8px;}
+.match-info-table tr td p:last-child    { margin-bottom: 0px;}
+.match-info-title                       { margin: 32px 0px 16px; }
+.match-info-title img                   { margin-right: 8px; height: 40px; border-radius: 2px; }
+.match-info-title h4                    { margin: 0px; }
 
 /***** Responsive CSS Start ******/
 

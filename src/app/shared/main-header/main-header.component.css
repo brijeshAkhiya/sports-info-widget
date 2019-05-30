@@ -9,8 +9,8 @@
 .header-live-slider .slider-item .match-winner::after   { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background: url(../../../assets/images/winner-cup.svg); vertical-align: middle; }
 .header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; width: 20px; display: inline-block; }
 .header-live-slider .slider-item .result-line           { margin: 0px; font-size: 12px; line-height: 18px; }
-.header-live-slider .slider-item .live-result           { padding-left: 10px;}
-.header-live-slider .slider-item .live-result:before    { content: ""; margin: 6px 4px 0px -10px; width: 6px; height: 6px; background: #6DD400; display: inline-block; vertical-align: top; border-radius: 50%; }
+.header-live-slider .slider-item .live-result           { padding-left: 10px; }
+.header-live-slider .slider-item .live-result:before    { content: ""; margin: 6px 4px 0px -10px; width: 6px; height: 6px; background: #ED1A33; display: inline-block; vertical-align: top; border-radius: 50%; }
 
 /* -------- Navbar CSS ------- */
 nav.navbar                      { padding: 0px; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase; position: sticky; top: 0; z-index: 1111; }
