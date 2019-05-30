@@ -47,5 +47,6 @@
 @media (max-width: 575px) {
 /* -------- Match Title List ------- */
     .match-main-title .player-pic               { width: 66px; }
+    .match-main-title .match-update             { text-align: left; }
 }    
     
