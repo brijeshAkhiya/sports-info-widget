@@ -439,6 +439,26 @@ export class MatchHomeComponent implements OnInit {
     return this.data.timeline.filter((timeline) => {return timeline.commentaries});
   }
 
+  getCurrentOverSummery(){
+    
+    let currentInning = this.inningWiseCommentry.filter((innings) => { return innings.inning == this.data.sport_event_status.current_inning });
+    let currentOver = currentInning[0].commentry.filter((overData)=> { return overData.overs == Math.floor(this.data.sport_event_status.display_overs) + 1})
+    currentOver[0].data.forEach(element => {
+      if(element.batting_params){
+        this.LiveOverSummery.unshift({
+          run: (typeof element.batting_params != 'undefined') ? element.batting_params.runs_scored : 0,
+          wickets: (element.type == 'wicket') ? 'W' : '' ,
+          ball : element.ball_number,
+          extra_runs: (typeof element.bowling_params.extra_runs_conceded != 'undefined')  
+            ? element.bowling_params.extra_runs_type
+            : 0
+        });
+      }
+    });
+    console.log(this.LiveOverSummery);
+    
+  }
+
   /** Get all Commentries inning wise - support for more than 2 innings */
   getCommentries() {
     // console.log("getCommentries");
@@ -552,7 +572,7 @@ export class MatchHomeComponent implements OnInit {
       ].commentry.reverse();
     });
 
-    
+    this.getCurrentOverSummery();
     // If there is no any commentry - Do not show commentry
     if (this.inningWiseCommentry.filter(comm => comm.length > 0)) {
       this.showCommetry = true;
@@ -619,12 +639,13 @@ export class MatchHomeComponent implements OnInit {
         ].commentry.findIndex(overs => overs.overs == timeline.over_number);
         // console.log("currentOverIndex", currentOverIndex);
 
-        //
+        // current Over summery
         let thisBallStats = {
-          run: timelineStats.runs,
-          wickets: timelineStats.wickets,
-          wide: timeline.bowling_params
-            ? timeline.bowling_params.extra_runs_conceded
+          run: (typeof timeline.batting_params != 'undefined') ? timeline.batting_params.runs_scored : 0,
+          wickets: (timeline.type == 'wicket') ? 'W' : '' ,
+          ball : timeline.ball_number,
+          extra_runs: (typeof timeline.bowling_params.extra_runs_conceded != 'undefined')  
+            ? timeline.bowling_params.extra_runs_type
             : 0
         };
         // Check if current over is already exists in innings Array
@@ -649,7 +670,7 @@ export class MatchHomeComponent implements OnInit {
           temp.unshift(timeline);
           let currentStats = timelineStats;
           this.LiveOverSummery = [];
-          this.LiveOverSummery.push({ thisBallStats });
+          this.LiveOverSummery.push(thisBallStats);
 
           this.inningWiseCommentry[currentInningIndex].commentry.unshift({
             overs: timeline.over_number,
@@ -657,7 +678,6 @@ export class MatchHomeComponent implements OnInit {
             stats: currentStats
           });
         }
-        // console.log(this.LiveOverSummery);
       } else {
         // TODO - Create array of current Innings
         // console.log("else");
@@ -675,9 +695,15 @@ export class MatchHomeComponent implements OnInit {
           temp.unshift(timeline)
           this.inningWiseCommentry[0].commentry[0] = {'data' : temp};
         }else{
+          let isExist = false;
           let lengthComm = this.inningWiseCommentry[0].commentry.length - 1;
-          let isExist = this.inningWiseCommentry[0].commentry[lengthComm].data.filter((comment) => {return comment.id == timeline.id})
-          if(isExist.length <= 0)
+          this.inningWiseCommentry[0].commentry.forEach(element => {
+            element.data.forEach(ele => {
+              if(ele.id == timeline.id)
+                isExist = true;
+            });
+          });
+          if(!isExist)
             this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);
         }
       }
@@ -689,6 +715,11 @@ export class MatchHomeComponent implements OnInit {
     });
     console.log("************************this.inningWiseCommentry************************");
     console.log(this.inningWiseCommentry);
+    console.log(this.LiveOverSummery);
+
+
+    if (this.inningWiseCommentry.filter(comm => comm.length > 0)) 
+      this.showCommetry = true;
 
     // Stop live update if Match is ended
     if (this.data.sport_event_status.status == "ended") {
@@ -742,8 +773,9 @@ export class MatchHomeComponent implements OnInit {
   getLiveUpdate(classThis) {
     console.log("getLiveUpdate");
     this.interval =  setInterval(() => { 
+      //TEMP
       classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
-        // res = res.result;
+        // res = res.result; // TEMP
         // If no live coverage then no need to call API again
         if(typeof res.data.coverage_info != 'undefined' && res.data.coverage_info.live_coverage == false){
           this.clearTimeInterval();
@@ -756,7 +788,7 @@ export class MatchHomeComponent implements OnInit {
           this.getScores();
         }
       });
-    }, classThis.miliseconds(0,0,10));
+    }, classThis.miliseconds(0,0,15)); // TEMP
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
@@ -768,7 +800,7 @@ export class MatchHomeComponent implements OnInit {
       remainingTime.minutes,
       remainingTime.seconds
     );
-    remainingMiliSec = remainingMiliSec - this.miliseconds(5, 30, 0); // Start timer before 30 min of match start
+    remainingMiliSec = remainingMiliSec - this.miliseconds(0, 45, 0); // TEMP // Start timer before 30 min of match start
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
