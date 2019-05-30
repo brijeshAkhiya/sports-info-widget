@@ -24,6 +24,7 @@ export class FlashCommentaryComponent implements OnInit {
       this.reqFetchRooms();
     });
     this.onNewScore().subscribe(res => {});
+    this.onNewCommentary().subscribe(res => {});
   }
 
   //request fetch rooms/matches
@@ -64,15 +65,26 @@ export class FlashCommentaryComponent implements OnInit {
       this.socket.on("echoEvent", (data: any) => {
         observer.next(data);
         if (this.flashvalue) {
-        this.isnewflashvalue = false;
-        this.flashvalue = data.data;
-        setTimeout(() => {
-          this.isnewflashvalue = true;
-        }, 100);
+          this.isnewflashvalue = false;
+          this.flashvalue = data.data;
+          setTimeout(() => {
+            this.isnewflashvalue = true;
+          }, 100);
         } else {
           this.isnewflashvalue = true;
           this.flashvalue = data.data;
         }
+      });
+    });
+  }
+
+  //on change new commentary
+
+  public onNewCommentary(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.socket.on("newCommentry", (data: any) => {
+        observer.next(data);
+        this.livematches = this.livematches.concat(data);
       });
     });
   }

@@ -69,32 +69,27 @@ export class MatchHomeComponent implements OnInit {
 
     this.matchid = atob(this.activatedroute.snapshot.params.id);
     this.activatedroute.params.subscribe(params => {
-
       this.matchid = atob(params.id);
       if (this.matchid) {
         this.getMatchTimeline();
+        this.getmatchteamlineup();
       }
     });
   }
 
   ngOnInit() {
     console.log("ngOnInit");
-
-    // this.getMatchTimeline();
   }
 
   //get matchtimeline
   getMatchTimeline() {
-    this.isshow = true
-    console.log("getMatchTimeline");
-
+    this.isshow = true;
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       res => {
         if (res["data"]) {
-          this.isshow = false
+          this.isshow = false;
           this.data = res["data"];
           this.initMatch();
-
           this.matchdata = res["data"];
           console.log("data", res["data"]);
           this.matchstatus = res["data"]["sport_event_status"].status;
@@ -102,13 +97,11 @@ export class MatchHomeComponent implements OnInit {
           this.venuedetails = res["data"]["sport_event"]["venue"];
           this.team1id = res["data"]["sport_event"]["competitors"][0].id;
           this.team2id = res["data"]["sport_event"]["competitors"][1].id;
-
           if (this.team1id && this.team2id) {
             console.log("teamvstaem");
-
             this.getTeamvsTeamdata(); //to get team vs team data
           }
-
+          //get venue details
           if (this.venuedetails) {
             if (this.venuedetails.map_coordinates) {
               let cordinates = this.venuedetails.map_coordinates.split(",");
@@ -156,22 +149,8 @@ export class MatchHomeComponent implements OnInit {
           });
 
           if (this.matchstatus == "not_started") {
+            console.log("status::", this.matchstatus);
             this.getMatchProbability();
-            // let date = this.sportevent.scheduled;
-            // setInterval(() => {
-            //   let enddate = new Date(date).getTime();
-            //   let now = new Date().getTime();
-            //   let time = enddate - now;
-            //   if (time >= 0) {
-            //     this.hours = Math.floor(
-            //       (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            //     );
-            //     this.minutes = Math.floor(
-            //       (time % (1000 * 60 * 60)) / (1000 * 60)
-            //     );
-            //     this.seconds = Math.floor((time % (1000 * 60)) / 1000);
-            //   }
-            // }, 1000);
           } else if (
             this.matchstatus == "closed" ||
             this.matchstatus == "live"
@@ -181,91 +160,9 @@ export class MatchHomeComponent implements OnInit {
             this.scorecards = res["data"]["statistics"]["innings"];
             let objBatting = {};
             let objBowling = {};
+            this.getmatchteamlineup();
 
-            this.scorecards.map((data, key) => {
-              data["teams"][0]["statistics"]["batting"]["players"].map(
-                single => {
-                  if (!objBatting[single.id]) {
-                    objBatting[single.id] = [];
-                    objBatting[single.id].push(single);
-                  }
-                }
-              );
-              data["teams"][1]["statistics"]["bowling"]["players"].map(
-                single => {
-                  if (!objBowling[single.id]) {
-                    objBowling[single.id] = [];
-                    objBowling[single.id].push(single);
-                  }
-                }
-              );
-            });
-
-            //players name object
-            this.objnew3 = {
-              ...objBowling,
-              ...objBatting
-            };
-
-            console.log('obj3:::', this.objnew3);
-
-            //<------------old logic for scorecard ----------->>>>>>
-            // this.scorecards.map(data => {
-            //   if (data.batting_team === this.teams[0].data[0].id) {
-            //     this.battingteam1.push(data);
-            //   } else if (data.batting_team === this.teams[1].data[0].id) {
-            //     this.battingteam2.push(data);
-            //   }
-            //   if (data.bowling_team == this.teams[0].data[0].id) {
-            //     this.bowlingteam1.push(data);
-            //   } else if (data.bowling_team == this.teams[1].data[0].id) {
-            //     this.bowlingteam2.push(data);
-            //   }
-            // });
-
-            // console.log("scorecards", this.scorecards);
-            // this.battingteam1 = this.battingteam1[0]["teams"][0]["statistics"][
-            //   "batting"
-            // ];
-            // console.log("battin1", this.battingteam1);
-
-            // this.battingteam2 = this.battingteam2[0]["teams"][0]["statistics"][
-            //   "batting"
-            // ];
-            // this.bowlingteam1 = this.bowlingteam1[0]["teams"][1]["statistics"][
-            //   "bowling"
-            // ];
-            // this.bowlingteam2 = this.bowlingteam2[0]["teams"][1]["statistics"][
-            //   "bowling"
-            // ];
-
-            // let arrnew = [];
-
-            // arrnew = this.battingteam2["players"];
-            // arrnew.map(single => {
-            //   if (!this.objnew[single.id]) {
-            //     this.objnew[single.id] = [];
-            //   }
-            // });
-            // arrnew.map(data => {
-            //   this.objnew[data.id].push(data);
-            // });
-            // console.log("objnew", this.objnew);
-
-            //map array for team 2 bowlers name
-
-            // let playerarr = [];
-            // playerarr = this.battingteam1["players"];
-            // playerarr.map(single => {
-            //   if (!this.objnew2[single.id]) {
-            //     this.objnew2[single.id] = [];
-            //   }
-            // });
-            // playerarr.map(data => {
-            //   this.objnew2[data.id].push(data);
-            // });
-
-            //<<<<<----------old scorecard logic over ------->>>>>>
+            console.log("obj3::", this.objnew3);
 
             //calculate fall of wickets data
             let fallofwircket1 = [];
@@ -299,11 +196,31 @@ export class MatchHomeComponent implements OnInit {
       },
       error => {
         if (error["error"].status == 400 || error["error"].status == 403) {
-          this.isshow = false
+          this.isshow = false;
           this.router.navigate(["/page-not-found"]);
         }
       }
     );
+  }
+
+  //get match team line ups
+  getmatchteamlineup() {
+    if (this.matchid) {
+      this.sportsService.getmatchteamlineup(this.matchid).subscribe(res => {
+        if (res["data"]) {
+          let players = res["data"]["lineups"][0]["starting_lineup"].concat(
+            res["data"]["lineups"][1]["starting_lineup"]
+          );
+          players.map(single => {
+            if (!this.objnew3[single.id]) {
+              this.objnew3[single.id] = [];
+              this.objnew3[single.id].push(single);
+            }
+          });
+          console.log("teamsplayers:::", this.objnew3);
+        }
+      });
+    }
   }
 
   //get match probablities
@@ -360,11 +277,11 @@ export class MatchHomeComponent implements OnInit {
           //map array for last matches
 
           // this.lastmatches = res["data"].last_meetings;
-          res['data'].last_meetings.map((data) => {
-            if (data.match_status && data.match_status == 'ended') {
-              this.lastmatches.push(data)
+          res["data"].last_meetings.map(data => {
+            if (data.match_status && data.match_status == "ended") {
+              this.lastmatches.push(data);
             }
-          })
+          });
           this.lastmatches = this.lastmatches.map(data => {
             let obj = {};
             let team_arr = data["competitors"];
@@ -423,15 +340,18 @@ export class MatchHomeComponent implements OnInit {
 
   /** Init Match */
   initMatch() {
-    if (this.data.sport_event_status.status == 'closed' || this.data.sport_event_status.status == 'ended') {
-      this.getCommentries()
-    } else if (this.data.sport_event_status.status == 'not_started')
+    if (
+      this.data.sport_event_status.status == "closed" ||
+      this.data.sport_event_status.status == "ended"
+    ) {
+      this.getCommentries();
+    } else if (this.data.sport_event_status.status == "not_started")
       this.startLiveUpdateAfterTime();
-    else if (this.data.sport_event_status.status == 'live') {
+    else if (this.data.sport_event_status.status == "live") {
       this.getLiveUpdate(this);
       this.getCommentries();
     }
-    this.getScores()
+    this.getScores();
   }
 
   /** Check if there is no commentry from API */
@@ -482,9 +402,11 @@ export class MatchHomeComponent implements OnInit {
       // Get all the data for this inning
       let currentInningCommentry = this.data.timeline.filter((commentry) => commentry.inning == innings.number);
 
-      //for loop of overs_completd in inning 
-      if (typeof innings.overs == 'undefined' || innings.overs.length <= 0) {
 
+      //for loop of overs_completd in inning
+      if (typeof innings.overs == "undefined" || innings.overs.length <= 0) {
+        if (typeof this.inningWiseCommentry[0] == "undefined")
+          this.inningWiseCommentry[0] = { commentry: [] };
 
         if (typeof this.inningWiseCommentry[0] == 'undefined')
           this.inningWiseCommentry[0] = { 'commentry': [] };
@@ -638,7 +560,10 @@ export class MatchHomeComponent implements OnInit {
       // console.log("currentInningIndex", currentInningIndex);
 
       // Check if current inning is already exists in Array
-      if (currentInningIndex >= 0 && typeof timeline.over_number != 'undefined') {
+      if (
+        currentInningIndex >= 0 &&
+        typeof timeline.over_number != "undefined"
+      ) {
         // Find Index of current Over in current Inning
         let currentOverIndex = this.inningWiseCommentry[
           currentInningIndex
@@ -687,8 +612,8 @@ export class MatchHomeComponent implements OnInit {
       } else {
         // TODO - Create array of current Innings
         // console.log("else");
-        if (typeof this.inningWiseCommentry[0] == 'undefined')
-          this.inningWiseCommentry[0] = { 'commentry': [] };
+        if (typeof this.inningWiseCommentry[0] == "undefined")
+          this.inningWiseCommentry[0] = { commentry: [] };
 
         if (this.data.sport_event_status.current_inning)
           this.inningWiseCommentry[0].inning = this.data.sport_event_status.current_inning;
@@ -698,15 +623,14 @@ export class MatchHomeComponent implements OnInit {
 
         if (this.inningWiseCommentry[0].commentry.length <= 0) {
           let temp = [];
-          temp.unshift(timeline)
-          this.inningWiseCommentry[0].commentry[0] = { 'data': temp };
+          temp.unshift(timeline);
+          this.inningWiseCommentry[0].commentry[0] = { data: temp };
         } else {
           let isExist = false;
           let lengthComm = this.inningWiseCommentry[0].commentry.length - 1;
           this.inningWiseCommentry[0].commentry.forEach(element => {
             element.data.forEach(ele => {
-              if (ele.id == timeline.id)
-                isExist = true;
+              if (ele.id == timeline.id) isExist = true;
             });
           });
           if (!isExist)
@@ -719,10 +643,11 @@ export class MatchHomeComponent implements OnInit {
       // Get current batsman and ballers
       this.getCurrentPlayers()
     });
-    console.log("************************this.inningWiseCommentry************************");
+    console.log(
+      "************************this.inningWiseCommentry************************"
+    );
     console.log(this.inningWiseCommentry);
     console.log(this.LiveOverSummery);
-
 
     if (this.inningWiseCommentry.filter(comm => comm.length > 0))
       this.showCommetry = true;
@@ -780,20 +705,25 @@ export class MatchHomeComponent implements OnInit {
     console.log("getLiveUpdate");
     this.interval = setInterval(() => {
       //TEMP
-      classThis.sportsService.getmatchtimelineDetla(classThis.data.sport_event.id).subscribe(res => {
-        // res = res.result; // TEMP
-        // If no live coverage then no need to call API again
-        if (typeof res.data.coverage_info != 'undefined' && res.data.coverage_info.live_coverage == false) {
-          this.clearTimeInterval();
-        }
+      classThis.sportsService
+        .getmatchtimelineDetla(classThis.data.sport_event.id)
+        .subscribe(res => {
+          // res = res.result; // TEMP
+          // If no live coverage then no need to call API again
+          if (
+            typeof res.data.coverage_info != "undefined" &&
+            res.data.coverage_info.live_coverage == false
+          ) {
+            this.clearTimeInterval();
+          }
 
-        // Update Commnetry and scores
-        if (res.data.timeline && res.data.timeline.length > 0) {
-          this.data = res.data;
-          this.getUpdate();
-          this.getScores();
-        }
-      });
+          // Update Commnetry and scores
+          if (res.data.timeline && res.data.timeline.length > 0) {
+            this.data = res.data;
+            this.getUpdate();
+            this.getScores();
+          }
+        });
     }, classThis.miliseconds(0, 0, 15)); // TEMP
   }
 
@@ -860,3 +790,105 @@ export class MatchHomeComponent implements OnInit {
     this.clearTimeInterval();
   }
 }
+
+//<------------old logic for scorecard ----------->>>>>>
+// this.scorecards.map(data => {
+//   if (data.batting_team === this.teams[0].data[0].id) {
+//     this.battingteam1.push(data);
+//   } else if (data.batting_team === this.teams[1].data[0].id) {
+//     this.battingteam2.push(data);
+//   }
+//   if (data.bowling_team == this.teams[0].data[0].id) {
+//     this.bowlingteam1.push(data);
+//   } else if (data.bowling_team == this.teams[1].data[0].id) {
+//     this.bowlingteam2.push(data);
+//   }
+// });
+
+// console.log("scorecards", this.scorecards);
+// this.battingteam1 = this.battingteam1[0]["teams"][0]["statistics"][
+//   "batting"
+// ];
+// console.log("battin1", this.battingteam1);
+
+// this.battingteam2 = this.battingteam2[0]["teams"][0]["statistics"][
+//   "batting"
+// ];
+// this.bowlingteam1 = this.bowlingteam1[0]["teams"][1]["statistics"][
+//   "bowling"
+// ];
+// this.bowlingteam2 = this.bowlingteam2[0]["teams"][1]["statistics"][
+//   "bowling"
+// ];
+
+// let arrnew = [];
+
+// arrnew = this.battingteam2["players"];
+// arrnew.map(single => {
+//   if (!this.objnew[single.id]) {
+//     this.objnew[single.id] = [];
+//   }
+// });
+// arrnew.map(data => {
+//   this.objnew[data.id].push(data);
+// });
+// console.log("objnew", this.objnew);
+
+//map array for team 2 bowlers name
+
+// let playerarr = [];
+// playerarr = this.battingteam1["players"];
+// playerarr.map(single => {
+//   if (!this.objnew2[single.id]) {
+//     this.objnew2[single.id] = [];
+//   }
+// });
+// playerarr.map(data => {
+//   this.objnew2[data.id].push(data);
+// });
+
+//<<<<<----------old scorecard logic over ------->>>>>>
+
+//old logic for timer
+
+// let date = this.sportevent.scheduled;
+// setInterval(() => {
+//   let enddate = new Date(date).getTime();
+//   let now = new Date().getTime();
+//   let time = enddate - now;
+//   if (time >= 0) {
+//     this.hours = Math.floor(
+//       (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+//     );
+//     this.minutes = Math.floor(
+//       (time % (1000 * 60 * 60)) / (1000 * 60)
+//     );
+//     this.seconds = Math.floor((time % (1000 * 60)) / 1000);
+//   }
+// }, 1000);
+
+//old logic for get players name
+// this.scorecards.map((data, key) => {
+//   data["teams"][0]["statistics"]["batting"]["players"].map(
+//     single => {
+//       if (!objBatting[single.id]) {
+//         objBatting[single.id] = [];
+//         objBatting[single.id].push(single);
+//       }
+//     }
+//   );
+//   data["teams"][1]["statistics"]["bowling"]["players"].map(
+//     single => {
+//       if (!objBowling[single.id]) {
+//         objBowling[single.id] = [];
+//         objBowling[single.id].push(single);
+//       }
+//     }
+//   );
+// });
+
+//players name object
+// this.objnew3 = {
+//   ...objBowling,
+//   ...objBatting
+// };

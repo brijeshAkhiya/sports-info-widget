@@ -10,13 +10,10 @@ $base: #ffffff;
     Enable dark or light logo based on base color
 */
 @import url("//fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=latin,latin-ext");
-body {
-  display: flex;
-  justify-content: center;
-}
+
 .widgets {
-  max-width: 620px;
   width: 100%;
+  max-width: 100%;
 }
 .sr-widget {
   border: rgba(0,0,0,0.12) solid 1px;

@@ -10,7 +10,7 @@ import { SocketService } from '../providers/socket.service';
 import { MomentModule } from 'ngx-moment';
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
 import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
-import { PointstableWidgetComponent } from './pointstable-widget/pointstable-widget.component';
+import { PointstableWidgetComponent } from './cricket/pointstable-widget/pointstable-widget.component';
 import { SplitPipe } from '../pipes/stringsplitpipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

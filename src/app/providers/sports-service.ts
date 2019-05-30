@@ -207,6 +207,13 @@ export class SportsService {
     );
   }
 
+  //get match team lineups
+  getmatchteamlineup(matchid){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/cricket/match/${matchid}/lineups`
+    );
+  }
+
   //get match timeline Delta - live
   getmatchtimelineDetla(id) {
     return this.http.get(

@@ -17,13 +17,14 @@ export class CommonNewsListComponent implements OnInit {
   writerid: any;
   iswritervideo: boolean;
   relatedids: any;
+  isloading: any;
   constructor(
     private sportsService: SportsService,
     private slugifyPipe: SlugifyPipe,
     private router: Router
   ) {}
 
-  ngOnInit() {   
+  ngOnInit() {
     if (this.type == "any") {
       this.posts = [];
       this.getRecentPosts();
@@ -40,8 +41,10 @@ export class CommonNewsListComponent implements OnInit {
       this.iswritervideo = true;
       this.getWriterblogs(this.reqparams);
     } else {
+      console.log("type::", this.type);
+
       this.posts = [];
-      this.relatedids = this.reqparams['aIds']
+      this.relatedids = this.reqparams["aIds"];
       this.getRelatedPosts(this.reqparams);
     }
   }
@@ -78,14 +81,10 @@ export class CommonNewsListComponent implements OnInit {
     if (data) {
       this.isdisplay = false;
       this.sportsService.getwriterprofile(data).subscribe(res => {
-        if (res["data"]["posts"].posts) {
-          this.posts = res["data"]["posts"].posts;
-          console.log(this.posts);
-          
+        if (res["data"] && res["data"]["posts"]) {
           this.isdisplay = true;
+          this.posts = res["data"]["posts"].posts;
         } else {
-          console.log('no video posts');
-          
           this.isdisplay = true;
         }
       });
@@ -104,18 +103,19 @@ export class CommonNewsListComponent implements OnInit {
       };
       this.isdisplay = false;
       this.sportsService.getwriterprofile(data).subscribe(res => {
-        if (res["data"]["posts"].posts) {
+        if (res["data"]["posts"] && res["data"]["posts"].posts) {
           this.loadnewposts = res["data"]["posts"].posts;
           this.posts = this.posts.concat(this.loadnewposts);
           this.isdisplay = true;
         } else {
+          this.loadnewposts = [];
           this.isdisplay = true;
         }
       });
-    } else if(this.type == undefined){
+    } else if (this.type == undefined) {
       let start = this.posts.length;
       let data = {
-        aIds:this.relatedids,
+        aIds: this.relatedids,
         nStart: start,
         nLimit: 4
       };
@@ -128,6 +128,7 @@ export class CommonNewsListComponent implements OnInit {
         }
       });
     }
+    console.log("loadnewposts", this.loadnewposts);
   }
 
   //blog view

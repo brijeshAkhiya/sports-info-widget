@@ -6,7 +6,7 @@
 .schedule-list .month-title                 { width: 174px; padding-right: 16px; }
 .schedule-list .schedule-items              { width: calc(100% - 174px);  }
 .schedule-list .month-title h5              { margin-top: 4px; font-family: 'IBM Plex Sans Condensed', sans-serif; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out; opacity: 0.3; text-transform: uppercase;}
-.schedule-list .month-title .sticky-month   { position: sticky; position: -webkit-sticky; top: 0; }
+.schedule-list .month-title .sticky-month   { position: sticky; position: -webkit-sticky; top: 100px; }
 .schedule-month:hover .month-title h5       { color: #ED1A33; opacity: 1;  }
 .schedule-list .schedule-item               { margin-bottom: 16px; padding: 16px 24px 24px; background: #fff; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 .schedule-list .schedule-item.schedule-hover{ cursor: pointer;}

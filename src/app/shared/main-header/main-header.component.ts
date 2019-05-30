@@ -41,6 +41,7 @@ export class MainHeaderComponent implements OnInit {
   interval;
   sliderdata1: any;
   livedataarray = [];
+  ismatchstart: boolean;
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -141,10 +142,10 @@ export class MainHeaderComponent implements OnInit {
               data.slider_status == "live"
             ) {
               this.sliderdata.push(data);
-              this.sliderdata.reverse();
             }
           });
         }
+
         let newArray = [];
         newArray = this.sliderdata.map(sData => {
           if (sData.slider_status !== "results") {
@@ -157,7 +158,7 @@ export class MainHeaderComponent implements OnInit {
                     compObj["home"].period_scores = [];
                   }
                   if (sPScore.number === 1) {
-                    compObj["home"].show_first = true  
+                    compObj["home"].show_first = true;
                   }
                   compObj["home"].period_scores.push(sPScore);
                 } else if (sPScore.away_score) {
@@ -165,7 +166,7 @@ export class MainHeaderComponent implements OnInit {
                     compObj["away"].period_scores = [];
                   }
                   if (sPScore.number === 1) {
-                    compObj["away"].show_first = true  
+                    compObj["away"].show_first = true;
                   }
                   compObj["away"].period_scores.push(sPScore);
                 }
@@ -177,23 +178,46 @@ export class MainHeaderComponent implements OnInit {
             return sData;
           }
         });
-        newArray = newArray.sort((a, b) =>
-          a.slider_status === "live" ? -1 : 0
-        );
-        console.log('array', newArray)
+        // newArray = newArray.sort((a, b) =>
+        //   a.slider_status === "live" ? -1 : 0
+        // );
+        newArray = newArray.sort(function(a, b) {
+          if (a.scheduled && b.scheduled) {
+            let aDate: any = new Date(a.scheduled);
+            let bDate: any = new Date(b.scheduled);
+            return aDate - bDate;
+          } else {
+            return -1;
+          }
+        });
+        console.log("array", newArray);
         this.sliderdata1 = newArray;
 
         this.isanylivematch = this.sliderdata1.some(
           type => type.slider_status === "live"
         );
 
+        //check if any match is going to start in next 5 hours from current time
+        this.ismatchstart = this.sliderdata1.some(data => {
+          let matchtime: any = new Date(data.scheduled).getTime();
+          let currenttime: any = new Date().getTime();
+          let difference = Math.round(
+            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100) / 100
+          );
+          if (difference <= 5 && difference >= 0) {
+            return true;
+          }
+        });
+        if (this.ismatchstart) {
+          setTimeout(() => {
+            this.getLiveUpdates();
+          }, 30000);
+        }
         if (this.isanylivematch == true) {
-          console.log("1");
-
           this.interval = setInterval(() => {
             console.log("live update");
             this.getLiveUpdates();
-          },7000);
+          }, 7000);
         }
       }
     });
@@ -228,7 +252,7 @@ export class MainHeaderComponent implements OnInit {
                     compObj["home"].period_scores = [];
                   }
                   if (sPScore.number === 1) {
-                    compObj["home"].show_first = true  
+                    compObj["home"].show_first = true;
                   }
                   compObj["home"].period_scores.push(sPScore);
                 } else if (sPScore.away_score) {
@@ -236,7 +260,7 @@ export class MainHeaderComponent implements OnInit {
                     compObj["away"].period_scores = [];
                   }
                   if (sPScore.number === 1) {
-                    compObj["away"].show_first = true  
+                    compObj["away"].show_first = true;
                   }
                   compObj["away"].period_scores.push(sPScore);
                 }
@@ -248,9 +272,18 @@ export class MainHeaderComponent implements OnInit {
             return sData;
           }
         });
-        newArray = newArray.sort((a, b) =>
-          a.slider_status === "live" ? -1 : 0
-        );
+        // newArray = newArray.sort((a, b) =>
+        //   a.slider_status === "live" ? -1 : 0
+        // );
+        newArray = newArray.sort(function(a, b) {
+          if (a.scheduled && b.scheduled) {
+            let aDate: any = new Date(a.scheduled);
+            let bDate: any = new Date(b.scheduled);
+            return aDate - bDate;
+          } else {
+            return -1;
+          }
+        });
         this.sliderdata1 = newArray;
       }
     });
