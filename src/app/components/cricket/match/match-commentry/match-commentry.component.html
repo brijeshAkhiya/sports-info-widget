@@ -7,7 +7,7 @@
 <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
 <div>
   <!-- Match is live-->
-  <ng-container>
+  <ng-container *ngIf="data.sport_event_status.status == 'live'">
     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box"
       *ngIf="batsmanList">
       <div class="table-responsive">
