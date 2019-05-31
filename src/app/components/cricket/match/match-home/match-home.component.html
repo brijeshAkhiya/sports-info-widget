@@ -12,7 +12,7 @@
             <ng-template ngbTabContent>
               <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
-                [oversummery]="LiveOverSummery" [ballerList]="ballerList"></app-match-commentry>
+                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"></app-match-commentry>
             </ng-template>
           </ngb-tab>
           <ngb-tab>

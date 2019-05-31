@@ -8,7 +8,7 @@
   <span>Summary : {{commentaries.stats.runs}} Runs {{commentaries.stats.wickets}} Wickets</span>
 </div>
 
-<div class="commentary-item common-shadow rounded-box" *ngIf="commentaries.data.length > 0">
+<div class="commentary-item common-shadow rounded-box" *ngIf="commentaries.data && commentaries.data.length > 0">
   <ul>
     <li class="d-flex" *ngFor="let commentary of commentaries.data">
 
