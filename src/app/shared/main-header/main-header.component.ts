@@ -42,6 +42,7 @@ export class MainHeaderComponent implements OnInit {
   sliderdata1: any;
   livedataarray = [];
   ismatchstart: boolean;
+  logoplaceholder = '../../../assets/images/logo-placeholder.svg'
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,

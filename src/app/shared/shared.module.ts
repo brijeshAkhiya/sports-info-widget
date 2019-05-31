@@ -19,6 +19,7 @@ import { CommonBlogCardComponent } from './common-blog-card/common-blog-card.com
 import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
 import { CustomAdsWidgetComponent } from './custom-ads-widget/custom-ads-widget.component';
 import { StripHtmlPipe } from '../pipes/striphtmlpipe';
+import { LogosUrlPipe } from '../pipes/logosurlpipe';
 import { NoDataWidgetComponent } from './no-data-widget/no-data-widget.component';
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
@@ -36,8 +37,8 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         FormsModule,
         LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, ResizeImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent],
-    providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService,SplitPipe],
-    exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent]
+    declarations: [TruncatePipe, ResizeImagePipe,LogosUrlPipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent],
+    providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService,SplitPipe,LogosUrlPipe],
+    exports: [NgxTinySliderModule, TruncatePipe,LogosUrlPipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent]
 })
 export class SharedModule { }

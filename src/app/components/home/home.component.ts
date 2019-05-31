@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   ad: any;
   largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
   smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
+  logoplaceholder = '../../../assets/images/logo-placeholder.svg'
   nofixturesdata: boolean;
   isnodata: boolean;
 

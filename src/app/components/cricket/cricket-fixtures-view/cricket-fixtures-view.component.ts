@@ -19,6 +19,7 @@ export class CricketFixturesViewComponent implements OnInit {
   noresultdata: boolean = false;
   selectedTab;
   nofixtures: boolean;
+  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(
     private sportsService: SportsService,
     private router: Router,
