@@ -192,10 +192,10 @@
                             </tr>
                             <tr>
                               <td>
-                                Extras<p class="batsman-text">b - {{item?.teams[1]?.statistics?.bowling?.byes}}, w -
-                                  {{item?.teams[1]?.statistics?.bowling?.wides}},
+                                Extras<p class="batsman-text">( b - {{item?.teams[1]?.statistics?.bowling?.byes ? item?.teams[1]?.statistics?.bowling?.byes : '0'}}, w -
+                                  {{item?.teams[1]?.statistics?.bowling?.wides ? item?.teams[1]?.statistics?.bowling?.wides : '0'}},
                                   no
-                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}})</p>
+                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}} )</p>
                               </td>
                               <td>{{item?.teams[1]?.statistics?.bowling?.extras}}</td>
                               <td colspan="4"></td>
@@ -222,7 +222,7 @@
                     <!--Score card tab end-->
                     <!--Fall of wickets section starts-->
                     <div class="common-table common-shadow rounded-box"
-                      *ngIf="sportevent.tournament.type != 'first_class'">
+                      *ngIf="sportevent.tournament.type != 'first_class' && ((item.number == 1 && fallofwicket1data.length > 0) || (item.number == 2 && fallofwicket2data.length > 0))">
                       <div class="table-title" *ngIf="fallofwicket2data">
                         <h6 class="text-uppercase">Fall of Wickets</h6>
                       </div>

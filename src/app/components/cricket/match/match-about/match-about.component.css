@@ -3,7 +3,8 @@
 .match-main-title h1,
 .match-main-title .match-update             { margin-bottom: 32px; }
 .match-main-title .match-update             { flex-grow: 1; -webkit-flex-grow: 1; text-align: right; align-self: self-start; -webkit-align-self: self-start; }
-.match-main-title .match-update p           { line-height: 24px; margin-bottom: 4px; font-weight: 500; }
+.match-main-title .match-update p           { line-height: 24px; margin-bottom: 4px; }
+.match-main-title .match-update p:last-child            { color: #292929; }
 .match-main-title .match-update p.live-match            { color: #ED1A33; }
 .match-main-title .match-update p.live-match:before     { content: ""; margin: -3px 8px 0px 0px; display: inline-block; width: 8px; height: 8px; background: #ED1A33; border-radius: 50%; vertical-align: middle; }
 .match-main-title .current-match            { width: 100%; border-bottom: 2px solid #ECECEC; }
