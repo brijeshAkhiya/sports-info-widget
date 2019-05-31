@@ -5,8 +5,8 @@
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>Recent Fixtures</h1>
         </div>
-        <ngb-tabset class="common-tabs"  #t="ngbTabset" >
-          <ngb-tab id="1">
+        <ngb-tabset class="common-tabs" [activeId]="selectedTab" >
+          <ngb-tab id="upcoming">
             <ng-template ngbTabTitle>
               <div>Upcoming</div>
             </ng-template>
@@ -52,7 +52,7 @@
               </div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab id="2">
+          <ngb-tab id="results">
             <ng-template ngbTabTitle><div (click)="getMatchResults()">Results</div></ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">

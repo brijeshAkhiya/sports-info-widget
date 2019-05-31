@@ -195,7 +195,7 @@
                                 Extras<p class="batsman-text">b - {{item?.teams[1]?.statistics?.bowling?.byes}}, w -
                                   {{item?.teams[1]?.statistics?.bowling?.wides}},
                                   no
-                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls}})</p>
+                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}})</p>
                               </td>
                               <td>{{item?.teams[1]?.statistics?.bowling?.extras}}</td>
                               <td colspan="4"></td>
