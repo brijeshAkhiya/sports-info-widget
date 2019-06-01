@@ -6,6 +6,7 @@ import { SocketIoModule} from 'ngx-socket-io';
 import { TruncatePipe } from '../pipes/truncatepipe';
 import { ResizeImagePipe } from '../pipes/resize-image.pipe';
 import { SportsService } from '../providers/sports-service';
+import { CommonService } from '../providers/common-service';
 import { SocketService } from '../providers/socket.service';
 import { MomentModule } from 'ngx-moment';
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
@@ -37,7 +38,7 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         LazyLoadImageModule
     ],
     declarations: [TruncatePipe, ResizeImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent],
-    providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService,SplitPipe],
+    providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService, CommonService,SplitPipe],
     exports: [NgxTinySliderModule, TruncatePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent]
 })
 export class SharedModule { }
