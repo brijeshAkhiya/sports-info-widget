@@ -21,7 +21,6 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
   blogcomments: any;
   newcommnets: any;
   isplay:boolean = false
-  s3videobaseurl = 'https://d1ldsx0apuyt84.cloudfront.net/'
   widgetblogs: any;
   hideBtn: boolean = false;
   @ViewChild('videoPlayer') videoplayer: ElementRef;
@@ -159,7 +158,7 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
    //sharable link 
 
    sharablelink(platform) {
-    this.blogUrl = `http://dev.sports.info/blog/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
+    this.blogUrl = `${this.commonService.siteUrl}blog/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
     if (platform == 'facebook') {
       window.open(`http://www.facebook.com/sharer.php?u=${this.blogUrl}`, '_blank');
     }

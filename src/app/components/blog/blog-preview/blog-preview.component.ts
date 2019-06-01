@@ -20,7 +20,6 @@ export class BlogPreviewComponent implements OnInit {
   blogcomments: any;
   newcommnets: any;
   isplay:boolean = false
-  s3videobaseurl = 'https://d1ldsx0apuyt84.cloudfront.net/'
   widgetblogs: any;
   hideBtn: boolean = false;
 
@@ -34,6 +33,7 @@ export class BlogPreviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("ngOnInit")
     this.blogshareid = this.activatedroute.snapshot.params.id
     this.blogslug = this.activatedroute.snapshot.params.slug
     this.blogid = atob(this.activatedroute.snapshot.params.id);
@@ -147,7 +147,7 @@ export class BlogPreviewComponent implements OnInit {
    //sharable link 
 
    sharablelink(platform) {
-    this.blogUrl = `http://dev.sports.info/blog/blog-preview/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
+    this.blogUrl = `${this.commonService.siteUrl}blog/blog-preview/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
     if (platform == 'facebook') {
       window.open(`http://www.facebook.com/sharer.php?u=${this.blogUrl}`, '_blank');
     }

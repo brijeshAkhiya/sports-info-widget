@@ -21,7 +21,8 @@
     "paths": {
       "@app/*": ["app/*"],
       "@providers/*": ["app/providers/*"],
-      "@assets/*": ["app/assets/*"]
+      "@assets/*": ["app/assets/*"],
+      "@env": ["environments/environment"]
     }
   }
 

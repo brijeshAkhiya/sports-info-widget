@@ -13,7 +13,7 @@
 </section>
 <section class="blog-banner" *ngIf="blogtype == 'video'" [defaultImage]="commonService.largeblogPlaceholder" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
   <video controls [ngClass]="{'show': isplay}" controlsList="nodownload" autoplay>
-    <source [src]="s3videobaseurl+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
+    <source [src]="commonService.s3Url+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
     Your browser does not support the video tag.
   </video>
   <button class="video-play-btn" (click)="videoplay()"></button>

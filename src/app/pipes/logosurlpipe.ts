@@ -1,13 +1,17 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { CommonService } from '@providers/common-service';
 
 @Pipe({
   name: "logosurl"
 })
 export class LogosUrlPipe implements PipeTransform {
+
+  constructor(public commonService: CommonService) {}
+
   transform(value: any): any {
     if (value) {
       return (
-        "https://d1ldsx0apuyt84.cloudfront.net/logos/" + value + ".png" 
+        `${this.commonService.s3Url}logos/${value}.png`
       );
     } 
   }
