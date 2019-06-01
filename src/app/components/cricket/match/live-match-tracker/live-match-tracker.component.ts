@@ -9,13 +9,8 @@ declare var window: any;
   encapsulation:ViewEncapsulation.None
 })
 
-// interface Scripts {
-//   name: string;
-//   src: string;
-// }
 export class LiveMatchTrackerComponent implements AfterContentInit,OnInit{
-  @Input() data: any
-  matchid: any;
+  @Input() matchid: any
 
   private scripts: any = {};
   ScriptStore: any = [
@@ -32,25 +27,19 @@ export class LiveMatchTrackerComponent implements AfterContentInit,OnInit{
   }
 
   ngOnInit(): void {
-    let Id = this.data['sport_event'].id
-    if(Id){
-        this.matchid = Id.split(':')[2]
-    }
     this.loader = true
   }
 
   ngAfterContentInit() {
     
-    this.load('widgetloader').then(data => {      
-      console.log('script loaded ', data);      
-          
+    this.load('widgetloader').then(data => {             
       window.SIR("addWidget", ".sr-widget-1", "match.lmtPlus", {
         adsFrequency: false,
         theme:true,
         layout: "topdown",
         scoreboard: "extended",
         detailedScoreboard:"disable",
-        matchId: this.matchid
+        matchId: this.matchid.split(':')[2]
     });
     this.loader = false  
     }).catch(error => console.log(error));

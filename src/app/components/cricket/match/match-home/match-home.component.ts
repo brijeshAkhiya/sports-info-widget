@@ -58,8 +58,10 @@ export class MatchHomeComponent implements OnInit {
   closeofCommentry: any;
   stylepercentage: any;
   isshow: boolean;
-  tossdecision:any = {};
+  tossdecision: any = {};
   batsmanList;
+
+  testcheck: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -78,6 +80,7 @@ export class MatchHomeComponent implements OnInit {
       this.matchid = atob(params.id);
       if (this.matchid) {
         this.getMatchTimeline();
+        this.getMatchData();
         this.getmatchteamlineup();
       }
     });
@@ -85,6 +88,140 @@ export class MatchHomeComponent implements OnInit {
 
   ngOnInit() {
     console.log("ngOnInit");
+  }
+
+  /** Get Match Data */
+  getMatchData() {
+
+    this.sportsService.getmatchtimeline(this.matchid).subscribe((res:any) => {
+      
+      if (res.data) {
+        this.isshow = false;
+        this.matchdata = res.data;
+  
+
+
+        this.initMatch();
+        this.matchdata = res["data"];
+        console.log("data", res["data"]);
+        this.matchstatus = res["data"]["sport_event_status"].status;
+        this.sportevent = res["data"]["sport_event"];
+        this.venuedetails = res["data"]["sport_event"]["venue"];
+        this.team1id = res["data"]["sport_event"]["competitors"][0].id;
+        this.team2id = res["data"]["sport_event"]["competitors"][1].id;
+        if (this.team1id && this.team2id) {
+          console.log("teamvstaem");
+          this.getTeamvsTeamdata(); //to get team vs team data
+        }
+        //get venue details
+        if (this.venuedetails) {
+          if (this.venuedetails.map_coordinates) {
+            let cordinates = this.venuedetails.map_coordinates.split(",");
+            this.venuelat = Number(cordinates[0]);
+            this.venuelong = Number(cordinates[1]);
+          } else {
+            this.venuelat = 22.5726;
+            this.venuelong = 88.363;
+          }
+        }
+        //teams array
+        let obj = {};
+        let team_arr = res["data"]["sport_event"]["competitors"];
+        team_arr.map(single => {
+          if (!obj[single.id]) {
+            obj[single.id] = [];
+          }
+        });
+        team_arr.map(data => {
+          obj[data.id].push(data);
+        });
+
+        this.teams = Object.keys(obj).map(id => ({ id, data: obj[id] }));
+        console.log(this.teams);
+
+        let team_arr2 = [];
+        let obj2 = {};
+        team_arr2 = res["data"]["sport_event"]["competitors"];
+        team_arr2.map(single => {
+          if (!obj2[single.qualifier]) {
+            obj2[single.qualifier] = [];
+          }
+        });
+        team_arr2.map(data => {
+          obj2[data.qualifier].push(data);
+        });
+
+        this.teamsbytype = Object.keys(obj2).map(qualifier => ({
+          qualifier,
+          data: obj2[qualifier]
+        }));
+
+        this.teamsbytype.map(data => {
+          this.teamObj[data.data[0].id] = data;
+        });
+        console.log(this.teamObj);
+
+        if (this.matchstatus == "not_started") {
+          console.log("status::", this.matchstatus);
+          // this.getMatchProbability();
+        } else if (
+          this.matchstatus == "closed" ||
+          this.matchstatus == "live"
+        ) {
+          this.manofthematch = res["data"]["statistics"]["man_of_the_match"];
+          this.matcheventstatus = res["data"]["sport_event_status"];
+          this.scorecards = res["data"]["statistics"]["innings"];
+          let objBatting = {};
+          let objBowling = {};
+          this.getmatchteamlineup();
+
+          console.log("obj3::", this.objnew3);
+
+          //calculate fall of wickets data
+          let fallofwircket1 = [];
+          fallofwircket1 = this.matchdata["timeline"];
+          let fallof1data = [];
+          fallofwircket1.map(data => {
+            if (data.inning == 1 && data.type == "wicket") {
+              this.fallofwicket1data.push({
+                playerid: data.dismissal_params.player.id,
+                playername: data.dismissal_params.player.name,
+                displayover: data.display_overs,
+                displayscore: data.display_score
+              });
+            }
+          });
+          let fallofwircket2 = [];
+          fallofwircket2 = this.matchdata["timeline"];
+          let fallof2data = [];
+          fallofwircket1.map(data => {
+            if (data.inning == 2 && data.type == "wicket") {
+              this.fallofwicket2data.push({
+                playerid: data.dismissal_params.player.id,
+                playername: data.dismissal_params.player.name,
+                displayover: data.display_overs,
+                displayscore: data.display_score
+              });
+
+              console.log("fallofwickets2", this.fallofwicket2data);
+            }
+          });
+        }
+
+
+        this.getTossDecision();
+
+        this.getCommentries();
+
+      }
+    },
+      error => {
+        if (error["error"].status == 400 || error["error"].status == 403) {
+          this.isshow = false;
+          this.router.navigate(["/page-not-found"]);
+        }
+      }
+    );
   }
 
   //get matchtimeline
@@ -107,17 +244,19 @@ export class MatchHomeComponent implements OnInit {
             console.log("teamvstaem");
             this.getTeamvsTeamdata(); //to get team vs team data
           }
-          //get venue details
-          if (this.venuedetails) {
-            if (this.venuedetails.map_coordinates) {
-              let cordinates = this.venuedetails.map_coordinates.split(",");
-              this.venuelat = Number(cordinates[0]);
-              this.venuelong = Number(cordinates[1]);
-            } else {
-              this.venuelat = 22.5726;
-              this.venuelong = 88.363;
-            }
-          }
+          // //get venue details
+          // if (this.venuedetails) {
+          //   if (this.venuedetails.map_coordinates) {
+          //     let cordinates = this.venuedetails.map_coordinates.split(",");
+          //     this.venuelat = Number(cordinates[0]);
+          //     this.venuelong = Number(cordinates[1]);
+          //   } else {
+          //     this.venuelat = 22.5726;
+          //     this.venuelong = 88.363;
+          //   }
+          // }
+          // console.log(this.venuedetails);
+          
           //teams array
           let obj = {};
           let team_arr = res["data"]["sport_event"]["competitors"];
@@ -157,7 +296,7 @@ export class MatchHomeComponent implements OnInit {
 
           if (this.matchstatus == "not_started") {
             console.log("status::", this.matchstatus);
-            this.getMatchProbability();
+            // this.getMatchProbability();
           } else if (
             this.matchstatus == "closed" ||
             this.matchstatus == "live"
@@ -205,7 +344,7 @@ export class MatchHomeComponent implements OnInit {
 
           this.getTossDecision();
 
-        this.getCommentries();
+          this.getCommentries();
 
         }
       },
@@ -239,7 +378,6 @@ export class MatchHomeComponent implements OnInit {
   }
 
   //get match probablities
-
   getMatchProbability() {
     this.sportsService.getmatchprobability(this.matchid).subscribe(res => {
       this.matchprobability = res["data"];
@@ -370,24 +508,24 @@ export class MatchHomeComponent implements OnInit {
   }
 
   /** Get Toss decision */
-  getTossDecision(){
+  getTossDecision() {
     console.log("getTossDecision");
-    
-    if(Object.entries(this.tossdecision).length === 0){
-      if(typeof this.data.sport_event_status.toss_won_by != 'undefined'){
+
+    if (Object.entries(this.tossdecision).length === 0) {
+      if (typeof this.data.sport_event_status.toss_won_by != 'undefined') {
         this.tossdecision.toss_won_by = this.data.sport_event_status.toss_won_by;
         console.log(this.teamObj);
-        
-        if(this.teamObj[this.data.sport_event_status.toss_won_by])
+
+        if (this.teamObj[this.data.sport_event_status.toss_won_by])
           this.tossdecision.toss_won_by_team = this.teamObj[this.data.sport_event_status.toss_won_by].data[0].name
       }
 
-      if(typeof this.data.sport_event_status.toss_decision != 'undefined')
-        this.tossdecision.toss_decision = this.data.sport_event_status.toss_decision;       
-      
+      if (typeof this.data.sport_event_status.toss_decision != 'undefined')
+        this.tossdecision.toss_decision = this.data.sport_event_status.toss_decision;
+
     }
     console.log(this.tossdecision);
-    
+
   }
 
   /** Check if there is no commentry from API */
@@ -616,12 +754,12 @@ export class MatchHomeComponent implements OnInit {
           currentInningOver.length > 0 ? currentInningOver[0].number : 0,
         runs:
           currentInningOver.length > 0 &&
-          typeof currentInningOver[0].runs != "undefined"
+            typeof currentInningOver[0].runs != "undefined"
             ? currentInningOver[0].runs
             : 0,
         wickets:
           currentInningOver.length > 0 &&
-          typeof currentInningOver[0].wickets != "undefined"
+            typeof currentInningOver[0].wickets != "undefined"
             ? currentInningOver[0].wickets
             : 0,
         abbreviation:
@@ -792,16 +930,16 @@ export class MatchHomeComponent implements OnInit {
     console.log(currentInning);
     let currentInningIndex = this.data.statistics.innings.findIndex((inning) => inning.number == currentInning);
     console.log(currentInningIndex);
-    
+
     let batsmanList = this.data.statistics.innings[currentInningIndex].teams.filter(
       players => players.statistics.batting
     )
-    batsmanList = (typeof batsmanList[0] != 'undefined')  ? batsmanList[0].statistics.batting.players : [];
-    
+    batsmanList = (typeof batsmanList[0] != 'undefined') ? batsmanList[0].statistics.batting.players : [];
+
     this.ballerList = this.data.statistics.innings[currentInningIndex].teams.filter(
       players => players.statistics.bowling
     );
-    this.ballerList = (typeof this.ballerList[0] != 'undefined')  ? this.ballerList[0].statistics.bowling.players : [];
+    this.ballerList = (typeof this.ballerList[0] != 'undefined') ? this.ballerList[0].statistics.bowling.players : [];
     console.log(batsmanList);
     this.ballerList = this.ballerList.slice(-1)[0].players;
     console.log(batsmanList);
