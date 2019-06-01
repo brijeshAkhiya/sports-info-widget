@@ -5,8 +5,8 @@
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>Recent Fixtures</h1>
         </div>
-        <ngb-tabset class="common-tabs"  #t="ngbTabset" >
-          <ngb-tab id="1">
+        <ngb-tabset class="common-tabs" [activeId]="selectedTab" >
+          <ngb-tab id="upcoming">
             <ng-template ngbTabTitle>
               <div>Upcoming</div>
             </ng-template>
@@ -33,13 +33,13 @@
                           <div class="team-info">
                             <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
+                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl" [defaultImage]="logoplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
+                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl" [defaultImage]="logoplaceholder" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
@@ -52,7 +52,7 @@
               </div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab id="2">
+          <ngb-tab id="results">
             <ng-template ngbTabTitle><div (click)="getMatchResults()">Results</div></ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
@@ -78,14 +78,14 @@
                             <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                             <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                           </div>
-                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
+                          <img class="team-flag" [lazyLoad]="item?.team.id | logosurl" [defaultImage]="logoplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center"
                           *ngFor="let item of item.period_score_new | slice:1:2">
-                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg" alt="team-flag">
+                          <img class="team-flag" [lazyLoad]="item?.team.id | logosurl" [defaultImage]="logoplaceholder" alt="team-flag">
                           <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
                             <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                             <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>

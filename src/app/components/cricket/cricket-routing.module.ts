@@ -24,7 +24,7 @@ const childRoutes: Routes = [
                 component: CricketHomeComponent
             },
             {
-                path:'recent-fixtures/view',
+                path:'recent-fixtures/:type/view',
                 component:CricketFixturesViewComponent
             },
             {

@@ -18,7 +18,7 @@ export class TournamentStateComponent implements OnInit {
   fieldingleaders: any;
   nostatistics: boolean ;
   isdata:boolean
-
+  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe, private router: Router, private splitpipe: SplitPipe) { }
 
   ngOnInit() {

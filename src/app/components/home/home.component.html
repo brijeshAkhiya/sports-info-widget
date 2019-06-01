@@ -77,10 +77,10 @@
                       <p>{{item.scheduled | amTimeAgo }}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/logo-placeholder.svg" alt="rcb">{{item.competitors[0].name}}</p>
+                      <p><img  [lazyLoad]="item.competitors[0].id | logosurl" [defaultImage]="logoplaceholder" alt="rcb">{{item.competitors[0].name}}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img src="../../../assets/images/logo-placeholder.svg" alt="kxip">{{item.competitors[1].name}}
+                      <p><img [lazyLoad]="item.competitors[1].id | logosurl" [defaultImage]="logoplaceholder" alt="kxip">{{item.competitors[1].name}}
                       </p>
                     </div>
                     <div class="row">
@@ -90,7 +90,7 @@
                       </div>
                     </div>
                   </li>
-                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchfixtures?.length != 0">View
+                  <li><button [routerLink]="['/cricket/recent-fixtures/upcoming/view']" *ngIf="matchfixtures?.length != 0">View
                       all</button></li>
                 </ul>
               </ng-template>
@@ -111,13 +111,13 @@
                     </div>
                     <div *ngFor="let item of result.period_score_new">
                       <div class="match-info d-flex justify-content-between align-items-center" *ngIf="!item.teamFlag">
-                        <p [ngClass]="{'match-winner': item.team.winner}"><img src="../../../assets/images/logo-placeholder.svg"
+                        <p [ngClass]="{'match-winner': item.team.winner}"><img [lazyLoad]="item.team.id | logosurl" [defaultImage]="logoplaceholder"
                             alt="rcb">{{item.team.abbreviation}}</p>
                         <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                       </div>
                       <div class="match-info d-flex justify-content-between align-items-center" *ngIf="item.teamFlag">
                         <p [ngClass]="{'match-winner': item.team.winner}"><img
-                            src="../../../assets/images/logo-placeholder.svg" alt="kxip">{{item.team.abbreviation}}
+                          [lazyLoad]="item.team.id | logosurl" [defaultImage]="logoplaceholder" alt="kxip">{{item.team.abbreviation}}
                         </p>
                         <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                       </div>
@@ -128,7 +128,7 @@
                       </div>
                     </div>
                   </li>
-                  <li><button [routerLink]="['/cricket/recent-fixtures/view']" *ngIf="matchresults">View all</button>
+                  <li><button [routerLink]="['/cricket/recent-fixtures/results/view']" *ngIf="matchresults">View all</button>
                   </li>
                 </ul>
               </ng-template>

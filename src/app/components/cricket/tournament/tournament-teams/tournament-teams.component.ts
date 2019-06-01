@@ -13,6 +13,7 @@ export class TournamentTeamsComponent implements OnInit {
   teamsname: any;
   widget1title = 'Current Series';
   widget1type = 'currentseries'
+  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() {

@@ -35,7 +35,7 @@ footer .copyright p                 { margin: 0px; font-size: 18px; line-height:
 .fav-block .fav-list button:hover   { background: #ED1A33; color: #fff; border-color: #ED1A33; }
 
 /* -------- Scroll Top CSS ------- */
-.fav-btn.scroll-top                 { right: 112px; background-image: none;  }
+.fav-btn.scroll-top                 { right: 32px; background-image: none;  }
 .fav-btn.scroll-top img             { width: 32%; transform: rotate(-90deg); -webkit-transform: rotate(-90deg);}
 .fav-btn.scroll-top:hover           { transform: rotate(0deg); -webkit-transform: rotate(0deg); }
 
@@ -73,7 +73,7 @@ footer .copyright p                 { margin: 0px; font-size: 18px; line-height:
     .fav-block .fav-list                { margin: 12px 0px 0px;}
     .fav-block .fav-list button         { margin: 0px 5px 5px 0px; padding: 6px; background: transparent; font-size: 13px; line-height: 17px; }
 /* -------- Scroll Top CSS ------- */
-    .fav-btn.scroll-top                 { right: 70px; }
+    .fav-btn.scroll-top                 { right: 16px; }
 }
 
 

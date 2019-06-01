@@ -13,6 +13,7 @@ export class TournamentStandingsComponent implements OnInit {
   widget1type = 'currentseries'
   tournamentid: any;
   pointstable: any;
+  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router) { }
 
   ngOnInit() {

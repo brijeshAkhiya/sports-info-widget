@@ -15,12 +15,12 @@
                 </div>
                 <div *ngIf="slide?.competitors?.home?.show_first == true">
                 <div class="match-info d-flex justify-content-between align-items-center" >
-                  <p><img src="../../../assets/images/logo-placeholder.svg"
+                  <p><img   [lazyLoad]="slide.competitors.home.id| logosurl" [defaultImage]="logoplaceholder"
                       alt="rcb">{{slide.competitors.home.name}}</p>
                   <p *ngIf="slide.competitors.home.period_scores">{{slide?.competitors?.home?.period_scores[0]?.display_score}}({{slide?.competitors?.home?.period_scores[0]?.display_overs}} ov)</p>
                 </div>
                 <div class="match-info d-flex justify-content-between align-items-center" >
-                  <p><img src="../../../assets/images/logo-placeholder.svg"
+                  <p><img  [lazyLoad]="slide.competitors.away.id| logosurl" [defaultImage]="logoplaceholder"
                       alt="kxip">{{slide.competitors.away.name}}
                   </p>
                   <p *ngIf="slide.competitors.away.period_scores">{{slide?.competitors?.away?.period_scores[0]?.display_score}}({{slide?.competitors?.away?.period_scores[0]?.display_overs}} ov)</p>
@@ -28,13 +28,13 @@
                 </div>
                 <div *ngIf="slide?.competitors?.away?.show_first == true">
                     <div class="match-info d-flex justify-content-between align-items-center" >
-                        <p><img src="../../../assets/images/logo-placeholder.svg"
+                        <p><img  [lazyLoad]="slide.competitors.away.id| logosurl" [defaultImage]="logoplaceholder"
                             alt="kxip">{{slide.competitors.away.name}}
                         </p>
                         <p *ngIf="slide.competitors.away.period_scores">{{slide?.competitors?.away?.period_scores[0]?.display_score}}({{slide?.competitors?.away?.period_scores[0]?.display_overs}} ov)</p>
                       </div>
                     <div class="match-info d-flex justify-content-between align-items-center" >
-                      <p><img src="../../../assets/images/logo-placeholder.svg"
+                      <p><img  [lazyLoad]="slide.competitors.home.id| logosurl" [defaultImage]="logoplaceholder"
                           alt="rcb">{{slide.competitors.home.name}}</p>
                       <p *ngIf="slide.competitors.home.period_scores">{{slide?.competitors?.home?.period_scores[0]?.display_score}}({{slide?.competitors?.home?.period_scores[0]?.display_overs}} ov)</p>
                     </div>
@@ -55,10 +55,10 @@
                   <p>{{slide.scheduled | amTimeAgo}}</p>
                 </div>
                 <div class="match-info d-flex justify-content-between align-items-center">
-                  <p><img src="../../../assets/images/logo-placeholder.svg" alt="flag">{{slide.competitors.home.name}}</p>
+                  <p><img  [lazyLoad]="slide.competitors.home.id| logosurl" [defaultImage]="logoplaceholder" alt="flag">{{slide.competitors.home.name}}</p>
                 </div>
                 <div class="match-info d-flex justify-content-between align-items-center">
-                  <p><img src="../../../assets/images/logo-placeholder.svg" alt="flag">{{slide.competitors.away.name}}</p>
+                  <p><img  [lazyLoad]="slide.competitors.away.id| logosurl" [defaultImage]="logoplaceholder" alt="flag">{{slide.competitors.away.name}}</p>
                 </div>
                 <div class="row">
                   <div class="col-lg-9">

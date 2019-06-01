@@ -26,23 +26,23 @@
                   <div class="probability-block d-flex align-items-center justify-content-between"
                     *ngIf="matchprobability[0]?.probability > matchprobability[1]?.probability">
                     <div class="team-block" *ngIf="matchprobability?.length != 0 ">
-                      <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
+                      <img class="team-flag" [lazyLoad]="matchprobability[0]?.id | logosurl" [defaultImage]="logoplaceholder">
                       <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
                     </div>
                     <div class="team-block" *ngIf="matchprobability?.length != 0">
                       <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
-                      <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
+                      <img class="team-flag" [lazyLoad]="matchprobability[1]?.id | logosurl" [defaultImage]="logoplaceholder">
                     </div>
                   </div>
                   <div class="probability-block d-flex align-items-center justify-content-between"
                     *ngIf="matchprobability[1]?.probability > matchprobability[0]?.probability">
                     <div class="team-block" *ngIf="matchprobability?.length != 0 ">
-                      <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
+                      <img class="team-flag" [lazyLoad]="matchprobability[1]?.id | logosurl" [defaultImage]="logoplaceholder">
                       <h3 *ngIf="matchprobability">{{matchprobability[1]?.probability}}%</h3>
                     </div>
                     <div class="team-block" *ngIf="matchprobability?.length != 0">
                       <h3 *ngIf="matchprobability">{{matchprobability[0]?.probability}}%</h3>
-                      <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg">
+                      <img class="team-flag" [lazyLoad]="matchprobability[0]?.id | logosurl" [defaultImage]="logoplaceholder">
                     </div>
                   </div>
                   <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage"></div>
@@ -80,7 +80,7 @@
                                 <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                                 <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                               </div>
-                              <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg"
+                              <img class="team-flag" [lazyLoad]="item.team.id | logosurl" [defaultImage]="logoplaceholder"
                                 alt="team-flag">
                             </div>
                             <div class="vs-block">
@@ -88,7 +88,7 @@
                             </div>
                             <div class="match-team d-flex align-items-center"
                               *ngFor="let item of item.period_score_new | slice:1:2">
-                              <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg"
+                              <img class="team-flag" [lazyLoad]="item.team.id | logosurl" [defaultImage]="logoplaceholder"
                                 alt="team-flag">
                               <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
                                 <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
@@ -192,10 +192,10 @@
                             </tr>
                             <tr>
                               <td>
-                                Extras<p class="batsman-text">b - {{item?.teams[1]?.statistics?.bowling?.byes}}, w -
-                                  {{item?.teams[1]?.statistics?.bowling?.wides}},
+                                Extras<p class="batsman-text">( b - {{item?.teams[1]?.statistics?.bowling?.byes ? item?.teams[1]?.statistics?.bowling?.byes : '0'}}, w -
+                                  {{item?.teams[1]?.statistics?.bowling?.wides ? item?.teams[1]?.statistics?.bowling?.wides : '0'}},
                                   no
-                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls}})</p>
+                                  - {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}} )</p>
                               </td>
                               <td>{{item?.teams[1]?.statistics?.bowling?.extras}}</td>
                               <td colspan="4"></td>
@@ -222,7 +222,7 @@
                     <!--Score card tab end-->
                     <!--Fall of wickets section starts-->
                     <div class="common-table common-shadow rounded-box"
-                      *ngIf="sportevent.tournament.type != 'first_class'">
+                      *ngIf="sportevent.tournament.type != 'first_class' && ((item.number == 1 && fallofwicket1data.length > 0) || (item.number == 2 && fallofwicket2data.length > 0))">
                       <div class="table-title" *ngIf="fallofwicket2data">
                         <h6 class="text-uppercase">Fall of Wickets</h6>
                       </div>
@@ -647,14 +647,14 @@
                           <div class="team-info">
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg"
+                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl" [defaultImage]="logoplaceholder"
                             alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" src="../../../../../assets/images/logo-placeholder.svg"
+                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl" [defaultImage]="logoplaceholder"
                             alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>

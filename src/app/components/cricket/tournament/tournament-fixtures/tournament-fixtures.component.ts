@@ -16,7 +16,7 @@ export class TournamentFixturesComponent implements OnInit {
   finalresultsdata: any;
   nofixturesdata: boolean = false;
   noresultdata: boolean = false;
-
+  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
