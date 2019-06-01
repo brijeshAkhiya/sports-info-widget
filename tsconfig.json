@@ -22,7 +22,8 @@
       "@app/*": ["app/*"],
       "@providers/*": ["app/providers/*"],
       "@assets/*": ["app/assets/*"],
-      "@env": ["environments/environment"]
+      "@pipes": ["app/pipes/*"],
+      "@env": ["environments/environment"],
     }
   }
 

@@ -8,6 +8,7 @@ export class CommonService {
   public smallblogPlaceholder = '/assets/images/placeholder_blog_small.svg'
   public s3Url
   public siteUrl
+  
   constructor() {
     console.log("common service");    
     this.s3Url = environment.s3Url    
