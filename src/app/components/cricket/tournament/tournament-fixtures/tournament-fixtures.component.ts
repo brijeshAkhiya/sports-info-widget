@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SportsService } from "../../../../providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
 import { ActivatedRoute, Router } from "@angular/router";
 import * as moment from "moment";
 
@@ -16,11 +17,11 @@ export class TournamentFixturesComponent implements OnInit {
   finalresultsdata: any;
   nofixturesdata: boolean = false;
   noresultdata: boolean = false;
-  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
-    private router: Router
+    private router: Router,
+    private cricketService: CricketService
   ) {}
 
   ngOnInit() {

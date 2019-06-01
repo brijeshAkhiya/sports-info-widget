@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { distinctUntilChanged } from "rxjs/operators";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
 import { SportsService } from "../../../providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
 import * as moment from "moment";
-import { NgbTabset } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-cricket-fixtures-view",
@@ -19,9 +19,9 @@ export class CricketFixturesViewComponent implements OnInit {
   noresultdata: boolean = false;
   selectedTab;
   nofixtures: boolean;
-  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
   constructor(
     private sportsService: SportsService,
+    private cricketService: CricketService,
     private router: Router,
     private activatedroute: ActivatedRoute,
     private slugifyPipe: SlugifyPipe

@@ -9,6 +9,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AgmCoreModule } from "@agm/core";
 import { SportsService } from "../../providers/sports-service";
 import { SocketService } from "../../providers/socket.service";
+import { CricketService } from "../../providers/cricket-service";
 import { CricketFixturesComponent } from "./cricket-fixtures/cricket-fixtures.component";
 import { CricketHomeComponent } from "./cricket-home/cricket-home.component";
 import { CricketMenuComponent } from "../../shared/cricket/cricket-menu/cricket-menu.component";
@@ -76,7 +77,7 @@ import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match
     ScrollingModule,
     LazyLoadImageModule
   ],
-  providers: [SportsService, SocketService, SlugifyPipe, StringUnder],
+  providers: [SportsService, SocketService, SlugifyPipe, StringUnder, CricketService],
   exports: [CommentryComponent, MatchCounterComponent, MatchAboutComponent]
 })
 export class CricketModule {}

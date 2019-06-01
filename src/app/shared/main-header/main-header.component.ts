@@ -20,6 +20,7 @@ import * as Ads from "../../store/ads-management/ads.actions";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SlugifyPipe } from "../../pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: "app-main-header",
@@ -42,7 +43,6 @@ export class MainHeaderComponent implements OnInit {
   sliderdata1: any;
   livedataarray = [];
   ismatchstart: boolean;
-  logoplaceholder = '../../../assets/images/logo-placeholder.svg'
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -52,7 +52,8 @@ export class MainHeaderComponent implements OnInit {
     private sportsService: SportsService,
     private modalService: NgbModal,
     private socialLoginService: AuthService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private cricketService: CricketService,
   ) {
     //get custom ads data Funtion call --->
     this.getCustomAds();

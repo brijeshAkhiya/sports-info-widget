@@ -6,6 +6,7 @@ import {
   ViewChild
 } from "@angular/core";
 import { SportsService } from "../../providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
 import { distinctUntilChanged } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from "../../pipes/slugpipe";
@@ -37,17 +38,18 @@ export class HomeComponent implements OnInit {
   ad: any;
   largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
   smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
-  logoplaceholder = '../../../assets/images/logo-placeholder.svg'
   nofixturesdata: boolean;
   isnodata: boolean;
 
   constructor(
     private renderer2: Renderer2,
     private sportsService: SportsService,
+    private cricketService: CricketService,
     private router: Router,
     private slugifyPipe: SlugifyPipe,
     private store: Store<any>
   ) {
+    console.log(this.cricketService)
     this.commonnewsparams = {
       nStart: 0,
       nLimit: 4

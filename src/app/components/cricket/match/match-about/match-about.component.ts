@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: 'app-match-about',
@@ -13,7 +14,9 @@ export class MatchAboutComponent implements OnInit {
 
   teamsresultsscore;
 
-  constructor() { }
+  constructor(
+    private cricketService: CricketService
+    ) { }
 
   ngOnInit() {  
   if(this.data['sport_event_status']['status'] == 'closed'){

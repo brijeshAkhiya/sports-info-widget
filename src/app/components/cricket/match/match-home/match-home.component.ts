@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../../providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
 import * as moment from "moment";
 
 @Component({
@@ -60,12 +61,11 @@ export class MatchHomeComponent implements OnInit {
   tossdecision:any = {};
   batsmanList;
 
-
-  logoplaceholder = "../../../../../assets/images/logo-placeholder.svg";
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
-    private router: Router
+    private router: Router,
+    private cricketService: CricketService
   ) {
     console.log("constructor");
     /**To reload router if routing in same page */

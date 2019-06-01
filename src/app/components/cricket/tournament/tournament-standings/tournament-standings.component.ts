@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SlugifyPipe } from '../../../../pipes/slugpipe';
+import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: 'app-tournament-standings',
@@ -13,8 +14,8 @@ export class TournamentStandingsComponent implements OnInit {
   widget1type = 'currentseries'
   tournamentid: any;
   pointstable: any;
-  logoplaceholder = '../../../../../assets/images/logo-placeholder.svg'
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router,
+    private cricketService: CricketService) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.parent.snapshot.params.id)
