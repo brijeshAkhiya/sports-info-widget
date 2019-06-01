@@ -3,6 +3,7 @@ import { SportsService } from "../../../providers/sports-service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from '../../../pipes/slugpipe';
 import { SplitPipe } from '../../../pipes/stringsplitpipe';
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: "app-blog-view",
@@ -23,14 +24,14 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
   s3videobaseurl = 'https://d1ldsx0apuyt84.cloudfront.net/'
   widgetblogs: any;
   hideBtn: boolean = false;
-  largeblogdefault = '../../../../assets/images/placeholder_blog_large.svg'
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
     private sportsService: SportsService,
     private slugifypipe:SlugifyPipe,
-    private splitpipe:SplitPipe
+    private splitpipe:SplitPipe,
+    private commonService:CommonService
   ) {}
 
   ngOnInit() {

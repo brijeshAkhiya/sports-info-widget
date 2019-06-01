@@ -3,6 +3,7 @@ import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { SlugifyPipe } from "../../../../pipes/slugpipe";
 import { SplitPipe } from '../../../../pipes/stringsplitpipe';
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-tournament-home',
@@ -20,9 +21,9 @@ export class TournamentHomeComponent implements OnInit {
   popularvideos: any;
   populararticles: any;
   commonnewsparams:any
-  largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
 
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router,
+    private commonService:CommonService) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.snapshot.params.id)

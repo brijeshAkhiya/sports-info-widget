@@ -11,6 +11,7 @@ import { MomentModule } from 'ngx-moment';
 import { SportsService } from '../../providers/sports-service';
 import { SocketService } from '../../providers/socket.service';
 import { CricketService } from '../../providers/cricket-service';
+import { CommonService } from '@providers/common-service';
 
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
@@ -27,7 +28,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     MomentModule,
     LazyLoadImageModule
   ],
-  providers: [SlugifyPipe,SportsService,SocketService, CricketService]
+  providers: [SlugifyPipe,SportsService,SocketService, CricketService, CommonService]
 })
 
 export class HomeModule { }

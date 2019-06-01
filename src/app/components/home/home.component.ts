@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { SportsService } from "../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from '@providers/common-service';
 import { distinctUntilChanged } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from "../../pipes/slugpipe";
@@ -36,8 +37,6 @@ export class HomeComponent implements OnInit {
   customads: any;
   adsObj: {};
   ad: any;
-  largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
-  smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
   nofixturesdata: boolean;
   isnodata: boolean;
 
@@ -47,9 +46,9 @@ export class HomeComponent implements OnInit {
     private cricketService: CricketService,
     private router: Router,
     private slugifyPipe: SlugifyPipe,
-    private store: Store<any>
+    private store: Store<any>,
+    private commonService:CommonService
   ) {
-    console.log(this.cricketService)
     this.commonnewsparams = {
       nStart: 0,
       nLimit: 4

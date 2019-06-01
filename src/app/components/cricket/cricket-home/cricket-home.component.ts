@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from "../../../providers/sports-service";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { CommonService } from '@providers/common-service';
 @Component({
   selector: "app-cricket-home",
   templateUrl: "./cricket-home.component.html",
@@ -21,10 +22,9 @@ export class CricketHomeComponent implements OnInit {
   widget2type = "populartags";
   commonnewsparams:any
   commonnewstype:any
-  largeblogdefault = '../../../assets/images/placeholder_blog_large.svg'
-  smallblogdefault = '../../../assets/images/placeholder_blog_small.svg'
   constructor(private sportsService: SportsService,private router: Router,
-    private slugifyPipe: SlugifyPipe) {}
+    private slugifyPipe: SlugifyPipe,
+    private commonService:CommonService) {}
 
   ngOnInit() {
     this.getPopularArticles();

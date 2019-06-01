@@ -1,4 +1,4 @@
-<section class="blog-banner" *ngIf="blogtype == 'article'" [defaultImage]="largeblogdefault"
+<section class="blog-banner" *ngIf="blogtype == 'article'" [defaultImage]="commonService.largeblogPlaceholder"
   [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
   <div class="banner-inner">
     <div class="container">
@@ -13,7 +13,7 @@
     </div>
   </div>
 </section>
-<section class="blog-banner" *ngIf="blogtype == 'video'" [defaultImage]="largeblogdefault"
+<section class="blog-banner" *ngIf="blogtype == 'video'" [defaultImage]="commonService.largeblogPlaceholder"
   [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
   <div class="video-container" [ngClass]="{'show': isplay}">
     <!-- <img class="pattern pattern-left" src="../../../../assets/images/video-pattern-img.svg">
