@@ -26,16 +26,7 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
 
-          <!-- START - FACTS AND FIGURES-->
-          <ngb-tab>
-            <ng-template ngbTabTitle>
-              <div>Facts & Figures</div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <app-match-facts-figures [matchdata]="matchdata" [teamLastmatch]="lastmatches" [teamMatchResult]="matchesresultdata"></app-match-facts-figures>
-            </ng-template>
-          </ngb-tab>
-          <!-- END - FACTS AND FIGURES-->
+       
 
           <!-- START - SCORECARDS-->
           <ngb-tab *ngIf="matchdata.sport_event_status.status != 'not_started'">
@@ -69,8 +60,9 @@
                           <tbody *ngIf="matchdata.statistics.innings">
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <td>
-                                {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}<p
+                                <span [ngClass]="{'current-batsman': (batting.statistics.not_out && batting.statistics.length != 0) , 'current-batsman' : (batting.statistics && batting.statistics.length != 0) }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</span><p
                                   class="batsman-text">
+                                  {{ (matchdata.sport_event_status.status == 'live' &&  batting?.statistics.length != 0 ) ?  'batting' : ''}}
                                   {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}
                                   {{batting?.statistics?.dismissal?.type == 'stumped' ? 'st' : ''}}
                                   <!--if batsman is leg before type out-->
@@ -125,7 +117,7 @@
                                 <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} runs per
                                   over)</p>
                               </td>
-                              <td><b>{{item?.teams[0]?.statistics?.batting?.runs}}</b></td>
+                              <td><b>{{item?.teams[0]?.statistics?.batting?.runs + item?.teams[1]?.statistics?.bowling?.extras}}</b></td>
                               <td colspan="4"></td>
                             </tr>
                             <!-- <tr>
@@ -200,6 +192,18 @@
             </ng-template>
           </ngb-tab>
           <!--END - LIVE MATCH TRACKER-->
+
+
+             <!-- START - FACTS AND FIGURES-->
+             <ngb-tab>
+              <ng-template ngbTabTitle>
+                <div>Facts & Figures</div>
+              </ng-template>
+              <ng-template ngbTabContent>
+                <app-match-facts-figures [matchdata]="matchdata" [teamLastmatch]="lastmatches" [teamMatchResult]="matchesresultdata"></app-match-facts-figures>
+              </ng-template>
+            </ngb-tab>
+            <!-- END - FACTS AND FIGURES-->
 
           <!--START - NEWS TAB-->
           <ngb-tab>

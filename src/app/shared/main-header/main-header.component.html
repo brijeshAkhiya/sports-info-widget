@@ -5,7 +5,7 @@
         <ng-container class="items" *ngFor="let slide of sliderdata1$ | async">
           <ng-template carouselSlide>
             <!--Live matches-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'live'"
+            <div class="slider-item" *ngIf="slide.status == 'live'"
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
@@ -47,7 +47,7 @@
               </div>
             </div>
             <!--upcoming matches-->
-            <div class="slider-item" *ngIf="slide.slider_status == 'upcoming'"
+            <div class="slider-item" *ngIf="slide.status == 'not_started'"
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">

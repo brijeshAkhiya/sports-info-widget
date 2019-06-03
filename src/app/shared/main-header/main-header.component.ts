@@ -142,8 +142,8 @@ export class MainHeaderComponent implements OnInit {
         if (res["data"]) {
           res["data"].map(data => {
             if (
-              data.slider_status == "upcoming" ||
-              data.slider_status == "live"
+              data.status == "not_started" ||
+              data.status == "live"
             ) {
               this.sliderdata.push(data);
             }
@@ -198,7 +198,7 @@ export class MainHeaderComponent implements OnInit {
         this.sliderdata1 = newArray;
         this.sliderdata1$ = of(this.sliderdata1)
         this.isanylivematch = this.sliderdata1.some(
-          type => type.slider_status === "live"
+          type => type.status === "live"
         );
 
         //check if any match is going to start in next 5 hours from current time
@@ -236,8 +236,8 @@ export class MainHeaderComponent implements OnInit {
         let dataarr = [];
         res["data"].map(data => {
           if (
-            data.slider_status == "live" ||
-            data.slider_status == "upcoming"
+            data.status == "live" ||
+            data.status == "not_started"
           ) {
             dataarr.push(data);
             dataarr.reverse();
@@ -245,8 +245,8 @@ export class MainHeaderComponent implements OnInit {
         });
         newArray = dataarr.map(sData => {
           if (
-            sData.slider_status == "live" ||
-            sData.slider_status == "upcoming"
+            sData.status == "live" ||
+            sData.status == "not_started"
           ) {
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));

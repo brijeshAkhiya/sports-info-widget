@@ -1,3 +1,14 @@
+.common-table                                   { margin-bottom: 24px;}
+.common-table:last-child                        { margin-bottom: 0px;}
+.batsman-table.common-table .table tr th:first-child,
+.batsman-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
+.bowler-table.common-table .table th                    { text-transform: uppercase; }
+.bowler-table.common-table .table td,
+.batsman-table.common-table .table td           { width: 8%; vertical-align: middle; }
+.bowler-table.common-table .table tr th:first-child,
+.bowler-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
+.common-table .table tr td .current-player      { color: #ED1A33; }
+
 /* -------- Commentary Section ------- */
 .this-over-block                                { margin-bottom: 24px; padding-bottom: 24px; font-family: 'IBM Plex Sans Condensed', sans-serif; text-transform: uppercase; border-bottom: 2px solid #ECECEC; }
 .this-over-block h5                             { margin: 0px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; flex-shrink: 0; -webkit-flex-shrink: 0; }

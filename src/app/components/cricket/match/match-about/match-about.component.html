@@ -5,8 +5,7 @@
   <h1 *ngIf="data.sport_event.competitors">
     {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
   </h1>
-  <span *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team">{{toss.toss_won_by_team}} opt to
-    {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+  
 
   <div class="match-update">
     <p class="light-text">
@@ -17,7 +16,8 @@
     </p>
     <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
     <p *ngIf="data.sport_event_status.status == 'cancelled'">Match is cancelled</p>
-    <p *ngIf="data.sport_event_status.status == 'live'" class="live-match">Live</p>
+    <p *ngIf="data.sport_event_status.status == 'live'" class="live-match">Live <span *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
+      {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span></p>
   </div>
 
   <div class="current-match d-flex">
@@ -25,24 +25,18 @@
     <!--If match not started-->
     <div class="current-teams" *ngIf="competitor">
       <div class="current-team d-flex justify-content-between align-items-center">
-        <h4 *ngIf="data.sport_event.competitors">
-          <p
-            [ngClass]="{'match-winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.home.id == data.sport_event_status.winner_id}">
-            <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
+        <h4 *ngIf="data.sport_event.competitors" [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.home.id == data.sport_event_status.winner_id}">
+           <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
             {{data.sport_event_status.status == 'not_started' ? competitor.home.name : competitor.home.abbreviation}}
-          </p>
         </h4>
         <h4 class="score" *ngIf="competitor.home.period_scores && competitor.home.period_scores[0]">
           {{competitor.home.period_scores[0].display_score}} ({{competitor.home.period_scores[0].display_overs}} ov)
         </h4>
       </div>
       <div class="current-team d-flex justify-content-between align-items-center">
-        <h4>
-          <p
-            [ngClass]="{'match-winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.away.id == data.sport_event_status.winner_id}">
+        <h4 [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.away.id == data.sport_event_status.winner_id}">
             <img [lazyLoad]="competitor.away.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
             {{data.sport_event_status.status == 'not_started' ? competitor.away.name : competitor.away.abbreviation}}
-          </p>
         </h4>
         <h4 class="score" *ngIf="competitor.away.period_scores && competitor.away.period_scores[0]">
           {{competitor.away.period_scores[0].display_score}} ({{competitor.away.period_scores[0].display_overs}} ov)

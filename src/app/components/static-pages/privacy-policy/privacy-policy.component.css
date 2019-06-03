@@ -10,6 +10,9 @@
 .privacy-policy-section ul              { padding-left: 48px; }
 .privacy-policy-section ul li           { position: relative; }
 .privacy-policy-section ul li::before   { content: ""; position: absolute; display: block; width: 8px; height: 8px; left: -24px; top: 10px; background: #3D3D3D; border-radius: 50%; }
+.privacy-policy-section a               { color: #ED1A33; }
+.privacy-policy-section a:hover,
+.privacy-policy-section a:focus         { color: #3D3D3D; }
 
 /***** Responsive CSS Start ******/
 

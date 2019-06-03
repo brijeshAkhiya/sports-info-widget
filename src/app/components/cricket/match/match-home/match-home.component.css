@@ -5,6 +5,7 @@
 .batsman-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
 .batsman-text                                   { margin: 4px 0px 0px; font-size: 14px; line-height: 18px; color: #7A7A7A; }
 .batsman-table.common-table .table td           { width: 8%; vertical-align: middle; }
+.bowler-table td .current-bowler,
 .batsman-table td .current-batsman              { font-weight: 500; }
 .fall-wicket-list                               { margin: 24px 0px 0px; text-align: center; }
 .fall-wicket-list li                            { margin: 0px 12px 24px; display: inline-block; width: 70px; vertical-align: top; cursor: pointer;  }

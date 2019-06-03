@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-match-facts-figures',
@@ -19,10 +19,15 @@ export class MatchFactsFiguresComponent implements OnInit {
 
   constructor(
     private sportsService: SportsService,
+    private router: Router,
     public cricketService: CricketService) {}
 
   ngOnInit() {
+    console.log('lastmatchess::',this.teamLastmatch);
+    
     if(this.matchdata){
+    console.log('matchdata:::',this.matchdata);
+    
       this.getVenueData();
 
       if(this.matchdata.sport_event_status.status == 'not_started')
@@ -60,5 +65,12 @@ export class MatchFactsFiguresComponent implements OnInit {
       }
     });
   }
+
+   //get match detail
+   matchDetail(id, team1, team2) {
+    let teams = team1.concat("-", team2);
+    this.router.navigate(["/cricket/match", btoa(id), teams]);
+  }
+
 
 }
