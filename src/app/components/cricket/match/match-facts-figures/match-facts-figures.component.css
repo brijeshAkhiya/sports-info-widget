@@ -18,17 +18,16 @@ agm-map                                         { height: 300px; }
     .probability-section .team-block h3             { margin: 0px 32px; font-size: 48px; line-height: 68px; }
 }
 
-
 @media (max-width: 1199px) {
-    /* -------- Facts & Figures Section ------- */
+/* -------- Facts & Figures Section ------- */
     .probability-section .team-block img        { height: 72px; }
     .probability-section .team-block h3         { margin: 0px 24px; font-size: 32px; line-height: 42px; }
-}
-@media (min-width: 768px) and (max-width: 991px) {
 }
 
 @media (max-width: 767px) {
 /* -------- Facts & Figures Section ------- */
+    .probability-section .team-block img        { height: 52px; }
+    .probability-section .team-block h3         { margin: 0px 20px; font-size: 28px; line-height: 38px; }
     .venue-info p                               { font-size: 16px; line-height: 22px; }
 }
 

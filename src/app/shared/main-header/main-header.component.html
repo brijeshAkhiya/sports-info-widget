@@ -1,8 +1,8 @@
 <div class="header-live-section">
   <div class="container">
     <div class="header-live-slider">
-      <owl-carousel-o [options]="customOptions" *ngIf="sliderdata1">
-        <ng-container class="items" *ngFor="let slide of sliderdata1">
+      <owl-carousel-o [options]="customOptions">
+        <ng-container class="items" *ngFor="let slide of sliderdata1$ | async">
           <ng-template carouselSlide>
             <!--Live matches-->
             <div class="slider-item" *ngIf="slide.slider_status == 'live'"
@@ -70,7 +70,6 @@
             </div>
           </ng-template>
         </ng-container>
-
       </owl-carousel-o>
     </div>
   </div>

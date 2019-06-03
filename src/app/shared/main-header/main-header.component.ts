@@ -21,6 +21,7 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SlugifyPipe } from "../../pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: "app-main-header",
@@ -43,6 +44,7 @@ export class MainHeaderComponent implements OnInit {
   sliderdata1: any;
   livedataarray = [];
   ismatchstart: boolean;
+  sliderdata1$: Observable<any[]>;
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -87,12 +89,12 @@ export class MainHeaderComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.getHeaderSliderData();
+   this.getHeaderSliderData();
   }
 
   //get custom ads api call -Ngrx Store
   getCustomAds() {
-    this.sportsService.getcustomadsbanner().subscribe(
+   this.sportsService.getcustomadsbanner().subscribe(
       res => {
         if (res["data"]) {
           this.store.dispatch(new Ads.SaveAds(res["data"]));
@@ -134,7 +136,7 @@ export class MainHeaderComponent implements OnInit {
 
   //get header slider data
 
-  getHeaderSliderData() {
+  getHeaderSliderData(){
     this.sportsService.getheaderslider().subscribe(res => {
       if (res["data"]) {
         if (res["data"]) {
@@ -194,7 +196,7 @@ export class MainHeaderComponent implements OnInit {
         });
         console.log("array", newArray);
         this.sliderdata1 = newArray;
-
+        this.sliderdata1$ = of(this.sliderdata1)
         this.isanylivematch = this.sliderdata1.some(
           type => type.slider_status === "live"
         );
@@ -211,9 +213,9 @@ export class MainHeaderComponent implements OnInit {
           }
         });
         if (this.ismatchstart) {
-          setTimeout(() => {
+          setInterval(() => {
             this.getLiveUpdates();
-          }, 30000);
+          }, 10000);
         }
         if (this.isanylivematch == true) {
           this.interval = setInterval(() => {
@@ -221,6 +223,7 @@ export class MainHeaderComponent implements OnInit {
             this.getLiveUpdates();
           }, 7000);
         }
+
       }
     });
   }
@@ -287,6 +290,7 @@ export class MainHeaderComponent implements OnInit {
           }
         });
         this.sliderdata1 = newArray;
+        this.sliderdata1$ = of(this.sliderdata1)
       }
     });
   }
