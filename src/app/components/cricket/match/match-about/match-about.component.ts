@@ -22,28 +22,13 @@ export class MatchAboutComponent implements OnInit {
   if(this.data['sport_event_status']['status'] == 'closed'){
     let compititors = this.data['sport_event']['competitors']
     let scores = this.data['sport_event_status']['period_scores']
-    //make obj for team results display
-    let obj = {}
+    
+    let obj = {}  
     compititors.map((sComp)=>{
       obj[sComp.qualifier] = sComp
+      let temp = (sComp.qualifier == 'home') ?  this.data['sport_event_status']['period_scores'].filter((score)=> {return score.home_score} ) : this.data['sport_event_status']['period_scores'].filter((score)=> {return score.away_score} )
+      obj[sComp.qualifier].period_score = temp[0]
     })  
-    scores.map((sScore)=>{
-      if(sScore.home_score){
-        if (!obj["home"].period_scores) {
-          obj["home"].period_scores = [];
-        }
-        obj["home"].period_scores.push(sScore);
-      } else {
-        if (!obj["away"].period_scores) {
-          obj["away"].period_scores = [];
-        }
-        obj["away"].period_scores.push(sScore);
-      }
-    })
-
-    this.teamsresultsscore = obj
-    console.log(this.teamsresultsscore);
-    
   }
  }
 }
