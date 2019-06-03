@@ -760,12 +760,45 @@ export class MatchHomeComponent implements OnInit {
       players => players.statistics.batting
     )
     batsmanList = (typeof batsmanList[0] != 'undefined') ? batsmanList[0].statistics.batting.players : [];
-    this.batsmanList = batsmanList.filter(obj => !obj.statistics.dismissal);
+    batsmanList = batsmanList.filter(obj => !obj.statistics.dismissal);
   
-    this.ballerList = this.data.statistics.innings[currentInningIndex].teams.filter(
+    let ballerList = this.data.statistics.innings[currentInningIndex].teams.filter(
       players => players.statistics.bowling
     );
-    this.ballerList = (typeof this.ballerList[0] != 'undefined') ? this.ballerList[0].statistics.bowling.players : [];
+    ballerList = (typeof ballerList[0] != 'undefined') ? ballerList[0].statistics.bowling.players : [];
+    
+    if(this.data.timeline && this.data.timeline.length > 0){
+      let timeline = this.data.timeline[this.data.timeline.length - 1];
+      if(typeof this.batsmanList == 'undefined')
+        this.batsmanList = [];
+      if(timeline.batting_params && timeline.batting_params.striker){
+        this.batsmanList[0] = timeline.batting_params.striker
+        console.log(this.batsmanList)
+        let stats = batsmanList.filter((player) => player.id == timeline.batting_params.striker.id)
+        console.log(stats)
+        this.batsmanList[0].statistics = stats[0].statistics
+      }
+      console.log(this.batsmanList)
+      if(timeline.batting_params && timeline.batting_params.non_striker){
+        this.batsmanList[1] = timeline.batting_params.non_striker
+        let stats = batsmanList.filter((player) => player.id == timeline.batting_params.non_striker.id)
+        this.batsmanList[1].statistics = stats[0].statistics
+      }
+      if(typeof this.ballerList == 'undefined')
+        this.ballerList = [];
+      if(timeline.bowling_params && timeline.bowling_params.bowler){
+        this.ballerList[0] = timeline.bowling_params.bowler
+        let stats = ballerList.filter((player) => player.id == timeline.bowling_params.bowler.id)
+        this.ballerList[0].statistics = stats[0].statistics
+      }
+      if(timeline.bowling_params && timeline.bowling_params.other_bowler){
+        this.ballerList[1] = timeline.bowling_params.other_bowler
+        let stats = ballerList.filter((player) => player.id == timeline.bowling_params.other_bowler.id)
+        this.ballerList[1].statistics = stats[0].statistics
+      }
+      console.log(this.batsmanList)
+    }
+
 
   }
 

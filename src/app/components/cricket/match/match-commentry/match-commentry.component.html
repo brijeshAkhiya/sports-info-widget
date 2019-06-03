@@ -23,8 +23,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let baller of batsmanList | slice:0:2">
-              <td>{{baller.name | split}}</td>
+            <tr *ngFor="let baller of batsmanList,let i = index">
+              <td (click)="cricketService.playerview(baller.id,baller.name)" >
+                  <span  [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </span>
+              </td>
               <td>{{baller.statistics.runs ? baller.statistics.runs : 0}}</td>
               <td>{{baller.statistics.balls_faced ? baller.statistics.balls_faced : 0}}</td>
               <td>{{baller.statistics.fours ? baller.statistics.fours : 0}}</td>
@@ -49,8 +51,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let baller of ballerList | slice:0:2">
-              <td>{{baller.name | split}}</td>
+            <tr *ngFor="let baller of ballerList,let i = index">
+              <td (click)="cricketService.playerview(baller.id,baller.name)" > 
+                <span  [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </span>
+              </td>
               <td>{{baller.statistics.overs_bowled ? baller.statistics.overs_bowled : 0}}</td>
               <td>{{baller.statistics.maidens ? baller.statistics.maidens : 0}}</td>
               <td>{{baller.statistics.runs_conceded ? baller.statistics.runs_conceded : 0}} </td>
