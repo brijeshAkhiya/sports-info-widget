@@ -4,20 +4,32 @@
   <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
     <div class="probability-block d-flex align-items-center justify-content-between">
       <div class="team-block">
-        <img class="team-flag"
-          [lazyLoad]="matchprobability[0]?.probability > matchprobability[1]?.probability ? matchprobability[0]?.id : matchprobability[1]?.id | logosurl"
-          [defaultImage]="cricketService.flagplaceholder">
+        
+        <img class="team-flag" *ngIf="matchprobability[0]?.probability > matchprobability[1]?.probability"
+        [lazyLoad]="matchprobability[0]?.id | logosurl"
+        [defaultImage]="cricketService.flagplaceholder">
+        
+        <img class="team-flag" *ngIf="!matchprobability[0]?.probability > matchprobability[1]?.probability"
+            [lazyLoad]="matchprobability[1]?.id | logosurl"
+            [defaultImage]="cricketService.flagplaceholder">
+
         <h3 *ngIf="matchprobability">
           {{matchprobability[0]?.probability > matchprobability[1]?.probability ? matchprobability[0]?.probability : matchprobability[1]?.probability}}%
         </h3>
       </div>
+      
       <div class="team-block">
         <h3 *ngIf="matchprobability">
           {{matchprobability[0]?.probability > matchprobability[1]?.probability ? matchprobability[1]?.probability : matchprobability[0]?.probability}}%
         </h3>
-        <img class="team-flag"
-          [lazyLoad]="matchprobability[0]?.probability > matchprobability[1]?.probability ? matchprobability[1]?.id : matchprobability[0]?.id | logosurl"
-          [defaultImage]="cricketService.flagplaceholder">
+        
+        <img class="team-flag" *ngIf="matchprobability[0]?.probability > matchprobability[1]?.probability"
+        [lazyLoad]="matchprobability[1]?.id | logosurl"
+        [defaultImage]="cricketService.flagplaceholder">
+        
+        <img class="team-flag" *ngIf="!matchprobability[0]?.probability > matchprobability[1]?.probability"
+            [lazyLoad]="matchprobability[0]?.id | logosurl"
+            [defaultImage]="cricketService.flagplaceholder">
       </div>
     </div>
     <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage"></div>
@@ -29,12 +41,12 @@
 <!-- END - MATCH PROBABAILITY-->
 
 
-<!-- <section class="last-meetings-section" *ngIf="lastmatches?.length != 0">
+<section class="last-meetings-section" *ngIf="teamLastmatch?.length != 0">
   <h4 class="line-title">Last meetings</h4>
   <div class="schedule-list schedule-tour-list">
-    <app-data-loader-widget *ngIf="!matchesresultdata"></app-data-loader-widget>
-    <app-no-data-widget *ngIf="lastmatches?.length == 0"></app-no-data-widget>
-    <div class="schedule-list-inner" *ngFor="let item of matchesresultdata">
+    <app-data-loader-widget *ngIf="!teamMatchResult"></app-data-loader-widget>
+    <app-no-data-widget *ngIf="teamLastmatch?.length == 0"></app-no-data-widget>
+    <div class="schedule-list-inner" *ngFor="let item of teamMatchResult">
       <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
         <div class="month-title">
           <div class="sticky-month">
@@ -80,9 +92,9 @@
       <!-- <div *ngIf="!item.data[0].period_scores">
         No data available!
       </div> -->
-<!--</div>
+</div>
   </div>
-</section> -->
+</section>
 
 <!-- START - VENUE-->
 <h4 class="line-title">Venue Details</h4>

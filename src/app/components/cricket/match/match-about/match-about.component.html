@@ -2,10 +2,11 @@
   class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
   *ngIf="data">
 
-  <h1 *ngIf="data.sport_event.competitors && data.sport_event_status != 'not_started'">
+  <h1 *ngIf="data.sport_event.competitors">
     {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
   </h1>
-
+  <span *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team">{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+  
   <div class="match-update">
     <p class="light-text">
       <ng-container *ngIf="data.sport_event.venue">
@@ -21,7 +22,7 @@
   <div class="current-match d-flex">
 
     <!--If match not started-->
-    <div class="current-teams">
+    <div class="current-teams" *ngIf="competitor">
       <div class="current-team d-flex justify-content-between align-items-center">
         <h4 *ngIf="data.sport_event.competitors">
           <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder">

@@ -24,12 +24,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let baller of batsmanList | slice:0:2">
-              <td>{{baller.name}}</td>
-              <td>4.3</td>
-              <td>1</td>
-              <td>56</td>
-              <td>1</td>
-              <td>6.23</td>
+              <td>{{baller.name | split}}</td>
+              <td>{{baller.statistics.runs ? baller.statistics.runs : 0}}</td>
+              <td>{{baller.statistics.balls_faced ? baller.statistics.balls_faced : 0}}</td>
+              <td>{{baller.statistics.fours ? baller.statistics.fours : 0}}</td>
+              <td>{{baller.statistics.sixes ? baller.statistics.sixes : 0}}</td>
+              <td>{{baller.statistics.strike_rate ? baller.statistics.strike_rate : 0}}</td>
             </tr>
           </tbody>
         </table>
@@ -50,12 +50,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let baller of ballerList | slice:0:2">
-              <td>{{baller.name}}</td>
-              <td>4.3</td>
-              <td>1</td>
-              <td>56</td>
-              <td>1</td>
-              <td>6.23</td>
+              <td>{{baller.name | split}}</td>
+              <td>{{baller.statistics.overs_bowled ? baller.statistics.overs_bowled : 0}}</td>
+              <td>{{baller.statistics.runs_conceded ? baller.statistics.runs_conceded : 0}} </td>
+              <td>{{baller.statistics.maidens ? baller.statistics.maidens : 0}}</td>
+              <td>{{baller.statistics.wickets ? baller.statistics.wickets : 0}}</td>
+              <td>{{baller.statistics.economy_rate ? baller.statistics.economy_rate : 0}}</td>
             </tr>
           </tbody>
         </table>

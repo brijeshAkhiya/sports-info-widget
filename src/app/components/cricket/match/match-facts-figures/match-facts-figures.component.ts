@@ -11,13 +11,15 @@ import { CricketService } from "@providers/cricket-service";
 export class MatchFactsFiguresComponent implements OnInit {
 
   @Input() matchdata;
+  @Input() teamLastmatch;
+  @Input() teamMatchResult;
   venuedetails;
   matchprobability;
   stylepercentage;
 
   constructor(
     private sportsService: SportsService,
-    private cricketService: CricketService) {}
+    public cricketService: CricketService) {}
 
   ngOnInit() {
     if(this.matchdata){

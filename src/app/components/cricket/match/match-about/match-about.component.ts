@@ -9,8 +9,8 @@ import { CricketService } from "@providers/cricket-service";
 export class MatchAboutComponent implements OnInit {
 
   @Input() data: any;
-  @Input() teams: any;  
   @Input() competitor: any;
+  @Input() toss: any;
 
   teamsresultsscore;
 

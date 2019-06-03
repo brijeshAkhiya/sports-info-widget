@@ -7,7 +7,7 @@
         <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
         
         <!-- START - ABOUT MATCH-->
-        <app-match-about *ngIf="matchdata" [data]="matchdata" [teams]="teamsbytype" [competitor]="competitor"></app-match-about>
+        <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision" ></app-match-about>
         <!-- END - ABOUT MATCH-->
 
 
@@ -32,22 +32,25 @@
               <div>Facts & Figures</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-match-facts-figures [matchdata]="matchdata"></app-match-facts-figures>
+              <app-match-facts-figures [matchdata]="matchdata" [teamLastmatch]="lastmatches" [teamMatchResult]="matchesresultdata"></app-match-facts-figures>
             </ng-template>
           </ngb-tab>
           <!-- END - FACTS AND FIGURES-->
 
           <!-- START - SCORECARDS-->
-          <ngb-tab *ngIf="matchstatus != 'not_started'">
+          <ngb-tab *ngIf="matchdata.sport_event_status.status != 'not_started'">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs scorecard-tab"
-                [ngClass]="{'test-match': sportevent.tournament.type == 'first_class'}">
-                <ngb-tab *ngFor="let item of scorecards,let i = index">
-                  <ng-template ngbTabTitle *ngIf="scorecards">
-                    <span>{{teamObj[item.batting_team].data[0].name}}
+                [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
+                <ngb-tab *ngFor="let item of matchdata.statistics.innings,let i = index">
+                  <ng-template ngbTabTitle *ngIf="matchdata.statistics.innings">
+                    <span>{{teamObj[item.batting_team].name}}
                       <span
-                        class="test-inng">{{sportevent.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}</span></span>
+                        class="test-inng">
+                        {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
+                      </span>
+                    </span>
                   </ng-template>
                   <ng-template ngbTabContent>
                     <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box">
@@ -63,7 +66,7 @@
                               <th>SRR</th>
                             </tr>
                           </thead>
-                          <tbody *ngIf="scorecards">
+                          <tbody *ngIf="matchdata.statistics.innings">
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <td>
                                 {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}<p
@@ -75,25 +78,25 @@
                                   <!--if batsman is catch out-->
                                   {{ batting?.statistics?.dismissal?.type == 'caught' ? 'c' : '' || batting?.statistics?.dismissal?.type == 'retired_hurt' ? 'retired hurt' : ''}}
                                   {{ batting?.statistics?.dismissal?.type == 'caught' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
-                                      (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
                                         : ''  
-                                    : (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
                                   <!--if batsman is stumped out-->
                                   {{ batting?.statistics?.dismissal?.type == 'stumped' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
-                                      (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
                                         : ''  
-                                    : (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
                                   <!--if batsman is runout-->
                                   {{ batting?.statistics?.dismissal?.type == 'run_out' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
-                                      (objnew3[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
                                         : ''  
-                                    : (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
 
                                   {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? 'b' : '' : '' }}
-                                  {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (objnew3[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : '' : '' }}
+                                  {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : '' : '' }}
                                 </p>
                               </td>
                               <td>{{batting?.statistics?.runs ? batting.statistics.runs : '-'}}</td>
@@ -136,21 +139,23 @@
                       </div>
                     </div>
                     <!--Score card tab end-->
+
                     <!--Fall of wickets section starts-->
-                    <div class="common-table common-shadow rounded-box"
-                      *ngIf="sportevent.tournament.type != 'first_class' && ((item.number == 1 && fallofwicket1data.length > 0) || (item.number == 2 && fallofwicket2data.length > 0))">
-                      <div class="table-title" *ngIf="fallofwicket2data">
-                        <h6 class="text-uppercase">Fall of Wickets</h6>
-                      </div>
-                      <ul class="fall-wicket-list" *ngIf="fallofwicket2data">
-                        <li *ngFor="let item of item.number == 1 ? fallofwicket1data : fallofwicket2data">
-                          <p class="fall-wicket">{{item.displayscore}}</p>
-                          <p class="title">{{item.playername | split}}</p>
-                          <p>{{item.displayover}} OV</p>
-                        </li>
-                      </ul>
+                  <div class="common-table common-shadow rounded-box"
+                    *ngIf="matchdata.sport_event.tournament.type != 'first_class' && fallofWickets[item.number]">
+                    <div class="table-title" *ngIf="fallofWickets.length > 0">
+                      <h6 class="text-uppercase">Fall of Wickets</h6>
                     </div>
+                    <ul class="fall-wicket-list" *ngIf="fallofWickets.length > 0">
+                      <li *ngFor="let item of fallofWickets[item.number]">
+                        <p class="fall-wicket">{{item.displayscore}}</p>
+                        <p class="title">{{item.playername | split}}</p>
+                        <p>{{item.displayover}} OV</p>
+                      </li>
+                    </ul>
+                  </div>
                     <!--Fall of wickets section ends-->
+                    
                     <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box">
                       <div class="table-responsive">
                         <table class="table">
