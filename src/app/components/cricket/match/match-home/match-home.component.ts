@@ -658,6 +658,12 @@ export class MatchHomeComponent implements OnInit {
             ].stats = timelineStats;
             this.LiveOverSummery.push(thisBallStats);
           }
+          else{
+            // update commentry if already exists
+            this.inningWiseCommentry[currentInningIndex].commentry[
+              currentOverIndex
+            ].data[currentBallIndex] = timeline;
+          }
         } else {
           let temp = [];
           temp.unshift(timeline);
@@ -703,13 +709,14 @@ export class MatchHomeComponent implements OnInit {
       // console.log("************************");
       // console.log(this.inningWiseCommentry);
       // Get current batsman and ballers
-      this.getCurrentPlayers();
     });
     console.log(
       "************************this.inningWiseCommentry************************"
     );
     console.log(this.inningWiseCommentry);
     console.log(this.LiveOverSummery);
+
+    this.getCurrentPlayers();
 
     if (this.inningWiseCommentry.filter(comm => comm.length > 0))
       this.showCommetry = true;
@@ -723,7 +730,6 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get Live scores in match detail header */
   getScores() {
-    console.log(this.data.sport_event.competitors);
     let compObj = {};
     this.data.sport_event.competitors.map(s => (compObj[s.qualifier] = s));
     if (this.data.sport_event_status.period_scores) {
@@ -741,8 +747,6 @@ export class MatchHomeComponent implements OnInit {
         }
       });
     }
-    console.log(compObj);
-
     this.competitor = compObj;
     console.log(this.competitor);
   }
@@ -757,13 +761,11 @@ export class MatchHomeComponent implements OnInit {
     )
     batsmanList = (typeof batsmanList[0] != 'undefined') ? batsmanList[0].statistics.batting.players : [];
     this.batsmanList = batsmanList.filter(obj => !obj.statistics.dismissal);
-    console.log("this.batsmanList" , this.batsmanList);
-
+  
     this.ballerList = this.data.statistics.innings[currentInningIndex].teams.filter(
       players => players.statistics.bowling
     );
     this.ballerList = (typeof this.ballerList[0] != 'undefined') ? this.ballerList[0].statistics.bowling.players : [];
-    console.log("this.ballerList", this.ballerList);
 
   }
 
@@ -793,7 +795,7 @@ export class MatchHomeComponent implements OnInit {
             this.getScores();
           }
         });
-    }, classThis.commonService.miliseconds(0, 0, 15)); // TEMP
+    }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
