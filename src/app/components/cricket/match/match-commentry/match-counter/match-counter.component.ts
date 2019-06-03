@@ -27,7 +27,6 @@ export class MatchCounterComponent implements OnInit {
     else{
       this.interval = setInterval(() => {
         this.remainingTime = this.commonService.getRemainigTimeofMatch(this.scheduled)
-        console.log(this.remainingTime);   
         if(this.remainingTime.days == 0 && this.remainingTime.hours == 0 && this.remainingTime.minutes == 0 && this.remainingTime.seconds == 0 )     
           this.clear();
       }, 1000);
