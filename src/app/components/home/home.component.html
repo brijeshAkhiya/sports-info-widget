@@ -157,9 +157,9 @@
     </div>
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
-        <div class="main-popular-video common-zoom-container common-full-img">
+        <div class="main-popular-video common-zoom-container common-full-img" (click)="blogview(video._id,video.eType,video.sTitle)">
           <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
-            [lazyLoad]="video.sImage | resizeImage:['m']" (click)="blogview(video._id,video.eType,video.sTitle)">
+            [lazyLoad]="video.sImage | resizeImage:['m']" >
           </div>
           <a class="play-btn"><img src="../../../assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">

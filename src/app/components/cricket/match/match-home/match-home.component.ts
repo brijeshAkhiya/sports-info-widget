@@ -684,6 +684,12 @@ export class MatchHomeComponent implements OnInit {
             ].stats = timelineStats;
             this.LiveOverSummery.push(thisBallStats);
           }
+          else{
+            // update commentry if already exists
+            this.inningWiseCommentry[currentInningIndex].commentry[
+              currentOverIndex
+            ].data[currentBallIndex] = timeline;
+          }
         } else {
           let temp = [];
           temp.unshift(timeline);
@@ -729,13 +735,14 @@ export class MatchHomeComponent implements OnInit {
       // console.log("************************");
       // console.log(this.inningWiseCommentry);
       // Get current batsman and ballers
-      this.getCurrentPlayers();
     });
     console.log(
       "************************this.inningWiseCommentry************************"
     );
     console.log(this.inningWiseCommentry);
     console.log(this.LiveOverSummery);
+
+    this.getCurrentPlayers();
 
     if (this.inningWiseCommentry.filter(comm => comm.length > 0))
       this.showCommetry = true;
@@ -749,7 +756,6 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get Live scores in match detail header */
   getScores() {
-    console.log(this.data.sport_event.competitors);
     let compObj = {};
     this.data.sport_event.competitors.map(s => (compObj[s.qualifier] = s));
     if (this.data.sport_event_status.period_scores) {
@@ -767,36 +773,59 @@ export class MatchHomeComponent implements OnInit {
         }
       });
     }
-    console.log(compObj);
-
     this.competitor = compObj;
     console.log(this.competitor);
   }
 
   /** Get current Batsman and Ballers */
   getCurrentPlayers() {
-    let currentInningIndex = this.data.statistics.innings.findIndex(
-      inning => inning.number == this.data.sport_event_status.current_inning
+
+    let currentInningIndex = this.data.statistics.innings.findIndex((inning) => inning.number == this.data.sport_event_status.current_inning);
+
+    let batsmanList = this.data.statistics.innings[currentInningIndex].teams.filter(
+      players => players.statistics.batting
+    )
+    batsmanList = (typeof batsmanList[0] != 'undefined') ? batsmanList[0].statistics.batting.players : [];
+    batsmanList = batsmanList.filter(obj => !obj.statistics.dismissal);
+  
+    let ballerList = this.data.statistics.innings[currentInningIndex].teams.filter(
+      players => players.statistics.bowling
     );
+    ballerList = (typeof ballerList[0] != 'undefined') ? ballerList[0].statistics.bowling.players : [];
+    
+    if(this.data.timeline && this.data.timeline.length > 0){
+      let timeline = this.data.timeline[this.data.timeline.length - 1];
+      if(typeof this.batsmanList == 'undefined')
+        this.batsmanList = [];
+      if(timeline.batting_params && timeline.batting_params.striker){
+        this.batsmanList[0] = timeline.batting_params.striker
+        console.log(this.batsmanList)
+        let stats = batsmanList.filter((player) => player.id == timeline.batting_params.striker.id)
+        console.log(stats)
+        this.batsmanList[0].statistics = stats[0].statistics
+      }
+      console.log(this.batsmanList)
+      if(timeline.batting_params && timeline.batting_params.non_striker){
+        this.batsmanList[1] = timeline.batting_params.non_striker
+        let stats = batsmanList.filter((player) => player.id == timeline.batting_params.non_striker.id)
+        this.batsmanList[1].statistics = stats[0].statistics
+      }
+      if(typeof this.ballerList == 'undefined')
+        this.ballerList = [];
+      if(timeline.bowling_params && timeline.bowling_params.bowler){
+        this.ballerList[0] = timeline.bowling_params.bowler
+        let stats = ballerList.filter((player) => player.id == timeline.bowling_params.bowler.id)
+        this.ballerList[0].statistics = stats[0].statistics
+      }
+      if(timeline.bowling_params && timeline.bowling_params.other_bowler){
+        this.ballerList[1] = timeline.bowling_params.other_bowler
+        let stats = ballerList.filter((player) => player.id == timeline.bowling_params.other_bowler.id)
+        this.ballerList[1].statistics = stats[0].statistics
+      }
+      console.log(this.batsmanList)
+    }
 
-    let batsmanList = this.data.statistics.innings[
-      currentInningIndex
-    ].teams.filter(players => players.statistics.batting);
-    batsmanList =
-      typeof batsmanList[0] != "undefined"
-        ? batsmanList[0].statistics.batting.players
-        : [];
-    this.batsmanList = batsmanList.filter(obj => !obj.statistics.dismissal);
-    console.log("this.batsmanList", this.batsmanList);
 
-    this.ballerList = this.data.statistics.innings[
-      currentInningIndex
-    ].teams.filter(players => players.statistics.bowling);
-    this.ballerList =
-      typeof this.ballerList[0] != "undefined"
-        ? this.ballerList[0].statistics.bowling.players
-        : [];
-    console.log("this.ballerList", this.ballerList);
   }
 
   /** Get Match Live Update */
@@ -825,7 +854,7 @@ export class MatchHomeComponent implements OnInit {
             this.getScores();
           }
         });
-    }, classThis.commonService.miliseconds(0, 0, 15)); // TEMP
+    }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */

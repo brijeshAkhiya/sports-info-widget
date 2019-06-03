@@ -22,11 +22,8 @@ export class CustomAdsWidgetComponent implements OnInit {
       let arr = data["ads"].Ads;
       this.adsObj = {};
       arr.map(data => {
-        if (!this.adsObj[data.eType]) {
+        if (!this.adsObj[data.eType]) 
           this.adsObj[data.eType] = [];
-        }
-      });
-      arr.map(data => {
         this.adsObj[data.eType].push(data);
       });
     });  

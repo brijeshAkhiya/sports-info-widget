@@ -60,7 +60,7 @@
                           <tbody *ngIf="matchdata.statistics.innings">
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <td>
-                                <span [ngClass]="{'current-batsman': (batting.statistics.not_out && batting.statistics.length != 0) , 'current-batsman' : (batting.statistics && batting.statistics.length != 0) }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</span><p
+                                <span [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</span><p
                                   class="batsman-text">
                                   {{ (matchdata.sport_event_status.status == 'live' &&  batting?.statistics.length != 0 ) ?  'batting' : ''}}
                                   {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}

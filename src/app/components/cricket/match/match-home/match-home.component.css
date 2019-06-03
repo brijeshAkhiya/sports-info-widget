@@ -38,6 +38,9 @@
 @media (max-width: 767px) {
 /* -------- Scorecard Section ------- */
     .batsman-text                               { font-size: 11px; line-height: 14px;}
+    .fall-wicket-list li                        { margin: 0px 6px 16px; width: 70px; }
+    .fall-wicket-list .fall-wicket              { padding: 14px 4px; min-width: 52px; line-height: 20px; border-radius: 14px; }
+    .fall-wicket-list p                         { font-size: 12px; line-height: 18px; }
 }
 
 @media (max-width: 575px) {

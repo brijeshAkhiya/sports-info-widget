@@ -23,8 +23,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let baller of batsmanList | slice:0:2">
-              <td>{{baller.name | split}}</td>
+            <tr *ngFor="let baller of batsmanList,let i = index">
+              <td (click)="cricketService.playerview(baller.id,baller.name)" >
+                  <span  [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </span>
+              </td>
               <td>{{baller.statistics.runs ? baller.statistics.runs : 0}}</td>
               <td>{{baller.statistics.balls_faced ? baller.statistics.balls_faced : 0}}</td>
               <td>{{baller.statistics.fours ? baller.statistics.fours : 0}}</td>
@@ -49,11 +51,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let baller of ballerList | slice:0:2">
-              <td>{{baller.name | split}}</td>
+            <tr *ngFor="let baller of ballerList,let i = index">
+              <td (click)="cricketService.playerview(baller.id,baller.name)" > 
+                <span  [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </span>
+              </td>
               <td>{{baller.statistics.overs_bowled ? baller.statistics.overs_bowled : 0}}</td>
-              <td>{{baller.statistics.runs_conceded ? baller.statistics.runs_conceded : 0}} </td>
               <td>{{baller.statistics.maidens ? baller.statistics.maidens : 0}}</td>
+              <td>{{baller.statistics.runs_conceded ? baller.statistics.runs_conceded : 0}} </td>
               <td>{{baller.statistics.wickets ? baller.statistics.wickets : 0}}</td>
               <td>{{baller.statistics.economy_rate ? baller.statistics.economy_rate : 0}}</td>
             </tr>
@@ -61,12 +65,11 @@
         </table>
       </div>
     </div>
-
     <div class="this-over-block d-flex align-items-center" *ngIf="oversummery && oversummery.length > 0">
       <h5>This over :</h5>
       <ul>
         <ng-container *ngFor="let over of oversummery">
-          <li [ngClass]="{'hightlight': over.wickets=='W' || over.extra_runs || over.run == 4 || over == 6}">
+          <li [ngClass]="{'hightlight': over.wickets=='W' || over.extra_runs || over.run == 4 || over.run == 6}">
             {{ over.wickets=='W' || over.extra_runs ? (over.extra_runs > 0 ? over.extra_runs : '') : over.run }}
             <ng-container *ngIf="over.wickets=='W'"><span>W</span></ng-container>
             <ng-container *ngIf="over.extra_runs"><span>{{over.extra_runs}}</span></ng-container>
