@@ -52,7 +52,7 @@
 
     <div class="match-win-player d-flex" *ngIf="data.statistics && data.statistics.man_of_the_match">
       <div class="player-pic">
-        <img src="../../../../../assets/images/placeholder-sqad.svg">
+        <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
       </div>
       <div class="player-info">
         <p class="light-text">Player of the Match</p>

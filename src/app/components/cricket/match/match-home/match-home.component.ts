@@ -98,11 +98,9 @@ export class MatchHomeComponent implements OnInit {
       (res: any) => {
         this.isshow = true;
         if (res.data) {
-          console.log(res.data);
-          
+          console.log(res.data);  
           this.isshow = false;
           this.matchdata = res.data;
-          this.getmatchteamlineup();
           this.data = res.data;
           this.getTeams();
           if (this.matchdata.sport_event_status.status == "not_started")
@@ -199,7 +197,6 @@ export class MatchHomeComponent implements OnInit {
             this.matcheventstatus = res["data"]["sport_event_status"];
             this.scorecards = res["data"]["statistics"]["innings"];
             console.log('scorecards',this.scorecards);
-            
             this.getmatchteamlineup();
           }
 

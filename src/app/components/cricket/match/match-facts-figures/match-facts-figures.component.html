@@ -106,11 +106,11 @@
   </ng-container>
   <p *ngIf="venuedetails?.name">
     <span>Venue :</span>
-    {{venuedetails?.name}}, {{venuedetails?.city_name}},{{venuedetails?.country_name}}
+    {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
   </p>
   <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
-  <p *ngIf="venuedetails?.bowling_ends"><span>End names
-      :</span>{{venuedetails?.bowling_ends[0].name}},{{venuedetails?.bowling_ends[1].name}}</p>
+  <p *ngIf="venuedetails?.bowling_ends"><span>Ends
+      :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
 </section>
 <div *ngIf="!venuedetails">
   No venue details available for this match!

@@ -8,7 +8,7 @@
         <ngb-tabset class="common-tabs" [activeId]="selectedTab" >
           <ngb-tab id="upcoming">
             <ng-template ngbTabTitle>
-              <div>Upcoming</div>
+              <div (click)="getMatchFixtures()">Upcoming</div>
             </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">

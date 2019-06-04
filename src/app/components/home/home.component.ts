@@ -143,7 +143,6 @@ export class HomeComponent implements OnInit {
   getMatchResults() {
     this.sportsService
       .getmatchresults()
-      .pipe(distinctUntilChanged())
       .subscribe(res => {
         if (res["data"].length != 0) {
           this.matchresults = res["data"];

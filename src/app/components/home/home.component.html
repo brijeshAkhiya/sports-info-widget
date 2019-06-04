@@ -103,7 +103,7 @@
                 <app-data-loader-widget *ngIf="!matchresults || isnodata"></app-data-loader-widget>
                 <app-no-data-widget *ngIf="matchresults?.length == 0 || isnodata"></app-no-data-widget>
                 <ul class="common-list cricket-list">
-                  <li *ngFor="let result of matchresults | slice:1:5"
+                  <li *ngFor="let result of matchresults | slice:0:4"
                     (click)="matchDetail(result.match_id,result.competitors[0].name,result.competitors[1].name)">
                     <div class="title d-flex justify-content-between">
                       <p><b>{{result.season_name ? result.season_name : result.tournament_name}}</b></p>

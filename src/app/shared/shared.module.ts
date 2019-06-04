@@ -25,6 +25,7 @@ import { LogosUrlPipe } from '../pipes/logosurlpipe';
 import { NoDataWidgetComponent } from './no-data-widget/no-data-widget.component';
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
+import { PlayerImagePipe } from '@app/pipes/playerimageurl.pipe';
 
 
 @NgModule({
@@ -39,8 +40,8 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         FormsModule,
         LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, ResizeImagePipe,LogosUrlPipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent],
+    declarations: [TruncatePipe, ResizeImagePipe,LogosUrlPipe,PlayerImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent],
     providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService,SplitPipe,LogosUrlPipe, CommonService, CricketService],
-    exports: [NgxTinySliderModule, TruncatePipe,LogosUrlPipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent]
+    exports: [NgxTinySliderModule, TruncatePipe,LogosUrlPipe,PlayerImagePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent]
 })
 export class SharedModule { }
