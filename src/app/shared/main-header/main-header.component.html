@@ -1,7 +1,7 @@
 <div class="header-live-section">
   <div class="container">
     <div class="header-live-slider">
-      <owl-carousel-o [options]="customOptions">
+      <owl-carousel-o [options]="customOptions" *ngIf="sliderdata1">
         <ng-container class="items" *ngFor="let slide of sliderdata1$ | async">
           <ng-template carouselSlide>
             <!--Live matches-->
@@ -119,7 +119,7 @@
       <!-- <div id="nav-pointer" #navpointer></div> -->
     </div>
     <ul class="navbar-nav navbar-rightside login-search">
-      <li><a class="search" (click)="searchopen()"></a></li>
+      <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()"></a></li>
       <!-- <li><a class="login" (click)="open(content)"></a></li> -->
     </ul>
   </div>
