@@ -1,8 +1,8 @@
 <!-- currentOverStats
 {{currentOverStats | json}} -->
-{{'fgdg'}}{{oversummery | json }}
-<div class="commentary-title" *ngIf="commentaries.stats && (oversummery && oversummery.length > 0 && commentaries.stats.over_number != oversummery[0].over)">
-  <span>End of over : {{commentaries.stats.over_number}}</span>
+<!-- <div class="commentary-title" *ngIf="commentaries.stats || (data.sport_event_status.status == 'live' && oversummery && commentaries.stats.over_number != oversummery[0].over)"> -->
+<div class="commentary-title" *ngIf="(commentaries.stats && data.sport_event_status.status == 'closed') || (commentaries.stats &&  data.sport_event_status.status == 'live' && oversummery && commentaries.stats.over_number != oversummery[0].over)">
+        <span>End of over : {{commentaries.stats.over_number}}</span>
   <span>{{commentaries.stats.abbreviation}} : {{commentaries.stats.display_score}}</span>   <!-- TODO - display_score-->
   <!-- <span>RR : 8.00</span> -->  <!-- TODO - Run Rate-->
   <span>Summary : {{commentaries.stats.runs}} Runs {{commentaries.stats.wickets}} Wickets</span>

@@ -242,6 +242,7 @@ export class MatchHomeComponent implements OnInit {
                 let objBowling = {};
                 //old logic for get players name
 
+                console.log('scorecards::',this.scorecards);
                 
                 this.scorecards.map((data, key) => {
                   data["teams"][0]["statistics"]["batting"]["players"].map(
@@ -266,13 +267,13 @@ export class MatchHomeComponent implements OnInit {
                   ...objBowling,
                   ...objBatting
               }
-            
+              console.log("playerList:::", this.playerList);
           }
         }
       
       );
     }
-    console.log("playerList:::", this.playerList);
+  
   }
 
   //get team versus team data
