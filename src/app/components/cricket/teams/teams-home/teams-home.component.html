@@ -35,8 +35,8 @@
                 <app-data-loader-widget *ngIf="!teamprofiledata?.players"></app-data-loader-widget>
                 <div class="row row-size12">
                   <div class="col-xl-3 col-sm-4" *ngFor="let player of teamprofiledata?.players">
-                    <div class="squad-item rounded-box common-shadow">
-                      <img src="../../../../../assets/images/placeholder-sqad.svg" alt="dhoni">
+                    <div class="squad-item rounded-box common-shadow" (click)="playerview(player.id,player.name)">
+                      <img alt="dhoni" [lazyLoad]="player?.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
                       <div class="item-desc">
                         <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
                         <button class="theme-btn" (click)="playerview(player.id,player.name)">View

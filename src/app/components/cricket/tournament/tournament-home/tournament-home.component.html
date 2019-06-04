@@ -78,7 +78,7 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of battingleaders | slice:0:1">
-                      <img src="../../../../../assets/images/placeholder-sqad.svg" alt="player">
+                      <img  alt="player" [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
@@ -112,7 +112,7 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of bowlingleaders | slice:0:1">
-                      <img src="../../../../../assets/images/placeholder-sqad.svg" alt="player">
+                      <img alt="player" [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">

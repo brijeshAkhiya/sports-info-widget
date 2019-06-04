@@ -4,6 +4,8 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { SlugifyPipe } from "../../../../pipes/slugpipe";
 import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 import { CommonService } from '@providers/common-service';
+import { CricketService } from "@providers/cricket-service";
+
 
 @Component({
   selector: 'app-tournament-home',
@@ -22,7 +24,7 @@ export class TournamentHomeComponent implements OnInit {
   populararticles: any;
   commonnewsparams:any
 
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router,
+  constructor(private sportsService: SportsService, private cricketService: CricketService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe,private router: Router,
     private commonService:CommonService) { }
 
   ngOnInit() {

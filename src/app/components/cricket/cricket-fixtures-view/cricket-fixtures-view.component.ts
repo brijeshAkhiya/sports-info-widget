@@ -43,7 +43,6 @@ export class CricketFixturesViewComponent implements OnInit {
   getMatchResults() {
     this.sportsService
       .getmatchresults()
-      .pipe(distinctUntilChanged())
       .subscribe(
         res => {
           if (res["data"].length != 0) {

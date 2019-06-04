@@ -10,7 +10,7 @@ export class PlayerImagePipe implements PipeTransform {
   transform(value: any, args?: any): any {
     let sizes = { s: "560x315", m: "452x544", l: "1920x1080" };
     if (args) {
-      return `${this.commonService.s3Url}/${sizes[args]}/players/${value}.jpg`;
+      return `${this.commonService.s3Url}${sizes[args]}/players/${value}.jpg`;
     } else {
       return `${this.commonService.s3Url}${value}.jpg`;
     }

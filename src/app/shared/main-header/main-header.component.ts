@@ -206,10 +206,15 @@ export class MainHeaderComponent implements OnInit {
           let matchtime: any = new Date(data.scheduled).getTime();
           let currenttime: any = new Date().getTime();
           let difference = Math.round(
-            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100) / 100
+            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100) 
           );
-          if (difference <= 5 && difference >= 0) {
-            return true;
+          console.log('diiff::', Math.round(
+            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
+          ));
+          if (difference > 0 && difference <= 10 ) {
+              setTimeout(() => {
+                this.getLiveUpdates();
+              },difference);
           }
         });
         if (this.ismatchstart) {
