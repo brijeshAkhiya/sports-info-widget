@@ -23,13 +23,10 @@ export class MatchFactsFiguresComponent implements OnInit {
     public cricketService: CricketService) {}
 
   ngOnInit() {
-    console.log('lastmatchess::',this.teamLastmatch);
+    console.log(this.teamMatchResult);
     
     if(this.matchdata){
-    console.log('matchdata:::',this.matchdata);
-    
       this.getVenueData();
-
       if(this.matchdata.sport_event_status.status == 'not_started')
         this.getMatchProbability();
 
@@ -55,6 +52,8 @@ export class MatchFactsFiguresComponent implements OnInit {
   getMatchProbability() {
     this.sportsService.getmatchprobability(this.matchdata.sport_event.id).subscribe((res:any) => {
       this.matchprobability = res.data;
+      console.log(this.matchprobability);
+      
       if (
         this.matchprobability[0].probability >
         this.matchprobability[1].probability
