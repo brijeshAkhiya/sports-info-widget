@@ -84,7 +84,7 @@
   <ng-container *ngIf="commentry">
     <ng-container *ngFor="let temp of commentry">
       <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries" [oversummery]="oversummery"
-        [index]="i"></app-commentry>
+        [index]="i" [data]="data"></app-commentry>
     </ng-container>
   </ng-container>
 

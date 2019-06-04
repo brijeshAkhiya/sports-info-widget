@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CommentryComponent implements OnInit {
 
+  @Input() data: any;
   @Input() commentaries: any;
   @Input() index: any;
   @Input() oversummery: any;
