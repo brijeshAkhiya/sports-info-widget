@@ -6,11 +6,11 @@
       <div class="team-block">
         
         <img class="team-flag" *ngIf="matchprobability[0]?.probability > matchprobability[1]?.probability"
-        [lazyLoad]="matchprobability[0]?.id | logosurl"
+        [lazyLoad]="matchprobability[0].id | logosurl"
         [defaultImage]="cricketService.flagplaceholder">
         
         <img class="team-flag" *ngIf="!matchprobability[0]?.probability > matchprobability[1]?.probability"
-            [lazyLoad]="matchprobability[1]?.id | logosurl"
+            [lazyLoad]="matchprobability[1].id | logosurl"
             [defaultImage]="cricketService.flagplaceholder">
 
         <h3 *ngIf="matchprobability">

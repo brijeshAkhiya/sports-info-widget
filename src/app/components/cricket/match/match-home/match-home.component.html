@@ -117,7 +117,7 @@
                                 <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} runs per
                                   over)</p>
                               </td>
-                              <td><b>{{item?.teams[0]?.statistics?.batting?.runs + item?.teams[1]?.statistics?.bowling?.extras}}</b></td>
+                              <td><b>{{item?.teams[1]?.statistics?.bowling?.extras > 0 ? item?.teams[0]?.statistics?.batting?.runs + item?.teams[1]?.statistics?.bowling?.extras : item?.teams[0]?.statistics?.batting?.runs}}</b></td>
                               <td colspan="4"></td>
                             </tr>
                             <!-- <tr>
