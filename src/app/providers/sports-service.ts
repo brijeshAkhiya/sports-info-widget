@@ -294,6 +294,15 @@ export class SportsService {
     );
   }
 
+  //get team profile without tournament id
+  getteamprofileview(teamid){
+    return this.http.get(
+      environment.apiUrl +
+        environment.version +
+        `/cricket/team/${teamid}/profile`
+    );
+  }
+
   //get writer profile
   getwriterprofile(data) {
     return this.http.post(

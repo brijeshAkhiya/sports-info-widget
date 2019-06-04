@@ -16,7 +16,7 @@
 .reader-section .title-block                { padding-top: 54px; }
 .reader-section h1                          { margin-bottom: 12px; }
 .reader-item                                { margin: 52px 12px 10px; padding: 24px; background: #fff; text-align: center; }
-.owl-carousel .owl-item .reader-item img    { margin: -72px 0px 12px; width: 104px; display: inline-block; border-radius: 50%; }
+.owl-carousel .owl-item .reader-item img    { margin: -76px 0px 12px; width: 104px; display: inline-block; border-radius: 50%; }
 .reader-item p:last-child                   { margin: 0px; }
 .reader-slider-nav.owl-theme .owl-nav                   { position: static; text-align: left; }
 .reader-slider-nav.owl-theme .owl-nav li                { display: inline-block; }
@@ -45,6 +45,6 @@
     .about-count [class*="col-"]:last-child .count-item  { margin-bottom: 0px; }
     .about-count .count-item:after      { height: 4px; }
     .reader-item                                { margin: 52px 12px 10px; padding: 16px; background: #fff; text-align: center; }
-    .owl-carousel .owl-item .reader-item img    { margin: -72px 0px 12px; width: 104px; display: inline-block; border-radius: 50%; }
+    .owl-carousel .owl-item .reader-item img    { margin: -56px 0px 12px; width: 80px; display: inline-block; border-radius: 50%; }
 
 }   

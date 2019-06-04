@@ -37,6 +37,7 @@ import { RecommendedComponent } from "./match/recommended/recommended.component"
 import { MatchAboutComponent } from "./match/match-about/match-about.component";
 import { CricketFixturesViewComponent } from "./cricket-fixtures-view/cricket-fixtures-view.component";
 import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
+import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match
     UpcomingComponent,
     RecommendedComponent,
     MatchAboutComponent,
-    LiveMatchTrackerComponent
+    LiveMatchTrackerComponent,
+    CustomTeamViewComponent
   ],
   imports: [
     CommonModule,

@@ -23,4 +23,5 @@ export class CricketService {
     this.router.navigate(['/cricket/player', btoa(id), slugname]);
   }
 
+
 }

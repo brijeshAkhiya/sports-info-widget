@@ -1,0 +1,121 @@
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center" *ngIf="teamprofiledata">
+          <h1>{{teamprofiledata?.name}}</h1>
+          <!-- <button class="add-to-fav-btn added"><span>Add to favorites</span></button> -->
+        </div>
+        <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
+        <ngb-tabset class="common-tabs" *ngIf="teamprofiledata">
+          <ngb-tab>
+            <ng-template ngbTabTitle>About</ng-template>
+            <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
+            <app-no-data-widget *ngIf="teamprofiledata?.length == 0"></app-no-data-widget>
+            <ng-template ngbTabContent>
+              <section class="team-about-head d-flex">
+                <div class="team-logo align-self-start rounded-box common-shadow">
+                  <div class="team-logo-img" [lazyLoad]="teamprofiledata?.id | logosurl" [defaultImage]="teamsplaceholder"></div>
+                  <!-- <img src="http://sports-info.s3-website.ap-south-1.amazonaws.com/logos/au.png" alt="team-logo"> -->
+                  <!-- ../../../../../assets/images/logo-placeholder.svg -->
+                </div>
+                <div class="team-info align-items-center rounded-box common-shadow">
+                  <h5><span class="title light-text">Abbreviation : </span>{{teamprofiledata?.abbreviation}}</h5>
+                  <h5><span class="title light-text">Manager : </span>{{teamprofiledata?.manager_name | split}}</h5>
+                  <h5>
+                    <span class="title light-text">Recent Matches : </span>
+                    <ul class="match-result">
+                      <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamprofiledata?.results">{{item}}</li>
+                    </ul>
+                  </h5>
+                </div>
+              </section>
+              <section class="common-section squad-list" *ngIf="teamprofiledata?.players">
+                <h4>Squad</h4>
+                <app-data-loader-widget *ngIf="!teamprofiledata?.players"></app-data-loader-widget>
+                <div class="row row-size12">
+                  <div class="col-xl-3 col-sm-4" *ngFor="let player of teamprofiledata?.players">
+                    <div class="squad-item rounded-box common-shadow" (click)="playerview(player.id,player.name)">
+                      <img alt="dhoni" [lazyLoad]="player?.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
+                      <div class="item-desc">
+                        <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
+                        <button class="theme-btn" (click)="playerview(player.id,player.name)">View
+                          Player<span></span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="getarticles()">News</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="getTeamFixtures()">Fixtures</div>
+            </ng-template>
+            <app-data-loader-widget *ngIf="!fixturesdata || noteamfixtures"></app-data-loader-widget>
+            <app-no-data-widget *ngIf="fixturesdata?.length == 0"></app-no-data-widget>
+            <!-- <div *ngIf="noteamfixtures || !fixturesdata">No data available!</div> -->
+            <ng-template ngbTabContent *ngIf="!noteamfixtures">
+              <div class="schedule-list schedule-tour-list">
+                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
+                  <div class="month-title">
+                    <div class="sticky-month">
+                      <h5>{{item.day}}</h5>
+                    </div>
+                  </div>
+                  <div class="schedule-items">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)">
+                      <div class="match-desc">
+                        <!-- <h6>Match 2</h6> -->
+                        <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="time-line">{{item.scheduled | date:'h:mm a'}}</p>
+                      </div>
+                      <div class="match-teams d-flex align-items-center">
+                        <div class="match-team d-flex align-items-center">
+                          <div class="team-info">
+                            <h5>{{item.competitors[0].abbreviation}}</h5>
+                          </div>
+                          <img class="team-flag" [lazyLoad]="item.competitors[0]?.id | logosurl" [defaultImage]="teamsplaceholder" alt="team-flag">
+                        </div>
+                        <div class="vs-block">
+                          <h6>vs</h6>
+                        </div>
+                        <div class="match-team d-flex align-items-center">
+                          <img class="team-flag" [lazyLoad]="item.competitors[1]?.id | logosurl"  [defaultImage]="teamsplaceholder" alt="team-flag">
+                          <div class="team-info">
+                            <h5>{{item.competitors[1].abbreviation}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="details-btn"
+                        (click)="matchDetail(item.id,item.competitors[0].name,item.competitors[1].name)"><span>Details</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
+            *ngIf="widget1type && widget1title"></app-common-story-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

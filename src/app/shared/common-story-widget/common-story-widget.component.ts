@@ -77,9 +77,9 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
       let slugname = this.slugifyPipe.transform(playername);
       this.router.navigate(['/cricket/player', btoa(id), slugname]);
     }
-    if(type == 'Tour'){
+    if(type == 'Team'){
       let slugname = this.slugifyPipe.transform(name);
-      this.router.navigate(['/cricket/team',btoa('1234'),btoa(id),slugname]);
+      this.router.navigate(['/cricket/team',btoa(id),slugname]);
     }
     
     

@@ -18,7 +18,7 @@ export class PlayerHomeComponent implements OnInit {
   commonnewsparams = {}
   widget1title = "Current Series";
   widget1type = "currentseries";
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private router: Router,private cricketservice:CricketService) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private router: Router,private cricketService:CricketService) { }
 
   ngOnInit() {
     this.playerid = atob(this.activatedroute.snapshot.params.id)

@@ -13,6 +13,7 @@ import { PlayerHomeComponent } from './player/player-home/player-home.component'
 import { TournamentCricketComponent } from './tournament/tournament-cricket/tournament-cricket.component';
 import { TournamentStandingsComponent } from './tournament/tournament-standings/tournament-standings.component';
 import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
+import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
 
 const childRoutes: Routes = [
     {
@@ -64,6 +65,10 @@ const childRoutes: Routes = [
             {
                 path: 'team/:tournamentid/:teamid/:slug',
                 component: TeamsHomeComponent
+            },
+            {
+                path: 'team/:teamid/:slug',
+                component: CustomTeamViewComponent
             },
             {
                 path: 'player/:id/:slug',

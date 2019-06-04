@@ -148,7 +148,7 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
       this.router.navigate(['/cricket/tournament',btoa(id),slugname]);
     }
     else if(type == 'Team'){
-      this.router.navigate(['/cricket/team','c3I6dG91cm5hbWVudDoyNDcy',btoa(id),slugname])
+      this.router.navigate(['/cricket/team',btoa(id),slugname])
     }
     else if(type == 'Match'){
       this.router.navigate(['/cricket/match/',btoa(id),slugname])
