@@ -10,6 +10,11 @@ export class ResizeImagePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     
+    // If image is direct http URL
+    if(value != null && typeof value != 'undefined' && value.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/))
+      return value;
+
+    // if image has only source - append baseURL
     let sizes = { s: "560x315", m: "1440x810", l: "1920x1080" };
     if (args) {
       return (
