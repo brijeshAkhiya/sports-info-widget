@@ -7,7 +7,7 @@
 .batsman-table.common-table .table td           { width: 8%; vertical-align: middle; }
 .bowler-table.common-table .table tr th:first-child,
 .bowler-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
-.common-table .table tr td .current-player      { color: #ED1A33; }
+.common-table .table tr td .current-player      { font-weight: 500; }
 
 /* -------- Commentary Section ------- */
 .this-over-block                                { margin-bottom: 24px; padding-bottom: 24px; font-family: 'IBM Plex Sans Condensed', sans-serif; text-transform: uppercase; border-bottom: 2px solid #ECECEC; }
@@ -18,14 +18,23 @@
 
 /***** Responsive CSS Start ******/
 
+@media (min-width: 1200px) and (max-width: 1379px) {
+    .this-over-block ul li                      { margin-left: 12px; width: 52px; height: 52px; font-size: 19px; line-height: 52px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .this-over-block                            { padding-bottom: 16px; }
+    .this-over-block ul li                      { margin-bottom: 8px; margin-left: 12px; width: 48px; height: 48px; font-size: 18px; line-height: 48px; }
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Commentary Section ------- */
-    .this-over-block ul li                      { width: 48px; height: 48px; font-size: 18px; line-height: 48px; }
+    .this-over-block ul li                      {  margin-left: 12px; width: 42px; height: 42px; font-size: 16px; line-height: 42px; }
 }
 
 @media (max-width: 767px) {
 /* -------- Commentary Section ------- */
-    .this-over-block ul li                      { width: 36px; height: 36px; font-size: 14px; line-height: 36px; }
+    .this-over-block ul li                      { margin-left: 8px; width: 36px; height: 36px; font-size: 14px; line-height: 36px; }
 }
 
 @media (max-width: 575px) {
