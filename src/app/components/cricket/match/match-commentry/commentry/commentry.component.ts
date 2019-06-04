@@ -9,6 +9,7 @@ export class CommentryComponent implements OnInit {
 
   @Input() commentaries: any;
   @Input() index: any;
+  @Input() oversummery: any;
   constructor() { }
 
   ngOnInit() {

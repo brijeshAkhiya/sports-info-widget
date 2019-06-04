@@ -399,6 +399,7 @@ export class MatchHomeComponent implements OnInit {
       currentOver[0].data.forEach(element => {
         if (element.batting_params) {
           this.LiveOverSummery.unshift({
+            over: element.over_number,
             run:
               typeof element.batting_params != "undefined"
                 ? element.batting_params.runs_scored
@@ -642,6 +643,7 @@ export class MatchHomeComponent implements OnInit {
 
         // current Over summery
         let thisBallStats = {
+          over: timeline.over_number,
           run:
             typeof timeline.batting_params != "undefined"
               ? timeline.batting_params.runs_scored
@@ -783,7 +785,6 @@ export class MatchHomeComponent implements OnInit {
       players => players.statistics.batting
     )
     batsmanList = (typeof batsmanList[0] != 'undefined') ? batsmanList[0].statistics.batting.players : [];
-    batsmanList = batsmanList.filter(obj => !obj.statistics.dismissal);
   
     let ballerList = this.data.statistics.innings[currentInningIndex].teams.filter(
       players => players.statistics.bowling
@@ -796,17 +797,16 @@ export class MatchHomeComponent implements OnInit {
         this.batsmanList = [];
       if(timeline.batting_params && timeline.batting_params.striker){
         this.batsmanList[0] = timeline.batting_params.striker
-        console.log(this.batsmanList)
         let stats = batsmanList.filter((player) => player.id == timeline.batting_params.striker.id)
-        console.log(stats)
         this.batsmanList[0].statistics = stats[0].statistics
       }
-      console.log(this.batsmanList)
       if(timeline.batting_params && timeline.batting_params.non_striker){
         this.batsmanList[1] = timeline.batting_params.non_striker
         let stats = batsmanList.filter((player) => player.id == timeline.batting_params.non_striker.id)
         this.batsmanList[1].statistics = stats[0].statistics
       }
+      console.log(this.batsmanList)
+
       if(typeof this.ballerList == 'undefined')
         this.ballerList = [];
       if(timeline.bowling_params && timeline.bowling_params.bowler){
@@ -834,6 +834,9 @@ export class MatchHomeComponent implements OnInit {
         .getmatchtimelineDetla(classThis.data.sport_event.id)
         .subscribe(res => {
           // res = res.result; // TEMP
+          this.data = res.data;
+          this.matchdata = res.data;
+          
           this.getTossDecision();
 
           // If no live coverage then no need to call API again

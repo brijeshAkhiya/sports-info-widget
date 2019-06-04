@@ -16,8 +16,12 @@
     </p>
     <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
     <p *ngIf="data.sport_event_status.status == 'cancelled'">Match is cancelled</p>
-    <p *ngIf="data.sport_event_status.status == 'live'" class="live-match">Live <span *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
-      {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span></p>
+    <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team" class="live-match"> 
+      <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+    </p>
+    <p *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team" class="live-match">Live 
+      <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+    </p>
   </div>
 
   <div class="current-match d-flex">

@@ -15,9 +15,12 @@ export class MatchCommentryComponent implements OnInit {
   @Input() batsmanList:any;
   showCommetry;
   ballers: any;
+  currentover;
+
   constructor(
     private cricketService: CricketService
-  ) {}
+  ) {
+  }
 
   ngOnInit(){
   }
