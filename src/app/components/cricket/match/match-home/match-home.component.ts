@@ -96,6 +96,7 @@ export class MatchHomeComponent implements OnInit {
   getMatchData() {
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
+        // res = res.result;
         this.isshow = true;
         if (res.data) {
           console.log(res.data);  
@@ -103,25 +104,30 @@ export class MatchHomeComponent implements OnInit {
           this.matchdata = res.data;
           this.data = res.data;
           this.getTeams();
+          this.getCommentries();
+          this.getFallWickets();
+          this.getScores();
+          this.getTossDecision();
           if (this.matchdata.sport_event_status.status == "not_started"){
             this.startLiveUpdateAfterTime();
-            this.getTossDecision();
-            if(this.data.timeline)
-              this.getUpdate();
-          }else if (
-            this.matchdata.sport_event_status.status == "closed" ||
-            this.matchdata.sport_event_status.status == "ended"
-          ) {
-            this.getCommentries();
-            this.getFallWickets();
-            this.getScores();
-          } else if (this.matchdata.sport_event_status.status == "live") {
-            this.getLiveUpdate(this);
-            this.getCommentries();
-            this.getFallWickets();
-            this.getTossDecision();
-            this.getScores();
           }
+          if(this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted") {
+              this.getLiveUpdate(this);
+          }
+            // else if (
+          //   this.matchdata.sport_event_status.status == "closed" ||
+          //   this.matchdata.sport_event_status.status == "ended"
+          // ) {
+          //   this.getCommentries();
+          //   this.getFallWickets();
+          //   this.getScores();
+          // } else if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted") {
+          //   this.getLiveUpdate(this);
+          //   this.getCommentries();
+          //   this.getFallWickets();
+          //   this.getTossDecision();
+          //   this.getScores();
+          // }
         }
       },
       error => {
@@ -376,8 +382,9 @@ export class MatchHomeComponent implements OnInit {
 
       if (typeof this.data.sport_event_status.toss_decision != "undefined")
         this.tossdecision.toss_decision = this.data.sport_event_status.toss_decision;
+
+      console.log(this.tossdecision);
     }
-    console.log(this.tossdecision);
   }
 
   /** Check if there is no commentry from API */
@@ -389,17 +396,24 @@ export class MatchHomeComponent implements OnInit {
   }
 
   getCurrentOverSummery() {
-    let currentInning = this.inningWiseCommentry.filter(innings => {
+    console.log("getCurrentOverSummery");
+    
+    let currentInning:any = this.inningWiseCommentry.filter(innings => {
       return innings.inning == this.data.sport_event_status.current_inning;
     });
-    let currentOver = currentInning[0].commentry.filter(overData => {
-      return (
-        overData.overs ==
-        Math.floor(this.data.sport_event_status.display_overs) + 1
-      );
-    });
-    if (currentOver.length > 0) {
-      currentOver[0].data.forEach(element => {
+    // let currentOver = currentInning[0].commentry.filter(overData => {
+    //   return (
+    //     overData.overs ==
+    //     Math.floor(this.data.sport_event_status.display_overs) + 1
+    //   );
+    // });
+    let temp = currentInning[0].commentry;
+    let currentOver = temp.findIndex(
+      overData => { console.log(overData); return overData.data.length > 0}
+    );
+      
+    if (currentOver > -1) {
+      currentInning[0].commentry[currentOver].data.forEach(element => {
         if (element.batting_params) {
           this.LiveOverSummery.unshift({
             over: element.over_number,
@@ -550,10 +564,10 @@ export class MatchHomeComponent implements OnInit {
       ].commentry.unshift({ data: temp });
     }
 
-    if (this.data.sport_event_status.status == "live") {
+    // if (this.data.sport_event_status.status == "live") {
       this.getCurrentOverSummery();
       this.getCurrentPlayers();
-    }
+    // }
 
     this.getTossDecision();
 
@@ -759,7 +773,8 @@ export class MatchHomeComponent implements OnInit {
   /** Get Live scores in match detail header */
   getScores() {
     let compObj = {};
-    this.data.sport_event.competitors.map(s => (compObj[s.qualifier] = s));
+    if(this.data.sport_event.competitors)
+      this.data.sport_event.competitors.map(s => (compObj[s.qualifier] = s));
     if (this.data.sport_event_status.period_scores) {
       this.data.sport_event_status.period_scores.map(sPScore => {
         if (sPScore.home_score) {
@@ -781,7 +796,8 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get current Batsman and Ballers */
   getCurrentPlayers() {
-
+    console.log("getCurrentPlayers");
+    
     let currentInningIndex = this.data.statistics.innings.findIndex((inning) => inning.number == this.data.sport_event_status.current_inning);
 
     let batsmanList = this.data.statistics.innings[currentInningIndex].teams.filter(
@@ -795,7 +811,12 @@ export class MatchHomeComponent implements OnInit {
     ballerList = (typeof ballerList[0] != 'undefined') ? ballerList[0].statistics.bowling.players : [];
     
     if(this.data.timeline && this.data.timeline.length > 0){
-      let timeline = this.data.timeline[this.data.timeline.length - 1];
+      let temp = this.data.timeline;
+      let timeline =  temp.reverse().findIndex(
+        overData => { return overData.batting_params}
+      );
+      
+      timeline = temp[timeline];
       if(typeof this.batsmanList == 'undefined')
         this.batsmanList = [];
       if(timeline.batting_params && timeline.batting_params.striker){
@@ -872,7 +893,7 @@ export class MatchHomeComponent implements OnInit {
       remainingTime.seconds
     );
     remainingMiliSec =
-      remainingMiliSec - this.commonService.miliseconds(0, 45, 0); // TEMP // Start timer before 30 min of match start
+      remainingMiliSec - this.commonService.miliseconds(0, 45, 0); // TEMP // Start timer before 45 min of match start
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
