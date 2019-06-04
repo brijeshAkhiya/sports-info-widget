@@ -7,6 +7,7 @@ import { SlugifyPipe } from '../pipes/slugpipe';
 export class CricketService {
 
   public flagplaceholder = '/assets/images/logo-placeholder.svg';
+  public playerplaceholder = '/assets/images/placeholder-sqad.svg';
   
   constructor(
     private splitpipe: SplitPipe,

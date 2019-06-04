@@ -12,12 +12,12 @@
 .about-count p                      { margin: 0px; font-size: 14px; line-height: 18px; letter-spacing: 0.88px; color: #A3A3A3; text-transform: uppercase; }
 
 /* -------- Reader Slider ------- */
-.reader-section .reader-inner       { padding-top: 48px; border-top: 2px solid #E5E5EC; }
-.reader-section .title-block        { padding-top: 54px; }
-.reader-section h1                  { margin-bottom: 12px; }
-.reader-item                        { margin: 52px 12px 10px; padding: 24px; background: #fff; text-align: center; }
-.reader-item img                    { margin: -72px 0px 12px; width: 104px; display: inline-block; border-radius: 50%; }
-.reader-item p:last-child           { margin: 0px; }
+.reader-section .reader-inner               { padding-top: 48px; border-top: 2px solid #E5E5EC; }
+.reader-section .title-block                { padding-top: 54px; }
+.reader-section h1                          { margin-bottom: 12px; }
+.reader-item                                { margin: 52px 12px 10px; padding: 24px; background: #fff; text-align: center; }
+.owl-carousel .owl-item .reader-item img    { margin: -72px 0px 12px; width: 104px; display: inline-block; border-radius: 50%; }
+.reader-item p:last-child                   { margin: 0px; }
 .reader-slider-nav.owl-theme .owl-nav                   { position: static; text-align: left; }
 .reader-slider-nav.owl-theme .owl-nav li                { display: inline-block; }
 .reader-slider-nav.owl-theme .owl-nav [class*="owl-"]   { margin-right: 14px; background: #fff; position: relative; left: auto; right: auto; transform: none; -webkit-transform: none; }

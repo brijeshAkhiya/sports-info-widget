@@ -14,7 +14,7 @@
             <ng-template ngbTabContent>
               <section class="player-profile d-flex">
                 <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="" src="../../../../../assets/images/placeholder-sqad.svg">
+                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerbasic?.id | playerimage:['m']" [defaultImage]="cricketservice.playerplaceholder">
                 </div>
                 <div class="player-info d-flex common-shadow rounded-box">
                   <div class="info-col">
