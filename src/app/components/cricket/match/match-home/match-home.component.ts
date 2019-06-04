@@ -103,9 +103,12 @@ export class MatchHomeComponent implements OnInit {
           this.matchdata = res.data;
           this.data = res.data;
           this.getTeams();
-          if (this.matchdata.sport_event_status.status == "not_started")
+          if (this.matchdata.sport_event_status.status == "not_started"){
             this.startLiveUpdateAfterTime();
-          else if (
+            this.getTossDecision();
+            if(this.data.timeline)
+              this.getUpdate();
+          }else if (
             this.matchdata.sport_event_status.status == "closed" ||
             this.matchdata.sport_event_status.status == "ended"
           ) {
