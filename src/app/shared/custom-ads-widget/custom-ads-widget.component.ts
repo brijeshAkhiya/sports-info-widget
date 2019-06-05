@@ -9,7 +9,7 @@ import { SportsService } from "../../providers/sports-service";
 })
 export class CustomAdsWidgetComponent implements OnInit {
   @Input()type:any
-  adsObj: {};
+  adsObj = [];
   addata: any;
   defaultImageLarge = '/assets/images/ad-1320-300.jpg'
   defaultImageRectangle = '/assets/images/ad-320-267.jpg'
@@ -19,16 +19,18 @@ export class CustomAdsWidgetComponent implements OnInit {
 
   ngOnInit() {
     this.store.subscribe(data => {
+      
       let arr = data["ads"].Ads;
-      this.adsObj = {};
       arr.map(data => {
         if (!this.adsObj[data.eType]) 
           this.adsObj[data.eType] = [];
         this.adsObj[data.eType].push(data);
       });
-    });  
-    //pick random custom ad from ngrx store data obj
-    this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];    
+
+      //pick random custom ad from ngrx store data obj
+      if(this.adsObj[this.type])
+        this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];   
+    });   
   }
 
   adclick(id,adlink){
