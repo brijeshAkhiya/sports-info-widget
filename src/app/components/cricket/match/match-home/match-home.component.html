@@ -62,7 +62,7 @@
                               <td>
                                 <a (click)="cricketService.playerview(batting.id,batting.name)"  [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</a><p
                                   class="batsman-text">
-                                  {{ (matchdata.sport_event_status.status == 'live' &&  batting?.statistics.length != 0 ) ?  'batting' : ''}}
+                                  {{ (matchdata.sport_event_status.status == 'live' &&  !batting?.statistics.dismissal && batting.statistics.length != 0 ) ?  'batting' : ''}}
                                   {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}
                                   {{batting?.statistics?.dismissal?.type == 'stumped' ? 'st' : ''}}
                                   <!--if batsman is leg before type out-->

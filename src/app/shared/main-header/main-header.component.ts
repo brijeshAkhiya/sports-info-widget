@@ -89,12 +89,12 @@ export class MainHeaderComponent implements OnInit {
   };
 
   ngOnInit() {
-   this.getHeaderSliderData();
+    this.getHeaderSliderData();
   }
 
   //get custom ads api call -Ngrx Store
   getCustomAds() {
-   this.sportsService.getcustomadsbanner().subscribe(
+    this.sportsService.getcustomadsbanner().subscribe(
       res => {
         if (res["data"]) {
           this.store.dispatch(new Ads.SaveAds(res["data"]));
@@ -136,23 +136,21 @@ export class MainHeaderComponent implements OnInit {
 
   //get header slider data
 
-  getHeaderSliderData(){
+  getHeaderSliderData() {
     this.sportsService.getheaderslider().subscribe(res => {
       if (res["data"]) {
         if (res["data"]) {
           res["data"].map(data => {
-            if (
-              data.status == "not_started" ||
-              data.status == "live"
-            ) {
-              this.sliderdata.push(data);
-            }
+
+            this.sliderdata.push(data);
+
           });
         }
 
         let newArray = [];
         newArray = this.sliderdata.map(sData => {
-          if (sData.slider_status !== "results") {
+          if (!sData.match_status && sData.status) {
+            // console.log('not results::', sData)
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));
             if (sData.match_data) {
@@ -178,23 +176,100 @@ export class MainHeaderComponent implements OnInit {
             }
             sData.competitors = compObj;
             return sData;
-          } else {
+          }
+          else if (sData.match_status) {
+            // console.log('results::', sData)
+            let compObj = {};
+            sData.competitors.map(s => (compObj[s.qualifier] = s));
+            if (sData) {
+              sData.period_scores.map(sPScore => {
+                if (sPScore.home_score) {
+                  if (!compObj["home"].period_scores) {
+                    compObj["home"].period_scores = [];
+                  }
+                  if (sPScore.number === 1) {
+                    compObj["home"].show_first = true;
+                  }
+                  compObj["home"].period_scores.push(sPScore);
+                } else if (sPScore.away_score) {
+                  if (!compObj["away"].period_scores) {
+                    compObj["away"].period_scores = [];
+                  }
+                  if (sPScore.number === 1) {
+                    compObj["away"].show_first = true;
+                  }
+                  compObj["away"].period_scores.push(sPScore);
+                }
+              });
+            }
+            sData.competitors = compObj;
             return sData;
           }
+          // else {
+          //   return sData;
+          // }
         });
-        // newArray = newArray.sort((a, b) =>
-        //   a.slider_status === "live" ? -1 : 0
-        // );
-        newArray = newArray.sort(function(a, b) {
-          if (a.scheduled && b.scheduled) {
-            let aDate: any = new Date(a.scheduled);
-            let bDate: any = new Date(b.scheduled);
-            return aDate - bDate;
-          } else {
-            return -1;
+        newArray = newArray.sort(function (a, b) {
+          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
+            return -1
+          }
+          else if (a.status == 'not_started') {
+            if (a.scheduled && b.scheduled) {
+              let aDate: any = new Date(a.scheduled);
+              let bDate: any = new Date(b.scheduled);
+              return aDate - bDate;
+            }
+          }
+          else {
+            return 0;
           }
         });
+
+        let arr = [
+          {status:'live',scheduled:'2019-06-05T09:31:00+00:00'},
+          {status:'interrupted',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'live',scheduled:'2019-06-05T09:32:00+00:00'},
+          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'live',scheduled:'2019-06-05T09:33:00+00:00'},
+          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'live',scheduled:'2019-06-05T09:34:00+00:00'},
+          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'interrupted',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'live',scheduled:'2019-06-05T09:30:00+00:00'},
+          {status:'live',scheduled:'2019-06-05T09:30:00+00:00'}
+
+        ]
+
+        arr = arr.sort(function (a, b) {
+          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
+            return -1
+          }
+          else if (a.status == 'not_started') {
+            if (a.scheduled && b.scheduled) {
+              let aDate: any = new Date(a.scheduled);
+              let bDate: any = new Date(b.scheduled);
+              return aDate - bDate;
+            }
+          }
+          else {
+            return 0;
+          }
+        });
+        console.log('fake array::',arr)
         console.log("array", newArray);
+        // newArray = newArray.sort(function(a, b) {
+        //   if (a.scheduled && b.scheduled) {
+        //     let aDate: any = new Date(a.scheduled);
+        //     let bDate: any = new Date(b.scheduled);
+        //     return aDate - bDate;
+        //   } else {
+        //     return -1;
+        //   }
+        // });
+
         this.sliderdata1 = newArray;
         this.sliderdata1$ = of(this.sliderdata1)
         this.isanylivematch = this.sliderdata1.some(
@@ -206,15 +281,15 @@ export class MainHeaderComponent implements OnInit {
           let matchtime: any = new Date(data.scheduled).getTime();
           let currenttime: any = new Date().getTime();
           let difference = Math.round(
-            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100) 
+            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
           );
           console.log('diiff::', Math.round(
             ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
           ));
-          if (difference > 0 && difference <= 10 ) {
-              setTimeout(() => {
-                this.getLiveUpdates();
-              },difference);
+          if (difference > 0 && difference <= 10) {
+            setTimeout(() => {
+              this.getLiveUpdates();
+            }, difference);
           }
         });
         if (this.ismatchstart) {
@@ -240,19 +315,14 @@ export class MainHeaderComponent implements OnInit {
         let newArray = [];
         let dataarr = [];
         res["data"].map(data => {
-          if (
-            data.status == "live" ||
-            data.status == "not_started"
-          ) {
+         
             dataarr.push(data);
             dataarr.reverse();
-          }
+          
         });
         newArray = dataarr.map(sData => {
-          if (
-            sData.status == "live" ||
-            sData.status == "not_started"
-          ) {
+          if (!sData.match_status && sData.status) {
+            // console.log('not results::', sData)
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));
             if (sData.match_data) {
@@ -278,22 +348,65 @@ export class MainHeaderComponent implements OnInit {
             }
             sData.competitors = compObj;
             return sData;
-          } else {
+          }
+          else if (sData.match_status) {
+            // console.log('results::', sData)
+            let compObj = {};
+            sData.competitors.map(s => (compObj[s.qualifier] = s));
+            if (sData) {
+              sData.period_scores.map(sPScore => {
+                if (sPScore.home_score) {
+                  if (!compObj["home"].period_scores) {
+                    compObj["home"].period_scores = [];
+                  }
+                  if (sPScore.number === 1) {
+                    compObj["home"].show_first = true;
+                  }
+                  compObj["home"].period_scores.push(sPScore);
+                } else if (sPScore.away_score) {
+                  if (!compObj["away"].period_scores) {
+                    compObj["away"].period_scores = [];
+                  }
+                  if (sPScore.number === 1) {
+                    compObj["away"].show_first = true;
+                  }
+                  compObj["away"].period_scores.push(sPScore);
+                }
+              });
+            }
+            sData.competitors = compObj;
             return sData;
           }
         });
+
+        newArray = newArray.sort(function (a, b) {
+          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
+            return -1
+          }
+          else if (a.status == 'not_started') {
+            if (a.scheduled && b.scheduled) {
+              let aDate: any = new Date(a.scheduled);
+              let bDate: any = new Date(b.scheduled);
+              return aDate - bDate;
+            }
+          }
+          else {
+            return 0;
+          }
+        });
+
         // newArray = newArray.sort((a, b) =>
         //   a.slider_status === "live" ? -1 : 0
         // );
-        newArray = newArray.sort(function(a, b) {
-          if (a.scheduled && b.scheduled) {
-            let aDate: any = new Date(a.scheduled);
-            let bDate: any = new Date(b.scheduled);
-            return aDate - bDate;
-          } else {
-            return -1;
-          }
-        });
+        // newArray = newArray.sort(function (a, b) {
+        //   if (a.scheduled && b.scheduled) {
+        //     let aDate: any = new Date(a.scheduled);
+        //     let bDate: any = new Date(b.scheduled);
+        //     return aDate - bDate;
+        //   } else {
+        //     return -1;
+        //   }
+        // });
         this.sliderdata1 = newArray;
         this.sliderdata1$ = of(this.sliderdata1)
       }
@@ -328,7 +441,7 @@ export class MainHeaderComponent implements OnInit {
           this.socialUser = res;
         }
       })
-      .catch(error => {});
+      .catch(error => { });
   }
 
   //Social login modal

@@ -239,6 +239,8 @@ export class MatchHomeComponent implements OnInit {
                 this.playerList[single.id].push(single);
               }
             });
+
+          console.log('playerlist::',this.playerList)
           }
         },
         error => {
