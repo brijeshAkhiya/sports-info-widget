@@ -4,32 +4,13 @@
   <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
     <div class="probability-block d-flex align-items-center justify-content-between">
       <div class="team-block">
-        
-        <img class="team-flag" *ngIf="matchprobability[0]?.probability > matchprobability[1]?.probability"
-        [lazyLoad]="matchprobability[0].id | logosurl"
-        [defaultImage]="cricketService.flagplaceholder">
-        
-        <img class="team-flag" *ngIf="!matchprobability[0]?.probability > matchprobability[1]?.probability"
-            [lazyLoad]="matchprobability[1].id | logosurl"
-            [defaultImage]="cricketService.flagplaceholder">
-
-        <h3 *ngIf="matchprobability">
-          {{matchprobability[0]?.probability > matchprobability[1]?.probability ? matchprobability[0]?.probability : matchprobability[1]?.probability}}%
-        </h3>
+        <img class="team-flag" [lazyLoad]="comp1.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
+        <h3 *ngIf="matchprobability">{{comp1.probability}}%</h3>
       </div>
-      
+
       <div class="team-block">
-        <h3 *ngIf="matchprobability">
-          {{matchprobability[0]?.probability > matchprobability[1]?.probability ? matchprobability[1]?.probability : matchprobability[0]?.probability}}%
-        </h3>
-        
-        <img class="team-flag" *ngIf="matchprobability[0]?.probability > matchprobability[1]?.probability"
-        [lazyLoad]="matchprobability[1]?.id | logosurl"
-        [defaultImage]="cricketService.flagplaceholder">
-        
-        <img class="team-flag" *ngIf="!matchprobability[0]?.probability > matchprobability[1]?.probability"
-            [lazyLoad]="matchprobability[0]?.id | logosurl"
-            [defaultImage]="cricketService.flagplaceholder">
+        <h3 *ngIf="matchprobability">{{comp2.probability}}%</h3>
+        <img class="team-flag" [lazyLoad]="comp2.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
       </div>
     </div>
     <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage"></div>
@@ -92,7 +73,7 @@
       <!-- <div *ngIf="!item.data[0].period_scores">
         No data available!
       </div> -->
-</div>
+    </div>
   </div>
 </section>
 

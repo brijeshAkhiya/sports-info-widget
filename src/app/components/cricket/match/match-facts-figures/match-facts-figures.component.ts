@@ -16,6 +16,8 @@ export class MatchFactsFiguresComponent implements OnInit {
   venuedetails;
   matchprobability;
   stylepercentage;
+  comp1;
+  comp2;
 
   constructor(
     private sportsService: SportsService,
@@ -58,8 +60,12 @@ export class MatchFactsFiguresComponent implements OnInit {
         this.matchprobability[0].probability >
         this.matchprobability[1].probability
       ) {
+        this.comp1 = this.matchprobability[0];
+        this.comp2 = this.matchprobability[1];
         this.stylepercentage = `${this.matchprobability[0].probability}%`;
       } else {
+        this.comp1 = this.matchprobability[1];
+        this.comp2 = this.matchprobability[0];
         this.stylepercentage = `${this.matchprobability[1].probability}%`;
       }
     });
