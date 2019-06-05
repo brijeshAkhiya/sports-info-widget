@@ -815,7 +815,9 @@ export class MatchHomeComponent implements OnInit {
       let timeline =  temp.reverse().findIndex(
         overData => { return overData.batting_params}
       );
-      
+      console.log(timeline);
+      if(timeline == -1)
+        return;
       timeline = temp[timeline];
       if(typeof this.batsmanList == 'undefined')
         this.batsmanList = [];
