@@ -24,4 +24,9 @@ export class CricketService {
   }
 
 
+  teamInfo(id,name){
+    let slugname = this.slugifyPipe.transform(name);
+    this.router.navigate(['/cricket/team',btoa(id),slugname]);
+  }
+
 }
