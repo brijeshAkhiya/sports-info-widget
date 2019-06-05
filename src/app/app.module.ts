@@ -31,6 +31,7 @@ import { SharedModule } from "./shared/shared.module";
 import { MomentModule } from "ngx-moment";
 import { LazyLoadImageModule } from "ng-lazyload-image";
 import { CarouselModule } from "ngx-owl-carousel-o";
+import { NguCarouselModule } from '@ngu/carousel';
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { SplitPipe } from "./pipes/stringsplitpipe";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -91,6 +92,7 @@ export function provideConfig() {
     MomentModule,
     LazyLoadImageModule,
     CarouselModule,
+    NguCarouselModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

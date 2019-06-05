@@ -23,17 +23,6 @@
         ]
       }
     }
-  ],
-  "dataGroups": [{
-    "name": "api-freshness",
-    "urls": [
-        "https://https://sports.bhavin.cf/api/v1"
-    ],
-    "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "1h",
-        "timeout": "3s",
-        "strategy": "freshness"
-    }
-}]
+  ]
+ 
 }

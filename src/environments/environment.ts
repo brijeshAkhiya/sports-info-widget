@@ -6,12 +6,12 @@
 export const environment = {
   production: false,
   hmr: true,
-  apiUrl: 'https://sports.bhavin.cf',
+  apiUrl: 'https://backend.sports.info',
   version: '/api/v1',
   socket: {
     baseUrl: 'https://backend.sports.info',
     config: {}
   },
   s3Url : 'https://d1ldsx0apuyt84.cloudfront.net/',
-  siteUrl : 'http://dev.sports.info/',
+  siteUrl : 'https://sports.info/',
 };
