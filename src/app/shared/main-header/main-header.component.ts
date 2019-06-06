@@ -8,7 +8,6 @@ import {
   AfterViewInit
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { SlidesOutputData } from "ngx-owl-carousel-o";
 import { AuthService } from "angularx-social-login";
 import {
   FacebookLoginProvider,
@@ -22,8 +21,7 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SlugifyPipe } from "../../pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
-import { Observable, of } from 'rxjs';
-import { NguCarouselConfig, NguCarousel } from '@ngu/carousel';
+import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: "app-main-header",
@@ -33,33 +31,15 @@ import { NguCarouselConfig, NguCarousel } from '@ngu/carousel';
 export class MainHeaderComponent implements OnInit,AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
-  @ViewChild('myCarousel') myCarousel: NguCarousel<any>;
-  sliderdata = [];
-  sliderresults = [];
   isapply: boolean = false;
   socialUser: any;
   issearch: boolean;
   searchkey: string;
   searchdata: any;
   noresults: boolean;
-  isanylivematch: boolean;
   interval;
-  sliderdata1: any;
-  livedataarray = [];
-  ismatchstart: boolean;
-  sliderdata1$: Observable<any[]>;
-  public carouselTile: NguCarouselConfig = {
-    grid: { xs: 1, sm: 1, md: 3, lg: 3, all: 0 },
-    slide: 3,
-    speed: 250,
-    point: {
-      visible: true
-    },
-    load: 2,
-    touch: true,
-    easing: 'cubic-bezier(0, 0, 0.2, 1)'
-  };
-  carouselTileItems: number[];
+  slider =[];
+
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -71,6 +51,7 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
     private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
     private cricketService: CricketService,
+    private commonService: CommonService
   ) {
     //get custom ads data Funtion call --->
     this.getCustomAds();
@@ -104,17 +85,7 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
   };
 
   ngOnInit() {
-    this.getHeaderSliderData();
-    this.carouselTileItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    // setInterval(() => {
-    //   this.abc();
-    // },2000);
-  }
-
-  abc(){
-    this.carouselTileItems.push(this.carouselTileItems.length);
-    console.log('sliderrrr:::',this.carouselTileItems);
-    
+    this.getHeader();
   }
 
   ngAfterViewInit(){
@@ -163,281 +134,96 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
     }
   }
 
-  //get header slider data
+  getHeader(){
+    this.sportsService.getheaderslider().subscribe((res:any) => {
 
-  getHeaderSliderData() {
-    this.sportsService.getheaderslider().subscribe(res => {
-      if (res["data"]) {
-        if (res["data"]) {
-          res["data"].map(data => {
+      this.slider = this.sortBySchedule(res.data);   
+      this.slider.forEach((match,index)=>{
 
-            this.sliderdata.push(data);
+        let compObj = {};
+        match.competitors.map(s => {
+          compObj[s.qualifier] = s
+          if(s.qualifier == 'home')
+            compObj[s.qualifier].show_first = true;
+        });
+        this.slider[index].competitors = compObj
 
-          });
+        if (match.status == "not_started") {
+          this.startLiveUpdateAfterTime(match);   
         }
-
-        let newArray = [];
-        newArray = this.sliderdata.map(sData => {
-          if (!sData.match_status && sData.status) {
-            // console.log('not results::', sData)
-            let compObj = {};
-            sData.competitors.map(s => (compObj[s.qualifier] = s));
-            if (sData.match_data) {
-              sData.match_data.period_scores.map(sPScore => {
-                if (sPScore.home_score) {
-                  if (!compObj["home"].period_scores) {
-                    compObj["home"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["home"].show_first = true;
-                  }
-                  compObj["home"].period_scores.push(sPScore);
-                } else if (sPScore.away_score) {
-                  if (!compObj["away"].period_scores) {
-                    compObj["away"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["away"].show_first = true;
-                  }
-                  compObj["away"].period_scores.push(sPScore);
-                }
-              });
-            }
-            sData.competitors = compObj;
-            return sData;
-          }
-          else if (sData.match_status) {
-            // console.log('results::', sData)
-            let compObj = {};
-            sData.competitors.map(s => (compObj[s.qualifier] = s));
-            if (sData) {
-              sData.period_scores.map(sPScore => {
-                if (sPScore.home_score) {
-                  if (!compObj["home"].period_scores) {
-                    compObj["home"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["home"].show_first = true;
-                  }
-                  compObj["home"].period_scores.push(sPScore);
-                } else if (sPScore.away_score) {
-                  if (!compObj["away"].period_scores) {
-                    compObj["away"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["away"].show_first = true;
-                  }
-                  compObj["away"].period_scores.push(sPScore);
-                }
-              });
-            }
-            sData.competitors = compObj;
-            return sData;
-          }
-          // else {
-          //   return sData;
-          // }
-        });
-        newArray = newArray.sort(function (a, b) {
-          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
-            return -1
-          }
-          else if (a.status == 'not_started') {
-            if (a.scheduled && b.scheduled) {
-              let aDate: any = new Date(a.scheduled);
-              let bDate: any = new Date(b.scheduled);
-              return aDate - bDate;
-            }
-          }
-          else {
-            return 0;
-          }
-        });
-
-        let arr = [
-          {status:'live',scheduled:'2019-06-05T09:31:00+00:00'},
-          {status:'interrupted',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:32:00+00:00'},
-          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:33:00+00:00'},
-          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:34:00+00:00'},
-          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'interrupted',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:30:00+00:00'}
-
-        ]
-
-        arr = arr.sort(function (a, b) {
-          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
-            return -1
-          }
-          else if (a.status == 'not_started') {
-            if (a.scheduled && b.scheduled) {
-              let aDate: any = new Date(a.scheduled);
-              let bDate: any = new Date(b.scheduled);
-              return aDate - bDate;
-            }
-          }
-          else {
-            return 0;
-          }
-        });
-        console.log('fake array::',arr)
-        console.log("array", newArray);
-        // newArray = newArray.sort(function(a, b) {
-        //   if (a.scheduled && b.scheduled) {
-        //     let aDate: any = new Date(a.scheduled);
-        //     let bDate: any = new Date(b.scheduled);
-        //     return aDate - bDate;
-        //   } else {
-        //     return -1;
-        //   }
-        // });
-
-        this.sliderdata1 = newArray;
-        this.sliderdata1$ = of(this.sliderdata1)
-        this.isanylivematch = this.sliderdata1.some(
-          type => type.status === "live"
-        );
-
-        //check if any match is going to start in next 5 hours from current time
-        this.ismatchstart = this.sliderdata1.some(data => {
-          let matchtime: any = new Date(data.scheduled).getTime();
-          let currenttime: any = new Date().getTime();
-          let difference = Math.round(
-            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
-          );
-          console.log('diiff::', Math.round(
-            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
-          ));
-          if (difference > 0 && difference <= 10) {
-            setTimeout(() => {
-              this.getLiveUpdates();
-            }, difference);
-          }
-        });
-        if (this.ismatchstart) {
-          setInterval(() => {
-            this.getLiveUpdates();
-          }, 10000);
+        if (match.status == "live" || match.status == "interrupted") {
+          this.getLiveUpdateSlider(this);
         }
-        if (this.isanylivematch == true) {
-          this.interval = setInterval(() => {
-            console.log("live update");
-            this.getLiveUpdates();
-          }, 7000);
-        }
+        if(match.match_data)
+          this.setPeriodScore(match, index, match.match_data.period_scores)
+        else if (match.period_scores)
+          this.setPeriodScore(match, index, match.period_scores)
 
-      }
+      });
     });
   }
 
-  //get live match data slider - call every defined seconds of interval -->
-  getLiveUpdates() {
-    this.sportsService.getheaderslider().subscribe(res => {
-      if (res["data"]) {
-        let newArray = [];
-        let dataarr = [];
-        res["data"].map(data => {
-         
-            dataarr.push(data);
-            dataarr.reverse();
-          
-        });
-        newArray = dataarr.map(sData => {
-          if (!sData.match_status && sData.status) {
-            // console.log('not results::', sData)
-            let compObj = {};
-            sData.competitors.map(s => (compObj[s.qualifier] = s));
-            if (sData.match_data) {
-              sData.match_data.period_scores.map(sPScore => {
-                if (sPScore.home_score) {
-                  if (!compObj["home"].period_scores) {
-                    compObj["home"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["home"].show_first = true;
-                  }
-                  compObj["home"].period_scores.push(sPScore);
-                } else if (sPScore.away_score) {
-                  if (!compObj["away"].period_scores) {
-                    compObj["away"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["away"].show_first = true;
-                  }
-                  compObj["away"].period_scores.push(sPScore);
-                }
-              });
-            }
-            sData.competitors = compObj;
-            return sData;
-          }
-          else if (sData.match_status) {
-            // console.log('results::', sData)
-            let compObj = {};
-            sData.competitors.map(s => (compObj[s.qualifier] = s));
-            if (sData) {
-              sData.period_scores.map(sPScore => {
-                if (sPScore.home_score) {
-                  if (!compObj["home"].period_scores) {
-                    compObj["home"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["home"].show_first = true;
-                  }
-                  compObj["home"].period_scores.push(sPScore);
-                } else if (sPScore.away_score) {
-                  if (!compObj["away"].period_scores) {
-                    compObj["away"].period_scores = [];
-                  }
-                  if (sPScore.number === 1) {
-                    compObj["away"].show_first = true;
-                  }
-                  compObj["away"].period_scores.push(sPScore);
-                }
-              });
-            }
-            sData.competitors = compObj;
-            return sData;
-          }
-        });
+  /** Start Live Update after specific time - If match will start within 5 hours  */
+  startLiveUpdateAfterTime(match) {
+      let remainingTime = this.commonService.getRemainigTimeofMatch(match.scheduled);
+      let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours,remainingTime.minutes,remainingTime.seconds); remainingMiliSec =
+      remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 45, 0);
 
-        newArray = newArray.sort(function (a, b) {
-          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
-            return -1
-          }
-          else if (a.status == 'not_started') {
-            if (a.scheduled && b.scheduled) {
-              let aDate: any = new Date(a.scheduled);
-              let bDate: any = new Date(b.scheduled);
-              return aDate - bDate;
-            }
-          }
-          else {
-            return 0;
-          }
-        });
+      if (remainingTime.days == 0 && remainingTime.hours < 5) {
+        setTimeout(() => {
+          this.getLiveUpdateSlider(this)
+        }, remainingMiliSec);
+      }
+  }
 
-        // newArray = newArray.sort((a, b) =>
-        //   a.slider_status === "live" ? -1 : 0
-        // );
-        // newArray = newArray.sort(function (a, b) {
-        //   if (a.scheduled && b.scheduled) {
-        //     let aDate: any = new Date(a.scheduled);
-        //     let bDate: any = new Date(b.scheduled);
-        //     return aDate - bDate;
-        //   } else {
-        //     return -1;
-        //   }
-        // });
-        this.sliderdata1 = newArray;
-        this.sliderdata1$ = of(this.sliderdata1)
+  setPeriodScore(match, index, period_scores){
+    if (period_scores.length > 0) {
+      period_scores.map(sPScore => {
+        if (sPScore.home_score) {
+          this.slider[index].competitors["home"].period_scores = sPScore;
+          if (sPScore.number === 1) {
+            this.slider[index].competitors["home"].show_first = true;
+          }
+        } else if (sPScore.away_score) {
+          if (sPScore.number === 1) {
+            this.slider[index].competitors["away"].show_first = true;
+          }
+          this.slider[index].competitors["away"].period_scores = sPScore;
+        }
+      });
+    }
+  }
+
+  getLiveUpdateSlider(classThis){
+    setInterval(() => {
+      classThis.sportsService.getheaderslider().subscribe((res:any) => {
+        // this.slider = this.sortBySchedule(res.data);   
+        this.sortBySchedule(res.data).forEach((match, index) => {
+          this.slider[index].status = match.status;
+          if(match.match_data){
+            this.setPeriodScore(match, index, match.match_data.period_scores)
+          }
+          else if (match.period_scores)
+            this.setPeriodScore(match, index, match.period_scores)
+        });
+      });
+    }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP 
+  }
+
+  sortBySchedule(arr){
+    return arr.sort(function (a, b) {
+      if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
+        return -1
+      }
+      else if (a.status == 'not_started') {
+        if (a.scheduled && b.scheduled) {
+          let aDate: any = new Date(a.scheduled);
+          let bDate: any = new Date(b.scheduled);
+          return aDate - bDate;
+        }
+      }
+      else {
+        return 0;
       }
     });
   }
@@ -552,39 +338,3 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
   }
 }
 
-//old logic for upper slider
-
-// this.sliderdata.map((data) => {
-//   if (data.slider_status == 'live') {
-//     this.sliderresults.push(data);
-//   }
-//
-
-//   if(data.slider_status == 'live' || data.slider_status == 'upcoming' ){
-//     // interval(5000).subscribe((x)=>{
-//     //   this.getHeaderSliderData();
-//     // })
-//   }
-// })
-// this.sliderresults = this.sliderresults.map(data => {
-//   let obj = {};
-//   let team_arr = data["competitors"]
-//   team_arr.map(single => {
-//     obj[single.qualifier] = single
-//   })
-
-//   let period_score_new = data["period_scores"]
-//   if (period_score_new) {
-//     period_score_new = period_score_new.map(singleb => {
-//       if (singleb.away_score !== undefined) {
-//         return { ...singleb, team: obj["away"], teamFlag: true }
-//       } else {
-//         return { ...singleb, team: obj["home"], teamFlag: false }
-//       }
-//     })
-//     return { ...data, period_score_new }
-//   }
-//   else {
-//     return data;
-//   }
-// })
