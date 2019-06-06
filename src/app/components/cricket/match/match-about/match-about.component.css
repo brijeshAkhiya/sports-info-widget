@@ -12,9 +12,12 @@
 .match-main-title .current-team             { margin-bottom: 24px; }
 .match-main-title .current-team img         { margin-right: 12px; height: 40px; width: auto; border-radius: 2px; box-shadow: 0px 2px 3px rgba(0,0,0,0.14), 0px 3px 15px rgba(0,0,0,0.11); -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.14), 0px 3px 15px rgba(0,0,0,0.11);  }
 .match-main-title .current-team h4          { font-family: 'IBM Plex Sans', sans-serif; text-transform: uppercase; }
+.match-main-title .current-team h4 a        { display: inline-block; vertical-align: middle; }
 .match-main-title .current-team h4.score    { color: rgba(41,41,41,0.5); font-weight: 600; }
-.match-main-title .current-team h4.running      { color: #292929;}
-.match-main-title .current-team h4.winner:after { content: ""; margin: 0px 5px 4px; display: inline-block; height: 28px; width: 28px; background:url(../../../../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle;  }
+.match-main-title .current-team h4.running          { color: #292929;}
+.match-main-title .current-team h4 .win-toss:after,
+.match-main-title .current-team h4.winner:after     { content: ""; margin: 0px 5px 4px; display: inline-block; height: 28px; width: 28px; background:url(../../../../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle;  }
+.match-main-title .current-team h4 .win-toss:after  { background-image: url(../../../../../assets/images/toss-icon.svg); }
 .match-main-title .match-win-player         { padding-left: 32px; border-left: 2px solid #ECECEC;}
 .match-main-title .player-pic               { margin-right: 16px; width: 96px; }
 .match-main-title .player-pic img           { border-radius: 2px; }
@@ -27,6 +30,7 @@
     .match-main-title .match-update p           { font-size: 14px; line-height: 20px;}
     .match-main-title .current-teams            { padding-right: 12px;}
     .match-main-title .current-team h4          { font-size: 18px; line-height: 26px;}
+    .match-main-title .current-team h4 .win-toss:after,
     .match-main-title .current-team h4.winner:after{ height: 20px; width: 20px;   }
     .match-main-title .match-win-player         { padding-left: 12px;}
     .match-main-title .player-pic               { margin-right: 12px; width: 84px; }
@@ -48,8 +52,12 @@
 @media (max-width: 575px) {
 /* -------- Match Title List ------- */
     .match-main-title h1                        { margin-bottom: 4px; }
+    .match-main-title .match-update             { margin-bottom: 8px; }
+    .match-main-title .match-update p           { margin-bottom: 2px; }
+    .match-main-title .current-team img         { margin-right: 6px; height: 24px; }
     .match-main-title .current-team h4          { font-size: 16px; line-height: 22px;}
-    .match-main-title .current-team h4.winner:after     { height: 16px; width: 16px;   }
+    .match-main-title .current-team h4 .win-toss:after,
+    .match-main-title .current-team h4.winner:after     { height: 16px; width: 16px; }
     .match-main-title .player-pic               { width: 66px; }
     .match-main-title .match-update             { text-align: left; }
 }    

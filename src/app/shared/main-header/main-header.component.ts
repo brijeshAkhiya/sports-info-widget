@@ -20,15 +20,15 @@ import * as Ads from "../../store/ads-management/ads.actions";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SlugifyPipe } from "../../pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
-import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
+import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: "app-main-header",
   templateUrl: "./main-header.component.html",
   styleUrls: ["./main-header.component.css"]
 })
-export class MainHeaderComponent implements OnInit,AfterViewInit {
+export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
   isapply: boolean = false;
@@ -327,7 +327,6 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
   }
 
   //blog view
-
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
     this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);

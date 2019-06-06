@@ -104,8 +104,6 @@ export class TournamentFixturesComponent implements OnInit {
           data: dateObj[day]
         }));
         console.log(this.finalresultsdata);
-
-        console.log("finalresult", this.finalresultsdata);
       },
       error => {
         if (error["error"].status == 400) {

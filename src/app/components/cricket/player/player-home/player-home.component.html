@@ -14,7 +14,8 @@
             <ng-template ngbTabContent>
               <section class="player-profile d-flex">
                 <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerbasic?.id | playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
+                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerbasic?.id | playerimage:['m']"
+                    [defaultImage]="cricketService.playerplaceholder">
                 </div>
                 <div class="player-info d-flex common-shadow rounded-box">
                   <div class="info-col">
@@ -65,9 +66,11 @@
               <h4>Major Teams</h4>
               <div class="team-list">
                 <div class="row row-size12">
-                  <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let item of playerprofile?.teams">
+                  <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let item of playerprofile?.teams"
+                    (click)="cricketService.teamInfo(item.id,item.name)">
                     <div class="team-item rounded-box common-shadow d-flex">
-                      <div class="team-flag"><img [lazyLoad]="item?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag"></div>
+                      <div class="team-flag"><img [lazyLoad]="item?.id | logosurl"
+                          [defaultImage]="cricketService.flagplaceholder" alt="team-flag"></div>
                       <div class="team-name">
                         <h4>{{item?.name}}</h4>
                         <h5>{{item?.abbreviation}}</h5>
@@ -81,9 +84,10 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="!playerstats"></app-data-loader-widget>
-                <app-no-data-widget *ngIf="playerstats?.length == 0"></app-no-data-widget>
-              <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box" *ngIf="playerstats">
+              <app-data-loader-widget *ngIf="!playerstats"></app-data-loader-widget>
+              <app-no-data-widget *ngIf="playerstats?.length == 0"></app-no-data-widget>
+              <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box"
+                *ngIf="playerstats">
                 <div class="table-title">
                   <h6>Batting Stats</h6>
                 </div>
@@ -118,71 +122,6 @@
                         <td>{{item.batting.fours}}</td>
                         <td>{{item.batting.sixes}}</td>
                       </tr>
-                      <!-- <tr>
-                        <td>ODI</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>38.06</td>
-                        <td>96.23</td>
-                        <td>183*</td>
-                        <td>30</td>
-                        <td>50</td>
-                        <td>1624</td>
-                        <td>104</td>
-                      </tr>
-                      <tr>
-                        <td>T20I</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>38.06</td>
-                        <td>96.23</td>
-                        <td>183*</td>
-                        <td>30</td>
-                        <td>50</td>
-                        <td>1624</td>
-                        <td>104</td>
-                      </tr>
-                      <tr>
-                        <td>First Class</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>38.06</td>
-                        <td>96.23</td>
-                        <td>183*</td>
-                        <td>30</td>
-                        <td>50</td>
-                        <td>1624</td>
-                        <td>104</td>
-                      </tr>
-                      <tr>
-                        <td>ListA</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>38.06</td>
-                        <td>96.23</td>
-                        <td>183*</td>
-                        <td>30</td>
-                        <td>50</td>
-                        <td>1624</td>
-                        <td>104</td>
-                      </tr>
-                      <tr>
-                        <td>T20</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>38.06</td>
-                        <td>96.23</td>
-                        <td>183*</td>
-                        <td>30</td>
-                        <td>50</td>
-                        <td>1624</td>
-                        <td>104</td>
-                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -203,8 +142,8 @@
                         <th>R</th>
                         <th>W</th>
                         <th>AVG</th>
-                        <th>SRR</th>
-                        <th>Ecco</th>
+                        <th>SR</th>
+                        <th>Eco</th>
                         <th>5Ws</th>
                         <th>10Ws</th>
                       </tr>
@@ -224,76 +163,6 @@
                         <td>{{item.bowling.five_wicket_hauls}}</td>
                         <td>{{item.bowling.ten_wicket_hauls}}</td>
                       </tr>
-                      <!-- <tr>
-                        <td>ODI</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>120</td>
-                        <td>38.08</td>
-                        <td>5</td>
-                        <td>35.5</td>
-                        <td>36.0</td>
-                        <td>5.12</td>
-                        <td>12</td>
-                        <td>-</td>
-                      </tr>
-                      <tr>
-                        <td>T20I</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>120</td>
-                        <td>38.08</td>
-                        <td>5</td>
-                        <td>35.5</td>
-                        <td>36.0</td>
-                        <td>5.12</td>
-                        <td>12</td>
-                        <td>-</td>
-                      </tr>
-                      <tr>
-                        <td>First Class</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>120</td>
-                        <td>38.08</td>
-                        <td>5</td>
-                        <td>35.5</td>
-                        <td>36.0</td>
-                        <td>5.12</td>
-                        <td>12</td>
-                        <td>-</td>
-                      </tr>
-                      <tr>
-                        <td>ListA</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>120</td>
-                        <td>38.08</td>
-                        <td>5</td>
-                        <td>35.5</td>
-                        <td>36.0</td>
-                        <td>5.12</td>
-                        <td>12</td>
-                        <td>-</td>
-                      </tr>
-                      <tr>
-                        <td>T20</td>
-                        <td>120</td>
-                        <td>10</td>
-                        <td>1200</td>
-                        <td>120</td>
-                        <td>38.08</td>
-                        <td>5</td>
-                        <td>35.5</td>
-                        <td>36.0</td>
-                        <td>5.12</td>
-                        <td>12</td>
-                        <td>-</td>
-                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -303,101 +172,17 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              <!-- <div class="common-news-list">
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-news-video common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="common-news-item d-flex common-shadow">
-                  <div class="common-news-img common-zoom-container">
-                    <div class="common-zoom-img" style="background-image: url(../../../assets/images/video-thumb.jpg)">
-                    </div>
-                  </div>
-                  <div class="common-news-desc">
-                    <div class="news-excerpt">
-                      <h5><a>West Indies changes give Pollard World Cup hope</a></h5>
-                      <p>Kieron Pollard last played an ODI in October 2016 but may still have
-                        hopes of making it to the
-                        West
-                        Indies World Cup squad because of a new set-up running Cricket West
-                        Indies…</p>
-                    </div>
-                    <div class="author-info d-flex justify-content-between align-items-center">
-                      <p class="author"><a>Nick Evans</a>3 hrs ago</p>
-                      <p class="view">6.5K</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button>
-              </div> -->
-               <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
-          *ngIf="widget1type && widget1title"></app-common-story-widget>
+            *ngIf="widget1type && widget1title"></app-common-story-widget>
         </div>
       </div>
     </div>

@@ -211,7 +211,7 @@ export class SportsService {
   //get match timeline Delta - live
   getmatchtimelineDetlaDirect(id) {
     return this.http.get(
-      `http://api.sportradar.us/cricket-t2/en/matches/${id}/timeline/delta.json?api_key=j2skxacnm2uf5g6g5645p43u`
+      `https://www.jsonstore.io/62da0e5b2b07ef97dafcc45dc49312f6c4c62c4020fe92856df44878a11a0745`
     );
   }
 

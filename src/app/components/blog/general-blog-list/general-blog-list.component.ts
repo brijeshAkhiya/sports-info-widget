@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../providers/sports-service";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
 
-
 @Component({
   selector: 'app-general-blog-list',
   templateUrl: './general-blog-list.component.html',
@@ -19,7 +18,7 @@ export class GeneralBlogListComponent implements OnInit {
   smallblogdeafault = '../../../../assets/images/placeholder_blog_small.svg'
   blogcategory: string;
   blogtype: any;
-  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router, private activatedroute: ActivatedRoute,) { }
+  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router, private activatedroute: ActivatedRoute) { }
 
   ngOnInit() {
     this.blogcategory = this.activatedroute.snapshot.params.category;

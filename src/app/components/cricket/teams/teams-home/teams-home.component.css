@@ -69,7 +69,7 @@ h4                              { margin-bottom: 24px; }
     .team-about-head                            { flex-direction: column; -webkit-flex-direction: column; }
     .team-about-head .team-logo                 { margin-bottom: 8px; }
     .team-about-head .team-info                 { margin-left: 0px; }
-    .team-about-head .match-result li           { margin-bottom: 8px;}
+    .team-about-head .match-result li           { margin-bottom: 8px; font-size: 11px; }
 /* -------- Squad List ------- */
     .squad-list .row-size12                     { justify-content: space-evenly; -webkit-justify-content: space-evenly; }
     .squad-list .row-size12 [class*="col-"]     { width: 156px; }

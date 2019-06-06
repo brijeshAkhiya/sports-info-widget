@@ -1,4 +1,4 @@
-<div class="common-stories-widget common-shadow rounded-box" *ngIf="dataitems">
+<div class="common-stories-widget common-shadow rounded-box" *ngIf="dataitems && dataitems.length > 0">
     <h5>{{title}}</h5>
     <ul class="common-list">
       <li *ngFor="let item of dataitems | slice:0:5"><a (click)="route(item._id,item.tournament_id,item.type,item.name)">{{item.name | split}}</a></li>
