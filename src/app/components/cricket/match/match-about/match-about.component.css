@@ -47,6 +47,9 @@
 
 @media (max-width: 575px) {
 /* -------- Match Title List ------- */
+    .match-main-title h1                        { margin-bottom: 4px; }
+    .match-main-title .current-team h4          { font-size: 16px; line-height: 22px;}
+    .match-main-title .current-team h4.winner:after     { height: 16px; width: 16px;   }
     .match-main-title .player-pic               { width: 66px; }
     .match-main-title .match-update             { text-align: left; }
 }    

@@ -8,7 +8,7 @@
 <div>
   <!-- Match is live-->
   <ng-container *ngIf="data.sport_event_status.status != 'closed'">
-    <div class="common-table batsman-table striped-table tour-stats-table common-shadow rounded-box"
+    <div class="common-table batsman-table tour-stats-table common-shadow rounded-box"
       *ngIf="batsmanList">
       <div class="table-responsive">
         <table class="table" *ngIf="batsmanList.length > 0">
@@ -37,7 +37,7 @@
         </table>
       </div>
     </div>
-    <div class="common-table bowler-table striped-table tour-stats-table common-shadow rounded-box" *ngIf="ballerList">
+    <div class="common-table bowler-table tour-stats-table common-shadow rounded-box" *ngIf="ballerList">
       <div class="table-responsive">
         <table class="table" *ngIf="ballerList.length > 0">
           <thead>
