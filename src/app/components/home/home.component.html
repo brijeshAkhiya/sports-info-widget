@@ -145,7 +145,7 @@
 <!-- End Articles -->
 
 <!-- Start Videos -->
-<section class="common-section popular-video-section">
+<section class="common-section popular-video-section" *ngIf="popularvideos.length > 0">
   <div class="container">
     <div class="row row-size12">
       <div class="col-xl-9">
@@ -198,6 +198,11 @@
 </section>
 <!-- End Videos -->
 
+<!--AD section-->
+<div class="container" *ngIf="popularvideos.length == 0">
+    <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+</div>
+<!--AD over-->
 
 <section class="common-section recentnews-section">
   <div class="container">

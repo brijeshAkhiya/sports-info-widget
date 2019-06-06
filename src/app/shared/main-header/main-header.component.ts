@@ -4,7 +4,8 @@ import {
   Renderer2,
   ElementRef,
   ViewChild,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  AfterViewInit
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { SlidesOutputData } from "ngx-owl-carousel-o";
@@ -22,15 +23,17 @@ import { SlugifyPipe } from "../../pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { Observable, of } from 'rxjs';
+import { NguCarouselConfig, NguCarousel } from '@ngu/carousel';
 
 @Component({
   selector: "app-main-header",
   templateUrl: "./main-header.component.html",
   styleUrls: ["./main-header.component.css"]
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent implements OnInit,AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
+  @ViewChild('myCarousel') myCarousel: NguCarousel<any>;
   sliderdata = [];
   sliderresults = [];
   isapply: boolean = false;
@@ -45,6 +48,18 @@ export class MainHeaderComponent implements OnInit {
   livedataarray = [];
   ismatchstart: boolean;
   sliderdata1$: Observable<any[]>;
+  public carouselTile: NguCarouselConfig = {
+    grid: { xs: 1, sm: 1, md: 3, lg: 3, all: 0 },
+    slide: 3,
+    speed: 250,
+    point: {
+      visible: true
+    },
+    load: 2,
+    touch: true,
+    easing: 'cubic-bezier(0, 0, 0.2, 1)'
+  };
+  carouselTileItems: number[];
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -90,6 +105,20 @@ export class MainHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.getHeaderSliderData();
+    this.carouselTileItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    // setInterval(() => {
+    //   this.abc();
+    // },2000);
+  }
+
+  abc(){
+    this.carouselTileItems.push(this.carouselTileItems.length);
+    console.log('sliderrrr:::',this.carouselTileItems);
+    
+  }
+
+  ngAfterViewInit(){
+    this.changeDetector.detectChanges();
   }
 
   //get custom ads api call -Ngrx Store

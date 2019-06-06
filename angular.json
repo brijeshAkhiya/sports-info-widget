@@ -33,6 +33,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.prod.ts"
+                }
+            ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -42,9 +48,9 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-             
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
+             
             },
             "hmr": {
               "fileReplacements": [
