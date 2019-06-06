@@ -41,6 +41,7 @@ export class CricketFixturesViewComponent implements OnInit {
   //get 3 days results -HOME
 
   getMatchResults() {
+    this.matchresults = [];
     this.sportsService
       .getmatchresults()
       .subscribe(
@@ -109,6 +110,7 @@ export class CricketFixturesViewComponent implements OnInit {
 
   //get 3 days matches fixtures - HOME
   getMatchFixtures() {
+    this.matchfixtures = [];
     this.sportsService.getmatchfixtures().subscribe(
       res => {
         if (res["data"].length != 0) {

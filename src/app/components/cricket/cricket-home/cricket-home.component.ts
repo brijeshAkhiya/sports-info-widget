@@ -20,15 +20,15 @@ export class CricketHomeComponent implements OnInit {
   widget1type = "currentseries";
   widget2title = "Popular Right Now";
   widget2type = "populartags";
-  commonnewsparams:any
-  commonnewstype:any
-  constructor(private sportsService: SportsService,private router: Router,
+  commonnewsparams: any
+  commonnewstype: any
+  constructor(private sportsService: SportsService, private router: Router,
     private slugifyPipe: SlugifyPipe,
-    private commonService:CommonService) {}
+    private commonService: CommonService) { }
 
   ngOnInit() {
     this.getPopularArticles();
-    this.commonnewsparams= {
+    this.commonnewsparams = {
       eType: "",
       nLimit: 10,
       eSport: "Cricket",
@@ -62,6 +62,7 @@ export class CricketHomeComponent implements OnInit {
 
   getPopularArticles() {
     let data = {
+      eSport:'Cricket',
       nLimit: 10
     };
     this.sportsService.getpopularpost(data).subscribe(res => {
@@ -73,13 +74,14 @@ export class CricketHomeComponent implements OnInit {
 
   //loadmore popular 
 
-  loadpopular(){
+  loadpopular() {
     let start = this.populararticles.length
     let data = {
-      nStart:start,
-      nLimit:10
-    } 
-    this.sportsService.getpopularpost(data).subscribe(res =>{
+      eSport: 'Cricket',
+      nStart: start,
+      nLimit: 10
+    }
+    this.sportsService.getpopularpost(data).subscribe(res => {
       if (res["data"]) {
         let array = []
         array = res["data"];
@@ -98,8 +100,9 @@ export class CricketHomeComponent implements OnInit {
 
   getVideoPosts() {
     this.commonnewsparams = {
-      nLimit:10,
-      eType:'Video'
+      eSport: 'Cricket',
+      nLimit: 10,
+      eType: 'Video'
     }
   }
 
@@ -107,11 +110,11 @@ export class CricketHomeComponent implements OnInit {
 
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
+    this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);
   }
 
   //writer view 
-  writerview(id){
-    this.router.navigate(['/writer',btoa(id)])
+  writerview(id) {
+    this.router.navigate(['/writer', btoa(id)])
   }
 }

@@ -10,8 +10,6 @@ export class LogosUrlPipe implements PipeTransform {
 
   transform(value: any): any {
     if (value) {
-      console.log(value);
-      
       return (
         `${this.commonService.s3Url}logos/${value}.png`
       );

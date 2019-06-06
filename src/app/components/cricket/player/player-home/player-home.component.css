@@ -14,7 +14,7 @@ h4                                      { margin-bottom: 19px;}
 .player-sate                            { margin-bottom: 24px; }
 .player-sate:last-child                 { margin-bottom: 0px; }
 .player-sate .table tr th:first-child,
-.player-sate .table tr td:first-child   { text-align: left; width: 26%; }
+.player-sate .table tr td:first-child   { text-align: left; width: 26%; text-transform: uppercase; }
 
 /***** Responsive CSS Start ******/
 

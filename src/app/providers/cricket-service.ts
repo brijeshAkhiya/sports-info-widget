@@ -8,25 +8,25 @@ export class CricketService {
 
   public flagplaceholder = '/assets/images/logo-placeholder.svg';
   public playerplaceholder = '/assets/images/placeholder-sqad.svg';
-  
+
   constructor(
     private splitpipe: SplitPipe,
     private slugifyPipe: SplitPipe,
     private router: Router
   ) {
-      
+
   }
 
-  playerview(id,name){
+  playerview(id, name) {
     let playername = this.splitpipe.transform(name)
     let slugname = this.slugifyPipe.transform(playername);
     this.router.navigate(['/cricket/player', btoa(id), slugname]);
   }
 
 
-  teamInfo(id,name){
+  teamInfo(id, name) {
     let slugname = this.slugifyPipe.transform(name);
-    this.router.navigate(['/cricket/team',btoa(id),slugname]);
+    this.router.navigate(['/cricket/team', btoa(id), slugname]);
   }
 
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>toss-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="12" cy="12" r="8"></circle>
+    </defs>
+    <g id="toss-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#ECECEC" opacity="0" x="0" y="0" width="24" height="24"></rect>
+        <g id="Group">
+            <circle id="Oval" fill="#F09800" cx="12" cy="12" r="12"></circle>
+            <path d="M6.63096519,22.734824 C5.16460626,21.9999927 3.86971343,20.9735518 2.8223406,19.7315553 L14.1078297,0.184514803 C15.7483423,0.475197676 17.2737121,1.09918501 18.6114601,1.98399805 L6.63096519,22.734824 Z" id="Combined-Shape" fill="#FBA818"></path>
+            <path d="M10.5639714,23.9149623 C9.71736697,23.8140008 8.89782376,23.624897 8.11477893,23.357088 L19.8913383,2.95948883 C20.5228327,3.51116765 21.096002,4.12793896 21.6003819,4.79933848 L10.5639714,23.9149623 Z" id="Combined-Shape" fill="#FBA818"></path>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Oval-Copy" fill="#FFBD00" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

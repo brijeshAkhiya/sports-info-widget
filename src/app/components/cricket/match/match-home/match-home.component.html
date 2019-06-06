@@ -91,11 +91,11 @@
                                   {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : '' : '' }}
                                 </p>
                               </td>
-                              <td>{{batting?.statistics?.runs ? batting.statistics.runs : '-'}}</td>
-                              <td>{{batting?.statistics?.balls_faced ? batting.statistics.balls_faced : '-'}}</td>
-                              <td>{{batting?.statistics?.fours ? batting.statistics.fours : '-'}}</td>
-                              <td>{{batting?.statistics?.sixes ? batting.statistics.sixes : '-'}}</td>
-                              <td>{{batting?.statistics?.strike_rate ? batting.statistics.strike_rate : '-'}}</td>
+                              <td>{{batting?.statistics?.runs ? batting.statistics.runs : '0'}}</td>
+                              <td>{{batting?.statistics?.balls_faced ? batting.statistics.balls_faced : '0'}}</td>
+                              <td>{{batting?.statistics?.fours ? batting.statistics.fours : '0'}}</td>
+                              <td>{{batting?.statistics?.sixes ? batting.statistics.sixes : '0'}}</td>
+                              <td>{{batting?.statistics?.strike_rate ? (batting.statistics.strike_rate | number:'2.2-2') : '0'}}</td>
                             </tr>
                             <tr>
                               <td>
@@ -105,7 +105,8 @@
                                   {{item?.teams[1]?.statistics?.bowling?.wides ? item?.teams[1]?.statistics?.bowling?.wides : '0'}},
                                   no
                                   -
-                                  {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}}
+                                  {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}},
+                                  lb - {{item?.teams[1]?.statistics?.bowling?.leg_byes ? item?.teams[1]?.statistics?.bowling?.leg_byes : '0'}}
                                   )</p>
                               </td>
                               <td>{{item?.teams[1]?.statistics?.bowling?.extras}}</td>
@@ -141,13 +142,12 @@
                     <ul class="fall-wicket-list" *ngIf="fallofWickets.length > 0">
                       <li *ngFor="let item of fallofWickets[item.number]">
                         <p class="fall-wicket">{{item.displayscore}}</p>
-                        <p class="title">{{item.playername | split}}</p>
+                        <p class="title"><a (click)="cricketService.playerview(item.playerid,item.playername)">{{item.playername | split}}</a></p>
                         <p>{{item.displayover}} OV</p>
                       </li>
                     </ul>
                   </div>
                     <!--Fall of wickets section ends-->
-                    
                     <div class="common-table bowler-table tour-stats-table common-shadow rounded-box">
                       <div class="table-responsive">
                         <table class="table">
@@ -163,12 +163,12 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let bowling of item?.teams[1]?.statistics?.bowling?.players">
-                              <td>{{bowling?.name | split}}</td>
-                              <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '-'}}</td>
-                              <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '-'}}</td>
-                              <td>{{bowling?.statistics?.runs_conceded ? bowling?.statistics.runs_conceded : '-'}}</td>
-                              <td>{{bowling?.statistics?.wickets ? bowling?.statistics.wickets : '-'}}</td>
-                              <td>{{bowling?.statistics?.economy_rate ? bowling?.statistics.economy_rate : '-'}}</td>
+                              <td><a (click)="cricketService.playerview(bowling.id,bowling.name)">{{bowling?.name | split}}</a></td>
+                              <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '0'}}</td>
+                              <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '0'}}</td>
+                              <td>{{bowling?.statistics?.runs_conceded ? bowling?.statistics.runs_conceded : '0'}}</td>
+                              <td>{{bowling?.statistics?.wickets ? bowling?.statistics.wickets : '0'}}</td>
+                              <td>{{bowling?.statistics?.economy_rate ? (bowling?.statistics.economy_rate | number:'1.2-2') : '0'}}</td>
                             </tr>
                           </tbody>
                         </table>

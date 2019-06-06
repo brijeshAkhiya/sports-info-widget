@@ -33,6 +33,7 @@
 @media (max-width: 575px) {
 /* -------- Commentary Section ------- */
     .commentary-item ul li                      { margin-bottom: 10px; }
-    .commentary-item .over-ball                 { min-width: 46px;}
-    .commentary-item .commentary-line           { margin-top: 3px; padding-left: 16px; line-height: 20px;}
+    .commentary-item .over-ball                 { min-width: 46px; line-height: 24px;}
+    .commentary-item .over-run                  { width: 28px; height: 28px; font-size: 12px; line-height: 28px; }
+    .commentary-item .commentary-line           { margin-top: 0px; padding-left: 12px; line-height: 20px;}
 }

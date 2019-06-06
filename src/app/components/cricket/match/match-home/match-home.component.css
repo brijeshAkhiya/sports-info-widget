@@ -14,6 +14,7 @@
 .fall-wicket-list p                             { margin: 0px; font-size: 14px; line-height: 18px; color: #7A7A7A; font-weight: 500; word-wrap: break-word; }
 .fall-wicket-list li .title                     { margin-bottom: 4px; font-weight: 600; font-weight: 600; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 .fall-wicket-list li:hover .title               { color: #292929;}
+.fall-wicket-list li .title a:hover             { color: #ED1A33;}
 .bowler-table.common-table .table th                    { text-transform: uppercase; }
 .bowler-table.common-table .table td                    { width: 8%; }
 .bowler-table.common-table .table tr th:first-child,

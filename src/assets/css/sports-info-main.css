@@ -9,8 +9,8 @@
 
 /******* Common Element CSS Start ******/
 *                       { margin: 0px; padding: 0px; outline: none; }
-::-moz-selection        { color: #fff; background: #1B2A5A; }
-::selection             { color: #fff; background: #1B2A5A; }
+::-moz-selection        { color: #fff; background: #ED1A33; }
+::selection             { color: #fff; background: #ED1A33; }
 body                    { font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252; }
 .clear                  { clear:both;}
 img                     { border: 0px;}

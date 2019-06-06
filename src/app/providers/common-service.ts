@@ -24,7 +24,6 @@ export class CommonService {
   /** Get Remaining Time */
   getRemainigTimeofMatch(date) {
     console.log(date);
-    
     let oneDay = 24 * 60 * 60 * 1000;
     let remainingdays = { days: 0, hours: 0, minutes: 0, seconds: 0 };
     let enddate = new Date(date).getTime();

@@ -21,6 +21,7 @@ import * as Ads from "../../store/ads-management/ads.actions";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SlugifyPipe } from "../../pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
+import { CommonService } from "@providers/common-service";
 import { CricketService } from "@providers/cricket-service";
 import { Observable, of } from 'rxjs';
 import { NguCarouselConfig, NguCarousel } from '@ngu/carousel';
@@ -30,7 +31,7 @@ import { NguCarouselConfig, NguCarousel } from '@ngu/carousel';
   templateUrl: "./main-header.component.html",
   styleUrls: ["./main-header.component.css"]
 })
-export class MainHeaderComponent implements OnInit,AfterViewInit {
+export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
   @ViewChild('myCarousel') myCarousel: NguCarousel<any>;
@@ -71,6 +72,7 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
     private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
     private cricketService: CricketService,
+    private commonService: CommonService
   ) {
     //get custom ads data Funtion call --->
     this.getCustomAds();
@@ -106,18 +108,9 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     this.getHeaderSliderData();
     this.carouselTileItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    // setInterval(() => {
-    //   this.abc();
-    // },2000);
   }
 
-  abc(){
-    this.carouselTileItems.push(this.carouselTileItems.length);
-    console.log('sliderrrr:::',this.carouselTileItems);
-    
-  }
-
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.changeDetector.detectChanges();
   }
 
@@ -164,22 +157,17 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
   }
 
   //get header slider data
-
   getHeaderSliderData() {
     this.sportsService.getheaderslider().subscribe(res => {
       if (res["data"]) {
         if (res["data"]) {
           res["data"].map(data => {
-
             this.sliderdata.push(data);
-
           });
         }
-
         let newArray = [];
         newArray = this.sliderdata.map(sData => {
           if (!sData.match_status && sData.status) {
-            // console.log('not results::', sData)
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));
             if (sData.match_data) {
@@ -207,7 +195,6 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
             return sData;
           }
           else if (sData.match_status) {
-            // console.log('results::', sData)
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));
             if (sData) {
@@ -234,10 +221,8 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
             sData.competitors = compObj;
             return sData;
           }
-          // else {
-          //   return sData;
-          // }
         });
+        //sort an array in order of -> Live -> upcoming -> results
         newArray = newArray.sort(function (a, b) {
           if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
             return -1
@@ -253,72 +238,28 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
             return 0;
           }
         });
-
-        let arr = [
-          {status:'live',scheduled:'2019-06-05T09:31:00+00:00'},
-          {status:'interrupted',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:32:00+00:00'},
-          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:33:00+00:00'},
-          {status:'not_started',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:34:00+00:00'},
-          {status:'ended',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'interrupted',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:30:00+00:00'},
-          {status:'live',scheduled:'2019-06-05T09:30:00+00:00'}
-
-        ]
-
-        arr = arr.sort(function (a, b) {
-          if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
-            return -1
-          }
-          else if (a.status == 'not_started') {
-            if (a.scheduled && b.scheduled) {
-              let aDate: any = new Date(a.scheduled);
-              let bDate: any = new Date(b.scheduled);
-              return aDate - bDate;
-            }
-          }
-          else {
-            return 0;
-          }
-        });
-        console.log('fake array::',arr)
-        console.log("array", newArray);
-        // newArray = newArray.sort(function(a, b) {
-        //   if (a.scheduled && b.scheduled) {
-        //     let aDate: any = new Date(a.scheduled);
-        //     let bDate: any = new Date(b.scheduled);
-        //     return aDate - bDate;
-        //   } else {
-        //     return -1;
-        //   }
-        // });
-
+        //check is any of match is live now !
         this.sliderdata1 = newArray;
         this.sliderdata1$ = of(this.sliderdata1)
         this.isanylivematch = this.sliderdata1.some(
           type => type.status === "live"
         );
-
         //check if any match is going to start in next 5 hours from current time
         this.ismatchstart = this.sliderdata1.some(data => {
-          let matchtime: any = new Date(data.scheduled).getTime();
-          let currenttime: any = new Date().getTime();
-          let difference = Math.round(
-            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
-          );
-          console.log('diiff::', Math.round(
-            ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
-          ));
-          if (difference > 0 && difference <= 10) {
+          // let matchtime: any = new Date(data.scheduled).getTime();
+          let difference = this.commonService.getRemainigTimeofMatch(data.scheduled);
+          console.log('dd::', difference.minutes);
+          // let currenttime: any = new Date().getTime();
+          // let difference = Math.round(
+          //   ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
+          // );
+          // console.log('diiff::', Math.round(
+          //   ((((matchtime - currenttime) / (1000 * 60 * 60)) % 24) * 100)
+          // ));
+          if (difference.minutes > 0 && difference.minutes <= 10) {
             setTimeout(() => {
               this.getLiveUpdates();
-            }, difference);
+            },difference.minutes);
           }
         });
         if (this.ismatchstart) {
@@ -344,14 +285,11 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
         let newArray = [];
         let dataarr = [];
         res["data"].map(data => {
-         
-            dataarr.push(data);
-            dataarr.reverse();
-          
+          dataarr.push(data);
+          dataarr.reverse();
         });
         newArray = dataarr.map(sData => {
           if (!sData.match_status && sData.status) {
-            // console.log('not results::', sData)
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));
             if (sData.match_data) {
@@ -379,7 +317,6 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
             return sData;
           }
           else if (sData.match_status) {
-            // console.log('results::', sData)
             let compObj = {};
             sData.competitors.map(s => (compObj[s.qualifier] = s));
             if (sData) {
@@ -423,19 +360,6 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
             return 0;
           }
         });
-
-        // newArray = newArray.sort((a, b) =>
-        //   a.slider_status === "live" ? -1 : 0
-        // );
-        // newArray = newArray.sort(function (a, b) {
-        //   if (a.scheduled && b.scheduled) {
-        //     let aDate: any = new Date(a.scheduled);
-        //     let bDate: any = new Date(b.scheduled);
-        //     return aDate - bDate;
-        //   } else {
-        //     return -1;
-        //   }
-        // });
         this.sliderdata1 = newArray;
         this.sliderdata1$ = of(this.sliderdata1)
       }
@@ -541,7 +465,6 @@ export class MainHeaderComponent implements OnInit,AfterViewInit {
   }
 
   //blog view
-
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
     this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);
