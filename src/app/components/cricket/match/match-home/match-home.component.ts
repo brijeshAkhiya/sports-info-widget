@@ -460,6 +460,7 @@ export class MatchHomeComponent implements OnInit {
       let currentInningCommentry = this.data.timeline.filter(
         commentry => commentry.inning == innings.number
       );
+      
 
       //for loop of overs_completd in inning
       if (typeof innings.overs == "undefined" || innings.overs.length <= 0) {
@@ -477,53 +478,80 @@ export class MatchHomeComponent implements OnInit {
         temp.unshift(this.data.timeline);
         this.inningWiseCommentry[0].commentry.unshift({ data: temp, overs: 0 });
         return false;
-
-        return false;
       }
+      
+      let firstIndex = 0;
+      let lastIndex = 0;
       innings.overs.forEach((over, inningIndex) => {
-        // get first index of this innings over
-        let firstOverIndex = currentInningCommentry.findIndex(
-          commentry =>
-            commentry.over_number == over.number &&
-            commentry.inning == innings.number
-        );
 
         // get last index of innings over
         let nextOver = over.number + 1;
-        let lastOverIndex = currentInningCommentry.findIndex(
+        let lastIndex = currentInningCommentry.findIndex(
           commentry =>
             commentry.over_number == nextOver &&
             commentry.inning == innings.number
         );
-
-        // Single Over commentry of Inning - get commentry of current overs to Next Over
-        // console.log("lastOverIndex", lastOverIndex);
-        // console.log("firstOverIndex", firstOverIndex);
         let overCommentry = [];
-        if (innings.number == 1 && over.number == 1)
-          overCommentry = currentInningCommentry.slice(0, lastOverIndex);
-        else if (lastOverIndex > 0)
+        if(lastIndex > 0){
           overCommentry = currentInningCommentry.slice(
-            firstOverIndex,
-            lastOverIndex
+            firstIndex,
+            lastIndex
           );
-        else if (firstOverIndex > 0) {
-          // console.log("else if");
-          let lastOverIndex = currentInningCommentry.findIndex(
+          firstIndex = lastIndex;
+        }
+        else if (firstIndex > 0) {
+          let lastIndex = currentInningCommentry.findIndex(
             commentry =>
               commentry.type == "match_ended" ||
               commentry.type == "close_of_play"
           );
-
-          // console.log("lastOverIndex", lastOverIndex);
-          // console.log("firstOverIndex", firstOverIndex);
-          if (lastOverIndex > 0)
+          if (lastIndex > 0)
             overCommentry = currentInningCommentry.slice(
-              firstOverIndex,
-              lastOverIndex
+              firstIndex,
+              lastIndex
             );
-          else overCommentry = currentInningCommentry.slice(firstOverIndex);
+          else overCommentry = currentInningCommentry.slice(firstIndex);
         }
+        // // get first index of this innings over
+        // let firstOverIndex = currentInningCommentry.findIndex(
+        //   commentry =>
+        //     commentry.over_number == over.number &&
+        //     commentry.inning == innings.number
+        // );
+
+        // get last index of innings over
+        // let nextOver = over.number + 1;
+        // let lastOverIndex = currentInningCommentry.findIndex(
+        //   commentry =>
+        //     commentry.over_number == nextOver &&
+        //     commentry.inning == innings.number
+        // );
+
+        // Single Over commentry of Inning - get commentry of current overs to Next Over
+        // console.log("lastOverIndex", lastOverIndex);
+        // console.log("firstOverIndex", firstOverIndex);
+        // let overCommentry = [];
+        // if (innings.number == 1 && over.number == 1)
+        //   overCommentry = currentInningCommentry.slice(0, lastOverIndex);
+        // else if (lastOverIndex > 0)
+        //   overCommentry = currentInningCommentry.slice(
+        //     firstOverIndex,
+        //     lastOverIndex
+        //   );
+        // else if (firstOverIndex > 0) {
+        //   let lastOverIndex = currentInningCommentry.findIndex(
+        //     commentry =>
+        //       commentry.type == "match_ended" ||
+        //       commentry.type == "close_of_play"
+        //   );
+        //   if (lastOverIndex > 0)
+        //     overCommentry = currentInningCommentry.slice(
+        //       firstOverIndex,
+        //       lastOverIndex
+        //     );
+        //   else overCommentry = currentInningCommentry.slice(firstOverIndex);
+        // }
+
         /** Display Over Display Score */
         let overDisplayScore = [];
         if (overCommentry.length > 0) {
@@ -585,6 +613,9 @@ export class MatchHomeComponent implements OnInit {
     this.getTossDecision();
 
     this.data.timeline.forEach((timeline, index) => {
+
+        if(timeline.type == 'wicket')
+          this.getFallWickets();
       // console.log(timeline);
       // console.log(index);
 
@@ -836,9 +867,10 @@ export class MatchHomeComponent implements OnInit {
         this.batsmanList[1].statistics = stats[0].statistics;
       }
       console.log(this.batsmanList);
-
+      let prev_baller;
       if (typeof this.ballerList == "undefined") this.ballerList = [];
       if (timeline.bowling_params && timeline.bowling_params.bowler) {
+        prev_baller = this.ballerList[0];
         this.ballerList[0] = timeline.bowling_params.bowler;
         let stats = ballerList.filter(
           player => player.id == timeline.bowling_params.bowler.id
@@ -852,6 +884,10 @@ export class MatchHomeComponent implements OnInit {
         );
         this.ballerList[1].statistics = stats[0].statistics;
       }
+      else if(prev_baller.id != this.ballerList[0].id)
+        this.ballerList[1] = prev_baller;
+      // else
+      //   this.ballerList.splice(1, 1);
       console.log(this.batsmanList);
     }
   }
