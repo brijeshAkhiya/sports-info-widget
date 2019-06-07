@@ -14,82 +14,25 @@
                 <ngb-tab>
                   <ng-template ngbTabTitle>Score</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>High Score</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of battingleaders?.highest_score">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split}}</a></td>
-                              <td>{{item.total}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','High Score'], total:'total', players: battingleaders?.highest_score}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
                 <ngb-tab>
                   <ng-template ngbTabTitle>Runs</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>Runs</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of battingleaders.top_runs">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split}}</a></td>
-                              <td>{{item.total}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','Runs'], total:'total', players: battingleaders.top_runs}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
                 <ngb-tab>
                   <ng-template ngbTabTitle>Average</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>Average</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of battingleaders?.top_average">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split }}</a></td>
-                              <td>{{item.average}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','Average'], total:'average', players: battingleaders?.top_average}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
               </ngb-tabset>
@@ -103,83 +46,26 @@
                 <ngb-tab>
                   <ng-template ngbTabTitle>Top</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>Wickets</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of bowlingleaders?.top_wickets">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split}}</a></td>
-                              <td>{{item.total}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','Wickets'], total:'total', players: bowlingleaders?.top_wickets}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
                 <!--Bowling average-->
                 <ngb-tab>
                   <ng-template ngbTabTitle>Average</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>Average</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of bowlingleaders.top_bowling_average">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split}}</a></td>
-                              <td>{{item.average}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','Average'], total:'average', players: bowlingleaders.top_bowling_average}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
                 <ngb-tab>
                   <ng-template ngbTabTitle>Economy</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>Economy Rate</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of bowlingleaders.top_economy">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split}}</a></td>
-                              <td>{{item.rate}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','Economy Rate'], total:'rate', players: bowlingleaders.top_economy}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
               </ngb-tabset>
@@ -192,28 +78,9 @@
                 <ngb-tab>
                   <ng-template ngbTabTitle>Top Catches</ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table striped-table tour-stats-table common-shadow rounded-box">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr class="light-row">
-                              <th>POS</th>
-                              <th>Player</th>
-                              <th>Catches</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of fieldingleaders?.top_catches">
-                              <td>{{item.rank}}</td>
-                              <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                                [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
-                                    alt="logo">{{item.player.name | split}}</a></td>
-                              <td>{{item.total}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                      <ng-container 
+                      *ngTemplateOutlet="playerList;context:{ titles:['POS', 'player','Catches'], total:'total', players: fieldingleaders?.top_catches}">
+                      </ng-container>
                   </ng-template>
                 </ngb-tab>
               </ngb-tabset>
@@ -233,3 +100,26 @@
     </div>
   </div>
 </section>
+
+<ng-template #playerList let-players="players" let-titles="titles" let-total="total">
+    <div class="common-table striped-table tour-stats-table common-shadow rounded-box" *ngIf="players">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr class="light-row">
+                <th *ngFor="let title of titles">{{title}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of players">
+                <td>{{item.rank}}</td>
+                <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
+                  [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset"
+                      alt="logo">{{item.player.name | split}}</a></td>
+                <td>{{item[total]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</ng-template>            

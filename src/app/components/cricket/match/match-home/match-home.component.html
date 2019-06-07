@@ -30,10 +30,10 @@
 
 
           <!-- START - SCORECARDS-->
-          <ngb-tab *ngIf="matchdata.sport_event_status.status != 'not_started'">
+          <ngb-tab *ngIf="matchdata.statistics">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
-              <ngb-tabset class="filled-tabs scorecard-tab"
+              <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="matchdata.statistics.innings"
                 [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
                 <ngb-tab *ngFor="let item of matchdata.statistics.innings,let i = index">
                   <ng-template ngbTabTitle *ngIf="matchdata.statistics.innings">
@@ -411,14 +411,14 @@
                           <div class="team-info">
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"
+                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"  [offset]="commonService.lazyloadoffset" 
                             [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"
+                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"  [offset]="commonService.lazyloadoffset" 
                             [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>

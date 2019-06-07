@@ -6,6 +6,7 @@ export class CommonService {
 
   public largeblogPlaceholder = '/assets/images/placeholder_blog_large.svg'
   public smallblogPlaceholder = '/assets/images/placeholder_blog_small.svg'
+  public lazyloadoffset = "1000";
   public s3Url
   public siteUrl
   

@@ -16,7 +16,7 @@
   </div>
   <div class="banner-images">
     <div class="banner-image" *ngFor="let item of bannerimages; let i=index;" [ngClass]="{'active': i===imageindex}"
-      [lazyLoad]="item | resizeImage:['m']"></div>
+    [offset]="commonService.lazyloadoffset"  [lazyLoad]="item | resizeImage:['m']"></div>
   </div>
 </section>
 <!-- End  Top Highlight -->
@@ -35,7 +35,7 @@
         <div class="popular-main-item common-shadow" *ngFor="let article of populararticles | slice:0:1">
           <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': article.eType == 'Video'}">
             <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"
-              [lazyLoad]="article.sImage | resizeImage:['m']"
+            [offset]="commonService.lazyloadoffset"  [lazyLoad]="article.sImage | resizeImage:['m']"
               (click)="blogview(article._id,article.eType,article.sTitle)">
             </div>
           </div>
@@ -77,10 +77,10 @@
                       <p>{{item.scheduled | amTimeAgo }}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img  [lazyLoad]="item.competitors[0].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="rcb">{{item.competitors[0].name}}</p>
+                      <p><img   [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitors[0].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="rcb">{{item.competitors[0].name}}</p>
                     </div>
                     <div class="match-info d-flex justify-content-between align-items-center">
-                      <p><img [lazyLoad]="item.competitors[1].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{item.competitors[1].name}}
+                      <p><img   [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.competitors[1].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{item.competitors[1].name}}
                       </p>
                     </div>
                     <div class="row">
@@ -111,13 +111,13 @@
                     </div>
                     <div *ngFor="let item of result.period_score_new">
                       <div class="match-info d-flex justify-content-between align-items-center" *ngIf="!item.teamFlag">
-                        <p [ngClass]="{'match-winner': item.team.winner}"><img [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+                        <p [ngClass]="{'match-winner': item.team.winner}"><img  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
                             alt="rcb">{{item.team.abbreviation}}</p>
                         <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                       </div>
                       <div class="match-info d-flex justify-content-between align-items-center" *ngIf="item.teamFlag">
                         <p [ngClass]="{'match-winner': item.team.winner}"><img
-                          [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{item.team.abbreviation}}
+                          [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{item.team.abbreviation}}
                         </p>
                         <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                       </div>
@@ -159,7 +159,7 @@
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
         <div class="main-popular-video common-zoom-container common-full-img" (click)="blogview(video._id,video.eType,video.sTitle)">
           <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
-            [lazyLoad]="video.sImage | resizeImage:['m']" >
+          [offset]="commonService.lazyloadoffset"  [lazyLoad]="video.sImage | resizeImage:['m']" >
           </div>
           <a class="play-btn"><img src="../../../assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
@@ -181,7 +181,7 @@
               (click)="blogview(video._id,video.eType,video.sTitle)">
               <div class="video-img common-overlay common-zoom-container common-full-img">
                 <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
-                  [lazyLoad]="video.sImage | resizeImage:['s']">
+                [offset]="commonService.lazyloadoffset"  [lazyLoad]="video.sImage | resizeImage:['s']">
                 </div>
                 <p class="bold-text white-text" (click)="blogview(video._id,video.eType,video.sTitle)">
                   {{video.sTitle | truncate:[60,'...'] }}

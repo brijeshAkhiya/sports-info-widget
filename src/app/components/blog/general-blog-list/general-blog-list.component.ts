@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../providers/sports-service";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: 'app-general-blog-list',
@@ -15,10 +16,9 @@ export class GeneralBlogListComponent implements OnInit {
   data: any;
   widgetblogs: any;
   total: any;
-  smallblogdeafault = '../../../../assets/images/placeholder_blog_small.svg'
   blogcategory: string;
   blogtype: any;
-  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router, private activatedroute: ActivatedRoute) { }
+  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router, private activatedroute: ActivatedRoute, private commonService: CommonService) { }
 
   ngOnInit() {
     this.blogcategory = this.activatedroute.snapshot.params.category;

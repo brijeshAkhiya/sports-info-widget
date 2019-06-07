@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { SportsService } from "../../../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { CommonService } from "@providers/common-service";
+
 import * as moment from "moment";
 
 @Component({
@@ -21,7 +23,8 @@ export class TournamentFixturesComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     private router: Router,
-    private cricketService: CricketService
+    private cricketService: CricketService, private commonService: CommonService
+
   ) {}
 
   ngOnInit() {

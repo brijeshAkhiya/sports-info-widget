@@ -3,6 +3,7 @@ import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SlugifyPipe } from '../../../../pipes/slugpipe';
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: 'app-tournament-standings',
@@ -15,7 +16,8 @@ export class TournamentStandingsComponent implements OnInit {
   tournamentid: any;
   pointstable: any;
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute,private slugifyPipe: SlugifyPipe,private router: Router,
-    private cricketService: CricketService) { }
+    private cricketService: CricketService, private commonService: CommonService
+    ) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.parent.snapshot.params.id)

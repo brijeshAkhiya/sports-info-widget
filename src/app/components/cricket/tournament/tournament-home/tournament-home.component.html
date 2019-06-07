@@ -12,7 +12,7 @@
               <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
                 <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"
                   (click)="blogview(post._id,post.eType,post.sTitle)">
-                  <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"  [lazyLoad]="post.sImage | resizeImage:['m']">
+                  <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"   [offset]="commonService.lazyloadoffset"  [lazyLoad]="post.sImage | resizeImage:['m']">
                   </div>
                 </div>
                 <div class="blog-desc">
@@ -78,7 +78,7 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of battingleaders | slice:0:1">
-                      <img  alt="player" [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
+                      <img  alt="player"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
@@ -112,7 +112,7 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of bowlingleaders | slice:0:1">
-                      <img alt="player" [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
+                      <img alt="player"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">

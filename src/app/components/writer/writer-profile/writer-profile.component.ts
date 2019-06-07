@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../providers/sports-service";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { CommonService } from "@providers/common-service";
+
 
 @Component({
   selector: 'app-writer-profile',
@@ -15,7 +17,7 @@ export class WriterProfileComponent implements OnInit {
   commonpopularparams:{}
   commonvideoparams:{}
   defaultwriterimg = '../../../../assets/images/placeholder-sqad.svg'
-  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router,private activatedroute: ActivatedRoute) { }
+  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router,private activatedroute: ActivatedRoute, private commonService: CommonService) { }
 
   ngOnInit() {
     this.writerid = atob(this.activatedroute.snapshot.params.id);

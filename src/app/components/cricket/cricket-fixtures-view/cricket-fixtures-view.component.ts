@@ -4,6 +4,7 @@ import { distinctUntilChanged } from "rxjs/operators";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
 import { SportsService } from "../../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
 import * as moment from "moment";
 
 @Component({
@@ -22,6 +23,7 @@ export class CricketFixturesViewComponent implements OnInit {
   constructor(
     private sportsService: SportsService,
     private cricketService: CricketService,
+    private commonService: CommonService,
     private router: Router,
     private activatedroute: ActivatedRoute,
     private slugifyPipe: SlugifyPipe

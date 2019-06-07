@@ -14,7 +14,7 @@
             <ng-template ngbTabContent>
               <section class="player-profile d-flex">
                 <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerbasic?.id | playerimage:['m']"
+                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerbasic?.id | playerimage:['m']"  [offset]="commonService.lazyloadoffset" 
                     [defaultImage]="cricketService.playerplaceholder">
                 </div>
                 <div class="player-info d-flex common-shadow rounded-box">
@@ -81,7 +81,7 @@
                   <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let item of playerprofile?.teams"
                     (click)="cricketService.teamInfo(item.id,item.name)">
                     <div class="team-item rounded-box common-shadow d-flex">
-                      <div class="team-flag"><img [lazyLoad]="item?.id | logosurl"
+                      <div class="team-flag"><img [lazyLoad]="item?.id | logosurl"  [offset]="commonService.lazyloadoffset" 
                           [defaultImage]="cricketService.flagplaceholder" alt="team-flag"></div>
                       <div class="team-name">
                         <h4>{{item?.name}}</h4>
