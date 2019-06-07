@@ -20,17 +20,23 @@
                 <div class="player-info d-flex common-shadow rounded-box">
                   <div class="info-col">
                     <p class="light-title">Full Name</p>
-                    <p>{{playerbasic?.full_name}}</p>
+                    <p>
+                      {{playerbasic ? playerbasic.full_name ? playerbasic.full_name : playerbasic.name ? playerbasic.name : '' : ''}}
+                    </p>
                     <p class="light-title">Born</p>
                     <p>{{playerbasic?.date_of_birth | date}}</p>
                     <p class="light-title">Nationality</p>
                     <p>{{playerbasic?.nationality}}</p>
                   </div>
                   <div class="info-col">
-                    <p class="light-title">Batting Style</p>
-                    <p>{{playerbasic?.batting_style | stringunder}}</p>
-                    <p class="light-title">Bowling Style</p>
-                    <p>{{playerbasic?.bowling_style | stringunder}}</p>
+                    <div *ngIf="playerbasic?.batting_style">
+                      <p class="light-title">Batting Style</p>
+                      <p>{{playerbasic?.batting_style | stringunder}}</p>
+                    </div>
+                    <div *ngIf="playerbasic?.bowling_style">
+                      <p class="light-title">Bowling Style</p>
+                      <p>{{playerbasic?.bowling_style | stringunder}}</p>
+                    </div>
                     <p class="light-title">Role</p>
                     <p>{{playerbasic?.type | stringunder}}</p>
                   </div>

@@ -97,7 +97,7 @@ export function provideConfig() {
     LottieAnimationViewModule.forRoot(),
     NgbModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY"
+      apiKey: environment.mapsKey
     }),
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
@@ -121,4 +121,4 @@ export function provideConfig() {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

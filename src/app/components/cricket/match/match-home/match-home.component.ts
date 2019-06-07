@@ -462,7 +462,7 @@ export class MatchHomeComponent implements OnInit {
       let currentInningCommentry = this.data.timeline.filter(
         commentry => commentry.inning == innings.number
       );
-      
+
 
       //for loop of overs_completd in inning
       if (typeof innings.overs == "undefined" || innings.overs.length <= 0) {
@@ -481,7 +481,7 @@ export class MatchHomeComponent implements OnInit {
         this.inningWiseCommentry[0].commentry.unshift({ data: temp, overs: 0 });
         return false;
       }
-      
+
       let firstIndex = 0;
       let lastIndex = 0;
       innings.overs.forEach((over, inningIndex) => {
@@ -494,7 +494,7 @@ export class MatchHomeComponent implements OnInit {
             commentry.inning == innings.number
         );
         let overCommentry = [];
-        if(lastIndex > 0){
+        if (lastIndex > 0) {
           overCommentry = currentInningCommentry.slice(
             firstIndex,
             lastIndex
@@ -616,24 +616,24 @@ export class MatchHomeComponent implements OnInit {
 
     this.data.timeline.forEach((timeline, index) => {
 
-        if(timeline.type == 'wicket')
-          // this.getFallWickets();
-      // console.log(timeline);
-      // console.log(index);
+      if (timeline.type == 'wicket')
+        // this.getFallWickets();
+        // console.log(timeline);
+        // console.log(index);
 
-      // When inning is not yet started
-      // console.log(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined');
+        // When inning is not yet started
+        // console.log(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined');
 
-      if (
-        typeof this.data.statistics == "undefined" ||
-        typeof this.data.statistics.innings == "undefined"
-      ) {
-        if (typeof this.inningWiseCommentry[0] == "undefined")
-          this.inningWiseCommentry[0] = { commentry: [] };
+        if (
+          typeof this.data.statistics == "undefined" ||
+          typeof this.data.statistics.innings == "undefined"
+        ) {
+          if (typeof this.inningWiseCommentry[0] == "undefined")
+            this.inningWiseCommentry[0] = { commentry: [] };
 
-        this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);
-        return false;
-      }
+          this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);
+          return false;
+        }
 
       // Get Innings data of current inning
       let currentInning = this.data.statistics.innings.filter(
@@ -868,7 +868,7 @@ export class MatchHomeComponent implements OnInit {
         );
         this.batsmanList[1].statistics = stats[0].statistics;
       }
-      console.log(this.batsmanList);
+      console.log("batsmanList", this.batsmanList);
       let prev_baller;
       if (typeof this.ballerList == "undefined") this.ballerList = [];
       if (timeline.bowling_params && timeline.bowling_params.bowler) {
@@ -886,7 +886,7 @@ export class MatchHomeComponent implements OnInit {
         );
         this.ballerList[1].statistics = stats[0].statistics;
       }
-      else if(prev_baller.id != this.ballerList[0].id)
+      else if (prev_baller.id != this.ballerList[0].id)
         this.ballerList[1] = prev_baller;
       // else
       //   this.ballerList.splice(1, 1);
