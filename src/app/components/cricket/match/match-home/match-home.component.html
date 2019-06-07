@@ -1,4 +1,4 @@
-<app-data-loader-widget *ngIf="isshow"></app-data-loader-widget>
+<!-- <app-data-loader-widget *ngIf="isshow"></app-data-loader-widget> -->
 <section class="common-section cricket-recentnews recentnews-section" *ngIf="!isshow">
   <div class="container">
     <div class="row sidebar-row">
@@ -19,9 +19,9 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
+              <!-- <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget> -->
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
-                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList">
+                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList" [showCommetry]="showCommetry">
               </app-match-commentry>
             </ng-template>
           </ngb-tab>

@@ -13,20 +13,13 @@ export class MatchCommentryComponent implements OnInit {
   @Input() oversummery: any;
   @Input() ballerList: any;
   @Input() batsmanList:any;
-  showCommetry;
+  @Input() showCommetry:any;
   ballers: any;
   currentover;
 
   constructor(
     private cricketService: CricketService
-  ) {
-    console.log(this.commentry);
-    if(typeof this.commentry == 'undefined' || this.commentry.length > 0)
-      this.showCommetry = false;
-    else
-      this.showCommetry = true;
-    
-  }
+  ) {}
 
   ngOnInit(){
   }
