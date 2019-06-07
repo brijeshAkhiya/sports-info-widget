@@ -14,7 +14,7 @@ export interface Config {
 export class SportsService {
   configs: Observable<any>;
   currentseries: Observable<any>;
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   //<----home page services starts -------->
 
@@ -76,9 +76,9 @@ export class SportsService {
 
   getmatchresults() {
     // Cache it once if configs value is false
-   return this.http.get(environment.apiUrl + environment.version + "/cricket/results")
-      
-   
+    return this.http.get(environment.apiUrl + environment.version + "/cricket/results")
+
+
   }
 
   getmatchfixtures() {
@@ -89,7 +89,7 @@ export class SportsService {
 
   //get current cricket tournaments - CRICKET Page API --------------->
 
-  getcurrentseries(){
+  getcurrentseries() {
     return this.http.get(
       environment.apiUrl + environment.version + "/cricket/tournaments/current"
     );
@@ -104,11 +104,11 @@ export class SportsService {
   }
   //get all fixtures - CRICKET
 
-  getcricketfixtures(){
+  getcricketfixtures() {
     // return this.http.get(environment.apiUrl + environment.version + '/cricket/fixtures/all');
 
-   return this.http
-        .get(environment.apiUrl + environment.version + "/cricket/fixtures/all")
+    return this.http
+      .get(environment.apiUrl + environment.version + "/cricket/fixtures/all")
   }
 
   //get cricket tournament leaders
@@ -116,8 +116,8 @@ export class SportsService {
   gettournamentleaders(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/tournament/${id}/leaders`
+      environment.version +
+      `/cricket/tournament/${id}/leaders`
     );
   }
 
@@ -126,8 +126,8 @@ export class SportsService {
   gettournamentpointstable(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/tournament/${id}/point-table`
+      environment.version +
+      `/cricket/tournament/${id}/point-table`
     );
   }
 
@@ -136,8 +136,8 @@ export class SportsService {
   gettournamentteams(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/tournament/${id}/teams`
+      environment.version +
+      `/cricket/tournament/${id}/teams`
     );
   }
 
@@ -146,8 +146,8 @@ export class SportsService {
   gettournamentfixtures(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/tournament/${id}/fixtures`
+      environment.version +
+      `/cricket/tournament/${id}/fixtures`
     );
   }
 
@@ -155,8 +155,8 @@ export class SportsService {
   gettournamentresults(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/tournament/${id}/results`
+      environment.version +
+      `/cricket/tournament/${id}/results`
     );
   }
 
@@ -180,8 +180,8 @@ export class SportsService {
   getmatchprobability(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/match/${id}/probablities`
+      environment.version +
+      `/cricket/match/${id}/probablities`
     );
   }
 
@@ -193,7 +193,7 @@ export class SportsService {
   }
 
   //get match team lineups
-  getmatchteamlineup(matchid){
+  getmatchteamlineup(matchid) {
     return this.http.get(
       environment.apiUrl + environment.version + `/cricket/match/${matchid}/lineups`
     );
@@ -203,8 +203,8 @@ export class SportsService {
   getmatchtimelineDetla(id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/match/${id}/timelinedelta`
+      environment.version +
+      `/cricket/match/${id}/timelinedelta`
     );
   }
 
@@ -219,8 +219,8 @@ export class SportsService {
   getteamvsteamdata(team1id, team2id) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/team/${team1id}/team/${team2id}`
+      environment.version +
+      `/cricket/team/${team1id}/team/${team2id}`
     );
   }
 
@@ -289,17 +289,17 @@ export class SportsService {
   getteamprofile(tournamentid, teamid) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/tournament/${tournamentid}/teams/${teamid}`
+      environment.version +
+      `/cricket/tournament/${tournamentid}/teams/${teamid}`
     );
   }
 
   //get team profile without tournament id
-  getteamprofileview(teamid){
+  getteamprofileview(teamid) {
     return this.http.get(
       environment.apiUrl +
-        environment.version +
-        `/cricket/team/${teamid}/profile`
+      environment.version +
+      `/cricket/team/${teamid}/profile`
     );
   }
 
@@ -320,21 +320,22 @@ export class SportsService {
   }
 
   //get CMS Content
-  getcmscontent(sKey){
+  getcmscontent(sKey) {
     let headers = new HttpHeaders({
       'Content-Type': 'text/html'
-  });
+    });
     return this.http.get(
-      environment.apiUrl + environment.version + `/cms/${sKey}`, {headers:headers,responseType:'text'}
+      environment.apiUrl + environment.version + `/cms/${sKey}`, { headers: headers, responseType: 'text' }
     );
   }
 
-  connect(){
-    return io(environment.socket.baseUrl)
-    
+  getReverseGeo(address) {
+    return this.http.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${environment.mapsKey}`
+    );
   }
 
-  
-
-
+  connect() {
+    return io(environment.socket.baseUrl)
+  }
 }

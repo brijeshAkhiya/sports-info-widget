@@ -22,21 +22,21 @@ export class MatchFactsFiguresComponent implements OnInit {
   constructor(
     private sportsService: SportsService,
     private router: Router,
-    public cricketService: CricketService) {}
+    public cricketService: CricketService) { }
 
   ngOnInit() {
     console.log(this.teamMatchResult);
-    
-    if(this.matchdata){
+
+    if (this.matchdata) {
       this.getVenueData();
-      if(this.matchdata.sport_event_status.status == 'not_started')
+      if (this.matchdata.sport_event_status.status == 'not_started')
         this.getMatchProbability();
 
     }
-  } 
+  }
 
   /** Get Venue Details */
-  getVenueData(){
+  getVenueData() {
     if (this.matchdata.sport_event.venue) {
       this.venuedetails = this.matchdata.sport_event.venue;
       if (this.matchdata.sport_event.venue.map_coordinates) {
@@ -44,18 +44,18 @@ export class MatchFactsFiguresComponent implements OnInit {
         this.venuedetails.long = Number(this.matchdata.sport_event.venue.map_coordinates.split(",")[1]);
       } else {
         // TODO - Reverse Geo coding
-        this.venuedetails.lat = 22.5726;
-        this.venuedetails.long = 88.363;
+        this.sportsService.getReverseGeo(this.venuedetails.name).subscribe((res: any) => {
+          this.venuedetails.lat = res.results[0].geometry.location.lat;
+          this.venuedetails.long = res.results[0].geometry.location.lng;
+        })
       }
     }
   }
 
   /** get match probablities */
   getMatchProbability() {
-    this.sportsService.getmatchprobability(this.matchdata.sport_event.id).subscribe((res:any) => {
+    this.sportsService.getmatchprobability(this.matchdata.sport_event.id).subscribe((res: any) => {
       this.matchprobability = res.data;
-      console.log(this.matchprobability);
-      
       if (
         this.matchprobability[0].probability >
         this.matchprobability[1].probability
@@ -71,8 +71,8 @@ export class MatchFactsFiguresComponent implements OnInit {
     });
   }
 
-   //get match detail
-   matchDetail(id, team1, team2) {
+  //get match detail
+  matchDetail(id, team1, team2) {
     let teams = team1.concat("-", team2);
     this.router.navigate(["/cricket/match", btoa(id), teams]);
   }

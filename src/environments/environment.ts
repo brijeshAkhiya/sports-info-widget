@@ -14,4 +14,5 @@ export const environment = {
   },
   s3Url : 'https://d1ldsx0apuyt84.cloudfront.net/',
   siteUrl : 'https://sports.info/',
+  mapsKey : 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
 };
