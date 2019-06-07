@@ -3,9 +3,17 @@
     <span *ngIf="teamsname">{{teamsname[0]}}</span>
     <span *ngIf="teamsname">{{teamsname[1]}}</span>
   </button>
-  <p class="flash-run" [ngClass]="{'active': isnewflashvalue}">{{flashvalue}}</p>
-  <!-- <p class="flash-run active">WD</p> -->
 </div>
+<div class="flash-run" [ngClass]="{'active': isnewflashvalue}">{{flashvalue}}
+  <div class="pyro">
+    <div class="after"></div>
+  </div>
+</div>
+<!-- <div class="flash-run active">WD
+  <div class="pyro">
+    <div class="after"></div>
+  </div>
+</div> -->
 <div class="flash-comm-box" [ngClass]="{'flash-comm-show': isapply}">
   <!-- flash-comm-show -->
   <div class="head-btn-list">
@@ -20,7 +28,7 @@
       </div>
     </form> -->
     <ul class="flash-comm-list">
-      <li *ngIf="!livematches || livematches.length == 0">No any live matches!</li>
+      <li *ngIf="!livematches || livematches.length == 0">Ooops! No live commentaries available at the moment.</li>
       <li *ngFor="let item of livematches"><button (click)="reqJoinRoom(item.id,item.competitors)"
           [ngClass]="{'selected': item.id == currentmatchid}">{{item.competitors}}</button></li>
     </ul>

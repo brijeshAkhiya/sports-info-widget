@@ -23,27 +23,33 @@
                     <p>
                       {{playerbasic ? playerbasic.full_name ? playerbasic.full_name : playerbasic.name ? playerbasic.name : '' : ''}}
                     </p>
-                    <p class="light-title">Born</p>
-                    <p>{{playerbasic?.date_of_birth | date}}</p>
-                    <p class="light-title">Nationality</p>
-                    <p>{{playerbasic?.nationality}}</p>
+                    <div class="info-item" *ngIf="playerbasic?.date_of_birth">
+                      <p class="light-title">Born</p>
+                      <p>{{playerbasic?.date_of_birth | date}}</p>
+                    </div>
+                    <div class="info-item" *ngIf="playerbasic?.nationality">
+                      <p class="light-title">Nationality</p>
+                      <p>{{playerbasic?.nationality}}</p>
+                    </div>
                   </div>
                   <div class="info-col">
-                    <div *ngIf="playerbasic?.batting_style">
+                    <div class="info-item" *ngIf="playerbasic?.batting_style">
                       <p class="light-title">Batting Style</p>
                       <p>{{playerbasic?.batting_style | stringunder}}</p>
                     </div>
-                    <div *ngIf="playerbasic?.bowling_style">
+                    <div class="info-item" *ngIf="playerbasic?.bowling_style">
                       <p class="light-title">Bowling Style</p>
                       <p>{{playerbasic?.bowling_style | stringunder}}</p>
                     </div>
-                    <p class="light-title">Role</p>
-                    <p>{{playerbasic?.type | stringunder}}</p>
+                    <div class="info-item" *ngIf="playerbasic?.type">
+                      <p class="light-title">Role</p>
+                      <p>{{playerbasic?.type | stringunder}}</p>
+                    </div>
                   </div>
-                  <div class="info-col">
-                    <!-- <p class="light-title">jersey no</p>
-                    <p>7</p> -->
-                  </div>
+                  <!-- <div class="info-col">
+                    <p class="light-title">jersey no</p>
+                    <p>7</p>
+                  </div> -->
                 </div>
               </section>
               <section class="common-section quick-stats">

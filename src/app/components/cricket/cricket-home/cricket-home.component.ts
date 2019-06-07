@@ -61,19 +61,22 @@ export class CricketHomeComponent implements OnInit {
   //get popular posts
 
   getPopularArticles() {
+    if (!this.populararticles) {
+      this.populararticles = []
+    }
     let data = {
-      eSport:'Cricket',
+      eSport: 'Cricket',
+      nStart: this.populararticles.length,
       nLimit: 10
     };
     this.sportsService.getpopularpost(data).subscribe(res => {
       if (res["data"]) {
-        this.populararticles = res["data"];
+        this.populararticles = this.populararticles.concat(res["data"]);
       }
     });
   }
 
   //loadmore popular 
-
   loadpopular() {
     let start = this.populararticles.length
     let data = {

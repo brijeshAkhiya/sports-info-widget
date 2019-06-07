@@ -230,13 +230,11 @@ export class MatchHomeComponent implements OnInit {
       this.sportsService.getmatchteamlineup(this.matchid).subscribe(
         (res: any) => {
           if (res.data && res.data.lineups[0].starting_lineup && res.data.lineups[1].starting_lineup) {
-            let players = res.data.lineups[0].starting_lineup.concat(
-              res.data.lineups[1].starting_lineup
-            );
+            let players = [...res.data.lineups[0].starting_lineup, ...res.data.lineups[1].starting_lineup]
+
             players.map(single => {
               if (!this.playerList[single.id]) {
-                this.playerList[single.id] = [];
-                this.playerList[single.id].push(single);
+                this.playerList[single.id] = single
               }
             });
           }
@@ -390,7 +388,7 @@ export class MatchHomeComponent implements OnInit {
       if (typeof this.data.sport_event_status.toss_decision != "undefined")
         this.tossdecision.toss_decision = this.data.sport_event_status.toss_decision;
 
-      console.log(this.tossdecision);
+      console.log("toss decision",this.tossdecision);
     }
   }
 
@@ -980,6 +978,10 @@ export class MatchHomeComponent implements OnInit {
     console.log("clearTimeInterval");
     clearInterval(this.interval);
     clearTimeout(this.timeout);
+  }
+
+  checkNotBat() {
+    
   }
 
   ngOnDestroy() {
