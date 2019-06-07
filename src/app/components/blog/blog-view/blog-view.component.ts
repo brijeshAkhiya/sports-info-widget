@@ -12,18 +12,21 @@ import { CommonService } from '@providers/common-service';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogViewComponent implements OnInit ,OnDestroy{
-  blogid: any;
   blogtype: any;
   blogdata: any;
   blogUrl: any;
   blogshareid: any;
   blogslug: any;
-  blogcomments: any;
-  newcommnets: any;
+  blogcomments = [];
   isplay:boolean = false
   widgetblogs: any;
   hideBtn: boolean = false;
   @ViewChild('videoPlayer') videoplayer: ElementRef;
+
+  url:any;
+  previewtype:any; 
+  
+
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
@@ -31,26 +34,39 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
     private slugifypipe:SlugifyPipe,
     private splitpipe:SplitPipe,
     private commonService:CommonService
-  ) {}
+  ) {
+    /**To reload router if routing in same page */
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+  }
 
   ngOnInit() {
+    console.log(this.activatedroute);
+    this.url = this.activatedroute.url;
+
+    if(this.activatedroute.snapshot.params.id)
+      this.getBlogview(atob(this.activatedroute.snapshot.params.id));
+
+    this.previewtype =  (this.url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     this.blogshareid = this.activatedroute.snapshot.params.id
     this.blogslug = this.activatedroute.snapshot.params.slug
-    this.blogid = atob(this.activatedroute.snapshot.params.id);
     this.blogtype = this.activatedroute.snapshot.params.type;
-    this.updatePostCount();
-    this.getBlogview();
-    this.getBlogComments();
     this.getPopularArticles();
   }
 
-  getBlogview() {
-    if (this.blogid) {
-      this.sportsService.getblogview(this.blogid).subscribe(res => {
-        this.blogdata = res["data"];
-        if(this.blogdata.length == 4){
-          this.hideBtn = true
-        }
+  getBlogview(id) {
+    if (id) {
+      this.sportsService.getblogview(id).subscribe((res:any) => {
+        this.blogdata = res.data;
+        let type =  (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
+        if(type.toUpperCase() != this.blogdata.eType.toUpperCase())
+          this.router.navigate(['/page-not-found'])
+
+        if(type == 'detail')
+          this.updatePostCount(this.blogdata._id)
+        
+        this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id));
       },(error)=>{
           if(error['error'].status == 500){
             this.router.navigate(['/page-not-found'])
@@ -60,48 +76,35 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
   }
 
   //update post view count
-
-  updatePostCount() {
-    if (this.blogid) {
-      this.sportsService.updatepostviewcount(this.blogid).subscribe(res => {});
+  updatePostCount(id) {
+    if (id) {
+      this.sportsService.updatepostviewcount(id).subscribe(res => {});
     }
+  }
+
+  initBlogParams(id){
+     return {
+      iPostId:id,
+      nStart:this.blogcomments.length,
+      nLimit:4
+    }
+  }
+
+  viewmorecomments(){
+    this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id))
   }
 
   //to get blog comments
-  getBlogComments(){
-    if (this.blogid) {
-      let data = {
-        iPostId:this.blogid,
-        nStart:0,
-        nLimit:4
-      }
-      this.sportsService.getblogcommnets(data).subscribe(res => {
-        if(res['data']){
-          this.blogcomments = res['data'];
+  getBlogComments(id, data){
+    if (id) {
+      this.sportsService.getblogcommnets(data).subscribe((res:any) => {
+        if(res.data){
+          if(res.data.length == 0)
+            this.hideBtn = true;
+          this.blogcomments = this.blogcomments.concat(res.data)
         }
       });
     }
-  }
-
-  //view more comments 
-
-  viewmorecomments(){
-    let start = this.blogcomments.length
-    let data = {
-      iPostId:this.blogid,
-      nStart:start,
-      nLimit:4
-    }
-    this.sportsService.getblogcommnets(data).subscribe(res => {
-      if(res['data']){
-        this.newcommnets = res['data'];
-        if(this.newcommnets.length == 0){
-            this.hideBtn = true
-        }
-        this.blogcomments = this.blogcomments.concat(this.newcommnets)
-      }
-    });
-
   }
 
   //video play event 
@@ -126,13 +129,8 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
 
   // get widget blogs view 
   getwidgetblogsview(id,type,title){
-    this.blogid = id
     let slug = this.slugifypipe.transform(title);
     this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slug]);
-    this.updatePostCount();
-    this.getBlogview();
-    this.getBlogComments();
-    this.getPopularArticles();
   }
 
 
@@ -156,7 +154,6 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
   }
 
    //sharable link 
-
    sharablelink(platform) {
     this.blogUrl = `${this.commonService.siteUrl}blog/${this.blogtype}/${this.blogshareid}/${this.blogslug}`;
     if (platform == 'facebook') {

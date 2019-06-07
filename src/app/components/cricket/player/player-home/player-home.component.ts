@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
+
 @Component({
   selector: 'app-player-home',
   templateUrl: './player-home.component.html',
@@ -18,7 +20,8 @@ export class PlayerHomeComponent implements OnInit {
   commonnewsparams = {}
   widget1title = "Current Series";
   widget1type = "currentseries";
-  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private router: Router,private cricketService:CricketService) { }
+  constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private router: Router,private cricketService:CricketService, private commonService: CommonService
+    ) { }
 
   ngOnInit() {
     this.playerid = atob(this.activatedroute.snapshot.params.id)

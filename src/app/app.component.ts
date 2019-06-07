@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   socialUser2:any;
   vibrantcolor:any
   mutedcolor:any
-  imgurl = "../images/banner/9S6A5434.jpg"
   constructor(private http:HttpClient,private router: Router,private socialLoginService: AuthService,private store: Store<fromRoot.State>){
 
   }

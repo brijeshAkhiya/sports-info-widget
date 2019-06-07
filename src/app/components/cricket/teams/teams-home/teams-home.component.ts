@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { SlugifyPipe } from '../../../../pipes/slugpipe';
 import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
+
 @Component({
   selector: 'app-teams-home',
   templateUrl: './teams-home.component.html',
@@ -20,7 +22,7 @@ export class TeamsHomeComponent implements OnInit {
   noteamfixtures: boolean = false;
   teamprofiledata: any;
   teamsplaceholder = '../../../../../assets/images/logo-placeholder.svg'
-  constructor(private sportsService: SportsService, private cricketService: CricketService,private activatedroute: ActivatedRoute,private router: Router,private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe) {
+  constructor(private sportsService: SportsService, private cricketService: CricketService,private activatedroute: ActivatedRoute,private router: Router,private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe, private commonService: CommonService) {
   }
 
   ngOnInit() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../providers/sports-service";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: "app-blog-list",
@@ -15,8 +16,7 @@ export class BlogListComponent implements OnInit {
   data: any;
   widgetblogs: any;
   total: any;
-  smallblogdeafault = '../../../../assets/images/placeholder_blog_small.svg'
-  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router) {}
+  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router, private commonService: CommonService) {}
 
   ngOnInit() {
     this.getPopularArticles(this.nstart, this.nlimit);

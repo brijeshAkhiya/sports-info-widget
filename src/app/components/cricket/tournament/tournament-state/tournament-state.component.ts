@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SlugifyPipe } from '../../../../pipes/slugpipe';
 import { SplitPipe } from '../../../../pipes/stringsplitpipe';
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
+
 
 @Component({
   selector: 'app-tournament-state',
@@ -20,7 +22,8 @@ export class TournamentStateComponent implements OnInit {
   nostatistics: boolean ;
   isdata:boolean
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private slugifyPipe: SlugifyPipe, private router: Router, private splitpipe: SplitPipe,
-    private cricketService: CricketService) { }
+    private cricketService: CricketService, private commonService: CommonService
+    ) { }
 
   ngOnInit() {
     this.tournamentid = atob(this.activatedroute.snapshot.parent.params.id)

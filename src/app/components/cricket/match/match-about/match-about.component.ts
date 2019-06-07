@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
+
 
 @Component({
   selector: 'app-match-about',
@@ -15,7 +17,7 @@ export class MatchAboutComponent implements OnInit {
   teamsresultsscore;
 
   constructor(
-    private cricketService: CricketService
+    private cricketService: CricketService, private commonService: CommonService
     ) { }
 
   ngOnInit() {  

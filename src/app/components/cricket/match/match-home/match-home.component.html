@@ -256,14 +256,14 @@
                           <div class="team-info">
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"
+                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"  [offset]="commonService.lazyloadoffset" 
                             [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"
+                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"  [offset]="commonService.lazyloadoffset" 
                             [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>

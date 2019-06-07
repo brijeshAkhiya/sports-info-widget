@@ -114,7 +114,7 @@
               <tr *ngFor="let item of players">
                 <td>{{item.rank}}</td>
                 <td><a (click)="playerinfo(item.player.id,item.player.name)"><img class=""
-                  [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="1000"
+                  [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" [offset]="cricketService.lazyloadoffset"
                       alt="logo">{{item.player.name | split}}</a></td>
                 <td>{{item[total]}}</td>
               </tr>
