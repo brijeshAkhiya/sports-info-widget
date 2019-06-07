@@ -1,7 +1,7 @@
 <div class="header-live-section">
   <div class="container">
     <div class="header-live-slider">
-      <owl-carousel-o [options]="customOptions" *ngIf="slider">
+      <owl-carousel-o [options]="customOptions" *ngIf="slider.length > 0">
         <ng-container class="items" *ngFor="let slide of slider">
           <ng-template carouselSlide>
             

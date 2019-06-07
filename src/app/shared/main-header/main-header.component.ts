@@ -139,7 +139,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
       this.slider = this.sortBySchedule(res.data);   
       this.slider.forEach((match,index)=>{
-
+        console.log(match);
+        
         let compObj = {};
         match.competitors.map(s => {
           compObj[s.qualifier] = s
@@ -154,7 +155,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         if (match.status == "live" || match.status == "interrupted") {
           this.getLiveUpdateSlider(this);
         }
-        if(match.match_data)
+        if(match.match_data && match.match_data.period_scores)
           this.setPeriodScore(match, index, match.match_data.period_scores)
         else if (match.period_scores)
           this.setPeriodScore(match, index, match.period_scores)
@@ -200,7 +201,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         // this.slider = this.sortBySchedule(res.data);   
         this.sortBySchedule(res.data).forEach((match, index) => {
           this.slider[index].status = match.status;
-          if(match.match_data){
+          if(match.match_data && match.match_data.period_scores){
             this.setPeriodScore(match, index, match.match_data.period_scores)
           }
           else if (match.period_scores)
