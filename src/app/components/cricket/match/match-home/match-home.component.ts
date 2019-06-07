@@ -63,7 +63,7 @@ export class MatchHomeComponent implements OnInit {
   batsmanList;
 
   testcheck: any;
-
+  dummyAPICall = 450;
   fallofWickets = [];
   playerList = {};
 
@@ -372,7 +372,7 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get Toss decision */
   getTossDecision() {
-    console.log("getTossDecision");
+    console.log("getTossDecision", Object.entries(this.tossdecision).length);
 
     if (Object.entries(this.tossdecision).length === 0) {
       if (typeof this.data.sport_event_status.toss_won_by != "undefined") {
@@ -450,6 +450,20 @@ export class MatchHomeComponent implements OnInit {
       return false;
     }
 
+    let timelineWithCommentry = this.data.timeline.filter((commentry)=>{ return commentry.commentaries});
+
+    console.log(this.data.timeline.length > 0 ,this.data.sport_event_status.current_inning == 1, this.data.sport_event_status.display_overs == 0)
+    if(this.data.timeline.length > 0 && this.data.sport_event_status.current_inning == 1 &&  this.data.sport_event_status.display_overs == 0){  
+      this.inningWiseCommentry[0] = { commentry: [], inning: 1 };
+      let temp = [];
+      temp.unshift(this.data.timeline);
+      this.inningWiseCommentry[0].commentry.unshift({ data: timelineWithCommentry, overs: 1 });
+      console.log(this.inningWiseCommentry);
+      return false;
+    }
+    
+
+
     // loop of innings from statistics
     this.data.statistics.innings.forEach((innings, index) => {
       // Store Inning wise data
@@ -459,7 +473,7 @@ export class MatchHomeComponent implements OnInit {
       };
 
       // Get all the data for this inning
-      let currentInningCommentry = this.data.timeline.filter(
+      let currentInningCommentry = timelineWithCommentry.filter(
         commentry => commentry.inning == innings.number
       );
 
@@ -477,8 +491,8 @@ export class MatchHomeComponent implements OnInit {
           this.inningWiseCommentry[0].commentry[0] = {};
 
         let temp = [];
-        temp.unshift(this.data.timeline);
-        this.inningWiseCommentry[0].commentry.unshift({ data: temp, overs: 0 });
+        temp.unshift(timelineWithCommentry);
+        this.inningWiseCommentry[0].commentry.unshift({ data: temp, overs: 1 });
         return false;
       }
 
@@ -493,6 +507,7 @@ export class MatchHomeComponent implements OnInit {
             commentry.over_number == nextOver &&
             commentry.inning == innings.number
         );
+        console.log("lastIndex",lastIndex)
         let overCommentry = [];
         if (lastIndex > 0) {
           overCommentry = currentInningCommentry.slice(
@@ -513,7 +528,8 @@ export class MatchHomeComponent implements OnInit {
               lastIndex
             );
           else overCommentry = currentInningCommentry.slice(firstIndex);
-        }
+        }else
+          overCommentry = currentInningCommentry.slice(firstIndex);
         // // get first index of this innings over
         // let firstOverIndex = currentInningCommentry.findIndex(
         //   commentry =>
@@ -613,8 +629,10 @@ export class MatchHomeComponent implements OnInit {
   /** Get Live Commentries inning wise*/
   getUpdate() {
     this.getTossDecision();
+    
+    let timelineWithCommentry = this.data.timeline.filter((commentry)=>{ return commentry.commentaries});
 
-    this.data.timeline.forEach((timeline, index) => {
+    timelineWithCommentry.forEach((timeline, index) => {
 
       if (timeline.type == 'wicket')
         // this.getFallWickets();
@@ -886,11 +904,11 @@ export class MatchHomeComponent implements OnInit {
         );
         this.ballerList[1].statistics = stats[0].statistics;
       }
-      else if (prev_baller.id != this.ballerList[0].id)
+      else if (typeof prev_baller != 'undefined' && ( prev_baller.id != this.ballerList[0].id))
         this.ballerList[1] = prev_baller;
       // else
       //   this.ballerList.splice(1, 1);
-      console.log(this.batsmanList);
+      console.log(this.ballerList);
     }
   }
 
@@ -899,9 +917,10 @@ export class MatchHomeComponent implements OnInit {
     console.log("getLiveUpdate");
     this.interval = setInterval(() => {
       //TEMP
+      this.dummyAPICall++;
       classThis.sportsService
-        .getmatchtimelineDetla(classThis.data.sport_event.id)
-        .subscribe(res => {
+      .getmatchtimelineDetla(classThis.data.sport_event.id)
+      .subscribe(res => {
           // res = res.result; // TEMP
           this.data = res.data;
           this.matchdata = res.data;
