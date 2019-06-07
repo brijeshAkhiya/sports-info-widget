@@ -59,7 +59,8 @@
                           </thead>
                           <tbody *ngIf="matchdata.statistics.innings">
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
-                              <ng-container *ngIf="batting.statistics && (batting.statistics.not_out || batting.statistics.dismissal)">
+                              <ng-container
+                                *ngIf="batting.statistics && (batting.statistics.not_out || batting.statistics.dismissal)">
                                 <td>
                                   <a (click)="cricketService.playerview(batting.id,batting.name)"
                                     [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</a>
@@ -72,25 +73,25 @@
                                     <!--if batsman is catch out-->
                                     {{ batting?.statistics?.dismissal?.type == 'caught' ? 'c' : '' || batting?.statistics?.dismissal?.type == 'retired_hurt' ? 'retired hurt' : ''}}
                                     {{ batting?.statistics?.dismissal?.type == 'caught' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
-                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
                                         : ''  
-                                    : (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
                                     <!--if batsman is stumped out-->
                                     {{ batting?.statistics?.dismissal?.type == 'stumped' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
-                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
                                         : ''  
-                                    : (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
                                     <!--if batsman is runout-->
                                     {{ batting?.statistics?.dismissal?.type == 'run_out' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name) ? 
-                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id][0].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
                                         : ''  
-                                    : (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : ''}}
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
 
                                     {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? 'b' : '' : '' }}
-                                    {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name) ? (playerList[batting?.statistics?.dismissal?.bowler_id][0]?.name | split) : '' : '' : '' }}
+                                    {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (playerList[batting?.statistics?.dismissal?.bowler_id]?.name) ? (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : '' : '' : '' }}
                                   </p>
                                 </td>
                                 <td>{{batting?.statistics?.runs ? batting.statistics.runs : '0'}}</td>
@@ -131,8 +132,14 @@
                             </tr>
                             <tr>
                               <td colspan="6">
-                                <b>Did not bat : </b><span class="batsman-text"> Opi Watihana, Emiliya Perevalova, Opi
-                                  Watihana, Emiliya Perevalova</span>
+                                <b> {{matchdata.sport_event_status.status == 'live' ? 'Yet' : 'Did'}} {{matchdata.sport_event_status.status == 'live' ? 'to' : 'not'}} bat : </b>
+                                <span class="batsman-text not-bat-text">
+                                  <ng-container *ngFor="let notBat of item?.teams[0]?.statistics?.batting?.players">
+                                    <ng-container *ngIf="notBat && notBat.statistics.length === 0">
+                                      {{notBat?.name | split}}<span>,</span>
+                                    </ng-container>
+                                  </ng-container>
+                                </span>
                               </td>
                             </tr>
                           </tbody>
@@ -219,6 +226,154 @@
             </ng-template>
           </ngb-tab>
           <!-- END - FACTS AND FIGURES-->
+
+
+          <!-- Match information starts -->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Info</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div class="common-table match-info-table common-shadow rounded-box">
+                <div class="table-responsive">
+                  <table class="table">
+                    <tr>
+                      <td>Match</td>
+                      <td>{{matchdata.sport_event.competitors[0].name}} VS {{matchdata.sport_event.competitors[1].name}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Series</td>
+                      <td>
+                        {{matchdata.sport_event.season ? matchdata.sport_event.season.name : matchdata.sport_event.tournament.name }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Toss</td>
+                      <td>
+                        <p *ngIf="tossdecision.toss_won_by_team">
+                          <span>{{tossdecision.toss_won_by_team}} opt to
+                            {{tossdecision.toss_decision ? tossdecision.toss_decision : 'bat'}}</span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Weather Condition</td>
+                      <td>{{matchdata.sport_event_conditions?.weather_info?.weather_conditions | stringunder}}</td>
+                    </tr>
+                    <tr>
+                      <td>Pitch Condition</td>
+                      <td>{{matchdata.sport_event_conditions?.pitch_info?.pitch_conditions | stringunder}}</td>
+                    </tr>
+                    <tr>
+                      <td>Outfield Conditions</td>
+                      <td>{{matchdata.sport_event_conditions?.outfield_info?.outfield_conditions | stringunder}}</td>
+                    </tr>
+                    <tr>
+                      <td>Umpires</td>
+                      <td>
+                        <p *ngFor="let singleUmpire of matchdata.sport_event_conditions?.referees?.umpires">
+                          {{singleUmpire.name | split}} <span
+                            class="light-text">{{ singleUmpire.type === 'on_field' ? '(On Field)' : singleUmpire.type === '3rd' ? '(3rd Umpire)' : ''}}</span>
+                        </p>
+                        <!-- <p>Chinaza Akachi <span class="light-text">(1st Umpire)</span></p>
+                        <p>Hemchandra Chakravorty <span class="light-text">(2nd Umpire)</span></p>
+                        <p>Chinaza Akachi <span class="light-text">(3rd Umpire)</span></p> -->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Match Refree</td>
+                      <td>{{matchdata.sport_event_conditions?.referees?.referee?.name | split}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!-- <div class="d-flex match-info-title align-items-center">
+                <img class="common-shadow" src="https://d1ldsx0apuyt84.cloudfront.net/logos/au.png">
+                <h4>West Indies Lineup</h4>
+              </div>
+              <div class="common-table match-info-table common-shadow rounded-box">
+                <div class="table-responsive">
+                  <table class="table">
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td>Karlien Nijhuis</td>
+                    </tr>
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td>Karlien Nijhuis</td>
+                    </tr>
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td>Karlien Nijhuis</td>
+                    </tr>
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="d-flex match-info-title align-items-center">
+                  <img class="common-shadow" src="https://d1ldsx0apuyt84.cloudfront.net/logos/au.png">
+                  <h4>Pakistan Lineup</h4>
+                </div>
+                <div class="common-table match-info-table common-shadow rounded-box">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td>Karlien Nijhuis</td>
+                      </tr>
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td>Karlien Nijhuis</td>
+                      </tr>
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td>Karlien Nijhuis</td>
+                      </tr>
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </div>
+              </div> -->
+            </ng-template>
+          </ngb-tab>
 
           <!--START - NEWS TAB-->
           <ngb-tab>
