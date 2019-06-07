@@ -152,7 +152,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         if (match.status == "not_started") {
           this.startLiveUpdateAfterTime(match);   
         }
-        if (match.status == "live" || match.status == "interrupted") {
+        if (match.status == "live" || match.status == "interrupted" || match.status == "delayed") {
           this.getLiveUpdateSlider(this);
         }
         if(match.match_data && match.match_data.period_scores)
