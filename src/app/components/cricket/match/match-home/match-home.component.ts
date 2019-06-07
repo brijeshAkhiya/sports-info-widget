@@ -112,7 +112,7 @@ export class MatchHomeComponent implements OnInit {
           if (this.matchdata.sport_event_status.status == "not_started") {
             this.startLiveUpdateAfterTime();
           }
-          if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted") {
+          if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted" || this.matchdata.sport_event_status.status == "delayed") {
             this.getLiveUpdate(this);
           }
           // else if (
@@ -256,6 +256,7 @@ export class MatchHomeComponent implements OnInit {
   //getPlayersname if lineup data api doesn't provide players data
   getPlayersname() {
     this.sportsService.getmatchtimeline(this.matchid).subscribe(res => {
+      if(res["data"]["statistics"] && res["data"]["statistics"]["innings"]){
       this.scorecards = res["data"]["statistics"]["innings"];
       let objBatting = {};
       let objBowling = {};
@@ -284,6 +285,7 @@ export class MatchHomeComponent implements OnInit {
         ...objBatting
       };
       console.log("playerList:::", this.playerList);
+    }
     });
   }
 

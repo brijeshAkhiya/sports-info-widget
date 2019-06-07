@@ -20,6 +20,12 @@ export class MatchCommentryComponent implements OnInit {
   constructor(
     private cricketService: CricketService
   ) {
+    console.log(this.commentry);
+    if(typeof this.commentry == 'undefined' || this.commentry.length > 0)
+      this.showCommetry = false;
+    else
+      this.showCommetry = true;
+    
   }
 
   ngOnInit(){

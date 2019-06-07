@@ -88,11 +88,17 @@
     </ng-container>
   </ng-container>
 
-  <!-- No commentary data available for this match! -->
-  <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry">
+  <!-- Match is live, but not commentry available -->
+  <ng-container *ngIf="(data.sport_event_status.status == 'live' || data.sport_event_status.status == 'delayed' || data.sport_event_status.status == 'interrupted') && !showCommetry">
     <app-no-data-widget></app-no-data-widget>
   </ng-container>
   <!-- END - COMMENTRY -->
+
+  <!-- No commentary data available for this match! -->
+  <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry">
+      <app-no-data-widget></app-no-data-widget>
+    </ng-container>
+    <!-- END - COMMENTRY -->
 
   <!--If Match is cancelled -->
   <ng-container *ngIf="data.sport_event_status.status == 'cancelled'" >

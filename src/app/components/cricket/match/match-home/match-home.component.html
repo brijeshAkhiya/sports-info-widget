@@ -30,10 +30,10 @@
 
 
           <!-- START - SCORECARDS-->
-          <ngb-tab *ngIf="matchdata.sport_event_status.status != 'not_started'">
+          <ngb-tab *ngIf="matchdata.statistics">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
-              <ngb-tabset class="filled-tabs scorecard-tab"
+              <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="matchdata.statistics.innings"
                 [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
                 <ngb-tab *ngFor="let item of matchdata.statistics.innings,let i = index">
                   <ng-template ngbTabTitle *ngIf="matchdata.statistics.innings">

@@ -139,7 +139,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
       this.slider = this.sortBySchedule(res.data);   
       this.slider.forEach((match,index)=>{
-        console.log(match);
         
         let compObj = {};
         match.competitors.map(s => {
