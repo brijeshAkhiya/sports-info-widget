@@ -39,6 +39,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   noresults: boolean;
   interval;
   slider =[];
+  timeout;
 
   constructor(
     private renderer2: Renderer2,
@@ -148,31 +149,38 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         });
         this.slider[index].competitors = compObj
 
-        if (match.status == "not_started") {
-          this.startLiveUpdateAfterTime(match);   
-        }
-        if (match.status == "live" || match.status == "interrupted" || match.status == "delayed") {
-          this.getLiveUpdateSlider(this);
-        }
         if(match.match_data && match.match_data.period_scores)
           this.setPeriodScore(match, index, match.match_data.period_scores)
         else if (match.period_scores)
           this.setPeriodScore(match, index, match.period_scores)
         else
           this.slider[index].competitors["home"].show_first = true;
-
       });
+
+      let livematchcount = res.data.filter(match => match.status == "live" || match.status == "interrupted" || match.status == "delayed")
+      if(livematchcount.length > 0)
+        this.getLiveUpdateSlider(this);
+
+      let upcomingMatchcount = res.data.filter(match => match.status == "not_started")
+      if(upcomingMatchcount.length > 0){
+        let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function(e) {
+          return new Date(e.scheduled);
+        })));
+        this.startLiveUpdateAfterTime(minTime); 
+      }
+  
     });
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
-  startLiveUpdateAfterTime(match) {
-      let remainingTime = this.commonService.getRemainigTimeofMatch(match.scheduled);
+  startLiveUpdateAfterTime(scheduled) {
+      let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
       let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours,remainingTime.minutes,remainingTime.seconds); remainingMiliSec =
       remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 45, 0);
 
       if (remainingTime.days == 0 && remainingTime.hours < 5) {
-        setTimeout(() => {
+        console.log("remainingMiliSec", remainingMiliSec);        
+        this.timeout = setTimeout(() => {
           this.getLiveUpdateSlider(this)
         }, remainingMiliSec);
       }
@@ -199,10 +207,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   }
 
   getLiveUpdateSlider(classThis){
-    setInterval(() => {
+    console.log("getLiveUpdateSlider");
+    this.interval = setInterval(() => {
       classThis.sportsService.getheaderslider().subscribe((res:any) => {
         // this.slider = this.sortBySchedule(res.data);   
         this.sortBySchedule(res.data).forEach((match, index) => {
+          console.log(match);
+          
           this.slider[index].status = match.status;
           if(match.match_data && match.match_data.period_scores){
             this.setPeriodScore(match, index, match.match_data.period_scores)
@@ -214,8 +225,22 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
           
         });
       });
-    }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP 
+    }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP 
   }
+
+
+  /** Clear Interval and timeout on destroy */
+  clearTimeInterval() {
+    console.log("clearTimeInterval");
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
+  }
+
+  ngOnDestroy() {
+    console.log("ngOnDestroy");
+    this.clearTimeInterval();
+  }
+
 
   sortBySchedule(arr){
     return arr.sort(function (a, b) {

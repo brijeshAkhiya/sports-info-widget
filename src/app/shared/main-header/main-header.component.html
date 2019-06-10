@@ -18,7 +18,7 @@
                     <p class="live-result">{{slide.status ? slide.status : slide.match_status}}</p>
                   </ng-template>
                 </div>
-                <div *ngIf="slide?.competitors?.home?.show_first == true">
+                <div *ngIf="slide.competitors.home.show_first">
                   <div class="match-info d-flex justify-content-between align-items-center">
                     <p><img [lazyLoad]="slide.competitors.home.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="rcb">{{slide.competitors.home.name}}</p>
@@ -35,7 +35,7 @@
                       ov)</p>
                   </div>
                 </div>
-                <div *ngIf="slide?.competitors?.away?.show_first == true">
+                <div *ngIf="slide.competitors.away.show_first">
                   <div class="match-info d-flex justify-content-between align-items-center">
                     <p><img [lazyLoad]="slide.competitors.away.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{slide.competitors.away.name}}
