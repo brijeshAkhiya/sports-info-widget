@@ -5,8 +5,7 @@ import {
   ElementRef,
   ViewChild,
   ChangeDetectorRef,
-  AfterViewInit,
-  HostListener
+  AfterViewInit
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "angularx-social-login";
@@ -39,7 +38,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   searchdata: any;
   noresults: boolean;
   interval;
-  slider = [];
+  slider =[];
 
   constructor(
     private renderer2: Renderer2,
@@ -89,21 +88,9 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.getHeader();
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-     if (window.pageYOffset > 193) {
-       let element = document.getElementById('navbar');
-       element.classList.add('fixed-nav');
-     } else {
-      let element = document.getElementById('navbar');
-        element.classList.remove('fixed-nav'); 
-     }
-  }
-
-  ngAfterViewInit() {
+  ngAfterViewInit(){
     this.changeDetector.detectChanges();
   }
-
 
   //get custom ads api call -Ngrx Store
   getCustomAds() {
@@ -147,30 +134,32 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getHeader() {
-    this.sportsService.getheaderslider().subscribe((res: any) => {
+  getHeader(){
+    this.sportsService.getheaderslider().subscribe((res:any) => {
 
-      this.slider = this.sortBySchedule(res.data);
-      this.slider.forEach((match, index) => {
-
+      this.slider = this.sortBySchedule(res.data);   
+      this.slider.forEach((match,index)=>{
+        
         let compObj = {};
         match.competitors.map(s => {
           compObj[s.qualifier] = s
-          if (s.qualifier == 'home')
+          if(s.qualifier == 'home')
             compObj[s.qualifier].show_first = true;
         });
         this.slider[index].competitors = compObj
 
         if (match.status == "not_started") {
-          this.startLiveUpdateAfterTime(match);
+          this.startLiveUpdateAfterTime(match);   
         }
         if (match.status == "live" || match.status == "interrupted" || match.status == "delayed") {
           this.getLiveUpdateSlider(this);
         }
-        if (match.match_data && match.match_data.period_scores)
+        if(match.match_data && match.match_data.period_scores)
           this.setPeriodScore(match, index, match.match_data.period_scores)
         else if (match.period_scores)
           this.setPeriodScore(match, index, match.period_scores)
+        else
+          this.slider[index].competitors["home"].show_first = true;
 
       });
     });
@@ -178,18 +167,20 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
   startLiveUpdateAfterTime(match) {
-    let remainingTime = this.commonService.getRemainigTimeofMatch(match.scheduled);
-    let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds); remainingMiliSec =
+      let remainingTime = this.commonService.getRemainigTimeofMatch(match.scheduled);
+      let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours,remainingTime.minutes,remainingTime.seconds); remainingMiliSec =
       remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 45, 0);
 
-    if (remainingTime.days == 0 && remainingTime.hours < 5) {
-      setTimeout(() => {
-        this.getLiveUpdateSlider(this)
-      }, remainingMiliSec);
-    }
+      if (remainingTime.days == 0 && remainingTime.hours < 5) {
+        setTimeout(() => {
+          this.getLiveUpdateSlider(this)
+        }, remainingMiliSec);
+      }
   }
 
-  setPeriodScore(match, index, period_scores) {
+  setPeriodScore(match, index, period_scores){
+    console.log("setPeriodScore");
+    
     if (period_scores.length > 0) {
       period_scores.map(sPScore => {
         if (sPScore.home_score) {
@@ -207,23 +198,26 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getLiveUpdateSlider(classThis) {
+  getLiveUpdateSlider(classThis){
     setInterval(() => {
-      classThis.sportsService.getheaderslider().subscribe((res: any) => {
+      classThis.sportsService.getheaderslider().subscribe((res:any) => {
         // this.slider = this.sortBySchedule(res.data);   
         this.sortBySchedule(res.data).forEach((match, index) => {
           this.slider[index].status = match.status;
-          if (match.match_data && match.match_data.period_scores) {
+          if(match.match_data && match.match_data.period_scores){
             this.setPeriodScore(match, index, match.match_data.period_scores)
           }
           else if (match.period_scores)
             this.setPeriodScore(match, index, match.period_scores)
+          else
+            this.slider[index].competitors["home"].show_first = true;
+          
         });
       });
     }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP 
   }
 
-  sortBySchedule(arr) {
+  sortBySchedule(arr){
     return arr.sort(function (a, b) {
       if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
         return -1

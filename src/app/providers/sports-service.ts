@@ -211,7 +211,7 @@ export class SportsService {
   //get match timeline Delta - live
   getmatchtimelineDetlaDirect(id) {
     return this.http.get(
-      `https://www.jsonstore.io/62da0e5b2b07ef97dafcc45dc49312f6c4c62c4020fe92856df44878a11a0745`
+      `http://192.168.11.118:3008/api/v1/user/json/${id}`
     );
   }
 
