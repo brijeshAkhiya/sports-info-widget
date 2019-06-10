@@ -940,7 +940,7 @@ export class MatchHomeComponent implements OnInit {
             this.getScores();
           }
         });
-    }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP
+    }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
