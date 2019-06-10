@@ -4,7 +4,6 @@ import { SportsService } from "../../../../providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 import * as moment from "moment";
-
 @Component({
   selector: "app-match-home",
   templateUrl: "./match-home.component.html",
@@ -45,7 +44,6 @@ export class MatchHomeComponent implements OnInit {
   fallofwicket1data = [];
   fallofwicket2data = [];
   teamObj = {};
-
   data: any;
   timeline: any;
   statistics: any;
@@ -61,11 +59,11 @@ export class MatchHomeComponent implements OnInit {
   isshow: boolean;
   tossdecision: any = {};
   batsmanList;
-
   testcheck: any;
   dummyAPICall = 450;
   fallofWickets = [];
   playerList = {};
+  selectedtab: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -94,14 +92,18 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get Match Data */
   getMatchData() {
+    this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
+      console.log('scorecard::',res);
+    })
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
-        // res = res.result;
+         //res = res.result;
         this.isshow = true;
         if (res.data) {
           console.log(res.data);
           this.isshow = false;
           this.matchdata = res.data;
+          this.selectedtab = "1"
           this.data = res.data;
           this.getTeams();
           this.getCommentries();
@@ -140,9 +142,14 @@ export class MatchHomeComponent implements OnInit {
     );
   }
 
+  tabactive(tabid){
+    console.log(tabid);
+    this.selectedtab = tabid
+
+  }
+
   /** GET TEAMS */
   getTeams() {
-    console.log("getTeams");
     if (this.matchdata.sport_event.competitors) {
       this.getTeamvsTeamdata(); //to get team vs team data
       this.matchdata.sport_event.competitors.forEach(element => {
@@ -209,9 +216,7 @@ export class MatchHomeComponent implements OnInit {
             console.log("scorecards", this.scorecards);
             this.getmatchteamlineup();
           }
-
           this.getTossDecision();
-
           this.getCommentries();
         }
       },
@@ -231,7 +236,6 @@ export class MatchHomeComponent implements OnInit {
         (res: any) => {
           if (res.data && res.data.lineups[0].starting_lineup && res.data.lineups[1].starting_lineup) {
             let players = [...res.data.lineups[0].starting_lineup, ...res.data.lineups[1].starting_lineup]
-
             players.map(single => {
               if (!this.playerList[single.id]) {
                 this.playerList[single.id] = single
@@ -313,9 +317,7 @@ export class MatchHomeComponent implements OnInit {
             day,
             data: dateObj[day]
           }));
-
           //map array for last matches
-
           // this.lastmatches = res["data"].last_meetings;
           res["data"].last_meetings.map(data => {
             if (data.match_status && data.match_status == "ended") {
@@ -365,7 +367,7 @@ export class MatchHomeComponent implements OnInit {
   }
 
   //get match detail
-  matchDetail(id, team1, team2) {
+  matchDetail(id,team1,team2) {
     let teams = team1.concat("-", team2);
     this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
@@ -441,15 +443,12 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get all Commentries inning wise - support for more than 2 innings */
   getCommentries() {
-    console.log("getCommentries");
-
     // check if commentry exists
     console.log(this.checkCommentry().length);
     if (this.checkCommentry().length <= 0) {
       this.showCommetry = false;
       return false;
     }
-
     let timelineWithCommentry = this.data.timeline.filter((commentry)=>{ return commentry.commentaries});
 
     console.log(this.data.timeline.length > 0 ,this.data.sport_event_status.current_inning == 1, this.data.sport_event_status.display_overs == 0)
@@ -979,8 +978,10 @@ export class MatchHomeComponent implements OnInit {
     clearTimeout(this.timeout);
   }
 
-  checkNotBat() {
-    
+  checkNotBat() {  }
+
+  typeOf(value) {
+    return typeof value;
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { SportsService } from '../../../providers/sports-service';
 import { SlugifyPipe } from '../../../pipes/slugpipe';
@@ -24,6 +24,17 @@ export class CricketMenuComponent implements OnInit {
 
   ngOnInit() {
     this.getCricketSeries();
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+     if (window.pageYOffset > 193) {
+       let element = document.getElementById('sub-navabar');
+       element.classList.add('fixed-nav');
+     } else {
+      let element = document.getElementById('sub-navabar');
+        element.classList.remove('fixed-nav'); 
+     }
   }
 
   //nav bar click event 

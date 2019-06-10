@@ -3,32 +3,25 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-
         <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
-
         <!-- START - ABOUT MATCH-->
         <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision">
         </app-match-about>
         <!-- END - ABOUT MATCH-->
-
-
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs" *ngIf="matchdata">
-
           <!-- START - MATCH COMMENTRY-->
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
               <!-- <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget> -->
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
-                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList" [showCommetry]="showCommetry">
+                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"
+                [showCommetry]="showCommetry">
               </app-match-commentry>
             </ng-template>
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
-
-
-
           <!-- START - SCORECARDS-->
           <ngb-tab *ngIf="matchdata.statistics">
             <ng-template ngbTabTitle>Scorecard</ng-template>
@@ -37,7 +30,7 @@
                 [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
                 <ngb-tab *ngFor="let item of matchdata.statistics.innings,let i = index">
                   <ng-template ngbTabTitle *ngIf="matchdata.statistics.innings">
-                    <span>{{teamObj[item.batting_team].name}}
+                    <span (click)="tabactive(item.number)">{{teamObj[item.batting_team].name}}
                       <span class="test-inng">
                         {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
                       </span>
@@ -60,12 +53,12 @@
                           <tbody *ngIf="matchdata.statistics.innings">
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <ng-container
-                                *ngIf="batting.statistics && (batting.statistics.not_out || batting.statistics.dismissal)">
+                                *ngIf="typeOf(batting.statistics.length) !== 'number'">
                                 <td>
                                   <a (click)="cricketService.playerview(batting.id,batting.name)"
                                     [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</a>
                                   <p class="batsman-text">
-                                    {{ (matchdata.sport_event_status.status == 'live' &&  !batting?.statistics.dismissal && batting.statistics.length != 0 ) ?  'batting' : ''}}
+                                    {{ (matchdata.sport_event_status.status == 'live' && !batting?.statistics.dismissal && batting.statistics.length != 0) ?  'batting' : ''}}
                                     {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}
                                     {{batting?.statistics?.dismissal?.type == 'stumped' ? 'st' : ''}}
                                     <!--if batsman is leg before type out-->
@@ -89,7 +82,6 @@
                                       (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
                                         : ''  
                                     : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
-
                                     {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? 'b' : '' : '' }}
                                     {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (playerList[batting?.statistics?.dismissal?.bowler_id]?.name) ? (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : '' : '' : '' }}
                                   </p>
@@ -132,7 +124,8 @@
                             </tr>
                             <tr>
                               <td colspan="6">
-                                <b> {{matchdata.sport_event_status.status == 'live' ? 'Yet' : 'Did'}} {{matchdata.sport_event_status.status == 'live' ? 'to' : 'not'}} bat : </b>
+                                <b> {{matchdata.sport_event_status.status == 'live' ? 'Yet' : 'Did'}}
+                                  {{matchdata.sport_event_status.status == 'live' ? 'to' : 'not'}} bat : </b>
                                 <span class="batsman-text not-bat-text">
                                   <ng-container *ngFor="let notBat of item?.teams[0]?.statistics?.batting?.players">
                                     <ng-container *ngIf="notBat && notBat.statistics.length === 0">
@@ -147,7 +140,6 @@
                       </div>
                     </div>
                     <!--Score card tab end-->
-
                     <!--Fall of wickets section starts-->
                     <div class="common-table common-shadow rounded-box"
                       *ngIf="matchdata.sport_event.tournament.type != 'first_class' && fallofWickets[item.number]">
@@ -201,7 +193,6 @@
             </ng-template>
           </ngb-tab>
           <!-- END - SCORECARDS-->
-
           <!--START - LIVE MATCH TRACKER-->
           <ngb-tab>
             <ng-template ngbTabTitle>
@@ -213,8 +204,6 @@
             </ng-template>
           </ngb-tab>
           <!--END - LIVE MATCH TRACKER-->
-
-
           <!-- START - FACTS AND FIGURES-->
           <ngb-tab>
             <ng-template ngbTabTitle>
@@ -226,8 +215,6 @@
             </ng-template>
           </ngb-tab>
           <!-- END - FACTS AND FIGURES-->
-
-
           <!-- Match information starts -->
           <ngb-tab>
             <ng-template ngbTabTitle>
@@ -411,15 +398,17 @@
                           <div class="team-info">
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"  [offset]="commonService.lazyloadoffset" 
-                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"
+                            [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
+                            alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"  [offset]="commonService.lazyloadoffset" 
-                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"
+                            [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
+                            alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
@@ -437,7 +426,6 @@
 
         </ngb-tabset>
         <!-- END - MATCH TABS-->
-
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">

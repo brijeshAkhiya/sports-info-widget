@@ -22,6 +22,8 @@ export class CricketHomeComponent implements OnInit {
   widget2type = "populartags";
   commonnewsparams: any
   commonnewstype: any
+  commonvideoparams: { eSport: string; nLimit: number; eType: string; };
+  commonlatestparams: any;
   constructor(private sportsService: SportsService, private router: Router,
     private slugifyPipe: SlugifyPipe,
     private commonService: CommonService) { }
@@ -96,13 +98,17 @@ export class CricketHomeComponent implements OnInit {
   //get recent posts
 
   getRecentPosts() {
-    this.commonnewstype = 'any'
+    this.commonlatestparams = {
+      eSport: 'Cricket',
+      nLimit: 10,
+      eSort: 'Latest'
+    }
   }
 
   //get video posts
 
   getVideoPosts() {
-    this.commonnewsparams = {
+    this.commonvideoparams = {
       eSport: 'Cricket',
       nLimit: 10,
       eType: 'Video'

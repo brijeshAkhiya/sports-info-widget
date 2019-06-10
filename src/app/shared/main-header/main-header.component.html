@@ -4,7 +4,6 @@
       <owl-carousel-o [options]="customOptions" *ngIf="slider.length > 0">
         <ng-container class="items" *ngFor="let slide of slider">
           <ng-template carouselSlide>
-            
             <!--Live matches-->
             <div class="slider-item"
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
@@ -59,14 +58,13 @@
                 </div>
               </div>
             </div>
-
           </ng-template>
         </ng-container>
       </owl-carousel-o>
     </div>
   </div>
 </div>
-<nav class="navbar navbar-expand-md">
+<nav class="navbar navbar-expand-md" id="navbar" [ngClass]="{'menu-open': isapply}" (scroll)="onWindowScroll($event)">
   <a class="navbar-brand" (click)="routing('/')"><img src="../../../assets/images/logo.svg" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     [ngClass]="{'active': isapply}" (click)="isapply = !isapply" aria-controls="navbarSupportedContent"
@@ -76,7 +74,7 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <div class="collapse navbar-collapse" [ngClass]="{'menu-open': isapply}">
+  <div class="collapse navbar-collapse">
     <div class="navbar-nav-container" id="navbar-nav">
       <ul class="navbar-nav" #navbarnav>
         <li class="nav-item">

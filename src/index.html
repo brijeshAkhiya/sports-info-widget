@@ -71,14 +71,15 @@
       background: #fff;
       text-align: center;
     }
-
+    .root-loader video,
     .root-loader img {
       width: 320px;
       max-width: 70%;
-      position: relative;
+      position: absolute;
       top: 50%;
-      transform: translateY(-50%);
-      -webkit-transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -100,7 +101,8 @@
 <body ontouchstart>
   <app-root>
     <div class="root-loader">
-      <img src="./assets/images/loader.gif" />
+      <!-- <img src="./assets/images/loader.mp4" alt="" /> -->
+      <video src="./assets/images/loader.mp4" autoplay loop muted></video>
     </div>
   </app-root>
   <script>
