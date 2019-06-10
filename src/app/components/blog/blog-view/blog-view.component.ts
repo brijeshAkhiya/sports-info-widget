@@ -33,7 +33,7 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
     private sportsService: SportsService,
     private slugifypipe:SlugifyPipe,
     private splitpipe:SplitPipe,
-    private commonService:CommonService
+    public commonService:CommonService
   ) {
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {

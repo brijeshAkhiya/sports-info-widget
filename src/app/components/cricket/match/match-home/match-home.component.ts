@@ -507,7 +507,6 @@ export class MatchHomeComponent implements OnInit {
             commentry.over_number == nextOver &&
             commentry.inning == innings.number
         );
-        console.log("lastIndex",lastIndex)
         let overCommentry = [];
         if (lastIndex > 0) {
           overCommentry = currentInningCommentry.slice(

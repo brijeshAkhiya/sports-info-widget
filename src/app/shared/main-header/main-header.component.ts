@@ -158,6 +158,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
           this.setPeriodScore(match, index, match.match_data.period_scores)
         else if (match.period_scores)
           this.setPeriodScore(match, index, match.period_scores)
+        else
+          this.slider[index].competitors["home"].show_first = true;
 
       });
     });
@@ -177,6 +179,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   }
 
   setPeriodScore(match, index, period_scores){
+    console.log("setPeriodScore");
+    
     if (period_scores.length > 0) {
       period_scores.map(sPScore => {
         if (sPScore.home_score) {
@@ -205,6 +209,9 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
           }
           else if (match.period_scores)
             this.setPeriodScore(match, index, match.period_scores)
+          else
+            this.slider[index].competitors["home"].show_first = true;
+          
         });
       });
     }, classThis.commonService.miliseconds(0, 0, 10)); // TEMP 
