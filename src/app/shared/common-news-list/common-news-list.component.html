@@ -1,8 +1,5 @@
   <app-data-loader-widget *ngIf="!isdisplay"></app-data-loader-widget>
-
-  
-
-  <!-- <app-no-data-widget *ngIf="!posts || posts?.length == 0"></app-no-data-widget> -->
+   <app-no-data-widget *ngIf="posts?.length == 0 || !posts"></app-no-data-widget>
   <div class="common-news-list" *ngIf="posts && posts?.length > 0">
     <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
       <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"

@@ -44,7 +44,7 @@
               <div (click)="getRecentPosts()">Latest</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [type]="commonnewstype" *ngIf="commonnewstype"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonlatestparams"  *ngIf="commonlatestparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Videos tab start-->
@@ -53,7 +53,7 @@
               <div (click)="getVideoPosts()">Videos</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonvideoparams" *ngIf="commonvideoparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>

@@ -52,7 +52,7 @@
         </div>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
 
-        <div class="common-title-btn d-flex justify-content-between align-items-center">
+        <div class="common-title-btn d-flex justify-content-between align-items-center" *ngIf="populararticles.length > 0">
           <h4>Related news</h4>
           <button class="theme-btn" [routerLink]="['/blog/list/popular/article']">View All<span></span></button>
         </div>

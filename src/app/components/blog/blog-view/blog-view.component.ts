@@ -63,7 +63,7 @@ export class BlogViewComponent implements OnInit ,OnDestroy{
         if(type.toUpperCase() != this.blogdata.eType.toUpperCase())
           this.router.navigate(['/page-not-found'])
 
-        if(type == 'detail')
+        if(this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id)
         
         this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id));
