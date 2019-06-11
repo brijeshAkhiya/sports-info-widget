@@ -56,7 +56,7 @@
             <ng-template ngbTabTitle><div (click)="getMatchResults()">Results</div></ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list schedule-tour-list">
-                  <app-data-loader-widget *ngIf="!noresultdata "></app-data-loader-widget>
+                  <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
                   <app-no-data-widget *ngIf="noresultdata"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
                   <div class="month-title">

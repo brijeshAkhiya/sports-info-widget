@@ -28,6 +28,7 @@
                         <p class="result-line">{{item?.match_result}}</p>
                         <p class="result-line" *ngIf="item.match_status == 'postponed'">Match is postponed</p>
                         <p class="result-line" *ngIf="item.match_status == 'abandoned'">Match is abandoned</p>
+                        <p class="result-line" *ngIf="item.match_status == 'start_delayed'">Match is cancelled</p>
                       </div>
                       <div class="match-teams d-flex align-items-center" *ngIf="item.match_status == 'ended'">
                         <div class="match-team d-flex align-items-center"
@@ -53,7 +54,7 @@
                           (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                       </div>
                       <!-- If match is postponeded -->
-                      <div class="match-teams d-flex align-items-center" *ngIf="item.match_status == 'postponed'">
+                      <div class="match-teams d-flex align-items-center" *ngIf="item.match_status == 'postponed' || item.match_status == 'start_delayed'">
                         <div class="match-team d-flex align-items-center">
                           <div class="team-info">
                             <h5>{{item.competitors[0].abbreviation}}</h5>

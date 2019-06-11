@@ -20,6 +20,7 @@ export class CricketFixturesViewComponent implements OnInit {
   noresultdata: boolean = false;
   selectedTab;
   nofixtures: boolean;
+  loader:boolean;
   constructor(
     private sportsService: SportsService,
     private cricketService: CricketService,
@@ -44,11 +45,13 @@ export class CricketFixturesViewComponent implements OnInit {
 
   getMatchResults() {
     this.matchresults = [];
+    this.loader = true
     this.sportsService
       .getmatchresults()
       .subscribe(
         res => {
           if (res["data"].length != 0) {
+            this.loader = false
             res["data"].map(data => {
               if (data.match_status == "ended") {
                 this.matchresults.push(data);
@@ -80,12 +83,11 @@ export class CricketFixturesViewComponent implements OnInit {
             });
           } else {
             this.noresultdata = true;
+            this.loader = false
           }
           //sort matches result by date
           let dateObj1 = {};
           if (res["data"].length != 0) {
-            console.log("afterloop:::", this.matchresults);
-
             this.matchresults.map(data => {
               let mdate = moment(data.scheduled).format("Do MMMM YYYY");
               if (!dateObj1[mdate]) {
@@ -105,6 +107,7 @@ export class CricketFixturesViewComponent implements OnInit {
         error => {
           if (error["error"].status == 400) {
             this.noresultdata = true;
+            this.loader = false
           }
         }
       );

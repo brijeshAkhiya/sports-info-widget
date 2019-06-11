@@ -76,6 +76,7 @@ export class ContactComponent implements OnInit {
     }
 
     anothersubmit(){
+      this.btnDisable = false
       setTimeout(() => {
         this.contactForm.reset();
         for (let name in this.contactForm.controls) {

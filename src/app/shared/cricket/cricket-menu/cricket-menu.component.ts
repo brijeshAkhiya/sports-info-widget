@@ -28,7 +28,7 @@ export class CricketMenuComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-     if (window.pageYOffset > 193) {
+     if (window.pageYOffset > 156) {
        let element = document.getElementById('sub-navabar');
        element.classList.add('fixed-nav');
      } else {

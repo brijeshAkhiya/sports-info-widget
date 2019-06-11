@@ -5,7 +5,8 @@ import {
   ElementRef,
   ViewChild,
   ChangeDetectorRef,
-  AfterViewInit
+  AfterViewInit,
+  HostListener
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "angularx-social-login";
@@ -88,6 +89,18 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getHeader();
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+     if (window.pageYOffset > 156) {
+       let element = document.getElementById('navbar');
+       element.classList.add('sticky');
+     } else {
+      let element = document.getElementById('navbar');
+        element.classList.remove('sticky'); 
+     }
+  }
+
 
   ngAfterViewInit(){
     this.changeDetector.detectChanges();

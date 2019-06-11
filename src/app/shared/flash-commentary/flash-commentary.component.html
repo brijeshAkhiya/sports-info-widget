@@ -3,24 +3,16 @@
     <span *ngIf="teamsname">{{teamsname[0]}}</span>
     <span *ngIf="teamsname">{{teamsname[1]}}</span>
   </button>
+  <div class="flash-run" [ngClass]="{'active': isnewflashvalue}">{{flashvalue}}</div>
+  <!-- <div class="flash-run active">WD</div> -->
 </div>
-<div class="flash-run" [ngClass]="{'active': isnewflashvalue}">{{flashvalue}}
-  <div class="pyro">
-    <div class="after"></div>
-  </div>
-</div>
-<!-- <div class="flash-run active">WD
-  <div class="pyro">
-    <div class="after"></div>
-  </div>
-</div> -->
 <div class="flash-comm-box" [ngClass]="{'flash-comm-show': isapply}">
   <!-- flash-comm-show -->
   <div class="head-btn-list">
     <button class="close-btn" (click)="isapply = false"></button>
   </div>
   <div class="flash-comm-block">
-    <h5>Flash Commentary</h5>
+    <h5>Flash Score</h5>
     <!-- <form>      this section not used for now it will be used later when multiple sports are there
       <div class="search-box">
         <input type="text" placeholder="Select sport">

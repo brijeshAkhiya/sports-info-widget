@@ -63,7 +63,7 @@ export class MatchHomeComponent implements OnInit {
   dummyAPICall = 450;
   fallofWickets = [];
   playerList = {};
-  selectedtab: any;
+  scorecardinnings: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -103,14 +103,14 @@ export class MatchHomeComponent implements OnInit {
           console.log(res.data);
           this.isshow = false;
           this.matchdata = res.data;
-          this.selectedtab = "1"
+          //this.getScorecards(this.matchdata.statistics.innings)
           this.data = res.data;
           this.getTeams();
+          this.getmatchteamlineup();
           this.getCommentries();
           this.getFallWickets();
           this.getScores();
           this.getTossDecision();
-          this.getmatchteamlineup();
           if (this.matchdata.sport_event_status.status == "not_started") {
             this.startLiveUpdateAfterTime();
           }
@@ -142,12 +142,17 @@ export class MatchHomeComponent implements OnInit {
     );
   }
 
-  tabactive(tabid){
-    console.log(tabid);
-    this.selectedtab = tabid
-
+  //get scorecards 
+  getScorecards(matchdata){
+    this.scorecardinnings = matchdata
+    console.log('scoreinnigs::::',this.scorecardinnings);
+    this.scorecardinnings.forEach(element => {
+      
+    });
+    
   }
 
+  
   /** GET TEAMS */
   getTeams() {
     if (this.matchdata.sport_event.competitors) {
@@ -192,7 +197,7 @@ export class MatchHomeComponent implements OnInit {
           this.isshow = false;
           this.data = res["data"];
           this.matchdata = res["data"];
-          console.log("data::::", res["data"]);
+          console.log("data::::",res["data"]);
           this.matchstatus = res["data"]["sport_event_status"].status;
           this.sportevent = res["data"]["sport_event"];
           this.venuedetails = res["data"]["sport_event"]["venue"];
@@ -241,6 +246,8 @@ export class MatchHomeComponent implements OnInit {
                 this.playerList[single.id] = single
               }
             });
+            console.log('playerslistt::',this.playerList);
+            
           }
           else {
             this.getPlayersname();

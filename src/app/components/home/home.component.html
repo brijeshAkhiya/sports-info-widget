@@ -100,7 +100,7 @@
                 <div (click)="getMatchResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="!isnodata"></app-data-loader-widget>
+                <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
                 <app-no-data-widget *ngIf="isnodata"></app-no-data-widget>
                 <ul class="common-list cricket-list">
                   <li *ngFor="let result of matchresults | slice:0:4"
@@ -109,7 +109,8 @@
                       <p><b>{{result.season_name ? result.season_name : result.tournament_name}}</b></p>
                       <p>{{result.scheduled | amTimeAgo}}</p>
                     </div>
-                    <div *ngFor="let item of result.period_score_new">
+                  
+                    <div *ngFor="let item of result.period_score_new" >
                       <div class="match-info d-flex justify-content-between align-items-center" *ngIf="!item.teamFlag">
                         <p [ngClass]="{'match-winner': item.team.winner}"><img  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
                             alt="rcb">{{item.team.abbreviation}}</p>
@@ -122,9 +123,26 @@
                         <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                       </div>
                     </div>
+           
+                    <!-- Match abandaned-->
+                  <!-- <div *ngIf="result.match_status == 'abandoned'">
+                    <div *ngFor="let item of result.p" >
+                      <div class="match-info d-flex justify-content-between align-items-center">
+                        <p [ngClass]="{'match-winner': item.team.winner}"><img  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+                            alt="rcb">{{item.team.abbreviation}}</p>
+                        <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                      </div>
+                      <div class="match-info d-flex justify-content-between align-items-center">
+                        <p [ngClass]="{'match-winner': item.team.winner}"><img
+                          [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.team.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{item.team.abbreviation}}
+                        </p>
+                        <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                      </div>
+                    </div>
+                  </div> -->
                     <div class="row">
                       <div class="col-md-9">
-                        <p class="result-line">{{result?.match_result}}</p>
+                        <p class="result-line">{{result.match_result ? result.match_result : result.match_status }}</p>
                       </div>
                     </div>
                   </li>

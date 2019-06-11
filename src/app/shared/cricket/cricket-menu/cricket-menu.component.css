@@ -1,4 +1,5 @@
-.sub-navabar                                    { background: #1B2A5A; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; white-space: nowrap; position: sticky; top: 51px; z-index: 111;}
+.sub-navabar                                    { width: 100%; background: #1B2A5A; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; white-space: nowrap; top: 51px; z-index: 111;}
+.sub-navabar.fixed-nav                          { position: fixed; }
 .submenu-back                                   { padding: 12px 32px 12px 12px; display: block; color: #fff;  font-weight: 600; text-transform: uppercase; border-right: 4px solid #294089; }
 .sub-navabar .sub-navabar-inner                 { justify-content: center; -webkit-justify-content: center; }
 .sub-navabar .subnavbarmenu                     { margin: 0px;}

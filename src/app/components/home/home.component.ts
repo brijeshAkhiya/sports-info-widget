@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   ad: any;
   nofixturesdata: boolean;
   isnodata: boolean;
-
+  loader:boolean
   constructor(
     private renderer2: Renderer2,
     private sportsService: SportsService,
@@ -141,12 +141,14 @@ export class HomeComponent implements OnInit {
   //get 3 days results -HOME
 
   getMatchResults() {
+    this.loader = true
     this.sportsService
       .getmatchresults()
       .subscribe(res => {
         if (res["data"].length != 0) {
           this.matchresults = res["data"];
-          this.isnodata = false
+          this.loader = false
+          // this.isnodata = false
           //manipulate received data array
           this.matchresults = this.matchresults.map(data => {
             let obj = {};
@@ -154,7 +156,7 @@ export class HomeComponent implements OnInit {
             team_arr.map(single => {
               obj[single.qualifier] = single;
             });
-
+          //check
             let period_score_new = data["period_scores"];
             if (period_score_new) {
               period_score_new = period_score_new.map(singleb => {
@@ -169,13 +171,17 @@ export class HomeComponent implements OnInit {
               return data;
             }
           });
+          console.log('matchresults:',this.matchresults);
+          
         } else {
           this.isnodata = true
+          this.loader = false
           // this.getMatchResults();
         }
       },(error)=>{
         if(error){
           this.isnodata = true
+          this.loader = false
         }
       });
   }

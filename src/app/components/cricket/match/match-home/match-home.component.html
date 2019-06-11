@@ -30,7 +30,7 @@
                 [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
                 <ngb-tab *ngFor="let item of matchdata.statistics.innings,let i = index">
                   <ng-template ngbTabTitle *ngIf="matchdata.statistics.innings">
-                    <span (click)="tabactive(item.number)">{{teamObj[item.batting_team].name}}
+                    <span>{{teamObj[item.batting_team].name}}
                       <span class="test-inng">
                         {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
                       </span>
