@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-cricket-tour-menu',
@@ -10,9 +10,16 @@ export class CricketTourMenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
- 
-   
-    
+  }
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+     if (window.pageYOffset > 156) {
+       let element = document.getElementById('sub-navabar');
+       element.classList.add('fixed-nav');
+     } else {
+      let element = document.getElementById('sub-navabar');
+        element.classList.remove('fixed-nav'); 
+     }
   }
 
 }

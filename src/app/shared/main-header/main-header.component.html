@@ -53,7 +53,8 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-9">
-                    <p class="result-line">{{slide.match_result ? slide.match_result : slide.venue_name}}</p>
+                      <p class="result-line" *ngIf="slide.match_status == 'live'">{{slide.venue_name ? slide.venue_name : ''}}</p>
+                      <p class="result-line" *ngIf="slide.match_status != 'live'">{{slide.match_result ? slide.match_result : slide.venue_name}}</p>
                   </div>
                 </div>
               </div>
