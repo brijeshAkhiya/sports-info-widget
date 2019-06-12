@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../providers/sports-service";
 import { SlugifyPipe } from "../../../pipes/slugpipe";
 import { CommonService } from '@providers/common-service';
+import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: "app-cricket-home",
   templateUrl: "./cricket-home.component.html",
@@ -24,9 +25,10 @@ export class CricketHomeComponent implements OnInit {
   commonnewstype: any
   commonvideoparams: { eSport: string; nLimit: number; eType: string; };
   commonlatestparams: any;
-  constructor(private sportsService: SportsService, private router: Router,
+  constructor(private sportsService: SportsService, private router: Router, private title: Title, private meta: Meta,
     private slugifyPipe: SlugifyPipe,
-    private commonService: CommonService) { }
+    private commonService: CommonService) {
+  }
 
   ngOnInit() {
     this.getPopularArticles();

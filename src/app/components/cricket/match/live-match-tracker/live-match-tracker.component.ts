@@ -18,7 +18,7 @@ export class LiveMatchTrackerComponent implements AfterContentInit,OnInit{
   ];
   loader: boolean;
   constructor() { 
-    this.ScriptStore.forEach((script: any) => {
+    this.ScriptStore.forEach((script: any) => {    
       this.scripts[script.name] = {
         loaded: false,
         src: script.src

@@ -44,6 +44,7 @@ import { TermsAndConditionsComponent } from "./components/static-pages/terms-and
 import { PrivacyPolicyComponent } from "./components/static-pages/privacy-policy/privacy-policy.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { StripHtmlPipe } from "./pipes/striphtmlpipe";
+import { ClickOutsideModule } from 'ng-click-outside';
 
 //socket config
 
@@ -89,6 +90,7 @@ export function provideConfig() {
     AppRoutingModule,
     SharedModule,
     MomentModule,
+    ClickOutsideModule,
     LazyLoadImageModule,
     CarouselModule,
     HttpClientModule,

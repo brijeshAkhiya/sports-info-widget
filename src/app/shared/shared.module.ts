@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgxTinySliderModule } from 'ngx-tiny-slider';
 import { SocketIoModule} from 'ngx-socket-io';
+import { ClickOutsideModule } from 'ng-click-outside';
 import { TruncatePipe } from '../pipes/truncatepipe';
 import { ResizeImagePipe } from '../pipes/resize-image.pipe';
 import { SportsService } from '../providers/sports-service';
@@ -35,6 +36,7 @@ import { PlayerImagePipe } from '@app/pipes/playerimageurl.pipe';
         NgxTinySliderModule,
         MomentModule,
         NgbModule,
+        ClickOutsideModule,
         SocketIoModule,
         ReactiveFormsModule,
         FormsModule,

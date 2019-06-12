@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { SportsService } from "../../providers/sports-service";
-
+declare var document: any;
+declare var window: any;
 @Component({
   selector: 'app-custom-ads-widget',
   templateUrl: './custom-ads-widget.component.html',
@@ -18,6 +19,16 @@ export class CustomAdsWidgetComponent implements OnInit {
   constructor(private store: Store<any>,private sportsService: SportsService,) { }
 
   ngOnInit() {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = 'url';
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
+
+    //ngrx store code
+
     this.store.subscribe(data => {
       
       let arr = data["ads"].Ads;

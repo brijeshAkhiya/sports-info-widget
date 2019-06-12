@@ -32,6 +32,7 @@ import { CricketService } from "@providers/cricket-service";
 export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
+  @ViewChild("navbarmenu") navbarmenu: ElementRef;
   isapply: boolean = false;
   socialUser: any;
   issearch: boolean;
@@ -39,7 +40,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   searchdata: any;
   noresults: boolean;
   interval;
-  slider =[];
+  slider = [];
   timeout;
 
   constructor(
@@ -92,17 +93,16 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-     if (window.pageYOffset > 156) {
-       let element = document.getElementById('navbar');
-       element.classList.add('sticky');
-     } else {
+    if (window.pageYOffset > 156) {
       let element = document.getElementById('navbar');
-        element.classList.remove('sticky'); 
-     }
+      element.classList.add('sticky');
+    } else {
+      let element = document.getElementById('navbar');
+      element.classList.remove('sticky');
+    }
   }
 
-
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.changeDetector.detectChanges();
   }
 
@@ -148,21 +148,21 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getHeader(){
-    this.sportsService.getheaderslider().subscribe((res:any) => {
+  getHeader() {
+    this.sportsService.getheaderslider().subscribe((res: any) => {
 
-      this.slider = this.sortBySchedule(res.data);   
-      this.slider.forEach((match,index)=>{
-        
+      this.slider = this.sortBySchedule(res.data);
+      this.slider.forEach((match, index) => {
+
         let compObj = {};
         match.competitors.map(s => {
           compObj[s.qualifier] = s
-          if(s.qualifier == 'home')
+          if (s.qualifier == 'home')
             compObj[s.qualifier].show_first = true;
         });
         this.slider[index].competitors = compObj
 
-        if(match.match_data && match.match_data.period_scores)
+        if (match.match_data && match.match_data.period_scores)
           this.setPeriodScore(match, index, match.match_data.period_scores)
         else if (match.period_scores)
           this.setPeriodScore(match, index, match.period_scores)
@@ -171,37 +171,37 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       });
 
       let livematchcount = res.data.filter(match => match.status == "live" || match.status == "interrupted" || match.status == "delayed")
-      if(livematchcount.length > 0)
+      if (livematchcount.length > 0)
         this.getLiveUpdateSlider(this);
 
       let upcomingMatchcount = res.data.filter(match => match.status == "not_started")
-      if(upcomingMatchcount.length > 0){
-        let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function(e) {
+      if (upcomingMatchcount.length > 0) {
+        let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function (e) {
           return new Date(e.scheduled);
         })));
-        this.startLiveUpdateAfterTime(minTime); 
+        this.startLiveUpdateAfterTime(minTime);
       }
-  
+
     });
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
   startLiveUpdateAfterTime(scheduled) {
-      let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
-      let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours,remainingTime.minutes,remainingTime.seconds); remainingMiliSec =
+    let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
+    let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds); remainingMiliSec =
       remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 45, 0);
 
-      if (remainingTime.days == 0 && remainingTime.hours < 5) {
-        console.log("remainingMiliSec", remainingMiliSec);        
-        this.timeout = setTimeout(() => {
-          this.getLiveUpdateSlider(this)
-        }, remainingMiliSec);
-      }
+    if (remainingTime.days == 0 && remainingTime.hours < 5) {
+      console.log("remainingMiliSec", remainingMiliSec);
+      this.timeout = setTimeout(() => {
+        this.getLiveUpdateSlider(this)
+      }, remainingMiliSec);
+    }
   }
 
-  setPeriodScore(match, index, period_scores){
+  setPeriodScore(match, index, period_scores) {
     console.log("setPeriodScore");
-    
+
     if (period_scores.length > 0) {
       period_scores.map(sPScore => {
         if (sPScore.home_score) {
@@ -219,21 +219,21 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getLiveUpdateSlider(classThis){
+  getLiveUpdateSlider(classThis) {
     console.log("getLiveUpdateSlider");
     this.interval = setInterval(() => {
-      classThis.sportsService.getheaderslider().subscribe((res:any) => {
+      classThis.sportsService.getheaderslider().subscribe((res: any) => {
         // this.slider = this.sortBySchedule(res.data);   
         this.sortBySchedule(res.data).forEach((match, index) => {
           this.slider[index].status = match.status;
-          if(match.match_data && match.match_data.period_scores){
+          if (match.match_data && match.match_data.period_scores) {
             this.setPeriodScore(match, index, match.match_data.period_scores)
           }
           else if (match.period_scores)
             this.setPeriodScore(match, index, match.period_scores)
           else
             this.slider[index].competitors["home"].show_first = true;
-          
+
         });
       });
     }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP 
@@ -253,7 +253,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   }
 
 
-  sortBySchedule(arr){
+  sortBySchedule(arr) {
     return arr.sort(function (a, b) {
       if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
         return -1

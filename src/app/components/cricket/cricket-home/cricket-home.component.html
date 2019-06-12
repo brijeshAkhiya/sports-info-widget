@@ -30,12 +30,11 @@
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
               <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
-
               <!-- <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9" (loadmore)="loadmor"></app-common-blog-card>
               <div class="text-center"><button class="theme-btn down-btn" (click)="loadpopular()">Load
                   More<span></span></button>
               </div> -->
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonnewsparams" [type]="'recents'" *ngIf="commonnewsparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Latest Article Tab-->
@@ -44,7 +43,7 @@
               <div (click)="getRecentPosts()">Latest</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [reqparams]="commonlatestparams"  *ngIf="commonlatestparams"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonlatestparams"  *ngIf="commonlatestparams" [type]="'recents'" ></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Videos tab start-->
@@ -53,7 +52,7 @@
               <div (click)="getVideoPosts()">Videos</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [reqparams]="commonvideoparams" *ngIf="commonvideoparams"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonvideoparams" *ngIf="commonvideoparams" [type]="'recents'"></app-common-news-list>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
