@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     private commonService:CommonService
   ) {
     this.commonnewsparams = {
+      eSort:'Latest',
       nStart: 0,
       nLimit: 4
     };

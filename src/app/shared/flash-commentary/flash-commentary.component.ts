@@ -16,15 +16,36 @@ export class FlashCommentaryComponent implements OnInit {
   isshow: boolean;
   flashvalue: any;
   isnewflashvalue: boolean;
-  constructor(private io: SportsService) {}
+  constructor(private io: SportsService) { }
 
   ngOnInit() {
     this.socket = this.io.connect();
     this.socket.on("connect", res => {
       this.reqFetchRooms();
+      //if match is already selected/subscribed for flash commentary
+      setTimeout(() => {
+        if (localStorage.getItem('Matchid') && localStorage.getItem('matchteams')) {
+          if (this.livematches && this.livematches.length > 0) {
+            let ismatchexist = this.livematches.some(data => data.id == localStorage.getItem('Matchid'))
+            if (ismatchexist) {
+              this.onReJoinRoom(localStorage.getItem('Matchid'), JSON.parse(localStorage.getItem('matchteams')));
+            }
+            else {
+              localStorage.removeItem('Matchid');
+              localStorage.removeItem('matchteams');
+            }
+          }
+          else {
+            localStorage.removeItem('Matchid');
+            localStorage.removeItem('matchteams');
+          }
+        }
+      },
+        1000
+      );
     });
-    this.onNewScore().subscribe(res => {});
-    this.onNewCommentary().subscribe(res => {});
+    this.onNewScore().subscribe(res => { });
+    this.onNewCommentary().subscribe(res => { });
   }
 
   //request fetch rooms/matches
@@ -51,6 +72,25 @@ export class FlashCommentaryComponent implements OnInit {
     this.teamsname = teams.split("vs");
     this.socket.emit("reqJoinRoom", matchid, (error, res) => {
       if (res) {
+        localStorage.setItem('Matchid', this.currentmatchid);
+        localStorage.setItem('matchteams', JSON.stringify(this.teamsname))
+        this.isshow = true;
+        this.isapply = false;
+        this.onNewScore();
+      }
+    });
+  }
+
+
+  //request re-connect room/match from localstorage
+  onReJoinRoom(matchid, teams) {
+    this.teamsname = teams;
+    this.currentmatchid = matchid
+    this.socket.emit("reqJoinRoom", matchid, (error, res) => {
+      if (res) {
+        localStorage.setItem('Matchid', this.currentmatchid);
+        localStorage.setItem('matchteams', JSON.stringify(this.teamsname))
+        this.reqFetchRooms();
         this.isshow = true;
         this.isapply = false;
         this.onNewScore();
@@ -84,8 +124,8 @@ export class FlashCommentaryComponent implements OnInit {
     return new Observable<any>(observer => {
       this.socket.on("newCommentry", (data: any) => {
         observer.next(data);
-        console.log('newcommw',data);
-        
+        console.log('newcommw', data);
+
         this.livematches = []
         this.livematches = data
       });

@@ -1,5 +1,5 @@
 /* -------- Header Slider CSS ------- */
-.header-live-section                                    { background: #1B2A5A; }
+.header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1111; }
 .header-live-slider                                     { padding: 12px 74px; position: relative; }
 .header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 118px; background: #fff;  cursor: pointer; border-radius: 4px; }
 .header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 14px; line-height: 18px; font-weight: 500; font-family: 'IBM Plex Sans', sans-serif;}
@@ -32,9 +32,10 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .login-search li a.login        { background-image: url(../../../assets/images/user-icon.svg); }
 
 /* -------- Serch Box CSS ------- */
-.common-serch-box               { display: none; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); z-index: 112;}
-.common-serch-box.show          { display: block; }
-.search-bar                     { padding: 48px 0px; background: #fff; text-align: center; }
+.common-serch-box               { z-index: -112; opacity: 0; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.common-serch-box.show          { z-index: 112; opacity: 1; }
+.search-bar                     { padding: 48px 0px; background: #fff; text-align: center; transform: translateY(-100%); -webkit-transform: translateY(-100%); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.common-serch-box.show .search-bar              { transform: translateY(0%); -webkit-transform: translateY(0%); }
 .search-bar form ::-webkit-input-placeholder    { color: #A3A3A3; opacity: 1; }
 .search-bar form ::-moz-placeholder             { color: #A3A3A3; opacity: 1; }
 .search-bar form :-ms-input-placeholder         { color: #A3A3A3; opacity: 1; }

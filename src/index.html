@@ -62,26 +62,6 @@
     media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
     href="assets/icons/apple-launch-1536x2048.png">
   <meta name="theme-color" content="#ED1A33">
-  
-  <style>
-    .root-loader {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      text-align: center;
-    }
-    .root-loader video,
-    .root-loader img {
-      width: 320px;
-      max-width: 70%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%);
-    }
-  </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({
@@ -89,7 +69,6 @@
       enable_page_level_ads: true
     });
   </script>
-
 </head>
 <script>
   if ('serviceWorker' in navigator) {
@@ -100,9 +79,9 @@
 </script>
 <body ontouchstart>
   <app-root>
-    <div class="root-loader">
+    <div class="root-loader" style="position: absolute; width: 100%; height: 100%; background-color:#fff; background-image: linear-gradient(#22336F 20%, #fff 20%, #fff 80%, #292929 80%); text-align: center;">
       <!-- <img src="./assets/images/loader.mp4" alt="" /> -->
-      <video src="./assets/images/loader.mp4" autoplay loop muted></video>
+      <video src="./assets/images/loader.mp4" style="width: 320px; max-width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);" autoplay loop muted></video>
     </div>
   </app-root>
   <script>
@@ -122,5 +101,4 @@
     </script>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
-
 </html>

@@ -22,33 +22,21 @@ export class CommonNewsListComponent implements OnInit {
     private sportsService: SportsService,
     private slugifyPipe: SlugifyPipe,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.type == "any") {
       this.posts = [];
       this.getRecentPosts();
-    } else if (this.type == "writerrecent") {
+    } else if (this.type == "writerrecent" || this.type == "writerpopular" || this.type == "writervideos") {
       this.writerid = this.reqparams["_id"];
-
-      this.getWriterblogs(this.reqparams);
-    } else if (this.type == "writerpopular") {
-      this.writerid = this.reqparams["_id"];
-
-      this.getWriterblogs(this.reqparams);
-    } else if (this.type == "writervideos") {
-      this.writerid = this.reqparams["_id"];
-      this.iswritervideo = true;
       this.getWriterblogs(this.reqparams);
     } else {
-      console.log("type::", this.type);
-
       this.posts = [];
       this.relatedids = this.reqparams["aIds"];
       this.getRelatedPosts(this.reqparams);
     }
   }
-
   //get recent posts
 
   getRecentPosts() {
@@ -94,7 +82,7 @@ export class CommonNewsListComponent implements OnInit {
   //load more blogs
 
   loadmore() {
-    if (this.type && this.type != "any") {
+    if (this.type == 'writerpopular' || this.type == 'writervideos' || this.type == 'writerrecent') {
       let data = {
         _id: this.writerid,
         nStart: this.posts.length,
@@ -112,7 +100,25 @@ export class CommonNewsListComponent implements OnInit {
           this.isdisplay = true;
         }
       });
-    } else if (this.type == undefined) {
+    }
+    else if (this.type == 'homelatest') {
+      let start = this.posts.length;
+      let data = {
+        eSort: 'Latest',
+        nStart: start,
+        nLimit: 4
+      };
+      this.isdisplay = false;
+      this.sportsService.getrecentpost(data).subscribe(res => {
+        if (res["data"]) {
+          this.loadnewposts = res["data"];
+          this.posts = this.posts.concat(this.loadnewposts);
+          this.isdisplay = true;
+        }
+      });
+    }
+
+    else if (this.type == undefined) {
       let start = this.posts.length;
       let data = {
         aIds: this.relatedids,
