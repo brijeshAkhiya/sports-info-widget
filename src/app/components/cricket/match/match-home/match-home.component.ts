@@ -463,7 +463,7 @@ export class MatchHomeComponent implements OnInit {
       this.inningWiseCommentry[0] = { commentry: [], inning: 1 };
       let temp = [];
       temp.unshift(this.data.timeline);
-      this.inningWiseCommentry[0].commentry.unshift({ data: timelineWithCommentry, overs: 1 });
+      this.inningWiseCommentry[0].commentry.unshift({ data: timelineWithCommentry.reverse(), overs: 1 });
       console.log(this.inningWiseCommentry);
       return false;
     }
