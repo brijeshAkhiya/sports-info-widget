@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router ,NavigationEnd} from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
+import { Location } from "@angular/common";
+import { filter } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from "angularx-social-login";
+import { CommonService } from "@providers/common-service";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from '@ngrx/store'
+import { SportsService } from "@providers/sports-service";
+import * as MetaTags from "./store/meta-tags-management/meta-tags.actions";
 import * as fromRoot from './app-reducer'
 import * as Auth from './store/auth/auth.actions';
+import { Meta, Title } from '@angular/platform-browser';
 //vibrant import 
 // declare var Vibrant: any;
 // import '../assets/js/vibrant.js';
@@ -16,82 +22,110 @@ import * as Auth from './store/auth/auth.actions';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app'
-  users$:Observable<any>
-  socialUser:any
-  socialUser2:any;
-  vibrantcolor:any
-  mutedcolor:any
-  constructor(private http:HttpClient,private router: Router,private socialLoginService: AuthService,private store: Store<fromRoot.State>){
-
+  users$: Observable<any>
+  socialUser: any
+  socialUser2: any;
+  vibrantcolor: any
+  mutedcolor: any
+  metatagsObj = [];
+  constructor(private http: HttpClient, private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
+    this.getMetaTags();
   }
 
-  ngOnInit(){
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-          return;
+  ngOnInit() {
+    //get data from ngrx store through meta tags actions
+    setTimeout(() => {
+      this.store.subscribe((data: any) => {
+        let metadata = data.Metatags.MetaTags
+        metadata.map((data) => {
+          this.metatagsObj[data.sUrl] = data
+        })
+      })
+    }, 500);
+    //susbcribe to router events
+    this.router.events.subscribe((event) => {
+      //scroll to top navigation related
+      if (!(event instanceof NavigationEnd)) {
+        return;
       }
       window.scrollTo(0, 0)
-  });
+      //change route get url 
+      if (event instanceof NavigationEnd) {
+        let routerURL = event.url
+        //set meta tags from here...
+        // this.metatagsObj[routerURL]
+        //set page title 
+        let title = this.commonservice.getPagetitlebyurl(routerURL);
+        if (title != null) {
+          this.pagetitle.setTitle(title);
+        }
+      }
+    })
 
     this.users$ = this.http.get('https://jsonplaceholder.typicode.com/posts');
     this.socialLoginService.authState.subscribe((user) => {
-     // console.log('user',user);
+      // console.log('user',user);
       this.socialUser = user
     });
 
   }
 
   signInWithFB(): void {
-    this.socialLoginService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res)=>{
-      if(res){
-      this.socialUser = res
-      this.store.dispatch(new Auth.SetAuthenticated());
+    this.socialLoginService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res) => {
+      if (res) {
+        this.socialUser = res
+        this.store.dispatch(new Auth.SetAuthenticated());
       }
     });
   }
 
   signInWithGoogle(): void {
     console.log('sigin google');
-    
-    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res)=>{
-      if(res){
-      this.store.dispatch(new Auth.SetAuthenticated());
 
-      this.socialUser2 = res
+    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+      if (res) {
+        this.store.dispatch(new Auth.SetAuthenticated());
+
+        this.socialUser2 = res
       }
-      
-    }).catch(error=>{
+
+    }).catch(error => {
       console.log(error);
-      
+
     });
   }
 
-  logout(){
-   // console.log('in');
-    
-    this.socialLoginService.signOut().then((res)=>{
-      if(res == undefined){
-      this.store.dispatch(new Auth.SetUnauthenticated());
+  logout() {
+    this.socialLoginService.signOut().then((res) => {
+      if (res == undefined) {
+        this.store.dispatch(new Auth.SetUnauthenticated());
       }
-      
+    })
+  }
+
+  //get meta tags 
+  getMetaTags() {
+    this.sportsservice.getmetatags().subscribe((res: any) => {
+      if (res.data.length > 0) {
+        this.store.dispatch(new MetaTags.SaveMetaTags(res.data));
+      }
     })
   }
 
   // myfn(){
   //   const ele:HTMLImageElement = <HTMLImageElement>document.getElementById('img');
-  
+
   //   var vibrant = new Vibrant(ele);
   //   var swatches = vibrant.swatches()
-    
-    
+
+
   //   for (var swatch in swatches){
   //       if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "Vibrant"){
   //           console.log(swatch, swatches[swatch].getHex())
 
   //           this.vibrantcolor = swatches[swatch].getHex();
   //           console.log('vibrant',this.vibrantcolor);
-            
+
 
   //       }
   //       if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "DarkMuted"){
@@ -99,7 +133,7 @@ export class AppComponent implements OnInit {
 
   //         this.mutedcolor = swatches[swatch].getHex();
   //         console.log('muted',this.mutedcolor);
-          
+
 
   //     }
   //          // console.log('111',swatches[swatch].getHex()[0]);

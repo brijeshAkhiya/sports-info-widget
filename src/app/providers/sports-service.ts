@@ -335,7 +335,16 @@ export class SportsService {
     );
   }
 
+  //get meta tags 
+  getmetatags(){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/seotags` 
+    );
+  }
+
   connect() {
     return io(environment.socket.baseUrl)
   }
+
+
 }

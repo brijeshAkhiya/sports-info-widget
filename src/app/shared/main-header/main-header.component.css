@@ -27,7 +27,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .navbar-nav-container           { position: absolute; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
 .login-search                   { margin: 0px 36px 0px auto; }
 .login-search li a              { margin: 0px 12px; width: 32px; height: 32px; display: block; background: no-repeat center center / cover; opacity: 0.3;}
-.login-search li a.search       { background-image: url(../../../assets/images/search-icon.svg); }
+.login-search li a.search       { background-image: url(assets/images/search-icon.svg); }
 .login-search li a.search.active{ background-image: url(../../../assets/images/close-icon.svg); opacity: 1; }
 .login-search li a.login        { background-image: url(../../../assets/images/user-icon.svg); }
 

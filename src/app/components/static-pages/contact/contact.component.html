@@ -5,7 +5,7 @@
       <div class="col-md-4">
         <div class="contact-item d-flex flex-column common-shadow rounded-box">
           <div>
-            <img src="../../../../assets/images/message-red.svg" alt="mail">
+            <img src="assets/images/static/message-red.svg" alt="mail">
           </div>
           <h5 *ngIf="contactObj"><a href="mailto:{{contactObj['sContactEmail']}}">{{contactObj['sContactEmail']}}</a></h5>
         </div>
@@ -13,7 +13,7 @@
       <div class="col-md-4">
         <div class="contact-item d-flex flex-column common-shadow rounded-box">
           <div>
-            <img src="../../../../assets/images/telephone-red.svg" alt="telephone">
+            <img src="assets/images/static/telephone-red.svg" alt="telephone">
           </div>
           <h5 *ngIf="contactObj"><a href="tel:{{contactObj['sContactNumber']}}">+91 {{contactObj['sContactNumber']}}</a></h5>
         </div>
@@ -21,7 +21,7 @@
       <div class="col-md-4">
         <div class="contact-item d-flex flex-column common-shadow rounded-box">
           <div>
-            <img src="../../../../assets/images/map-red.svg" alt="address">
+            <img src="assets/images/static/map-red.svg" alt="address">
           </div>
           <h5 *ngIf="contactObj">{{contactObj['sAddress']}}</h5>
         </div>
@@ -77,7 +77,7 @@
             </form>
             </div>
             <div class="form-sucess-block" *ngIf="submitsuccess">
-              <img src="../../../../assets/images/submit-right-icon.svg" alt="sucess">
+              <img src="assets/images/static/submit-right-icon.svg" alt="sucess">
               <p class="light-text">Your response was submitted successfully.</p>
               <button class="theme-btn" type="submit" (click)="anothersubmit()" >Submit another response<span></span></button>
             </div>
