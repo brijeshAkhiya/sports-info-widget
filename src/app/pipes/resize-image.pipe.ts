@@ -9,8 +9,9 @@ export class ResizeImagePipe implements PipeTransform {
   constructor(public commonService: CommonService) {}
 
   transform(value: any, args?: any): any {
-    
-    // If image is direct http URL
+    if(typeof value == 'undefined' || value == null)
+      return value;
+    // If im  age is direct http URL
     if(value != null && typeof value != 'undefined' && value.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/))
       return value;
 
