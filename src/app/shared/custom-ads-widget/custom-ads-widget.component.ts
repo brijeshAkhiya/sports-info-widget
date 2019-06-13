@@ -9,57 +9,46 @@ declare var window: any;
   styleUrls: ['./custom-ads-widget.component.css']
 })
 export class CustomAdsWidgetComponent implements OnInit {
-  @Input()type:any
+  @Input() type: any
   adsObj = [];
   addata: any;
   defaultImageLarge = '/assets/images/ad-1320-300.jpg'
   defaultImageRectangle = '/assets/images/ad-320-267.jpg'
   defaultImageBanner = '/assets/images/ad-320-80.jpg'
 
-  constructor(private store: Store<any>,private sportsService: SportsService,) { }
+  constructor(private store: Store<any>, private sportsService: SportsService, ) { }
 
   ngOnInit() {
-    const body = <HTMLDivElement> document.body;
-    const script = document.createElement('script');
-    script.innerHTML = '';
-    script.src = 'url';
-    script.async = false;
-    script.defer = true;
-    body.appendChild(script);
-
     //ngrx store code
-
     this.store.subscribe(data => {
-      
       let arr = data["ads"].Ads;
       arr.map(data => {
-        if (!this.adsObj[data.eType]) 
+        if (!this.adsObj[data.eType])
           this.adsObj[data.eType] = [];
         this.adsObj[data.eType].push(data);
       });
-
       //pick random custom ad from ngrx store data obj
-      if(this.adsObj[this.type])
-        this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];   
-    });   
-  }
-
-  /** For Google adsense */
+      if (this.adsObj[this.type])
+        this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
+    });
+  } 
+  
+  /** For load custom js */
   loadJS(){
     var myScript = document.createElement('script');
     myScript.textContent = ''; // TEMP Load Js
     document.head.appendChild(myScript);
   }
 
-  adclick(id,adlink){
+  adclick(id, adlink) {
     this.updateAdclickCount(id);
-    window.open(adlink,'_blank');   
+    window.open(adlink, '_blank');
   }
 
-  updateAdclickCount(id){
-    if(id){
-      this.sportsService.updateaddclickcount(id).subscribe((res)=>{
-        if(res){
+  updateAdclickCount(id) {
+    if (id) {
+      this.sportsService.updateaddclickcount(id).subscribe((res) => {
+        if (res) {
         }
       })
     }

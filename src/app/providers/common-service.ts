@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from "@env";
-
+import { SportsService } from "@providers/sports-service";
+import { Store } from "@ngrx/store";
+import * as fromRoot from "../app-reducer";
+import * as MetaTags from "../store/meta-tags-management/meta-tags.actions";
 @Injectable()
 export class CommonService {
 
@@ -9,13 +12,12 @@ export class CommonService {
   public lazyloadoffset = "1000";
   public s3Url
   public siteUrl
-  
-  constructor() {
-    console.log("common service");    
-    this.s3Url = environment.s3Url    
+  titleObj;
+  constructor(private sportsservice: SportsService, private store: Store<fromRoot.State>) {
+    this.s3Url = environment.s3Url
     this.siteUrl = environment.siteUrl
+    this.getPageTitles();
   }
-
 
   /** Get Milli seconds from Hr, min and seconds */
   miliseconds(hrs, min, sec) {
@@ -43,4 +45,38 @@ export class CommonService {
     }
     return remainingdays;
   }
+
+  getPageTitles() {
+    this.titleObj = {
+      "/": { title: "Sports.info" },
+      "/about": { title: "About Us" },
+      "/advertise-with-us": { title: "Advertise with us" },
+      "/blog": { title: "Blog" },
+      "/coming-soon/badminton": { title: "Badminton" },
+      "/coming-soon/basketball": { title: "Basketball" },
+      "/coming-soon/field-Hockey": { title: "Field Hockey" },
+      "/coming-soon/racing": { title: "Racing" },
+      "/coming-soon/soccer": { title: "Soccer" },
+      "/coming-soon/tennis-sports": { title: "Tennis Sports" },
+      "/contact-us": { title: "Contact Us" },
+      "/cricket": { title: "Cricket" },
+      "/cricket/fixtures": { title: "Cricket Fixtures" },
+      "/cricket/recent-fixtures/results/view": { title: "Cricket Recent Results" },
+      "/cricket/recent-fixtures/upcoming/view": { title: "Cricket Recent Fixtures" },
+      "/privacy-policy": { title: "Privacy Policy" },
+      "/terms-and-conditions": { title: "Terms & conditions" },
+    }
+  }
+
+  getPagetitlebyurl(url) {
+    if (this.titleObj[url]) {
+      return this.titleObj[url].title
+    }
+    else {
+      var last = url.split("/").pop();
+      return last.replace(/-/g, ' ');
+    }
+  }
+
+  
 }
