@@ -15,7 +15,7 @@
       {{data.sport_event.scheduled | date}}
     </p>
     <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
-    <p *ngIf="data.sport_event_status.status == 'cancelled'">Match is cancelled</p>
+    <!-- Delay class--><p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">Match is {{ data.sport_event_status.status }}</p>
     <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team"> 
       <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
     </p>
