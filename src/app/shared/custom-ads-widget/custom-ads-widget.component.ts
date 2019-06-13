@@ -44,6 +44,13 @@ export class CustomAdsWidgetComponent implements OnInit {
     });   
   }
 
+  /** For Google adsense */
+  loadJS(){
+    var myScript = document.createElement('script');
+    myScript.textContent = ''; // TEMP Load Js
+    document.head.appendChild(myScript);
+  }
+
   adclick(id,adlink){
     this.updateAdclickCount(id);
     window.open(adlink,'_blank');   
