@@ -6,8 +6,7 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
 import { AboutComponent } from './components/static-pages/about/about.component';
 import { ContactComponent } from './components/static-pages/contact/contact.component';
 import { AdvertiseWithUsComponent } from './components/static-pages/advertise-with-us/advertise-with-us.component';
-import { TermsAndConditionsComponent } from './components/static-pages/terms-and-conditions/terms-and-conditions.component';
-import { PrivacyPolicyComponent } from './components/static-pages/privacy-policy/privacy-policy.component';
+import { CmsContentComponent } from './components/static-pages/cms-content/cms-content.component';
 
 const routes: Routes = [
 
@@ -48,12 +47,12 @@ const routes: Routes = [
     },
     {
         path: 'privacy-policy',
-        component:PrivacyPolicyComponent
+        component:CmsContentComponent
 
     },
     {
         path: 'terms-and-conditions',
-        component:TermsAndConditionsComponent
+        component:CmsContentComponent
 
     },
     {

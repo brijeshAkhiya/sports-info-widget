@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { SportsService } from "../../../providers/sports-service";
-
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators
 } from "@angular/forms";
+
+import { SportsService } from "@providers/sports-service";
 
 @Component({
   selector: "app-advertise-with-us",
@@ -18,70 +15,52 @@ import {
 
 })
 export class AdvertiseWithUsComponent implements OnInit {
+  
   advertiseForm: FormGroup;
-  submitted: boolean;
-  btnDisable: boolean;
+  contactObj;
+  submitted: boolean = false;
   submitsuccess: boolean = false;
-  cmsdata: string;
-  constructor(private _formBuilder: FormBuilder,private sportsService: SportsService,) {}
+
+  constructor(
+    private sportsService: SportsService,
+    private _formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
-    this.fnInitAdvertiseForm();
-    this.getCMSContent();
+    this.initForm();
   }
 
-  fnInitAdvertiseForm() {
+  initForm() {
     this.advertiseForm = this._formBuilder.group({
-      fullname: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      company: ["", Validators.required],
-      phone: ["", Validators.required],
-      textareavalue: ["", Validators.required]
+      sName: ["", Validators.required],
+      sEmail: ["", [Validators.required, Validators.email]],
+      sCompanyName: ["", Validators.required],
+      sMobile: ["", Validators.required],
+      sMessage: ["", Validators.required]
     });
   }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.advertiseForm.controls; }
+  get f() { return this.advertiseForm.controls; }
 
   submit() {
     this.submitted = true;
-    if(this.advertiseForm.valid){
-      let data  = {
-        sName:this.advertiseForm.controls.fullname.value,
-        sEmail:this.advertiseForm.controls.email.value,
-        sCompanyName:this.advertiseForm.controls.company.value,
-        sMobile:this.advertiseForm.controls.phone.value,
-        sMessage:this.advertiseForm.controls.textareavalue.value,
-        eType:'Ad'
-      }
-      if(data){  
-      this.btnDisable = true
-      this.sportsService.postinquiries(data).subscribe((res)=>{
-        if(res['data']){
-          this.submitsuccess = true
-        }
-      })
+    if (this.advertiseForm.valid) {
+      let data = this.advertiseForm.value;
+      data.eType = 'Ad'
+      if (data) {
+        this.sportsService.postinquiries(data).subscribe((res) => {
+          if (res['data']) {
+            this.submitsuccess = true;
+            this.submitted = false;
+            this.advertiseForm.reset();
+            this.initForm();
+          }
+        })
       }
     }
   }
 
-  anothersubmit(){
-    setTimeout(() => {
-      this.advertiseForm.reset();
-      for (let name in this.advertiseForm.controls) {
-          this.advertiseForm.controls[name].setErrors(null);
-         }
-    },100);
-    this.submitsuccess = false   
+  anothersubmit() {
+    this.submitsuccess = false;
   }
-
-  getCMSContent(){
-    let sKey = 'Advertise With Us'
-    this.sportsService.getcmscontent(sKey).subscribe((res)=>{
-      if(res){
-        this.cmsdata = res
-      }
-    })
-  }
-
 }

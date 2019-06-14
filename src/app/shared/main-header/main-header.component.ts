@@ -224,15 +224,18 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.interval = setInterval(() => {
       classThis.sportsService.getheaderslider().subscribe((res: any) => {
         // this.slider = this.sortBySchedule(res.data);   
-        this.sortBySchedule(res.data).forEach((match, index) => {
-          this.slider[index].status = match.status;
+        res.data.forEach((match, index) => {
+          console.log(this.slider);
+          let indexSlider = this.slider.findIndex((slide) => slide.match_id == match.match_id);
+          console.log(indexSlider)
+          this.slider[indexSlider].status = match.status;
           if (match.match_data && match.match_data.period_scores) {
-            this.setPeriodScore(match, index, match.match_data.period_scores)
+            this.setPeriodScore(match, indexSlider, match.match_data.period_scores)
           }
           else if (match.period_scores)
-            this.setPeriodScore(match, index, match.period_scores)
+            this.setPeriodScore(match, indexSlider, match.period_scores)
           else
-            this.slider[index].competitors["home"].show_first = true;
+            this.slider[indexSlider].competitors["home"].show_first = true;
 
         });
       });
