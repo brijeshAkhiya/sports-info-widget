@@ -27,6 +27,7 @@ import { NoDataWidgetComponent } from './no-data-widget/no-data-widget.component
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { PlayerImagePipe } from '@app/pipes/playerimageurl.pipe';
+import { ContentComponent } from './widget/content/content.component';
 
 
 @NgModule({
@@ -42,8 +43,8 @@ import { PlayerImagePipe } from '@app/pipes/playerimageurl.pipe';
         FormsModule,
         LazyLoadImageModule
     ],
-    declarations: [TruncatePipe, ResizeImagePipe,LogosUrlPipe,PlayerImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent],
+    declarations: [TruncatePipe, ResizeImagePipe,LogosUrlPipe,PlayerImagePipe, StripHtmlPipe, CommonStoryWidgetComponent, CommonNewsListComponent, PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent, CustomAdsWidgetComponent, NoDataWidgetComponent, DataLoaderWidgetComponent, FlashCommentaryComponent, ContentComponent],
     providers: [TruncatePipe, ResizeImagePipe,SportsService,SocketService,SplitPipe,LogosUrlPipe, CommonService, CricketService],
-    exports: [NgxTinySliderModule, TruncatePipe,LogosUrlPipe,PlayerImagePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent]
+    exports: [NgxTinySliderModule, TruncatePipe,LogosUrlPipe,PlayerImagePipe, ResizeImagePipe,StripHtmlPipe ,CommonNewsListComponent,CommonStoryWidgetComponent,PointstableWidgetComponent,SplitPipe, CommonBlogCardComponent, CommonRelatedBlogCardComponent,CustomAdsWidgetComponent,NoDataWidgetComponent,DataLoaderWidgetComponent,FlashCommentaryComponent, ContentComponent]
 })
 export class SharedModule { }

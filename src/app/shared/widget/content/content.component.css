@@ -1,0 +1,31 @@
+app-content .common-section { background: #fff; }
+app-content h2,
+app-content h3,
+app-content h4,
+app-content h5              { margin: 0px; font-size: 20px; line-height: 28px; font-family: 'IBM Plex Sans', sans-serif; text-transform: unset; }
+app-content p,
+app-content ul              { margin-bottom: 28px; font-size: 18px; line-height: 28px; color: #3D3D3D; }
+app-content p:last-child,
+app-content ul:last-child   { margin-bottom: 0px; }
+app-content ul              { padding-left: 48px; }
+app-content ul li           { position: relative; }
+app-content ul li::before   { content: ""; position: absolute; display: block; width: 8px; height: 8px; left: -24px; top: 10px; background: #3D3D3D; border-radius: 50%; }
+app-content a               { color: #ED1A33; }
+app-content a:hover,
+app-content a:focus         { color: #3D3D3D; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 992px) {
+    app-content p,
+    app-content ul          { margin-bottom: 24px; font-size: 16px; line-height: 24px; }
+}
+
+@media (max-width: 767px) {
+    app-content h2,
+    app-content h3,
+    app-content h4,
+    app-content h5          { margin: 4px; font-size: 18px; line-height: 24px;}
+    app-content p,
+    app-content ul          { margin-bottom: 16px; font-size: 14px; line-height: 20px; }
+}

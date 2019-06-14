@@ -31,6 +31,13 @@ export class CustomAdsWidgetComponent implements OnInit {
       if (this.adsObj[this.type])
         this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
     });
+  } 
+  
+  /** For load custom js */
+  loadJS(){
+    var myScript = document.createElement('script');
+    myScript.textContent = ''; // TEMP Load Js
+    document.head.appendChild(myScript);
   }
 
   adclick(id, adlink) {

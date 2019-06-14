@@ -4,7 +4,7 @@
       <div class="row row-size12">
         <div class="col-lg-7">
           <h1>Advertise with us</h1>
-          <p [innerHTML]="cmsdata ? cmsdata : ''"></p>
+          <app-content [cmsKey]="'Advertise With Us'"></app-content>
         </div>
         <div class="col-lg-5">
           <img src="assets/images/static/about-img.jpg" alt="about">
@@ -29,38 +29,38 @@
             <form [formGroup]="advertiseForm" (ngSubmit)="submit()" novalidate>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group" [ngClass]="{'has-error': submitted && f.fullname.errors}">
-                    <input type="text" class="form-control" placeholder="Full Name" formControlName="fullname">
-                    <span  *ngIf="submitted && f.fullname.hasError('required')">This field is required!</span>
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.sName.errors}">
+                    <input type="text" class="form-control" placeholder="Full Name" formControlName="sName">
+                    <span  *ngIf="submitted && f.sName.hasError('required')">This field is required!</span>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group" [ngClass]="{'has-error': submitted && f.company.errors}">
-                    <input type="text" class="form-control" placeholder="Company" formControlName="company">
-                    <span  *ngIf="submitted && f.company.hasError('required')">This field is required!</span>
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.sCompanyName.errors}">
+                    <input type="text" class="form-control" placeholder="Company" formControlName="sCompanyName">
+                    <span  *ngIf="submitted && f.sCompanyName.hasError('required')">This field is required!</span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group" [ngClass]="{'has-error': submitted && f.email.errors}">
-                    <input type="email" class="form-control" placeholder="Email" formControlName="email"> 
-                    <span  *ngIf="submitted && f.email.hasError('required')">This field is required!</span>
-                    <span  *ngIf="submitted && f.email.hasError('email')">Please enter valid email address</span>
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.sEmail.errors}">
+                    <input type="email" class="form-control" placeholder="Email" formControlName="sEmail"> 
+                    <span  *ngIf="submitted && f.sEmail.hasError('required')">This field is required!</span>
+                    <span  *ngIf="submitted && f.sEmail.hasError('email')">Please enter valid email address</span>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group" [ngClass]="{'has-error': submitted && f.phone.errors}">
-                    <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
-                    <span  *ngIf="submitted && f.phone.hasError('required')">This field is required!</span>
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.sMobile.errors}">
+                    <input type="text" class="form-control" placeholder="Phone" formControlName="sMobile">
+                    <span  *ngIf="submitted && f.sMobile.hasError('required')">This field is required!</span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group" [ngClass]="{'has-error': submitted && f.textareavalue.errors}">
-                    <textarea type="text" class="form-control" placeholder="How can we help ?" formControlName="textareavalue"></textarea>
-                    <span *ngIf="submitted && f.textareavalue.hasError('required')">This field is required!</span>
+                  <div class="form-group" [ngClass]="{'has-error': submitted && f.sMessage.errors}">
+                    <textarea type="text" class="form-control" placeholder="How can we help ?" formControlName="sMessage"></textarea>
+                    <span *ngIf="submitted && f.sMessage.hasError('required')">This field is required!</span>
                   </div>
                 </div>
               </div>
