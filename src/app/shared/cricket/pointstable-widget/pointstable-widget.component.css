@@ -1,0 +1,10 @@
+/* -------- Point Table Widget ------- */
+.point-table-widget .table                      { margin: 0px; }
+.point-table-widget .table-responsive           { padding: 0px 8px 8px; }
+.point-table-widget .table th,
+.point-table-widget .table td                   { padding: 8px; font-size: 12px; line-height: 15px; color: #595959; border: none; text-align: center; }
+.point-table-widget .table th                   { text-transform: uppercase; }        
+.point-table-widget .table tr:nth-child(even)   { background: #F4F5F5; }
+.point-table-widget .table tr th:first-child,
+.point-table-widget .table tr td:first-child    { text-align: left; }
+.point-table-widget .table tr td:first-child    { font-weight: 500; width: 30%; }

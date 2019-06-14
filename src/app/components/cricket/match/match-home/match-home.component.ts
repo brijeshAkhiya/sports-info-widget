@@ -92,9 +92,9 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get Match Data */
   getMatchData() {
-    this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
-      console.log('scorecard::',res);
-    })
+    // this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
+    //   console.log('scorecard::',res);
+    // })
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
          //res = res.result;
