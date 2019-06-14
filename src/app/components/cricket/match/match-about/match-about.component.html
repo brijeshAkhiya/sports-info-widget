@@ -5,7 +5,7 @@
   <h1 *ngIf="data.sport_event.competitors">
     {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
   </h1>
-  
+
 
   <div class="match-update">
     <p class="light-text">
@@ -15,12 +15,15 @@
       {{data.sport_event.scheduled | date}}
     </p>
     <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
-    <!-- Delay class--><p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">Match is {{ data.sport_event_status.status }}</p>
-    <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team"> 
+    <!-- TODO Delay class-->
+    <p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">Match is
+      {{ data.sport_event_status.status }}</p>
+    <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
       <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
     </p>
-    <p *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team" class="live-match">Live 
-      <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+    <p *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team" class="live-match">Live
+      <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
+        {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
     </p>
   </div>
 
@@ -28,36 +31,51 @@
 
     <!--If match not started-->
     <div class="current-teams" *ngIf="competitor">
-      <div class="current-team d-flex justify-content-between align-items-center">
-        <h4 *ngIf="data.sport_event.competitors" [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.home.id == data.sport_event_status.winner_id}">
-           <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
-           <a [ngClass]="{'win-toss': competitor.home.id == toss.toss_won_by}" (click)="cricketService.teamInfo(competitor.home.id, competitor.home.name)" > {{data.sport_event_status.status == 'not_started' ? competitor.home.name : competitor.home.abbreviation}} </a>
-        </h4>
-        <h4 class="score" *ngIf="competitor.home.period_scores && competitor.home.period_scores[0]">
-          {{competitor.home.period_scores[0].display_score}} ({{competitor.home.period_scores[0].display_overs}} ov)
-        </h4>
-      </div>
-      <div class="current-team d-flex justify-content-between align-items-center">
-        <h4 [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.away.id == data.sport_event_status.winner_id}">
-            <img [lazyLoad]="competitor.away.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
-            <a [ngClass]="{'win-toss': competitor.away.id == toss.toss_won_by}"  (click)="cricketService.teamInfo(competitor.away.id, competitor.away.name)" > {{data.sport_event_status.status == 'not_started' ? competitor.away.name : competitor.away.abbreviation}} </a>
-        </h4>
-        <h4 class="score" *ngIf="competitor.away.period_scores && competitor.away.period_scores[0]">
-          {{competitor.away.period_scores[0].display_score}} ({{competitor.away.period_scores[0].display_overs}} ov)
-        </h4>
+      <ng-container
+        *ngIf="competitor.away.period_scores && competitor.away.period_scores[0].number == 1; else home_first">
+        <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.away, data:data}">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.home, data:data}">
+        </ng-container>
+      </ng-container>
+      <ng-template #home_first>
+        <ng-container>
+          <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.home, data:data}">
+          </ng-container>
+          <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.away, data:data}">
+          </ng-container>
+        </ng-container>
+      </ng-template>
 
-      </div>
+      <ng-template #team let-competitor="competitor">
+        <div class="current-team d-flex justify-content-between align-items-center">
+          <h4 *ngIf="data.sport_event.competitors"
+            [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.id == data.sport_event_status.winner_id}">
+            <img [lazyLoad]="competitor.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+              [offset]="commonService.lazyloadoffset">
+            <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by}"
+              (click)="cricketService.teamInfo(competitor.id, competitor.name)">
+              {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
+          </h4>
+          <h4 class="score" [ngClass]="{'running' : competitor.period_scores[0].number == data.sport_event_status.current_inning}" *ngIf="competitor.period_scores && competitor.period_scores[0]">
+            {{competitor.period_scores[0].display_score}} ({{competitor.period_scores[0].display_overs}} ov)
+          </h4>
+        </div>
+      </ng-template>
     </div>
 
 
     <div class="match-win-player d-flex" *ngIf="data.statistics && data.statistics.man_of_the_match">
       <div class="player-pic">
-        <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder"  [offset]="commonService.lazyloadoffset" >
+        <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']"
+          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </div>
       <div class="player-info">
         <p class="light-text">Player of the Match</p>
         <h5 class="theme-color">
-          <a (click)="cricketService.playerview(data.statistics.man_of_the_match[0].id,data.statistics.man_of_the_match[0].name)">  {{data.statistics.man_of_the_match[0]?.name | split}} </a>
+          <a
+            (click)="cricketService.playerview(data.statistics.man_of_the_match[0].id,data.statistics.man_of_the_match[0].name)">
+            {{data.statistics.man_of_the_match[0]?.name | split}} </a>
         </h5>
         <!-- <p class="player-team">West Indies</p> -->
       </div>
