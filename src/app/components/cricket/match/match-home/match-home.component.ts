@@ -60,7 +60,7 @@ export class MatchHomeComponent implements OnInit {
   tossdecision: any = {};
   batsmanList;
   testcheck: any;
-  dummyAPICall = 450;
+  dummyAPICall = 1090;
   fallofWickets = [];
   playerList = {};
   scorecardinnings: any;
@@ -92,9 +92,9 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get Match Data */
   getMatchData() {
-    this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
-      console.log('scorecard::',res);
-    })
+    // this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
+    //   console.log('scorecard::',res);
+    // })
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
          //res = res.result;
@@ -173,15 +173,20 @@ export class MatchHomeComponent implements OnInit {
     if (this.matchdata.timeline) {
       this.matchdata.timeline.map(data => {
         if (data.type == "wicket") {
+          console.log(this.fallofWickets);
           if (!this.fallofWickets[data.inning])
             this.fallofWickets[data.inning] = [];
-
-          this.fallofWickets[data.inning].push({
-            playerid: data.dismissal_params.player.id,
-            playername: data.dismissal_params.player.name,
-            displayover: data.display_overs,
-            displayscore: data.display_score
-          });
+          
+          let find = this.fallofWickets[data.inning].filter((wicket) => wicket.playerid == data.dismissal_params.player.id)
+          console.log(find)
+          if(find.length == 0){
+            this.fallofWickets[data.inning].unshift({
+              playerid: data.dismissal_params.player.id,
+              playername: data.dismissal_params.player.name,
+              displayover: data.display_overs,
+              displayscore: data.display_score
+            });
+          }
         }
       });
     }
@@ -640,7 +645,7 @@ export class MatchHomeComponent implements OnInit {
     timelineWithCommentry.forEach((timeline, index) => {
 
       if (timeline.type == 'wicket')
-        // this.getFallWickets();
+        this.getFallWickets();
         // console.log(timeline);
         // console.log(index);
 
@@ -892,6 +897,10 @@ export class MatchHomeComponent implements OnInit {
         this.batsmanList[1].statistics = stats[0].statistics;
       }
       console.log("batsmanList", this.batsmanList);
+      /** Remove dismissal */
+      if(timeline.dismissal_params)
+        this.batsmanList = this.batsmanList.filter((player) => player.id != timeline.dismissal_params.player.id)
+
       let prev_baller;
       if (typeof this.ballerList == "undefined") this.ballerList = [];
       if (timeline.bowling_params && timeline.bowling_params.bowler) {

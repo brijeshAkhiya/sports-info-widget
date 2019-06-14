@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { SlugifyPipe } from "../../pipes/slugpipe";
+import { SlugifyPipe } from "@pipes/slugpipe";
 import { start } from 'repl';
 
 @Component({

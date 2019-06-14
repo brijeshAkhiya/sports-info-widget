@@ -19,7 +19,7 @@ import * as fromRoot from "../../app-reducer";
 import * as Auth from "../../store/auth/auth.actions";
 import * as Ads from "../../store/ads-management/ads.actions";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { SlugifyPipe } from "../../pipes/slugpipe";
+import { SlugifyPipe } from "@pipes/slugpipe";
 import { SportsService } from "../../providers/sports-service";
 import { CommonService } from "@providers/common-service";
 import { CricketService } from "@providers/cricket-service";
@@ -157,8 +157,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         let compObj = {};
         match.competitors.map(s => {
           compObj[s.qualifier] = s
-          if (s.qualifier == 'home')
-            compObj[s.qualifier].show_first = true;
+          // if (s.qualifier == 'home')
+          //   compObj[s.qualifier].show_first = true;
         });
         this.slider[index].competitors = compObj
 
@@ -217,6 +217,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         }
       });
     }
+    console.log(this.slider);
+    
   }
 
   getLiveUpdateSlider(classThis) {

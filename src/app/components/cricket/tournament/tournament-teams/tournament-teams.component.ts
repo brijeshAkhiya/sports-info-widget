@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SlugifyPipe } from '../../../../pipes/slugpipe';
+
+import { SlugifyPipe } from '@pipes/slugpipe';
+
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
+import { SportsService } from '@providers/sports-service';
 
 
 @Component({

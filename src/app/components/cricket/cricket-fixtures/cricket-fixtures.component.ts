@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SportsService } from '../../../providers/sports-service';
 import { distinctUntilChanged } from 'rxjs/operators';
-
 import * as moment from 'moment';
 import { Router } from '@angular/router';
-import { SlugifyPipe } from '../../../pipes/slugpipe';
+import { SportsService } from '@providers/sports-service';
+import { SlugifyPipe } from '@pipes/slugpipe';
 
 @Component({
   selector: 'app-cricket-fixtures',

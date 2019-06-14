@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { SportsService } from "../../../providers/sports-service";
-import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
 
 @Component({
@@ -16,7 +14,10 @@ export class BlogListComponent implements OnInit {
   data: any;
   widgetblogs: any;
   total: any;
-  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router, private commonService: CommonService) {}
+  constructor(
+    private sportsService: SportsService,
+    private commonService: CommonService
+  ) {}
 
   ngOnInit() {
     this.getPopularArticles(this.nstart, this.nlimit);
@@ -66,11 +67,5 @@ export class BlogListComponent implements OnInit {
         this.widgetblogs = res["data"];
       }
     });
-  }
-   //blog view
-
-   blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
   }
 }

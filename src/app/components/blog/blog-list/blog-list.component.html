@@ -12,7 +12,7 @@
             <div class="col-sm-6" *ngFor="let blog of blogs">
               <div class="web-news-item common-shadow rounded-box">
                 <div class="web-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
-                  <div class="common-zoom-img" [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="blog.sImage | resizeImage:['s']" (click)="blogview(blog._id,'Article',blog.sTitle)">
+                  <div class="common-zoom-img" [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="blog.sImage | resizeImage:['s']" (click)="commonService.blogview(blog._id,'Article',blog.sTitle)">
                   </div>
                 </div>
                 <div class="news-desc">

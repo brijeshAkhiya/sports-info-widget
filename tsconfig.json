@@ -22,7 +22,7 @@
       "@app/*": ["app/*"],
       "@providers/*": ["app/providers/*"],
       "@assets/*": ["app/assets/*"],
-      "@pipes": ["app/pipes/*"],
+      "@pipes/*": ["app/shared/pipes/*"],
       "@env": ["environments/environment"],
     }
   }
