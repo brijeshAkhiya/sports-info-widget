@@ -52,17 +52,6 @@
 .team-list .team-item h4            { margin-bottom: 2px; font-family: 'IBM Plex Sans', sans-serif; color: #292929; font-weight: 500;}
 .team-list .team-item h5            { margin: 0px; font-family: 'IBM Plex Sans', sans-serif; color: #A3A3A3; font-weight: 400;}
 
-/* -------- Point Table Widget ------- */
-.point-table-widget .table                      { margin: 0px; }
-.point-table-widget .table-responsive           { padding: 0px 8px 8px; }
-.point-table-widget .table th,
-.point-table-widget .table td                   { padding: 8px; font-size: 12px; line-height: 15px; color: #595959; border: none; }
-.point-table-widget .table th                   { text-transform: uppercase; }        
-.point-table-widget .table tr:nth-child(even)   { background: #F4F5F5; }
-.point-table-widget .table tr th:last-child,
-.point-table-widget .table tr td:last-child     { text-align: right; }
-.point-table-widget .table tr td:first-child    { font-weight: 500; width: 30%; }
-
 /* -------- Player Score Widget ------- */
 .player-score-list li.common-player         { padding: 12px; cursor: pointer;}
 .player-score-list li *                     { margin: 0px; font-family: 'IBM Plex Sans', sans-serif;}

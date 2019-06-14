@@ -64,21 +64,36 @@ export class FlashCommentaryComponent implements OnInit {
     if (this.currentmatchid && matchid != this.currentmatchid) {
       this.socket.emit("reqLeaveRoom", this.currentmatchid, (error, res) => {
         if (res) {
-          console.log("leaveroom ::", res);
+          this.currentmatchid = ""
+          this.isshow = false;
+          this.isapply = true;
+          localStorage.removeItem('Matchid')
         }
       });
     }
-    this.currentmatchid = matchid;
-    this.teamsname = teams.split("vs");
-    this.socket.emit("reqJoinRoom", matchid, (error, res) => {
-      if (res) {
-        localStorage.setItem('Matchid', this.currentmatchid);
-        localStorage.setItem('matchteams', JSON.stringify(this.teamsname))
-        this.isshow = true;
-        this.isapply = false;
-        this.onNewScore();
-      }
-    });
+    if (this.currentmatchid == matchid) {
+      this.socket.emit("reqLeaveRoom", this.currentmatchid, (error, res) => {
+        if (res) {
+          this.currentmatchid = ""
+          this.isshow = false;
+          this.isapply = false;
+          localStorage.removeItem('Matchid')
+        }
+      });
+    }
+    else {
+      this.currentmatchid = matchid;
+      this.teamsname = teams.split("vs");
+      this.socket.emit("reqJoinRoom", matchid, (error, res) => {
+        if (res) {
+          localStorage.setItem('Matchid', this.currentmatchid);
+          localStorage.setItem('matchteams', JSON.stringify(this.teamsname))
+          this.isshow = true;
+          this.isapply = false;
+          this.onNewScore();
+        }
+      });
+    }
   }
 
 

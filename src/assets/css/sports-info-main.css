@@ -2,9 +2,9 @@
 /* CSS Document */
 
 /******* Fonts Face CSS Start **********/
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700');
+/* @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Muli:600,700,800,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Muli:600,700,800,900,900i'); */
 /********* Fonts Face CSS End **********/
 
 /******* Common Element CSS Start ******/
@@ -159,6 +159,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-popular-list .item-desc p a     { display: block; color: #292929; }
 .common-popular-list a:not([href]):not([tabindex]):focus, 
 .common-popular-list a:not([href]):not([tabindex]):hover    { color: #ED1A33; }
+
 /* -------- Common News Section ------- */
 .common-news-list .common-news-item         { margin-bottom: 24px; padding: 16px; background: #fff; border-radius: 4px; }
 .common-news-list .common-news-img          { width: 280px; height: 181px; border-radius: 2px 2px 0px 0px; cursor: pointer; position: relative; }
