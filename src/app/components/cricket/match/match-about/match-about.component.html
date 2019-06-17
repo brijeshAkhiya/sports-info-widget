@@ -53,7 +53,7 @@
             [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.id == data.sport_event_status.winner_id}">
             <img [lazyLoad]="competitor.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
               [offset]="commonService.lazyloadoffset">
-            <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by}"
+            <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by && (data.sport_event_status.status != 'closed' && data.sport_event_status.status != 'ended') }"
               (click)="cricketService.teamInfo(competitor.id, competitor.name)">
               {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
           </h4>
