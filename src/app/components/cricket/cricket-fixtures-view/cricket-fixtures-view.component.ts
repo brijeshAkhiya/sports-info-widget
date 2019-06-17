@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { distinctUntilChanged } from "rxjs/operators";
-import { SlugifyPipe } from "../../../pipes/slugpipe";
-import { SportsService } from "../../../providers/sports-service";
+import * as moment from "moment";
+
+import { SlugifyPipe } from "@pipes/slugpipe";
+import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
-import * as moment from "moment";
 
 @Component({
   selector: "app-cricket-fixtures-view",

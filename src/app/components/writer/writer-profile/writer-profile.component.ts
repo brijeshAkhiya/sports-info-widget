@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "../../../providers/sports-service";
-import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { SlugifyPipe } from "@pipes/slugpipe";
 import { CommonService } from "@providers/common-service";
 
 

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
-import { SplitPipe } from '../pipes/stringsplitpipe';
-import { SlugifyPipe } from '../pipes/slugpipe';
+
+import { SplitPipe } from '@pipes/stringsplitpipe';
+import { SlugifyPipe } from '@pipes/slugpipe';
 
 @Injectable()
 export class CricketService {
@@ -11,10 +12,9 @@ export class CricketService {
 
   constructor(
     private splitpipe: SplitPipe,
-    private slugifyPipe: SplitPipe,
+    private slugifyPipe: SlugifyPipe,
     private router: Router
   ) {
-
   }
 
   playerview(id, name) {

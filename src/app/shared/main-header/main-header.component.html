@@ -43,15 +43,16 @@
                         [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{slide.competitors.away.name}}
                     </p>
                     <p *ngIf="slide.competitors.away.period_scores">
-                      {{slide?.competitors?.away?.period_scores[0]?.display_score}}({{slide?.competitors?.away?.period_scores[0]?.display_overs}}
-                      ov)</p>
+                      {{slide?.competitors?.away?.period_scores.display_score}}({{slide?.competitors?.away?.period_scores.display_overs}}
+                      ov)
+                  </p>
                   </div>
                   <div class="match-info d-flex justify-content-between align-items-center"> 
                     <p [ngClass]="{'match-winner': slide.competitors.home.winner}">
                         <img [lazyLoad]="slide.competitors.home.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="rcb">{{slide.competitors.home.name}}</p>
                     <p *ngIf="slide.competitors.home.period_scores">
-                      {{slide?.competitors?.home?.period_scores[0]?.display_score}}({{slide?.competitors?.home?.period_scores[0]?.display_overs}}
+                      {{slide?.competitors?.home?.period_scores.display_score}}({{slide?.competitors?.home?.period_scores.display_overs}}
                       ov)</p>
                   </div>
                 </div>

@@ -41,10 +41,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { environment } from "../environments/environment";
 
 /** All Pipes */
-import { SlugifyPipe } from "./pipes/slugpipe";
-import { TruncatePipe } from "./pipes/truncatepipe";
-import { SplitPipe } from "./pipes/stringsplitpipe";
-import { StripHtmlPipe } from "./pipes/striphtmlpipe";
+import { SlugifyPipe } from "./shared/pipes/slugpipe";
+import { TruncatePipe } from "./shared/pipes/truncatepipe";
+import { SplitPipe } from "./shared/pipes/stringsplitpipe";
+import { StripHtmlPipe } from "./shared/pipes/striphtmlpipe";
 
 /** All Components */
 import { AppComponent } from "./app.component";

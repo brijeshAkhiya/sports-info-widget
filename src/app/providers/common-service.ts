@@ -1,9 +1,13 @@
 import { Injectable } from "@angular/core";
 import { environment } from "@env";
-import { SportsService } from "@providers/sports-service";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../app-reducer";
 import * as MetaTags from "../store/meta-tags-management/meta-tags.actions";
+
+import { Router } from '@angular/router';
+
+import { SlugifyPipe } from '@pipes/slugpipe';
+
 @Injectable()
 export class CommonService {
 
@@ -13,10 +17,21 @@ export class CommonService {
   public s3Url
   public siteUrl
   titleObj;
-  constructor(private sportsservice: SportsService, private store: Store<fromRoot.State>) {
+  
+  constructor(
+    private slugifyPipe: SlugifyPipe,
+    private router: Router,
+    private store: Store<fromRoot.State>
+  ) {
     this.s3Url = environment.s3Url
     this.siteUrl = environment.siteUrl
     this.getPageTitles();
+  }
+
+  //blog view
+  blogview(id, type, title) {
+    let slugname = this.slugifyPipe.transform(title);
+    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
   }
 
   /** Get Milli seconds from Hr, min and seconds */

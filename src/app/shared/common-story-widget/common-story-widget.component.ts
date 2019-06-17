@@ -2,8 +2,9 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { SportsService } from '../../providers/sports-service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { SlugifyPipe } from '../../pipes/slugpipe';
-import { SplitPipe } from '../../pipes/stringsplitpipe';
+
+import { SlugifyPipe } from '@pipes/slugpipe';
+import { SplitPipe } from '@pipes/stringsplitpipe';
 
 
 

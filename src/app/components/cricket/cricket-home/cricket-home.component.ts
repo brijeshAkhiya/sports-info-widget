@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { SportsService } from "../../../providers/sports-service";
-import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { SportsService } from "@providers/sports-service";
+import { SlugifyPipe } from "@pipes/slugpipe";
 import { CommonService } from '@providers/common-service';
 import { Meta, Title } from '@angular/platform-browser';
 @Component({

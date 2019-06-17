@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SportsService } from '../../../../providers/sports-service';
 import { ActivatedRoute,Router } from '@angular/router';
-import { SlugifyPipe } from "../../../../pipes/slugpipe";
-import { SplitPipe } from '../../../../pipes/stringsplitpipe';
+
+import { SlugifyPipe } from "@pipes/slugpipe";
+import { SplitPipe } from '@pipes/stringsplitpipe';
+
 import { CommonService } from '@providers/common-service';
 import { CricketService } from "@providers/cricket-service";
+import { SportsService } from '@providers/sports-service';
 
 
 @Component({

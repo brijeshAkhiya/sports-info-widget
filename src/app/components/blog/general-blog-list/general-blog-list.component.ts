@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { SportsService } from "../../../providers/sports-service";
-import { SlugifyPipe } from "../../../pipes/slugpipe";
+import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
+import { SlugifyPipe } from "@pipes/slugpipe";
 
 @Component({
   selector: 'app-general-blog-list',
