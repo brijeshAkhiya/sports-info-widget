@@ -241,7 +241,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
         });
       });
-    }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP 
+    }, classThis.commonService.miliseconds(0, 0, 8)); // TEMP 
   }
 
 
