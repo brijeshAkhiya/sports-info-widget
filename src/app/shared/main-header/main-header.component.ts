@@ -190,7 +190,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
     let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds); remainingMiliSec =
       remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 45, 0);
-
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       console.log("remainingMiliSec", remainingMiliSec);
       this.timeout = setTimeout(() => {
@@ -225,7 +224,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       classThis.sportsService.getheaderslider().subscribe((res: any) => {
         // this.slider = this.sortBySchedule(res.data);   
         res.data.forEach((match, index) => {
-          console.log(this.slider);
           let indexSlider = this.slider.findIndex((slide) => slide.match_id == match.match_id);
           console.log(indexSlider)
           this.slider[indexSlider].status = match.status;

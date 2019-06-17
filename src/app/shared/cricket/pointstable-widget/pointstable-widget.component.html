@@ -18,7 +18,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of pointstable">
-          <td>{{item.team.abbreviation ? item.team.abbreviation : item.team.name}}</td>
+          <td><a
+              (click)="cricketService.teamInfo(item.team.id,item.team.name)">{{item.team.abbreviation ? item.team.abbreviation : item.team.name}}</a>
+          </td>
           <td>{{item.played}}</td>
           <td>{{item.win}}</td>
           <td>{{item.loss}}</td>

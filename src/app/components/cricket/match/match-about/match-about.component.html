@@ -31,7 +31,7 @@
       <div class="current-team d-flex justify-content-between align-items-center">
         <h4 *ngIf="data.sport_event.competitors" [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.home.id == data.sport_event_status.winner_id}">
            <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
-           <a [ngClass]="{'win-toss': competitor.home.id == toss.toss_won_by}" (click)="cricketService.teamInfo(competitor.home.id, competitor.home.name)" > {{data.sport_event_status.status == 'not_started' ? competitor.home.name : competitor.home.abbreviation}} </a>
+           <a [ngClass]="{'win-toss': competitor.home.id == toss.toss_won_by && data.sport_event_status.status != 'closed'   }" (click)="cricketService.teamInfo(competitor.home.id, competitor.home.name)" > {{data.sport_event_status.status == 'not_started' ? competitor.home.name : competitor.home.abbreviation}} </a>
         </h4>
         <h4 class="score" *ngIf="competitor.home.period_scores && competitor.home.period_scores[0]">
           {{competitor.home.period_scores[0].display_score}} ({{competitor.home.period_scores[0].display_overs}} ov)
@@ -40,7 +40,7 @@
       <div class="current-team d-flex justify-content-between align-items-center">
         <h4 [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.away.id == data.sport_event_status.winner_id}">
             <img [lazyLoad]="competitor.away.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
-            <a [ngClass]="{'win-toss': competitor.away.id == toss.toss_won_by}"  (click)="cricketService.teamInfo(competitor.away.id, competitor.away.name)" > {{data.sport_event_status.status == 'not_started' ? competitor.away.name : competitor.away.abbreviation}} </a>
+            <a [ngClass]="{'win-toss': competitor.away.id == toss.toss_won_by && data.sport_event_status.status != 'closed' }"  (click)="cricketService.teamInfo(competitor.away.id, competitor.away.name)" > {{data.sport_event_status.status == 'not_started' ? competitor.away.name : competitor.away.abbreviation}} </a>
         </h4>
         <h4 class="score" *ngIf="competitor.away.period_scores && competitor.away.period_scores[0]">
           {{competitor.away.period_scores[0].display_score}} ({{competitor.away.period_scores[0].display_overs}} ov)

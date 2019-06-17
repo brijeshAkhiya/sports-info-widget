@@ -8,6 +8,6 @@ export const environment = {
         config: {}
     },
     s3Url: 'https://d1ldsx0apuyt84.cloudfront.net/',
-    siteUrl: 'http://dev.sports.info/',
+    siteUrl: 'http://dev.sports.info',
     mapsKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
 };

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from "angularx-social-login";
 import { CommonService } from "@providers/common-service";
+import { environment } from "../environments/environment";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from '@ngrx/store'
 import { SportsService } from "@providers/sports-service";
@@ -53,7 +54,29 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         let routerURL = event.url
         //set meta tags from here...
-        // this.metatagsObj[routerURL]
+        let data = this.metatagsObj[environment.siteUrl + routerURL]
+        if (data) {
+          this.meta.updateTag({ name: 'title', content: data.title ? data.title : 'Sports.info' });
+          this.meta.updateTag({ name: 'description', content: data.description ? data.description : 'Sports.info' });
+          this.meta.updateTag({ name: 'topic', content: data.topic ? data.topic : 'Sports.info' });
+          this.meta.updateTag({ name: 'subject', content: data.subject ? data.subject : 'Sports.info' });
+          this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Sports.info' });
+          this.meta.updateTag({ property: 'og:title', content: data['og:title'] ? data['og:title'] : 'Sports.info' });
+          this.meta.updateTag({ property: 'og:type', content: data['og:type'] ? data['og:type'] : 'Sports.info' });
+          this.meta.updateTag({ property: 'og:description', content: data['og:description'] ? data['og:description'] : 'Sports.info' });
+          this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
+        }
+        else {
+          this.meta.updateTag({ name: 'title', content: 'Sports.info' });
+          this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+          this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
+          this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
+          this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
+          this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
+          this.meta.updateTag({ property: 'og:type', content: 'article' });
+          this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+          this.meta.updateTag({ property: 'twitter:card', content: 'Sports.info' });
+        }
         //set page title 
         let title = this.commonservice.getPagetitlebyurl(routerURL);
         if (title != null) {
@@ -67,7 +90,6 @@ export class AppComponent implements OnInit {
       // console.log('user',user);
       this.socialUser = user
     });
-
   }
 
   signInWithFB(): void {
