@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SportsService } from '../../../providers/sports-service';
+import { CricketService } from '@app/providers/cricket-service';
 @Component({
   selector: 'app-pointstable-widget',
   templateUrl: './pointstable-widget.component.html',
@@ -8,7 +9,7 @@ import { SportsService } from '../../../providers/sports-service';
 export class PointstableWidgetComponent implements OnInit {
   @Input() tournamentId: any;
   pointstable: any;
-  constructor(private sportsService: SportsService) { }
+  constructor(private sportsService: SportsService,private cricketService:CricketService) { }
 
   ngOnInit() {
     if (this.tournamentId) {
@@ -23,6 +24,7 @@ export class PointstableWidgetComponent implements OnInit {
       if (res['data']) {
         res['data'].map((data) => {
           this.pointstable = data.team_standings
+          console.log(this.pointstable);
         })
       }
     })
