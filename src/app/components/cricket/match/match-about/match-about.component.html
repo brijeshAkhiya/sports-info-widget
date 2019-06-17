@@ -21,16 +21,18 @@
     <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
       <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
     </p>
-    <p *ngIf="data.sport_event_status.status == 'live' && toss.toss_won_by_team" class="live-match">Live
+    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 1 && toss.toss_won_by_team " class="live-match">Live
       <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
         {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+    </p>
+    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2" class="live-match">Live | {{data.sport_event_status.equation}}
     </p>
   </div>
 
   <div class="current-match d-flex">
 
     <!--If match not started-->
-    <div class="current-teams" *ngIf="competitor">
+    <div class="current-teams" *ngIf="competitor && competitor.home">
       <ng-container
         *ngIf="competitor.away.period_scores && competitor.away.period_scores[0].number == 1; else home_first">
         <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.away, data:data}">
@@ -65,7 +67,7 @@
     </div>
 
 
-    <div class="match-win-player d-flex" *ngIf="data.statistics && data.statistics.man_of_the_match">
+    <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status != 'live'  && data.statistics && data.statistics.man_of_the_match">
       <div class="player-pic">
         <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']"
           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
@@ -80,6 +82,16 @@
         <!-- <p class="player-team">West Indies</p> -->
       </div>
     </div>
+
+    <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
+      <div class="player-info">
+        <p *ngIf="data.sport_event_status.run_rate">CRR : <span> {{data.sport_event_status.run_rate}}</span></p>
+        <p *ngIf="data.sport_event_status.run_rate_required">RR : <span> {{data.sport_event_status.run_rate_required}}</span></p> 
+        <p *ngIf="toss.toss_won_by_team">{{toss.toss_won_by_team}} opt to
+          {{toss.toss_decision ? toss.toss_decision : 'bat'}}</p>       
+      </div>
+    </div>
+
   </div>
 
 </div>
