@@ -60,10 +60,11 @@ export class MatchHomeComponent implements OnInit {
   tossdecision: any = {};
   batsmanList;
   testcheck: any;
-  dummyAPICall = 1090;
+  dummyAPICall = 4910;
   fallofWickets = [];
   playerList = {};
   scorecardinnings: any;
+  matchInnings = [];
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -90,6 +91,12 @@ export class MatchHomeComponent implements OnInit {
 
   ngOnInit() { }
 
+  checkYetBat(players){
+    let check = players.filter((player) => player.statistics.length == 0)
+    if(check.length > 0)
+      return true;
+    return false;
+  }
   /** Get Match Data */
   getMatchData() {
     // this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
@@ -97,12 +104,13 @@ export class MatchHomeComponent implements OnInit {
     // })
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
-         //res = res.result;
+        //res = res.result;
         this.isshow = true;
         if (res.data) {
           console.log(res.data);
           this.isshow = false;
           this.matchdata = res.data;
+          this.matchInnings = (res.data.statistics) ? res.data.statistics.innings : [];
           //this.getScorecards(this.matchdata.statistics.innings)
           this.data = res.data;
           this.getTeams();
@@ -117,20 +125,6 @@ export class MatchHomeComponent implements OnInit {
           if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted" || this.matchdata.sport_event_status.status == "delayed") {
             this.getLiveUpdate(this);
           }
-          // else if (
-          //   this.matchdata.sport_event_status.status == "closed" ||
-          //   this.matchdata.sport_event_status.status == "ended"
-          // ) {
-          //   this.getCommentries();
-          //   this.getFallWickets();
-          //   this.getScores();
-          // } else if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted") {
-          //   this.getLiveUpdate(this);
-          //   this.getCommentries();
-          //   this.getFallWickets();
-          //   this.getTossDecision();
-          //   this.getScores();
-          // }
         }
       },
       error => {
@@ -143,16 +137,16 @@ export class MatchHomeComponent implements OnInit {
   }
 
   //get scorecards 
-  getScorecards(matchdata){
+  getScorecards(matchdata) {
     this.scorecardinnings = matchdata
-    console.log('scoreinnigs::::',this.scorecardinnings);
+    console.log('scoreinnigs::::', this.scorecardinnings);
     this.scorecardinnings.forEach(element => {
-      
+
     });
-    
+
   }
 
-  
+
   /** GET TEAMS */
   getTeams() {
     if (this.matchdata.sport_event.competitors) {
@@ -171,24 +165,29 @@ export class MatchHomeComponent implements OnInit {
   /** Get Fall of Wickets */
   getFallWickets() {
     if (this.matchdata.timeline) {
-      this.matchdata.timeline.map(data => {
-        if (data.type == "wicket") {
+      let arrWickets = this.matchdata.timeline.filter((timeline) => timeline.type == "wicket")
+      console.log(arrWickets);
+      if (arrWickets.length > 0) {
+        arrWickets.reverse().map(data => {
           console.log(this.fallofWickets);
           if (!this.fallofWickets[data.inning])
             this.fallofWickets[data.inning] = [];
-          
+
           let find = this.fallofWickets[data.inning].filter((wicket) => wicket.playerid == data.dismissal_params.player.id)
           console.log(find)
-          if(find.length == 0){
-            this.fallofWickets[data.inning].unshift({
+          if (find.length == 0) {
+            this.fallofWickets[data.inning].push({
               playerid: data.dismissal_params.player.id,
               playername: data.dismissal_params.player.name,
               displayover: data.display_overs,
               displayscore: data.display_score
             });
           }
-        }
-      });
+        });
+
+      }
+
+
     }
     console.log("this.fallofWickets", this.fallofWickets);
   }
@@ -202,7 +201,7 @@ export class MatchHomeComponent implements OnInit {
           this.isshow = false;
           this.data = res["data"];
           this.matchdata = res["data"];
-          console.log("data::::",res["data"]);
+          console.log("data::::", res["data"]);
           this.matchstatus = res["data"]["sport_event_status"].status;
           this.sportevent = res["data"]["sport_event"];
           this.venuedetails = res["data"]["sport_event"]["venue"];
@@ -251,8 +250,8 @@ export class MatchHomeComponent implements OnInit {
                 this.playerList[single.id] = single
               }
             });
-            console.log('playerslistt::',this.playerList);
-            
+            console.log('playerslistt::', this.playerList);
+
           }
           else {
             this.getPlayersname();
@@ -270,36 +269,36 @@ export class MatchHomeComponent implements OnInit {
   //getPlayersname if lineup data api doesn't provide players data
   getPlayersname() {
     this.sportsService.getmatchtimeline(this.matchid).subscribe(res => {
-      if(res["data"]["statistics"] && res["data"]["statistics"]["innings"]){
-      this.scorecards = res["data"]["statistics"]["innings"];
-      let objBatting = {};
-      let objBowling = {};
-      //old logic for get players name
-      this.scorecards.map((data, key) => {
-        data["teams"][0]["statistics"]["batting"]["players"].map(
-          single => {
-            if (!objBatting[single.id]) {
-              objBatting[single.id] = [];
-              objBatting[single.id].push(single);
+      if (res["data"]["statistics"] && res["data"]["statistics"]["innings"]) {
+        this.scorecards = res["data"]["statistics"]["innings"];
+        let objBatting = {};
+        let objBowling = {};
+        //old logic for get players name
+        this.scorecards.map((data, key) => {
+          data["teams"][0]["statistics"]["batting"]["players"].map(
+            single => {
+              if (!objBatting[single.id]) {
+                objBatting[single.id] = [];
+                objBatting[single.id].push(single);
+              }
             }
-          }
-        );
-        data["teams"][1]["statistics"]["bowling"]["players"].map(
-          single => {
-            if (!objBowling[single.id]) {
-              objBowling[single.id] = [];
-              objBowling[single.id].push(single);
+          );
+          data["teams"][1]["statistics"]["bowling"]["players"].map(
+            single => {
+              if (!objBowling[single.id]) {
+                objBowling[single.id] = [];
+                objBowling[single.id].push(single);
+              }
             }
-          }
-        );
-      });
-      // players name object
-      this.playerList = {
-        ...objBowling,
-        ...objBatting
-      };
-      console.log("playerList:::", this.playerList);
-    }
+          );
+        });
+        // players name object
+        this.playerList = {
+          ...objBowling,
+          ...objBatting
+        };
+        console.log("playerList:::", this.playerList);
+      }
     });
   }
 
@@ -379,7 +378,7 @@ export class MatchHomeComponent implements OnInit {
   }
 
   //get match detail
-  matchDetail(id,team1,team2) {
+  matchDetail(id, team1, team2) {
     let teams = team1.concat("-", team2);
     this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
@@ -402,7 +401,7 @@ export class MatchHomeComponent implements OnInit {
       if (typeof this.data.sport_event_status.toss_decision != "undefined")
         this.tossdecision.toss_decision = this.data.sport_event_status.toss_decision;
 
-      console.log("toss decision",this.tossdecision);
+      console.log("toss decision", this.tossdecision);
     }
   }
 
@@ -461,10 +460,10 @@ export class MatchHomeComponent implements OnInit {
       this.showCommetry = false;
       return false;
     }
-    let timelineWithCommentry = this.data.timeline.filter((commentry)=>{ return commentry.commentaries});
+    let timelineWithCommentry = this.data.timeline.filter((commentry) => { return commentry.commentaries });
 
-    console.log(this.data.timeline.length > 0 ,this.data.sport_event_status.current_inning == 1, this.data.sport_event_status.display_overs == 0)
-    if(this.data.timeline.length > 0 && this.data.sport_event_status.current_inning == 1 &&  this.data.sport_event_status.display_overs == 0){  
+    console.log(this.data.timeline.length > 0, this.data.sport_event_status.current_inning == 1, this.data.sport_event_status.display_overs == 0)
+    if (this.data.timeline.length > 0 && this.data.sport_event_status.current_inning == 1 && this.data.sport_event_status.display_overs == 0) {
       this.inningWiseCommentry[0] = { commentry: [], inning: 1 };
       let temp = [];
       temp.unshift(this.data.timeline);
@@ -472,7 +471,7 @@ export class MatchHomeComponent implements OnInit {
       console.log(this.inningWiseCommentry);
       return false;
     }
-    
+
 
 
     // loop of innings from statistics
@@ -538,7 +537,7 @@ export class MatchHomeComponent implements OnInit {
               lastIndex
             );
           else overCommentry = currentInningCommentry.slice(firstIndex);
-        }else
+        } else
           overCommentry = currentInningCommentry.slice(firstIndex);
         // // get first index of this innings over
         // let firstOverIndex = currentInningCommentry.findIndex(
@@ -639,29 +638,29 @@ export class MatchHomeComponent implements OnInit {
   /** Get Live Commentries inning wise*/
   getUpdate() {
     this.getTossDecision();
-    
-    let timelineWithCommentry = this.data.timeline.filter((commentry)=>{ return commentry.commentaries});
+
+    let timelineWithCommentry = this.data.timeline.filter((commentry) => { return commentry.commentaries });
 
     timelineWithCommentry.forEach((timeline, index) => {
 
       if (timeline.type == 'wicket')
         this.getFallWickets();
-        // console.log(timeline);
-        // console.log(index);
+      // console.log(timeline);
+      // console.log(index);
 
-        // When inning is not yet started
-        // console.log(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined');
+      // When inning is not yet started
+      // console.log(typeof this.data.statistics == 'undefined' || typeof this.data.statistics.innings == 'undefined');
 
-        if (
-          typeof this.data.statistics == "undefined" ||
-          typeof this.data.statistics.innings == "undefined"
-        ) {
-          if (typeof this.inningWiseCommentry[0] == "undefined")
-            this.inningWiseCommentry[0] = { commentry: [] };
+      if (
+        typeof this.data.statistics == "undefined" ||
+        typeof this.data.statistics.innings == "undefined"
+      ) {
+        if (typeof this.inningWiseCommentry[0] == "undefined")
+          this.inningWiseCommentry[0] = { commentry: [] };
 
-          this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);
-          return false;
-        }
+        this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);
+        return false;
+      }
 
       // Get Innings data of current inning
       let currentInning = this.data.statistics.innings.filter(
@@ -898,7 +897,7 @@ export class MatchHomeComponent implements OnInit {
       }
       console.log("batsmanList", this.batsmanList);
       /** Remove dismissal */
-      if(timeline.dismissal_params)
+      if (timeline.dismissal_params)
         this.batsmanList = this.batsmanList.filter((player) => player.id != timeline.dismissal_params.player.id)
 
       let prev_baller;
@@ -918,7 +917,7 @@ export class MatchHomeComponent implements OnInit {
         );
         this.ballerList[1].statistics = stats[0].statistics;
       }
-      else if (typeof prev_baller != 'undefined' && ( prev_baller.id != this.ballerList[0].id))
+      else if (typeof prev_baller != 'undefined' && (prev_baller.id != this.ballerList[0].id))
         this.ballerList[1] = prev_baller;
       // else
       //   this.ballerList.splice(1, 1);
@@ -934,10 +933,20 @@ export class MatchHomeComponent implements OnInit {
       this.dummyAPICall++;
       classThis.sportsService
       .getmatchtimelineDetla(classThis.data.sport_event.id)
-      .subscribe(res => {
+        .subscribe(res => {
           // res = res.result; // TEMP
           this.data = res.data;
           this.matchdata = res.data;
+
+          /** Update Scorecard */
+          let inningIndex = this.matchInnings.findIndex((innings) => innings.number == this.data.sport_event_status.current_inning);
+          let inning = this.matchdata.statistics.innings.filter((innings) => innings.number == this.data.sport_event_status.current_inning);
+          if (inningIndex > -1 && inning.length > 0) {
+            this.matchInnings[inningIndex].teams = inning[0].teams;
+          }
+          else {
+            this.matchInnings.push(inning[0]);
+          }
 
           this.getTossDecision();
 
@@ -994,7 +1003,7 @@ export class MatchHomeComponent implements OnInit {
     clearTimeout(this.timeout);
   }
 
-  checkNotBat() {  }
+  checkNotBat() { }
 
   typeOf(value) {
     return typeof value;
