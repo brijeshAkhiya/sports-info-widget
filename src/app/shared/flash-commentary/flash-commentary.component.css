@@ -45,6 +45,17 @@ h5                                          { margin-bottom: 8px; font-family: '
 .flash-comm-block .flash-comm-list button.selected,
 .flash-comm-block .flash-comm-list button:hover   { background: #ED1A33; color: #fff; border-color: #ED1A33; }
 
+
+.flash-match-list         						{ margin: 0px; display: none; position: absolute; bottom: 100%; }
+.flash-match-list.active 						{ display: block;}
+.flash-match-list li button 	 				{ margin-bottom: 10px; opacity: 0.65; background-image: none; }
+.flash-match-list li button:hover  				{ background-image: url(../../../assets/images/tick-icon.svg); }
+.flash-match-list li button span  				{ display: block; }
+.flash-match-list li button:hover span  		{ display: none; }
+.flash-match-list li button.active 				{ opacity: 1; background-image: none; }
+.flash-match-list li button.active:hover       	{ background-image: url(../../../assets/images/close-icon.svg);}
+
+
 /***** Responsive CSS Start ******/
 
 @media (max-width: 767px) {

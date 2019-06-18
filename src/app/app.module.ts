@@ -26,6 +26,7 @@ import { CarouselModule } from "ngx-owl-carousel-o";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdsenseModule } from 'ng2-adsense';
 
 //store configuration modules import
 import { StoreModule } from "@ngrx/store";
@@ -58,6 +59,7 @@ import { AdvertiseWithUsComponent } from "./pages/advertise-with-us/advertise-wi
 import { MainHeaderComponent } from "./shared/main-header/main-header.component";
 import { MainFooterComponent } from "./shared/main-footer/main-footer.component";
 import { WriterProfileComponent } from "./components/writer/writer-profile/writer-profile.component";
+
 
 //socket config
 const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
@@ -97,6 +99,10 @@ export function provideConfig() {
   ],
   imports: [
     BrowserModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-6381087658260439',
+      adSlot: 7259870550,
+    }),
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     AppRoutingModule,

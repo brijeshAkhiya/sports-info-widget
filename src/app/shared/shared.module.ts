@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Extrernal Modules */
 import { NgxTinySliderModule } from 'ngx-tiny-slider';
-import { SocketIoModule} from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MomentModule } from 'ngx-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -18,7 +18,8 @@ import { ResizeImagePipe } from './pipes/resize-image.pipe';
 import { SplitPipe } from './pipes/stringsplitpipe';
 import { StripHtmlPipe } from './pipes/striphtmlpipe';
 import { LogosUrlPipe } from './pipes/logosurlpipe';
-import { PlayerImagePipe } from '@app/shared/pipes/playerimageurl.pipe';
+import { PlayerImagePipe } from './pipes/playerimageurl.pipe';
+import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
@@ -82,6 +83,7 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         ResizeImagePipe,
         SplitPipe,
         LogosUrlPipe,
+        FlashteamPipe,
 
         /** All Providers*/
         SportsService,
@@ -94,25 +96,22 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
 
         /** All Pipes */
         TruncatePipe,
-        LogosUrlPipe,
-        PlayerImagePipe, 
-        ResizeImagePipe,
+        PlayerImagePipe,
+        FlashteamPipe,
         StripHtmlPipe,
         SplitPipe,
-        
-        /** All Componenets */
-        CommonNewsListComponent,
+
         CommonStoryWidgetComponent,
+        CommonNewsListComponent,
         PointstableWidgetComponent,
-        CommonBlogCardComponent, 
+        CommonBlogCardComponent,
         CommonRelatedBlogCardComponent,
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,
         DataLoaderWidgetComponent,
-        FlashCommentaryComponent, 
+        FlashCommentaryComponent,
         ContentComponent,
-        BlogComponent
-    ]
-
+        BlogComponent,
+    ],
 })
 export class SharedModule { }

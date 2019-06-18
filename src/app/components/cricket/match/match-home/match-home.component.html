@@ -23,7 +23,7 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - SCORECARDS-->
-          <ngb-tab *ngIf="matchInnings.length > 0">
+          <ngb-tab *ngIf="matchInnings?.length > 0">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs scorecard-tab"
