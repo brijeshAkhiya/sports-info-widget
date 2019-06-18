@@ -6,13 +6,13 @@
     <li *ngFor="let item of livematches">
       <button class="flash-comm-btn" [ngClass]="{active: item.isActive}" (click)="reqLeaveRoom(item.id,item.isActive)"
         [ngStyle]="{'background-color':item.color}">
-        <span [ngStyle]="{'border-color': ''}">{{item.competitors | flashteam:0}}</span>
+        <span [ngStyle]="{'border-color': item.shadow}">{{item.competitors | flashteam:0}}</span>
         <span>{{item.competitors | flashteam:1}}</span>
       </button>
     </li>
   </ul>
   <div class="flash-run" [ngClass]="{'active': isnewflashvalue}"
-    [ngStyle]="{'color':flashscorecolor,'-webkit-text-stroke-color':'red'}">{{flashvalue}}</div>
+    [ngStyle]="{'color':flashscorecolor,'-webkit-text-stroke-color':flashstockcolor}">{{flashvalue}}</div>
   <!-- <div class="flash-run active" style="color: blue;">WD</div> -->
 </div>
 <!-- [ngClass]="{'flash-comm-show': isapply}" -->

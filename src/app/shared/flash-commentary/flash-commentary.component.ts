@@ -18,6 +18,7 @@ export class FlashCommentaryComponent implements OnInit {
   isnewflashvalue: boolean;
   newscoreObj = [];
   flashscorecolor: any;
+  flashstockcolor: any;
   constructor(private io: SportsService) { }
 
   ngOnInit() {
@@ -109,14 +110,20 @@ export class FlashCommentaryComponent implements OnInit {
         console.log('newcomme:', data);
         observer.next(data);
         if (this.flashvalue) {
+          console.log('1');
           this.isnewflashvalue = false;
+          this.flashstockcolor = this.newscoreObj[data.id].shadow
           this.flashscorecolor = this.newscoreObj[data.id].color
+          this.flashvalue = ''
           this.flashvalue = data.data.data;
           setTimeout(() => {
             this.isnewflashvalue = true;
           }, 100);
         } else {
+          console.log('2');
+
           this.isnewflashvalue = true;
+          this.flashstockcolor = this.newscoreObj[data.id].shadow
           this.flashscorecolor = this.newscoreObj[data.id].color
           this.flashvalue = data.data.data;
         }
