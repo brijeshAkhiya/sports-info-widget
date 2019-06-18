@@ -62,7 +62,6 @@ export class FlashCommentaryComponent implements OnInit {
               return singlematch
             }
           })
-          console.log('afterleave:', this.livematches);
         }
       });
     }
@@ -80,7 +79,6 @@ export class FlashCommentaryComponent implements OnInit {
               return singlematch
             }
           })
-          console.log('afterjoin:', this.livematches);
         }
       });
     }

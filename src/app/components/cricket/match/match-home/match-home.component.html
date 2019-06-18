@@ -23,13 +23,13 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - SCORECARDS-->
-          <ngb-tab *ngIf="matchdata.statistics">
+          <ngb-tab *ngIf="matchInnings?.length > 0">
             <ng-template ngbTabTitle>Scorecard</ng-template>
             <ng-template ngbTabContent>
-              <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="matchdata.statistics.innings"
+              <ngb-tabset class="filled-tabs scorecard-tab"
                 [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
-                <ngb-tab *ngFor="let item of matchdata.statistics.innings,let i = index">
-                  <ng-template ngbTabTitle *ngIf="matchdata.statistics.innings">
+                <ngb-tab *ngFor="let item of matchInnings,let i = index">
+                  <ng-template ngbTabTitle>
                     <span>{{teamObj[item.batting_team].name}}
                       <span class="test-inng">
                         {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
@@ -50,15 +50,29 @@
                               <th>SR</th>
                             </tr>
                           </thead>
-                          <tbody *ngIf="matchdata.statistics.innings">
+                          <tbody>
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <ng-container
                                 *ngIf="typeOf(batting.statistics.length) !== 'number'">
                                 <td>
                                   <a (click)="cricketService.playerview(batting.id,batting.name)"
-                                    [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">{{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}</a>
+                                    [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">
+                                    {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}
+                                  </a>
                                   <p class="batsman-text">
-                                    {{ (matchdata.sport_event_status.status == 'live' && !batting?.statistics.dismissal && batting.statistics.length != 0) ?  'batting' : ''}}
+                                    {{
+                                      (!batting?.statistics.dismissal && batting.statistics.length != 0) 
+                                      ? 
+                                        (matchdata.sport_event_status.status == 'closed' || matchdata.sport_event_status.status == 'ended') 
+                                        ? "not out"
+                                        : (matchdata.sport_event_status.current_inning == item?.number) ? "batting" : "not out"
+                                      :
+                                      "" 
+                                    }}
+
+
+                                    <!-- {{ (matchdata.sport_event_status.status == 'live' && !batting?.statistics.dismissal && batting.statistics.length != 0) ?  'batting' : ''}}
+                                    {{ (matchdata.sport_event_status.status == 'ended' || matchdata.sport_event_status.status == 'closed' ) && !batting?.statistics.dismissal && batting.statistics.length != 0) ?  'not out' : ''}} -->
                                     {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}
                                     {{batting?.statistics?.dismissal?.type == 'stumped' ? 'st' : ''}}
                                     <!--if batsman is leg before type out-->
@@ -122,7 +136,7 @@
                               </td>
                               <td colspan="4"></td>
                             </tr>
-                            <tr>
+                            <tr *ngIf="checkYetBat(item?.teams[0]?.statistics?.batting?.players)">
                               <td colspan="6">
                                 <b> {{matchdata.sport_event_status.status == 'live' ? 'Yet' : 'Did'}}
                                   {{matchdata.sport_event_status.status == 'live' ? 'to' : 'not'}} bat : </b>
@@ -157,7 +171,9 @@
                       </ul>
                     </div>
                     <!--Fall of wickets section ends-->
-                    <div class="common-table bowler-table tour-stats-table common-shadow rounded-box">
+
+
+                    <div class="common-table bowler-table tour-stats-table common-shadow rounded-box" *ngIf="item?.teams[1]?.statistics?.bowling?.players.length > 0">
                       <div class="table-responsive">
                         <table class="table">
                           <thead>

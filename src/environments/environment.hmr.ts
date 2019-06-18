@@ -7,7 +7,7 @@ export const environment = {
         baseUrl: 'https://dev.backend.sports.info',
         config: {}
     },
-    s3Url: 'https://d1ldsx0apuyt84.cloudfront.net/',
-    siteUrl: 'http://dev.sports.info',
-    mapsKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
-};
+    s3Url : 'https://d1ldsx0apuyt84.cloudfront.net/',
+    siteUrl : 'https://sports.info/',
+    mapsKey : 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
+  };
