@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { SportsService } from "../../providers/sports-service";
+import { SportsService } from "@providers/sports-service";
 import { Observable } from "rxjs";
 
 @Component({

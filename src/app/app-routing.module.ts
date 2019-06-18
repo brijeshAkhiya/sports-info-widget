@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { CmsContentComponent } from './pages/cms-content/cms-content.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AdvertiseWithUsComponent } from './pages/advertise-with-us/advertise-with-us.component';
+
 import { WriterProfileComponent } from './components/writer/writer-profile/writer-profile.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
-import { AboutComponent } from './components/static-pages/about/about.component';
-import { ContactComponent } from './components/static-pages/contact/contact.component';
-import { AdvertiseWithUsComponent } from './components/static-pages/advertise-with-us/advertise-with-us.component';
-import { CmsContentComponent } from './components/static-pages/cms-content/cms-content.component';
 
 const routes: Routes = [
 
@@ -28,7 +30,6 @@ const routes: Routes = [
     {
         path: 'writer/:id',
         component:WriterProfileComponent
-
     },
     {
         path: 'coming-soon/:sport',

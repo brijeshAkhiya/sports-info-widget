@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { environment } from "@env";
 import { Store } from "@ngrx/store";
-import * as fromRoot from "../app-reducer";
-import * as MetaTags from "../store/meta-tags-management/meta-tags.actions";
+import * as fromRoot from "../../app-reducer";
+import * as MetaTags from "../../store/meta-tags-management/meta-tags.actions";
 
 import { Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ export class CommonService {
 
   public largeblogPlaceholder = '/assets/images/placeholder_blog_large.svg'
   public smallblogPlaceholder = '/assets/images/placeholder_blog_small.svg'
+  public writerPlaceholder = '/assets/images/placeholder-sqad.svg'
   public lazyloadoffset = "1000";
   public s3Url
   public siteUrl
@@ -32,6 +33,11 @@ export class CommonService {
   blogview(id, type, title) {
     let slugname = this.slugifyPipe.transform(title);
     this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
+  }
+
+  //writer view 
+  writerview(id){
+    this.router.navigate(['/writer',btoa(id)])
   }
 
   /** Get Milli seconds from Hr, min and seconds */

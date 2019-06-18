@@ -20,7 +20,8 @@ import * as Auth from "../../store/auth/auth.actions";
 import * as Ads from "../../store/ads-management/ads.actions";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SlugifyPipe } from "@pipes/slugpipe";
-import { SportsService } from "../../providers/sports-service";
+
+import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
 import { CricketService } from "@providers/cricket-service";
 

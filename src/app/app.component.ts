@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from "@angular/router";
 import { Location } from "@angular/common";
+import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store'
+import { Meta, Title } from '@angular/platform-browser';
+
 import { filter } from 'rxjs/operators'
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from "angularx-social-login";
-import { CommonService } from "@providers/common-service";
-import { environment } from "../environments/environment";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-import { Store } from '@ngrx/store'
-import { SportsService } from "@providers/sports-service";
 import * as MetaTags from "./store/meta-tags-management/meta-tags.actions";
 import * as fromRoot from './app-reducer'
 import * as Auth from './store/auth/auth.actions';
-import { Meta, Title } from '@angular/platform-browser';
+import { environment } from "@env";
+
+/** Providers */
+import { CommonService } from "@providers/common-service";
+import { SportsService } from "@providers/sports-service";
+
 //vibrant import 
 // declare var Vibrant: any;
 // import '../assets/js/vibrant.js';

@@ -48,15 +48,16 @@ import { StripHtmlPipe } from "./shared/pipes/striphtmlpipe";
 
 /** All Components */
 import { AppComponent } from "./app.component";
+import { ComingSoonComponent } from "./pages/coming-soon/coming-soon.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
+import { CmsContentComponent } from './pages/cms-content/cms-content.component';
+import { AboutComponent } from "./pages/about/about.component";
+import { ContactComponent } from "./pages/contact/contact.component";
+import { AdvertiseWithUsComponent } from "./pages/advertise-with-us/advertise-with-us.component";
+
 import { MainHeaderComponent } from "./shared/main-header/main-header.component";
 import { MainFooterComponent } from "./shared/main-footer/main-footer.component";
 import { WriterProfileComponent } from "./components/writer/writer-profile/writer-profile.component";
-import { ComingSoonComponent } from "./components/coming-soon/coming-soon.component";
-import { AboutComponent } from "./components/static-pages/about/about.component";
-import { ContactComponent } from "./components/static-pages/contact/contact.component";
-import { AdvertiseWithUsComponent } from "./components/static-pages/advertise-with-us/advertise-with-us.component";
-import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { CmsContentComponent } from './components/static-pages/cms-content/cms-content.component';
 
 //socket config
 const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
@@ -82,16 +83,17 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    MainHeaderComponent,
-    MainFooterComponent,
-    SlugifyPipe,
-    WriterProfileComponent,
     ComingSoonComponent,
+    PageNotFoundComponent,
+    CmsContentComponent,
     AboutComponent,
     ContactComponent,
     AdvertiseWithUsComponent,
-    CmsContentComponent,
-    PageNotFoundComponent
+    
+    MainHeaderComponent,
+    MainFooterComponent,
+    SlugifyPipe,      
+    WriterProfileComponent,
   ],
   imports: [
     BrowserModule,

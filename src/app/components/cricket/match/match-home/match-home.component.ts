@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { SportsService } from "../../../../providers/sports-service";
+import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 import * as moment from "moment";

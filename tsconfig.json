@@ -20,7 +20,7 @@
     "baseUrl": "src",
     "paths": {
       "@app/*": ["app/*"],
-      "@providers/*": ["app/providers/*"],
+      "@providers/*": ["app/shared/providers/*"],
       "@assets/*": ["app/assets/*"],
       "@pipes/*": ["app/shared/pipes/*"],
       "@env": ["environments/environment"],

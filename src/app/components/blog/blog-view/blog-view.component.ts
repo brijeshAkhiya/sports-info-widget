@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy } from "@angular/core";
-import { SportsService } from "../../../providers/sports-service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from '@pipes/slugpipe';
 import { SplitPipe } from '@pipes/stringsplitpipe';
+
+import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 
 @Component({

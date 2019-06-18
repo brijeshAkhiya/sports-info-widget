@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from "@angular/core";
-import { SportsService } from "../../providers/sports-service";
-import { SocketService } from '../../providers/socket.service';
+import { SportsService } from "@providers/sports-service";
+import { SocketService } from '@providers/socket.service';
 import { Socket } from "ngx-socket-io";
 
 

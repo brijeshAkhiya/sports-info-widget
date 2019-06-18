@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { SportsService } from "../../providers/sports-service";
+import { SportsService } from "@providers/sports-service";
 declare var document: any;
 declare var window: any;
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SportsService } from '../../../providers/sports-service';
-import { CricketService } from '@app/providers/cricket-service';
+import { SportsService } from '@providers/sports-service';
+import { CricketService } from '@providers/cricket-service';
 @Component({
   selector: 'app-pointstable-widget',
   templateUrl: './pointstable-widget.component.html',
