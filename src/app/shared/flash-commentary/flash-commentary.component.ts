@@ -16,33 +16,15 @@ export class FlashCommentaryComponent implements OnInit {
   isshow: boolean;
   flashvalue: any;
   isnewflashvalue: boolean;
+  newscoreObj = [];
+  flashscorecolor: any;
   constructor(private io: SportsService) { }
 
   ngOnInit() {
     this.socket = this.io.connect();
     this.socket.on("connect", res => {
       this.reqFetchRooms();
-      //if match is already selected/subscribed for flash commentary
-      setTimeout(() => {
-        if (localStorage.getItem('Matchid') && localStorage.getItem('matchteams')) {
-          if (this.livematches && this.livematches.length > 0) {
-            let ismatchexist = this.livematches.some(data => data.id == localStorage.getItem('Matchid'))
-            if (ismatchexist) {
-              this.onReJoinRoom(localStorage.getItem('Matchid'), JSON.parse(localStorage.getItem('matchteams')));
-            }
-            else {
-              localStorage.removeItem('Matchid');
-              localStorage.removeItem('matchteams');
-            }
-          }
-          else {
-            localStorage.removeItem('Matchid');
-            localStorage.removeItem('matchteams');
-          }
-        }
-      },
-        1000
-      );
+      this.onNewScore();
     });
     this.onNewScore().subscribe(res => { });
     this.onNewCommentary().subscribe(res => { });
@@ -52,52 +34,60 @@ export class FlashCommentaryComponent implements OnInit {
   reqFetchRooms() {
     this.socket.emit("reqFetchRooms", {}, (error, res) => {
       if (res) {
-        console.log("fetchrooms::", res);
-        this.livematches = res;
+        console.log('rooms:', res);
+        this.livematches = res.map(singleMatch => {
+          this.newscoreObj[singleMatch.id] = singleMatch
+          return {
+            ...singleMatch,
+            isActive: true
+          }
+        });
       }
     });
   }
 
-  //request join room/match
-
-  reqJoinRoom(matchid, teams) {
-    if (this.currentmatchid && matchid != this.currentmatchid) {
-      this.socket.emit("reqLeaveRoom", this.currentmatchid, (error, res) => {
+  //Match is active/disable handled by this function
+  reqLeaveRoom(matchid, isactive) {
+    if (isactive == true) {
+      this.socket.emit("reqLeaveRoom", matchid, (error, res) => {
         if (res) {
-          this.currentmatchid = ""
-          this.isshow = false;
-          this.isapply = true;
-          localStorage.removeItem('Matchid')
+          console.log(res);
+          this.livematches = this.livematches.map((singlematch) => {
+            if (singlematch.id == matchid) {
+              return {
+                ...singlematch,
+                isActive: false
+              }
+            } else {
+              return singlematch
+            }
+          })
+          console.log('afterleave:', this.livematches);
         }
       });
     }
-    if (this.currentmatchid == matchid) {
-      this.socket.emit("reqLeaveRoom", this.currentmatchid, (error, res) => {
-        if (res) {
-          this.currentmatchid = ""
-          this.isshow = false;
-          this.isapply = false;
-          localStorage.removeItem('Matchid')
-        }
-      });
-    }
-    else {
-      this.currentmatchid = matchid;
-      this.teamsname = teams.split("vs");
+    else if (isactive == false) {
       this.socket.emit("reqJoinRoom", matchid, (error, res) => {
         if (res) {
-          localStorage.setItem('Matchid', this.currentmatchid);
-          localStorage.setItem('matchteams', JSON.stringify(this.teamsname))
-          this.isshow = true;
-          this.isapply = false;
-          this.onNewScore();
+          console.log(res);
+          this.livematches = this.livematches.map((singlematch) => {
+            if (singlematch.id == matchid) {
+              return {
+                ...singlematch,
+                isActive: true
+              }
+            } else {
+              return singlematch
+            }
+          })
+          console.log('afterjoin:', this.livematches);
         }
       });
     }
+
   }
 
-
-  //request re-connect room/match from localstorage
+  //request re-connect room/match from localstorage - old logic
   onReJoinRoom(matchid, teams) {
     this.teamsname = teams;
     this.currentmatchid = matchid
@@ -118,16 +108,19 @@ export class FlashCommentaryComponent implements OnInit {
   public onNewScore(): Observable<any> {
     return new Observable<any>(observer => {
       this.socket.on("echoEvent", (data: any) => {
+        console.log('newcomme:', data);
         observer.next(data);
         if (this.flashvalue) {
           this.isnewflashvalue = false;
-          this.flashvalue = data.data;
+          this.flashscorecolor = this.newscoreObj[data.id].color
+          this.flashvalue = data.data.data;
           setTimeout(() => {
             this.isnewflashvalue = true;
           }, 100);
         } else {
           this.isnewflashvalue = true;
-          this.flashvalue = data.data;
+          this.flashscorecolor = this.newscoreObj[data.id].color
+          this.flashvalue = data.data.data;
         }
       });
     });
@@ -140,8 +133,21 @@ export class FlashCommentaryComponent implements OnInit {
       this.socket.on("newCommentry", (data: any) => {
         observer.next(data);
         this.livematches = []
-        this.livematches = data
+        this.livematches = data.map((singlematch) => {
+          this.newscoreObj[singlematch.id] = singlematch
+          return {
+            ...singlematch,
+            isActive: true
+          }
+        })
       });
     });
   }
 }
+
+
+
+
+
+
+

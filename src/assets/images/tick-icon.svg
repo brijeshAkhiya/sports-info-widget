@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>tick</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="48" height="48"></rect>
+    </defs>
+    <g id="tick" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Rectangle" fill="#EBEBEB" opacity="0" xlink:href="#path-1"></use>
+            <polyline id="Path-Copy" stroke="#FFFFFF" stroke-width="6" mask="url(#mask-2)" transform="translate(23.929443, 18.280925) rotate(-315.000000) translate(-23.929443, -18.280925) " points="29.8588851 3 29.8588851 33.5618492 18 33.5618492"></polyline>
+        </g>
+    </g>
+</svg>

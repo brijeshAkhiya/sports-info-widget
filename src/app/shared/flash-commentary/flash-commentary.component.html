@@ -1,12 +1,22 @@
 <div class="flash-comm-btn-box">
-  <button class="flash-comm-btn" [ngClass]="{'active': isshow}" (click)="isapply = !isapply">
-    <span *ngIf="teamsname">{{teamsname[0]}}</span>
-    <span *ngIf="teamsname">{{teamsname[1]}}</span>
+  <button class="flash-comm-btn" [ngClass]="{'active': isshow}" (click)="isapply = !isapply"
+    *ngIf="livematches && livematches?.length > 0">
   </button>
-  <div class="flash-run" [ngClass]="{'active': isnewflashvalue}">{{flashvalue}}</div>
-  <!-- <div class="flash-run active">WD</div> -->
+  <ul class="flash-match-list" [ngClass]="{'active': isapply}">
+    <li *ngFor="let item of livematches">
+      <button class="flash-comm-btn" [ngClass]="{active: item.isActive}" (click)="reqLeaveRoom(item.id,item.isActive)"
+        [ngStyle]="{'background-color':item.color}">
+        <span [ngStyle]="{'border-color': ''}">{{item.competitors | flashteam:0}}</span>
+        <span>{{item.competitors | flashteam:1}}</span>
+      </button>
+    </li>
+  </ul>
+  <div class="flash-run" [ngClass]="{'active': isnewflashvalue}"
+    [ngStyle]="{'color':flashscorecolor,'-webkit-text-stroke-color':'red'}">{{flashvalue}}</div>
+  <!-- <div class="flash-run active" style="color: blue;">WD</div> -->
 </div>
-<div class="flash-comm-box" [ngClass]="{'flash-comm-show': isapply}">
+<!-- [ngClass]="{'flash-comm-show': isapply}" -->
+<div class="flash-comm-box">
   <!-- flash-comm-show -->
   <div class="head-btn-list">
     <button class="close-btn" (click)="isapply = false"></button>

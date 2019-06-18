@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** Extrernal Modules */
 import { NgxTinySliderModule } from 'ngx-tiny-slider';
-import { SocketIoModule} from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MomentModule } from 'ngx-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,7 @@ import { SplitPipe } from './pipes/stringsplitpipe';
 import { StripHtmlPipe } from './pipes/striphtmlpipe';
 import { LogosUrlPipe } from './pipes/logosurlpipe';
 import { PlayerImagePipe } from '@app/shared/pipes/playerimageurl.pipe';
+import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
 
 /** All Providers*/
 import { SportsService } from '../providers/sports-service';
@@ -56,47 +57,50 @@ import { ContentComponent } from './widget/content/content.component';
         TruncatePipe,
         ResizeImagePipe,
         LogosUrlPipe,
-        PlayerImagePipe, 
-        StripHtmlPipe, 
-        CommonStoryWidgetComponent, 
-        CommonNewsListComponent, 
+        PlayerImagePipe,
+        FlashteamPipe,
+        StripHtmlPipe,
+        CommonStoryWidgetComponent,
+        CommonNewsListComponent,
         PointstableWidgetComponent,
-        SplitPipe, 
-        CommonBlogCardComponent, 
-        CommonRelatedBlogCardComponent, 
-        CustomAdsWidgetComponent, 
-        NoDataWidgetComponent, 
-        DataLoaderWidgetComponent, 
-        FlashCommentaryComponent, 
+        SplitPipe,
+        CommonBlogCardComponent,
+        CommonRelatedBlogCardComponent,
+        CustomAdsWidgetComponent,
+        NoDataWidgetComponent,
+        DataLoaderWidgetComponent,
+        FlashCommentaryComponent,
         ContentComponent
     ],
     providers: [
-        TruncatePipe, 
+        TruncatePipe,
         ResizeImagePipe,
+        FlashteamPipe,
         SportsService,
         SocketService,
         SplitPipe,
         LogosUrlPipe,
-        CommonService, 
+        CommonService,
         CricketService
     ],
     exports: [
-        NgxTinySliderModule, 
+        NgxTinySliderModule,
         TruncatePipe,
         LogosUrlPipe,
-        PlayerImagePipe, 
+        PlayerImagePipe,
         ResizeImagePipe,
+        FlashteamPipe,
         StripHtmlPipe,
         CommonNewsListComponent,
         CommonStoryWidgetComponent,
         PointstableWidgetComponent,
         SplitPipe,
-        CommonBlogCardComponent, 
+        CommonBlogCardComponent,
         CommonRelatedBlogCardComponent,
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,
         DataLoaderWidgetComponent,
-        FlashCommentaryComponent, 
+        FlashCommentaryComponent,
         ContentComponent
     ]
 

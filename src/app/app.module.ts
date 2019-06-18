@@ -57,6 +57,8 @@ import { ContactComponent } from "./components/static-pages/contact/contact.comp
 import { AdvertiseWithUsComponent } from "./components/static-pages/advertise-with-us/advertise-with-us.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { CmsContentComponent } from './components/static-pages/cms-content/cms-content.component';
+import { AdsenseModule } from 'ng2-adsense';
+
 
 //socket config
 const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
@@ -95,6 +97,10 @@ export function provideConfig() {
   ],
   imports: [
     BrowserModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-6381087658260439',
+      adSlot: 7259870550,
+    }),
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     AppRoutingModule,
