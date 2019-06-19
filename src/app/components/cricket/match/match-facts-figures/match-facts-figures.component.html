@@ -36,37 +36,37 @@
         </div>
         <div class="schedule-items">
           <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
-            *ngFor="let item of item.data"
-            (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+            *ngFor="let match of item.data"
+            (click)="matchDetail(match.match_id,match.competitors[0].abbreviation,match.competitors[1].abbreviation)">
             <div class="match-desc">
-              <h6>{{item.competitors[0].abbreviation}} VS {{item.competitors[1].abbreviation}} </h6>
-              <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',' : ''}} {{item.city_name}}
+              <h6>{{match.competitors[0].abbreviation}} VS {{match.competitors[1].abbreviation}} </h6>
+              <p class="stadium-nm">{{match.venue_name}}{{match.venue_name ? ',' : ''}} {{match.city_name}}
               </p>
-              <p class="result-line">{{item.match_result}}</p>
+              <p class="result-line">{{match.match_result}}</p>
             </div>
             <div class="match-teams d-flex align-items-center">
-              <div class="match-team d-flex align-items-center" *ngFor="let item of item.period_score_new | slice:0:1">
-                <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
-                  <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
-                  <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+              <div class="match-team d-flex align-items-center" *ngFor="let score of match.period_score_new | slice:0:1">
+                <div class="team-info" *ngIf="!score.teamFlag || score.teamFlag">
+                  <h5 [ngClass]="{'winner': score.team.id == match.winner_id}">{{score.team.abbreviation}}</h5>
+                  <p>{{score?.display_score}}({{score?.display_overs}} ov)</p>
                 </div>
-                <img class="team-flag" [lazyLoad]="item.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
+                <img class="team-flag" [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
                   [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
               </div>
               <div class="vs-block">
                 <h6>vs</h6>
               </div>
-              <div class="match-team d-flex align-items-center" *ngFor="let item of item.period_score_new | slice:1:2">
-                <img class="team-flag" [lazyLoad]="item.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
+              <div class="match-team d-flex align-items-center" *ngFor="let score of match.period_score_new | slice:1:2">
+                <img class="team-flag" [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
                   [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
-                <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
-                  <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
-                  <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
+                <div class="team-info" *ngIf="!score.teamFlag || score.teamFlag">
+                  <h5 [ngClass]="{'winner': score.team.id == match.winner_id}">{{score.team.abbreviation}}</h5>
+                  <p>{{score?.display_score}}({{score?.display_overs}} ov)</p>
                 </div>
               </div>
             </div>
             <a class="details-btn"
-              (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+              (click)="matchDetail(match.match_id,match.competitors[0].abbreviation,match.competitors[1].abbreviation)"><span>Details</span></a>
           </div>
         </div>
       </div>
