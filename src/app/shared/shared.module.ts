@@ -38,6 +38,7 @@ import { NoDataWidgetComponent } from './no-data-widget/no-data-widget.component
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { ContentComponent } from './widget/content/content.component';
+import { SafehtmlPipe } from './pipes/safehtml.pipe';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ContentComponent } from './widget/content/content.component';
     declarations: [
         TruncatePipe,
         ResizeImagePipe,
+        SafehtmlPipe,
         LogosUrlPipe,
         PlayerImagePipe,
         FlashteamPipe,
@@ -75,6 +77,7 @@ import { ContentComponent } from './widget/content/content.component';
     providers: [
         TruncatePipe,
         ResizeImagePipe,
+        SafehtmlPipe,
         FlashteamPipe,
         SportsService,
         SocketService,
@@ -87,6 +90,7 @@ import { ContentComponent } from './widget/content/content.component';
         NgxTinySliderModule,
         TruncatePipe,
         LogosUrlPipe,
+        SafehtmlPipe,
         PlayerImagePipe,
         ResizeImagePipe,
         FlashteamPipe,

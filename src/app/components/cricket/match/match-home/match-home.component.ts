@@ -91,9 +91,9 @@ export class MatchHomeComponent implements OnInit {
 
   ngOnInit() { }
 
-  checkYetBat(players){
+  checkYetBat(players) {
     let check = players.filter((player) => player.statistics.length == 0)
-    if(check.length > 0)
+    if (check.length > 0)
       return true;
     return false;
   }
@@ -271,24 +271,13 @@ export class MatchHomeComponent implements OnInit {
     this.sportsService.getmatchtimeline(this.matchid).subscribe(res => {
       if (res["data"]["statistics"] && res["data"]["statistics"]["innings"]) {
         this.scorecards = res["data"]["statistics"]["innings"];
-        let objBatting = {};
+        let objBatting = [];
         let objBowling = {};
         //old logic for get players name
         this.scorecards.map((data, key) => {
           data["teams"][0]["statistics"]["batting"]["players"].map(
             single => {
-              if (!objBatting[single.id]) {
-                objBatting[single.id] = [];
-                objBatting[single.id].push(single);
-              }
-            }
-          );
-          data["teams"][1]["statistics"]["bowling"]["players"].map(
-            single => {
-              if (!objBowling[single.id]) {
-                objBowling[single.id] = [];
-                objBowling[single.id].push(single);
-              }
+              objBatting[single.id] = single
             }
           );
         });
@@ -932,7 +921,7 @@ export class MatchHomeComponent implements OnInit {
       //TEMP
       this.dummyAPICall++;
       classThis.sportsService
-      .getmatchtimelineDetla(classThis.data.sport_event.id)
+        .getmatchtimelineDetla(classThis.data.sport_event.id)
         .subscribe(res => {
           // res = res.result; // TEMP
           this.data = res.data;

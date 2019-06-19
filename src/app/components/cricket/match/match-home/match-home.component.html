@@ -84,6 +84,7 @@
                                       (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
                                         : ''  
                                     : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
+                                     
                                     <!--if batsman is stumped out-->
                                     {{ batting?.statistics?.dismissal?.type == 'stumped' ? batting?.statistics?.dismissal?.fieldsman_id ?
                                     (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
