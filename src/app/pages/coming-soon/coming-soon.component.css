@@ -1,6 +1,6 @@
 /* -------- Banner Section ------- */
 .home-banner                                        { padding: 60px 0px; height: 560px; background: #1B2A5A; position: relative; overflow: hidden; text-align: center; }
-.home-banner:after                                  { content: ""; display: block; position: absolute; width: 100%; height: 32px; left: 0px; bottom: 0px; background: url(../../../assets/images/bottom-round-shape.svg) no-repeat center center / 100% 100%; z-index: 5; }
+.home-banner:after                                  { content: ""; display: block; position: absolute; width: 100%; height: 32px; left: 0px; bottom: 0px; background: url(assets/images/bottom-round-shape.svg) no-repeat center center / 100% 100%; z-index: 5; }
 .home-banner .banner-text                           { position: relative; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); z-index: 3; }
 .home-banner h1                                     { margin: 0px; font-size: 96px; line-height: 120px; color: #fff; text-align: center; }
 .home-banner .banner-images                         { position: absolute; width: 66%; height: 100%; top: 0px; right: 0px; z-index: 1; opacity: 0.79; }

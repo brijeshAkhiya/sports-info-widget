@@ -16,7 +16,7 @@ export class WriterProfileComponent implements OnInit {
   commonrecentparams :{}
   commonpopularparams:{}
   commonvideoparams:{}
-  defaultwriterimg = '../../../../assets/images/placeholder-sqad.svg'
+  
   constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router,private activatedroute: ActivatedRoute, private commonService: CommonService) { }
 
   ngOnInit() {

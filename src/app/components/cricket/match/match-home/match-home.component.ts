@@ -939,13 +939,15 @@ export class MatchHomeComponent implements OnInit {
           this.matchdata = res.data;
 
           /** Update Scorecard */
-          let inningIndex = this.matchInnings.findIndex((innings) => innings.number == this.data.sport_event_status.current_inning);
-          let inning = this.matchdata.statistics.innings.filter((innings) => innings.number == this.data.sport_event_status.current_inning);
-          if (inningIndex > -1 && inning.length > 0) {
-            this.matchInnings[inningIndex].teams = inning[0].teams;
-          }
-          else {
-            this.matchInnings.push(inning[0]);
+          if(this.matchdata.statistics && this.matchdata.statistics.innings){
+            let inningIndex = this.matchInnings.findIndex((innings) => innings.number == this.data.sport_event_status.current_inning);
+            let inning = this.matchdata.statistics.innings.filter((innings) => innings.number == this.data.sport_event_status.current_inning);
+            if (inningIndex > -1 && inning.length > 0) {
+              this.matchInnings[inningIndex].teams = inning[0].teams;
+            }
+            else {
+              this.matchInnings.push(inning[0]);
+            }
           }
 
           this.getTossDecision();

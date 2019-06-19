@@ -9,6 +9,7 @@ export class CricketService {
 
   public flagplaceholder = '/assets/images/logo-placeholder.svg';
   public playerplaceholder = '/assets/images/placeholder-sqad.svg';
+  public teamPlaceholder = '/assets/images/logo-placeholder.svg';
 
   constructor(
     private splitpipe: SplitPipe,

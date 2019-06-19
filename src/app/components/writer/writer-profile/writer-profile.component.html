@@ -1,9 +1,9 @@
-<section class="common-section cricket-recentnews recentnews-section" *ngIf="writer?.writerData ; else noDataBlock">
+<section class="common-section cricket-recentnews recentnews-section" *ngIf="writerdata?.writerData ; else noDataBlock">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="writer-profile d-flex">
-          <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']" [defaultImage]="defaultwriterimg"></div>
+          <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']" [defaultImage]="commonService.writerPlaceholder"></div>
           <div class="writer-info rounded-box common-shadow d-flex flex-column">
             <div>
               <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
@@ -15,22 +15,19 @@
         <ngb-tabset class="common-tabs writer-tab">
           <ngb-tab>
             <ng-template ngbTabTitle>Latest</ng-template>
-            <ng-template ngbTabContent>
-             
+            <ng-template ngbTabContent>             
                 <app-common-news-list [type]="'writerrecent'" [reqparams]="commonrecentparams"></app-common-news-list>  
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle><div (click)="getWriteropularblogs()">Most Read</div></ng-template>
-            <ng-template ngbTabContent>
-              
+            <ng-template ngbTabContent>              
               <app-common-news-list [type]="'writerpopular'" [reqparams]="commonpopularparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle><div (click)="getWritervideos()">Videos</div></ng-template>
-            <ng-template ngbTabContent>
-             
+            <ng-template ngbTabContent>             
               <app-common-news-list [type]="'writervideos'" [reqparams]="commonvideoparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>

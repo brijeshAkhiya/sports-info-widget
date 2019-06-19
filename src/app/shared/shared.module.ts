@@ -38,7 +38,6 @@ import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.co
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
 import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
 import { PointstableWidgetComponent } from './cricket/pointstable-widget/pointstable-widget.component';
-import { CommonBlogCardComponent } from './common-blog-card/common-blog-card.component';
 import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
@@ -72,7 +71,6 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         CommonStoryWidgetComponent, 
         CommonNewsListComponent, 
         PointstableWidgetComponent,
-        CommonBlogCardComponent, 
         CommonRelatedBlogCardComponent, 
         CustomAdsWidgetComponent, 
         NoDataWidgetComponent, 
@@ -113,7 +111,6 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         CommonStoryWidgetComponent,
         CommonNewsListComponent,
         PointstableWidgetComponent,
-        CommonBlogCardComponent,
         CommonRelatedBlogCardComponent,
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,

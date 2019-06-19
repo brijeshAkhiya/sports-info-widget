@@ -3,7 +3,7 @@
     <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
       <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"
         [offset]="commonService.lazyloadoffset" [lazyLoad]="post.sImage | resizeImage:['m']"
-        (click)="commonService.blogview(post._id,post.eType,post.sTitle)">ddd
+        (click)="commonService.blogview(post._id,post.eType,post.sTitle)">
       </div>
     </div>
     <div class="blog-desc">

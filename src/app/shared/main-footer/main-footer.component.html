@@ -11,10 +11,10 @@
 				<li><a [routerLink]="['/privacy-policy']">Privacy Policy</a></li>
 			</ul>
 			<ul class="footer-social-links">
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sFbPageLink']"><img src="../../../assets/images/facebook-icon.svg" alt="facebook"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sTwitterLink']"><img src="../../../assets/images/twitter-icon.svg" alt="twitter"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sLinkdinLink']"><img src="../../../assets/images/linkedin-icon.svg" alt="linkedin"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sInstagramLink']"><img src="../../../assets/images/instagram-icon.svg" alt="instagram"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sFbPageLink']"><img src="/assets/images/facebook-icon.svg" alt="facebook"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sTwitterLink']"><img src="/assets/images/twitter-icon.svg" alt="twitter"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sLinkdinLink']"><img src="/assets/images/linkedin-icon.svg" alt="linkedin"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sInstagramLink']"><img src="/assets/images/instagram-icon.svg" alt="instagram"></a></li>
 			</ul>
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 </footer>
-<button class="fav-btn scroll-top" *ngIf="isShow" (click)="gotoTop()"><img src="../../../assets/images/right-arrow.svg"></button>
+<button class="fav-btn scroll-top" *ngIf="isShow" (click)="gotoTop()"><img src="/assets/images/right-arrow.svg"></button>
 <app-flash-commentary></app-flash-commentary>
 
 <!--Favourite module start-->

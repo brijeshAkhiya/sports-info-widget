@@ -15,7 +15,7 @@
             <ng-template ngbTabContent>
               <section class="team-about-head d-flex">
                 <div class="team-logo align-self-start rounded-box common-shadow">
-                  <div class="team-logo-img" [lazyLoad]="teamprofiledata?.id | logosurl" [defaultImage]="teamsplaceholder"  [offset]="commonService.lazyloadoffset" ></div>
+                  <div class="team-logo-img" [lazyLoad]="teamprofiledata?.id | logosurl" [defaultImage]="cricketService.teamsplaceholder"  [offset]="commonService.lazyloadoffset" ></div>
                   <!-- <img src="http://sports-info.s3-website.ap-south-1.amazonaws.com/logos/au.png" alt="team-logo"> -->
                   <!-- ../../../../../assets/images/logo-placeholder.svg -->
                 </div>
@@ -86,13 +86,13 @@
                           <div class="team-info">
                             <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" [lazyLoad]="item.competitors[0]?.id | logosurl" [defaultImage]="teamsplaceholder" alt="team-flag"  [offset]="commonService.lazyloadoffset" >
+                          <img class="team-flag" [lazyLoad]="item.competitors[0]?.id | logosurl" [defaultImage]="cricketService.teamsplaceholder" alt="team-flag"  [offset]="commonService.lazyloadoffset" >
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" [lazyLoad]="item.competitors[1]?.id | logosurl"  [defaultImage]="teamsplaceholder" alt="team-flag"  [offset]="commonService.lazyloadoffset" >
+                          <img class="team-flag" [lazyLoad]="item.competitors[1]?.id | logosurl"  [defaultImage]="cricketService.teamsplaceholder" alt="team-flag"  [offset]="commonService.lazyloadoffset" >
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>

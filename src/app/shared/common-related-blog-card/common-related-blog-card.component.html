@@ -3,7 +3,7 @@
     <div class="col-sm-6 col-xl-3" *ngFor="let post of  posts | slice:start:end ">
       <div class="popular-item common-shadow">
         <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-          <div class="common-zoom-img" [defaultImage]="smallblogdeafault" [lazyLoad]="post.sImage | resizeImage:['s']"
+          <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="post.sImage | resizeImage:['s']"
             (click)="blogview(post._id,post.eType,post.sTitle)"></div>
         </div>
         <div class="item-desc">

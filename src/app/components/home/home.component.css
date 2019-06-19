@@ -22,8 +22,8 @@
 .main-popular-video                                     { height: 550px; position: relative; cursor: pointer; border-radius: 4px;}
 .main-popular-video .video-desc                         { padding: 24px; position: absolute; width: 100%; bottom: 0px; }
 .main-popular-video:before,
-.main-popular-video:after                               { content: ""; position: absolute; display: block; width: 190px; height: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  background: url(../../../assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
-.main-popular-video:before                              { opacity: 0; background-image: url(../../../assets/images/play-btn-anim.png); }
+.main-popular-video:after                               { content: ""; position: absolute; display: block; width: 190px; height: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  background: url(assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
+.main-popular-video:before                              { opacity: 0; background-image: url(assets/images/play-btn-anim.png); }
 .main-popular-video:hover:before                        { opacity: 1; }
 .main-popular-video .author-info p,
 .main-popular-video .author-info p.author a             { color: #fff;}

@@ -71,7 +71,7 @@
   </div>
 </div>
 <nav class="navbar navbar-expand-md" id="navbar" [ngClass]="{'menu-open': isapply}" (scroll)="onWindowScroll($event);">
-  <a class="navbar-brand" (click)="routing('/')"><img src="../../../assets/images/logo.svg" alt=""></a>
+  <a class="navbar-brand" (click)="routing('/')"><img src="/assets/images/logo.svg" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     [ngClass]="{'active': isapply}" (click)="isapply = !isapply" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -167,8 +167,8 @@
   <div class="modal-body">
     <h1>Sign In</h1>
     <ul>
-      <li><button (click)="signInWithGoogle()"><img src="../../../assets/images/google-signin.svg">Sign in with Google</button></li>
-      <li><button class="fb-button" (click)="signInWithFB()"><img src="../../../assets/images/facebook-signin.svg">Continue with Facebook</button></li>
+      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">Sign in with Google</button></li>
+      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">Continue with Facebook</button></li>
     </ul>
     <p class="signin-text">By signing in with Google or Facebook, you agree to
       SportsInfo’s <a [routerLink]="['/terms-and-conditions']" >Terms</a> and <a [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>

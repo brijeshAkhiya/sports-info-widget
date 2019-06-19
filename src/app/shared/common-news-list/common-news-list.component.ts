@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "@providers/sports-service";
+import { CommonService } from "@providers/common-service";
 import { SlugifyPipe } from "@pipes/slugpipe";
 @Component({
   selector: "app-common-news-list",
@@ -13,13 +14,13 @@ export class CommonNewsListComponent implements OnInit {
   @Input() reqparams: {};
   loadnewposts: any;
   isdisplay: boolean;
-  smallblogdeafault = "../../../assets/images/placeholder_blog_small.svg";
   writerid: any;
   iswritervideo: boolean;
   relatedids: any;
   isloading: any;
   constructor(
     private sportsService: SportsService,
+    public commonService: CommonService,
     private slugifyPipe: SlugifyPipe,
     private router: Router
   ) { }

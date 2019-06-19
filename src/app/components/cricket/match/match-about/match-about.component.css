@@ -16,8 +16,8 @@
 .match-main-title .current-team h4.score    { color: rgba(41,41,41,0.5); font-weight: 600; }
 .match-main-title .current-team h4.running          { color: #292929;}
 .match-main-title .current-team h4 .win-toss:after,
-.match-main-title .current-team h4.winner:after     { content: ""; margin: 0px 5px 4px; display: inline-block; height: 28px; width: 28px; background:url(../../../../../assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle;  }
-.match-main-title .current-team h4 .win-toss:after  { background-image: url(../../../../../assets/images/toss-icon.svg); }
+.match-main-title .current-team h4.winner:after     { content: ""; margin: 0px 5px 4px; display: inline-block; height: 28px; width: 28px; background:url(assets/images/winner-cup.svg) no-repeat center center / cover; vertical-align: middle;  }
+.match-main-title .current-team h4 .win-toss:after  { background-image: url(assets/images/toss-icon.svg); }
 .match-main-title .match-win-player         { padding-left: 32px; border-left: 2px solid #ECECEC;}
 .match-main-title .player-pic               { margin-right: 16px; width: 96px; }
 .match-main-title .player-pic img           { border-radius: 2px; }

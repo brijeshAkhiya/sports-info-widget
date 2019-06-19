@@ -23,8 +23,7 @@ export class CustomTeamViewComponent implements OnInit {
   widget1type = "currentseries";
   noteamfixtures: boolean = false;
   teamprofiledata: any;
-  teamsplaceholder = '../../../../../assets/images/logo-placeholder.svg'
-  constructor(private sportsService: SportsService, private cricketService: CricketService,private activatedroute: ActivatedRoute,private router: Router,private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe, private commonService: CommonService) { }
+  constructor(private sportsService: SportsService, public cricketService: CricketService,private activatedroute: ActivatedRoute,private router: Router,private slugifyPipe: SlugifyPipe,private splitpipe: SplitPipe, private commonService: CommonService) { }
 
   ngOnInit() {
     this.teamid = atob(this.activatedroute.snapshot.params.teamid)
