@@ -41,12 +41,6 @@ import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { environment } from "../environments/environment";
 
-/** All Pipes */
-import { SlugifyPipe } from "./shared/pipes/slugpipe";
-import { TruncatePipe } from "./shared/pipes/truncatepipe";
-import { SplitPipe } from "./shared/pipes/stringsplitpipe";
-import { StripHtmlPipe } from "./shared/pipes/striphtmlpipe";
-
 /** All Components */
 import { AppComponent } from "./app.component";
 import { ComingSoonComponent } from "./pages/coming-soon/coming-soon.component";
@@ -94,7 +88,6 @@ export function provideConfig() {
     
     MainHeaderComponent,
     MainFooterComponent,
-    SlugifyPipe,      
     WriterProfileComponent,
   ],
   imports: [
@@ -129,10 +122,6 @@ export function provideConfig() {
   ],
   providers: [
     AuthService,
-    SplitPipe,
-    TruncatePipe,
-    SlugifyPipe,
-    StripHtmlPipe,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

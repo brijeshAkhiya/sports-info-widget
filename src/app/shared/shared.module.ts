@@ -20,6 +20,8 @@ import { StripHtmlPipe } from './pipes/striphtmlpipe';
 import { LogosUrlPipe } from './pipes/logosurlpipe';
 import { PlayerImagePipe } from './pipes/playerimageurl.pipe';
 import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
+import { SlugifyPipe } from "./pipes/slugpipe";
+
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
@@ -63,6 +65,8 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         PlayerImagePipe, 
         StripHtmlPipe, 
         SplitPipe, 
+        FlashteamPipe,
+        SlugifyPipe,
 
         /** All Componenets */
         CommonStoryWidgetComponent, 
@@ -84,6 +88,7 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         SplitPipe,
         LogosUrlPipe,
         FlashteamPipe,
+        SlugifyPipe,        
 
         /** All Providers*/
         SportsService,
@@ -95,12 +100,16 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         NgxTinySliderModule, 
 
         /** All Pipes */
-        TruncatePipe,
         PlayerImagePipe,
         FlashteamPipe,
         StripHtmlPipe,
         SplitPipe,
+        TruncatePipe,
+        LogosUrlPipe,
+        ResizeImagePipe,
+        SlugifyPipe,
 
+        /** All Componenets */
         CommonStoryWidgetComponent,
         CommonNewsListComponent,
         PointstableWidgetComponent,
@@ -113,5 +122,6 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         ContentComponent,
         BlogComponent,
     ],
+
 })
 export class SharedModule { }
