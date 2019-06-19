@@ -12,7 +12,7 @@
       <ng-container *ngIf="data.sport_event.venue">
         <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
       </ng-container>
-      {{data.sport_event.scheduled | date}}
+      {{data.sport_event.scheduled | amDateFormat:'Do MMMM YYYY'}}
     </p>
     <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
     <!-- TODO Delay class-->

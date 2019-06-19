@@ -29,6 +29,7 @@ export class FlashCommentaryComponent implements OnInit {
     });
     this.onNewScore().subscribe(res => { });
     this.onNewCommentary().subscribe(res => { });
+    this.onStopCommentary().subscribe(res => { });
   }
 
   //request fetch rooms/matches
@@ -121,7 +122,6 @@ export class FlashCommentaryComponent implements OnInit {
           }, 100);
         } else {
           console.log('2');
-
           this.isnewflashvalue = true;
           this.flashstockcolor = this.newscoreObj[data.id].shadow
           this.flashscorecolor = this.newscoreObj[data.id].color
@@ -137,6 +137,24 @@ export class FlashCommentaryComponent implements OnInit {
     return new Observable<any>(observer => {
       this.socket.on("newCommentry", (data: any) => {
         observer.next(data);
+        this.livematches = []
+        this.livematches = data.map((singlematch) => {
+          this.newscoreObj[singlematch.id] = singlematch
+          return {
+            ...singlematch,
+            isActive: true
+          }
+        })
+      });
+    });
+  }
+
+  //on Stop commentary 
+  public onStopCommentary(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.socket.on("commentryStopped", (data: any) => {
+        observer.next(data);
+        console.log('stop:', data);
         this.livematches = []
         this.livematches = data.map((singlematch) => {
           this.newscoreObj[singlematch.id] = singlematch
