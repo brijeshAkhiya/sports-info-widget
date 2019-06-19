@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy, AfterViewInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SlugifyPipe } from '@pipes/slugpipe';
 import { SplitPipe } from '@pipes/stringsplitpipe';
@@ -12,7 +12,7 @@ import { CommonService } from '@providers/common-service';
   styleUrls: ["./blog-view.component.css"],
   encapsulation: ViewEncapsulation.None,
 })
-export class BlogViewComponent implements OnInit, OnDestroy {
+export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
   blogtype: any;
   blogdata: any;
   blogUrl: any;
@@ -47,13 +47,31 @@ export class BlogViewComponent implements OnInit, OnDestroy {
     this.url = this.activatedroute.url;
 
     if (this.activatedroute.snapshot.params.id)
-    this.getBlogview(atob(this.activatedroute.snapshot.params.id));
+      this.getBlogview(atob(this.activatedroute.snapshot.params.id));
     this.previewtype = (this.url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     this.blogshareid = this.activatedroute.snapshot.params.id
     this.blogslug = this.activatedroute.snapshot.params.slug
     this.blogtype = this.activatedroute.snapshot.params.type;
     this.getPopularArticles();
   }
+
+  ngAfterViewInit() {
+
+    // for load social media widgets
+    let ngJs: any;
+    const ngFjs = document.getElementsByTagName('script')[0];
+    const ngP = 'https';
+    ngJs = document.createElement('script');
+    ngJs.id = 'twitter-wjs';
+    ngJs.src = ngP + '://platform.twitter.com/widgets.js';
+    ngFjs.parentNode.insertBefore(ngJs, ngFjs);
+
+    ngJs = document.createElement('script');
+    ngJs.src = ngP + '://platform.instagram.com/en_US/embeds.js';
+    ngFjs.parentNode.insertBefore(ngJs, ngFjs);
+
+  }
+
 
   getBlogview(id) {
     if (id) {

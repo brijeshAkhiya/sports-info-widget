@@ -30,7 +30,6 @@ import { CricketService } from './providers/cricket-service';
 import { SocketService } from './providers/socket.service';
 
 /** All Componenets */
-import { ContentComponent } from './widget/content/content.component';
 import { BlogComponent } from './widget/blog/blog.component';
 import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-widget.component';
 import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
@@ -41,6 +40,8 @@ import { PointstableWidgetComponent } from './cricket/pointstable-widget/pointst
 import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
+import { ContentComponent } from './widget/content/content.component';
+import { SafehtmlPipe } from './pipes/safehtml.pipe';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         /** All Pipes */
         TruncatePipe,
         ResizeImagePipe,
+        SafehtmlPipe,
         LogosUrlPipe,
         PlayerImagePipe, 
         StripHtmlPipe, 
@@ -85,6 +87,7 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         ResizeImagePipe,
         SplitPipe,
         LogosUrlPipe,
+        SafehtmlPipe,
         FlashteamPipe,
         SlugifyPipe,        
 
@@ -98,6 +101,9 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
         NgxTinySliderModule, 
 
         /** All Pipes */
+        TruncatePipe,
+        LogosUrlPipe,
+        SafehtmlPipe,
         PlayerImagePipe,
         FlashteamPipe,
         StripHtmlPipe,

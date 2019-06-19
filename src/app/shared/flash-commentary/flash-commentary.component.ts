@@ -19,6 +19,7 @@ export class FlashCommentaryComponent implements OnInit {
   newscoreObj = [];
   flashscorecolor: any;
   flashstockcolor: any;
+  
   constructor(private io: SportsService) { }
 
   ngOnInit() {
@@ -39,6 +40,7 @@ export class FlashCommentaryComponent implements OnInit {
         console.log('rooms:', res);
         this.livematches = res.map(singleMatch => {
           this.newscoreObj[singleMatch.id] = singleMatch
+       
           return {
             ...singleMatch,
             isActive: true
@@ -137,9 +139,13 @@ export class FlashCommentaryComponent implements OnInit {
     return new Observable<any>(observer => {
       this.socket.on("newCommentry", (data: any) => {
         observer.next(data);
+        this.reqFetchRooms();
         this.livematches = []
         this.livematches = data.map((singlematch) => {
-          this.newscoreObj[singlematch.id] = singlematch
+          this.newscoreObj[singlematch.id] = singlematch;
+          this.socket.emit("reqJoinRoom", singlematch.id, (error, res) => {
+            if (res) { }
+          });
           return {
             ...singlematch,
             isActive: true

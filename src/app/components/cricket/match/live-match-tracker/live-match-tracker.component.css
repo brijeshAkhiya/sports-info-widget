@@ -1811,3 +1811,4 @@ $base: #ffffff;
 .sr-bb .srt-logo-powered-by-dark {
   display: none;
 }
+.sr-bb .sr-lmt-plus__footer-wrapper{ display: none !important;}

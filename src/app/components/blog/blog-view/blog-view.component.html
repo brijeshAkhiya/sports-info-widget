@@ -38,7 +38,7 @@
             </ul>
           </div>
           <div class="blog-content-block">
-            <div class="blog-content" [innerHTML]="blogdata?.sDescription">
+            <div class="blog-content" [innerHTML]="blogdata?.sDescription | safehtml">
             </div>
             <ul class="tag-list">
               <li *ngFor="let item of blogdata?.aTags"><button
