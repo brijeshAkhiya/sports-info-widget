@@ -190,7 +190,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   startLiveUpdateAfterTime(scheduled) {
     let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
     let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds); remainingMiliSec =
-      remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 45, 0);
+      remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, 10, 0);
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       console.log("remainingMiliSec", remainingMiliSec);
       this.timeout = setTimeout(() => {
