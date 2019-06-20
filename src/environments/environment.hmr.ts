@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     hmr: true,
-    apiUrl: 'https://dev.backend.sports.info',
+    apiUrl: 'http://sports-info-clb-623454368.ap-south-1.elb.amazonaws.com',
     version: '/api/v1',
     socket: {
         baseUrl: 'https://dev.backend.sports.info',

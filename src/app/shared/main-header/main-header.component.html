@@ -9,7 +9,7 @@
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
+                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
                   <p
                     *ngIf="slide.status == 'not_started' || slide.match_status == 'ended' || slide.status == 'closed'; else matchStatus">
                     {{slide.scheduled | amTimeAgo}}</p>
@@ -22,44 +22,46 @@
                     <p [ngClass]="{'match-winner': slide.competitors.home.winner}">
                       <img [lazyLoad]="slide.competitors.home.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="rcb">{{slide.competitors.home.name}}</p>
-                    <p *ngIf="slide.competitors.home.period_scores">
-                      {{slide?.competitors?.home?.period_scores.display_score}}({{slide?.competitors?.home?.period_scores.display_overs}}
-                      ov)</p>
+                    <p *ngIf="slide.competitors.home.period_scores"><b>
+                        {{slide?.competitors?.home?.period_scores.display_score}}({{slide?.competitors?.home?.period_scores.display_overs}}
+                        ov)</b></p>
                   </div>
                   <div class="match-info d-flex justify-content-between align-items-center">
                     <p [ngClass]="{'match-winner': slide.competitors.away.winner}">
-                        <img [lazyLoad]="slide.competitors.away.id| logosurl"
+                      <img [lazyLoad]="slide.competitors.away.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{slide.competitors.away.name}}
                     </p>
-                    <p *ngIf="slide.competitors.away.period_scores">
-                      {{slide?.competitors?.away?.period_scores.display_score}}({{slide?.competitors?.away?.period_scores.display_overs}}
-                      ov)</p>
+                    <p *ngIf="slide.competitors.away.period_scores"><b>
+                        {{slide?.competitors?.away?.period_scores.display_score}}({{slide?.competitors?.away?.period_scores.display_overs}}
+                        ov)</b></p>
                   </div>
                 </div>
                 <div *ngIf="slide.competitors.away.show_first">
-                  <div class="match-info d-flex justify-content-between align-items-center">    
+                  <div class="match-info d-flex justify-content-between align-items-center">
                     <p [ngClass]="{'match-winner': slide.competitors.away.winner}">
-                        <img [lazyLoad]="slide.competitors.away.id| logosurl"
+                      <img [lazyLoad]="slide.competitors.away.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="kxip">{{slide.competitors.away.name}}
                     </p>
-                    <p *ngIf="slide.competitors.away.period_scores">
-                      {{slide?.competitors?.away?.period_scores.display_score}}({{slide?.competitors?.away?.period_scores.display_overs}}
-                      ov)
-                  </p>
+                    <p *ngIf="slide.competitors.away.period_scores"><b>
+                        {{slide?.competitors?.away?.period_scores.display_score}}({{slide?.competitors?.away?.period_scores.display_overs}}
+                        ov)</b>
+                    </p>
                   </div>
-                  <div class="match-info d-flex justify-content-between align-items-center"> 
+                  <div class="match-info d-flex justify-content-between align-items-center">
                     <p [ngClass]="{'match-winner': slide.competitors.home.winner}">
-                        <img [lazyLoad]="slide.competitors.home.id| logosurl"
+                      <img [lazyLoad]="slide.competitors.home.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder" alt="rcb">{{slide.competitors.home.name}}</p>
-                    <p *ngIf="slide.competitors.home.period_scores">
+                    <p *ngIf="slide.competitors.home.period_scores"><b>
                       {{slide?.competitors?.home?.period_scores.display_score}}({{slide?.competitors?.home?.period_scores.display_overs}}
-                      ov)</p>
+                      ov)</b></p>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-9">
-                      <p class="result-line" *ngIf="slide.match_status == 'live'">{{slide.venue_name ? slide.venue_name : ''}}</p>
-                      <p class="result-line" *ngIf="slide.match_status != 'live'">{{slide.match_result ? slide.match_result : slide.venue_name}}</p>
+                    <p class="result-line" *ngIf="slide.match_status == 'live'">
+                      {{slide.venue_name ? slide.venue_name : ''}}</p>
+                    <p class="result-line" *ngIf="slide.match_status != 'live'">
+                      {{slide.match_result ? slide.match_result : slide.venue_name}}</p>
                   </div>
                 </div>
               </div>

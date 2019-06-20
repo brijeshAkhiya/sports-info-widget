@@ -41,7 +41,7 @@ export class GeneralBlogListComponent implements OnInit {
    getPopularArticles(start, limit) {
     let data = {
       eType:this.blogtype.charAt(0).toUpperCase() + this.blogtype.slice(1),
-      nstart: start,
+      nStart: start,
       nLimit: limit
     };
     this.sportsService.getpopularpost(data).subscribe(res => {
@@ -55,7 +55,7 @@ export class GeneralBlogListComponent implements OnInit {
   loadmore() {  
     let start = this.blogs.length
     let data = {
-      nstart: start,
+      nStart: start,
       nLimit: 10,
       eType:this.blogtype.charAt(0).toUpperCase() + this.blogtype.slice(1)
     };
@@ -81,7 +81,7 @@ export class GeneralBlogListComponent implements OnInit {
   getRecentArticles(start,limit) {
     let data = {
       eType:this.blogtype.charAt(0).toUpperCase() + this.blogtype.slice(1),
-      nstart: start,
+      nStart: start,
       nLimit: limit
     };
     this.sportsService.getrecentpost(data).subscribe(res => {
