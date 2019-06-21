@@ -17,6 +17,7 @@ import { environment } from "@env";
 /** Providers */
 import { CommonService } from "@providers/common-service";
 import { SportsService } from "@providers/sports-service";
+import { SwUpdate } from '@angular/service-worker';
 
 //vibrant import 
 // declare var Vibrant: any;
@@ -33,8 +34,14 @@ export class AppComponent implements OnInit {
   vibrantcolor: any
   mutedcolor: any
   metatagsObj = [];
-  constructor(private http: HttpClient, private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
+  constructor(private http: HttpClient,private swupdate:SwUpdate ,private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
+   
     this.getMetaTags();
+    this.swupdate.available.subscribe((res)=>{
+     if(confirm("New version of Website is available")){
+      window.location.reload(true);
+     }
+    })
   }
 
   ngOnInit() {
