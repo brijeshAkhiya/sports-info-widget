@@ -816,8 +816,10 @@ export class MatchHomeComponent implements OnInit {
 
     // Stop live update if Match is ended
     if (this.data.sport_event_status.status == "ended") {
-      this.clearTimeInterval();
-      return false;
+      this.interval = setInterval(() => {
+        this.clearTimeInterval();
+        return false;
+      }, this.commonService.miliseconds(0, 15, 0)); // stop live update after 15 min of match completed 
     }
   }
 
