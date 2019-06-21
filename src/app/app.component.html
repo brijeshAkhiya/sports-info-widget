@@ -1,5 +1,4 @@
-
-  <!-- <div>
+<!-- <div>
     <p>Login with FB</p>
     <button (click)="signInWithFB()">FB</button>
     <p>Login with Google</p>
@@ -10,19 +9,19 @@
     </div>
   </div> -->
 
-  <!-- <button (click)="logout()">Logout</button> -->
-  
-    
-    <!-- <div *ngIf="socialUser2">
+<!-- <button (click)="logout()">Logout</button> -->
+
+
+<!-- <div *ngIf="socialUser2">
       <p>{{socialUser2.name}}</p>
       <p><img [src]="socialUser2.photoUrl" ></p>
     </div> -->
-  
 
 
 
-  <!--Home page-->
-  <!-- <div class="container">
+
+<!--Home page-->
+<!-- <div class="container">
     <div class="row">
     <div class="col-sm-10 offset-sm-1">
     <div class="home-banner">
@@ -34,11 +33,15 @@
     </div>
     </div>
     </div> -->
-    <!-- <img src="../assets/images/banner/9S6A5434.jpg"> -->
-  
+<!-- <img src="../assets/images/banner/9S6A5434.jpg"> -->
+
 
 <app-main-header></app-main-header>
 <div class="main-container">
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 <app-main-footer></app-main-footer>
+<div class="new-ver-toast d-flex justify-content-between align-items-center" [ngClass]="{active: isupdate}">
+  <p>New version of SportsInfo is available.</p>
+  <p><a (click)="updatewebsite()">Take me there <span></span></a></p>
+</div>

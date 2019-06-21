@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     hmr: true,
-    apiUrl: 'http://sports-info-clb-623454368.ap-south-1.elb.amazonaws.com',
+    apiUrl: 'https://dev.backend.sports.info',
     version: '/api/v1',
     socket: {
         baseUrl: 'https://dev.backend.sports.info',
@@ -9,5 +9,7 @@ export const environment = {
     },
     s3Url : 'https://d1ldsx0apuyt84.cloudfront.net/',
     siteUrl : 'https://sports.info/',
-    mapsKey : 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
+    mapsKey : 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY',
+    facebookId:'392165904733265',
+    googleOuthId:'504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com'
   };

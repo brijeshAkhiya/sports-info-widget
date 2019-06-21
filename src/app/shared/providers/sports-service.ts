@@ -342,6 +342,14 @@ export class SportsService {
     );
   }
 
+  //social login 
+  sociallogin(type,data){
+    return this.http.post(
+      environment.apiUrl + environment.version + `/login/${type}`,
+      data
+    );
+  }
+
   connect() {
     return io(environment.socket.baseUrl)
   }

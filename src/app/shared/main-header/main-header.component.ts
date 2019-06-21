@@ -9,11 +9,7 @@ import {
   HostListener
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthService } from "angularx-social-login";
-import {
-  FacebookLoginProvider,
-  GoogleLoginProvider
-} from "angularx-social-login";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app-reducer";
 import * as Auth from "../../store/auth/auth.actions";
@@ -43,6 +39,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   interval;
   slider = [];
   timeout;
+  isLogin: boolean;
 
   constructor(
     private renderer2: Renderer2,
@@ -52,10 +49,12 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     private slugifyPipe: SlugifyPipe,
     private sportsService: SportsService,
     private modalService: NgbModal,
+    private authService: AuthService,
     private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
     private cricketService: CricketService,
-    private commonService: CommonService
+    private commonService: CommonService,
+
   ) {
     //get custom ads data Funtion call --->
     this.getCustomAds();
@@ -90,8 +89,29 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getHeader();
+    this.authService.authState.subscribe((user) => {
+      console.log('checksocial', user);
+      if (user == null) {
+        this.isLogin = false
+      }
+      else {
+        this.socialUser = user;
+        this.isLogin = true
+      }
+
+    });
   }
 
+  checklogin() {
+    this.modalService.open('content')
+  }
+
+  logout() {
+    this.authService.signOut().then(res => {
+      console.log(res);
+
+    });
+  }
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     if (window.pageYOffset > 156) {
@@ -218,7 +238,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       });
     }
     console.log(this.slider);
-    
+
   }
 
   getLiveUpdateSlider(classThis) {
@@ -285,7 +305,10 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       .then(res => {
         if (res) {
           this.socialUser = res;
+          this.validateSocialLogin('fb', res.authToken)
+          console.log('socialuser', this.socialUser);
           this.store.dispatch(new Auth.SetAuthenticated());
+          this.modalService.dismissAll();
         }
       });
   }
@@ -297,11 +320,32 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       .then(res => {
         if (res) {
           this.store.dispatch(new Auth.SetAuthenticated());
-
           this.socialUser = res;
+          this.validateSocialLogin('google', res.idToken)
+          console.log('socialuser', this.socialUser);
+          this.modalService.dismissAll();
         }
       })
       .catch(error => { });
+  }
+
+  validateSocialLogin(type, token) {
+    if (type == 'fb') {
+      let data = {
+        sFbToken: token
+      }
+      this.sportsService.sociallogin(type, data).subscribe((res) => {
+
+      })
+    }
+    else if (type == 'google') {
+      let data = {
+        sGoogleToken: token
+      }
+      this.sportsService.sociallogin(type, data).subscribe((res) => {
+
+      })
+    }
   }
 
   //Social login modal

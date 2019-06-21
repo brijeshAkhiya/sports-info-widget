@@ -34,13 +34,12 @@ export class AppComponent implements OnInit {
   vibrantcolor: any
   mutedcolor: any
   metatagsObj = [];
+  isupdate:boolean
   constructor(private http: HttpClient,private swupdate:SwUpdate ,private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
    
     this.getMetaTags();
     this.swupdate.available.subscribe((res)=>{
-     if(confirm("New version of Website is available")){
-      window.location.reload(true);
-     }
+      this.isupdate = true
     })
   }
 
@@ -143,6 +142,11 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new MetaTags.SaveMetaTags(res.data));
       }
     })
+  }
+
+  updatewebsite(){
+    this.isupdate = false
+    window.location.reload(true);
   }
 
   // myfn(){

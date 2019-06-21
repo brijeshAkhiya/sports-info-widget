@@ -84,12 +84,23 @@
     </div>
 
     <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
-      <div class="player-info">
+      <!-- <div class="player-info">
         <p *ngIf="data.sport_event_status.run_rate">CRR : <span> {{data.sport_event_status.run_rate}}</span></p>
         <p *ngIf="data.sport_event_status.run_rate_required">RR : <span> {{data.sport_event_status.run_rate_required}}</span></p> 
         <p *ngIf="toss.toss_won_by_team">{{toss.toss_won_by_team}} opt to
           {{toss.toss_decision ? toss.toss_decision : 'bat'}}</p>       
-      </div>
+      </div> -->
+      <ul class="sec-inngs-state-list">
+        <li>
+          <p *ngIf="data.sport_event_status.run_rate"><span class="title">Required rate</span>: <span class="value">{{data.sport_event_status.run_rate}}</span></p>
+        </li>
+        <li>
+          <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">Current rate</span>: <span class="value">{{data.sport_event_status.run_rate_required}}</span></p>
+        </li>
+        <!-- <li>
+          <p><span class="title">Last 5 overs</span>: <span class="value">56 runs 2 wickets</span></p>
+        </li> -->
+      </ul>
     </div>
 
   </div>

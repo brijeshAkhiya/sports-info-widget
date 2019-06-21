@@ -1,0 +1,35 @@
+.new-ver-toast                          { padding: 18px 18px 18px 40px; width: 860px; background: #fff; position: fixed; bottom: -140px; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); border-radius: 4em; box-shadow: 0px 8px 24px rgba(0,0,0,0.21); -webkit-box-shadow: 0px 8px 24px rgba(0,0,0,0.21); z-index: 10; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.new-ver-toast.active                   { bottom: 40px; }
+.new-ver-toast p                        { margin: 0px; font-size: 24px; line-height: 32px; color: #292929; }
+.new-ver-toast p a                      { color: #ED1A33;}
+.new-ver-toast p span                   { margin-left: 10px; display: inline-block; width: 84px; height: 84px; background: #ED1A33; box-shadow: 0px 6px 12px rgba(239, 29, 58,0.48); -webkit-box-shadow: 0px 6px 12px rgba(239, 29, 58,0.48); border-radius: 50%; vertical-align: middle; position: relative; overflow: hidden;}
+.new-ver-toast p span:before,
+.new-ver-toast p span:after             { content: ""; position: absolute; display: block; width: 100%; height: 100%; top: 0px; left: 0px; background: url(assets/images/right-arrow.svg) no-repeat center center / 40% auto; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.new-ver-toast p span:before            { left: -100%; }
+.new-ver-toast p a:hover span:before    { left: 0px; }
+.new-ver-toast p a:hover span:after     { left: 100%; }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .new-ver-toast                      { padding: 12px 12px 12px 32px; width: 660px;}
+    .new-ver-toast p                    { font-size: 19px; line-height: 28px; }
+    .new-ver-toast p span               { width: 64px; height: 64px;}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .new-ver-toast                      { padding: 10px 10px 10px 24px; width: 560px;}
+    .new-ver-toast p                    { font-size: 17px; line-height: 22px; }
+    .new-ver-toast p span               { width: 48px; height: 48px;}
+}
+
+@media (max-width: 767px) {
+    .new-ver-toast                      { padding: 8px 8px 8px 16px; width: 80%; }
+    .new-ver-toast p                    { font-size: 13px; line-height: 18px; }
+    .new-ver-toast p span               { margin-left: 4px; width: 48px; height: 48px; }
+    .new-ver-toast p:last-child         { text-align: right;}
+}
+
+@media (max-width: 575px) {
+    .new-ver-toast                      { width: 95%; }
+    .new-ver-toast > p                   { width: 50%; }
+
+}
