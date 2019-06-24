@@ -15,7 +15,7 @@
         </div>
         <div class="author-info d-flex justify-content-between align-items-center">
           <p class="author"><a (click)="writerview(post?.iId?._id)">{{post.iId.sFirstName}}
-              {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+              {{post.iId.sLastName}}</a>{{post.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
           <p class="view">{{post.nViewCounts}}</p>
         </div>
       </div>

@@ -78,7 +78,7 @@ export class MatchHomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-
+    
     this.matchid = atob(this.activatedroute.snapshot.params.id);
     this.activatedroute.params.subscribe(params => {
       this.matchid = atob(params.id);

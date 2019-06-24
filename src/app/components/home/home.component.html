@@ -220,7 +220,7 @@
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
                 <a (click)="writerview(video?.iId?._id)">{{video.iId.sFirstName}}
-                  {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
+                  {{video.iId.sLastName}}</a>{{video.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}
               </p>
               <p class="view white-view">{{video.nViewCounts}}</p>
             </div>

@@ -33,26 +33,29 @@ export class AppComponent implements OnInit {
   socialUser2: any;
   vibrantcolor: any
   mutedcolor: any
-  metatagsObj = [];
-  isupdate:boolean
-  constructor(private http: HttpClient,private swupdate:SwUpdate ,private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
-   
+  metatagsObj = {};
+  isupdate: boolean
+  constructor(private http: HttpClient, private swupdate: SwUpdate, private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
+
     this.getMetaTags();
-    this.swupdate.available.subscribe((res)=>{
+    this.swupdate.available.subscribe((res) => {
       this.isupdate = true
     })
   }
 
   ngOnInit() {
     //get data from ngrx store through meta tags actions
-    setTimeout(() => {
-      this.store.subscribe((data: any) => {
-        let metadata = data.Metatags.MetaTags
-        metadata.map((data) => {
-          this.metatagsObj[data.sUrl] = data
-        })
+    this.store.subscribe((data: any) => {
+      let metadata = data.Metatags.MetaTags
+      let metaarray = [];
+      metadata.map((data) => {
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
+        
+        metaarray[routerUrl[4]] = data
       })
-    }, 500);
+      this.metatagsObj = { ...metaarray }
+    })
+
     //susbcribe to router events
     this.router.events.subscribe((event) => {
       //scroll to top navigation related
@@ -62,77 +65,45 @@ export class AppComponent implements OnInit {
       window.scrollTo(0, 0)
       //change route get url 
       if (event instanceof NavigationEnd) {
-        let routerURL = event.url
+        this.setmetatags(event.url);
         //set meta tags from here...
-        let data = this.metatagsObj[environment.siteUrl + routerURL]
-        if (data) {
-          this.meta.updateTag({ name: 'title', content: data.title ? data.title : 'Sports.info' });
-          this.meta.updateTag({ name: 'description', content: data.description ? data.description : 'Sports.info' });
-          this.meta.updateTag({ name: 'topic', content: data.topic ? data.topic : 'Sports.info' });
-          this.meta.updateTag({ name: 'subject', content: data.subject ? data.subject : 'Sports.info' });
-          this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Sports.info' });
-          this.meta.updateTag({ property: 'og:title', content: data['og:title'] ? data['og:title'] : 'Sports.info' });
-          this.meta.updateTag({ property: 'og:type', content: data['og:type'] ? data['og:type'] : 'Sports.info' });
-          this.meta.updateTag({ property: 'og:description', content: data['og:description'] ? data['og:description'] : 'Sports.info' });
-          this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
-        }
-        else {
-          this.meta.updateTag({ name: 'title', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-          this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
-          this.meta.updateTag({ property: 'og:type', content: 'article' });
-          this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ property: 'twitter:card', content: 'Sports.info' });
-        }
+        console.log('tagsobj', this.metatagsObj);
         //set page title 
-        let title = this.commonservice.getPagetitlebyurl(routerURL);
+        let title = this.commonservice.getPagetitlebyurl(event.url);
         if (title != null) {
           this.pagetitle.setTitle(title);
         }
       }
     })
-
-    this.users$ = this.http.get('https://jsonplaceholder.typicode.com/posts');
-    this.socialLoginService.authState.subscribe((user) => {
-      // console.log('user',user);
-      this.socialUser = user
-    });
   }
 
-  signInWithFB(): void {
-    this.socialLoginService.signIn(FacebookLoginProvider.PROVIDER_ID).then((res) => {
-      if (res) {
-        this.socialUser = res
-        this.store.dispatch(new Auth.SetAuthenticated());
-      }
-    });
-  }
+  setmetatags(routerURL) {
+    console.log('routee',routerURL);
+    
+    let data = this.metatagsObj[routerURL]
+    if (data) {
+      this.meta.updateTag({ name: 'title', content: data.title ? data.title : 'Sports.info' });
+      this.meta.updateTag({ name: 'description', content: data.description ? data.description : 'Sports.info' });
+      this.meta.updateTag({ name: 'topic', content: data.topic ? data.topic : 'Sports.info' });
+      this.meta.updateTag({ name: 'subject', content: data.subject ? data.subject : 'Sports.info' });
+      this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Sports.info' });
+      this.meta.updateTag({ property: 'og:title', content: data['og:title'] ? data['og:title'] : 'Sports.info' });
+      this.meta.updateTag({ property: 'og:type', content: data['og:type'] ? data['og:type'] : 'Sports.info' });
+      this.meta.updateTag({ property: 'og:description', content: data['og:description'] ? data['og:description'] : 'Sports.info' });
+      this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
+    }
+    else {
+      this.meta.updateTag({ name: 'title', content: 'Sports.info' });
+      this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+      this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
+      this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
+      this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
+      this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
+      this.meta.updateTag({ property: 'og:type', content: 'article' });
+      this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+      this.meta.updateTag({ property: 'twitter:card', content: 'Sports.info' });
+    }
 
-  signInWithGoogle(): void {
-    console.log('sigin google');
-
-    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
-      if (res) {
-        this.store.dispatch(new Auth.SetAuthenticated());
-
-        this.socialUser2 = res
-      }
-
-    }).catch(error => {
-      console.log(error);
-
-    });
-  }
-
-  logout() {
-    this.socialLoginService.signOut().then((res) => {
-      if (res == undefined) {
-        this.store.dispatch(new Auth.SetUnauthenticated());
-      }
-    })
   }
 
   //get meta tags 
@@ -144,7 +115,7 @@ export class AppComponent implements OnInit {
     })
   }
 
-  updatewebsite(){
+  updatewebsite() {
     this.isupdate = false
     window.location.reload(true);
   }
