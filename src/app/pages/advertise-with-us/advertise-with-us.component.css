@@ -1,7 +1,7 @@
 .common-desc-block                      { padding: 24px; background: #fff; }
 .common-desc-block h1                   { margin-bottom: 8px; }
 .ad-desc-block img                      { width: 100%; }
-.common-desc-block p                    { color: #525252; line-height: 24px; }
+.common-desc-block p                    { font-size: inherit; color: #525252; line-height: 24px; }
 .common-desc-block p:last-child         { margin-bottom: 0px;}
 .common-form-section .common-section    { border-top: 2px solid #E5E5EC; }
 .common-form-section .title-block       { margin-bottom: 24px; }

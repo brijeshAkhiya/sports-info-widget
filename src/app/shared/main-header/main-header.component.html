@@ -9,7 +9,7 @@
               (click)="getmatchdetail(slide.match_id,slide.competitors.home.abbreviation,slide.competitors.away.abbreviation)">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
+                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
                   <p
                     *ngIf="slide.status == 'not_started' || slide.match_status == 'ended' || slide.status == 'closed'; else matchStatus">
                     {{slide.scheduled | amTimeAgo}}</p>
@@ -39,16 +39,18 @@
                     <p [ngClass]="{'match-winner': competitor?.winner}">
                       <img [lazyLoad]="competitor?.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder">{{competitor?.name}}</p>
-                    <p *ngIf="competitor?.period_scores">
+                    <p *ngIf="competitor?.period_scores"><b>
                       {{competitor?.period_scores.display_score}}({{competitor?.period_scores.display_overs}}
-                      ov)</p>
+                      ov)</b></p>
                   </div>
                 </ng-template>
 
                 <div class="row">
                   <div class="col-lg-9">
-                      <p class="result-line" *ngIf="slide.match_status == 'live'">{{slide.venue_name ? slide.venue_name : ''}}</p>
-                      <p class="result-line" *ngIf="slide.match_status != 'live'">{{slide.match_result ? slide.match_result : slide.venue_name}}</p>
+                    <p class="result-line" *ngIf="slide.match_status == 'live'">
+                      {{slide.venue_name ? slide.venue_name : ''}}</p>
+                    <p class="result-line" *ngIf="slide.match_status != 'live'">
+                      {{slide.match_result ? slide.match_result : slide.venue_name}}</p>
                   </div>
                 </div>
               </div>
@@ -104,7 +106,15 @@
     </div>
     <ul class="navbar-nav navbar-rightside login-search">
       <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()"></a></li>
-      <!-- <li><a class="login" (click)="open(content)"></a></li> -->
+      <li *ngIf="!isLogin">
+        <a class="login" (click)="open(content)"></a>
+      </li>
+      <li ngbDropdown *ngIf="isLogin">
+        <a class="login" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
+        <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>
@@ -135,7 +145,7 @@
       </div>
       <div class="common-popular-list popular-list-4" *ngIf="searchdata">
         <div class="row row-size12">
-          <div class="col-sm-3" *ngFor="let item of searchdata">
+          <div class="col-sm-3" *ngFor="let item of searchdata | slice:0:4">
             <div class="popular-item common-shadow">
               <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': item?.eType == 'Video'}">
                 <div class="common-zoom-img" [lazyLoad]="item?.sImage | resizeImage:['s']">
@@ -152,7 +162,7 @@
     </div>
   </div>
 </div>
-<!-- <ng-template #content let-modal>
+<ng-template #content let-modal>
   <div class="modal-body">
     <h1>Sign In</h1>
     <ul>
@@ -162,4 +172,4 @@
     <p class="signin-text">By signing in with Google or Facebook, you agree to
       SportsInfo’s <a [routerLink]="['/terms-and-conditions']" >Terms</a> and <a [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>
   </div>
-</ng-template> -->
+</ng-template>

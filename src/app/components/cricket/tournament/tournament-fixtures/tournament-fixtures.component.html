@@ -27,6 +27,7 @@
                         <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
                         <p class="result-line">{{item?.match_result}}</p>
                         <p class="result-line" *ngIf="item.match_status == 'postponed'">Match is postponed</p>
+                        <p class="result-line" *ngIf="item.match_status == 'cancelled'">Match is cancelled</p>
                         <p class="result-line" *ngIf="item.match_status == 'abandoned'">Match is abandoned</p>
                         <p class="result-line" *ngIf="item.match_status == 'start_delayed'">Match is cancelled</p>
                       </div>
@@ -37,14 +38,18 @@
                             <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                             <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
                           </div>
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+                            alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center"
                           *ngFor="let item of item.period_score_new | slice:1:2">
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item?.team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+                            alt="team-flag">
                           <div class="team-info" *ngIf="!item.teamFlag || item.teamFlag">
                             <h5 [ngClass]="{'winner': item.team.winner}">{{item.team.abbreviation}}</h5>
                             <p>{{item?.display_score}}({{item?.display_overs}} ov)</p>
@@ -54,18 +59,23 @@
                           (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                       </div>
                       <!-- If match is postponeded -->
-                      <div class="match-teams d-flex align-items-center" *ngIf="item.match_status == 'postponed' || item.match_status == 'start_delayed'">
+                      <div class="match-teams d-flex align-items-center"
+                        *ngIf="item.match_status == 'postponed' || item.match_status == 'start_delayed'">
                         <div class="match-team d-flex align-items-center">
                           <div class="team-info">
                             <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.competitors[0].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item?.competitors[0].id | logosurl"
+                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.competitors[1].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item?.competitors[1].id | logosurl"
+                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
@@ -73,19 +83,24 @@
                         <a class="details-btn"
                           (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                       </div>
-                      <!--If match is abandoned-->
-                      <div class="match-teams d-flex align-items-center" *ngIf="item.match_status == 'abandoned'">
+                      <!--If match is abandoned or cancelled-->
+                      <div class="match-teams d-flex align-items-center"
+                        *ngIf="item.match_status == 'abandoned' || item.match_status == 'cancelled'">
                         <div class="match-team d-flex align-items-center">
                           <div class="team-info">
                             <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.competitors[0].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item?.competitors[0].id | logosurl"
+                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.competitors[1]?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item?.competitors[1]?.id | logosurl"
+                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>
@@ -127,13 +142,17 @@
                           <div class="team-info">
                             <h5>{{item.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.competitors[0]?.id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item.competitors[0]?.id | logosurl"
+                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item.competitors[1].id | logosurl" [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                            [lazyLoad]="item.competitors[1].id | logosurl"
+                            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>

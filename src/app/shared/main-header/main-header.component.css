@@ -1,23 +1,24 @@
 /* -------- Header Slider CSS ------- */
 .header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1111; }
 .header-live-slider                                     { padding: 12px 74px; position: relative; }
-.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 118px; background: #fff;  cursor: pointer; border-radius: 4px; }
-.header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 14px; line-height: 18px; font-weight: 500; font-family: 'IBM Plex Sans', sans-serif;}
-.header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif;  }
-.header-live-slider .slider-item .title p:last-child    { padding-left: 4px; flex-shrink: 0; -webkit-flex-shrink: 0; }
-.header-live-slider .slider-item .title p.live-result           { padding-left: 10px; color: #ED1A33; text-transform: capitalize; }
+.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 105px; background: #fff;  cursor: pointer; border-radius: 4px; }
+.header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 12px; line-height: 16px; font-family: 'IBM Plex Sans', sans-serif;}
+.header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-family: 'IBM Plex Sans Condensed', sans-serif;  }
+.header-live-slider .slider-item .title p:last-child    { padding-left: 14px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.header-live-slider .slider-item .title p.live-result           { color: #ED1A33; text-transform: capitalize; }
 .header-live-slider .slider-item .title p.live-result:before    { content: ""; margin: 4px 4px 0px -10px; width: 6px; height: 6px; background: #ED1A33; display: inline-block; vertical-align: top; border-radius: 50%; }
-.header-live-slider .slider-item .title p b             { color: #595959;}
+.header-live-slider .slider-item .title .tour-name      { white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.header-live-slider .slider-item .title p b             { color: #595959; font-weight: 700;}
 .header-live-slider .slider-item .match-winner::after   { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background: url(assets/images/winner-cup.svg); vertical-align: middle; }
-.header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; width: 20px; display: inline-block; }
-.header-live-slider .slider-item .result-line           { margin: 0px; font-size: 12px; line-height: 18px; }
-.header-live-slider .slider-item .live-result           { padding-left: 10px; }
+.header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; height: 16px; width: auto; display: inline-block; }
+.header-live-slider .slider-item .match-info p          { color: #292929; font-weight: 500; }
+.header-live-slider .slider-item .result-line           { margin: 1px 0px 0px; font-size: 11px; line-height: 14px; }
 
 /* -------- Navbar CSS ------- */
-nav.navbar                      { padding: 0px; width: 100%; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase; top: 0; z-index: 1111; overflow: hidden; }
+nav.navbar                      { padding: 0px; width: 100%; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase; top: 0; z-index: 1111; }
 nav.navbar.sticky               { position: fixed; top: 0;}
 nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block; background: #fff; position: relative; }
-nav .navbar-brand:before        { content: ""; position: absolute; width: 52px; height: calc(100% + 1px); right: -50px; top: 0px; background: url(assets/images/logo-shape.svg) no-repeat center center / 100% 100%; }
+nav .navbar-brand:before        { content: ""; position: absolute; width: 52px; height: calc(100% + 0px); right: -50px; top: 0px; background: url(assets/images/logo-shape.svg) no-repeat center center / 100% 100%; }
 nav .navbar-brand img           { position: relative; z-index: 1;}
 .navbar-nav                     { position: relative; } 
 .navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; white-space: nowrap; }
@@ -30,7 +31,8 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .login-search li a.search       { background-image: url(assets/images/search-icon.svg); }
 .login-search li a.search.active{ background-image: url(assets/images/close-icon.svg); opacity: 1; }
 .login-search li a.login        { background-image: url(assets/images/user-icon.svg); }
-
+.login-search li .login.dropdown-toggle::after  { display: none; }
+.login-search li .login .dropdown-menu          { top: 100% !important; left: auto !important; right: 0 !important; transform: translate(0) !important; -webkit-transform: translate(0) !important; }
 /* -------- Serch Box CSS ------- */
 .common-serch-box               { z-index: -112; opacity: 0; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .common-serch-box.show          { z-index: 112; opacity: 1; }
@@ -112,8 +114,6 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 }
 
 @media (max-width: 767px) {
-/* -------- Header Slider CSS ------- */
-    .header-live-slider .slider-item-inner              {  }
 /* -------- Navbar CSS ------- */
     nav.navbar.menu-open                                { overflow: visible;}
     nav .navbar-brand                                   { margin-right: 24px; padding: 6px 0px 6px 12px;}
@@ -138,18 +138,14 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 }
 
 @media (max-width: 575px) {
+/* -------- Header Slider CSS ------- */
     .header-live-slider                                     { padding: 12px 24px;}
-    .header-live-slider .slider-item-inner                  { min-height: 106px; }
-    .header-live-slider .slider-item-inner p                { margin-bottom: 3px; font-size: 13px; line-height: 17px;}
-    .header-live-slider .slider-item .title p               { font-size: 11px; line-height: 14px;   }
+    .header-live-slider .slider-item-inner                  { min-height: 105px; }
     .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
-    .header-live-slider .slider-item .match-info img        { width: 18px; }
-    .header-live-slider .slider-item .result-line           { font-size: 11px; line-height: 16px; }
-
 /* -------- Navbar CSS ------- */
     nav .navbar-brand:before                            { width: 36px; right: -34px; }
     nav .navbar-brand img                               { width: 140px;}
 /* -------- Serch Box CSS ------- */
     .search-bar input                               { font-size: 16px; line-height: 20px; }
-    .search-result .common-title-btn h3             {font-size: 18px; }
+    .search-result .common-title-btn h3             { font-size: 18px; }
 }

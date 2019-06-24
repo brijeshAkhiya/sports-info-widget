@@ -13,7 +13,9 @@ export const environment = {
   },
   s3Url: 'https://d1ldsx0apuyt84.cloudfront.net/',
   siteUrl: 'https://dev.sports.info',
-  mapsKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY'
+  mapsKey: 'AIzaSyAjnz5zvaRF5aMwMcsZ2-5nm43B9Hs3KhY',
+  facebookId:'392165904733265',
+  googleOuthId:'504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com'
 };
 
 
