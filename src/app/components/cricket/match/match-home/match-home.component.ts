@@ -443,6 +443,7 @@ export class MatchHomeComponent implements OnInit {
 
   /** Get all Commentries inning wise - support for more than 2 innings */
   getCommentries() {
+
     // check if commentry exists
     console.log(this.checkCommentry().length);
     if (this.checkCommentry().length <= 0) {
@@ -461,10 +462,9 @@ export class MatchHomeComponent implements OnInit {
       return false;
     }
 
-
-
     // loop of innings from statistics
     this.data.statistics.innings.forEach((innings, index) => {
+      
       // Store Inning wise data
       this.inningWiseCommentry[index] = {
         inning: innings.number,
@@ -476,8 +476,7 @@ export class MatchHomeComponent implements OnInit {
         commentry => commentry.inning == innings.number
       );
 
-
-      //for loop of overs_completd in inning
+      // If overs is not yet started
       if (typeof innings.overs == "undefined" || innings.overs.length <= 0) {
         if (typeof this.inningWiseCommentry[0] == "undefined")
           this.inningWiseCommentry[0] = { commentry: [] };
@@ -485,7 +484,6 @@ export class MatchHomeComponent implements OnInit {
         if (typeof this.inningWiseCommentry[0] == "undefined")
           this.inningWiseCommentry[0] = { commentry: [] };
 
-        // console.log(this.inningWiseCommentry[0].commentry)
         if (this.inningWiseCommentry[0].commentry.length <= 0)
           this.inningWiseCommentry[0].commentry[0] = {};
 
@@ -495,6 +493,7 @@ export class MatchHomeComponent implements OnInit {
         return false;
       }
 
+      //for loop of overs_completd in inning
       let firstIndex = 0;
       let lastIndex = 0;
       innings.overs.forEach((over, inningIndex) => {
@@ -505,7 +504,12 @@ export class MatchHomeComponent implements OnInit {
           commentry =>
             commentry.over_number == nextOver &&
             commentry.inning == innings.number
-        );
+        );        
+        // Next over if commentry type is change_of_bowler
+        let matchedIndex = currentInningCommentry.map(function (obj, i) { return i > firstIndex && obj.type; }).indexOf('change_of_bowler');
+        if(lastIndex > matchedIndex)
+          lastIndex = matchedIndex;
+
         let overCommentry = [];
         if (lastIndex > 0) {
           overCommentry = currentInningCommentry.slice(
@@ -528,6 +532,8 @@ export class MatchHomeComponent implements OnInit {
           else overCommentry = currentInningCommentry.slice(firstIndex);
         } else
           overCommentry = currentInningCommentry.slice(firstIndex);
+
+        console.log(overCommentry)
         // // get first index of this innings over
         // let firstOverIndex = currentInningCommentry.findIndex(
         //   commentry =>
@@ -816,8 +822,10 @@ export class MatchHomeComponent implements OnInit {
 
     // Stop live update if Match is ended
     if (this.data.sport_event_status.status == "ended") {
-      this.clearTimeInterval();
-      return false;
+      this.interval = setInterval(() => {
+        this.clearTimeInterval();
+        return false;
+      }, this.commonService.miliseconds(0, 15, 0)); // stop live update after 15 min of match completed 
     }
   }
 
