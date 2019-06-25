@@ -18,8 +18,7 @@
                   </ng-template>
                 </div>
 
-                <ng-container
-                  *ngIf="slide?.competitors?.away?.show_first; else home_first">
+                <ng-container *ngIf="slide?.competitors?.away?.show_first; else home_first">
                   <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away}">
                   </ng-container>
                   <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home}">
@@ -40,8 +39,8 @@
                       <img [lazyLoad]="competitor?.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder">{{competitor?.name}}</p>
                     <p *ngIf="competitor?.period_scores"><b>
-                      {{competitor?.period_scores.display_score}}({{competitor?.period_scores.display_overs}}
-                      ov)</b></p>
+                        {{competitor?.period_scores.display_score}}({{competitor?.period_scores.display_overs}}
+                        ov)</b></p>
                   </div>
                 </ng-template>
 
@@ -153,7 +152,8 @@
               </div>
               <div class="item-desc">
                 <p class="bold-text"><a
-                    (click)="blogview(item._id,item.eType,item.sTitle)">{{item?.sTitle | truncate:[56,'...']}}</a></p>
+                    [routerLink]="['/blog' , (item.eType |lowercase) , item._id , item.sSlug ]">{{item?.sTitle | truncate:[56,'...']}}</a>
+                </p>
               </div>
             </div>
           </div>
@@ -166,10 +166,13 @@
   <div class="modal-body">
     <h1>Sign In</h1>
     <ul>
-      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">Sign in with Google</button></li>
-      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">Continue with Facebook</button></li>
+      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">Sign in with Google</button>
+      </li>
+      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">Continue with
+          Facebook</button></li>
     </ul>
     <p class="signin-text">By signing in with Google or Facebook, you agree to
-      SportsInfo’s <a [routerLink]="['/terms-and-conditions']" >Terms</a> and <a [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>
+      SportsInfo’s <a [routerLink]="['/terms-and-conditions']">Terms</a> and <a
+        [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>
   </div>
 </ng-template>

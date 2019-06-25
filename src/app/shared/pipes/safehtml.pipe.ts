@@ -8,10 +8,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SafehtmlPipe implements PipeTransform {
 
   constructor(public commonService: CommonService,private domsanitizer:DomSanitizer) {}
-
-  transform(value: any): any {
-    if (value) {
-      return this.domsanitizer.bypassSecurityTrustHtml(value);
+  transform(value: any,args?: any): any {
+    if (args == 'video') {
+      return this.domsanitizer.bypassSecurityTrustUrl(value);
     } 
+    else {
+      return this.domsanitizer.bypassSecurityTrustHtml(value);
+    }
   }
 }

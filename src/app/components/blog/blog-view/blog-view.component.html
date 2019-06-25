@@ -3,7 +3,7 @@
   <ng-container *ngIf="blogtype == 'video'">
     <div class="video-container" [ngClass]="{'show': isplay}">
       <video controls controlsList="nodownload" #videoPlayer>
-        <source [src]="commonService.s3Url+blogdata?.sVideo" type="video/mp4" *ngIf="blogdata?.sVideo">
+        <source [src]="commonService.s3Url+blogdata?.sVideo | safehtml:['video']" type="video/mp4" *ngIf="blogdata?.sVideo">
         Your browser does not support the video tag.
       </video>
     </div>

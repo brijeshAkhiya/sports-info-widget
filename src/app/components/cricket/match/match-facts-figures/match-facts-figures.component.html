@@ -50,15 +50,19 @@
                   <h5 [ngClass]="{'winner': score.team.id == match.winner_id}">{{score.team.abbreviation}}</h5>
                   <p>{{score?.display_score}}({{score?.display_overs}} ov)</p>
                 </div>
-                <img class="team-flag" [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
+                <div class="team-flag">
+                <img [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
                   [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                </div>
               </div>
               <div class="vs-block">
                 <h6>vs</h6>
               </div>
               <div class="match-team d-flex align-items-center" *ngFor="let score of match.period_score_new | slice:1:2">
-                <img class="team-flag" [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
+                <div class="team-flag">
+                <img [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
                   [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                </div>
                 <div class="team-info" *ngIf="!score.teamFlag || score.teamFlag">
                   <h5 [ngClass]="{'winner': score.team.id == match.winner_id}">{{score.team.abbreviation}}</h5>
                   <p>{{score?.display_score}}({{score?.display_overs}} ov)</p>

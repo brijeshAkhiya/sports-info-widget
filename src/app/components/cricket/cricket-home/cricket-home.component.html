@@ -12,14 +12,16 @@
             <ng-template ngbTabContent>
               <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
                 <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"
-                  (click)="blogview(post._id,post.eType,post.sTitle)">
-                  <div class="common-zoom-img"  [offset]="commonService.lazyloadoffset"  [defaultImage]="commonService.largeblogPlaceholder"  [lazyLoad]="post.sImage | resizeImage:['m']">
+                  [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">
+                  <div class="common-zoom-img" [offset]="commonService.lazyloadoffset"
+                    [defaultImage]="commonService.largeblogPlaceholder" [lazyLoad]="post.sImage | resizeImage:['m']">
                   </div>
                 </div>
                 <div class="blog-desc">
-                  <h4><a (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle}}</a></h4>
+                  <h4><a [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle}}</a>
+                  </h4>
                   <p [innerHtml]="post.sDescription | truncate:[240,'...'] | striphtml"
-                    (click)="blogview(post._id,post.eType,post.sTitle)"></p>
+                    [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]"></p>
                   <div class="author-info d-flex justify-content-between align-items-center">
                     <p class="author"><a (click)="writerview(post?.iId?._id)">{{post.iId.sFirstName}}
                         {{post.iId.sLastName}}</a>{{post.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
@@ -28,13 +30,15 @@
                 </div>
               </div>
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
-              <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
+              <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5">
+              </app-common-related-blog-card>
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
               <!-- <app-common-blog-card [posts]="populararticles" [start]="5" [end]="9" (loadmore)="loadmor"></app-common-blog-card>
               <div class="text-center"><button class="theme-btn down-btn" (click)="loadpopular()">Load
                   More<span></span></button>
               </div> -->
-              <app-common-news-list [reqparams]="commonnewsparams" [type]="'recents'" *ngIf="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonnewsparams" [type]="'recents'" *ngIf="commonnewsparams">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Latest Article Tab-->
@@ -43,24 +47,26 @@
               <div (click)="getRecentPosts()">Latest</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [reqparams]="commonlatestparams"  *ngIf="commonlatestparams" [type]="'recents'" ></app-common-news-list>
+              <app-common-news-list [reqparams]="commonlatestparams" *ngIf="commonlatestparams" [type]="'recents'">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Videos tab start-->
-          <ngb-tab> 
+          <ngb-tab>
             <ng-template ngbTabTitle>
               <div (click)="getVideoPosts()">Videos</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [reqparams]="commonvideoparams" *ngIf="commonvideoparams" [type]="'recents'"></app-common-news-list>
+              <app-common-news-list [reqparams]="commonvideoparams" *ngIf="commonvideoparams" [type]="'recents'">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
             *ngIf="widget1type && widget1title"></app-common-story-widget>
           <app-common-story-widget [title]="widget2title" [type]="widget2type" [data]="populartags"

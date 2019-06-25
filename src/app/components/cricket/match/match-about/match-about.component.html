@@ -2,10 +2,15 @@
   class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
   *ngIf="data">
 
-  <h1 *ngIf="data.sport_event.competitors">
+  <!-- <h1 *ngIf="data.sport_event.competitors">
     {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
-  </h1>
-
+  </h1> -->
+  <div class="tour-match-title">
+    <p class="light-text">{{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}</p>
+    <h1 *ngIf="data.sport_event.competitors">
+        {{data.sport_event.competitors[0].name}} vs {{data.sport_event?.competitors[1].name}}
+      </h1>
+  </div>
 
   <div class="match-update">
     <p class="light-text">

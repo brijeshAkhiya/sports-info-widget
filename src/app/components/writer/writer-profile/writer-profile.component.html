@@ -3,31 +3,39 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="writer-profile d-flex">
-          <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']" [defaultImage]="commonService.writerPlaceholder"></div>
+          <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start"
+            [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']"
+            [defaultImage]="commonService.writerPlaceholder"></div>
           <div class="writer-info rounded-box common-shadow d-flex flex-column">
             <div>
               <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
               <p>{{writerdata?.writerData?.sBio}}</p>
             </div>
-            <p class="view-info">Posts : <b>{{writerdata?.writerData?.nPostsCount}}</b> | Views : <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
+            <p class="view-info">Posts : <b>{{writerdata?.writerData?.nPostsCount}}</b> | Views :
+              <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
           </div>
         </div>
         <ngb-tabset class="common-tabs writer-tab">
           <ngb-tab>
             <ng-template ngbTabTitle>Latest</ng-template>
-            <ng-template ngbTabContent>             
-                <app-common-news-list [type]="'writerrecent'" [reqparams]="commonrecentparams"></app-common-news-list>  
+            <ng-template ngbTabContent>
+              <app-common-news-list [type]="'writerrecent'" [reqparams]="commonrecentparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle><div (click)="getWriteropularblogs()">Most Read</div></ng-template>
-            <ng-template ngbTabContent>              
+            <ng-template ngbTabTitle>
+              <div (click)="getWriteropularblogs()">Most Read</div>
+            </ng-template>
+            <ng-template ngbTabContent>
               <app-common-news-list [type]="'writerpopular'" [reqparams]="commonpopularparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
-            <ng-template ngbTabTitle><div (click)="getWritervideos()">Videos</div></ng-template>
-            <ng-template ngbTabContent>             
+            <ng-template ngbTabTitle>
+              <div (click)="getWritervideos()">Videos</div>
+            </ng-template>
+            <ng-template ngbTabContent>
               <app-common-news-list [type]="'writervideos'" [reqparams]="commonvideoparams"></app-common-news-list>
             </ng-template>
           </ngb-tab>
@@ -40,7 +48,8 @@
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>From this writer</h5>
             <ul class="common-list">
-              <li *ngFor="let item of writerdata?.posts?.posts | slice:0:5"><a (click)="blogview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
+              <li *ngFor="let item of writerdata?.posts?.posts | slice:0:5"><a
+                  [routerLink]="['/blog' , (item.eType |lowercase) , item._id , item.sSlug ]">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>

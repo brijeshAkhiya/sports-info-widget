@@ -507,9 +507,10 @@ export class MatchHomeComponent implements OnInit {
         );        
         // Next over if commentry type is change_of_bowler
         let matchedIndex = currentInningCommentry.map(function (obj, i) { return i > firstIndex && obj.type; }).indexOf('change_of_bowler');
+        if(matchedIndex > -1){
         if(lastIndex > matchedIndex)
           lastIndex = matchedIndex;
-
+        }
         let overCommentry = [];
         if (lastIndex > 0) {
           overCommentry = currentInningCommentry.slice(

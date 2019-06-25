@@ -36,7 +36,8 @@
 .match-teams .match-team                { width: calc(50% - 36px); }
 .match-teams .match-team:first-child    { text-align: right;  -webkit-justify-content: flex-end; -moz-justify-content: flex-end; -ms-justify-content: flex-end; justify-content: flex-end; }
 .match-teams .team-info                 { padding: 0px 12px; }
-.match-teams .team-flag                 { height: 46px; width: auto; border: 2px solid #E5E5E5; border-radius: 3px; }
+.match-teams .team-flag                 { border: 2px solid #E5E5E5; border-radius: 3px; overflow: hidden; }
+.match-teams .team-flag img             { height: 46px; width: auto;}
 .schedule-item .details-btn             { position: absolute; width: 32px; height: 100%; background: #ED1A33; font-size: 14px; line-height: 32px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: #fff; right: -32px; top: 0px; border-radius: 4px; text-transform: uppercase; }
 .schedule-item .details-btn span        { position: relative; color: #fff; display: block; top: calc(50% + 2px); transform: rotate(-90deg); -webkit-transform: rotate(-90deg); }
 .schedule-item:hover .details-btn       { right: 0px;}
@@ -80,7 +81,7 @@
     .schedule-item .match-teams             { width: calc(100% - 168px); }
     .match-teams .match-team                { width: calc(50% - 5px); }
     .match-teams .team-info                 { padding: 0px 10px; }
-    .match-teams .team-flag                 { height: 42px;}
+    .match-teams .team-flag img             { height: 42px;}
     .match-teams .vs-block h6               { margin: 0px 10px; }
     .schedule-tour-list p                   { margin-bottom: 10px;}
 /* -------- Teams List ------- */  
@@ -102,7 +103,7 @@
     .match-teams .team-info                 { padding: 0px 10px; }
     .schedule-item .match-teams             { margin-top: 12px; }
     .match-teams .match-team                { width: calc(50% - 5px); }
-    .match-teams .team-flag                 { height: 40px;}
+    .match-teams .team-flag img             { height: 40px;}
     .match-teams .vs-block h6               { margin: 0px 10px; }
     .schedule-tour-list p                   { margin-bottom: 6px;}
 /* -------- Teams List ------- */ 
@@ -129,7 +130,7 @@
     .schedule-list .schedule-items              { width: calc(100% - 90px); }
     .schedule-list .schedule-item .schedule-date { font-size: 15px; line-height: 20px;}
 /* -------- Tournament Fixtures List ------- */
-    .match-teams .team-flag                 { height: 34px;}
+    .match-teams .team-flag img             { height: 34px;}
     .schedule-tour-list .complete-match h5  { margin-bottom: 2px; font-size: 15px; line-height: 19px; }
     .schedule-tour-list .schedule-item      { padding-left: 4px;}
     .schedule-tour-list p                   { margin-bottom: 5px; font-size: 13px; line-height: 18px;}
@@ -146,7 +147,7 @@
     .schedule-list .month-title h5              { margin-bottom: 16px;}
     .schedule-list .month-title .sticky-month   { position: static; }
 /* -------- Tournament Fixtures List ------- */
-    .match-teams .team-flag                         { height: 28px; }
+    .match-teams .team-flag img                     { height: 28px; }
     .schedule-item.complete-match .match-teams      { flex-direction: column; }
     .schedule-tour-list .schedule-item              { padding-left: 20px; padding-right: 32px;}
     .complete-match .match-teams .match-team:first-child            { text-align: left; justify-content: start; -webkit-justify-content: start; }
