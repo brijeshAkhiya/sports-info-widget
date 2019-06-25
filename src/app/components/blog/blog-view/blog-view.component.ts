@@ -47,7 +47,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.url = this.activatedroute.url;
 
     if (this.activatedroute.snapshot.params.id)
-      this.getBlogview(atob(this.activatedroute.snapshot.params.id));
+      this.getBlogview(this.activatedroute.snapshot.params.id);
     this.previewtype = (this.url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     this.blogshareid = this.activatedroute.snapshot.params.id
     this.blogslug = this.activatedroute.snapshot.params.slug
@@ -178,7 +178,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
       window.open(`http://www.facebook.com/sharer.php?u=${this.blogUrl}`, '_blank');
     }
     else if (platform == 'whatsapp') {
-      window.open(`https://web.whatsapp.com/send?text=${this.blogUrl}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=&text=${this.blogUrl}`,'_blank');
     }
     else {
       window.open(`http://twitter.com/share?text=This is our new blog !!! &url=${this.blogUrl}&hashtags=Sports.info,Cricketblogs,sportslatest`, '_blank')

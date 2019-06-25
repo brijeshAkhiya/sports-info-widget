@@ -350,6 +350,16 @@ export class SportsService {
     );
   }
 
+  //social logout
+  userlogout(token){
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    return this.http.get(
+      environment.apiUrl + environment.version + `/logout`, { headers: headers }
+    );
+  }
+
   connect() {
     return io(environment.socket.baseUrl)
   }

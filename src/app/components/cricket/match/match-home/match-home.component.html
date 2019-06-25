@@ -52,8 +52,7 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
-                              <ng-container
-                                *ngIf="typeOf(batting.statistics.length) !== 'number'">
+                              <ng-container *ngIf="typeOf(batting.statistics.length) !== 'number'">
                                 <td>
                                   <a (click)="cricketService.playerview(batting.id,batting.name)"
                                     [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">
@@ -84,7 +83,7 @@
                                       (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
                                         : ''  
                                     : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
-                                     
+
                                     <!--if batsman is stumped out-->
                                     {{ batting?.statistics?.dismissal?.type == 'stumped' ? batting?.statistics?.dismissal?.fieldsman_id ?
                                     (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
@@ -174,7 +173,8 @@
                     <!--Fall of wickets section ends-->
 
 
-                    <div class="common-table bowler-table tour-stats-table common-shadow rounded-box" *ngIf="item?.teams[1]?.statistics?.bowling?.players.length > 0">
+                    <div class="common-table bowler-table tour-stats-table common-shadow rounded-box"
+                      *ngIf="item?.teams[1]?.statistics?.bowling?.players.length > 0">
                       <div class="table-responsive">
                         <table class="table">
                           <thead>
@@ -404,7 +404,8 @@
                   </div>
                   <div class="schedule-items">
                     <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
-                      *ngFor="let item of item.data"  (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                       <div class="match-desc">
                         <!-- <h6>Match 2</h6> -->
                         <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
@@ -415,17 +416,21 @@
                           <div class="team-info">
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
-                          <img class="team-flag" [lazyLoad]="item?.competitors[0].id | logosurl"
-                            [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
-                            alt="team-flag">
+                          <div class="team-flag">
+                            <img [lazyLoad]="item?.competitors[0].id | logosurl"
+                              [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
+                              alt="team-flag">
+                          </div>
                         </div>
                         <div class="vs-block">
                           <h6>vs</h6>
                         </div>
                         <div class="match-team d-flex align-items-center">
-                          <img class="team-flag" [lazyLoad]="item?.competitors[1].id | logosurl"
-                            [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
-                            alt="team-flag">
+                          <div class="team-flag">
+                            <img [lazyLoad]="item?.competitors[1].id | logosurl"
+                              [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
+                              alt="team-flag">
+                          </div>
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
                           </div>

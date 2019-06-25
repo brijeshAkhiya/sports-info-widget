@@ -98,7 +98,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         this.socialUser = user;
         this.isLogin = true
       }
-
     });
   }
 
@@ -108,10 +107,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   logout() {
     this.authService.signOut().then(res => {
-      console.log(res);
-
+      if (localStorage.getItem('userT')) {
+        this.getuserLogout(localStorage.getItem('userT'));
+        localStorage.removeItem('userT')
+      }
     });
   }
+  
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     if (window.pageYOffset > 156) {
@@ -314,6 +316,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   }
 
   signInWithGoogle(): void {
+    console.log('google click')
     this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.socialLoginService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
@@ -334,18 +337,24 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       let data = {
         sFbToken: token
       }
-      this.sportsService.sociallogin(type, data).subscribe((res) => {
-
+      this.sportsService.sociallogin(type, data).subscribe((res: any) => {
+        localStorage.setItem('userT', res.Authorization)
       })
     }
     else if (type == 'google') {
       let data = {
         sGoogleToken: token
       }
-      this.sportsService.sociallogin(type, data).subscribe((res) => {
-
+      this.sportsService.sociallogin(type, data).subscribe((res: any) => {
+        localStorage.setItem('userT', res.Authorization)
       })
     }
+  }
+
+  getuserLogout(token) {
+    this.sportsService.userlogout(token).subscribe((res) => {
+      console.log(res);
+    })
   }
 
   //Social login modal

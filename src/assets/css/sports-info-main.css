@@ -23,8 +23,12 @@ h2                      { margin: 0px 0px 8px; font-size: 40px; line-height: 50p
 h3                      { margin: 0px 0px 8px; font-size: 32px; line-height: 42px; font-family: 'Muli', sans-serif; color: #292929; font-weight: 800; text-transform: uppercase; }
 h4                      { margin: 0px 0px 8px; font-size: 24px; line-height: 32px; color: #3D3D3D; font-family: 'Muli', sans-serif; font-weight: 800; }
 h5                      { margin: 0px 0px 4px; font-size: 20px; line-height: 25px; color: #292929; font-family: 'Muli', sans-serif; font-weight: 700; }
+h5 a                    { color: #292929;}
 h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
-h6 a                    { color: #3D3D3D; }
+h4 a,h6 a               { color: #3D3D3D; }
+h4 a:hover,h4 a:hover,
+h5 a:hover,h5 a:hover,
+h6 a:hover,h6 a:hover,
 h4 a:not([href]):not([tabindex]):hover,
 h4 a:not([href]):not([tabindex]):focus,
 h5 a:not([href]):not([tabindex]):hover,
@@ -110,7 +114,8 @@ button                  { outline: none !important; cursor: pointer; transition:
 .no-data-available-white h5         { margin: 64px 0px 0px; text-align: center;color: #fff !important; }
 
 /******* Header Section CSS Start ******/
-.modal-backdrop.show                { opacity: 0.65; }
+.modal-backdrop.show                { opacity: 0.65; z-index: 11111 !important; }
+.modal                              { z-index: 11111;}
 .modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
 .modal.show .modal-dialog           { left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 .signin-modal h1                    { opacity: 0.20; font-style: normal; }
@@ -232,12 +237,12 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .common-stories-widget:last-child       { margin-bottom: 24px; }
 .common-stories-widget h5               { margin-bottom: 16px; }
 .common-stories-widget ul               { margin: 0px; }
-.common-stories-widget li a:not([href]):not([tabindex])             { margin-bottom: 12px; padding-bottom: 12px; display: block; font-size: 14px; line-height: 22px; color: rgba(41,41,41,0.5); font-family: 'Muli', sans-serif; font-weight: 700; border-bottom: 1px solid #ECECEC; }
-.common-stories-widget li a:not([href]):not([tabindex]):focus,
-.common-stories-widget li a:not([href]):not([tabindex]):hover       { color: rgba(41,41,41,1);}
+.common-stories-widget li a             { margin-bottom: 12px; padding-bottom: 12px; display: block; font-size: 14px; line-height: 22px; color: rgba(41,41,41,0.5); font-family: 'Muli', sans-serif; font-weight: 700; border-bottom: 1px solid #ECECEC; }
+.common-stories-widget li a:focus,
+.common-stories-widget li a:hover       { color: rgba(41,41,41,1);}
 .common-stories-widget li a:before      { margin-top: -3px; content: ""; display: inline-block; width: 0px; height: 2px; vertical-align: middle; background: #292929; transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; }
 .common-stories-widget li a:hover:before{ margin-right: 8px; width: 18px;}
-.common-stories-widget li:last-child a:not([href]):not([tabindex])  { margin-bottom: 0px; padding-bottom: 0px; border: none; }
+.common-stories-widget li:last-child a  { margin-bottom: 0px; padding-bottom: 0px; border: none; }
 
 /* -------- Table Style ------- */
 .common-table                           { background: #fff; overflow: hidden; }
@@ -425,7 +430,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .common-tabs > .nav-tabs .nav-link          { margin: 0px 14px; font-size: 15px; }
 /* -------- Common Stories Widget Block ------- */
     .common-stories-widget                      { padding: 16px 20px 20px;}
-    .common-stories-widget li a:not([href]):not([tabindex]) { margin-bottom: 10px; padding-bottom: 10px;}
+    .common-stories-widget li a                 { margin-bottom: 10px; padding-bottom: 10px;}
 /* -------- Filled Tab ------- */
     .filled-tabs > .nav-tabs .nav-link          { padding: 14px 12px 13px; font-size: 16px; line-height: 20px;}
 /* -------- Writer Tab ------- */

@@ -11,25 +11,29 @@
             <ng-template ngbTabContent>
               <div class="popular-main-item common-shadow" *ngFor="let post of populararticles | slice:0:1">
                 <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"
-                  (click)="blogview(post._id,post.eType,post.sTitle)">
-                  <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"   [offset]="commonService.lazyloadoffset"  [lazyLoad]="post.sImage | resizeImage:['m']">
+                  [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">
+                  <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"
+                    [offset]="commonService.lazyloadoffset" [lazyLoad]="post.sImage | resizeImage:['m']">
                   </div>
                 </div>
                 <div class="blog-desc">
-                  <h4><a (click)="blogview(post._id,post.eType,post.sTitle)">{{post.sTitle}}</a></h4>
+                  <h4><a [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle}}</a>
+                  </h4>
                   <p [innerHtml]="post.sDescription | truncate:[240,'...'] | striphtml"
-                    (click)="blogview(post._id,post.eType,post.sTitle)"></p>
+                    [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]"></p>
                   <div class="author-info d-flex justify-content-between align-items-center">
                     <p class="author"><a (click)="writerview(post?.iId?._id)">{{post.iId.sFirstName}}
-                        {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+                        {{post.iId.sLastName}}</a>{{post.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
                     <p class="view">{{post.nViewCounts}}</p>
                   </div>
                 </div>
               </div>
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
-              <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5"></app-common-related-blog-card>
+              <app-common-related-blog-card [posts]="populararticles" [start]="1" [end]="5">
+              </app-common-related-blog-card>
               <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Latest Article Tab-->
@@ -38,9 +42,10 @@
               <div (click)="getRecentPosts()">Latest</div>
             </ng-template>
             <ng-template ngbTabContent>
-                <!-- <app-common-blog-card [posts]="latestposts" [start]="0" [end]="5"></app-common-blog-card>
+              <!-- <app-common-blog-card [posts]="latestposts" [start]="0" [end]="5"></app-common-blog-card>
                 <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--Videos tab start-->
@@ -51,21 +56,23 @@
             <ng-template ngbTabContent>
               <!-- <app-common-blog-card [posts]="popularvideos" [start]="0" [end]="5"></app-common-blog-card>
               <div class="text-center"><button class="theme-btn down-btn">Load More<span></span></button></div> -->
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams"></app-common-news-list>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--Points table widget-->
           <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
             <h5>Teams</h5>
             <ul class="common-list">
-              <li *ngFor="let item of teamsname | slice:0:5"><a (click)="teamsview(item.id,item.name)">{{item.name}}</a></li>
+              <li *ngFor="let item of teamsname | slice:0:5"><a (click)="teamsview(item.id,item.name)">{{item.name}}</a>
+              </li>
             </ul>
           </div>
           <div class="common-widget tab-widget" *ngIf="battingleaders && bowlingleaders">
@@ -78,11 +85,14 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of battingleaders | slice:0:1">
-                      <img  alt="player"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
+                      <img alt="player" [offset]="commonService.lazyloadoffset"
+                        [lazyLoad]="item?.player.id| playerimage:['m']"
+                        [defaultImage]="cricketService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
-                          <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split}}</p>
+                          <p class="name" (click)="playerinfo(item.player.id,item.player.name)">
+                            {{item.player.name | split}}</p>
                           <p class="team">{{item.team.abbreviation}}</p>
                         </div>
                         <div class="player-score">
@@ -95,7 +105,8 @@
                       *ngFor="let item of battingleaders | slice:1:10">
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
-                        <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split }}</p>
+                        <p class="name" (click)="playerinfo(item.player.id,item.player.name)">
+                          {{item.player.name | split }}</p>
                         <p class="team">{{item.team.abbreviation}}</p>
                       </div>
                       <div class="player-score">
@@ -112,11 +123,14 @@
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of bowlingleaders | slice:0:1">
-                      <img alt="player"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="item?.player.id| playerimage:['m']" [defaultImage]="cricketService.playerplaceholder">
+                      <img alt="player" [offset]="commonService.lazyloadoffset"
+                        [lazyLoad]="item?.player.id| playerimage:['m']"
+                        [defaultImage]="cricketService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
-                          <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split}}</p>
+                          <p class="name" (click)="playerinfo(item.player.id,item.player.name)">
+                            {{item.player.name | split}}</p>
                           <p class="team">{{item.team.abbreviation}}</p>
                         </div>
                         <div class="player-score">
@@ -129,7 +143,8 @@
                       *ngFor="let item of bowlingleaders | slice:1:10">
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
-                        <p class="name" (click)="playerinfo(item.player.id,item.player.name)">{{item.player.name | split}}</p>
+                        <p class="name" (click)="playerinfo(item.player.id,item.player.name)">
+                          {{item.player.name | split}}</p>
                         <p class="team">{{item.team.abbreviation}}</p>
                       </div>
                       <div class="player-score">

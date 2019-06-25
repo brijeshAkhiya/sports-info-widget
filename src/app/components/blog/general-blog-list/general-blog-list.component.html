@@ -10,13 +10,13 @@
         <div class="common-news-list" *ngIf="blogs">
           <div class="common-news-item d-flex common-shadow" *ngFor="let blog of blogs">
             <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': blog.eType == 'Video'}">
-              <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder" [offset]="commonService.lazyloadoffset" [lazyLoad]="blog?.sImage | resizeImage:['s']" (click)="blogview(blog._id,'Article',blog.sTitle)">
+              <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder" [offset]="commonService.lazyloadoffset" [lazyLoad]="blog?.sImage | resizeImage:['s']" [routerLink]="['/blog' , (blog.eType |lowercase) , blog._id , blog.sSlug ]">
               </div>
             </div>
             <div class="common-news-desc">
               <div class="news-excerpt">
-                <h5><a (click)="blogview(blog._id,blog.eType,blog.sTitle)">{{blog.sTitle}}</a></h5>
-                <p [innerHtml]="blog?.sDescription | truncate:[164,'...'] | striphtml" (click)="blogview(blog._id,'Article',blog.sTitle)"></p>
+                <h5><a [routerLink]="['/blog' , (blog.eType |lowercase) , blog._id , blog.sSlug ]">{{blog.sTitle}}</a></h5>
+                <p [innerHtml]="blog?.sDescription | truncate:[164,'...'] | striphtml" [routerLink]="['/blog' , (blog.eType |lowercase) , blog._id , blog.sSlug ]"></p>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs.length > 0">
             <h5>Recent Stories</h5>
             <ul class="common-list">
-              <li *ngFor="let item of widgetblogs | slice:0:5"><a (click)="blogview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a [routerLink]="['/blog' , (item.eType |lowercase) , item._id , item.sSlug ]">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
