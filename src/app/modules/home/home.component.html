@@ -1,0 +1,109 @@
+<!-- Start Top Highlight -->
+<section class="home-banner" *ngIf="banners?.length > 0">
+  <img class="common-banner-pattern" src="assets/images/common-banner-pattern.svg">
+  <div class="banner-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5 col-md-7 col-sm-9 col-10">
+          <h1 class="white-text">Top Highlights</h1>
+          <ul class="banner-news-list">
+            <li *ngFor="let post of banners;let i = index;"
+              (click)="commonService.blogview(post._id,post.eType,post.sTitle)"><a
+                [ngClass]="{'active': i===highlightImage}" (mouseover)="highlightImage = i">{{post.sTitle}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="banner-images">
+    <div class="banner-image" *ngFor="let item of banners; let i=index;" [ngClass]="{'active': i===highlightImage}"
+      [offset]="commonService.lazyloadoffset" [lazyLoad]="item.sImage | resizeImage:['m']"></div>
+  </div>
+</section>
+<!-- End  Top Highlight -->
+
+<!-- Start Ads -->
+<div class="container">
+  <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+</div>
+<!-- End Ads -->
+
+
+<!-- Start Articles -->
+<section class="common-section home-popular-article">
+  <div class="container">
+    <div class="row sidebar-row">
+      <app-sports-home [options]="{page_type:'home', reqParams :{nStart:0, nLimit:5, eType:'Article'}}"></app-sports-home>
+
+      <!-- Start Cricket sidebar -->
+      <app-cricket-sidebar></app-cricket-sidebar>
+      <!-- End Cricket sidebar -->
+    </div>
+  </div>
+</section>
+<!-- End Articles -->
+
+<!-- Start Videos -->
+<section class="common-section popular-video-section" *ngIf="popularvideos.length > 0">
+  <div class="container">
+    <div class="row row-size12">
+      <div class="col-xl-9">
+        <div class="common-title-btn d-flex justify-content-between align-items-center">
+          <h4 class="white-text">Popular Videos</h4>
+          <button class="theme-btn" [routerLink]="['/blog/list/popular/video']">View All<span></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="row row-size12">
+      <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
+        <div class="main-popular-video common-zoom-container common-full-img"
+          (click)="commonService.blogview(video._id,video.eType,video.sTitle)">
+          <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
+            [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['m']">
+          </div>
+          <a class="play-btn"><img src="/assets/images/play-btn.svg" alt="play"></a>
+          <div class="video-desc">
+            <h2 class="white-text"><a
+                (click)="commonService.blogview(video._id,video.eType,video.sTitle)">{{video.sTitle}}</a></h2>
+            <div class="author-info d-flex justify-content-between align-items-center">
+              <p class="author">
+                <a (click)="commonService.writerview(video?.iId?._id)">{{video.iId.sFirstName}}
+                  {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
+              </p>
+              <p class="view white-view">{{video.nViewCounts}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <ng-scrollbar class="custom-scrollbar">
+          <div class="home-popular-vid-list">
+            <div class="video-item" *ngFor="let video of popularvideos"
+              (click)="commonService.blogview(video._id,video.eType,video.sTitle)">
+              <div class="video-img common-overlay common-zoom-container common-full-img">
+                <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
+                  [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['s']">
+                </div>
+                <p class="bold-text white-text" (click)="commonService.blogview(video._id,video.eType,video.sTitle)">
+                  {{video.sTitle | truncate:[60,'...'] }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </ng-scrollbar>
+      </div>
+    </div>
+  </div>
+  <img class="pattern pattern-left" src="/assets/images/video-pattern-img.svg">
+  <img class="pattern pattern-right" src="/assets/images/video-pattern-img.svg">
+</section>
+<!-- End Videos -->
+
+<section class="common-section recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4}}">
+      </app-sports-home>
+    </div>
+  </div>
+</section>

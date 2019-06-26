@@ -18,6 +18,9 @@ export class BlogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.posts);
+    console.log(this.card_type);
+    
   }
 
 }

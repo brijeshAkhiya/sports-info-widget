@@ -29,12 +29,6 @@ export class CommonService {
     this.getPageTitles();
   }
 
-  //blog view
-  blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
-  }
-
   //writer view 
   writerview(id){
     this.router.navigate(['/writer',btoa(id)])

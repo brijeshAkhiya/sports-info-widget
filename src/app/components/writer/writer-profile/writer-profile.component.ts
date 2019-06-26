@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "@providers/sports-service";
-import { SlugifyPipe } from "@pipes/slugpipe";
 import { CommonService } from "@providers/common-service";
 
 
@@ -13,19 +12,16 @@ import { CommonService } from "@providers/common-service";
 export class WriterProfileComponent implements OnInit {
   writerdata :any;
   writerid;
-  commonrecentparams :{}
-  commonpopularparams:{}
-  commonvideoparams:{}
   
-  constructor(private sportsService: SportsService, private slugifyPipe: SlugifyPipe, private router: Router,private activatedroute: ActivatedRoute, private commonService: CommonService) { }
+  constructor(
+    private sportsService: SportsService,
+    private activatedroute: ActivatedRoute, 
+    public commonService: CommonService
+  ) { }
 
   ngOnInit() {
     this.writerid = atob(this.activatedroute.snapshot.params.id);
     this.getWriterProfile();
-    this.commonrecentparams = {
-      _id:this.writerid,
-      nLimit:10
-    }
   }
 
 
@@ -40,31 +36,6 @@ export class WriterProfileComponent implements OnInit {
         this.writerdata = res['data']
       }
     });
-  }
-
-  //get writer popular blogs
-  getWriteropularblogs(){
-    this.commonpopularparams = {
-      _id:this.writerid,
-      eType:"MostViewed",
-      nLimit:10
-    }
-  }
-
-  //get writer videos 
-  getWritervideos(){
-    this.commonvideoparams = {
-      _id:this.writerid,
-      eType:'Videos',
-      nLimit:10
-    }
-  }
-
-   //blog view 
-
-   blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type.toLowerCase(), btoa(id),slugname]);
   }
 
 }

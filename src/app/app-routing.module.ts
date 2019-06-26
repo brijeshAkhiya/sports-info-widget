@@ -14,12 +14,12 @@ const routes: Routes = [
 
     {
         path: '',
-        loadChildren: './components/home/home.module#HomeModule',
+        loadChildren: './modules/home/home.module#HomeModule',
 
     },
     {
         path: 'cricket',
-        loadChildren: './components/cricket/cricket.module#CricketModule',
+        loadChildren: './modules/cricket/cricket.module#CricketModule',
 
     },
     {

@@ -21,6 +21,7 @@ import { LogosUrlPipe } from './pipes/logosurlpipe';
 import { PlayerImagePipe } from './pipes/playerimageurl.pipe';
 import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
 import { SlugifyPipe } from "./pipes/slugpipe";
+import { SafehtmlPipe } from './pipes/safehtml.pipe';
 
 
 /** All Providers*/
@@ -41,7 +42,11 @@ import { CommonRelatedBlogCardComponent } from './common-related-blog-card/commo
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { ContentComponent } from './widget/content/content.component';
-import { SafehtmlPipe } from './pipes/safehtml.pipe';
+import { SportsHomeComponent } from './sports-home/sports-home.component';
+import { BlogListComponent } from './blog-list/blog-list.component';
+import { MenuComponent } from './widget/menu/menu.component';
+import { TeamsComponent } from './widget/teams/teams.component';
+import { PlayerTableComponent } from './widget/player-table/player-table.component';
 
 
 @NgModule({
@@ -79,7 +84,10 @@ import { SafehtmlPipe } from './pipes/safehtml.pipe';
         DataLoaderWidgetComponent, 
         FlashCommentaryComponent, 
         ContentComponent, 
-        BlogComponent
+        BlogComponent, 
+        SportsHomeComponent, 
+        BlogListComponent, 
+        MenuComponent, TeamsComponent, PlayerTableComponent
     ],
     providers: [
         /** All Pipes */
@@ -124,6 +132,9 @@ import { SafehtmlPipe } from './pipes/safehtml.pipe';
         FlashCommentaryComponent,
         ContentComponent,
         BlogComponent,
+        SportsHomeComponent,
+        BlogListComponent,
+        MenuComponent
     ],
 
 })

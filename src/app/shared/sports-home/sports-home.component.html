@@ -1,0 +1,63 @@
+<div *ngIf="options.page_type == 'home'; else tabs">
+    <ng-container *ngIf="options.blog_type =='recent'">
+        <app-blog-list *ngIf="recentArticlesParams" [options]="{'reqParams': popularArticlesParams}"></app-blog-list>
+    </ng-container>
+
+    <ng-container *ngIf="options.blog_type !='recent'">
+        <app-blog [posts]="popularArticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog>
+        <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+
+        <div class="common-title-btn d-flex justify-content-between align-items-center"
+            *ngIf="popularArticles.length > 1">
+            <h4>Related news</h4>
+            <button class="theme-btn" [routerLink]="['/blog/list/popular/article']">View All<span></span></button>
+        </div>
+        <app-blog [posts]="popularArticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog>
+        <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+    </ng-container>
+</div>
+
+<ng-template #tabs>
+    <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+        <h1 *ngIf="options">{{options.title}}</h1>
+        <!-- <button class="add-to-fav-btn"><span>Add to favorites</span></button> -->
+    </div>
+    <ngb-tabset class="common-tabs" (tabChange)="beforeChange($event)">
+        <!--Latest Article Tab-->
+        <ngb-tab id="latest">
+            <ng-template ngbTabTitle>
+                <div>Latest</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <app-data-loader-widget *ngIf="isLoading"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="!isLoading && recentArticles?.length == 0 || !recentArticles"></app-no-data-widget>
+                <app-blog [posts]="recentArticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog>
+                <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+                <app-blog [posts]="recentArticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog>
+                <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
+                <app-blog-list *ngIf="recentArticles.length > 5"
+                    [options]="{'reqParams': recentArticlesParams, 'data':recentArticles, 'start': 5, 'end' : 8}">
+                </app-blog-list>
+            </ng-template>
+        </ngb-tab>
+
+
+        <!--Videos tab start-->
+        <ngb-tab id="videos">
+            <ng-template ngbTabTitle>
+                <div>Videos</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <app-blog-list *ngIf="videoArticlesParams" [options]="{'reqParams': videoArticlesParams}">
+                </app-blog-list>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Recommended">
+            <ng-template ngbTabContent>
+                <app-blog-list *ngIf="popularArticlesParams" [options]="{'reqParams': popularArticlesParams}">
+                </app-blog-list>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</ng-template>

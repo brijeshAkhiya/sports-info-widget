@@ -1,0 +1,19 @@
+<!-- <app-cricket-menu></app-cricket-menu> -->
+<app-menu [options]="{type : 'cricket'}"></app-menu>
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+     
+      <app-sports-home *ngIf="options" [options]="options"></app-sports-home>
+
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-common-story-widget [title]="'Current Series'" [type]="'currentseries'" [data]="cricketseries" ></app-common-story-widget>
+          <app-common-story-widget [title]="'Popular Right Now'" [type]="'populartags'" [data]="populartags" ></app-common-story-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
