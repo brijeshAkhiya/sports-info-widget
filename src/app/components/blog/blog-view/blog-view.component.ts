@@ -22,6 +22,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
   isplay: boolean = false
   widgetblogs: any;
   hideBtn: boolean = false;
+  usercommentvalue = ''
   @ViewChild('videoPlayer') videoplayer: ElementRef;
 
   url: any;
@@ -53,6 +54,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
     this.blogslug = this.activatedroute.snapshot.params.slug
     this.blogtype = this.activatedroute.snapshot.params.type;
     this.getPopularArticles();
+    this.getBlogComments(this.blogdata._id,{ iPostId:this.blogdata._id , nStart:0 ,nLimit:4 });
   }
 
   ngAfterViewInit() {
@@ -72,6 +74,26 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  clicksubmit(){
+    if(this.usercommentvalue){
+      if(localStorage.getItem('userT')){
+        let data = {
+          iPostId:this.blogshareid,
+          sComment:this.usercommentvalue
+        }
+        this.sportsService.addusercomment(data).subscribe((res:any)=>{
+          if(res){
+            this.usercommentvalue = ''
+            this.getBlogComments(this.blogdata._id,{ iPostId:this.blogdata._id , nStart:0 ,nLimit:this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
+          }
+        })
+      }
+      else{
+
+      }
+    }
+    
+  }
 
   getBlogview(id) {
     if (id) {
@@ -109,7 +131,15 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   viewmorecomments() {
-    this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id))
+
+    this.sportsService.getblogcommnets(this.initBlogParams(this.blogdata._id)).subscribe((res: any) => {
+      if (res.data) {
+        if (res.data.length == 0)
+          this.hideBtn = true;
+        this.blogcomments = this.blogcomments.concat(res.data)
+      }
+    });
+  //  this.getBlogComments(this.blogdata._id,this.initBlogParams(this.blogdata._id))
   }
 
   //to get blog comments
@@ -119,7 +149,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
         if (res.data) {
           if (res.data.length == 0)
             this.hideBtn = true;
-          this.blogcomments = this.blogcomments.concat(res.data)
+          this.blogcomments = res.data
         }
       });
     }

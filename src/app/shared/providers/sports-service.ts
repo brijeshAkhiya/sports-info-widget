@@ -248,12 +248,23 @@ export class SportsService {
     );
   }
 
+  //add user comment 
+  addusercomment(data){
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('userT')
+    });
+    return this.http.post(
+      environment.apiUrl + environment.version + `/comments`,
+      data,{ headers: headers }
+    );
+  }
+
   //post website inquiries
 
   postinquiries(data) {
     return this.http.post(
       environment.apiUrl + environment.version + `/inquiries`,
-      data
+      data,
     );
   }
 
