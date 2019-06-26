@@ -56,15 +56,15 @@
     </div>
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
-        <div class="main-popular-video common-zoom-container common-full-img"
-          (click)="commonService.blogview(video._id,video.eType,video.sTitle)">
+        <div class="main-popular-video common-zoom-container common-full-img"          
+        [routerLink]="['/blog' , (video.eType |lowercase) , video._id , video.sSlug ]">
           <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
             [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['m']">
           </div>
           <a class="play-btn"><img src="/assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
             <h2 class="white-text"><a
-                (click)="commonService.blogview(video._id,video.eType,video.sTitle)">{{video.sTitle}}</a></h2>
+              [routerLink]="['/blog' , (video.eType |lowercase) , video._id , video.sSlug ]">{{video.sTitle}}</a></h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
                 <a (click)="commonService.writerview(video?.iId?._id)">{{video.iId.sFirstName}}

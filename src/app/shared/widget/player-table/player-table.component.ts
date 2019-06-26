@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { CommonService } from '@providers/common-service';
+import { CricketService } from '@providers/cricket-service';
 
 @Component({
   selector: 'app-player-table',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerTableComponent implements OnInit {
 
-  constructor() { }
+  @Input() data;
+  @Input() options;
+  constructor(
+    private commonService: CommonService,
+    private cricketService: CricketService,
+  ) { }
 
   ngOnInit() {
   }

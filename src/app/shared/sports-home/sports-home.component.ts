@@ -78,10 +78,10 @@ export class SportsHomeComponent implements OnInit {
   //get related posts
   getRelatedPosts() {
     this.isLoading = true;
-    this.sportsService.getrelatedpost(this.popularArticlesParams).subscribe((res:any) => {
+    this.sportsService.getrelatedpost(this.recentArticlesParams).subscribe((res:any) => {
       this.isLoading = false;
       if (res.data) {
-        this.popularArticles = this.popularArticles.concat(res.data);
+        this.recentArticles = this.recentArticles.concat(res.data);
       }
     });
   }

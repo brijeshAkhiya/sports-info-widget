@@ -1,3 +1,29 @@
-<p>
-  player-table works!
-</p>
+<div class="common-table tour-stand-table striped-table common-shadow rounded-box" *ngIf="data">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th *ngFor="let title of options.titles">{{title}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data;">
+          <ng-container *ngFor="let value of options.values">
+            <td *ngIf="value != 'image'; else data">
+              {{item[value]}}
+            </td>
+            <ng-template #data>
+              <td>
+                <a>
+                  <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
+                    [defaultImage]="cricketService.flagplaceholder" alt="logo">
+                    {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
+                </a>
+              </td>
+            </ng-template>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

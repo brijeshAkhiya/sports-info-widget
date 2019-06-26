@@ -134,7 +134,8 @@ import { PlayerTableComponent } from './widget/player-table/player-table.compone
         BlogComponent,
         SportsHomeComponent,
         BlogListComponent,
-        MenuComponent
+        MenuComponent,
+        PlayerTableComponent
     ],
 
 })

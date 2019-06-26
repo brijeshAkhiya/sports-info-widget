@@ -11,12 +11,18 @@ import { SportsService } from '@providers/sports-service';
 export class TournamentStadingsComponent implements OnInit {
   
   pointstable: any;
+  options = {
+    titles : ['POS', 'TEAM', 'M', 'W', 'L', 'D', 'N/R', 'P', 'NRR'],
+    values : ['rank', 'image', 'played', 'win', 'loss', 'draw', 'no_result', 'points', 'net_run_rate'],
+    image_type :'team'
+  }
+
   constructor(
     private sportsService: SportsService,
     private activatedroute: ActivatedRoute
     ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     let id = atob(this.activatedroute.parent.snapshot.params.id)
     this.getTournamentPointsTable(id)
   }
