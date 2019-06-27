@@ -20,6 +20,7 @@ export class PlayerHomeComponent implements OnInit {
   commonnewsparams = {}
   widget1title = "Current Series";
   widget1type = "currentseries";
+  isstats: boolean;
   constructor(private sportsService: SportsService, private activatedroute: ActivatedRoute, private router: Router,private cricketService:CricketService, private commonService: CommonService
     ) { }
 
@@ -41,11 +42,17 @@ export class PlayerHomeComponent implements OnInit {
         this.playerprofile = res['data']
         this.playerbasic = res['data'].player
         this.playerstats = res['data'].statistics
+        if(this.playerstats){
+          this.isstats = true
         this.playerstats.map(s => {
           this.totalmatches += s.batting.matches;
           this.totalruns += s.batting.runs;
           this.totalwicket += s.bowling.wickets
         })
+        }
+        else{
+          this.isstats = false
+        }
       }
     },
     (error)=>{

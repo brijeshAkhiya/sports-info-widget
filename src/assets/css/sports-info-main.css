@@ -50,6 +50,7 @@ img                     { max-width: 100%; }
 /* -------- Color Style ------- */
 .white-text             { color: #fff; }
 .light-text             { color: #A3A3A3; }
+.dark-text              { color: #292929; }
 .theme-color            { color: #ED1A33;}
 .light-blue-color       { color: #2990F8; }
 .theme-bg               { background: #ED1A33; }

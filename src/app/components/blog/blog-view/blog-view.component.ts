@@ -27,6 +27,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   url: any;
   previewtype: any;
+  isloggedin: boolean = true;
 
 
   constructor(
@@ -77,6 +78,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
   clicksubmit(){
     if(this.usercommentvalue){
       if(localStorage.getItem('userT')){
+        this.isloggedin = true
         let data = {
           iPostId:this.blogshareid,
           sComment:this.usercommentvalue
@@ -89,7 +91,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
         })
       }
       else{
-
+        this.isloggedin = false
       }
     }
     

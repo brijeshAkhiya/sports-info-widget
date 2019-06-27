@@ -88,6 +88,10 @@
                 [ngModelOptions]="{standalone:true}"></textarea>
               <button type="submit" class="theme-btn" (click)="clicksubmit()">Post<span></span></button>
             </form>
+            <div class="login-toast active d-flex align-items-center" *ngIf="!isloggedin">
+              <img src="assets/images/blog/error-icon.svg">
+              <p class="dark-text">You must be logged in to comment.</p>
+            </div>
           </div>
           <div class="comment-list" *ngIf="blogcomments?.length != 0">
             <div class="comment-item d-flex align-items-start" *ngFor="let comment of blogcomments">
