@@ -29,10 +29,10 @@
 
 <!--Favourite module start-->
 
-<!-- <button class="fav-btn" (click)="isapply = !isapply"></button> -->
-<!-- <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
+<button class="fav-btn" (click)="isapply = !isapply"></button>
+<div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
 	<div class="head-btn-list">
-		<button class="delete-btn edit-btn"></button>
+		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'delete-btn': isedit}"></button>
 		<button class="close-btn" (click)="isapply = false"></button>
 	</div>
 	<div class="fav-block">
@@ -43,10 +43,10 @@
 			</div>
 		</form>
 		<ul class="fav-list">
-			<li><button >Virat Kohli</button></li>
-			<li><button>Indian Premier League 2019</button></li>
+			<li *ngFor="let item of userfavourites" ><button [ngClass]="{'selected': item.isSelect}" (click)="routingfromfav(item.type,item.id,item.name)">{{item.name}}</button></li>
+			<!-- <li><button>Indian Premier League 2019</button></li>
 			<li><button class="selected">MS Dhoni</button></li>
-			<li><button>Arsenal</button></li>
+			<li><button>Arsenal</button></li> -->
 		</ul>
 	</div>
-</div> -->
+</div>

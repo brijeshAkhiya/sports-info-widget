@@ -6,6 +6,7 @@
           *ngIf="teamprofiledata">
           <h1>{{teamprofiledata?.name}}</h1>
           <!-- <button class="add-to-fav-btn added"><span>Add to favorites</span></button> -->
+          <app-favourites-widget [value]="{id:teamid,type:'team',name:teamprofiledata?.name}"></app-favourites-widget>
         </div>
         <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
         <ngb-tabset class="common-tabs" *ngIf="teamprofiledata">

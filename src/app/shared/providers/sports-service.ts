@@ -371,6 +371,27 @@ export class SportsService {
     );
   }
 
+  //update favourites 
+  updatefavourites(data){
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('userT')
+    });
+    return this.http.put(
+      environment.apiUrl + environment.version + `/favorites`,
+      data,{ headers: headers }
+    );
+  }
+
+  //get user favourites
+  getuserfavourite(){
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('userT')
+    });
+    return this.http.get(
+      environment.apiUrl + environment.version + `/favorites` ,{headers:headers}
+    );
+  }
+
   connect() {
     return io(environment.socket.baseUrl)
   }

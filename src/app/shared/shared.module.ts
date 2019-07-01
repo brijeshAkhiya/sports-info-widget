@@ -42,6 +42,7 @@ import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widg
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { ContentComponent } from './widget/content/content.component';
 import { SafehtmlPipe } from './pipes/safehtml.pipe';
+import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { SafehtmlPipe } from './pipes/safehtml.pipe';
         DataLoaderWidgetComponent, 
         FlashCommentaryComponent, 
         ContentComponent, 
-        BlogComponent
+        BlogComponent, 
+        FavouritesWidgetComponent
     ],
     providers: [
         /** All Pipes */
@@ -124,6 +126,7 @@ import { SafehtmlPipe } from './pipes/safehtml.pipe';
         FlashCommentaryComponent,
         ContentComponent,
         BlogComponent,
+        FavouritesWidgetComponent
     ],
 
 })

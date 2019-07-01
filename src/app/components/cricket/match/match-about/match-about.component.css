@@ -1,5 +1,5 @@
 /* -------- Match Title List ------- */
-.match-main-title                                   { flex-wrap: wrap; -webkit-flex-wrap: wrap;}
+.match-main-title                                   { flex-wrap: wrap; -webkit-flex-wrap: wrap; overflow: hidden; position: relative;}
 .match-main-title .tour-match-title p               { margin-bottom: 4px; font-weight: 500;}
 .match-main-title .tour-match-title h1              { font-size: 24px; line-height: 30px; }
 .match-main-title h1,
@@ -9,7 +9,7 @@
 .match-main-title .match-update p:last-child        { color: #292929; }
 .match-main-title .match-update p.live-match        { color: #ED1A33; }
 .match-main-title .match-update p.live-match:before { content: ""; margin: -3px 8px 0px 0px; display: inline-block; width: 8px; height: 8px; background: #ED1A33; border-radius: 50%; vertical-align: middle; }
-.match-main-title .current-match                    { width: 100%; border-bottom: 2px solid #ECECEC; }
+.match-main-title .current-match                    { width: 100%; border-bottom: 2px solid #ECECEC; position: relative; }
 .match-main-title .current-teams                    { padding-right: 32px; width: 58%; }
 .match-main-title .current-team                     { margin-bottom: 24px; }
 .match-main-title .current-team img                 { margin-right: 12px; height: 40px; width: auto; border-radius: 2px; box-shadow: 0px 2px 3px rgba(0,0,0,0.14), 0px 3px 15px rgba(0,0,0,0.11); -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.14), 0px 3px 15px rgba(0,0,0,0.11);  }
@@ -29,6 +29,47 @@
 .match-main-title .sec-inngs-state-list p           { margin-bottom: 8px; color: #A3A3A3; font-weight: 500; }
 .match-main-title .sec-inngs-state-list p .title    { min-width: 110px; display: inline-block; }
 .match-main-title .sec-inngs-state-list p .value    { color: #292929; font-weight: 600; }
+.match-main-title .show-anim                        { opacity: 0; animation: show-anim 1s ease-in-out 2s forwards; -webkit-animation: show-anim 1s ease-in-out 2s forwards; }
+.match-main-title .teams-animation                  { opacity: 1; position: absolute; top: 0px; left: 10%; width: 80%; height: 100%; text-align: center; z-index: 1; }
+.match-main-title .teams-animation img              { margin-bottom: 15px; height: 64px; width: auto; }
+.match-main-title .team-anim                        { position: relative; animation: 2s ease-in-out 1s forwards; -webkit-animation: 2s ease-in-out 1s forwards;}
+.match-main-title .team-anim:first-child            { animation-name: flag-first; -webkit-animation-name: flag-first; }
+.match-main-title .team-anim.vs-anim                { animation-name: vs-anim; -webkit-animation-name: vs-anim;}
+.match-main-title .team-anim:last-child             { animation-name: flag-last; -webkit-animation-name: flag-last; }
+
+@-webkit-keyframes show-anim {
+    0%      { opacity: 0; }
+    100%    { opacity: 1; }
+}
+@keyframes show-anim {
+    0%      { opacity: 0; }
+    100%    { opacity: 1; }
+}
+
+@-webkit-keyframes flag-first {
+    0%      {  }
+    100%    { transform: translateX(-500px); -webkit-transform: translateX(-500px); opacity: 0; }
+}
+@keyframes flag-first {
+    0%      {  }
+    100%    { transform: translateX(-500px); -webkit-transform: translateX(-500px); opacity: 0; }
+}
+@-webkit-keyframes flag-last {
+    0%      {  }
+    100%    { transform: translateX(500px); -webkit-transform: translateX(500px); opacity: 0; }
+}
+@keyframes flag-last {
+    0%      {  }
+    100%    { transform: translateX(500px); -webkit-transform: translateX(500px); opacity: 0; }
+}
+@-webkit-keyframes vs-anim {
+    0%      {  }
+    100%    { opacity: 0; }
+}
+@keyframes vs-anim {
+    0%      {  }
+    100%    { opacity: 0; }
+}
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {

@@ -1,3 +1,4 @@
+.match-tabs                                     { position: relative;}
 /* -------- Scorecard Section ------- */
 .common-table                                   { margin-bottom: 24px;}
 .common-table:last-child                        { margin-bottom: 0px;}
@@ -31,6 +32,11 @@
 .match-info-title                       { margin: 32px 0px 16px; }
 .match-info-title img                   { margin-right: 8px; height: 40px; border-radius: 2px; }
 .match-info-title h4                    { margin: 0px; }
+
+/* -------- Match Scoreline Section ------- */
+.scoreline-block                        { position: fixed; width: 100%; bottom: 0px; left: 0px; color: #fff; text-align: center; }
+.scoreline-block:before                 { content: ""; display: block; position: absolute; left: 20px; bottom: -8px; width: calc(100% - 40px); height: calc(100% + 21px); border-radius: 10px 10px 0px 0px; background: #22336F; transform: perspective(1200px) rotateX(45deg) rotate(0deg); -webkit-transform: perspective(1200px) rotateX(45deg) rotate(0deg); }
+.scoreline-block .score                 { position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
 
 /***** Responsive CSS Start ******/
 

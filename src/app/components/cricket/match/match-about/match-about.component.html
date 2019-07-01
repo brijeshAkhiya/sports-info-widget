@@ -1,18 +1,29 @@
 <div
   class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
   *ngIf="data">
-
+  <div class="teams-animation d-flex justify-content-around align-items-center">
+    <div class="team-anim">
+      <img src="https://d1ldsx0apuyt84.cloudfront.net/logos/sr:competitor:107203.png">
+      <h4>India</h4>
+    </div>
+    <div class="team-anim vs-anim"><h5>VS</h5></div>
+    <div class="team-anim">
+      <img src="https://d1ldsx0apuyt84.cloudfront.net/logos/sr:competitor:107203.png">
+      <h4>West Indies</h4>
+    </div>
+  </div>
   <!-- <h1 *ngIf="data.sport_event.competitors">
     {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
   </h1> -->
-  <div class="tour-match-title">
-    <p class="light-text">{{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}</p>
+  <div class="tour-match-title show-anim">
+    <p class="light-text">
+      {{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}</p>
     <h1 *ngIf="data.sport_event.competitors">
-        {{data.sport_event.competitors[0].name}} vs {{data.sport_event?.competitors[1].name}}
-      </h1>
+      {{data.sport_event.competitors[0].name}} vs {{data.sport_event?.competitors[1].name}}
+    </h1>
   </div>
 
-  <div class="match-update">
+  <div class="match-update show-anim">
     <p class="light-text">
       <ng-container *ngIf="data.sport_event.venue">
         <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
@@ -26,16 +37,17 @@
     <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
       <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
     </p>
-    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 1 && toss.toss_won_by_team " class="live-match">Live
+    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 1 && toss.toss_won_by_team "
+      class="live-match">Live
       <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
         {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
     </p>
-    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2" class="live-match">Live | {{data.sport_event_status.equation}}
+    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2"
+      class="live-match">Live | {{data.sport_event_status.equation}}
     </p>
   </div>
 
-  <div class="current-match d-flex">
-
+  <div class="current-match d-flex show-anim">
     <!--If match not started-->
     <div class="current-teams" *ngIf="competitor && competitor.home">
       <ng-container
@@ -64,7 +76,9 @@
               (click)="cricketService.teamInfo(competitor.id, competitor.name)">
               {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
           </h4>
-          <h4 class="score" [ngClass]="{'running' : competitor.period_scores[0].number == data.sport_event_status.current_inning}" *ngIf="competitor.period_scores && competitor.period_scores[0]">
+          <h4 class="score"
+            [ngClass]="{'running' : competitor.period_scores[0].number == data.sport_event_status.current_inning}"
+            *ngIf="competitor.period_scores && competitor.period_scores[0]">
             {{competitor.period_scores[0].display_score}} ({{competitor.period_scores[0].display_overs}} ov)
           </h4>
         </div>
@@ -72,7 +86,8 @@
     </div>
 
 
-    <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status != 'live'  && data.statistics && data.statistics.man_of_the_match">
+    <div class="match-win-player d-flex"
+      *ngIf="data.sport_event_status.status != 'live'  && data.statistics && data.statistics.man_of_the_match">
       <div class="player-pic">
         <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']"
           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
@@ -88,7 +103,8 @@
       </div>
     </div>
 
-    <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
+    <div class="match-win-player d-flex"
+      *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
       <!-- <div class="player-info">
         <p *ngIf="data.sport_event_status.run_rate">CRR : <span> {{data.sport_event_status.run_rate}}</span></p>
         <p *ngIf="data.sport_event_status.run_rate_required">RR : <span> {{data.sport_event_status.run_rate_required}}</span></p> 
@@ -97,10 +113,12 @@
       </div> -->
       <ul class="sec-inngs-state-list">
         <li>
-          <p *ngIf="data.sport_event_status.run_rate"><span class="title">Required rate</span>: <span class="value">{{data.sport_event_status.run_rate}}</span></p>
+          <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">Required rate</span>: <span
+              class="value">{{data.sport_event_status.run_rate_required}}</span></p>
         </li>
         <li>
-          <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">Current rate</span>: <span class="value">{{data.sport_event_status.run_rate_required}}</span></p>
+          <p *ngIf="data.sport_event_status.run_rate"><span class="title">Current rate</span>: <span
+              class="value">{{data.sport_event_status.run_rate}}</span></p>
         </li>
         <!-- <li>
           <p><span class="title">Last 5 overs</span>: <span class="value">56 runs 2 wickets</span></p>

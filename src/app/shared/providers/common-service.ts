@@ -14,6 +14,7 @@ export class CommonService {
   public largeblogPlaceholder = '/assets/images/placeholder_blog_large.svg'
   public smallblogPlaceholder = '/assets/images/placeholder_blog_small.svg'
   public writerPlaceholder = '/assets/images/placeholder-author.svg'
+  public commenterPlaceholder = '/assets/images/placeholder-commenter.svg'
   public lazyloadoffset = "1000";
   public s3Url
   public siteUrl

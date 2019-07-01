@@ -13,6 +13,8 @@ h4                              { margin-bottom: 24px; }
 .squad-item                     { margin-bottom: 24px; height: 340px; background: #fff; overflow: hidden; cursor: pointer; }
 .squad-item .item-desc          { padding: 16px; background: #fff; text-align: center; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .squad-item:hover .item-desc    { transform: translateY(-64px); -webkit-transform: translateY(-64px); }
+.squad-item .theme-btn          { opacity: 0;}
+.squad-item:hover .theme-btn    { opacity: 1;}
 .squad-item p                   { margin-bottom: 16px; line-height: 20px; font-weight: 500; }
 .squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
 

@@ -28,6 +28,7 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
   url: any;
   previewtype: any;
   isloggedin: boolean = true;
+  total: any;
 
 
   constructor(
@@ -148,9 +149,14 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
   getBlogComments(id, data) {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
+        this.total = res.total
         if (res.data) {
-          if (res.data.length == 0)
+          if (res.data.length == 0){
             this.hideBtn = true;
+          }
+          else{
+            this.hideBtn = false
+          }
           this.blogcomments = res.data
         }
       });

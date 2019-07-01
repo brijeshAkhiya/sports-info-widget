@@ -1,5 +1,5 @@
-.flash-comm-btn-box                 { position: fixed; right: 32px; bottom: 24px; z-index: 6;}
-.flash-comm-btn                     { width: 64px; height: 64px; display: block; background: #ED1A33 url(assets/images/flash-comm-icon.svg) no-repeat center center / 50% 50%; border-radius: 50%; box-shadow: 0px 4px 16px rgba(239,29,58,0.6); -webkit-box-shadow: 0px 4px 16px rgba(239,29,58,0.6); border: none !important; position: relative; z-index: 6; }
+.flash-comm-btn-box                 { position: fixed; right: 112px; bottom: 24px; z-index: 6;}
+.flash-comm-btn                     { width: 64px; height: 64px; display: block; background: #ED1A33 url(assets/images/flash-comm-icon.svg) no-repeat center center / 50% 50%; border-radius: 50%; box-shadow: 0px 4px 16px rgba(239,29,58,0.6); -webkit-box-shadow: 0px 4px 16px rgba(239,29,58,0.6); border: none !important; position: relative; z-index: 6; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .flash-comm-btn:hover               { box-shadow: none; -webkit-box-shadow: none; }
 .flash-comm-btn span                { display: none; margin: 0px 6px; padding-bottom: 2px; font-size: 14px; line-height: 20px; font-weight: 500; color: #fff; position: relative; }
 .flash-comm-btn span:first-child    { border-bottom: 2px solid #D4172E; }
@@ -59,7 +59,7 @@ h5                                          { margin-bottom: 8px; font-family: '
 /***** Responsive CSS Start ******/
 
 @media (max-width: 767px) {
-    .flash-comm-btn-box                         { right: 16px; bottom: 16px; }
+    .flash-comm-btn-box                         { right: 70px; bottom: 16px; }
     .flash-comm-btn                             { width: 48px; height: 48px; }
     .flash-comm-btn span                        { font-size: 12px; line-height: 16px;}
     .flash-run                                  { width: 117px; height: 117px; font-size: 70px; line-height: 117px; -webkit-text-stroke-width: 3px; text-shadow: 0px 20px 28px rgba(0,0,0,0.18); -webkit-text-shadow: 0px 20px 28px rgba(0,0,0,0.18); }
