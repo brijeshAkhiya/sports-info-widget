@@ -109,7 +109,7 @@
         <a class="login" (click)="open(content)"></a>
       </li>
       <li ngbDropdown *ngIf="isLogin">
-        <a class="login" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
+        <a class="login"   [ngClass]="{'logged': isLogin}"  ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
         <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
         </ul>

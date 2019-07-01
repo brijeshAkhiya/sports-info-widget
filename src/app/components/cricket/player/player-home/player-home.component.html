@@ -96,8 +96,8 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="!playerstats"></app-data-loader-widget>
-              <app-no-data-widget *ngIf="playerstats?.length == 0"></app-no-data-widget>
+              <app-data-loader-widget *ngIf="!playerstats || isstats"></app-data-loader-widget>
+              <app-no-data-widget *ngIf="playerstats?.length == 0 || !playerstats"></app-no-data-widget>
               <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box"
                 *ngIf="playerstats">
                 <div class="table-title">
@@ -138,7 +138,7 @@
                   </table>
                 </div>
               </div>
-              <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box">
+              <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box"  *ngIf="playerstats">
                 <div class="table-title">
                   <h6>Bowling Stats</h6>
                 </div>

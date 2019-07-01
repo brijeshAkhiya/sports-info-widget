@@ -48,7 +48,8 @@
 .team-list [class*="col-"]:nth-last-child(2) .team-item,
 .team-list [class*="col-"]:last-child .team-item    { margin-bottom: 0; }
 /* .team-list .team-item .team-flag    { width: 120px;} */
-.team-list .team-item .team-flag img{ height: 80px; width: auto; box-shadow: 0px 4px 6px rgba(0,0,0,0.14), 0px 6px 26px rgba(0,0,0,0.14); border-radius: 3.33px;}
+.team-list .team-item .team-flag    { border: 2px solid #EBEBEB; border-radius: 6px; overflow: hidden;}
+.team-list .team-item .team-flag img{ height: 80px; width: auto; }
 .team-list .team-item .team-name    { padding-left: 16px; text-transform: uppercase; flex: 1; -webkit-flex: 1; -ms-flex: 1;}
 .team-list .team-item h4            { margin-bottom: 2px; font-family: 'IBM Plex Sans', sans-serif; color: #292929; font-weight: 500;}
 .team-list .team-item h5            { margin: 0px; font-family: 'IBM Plex Sans', sans-serif; color: #A3A3A3; font-weight: 400;}
