@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TournamentHomeComponent implements OnInit {
 
-  options:any = { reqParams : { eSport : 'Cricket'}, title : 'Cricket'}
+  options:any;
 
   constructor(
     private activatedroute: ActivatedRoute
@@ -16,7 +16,8 @@ export class TournamentHomeComponent implements OnInit {
 
   ngOnInit() {
     let temp: Array<any> = [atob(this.activatedroute.snapshot.params.id)]
-    this.options.reqParams.aIds = temp;
+    let name = this.activatedroute.snapshot.params.slug
+    this.options = {reqParams : {aIds:[atob(this.activatedroute.snapshot.params.id)]},title:name.replace(/-/g," ")}
   }
 
 }

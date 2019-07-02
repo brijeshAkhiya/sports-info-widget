@@ -1,0 +1,39 @@
+/* -------- Commentary Section ------- */
+.commentary-item                                { margin-bottom: 24px; padding: 16px 32px; background: #fff; }
+.commentary-item ul                             { margin: 0px; }
+.commentary-item ul li                          { margin-bottom: 16px; }
+.commentary-item ul li:last-child               { margin-bottom: 0px; }
+.commentary-item p                              { margin: 0px; }
+.commentary-item .over-ball                     { padding-right: 4px; min-width: 58px; line-height: 34px; font-weight: 500; }
+.commentary-item .over-run                      { width: 34px; height: 34px; background: #ECECEC; line-height: 34px; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; text-align: center; border-radius: 50%;}
+.commentary-item .over-run.hightlight           { background: #ED1A33; color: #fff; }
+.commentary-item .commentary-line               { margin-top: 5px; padding-left: 24px; line-height: 24px; color: #3D3D3D; flex: 1; -webkit-flex: 1; -ms-flex: 1; }
+.commentary-title                               { margin-bottom: 24px; padding: 12px 16px; background: #3D3D3D; }
+.commentary-title span                          { margin-right: 32px; font-size: 18px; line-height: 23px; color: #fff; font-weight: 500;  }
+.commentary-title span:last-child               { margin: 0px; }
+
+/***** Responsive CSS Start ******/
+    
+@media (max-width: 1199px) {
+/* -------- Commentary Section ------- */
+    .commentary-title span                      { margin-right: 16px; font-size: 16px; line-height: 22px; }
+}
+
+@media (max-width: 767px) {
+/* -------- Commentary Section ------- */
+    .match-counter p                            { font-size: 16px; line-height: 20px;  }
+    .match-counter-block                        { width: 220px; height: 220px; border-width: 6px;  }
+    .match-counter-block p .time-num            { font-size: 40px; line-height: 54px; }
+    .match-counter-block p .time-unit           { padding-right: 10px;}
+    .commentary-item                            { padding: 16px; }
+    .commentary-title span                      { margin-right: 14px; font-size: 14px; line-height: 20px; }
+
+}
+
+@media (max-width: 575px) {
+/* -------- Commentary Section ------- */
+    .commentary-item ul li                      { margin-bottom: 10px; }
+    .commentary-item .over-ball                 { min-width: 46px; line-height: 24px;}
+    .commentary-item .over-run                  { width: 28px; height: 28px; font-size: 12px; line-height: 28px; }
+    .commentary-item .commentary-line           { margin-top: 0px; padding-left: 12px; line-height: 20px;}
+}

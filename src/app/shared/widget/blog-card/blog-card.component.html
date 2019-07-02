@@ -4,13 +4,13 @@
       <div class="item-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
         <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"
           [offset]="commonService.lazyloadoffset" [lazyLoad]="post.sImage | resizeImage:['m']"
-          [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">
+          [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">
         </div>
       </div>
       <div class="blog-desc">
-        <h4><a [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle}}</a></h4>
+        <h4><a [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a></h4>
         <p [innerHtml]="post.sDescription | truncate:[240,'...'] | striphtml"
-          [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]"></p>
+        [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
         <div class="author-info d-flex justify-content-between align-items-center">
           <p class="author"><a (click)="commonService.writerview(post?.iId?._id)">{{post.iId.sFirstName}}
               {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
@@ -28,11 +28,13 @@
             <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
               <div class="common-zoom-img" [defaultImage]="commonService.smallblogdeafault"
                 [lazyLoad]="post.sImage | resizeImage:['s']"
-                [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]"></div>
+                [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"
+               ></div>
             </div>
             <div class="item-desc">
               <p class="bold-text"><a
-                  [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle | truncate:[56,'...']}}</a>
+                [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"
+                 >{{post.sTitle | truncate:[56,'...']}}</a>
               </p>
             </div>
           </div>
@@ -45,16 +47,16 @@
   <ng-container *ngIf="card_type == 'list'">
     <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
       <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"
-        [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">
+      [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">
         <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
           [lazyLoad]="post.sImage | resizeImage:['s']"
-          [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]"></div>
+          [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></div>
       </div>
       <div class="common-news-desc">
         <div class="news-excerpt">
-          <h5><a [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle}}</a></h5>
+          <h5><a [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a></h5>
           <p [innerHtml]="post.sDescription | striphtml | truncate:[164,'...']"
-            [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]"></p>
+          [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
         </div>
         <div class="author-info d-flex justify-content-between align-items-center">
           <p class="author"><a (click)="commonService.writerview(post?.iId?._id)">{{post.iId.sFirstName}}
@@ -73,11 +75,11 @@
             <div class="web-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
               <div class="common-zoom-img" [offset]="commonService.lazyloadoffset"
                 [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="post.sImage | resizeImage:['s']"
-                [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">
+                [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]" >
               </div>
             </div>
             <div class="news-desc">
-              <h5><a [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle}}</a>
+              <h5><a [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a>
               </h5>
             </div>
           </div>
@@ -92,12 +94,12 @@
           <div class="col-sm-3" *ngFor="let item of posts | slice:start:end ">
             <div class="popular-item common-shadow">
               <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': item?.eType == 'Video'}">
-                <div class="common-zoom-img" [lazyLoad]="item?.sImage | resizeImage:['s']">
+                <div class="common-zoom-img" [lazyLoad]="item?.sImage | resizeImage:['s']" [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">
                 </div>
               </div>
               <div class="item-desc">
                 <p class="bold-text"><a
-                    [routerLink]="['/blog' , (item.eType |lowercase) , item._id , item.sSlug ]">{{item?.sTitle | truncate:[56,'...']}}</a>
+                  [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item?.sTitle | truncate:[56,'...']}}</a>
                 </p>
               </div>
             </div>

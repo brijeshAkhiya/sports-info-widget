@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   @ViewChild('subnavpointer') subnavpointer: ElementRef
   @ViewChild('subnavbarmenu') subnavbarmenu: ElementRef
   @Input() options;
+  @Input() name;
   series;
 
   constructor(

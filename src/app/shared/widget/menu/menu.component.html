@@ -24,7 +24,7 @@
 
 <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'tournament'">
   <div class="sub-navabar-inner d-flex">
-    <a class="submenu-back" [routerLink]="['./']">{{dataToChild}}</a>
+    <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
     <div class="sub-navbar-container" id="sub-navbar-nav">
       <ul #subnavbarmenu class="subnavbarmenu">
         <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>

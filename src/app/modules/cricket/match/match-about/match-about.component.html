@@ -1,0 +1,113 @@
+<div
+  class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
+  *ngIf="data">
+
+  <!-- <h1 *ngIf="data.sport_event.competitors">
+    {{data.sport_event.competitors[0].abbreviation}} vs {{data.sport_event?.competitors[1].abbreviation}}
+  </h1> -->
+  <div class="tour-match-title">
+    <p class="light-text">{{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}</p>
+    <h1 *ngIf="data.sport_event.competitors">
+        {{data.sport_event.competitors[0].name}} vs {{data.sport_event?.competitors[1].name}}
+      </h1>
+  </div>
+
+  <div class="match-update">
+    <p class="light-text">
+      <ng-container *ngIf="data.sport_event.venue">
+        <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
+      </ng-container>
+      {{data.sport_event.scheduled | amDateFormat:'Do MMMM YYYY'}}
+    </p>
+    <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
+    <!-- TODO Delay class-->
+    <p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">Match is
+      {{ data.sport_event_status.status }}</p>
+    <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
+      <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+    </p>
+    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 1 && toss.toss_won_by_team " class="live-match">Live
+      <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
+        {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+    </p>
+    <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2" class="live-match">Live | {{data.sport_event_status.equation}}
+    </p>
+  </div>
+
+  <div class="current-match d-flex">
+
+    <!--If match not started-->
+    <div class="current-teams" *ngIf="competitor && competitor.home">
+      <ng-container
+        *ngIf="competitor.away.period_scores && competitor.away.period_scores[0].number == 1; else home_first">
+        <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.away, data:data}">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.home, data:data}">
+        </ng-container>
+      </ng-container>
+      <ng-template #home_first>
+        <ng-container>
+          <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.home, data:data}">
+          </ng-container>
+          <ng-container *ngTemplateOutlet="team;context:{competitor:competitor.away, data:data}">
+          </ng-container>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #team let-competitor="competitor">
+        <div class="current-team d-flex justify-content-between align-items-center">
+          <h4 *ngIf="data.sport_event.competitors"
+            [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.id == data.sport_event_status.winner_id}">
+            <img [lazyLoad]="competitor.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+              [offset]="commonService.lazyloadoffset">
+            <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by && (data.sport_event_status.status != 'closed' && data.sport_event_status.status != 'ended') }"
+              (click)="cricketService.teamInfo(competitor.id, competitor.name)">
+              {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
+          </h4>
+          <h4 class="score" [ngClass]="{'running' : competitor.period_scores[0].number == data.sport_event_status.current_inning}" *ngIf="competitor.period_scores && competitor.period_scores[0]">
+            {{competitor.period_scores[0].display_score}} ({{competitor.period_scores[0].display_overs}} ov)
+          </h4>
+        </div>
+      </ng-template>
+    </div>
+
+
+    <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status != 'live'  && data.statistics && data.statistics.man_of_the_match">
+      <div class="player-pic">
+        <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']"
+          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+      </div>
+      <div class="player-info">
+        <p class="light-text">Player of the Match</p>
+        <h5 class="theme-color">
+          <a
+            (click)="cricketService.playerview(data.statistics.man_of_the_match[0].id,data.statistics.man_of_the_match[0].name)">
+            {{data.statistics.man_of_the_match[0]?.name | split}} </a>
+        </h5>
+        <!-- <p class="player-team">West Indies</p> -->
+      </div>
+    </div>
+
+    <div class="match-win-player d-flex" *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
+      <!-- <div class="player-info">
+        <p *ngIf="data.sport_event_status.run_rate">CRR : <span> {{data.sport_event_status.run_rate}}</span></p>
+        <p *ngIf="data.sport_event_status.run_rate_required">RR : <span> {{data.sport_event_status.run_rate_required}}</span></p> 
+        <p *ngIf="toss.toss_won_by_team">{{toss.toss_won_by_team}} opt to
+          {{toss.toss_decision ? toss.toss_decision : 'bat'}}</p>       
+      </div> -->
+      <ul class="sec-inngs-state-list">
+        <li>
+          <p *ngIf="data.sport_event_status.run_rate"><span class="title">Required rate</span>: <span class="value">{{data.sport_event_status.run_rate}}</span></p>
+        </li>
+        <li>
+          <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">Current rate</span>: <span class="value">{{data.sport_event_status.run_rate_required}}</span></p>
+        </li>
+        <!-- <li>
+          <p><span class="title">Last 5 overs</span>: <span class="value">56 runs 2 wickets</span></p>
+        </li> -->
+      </ul>
+    </div>
+
+  </div>
+
+</div>
