@@ -43,6 +43,7 @@ import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.co
 import { ContentComponent } from './widget/content/content.component';
 import { SafehtmlPipe } from './pipes/safehtml.pipe';
 import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget
         SplitPipe, 
         FlashteamPipe,
         SlugifyPipe,
+        FilterPipe,
 
         /** All Componenets */
         CommonStoryWidgetComponent, 
@@ -91,7 +93,8 @@ import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget
         LogosUrlPipe,
         SafehtmlPipe,
         FlashteamPipe,
-        SlugifyPipe,        
+        SlugifyPipe,  
+        FilterPipe,      
 
         /** All Providers*/
         SportsService,
@@ -114,6 +117,7 @@ import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget
         LogosUrlPipe,
         ResizeImagePipe,
         SlugifyPipe,
+        FilterPipe,
 
         /** All Componenets */
         CommonStoryWidgetComponent,

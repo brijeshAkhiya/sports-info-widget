@@ -3,13 +3,13 @@
   *ngIf="data">
   <div class="teams-animation d-flex justify-content-around align-items-center">
     <div class="team-anim">
-      <img src="https://d1ldsx0apuyt84.cloudfront.net/logos/sr:competitor:107203.png">
-      <h4>India</h4>
+      <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
+      <h4>{{competitor.home.name}}</h4>
     </div>
     <div class="team-anim vs-anim"><h5>VS</h5></div>
     <div class="team-anim">
-      <img src="https://d1ldsx0apuyt84.cloudfront.net/logos/sr:competitor:107203.png">
-      <h4>West Indies</h4>
+      <img [lazyLoad]="competitor.away.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
+      <h4>{{competitor.away.name}}</h4>
     </div>
   </div>
   <!-- <h1 *ngIf="data.sport_event.competitors">

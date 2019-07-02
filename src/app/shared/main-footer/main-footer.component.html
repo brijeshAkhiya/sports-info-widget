@@ -2,19 +2,23 @@
 	<div class="footer-inner">
 		<div class="container">
 			<ul class="footer-nav-links">
-				<li><a [routerLink]="['/about']"  >About</a></li>
+				<li><a [routerLink]="['/about']">About</a></li>
 				<li><a [routerLink]="['/contact-us']">Contact</a></li>
-				<li><a [routerLink]="['/blog']"  >Blog</a></li>
+				<li><a [routerLink]="['/blog']">Blog</a></li>
 				<li><a [routerLink]="['/advertise-with-us']">Advertise with us</a></li>
 				<!-- <li><a>Sitemap</a></li> -->
-				<li><a [routerLink]="['/terms-and-conditions']" >Terms & Conditions</a></li>
+				<li><a [routerLink]="['/terms-and-conditions']">Terms & Conditions</a></li>
 				<li><a [routerLink]="['/privacy-policy']">Privacy Policy</a></li>
 			</ul>
 			<ul class="footer-social-links">
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sFbPageLink']"><img src="/assets/images/facebook-icon.svg" alt="facebook"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sTwitterLink']"><img src="/assets/images/twitter-icon.svg" alt="twitter"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sLinkdinLink']"><img src="/assets/images/linkedin-icon.svg" alt="linkedin"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sInstagramLink']"><img src="/assets/images/instagram-icon.svg" alt="instagram"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sFbPageLink']"><img
+							src="/assets/images/facebook-icon.svg" alt="facebook"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sTwitterLink']"><img
+							src="/assets/images/twitter-icon.svg" alt="twitter"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sLinkdinLink']"><img
+							src="/assets/images/linkedin-icon.svg" alt="linkedin"></a></li>
+				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sInstagramLink']"><img
+							src="/assets/images/instagram-icon.svg" alt="instagram"></a></li>
 			</ul>
 		</div>
 	</div>
@@ -24,7 +28,8 @@
 		</div>
 	</div>
 </footer>
-<button class="fav-btn scroll-top" *ngIf="isShow" (click)="gotoTop()"><img src="/assets/images/right-arrow.svg"></button>
+<button class="fav-btn scroll-top" *ngIf="isShow" (click)="gotoTop()"><img
+		src="/assets/images/right-arrow.svg"></button>
 <app-flash-commentary></app-flash-commentary>
 
 <!--Favourite module start-->
@@ -38,15 +43,15 @@
 	<div class="fav-block">
 		<form>
 			<div class="search-box">
-				<input type="text" placeholder="Search favorites ...">
+				<input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}"
+					placeholder="Search favorites ...">
 				<button type="submit"></button>
 			</div>
 		</form>
 		<ul class="fav-list">
-			<li *ngFor="let item of userfavourites" ><button [ngClass]="{'selected': item.isSelect}" (click)="routingfromfav(item.type,item.id,item.name)">{{item.name}}</button></li>
-			<!-- <li><button>Indian Premier League 2019</button></li>
-			<li><button class="selected">MS Dhoni</button></li>
-			<li><button>Arsenal</button></li> -->
+			<li *ngFor="let item of (userfavourites | filter : searchText)"><button
+					[ngClass]="{'selected': item.isSelect}"
+					(click)="routingfromfav(item.type,item.id,item.name)">{{item.name}}</button></li>
 		</ul>
 	</div>
 </div>

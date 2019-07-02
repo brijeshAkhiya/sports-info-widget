@@ -74,6 +74,11 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
     ngJs.src = ngP + '://platform.instagram.com/en_US/embeds.js';
     ngFjs.parentNode.insertBefore(ngJs, ngFjs);
 
+    ngJs = document.createElement('script');
+    ngJs.src = ngP + '://connect.facebook.net/nl_NL/sdk.js#xfbml=1&amp;version=v3.3';
+    ngFjs.parentNode.insertBefore(ngJs, ngFjs);
+
+
   }
 
   clicksubmit(){

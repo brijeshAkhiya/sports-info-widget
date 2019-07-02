@@ -14,12 +14,12 @@ export class MainFooterComponent implements OnInit {
   isapply: boolean = false;
   contactObj: {};
   userfavourites: any;
-  isedit:boolean = false;
-  constructor(private sportsService: SportsService, private router: Router, private socketservice: SocketService, private socket: Socket, private slugifyPipe: SlugifyPipe) {
-  }
-
+  isedit: boolean = false;
   isShow: boolean;
   topPosToStartShowing = 100;
+
+  constructor(private sportsService: SportsService, private router: Router, private socketservice: SocketService, private socket: Socket, private slugifyPipe: SlugifyPipe) {
+  }
 
   ngOnInit() {
     this.getContactDetails();
@@ -31,79 +31,77 @@ export class MainFooterComponent implements OnInit {
   //get user favourites
   getUserfavourites() {
     this.sportsService.getuserfavourite().subscribe((res: any) => {
-    this.userfavourites = res.data
-    this.userfavourites =  this.userfavourites.map((singleitem)=>{
+      this.userfavourites = res.data
+      this.userfavourites = this.userfavourites.map((singleitem) => {
         return {
           ...singleitem,
-          isSelect:false
+          isSelect: false
         }
       });
-      console.log(this.userfavourites);
     })
   }
 
   //favourites tags routing 
   routingfromfav(type, id, name) {
-  if(this.isedit){
-     this.userfavourites = this.userfavourites.map((singleitem) => {
-      if (singleitem.id == id && singleitem.isSelect == false) {
-        return {
-          ...singleitem,
-          isSelect: true
-        }
-      }
-      else if (singleitem.id == id && singleitem.isSelect == true){
-        return {
-          ...singleitem,
-          isSelect: false
-        }
-      } else {
-        return singleitem
-      }
-    })
-    console.log(this.userfavourites);
-    
-  }
-  else{
-    if (type == 'sport') {
-      this.router.navigate([id]);
-    }
-    else if (type == 'tournament') {
-      let slugname = this.slugifyPipe.transform(name);
-      this.router.navigate(['cricket/tournament', btoa(id), slugname])
-    }
-    else if (type == 'team'){
-      let slugname = this.slugifyPipe.transform(name);
-      this.router.navigate(['cricket/team', btoa(id),slugname])
-    }
-    else if (type == 'player'){
-      let slugname = this.slugifyPipe.transform(name);
-      this.router.navigate(['cricket/player', btoa(id),slugname])
-    }
-  }
-  }
-  //remove favourites function
-  removefavourite(){
-    if(this.isedit){
-      let isselectedtags = this.userfavourites.some((data)=>data.isSelect == true);
-      if(isselectedtags){
-        this.userfavourites.map((data)=>{
-          if(data.isSelect == true){
-            this.userfavourites.splice(this.userfavourites.findIndex(v => v.isSelect === true),1);
+    if (this.isedit) {
+      this.userfavourites = this.userfavourites.map((singleitem) => {
+        if (singleitem.id == id && singleitem.isSelect == false) {
+          return {
+            ...singleitem,
+            isSelect: true
           }
-        })
-       this.sportsService.updatefavourites(this.userfavourites).subscribe((res: any) => {
-        if (res) {
-          console.log(res);
+        }
+        else if (singleitem.id == id && singleitem.isSelect == true) {
+          return {
+            ...singleitem,
+            isSelect: false
+          }
+        } else {
+          return singleitem
         }
       })
+    }
+    else {
+      if (type == 'sport') {
+        this.router.navigate([id]);
       }
-      else{
+      else if (type == 'tournament') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['cricket/tournament', btoa(id), slugname])
+      }
+      else if (type == 'team') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['cricket/team', btoa(id), slugname])
+      }
+      else if (type == 'player') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['cricket/player', btoa(id), slugname])
+      }
+    }
+  }
+  //remove favourites function
+  removefavourite() {
+    if (this.isedit) {
+      let isselectedtags = this.userfavourites.some((data) => data.isSelect == true);
+      if (isselectedtags) {
+        this.userfavourites.map((data) => {
+          if (data.isSelect == true) {
+            this.userfavourites.splice(this.userfavourites.findIndex(v => v.isSelect == true), 1);
+          }
+        })
+        console.log('userfavnew', this.userfavourites);
+        this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
+          if (res) {
+            console.log(res);
+          }
+        })
+      }
+      else {
         this.isedit = false
       }
     }
-    else{
-     this.isedit = true
+    else {
+      this.isedit = true
     }
   }
 
