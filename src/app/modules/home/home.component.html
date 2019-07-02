@@ -60,7 +60,7 @@
             <a [state]="{ type: 'popular' }" [routerLink]="['video']">View All</a>
             <!-- View All -->
             <span></span>
-        </button>
+          </button>
 
         </div>
       </div>
@@ -74,8 +74,7 @@
           </div>
           <a class="play-btn"><img src="/assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
-            <h2 class="white-text"><a
-                [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</a></h2>
+            <h2 class="white-text"><a [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</a></h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
                 <a (click)="commonService.writerview(video?.iId?._id)">{{video.iId.sFirstName}}
@@ -86,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-4">
+      <div class="col-lg-3 col-md-4" *ngIf="popularvideos.length > 1">
         <ng-scrollbar class="custom-scrollbar">
           <div class="home-popular-vid-list">
             <div class="video-item" *ngFor="let video of popularvideos"
@@ -113,8 +112,21 @@
 <section class="common-section recentnews-section">
   <div class="container">
     <div class="row sidebar-row">
-      <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4}}">
-      </app-sports-home>
+      <div class="content-col">
+        <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4}}">
+        </app-sports-home>
+      </div>
+      <div class="sidebar-col" *ngIf="recentPosts.length > 0">
+        <div class="common-stories-widget common-shadow rounded-box">
+          <h5>Recommended Stories</h5>
+          <ul class="common-list">
+            <li *ngFor="let post of recentPosts | slice:4:9"><a
+                [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle | truncate:[60,'...']}}</a>
+            </li>
+          </ul>
+        </div>
+        <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+      </div>
     </div>
   </div>
 </section>

@@ -57,7 +57,7 @@
       </div>
     </li>
     <li>
-      <button [routerLink]="type == 'fixture' ? ['/cricket/recent-fixtures/upcoming/view'] : ['/cricket/recent-fixtures/results/view']" *ngIf="matches.length > 0">
+      <button [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']" *ngIf="matches.length > 0">
         View all
       </button>
     </li>

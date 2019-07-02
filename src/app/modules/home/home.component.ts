@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   banners = [];
   highlightImage: Number = 0;
   popularvideos = [];
+  recentPosts = [];
 
   constructor(
     public commonService: CommonService,
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getBannerPost();
     this.getPopularVideos();
+    this.getRecentPosts();
   }
 
   //get banner posts
@@ -39,4 +41,14 @@ export class HomeComponent implements OnInit {
         this.popularvideos = res.data;
     });
   }
+
+  //get recent posts
+  getRecentPosts() {
+    this.sportsService.getrecentpost({eType: "",nLimit: 10}).subscribe((res:any) => {
+      if (res.data) {
+        this.recentPosts = res.data;
+      }
+    });
+  }
+
 }

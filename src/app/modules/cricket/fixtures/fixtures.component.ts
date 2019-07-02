@@ -4,6 +4,7 @@ import * as moment from 'moment';
 
 import { SportsService } from '@providers/sports-service';
 import { CricketService } from '@providers/cricket-service';
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-fixtures',
@@ -18,6 +19,7 @@ export class FixturesComponent implements OnInit {
   constructor(
     private sportsService: SportsService,
     private cricketService: CricketService,
+    private commonService: CommonService,
   ) { }
 
   ngOnInit() {
@@ -36,22 +38,10 @@ export class FixturesComponent implements OnInit {
           else
             this.domesticSchedule.push(data)
         });
-        this.internationSchedule = this.sortArr(this.internationSchedule);
-        this.domesticSchedule = this.sortArr(this.domesticSchedule);
-        console.log(this.internationSchedule)
+        this.internationSchedule = this.commonService.sortArr(this.internationSchedule, 'MMMM YYYY', 'start_date');
+        this.domesticSchedule = this.commonService.sortArr(this.domesticSchedule, 'MMMM YYYY', 'start_date');
       }
     });
-  }
-
-  sortArr(data) {
-    let dateObj = {}
-    data.map((data) => {
-      let mdate = moment(data.start_date).format('MMMM YYYY');
-      if (!dateObj[mdate]) 
-        dateObj[mdate] = [];
-      dateObj[mdate].push(data)        
-    })
-    return Object.keys(dateObj).map(month => ({ month, data: dateObj[month] }));
   }
 }
 

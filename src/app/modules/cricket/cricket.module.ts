@@ -23,6 +23,7 @@ import { TournamentFixturesComponent } from './tournament/tournament-fixtures/to
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
+import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TournamentTeamsComponent } from './tournament/tournament-teams/tourname
     TournamentStadingsComponent,
     TournamentStatsComponent,
     TournamentTeamsComponent, 
+    CricketFixturesViewComponent,
   ],
   imports: [
     CommonModule,

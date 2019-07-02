@@ -39,7 +39,7 @@
                       <img [lazyLoad]="competitor?.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder">{{competitor?.name}}</p>
                     <p *ngIf="competitor?.period_scores"><b>
-                        {{competitor?.period_scores.display_score}}({{competitor?.period_scores.display_overs}}
+                        {{competitor?.period_scores.display_score}} ({{competitor?.period_scores.display_overs}}
                         ov)</b></p>
                   </div>
                 </ng-template>

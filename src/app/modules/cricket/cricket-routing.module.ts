@@ -11,6 +11,7 @@ import { TournamentFixturesComponent } from './tournament/tournament-fixtures/to
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
+import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
         {
             path: 'fixtures',
             component: FixturesComponent
+        },
+        {
+            path:'recent/:type',
+            component: CricketFixturesViewComponent
         },
         {
           path: 'tournament/:id/:slug',

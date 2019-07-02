@@ -3,20 +3,75 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>Fixtures</h1>
+          <h1>Recent Fixtures</h1>
         </div>
-
-        <ngb-tabset class="common-tabs">
-          <ngb-tab>
-            <ng-template ngbTabTitle>Results</ng-template>
+        <ngb-tabset class="common-tabs" [activeId]="selectedTab">
+          <ngb-tab id="upcoming">
+            <ng-template ngbTabTitle>
+              <div (click)="getMatchFixtures()">Upcoming</div>
+            </ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="loadingResult"></app-data-loader-widget>
-              <app-no-data-widget *ngIf="!loadingResult  &&  (!results || results?.length == 0 )"></app-no-data-widget>
               <div class="schedule-list schedule-tour-list">
-                <div class="schedule-month d-flex" *ngFor="let item of results">
+                <app-data-loader-widget *ngIf="!fixturesdata && !nofixturesdata"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="fixturesdata?.length == 0 || nofixturesdata"></app-no-data-widget>
+                <div class="schedule-month d-flex" *ngFor="let item of fixturesdata">
                   <div class="month-title">
                     <div class="sticky-month">
-                      <h5>{{item.key}}</h5>
+                      <h5>{{item.day}}</h5>
+                    </div>
+                  </div>
+                  <div class="schedule-items">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      <div class="match-desc">
+                        <!-- <h6>Match 2</h6> -->
+                        <p class="stadium-nm">{{item.venue_name}}{{item.venue_name ? ',':''}} {{item.city_name}}</p>
+                        <p class="time-line">{{item.scheduled | date:'h:mm a'}}</p>
+                      </div>
+                      <div class="match-teams d-flex align-items-center">
+                        <div class="match-team d-flex align-items-center">
+                          <div class="team-info">
+                            <h5>{{item.competitors[0].abbreviation}}</h5>
+                          </div>
+                          <div class="team-flag">
+                            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.competitors[0].id | logosurl"
+                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          </div>
+                        </div>
+                        <div class="vs-block">
+                          <h6>vs</h6>
+                        </div>
+                        <div class="match-team d-flex align-items-center">
+                          <div class="team-flag">
+                            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.competitors[1].id | logosurl"
+                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          </div>
+                          <div class="team-info">
+                            <h5>{{item.competitors[1].abbreviation}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="details-btn"
+                        (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="results">
+            <ng-template ngbTabTitle>
+              <div (click)="getMatchResults()">Results</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div class="schedule-list schedule-tour-list">
+                <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
+                <app-no-data-widget *ngIf="noresultdata"></app-no-data-widget>
+                <div class="schedule-month d-flex" *ngFor="let item of finalresultsdata">
+                  <div class="month-title">
+                    <div class="sticky-month">
+                      <h5>{{item.day}}</h5>
                     </div>
                   </div>
                   <div class="schedule-items">
@@ -24,13 +79,8 @@
                       *ngFor="let item of item.data"
                       (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
                       <div class="match-desc">
-                        <!-- <h6>Match 2</h6> -->
-                        <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="stadium-nm">{{item?.venue_name}}{{item?.venue_name ? ',':''}} {{item?.city_name}}</p>
                         <p class="result-line">{{item?.match_result}}</p>
-                        <p class="result-line" *ngIf="item.match_status == 'postponed'">Match is postponed</p>
-                        <p class="result-line" *ngIf="item.match_status == 'cancelled'">Match is cancelled</p>
-                        <p class="result-line" *ngIf="item.match_status == 'abandoned'">Match is abandoned</p>
-                        <p class="result-line" *ngIf="item.match_status == 'start_delayed'">Match is cancelled</p>
                       </div>
                       <div class="match-teams d-flex align-items-center" *ngIf="item.match_status == 'ended'">
                         <div class="match-team d-flex align-items-center"
@@ -93,10 +143,11 @@
                         *ngIf="item.match_status == 'abandoned' || item.match_status == 'cancelled'">
                         <div class="match-team d-flex align-items-center">
                           <div class="team-info">
-                            <h5>{{item.competitors[0].abbreviation}}</h5>
+                            <h5>{{item.data.competitors[0].abbreviation}}</h5>
                           </div>
                           <div class="team-flag">
-                            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.competitors[0].id | logosurl"
+                            <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                              [lazyLoad]="item?.data.competitors[0].id | logosurl"
                               [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           </div>
                         </div>
@@ -105,72 +156,17 @@
                         </div>
                         <div class="match-team d-flex align-items-center">
                           <div class="team-flag">
-                            <img [offset]="commonService.lazyloadoffset"
-                              [lazyLoad]="item?.competitors[1]?.id | logosurl"
+                            <img class="team-flag" [offset]="commonService.lazyloadoffset"
+                              [lazyLoad]="item?.data.competitors[1]?.id | logosurl"
                               [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           </div>
                           <div class="team-info">
-                            <h5>{{item.competitors[1].abbreviation}}</h5>
+                            <h5>{{item.data.competitors[1].abbreviation}}</h5>
                           </div>
                         </div>
                         <a class="details-btn"
                           (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab>
-            <ng-template ngbTabTitle>
-              <div (click)="getTournamentFixtures()">Upcoming</div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="loadingFixture"></app-data-loader-widget>
-              <app-no-data-widget *ngIf="!loadingFixture  &&  (!fixtures || results?.length == 0 )">
-              </app-no-data-widget>
-              <div class="schedule-list schedule-tour-list">
-                <div class="schedule-month d-flex" *ngFor="let item of fixtures">
-                  <div class="month-title">
-                    <div class="sticky-month">
-                      <h5>{{item.key}}</h5>
-                    </div>
-                  </div>
-                  <div class="schedule-items">
-                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
-                      *ngFor="let item of item.data"
-                      (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
-                      <div class="match-desc">
-                        <!-- <h6>Match 2</h6> -->
-                        <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
-                        <p class="time-line">{{item.scheduled | date:'h:mm a'}}</p>
-                      </div>
-                      <div class="match-teams d-flex align-items-center">
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-info">
-                            <h5>{{item.competitors[0].abbreviation}}</h5>
-                          </div>
-                          <div class="team-flag">
-                            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitors[0]?.id | logosurl"
-                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
-                          </div>
-                        </div>
-                        <div class="vs-block">
-                          <h6>vs</h6>
-                        </div>
-                        <div class="match-team d-flex align-items-center">
-                          <div class="team-flag">
-                            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitors[1].id | logosurl"
-                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
-                          </div>
-                          <div class="team-info">
-                            <h5>{{item.competitors[1].abbreviation}}</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <a class="details-btn"
-                        (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
                     </div>
                   </div>
                 </div>
@@ -184,7 +180,7 @@
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--points table widget-->
-          <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
+          <!-- <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget> -->
         </div>
       </div>
     </div>
