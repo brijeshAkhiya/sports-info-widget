@@ -11,6 +11,7 @@ import { TournamentFixturesComponent } from './tournament/tournament-fixtures/to
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
+import { MatchHomeComponent } from './match/match-home/match-home.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
                   component: TournamentStadingsComponent
               }
           ]
+        },
+        {
+            path: 'match/:id/:slug',
+            component: MatchHomeComponent
         },
       ]
   }

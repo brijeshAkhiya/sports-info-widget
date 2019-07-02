@@ -32,6 +32,9 @@ export class BlogViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('in blogview');
+    console.log('state::blogvieww',window.history.state);
+    
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     if (window.history.state && window.history.state.id) {
