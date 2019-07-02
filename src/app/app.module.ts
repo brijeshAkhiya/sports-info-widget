@@ -49,10 +49,12 @@ import { CmsContentComponent } from './pages/cms-content/cms-content.component';
 import { AboutComponent } from "./pages/about/about.component";
 import { ContactComponent } from "./pages/contact/contact.component";
 import { AdvertiseWithUsComponent } from "./pages/advertise-with-us/advertise-with-us.component";
+import { BlogsComponent } from "./pages/blogs/blogs.component";
 
 import { MainHeaderComponent } from "./shared/main-header/main-header.component";
 import { MainFooterComponent } from "./shared/main-footer/main-footer.component";
 import { WriterProfileComponent } from "./components/writer/writer-profile/writer-profile.component";
+import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
 
 
 //socket config
@@ -85,10 +87,12 @@ export function provideConfig() {
     AboutComponent,
     ContactComponent,
     AdvertiseWithUsComponent,
+    BlogsComponent,
     
     MainHeaderComponent,
     MainFooterComponent,
     WriterProfileComponent,
+    BlogViewComponent,
   ],
   imports: [
     BrowserModule,

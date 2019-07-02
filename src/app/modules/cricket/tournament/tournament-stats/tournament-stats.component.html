@@ -17,7 +17,9 @@
                       <app-player-table *ngIf="stats?.batting?.highest_score" [data]="stats?.batting?.highest_score" 
                         [options]=" {
                           titles : ['POS', 'player', 'High Score'],
-                          values : ['rank', 'image', 'total']
+                          values : ['rank', 'image', 'total'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>
@@ -28,7 +30,9 @@
                         <app-player-table *ngIf="stats?.batting?.top_runs" [data]="stats?.batting?.top_runs" 
                         [options]=" {
                           titles : ['POS', 'player', 'Runs'],
-                          values : ['rank', 'image', 'total']
+                          values : ['rank', 'image', 'total'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>
@@ -39,7 +43,9 @@
                         <app-player-table *ngIf="stats?.batting?.top_average" [data]="stats?.batting?.top_average" 
                         [options]=" {
                           titles : ['POS', 'player', 'Average'],
-                          values : ['rank', 'image', 'average']
+                          values : ['rank', 'image', 'average'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>
@@ -59,7 +65,9 @@
                         <app-player-table *ngIf="stats?.bowling?.top_wickets" [data]="stats?.bowling?.top_wickets" 
                         [options]=" {
                           titles : ['POS', 'player', 'Wickets'],
-                          values : ['rank', 'image', 'total']
+                          values : ['rank', 'image', 'total'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>
@@ -71,7 +79,9 @@
                         <app-player-table *ngIf="stats?.bowling?.top_bowling_average" [data]="stats?.bowling?.top_bowling_average" 
                         [options]=" {
                           titles : ['POS', 'player', 'Average'],
-                          values : ['rank', 'image', 'average']
+                          values : ['rank', 'image', 'average'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>
@@ -82,7 +92,9 @@
                         <app-player-table *ngIf="stats?.bowling?.top_economy" [data]="stats?.bowling?.top_economy" 
                         [options]=" {
                           titles : ['POS', 'player', 'Economy Rate'],
-                          values : ['rank', 'image', 'rate']
+                          values : ['rank', 'image', 'rate'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>
@@ -100,7 +112,9 @@
                         <app-player-table *ngIf="stats?.fielding?.top_catches" [data]="stats?.fielding?.top_catches" 
                         [options]=" {
                           titles : ['POS', 'player', 'Catches'],
-                          values : ['rank', 'image', 'total']
+                          values : ['rank', 'image', 'total'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
                         }">
                       </app-player-table>
                     </ng-template>

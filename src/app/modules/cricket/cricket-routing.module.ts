@@ -10,8 +10,7 @@ import { TournamentHomeComponent } from './tournament/tournament-home/tournament
 import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
-
-import { TeamsComponent } from '@app/shared/widget/teams/teams.component';
+import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
 
 const routes: Routes = [
   {
@@ -40,8 +39,7 @@ const routes: Routes = [
               },
               {
                   path: 'teams',
-                  component: TeamsComponent,
-                  data : { type : 'cricket'}
+                  component: TournamentTeamsComponent,
               },
               {
                   path: 'stats',

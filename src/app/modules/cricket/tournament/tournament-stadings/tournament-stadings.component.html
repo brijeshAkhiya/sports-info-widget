@@ -8,7 +8,6 @@
         <app-data-loader-widget *ngIf="!pointstable"></app-data-loader-widget>
         <app-no-data-widget *ngIf="pointstable?.length == 0"></app-no-data-widget>
         <app-player-table *ngIf="pointstable" [data]="pointstable" [options]="options"></app-player-table>
-
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">

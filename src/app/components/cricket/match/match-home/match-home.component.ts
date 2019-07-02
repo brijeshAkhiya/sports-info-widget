@@ -89,7 +89,42 @@ export class MatchHomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    var classThis = this;
+    var hidden, visibilityChange;
+    if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+      hidden = "hidden";
+      visibilityChange = "visibilitychange";
+    } 
+    else if (typeof document['msHidden'] !== "undefined") {
+      hidden = "msHidden";
+      visibilityChange = "msvisibilitychange";
+    } else if (typeof document['webkitHidden'] !== "undefined") {
+      hidden = "webkitHidden";
+      visibilityChange = "webkitvisibilitychange";
+    }
+
+    function handleVisibilityChange() {
+      console.log('visiblity changed', document.hidden)
+      console.log('visiblity hasfocus', document.hasFocus())
+      if(document.hidden)
+        classThis.clearTimeInterval()
+      else{  
+        classThis.getMatchData();
+      }
+    }
+
+    // Warn if the browser doesn't support addEventListener or the Page Visibility API
+    if (typeof document.addEventListener === "undefined" || hidden === undefined) {
+      alert("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+    } else {
+      document.addEventListener(visibilityChange, handleVisibilityChange, false);
+    }
+
+  }
+  initData(){
+    this.LiveOverSummery = [];
+  }
 
   checkYetBat(players) {
     let check = players.filter((player) => player.statistics.length == 0)
@@ -104,6 +139,8 @@ export class MatchHomeComponent implements OnInit {
     // })
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
+
+        this.initData();
         //res = res.result;
         this.isshow = true;
         if (res.data) {

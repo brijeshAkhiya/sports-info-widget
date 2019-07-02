@@ -22,6 +22,7 @@ import { MatchScheduleComponent } from './components/match-schedule/match-schedu
 import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
+import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TournamentStatsComponent } from './tournament/tournament-stats/tourname
     MatchScheduleComponent,
     TournamentFixturesComponent,
     TournamentStadingsComponent,
-    TournamentStatsComponent, 
+    TournamentStatsComponent,
+    TournamentTeamsComponent, 
   ],
   imports: [
     CommonModule,

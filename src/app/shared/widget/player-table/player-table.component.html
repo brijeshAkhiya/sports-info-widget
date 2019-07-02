@@ -1,8 +1,8 @@
-<div class="common-table tour-stand-table striped-table common-shadow rounded-box" *ngIf="data">
+<div class="common-table striped-table common-shadow rounded-box" [ngClass]="options.class" *ngIf="data">
   <div class="table-responsive">
     <table class="table">
       <thead>
-        <tr>
+        <tr [ngClass]="options.class_light_row ">
           <th *ngFor="let title of options.titles">{{title}}</th>
         </tr>
       </thead>

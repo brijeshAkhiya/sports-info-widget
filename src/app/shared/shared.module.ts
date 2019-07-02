@@ -31,7 +31,6 @@ import { CricketService } from './providers/cricket-service';
 import { SocketService } from './providers/socket.service';
 
 /** All Componenets */
-import { BlogComponent } from './widget/blog/blog.component';
 import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-widget.component';
 import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
 
@@ -47,6 +46,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { MenuComponent } from './widget/menu/menu.component';
 import { TeamsComponent } from './widget/teams/teams.component';
 import { PlayerTableComponent } from './widget/player-table/player-table.component';
+import { BlogCardComponent } from './widget/blog-card/blog-card.component';
 
 
 @NgModule({
@@ -84,10 +84,9 @@ import { PlayerTableComponent } from './widget/player-table/player-table.compone
         DataLoaderWidgetComponent, 
         FlashCommentaryComponent, 
         ContentComponent, 
-        BlogComponent, 
         SportsHomeComponent, 
         BlogListComponent, 
-        MenuComponent, TeamsComponent, PlayerTableComponent
+        MenuComponent, TeamsComponent, PlayerTableComponent, BlogCardComponent
     ],
     providers: [
         /** All Pipes */
@@ -131,11 +130,12 @@ import { PlayerTableComponent } from './widget/player-table/player-table.compone
         DataLoaderWidgetComponent,
         FlashCommentaryComponent,
         ContentComponent,
-        BlogComponent,
         SportsHomeComponent,
         BlogListComponent,
         MenuComponent,
-        PlayerTableComponent
+        TeamsComponent,
+        PlayerTableComponent,
+        BlogCardComponent
     ],
 
 })

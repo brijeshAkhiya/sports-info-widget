@@ -1,4 +1,4 @@
-<div class="sidebar-col">
+
   <div class="common-widget tab-widget">
     <div class="widget-title">
       <h5>Cricket</h5>
@@ -25,7 +25,6 @@
   </div>
   <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
   <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-</div>
 
 <ng-template #sidebarMatch let-loader="loader" let-matches="matches" let-type="type">
   
@@ -48,8 +47,8 @@
 
       <div class="row">
         <div class="col-md-9">
-          <p class="result-line" *ngIf="match?.period_scores; else match_schedule ">
-            {{ match.match_result ? match.match_result : match.status }}
+          <p class="result-line" *ngIf="type == 'result'; else match_schedule ">
+            {{ match.match_result ? match.match_result : match.match_status }}
           </p>
           <ng-template #match_schedule>
             <p class="result-line">Starts {{match.scheduled | amLocal | amDateFormat:'LT'}}  {{(match.city_name) ? '| ' + match.city_name : ''}}</p>

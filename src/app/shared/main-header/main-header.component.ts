@@ -8,7 +8,7 @@ import {
   AfterViewInit,
   HostListener
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app-reducer";
@@ -308,7 +308,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         if (res) {
           this.socialUser = res;
           this.validateSocialLogin('fb', res.authToken)
-          console.log('socialuser', this.socialUser);
           this.store.dispatch(new Auth.SetAuthenticated());
           this.modalService.dismissAll();
         }
@@ -396,6 +395,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       this.renderer2.removeClass(document.body, "search-box-open");
     }
   }
+  valuechange($e){
+    if($e.keyCode != 8 && this.searchkey.length > 2){
+      this.search();
+    }
+    else if(this.searchkey == '')
+      this.searchdata = [];
+  }
 
   //search close
   closesearch() {
@@ -422,6 +428,17 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  blogList(){
+    this.issearch = false;
+    this.renderer2.removeClass(document.body, "search-box-open");
+    this.router.navigate(['search', this.searchkey],{ 
+      state: { data:  this.searchdata, sSearch : this.searchkey} 
+    });
+    this.searchkey = '';
+    this.searchdata = [];
+
   }
 }
 

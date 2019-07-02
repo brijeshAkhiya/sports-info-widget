@@ -14,7 +14,9 @@ export class TournamentStadingsComponent implements OnInit {
   options = {
     titles : ['POS', 'TEAM', 'M', 'W', 'L', 'D', 'N/R', 'P', 'NRR'],
     values : ['rank', 'image', 'played', 'win', 'loss', 'draw', 'no_result', 'points', 'net_run_rate'],
-    image_type :'team'
+    image_type :'team',
+    class:'tour-stand-table',
+    tr_class:'tour-stand-table'
   }
 
   constructor(

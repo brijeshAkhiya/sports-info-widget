@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommonService } from '@providers/common-service';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  selector: 'app-blog-card',
+  templateUrl: './blog-card.component.html',
+  styleUrls: ['./blog-card.component.css']
 })
-export class BlogComponent implements OnInit {
+export class BlogCardComponent implements OnInit {
 
   @Input() posts: any;
   @Input() start: any;

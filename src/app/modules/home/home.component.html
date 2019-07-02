@@ -7,8 +7,8 @@
         <div class="col-xl-5 col-md-7 col-sm-9 col-10">
           <h1 class="white-text">Top Highlights</h1>
           <ul class="banner-news-list">
-            <li *ngFor="let post of banners;let i = index;"
-              (click)="commonService.blogview(post._id,post.eType,post.sTitle)"><a
+            <li *ngFor="let post of banners;let i = index;">
+              <a [state]="{ id: post._id }" [routerLink]="[(post.eType |lowercase) , post.sSlug ]"
                 [ngClass]="{'active': i===highlightImage}" (mouseover)="highlightImage = i">{{post.sTitle}}</a></li>
           </ul>
         </div>
@@ -33,10 +33,15 @@
 <section class="common-section home-popular-article">
   <div class="container">
     <div class="row sidebar-row">
-      <app-sports-home [options]="{page_type:'home', reqParams :{nStart:0, nLimit:5, eType:'Article'}}"></app-sports-home>
+      <div class="content-col">
+        <app-sports-home [options]="{page_type:'home', reqParams :{nStart:0, nLimit:5, eType:'Article'}}">
+        </app-sports-home>
+      </div>
 
       <!-- Start Cricket sidebar -->
-      <app-cricket-sidebar></app-cricket-sidebar>
+      <div class="sidebar-col">
+        <app-cricket-sidebar></app-cricket-sidebar>
+      </div>
       <!-- End Cricket sidebar -->
     </div>
   </div>
@@ -50,21 +55,27 @@
       <div class="col-xl-9">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4 class="white-text">Popular Videos</h4>
-          <button class="theme-btn" [routerLink]="['/blog/list/popular/video']">View All<span></span></button>
+          <!-- <button class="theme-btn"  routerLink="/video"  [state]="{ type: 'popular' }" >View All<span></span></button> -->
+          <button class="theme-btn">
+            <a [state]="{ type: 'popular' }" [routerLink]="['video']">View All</a>
+            <!-- View All -->
+            <span></span>
+        </button>
+
         </div>
       </div>
     </div>
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
-        <div class="main-popular-video common-zoom-container common-full-img"          
-        [routerLink]="['/blog' , (video.eType |lowercase) , video._id , video.sSlug ]">
+        <div class="main-popular-video common-zoom-container common-full-img"
+          [routerLink]="[(video.eType |lowercase), video.sSlug ]">
           <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
             [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['m']">
           </div>
           <a class="play-btn"><img src="/assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
             <h2 class="white-text"><a
-              [routerLink]="['/blog' , (video.eType |lowercase) , video._id , video.sSlug ]">{{video.sTitle}}</a></h2>
+                [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</a></h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
                 <a (click)="commonService.writerview(video?.iId?._id)">{{video.iId.sFirstName}}
