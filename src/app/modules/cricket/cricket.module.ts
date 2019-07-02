@@ -40,8 +40,11 @@ import { StringUnder } from '@app/shared/pipes/underlinepipe';
 import { CricketService } from '@app/shared/providers/cricket-service';
 import { MatchCounterComponent } from './match/match-commentry/match-counter/match-counter.component';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
-import { CustomTeamViewComponent } from '@app/components/cricket/teams/custom-team-view/custom-team-view.component';
+
 import { AgmCoreModule } from '@agm/core';
+import { TeamsHomeComponent } from './teams/teams-home/teams-home.component';
+import { PlayerHomeComponent } from './player/player-home/player-home.component';
+import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,9 @@ import { AgmCoreModule } from '@agm/core';
     UpcomingComponent,StringUnder,
     CommentryComponent,
     LiveMatchTrackerComponent,
-    CustomTeamViewComponent
+    CustomTeamViewComponent,
+    TeamsHomeComponent,
+    PlayerHomeComponent
   ],
   imports: [
     CommonModule,

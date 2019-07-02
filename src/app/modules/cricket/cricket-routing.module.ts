@@ -13,6 +13,9 @@ import { TournamentStadingsComponent } from './tournament/tournament-stadings/to
 import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
 import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 import { MatchHomeComponent } from './match/match-home/match-home.component';
+import { TeamsHomeComponent } from './teams/teams-home/teams-home.component';
+import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
+import { PlayerHomeComponent } from './player/player-home/player-home.component';
 
 const routes: Routes = [
   {
@@ -61,6 +64,18 @@ const routes: Routes = [
             path: 'match/:id/:slug',
             component: MatchHomeComponent
         },
+        {
+            path: 'team/:tournamentid/:teamid/:slug',
+            component: TeamsHomeComponent
+        },
+        {
+            path: 'team/:teamid/:slug',
+            component: CustomTeamViewComponent
+        },
+        {
+            path: 'player/:id/:slug',
+            component: PlayerHomeComponent
+        }
       ]
   }
 ]

@@ -14,10 +14,11 @@
             </td>
             <ng-template #data>
               <td>
-                <a>
+                <a
+                  (click)="(options.image_type == 'team') ? cricketService.teamInfo(item.team.id,item.team.name) : cricketService.playerview(item.player.id,item.player.name)">
                   <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
                     [defaultImage]="cricketService.flagplaceholder" alt="logo">
-                    {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
+                  {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
                 </a>
               </td>
             </ng-template>

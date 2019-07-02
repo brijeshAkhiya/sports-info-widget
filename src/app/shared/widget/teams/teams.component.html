@@ -3,7 +3,7 @@
 <div class="team-list" *ngIf="teams">
     <div class="row row-size12">
       <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let team of teams">
-        <div class="team-item rounded-box common-shadow d-flex" (click)="teamInfo(team.id,team.name)">
+        <div class="team-item rounded-box common-shadow d-flex" (click)="cricketService.teamInfo(team.id,team.name)">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
               [defaultImage]="cricketService.flagplaceholder" alt="team-flag"></div>
           <div class="team-name">
