@@ -17,7 +17,7 @@ export class MainFooterComponent implements OnInit {
   isedit: boolean = false;
   isShow: boolean;
   topPosToStartShowing = 100;
-
+  searchText;
   constructor(private sportsService: SportsService, private router: Router, private socketservice: SocketService, private socket: Socket, private slugifyPipe: SlugifyPipe) {
   }
 

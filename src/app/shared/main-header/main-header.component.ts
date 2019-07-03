@@ -40,7 +40,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   slider = [];
   timeout;
   isLogin: boolean;
-
+  isuserblock: boolean;
+ 
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -113,7 +114,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     if (window.pageYOffset > 156) {
@@ -308,7 +309,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         if (res) {
           this.socialUser = res;
           this.validateSocialLogin('fb', res.authToken)
-          console.log('socialuser', this.socialUser);
           this.store.dispatch(new Auth.SetAuthenticated());
           this.modalService.dismissAll();
         }
@@ -325,7 +325,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
           this.store.dispatch(new Auth.SetAuthenticated());
           this.socialUser = res;
           this.validateSocialLogin('google', res.idToken)
-          console.log('socialuser', this.socialUser);
           this.modalService.dismissAll();
         }
       })
@@ -339,6 +338,14 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+      }, (error) => {
+        if (error.status == 401) {
+          this.isuserblock = true
+          setTimeout(() => {
+            this.isuserblock = false
+          }, 4000);
+          this.authService.signOut();
+        }
       })
     }
     else if (type == 'google') {
@@ -347,6 +354,14 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+      }, (error) => {
+        if (error.status == 401) {
+          this.isuserblock = true
+          setTimeout(() => {
+            this.isuserblock = false
+          }, 4000);
+          this.authService.signOut();
+        }
       })
     }
   }

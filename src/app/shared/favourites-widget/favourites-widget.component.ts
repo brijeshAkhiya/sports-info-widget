@@ -10,6 +10,7 @@ export class FavouritesWidgetComponent implements OnInit {
   @Input() value: any
   isadded: boolean = false
   userfavourites: any;
+  isLogin: boolean = true;
   constructor(private sportsService: SportsService) { }
 
   ngOnInit() {
@@ -31,18 +32,26 @@ export class FavouritesWidgetComponent implements OnInit {
   }
 
   addfav() {
-    if (this.isadded) {
-      this.isadded = false
-      this.userfavourites.data.splice(this.userfavourites.data.findIndex(v => v.id === this.value.id),1);
-      this.sportsService.updatefavourites(this.userfavourites).subscribe((res: any) => {
-        if (res) {
-          console.log(res);
-        }
-      })
+    if (localStorage.getItem('userT')) {
+      if (this.isadded) {
+        this.isadded = false
+        this.userfavourites.data.splice(this.userfavourites.data.findIndex(v => v.id === this.value.id), 1);
+        this.sportsService.updatefavourites(this.userfavourites).subscribe((res: any) => {
+          if (res) {
+            console.log(res);
+          }
+        })
+      }
+      else {
+        this.isadded = true
+        this.updatefavourites(this.value);
+      }
     }
     else {
-      this.isadded = true
-      this.updatefavourites(this.value);
+      this.isLogin = false
+      setTimeout(() => {
+        this.isLogin = true
+      }, 3000);
     }
 
   }
