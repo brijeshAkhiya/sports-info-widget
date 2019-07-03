@@ -18,6 +18,7 @@ export class BlogViewComponent implements OnInit {
   isloggedin: boolean = true;
   isplay: boolean = false
   @ViewChild('videoPlayer') videoplayer: ElementRef;
+  widgetblogs: any;
 
   constructor(
     private router: Router,
@@ -34,7 +35,7 @@ export class BlogViewComponent implements OnInit {
   ngOnInit() {
     console.log('in blogview');
     console.log('state::blogvieww',window.history.state);
-    
+    this.getPopularArticles();
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     if (window.history.state && window.history.state.id) {
@@ -143,6 +144,18 @@ export class BlogViewComponent implements OnInit {
 
   viewmorecomments() {
     this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id))
+  }
+
+  getPopularArticles() {
+    let data = {
+      nstart: 0,
+      nLimit: 10
+    };
+    this.sportsService.getpopularpost(data).subscribe(res => {
+      if (res["data"]) {
+        this.widgetblogs = res["data"];
+      }
+    });
   }
 
   //to get blog comments

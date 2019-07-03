@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cricket-sidebar',
@@ -20,6 +21,7 @@ export class CricketSidebarComponent implements OnInit {
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -33,8 +35,8 @@ export class CricketSidebarComponent implements OnInit {
       this.loadingFixture = false;
       if (res.data)
         this.matchfixtures = res.data;
-    },(error)=>{
-        this.loadingFixture = false;
+    }, (error) => {
+      this.loadingFixture = false;
     });
   }
 
@@ -43,22 +45,22 @@ export class CricketSidebarComponent implements OnInit {
     this.loadingResult = true;
     this.sportsService
       .getmatchresults()
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         this.loadingResult = false;
 
-        if(res.data.length > 0){
+        if (res.data.length > 0) {
           this.matchresults = res.data;
           this.matchresults = this.matchresults.map((data, matchIndex) => {
             let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
             let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
             data.period_scores.map((pscore, index) => {
-              if(pscore.home_score){
+              if (pscore.home_score) {
                 (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
-              }else{
+              } else {
                 (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
               }
-            })      
-            return data; 
+            })
+            return data;
           });
           console.log('matchresults:last:', this.matchresults);
         }
@@ -66,6 +68,14 @@ export class CricketSidebarComponent implements OnInit {
         this.loadingResult = false;
       });
   }
+
+
+  //get match detail
+  matchDetail(id, team1, team2) {
+    let teams = team1.concat("-", team2);
+    this.router.navigate(["/cricket/match", btoa(id), teams]);
+  }
+
 
 
 }

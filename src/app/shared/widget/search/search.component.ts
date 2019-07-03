@@ -9,21 +9,22 @@ import { SportsService } from "@providers/sports-service";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
-  searchkey: string;  
+  searchkey: string;
   searchdata: any;
+  noresults: boolean;
+  constructor(
+    private el: ElementRef,
+    private router: Router,
+    private renderer2: Renderer2,
+    private sportsService: SportsService
+    ) { }
+  
   @ViewChild('searchBox') searchBox;
   @Input() issearch;
   @Input() searchOpen;
   @Output()
   public clickOutside = new EventEmitter();
 
-  constructor(
-    private el: ElementRef,
-    private renderer2: Renderer2,
-    private router: Router,
-    private sportsService: SportsService,
-    ) { }
 
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {    
@@ -45,8 +46,16 @@ export class SearchComponent implements OnInit {
     });
     this.searchkey = '';
     this.searchdata = [];
-
   }
+
+  valuechange($e){
+    if($e.keyCode != 8 && this.searchkey.length > 2){
+      this.search();
+    }
+    else if(this.searchkey == '')
+      this.searchdata = [];
+  }
+
 
   //search api call
   search() {
@@ -58,22 +67,16 @@ export class SearchComponent implements OnInit {
       };
       this.searchdata = [];
       // this.noresults = false;
+      this.noresults = false;
       this.sportsService.getsearchresult(data).subscribe(res => {
         if (res["data"].length != 0) {
           this.searchdata = res["data"];
         } else {
           // this.noresults = true;
+          this.noresults = true;
         }
       });
     }
-  }
-
-  valuechange($e){
-    if($e.keyCode != 8 && this.searchkey.length > 2){
-      this.search();
-    }
-    else if(this.searchkey == '')
-      this.searchdata = [];
   }
 
   //search close

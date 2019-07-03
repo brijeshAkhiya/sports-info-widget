@@ -1,6 +1,6 @@
 <section class="blog-banner" [defaultImage]="commonService.largeblogPlaceholder" [offset]="commonService.lazyloadoffset"
   [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
-  <ng-container *ngIf="blogdata?.eType == 'video'">
+  <ng-container *ngIf="blogdata?.eType == 'Video'">
     <div class="video-container" [ngClass]="{'show': isplay}">
       <video controls="true" controlsList="nodownload" #videoPlayer>
         <source [src]="commonService.s3Url+blogdata?.sVideo | safehtml:['video']" type="video/mp4"
@@ -66,7 +66,7 @@
             <h5>Readlist</h5>
             <ul class="common-list">
               <li *ngFor="let item of widgetblogs | slice:0:5"><a
-                  (click)="getwidgetblogsview(item._id,item.eType,item.sTitle)">{{item.sTitle}}</a></li>
+                [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
