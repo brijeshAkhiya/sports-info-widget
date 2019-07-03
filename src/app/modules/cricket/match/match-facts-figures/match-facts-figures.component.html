@@ -1,0 +1,103 @@
+<!-- START - MATCH PROBABAILITY-->
+<div *ngIf="matchdata.sport_event_status.status == 'not_started'">
+  <h4 class="line-title">Win Probability</h4>
+  <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
+    <div class="probability-block d-flex align-items-center justify-content-between">
+      <div class="team-block">
+        <img class="team-flag" [lazyLoad]="comp1.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
+        <h3 *ngIf="matchprobability">{{comp1.probability}}%</h3>
+      </div>
+
+      <div class="team-block">
+        <h3 *ngIf="matchprobability">{{comp2.probability}}%</h3>
+        <img class="team-flag" [lazyLoad]="comp2.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
+      </div>
+    </div>
+    <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage"></div>
+  </div>
+  <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
+    No probability data available for this match!
+  </div>
+</div>
+<!-- END - MATCH PROBABAILITY-->
+
+
+<section class="last-meetings-section" *ngIf="teamLastmatch?.length != 0">
+  <h4 class="line-title">Last meetings</h4>
+  <div class="schedule-list schedule-tour-list">
+    <app-data-loader-widget *ngIf="!teamMatchResult"></app-data-loader-widget>
+    <app-no-data-widget *ngIf="teamLastmatch?.length == 0"></app-no-data-widget>
+    <div class="schedule-list-inner" *ngFor="let item of teamMatchResult">
+      <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">
+        <div class="month-title">
+          <div class="sticky-month">
+            <h5>{{item.day}}</h5>
+          </div>
+        </div>
+        <div class="schedule-items">
+          <div class="schedule-item complete-match d-flex align-items-center rounded-box common-shadow"
+            *ngFor="let match of item.data"
+            (click)="matchDetail(match.match_id,match.competitors[0].abbreviation,match.competitors[1].abbreviation)">
+            <div class="match-desc">
+              <h6>{{match.competitors[0].abbreviation}} VS {{match.competitors[1].abbreviation}} </h6>
+              <p class="stadium-nm">{{match.venue_name}}{{match.venue_name ? ',' : ''}} {{match.city_name}}
+              </p>
+              <p class="result-line">{{match.match_result}}</p>
+            </div>
+            <div class="match-teams d-flex align-items-center">
+              <div class="match-team d-flex align-items-center" *ngFor="let score of match.period_score_new | slice:0:1">
+                <div class="team-info" *ngIf="!score.teamFlag || score.teamFlag">
+                  <h5 [ngClass]="{'winner': score.team.id == match.winner_id}">{{score.team.abbreviation}}</h5>
+                  <p>{{score?.display_score}}({{score?.display_overs}} ov)</p>
+                </div>
+                <div class="team-flag">
+                <img [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
+                  [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                </div>
+              </div>
+              <div class="vs-block">
+                <h6>vs</h6>
+              </div>
+              <div class="match-team d-flex align-items-center" *ngFor="let score of match.period_score_new | slice:1:2">
+                <div class="team-flag">
+                <img [lazyLoad]="score.team.id | logosurl"  [offset]="commonService.lazyloadoffset" 
+                  [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                </div>
+                <div class="team-info" *ngIf="!score.teamFlag || score.teamFlag">
+                  <h5 [ngClass]="{'winner': score.team.id == match.winner_id}">{{score.team.abbreviation}}</h5>
+                  <p>{{score?.display_score}}({{score?.display_overs}} ov)</p>
+                </div>
+              </div>
+            </div>
+            <a class="details-btn"
+              (click)="matchDetail(match.match_id,match.competitors[0].abbreviation,match.competitors[1].abbreviation)"><span>Details</span></a>
+          </div>
+        </div>
+      </div>
+      <!-- <div *ngIf="!item.data[0].period_scores">
+        No data available!
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- START - VENUE-->
+<h4 class="line-title">Venue Details</h4>
+<section class="venue-info rounded-box common-shadow" *ngIf="venuedetails">
+  <ng-container *ngIf="venuedetails.lat && venuedetails.long">
+    <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.long">
+      <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.long"></agm-marker>
+    </agm-map>
+  </ng-container>
+  <p *ngIf="venuedetails?.name">
+    <span>Venue :</span>
+    {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
+  </p>
+  <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
+  <p *ngIf="venuedetails?.bowling_ends"><span>Ends
+      :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
+</section>
+<div *ngIf="!venuedetails">
+  No venue details available for this match!
+</div>
+<!-- END - VENUE-->

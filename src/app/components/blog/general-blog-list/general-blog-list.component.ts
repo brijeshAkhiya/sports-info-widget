@@ -91,11 +91,5 @@ export class GeneralBlogListComponent implements OnInit {
       }
     });
   }
-   //blog view
-
-   blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
-  }
 
 }

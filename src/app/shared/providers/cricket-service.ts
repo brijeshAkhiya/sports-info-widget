@@ -30,4 +30,12 @@ export class CricketService {
     this.router.navigate(['/cricket/team', btoa(id), slugname]);
   }
 
+
+  //get tournament info
+
+  tournamentInfo(id,name){
+    let slugname  =  this.slugifyPipe.transform(name); 
+    this.router.navigate(['/cricket/tournament',btoa(id),slugname]);
+  }
+
 }

@@ -21,6 +21,7 @@ import { LogosUrlPipe } from './pipes/logosurlpipe';
 import { PlayerImagePipe } from './pipes/playerimageurl.pipe';
 import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
 import { SlugifyPipe } from "./pipes/slugpipe";
+import { SafehtmlPipe } from './pipes/safehtml.pipe';
 
 
 /** All Providers*/
@@ -30,7 +31,6 @@ import { CricketService } from './providers/cricket-service';
 import { SocketService } from './providers/socket.service';
 
 /** All Componenets */
-import { BlogComponent } from './widget/blog/blog.component';
 import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-widget.component';
 import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
 
@@ -41,7 +41,14 @@ import { CommonRelatedBlogCardComponent } from './common-related-blog-card/commo
 import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { ContentComponent } from './widget/content/content.component';
-import { SafehtmlPipe } from './pipes/safehtml.pipe';
+import { SportsHomeComponent } from './sports-home/sports-home.component';
+import { BlogListComponent } from './blog-list/blog-list.component';
+import { MenuComponent } from './widget/menu/menu.component';
+import { TeamsComponent } from './widget/teams/teams.component';
+import { PlayerTableComponent } from './widget/player-table/player-table.component';
+import { BlogCardComponent } from './widget/blog-card/blog-card.component';
+import { ScheduleComponent } from './widget/schedule/schedule.component';
+import { SearchComponent } from './widget/search/search.component';
 import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
 import { FilterPipe } from './pipes/filter.pipe';
 
@@ -82,7 +89,13 @@ import { FilterPipe } from './pipes/filter.pipe';
         DataLoaderWidgetComponent, 
         FlashCommentaryComponent, 
         ContentComponent, 
-        BlogComponent, 
+        SportsHomeComponent, 
+        BlogListComponent, 
+        MenuComponent, 
+        TeamsComponent, 
+        PlayerTableComponent, 
+        BlogCardComponent, 
+        ScheduleComponent, SearchComponent,
         FavouritesWidgetComponent
     ],
     providers: [
@@ -129,7 +142,14 @@ import { FilterPipe } from './pipes/filter.pipe';
         DataLoaderWidgetComponent,
         FlashCommentaryComponent,
         ContentComponent,
-        BlogComponent,
+        SportsHomeComponent,
+        BlogListComponent,
+        MenuComponent,
+        TeamsComponent,
+        PlayerTableComponent,
+        BlogCardComponent,
+        ScheduleComponent,
+        SearchComponent,
         FavouritesWidgetComponent
     ],
 

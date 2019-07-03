@@ -1,0 +1,467 @@
+<!-- <app-data-loader-widget *ngIf="isshow"></app-data-loader-widget> -->
+<section class="common-section cricket-recentnews recentnews-section" *ngIf="!isshow">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
+        <!-- START - ABOUT MATCH-->
+        <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision">
+        </app-match-about>
+        <!-- END - ABOUT MATCH-->
+        <!-- START - MATCH TABS-->
+        <ngb-tabset class="common-tabs" *ngIf="matchdata">
+          <!-- START - MATCH COMMENTRY-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>Commentary</ng-template>
+            <ng-template ngbTabContent>
+              <!-- <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget> -->
+              <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
+                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"
+                [showCommetry]="showCommetry">
+              </app-match-commentry>
+            </ng-template>
+          </ngb-tab>
+          <!-- END - MATCH COMMENTRY-->
+          <!-- START - SCORECARDS-->
+          <ngb-tab *ngIf="matchInnings?.length > 0">
+            <ng-template ngbTabTitle>Scorecard</ng-template>
+            <ng-template ngbTabContent>
+              <ngb-tabset class="filled-tabs scorecard-tab"
+                [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
+                <ngb-tab *ngFor="let item of matchInnings,let i = index">
+                  <ng-template ngbTabTitle>
+                    <span>{{teamObj[item.batting_team].name}}
+                      <span class="test-inng">
+                        {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
+                      </span>
+                    </span>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <div class="common-table batsman-table tour-stats-table common-shadow rounded-box">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="text-uppercase">Batsman</th>
+                              <th>R</th>
+                              <th>B</th>
+                              <th>4s</th>
+                              <th>6s</th>
+                              <th>SR</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
+                              <ng-container *ngIf="typeOf(batting.statistics.length) !== 'number'">
+                                <td>
+                                  <a (click)="cricketService.playerview(batting.id,batting.name)"
+                                    [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">
+                                    {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}
+                                  </a>
+                                  <p class="batsman-text">
+                                    {{
+                                      (!batting?.statistics.dismissal && batting.statistics.length != 0) 
+                                      ? 
+                                        (matchdata.sport_event_status.status == 'closed' || matchdata.sport_event_status.status == 'ended') 
+                                        ? "not out"
+                                        : (matchdata.sport_event_status.current_inning == item?.number) ? "batting" : "not out"
+                                      :
+                                      "" 
+                                    }}
+
+
+                                    <!-- {{ (matchdata.sport_event_status.status == 'live' && !batting?.statistics.dismissal && batting.statistics.length != 0) ?  'batting' : ''}}
+                                    {{ (matchdata.sport_event_status.status == 'ended' || matchdata.sport_event_status.status == 'closed' ) && !batting?.statistics.dismissal && batting.statistics.length != 0) ?  'not out' : ''}} -->
+                                    {{batting?.statistics?.dismissal?.type == 'run_out' ? 'run out' : ''}}
+                                    {{batting?.statistics?.dismissal?.type == 'stumped' ? 'st' : ''}}
+                                    <!--if batsman is leg before type out-->
+                                    {{batting?.statistics?.dismissal?.type == 'leg_before_wicket' ? 'lbw' : ''}}
+                                    <!--if batsman is catch out-->
+                                    {{ batting?.statistics?.dismissal?.type == 'caught' ? 'c' : '' || batting?.statistics?.dismissal?.type == 'retired_hurt' ? 'retired hurt' : ''}}
+                                    {{ batting?.statistics?.dismissal?.type == 'caught' ? batting?.statistics?.dismissal?.fieldsman_id ?
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
+                                        : ''  
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
+
+                                    <!--if batsman is stumped out-->
+                                    {{ batting?.statistics?.dismissal?.type == 'stumped' ? batting?.statistics?.dismissal?.fieldsman_id ?
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
+                                        : ''  
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
+                                    <!--if batsman is runout-->
+                                    {{ batting?.statistics?.dismissal?.type == 'run_out' ? batting?.statistics?.dismissal?.fieldsman_id ?
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
+                                        : ''  
+                                    : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
+                                    {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? 'b' : '' : '' }}
+                                    {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? (playerList[batting?.statistics?.dismissal?.bowler_id]?.name) ? (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : '' : '' : '' }}
+                                  </p>
+                                </td>
+                                <td>{{batting?.statistics?.runs ? batting.statistics.runs : '0'}}</td>
+                                <td>{{batting?.statistics?.balls_faced ? batting.statistics.balls_faced : '0'}}</td>
+                                <td>{{batting?.statistics?.fours ? batting.statistics.fours : '0'}}</td>
+                                <td>{{batting?.statistics?.sixes ? batting.statistics.sixes : '0'}}</td>
+                                <td>
+                                  {{batting?.statistics?.strike_rate ? (batting.statistics.strike_rate | number:'2.2-2') : '0'}}
+                                </td>
+                              </ng-container>
+                            </tr>
+                            <tr>
+                              <td>
+                                Extras<p class="batsman-text">( b -
+                                  {{item?.teams[1]?.statistics?.bowling?.byes ? item?.teams[1]?.statistics?.bowling?.byes : '0'}},
+                                  w -
+                                  {{item?.teams[1]?.statistics?.bowling?.wides ? item?.teams[1]?.statistics?.bowling?.wides : '0'}},
+                                  no
+                                  -
+                                  {{item?.teams[1]?.statistics?.bowling?.no_balls ? item?.teams[1]?.statistics?.bowling?.no_balls : '0'}},
+                                  lb -
+                                  {{item?.teams[1]?.statistics?.bowling?.leg_byes ? item?.teams[1]?.statistics?.bowling?.leg_byes : '0'}}
+                                  )</p>
+                              </td>
+                              <td>{{item?.teams[1]?.statistics?.bowling?.extras}}</td>
+                              <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <b>Total</b>
+                                <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} runs per
+                                  over)</p>
+                              </td>
+                              <td>
+                                <b>{{item?.teams[1]?.statistics?.bowling?.extras > 0 ? item?.teams[0]?.statistics?.batting?.runs + item?.teams[1]?.statistics?.bowling?.extras : item?.teams[0]?.statistics?.batting?.runs}}</b>
+                              </td>
+                              <td colspan="4"></td>
+                            </tr>
+                            <tr *ngIf="checkYetBat(item?.teams[0]?.statistics?.batting?.players)">
+                              <td colspan="6">
+                                <b> {{matchdata.sport_event_status.status == 'live' ? 'Yet' : 'Did'}}
+                                  {{matchdata.sport_event_status.status == 'live' ? 'to' : 'not'}} bat : </b>
+                                <span class="batsman-text not-bat-text">
+                                  <ng-container *ngFor="let notBat of item?.teams[0]?.statistics?.batting?.players">
+                                    <ng-container *ngIf="notBat && notBat.statistics.length === 0">
+                                      {{notBat?.name | split}}<span>,</span>
+                                    </ng-container>
+                                  </ng-container>
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!--Score card tab end-->
+                    <!--Fall of wickets section starts-->
+                    <div class="common-table common-shadow rounded-box"
+                      *ngIf="matchdata.sport_event.tournament.type != 'first_class' && fallofWickets[item.number]">
+                      <div class="table-title" *ngIf="fallofWickets.length > 0">
+                        <h6 class="text-uppercase">Fall of Wickets</h6>
+                      </div>
+                      <ul class="fall-wicket-list" *ngIf="fallofWickets.length > 0">
+                        <li *ngFor="let item of fallofWickets[item.number]">
+                          <p class="fall-wicket">{{item.displayscore}}</p>
+                          <p class="title"><a
+                              (click)="cricketService.playerview(item.playerid,item.playername)">{{item.playername | split}}</a>
+                          </p>
+                          <p>{{item.displayover}} OV</p>
+                        </li>
+                      </ul>
+                    </div>
+                    <!--Fall of wickets section ends-->
+
+
+                    <div class="common-table bowler-table tour-stats-table common-shadow rounded-box"
+                      *ngIf="item?.teams[1]?.statistics?.bowling?.players.length > 0">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Bowler</th>
+                              <th>Ov</th>
+                              <th>DB</th>
+                              <th>R</th>
+                              <th>W</th>
+                              <th>ECO</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let bowling of item?.teams[1]?.statistics?.bowling?.players">
+                              <td><a
+                                  (click)="cricketService.playerview(bowling.id,bowling.name)">{{bowling?.name | split}}</a>
+                              </td>
+                              <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '0'}}</td>
+                              <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '0'}}</td>
+                              <td>{{bowling?.statistics?.runs_conceded ? bowling?.statistics.runs_conceded : '0'}}</td>
+                              <td>{{bowling?.statistics?.wickets ? bowling?.statistics.wickets : '0'}}</td>
+                              <td>
+                                {{bowling?.statistics?.economy_rate ? (bowling?.statistics.economy_rate | number:'1.2-2') : '0.00'}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+            </ng-template>
+          </ngb-tab>
+          <!-- END - SCORECARDS-->
+          <!--START - LIVE MATCH TRACKER-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Hawk Eye</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-live-match-tracker [matchid]="matchid" *ngIf="matchid">
+              </app-live-match-tracker>
+            </ng-template>
+          </ngb-tab>
+          <!--END - LIVE MATCH TRACKER-->
+          <!-- START - FACTS AND FIGURES-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Facts & Figures</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-match-facts-figures [matchdata]="matchdata" [teamLastmatch]="lastmatches"
+                [teamMatchResult]="matchesresultdata"></app-match-facts-figures>
+            </ng-template>
+          </ngb-tab>
+          <!-- END - FACTS AND FIGURES-->
+          <!-- Match information starts -->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Info</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div class="common-table match-info-table common-shadow rounded-box">
+                <div class="table-responsive">
+                  <table class="table">
+                    <tr>
+                      <td>Match</td>
+                      <td>{{matchdata.sport_event.competitors[0].name}} VS {{matchdata.sport_event.competitors[1].name}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Series</td>
+                      <td>
+                        {{matchdata.sport_event.season ? matchdata.sport_event.season.name : matchdata.sport_event.tournament.name }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Toss</td>
+                      <td>
+                        <p *ngIf="tossdecision.toss_won_by_team">
+                          <span>{{tossdecision.toss_won_by_team}} opt to
+                            {{tossdecision.toss_decision ? tossdecision.toss_decision : 'bat'}}</span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Weather Condition</td>
+                      <td>{{matchdata.sport_event_conditions?.weather_info?.weather_conditions | stringunder}}</td>
+                    </tr>
+                    <tr>
+                      <td>Pitch Condition</td>
+                      <td>{{matchdata.sport_event_conditions?.pitch_info?.pitch_conditions | stringunder}}</td>
+                    </tr>
+                    <tr>
+                      <td>Outfield Conditions</td>
+                      <td>{{matchdata.sport_event_conditions?.outfield_info?.outfield_conditions | stringunder}}</td>
+                    </tr>
+                    <tr>
+                      <td>Umpires</td>
+                      <td>
+                        <p *ngFor="let singleUmpire of matchdata.sport_event_conditions?.referees?.umpires">
+                          {{singleUmpire.name | split}} <span
+                            class="light-text">{{ singleUmpire.type === 'on_field' ? '(On Field)' : singleUmpire.type === '3rd' ? '(3rd Umpire)' : ''}}</span>
+                        </p>
+                        <!-- <p>Chinaza Akachi <span class="light-text">(1st Umpire)</span></p>
+                        <p>Hemchandra Chakravorty <span class="light-text">(2nd Umpire)</span></p>
+                        <p>Chinaza Akachi <span class="light-text">(3rd Umpire)</span></p> -->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Match Refree</td>
+                      <td>{{matchdata.sport_event_conditions?.referees?.referee?.name | split}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!-- <div class="d-flex match-info-title align-items-center">
+                <img class="common-shadow" src="https://d1ldsx0apuyt84.cloudfront.net/logos/au.png">
+                <h4>West Indies Lineup</h4>
+              </div>
+              <div class="common-table match-info-table common-shadow rounded-box">
+                <div class="table-responsive">
+                  <table class="table">
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td>Karlien Nijhuis</td>
+                    </tr>
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td>Karlien Nijhuis</td>
+                    </tr>
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td>Karlien Nijhuis</td>
+                    </tr>
+                    <tr>
+                      <td>Christopher Walker</td>
+                      <td>Abayo Stevens</td>
+                    </tr>
+                    <tr>
+                      <td>Justine Marshall</td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="d-flex match-info-title align-items-center">
+                  <img class="common-shadow" src="https://d1ldsx0apuyt84.cloudfront.net/logos/au.png">
+                  <h4>Pakistan Lineup</h4>
+                </div>
+                <div class="common-table match-info-table common-shadow rounded-box">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td>Karlien Nijhuis</td>
+                      </tr>
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td>Karlien Nijhuis</td>
+                      </tr>
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td>Karlien Nijhuis</td>
+                      </tr>
+                      <tr>
+                        <td>Christopher Walker</td>
+                        <td>Abayo Stevens</td>
+                      </tr>
+                      <tr>
+                        <td>Justine Marshall</td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </div>
+              </div> -->
+            </ng-template>
+          </ngb-tab>
+
+          <!--START - NEWS TAB-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabContent>
+              <app-blog-list *ngIf="MatchArticleparams" [options]="{'reqParams': MatchArticleparams}">
+              </app-blog-list>
+            </ng-template>
+          </ngb-tab>
+          <!--END - NEWS TAB-->
+
+          <!--START - UPCOMING-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>Upcoming</ng-template>
+            <ng-template ngbTabContent>
+              <app-data-loader-widget *ngIf="!nextmatches"></app-data-loader-widget>
+              <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
+              <div class="schedule-list schedule-tour-list" *ngIf="nextmatches">
+                <div class="schedule-month d-flex" *ngFor="let item of nextmatches">
+                  <div class="month-title">
+                    <div class="sticky-month">
+                      <h5>{{item.day}}</h5>
+                    </div>
+                  </div>
+                  <div class="schedule-items">
+                    <div class="schedule-item d-flex align-items-center rounded-box common-shadow"
+                      *ngFor="let item of item.data"
+                      (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+                      <div class="match-desc">
+                        <!-- <h6>Match 2</h6> -->
+                        <p class="stadium-nm" *ngIf="item.venue_name">{{item.venue_name}}, {{item.city_name}}</p>
+                        <p class="time-line">{{item?.scheduled | date:'h:mm a'}}</p>
+                      </div>
+                      <div class="match-teams d-flex align-items-center">
+                        <div class="match-team d-flex align-items-center">
+                          <div class="team-info">
+                            <h5>{{item?.competitors[0].abbreviation}}</h5>
+                          </div>
+                          <div class="team-flag">
+                            <img [lazyLoad]="item?.competitors[0].id | logosurl" [offset]="commonService.lazyloadoffset"
+                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          </div>
+                        </div>
+                        <div class="vs-block">
+                          <h6>vs</h6>
+                        </div>
+                        <div class="match-team d-flex align-items-center">
+                          <div class="team-flag">
+                            <img [lazyLoad]="item?.competitors[1].id | logosurl" [offset]="commonService.lazyloadoffset"
+                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                          </div>
+                          <div class="team-info">
+                            <h5>{{item.competitors[1].abbreviation}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="details-btn"
+                        (click)="matchDetail(item.match_id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <!--END - UPCOMING-->
+
+        </ngb-tabset>
+        <!-- END - MATCH TABS-->
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+
+          <!--START - SIDERBAR ADS-->
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!--END - SIDERBAR ADS-->
+
+          <!--START - SIDERBAR STORY-->
+          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
+            *ngIf="widget1type && widget1title">
+          </app-common-story-widget>
+          <!--START - SIDERBAR STORY-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

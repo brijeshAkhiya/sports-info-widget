@@ -1,0 +1,30 @@
+<div class="common-serch-box" [ngClass]="{'show': issearch}">
+  <div class="search-bar" #searchBox>
+    <div class="container">
+      <div class="search-box">
+        <form>
+          <input type="text" placeholder="Search articles …" [(ngModel)]="searchkey"
+            [ngModelOptions]="{standalone: true}" autofocus="autofocus" (keyup)="valuechange($event)">
+          <button type="submit" (click)="search()"></button>
+        </form>
+      </div>
+      <button class="search-close" (click)="closesearch()"></button>
+    </div>
+  </div>
+  <div class="search-result">
+    <div class="container">
+      <div class="common-title-btn d-flex justify-content-between align-items-center"
+        *ngIf="searchdata?.length != 0 && searchdata">
+        <h3 class="white-text">Search Results</h3>
+        <button class="theme-btn" *ngIf="searchdata && searchdata?.length > 4" (click)="blogList()">View
+          All<span></span></button>
+      </div>
+      <div class="no-data-available-white" *ngIf="searchdata && searchdata?.length == 0 && noresults">
+        <h5>
+          No results found!
+        </h5>
+      </div>
+      <app-blog-card [posts]="searchdata" [start]="0" [end]="4" [card_type]="'search'"></app-blog-card>
+
+    </div>
+  </div>

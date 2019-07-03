@@ -1,0 +1,22 @@
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
+          <h1>Standings</h1>
+        </div>
+        <app-data-loader-widget *ngIf="!pointstable"></app-data-loader-widget>
+        <app-no-data-widget *ngIf="pointstable?.length == 0"></app-no-data-widget>
+        <app-player-table *ngIf="pointstable" [data]="pointstable" [options]="options"></app-player-table>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!--Recommended links-->
+          <!-- <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"></app-common-story-widget> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

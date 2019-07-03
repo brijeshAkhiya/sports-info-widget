@@ -35,7 +35,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
 
-        <app-blog [posts]="populararticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog>
+        <app-blog-card [posts]="populararticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog-card>
 
 
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
@@ -45,7 +45,7 @@
           <h4>Related news</h4>
           <button class="theme-btn" [routerLink]="['/blog/list/popular/article']">View All<span></span></button>
         </div>
-        <app-blog [posts]="populararticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog>
+        <app-blog-card [posts]="populararticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog-card>
 
       </div>
       <!-- Start Cricket sidebar -->

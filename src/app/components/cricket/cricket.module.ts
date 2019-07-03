@@ -25,7 +25,7 @@ import { CricketTourMenuComponent } from "../../shared/cricket/cricket-tour-menu
 import { SlugifyPipe } from "@pipes/slugpipe";
 import { TournamentStandingsComponent } from "./tournament/tournament-standings/tournament-standings.component";
 import { SplitPipe } from "@pipes/stringsplitpipe";
-import { StringUnder } from "@pipes/underlinepipe";
+// import { StringUnder } from "@pipes/underlinepipe";
 import { LazyLoadImageModule } from "ng-lazyload-image";
 import { MatchCommentryComponent } from "./match/match-commentry/match-commentry.component";
 import { CommentryComponent } from "./match/match-commentry/commentry/commentry.component";
@@ -56,7 +56,7 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     TournamentCricketComponent,
     CricketTourMenuComponent,
     TournamentStandingsComponent,
-    StringUnder,
+    
     MatchCommentryComponent,
     CommentryComponent,
     MatchCounterComponent,
@@ -79,7 +79,7 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     ScrollingModule,
     LazyLoadImageModule
   ],
-  providers: [SportsService, SocketService, SlugifyPipe, StringUnder, CricketService],
+  providers: [SportsService, SocketService, SlugifyPipe, CricketService],
   exports: [CommentryComponent, MatchCounterComponent, MatchAboutComponent]
 })
 export class CricketModule {}

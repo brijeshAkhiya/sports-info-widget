@@ -203,13 +203,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  //blog view
-
-  blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);
-  }
-
   //get match detail
   matchDetail(id, team1, team2) {
     let teams = team1.concat("-", team2);

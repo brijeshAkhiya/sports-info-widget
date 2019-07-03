@@ -122,6 +122,9 @@ export class MatchHomeComponent implements OnInit {
     }
 
   }
+  initData(){
+    this.LiveOverSummery = [];
+  }
 
   checkYetBat(players) {
     let check = players.filter((player) => player.statistics.length == 0)
@@ -136,6 +139,8 @@ export class MatchHomeComponent implements OnInit {
     // })
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
+
+        this.initData();
         //res = res.result;
         this.isshow = true;
         if (res.data) {

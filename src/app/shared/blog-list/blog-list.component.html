@@ -1,0 +1,14 @@
+
+<div class="common-news-list" *ngIf="articles && articles?.length > 0">
+    <app-blog-card [posts]="articles" *ngIf="options.card_type" [card_type]="options.card_type"></app-blog-card>
+    <app-blog-card [posts]="articles" *ngIf="!options.card_type"  [card_type]="'list'"></app-blog-card>
+</div>
+<app-data-loader-widget *ngIf="isLoading"></app-data-loader-widget>
+<app-no-data-widget *ngIf="!isLoading && articles?.length == 0 || !articles"></app-no-data-widget>
+
+<div class="text-center">
+  <button class="theme-btn down-btn" (click)="loadmore()" *ngIf="!isLoading && articles?.length > 0 && isLoadMore">
+    Load More
+    <span></span>
+  </button>
+</div>

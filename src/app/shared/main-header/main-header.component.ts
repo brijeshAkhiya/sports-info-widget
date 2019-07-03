@@ -8,7 +8,7 @@ import {
   AfterViewInit,
   HostListener
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app-reducer";
@@ -30,18 +30,18 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
   @ViewChild("navbarmenu") navbarmenu: ElementRef;
+  @ViewChild('searchOpen') searchOpen;
   isapply: boolean = false;
   socialUser: any;
   issearch: boolean;
-  searchkey: string;
-  searchdata: any;
+  // searchdata: any;
   noresults: boolean;
   interval;
   slider = [];
   timeout;
   isLogin: boolean;
   isuserblock: boolean;
- 
+
   constructor(
     private renderer2: Renderer2,
     private el: ElementRef,
@@ -55,6 +55,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     private store: Store<fromRoot.State>,
     private cricketService: CricketService,
     private commonService: CommonService,
+
 
   ) {
     //get custom ads data Funtion call --->
@@ -104,6 +105,9 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   checklogin() {
     this.modalService.open('content')
+  }
+  closemodal() {
+    this.modalService.dismissAll();
   }
 
   logout() {
@@ -399,7 +403,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       return `with: ${reason}`;
     }
   }
+  close($event) {
+    if (!$event) {
+      this.issearch = false;
+      this.renderer2.removeClass(document.body, "search-box-open");
+    }
 
+  }
   //search bar open
   searchopen() {
     this.isapply = false;
@@ -411,41 +421,10 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       this.renderer2.removeClass(document.body, "search-box-open");
     }
   }
-
   //search close
   closesearch() {
     this.issearch = false;
-    this.searchkey = "";
-    this.renderer2.removeClass(document.body, "search-box-open");
-  }
-
-  //search api call
-  search() {
-    if (this.searchkey.trim()) {
-      let data = {
-        sSearch: this.searchkey,
-        nLimit: 5,
-        nStart: 0
-      };
-      this.searchdata = [];
-      this.noresults = false;
-      this.sportsService.getsearchresult(data).subscribe(res => {
-        if (res["data"].length != 0) {
-          this.searchdata = res["data"];
-        } else {
-          this.noresults = true;
-        }
-      });
-    }
-  }
-
-  //blog view
-  blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog", type.toLowerCase(), btoa(id), slugname]);
-    this.issearch = false;
-    this.searchkey = "";
-    this.searchdata = [];
+    // this.searchkey = "";
     this.renderer2.removeClass(document.body, "search-box-open");
   }
 }

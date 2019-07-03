@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "@env";
 import { Store } from "@ngrx/store";
+import * as moment from 'moment';
 import * as fromRoot from "../../app-reducer";
 import * as MetaTags from "../../store/meta-tags-management/meta-tags.actions";
 
@@ -28,12 +29,6 @@ export class CommonService {
     this.s3Url = environment.s3Url
     this.siteUrl = environment.siteUrl
     this.getPageTitles();
-  }
-
-  //blog view
-  blogview(id, type, title) {
-    let slugname = this.slugifyPipe.transform(title);
-    this.router.navigate(["/blog",type.toLowerCase(), btoa(id),slugname]);
   }
 
   //writer view 
@@ -65,6 +60,18 @@ export class CommonService {
       remainingdays.seconds = Math.floor((time % (1000 * 60)) / 1000);
     }
     return remainingdays;
+  }
+
+
+  sortArr(data, format, date_param) {
+    let dateObj = {}
+    data.map((data) => {
+      let mdate = moment(data[date_param]).format(format);
+      if (!dateObj[mdate]) 
+        dateObj[mdate] = [];
+      dateObj[mdate].push(data)        
+    })
+    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
   getPageTitles() {
