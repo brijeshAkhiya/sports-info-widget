@@ -30,10 +30,10 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
   @ViewChild("navbarmenu") navbarmenu: ElementRef;
+  @ViewChild('searchOpen') searchOpen;
   isapply: boolean = false;
   socialUser: any;
   issearch: boolean;
-  searchkey: string;
   searchdata: any;
   noresults: boolean;
   interval;
@@ -383,10 +383,31 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       return `with: ${reason}`;
     }
   }
+  close($event){
+    console.log("close")
+    console.log($event)
+    if(!$event){
+      this.issearch = false;
+      this.renderer2.removeClass(document.body, "search-box-open");
+    }
 
+  }
   //search bar open
-  searchopen() {
+  searchopen($event) {
+    console.log("searchopen")
+    console.log($event);
+    console.log(this.issearch);
+
     this.isapply = false;
+    // if(!$event || !this.issearch){
+    //   this.issearch = false;
+    //   this.renderer2.removeClass(document.body, "search-box-open");
+    // }else{
+    //   this.issearch = true;
+    //   this.renderer2.addClass(document.body, "search-box-open");
+
+    // }
+
     if (!this.issearch) {
       this.issearch = true;
       this.renderer2.addClass(document.body, "search-box-open");
@@ -395,50 +416,11 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       this.renderer2.removeClass(document.body, "search-box-open");
     }
   }
-  valuechange($e){
-    if($e.keyCode != 8 && this.searchkey.length > 2){
-      this.search();
-    }
-    else if(this.searchkey == '')
-      this.searchdata = [];
-  }
-
   //search close
   closesearch() {
     this.issearch = false;
-    this.searchkey = "";
+    // this.searchkey = "";
     this.renderer2.removeClass(document.body, "search-box-open");
-  }
-
-  //search api call
-  search() {
-    if (this.searchkey.trim()) {
-      let data = {
-        sSearch: this.searchkey,
-        nLimit: 5,
-        nStart: 0
-      };
-      this.searchdata = [];
-      this.noresults = false;
-      this.sportsService.getsearchresult(data).subscribe(res => {
-        if (res["data"].length != 0) {
-          this.searchdata = res["data"];
-        } else {
-          this.noresults = true;
-        }
-      });
-    }
-  }
-
-  blogList(){
-    this.issearch = false;
-    this.renderer2.removeClass(document.body, "search-box-open");
-    this.router.navigate(['search', this.searchkey],{ 
-      state: { data:  this.searchdata, sSearch : this.searchkey} 
-    });
-    this.searchkey = '';
-    this.searchdata = [];
-
   }
 }
 
