@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { SportsService } from "@providers/sports-service";
 
 @Component({
@@ -20,19 +21,34 @@ export class SearchComponent implements OnInit {
   
   @ViewChild('searchBox') searchBox;
   @Input() issearch;
+  @Input() searchOpen;
   @Output()
   public clickOutside = new EventEmitter();
 
+
   @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {
+  public onClick(targetElement) {    
       const clickedInside = this.searchBox.nativeElement.contains(targetElement);
-      console.log(clickedInside)
-      if (!clickedInside) {
-          this.clickOutside.emit(null);
+      if (targetElement != this.searchOpen && !clickedInside) {
+        this.searchkey = '';
+        this.searchdata = [];
+        this.issearch = false;
+          this.clickOutside.emit(false);
       }
   }
   
   ngOnInit() {
+  }
+
+
+  blogList(){
+    this.issearch = false;
+    this.renderer2.removeClass(document.body, "search-box-open");
+    this.router.navigate(['search', this.searchkey],{ 
+      state: { data:  this.searchdata, sSearch : this.searchkey} 
+    });
+    this.searchkey = '';
+    this.searchdata = [];
   }
 
   valuechange($e){
@@ -43,12 +59,6 @@ export class SearchComponent implements OnInit {
       this.searchdata = [];
   }
 
-  //search close
-  closesearch() {
-    this.issearch = false;
-    this.searchkey = "";
-    this.renderer2.removeClass(document.body, "search-box-open");
-  }
 
   //search api call
   search() {
@@ -59,26 +69,22 @@ export class SearchComponent implements OnInit {
         nStart: 0
       };
       this.searchdata = [];
+      // this.noresults = false;
       this.noresults = false;
       this.sportsService.getsearchresult(data).subscribe(res => {
         if (res["data"].length != 0) {
           this.searchdata = res["data"];
         } else {
+          // this.noresults = true;
           this.noresults = true;
         }
       });
     }
   }
 
-  blogList(){
-    this.issearch = false;
-    this.renderer2.removeClass(document.body, "search-box-open");
-    this.router.navigate(['search', this.searchkey],{ 
-      state: { data:  this.searchdata, sSearch : this.searchkey} 
-    });
-    this.searchkey = '';
-    this.searchdata = [];
-
+  //search close
+  closesearch() {
+    this.clickOutside.emit(false);
   }
 
 }

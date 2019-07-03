@@ -25,7 +25,7 @@ import { CricketTourMenuComponent } from "../../shared/cricket/cricket-tour-menu
 import { SlugifyPipe } from "@pipes/slugpipe";
 import { TournamentStandingsComponent } from "./tournament/tournament-standings/tournament-standings.component";
 import { SplitPipe } from "@pipes/stringsplitpipe";
-import { StringUnder } from "@pipes/underlinepipe";
+// import { StringUnder } from "@pipes/underlinepipe";
 import { LazyLoadImageModule } from "ng-lazyload-image";
 import { MatchCommentryComponent } from "./match/match-commentry/match-commentry.component";
 import { CommentryComponent } from "./match/match-commentry/commentry/commentry.component";
