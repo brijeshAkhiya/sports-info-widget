@@ -11,4 +11,11 @@
     Load More
     <span></span>
   </button>
+
+  <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs?.length > 0">
+    <h5>Recent Stories</h5>
+    <ul class="common-list">
+      <li *ngFor="let item of widgetblogs | slice:0:5"><a [routerLink]="['/blog',(item.eType |lowercase) , item._id , item.sSlug ]">{{item.sTitle}}</a></li>
+    </ul>
+  </div>
 </div>

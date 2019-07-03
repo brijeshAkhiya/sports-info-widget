@@ -49,6 +49,7 @@ import { PlayerTableComponent } from './widget/player-table/player-table.compone
 import { BlogCardComponent } from './widget/blog-card/blog-card.component';
 import { ScheduleComponent } from './widget/schedule/schedule.component';
 import { SearchComponent } from './widget/search/search.component';
+import { StringUnder } from './pipes/underlinepipe';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { SearchComponent } from './widget/search/search.component';
         PlayerImagePipe, 
         StripHtmlPipe, 
         SplitPipe, 
+        StringUnder,
         FlashteamPipe,
         SlugifyPipe,
 
@@ -103,7 +105,7 @@ import { SearchComponent } from './widget/search/search.component';
         SafehtmlPipe,
         FlashteamPipe,
         SlugifyPipe,        
-
+        StringUnder,
         /** All Providers*/
         SportsService,
         SocketService,
@@ -125,6 +127,7 @@ import { SearchComponent } from './widget/search/search.component';
         LogosUrlPipe,
         ResizeImagePipe,
         SlugifyPipe,
+        StringUnder,
 
         /** All Componenets */
         CommonStoryWidgetComponent,

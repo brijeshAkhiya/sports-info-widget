@@ -49,7 +49,7 @@
               <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"
                 [offset]="commonService.lazyloadoffset"></div>
               <div class="author-desc">
-                <h6><a (click)="writerview(blogdata?.iId?._id)">{{blogdata?.iId?.sFirstName}}
+                <h6><a>{{blogdata?.iId?.sFirstName}}
                     {{blogdata?.iId?.sLastName}}</a></h6>
                 <p>{{blogdata?.iId?.sBio}}</p>
               </div>
@@ -65,8 +65,8 @@
           <div class="common-stories-widget common-shadow rounded-box">
             <h5>Readlist</h5>
             <ul class="common-list">
-              <li *ngFor="let item of widgetblogs | slice:0:5"><a
-                [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a [state]="{ id: item._id }"
+                  [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
             </ul>
           </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>

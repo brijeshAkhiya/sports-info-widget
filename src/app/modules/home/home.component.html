@@ -115,7 +115,7 @@
           <h5>Recommended Stories</h5>
           <ul class="common-list">
             <li *ngFor="let post of recentPosts | slice:4:9"><a
-                [routerLink]="['/blog' , (post.eType |lowercase) , post._id , post.sSlug ]">{{post.sTitle | truncate:[60,'...']}}</a>
+              [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle | truncate:[60,'...']}}</a>
             </li>
           </ul>
         </div>

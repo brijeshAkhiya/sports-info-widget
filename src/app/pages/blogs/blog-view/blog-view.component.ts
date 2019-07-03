@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
+import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
+import { SplitPipe } from '@app/shared/pipes/stringsplitpipe';
 
 @Component({
   selector: 'app-blog-view',
@@ -24,6 +26,8 @@ export class BlogViewComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
+    private slugifypipe: SlugifyPipe,
+    private splitpipe: SplitPipe,
     public commonService: CommonService
   ) {
     /**To reload router if routing in same page */
@@ -168,6 +172,25 @@ export class BlogViewComponent implements OnInit {
             this.blogcomments = this.blogcomments.concat(res.data)
         }
       });
+    }
+  }
+
+   //tags view 
+   tagview(id, type, title) {
+    let slugname = this.slugifypipe.transform(title);
+    if (type == 'Player') {
+      let playername = this.splitpipe.transform(title);
+      let playerslug = this.slugifypipe.transform(playername)
+      this.router.navigate(['/cricket/player', btoa(id), playerslug])
+    }
+    else if (type == 'Tournament') {
+      this.router.navigate(['/cricket/tournament', btoa(id), slugname]);
+    }
+    else if (type == 'Team') {
+      this.router.navigate(['/cricket/team', btoa(id), slugname])
+    }
+    else if (type == 'Match') {
+      this.router.navigate(['/cricket/match/', btoa(id), slugname])
     }
   }
 

@@ -68,7 +68,7 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     MatchScorecardComponent,
     MatchCounterComponent,
     RecommendedComponent,
-    UpcomingComponent,StringUnder,
+    UpcomingComponent,
     CommentryComponent,
     LiveMatchTrackerComponent,
     CustomTeamViewComponent,
@@ -84,7 +84,7 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     CricketRoutingModule,
     SharedModule,
   ],
-  providers: [SportsService, SocketService, SlugifyPipe, StringUnder, CricketService],
+  providers: [SportsService, SocketService, SlugifyPipe, CricketService],
   exports:[
     CricketSidebarComponent,
     MatchScheduleComponent, 

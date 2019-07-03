@@ -56,7 +56,6 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     TournamentCricketComponent,
     CricketTourMenuComponent,
     TournamentStandingsComponent,
-    StringUnder,
     MatchCommentryComponent,
     CommentryComponent,
     MatchCounterComponent,
@@ -79,7 +78,7 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     ScrollingModule,
     LazyLoadImageModule
   ],
-  providers: [SportsService, SocketService, SlugifyPipe, StringUnder, CricketService],
+  providers: [SportsService, SocketService, SlugifyPipe, CricketService],
   exports: [CommentryComponent, MatchCounterComponent, MatchAboutComponent]
 })
 export class CricketModule {}
