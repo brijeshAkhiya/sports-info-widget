@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   banners = [];
   highlightImage: Number = 0;
+  highlightImageInterval;
   popularvideos = [];
   recentPosts = [];
 
@@ -31,7 +32,23 @@ export class HomeComponent implements OnInit {
     this.sportsService.getbannerpost().subscribe((res:any) => {
       if (res.data) 
         this.banners = res.data; 
+        this.initHighlightInterval(0);
     });
+  }
+  initHighlightInterval(initValue){
+    let i = initValue;        
+    this.highlightImageInterval = setInterval(() => {
+      this.highlightImage = i;
+      i = (this.banners.length - 1 == i) ? 0 : i+1;
+    }, 4000 ); 
+
+  }  
+  mouseover(highlightIndex){
+    this.highlightImage = highlightIndex;
+    clearInterval(this.highlightImageInterval);
+  }
+  mouseout(){
+    this.initHighlightInterval(this.highlightImage)
   }
 
   //get popular videos

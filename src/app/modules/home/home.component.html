@@ -9,7 +9,7 @@
           <ul class="banner-news-list">
             <li *ngFor="let post of banners;let i = index;">
               <a [state]="{ id: post._id }" [routerLink]="[(post.eType |lowercase) , post.sSlug ]"
-                [ngClass]="{'active': i===highlightImage}" (mouseover)="highlightImage = i">{{post.sTitle}}</a></li>
+                [ngClass]="{'active': i===highlightImage}" (mouseover)="mouseover(i)" (mouseout)="mouseout()">{{post.sTitle}}</a></li>
           </ul>
         </div>
       </div>
