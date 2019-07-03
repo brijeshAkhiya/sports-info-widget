@@ -35,7 +35,7 @@ export class BlogListComponent implements OnInit {
   getData(){
     if(this.options.reqParams && this.options.reqParams.aIds)
       this.getRelatedPosts();
-    else if(this.options.type == 'popular')
+    else if(this.options.reqParams.type == 'popular' || this.options.type == 'popular')
       this.getPopularArticles();
     else if(this.options.type == 'writer' && typeof this.options.reqParams._id != 'undefined')
       this.getWriterPosts()

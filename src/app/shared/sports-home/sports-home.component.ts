@@ -19,7 +19,7 @@ export class SportsHomeComponent implements OnInit {
     this.tabSet = content;
   };
 
-  popularArticlesParams:any = { nStart: 0, nLimit: 10}
+  popularArticlesParams:any = { nStart: 0, nLimit: 10, type : 'popular'}
   recentArticlesParams:any = { nStart: 0, nLimit: 10, eSort: 'Latest'}
   videoArticlesParams:any = { nStart: 0, nLimit: 10, eType: 'Video'}
   popularArticles = [];
