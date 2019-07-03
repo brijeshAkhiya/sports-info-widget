@@ -43,15 +43,11 @@ export class PlayerHomeComponent implements OnInit {
         this.playerbasic = res['data'].player
         this.playerstats = res['data'].statistics
         if(this.playerstats){
-          this.isstats = true
         this.playerstats.map(s => {
           this.totalmatches += s.batting.matches;
           this.totalruns += s.batting.runs;
           this.totalwicket += s.bowling.wickets
         })
-        }
-        else{
-          this.isstats = false
         }
       }
     },

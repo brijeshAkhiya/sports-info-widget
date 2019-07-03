@@ -95,12 +95,14 @@
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Match Scoreline Section ------- */
     .scoreline-block:before                 { width: calc(100% - 14px); }
-    .scoreline-block                        { padding: 8px 0px; font-size: 13px; line-height: 21px; }
-    .scoreline-block .item                  { width: calc(50% - 110px); }
-    .scoreline-block .item p                { margin-right: 48px;}
+    .scoreline-block                        { padding: 8px 0px; font-size: 12px; line-height: 21px; }
+    .scoreline-block .item                  { width: calc(50% - 100px); }
+    .scoreline-block .item p                { margin-right: 24px;}
     .scoreline-block .item p > span         { margin-left: 6px; }
-    .scoreline-block .item p .target        { margin-left: 10px; padding-left: 12px;}
-    .scoreline-block .score                 { padding: 8px 16px; font-size: 14px; line-height: 24px; }
+    .scoreline-block .item:last-child p     { margin: 0px 0px 0px 6px; }
+    .scoreline-block .item p .target        { margin-left: 6px; padding-left: 10px;}
+    .scoreline-block .item p .target:before { width: 2px; }
+    .scoreline-block .score                 { padding: 8px 16px; font-size: 13px; line-height: 24px; }
     .scoreline-block .score .value          { margin: 0px 6px;}
 }
 
@@ -110,9 +112,19 @@
     .fall-wicket-list li                        { margin: 0px 6px 16px; width: 70px; }
     .fall-wicket-list .fall-wicket              { padding: 14px 4px; min-width: 52px; line-height: 20px; border-radius: 14px; }
     .fall-wicket-list p                         { font-size: 12px; line-height: 18px; }
+/* -------- Match Scoreline Section ------- */
+    .scoreline-block:before                 { width: calc(100% - 4px); }
+    .scoreline-block                        { padding: 8px 0px; height: 20px; }
+    .scoreline-block .item                  { display: none; }
+    .scoreline-block .score                 { padding: 6px 40px; font-size: 13px; line-height: 20px; }
+    .scoreline-block .score::before         { height: calc(100% + 22px); }
+    .scoreline-block .score .value          { margin: 0px 12px;}
 }
 
 @media (max-width: 575px) {
 /* -------- Match Title List ------- */
     .match-main-title .player-pic               { width: 66px; }
+/* -------- Match Scoreline Section ------- */
+    .scoreline-block .score                 { padding: 6px 20px; width: 60%; min-width: 240px; }
+    .scoreline-block .score .value          { margin: 0px 6px;}
 }

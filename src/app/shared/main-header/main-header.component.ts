@@ -40,6 +40,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   slider = [];
   timeout;
   isLogin: boolean;
+  isuserblock: boolean;
 
   constructor(
     private renderer2: Renderer2,
@@ -54,6 +55,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     private store: Store<fromRoot.State>,
     private cricketService: CricketService,
     private commonService: CommonService,
+
 
   ) {
     //get custom ads data Funtion call --->
@@ -104,6 +106,9 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   checklogin() {
     this.modalService.open('content')
   }
+  closemodal() {
+    this.modalService.dismissAll();
+  }
 
   logout() {
     this.authService.signOut().then(res => {
@@ -113,7 +118,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     if (window.pageYOffset > 156) {
@@ -324,7 +329,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
           this.store.dispatch(new Auth.SetAuthenticated());
           this.socialUser = res;
           this.validateSocialLogin('google', res.idToken)
-          console.log('socialuser', this.socialUser);
           this.modalService.dismissAll();
         }
       })
@@ -338,6 +342,14 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+      }, (error) => {
+        if (error.status == 401) {
+          this.isuserblock = true
+          setTimeout(() => {
+            this.isuserblock = false
+          }, 4000);
+          this.authService.signOut();
+        }
       })
     }
     else if (type == 'google') {
@@ -346,6 +358,14 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+      }, (error) => {
+        if (error.status == 401) {
+          this.isuserblock = true
+          setTimeout(() => {
+            this.isuserblock = false
+          }, 4000);
+          this.authService.signOut();
+        }
       })
     }
   }
@@ -383,8 +403,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       return `with: ${reason}`;
     }
   }
-  close($event){
-    if(!$event){
+  close($event) {
+    if (!$event) {
       this.issearch = false;
       this.renderer2.removeClass(document.body, "search-box-open");
     }

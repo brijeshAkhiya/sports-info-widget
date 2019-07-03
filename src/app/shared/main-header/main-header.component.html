@@ -116,6 +116,18 @@
       </li>
     </ul>
   </div>
+  <!-- <ul class="navbar-nav navbar-rightside login-search">
+    <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()"></a></li>
+    <li *ngIf="!isLogin">
+      <a class="login" (click)="open(content)"></a>
+    </li>
+    <li ngbDropdown *ngIf="isLogin">
+      <a class="login"   [ngClass]="{'logged': isLogin}"  ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
+      </ul>
+    </li>
+  </ul> -->
 </nav>
 
 <app-search [issearch]="issearch" [searchOpen]="searchOpen" (clickOutside)="close($event)"></app-search>
@@ -130,7 +142,11 @@
           Facebook</button></li>
     </ul>
     <p class="signin-text">By signing in with Google or Facebook, you agree to
-      SportsInfo’s <a [routerLink]="['/terms-and-conditions']">Terms</a> and <a
-        [routerLink]="['/privacy-policy']">Privacy Policies</a>.</p>
+      SportsInfo’s <a [routerLink]="['/terms-and-conditions']" (click)="closemodal()">Terms</a> and <a
+        [routerLink]="['/privacy-policy']" (click)="closemodal()">Privacy Policies</a>.</p>
   </div>
 </ng-template>
+<div class="login-toast active d-flex align-items-center" *ngIf="isuserblock">
+  <img src="assets/images/blog/error-icon.svg">
+  <p class="dark-text">This email id "email id" is blocked by admin. Please contact to admin "email id of admin"</p>
+</div>

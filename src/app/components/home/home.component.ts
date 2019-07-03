@@ -78,6 +78,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+  
 
   //get popular posts
 

@@ -110,10 +110,8 @@ export class BlogViewComponent implements OnInit, OnDestroy, AfterViewInit {
         let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
         if (type.toUpperCase() != this.blogdata.eType.toUpperCase())
           this.router.navigate(['/page-not-found'])
-
         if (this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id)
-
         this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id));
       }, (error) => {
         if (error['error'].status == 500) {
