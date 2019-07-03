@@ -1,33 +1,32 @@
-
-  <div class="common-widget tab-widget">
-    <div class="widget-title">
-      <h5>Cricket</h5>
-    </div>
-    <ngb-tabset class="common-tabs">
-      <ngb-tab title="Fixtures">
-        <ng-template ngbTabContent>
-            <ng-container 
-              *ngTemplateOutlet="sidebarMatch;context:{ loader:loadingFixture, matches: matchfixtures, type:'fixture'}">
-            </ng-container>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab>
-        <ng-template ngbTabTitle>
-          <div (click)="getMatchResults()">Results</div>
-        </ng-template>
-        <ng-template ngbTabContent>
-          <ng-container 
-            *ngTemplateOutlet="sidebarMatch;context:{ loader:loadingResult, matches: matchresults, type:'result'}">
-          </ng-container>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+<div class="common-widget tab-widget">
+  <div class="widget-title">
+    <h5>Cricket</h5>
   </div>
-  <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-  <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+  <ngb-tabset class="common-tabs">
+    <ngb-tab title="Fixtures">
+      <ng-template ngbTabContent>
+        <ng-container
+          *ngTemplateOutlet="sidebarMatch;context:{ loader:loadingFixture, matches: matchfixtures, type:'fixture'}">
+        </ng-container>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <div (click)="getMatchResults()">Results</div>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <ng-container
+          *ngTemplateOutlet="sidebarMatch;context:{ loader:loadingResult, matches: matchresults, type:'result'}">
+        </ng-container>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+<app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+<app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
 
 <ng-template #sidebarMatch let-loader="loader" let-matches="matches" let-type="type">
-  
+
   <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
   <app-no-data-widget *ngIf="!loader && matches && matches?.length == 0"></app-no-data-widget>
 
@@ -40,9 +39,8 @@
       </div>
 
       <div *ngFor="let item of match?.competitors">
-          <ng-container 
-            *ngTemplateOutlet="match_team;context:{match: match, team:item}">
-          </ng-container>
+        <ng-container *ngTemplateOutlet="match_team;context:{match: match, team:item}">
+        </ng-container>
       </div>
 
       <div class="row">
@@ -51,13 +49,15 @@
             {{ match.match_result ? match.match_result : match.match_status }}
           </p>
           <ng-template #match_schedule>
-            <p class="result-line">Starts {{match.scheduled | amLocal | amDateFormat:'LT'}}  {{(match.city_name) ? '| ' + match.city_name : ''}}</p>
+            <p class="result-line">Starts {{match.scheduled | amLocal | amDateFormat:'LT'}}
+              {{(match.city_name) ? '| ' + match.city_name : ''}}</p>
           </ng-template>
         </div>
       </div>
     </li>
     <li>
-      <button [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']" *ngIf="matches.length > 0">
+      <button [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']"
+        *ngIf="matches.length > 0">
         View all
       </button>
     </li>
@@ -72,8 +72,8 @@
     </p>
     <p *ngIf="match.match_result">
       <ng-container *ngFor="let score of team.p_new; let i = index">
-          {{score?.display_score}}
-          {{i == team.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
+        {{score?.display_score}}
+        {{i == team.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
       </ng-container>
     </p>
   </div>
