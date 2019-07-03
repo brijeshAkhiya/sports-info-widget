@@ -15,12 +15,13 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          <!-- <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs.length > 0">
+          
+          <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs?.length > 0">
               <h5>Recent Stories</h5>
               <ul class="common-list">
-                <li *ngFor="let item of widgetblogs | slice:0:5"><a [routerLink]="['/blog' , (item.eType |lowercase) , item._id , item.sSlug ]">{{item.sTitle}}</a></li>
+                <li *ngFor="let item of widgetblogs | slice:0:5"><a [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
               </ul>
-            </div> -->
+            </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
         </div>
       </div>

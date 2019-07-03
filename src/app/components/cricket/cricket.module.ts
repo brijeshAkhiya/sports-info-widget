@@ -56,7 +56,6 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     TournamentCricketComponent,
     CricketTourMenuComponent,
     TournamentStandingsComponent,
-    
     MatchCommentryComponent,
     CommentryComponent,
     MatchCounterComponent,

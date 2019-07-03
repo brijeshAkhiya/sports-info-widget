@@ -51,6 +51,7 @@ import { ScheduleComponent } from './widget/schedule/schedule.component';
 import { SearchComponent } from './widget/search/search.component';
 import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { StringUnder } from './pipes/underlinepipe';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { FilterPipe } from './pipes/filter.pipe';
         PlayerImagePipe, 
         StripHtmlPipe, 
         SplitPipe, 
+        StringUnder,
         FlashteamPipe,
         SlugifyPipe,
         FilterPipe,
@@ -109,6 +111,8 @@ import { FilterPipe } from './pipes/filter.pipe';
         SlugifyPipe,  
         FilterPipe,      
 
+        SlugifyPipe,        
+        StringUnder,
         /** All Providers*/
         SportsService,
         SocketService,
@@ -131,6 +135,7 @@ import { FilterPipe } from './pipes/filter.pipe';
         ResizeImagePipe,
         SlugifyPipe,
         FilterPipe,
+        StringUnder,
 
         /** All Componenets */
         CommonStoryWidgetComponent,
