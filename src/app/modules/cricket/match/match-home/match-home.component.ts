@@ -546,8 +546,8 @@ export class MatchHomeComponent implements OnInit {
         // Next over if commentry type is change_of_bowler
         let matchedIndex = currentInningCommentry.map(function (obj, i) { return i > firstIndex && obj.type; }).indexOf('change_of_bowler');
         if(matchedIndex > -1){
-        if(lastIndex > matchedIndex)
-          lastIndex = matchedIndex;
+          if(lastIndex > matchedIndex)
+            lastIndex = matchedIndex;
         }
         let overCommentry = [];
         if (lastIndex > 0) {
@@ -847,7 +847,7 @@ export class MatchHomeComponent implements OnInit {
 
     // Stop live update if Match is ended
     if (this.data.sport_event_status.status == "ended") {
-      this.interval = setInterval(() => {
+      this.interval = setTimeout(() => {
         this.clearTimeInterval();
         return false;
       }, this.commonService.miliseconds(0, 15, 0)); // stop live update after 15 min of match completed 
