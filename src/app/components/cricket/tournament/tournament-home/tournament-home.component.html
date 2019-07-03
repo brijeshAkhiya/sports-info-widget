@@ -5,6 +5,7 @@
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>{{tournamentname ? tournamentname : ''}}</h1>
           <!-- <button class="add-to-fav-btn added"><span>Add to favorites</span></button> -->
+          <app-favourites-widget [value]="{id:tournamentid,type:'tournament',name:tournamentname}"></app-favourites-widget>
         </div>
         <ngb-tabset class="common-tabs">
           <ngb-tab title="Recommended">

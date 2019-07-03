@@ -9,7 +9,7 @@
         </app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
-        <ngb-tabset class="common-tabs" *ngIf="matchdata">
+        <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
           <!-- START - MATCH COMMENTRY-->
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
@@ -417,9 +417,8 @@
                             <h5>{{item?.competitors[0].abbreviation}}</h5>
                           </div>
                           <div class="team-flag">
-                            <img [lazyLoad]="item?.competitors[0].id | logosurl"
-                              [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
-                              alt="team-flag">
+                            <img [lazyLoad]="item?.competitors[0].id | logosurl" [offset]="commonService.lazyloadoffset"
+                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           </div>
                         </div>
                         <div class="vs-block">
@@ -427,9 +426,8 @@
                         </div>
                         <div class="match-team d-flex align-items-center">
                           <div class="team-flag">
-                            <img [lazyLoad]="item?.competitors[1].id | logosurl"
-                              [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.flagplaceholder"
-                              alt="team-flag">
+                            <img [lazyLoad]="item?.competitors[1].id | logosurl" [offset]="commonService.lazyloadoffset"
+                              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
                           </div>
                           <div class="team-info">
                             <h5>{{item.competitors[1].abbreviation}}</h5>
@@ -464,6 +462,18 @@
           <!--START - SIDERBAR STORY-->
         </div>
       </div>
+    </div>
+  </div>
+  <div class="scoreline-block d-flex justify-content-between">
+    <div class="item">
+      <p>Gayle <span>24<span class="light-white">(12)</span></span></p>
+      <p>Gayle <span>24<span class="light-white">(12)</span></span></p>
+    </div>
+    <div class="score"><span class="dark-red">WI </span><span>vs</span> PAK<span class="value">93/8</span><span
+        class="dark-red">OV : </span> 24.3</div>
+    <div class="item">
+        <p>Phehlukwayo <span>1-56<span class="light-white">(10.5)</span></span></p>
+        <p><span class="light-white target">Target</span> <span>341</span></p>
     </div>
   </div>
 </section>

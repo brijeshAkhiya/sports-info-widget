@@ -49,6 +49,8 @@ import { PlayerTableComponent } from './widget/player-table/player-table.compone
 import { BlogCardComponent } from './widget/blog-card/blog-card.component';
 import { ScheduleComponent } from './widget/schedule/schedule.component';
 import { SearchComponent } from './widget/search/search.component';
+import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -75,6 +77,7 @@ import { SearchComponent } from './widget/search/search.component';
         SplitPipe, 
         FlashteamPipe,
         SlugifyPipe,
+        FilterPipe,
 
         /** All Componenets */
         CommonStoryWidgetComponent, 
@@ -92,7 +95,8 @@ import { SearchComponent } from './widget/search/search.component';
         TeamsComponent, 
         PlayerTableComponent, 
         BlogCardComponent, 
-        ScheduleComponent, SearchComponent
+        ScheduleComponent, SearchComponent,
+        FavouritesWidgetComponent
     ],
     providers: [
         /** All Pipes */
@@ -102,7 +106,8 @@ import { SearchComponent } from './widget/search/search.component';
         LogosUrlPipe,
         SafehtmlPipe,
         FlashteamPipe,
-        SlugifyPipe,        
+        SlugifyPipe,  
+        FilterPipe,      
 
         /** All Providers*/
         SportsService,
@@ -125,6 +130,7 @@ import { SearchComponent } from './widget/search/search.component';
         LogosUrlPipe,
         ResizeImagePipe,
         SlugifyPipe,
+        FilterPipe,
 
         /** All Componenets */
         CommonStoryWidgetComponent,
@@ -143,7 +149,8 @@ import { SearchComponent } from './widget/search/search.component';
         PlayerTableComponent,
         BlogCardComponent,
         ScheduleComponent,
-        SearchComponent
+        SearchComponent,
+        FavouritesWidgetComponent
     ],
 
 })
