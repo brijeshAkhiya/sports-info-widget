@@ -26,7 +26,7 @@
         <div class="col-sm-6 col-xl-3" *ngFor="let post of posts | slice:start:end ">
           <div class="popular-item common-shadow">
             <div class="img-block common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
-              <div class="common-zoom-img" [defaultImage]="commonService.smallblogdeafault"
+              <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
                 [lazyLoad]="post.sImage | resizeImage:['s']"
                 [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"
                ></div>
@@ -42,8 +42,7 @@
       </div>
     </div>
   </ng-container>
-  
-  
+    
   <ng-container *ngIf="card_type == 'list'">
     <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
       <div class="common-news-img common-zoom-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"

@@ -55,13 +55,7 @@
       <div class="col-xl-9">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4 class="white-text">Popular Videos</h4>
-          <!-- <button class="theme-btn"  routerLink="/video"  [state]="{ type: 'popular' }" >View All<span></span></button> -->
-          <button class="theme-btn">
-            <a [state]="{ type: 'popular' }" [routerLink]="['video']">View All</a>
-            <!-- View All -->
-            <span></span>
-          </button>
-
+          <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['video']"> View All<span></span></a>
         </div>
       </div>
     </div>
@@ -74,7 +68,7 @@
           </div>
           <a class="play-btn"><img src="/assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
-            <h2 class="white-text"><a [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</a></h2>
+            <h2 class="white-text" [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
                 <a (click)="commonService.writerview(video?.iId?._id)">{{video.iId.sFirstName}}
