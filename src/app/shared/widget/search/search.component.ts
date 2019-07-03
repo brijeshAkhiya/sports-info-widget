@@ -30,6 +30,9 @@ export class SearchComponent implements OnInit {
   public onClick(targetElement) {    
       const clickedInside = this.searchBox.nativeElement.contains(targetElement);
       if (targetElement != this.searchOpen && !clickedInside) {
+        this.searchkey = '';
+        this.searchdata = [];
+        this.issearch = false;
           this.clickOutside.emit(false);
       }
   }

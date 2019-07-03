@@ -34,7 +34,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   isapply: boolean = false;
   socialUser: any;
   issearch: boolean;
-  searchdata: any;
+  // searchdata: any;
   noresults: boolean;
   interval;
   slider = [];
@@ -384,8 +384,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     }
   }
   close($event){
-    console.log("close")
-    console.log($event)
     if(!$event){
       this.issearch = false;
       this.renderer2.removeClass(document.body, "search-box-open");
@@ -393,21 +391,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   }
   //search bar open
-  searchopen($event) {
-    console.log("searchopen")
-    console.log($event);
-    console.log(this.issearch);
-
+  searchopen() {
     this.isapply = false;
-    // if(!$event || !this.issearch){
-    //   this.issearch = false;
-    //   this.renderer2.removeClass(document.body, "search-box-open");
-    // }else{
-    //   this.issearch = true;
-    //   this.renderer2.addClass(document.body, "search-box-open");
-
-    // }
-
     if (!this.issearch) {
       this.issearch = true;
       this.renderer2.addClass(document.body, "search-box-open");

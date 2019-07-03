@@ -170,5 +170,9 @@ export class BlogViewComponent implements OnInit {
       });
     }
   }
+  //writer view 
+  writerview(id) {
+    this.router.navigate(['/writer', btoa(id)])
+  }
 
 }
