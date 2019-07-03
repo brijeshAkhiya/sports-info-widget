@@ -32,7 +32,7 @@ export class CricketFixturesViewComponent implements OnInit {
 
   ngOnInit() {
     let fromtype = this.activatedroute.snapshot.params.type;
-    if (fromtype == "upcoming") {
+    if (fromtype == "fixtures") {
       this.selectedTab = "upcoming";
       this.getMatchFixtures();
     } else if (fromtype == "results") {

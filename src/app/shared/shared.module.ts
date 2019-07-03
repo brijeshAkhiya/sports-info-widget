@@ -48,6 +48,7 @@ import { TeamsComponent } from './widget/teams/teams.component';
 import { PlayerTableComponent } from './widget/player-table/player-table.component';
 import { BlogCardComponent } from './widget/blog-card/blog-card.component';
 import { ScheduleComponent } from './widget/schedule/schedule.component';
+import { SearchComponent } from './widget/search/search.component';
 
 
 @NgModule({
@@ -91,7 +92,7 @@ import { ScheduleComponent } from './widget/schedule/schedule.component';
         TeamsComponent, 
         PlayerTableComponent, 
         BlogCardComponent, 
-        ScheduleComponent
+        ScheduleComponent, SearchComponent
     ],
     providers: [
         /** All Pipes */
@@ -141,7 +142,8 @@ import { ScheduleComponent } from './widget/schedule/schedule.component';
         TeamsComponent,
         PlayerTableComponent,
         BlogCardComponent,
-        ScheduleComponent
+        ScheduleComponent,
+        SearchComponent
     ],
 
 })

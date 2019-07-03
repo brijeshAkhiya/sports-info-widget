@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
@@ -23,6 +23,7 @@ export class TournamentFixturesComponent implements OnInit {
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -92,6 +93,12 @@ export class TournamentFixturesComponent implements OnInit {
         // }
       }
     );
+  }
+
+  //get match detail
+  matchDetail(id, team1, team2) {
+    let teams = team1.concat("-", team2);
+    this.router.navigate(["/cricket/match", btoa(id), teams]);
   }
 
 

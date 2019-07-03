@@ -117,7 +117,9 @@
     </ul>
   </div>
 </nav>
-<div class="common-serch-box" [ngClass]="{'show': issearch}">
+<app-search [issearch]="issearch" ></app-search>
+
+<!-- <div class="common-serch-box" [ngClass]="{'show': issearch}">
   <div class="search-bar">
     <div class="container">
       <div class="search-box">
@@ -147,7 +149,7 @@
 
     </div>
   </div>
-</div>
+</div> -->
 <ng-template #content let-modal>
   <div class="modal-body">
     <h1>Sign In</h1>
