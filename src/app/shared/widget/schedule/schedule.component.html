@@ -1,4 +1,4 @@
-<div class="schedule-list schedule-tour-list">
+<div class="schedule-list schedule-tour-list" *ngIf="sport == 'cricket'">
   <div class="schedule-month d-flex" *ngFor="let item of data">
     <div class="month-title">
       <div class="sticky-month">
@@ -6,41 +6,57 @@
       </div>
     </div>
     <div class="schedule-items">
-      <div class="schedule-item d-flex align-items-center rounded-box common-shadow" *ngFor="let item of item.data"
-        (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)">
+      <div class="schedule-item d-flex align-items-center rounded-box common-shadow" *ngFor="let match of item.data"
+        (click)="matchDetail(match.id,match.competitors[0].abbreviation,match.competitors[1].abbreviation)">
         <div class="match-desc">
           <!-- <h6>Match 2</h6> -->
-          <p class="stadium-nm">{{item.venue_name}}, {{item.city_name}}</p>
-          <p class="time-line" *ngIf="type == 'fixture'">{{item.scheduled | date:'h:mm a'}}</p>
+          <p class="stadium-nm" *ngIf="match.venue_name">{{match.venue_name}}, {{match.city_name}}</p>
+          <p class="time-line" *ngIf="type == 'fixture'">{{match.scheduled | date:'h:mm a'}}</p>
           <p class="result-line" *ngIf="type == 'result'">
-            {{(item?.match_result) ? item?.match_result : 'Match is '+ item.match_status }}
+            {{(match?.match_result) ? match?.match_result : 'Match is '+ match.match_status }}
           </p>
         </div>
-        <div class="match-teams d-flex align-items-center">
+        <div class="match-teams d-flex align-items-center" *ngIf="match.competitors">
+
           <div class="match-team d-flex align-items-center">
             <div class="team-info">
-              <h5>{{item.competitors[0].abbreviation}}</h5>
+              <h5 [ngClass]="{'winner': match?.competitors[0]?.winner}">{{match?.competitors[0]?.abbreviation}}</h5>
+              <p *ngIf="match.match_result">
+                  <ng-container *ngFor="let score of match?.competitors[0]?.p_new; let i = index">
+                    {{score?.display_score}}
+                    {{i == match?.competitors[0]?.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
+                  </ng-container>
+                </p>
             </div>
             <div class="team-flag">
-              <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitors[0]?.id | logosurl"
+              <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.competitors[0]?.id | logosurl"
                 [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
             </div>
           </div>
+          
           <div class="vs-block">
             <h6>vs</h6>
           </div>
+
           <div class="match-team d-flex align-items-center">
-            <div class="team-flag">
-              <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitors[1].id | logosurl"
-                [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.competitors[1]?.id | logosurl"
+                  [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+              </div>
+              <div class="team-info">
+                <h5 [ngClass]="{'winner': match?.competitors[1]?.winner}">{{match?.competitors[1]?.abbreviation}}</h5>
+                <p *ngIf="match.match_result">
+                    <ng-container *ngFor="let score of match?.competitors[1]?.p_new; let i = index">
+                      {{score?.display_score}}
+                      {{i == match?.competitors[1]?.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
+                    </ng-container>
+                  </p>
+              </div>
             </div>
-            <div class="team-info">
-              <h5>{{item.competitors[1].abbreviation}}</h5>
-            </div>
-          </div>
+
         </div>
         <a class="details-btn"
-          (click)="matchDetail(item.id,item.competitors[0].abbreviation,item.competitors[1].abbreviation)"><span>Details</span></a>
+          (click)="matchDetail(match.id,match.competitors[0].abbreviation,match.competitors[1].abbreviation)"><span>Details</span></a>
       </div>
     </div>
   </div>
