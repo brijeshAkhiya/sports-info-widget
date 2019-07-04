@@ -38,8 +38,8 @@ export class FixturesComponent implements OnInit {
           else
             this.domesticSchedule.push(data)
         });
-        this.internationSchedule = this.commonService.sortArr(this.internationSchedule, 'MMMM YYYY', 'start_date');
-        this.domesticSchedule = this.commonService.sortArr(this.domesticSchedule, 'MMMM YYYY', 'start_date');
+        this.internationSchedule = this.commonService.sortArr(this.internationSchedule, 'MMMM YYYY', 'start_date', 'desc');
+        this.domesticSchedule = this.commonService.sortArr(this.domesticSchedule, 'MMMM YYYY', 'start_date', 'desc');
       }
     });
   }

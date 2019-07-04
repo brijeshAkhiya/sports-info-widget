@@ -227,7 +227,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   }
 
   setPeriodScore(match, index, period_scores) {
-    console.log("setPeriodScore");
+    // console.log("setPeriodScore");
 
     if (period_scores.length > 0) {
       period_scores.map(sPScore => {
@@ -244,7 +244,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         }
       });
     }
-    console.log(this.slider);
+    // console.log(this.slider);
 
   }
 
