@@ -103,19 +103,20 @@
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
     </div>
-    <ul class="navbar-nav navbar-rightside login-search">
-      <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
-      <li *ngIf="!isLogin">
-        <a class="login" (click)="open(content)"></a>
-      </li>
-      <li ngbDropdown *ngIf="isLogin">
-        <a class="login"   [ngClass]="{'logged': isLogin}"  ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
-        <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
+   
   </div>
+  <ul class="navbar-nav navbar-rightside login-search">
+    <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
+    <li *ngIf="!isLogin">
+      <a class="login" (click)="open(content)"></a>
+    </li>
+    <li ngbDropdown *ngIf="isLogin">
+      <a class="login"   [ngClass]="{'logged': isLogin}"  ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
   <!-- <ul class="navbar-nav navbar-rightside login-search">
     <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()"></a></li>
     <li *ngIf="!isLogin">

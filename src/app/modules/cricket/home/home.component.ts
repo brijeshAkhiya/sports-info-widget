@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   cricketseries = [];
   populartags = [];
 
-  options = { reqParams : { eSport : 'Cricket'}, title : 'Cricket'}
+  options = { reqParams : { eSport : 'Cricket'}, title : 'Cricket' , type:'sport' , id :'cricket'}
 
   constructor(
     private sportsService: SportsService

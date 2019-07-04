@@ -41,7 +41,7 @@
               <h5>From this writer</h5>
               <ul class="common-list">
                   <li *ngFor="let item of writerdata?.posts?.posts | slice:0:5"><a
-                    [routerLink]="['/blog' , (item.eType |lowercase) , item._id , item.sSlug ]">{{item.sTitle}}</a></li>
+                    [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
               </ul>
             </div>
             <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
