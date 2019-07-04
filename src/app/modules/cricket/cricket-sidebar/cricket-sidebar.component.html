@@ -28,7 +28,7 @@
 <ng-template #sidebarMatch let-loader="loader" let-matches="matches" let-type="type">
 
   <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
-  <app-no-data-widget *ngIf="!loader && matches && matches?.length == 0"></app-no-data-widget>
+  <app-no-data-widget [message]="type =='result' ? 'No recent results' : 'No recent fixtures' " *ngIf="!loader && (!matches || matches?.length == 0)"></app-no-data-widget>
 
   <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0">
     <li *ngFor="let match of matches  | slice:0:4"
@@ -60,10 +60,6 @@
         View All
         <span></span>
       </a>
-      <!-- <button [state]="{ type: type, data : matches }" [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']"
-        *ngIf="matches.length > 0">
-        View all
-      </button> -->
     </li>
   </ul>
 </ng-template>
