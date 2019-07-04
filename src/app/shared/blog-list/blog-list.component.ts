@@ -24,7 +24,6 @@ export class BlogListComponent implements OnInit {
     if(this.options){
       if(this.options.data && this.options.data.length > 0){
         this.articles = (this.options.start) ? this.options.data.slice(this.options.start) : this.options.data;
-        console.log(this.options.reqParams.nLimit, this.options.data.length  )
         if(this.options.reqParams.nLimit > this.options.data.length  )
           this.isLoadMore = false;
       }else 
@@ -54,6 +53,8 @@ export class BlogListComponent implements OnInit {
       if(this.options.reqParams.nLimit > response.data.length )
         this.isLoadMore = false;
       this.articles = this.articles.concat(response.data);
+      if(this.options.data && this.options.data.length > 0)
+        this.options.data = this.options.data.concat(response.data);
     }else
       this.isLoadMore = false;
   }

@@ -62,7 +62,7 @@ const routes: Routes = [
         component:ComingSoonComponent
     },
     {
-        path: 'about',
+        path: 'about-us',
         component:AboutComponent
     },
     {

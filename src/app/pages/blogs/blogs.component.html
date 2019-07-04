@@ -10,12 +10,10 @@
         <app-blog-list *ngIf="options" [options]="options"> </app-blog-list>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
       </div>
-
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs?.length > 0">
               <h5>Recent Stories</h5>
               <ul class="common-list">

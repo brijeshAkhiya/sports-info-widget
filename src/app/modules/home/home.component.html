@@ -55,7 +55,7 @@
       <div class="col-xl-9">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4 class="white-text">Popular Videos</h4>
-          <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['video']"> View All<span></span></a>
+          <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['video']" *ngIf="popularvideos.length > 4"> View All<span></span></a>
         </div>
       </div>
     </div>

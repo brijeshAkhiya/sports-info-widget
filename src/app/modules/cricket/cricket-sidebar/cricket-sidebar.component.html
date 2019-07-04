@@ -56,10 +56,14 @@
       </div>
     </li>
     <li>
-      <button [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']"
+      <a [state]="{ type: type, data : matches }" [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']" >
+        View All
+        <span></span>
+      </a>
+      <!-- <button [state]="{ type: type, data : matches }" [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']"
         *ngIf="matches.length > 0">
         View all
-      </button>
+      </button> -->
     </li>
   </ul>
 </ng-template>
