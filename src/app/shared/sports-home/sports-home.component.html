@@ -1,6 +1,6 @@
 <div *ngIf="options.page_type == 'home'; else tabs">
     <ng-container *ngIf="options.blog_type =='recent'">
-        <app-blog-list *ngIf="recentArticlesParams" [options]="{'reqParams': popularArticlesParams}"></app-blog-list>
+        <app-blog-list *ngIf="recentArticlesParams" [options]="{'reqParams': recentArticlesParams}"></app-blog-list>
     </ng-container>
 
     <ng-container *ngIf="options.blog_type !='recent'">
@@ -55,7 +55,7 @@
 
         <ngb-tab title="Recommended">
             <ng-template ngbTabContent>
-                <app-blog-list *ngIf="popularArticlesParams" [options]="{'reqParams': popularArticlesParams}">
+                <app-blog-list *ngIf="popularArticlesParams" [options]="{'reqParams': popularArticlesParams, 'type' : 'popular'}">
                 </app-blog-list>
             </ng-template>
         </ngb-tab>

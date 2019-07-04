@@ -50,10 +50,11 @@ export class SearchComponent implements OnInit {
     this.searchkey = '';
     this.searchdata = [];
   }
-
+  prev;
   valuechange($e){
-    if($e.keyCode != 8 && this.searchkey.length > 2){
+    if(this.searchkey.length > 2 && this.searchkey != this.prev){
       this.search();
+      this.prev = this.searchkey;
     }
     else if(this.searchkey == '')
       this.searchdata = [];
