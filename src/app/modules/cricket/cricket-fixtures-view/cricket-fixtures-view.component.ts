@@ -30,7 +30,7 @@ export class CricketFixturesViewComponent implements OnInit {
       this.selectedTab = "upcoming";
       if(window.history.state.data){
         this.matchfixtures = window.history.state.data;
-        this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'scheduled');
+        this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'scheduled', 'asc');
       }
       else
         this.getMatchFixtures();
@@ -39,7 +39,7 @@ export class CricketFixturesViewComponent implements OnInit {
       this.selectedTab = "results";
       if(window.history.state.data){
         this.matchresults = window.history.state.data;
-        this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled');
+        this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
       }
       else
         this.getMatchResults();
@@ -56,7 +56,7 @@ export class CricketFixturesViewComponent implements OnInit {
       this.loadingFixture = false;
       if (res.data)
         this.matchfixtures = res.data;
-        this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'scheduled');
+        this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'scheduled', 'asc');
     }, (error) => {
       this.loadingFixture = false;
     });
@@ -94,7 +94,7 @@ export class CricketFixturesViewComponent implements OnInit {
       })
       return data;
     });
-    this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled');
+    this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
     console.log('matchresults:last:', this.matchresults);    
   }
   
