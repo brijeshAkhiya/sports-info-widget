@@ -19,7 +19,7 @@
 .schedule-list .schedule-item.schedule-hover:hover *       { color: #fff !important; }
 
 /* -------- Tournament Fixtures List ------- */
-.schedule-tour-list .schedule-item      { padding-bottom: 16px; overflow: hidden; position: relative; cursor: pointer;}
+.schedule-tour-list .schedule-item      { padding-bottom: 16px; overflow: hidden; position: relative;}
 .schedule-item .match-desc              { width: 200px;}
 .schedule-item .match-teams             { width: calc(100% - 208px); }
 .schedule-tour-list .schedule-item *:last-child         { margin-bottom: 0px; }
@@ -43,7 +43,7 @@
 .schedule-item:hover .details-btn       { right: 0px;}
 
 /* -------- Teams List ------- */
-.team-list .team-item               { margin-bottom: 24px; padding: 24px 24px 24px 16px; background: #fff; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; border-left: 8px solid transparent; }
+.team-list .team-item               { margin-bottom: 24px; padding: 24px 24px 24px 16px; background: #fff; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; border-left: 8px solid transparent; }
 .team-list .team-item:hover         { padding-left: 24px; border-left-color: #ED1A33;}
 .team-list [class*="col-"]:nth-last-child(2) .team-item,
 .team-list [class*="col-"]:last-child .team-item    { margin-bottom: 0; }

@@ -96,7 +96,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 
 /* -------- Full Block Link Style ------- */
 .fullblock-link-container                   { position: relative; }
-.fullblock-link-container .fullblock-link   { position: absolute; display: block; height: 100%; width: 100%; top: 0; left: 0; }
+.fullblock-link-container .fullblock-link   { position: absolute; display: block; height: 100%; width: 100%; top: 0; left: 0; z-index: 2; }
 
 /* -------- Loader Style ------- */
 .small-loader                                       { margin: 16px auto; }
