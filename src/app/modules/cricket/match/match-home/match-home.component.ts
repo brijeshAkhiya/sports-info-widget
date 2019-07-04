@@ -78,7 +78,7 @@ export class MatchHomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-    
+
     this.matchid = this.activatedroute.snapshot.params.id
     this.activatedroute.params.subscribe(params => {
       this.matchid = params.id
@@ -89,13 +89,13 @@ export class MatchHomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     var classThis = this;
     var hidden, visibilityChange;
     if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
       hidden = "hidden";
       visibilityChange = "visibilitychange";
-    } 
+    }
     else if (typeof document['msHidden'] !== "undefined") {
       hidden = "msHidden";
       visibilityChange = "msvisibilitychange";
@@ -107,11 +107,11 @@ export class MatchHomeComponent implements OnInit {
     function handleVisibilityChange() {
       console.log('visiblity changed', document.hidden)
       console.log('visiblity hasfocus', document.hasFocus())
-      if(document.hidden)
-        classThis.clearTimeInterval()
-      else{  
-        classThis.getMatchData();
-      }
+      // if (document.hidden)
+      //   classThis.clearTimeInterval()
+      // else {
+      //   classThis.getMatchData();
+      // }
     }
 
     // Warn if the browser doesn't support addEventListener or the Page Visibility API
@@ -122,7 +122,7 @@ export class MatchHomeComponent implements OnInit {
     }
 
   }
-  initData(){
+  initData() {
     this.LiveOverSummery = [];
   }
 
@@ -137,6 +137,8 @@ export class MatchHomeComponent implements OnInit {
     // this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
     //   console.log('scorecard::',res);
     // })
+    console.log('matchid::', this.matchid);
+
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
 
@@ -501,7 +503,7 @@ export class MatchHomeComponent implements OnInit {
 
     // loop of innings from statistics
     this.data.statistics.innings.forEach((innings, index) => {
-      
+
       // Store Inning wise data
       this.inningWiseCommentry[index] = {
         inning: innings.number,
@@ -541,12 +543,12 @@ export class MatchHomeComponent implements OnInit {
           commentry =>
             commentry.over_number == nextOver &&
             commentry.inning == innings.number
-        );        
+        );
         // Next over if commentry type is change_of_bowler
         let matchedIndex = currentInningCommentry.map(function (obj, i) { return i > firstIndex && obj.type; }).indexOf('change_of_bowler');
-        if(matchedIndex > -1){
-        if(lastIndex > matchedIndex)
-          lastIndex = matchedIndex;
+        if (matchedIndex > -1) {
+          if (lastIndex > matchedIndex)
+            lastIndex = matchedIndex;
         }
         let overCommentry = [];
         if (lastIndex > 0) {
@@ -960,7 +962,7 @@ export class MatchHomeComponent implements OnInit {
           this.matchdata = res.data;
 
           /** Update Scorecard */
-          if(this.matchdata.statistics && this.matchdata.statistics.innings){
+          if (this.matchdata.statistics && this.matchdata.statistics.innings) {
             let inningIndex = this.matchInnings.findIndex((innings) => innings.number == this.data.sport_event_status.current_inning);
             let inning = this.matchdata.statistics.innings.filter((innings) => innings.number == this.data.sport_event_status.current_inning);
             if (inningIndex > -1 && inning.length > 0) {
