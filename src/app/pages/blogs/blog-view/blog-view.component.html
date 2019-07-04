@@ -92,6 +92,10 @@
               <img src="assets/images/blog/error-icon.svg">
               <p class="dark-text">You must be logged in to comment.</p>
             </div>
+            <div class="login-toast active d-flex align-items-center" *ngIf="isNocomment">
+              <img src="assets/images/blog/error-icon.svg">
+              <p class="dark-text">Please enter your comment</p>
+            </div>
           </div>
           <div class="comment-list" *ngIf="blogcomments?.length != 0">
             <div class="comment-item d-flex align-items-start" *ngFor="let comment of blogcomments">
@@ -102,9 +106,9 @@
                 <p>{{comment.sComment}}</p>
               </div>
             </div>
-            <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="total > 4 && blogcomments.length > 0">VIEW
+            <!-- <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="blogcomments.length > 0">VIEW
                 MORE</button>
-  
+   -->
             <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="!hideBtn">VIEW MORE</button>
           </div>
         </div>

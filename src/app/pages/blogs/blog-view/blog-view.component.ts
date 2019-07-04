@@ -22,6 +22,8 @@ export class BlogViewComponent implements OnInit {
   isplay: boolean = false
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   widgetblogs: any;
+  hideBtn: boolean;
+  isNocomment: boolean;
 
   constructor(
     private router: Router,
@@ -39,7 +41,7 @@ export class BlogViewComponent implements OnInit {
 
   ngOnInit() {
     console.log('in blogview');
-    console.log('state::blogvieww',window.history.state);
+    console.log('state::blogvieww', window.history.state);
     this.getPopularArticles();
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
@@ -103,9 +105,10 @@ export class BlogViewComponent implements OnInit {
   }
 
   clicksubmit() {
-    if (this.usercommentvalue) {
+    if (this.usercommentvalue.trim()) {
       if (localStorage.getItem('userT')) {
         this.isloggedin = true
+        this.isNocomment = false
         let data = {
           iPostId: this.blogdata._id,
           sComment: this.usercommentvalue
@@ -116,6 +119,15 @@ export class BlogViewComponent implements OnInit {
             this.getBlogComments(this.blogdata._id, { iPostId: this.blogdata._id, nStart: 0, nLimit: this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
           }
         })
+      }
+      else {
+        this.isloggedin = false
+      }
+    }
+    else {
+      if (localStorage.getItem('userT')) {
+        this.isloggedin = true
+        this.isNocomment = true
       }
       else {
         this.isloggedin = false
@@ -148,7 +160,15 @@ export class BlogViewComponent implements OnInit {
   }
 
   viewmorecomments() {
-    this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id))
+
+    this.sportsService.getblogcommnets(this.initBlogParams(this.blogdata._id)).subscribe((res: any) => {
+      if (res.data) {
+        if (res.data.length == 0)
+          this.hideBtn = true;
+        this.blogcomments = this.blogcomments.concat(res.data)
+      }
+    });
+    //  this.getBlogComments(this.blogdata._id,this.initBlogParams(this.blogdata._id))
   }
 
   getPopularArticles() {
@@ -164,24 +184,30 @@ export class BlogViewComponent implements OnInit {
   }
 
   //to get blog comments
+  //to get blog comments
   getBlogComments(id, data) {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
         if (res.data) {
-          if (res.data.length == 0)
-            // this.hideBtn = true;
-            this.blogcomments = this.blogcomments.concat(res.data)
+          if (res.data.length == 0) {
+            this.hideBtn = true;
+          }
+          else {
+            this.hideBtn = false
+          }
+          this.blogcomments = res.data
         }
       });
     }
   }
+
   //writer view 
   writerview(id) {
     this.router.navigate(['/writer', btoa(id)])
   }
 
-   //tags view 
-   tagview(id, type, title) {
+  //tags view 
+  tagview(id, type, title) {
     let slugname = this.slugifypipe.transform(title);
     if (type == 'Player') {
       let playername = this.splitpipe.transform(title);

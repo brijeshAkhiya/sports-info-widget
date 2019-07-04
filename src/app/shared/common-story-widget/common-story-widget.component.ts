@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
 import { SlugifyPipe } from '@pipes/slugpipe';
 import { SplitPipe } from '@pipes/stringsplitpipe';
 
-
-
 @Component({
   selector: 'app-common-story-widget',
   templateUrl: './common-story-widget.component.html',

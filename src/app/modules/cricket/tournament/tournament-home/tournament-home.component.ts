@@ -37,7 +37,7 @@ export class TournamentHomeComponent implements OnInit {
     let temp: Array<any> = [atob(this.activatedroute.snapshot.params.id)]
     this.tournamentid = atob(this.activatedroute.snapshot.params.id)
     let name = this.activatedroute.snapshot.params.slug
-    this.options = { reqParams: { aIds: [atob(this.activatedroute.snapshot.params.id)] }, title: name.replace(/-/g, " ") }
+    this.options = { reqParams: { aIds: [atob(this.activatedroute.snapshot.params.id)] }, title: name.replace(/-/g, " "),id:this.tournamentid,name:name.replace(/-/g, " "),type:'tournament' }
     this.getTournamentsLeader();
     this.getTournamentPointsTable();
     this.getTournamentTeams();

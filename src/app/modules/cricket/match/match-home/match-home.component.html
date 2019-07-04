@@ -9,7 +9,7 @@
         </app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
-        <ngb-tabset class="common-tabs" *ngIf="matchdata">
+        <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
           <!-- START - MATCH COMMENTRY-->
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
@@ -383,8 +383,8 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              <app-blog-list *ngIf="MatchArticleparams" [options]="{'reqParams': MatchArticleparams}">
-              </app-blog-list>
+              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
+              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <!--END - NEWS TAB-->
@@ -464,4 +464,16 @@
       </div>
     </div>
   </div>
+  <!-- <div class="scoreline-block d-flex justify-content-between">
+    <div class="item">
+      <p>Gayle <span>24<span class="light-white">(12)</span></span></p>
+      <p>Gayle <span>24<span class="light-white">(12)</span></span></p>
+    </div>
+    <div class="score"><span class="dark-red">WI </span><span>vs</span> PAK<span class="value">93/8</span><span
+        class="dark-red">OV : </span> 24.3</div>
+    <div class="item">
+        <p>Phehlukwayo <span>1-56<span class="light-white">(10.5)</span></span></p>
+        <p><span class="light-white target">Target</span> <span>341</span></p>
+    </div>
+  </div> -->
 </section>

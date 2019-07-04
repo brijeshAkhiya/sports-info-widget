@@ -83,7 +83,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { padding: 11px 0px 11px 24px;}
     nav .navbar-brand:before        { right: -28px; }
-    .navbar-nav .nav-link           { padding: 16px 9px; font-size: 15px; }
+    .navbar-nav .nav-link           { padding: 15px 9px; font-size: 15px; }
     nav .navbar-brand img           { width: 140px;}
     .login-search                   { margin: 0px 16px 0px auto; }
     .login-search > li > a              { margin: 0px 8px; width: 24px; height: 24px; }
