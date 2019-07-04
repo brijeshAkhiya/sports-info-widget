@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SportsService } from "@providers/sports-service";
@@ -6,7 +6,8 @@ import { SportsService } from "@providers/sports-service";
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SearchComponent implements OnInit {
   searchkey: string;
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit {
     ) { }
   
   @ViewChild('searchBox') searchBox;
+  @ViewChild("name") nameField: ElementRef;
   @Input() issearch;
   @Input() searchOpen;
   @Output()
@@ -38,6 +40,7 @@ export class SearchComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.nameField.nativeElement.focus();
   }
 
 

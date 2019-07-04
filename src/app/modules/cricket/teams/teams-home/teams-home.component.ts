@@ -28,8 +28,8 @@ export class TeamsHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tournamentid = atob(this.activatedroute.snapshot.params.tournamentid)
-    this.teamid = atob(this.activatedroute.snapshot.params.teamid)
+    this.tournamentid = this.activatedroute.snapshot.params.tournamentid
+    this.teamid = this.activatedroute.snapshot.params.teamid
     this.TeamArticleparams = { nStart: 0, nLimit: 10, aIds: [this.teamid, this.tournamentid] }
     this.getTournamentTeamProfile();
   }

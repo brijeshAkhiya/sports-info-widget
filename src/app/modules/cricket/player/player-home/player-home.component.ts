@@ -26,7 +26,7 @@ export class PlayerHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.playerid = atob(this.activatedroute.snapshot.params.id)
+    this.playerid = this.activatedroute.snapshot.params.id
     this.PlayerArticleparams = { nStart: 0, nLimit: 10, aIds: [this.playerid] }
     this.getPlayerInfo();
   }

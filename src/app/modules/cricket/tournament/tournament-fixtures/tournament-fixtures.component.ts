@@ -27,7 +27,7 @@ export class TournamentFixturesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tournamentid = atob(this.activatedroute.parent.snapshot.params.id); 
+    this.tournamentid = this.activatedroute.parent.snapshot.params.id 
     this.getTournamentResults();
   }
 

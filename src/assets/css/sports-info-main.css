@@ -15,18 +15,20 @@ body                    { font-family: 'IBM Plex Sans', sans-serif; -webkit-font
 .clear                  { clear:both;}
 img                     { border: 0px;}
 ul,ol                   { list-style: none;}
-a                       { text-decoration: none; outline: none; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+a                       { text-decoration: none; outline: none; color: inherit; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 a:focus, a:active, a:visited, 
 a:hover	                { text-decoration: none; outline: none; }
+a:focus, a:active,
+a:hover	                { color: #ED1A33; }
 h1                      { margin: 0px 0px 24px; font-size: 48px; line-height: 64px; font-family: 'Muli', sans-serif; font-weight: 900; text-transform: uppercase; color: #292929; font-style: italic; }
 h2                      { margin: 0px 0px 8px; font-size: 40px; line-height: 50px; font-family: 'Muli', sans-serif; font-weight: 800; }
 h3                      { margin: 0px 0px 8px; font-size: 32px; line-height: 42px; font-family: 'Muli', sans-serif; color: #292929; font-weight: 800; text-transform: uppercase; }
 h4                      { margin: 0px 0px 8px; font-size: 24px; line-height: 32px; color: #3D3D3D; font-family: 'Muli', sans-serif; font-weight: 800; }
 h5                      { margin: 0px 0px 4px; font-size: 20px; line-height: 25px; color: #292929; font-family: 'Muli', sans-serif; font-weight: 700; }
-h5 a                    { color: #292929;}
+/* h5 a                    { color: #292929;} */
 h6                      { font-size: 18px; line-height: 26px; color: #3D3D3D; font-weight: 500; }
-h4 a,h6 a               { color: #3D3D3D; }
-h4 a:hover,h4 a:hover,
+/* h4 a,h6 a               { color: #3D3D3D; } */
+/* h4 a:hover,h4 a:hover,
 h5 a:hover,h5 a:hover,
 h6 a:hover,h6 a:hover,
 h4 a:not([href]):not([tabindex]):hover,
@@ -34,7 +36,7 @@ h4 a:not([href]):not([tabindex]):focus,
 h5 a:not([href]):not([tabindex]):hover,
 h5 a:not([href]):not([tabindex]):focus,
 h6 a:not([href]):not([tabindex]):hover,
-h6 a:not([href]):not([tabindex]):focus      { color: #ED1A33;}
+h6 a:not([href]):not([tabindex]):focus      { color: #ED1A33;} */
 /* h6                      { font-family: 'IBM Plex Sans Condensed', sans-serif;  } */
 p                       { margin-bottom: 24px; }
 p.bold-text             { line-height: 22px; font-family: 'Muli', sans-serif; font-weight: 700; } 
@@ -91,6 +93,10 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-zoom-img        { height: 100%; background: #F4F4F5 no-repeat center center / cover; transition: all 0.3s ease-in-out; }
 .common-zoom-container.common-full-img:hover .common-zoom-img,
 .common-zoom-img:hover  { transform: scale(1.05); -webkit-transform: scale(1.05); }
+
+/* -------- Full Block Link Style ------- */
+.fullblock-link-container                   { position: relative; }
+.fullblock-link-container .fullblock-link   { position: absolute; display: block; height: 100%; width: 100%; top: 0; left: 0; }
 
 /* -------- Loader Style ------- */
 .small-loader                                       { margin: 16px auto; }
@@ -178,7 +184,7 @@ button                  { outline: none !important; cursor: pointer; transition:
 .common-widget .widget-title h5     { margin: 0px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #292929; font-weight: 600; }
 .common-widget .common-list         { margin: 0px; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
 .common-widget .common-list li      { border-bottom: 2px solid #F5F5F5; }
-.common-widget .common-list li a    { padding: 12px 16px; display: block; }
+.common-widget .common-list li a    { display: block; }
 .common-widget .common-list li:last-child       { border-bottom: none; }
 .common-widget .common-list li button           { margin: 12px; padding: 14px 16px; width: calc(100% - 24px); background: #ED1A33; color: #fff; text-align: center; border: none; border-radius: 4px; font-weight: 500; text-transform: uppercase; }
 .common-widget .common-list li button:hover,

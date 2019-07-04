@@ -79,9 +79,9 @@ export class MatchHomeComponent implements OnInit {
       return false;
     };
     
-    this.matchid = atob(this.activatedroute.snapshot.params.id);
+    this.matchid = this.activatedroute.snapshot.params.id
     this.activatedroute.params.subscribe(params => {
-      this.matchid = atob(params.id);
+      this.matchid = params.id
       if (this.matchid) {
         // this.getMatchTimeline();
         this.getMatchData();

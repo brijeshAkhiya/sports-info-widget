@@ -27,7 +27,7 @@ export class CustomTeamViewComponent implements OnInit {
   constructor(private sportsService: SportsService, public cricketService: CricketService, private activatedroute: ActivatedRoute, private router: Router, private slugifyPipe: SlugifyPipe, private splitpipe: SplitPipe, private commonService: CommonService) { }
 
   ngOnInit() {
-    this.teamid = atob(this.activatedroute.snapshot.params.teamid)
+    this.teamid = this.activatedroute.snapshot.params.teamid
     this.TeamArticleparams = { nStart: 0, nLimit: 10, aIds: [this.teamid] }
     this.getTournamentTeamProfile();
   }

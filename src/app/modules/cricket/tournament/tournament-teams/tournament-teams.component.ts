@@ -17,7 +17,7 @@ export class TournamentTeamsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    let id = atob(this.activatedRoute.parent.snapshot.params.id)
+    let id = this.activatedRoute.parent.snapshot.params.id
     this.getTournamentTeams(id)
   }
 

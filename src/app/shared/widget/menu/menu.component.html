@@ -10,10 +10,10 @@
           <a id="dropdownBasic1" ngbDropdownToggle>Series</a>
           <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <li ngbDropdownItem *ngFor="let item of series | slice:0:4"><a
-                (click)="cricketService.tournamentInfo(item.tournament_id,item.name)">{{item.name}}</a></li>
+                [routerLink]="['/cricket/tournament',item.tournament_id,(item.name | slugify)]">{{item.name}}</a></li>
           </ul>
         </li>
-        <li><a class="special-nav-item" [routerLink]="['/cricket/tournament/c3I6dG91cm5hbWVudDoyNDc0/world-cup']">World
+        <li><a class="special-nav-item" [routerLink]="['/cricket/tournament/sr:tournament:2474/world-cup']">World
             Cup 2019</a></li>
       </ul>
       <div id="subnav-pointer" #subnavpointer></div>

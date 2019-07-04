@@ -25,7 +25,7 @@ export class TournamentStadingsComponent implements OnInit {
     ) { }
 
   ngOnInit() {    
-    let id = atob(this.activatedroute.parent.snapshot.params.id)
+    let id = this.activatedroute.parent.snapshot.params.id
     this.getTournamentPointsTable(id)
   }
 

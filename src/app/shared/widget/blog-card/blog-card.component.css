@@ -1,49 +1,31 @@
-/* -------- Search Blog List ------- */
-.search-result.common-popular-list .item-desc  { min-height: 68px; }
-/* -------- Admin Blog List ------- */
 .web-news-list .web-news-item       { margin-bottom: 24px; height: 340px; background: #fff; overflow: hidden;}
 .web-news-list .web-news-img        { height: 240px; cursor: pointer; }
 .web-news-list .news-desc           { padding: 12px 16px; }
 .web-news-list .news-desc h5        { margin: 0px; }
 
-
 /***** Responsive CSS Start ******/
+
 @media (min-width: 1200px) and (max-width: 1379px) {
-/* -------- Admin Blog List ------- */
     .web-news-list .web-news-item       { height: 300px; }
     .web-news-list .web-news-img        { height: 200px; }
-/* -------- Search Blog List ------- */
-    .search-result.common-popular-list .item-desc  { min-height: 90px; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-/* -------- Admin Blog List ------- */
     .web-news-list .web-news-item       { height: 300px; }
     .web-news-list .web-news-img        { height: 180px; }
-/* -------- Search Blog List ------- */
-    .search-result.common-popular-list .img-block  { height: 110px; }
-    .search-result.common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
 }
 
 @media (max-width: 991px) {
-/* -------- Admin Blog List ------- */
     .web-news-list .web-news-item       { height: 290px; }
     .web-news-list .web-news-img        { height: 200px; }
-/* -------- Search Blog List ------- */
-    .search-result.common-popular-list .img-block  { height: 110px; }
-    .search-result.common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
-    .search-result.common-popular-list > .row      { flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow: scroll; }
-    .search-result.common-popular-list > .row > [class*="col-"] { min-width: 220px;}
 }
 
 @media (max-width: 767px) {
-/* -------- Admin Blog List ------- */
     .web-news-list .web-news-item       { height: 260px; }
     .web-news-list .web-news-img        { height: 150px; }
     .web-news-list .news-desc           { padding: 12px;}
 }
 
 @media (max-width: 767px) {
-/* -------- Admin Blog List ------- */
     .web-news-list .web-news-item       { height: auto; }
 }

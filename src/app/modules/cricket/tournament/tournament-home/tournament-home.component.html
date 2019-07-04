@@ -13,7 +13,8 @@
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
             <h5>Teams</h5>
             <ul class="common-list">
-              <li *ngFor="let item of teamsname | slice:0:5"><a (click)="cricketService.teamInfo(item.id,item.name)">{{item.name}}</a>
+              <li *ngFor="let item of teamsname | slice:0:5"><a
+                  [routerLink]="['/cricket/team',item.id,(item.name | slugify)]">{{item.name}}</a>
               </li>
             </ul>
           </div>
@@ -33,8 +34,12 @@
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
-                          <p class="name" (click)="cricketService.playerview(item.player.id,item.player.name)">
-                            {{item.player.name | split}}</p>
+                          <p class="name">
+                            <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                              {{item.player.name | split}}
+                            </a>
+                          </p>
+
                           <p class="team">{{item.team.abbreviation}}</p>
                         </div>
                         <div class="player-score">
@@ -47,8 +52,10 @@
                       *ngFor="let item of battingleaders | slice:1:10">
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
-                        <p class="name" (click)="cricketService.playerview(item.player.id,item.player.name)">
-                          {{item.player.name | split }}</p>
+                        <p class="name">
+                          <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                            {{item.player.name | split}}
+                          </a></p>
                         <p class="team">{{item.team.abbreviation}}</p>
                       </div>
                       <div class="player-score">
@@ -72,7 +79,9 @@
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
                           <p class="name" (click)="cricketService.playerview(item.player.id,item.player.name)">
-                            {{item.player.name | split}}</p>
+                              <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                                {{item.player.name | split}}
+                              </a></p>
                           <p class="team">{{item.team.abbreviation}}</p>
                         </div>
                         <div class="player-score">
@@ -86,7 +95,9 @@
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
                         <p class="name" (click)="cricketService.playerview(item.player.id,item.player.name)">
-                          {{item.player.name | split}}</p>
+                            <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                              {{item.player.name | split}}
+                            </a></p>
                         <p class="team">{{item.team.abbreviation}}</p>
                       </div>
                       <div class="player-score">

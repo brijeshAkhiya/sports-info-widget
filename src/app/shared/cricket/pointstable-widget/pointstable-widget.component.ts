@@ -15,6 +15,8 @@ export class PointstableWidgetComponent implements OnInit {
     if (this.tournamentId) {
       this.getTournamentPointsTable();
     }
+    console.log('tourid ::::',this.tournamentId);
+    
   }
 
   //get tournaments points table

@@ -60,25 +60,25 @@ export class CommonStoryWidgetComponent implements OnInit, OnChanges {
   }
 
   route(id,tournamentid,type,name){
-     if(tournamentid){
-      let tournamentslug  =  this.slugifyPipe.transform(name); 
-      this.router.navigate(['/cricket/tournament',btoa(tournamentid),tournamentslug]);
-     }
+    //  if(tournamentid){
+    //   let tournamentslug  =  this.slugifyPipe.transform(name); 
+    //   this.router.navigate(['/cricket/tournament',tournamentid,tournamentslug]);
+    //  }
     if(type == 'Match'){
       
     }
     if(type == 'Tournament'){
       let tournamentslug  =  this.slugifyPipe.transform(name); 
-      this.router.navigate(['/cricket/tournament',btoa(id),tournamentslug]);
+      this.router.navigate(['/cricket/tournament',id,tournamentslug]);
     }
     if(type == 'Player'){
       let playername = this.splitpipe.transform(name)
       let slugname = this.slugifyPipe.transform(playername);
-      this.router.navigate(['/cricket/player', btoa(id), slugname]);
+      this.router.navigate(['/cricket/player', id, slugname]);
     }
     if(type == 'Team'){
       let slugname = this.slugifyPipe.transform(name);
-      this.router.navigate(['/cricket/team',btoa(id),slugname]);
+      this.router.navigate(['/cricket/team',id,slugname]);
     }
     
     

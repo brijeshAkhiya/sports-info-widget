@@ -14,8 +14,8 @@
             </td>
             <ng-template #data>
               <td>
-                <a
-                  (click)="(options.image_type == 'team') ? cricketService.teamInfo(item.team.id,item.team.name) : cricketService.playerview(item.player.id,item.player.name)">
+                <a [routerLink]="options.image_type == 'team' ? ['/cricket/team',item.team.id,(item.team.name | slugify)] : ['/cricket/player',item.player.id,(item.player.name | split | slugify)] " 
+                 >
                   <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
                     [defaultImage]="cricketService.flagplaceholder" alt="logo">
                   {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}

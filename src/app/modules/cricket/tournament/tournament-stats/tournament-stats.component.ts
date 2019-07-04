@@ -20,7 +20,7 @@ export class TournamentStatsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let id =  atob(this.activatedroute.snapshot.parent.params.id)
+    let id =  this.activatedroute.snapshot.parent.params.id
     this.getTournamentsLeader(id);
 }
 
