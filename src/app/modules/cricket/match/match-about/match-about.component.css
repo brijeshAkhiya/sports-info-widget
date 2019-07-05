@@ -30,7 +30,7 @@
 .match-main-title .sec-inngs-state-list p .title    { min-width: 110px; display: inline-block; }
 .match-main-title .sec-inngs-state-list p .value    { color: #292929; font-weight: 600; }
 /* -------- Match Animation ------- */
-.match-main-title .show-anim                        { opacity: 0; animation: show-anim 1s ease-in-out 1s forwards; -webkit-animation: show-anim 1s ease-in-out 1s forwards; }
+.match-main-title .show-anim                        { position: relative; z-index: 2; opacity: 0; animation: show-anim 1s ease-in-out 1s forwards; -webkit-animation: show-anim 1s ease-in-out 1s forwards; }
 .match-main-title .teams-animation                  { position: absolute; top: 0px; left: 10%; width: 80%; height: 100%; text-align: center; z-index: 1; }
 .match-main-title .teams-animation img              { margin-bottom: 15px; height: 64px; width: auto; }
 .match-main-title .team-anim                        { opacity: 0; position: relative; animation: 1s ease-in-out 0.5s forwards; -webkit-animation: 1s ease-in-out 0.5s forwards;}

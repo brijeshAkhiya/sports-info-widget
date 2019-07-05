@@ -1,6 +1,6 @@
 /* -------- Facts & Figures Section ------- */
 .line-title                                     { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #EBEBEB; }
-.team-probability                               { height: 6px; background: #ED1A33;}
+.team-probability                               { width: 0px; height: 6px; background: #ED1A33; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; transition-delay: 5s;}
 .probability-section,
 .last-meetings-section                          { margin-bottom: 48px;}
 .probability-section                            { background: #fff;}
