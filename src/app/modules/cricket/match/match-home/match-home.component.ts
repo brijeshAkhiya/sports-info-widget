@@ -65,7 +65,7 @@ export class MatchHomeComponent implements OnInit {
   playerList = {};
   scorecardinnings: any;
   matchInnings = [];
-
+  objectKeys = Object.keys
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -73,7 +73,6 @@ export class MatchHomeComponent implements OnInit {
     private cricketService: CricketService,
     private commonService: CommonService
   ) {
-    console.log("constructor");
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -281,14 +280,19 @@ export class MatchHomeComponent implements OnInit {
       this.sportsService.getmatchteamlineup(this.matchid).subscribe(
         (res: any) => {
           if (res.data && res.data.lineups[0].starting_lineup && res.data.lineups[1].starting_lineup) {
-            let players = [...res.data.lineups[0].starting_lineup, ...res.data.lineups[1].starting_lineup]
+            let players = []
+            res.data.lineups[0].starting_lineup.map(s => {
+              players.push({ ...s, team_type: res.data.lineups[0].team })
+            })
+            res.data.lineups[1].starting_lineup.map(s => {
+              players.push({ ...s, team_type: res.data.lineups[1].team })
+            })
             players.map(single => {
               if (!this.playerList[single.id]) {
                 this.playerList[single.id] = single
               }
             });
             console.log('playerslistt::', this.playerList);
-
           }
           else {
             this.getPlayersname();

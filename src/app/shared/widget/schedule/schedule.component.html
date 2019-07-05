@@ -7,7 +7,8 @@
     </div>
     <div class="schedule-items">
       <ng-container *ngFor="let match of item.data">
-        <div class="schedule-item d-flex align-items-center rounded-box common-shadow fullblock-link-container" [ngClass]="{'complete-match' : match?.match_result}">
+        <div class="schedule-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
+          [ngClass]="{'complete-match' : match?.match_result}">
 
           <div class="match-desc">
             <!-- <h6>Match 2</h6> -->
@@ -53,15 +54,13 @@
                 </p>
               </div>
             </div>
-
           </div>
           <a class="details-btn"
-            [routerLink]="['/cricket/match',match.match_id,(match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]"><span>Details</span></a>
+            [routerLink]="['/cricket/match', match.id, (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]"><span>Details</span></a>
           <a class="fullblock-link"
-            [routerLink]="['/cricket/match',match.match_id,(match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]">
+            [routerLink]="['/cricket/match', match.id, (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]">
           </a>
         </div>
-
       </ng-container>
     </div>
   </div>
