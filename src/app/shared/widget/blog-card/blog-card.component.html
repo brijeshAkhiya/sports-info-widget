@@ -13,8 +13,10 @@
       <p [innerHtml]="post.sDescription | truncate:[240,'...'] | striphtml" [state]="{ id: post._id }"
         [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       <div class="author-info d-flex justify-content-between align-items-center">
-        <p class="author"><a (click)="commonService.writerview(post?.iId?._id)">{{post.iId.sFirstName}}
-            {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+        <p class="author">
+          <a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}{{post.iId.sLastName}}</a>
+          {{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
+        </p>
         <p class="view">{{post.nViewCounts}}</p>
       </div>
     </div>
@@ -60,7 +62,7 @@
           [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       </div>
       <div class="author-info d-flex justify-content-between align-items-center">
-        <p class="author"><a (click)="commonService.writerview(post?.iId?._id)">{{post.iId.sFirstName}}
+        <p class="author"><a  [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}
             {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
         <p class="view">{{post.nViewCounts}}</p>
       </div>
@@ -78,11 +80,11 @@
               [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="post.sImage | resizeImage:['s']">
             </div>
             <a class="fullblock-link" [state]="{ id: post._id }"
-              [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></a>
+              [routerLink]="['/blog' , post.sSlug ]"></a>
           </div>
           <div class="news-desc">
             <h5><a [state]="{ id: post._id }"
-                [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a>
+                [routerLink]="['/blog' , post.sSlug ]">{{post.sTitle}}</a>
             </h5>
           </div>
         </div>

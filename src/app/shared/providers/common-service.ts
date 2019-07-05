@@ -72,28 +72,12 @@ export class CommonService {
     })
     let dateObj = {}
     data.map((data) => {
-      let mdate = data[date_param];
+      let mdate = moment(data[date_param]).format(format);
       if (!dateObj[mdate]) dateObj[mdate] = [];
       dateObj[mdate].push(data)
     })
-    return Object.keys(dateObj).map(key => ({ key: moment(key).format(format), data: dateObj[key] }));
+    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
-
-  // sortArr(data, format, date_param, sort_type) {
-  //   let dateObj = {}
-  //   data.map((data) => {
-  //     let mdate = moment(data[date_param]).format(format);
-  //     if (!dateObj[mdate]) 
-  //       dateObj[mdate] = [];
-  //     dateObj[mdate].push(data)        
-  //   })
-  //   let finalArray =  Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
-  //   finalArray.sort((a,b) => new Date(a.key).getTime() - new Date(b.key).getTime());
-  //   console.log(finalArray);
-  //   console.log(sort_type == 'desc');
-  //   return (sort_type == 'desc') ? finalArray.reverse() : finalArray;
-  // }
-
 
   getPageTitles() {
     this.titleObj = {

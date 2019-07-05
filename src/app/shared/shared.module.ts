@@ -44,7 +44,6 @@ import { ContentComponent } from './widget/content/content.component';
 import { SportsHomeComponent } from './sports-home/sports-home.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { MenuComponent } from './widget/menu/menu.component';
-import { TeamsComponent } from './widget/teams/teams.component';
 import { PlayerTableComponent } from './widget/player-table/player-table.component';
 import { BlogCardComponent } from './widget/blog-card/blog-card.component';
 import { ScheduleComponent } from './widget/schedule/schedule.component';
@@ -52,6 +51,7 @@ import { SearchComponent } from './widget/search/search.component';
 import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { StringUnder } from './pipes/underlinepipe';
+import { TeamCardComponent } from './widget/team-card/team-card.component';
 
 
 @NgModule({
@@ -94,11 +94,11 @@ import { StringUnder } from './pipes/underlinepipe';
         SportsHomeComponent, 
         BlogListComponent, 
         MenuComponent, 
-        TeamsComponent, 
         PlayerTableComponent, 
         BlogCardComponent, 
         ScheduleComponent, SearchComponent,
-        FavouritesWidgetComponent
+        FavouritesWidgetComponent,
+        TeamCardComponent,
     ],
     providers: [
         /** All Pipes */
@@ -150,12 +150,12 @@ import { StringUnder } from './pipes/underlinepipe';
         SportsHomeComponent,
         BlogListComponent,
         MenuComponent,
-        TeamsComponent,
         PlayerTableComponent,
         BlogCardComponent,
         ScheduleComponent,
         SearchComponent,
-        FavouritesWidgetComponent
+        FavouritesWidgetComponent,
+        TeamCardComponent
     ],
 
 })

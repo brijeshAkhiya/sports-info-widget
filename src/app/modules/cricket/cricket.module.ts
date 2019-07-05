@@ -22,7 +22,6 @@ import { MatchScheduleComponent } from './components/match-schedule/match-schedu
 import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
-import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
 import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 
 import { MatchHomeComponent } from './match/match-home/match-home.component';
@@ -36,15 +35,14 @@ import { UpcomingComponent } from './match/upcoming/upcoming.component';
 import { SportsService } from '@app/shared/providers/sports-service';
 import { SocketService } from '@app/shared/providers/socket.service';
 import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
-import { StringUnder } from '@app/shared/pipes/underlinepipe';
 import { CricketService } from '@app/shared/providers/cricket-service';
 import { MatchCounterComponent } from './match/match-commentry/match-counter/match-counter.component';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
 import { AgmCoreModule } from '@agm/core';
-import { TeamsHomeComponent } from './teams/teams-home/teams-home.component';
-import { PlayerHomeComponent } from './player/player-home/player-home.component';
-import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
+import { TeamsComponent } from '@app/pages/teams/teams.component';
+import { TeamComponent } from '@app/pages/teams/team/team.component';
+import { PlayerComponent } from '@app/pages/player/player.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +56,6 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     TournamentFixturesComponent,
     TournamentStadingsComponent,
     TournamentStatsComponent,
-    TournamentTeamsComponent, 
     CricketFixturesViewComponent,
     MatchHomeComponent,
     LiveMatchTrackerComponent,
@@ -71,9 +68,9 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     UpcomingComponent,
     CommentryComponent,
     LiveMatchTrackerComponent,
-    CustomTeamViewComponent,
-    TeamsHomeComponent,
-    PlayerHomeComponent
+    TeamsComponent,
+    TeamComponent,
+    PlayerComponent
   ],
   imports: [
     CommonModule,

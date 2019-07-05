@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
   }
   prev;
   valuechange($e){
-    if(this.searchkey.length > 2 && this.searchkey != this.prev){
+    if(this.searchkey && this.searchkey.length > 2 && (this.searchkey != this.prev)){
       this.search();
       this.prev = this.searchkey;
     }

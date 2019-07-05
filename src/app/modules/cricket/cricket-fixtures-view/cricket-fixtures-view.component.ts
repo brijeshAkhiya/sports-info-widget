@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { SportsService } from "@providers/sports-service"
 import { CommonService } from "@providers/common-service";
+import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: "app-cricket-fixtures-view",
@@ -21,6 +22,7 @@ export class CricketFixturesViewComponent implements OnInit {
   constructor(
     private sportsService: SportsService,
     private commonService: CommonService,
+    private cricketService: CricketService,
     private activatedroute: ActivatedRoute,
   ) {}
 
@@ -29,8 +31,7 @@ export class CricketFixturesViewComponent implements OnInit {
     if (fromtype == "fixtures") {
       this.selectedTab = "upcoming";
       if(window.history.state.data){
-        this.matchfixtures = window.history.state.data;
-        this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'scheduled', 'asc');
+        this.matchfixtures = this.commonService.sortArr(window.history.state.data, 'Do MMMM YYYY', 'scheduled', 'asc');
       }
       else
         this.getMatchFixtures();
@@ -38,8 +39,7 @@ export class CricketFixturesViewComponent implements OnInit {
     } else if (fromtype == "results") {
       this.selectedTab = "results";
       if(window.history.state.data){
-        this.matchresults = window.history.state.data;
-        this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
+        this.matchresults = this.commonService.sortArr(window.history.state.data, 'Do MMMM YYYY', 'scheduled', 'desc');
       }
       else
         this.getMatchResults();
@@ -55,8 +55,7 @@ export class CricketFixturesViewComponent implements OnInit {
     this.sportsService.getmatchfixtures().subscribe((res: any) => {
       this.loadingFixture = false;
       if (res.data)
-        this.matchfixtures = res.data;
-        this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'scheduled', 'asc');
+        this.matchfixtures = this.commonService.sortArr(res.data, 'Do MMMM YYYY', 'scheduled', 'asc');
     }, (error) => {
       this.loadingFixture = false;
     });
@@ -73,29 +72,11 @@ export class CricketFixturesViewComponent implements OnInit {
       .subscribe((res: any) => {
         this.loadingResult = false;
         if (res.data){
-          this.matchresults = res.data;
-          this.initScore();
+           this.matchresults =this.cricketService.initCompetitorScore(res.data)
+           this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
         }
       }, (error) => {
         this.loadingResult = false;
       });
   }
-  
-  initScore(){
-    this.matchresults = this.matchresults.map((data, matchIndex) => {
-      let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
-      let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
-      data.period_scores.map((pscore, index) => {
-        if (pscore.home_score) {
-          (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
-        } else {
-          (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
-        }
-      })
-      return data;
-    });
-    this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
-    console.log('matchresults:last:', this.matchresults);    
-  }
-  
 }

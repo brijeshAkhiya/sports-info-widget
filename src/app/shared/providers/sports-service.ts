@@ -161,10 +161,16 @@ export class SportsService {
   }
 
   //get team fixtures
-
   getteamfixtures(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/cricket/team/${id}/fixtures`
+    );
+  }
+
+  //get team result
+  getteamresults(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/cricket/team/${id}/results`
     );
   }
 

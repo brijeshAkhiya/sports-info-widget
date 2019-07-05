@@ -19,7 +19,7 @@ export class MatchHomeComponent implements OnInit {
   seconds: any;
   team1id: any;
   team2id: any;
-  nextmatches: { day: string; data: any }[];
+  nextmatches:any[];
   lastmatches = [];
   matchesresultdata: any;
   venuedetails: any;
@@ -205,15 +205,13 @@ export class MatchHomeComponent implements OnInit {
   getFallWickets() {
     if (this.matchdata.timeline) {
       let arrWickets = this.matchdata.timeline.filter((timeline) => timeline.type == "wicket")
-      console.log(arrWickets);
+     
       if (arrWickets.length > 0) {
         arrWickets.reverse().map(data => {
-          console.log(this.fallofWickets);
           if (!this.fallofWickets[data.inning])
             this.fallofWickets[data.inning] = [];
 
           let find = this.fallofWickets[data.inning].filter((wicket) => wicket.playerid == data.dismissal_params.player.id)
-          console.log(find)
           if (find.length == 0) {
             this.fallofWickets[data.inning].push({
               playerid: data.dismissal_params.player.id,
@@ -339,69 +337,15 @@ export class MatchHomeComponent implements OnInit {
       )
       .subscribe((res: any) => {
         if (res.data) {
-          let dataarray = [];
-          dataarray = res["data"].next_meetings;
-          let dateObj = {};
-          dataarray.map(data => {
-            let mdate = moment(data.scheduled).format("Do MMMM YYYY");
-            if (!dateObj[mdate]) {
-              dateObj[mdate] = [];
-            }
-          });
-          dataarray.map(data => {
-            let mdate = moment(data.scheduled).format("Do MMMM YYYY");
-            dateObj[mdate].push(data);
-          });
-          this.nextmatches = Object.keys(dateObj).map(day => ({
-            day,
-            data: dateObj[day]
-          }));
-          //map array for last matches
-          // this.lastmatches = res["data"].last_meetings;
-          res["data"].last_meetings.map(data => {
-            if (data.match_status && data.match_status == "ended") {
-              this.lastmatches.push(data);
-            }
-          });
-          this.lastmatches = this.lastmatches.map(data => {
-            let obj = {};
-            let team_arr = data["competitors"];
-            team_arr.map(single => {
-              obj[single.qualifier] = single;
-            });
-            let period_score_new = data["period_scores"];
-            if (period_score_new) {
-              period_score_new = period_score_new.map(singleb => {
-                if (singleb.away_score !== undefined) {
-                  return { ...singleb, team: obj["away"], teamFlag: true };
-                } else {
-                  return { ...singleb, team: obj["home"], teamFlag: false };
-                }
-              });
-              return { ...data, period_score_new };
-            } else {
-              return data;
-            }
-          });
-          console.log(this.lastmatches);
-        }
-
-        //sort matches result by date
-        let dateObj = {};
-        this.lastmatches.map(data => {
-          let mdate = moment(data.scheduled).format("Do MMMM YYYY");
-          if (!dateObj[mdate]) {
-            dateObj[mdate] = [];
+          if(res.data.next_meetings && res.data.next_meetings.length > 0)
+            this.nextmatches = this.commonService.sortArr(res.data.next_meetings, 'Do MMMM YYYY', 'scheduled', 'asc');
+         
+          if(res.data.last_meetings && res.data.last_meetings.length > 0){
+            let last_meetings = res.data.last_meetings.filter((match) => match.period_scores);
+            this.matchesresultdata = this.cricketService.initCompetitorScore(last_meetings)
+            this.matchesresultdata = this.commonService.sortArr(this.matchesresultdata, 'Do MMMM YYYY', 'scheduled', 'desc');
           }
-        });
-        this.lastmatches.map(data => {
-          let mdate = moment(data.scheduled).format("Do MMMM YYYY");
-          dateObj[mdate].push(data);
-        });
-        this.matchesresultdata = Object.keys(dateObj).map(day => ({
-          day,
-          data: dateObj[day]
-        }));
+        }
       });
   }
 

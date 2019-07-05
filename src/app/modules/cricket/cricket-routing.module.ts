@@ -10,12 +10,11 @@ import { TournamentHomeComponent } from './tournament/tournament-home/tournament
 import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
-import { TournamentTeamsComponent } from './tournament/tournament-teams/tournament-teams.component';
 import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 import { MatchHomeComponent } from './match/match-home/match-home.component';
-import { TeamsHomeComponent } from './teams/teams-home/teams-home.component';
-import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
-import { PlayerHomeComponent } from './player/player-home/player-home.component';
+import { TeamsComponent } from '@app/pages/teams/teams.component';
+import { TeamComponent } from '@app/pages/teams/team/team.component';
+import { PlayerComponent } from '@app/pages/player/player.component';
 
 const routes: Routes = [
   {
@@ -48,7 +47,8 @@ const routes: Routes = [
               },
               {
                   path: 'teams',
-                  component: TournamentTeamsComponent,
+                  component: TeamsComponent,
+                  data: { 'sport':'cricket'}
               },
               {
                   path: 'stats',
@@ -66,15 +66,17 @@ const routes: Routes = [
         },
         {
             path: 'team/:tournamentid/:teamid/:slug',
-            component: TeamsHomeComponent
+            component: TeamComponent,
+            data: { 'sport':'cricket'}
         },
         {
             path: 'team/:teamid/:slug',
-            component: CustomTeamViewComponent
+            component: TeamComponent,
+            data: { 'sport':'cricket'}
         },
         {
             path: 'player/:id/:slug',
-            component: PlayerHomeComponent
+            component: PlayerComponent
         }
       ]
   }

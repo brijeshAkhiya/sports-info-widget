@@ -8,7 +8,8 @@
             <h4>{{team.name}}</h4>
             <h5>{{team.abbreviation}}</h5>
           </div>
-          <a class="fullblock-link" [routerLink]="['/cricket/team',team.id,(team.name | slugify)]"></a>
+          <a *ngIf="tournament" class="fullblock-link" [routerLink]="['/cricket/team', tournament ,team.id,(team.name | slugify)]"></a>
+          <a *ngIf="!tournament" class="fullblock-link" [routerLink]="['/cricket/team',team.id,(team.name | slugify)]"></a>
         </div>
       </div>
     </div>

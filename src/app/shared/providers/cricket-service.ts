@@ -18,6 +18,23 @@ export class CricketService {
   ) {
   }
 
+  initCompetitorScore(arr){
+    return arr.map((data, matchIndex) => {
+      let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
+      let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
+      if(data.period_scores){
+        data.period_scores.map((pscore, index) => {
+          if (pscore.home_score) {
+            (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
+          } else {
+            (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
+          }
+        })
+      }
+      return data;
+    });
+  }
+
   playerview(id, name) {
     let playername = this.splitpipe.transform(name)
     let slugname = this.slugifyPipe.transform(playername);

@@ -1,0 +1,127 @@
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+
+      <div class="content-col">
+
+        <app-data-loader-widget *ngIf="loading"></app-data-loader-widget>
+        <app-no-data-widget *ngIf="!loading && (!playerData?.player)"></app-no-data-widget>
+
+        <div *ngIf="playerData"
+          class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+          <h1>{{playerData?.player?.name | split}}</h1>
+          <app-favourites-widget [value]="{id:playerid,type:'player',name:playerData?.player?.name | split}">
+          </app-favourites-widget>
+        </div>
+
+        <ngb-tabset class="common-tabs" *ngIf="playerData">
+          <ngb-tab>
+
+            <!-- Profile Section-->
+            <ng-template ngbTabTitle>Profile</ng-template>
+            <ng-template ngbTabContent>
+              <section class="player-profile d-flex">
+                <div class="player-pic">
+                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerData?.player?.id | playerimage:['m']"
+                    [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
+                </div>
+                <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData?.player">
+                  <div class="info-col">
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Full Name', value: playerData?.player.full_name ? playerData?.player.full_name : playerData?.player.name }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Born', value: playerData?.player?.date_of_birth | date }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Nationality', value: playerData?.player?.nationality }">
+                    </ng-container>
+                  </div>
+                  <div class="info-col">
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Batting Style', value: playerData?.player?.batting_style | stringunder }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Bowling Style', value: playerData?.player?.bowling_style | stringunder }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Role', value: playerData?.player?.type | stringunder }">
+                    </ng-container>
+                  </div>
+                  <!-- <div class="info-col">
+                      <p class="light-title">jersey no</p>
+                      <p>7</p>
+                    </div> -->
+                </div>
+              </section>
+              <section class="common-section quick-stats" *ngIf="stats">
+                <h4>Quick Stats</h4>
+                <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
+                </ng-container>
+              </section>
+              <h4>Major Teams</h4>
+              <app-team-card [teams]="playerData?.teams"></app-team-card>
+            </ng-template>
+          </ngb-tab>
+
+          <!-- Stats Section-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>Stats</ng-template>
+            <ng-template ngbTabContent>
+              <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]=" {
+                    titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
+                    values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
+                    subParams : 'batting',
+                    header_title:'Batting Stats'
+                  }">
+              </app-player-table>
+
+              <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]=" {
+                  titles : ['Game type', 'MAT', 'INN', 'OV', 'Maiden', 'R', 'W', 'AVG', 'SR', 'Eco', '5Ws', '10Ws'],
+                  values : ['type', 'matches', 'innings', 'overs', 'maidens', 'runs', 'wickets', 'average', 'strike_rate', 'economy', 'five_wicket_hauls', 'ten_wicket_hauls'],
+                  subParams : 'bowling',
+                  header_title:'Bowling Stats'
+                }">
+              </app-player-table>
+            </ng-template>
+          </ngb-tab>
+
+          <!-- News Section-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabContent>
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              </app-blog-list>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+          <div class="sticky-sidebar">
+            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+            <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="cricketseries"
+             ></app-common-story-widget>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #quickStateCard let-stats="stats">
+  <div class="row row-size12">
+    <div class="col-md-4" *ngFor="let stat of stats">
+      <div class="common-shadow rounded-box stat-item">
+        <h1>{{stat.data}}</h1>
+        <p>{{stat.key}}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #playerInfoCardContent let-value="value" let-title="title">
+  <div class="info-item" *ngIf="value">
+    <p class="light-title">{{title}}</p>
+    <p>{{value}}</p>
+  </div>
+</ng-template>

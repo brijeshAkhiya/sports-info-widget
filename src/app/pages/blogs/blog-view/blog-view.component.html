@@ -49,8 +49,9 @@
               <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"
                 [offset]="commonService.lazyloadoffset"></div>
               <div class="author-desc">
-                <h6><a>{{blogdata?.iId?.sFirstName}}
-                    {{blogdata?.iId?.sLastName}}</a></h6>
+                <h6>
+                  <a [routerLink]="['/writer', blogdata?.iId?._id ]" >{{blogdata?.iId?.sFirstName}}{{blogdata?.iId?.sLastName}}</a>
+                </h6>
                 <p>{{blogdata?.iId?.sBio}}</p>
               </div>
             </div>

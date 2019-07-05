@@ -20,7 +20,7 @@ export class WriterProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.writerid = atob(this.activatedroute.snapshot.params.id);
+    this.writerid = this.activatedroute.snapshot.params.id;
     this.getWriterProfile();
   }
 
