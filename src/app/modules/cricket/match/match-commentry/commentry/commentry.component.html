@@ -17,10 +17,15 @@
 
       <!-- Run-->
       <!-- TODO - class for wicket too-->
-      <p class="over-run" [ngClass]="{'hightlight': commentary.type=='wicket' || commentary.bowling_params.extra_runs_type || commentary.batting_params.runs_scored == 4 || commentary.batting_params.runs_scored == 6}" *ngIf="commentary.batting_params">
-        {{commentary.type == 'wicket' || commentary.bowling_params.extra_runs_conceded ? (commentary.batting_params.runs_scored > 0 ? commentary.batting_params.runs_scored : '') : commentary.batting_params.runs_scored }}
-        <ng-container *ngIf="commentary.type == 'wicket'"><span>W</span></ng-container>
-        <ng-container *ngIf="commentary.bowling_params.extra_runs_type"><span>{{commentary.bowling_params.extra_runs_type}}</span></ng-container>
+      <p class="over-run"
+        [ngClass]="{'hightlight': commentary.type=='wicket' || commentary.bowling_params.extra_runs_type || commentary.batting_params.runs_scored == 4 || commentary.batting_params.runs_scored == 6}"
+        *ngIf="commentary.batting_params"><!-- 
+        --><span>{{commentary.type == 'wicket' || commentary.bowling_params.extra_runs_conceded ? (commentary.batting_params?.runs_scored + commentary.bowling_params?.extra_runs_conceded) : commentary.batting_params.runs_scored}}<!--
+          --><ng-container *ngIf="commentary.type == 'wicket'"><span>W</span></ng-container>
+          <ng-container *ngIf="commentary.bowling_params.extra_runs_type">
+            <span>{{commentary.bowling_params.extra_runs_type}}</span>
+          </ng-container>
+        </span>
       </p>
 
       <!-- Commentry-->

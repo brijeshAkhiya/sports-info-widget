@@ -72,7 +72,9 @@
                     titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
                     values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
                     subParams : 'batting',
-                    header_title:'Batting Stats'
+                    header_title:'Batting Stats',
+                    class : ['player-state'],
+                    class_light_row : ['light-row']
                   }">
               </app-player-table>
 
@@ -80,7 +82,9 @@
                   titles : ['Game type', 'MAT', 'INN', 'OV', 'Maiden', 'R', 'W', 'AVG', 'SR', 'Eco', '5Ws', '10Ws'],
                   values : ['type', 'matches', 'innings', 'overs', 'maidens', 'runs', 'wickets', 'average', 'strike_rate', 'economy', 'five_wicket_hauls', 'ten_wicket_hauls'],
                   subParams : 'bowling',
-                  header_title:'Bowling Stats'
+                  header_title:'Bowling Stats',
+                  class : ['player-state'],
+                  class_light_row : ['light-row']
                 }">
               </app-player-table>
             </ng-template>

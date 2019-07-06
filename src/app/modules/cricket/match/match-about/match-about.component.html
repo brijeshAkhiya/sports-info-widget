@@ -73,7 +73,7 @@
             <img [lazyLoad]="competitor.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
               [offset]="commonService.lazyloadoffset">
             <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by && (data.sport_event_status.status != 'closed' && data.sport_event_status.status != 'ended') }"
-              (click)="cricketService.teamInfo(competitor.id, competitor.name)">
+              [routerLink]="data.sport_event.tournament.id ? ['/cricket/team', data.sport_event.tournament.id ,competitor.id,(competitor.name | slugify)] : ['/cricket/team',competitor.id,(competitor.name | slugify)]">
               {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
           </h4>
           <h4 class="score"
@@ -95,22 +95,14 @@
       <div class="player-info">
         <p class="light-text">Player of the Match</p>
         <h5 class="theme-color">
-          <a
-            (click)="cricketService.playerview(data.statistics.man_of_the_match[0].id,data.statistics.man_of_the_match[0].name)">
+          <a [routerLink]="['/cricket/player', data.statistics.man_of_the_match[0].id, (data.statistics.man_of_the_match[0].name | split)]" >
             {{data.statistics.man_of_the_match[0]?.name | split}} </a>
         </h5>
-        <!-- <p class="player-team">West Indies</p> -->
       </div>
     </div>
 
     <div class="match-win-player d-flex"
       *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
-      <!-- <div class="player-info">
-        <p *ngIf="data.sport_event_status.run_rate">CRR : <span> {{data.sport_event_status.run_rate}}</span></p>
-        <p *ngIf="data.sport_event_status.run_rate_required">RR : <span> {{data.sport_event_status.run_rate_required}}</span></p> 
-        <p *ngIf="toss.toss_won_by_team">{{toss.toss_won_by_team}} opt to
-          {{toss.toss_decision ? toss.toss_decision : 'bat'}}</p>       
-      </div> -->
       <ul class="sec-inngs-state-list">
         <li>
           <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">Required rate</span>: <span

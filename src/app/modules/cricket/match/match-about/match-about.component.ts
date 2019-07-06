@@ -22,6 +22,8 @@ export class MatchAboutComponent implements OnInit {
 
   ngOnInit() {  
     console.log('toss',this.toss);
+    console.log(this.data);
+    console.log(this.competitor);
     
   if(this.data['sport_event_status']['status'] == 'closed'){
     let compititors = this.data['sport_event']['competitors']

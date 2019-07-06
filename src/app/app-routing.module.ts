@@ -8,8 +8,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AdvertiseWithUsComponent } from './pages/advertise-with-us/advertise-with-us.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
-
-import { WriterProfileComponent } from './components/writer/writer-profile/writer-profile.component';
+import { WriterComponent } from './pages/writer/writer.component';
 import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
 
 const routes: Routes = [
@@ -55,7 +54,7 @@ const routes: Routes = [
     },
     {
         path: 'writer/:id',
-        component:WriterProfileComponent
+        component:WriterComponent
     },
     {
         path: 'coming-soon/:sport',
@@ -85,10 +84,6 @@ const routes: Routes = [
         path: '**',
         component:PageNotFoundComponent
     },
-
-
-
-
 ]
 
 

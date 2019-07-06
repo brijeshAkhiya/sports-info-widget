@@ -11,10 +11,6 @@ h4                                      { margin-bottom: 19px;}
 .quick-stats .stat-item:hover:after     { bottom: 0; }
 .quick-stats h1                         { margin-bottom: 4px; font-family: 'IBM Plex Sans', sans-serif; font-style: normal; }
 .quick-stats p                          { margin: 0px; font-size: 14px; line-height: 18px; color: #A3A3A3; font-weight: 600; text-transform: uppercase; }
-.player-sate                            { margin-bottom: 24px; }
-.player-sate:last-child                 { margin-bottom: 0px; }
-.player-sate .table tr th:first-child,
-.player-sate .table tr td:first-child   { text-align: left; width: 26%; text-transform: uppercase; }
 
 /***** Responsive CSS Start ******/
 

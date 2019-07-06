@@ -55,6 +55,7 @@ import { MainHeaderComponent } from "./shared/main-header/main-header.component"
 import { MainFooterComponent } from "./shared/main-footer/main-footer.component";
 import { WriterProfileComponent } from "./components/writer/writer-profile/writer-profile.component";
 import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
+import { WriterComponent } from './pages/writer/writer.component';
 
 
 //socket config
@@ -93,6 +94,7 @@ export function provideConfig() {
     MainFooterComponent,
     WriterProfileComponent,
     BlogViewComponent,
+    WriterComponent,
   ],
   imports: [
     BrowserModule,
