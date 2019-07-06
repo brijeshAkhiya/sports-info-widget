@@ -22,7 +22,7 @@ import { PlayerImagePipe } from './pipes/playerimageurl.pipe';
 import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
 import { SlugifyPipe } from "./pipes/slugpipe";
 import { SafehtmlPipe } from './pipes/safehtml.pipe';
-
+import { StringsplitID } from './pipes/stringsplitID.pipe';
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
@@ -53,6 +53,7 @@ import { LoaderComponent } from './widget/loader/loader.component';
 import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.component';
 
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -79,7 +80,7 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         FlashteamPipe,
         SlugifyPipe,
         FilterPipe,
-
+        StringsplitID,
         /** All Componenets */
         CommonStoryWidgetComponent, 
         PointstableWidgetComponent,
@@ -108,9 +109,9 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         FlashteamPipe,
         SlugifyPipe,  
         FilterPipe,      
-
         SlugifyPipe,        
         StringUnder,
+        StringsplitID,
         /** All Providers*/
         SportsService,
         SocketService,
@@ -134,7 +135,7 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         SlugifyPipe,
         FilterPipe,
         StringUnder,
-
+        StringsplitID,
         /** All Componenets */
         CommonStoryWidgetComponent,
         PointstableWidgetComponent,

@@ -28,10 +28,9 @@
   0%      { opacity: 0; transform: translateX(150%); -webkit-transform: translateX(150%); }
   100%    { opacity: 1; transform: translateX(0%); -webkit-transform: translateX(0%); }
 } */
-.player-state                            { margin-bottom: 24px; }
-.player-state:last-child                 { margin-bottom: 0px; }
+/* -------- Player Stats Section ------- */
 .player-state .table tr th:first-child,
-.player-state .table tr td:first-child   { text-align: left; width: 26%; text-transform: uppercase; }
+.player-state .table tr td:first-child    { text-align: left; width: 26%; text-transform: uppercase; }
 
 
 /***** Responsive CSS Start ******/

@@ -16,24 +16,24 @@ export class TeamsComponent implements OnInit {
   tournamentid;
   teams;
   paramsWidget = {}
-  
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private sportsService: SportsService,
     public cricketService: CricketService,
     public commonService: CommonService
-    ) {  }
+  ) { }
 
   ngOnInit() {
-    let data:any = this.activatedRoute.data
+    let data: any = this.activatedRoute.data
     let routeParams = this.activatedRoute.snapshot.params;
     console.log(this.activatedRoute.snapshot);
     console.log(routeParams);
-    
+
     this.sport = data.value.sport;
-    this.tournamentid = this.activatedRoute.parent.snapshot.params.id
-    if(this.sport == 'cricket'){
-      this.paramsWidget = { title: 'Current Series', type : 'currentseries', sport : this.sport, tournament : this.tournamentid }
+    this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'cricket', 'tournament');
+    if (this.sport == 'cricket') {
+      this.paramsWidget = { title: 'Current Series', type: 'currentseries', sport: this.sport, tournament: this.tournamentid }
       this.getTournamentTeams(this.tournamentid);
     }
 
@@ -41,11 +41,11 @@ export class TeamsComponent implements OnInit {
 
   //Cricket - Get tournament teams
   getTournamentTeams(id) {
-    this.sportsService.gettournamentteams(id).subscribe((res:any) => {
+    this.sportsService.gettournamentteams(id).subscribe((res: any) => {
       if (res.data) {
         res.data.groups.map((data) => {
           this.teams = data.teams
-        })        
+        })
       }
     })
   }

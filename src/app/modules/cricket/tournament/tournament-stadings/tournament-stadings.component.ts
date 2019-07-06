@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@app/shared/providers/common-service';
 
 @Component({
   selector: 'app-tournament-stadings',
@@ -21,11 +22,12 @@ export class TournamentStadingsComponent implements OnInit {
 
   constructor(
     private sportsService: SportsService,
+    private commonService: CommonService,
     private activatedroute: ActivatedRoute
     ) { }
 
   ngOnInit() {    
-    let id = this.activatedroute.parent.snapshot.params.id
+    let id = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'cricket','tournament');
     this.getTournamentPointsTable(id)
   }
 

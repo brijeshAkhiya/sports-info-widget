@@ -28,7 +28,7 @@ export class TournamentFixturesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.tournamentid = this.activatedroute.parent.snapshot.params.id 
+    this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'cricket','tournament');
     this.getMatchFixtures();
   }
 

@@ -20,7 +20,7 @@ export class CommonService {
   public s3Url
   public siteUrl
   titleObj;
-  
+
   constructor(
     private slugifyPipe: SlugifyPipe,
     private router: Router,
@@ -32,8 +32,8 @@ export class CommonService {
   }
 
   //writer view 
-  writerview(id){
-    this.router.navigate(['/writer',btoa(id)])
+  writerview(id) {
+    this.router.navigate(['/writer', btoa(id)])
   }
 
   /** Get Milli seconds from Hr, min and seconds */
@@ -111,5 +111,21 @@ export class CommonService {
     }
   }
 
-  
+  getIds(id, sport, type) {
+    if (sport == 'cricket') {
+      if (type == 'tournament') {
+        return 'sr:tournament:' + id
+      }
+      else if (type == 'match') {
+        return 'sr:match:' + id
+      }
+      else if (type == 'team') {
+        return 'sr:compititor:' + id
+      }
+      else if (type == 'player') {
+        return 'sr:player:' + id
+      }
+    }
+  }
+
 }
