@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
@@ -8,7 +8,8 @@ import { CommonService } from "@providers/common-service";
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PlayerComponent implements OnInit {
   

@@ -51,13 +51,13 @@
       <div class="schedule-items">
         <div class="schedule-item rounded-box common-shadow fullblock-link-container" *ngFor="let item of schedule.data">
           <div class="schedule-title d-flex justify-content-between">
-            <h4><a [routerLink]="['/cricket/tournament',item.tournament_id,(item.name | slugify)]">{{item.name}}</a>
+            <h4><a [routerLink]="['/cricket/tournament',(item.tournament_id | splitID),(item.name | slugify)]">{{item.name}}</a>
             </h4>
             <!-- <h5>{{item.matches}} Matches</h5> -->
           </div>
           <p class="schedule-date">{{item.start_date | amDateFormat:'MMM DD'}} -
             {{item.end_date | amDateFormat:'MMM DD'}}</p>
-          <a class="fullblock-link" [routerLink]="['/cricket/tournament',item.tournament_id,(item.name | slugify)]"></a>
+          <a class="fullblock-link" [routerLink]="['/cricket/tournament',(item.tournament_id | splitID),(item.name | slugify)]"></a>
         </div>
       </div>
     </div>

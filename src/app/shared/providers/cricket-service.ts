@@ -55,4 +55,6 @@ export class CricketService {
     this.router.navigate(['/cricket/tournament',btoa(id),slugname]);
   }
 
+ 
+
 }
