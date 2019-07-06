@@ -30,7 +30,7 @@
                 <div>Latest</div>
             </ng-template>
             <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="isLoading"></app-data-loader-widget>
+                <app-loader *ngIf="isLoading"></app-loader>
                 <app-no-data-widget *ngIf="!isLoading && recentArticles?.length == 0 || !recentArticles"></app-no-data-widget>
                 <app-blog-card [posts]="recentArticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog-card>
                 <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>

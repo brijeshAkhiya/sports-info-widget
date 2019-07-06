@@ -10,11 +10,10 @@ import { SportsService } from '@providers/sports-service'
 })
 export class HomeComponent implements OnInit {
 
-  banners = [];
   highlightImage: Number = 0;
   highlightImageInterval;
   popularvideos = [];
-  recentPosts = [];
+  banners = [];
 
   constructor(
     public commonService: CommonService,
@@ -24,7 +23,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getBannerPost();
     this.getPopularVideos();
-    this.getRecentPosts();
   }
 
   //get banner posts
@@ -35,20 +33,19 @@ export class HomeComponent implements OnInit {
         this.initHighlightInterval(0);
     });
   }
+  /** Highlight Blog in interval */
   initHighlightInterval(initValue){
     let i = initValue;        
     this.highlightImageInterval = setInterval(() => {
       this.highlightImage = i;
       i = (this.banners.length - 1 == i) ? 0 : i+1;
-    }, 4000 ); 
-
+    }, 1000 ); 
   }  
-  mouseover(highlightIndex){
+
+  /** Stop Highlight Blog on mouseover */
+  stopHighlightInterval(highlightIndex){
     this.highlightImage = highlightIndex;
     clearInterval(this.highlightImageInterval);
-  }
-  mouseout(){
-    this.initHighlightInterval(this.highlightImage)
   }
 
   //get popular videos
@@ -56,15 +53,6 @@ export class HomeComponent implements OnInit {
     this.sportsService.getpopularpost({eType: "Video"}).subscribe((res:any) => {
       if (res.data) 
         this.popularvideos = res.data;
-    });
-  }
-
-  //get recent posts
-  getRecentPosts() {
-    this.sportsService.getrecentpost({eType: "",nLimit: 10}).subscribe((res:any) => {
-      if (res.data) {
-        this.recentPosts = res.data;
-      }
     });
   }
 

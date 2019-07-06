@@ -95,7 +95,7 @@
       <div class="player-info">
         <p class="light-text">Player of the Match</p>
         <h5 class="theme-color">
-          <a [routerLink]="['/cricket/player', data.statistics.man_of_the_match[0].id, (data.statistics.man_of_the_match[0].name | split)]" >
+          <a [routerLink]="['/cricket/player', data.statistics.man_of_the_match[0].id, ((data.statistics.man_of_the_match[0].name | split ) | slugify) ]" >
             {{data.statistics.man_of_the_match[0]?.name | split}} </a>
         </h5>
       </div>

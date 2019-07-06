@@ -11,7 +11,7 @@
               <div (click)="getMatchFixtures()">Upcoming</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="loadingFixture"></app-data-loader-widget>
+              <app-loader *ngIf="loadingFixture"></app-loader>
               <app-no-data-widget [message]="'No recent fixtures'"
                 *ngIf="!loadingFixture && (!matchfixtures || matchfixtures?.length == 0)">
               </app-no-data-widget>
@@ -23,7 +23,7 @@
               <div (click)="getMatchResults()">Results</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="loadingResult"></app-data-loader-widget>
+              <app-loader *ngIf="loadingResult"></app-loader>
               <app-no-data-widget [message]="'No recent results'"
                 *ngIf="!loadingResult &&  (!matchresults || matchresults?.length == 0)">
               </app-no-data-widget>

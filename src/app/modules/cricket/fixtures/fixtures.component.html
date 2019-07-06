@@ -39,7 +39,7 @@
 </section>
 
 <ng-template #schedule let-schedules="schedules">
-  <app-data-loader-widget *ngIf="!schedules"></app-data-loader-widget>
+  <app-loader *ngIf="!schedules"></app-loader>
   <app-no-data-widget *ngIf="schedules?.length == 0"></app-no-data-widget>
   <div class="schedule-list" *ngIf="schedules.length > 0">
     <div class="schedule-month d-flex" *ngFor="let schedule of schedules">

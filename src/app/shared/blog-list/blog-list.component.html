@@ -3,7 +3,7 @@
     <app-blog-card [posts]="articles" *ngIf="options.card_type" [card_type]="options.card_type"></app-blog-card>
     <app-blog-card [posts]="articles" *ngIf="!options.card_type"  [card_type]="'list'"></app-blog-card>
 </div>
-<app-data-loader-widget *ngIf="isLoading"></app-data-loader-widget>
+<app-loader *ngIf="isLoading"></app-loader>
 <app-no-data-widget *ngIf="!isLoading && articles?.length == 0 || !articles"></app-no-data-widget>
 
 <div class="text-center">

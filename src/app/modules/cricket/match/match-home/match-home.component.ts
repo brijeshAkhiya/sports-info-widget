@@ -10,7 +10,7 @@ import * as moment from "moment";
   styleUrls: ["./match-home.component.css"]
 })
 export class MatchHomeComponent implements OnInit {
-  commonnewsparams = {};
+  paramArticle = { reqParams : { nStart: 0, nLimit: 10, aIds: [] } }
   matchid: any;
   matchstatus: any;
   sportevent: any;
@@ -79,6 +79,7 @@ export class MatchHomeComponent implements OnInit {
     };
 
     this.matchid = this.activatedroute.snapshot.params.id
+    this.paramArticle.reqParams.aIds.push(this.matchid);
     this.activatedroute.params.subscribe(params => {
       this.matchid = params.id
       if (this.matchid) {

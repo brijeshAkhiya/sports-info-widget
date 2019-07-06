@@ -27,7 +27,7 @@
 
 <ng-template #sidebarMatch let-loader="loader" let-matches="matches" let-type="type">
 
-  <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
+  <app-loader *ngIf="loader"></app-loader>
   <app-no-data-widget [message]="type =='result' ? 'No recent results' : 'No recent fixtures' "
     *ngIf="!loader && (!matches || matches?.length == 0)"></app-no-data-widget>
 

@@ -35,9 +35,9 @@
 .blog-content blockquote    { padding-left: 24px; border-left: 6px solid #ED1A33;}
 .tag-list                   { margin: 0px; padding: 30px 0px 22px; border-bottom: 2px solid #F5F5F5; }
 .tag-list li                { display: inline-block; }
-.tag-list li button         { margin: 0px 8px 8px 0px; padding: 8px 12px; background: #ECECEC; font-size: 14px; line-height: 18px; font-weight: 500; color: #A3A3A3; border: none; text-transform: uppercase; border-radius: 4px; }
-.tag-list li button:hover,
-.tag-list li button:focus   { background: #ED1A33; color: #fff; }
+.tag-list li a              { margin: 0px 8px 8px 0px; padding: 8px 12px; display: inline-block; background: #ECECEC; font-size: 14px; line-height: 18px; font-weight: 500; color: #A3A3A3; border: none; text-transform: uppercase; border-radius: 4px; }
+.tag-list li a:hover,
+.tag-list li a:focus        { background: #ED1A33; color: #fff; }
 .blog-author                { margin-top: 32px;}
 .blog-author .author-img    { margin-right: 16px; width: 104px; height: 104px; flex-shrink: 0; -webkit-flex-shrink: 0; background: no-repeat center center / cover; border-radius: 50%; overflow: hidden;}
 .blog-author .author-desc   { max-width: 70%; }
@@ -117,7 +117,7 @@
     .blog-content h2,
     .blog-content h3,
     .blog-content h4                    { font-size: 17px; line-height: 22px; }
-    .tag-list li button                 { padding: 7px 10px; font-size: 12px; line-height: 16px; }
+    .tag-list li a                      { padding: 7px 10px; font-size: 12px; line-height: 16px; }
 /* -------- Comment Section ------- */
     .comments-inner                     { padding-left: 0px; }
     .comment-item                       { margin: 30px 0px; }

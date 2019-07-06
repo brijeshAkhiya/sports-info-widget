@@ -24,8 +24,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let baller of batsmanList,let i = index">
-              <td (click)="cricketService.playerview(baller.id,baller.name)" >
-                  <a [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </a>
+              <td>
+                  <a [routerLink]="['/cricket/player',baller.id, ((baller?.name | split ) | slugify) ]" [ngClass]="{'current-player': i == 0 }">
+                    {{baller.name | split}} 
+                  </a>
               </td>
               <td>{{baller.statistics && baller.statistics.runs ? baller.statistics.runs : 0}}</td>
               <td>{{baller.statistics && baller.statistics.balls_faced ? baller.statistics.balls_faced : 0}}</td>
@@ -52,8 +54,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let baller of ballerList,let i = index">
-              <td (click)="cricketService.playerview(baller.id,baller.name)" > 
-                <a [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </a>
+              <td> 
+                <a [routerLink]="['/cricket/player',baller.id, ((baller?.name | split ) | slugify) ]" [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </a>
               </td>
               <td>{{baller.statistics && baller.statistics.overs_bowled ? baller.statistics.overs_bowled : 0}}</td>
               <td>{{baller.statistics && baller.statistics.maidens ? baller.statistics.maidens : 0}}</td>

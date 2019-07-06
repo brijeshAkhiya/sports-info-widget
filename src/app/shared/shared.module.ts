@@ -35,10 +35,7 @@ import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-
 import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
 
 import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
-import { CommonNewsListComponent } from './common-news-list/common-news-list.component';
 import { PointstableWidgetComponent } from './cricket/pointstable-widget/pointstable-widget.component';
-import { CommonRelatedBlogCardComponent } from './common-related-blog-card/common-related-blog-card.component';
-import { DataLoaderWidgetComponent } from './data-loader-widget/data-loader-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { ContentComponent } from './widget/content/content.component';
 import { SportsHomeComponent } from './sports-home/sports-home.component';
@@ -52,6 +49,8 @@ import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget
 import { FilterPipe } from './pipes/filter.pipe';
 import { StringUnder } from './pipes/underlinepipe';
 import { TeamCardComponent } from './widget/team-card/team-card.component';
+import { LoaderComponent } from './widget/loader/loader.component';
+import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.component';
 
 
 @NgModule({
@@ -83,12 +82,9 @@ import { TeamCardComponent } from './widget/team-card/team-card.component';
 
         /** All Componenets */
         CommonStoryWidgetComponent, 
-        CommonNewsListComponent, 
         PointstableWidgetComponent,
-        CommonRelatedBlogCardComponent, 
         CustomAdsWidgetComponent, 
         NoDataWidgetComponent, 
-        DataLoaderWidgetComponent, 
         FlashCommentaryComponent, 
         ContentComponent, 
         SportsHomeComponent, 
@@ -99,6 +95,8 @@ import { TeamCardComponent } from './widget/team-card/team-card.component';
         ScheduleComponent, SearchComponent,
         FavouritesWidgetComponent,
         TeamCardComponent,
+        LoaderComponent,
+        SidebarLinksComponent,
     ],
     providers: [
         /** All Pipes */
@@ -139,12 +137,9 @@ import { TeamCardComponent } from './widget/team-card/team-card.component';
 
         /** All Componenets */
         CommonStoryWidgetComponent,
-        CommonNewsListComponent,
         PointstableWidgetComponent,
-        CommonRelatedBlogCardComponent,
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,
-        DataLoaderWidgetComponent,
         FlashCommentaryComponent,
         ContentComponent,
         SportsHomeComponent,
@@ -155,7 +150,9 @@ import { TeamCardComponent } from './widget/team-card/team-card.component';
         ScheduleComponent,
         SearchComponent,
         FavouritesWidgetComponent,
-        TeamCardComponent
+        TeamCardComponent,
+        LoaderComponent,
+        SidebarLinksComponent
     ],
 
 })

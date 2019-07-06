@@ -3,7 +3,7 @@
       <div class="row sidebar-row">
   
         <div class="content-col">
-          <app-data-loader-widget *ngIf="loading"></app-data-loader-widget>
+          <app-loader *ngIf="loading"></app-loader>
           <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
   
           <div *ngIf="teamProfile"
@@ -16,7 +16,7 @@
             <!-- About Section-->
             <ngb-tab>
               <ng-template ngbTabTitle>About</ng-template>
-              <app-data-loader-widget *ngIf="loading"></app-data-loader-widget>
+              <app-loader *ngIf="loading"></app-loader>
               <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
               <ng-template ngbTabContent>
                 <!-- About Team Section-->
@@ -72,7 +72,7 @@
                 <div (click)="getTeamFixtures()">Fixtures</div>
               </ng-template>
               <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="loadingFixture"></app-data-loader-widget>
+                <app-loader *ngIf="loadingFixture"></app-loader>
                 <app-no-data-widget [message]="'No team fixtures'"
                   *ngIf="!loadingFixture &&  (!matchfixtures || matchfixtures?.length == 0)">
                 </app-no-data-widget>
@@ -86,7 +86,7 @@
                 <div (click)="getTeamResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="loadingResult"></app-data-loader-widget>
+                <app-loader *ngIf="loadingResult"></app-loader>
                 <app-no-data-widget [message]="'No team results'"
                   *ngIf="!loadingResult && (!matchresults || matchresults?.length == 0)">
                 </app-no-data-widget>

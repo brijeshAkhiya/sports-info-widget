@@ -9,8 +9,8 @@
           <ul class="banner-news-list">
             <li *ngFor="let post of banners;let i = index;">
               <a [state]="{ id: post._id }" [routerLink]="[(post.eType |lowercase) , post.sSlug ]"
-                [ngClass]="{'active': i===highlightImage}" (mouseover)="mouseover(i)"
-                (mouseout)="mouseout()">{{post.sTitle}}</a></li>
+                [ngClass]="{'active': i===highlightImage}" (mouseover)="stopHighlightInterval(i)"
+                (mouseout)="initHighlightInterval(i)">{{post.sTitle}}</a></li>
           </ul>
         </div>
       </div>
@@ -63,37 +63,39 @@
     </div>
     <div class="row row-size12">
       <div class="col-lg-9 col-md-8" *ngFor="let video of popularvideos | slice:0:1">
-        <div class="main-popular-video common-zoom-container common-full-img fullblock-link-container">
+        <div class="main-popular-video common-zoom-container common-full-img">
           <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
             [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['m']">
           </div>
-          <a class="play-btn"><img src="/assets/images/play-btn.svg" alt="play"></a>
+          <a class="play-btn" [routerLink]="[(video.eType |lowercase), video.sSlug ]"><img src="/assets/images/play-btn.svg" alt="play"></a>
           <div class="video-desc">
-            <h2 class="white-text" [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</h2>
+            <h2 class="white-text">
+                <a [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</a>
+            </h2>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
-                <a (click)="commonService.writerview(video?.iId?._id)">{{video.iId.sFirstName}}
+                <a [routerLink]="['/writer',video?.iId?._id]">{{video.iId.sFirstName}}
                   {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
               </p>
               <p class="view white-view">{{video.nViewCounts}}</p>
             </div>
           </div>
-          <a class="fullblock-link" [routerLink]="[(video.eType |lowercase), video.sSlug ]"></a>
+          <!-- <a class="fullblock-link" [routerLink]="[(video.eType |lowercase), video.sSlug ]"></a> -->
         </div>
       </div>
-      <div class="col-lg-3 col-md-4" *ngIf="popularvideos.length > 1">
+      <div class="col-lg-3 col-md-4">
         <ng-scrollbar class="custom-scrollbar">
           <div class="home-popular-vid-list">
-            <div class="video-item" *ngFor="let video of popularvideos"
-              (click)="commonService.blogview(video._id,video.eType,video.sTitle)">
+            <div class="video-item fullblock-link-container" *ngFor="let video of popularvideos">
               <div class="video-img common-overlay common-zoom-container common-full-img">
                 <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
                   [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['s']">
                 </div>
-                <p class="bold-text white-text" (click)="commonService.blogview(video._id,video.eType,video.sTitle)">
+                <p class="bold-text white-text">
                   {{video.sTitle | truncate:[60,'...'] }}
                 </p>
               </div>
+              <a class="fullblock-link" [routerLink]="[(video.eType |lowercase), video.sSlug ]"></a>
             </div>
           </div>
         </ng-scrollbar>
@@ -112,15 +114,8 @@
         <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4}}">
         </app-sports-home>
       </div>
-      <div class="sidebar-col" *ngIf="recentPosts.length > 0">
-        <div class="common-stories-widget common-shadow rounded-box">
-          <h5>Recommended Stories</h5>
-          <ul class="common-list">
-            <li *ngFor="let post of recentPosts | slice:4:9"><a [state]="{ id: post._id }"
-                [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle | truncate:[60,'...']}}</a>
-            </li>
-          </ul>
-        </div>
+      <div class="sidebar-col" >
+        <app-sidebar-links [sport]="'home'" [link_type]="'blogs'" [options]="{reqParams :{nStart:0, nLimit:5}, type: 'recent', title:'Recommended Stories'}"></app-sidebar-links>
         <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
       </div>
     </div>

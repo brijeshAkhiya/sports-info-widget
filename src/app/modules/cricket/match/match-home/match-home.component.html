@@ -1,9 +1,9 @@
-<!-- <app-data-loader-widget *ngIf="isshow"></app-data-loader-widget> -->
+<!-- <app-loader *ngIf="isshow"></app-loader> -->
 <section class="common-section cricket-recentnews recentnews-section" *ngIf="!isshow">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget>
+        <app-loader *ngIf="!matchdata"></app-loader>
         <!-- START - ABOUT MATCH-->
         <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision">
         </app-match-about>
@@ -14,7 +14,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-data-loader-widget *ngIf="!matchdata"></app-data-loader-widget> -->
+              <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
                 [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"
                 [showCommetry]="showCommetry">
@@ -54,7 +54,7 @@
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <ng-container *ngIf="typeOf(batting.statistics.length) !== 'number'">
                                 <td>
-                                  <a (click)="cricketService.playerview(batting.id,batting.name)"
+                                  <a [routerLink]="['/cricket/player', batting?.id, ((batting?.name | split ) | slugify) ]"
                                     [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">
                                     {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}
                                   </a>
@@ -163,8 +163,9 @@
                       <ul class="fall-wicket-list" *ngIf="fallofWickets.length > 0">
                         <li *ngFor="let item of fallofWickets[item.number]">
                           <p class="fall-wicket">{{item.displayscore}}</p>
-                          <p class="title"><a
-                              (click)="cricketService.playerview(item.playerid,item.playername)">{{item.playername | split}}</a>
+                          <p class="title">
+                            <a
+                              [routerLink]="['/cricket/player', item.playerid, ((item.playername | split ) | slugify) ]">{{item.playername | split}}</a>
                           </p>
                           <p>{{item.displayover}} OV</p>
                         </li>
@@ -190,7 +191,7 @@
                           <tbody>
                             <tr *ngFor="let bowling of item?.teams[1]?.statistics?.bowling?.players">
                               <td><a
-                                  (click)="cricketService.playerview(bowling.id,bowling.name)">{{bowling?.name | split}}</a>
+                                  [routerLink]="['/cricket/player', bowling.id, ((bowling.name | split ) | slugify) ]">{{bowling?.name | split}}</a>
                               </td>
                               <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '0'}}</td>
                               <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '0'}}</td>
@@ -313,8 +314,8 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
-              </app-common-news-list>
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              </app-blog-list>
             </ng-template>
           </ngb-tab>
           <!--END - NEWS TAB-->
@@ -323,7 +324,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Upcoming</ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="!nextmatches"></app-data-loader-widget>
+              <app-loader *ngIf="!nextmatches"></app-loader>
               <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
               <app-schedule [data]="nextmatches" [type]="'fixture'" [sport]="'cricket'"></app-schedule>
             </ng-template>

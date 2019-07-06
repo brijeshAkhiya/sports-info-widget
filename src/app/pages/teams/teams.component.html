@@ -5,7 +5,7 @@
           <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
             <h1>Teams</h1>
           </div>
-          <app-data-loader-widget *ngIf="!teams"></app-data-loader-widget>
+          <app-loader *ngIf="!teams"></app-loader>
           <app-no-data-widget *ngIf="teams?.length == 0"></app-no-data-widget>
 
           <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>

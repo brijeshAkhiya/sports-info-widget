@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
-import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
-import { SplitPipe } from '@app/shared/pipes/stringsplitpipe';
 
 @Component({
   selector: 'app-blog-view',
@@ -14,9 +12,11 @@ import { SplitPipe } from '@app/shared/pipes/stringsplitpipe';
 })
 export class BlogViewComponent implements OnInit {
 
+  isLoadMoreComments:boolean = true;
   blogdata: any;
   previewtype: any;
   blogcomments = [];
+  commentsParam:any = { nStart: 0, nLimit: 4}
   usercommentvalue = ''
   isloggedin: boolean = true;
   isplay: boolean = false
@@ -29,8 +29,6 @@ export class BlogViewComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
-    private slugifypipe: SlugifyPipe,
-    private splitpipe: SplitPipe,
     public commonService: CommonService
   ) {
     /**To reload router if routing in same page */
@@ -54,19 +52,25 @@ export class BlogViewComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    // for load social media widgets
+    /** for load social media widgets */ 
     let ngJs: any;
     const ngFjs = document.getElementsByTagName('script')[0];
     const ngP = 'https';
+    // Twitter
     ngJs = document.createElement('script');
     ngJs.id = 'twitter-wjs';
     ngJs.src = ngP + '://platform.twitter.com/widgets.js';
     ngFjs.parentNode.insertBefore(ngJs, ngFjs);
 
+    // Instagram
     ngJs = document.createElement('script');
     ngJs.src = ngP + '://platform.instagram.com/en_US/embeds.js';
     ngFjs.parentNode.insertBefore(ngJs, ngFjs);
 
+    // Facebook
+    ngJs = document.createElement('script');
+    ngJs.src = ngP + '://connect.facebook.net/nl_NL/sdk.js#xfbml=1&amp;version=v3.3';
+    ngFjs.parentNode.insertBefore(ngJs, ngFjs);
   }
 
 
@@ -152,20 +156,20 @@ export class BlogViewComponent implements OnInit {
 
 
   initBlogParams(id) {
-    return {
-      iPostId: id,
-      nStart: this.blogcomments.length,
-      nLimit: 4
-    }
+    this.commentsParam.iPostId = id;
+    this.commentsParam.nStart = this.blogcomments.length;
+    return this.commentsParam;
   }
 
   viewmorecomments() {
 
     this.sportsService.getblogcommnets(this.initBlogParams(this.blogdata._id)).subscribe((res: any) => {
-      if (res.data) {
-        if (res.data.length == 0)
-          this.hideBtn = true;
+      if(res.data && res.data.length > 0){
         this.blogcomments = this.blogcomments.concat(res.data)
+        if(this.commentsParam.nLimit > res.data.length  )
+          this.isLoadMoreComments = false;
+      }else{
+        this.isLoadMoreComments = false;
       }
     });
     //  this.getBlogComments(this.blogdata._id,this.initBlogParams(this.blogdata._id))
@@ -188,40 +192,14 @@ export class BlogViewComponent implements OnInit {
   getBlogComments(id, data) {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
-        if (res.data) {
-          if (res.data.length == 0) {
-            this.hideBtn = true;
-          }
-          else {
-            this.hideBtn = false
-          }
+        if(res.data && res.data.length > 0){
           this.blogcomments = res.data
+          if(this.commentsParam.nLimit > res.data.length  )
+            this.isLoadMoreComments = false;
+        }else{
+          this.isLoadMoreComments = false;
         }
       });
-    }
-  }
-
-  //writer view 
-  writerview(id) {
-    this.router.navigate(['/writer', btoa(id)])
-  }
-
-  //tags view 
-  tagview(id, type, title) {
-    let slugname = this.slugifypipe.transform(title);
-    if (type == 'Player') {
-      let playername = this.splitpipe.transform(title);
-      let playerslug = this.slugifypipe.transform(playername)
-      this.router.navigate(['/cricket/player', btoa(id), playerslug])
-    }
-    else if (type == 'Tournament') {
-      this.router.navigate(['/cricket/tournament', btoa(id), slugname]);
-    }
-    else if (type == 'Team') {
-      this.router.navigate(['/cricket/team', btoa(id), slugname])
-    }
-    else if (type == 'Match') {
-      this.router.navigate(['/cricket/match/', btoa(id), slugname])
     }
   }
 

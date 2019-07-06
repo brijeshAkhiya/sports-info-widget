@@ -1,0 +1,22 @@
+<div class="common-stories-widget common-shadow rounded-box" *ngIf="data && data.length > 0">
+  <h5>{{options.title}}</h5>
+  <ul class="common-list">
+    <li *ngFor="let item of data | slice:0:5">
+      <a *ngIf="link_type == 'blogs'" [state]="{ id: item._id }"
+        [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle | truncate:[60,'...']}}
+      </a>
+      <a *ngIf="link_type == 'tournament'" [state]="{ id: (item.id ? item.id : item.tournament_id) }"
+        [routerLink]="['/cricket/tournament', (item.id ? item.id : item.tournament_id), (item.name | slugify)] ">{{ item.name | split }}
+      </a>
+
+      <a *ngIf="link_type != 'blogs' && link_type != 'tournament'" [routerLink]=" item.type == 'Team' ? 
+      ['/cricket/team',item._id,(item.name | slugify)] 
+      : item.type == 'Player' 
+      ? ['/cricket/player',item._id, ((item.name | split) | slugify)] 
+      : item.type == 'Tournament' ? ['/cricket/tournament',item._id ,(item.name | slugify)] 
+      : ''">
+        {{ item.name | split }}
+      </a>
+    </li>
+  </ul>
+</div>

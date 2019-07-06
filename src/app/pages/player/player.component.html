@@ -4,7 +4,7 @@
 
       <div class="content-col">
 
-        <app-data-loader-widget *ngIf="loading"></app-data-loader-widget>
+        <app-loader *ngIf="loading"></app-loader>
         <app-no-data-widget *ngIf="!loading && (!playerData?.player)"></app-no-data-widget>
 
         <div *ngIf="playerData"
