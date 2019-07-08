@@ -19,12 +19,14 @@
 /* -------- Popular Video Section ------- */
 .popular-video-section                                  { background: #060332; position: relative; overflow: hidden; }
 .home-video-title                                       { margin-bottom: 32px;}
-.main-popular-video                                     { height: 550px; position: relative; cursor: pointer; border-radius: 4px;}
+.main-popular-video                                     { height: 550px; position: relative; border-radius: 4px;}
+.main-popular-video h2 a:hover                          { color: #fff; }
 .main-popular-video .video-desc                         { padding: 24px; position: absolute; width: 100%; bottom: 0px; }
-.main-popular-video:before,
-.main-popular-video:after                               { content: ""; position: absolute; display: block; width: 190px; height: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  background: url(assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
-.main-popular-video:before                              { opacity: 0; background-image: url(assets/images/play-btn-anim.png); }
-.main-popular-video:hover:before                        { opacity: 1; }
+/* .main-popular-video:before,
+.main-popular-video .play-btn, */
+.main-popular-video .play-btn                           { position: absolute; display: block; width: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  background: url(assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
+.main-popular-video .play-btn:before                    { content: ""; opacity: 0; display: block; position: absolute; width: 100%; height: 100%;; background: url(assets/images/play-btn-anim.png) no-repeat center center / cover;; }
+.main-popular-video:hover .play-btn:before              { opacity: 1; }
 .main-popular-video .author-info p,
 .main-popular-video .author-info p.author a             { color: #fff;}
 .home-popular-vid-list                                  { padding-right: 16px; height: 550px; }
@@ -82,7 +84,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { height: 360px; }
     .main-popular-video:before,
-    .main-popular-video:after               { width: 120px; height: 120px; }
+    .main-popular-video .play-btn           { width: 120px; }
     .home-popular-vid-list                  { padding-right: 20px; height: 360px; }
     .home-popular-vid-list .video-img       { height: 120px; }
     .popular-video-section .pattern-left    { left: -20%; top: -37%; }
@@ -98,7 +100,7 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 /* -------- Popular Video Section ------- */
     .main-popular-video                     { margin-bottom: 24px; height: 300px; }
     .main-popular-video:before,
-    .main-popular-video:after               { width: 100px; height: 100px;}
+    .main-popular-video .play-btn           { width: 100px; }
     .home-popular-vid-list                  { padding: 0px; height: initial; display: flex;}
     .home-popular-vid-list .video-item      { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
     /* .home-popular-vid-list                  { padding: 0px 12%; height: 360px; } */

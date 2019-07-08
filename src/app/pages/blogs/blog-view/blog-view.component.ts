@@ -135,6 +135,9 @@ export class BlogViewComponent implements OnInit {
       if (localStorage.getItem('userT')) {
         this.isloggedin = true
         this.isNocomment = true
+        setTimeout(() => {
+          this.isNocomment = false
+        },3000);
       }
       else {
         this.isloggedin = false

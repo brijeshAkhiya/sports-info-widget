@@ -27,26 +27,26 @@ export class TeamComponent implements OnInit {
     private sportsService: SportsService,
     public cricketService: CricketService,
     public commonService: CommonService
-    ) {  }
+  ) { }
 
   ngOnInit() {
-   
-    let data:any = this.activatedRoute.data;
+
+    let data: any = this.activatedRoute.data;
     this.sport = data.value.sport;
     this.routeParams = this.activatedRoute.snapshot.params
-    this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, aIds: [ this.routeParams.teamid] }, sport : this.sport }
-    if(this.routeParams.tournamentid)
-      this.getTournamentTeamProfile( this.routeParams.teamid,  this.routeParams.tournamentid)
+    this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, sport: this.sport }
+    if (this.routeParams.tournamentid)
+      this.getTournamentTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'), this.commonService.getIds(this.routeParams.tournamentid, 'cricket', 'tournament'))
     else
-      this.getTeamProfile( this.routeParams.teamid);
+      this.getTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'));
   }
 
   getTeamProfile(teamid) {
     this.loading = true;
     if (teamid) {
-      this.sportsService.getteamprofileview(teamid).subscribe((res:any) => {
+      this.sportsService.getteamprofileview(teamid).subscribe((res: any) => {
         this.loading = false;
-        if (res.data) 
+        if (res.data)
           this.teamProfile = res.data
       }, (error) => {
         this.loading = false;
@@ -57,9 +57,9 @@ export class TeamComponent implements OnInit {
   getTournamentTeamProfile(teamid, tournamentid) {
     this.loading = true;
     if (teamid && tournamentid) {
-      this.sportsService.getteamprofile(tournamentid, teamid).subscribe((res:any) => {
+      this.sportsService.getteamprofile(tournamentid, teamid).subscribe((res: any) => {
         this.loading = false;
-        if (res.data) 
+        if (res.data)
           this.teamProfile = res.data
       }, (error) => {
         this.loading = false;
@@ -69,34 +69,34 @@ export class TeamComponent implements OnInit {
 
 
   getTeamResults() {
-    if(this.matchresults && this.matchresults.length > 0 )
+    if (this.matchresults && this.matchresults.length > 0)
       return false;
 
     this.loadingResult = true;
     this.sportsService
-      .getteamresults( this.routeParams.teamid)
+      .getteamresults(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'))
       .subscribe((res: any) => {
         this.loadingResult = false;
-        if (res.data){
-           this.matchresults =this.cricketService.initCompetitorScore(res.data)
-           this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
+        if (res.data) {
+          this.matchresults = this.cricketService.initCompetitorScore(res.data)
+          this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
         }
       }, (error) => {
         this.loadingResult = false;
       });
   }
-  
-  getTeamFixtures() {
-      if(this.matchfixtures && this.matchfixtures.length > 0 )
-        return false;
 
-      this.loadingFixture = true;
-      this.sportsService.getteamfixtures( this.routeParams.teamid).subscribe((res: any) => {
-        this.loadingFixture = false;
-        if (res.data.schedule)
-          this.matchfixtures = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'asc');
-      }, (error) => {
-        this.loadingFixture = false;
-      });
-    }
+  getTeamFixtures() {
+    if (this.matchfixtures && this.matchfixtures.length > 0)
+      return false;
+
+    this.loadingFixture = true;
+    this.sportsService.getteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')).subscribe((res: any) => {
+      this.loadingFixture = false;
+      if (res.data.schedule)
+        this.matchfixtures = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'asc');
+    }, (error) => {
+      this.loadingFixture = false;
+    });
+  }
 }

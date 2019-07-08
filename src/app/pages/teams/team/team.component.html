@@ -46,7 +46,7 @@
                           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
                         <div class="item-desc">
                           <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
-                          <a [routerLink]="['/cricket/player', player?.id, (player?.name | split)]" class="theme-btn">View Player<span></span></a>
+                          <a [routerLink]="['/cricket/player',(player?.id | splitID), (player?.name | split)]" class="theme-btn">View Player<span></span></a>
                         </div>
                       </div>
                     </div>

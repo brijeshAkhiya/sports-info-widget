@@ -112,7 +112,6 @@ export class CommonService {
   }
 
   getIds(id, sport, type) {
-    return id;
     if (sport == 'cricket') {
       if (type == 'tournament') {
         return 'sr:tournament:' + id
@@ -121,7 +120,7 @@ export class CommonService {
         return 'sr:match:' + id
       }
       else if (type == 'team') {
-        return 'sr:compititor:' + id
+        return 'sr:competitor:' + id
       }
       else if (type == 'player') {
         return 'sr:player:' + id

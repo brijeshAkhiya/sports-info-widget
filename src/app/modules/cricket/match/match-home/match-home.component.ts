@@ -10,7 +10,7 @@ import * as moment from "moment";
   styleUrls: ["./match-home.component.css"]
 })
 export class MatchHomeComponent implements OnInit {
-  paramArticle = { reqParams : { nStart: 0, nLimit: 10, aIds: [] } }
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [] } }
   matchid: any;
   matchstatus: any;
   sportevent: any;
@@ -19,7 +19,7 @@ export class MatchHomeComponent implements OnInit {
   seconds: any;
   team1id: any;
   team2id: any;
-  nextmatches:any[];
+  nextmatches: any[];
   lastmatches = [];
   matchesresultdata: any;
   venuedetails: any;
@@ -77,11 +77,10 @@ export class MatchHomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-
-    this.matchid = this.activatedroute.snapshot.params.id
+    this.matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket', 'match')
     this.paramArticle.reqParams.aIds.push(this.matchid);
     this.activatedroute.params.subscribe(params => {
-      this.matchid = params.id
+      this.matchid = this.commonService.getIds(params.id, 'cricket', 'match')
       if (this.matchid) {
         // this.getMatchTimeline();
         this.getMatchData();
@@ -205,7 +204,7 @@ export class MatchHomeComponent implements OnInit {
   getFallWickets() {
     if (this.matchdata.timeline) {
       let arrWickets = this.matchdata.timeline.filter((timeline) => timeline.type == "wicket")
-     
+
       if (arrWickets.length > 0) {
         arrWickets.reverse().map(data => {
           if (!this.fallofWickets[data.inning])
@@ -342,10 +341,10 @@ export class MatchHomeComponent implements OnInit {
       )
       .subscribe((res: any) => {
         if (res.data) {
-          if(res.data.next_meetings && res.data.next_meetings.length > 0)
+          if (res.data.next_meetings && res.data.next_meetings.length > 0)
             this.nextmatches = this.commonService.sortArr(res.data.next_meetings, 'Do MMMM YYYY', 'scheduled', 'asc');
-         
-          if(res.data.last_meetings && res.data.last_meetings.length > 0){
+
+          if (res.data.last_meetings && res.data.last_meetings.length > 0) {
             let last_meetings = res.data.last_meetings.filter((match) => match.period_scores);
             this.matchesresultdata = this.cricketService.initCompetitorScore(last_meetings)
             this.matchesresultdata = this.commonService.sortArr(this.matchesresultdata, 'Do MMMM YYYY', 'scheduled', 'desc');

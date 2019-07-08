@@ -67,7 +67,9 @@
           <div class="common-zoom-img common-overlay" [defaultImage]="commonService.largeblogPlaceholder"
             [offset]="commonService.lazyloadoffset" [lazyLoad]="video.sImage | resizeImage:['m']">
           </div>
-          <a class="play-btn" [routerLink]="[(video.eType |lowercase), video.sSlug ]"><img src="/assets/images/play-btn.svg" alt="play"></a>
+          <a class="play-btn" [routerLink]="[(video.eType |lowercase), video.sSlug ]">
+            <img src="/assets/images/play-btn.svg" alt="play">
+          </a>
           <div class="video-desc">
             <h2 class="white-text">
                 <a [routerLink]="[(video.eType |lowercase), video.sSlug ]">{{video.sTitle}}</a>

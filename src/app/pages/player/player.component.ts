@@ -31,7 +31,7 @@ export class PlayerComponent implements OnInit {
   ngOnInit() {
     let data:any = this.activatedroute.data;
     this.sport = data.value.sport;
-    this.playerid = this.activatedroute.snapshot.params.id
+    this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket','player')
     this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, aIds: [this.playerid] }, sport : this.sport }
     this.getPlayerInfo();
   }
