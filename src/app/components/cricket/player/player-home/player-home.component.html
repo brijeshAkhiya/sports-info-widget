@@ -6,7 +6,7 @@
           <h1>{{playerbasic?.name | split}}</h1>
           <app-favourites-widget [value]="{id:playerid,type:'player',name:playerbasic?.name | split}"></app-favourites-widget>
         </div>
-        <app-data-loader-widget *ngIf="!playerprofile"></app-data-loader-widget>
+        <app-loader *ngIf="!playerprofile"></app-loader>
         <app-no-data-widget *ngIf="playerprofile?.length == 0"></app-no-data-widget>
         <ngb-tabset class="common-tabs" *ngIf="playerprofile">
           <ngb-tab>
@@ -96,7 +96,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="!playerstats"></app-data-loader-widget>
+              <app-loader *ngIf="!playerstats"></app-loader>
               <app-no-data-widget *ngIf="playerstats?.length == 0 || !playerstats"></app-no-data-widget>
               <div class="common-table player-sate striped-table tour-stats-table common-shadow rounded-box"
                 *ngIf="playerstats">
@@ -184,7 +184,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams"></app-common-news-list>
+              <!-- <app-blog-list [type]="commonnewstype" [reqparams]="commonnewsparams"></app-blog-list> -->
             </ng-template>
           </ngb-tab>
         </ngb-tabset>

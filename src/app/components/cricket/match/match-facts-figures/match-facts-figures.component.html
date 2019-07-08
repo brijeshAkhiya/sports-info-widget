@@ -25,7 +25,7 @@
 <section class="last-meetings-section" *ngIf="teamLastmatch?.length != 0">
   <h4 class="line-title">Last meetings</h4>
   <div class="schedule-list schedule-tour-list">
-    <app-data-loader-widget *ngIf="!teamMatchResult"></app-data-loader-widget>
+    <app-loader *ngIf="!teamMatchResult"></app-loader>
     <app-no-data-widget *ngIf="teamLastmatch?.length == 0"></app-no-data-widget>
     <div class="schedule-list-inner" *ngFor="let item of teamMatchResult">
       <div class="schedule-month d-flex" *ngIf="item.data[0].period_scores">

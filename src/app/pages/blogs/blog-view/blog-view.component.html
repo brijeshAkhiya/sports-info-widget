@@ -43,7 +43,8 @@
             </div>
             <ul class="tag-list">
               <li *ngFor="let item of blogdata?.aTags">
-                <a [routerLink]="(item.type == 'Player') ? ['/cricket/player',item.id, ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',item.id, (item.name | slugify)]  : ['/cricket/team',item.id, (item.name | slugify)])" >
+                <a
+                  [routerLink]="(item.type == 'Player') ? ['/cricket/player',item.id, ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',item.id, (item.name | slugify)]  : ['/cricket/team',item.id, (item.name | slugify)])">
                   {{item?.name | split}}
                 </a>
               </li>
@@ -112,9 +113,10 @@
               </div>
             </div>
             <!-- <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="blogcomments.length > 0">VIEW
-                MORE</button>
-   -->
-            <button class="theme-btn" (click)="viewmorecomments()" *ngIf="isLoadMoreComments">VIEW MORE</button>
+                MORE</button>-->
+            <div class="text-center">
+              <button class="theme-btn down-btn" (click)="viewmorecomments()" *ngIf="isLoadMoreComments">VIEW MORE<span></span></button>
+            </div>
           </div>
         </div>
       </div>

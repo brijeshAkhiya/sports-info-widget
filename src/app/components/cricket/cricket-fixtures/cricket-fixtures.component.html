@@ -10,7 +10,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>International</ng-template>
             <ng-template ngbTabContent>
-              <app-data-loader-widget *ngIf="!internationalresult"></app-data-loader-widget>
+              <app-loader *ngIf="!internationalresult"></app-loader>
               <app-no-data-widget *ngIf="internationalresult?.length == 0"></app-no-data-widget>
               <div class="schedule-list">
                 <div class="schedule-month d-flex" *ngFor="let item of internationalresult">
@@ -40,7 +40,7 @@
             </ng-template>
             <ng-template ngbTabContent>
               <div class="schedule-list">
-                <app-data-loader-widget *ngIf="!domesticresult"></app-data-loader-widget>
+                <app-loader *ngIf="!domesticresult"></app-loader>
                 <app-no-data-widget *ngIf="domesticresult?.length == 0"></app-no-data-widget>
                 <div class="schedule-month d-flex" *ngFor="let item of domesticresult">
                   <div class="month-title">

@@ -16,19 +16,19 @@
             <ngb-tab>
               <ng-template ngbTabTitle>Latest</ng-template>
               <ng-template ngbTabContent>             
-                  <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10 }, 'type':'writer'}"></app-blog-list>
+                  <!-- <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10 }, 'type':'writer'}"></app-blog-list> -->
               </ng-template>
             </ngb-tab>
             <ngb-tab>
               <ng-template ngbTabTitle><div >Most Read</div></ng-template>
               <ng-template ngbTabContent>         
-                <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'MostViewed' }, 'type':'writer'}"></app-blog-list> 
+                <!-- <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'MostViewed' }, 'type':'writer'}"></app-blog-list>  -->
               </ng-template>
             </ngb-tab>
             <ngb-tab>
               <ng-template ngbTabTitle><div >Videos</div></ng-template>
               <ng-template ngbTabContent>             
-                  <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'Videos' }, 'type':'writer'}"></app-blog-list>  
+                  <!-- <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'Videos' }, 'type':'writer'}"></app-blog-list>   -->
               </ng-template>
             </ngb-tab>
           </ngb-tabset>

@@ -5,7 +5,7 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>Standings</h1>
         </div>
-        <app-data-loader-widget *ngIf="!pointstable"></app-data-loader-widget>
+        <app-loader *ngIf="!pointstable"></app-loader>
         <app-no-data-widget *ngIf="pointstable?.length == 0"></app-no-data-widget>
         <div class="common-table tour-stand-table striped-table common-shadow rounded-box" *ngIf="pointstable">
           <div class="table-responsive">
