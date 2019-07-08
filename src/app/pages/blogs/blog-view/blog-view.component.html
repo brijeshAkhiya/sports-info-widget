@@ -44,7 +44,7 @@
             <ul class="tag-list">
               <li *ngFor="let item of blogdata?.aTags">
                 <a
-                  [routerLink]="(item.type == 'Player') ? ['/cricket/player',item.id, ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',item.id, (item.name | slugify)]  : ['/cricket/team',item.id, (item.name | slugify)])">
+                  [routerLink]="(item.type == 'Player') ? ['/cricket/player',(item.id | splitID), ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',(item.id | splitID), (item.name | slugify)]  : ['/cricket/team',(item.id | splitID), (item.name | slugify)])">
                   {{item?.name | split}}
                 </a>
               </li>
