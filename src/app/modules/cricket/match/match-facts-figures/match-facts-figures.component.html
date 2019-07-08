@@ -13,7 +13,9 @@
         <img class="team-flag" [lazyLoad]="comp2.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
       </div>
     </div>
-    <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage"></div>
+    <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage">
+      <div class="probability-fill"></div>
+    </div>
   </div>
   <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
     No probability data available for this match!
