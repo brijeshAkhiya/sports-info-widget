@@ -1,40 +1,31 @@
 <section class="common-section cricket-recentnews recentnews-section">
-    <div class="container">
-      <div class="row sidebar-row">
-        <div class="content-col">
-          <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-            <h1>Teams</h1>
-          </div>
-          <app-loader *ngIf="!teams"></app-loader>
-          <app-no-data-widget *ngIf="teams?.length == 0"></app-no-data-widget>
-
-          <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
-          <!-- <div class="team-list" *ngIf="teams">
-            <div class="row row-size12">
-              <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let team of teams">
-                <div class="team-item rounded-box common-shadow d-flex fullblock-link-container">
-                  <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
-                      [defaultImage]="cricketService.flagplaceholder" alt="team-flag"></div>
-                  <div class="team-name">
-                    <h4>{{team.name}}</h4>
-                    <h5>{{team.abbreviation}}</h5>
-                  </div>
-                  <a class="fullblock-link" [routerLink]="['/cricket/team',team.id,(team.name | slugify)]">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
+          <h1>Teams</h1>
         </div>
-        <div class="sidebar-col">
-          <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-            <!--Current series widget-->
-            <app-common-story-widget [title]="paramsWidget?.title" [type]="paramsWidget?.type"></app-common-story-widget>
+        <app-loader *ngIf="!teams"></app-loader>
+        <app-no-data-widget *ngIf="teams?.length == 0"></app-no-data-widget>
+        <div class="team-group-list">
+          <div class="team-group common-section top-padding">
+            <h4>Group A</h4>
+            <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
+          </div>
+          <div class="team-group common-section top-padding">
+            <h4>Group B</h4>
+            <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
           </div>
         </div>
       </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!--Current series widget-->
+          <app-common-story-widget [title]="paramsWidget?.title" [type]="paramsWidget?.type"></app-common-story-widget>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
