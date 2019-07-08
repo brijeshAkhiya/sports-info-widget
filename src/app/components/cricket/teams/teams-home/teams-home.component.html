@@ -8,11 +8,11 @@
           <!-- <button class="add-to-fav-btn added"><span>Add to favorites</span></button> -->
           <app-favourites-widget [value]="{id:teamid,type:'team',name:teamprofiledata?.name}"></app-favourites-widget>
         </div>
-        <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
+        <app-loader *ngIf="!teamprofiledata"></app-loader>
         <ngb-tabset class="common-tabs" *ngIf="teamprofiledata">
           <ngb-tab>
             <ng-template ngbTabTitle>About</ng-template>
-            <app-data-loader-widget *ngIf="!teamprofiledata"></app-data-loader-widget>
+            <app-loader *ngIf="!teamprofiledata"></app-loader>
             <app-no-data-widget *ngIf="teamprofiledata?.length == 0"></app-no-data-widget>
             <ng-template ngbTabContent>
               <section class="team-about-head d-flex">
@@ -35,7 +35,7 @@
               </section>
               <section class="common-section squad-list" *ngIf="teamprofiledata?.players">
                 <h4>Squad</h4>
-                <app-data-loader-widget *ngIf="!teamprofiledata?.players"></app-data-loader-widget>
+                <app-loader *ngIf="!teamprofiledata?.players"></app-loader>
                 <div class="row row-size12">
                   <div class="col-xl-3 col-sm-4" *ngFor="let player of teamprofiledata?.players">
                     <div class="squad-item rounded-box common-shadow" (click)="playerview(player.id,player.name)">
@@ -57,15 +57,13 @@
               <div (click)="getarticles()">News</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-common-news-list [type]="commonnewstype" [reqparams]="commonnewsparams" *ngIf="commonnewsparams">
-              </app-common-news-list>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div (click)="getTeamFixtures()">Fixtures</div>
             </ng-template>
-            <app-data-loader-widget *ngIf="!fixturesdata || noteamfixtures"></app-data-loader-widget>
+            <app-loader *ngIf="!fixturesdata || noteamfixtures"></app-loader>
             <app-no-data-widget *ngIf="fixturesdata?.length == 0"></app-no-data-widget>
             <!-- <div *ngIf="noteamfixtures || !fixturesdata">No data available!</div> -->
             <ng-template ngbTabContent *ngIf="!noteamfixtures">

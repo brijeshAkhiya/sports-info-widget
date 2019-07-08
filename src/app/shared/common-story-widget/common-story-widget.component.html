@@ -3,10 +3,10 @@
   <ul class="common-list">
     <li *ngFor="let item of dataitems | slice:0:5"><a 
       [routerLink]=" item.type == 'Team' ? 
-          ['/cricket/team',item._id,(item.name | slugify)] 
+          ['/cricket/team', (item.id ? item.id : item._id) ,(item.name | slugify)] 
           : item.type == 'Player' 
-          ? ['/cricket/player',item._id, ((item.name | split) | slugify)] 
-          : item.type == 'Tournament' ? ['/cricket/tournament',item._id ,(item.name | slugify)] 
-          : ''">{{ item.name | split }}</a></li>
+          ? ['/cricket/player', (item.id ? item.id : item._id), ((item.name | split) | slugify)] 
+          : item.type == 'Tournament' ? ['/cricket/tournament', (item.id ? item.id : item._id) ,(item.name | slugify)] 
+          : ''">{{ item.name | split }}ddd</a></li>
   </ul>
 </div>

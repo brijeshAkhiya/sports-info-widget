@@ -15,7 +15,7 @@ export class TeamsComponent implements OnInit {
   sport;
   tournamentid;
   teams;
-  paramsWidget = {}
+  paramsWidget:any = {}
 
   constructor(
     private activatedRoute: ActivatedRoute,

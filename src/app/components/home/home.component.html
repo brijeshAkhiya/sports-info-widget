@@ -58,7 +58,7 @@
             <ngb-tab title="Fixtures">
               <ng-template ngbTabContent>
                 <ul class="common-list cricket-list">
-                  <app-data-loader-widget *ngIf="!matchfixtures || nofixturesdata"></app-data-loader-widget>
+                  <app-loader *ngIf="!matchfixtures || nofixturesdata"></app-loader>
                   <app-no-data-widget *ngIf="matchfixtures?.length == 0 || nofixturesdata"></app-no-data-widget>
                   <li *ngFor="let item of matchfixtures | slice:0:4"
                     (click)="matchDetail(item.match_id,item.competitors[0].name,item.competitors[1].name)">
@@ -93,7 +93,7 @@
                 <div (click)="getMatchResults()">Results</div>
               </ng-template>
               <ng-template ngbTabContent>
-                <app-data-loader-widget *ngIf="loader"></app-data-loader-widget>
+                <app-loader *ngIf="loader"></app-loader>
                 <app-no-data-widget *ngIf="isnodata"></app-no-data-widget>
                 <ul class="common-list cricket-list">
                   <li *ngFor="let result of matchresults | slice:0:4"
@@ -264,8 +264,8 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-common-news-list [reqparams]="commonnewsparams" [type]="'homelatest'" *ngIf="commonnewsparams">
-        </app-common-news-list>
+        <!-- <app-blog-list [reqparams]="commonnewsparams" [type]="'homelatest'" *ngIf="commonnewsparams">
+        </app-blog-list> -->
       </div>
       <div class="sidebar-col">
         <div class="common-stories-widget common-shadow rounded-box">
