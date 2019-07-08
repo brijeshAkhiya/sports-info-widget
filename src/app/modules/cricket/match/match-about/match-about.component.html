@@ -19,7 +19,7 @@
   </h1> -->
   <div class="tour-match-title show-anim">
     <p class="light-text">
-      <a [routerLink]="['/cricket/tournament', data.sport_event.tournament.id, (data.sport_event.tournament.name | slugify) ]">
+      <a [routerLink]="['/cricket/tournament', (data.sport_event.tournament.id | splitID), (data.sport_event.tournament.name | slugify) ]">
       {{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}
       </a></p>
     <h1 *ngIf="data.sport_event.competitors">
