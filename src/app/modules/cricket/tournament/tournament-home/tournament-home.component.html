@@ -14,7 +14,7 @@
             <h5>Teams</h5>
             <ul class="common-list">
               <li *ngFor="let item of teamsname | slice:0:5"><a
-                  [routerLink]="['/cricket/team', tournamentid ,item.id,(item.name | slugify)]">
+                  [routerLink]="['/cricket/team', (tournamentid | splitID) ,(item.id | splitID),(item.name | slugify)]">
                   {{item.name}}</a>
               </li>
             </ul>
@@ -36,7 +36,7 @@
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
                           <p class="name">
-                            <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                            <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                               {{item.player.name | split}}
                             </a>
                           </p>
@@ -54,7 +54,7 @@
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
                         <p class="name">
-                          <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                          <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                             {{item.player.name | split}}
                           </a></p>
                         <p class="team">{{item.team.abbreviation}}</p>
@@ -80,7 +80,7 @@
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
                           <p class="name">
-                              <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                              <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                                 {{item.player.name | split}}
                               </a></p>
                           <p class="team">{{item.team.abbreviation}}</p>
@@ -96,7 +96,7 @@
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
                         <p class="name">
-                            <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                            <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                               {{item.player.name | split}}
                             </a></p>
                         <p class="team">{{item.team.abbreviation}}</p>

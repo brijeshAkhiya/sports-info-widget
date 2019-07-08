@@ -27,7 +27,7 @@
                 <ngb-tab>
                   <ng-template ngbTabTitle>Runs</ng-template>
                   <ng-template ngbTabContent>
-                    <app-player-table *ngIf="stats?.batting?.top_runs" [data]="stats?.batting?.top_runs" [options]=" {
+                    <app-player-table *ngIf="stats?.batting?.top_runs" [data]="stats?.batting?.top_runs" [options]="{
                           titles : ['POS', 'player', 'Runs'],
                           values : ['rank', 'image', 'total'],
                           class : ['tour-stats-table'],
@@ -89,7 +89,7 @@
                   <ng-template ngbTabTitle>Economy</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_economy" [data]="stats?.bowling?.top_economy"
-                      [options]=" {
+                      [options]="{
                           titles : ['POS', 'player', 'Economy Rate'],
                           values : ['rank', 'image', 'rate'],
                           class : ['tour-stats-table'],
