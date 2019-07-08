@@ -5,15 +5,15 @@
       <a *ngIf="link_type == 'blogs'" [state]="{ id: item._id }"
         [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle | truncate:[60,'...']}}
       </a>
-      <a *ngIf="link_type == 'tournament'" [state]="{ id: item.id }"
-        [routerLink]="['/cricket/tournament', item.id, (item.name | slugify)] ">{{ item.name | split }}
+      <a *ngIf="link_type == 'tournament'" [state]="{ id: (item.id ? item.id : item.tournament_id) }"
+        [routerLink]="['/cricket/tournament', (item.id ? (item.id | splitID) : (item.tournament_id | splitID)), (item.name | slugify)] ">{{ item.name | split }}
       </a>
 
       <a *ngIf="link_type != 'blogs' && link_type != 'tournament'" [routerLink]=" item.type == 'Team' ? 
-      ['/cricket/team',item.id,(item.name | slugify)] 
+      ['/cricket/team',(item._id | splitID),(item.name | slugify)] 
       : item.type == 'Player' 
-      ? ['/cricket/player',item.id, ((item.name | split) | slugify)] 
-      : item.type == 'Tournament' ? ['/cricket/tournament',item.id ,(item.name | slugify)] 
+      ? ['/cricket/player',(item._id | splitID), ((item.name | split) | slugify)] 
+      : item.type == 'Tournament' ? ['/cricket/tournament',(item._id | splitID) ,(item.name | slugify)] 
       : ''">
         {{ item.name | split }}
       </a>

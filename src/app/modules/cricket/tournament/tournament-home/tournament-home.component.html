@@ -10,15 +10,6 @@
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--Points table widget-->
           <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
-          <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
-            <h5>Teams</h5>
-            <ul class="common-list">
-              <li *ngFor="let item of teamsname | slice:0:5"><a
-                  [routerLink]="['/cricket/team', tournamentid ,item.id,(item.name | slugify)]">
-                  {{item.name}}</a>
-              </li>
-            </ul>
-          </div>
           <div class="common-widget tab-widget" *ngIf="battingleaders && bowlingleaders">
             <div class="widget-title">
               <h5>Top Scorers</h5>
@@ -36,7 +27,7 @@
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
                           <p class="name">
-                            <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                            <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                               {{item.player.name | split}}
                             </a>
                           </p>
@@ -54,7 +45,7 @@
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
                         <p class="name">
-                          <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                          <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                             {{item.player.name | split}}
                           </a></p>
                         <p class="team">{{item.team.abbreviation}}</p>
@@ -80,7 +71,7 @@
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
                           <p class="name">
-                              <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                              <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                                 {{item.player.name | split}}
                               </a></p>
                           <p class="team">{{item.team.abbreviation}}</p>
@@ -96,7 +87,7 @@
                       <p class="num">{{item.rank}}.</p>
                       <div class="player-names">
                         <p class="name">
-                            <a [routerLink]="['/cricket/player',item.player.id,(item.player.name | split | slugify)]">
+                            <a [routerLink]="['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
                               {{item.player.name | split}}
                             </a></p>
                         <p class="team">{{item.team.abbreviation}}</p>
@@ -112,6 +103,15 @@
               </ngb-tab>
             </ngb-tabset>
           </div>
+          <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
+              <h5>Teams</h5>
+              <ul class="common-list">
+                <li *ngFor="let item of teamsname | slice:0:5"><a
+                    [routerLink]="['/cricket/team', (tournamentid | splitID) ,(item.id | splitID),(item.name | slugify)]">
+                    {{item.name}}</a>
+                </li>
+              </ul>
+            </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
         </div>
       </div>

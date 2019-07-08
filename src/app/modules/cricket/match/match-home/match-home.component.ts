@@ -77,11 +77,10 @@ export class MatchHomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-
-    this.matchid = this.activatedroute.snapshot.params.id
+    this.matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket', 'match')
     this.paramArticle.reqParams.aIds.push(this.matchid);
     this.activatedroute.params.subscribe(params => {
-      this.matchid = params.id
+      this.matchid = this.commonService.getIds(params.id, 'cricket', 'match')
       if (this.matchid) {
         // this.getMatchTimeline();
         this.getMatchData();

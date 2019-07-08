@@ -54,13 +54,15 @@
                     </div> -->
                 </div>
               </section>
-              <section class="common-section quick-stats" *ngIf="stats">
+              <section class="common-section top-padding quick-stats" *ngIf="stats">
                 <h4>Quick Stats</h4>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
                 </ng-container>
               </section>
-              <h4>Major Teams</h4>
-              <app-team-card [teams]="playerData?.teams"></app-team-card>
+              <section class="common-section top-padding" *ngIf="stats">
+                <h4>Major Teams</h4>
+                <app-team-card [teams]="playerData?.teams"></app-team-card>
+              </section>
             </ng-template>
           </ngb-tab>
 
@@ -68,7 +70,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
-              <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]=" {
+              <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]="{
                     titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
                     values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
                     subParams : 'batting',
@@ -101,13 +103,13 @@
         </ngb-tabset>
       </div>
       <div class="sidebar-col">
-          <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-            <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="'cricketseries'"
-             ></app-common-story-widget>
-          </div>
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="'cricketseries'">
+          </app-common-story-widget>
         </div>
+      </div>
     </div>
   </div>
 </section>

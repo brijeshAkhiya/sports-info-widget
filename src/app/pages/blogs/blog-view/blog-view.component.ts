@@ -12,11 +12,11 @@ import { CommonService } from '@providers/common-service';
 })
 export class BlogViewComponent implements OnInit {
 
-  isLoadMoreComments:boolean = true;
+  isLoadMoreComments: boolean = true;
   blogdata: any;
   previewtype: any;
   blogcomments = [];
-  commentsParam:any = { nStart: 0, nLimit: 4}
+  commentsParam: any = { nStart: 0, nLimit: 4 }
   usercommentvalue = ''
   isloggedin: boolean = true;
   isplay: boolean = false
@@ -51,7 +51,7 @@ export class BlogViewComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    /** for load social media widgets */ 
+    /** for load social media widgets */
     let ngJs: any;
     const ngFjs = document.getElementsByTagName('script')[0];
     const ngP = 'https';
@@ -126,15 +126,24 @@ export class BlogViewComponent implements OnInit {
       }
       else {
         this.isloggedin = false
+        setTimeout(() => {
+          this.isloggedin = true
+        }, 3000);
       }
     }
     else {
       if (localStorage.getItem('userT')) {
         this.isloggedin = true
         this.isNocomment = true
+        setTimeout(() => {
+          this.isNocomment = false
+        },3000);
       }
       else {
         this.isloggedin = false
+        setTimeout(() => {
+          this.isloggedin = true
+        }, 3000);
       }
     }
 
@@ -164,11 +173,11 @@ export class BlogViewComponent implements OnInit {
   viewmorecomments() {
 
     this.sportsService.getblogcommnets(this.initBlogParams(this.blogdata._id)).subscribe((res: any) => {
-      if(res.data && res.data.length > 0){
+      if (res.data && res.data.length > 0) {
         this.blogcomments = this.blogcomments.concat(res.data)
-        if(this.commentsParam.nLimit > res.data.length  )
+        if (this.commentsParam.nLimit > res.data.length)
           this.isLoadMoreComments = false;
-      }else{
+      } else {
         this.isLoadMoreComments = false;
       }
     });
@@ -193,11 +202,11 @@ export class BlogViewComponent implements OnInit {
   getBlogComments(id, data) {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
-        if(res.data && res.data.length > 0){
+        if (res.data && res.data.length > 0) {
           this.blogcomments = res.data
-          if(this.commentsParam.nLimit > res.data.length  )
+          if (this.commentsParam.nLimit > res.data.length)
             this.isLoadMoreComments = false;
-        }else{
+        } else {
           this.isLoadMoreComments = false;
         }
       });

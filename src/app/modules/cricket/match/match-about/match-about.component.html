@@ -6,7 +6,9 @@
       <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
       <h4>{{competitor.home.name}}</h4>
     </div>
-    <div class="team-anim vs-anim"><h5>VS</h5></div>
+    <div class="team-anim vs-anim">
+      <h5>VS</h5>
+    </div>
     <div class="team-anim">
       <img [lazyLoad]="competitor.away.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
       <h4>{{competitor.away.name}}</h4>
@@ -75,7 +77,7 @@
             <img [lazyLoad]="competitor.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
               [offset]="commonService.lazyloadoffset">
             <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by && (data.sport_event_status.status != 'closed' && data.sport_event_status.status != 'ended') }"
-              [routerLink]="data.sport_event.tournament.id ? ['/cricket/team', data.sport_event.tournament.id ,competitor.id,(competitor.name | slugify)] : ['/cricket/team',competitor.id,(competitor.name | slugify)]">
+              [routerLink]="data.sport_event.tournament.id ? ['/cricket/team', (data.sport_event.tournament.id | splitID) ,(competitor.id | splitID),(competitor.name | slugify)] : ['/cricket/team',(competitor.id | splitID),(competitor.name | slugify)]">
               {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
           </h4>
           <h4 class="score"
@@ -97,7 +99,8 @@
       <div class="player-info">
         <p class="light-text">Player of the Match</p>
         <h5 class="theme-color">
-          <a [routerLink]="['/cricket/player', data.statistics.man_of_the_match[0].id, ((data.statistics.man_of_the_match[0].name | split ) | slugify) ]" >
+          <a
+            [routerLink]="['/cricket/player', (data.statistics.man_of_the_match[0].id | splitID), ((data.statistics.man_of_the_match[0].name | split ) | slugify) ]">
             {{data.statistics.man_of_the_match[0]?.name | split}} </a>
         </h5>
       </div>

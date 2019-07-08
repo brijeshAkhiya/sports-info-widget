@@ -17,73 +17,73 @@ import { TeamComponent } from '@app/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/pages/player/player.component';
 
 const routes: Routes = [
-  {
-      path: '',
-      component: CricketComponent, 
-      children: [
-        {
-            path: '',
-            component: HomeComponent
-        },
-        {
-            path: 'fixtures',
-            component: FixturesComponent
-        },
-        {
-            path:'recent/:type',
-            component: CricketFixturesViewComponent
-        },
-        {
-          path: 'tournament/:id/:slug',
-          component: TournamentComponent,
-          children: [
-              {
-                  path: '',
-                  component: TournamentHomeComponent
-              },
-              {
-                  path: 'fixtures',
-                  component: TournamentFixturesComponent
-              },
-              {
-                  path: 'teams',
-                  component: TeamsComponent,
-                  data: { 'sport':'cricket'}
-              },
-              {
-                  path: 'stats',
-                  component: TournamentStatsComponent
-              },
-              {
-                  path:'standings',
-                  component: TournamentStadingsComponent
-              }
-          ]
-        },
-        {
-            path: 'match/:id/:slug',
-            component: MatchHomeComponent
-        },
-        {
-            path: 'team/:tournamentid/:teamid/:slug',
-            component: TeamComponent,
-            data: { 'sport':'cricket'}
-        },
-        {
-            path: 'team/:teamid/:slug',
-            component: TeamComponent,
-            data: { 'sport':'cricket'}
-        },
-        {
-            path: 'player/:id/:slug',
-            component: PlayerComponent
-        }
-      ]
-  }
+    {
+        path: '',
+        component: CricketComponent,
+        children: [
+            {
+                path: '',
+                component: HomeComponent
+            },
+            {
+                path: 'fixtures',
+                component: FixturesComponent
+            },
+            {
+                path: 'recent/:type',
+                component: CricketFixturesViewComponent
+            },
+            {
+                path: 'tournament/:id/:slug',
+                component: TournamentComponent,
+                children: [
+                    {
+                        path: '',
+                        component: TournamentHomeComponent
+                    },
+                    {
+                        path: 'fixtures',
+                        component: TournamentFixturesComponent
+                    },
+                    {
+                        path: 'teams',
+                        component: TeamsComponent,
+                        data: { 'sport': 'cricket' }
+                    },
+                    {
+                        path: 'stats',
+                        component: TournamentStatsComponent
+                    },
+                    {
+                        path: 'standings',
+                        component: TournamentStadingsComponent
+                    }
+                ]
+            },
+            {
+                path: 'match/:id/:slug',
+                component: MatchHomeComponent
+            },
+            {
+                path: 'team/:tournamentid/:teamid/:slug',
+                component: TeamComponent,
+                data: { 'sport': 'cricket' }
+            },
+            {
+                path: 'team/:teamid/:slug',
+                component: TeamComponent,
+                data: { 'sport': 'cricket' }
+            },
+            {
+                path: 'player/:id/:slug',
+                component: PlayerComponent
+            }
+        ]
+    }
 ]
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class CricketRoutingModule { }

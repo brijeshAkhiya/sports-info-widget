@@ -1,12 +1,11 @@
 <div class="common-stories-widget common-shadow rounded-box" *ngIf="dataitems && dataitems.length > 0">
   <h5>{{title}}</h5>
   <ul class="common-list">
-    <li *ngFor="let item of dataitems | slice:0:5"><a 
-      [routerLink]=" item.type == 'Team' ? 
-          ['/cricket/team', (item.id ? item.id : item._id) ,(item.name | slugify)] 
+    <li *ngFor="let item of dataitems | slice:0:5"><a [routerLink]=" item.type == 'Team' ? 
+          ['/cricket/team', (item.id ? item.id : (item._id | splitID)) ,(item.name | slugify)] 
           : item.type == 'Player' 
-          ? ['/cricket/player', (item.id ? item.id : item._id), ((item.name | split) | slugify)] 
-          : item.type == 'Tournament' ? ['/cricket/tournament', (item.id ? item.id : item._id) ,(item.name | slugify)] 
-          : ''">{{ item.name | split }}ddd</a></li>
+          ? ['/cricket/player', (item.id ? item.id : (item._id | splitID)), ((item.name | split) | slugify)] 
+          : item.type == 'Tournament' ? ['/cricket/tournament', (item.id ? item.id : (item._id | splitID)) ,(item.name | slugify)] 
+          : ''">{{ item.name | split }}</a></li>
   </ul>
 </div>
