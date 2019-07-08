@@ -83,8 +83,8 @@
           <!-- <a class="fullblock-link" [routerLink]="[(video.eType |lowercase), video.sSlug ]"></a> -->
         </div>
       </div>
-      <div class="col-lg-3 col-md-4">
-        <ng-scrollbar class="custom-scrollbar">
+      <div class="col-lg-3 col-md-4"  *ngIf="popularvideos?.length > 1">
+        <ng-scrollbar class="custom-scrollbar" >
           <div class="home-popular-vid-list">
             <div class="video-item fullblock-link-container" *ngFor="let video of popularvideos">
               <div class="video-img common-overlay common-zoom-container common-full-img">

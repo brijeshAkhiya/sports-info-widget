@@ -293,20 +293,23 @@
                   </table>
                 </div>
               </div>
-              <div *ngFor="let team of objectKeys(competitor)">
-                <div class="d-flex match-info-title align-items-center">
-                  <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
-                    [defaultImage]="cricketService.flagplaceholder">
-                  <h4>{{competitor[team].name}}</h4>
+              <ng-container *ngIf="playerList && playerList.length > 0">
+                <div *ngFor="let team of objectKeys(competitor)">
+                  <div class="d-flex match-info-title align-items-center">
+                    <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
+                      [defaultImage]="cricketService.flagplaceholder">
+                    <h4>{{competitor[team].name}}</h4>
+                  </div>
+                  <div class="common-table team-lineup d-flex common-shadow rounded-box">
+                    <ng-container *ngFor="let key of objectKeys(playerList)">
+                      <div *ngIf="playerList[key].team_type === team">
+                        {{playerList[key].name | split}}
+                      </div>
+                    </ng-container>
+                  </div>
                 </div>
-                <div class="common-table team-lineup d-flex common-shadow rounded-box">
-                  <ng-container *ngFor="let key of objectKeys(playerList)">
-                    <div *ngIf="playerList[key].team_type === team">
-                      {{playerList[key].name | split}}
-                    </div>
-                  </ng-container>
-                </div>
-              </div>
+
+              </ng-container>
             </ng-template>
           </ngb-tab>
 
@@ -343,9 +346,7 @@
           <!--END - SIDERBAR ADS-->
 
           <!--START - SIDERBAR STORY-->
-          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
-            *ngIf="widget1type && widget1title">
-          </app-common-story-widget>
+          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Recommended Links'}"></app-sidebar-links>
           <!--START - SIDERBAR STORY-->
         </div>
       </div>

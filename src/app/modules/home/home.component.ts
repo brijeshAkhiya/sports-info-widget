@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     this.highlightImageInterval = setInterval(() => {
       this.highlightImage = i;
       i = (this.banners.length - 1 == i) ? 0 : i+1;
-    }, 1000 ); 
+    }, 3000 ); 
   }  
 
   /** Stop Highlight Blog on mouseover */
@@ -54,6 +54,11 @@ export class HomeComponent implements OnInit {
       if (res.data) 
         this.popularvideos = res.data;
     });
+  }
+
+  ngOnDestroy() {
+    console.log("ngOnDestroy");
+    clearInterval(this.highlightImageInterval);
   }
 
 }

@@ -21,23 +21,23 @@
                 </div>
 
                 <ng-container *ngIf="slide?.competitors?.away?.show_first; else home_first">
-                  <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away}">
+                  <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away, match:slide}">
                   </ng-container>
-                  <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home}">
+                  <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home, match:slide}">
                   </ng-container>
                 </ng-container>
                 <ng-template #home_first>
                   <ng-container>
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home}">
+                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home, match:slide}">
                     </ng-container>
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away}">
+                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away, match:slide}">
                     </ng-container>
                   </ng-container>
                 </ng-template>
 
-                <ng-template #team let-competitor="competitor">
+                <ng-template #team let-competitor="competitor" let-match="match">
                   <div class="match-info d-flex justify-content-between align-items-center">
-                    <p [ngClass]="{'match-winner': competitor?.winner}">
+                    <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
                       <img [lazyLoad]="competitor?.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder">{{competitor?.name}}</p>
                     <p *ngIf="competitor?.period_scores"><b>

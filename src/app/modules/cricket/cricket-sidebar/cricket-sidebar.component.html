@@ -72,7 +72,7 @@
 
 <ng-template #match_team let-team="team" let-match="match">
   <div class="match-info d-flex justify-content-between align-items-center">
-    <p [ngClass]="{'match-winner': team?.winner}"><img [offset]="commonService.lazyloadoffset"
+    <p [ngClass]="{'match-winner': match?.winner_id == team?.id}"><img [offset]="commonService.lazyloadoffset"
         [lazyLoad]="team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
       {{(match.match_result) ? team?.abbreviation : team?.name}}
     </p>

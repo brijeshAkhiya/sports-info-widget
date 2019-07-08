@@ -1,5 +1,5 @@
 <!-- START - MATCH PROBABAILITY-->
-<div *ngIf="matchdata.sport_event_status.status == 'not_started'">
+<div *ngIf="['not_started', 'live', 'delayed'].includes(matchdata.sport_event_status.status)">
   <h4 class="line-title">Win Probability</h4>
   <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
     <div class="probability-block d-flex align-items-center justify-content-between">
