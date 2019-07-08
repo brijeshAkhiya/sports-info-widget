@@ -1,4 +1,4 @@
-<section class="blog-banner" [defaultImage]="commonService.largeblogPlaceholder" [offset]="commonService.lazyloadoffset"
+<section *ngIf="blogdata" class="blog-banner" [defaultImage]="commonService.largeblogPlaceholder" [offset]="commonService.lazyloadoffset"
   [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
   <ng-container *ngIf="blogdata?.eType == 'Video'">
     <div class="video-container" [ngClass]="{'show': isplay}">
@@ -23,7 +23,7 @@
     </div>
   </div>
 </section>
-<section class="common-section blog-content-section">
+<section class="common-section blog-content-section" *ngIf="blogdata" >
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
@@ -41,7 +41,7 @@
           <div class="blog-content-block">
             <div class="blog-content" [innerHTML]="blogdata?.sDescription | safehtml">
             </div>
-            <ul class="tag-list">
+            <ul class="tag-list" *ngIf="blogdata?.aTags && blogdata?.aTags.length > 0">
               <li *ngFor="let item of blogdata?.aTags">
                 <a
                   [routerLink]="(item.type == 'Player') ? ['/cricket/player',(item.id | splitID), ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',(item.id | splitID), (item.name | slugify)]  : ['/cricket/team',(item.id | splitID), (item.name | slugify)])">

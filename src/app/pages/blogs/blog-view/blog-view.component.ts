@@ -40,7 +40,6 @@ export class BlogViewComponent implements OnInit {
   ngOnInit() {
     console.log('in blogview');
     console.log('state::blogvieww', window.history.state);
-    this.getPopularArticles();
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     if (window.history.state && window.history.state.id) {
@@ -78,6 +77,7 @@ export class BlogViewComponent implements OnInit {
     if (id) {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.blogdata = res.data;
+        this.getPopularArticles();
         // let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
         // if (type.toUpperCase() != this.blogdata.eType.toUpperCase())
         //   this.router.navigate(['/page-not-found'])
@@ -87,7 +87,7 @@ export class BlogViewComponent implements OnInit {
 
         this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id));
       }, (error) => {
-        if (error['error'].status == 500) {
+        if (error['error'].status == 500 || error['error'].status == 400) {
           this.router.navigate(['/page-not-found'])
         }
       });
@@ -187,9 +187,10 @@ export class BlogViewComponent implements OnInit {
   getPopularArticles() {
     let data = {
       nstart: 0,
-      nLimit: 10
+      nLimit: 10,
+      aIds:this.blogdata.aIds
     };
-    this.sportsService.getpopularpost(data).subscribe(res => {
+    this.sportsService.getrelatedpost(data).subscribe((res:any) => {
       if (res["data"]) {
         this.widgetblogs = res["data"];
       }

@@ -54,7 +54,7 @@
                             <tr *ngFor="let batting of item?.teams[0]?.statistics?.batting?.players">
                               <ng-container *ngIf="typeOf(batting.statistics.length) !== 'number'">
                                 <td>
-                                  <a [routerLink]="['/cricket/player', batting?.id, ((batting?.name | split ) | slugify) ]"
+                                  <a [routerLink]="['/cricket/player',  (batting?.id | splitID), ((batting?.name | split ) | slugify) ]"
                                     [ngClass]="{'current-batsman': batting?.statistics.length != 0  && !batting?.statistics.dismissal }">
                                     {{batting?.name | split}}{{batting?.statistics?.not_out ? '*' : ''}}
                                   </a>
@@ -165,7 +165,7 @@
                           <p class="fall-wicket">{{item.displayscore}}</p>
                           <p class="title">
                             <a
-                              [routerLink]="['/cricket/player', item.playerid, ((item.playername | split ) | slugify) ]">{{item.playername | split}}</a>
+                              [routerLink]="['/cricket/player', (item.playerid | splitID), ((item.playername | split ) | slugify) ]">{{item.playername | split}}</a>
                           </p>
                           <p>{{item.displayover}} OV</p>
                         </li>
@@ -191,7 +191,7 @@
                           <tbody>
                             <tr *ngFor="let bowling of item?.teams[1]?.statistics?.bowling?.players">
                               <td><a
-                                  [routerLink]="['/cricket/player', bowling.id, ((bowling.name | split ) | slugify) ]">{{bowling?.name | split}}</a>
+                                  [routerLink]="['/cricket/player', (bowling.id | splitID), ((bowling.name | split ) | slugify) ]">{{bowling?.name | split}}</a>
                               </td>
                               <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '0'}}</td>
                               <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '0'}}</td>
@@ -293,20 +293,23 @@
                   </table>
                 </div>
               </div>
-              <div *ngFor="let team of objectKeys(competitor)">
-                <div class="d-flex match-info-title align-items-center">
-                  <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
-                    [defaultImage]="cricketService.flagplaceholder">
-                  <h4>{{competitor[team].name}}</h4>
+              <ng-container *ngIf="playerList && playerList.length > 0">
+                <div *ngFor="let team of objectKeys(competitor)">
+                  <div class="d-flex match-info-title align-items-center">
+                    <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
+                      [defaultImage]="cricketService.flagplaceholder">
+                    <h4>{{competitor[team].name}}</h4>
+                  </div>
+                  <div class="common-table team-lineup d-flex common-shadow rounded-box">
+                    <ng-container *ngFor="let key of objectKeys(playerList)">
+                      <div *ngIf="playerList[key].team_type === team">
+                        {{playerList[key].name | split}}
+                      </div>
+                    </ng-container>
+                  </div>
                 </div>
-                <div class="common-table team-lineup d-flex common-shadow rounded-box">
-                  <ng-container *ngFor="let key of objectKeys(playerList)">
-                    <div *ngIf="playerList[key].team_type === team">
-                      {{playerList[key].name | split}}
-                    </div>
-                  </ng-container>
-                </div>
-              </div>
+
+              </ng-container>
             </ng-template>
           </ngb-tab>
 
@@ -343,9 +346,7 @@
           <!--END - SIDERBAR ADS-->
 
           <!--START - SIDERBAR STORY-->
-          <app-common-story-widget [title]="widget1title" [type]="widget1type" [data]="cricketseries"
-            *ngIf="widget1type && widget1title">
-          </app-common-story-widget>
+          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Recommended Links'}"></app-sidebar-links>
           <!--START - SIDERBAR STORY-->
         </div>
       </div>

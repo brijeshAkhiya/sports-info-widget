@@ -2,11 +2,12 @@
   <h5>{{options.title}}</h5>
   <ul class="common-list">
     <li *ngFor="let item of data | slice:0:5">
+      
       <a *ngIf="link_type == 'blogs'" [state]="{ id: item._id }"
         [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle | truncate:[60,'...']}}
       </a>
-      <a *ngIf="link_type == 'tournament'" [state]="{ id: (item.id ? item.id : item.tournament_id) }"
-        [routerLink]="['/cricket/tournament', (item.id ? (item.id | splitID) : (item.tournament_id | splitID)), (item.name | slugify)] ">{{ item.name | split }}
+      <a *ngIf="link_type == 'tournament'" [state]="{ id: item.id }"
+        [routerLink]="['/cricket/tournament', (item.id | splitID), (item.name | slugify)] ">{{ item.name | split }}
       </a>
 
       <a *ngIf="link_type != 'blogs' && link_type != 'tournament'" [routerLink]=" item.type == 'Team' ? 

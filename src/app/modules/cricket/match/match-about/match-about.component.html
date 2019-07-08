@@ -19,7 +19,9 @@
   </h1> -->
   <div class="tour-match-title show-anim">
     <p class="light-text">
-      {{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}</p>
+      <a [routerLink]="['/cricket/tournament', (data.sport_event.tournament.id | splitID), (data.sport_event.tournament.name | slugify) ]">
+      {{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}
+      </a></p>
     <h1 *ngIf="data.sport_event.competitors">
       {{data.sport_event.competitors[0].name}} vs {{data.sport_event?.competitors[1].name}}
     </h1>

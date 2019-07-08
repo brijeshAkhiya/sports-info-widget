@@ -60,7 +60,7 @@ export class MatchHomeComponent implements OnInit {
   tossdecision: any = {};
   batsmanList;
   testcheck: any;
-  dummyAPICall = 4910;
+  dummyAPICall = 450;
   fallofWickets = [];
   playerList = {};
   scorecardinnings: any;
@@ -161,8 +161,11 @@ export class MatchHomeComponent implements OnInit {
             this.startLiveUpdateAfterTime();
           }
           if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted" || this.matchdata.sport_event_status.status == "delayed") {
-            this.getLiveUpdate(this);
+          this.getLiveUpdate(this);
           }
+
+          this.setTitle();
+
         }
       },
       error => {
@@ -197,6 +200,7 @@ export class MatchHomeComponent implements OnInit {
         this.competitor[element.qualifier] = element;
       });
     }
+    console.log('this.teamObj');
     console.log(this.teamObj);
   }
 
@@ -904,6 +908,7 @@ export class MatchHomeComponent implements OnInit {
       this.dummyAPICall++;
       classThis.sportsService
         .getmatchtimelineDetla(classThis.data.sport_event.id)
+        // .getmatchtimelineDetlaDirect(this.dummyAPICall)
         .subscribe(res => {
           // res = res.result; // TEMP
           this.data = res.data;
@@ -937,8 +942,25 @@ export class MatchHomeComponent implements OnInit {
             this.getUpdate();
             this.getScores();
           }
+
+          this.setTitle();
+
+
         });
     }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP
+  }
+
+  /** Change page title */
+  setTitle() {
+    if (this.matchdata.sport_event_status.match_result)
+      document.title = this.matchdata.sport_event_status.match_result;
+    else if (this.matchdata.sport_event_status.current_inning >= 1) {
+      let currentInning = this.matchdata.statistics.innings.filter((inning) => inning.number == this.matchdata.sport_event_status.current_inning);
+      if (currentInning) {
+        let currentTeamInning = currentInning[0].teams.filter((team) => team.id == currentInning[0].batting_team)
+        document.title = currentTeamInning[0].abbreviation +' ' +this.matchdata.sport_event_status.display_score + ' (' + this.matchdata.sport_event_status.display_overs + ' ov)';
+      }
+    }
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */

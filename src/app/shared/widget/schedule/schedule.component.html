@@ -11,7 +11,7 @@
           [ngClass]="{'complete-match' : match?.match_result}">
 
           <div class="match-desc">
-            <!-- <h6>Match 2</h6> -->
+            <h6 *ngIf="match.tournament_name">{{match.tournament_name}}</h6>
             <p class="stadium-nm" *ngIf="match.venue_name">{{match.venue_name}}, {{match.city_name}}</p>
             <p class="time-line" *ngIf="type == 'fixture'">{{match.scheduled | date:'h:mm a'}}</p>
             <p class="result-line" *ngIf="type == 'result'">
@@ -21,7 +21,7 @@
           <div class="match-teams d-flex align-items-center" *ngIf="match.competitors">
             <div class="match-team d-flex align-items-center">
               <div class="team-info">
-                <h5 [ngClass]="{'winner': match?.competitors[0]?.winner}">{{match?.competitors[0]?.abbreviation}}</h5>
+                <h5 [ngClass]="{'winner': match?.winner_id == match?.competitors[0]?.id}">{{match?.competitors[0]?.abbreviation}}</h5>
                 <p *ngIf="match.match_result">
                   <ng-container *ngFor="let score of match?.competitors[0]?.p_new; let i = index">
                     {{score?.display_score}}
@@ -45,7 +45,7 @@
                   [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
               </div>
               <div class="team-info">
-                <h5 [ngClass]="{'winner': match?.competitors[1]?.winner}">{{match?.competitors[1]?.abbreviation}}</h5>
+                <h5 [ngClass]="{'winner':  match?.winner_id == match?.competitors[1]?.id}">{{match?.competitors[1]?.abbreviation}}</h5>
                 <p *ngIf="match.match_result">
                   <ng-container *ngFor="let score of match?.competitors[1]?.p_new; let i = index">
                     {{score?.display_score}}

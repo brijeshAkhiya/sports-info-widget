@@ -56,7 +56,7 @@
       <div class="col-xl-9">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
           <h4 class="white-text">Popular Videos</h4>
-          <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['video']" *ngIf="popularvideos.length > 4">
+          <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['/video']" *ngIf="popularvideos.length > 4">
             View All<span></span></a>
         </div>
       </div>
@@ -85,8 +85,8 @@
           <!-- <a class="fullblock-link" [routerLink]="[(video.eType |lowercase), video.sSlug ]"></a> -->
         </div>
       </div>
-      <div class="col-lg-3 col-md-4">
-        <ng-scrollbar class="custom-scrollbar">
+      <div class="col-lg-3 col-md-4"  *ngIf="popularvideos?.length > 1">
+        <ng-scrollbar class="custom-scrollbar" >
           <div class="home-popular-vid-list">
             <div class="video-item fullblock-link-container" *ngFor="let video of popularvideos">
               <div class="video-img common-overlay common-zoom-container common-full-img">
