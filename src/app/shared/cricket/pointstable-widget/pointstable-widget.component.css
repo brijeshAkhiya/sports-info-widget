@@ -1,4 +1,5 @@
 /* -------- Point Table Widget ------- */
+.point-table-widget h6                          { margin: 12px 8px 0px; padding: 4px 8px; font-size: 14px; line-height: 18px; color: #595959; font-weight: 700; border-bottom: 2px solid #F4F5F5; }
 .point-table-widget .table                      { margin: 0px; }
 .point-table-widget .table-responsive           { padding: 0px 8px 8px; }
 .point-table-widget .table th,
@@ -8,3 +9,7 @@
 .point-table-widget .table tr th:first-child,
 .point-table-widget .table tr td:first-child    { text-align: left; }
 .point-table-widget .table tr td:first-child    { font-weight: 500; width: 30%; }
+
+@media (max-width: 991px) {
+    .point-table-widget h6                      { margin: 6px 8px 0px; }
+}

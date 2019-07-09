@@ -12,6 +12,8 @@
 ::-moz-selection        { color: #fff; background: #ED1A33; }
 ::selection             { color: #fff; background: #ED1A33; }
 body                    { font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252; }
+.sticky-mainmenu        { padding-top: 50px; }
+.sticky-mainmenu.sticky-submenu         { padding-top: 95px; }
 .clear                  { clear:both;}
 img                     { border: 0px;}
 ul,ol                   { list-style: none;}
@@ -390,6 +392,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 
 @media (max-width: 767px) {
     body                    { font-size: 14px; line-height: 24px; }
+    .sticky-mainmenu                    { padding-top: 41px; }
+    .sticky-mainmenu.sticky-submenu     { padding-top: 83px; }
     h1                      { margin: 0px 0px 20px; font-size: 27px; line-height: 36px; }
     h2                      { font-size: 26px; line-height: 34px;}
     h3                      { font-size: 20px; line-height: 28px;}

@@ -156,8 +156,7 @@
     .complete-match .match-teams .match-team                { width: 100%; }
     .match-teams .vs-block h6                       { padding: 2px; }
 /* -------- Teams List ------- */
-    /* .team-list .team-item .team-flag    { width: 81px; } */
-    .team-list .team-item .team-flag img{ height: 54px;}
+    .team-list .team-item .team-flag img    { height: 48px;}
     .team-list [class*="col-"]:nth-last-child(2) .team-item,
     .team-list .team-item                   { margin-bottom: 16px; }
     .team-list .team-item                   { padding: 16px 16px 16px 10px; border-left-width: 6px; }
