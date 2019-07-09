@@ -13,7 +13,7 @@ export class CricketTourMenuComponent implements OnInit {
   }
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-     if (window.pageYOffset > 156) {
+     if (window.pageYOffset > 129) {
        let element = document.getElementById('sub-navabar');
        element.classList.add('fixed-nav');
      } else {
