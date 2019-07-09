@@ -35,7 +35,7 @@
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
 
       <div class="title d-flex justify-content-between">
-        <p><b>{{match.season_name ? match.season_name : match.tournament_name}}</b></p>
+        <p><b>{{match.season_name ? match.season_name : match.tournament_name}} </b> <span class="text-capitalize">semifinal</span></p>
         <p>{{match.scheduled | amTimeAgo}}</p>
       </div>
 
