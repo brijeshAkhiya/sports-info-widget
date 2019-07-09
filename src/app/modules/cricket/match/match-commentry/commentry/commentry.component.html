@@ -22,7 +22,10 @@
         *ngIf="commentary.batting_params"><!-- 
         --><span>
           {{commentary.type == 'wicket' || commentary.bowling_params.extra_runs_conceded 
-          ? (commentary.batting_params?.runs_scored + commentary.bowling_params?.extra_runs_conceded) > 0 ? (commentary.batting_params?.runs_scored + commentary.bowling_params?.extra_runs_conceded) :''
+          ?
+          (commentary.bowling_params.extra_runs_type == 'LB' || commentary.bowling_params.extra_runs_type == 'B') 
+            ? (commentary.batting_params?.runs_scored + commentary.bowling_params?.extra_runs_conceded) 
+            : ((commentary.batting_params?.runs_scored + commentary.bowling_params?.extra_runs_conceded - 1) > 0) ? (commentary.batting_params?.runs_scored + commentary.bowling_params?.extra_runs_conceded - 1) :''
           : commentary.batting_params.runs_scored}}<!--
           --><ng-container *ngIf="commentary.type == 'wicket'"><span>W</span></ng-container>
           <ng-container *ngIf="commentary.bowling_params.extra_runs_type">

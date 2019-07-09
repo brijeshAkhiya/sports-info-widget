@@ -151,7 +151,7 @@ export class BlogViewComponent implements OnInit {
 
   //sharable link 
   sharablelink(platform) {
-    let url = `${this.commonService.siteUrl}blog/${this.blogdata._id}/${this.blogdata.sSlug}`;
+    let url = `${this.commonService.siteUrl}${this.blogdata.eType.toLowerCase()}/${this.blogdata.sSlug}`;
     if (platform == 'facebook') {
       window.open(`http://www.facebook.com/sharer.php?u=${url}`, '_blank');
     }
@@ -159,7 +159,7 @@ export class BlogViewComponent implements OnInit {
       window.open(`https://api.whatsapp.com/send?phone=&text=${url}`, '_blank');
     }
     else {
-      window.open(`http://twitter.com/share?text=This is our new blog !!! &url=${url}&hashtags=Sports.info,Cricketblogs,sportslatest`, '_blank')
+      window.open(`http://twitter.com/share?text=${this.blogdata.sTitle} !!! &url=${url}&hashtags=SportsDotinfo,Cricketblogs,sportslatest`, '_blank')
     }
   }
 

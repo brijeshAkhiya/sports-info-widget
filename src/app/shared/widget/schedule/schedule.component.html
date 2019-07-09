@@ -11,7 +11,7 @@
           [ngClass]="{'complete-match' : match?.match_result}">
 
           <div class="match-desc">
-            <h6 *ngIf="match.tournament_name">{{match.tournament_name}}</h6>
+            <h6>{{match.tournament_name ? match.tournament_name : ''}}  <span class="result-line">{{ match.tournament_round ? ((match.tournament_name) ? ' - '+match.tournament_round : match.tournament_round) : '' }}</span></h6>
             <p class="stadium-nm" *ngIf="match.venue_name">{{match.venue_name}}, {{match.city_name}}</p>
             <p class="time-line" *ngIf="type == 'fixture'">{{match.scheduled | date:'h:mm a'}}</p>
             <p class="result-line" *ngIf="type == 'result'">

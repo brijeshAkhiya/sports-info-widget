@@ -24,7 +24,7 @@
 <!-- END - MATCH PROBABAILITY-->
 
 
-<section class="last-meetings-section" *ngIf="teamMatchResult?.length != 0">
+<section class="last-meetings-section" *ngIf="teamMatchResult && teamMatchResult?.length > 0">
   <h4 class="line-title">Last meetings</h4>
   <app-schedule [data]="teamMatchResult" [type]="'result'" [sport]="'cricket'"></app-schedule>
 </section>

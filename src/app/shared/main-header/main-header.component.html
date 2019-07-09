@@ -11,7 +11,9 @@
               >
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p>
+                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span class="result-line">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span> </p>
+
+                  <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
                   <p
                     *ngIf="slide.status == 'not_started' || slide.match_status == 'ended' || slide.status == 'closed'; else matchStatus">
                     {{slide.scheduled | amTimeAgo}}</p>

@@ -25,6 +25,10 @@ const routes: Routes = [
         component: BlogsComponent
     },
     {
+        path: 'blog/:type/:id/:slug',
+        component: BlogViewComponent,
+    },
+    {
         path: 'blog/:slug',
         component: BlogViewComponent,
     },
