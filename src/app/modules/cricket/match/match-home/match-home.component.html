@@ -234,7 +234,7 @@
           </ngb-tab>
           <!-- END - FACTS AND FIGURES-->
           <!-- Match information starts -->
-          <ngb-tab>
+          <ngb-tab *ngIf="tossdecision.toss_won_by_team">
             <ng-template ngbTabTitle>
               <div>Info</div>
             </ng-template>
