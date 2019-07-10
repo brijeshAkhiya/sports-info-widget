@@ -6,7 +6,7 @@
     <table class="table">
       <thead>
         <tr [ngClass]="options.class_light_row ">
-          <th *ngFor="let title of options.titles">{{title}}</th>
+          <th *ngFor="let title of options.titles" [innerHTML]="title"></th>
         </tr>
       </thead>
       <tbody>
