@@ -126,9 +126,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     if (window.pageYOffset > value) {
       let element = document.getElementById('navbar');
       element.classList.add('sticky');
+      let bodyelement = document.getElementById('main-body');
+      bodyelement.classList.add('sticky-mainmenu');
     } else {
       let element = document.getElementById('navbar');
       element.classList.remove('sticky');
+      let bodyelement = document.getElementById('main-body');
+      bodyelement.classList.remove('sticky-mainmenu');
     }
   }
 
