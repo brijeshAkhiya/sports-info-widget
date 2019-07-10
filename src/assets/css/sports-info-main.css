@@ -318,7 +318,6 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .add-to-fav-btn         { min-width: 188px; padding: 14px 29px 14px 52px; font-size: 16px; line-height: 20px;}
     .add-to-fav-btn:before  { width: 32px; height: 32px; }
     .add-to-fav-btn.added   { padding: 14px 52px 14px 29px;}
-
 /******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .common-popular-list .popular-item      { margin-bottom: 24px;}
@@ -351,7 +350,6 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 /* -------- Writer Tab ------- */
     .common-tabs.writer-tab > .nav-tabs             { margin: -31px 0px 24px 160px;}
     .common-tabs.writer-tab > .nav-tabs .nav-link   { margin: 0px 14px; font-size: 15px;}
-
 }
 
 @media (max-width: 991px) {
@@ -374,7 +372,6 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     h3                      { font-size: 22px; line-height: 30px;}
     h4                      { font-size: 20px; line-height: 28px; }
     h5                      { font-size: 18px; line-height: 22px;}
-
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .common-section         { padding: 36px 0px; }
@@ -387,7 +384,6 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .common-news-list .common-news-desc         { width: calc(100% - 220px);}
 /* -------- Writer Tab ------- */
     .common-tabs.writer-tab > .nav-tabs         { margin: -31px 0px 24px 160px;}
-
 }
 
 @media (max-width: 767px) {
