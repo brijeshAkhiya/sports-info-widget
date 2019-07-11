@@ -6,12 +6,11 @@
           <ng-template carouselSlide>
             <!--Live matches-->
             <div class="slider-item"
-              
-              [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-' +slide.competitors.away.abbreviation)]"
-              >
+              [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-' +slide.competitors.away.abbreviation)]">
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span class="result-line">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span> </p>
+                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
+                      class="result-line">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span> </p>
 
                   <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
                   <p
@@ -65,7 +64,7 @@
   </div>
 </div>
 <nav class="navbar navbar-expand-md" id="navbar" [ngClass]="{'menu-open': isapply}" (scroll)="onWindowScroll($event);">
-  <a class="navbar-brand"  routerLink="/" ><img src="/assets/images/logo.svg" alt=""></a>
+  <a class="navbar-brand" routerLink="/"><img src="/assets/images/logo.svg" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     [ngClass]="{'active': isapply}" (click)="isapply = !isapply" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +106,7 @@
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
     </div>
-   
+
   </div>
   <ul class="navbar-nav navbar-rightside login-search">
     <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
@@ -115,7 +114,7 @@
       <a class="login" (click)="open(content)"></a>
     </li>
     <li ngbDropdown *ngIf="isLogin">
-      <a class="login"   [ngClass]="{'logged': isLogin}"  ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
+      <a class="login" [ngClass]="{'logged': isLogin}" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
       <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
       </ul>

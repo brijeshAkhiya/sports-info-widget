@@ -20,6 +20,7 @@ export class CustomAdsWidgetComponent implements OnInit {
 
   ngOnInit() {
     //ngrx store code
+  
     this.store.subscribe(data => {
       let arr = data["ads"].Ads;
       arr.map(data => {

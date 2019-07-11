@@ -4,6 +4,12 @@ import { SocketService } from '@providers/socket.service';
 import { Socket } from "ngx-socket-io";
 import { Router } from '@angular/router';
 import { SlugifyPipe } from '@pipes/slugpipe';
+import { StringsplitID } from '@pipes/stringsplitID.pipe';
+import { Store } from "@ngrx/store";
+import * as fromRoot from '../../app-reducer'
+import * as favourites from '../../store/favourites-management/favourites.actions'
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: "app-main-footer",
@@ -18,14 +24,23 @@ export class MainFooterComponent implements OnInit {
   isShow: boolean;
   topPosToStartShowing = 100;
   searchText;
-  constructor(private sportsService: SportsService, private router: Router, private socketservice: SocketService, private socket: Socket, private slugifyPipe: SlugifyPipe) {
+  isAuth$: Observable<boolean>
+  constructor(private sportsService: SportsService, private router: Router, private socketservice: SocketService,
+    private socket: Socket,
+    private slugifyPipe: SlugifyPipe,
+    private splitIDPipe: StringsplitID,
+    private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
     this.getContactDetails();
-    if (localStorage.getItem('userT')) {
+    this.isAuth$ = this.store.select(fromRoot.getIsAuth)
+    if (this.isAuth$) {
       this.getUserfavourites();
     }
+    this.store.subscribe((data) => {
+      this.userfavourites = data.Favourites.Favourites
+    })
   }
 
   //get user favourites
@@ -38,6 +53,7 @@ export class MainFooterComponent implements OnInit {
           isSelect: false
         }
       });
+      this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
     })
   }
 
@@ -67,15 +83,15 @@ export class MainFooterComponent implements OnInit {
       }
       else if (type == 'tournament') {
         let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['cricket/tournament', btoa(id), slugname])
+        this.router.navigate(['cricket/tournament', this.splitIDPipe.transform(id), slugname])
       }
       else if (type == 'team') {
         let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['cricket/team', btoa(id), slugname])
+        this.router.navigate(['cricket/team', this.splitIDPipe.transform(id), slugname])
       }
       else if (type == 'player') {
         let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['cricket/player', btoa(id), slugname])
+        this.router.navigate(['cricket/player', this.splitIDPipe.transform(id), slugname])
       }
     }
   }
@@ -101,6 +117,8 @@ export class MainFooterComponent implements OnInit {
       }
     }
     else {
+      console.log('22');
+
       this.isedit = true
     }
   }
