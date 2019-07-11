@@ -11,7 +11,7 @@
               >
               <div class="slider-item-inner">
                 <div class="title d-flex justify-content-between">
-                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span class="result-line">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span> </p>
+                  <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span class="text-capitalize">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span> </p>
 
                   <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
                   <p
@@ -43,7 +43,7 @@
                       <img [lazyLoad]="competitor?.id| logosurl"
                         [defaultImage]="cricketService.flagplaceholder">{{competitor?.name}}</p>
                     <p *ngIf="competitor?.period_scores"><b>
-                        {{competitor?.period_scores.display_score}} ({{competitor?.period_scores.display_overs}}
+                        {{competitor?.period_scores.display_score | cricketScore}} ({{competitor?.period_scores.display_overs}}
                         ov)</b></p>
                   </div>
                 </ng-template>

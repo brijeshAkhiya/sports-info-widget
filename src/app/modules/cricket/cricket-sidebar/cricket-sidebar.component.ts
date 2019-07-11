@@ -53,6 +53,7 @@ export class CricketSidebarComponent implements OnInit {
           this.matchresults = this.matchresults.map((data, matchIndex) => {
             let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
             let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
+            if(data.period_scores){
             data.period_scores.map((pscore, index) => {
               if (pscore.home_score) {
                 (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
@@ -60,6 +61,7 @@ export class CricketSidebarComponent implements OnInit {
                 (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
               }
             })
+          }
             return data;
           });
           console.log('matchresults:last:', this.matchresults);

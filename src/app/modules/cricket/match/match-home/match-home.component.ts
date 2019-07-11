@@ -347,12 +347,15 @@ export class MatchHomeComponent implements OnInit {
         if (res.data) {
           if (res.data.next_meetings && res.data.next_meetings.length > 0)
             this.nextmatches = this.commonService.sortArr(res.data.next_meetings, 'Do MMMM YYYY', 'scheduled', 'asc');
-
+          else
+            this.nextmatches = [];
           if (res.data.last_meetings && res.data.last_meetings.length > 0) {
             let last_meetings = res.data.last_meetings.filter((match) => match.period_scores);
             this.matchesresultdata = this.cricketService.initCompetitorScore(last_meetings)
             this.matchesresultdata = this.commonService.sortArr(this.matchesresultdata, 'Do MMMM YYYY', 'scheduled', 'desc');
           }
+          else
+            this.matchesresultdata = [];
         }
       });
   }
@@ -712,6 +715,7 @@ export class MatchHomeComponent implements OnInit {
           ball: timeline.ball_number,
           extra_runs:
             typeof timeline.bowling_params.extra_runs_conceded != "undefined"
+            // ? timeline.bowling_params.extra_runs_type
               ? timeline.bowling_params.extra_runs_type
               : 0
         };
@@ -951,13 +955,16 @@ export class MatchHomeComponent implements OnInit {
   }
 
   /** Change page title */
+  currentTeam:any;
+  oppoTeam:any;
   setTitle() {
     if (this.matchdata.sport_event_status.match_result)
       document.title = this.matchdata.sport_event_status.match_result;
     else if (this.matchdata.sport_event_status.current_inning >= 1) {
       let currentInning = this.matchdata.statistics.innings.filter((inning) => inning.number == this.matchdata.sport_event_status.current_inning);
       if (currentInning) {
-        let currentTeamInning = currentInning[0].teams.filter((team) => team.id == currentInning[0].batting_team)
+        let currentTeamInning = this.currentTeam = currentInning[0].teams.filter((team) => team.id == currentInning[0].batting_team)
+        this.oppoTeam = currentInning[0].teams.filter((team) => team.id == currentInning[0].bowling_team)
         document.title = currentTeamInning[0].abbreviation +' ' +this.matchdata.sport_event_status.display_score + ' (' + this.matchdata.sport_event_status.display_overs + ' ov)';
       }
     }

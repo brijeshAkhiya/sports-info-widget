@@ -78,7 +78,7 @@
     </p>
     <p *ngIf="match.match_result">
       <ng-container *ngFor="let score of team.p_new; let i = index">
-        {{score?.display_score}}
+        {{score?.display_score | cricketScore}}
         {{i == team.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
       </ng-container>
     </p>
