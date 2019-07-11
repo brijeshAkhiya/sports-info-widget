@@ -31,15 +31,22 @@ export class MenuComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-     if (window.pageYOffset > 129) {
-       let element = document.getElementById('sub-navabar');
-       element.classList.add('fixed-nav');
-     } else {
+    if (window.pageYOffset > 129) {
       let element = document.getElementById('sub-navabar');
-        element.classList.remove('fixed-nav'); 
-     }
+      element.classList.add('fixed-nav');
+      let bodyelement = document.getElementById('main-body');
+      bodyelement.classList.add('sticky-submenu');
+    } else {
+      let element = document.getElementById('sub-navabar');
+      element.classList.remove('fixed-nav');
+      let bodyelement = document.getElementById('main-body');
+      bodyelement.classList.remove('sticky-submenu');
+    }
   }
-
+  ngOnDestroy(){
+    let bodyelement = document.getElementById('main-body');
+    bodyelement.classList.remove('sticky-submenu');
+  }
   //get current cricket series 
   getCricketSeries() {
     this.sportsService.getcurrentseries().subscribe((res: any) => {
