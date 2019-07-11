@@ -45,12 +45,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     //get data from ngrx store through meta tags actions
-    this.store.subscribe((data: any) => {
-      let metadata = data.Metatags.MetaTags
+    this.store.select('Metatags').subscribe((data: any) => {
+      let metadata = data.Metatags
       let metaarray = [];
       metadata.map((data) => {
         let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
-        
         metaarray[routerUrl[4]] = data
       })
       this.metatagsObj = { ...metaarray }
@@ -78,8 +77,8 @@ export class AppComponent implements OnInit {
   }
 
   setmetatags(routerURL) {
-    console.log('routee',routerURL);
-    
+    console.log('routee', routerURL);
+
     let data = this.metatagsObj[routerURL]
     if (data) {
       this.meta.updateTag({ name: 'title', content: data.title ? data.title : 'Sports.info' });
@@ -90,7 +89,7 @@ export class AppComponent implements OnInit {
       this.meta.updateTag({ property: 'og:title', content: data['og:title'] ? data['og:title'] : 'Sports.info' });
       this.meta.updateTag({ property: 'og:type', content: data['og:type'] ? data['og:type'] : 'Sports.info' });
       this.meta.updateTag({ property: 'og:description', content: data['og:description'] ? data['og:description'] : 'Sports.info' });
-      this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
+      this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
     }
     else {
       this.meta.updateTag({ name: 'title', content: 'Sports.info' });
@@ -101,7 +100,7 @@ export class AppComponent implements OnInit {
       this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
       this.meta.updateTag({ property: 'og:type', content: 'article' });
       this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ property: 'twitter:card', content: 'Sports.info' });
+      this.meta.updateTag({ name: 'twitter:card', content: 'Sports.info' });
     }
 
   }

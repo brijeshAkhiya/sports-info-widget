@@ -23,6 +23,7 @@ import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
 import { SlugifyPipe } from "./pipes/slugpipe";
 import { SafehtmlPipe } from './pipes/safehtml.pipe';
 import { StringsplitID } from './pipes/stringsplitID.pipe';
+import { CricketScorePipe } from './pipes/cricket-score.pipe';
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
@@ -81,6 +82,7 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         SlugifyPipe,
         FilterPipe,
         StringsplitID,
+        CricketScorePipe,
         /** All Componenets */
         CommonStoryWidgetComponent, 
         PointstableWidgetComponent,
@@ -112,6 +114,7 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         SlugifyPipe,        
         StringUnder,
         StringsplitID,
+        CricketScorePipe,
         /** All Providers*/
         SportsService,
         SocketService,
@@ -136,6 +139,7 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         FilterPipe,
         StringUnder,
         StringsplitID,
+        CricketScorePipe,
         /** All Componenets */
         CommonStoryWidgetComponent,
         PointstableWidgetComponent,

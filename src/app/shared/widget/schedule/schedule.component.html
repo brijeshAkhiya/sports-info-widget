@@ -11,7 +11,7 @@
           [ngClass]="{'complete-match' : match?.match_result}">
 
           <div class="match-desc">
-            <h6>{{match.tournament_name ? match.tournament_name : ''}}  <span class="result-line">{{ match.tournament_round ? ((match.tournament_name) ? ' - '+match.tournament_round : match.tournament_round) : '' }}</span></h6>
+            <h6>{{match.tournament_name ? match.tournament_name : ''}}  <span class="text-capitalize">{{ match.tournament_round ? ((match.tournament_name) ? ' - '+match.tournament_round : match.tournament_round) : '' }}</span></h6>
             <p class="stadium-nm" *ngIf="match.venue_name">{{match.venue_name}}, {{match.city_name}}</p>
             <p class="time-line" *ngIf="type == 'fixture'">{{match.scheduled | date:'h:mm a'}}</p>
             <p class="result-line" *ngIf="type == 'result'">
@@ -24,7 +24,7 @@
                 <h5 [ngClass]="{'winner': match?.winner_id == match?.competitors[0]?.id}">{{match?.competitors[0]?.abbreviation}}</h5>
                 <p *ngIf="match.match_result">
                   <ng-container *ngFor="let score of match?.competitors[0]?.p_new; let i = index">
-                    {{score?.display_score}}
+                    {{score?.display_score | cricketScore}}
                     {{i == match?.competitors[0]?.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
                   </ng-container>
                 </p>
@@ -48,7 +48,7 @@
                 <h5 [ngClass]="{'winner':  match?.winner_id == match?.competitors[1]?.id}">{{match?.competitors[1]?.abbreviation}}</h5>
                 <p *ngIf="match.match_result">
                   <ng-container *ngFor="let score of match?.competitors[1]?.p_new; let i = index">
-                    {{score?.display_score}}
+                    {{score?.display_score | cricketScore}}
                     {{i == match?.competitors[1]?.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
                   </ng-container>
                 </p>

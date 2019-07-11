@@ -24,7 +24,7 @@
 	</div>
 	<div class="copyright">
 		<div class="container">
-			<p>©2018 Sports Info. All Rights Reserved.</p>
+			<p>©2019 Sports Info. All Rights Reserved.</p>
 		</div>
 	</div>
 </footer>
@@ -34,7 +34,7 @@
 
 <!--Favourite module start-->
 
-<button class="fav-btn" (click)="isapply = !isapply"></button>
+<button class="fav-btn" (click)="isapply = !isapply" *ngIf="isAuth$ | async"></button>
 <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
 	<div class="head-btn-list">
 		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'delete-btn': isedit}"></button>

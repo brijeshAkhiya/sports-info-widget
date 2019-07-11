@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import * as fromRoot from "../../app-reducer";
 import * as Auth from "../../store/auth/auth.actions";
 import * as Ads from "../../store/ads-management/ads.actions";
@@ -20,6 +20,7 @@ import { SlugifyPipe } from "@pipes/slugpipe";
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
 import { CricketService } from "@providers/cricket-service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-main-header",
@@ -41,6 +42,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   timeout;
   isLogin: boolean;
   isuserblock: boolean;
+  value:Observable<any>;
   public windowinnerWidth: any;
 
   constructor(
@@ -92,14 +94,20 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getHeader();
+
+
     this.authService.authState.subscribe((user) => {
       console.log('checksocial', user);
       if (user == null) {
         this.isLogin = false
+        this.store.dispatch(new Auth.SetUnauthenticated);
       }
       else {
         this.socialUser = user;
         this.isLogin = true
+        this.store.dispatch(new Auth.SetAuthenticated);
+        this.value = this.store.select(fromRoot.getIsAuth)
+        console.log('valueee', this.value);
       }
     });
 
@@ -143,11 +151,11 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       this.responsiveSticky(128);
       console.log("width change" + innerWidth);
     }
-    else{
+    else {
       this.responsiveSticky(129);
     }
   }
-  
+
   ngAfterViewInit() {
     this.changeDetector.detectChanges();
   }
@@ -246,7 +254,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   setPeriodScore(match, index, period_scores) {
     // console.log("setPeriodScore");
-
     if (period_scores.length > 0) {
       period_scores.map(sPScore => {
         if (sPScore.home_score) {
@@ -327,7 +334,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         if (res) {
           this.socialUser = res;
           this.validateSocialLogin('fb', res.authToken)
-          this.store.dispatch(new Auth.SetAuthenticated());
           this.modalService.dismissAll();
         }
       });
@@ -340,7 +346,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(res => {
         if (res) {
-          this.store.dispatch(new Auth.SetAuthenticated());
           this.socialUser = res;
           this.validateSocialLogin('google', res.idToken)
           this.modalService.dismissAll();
@@ -356,6 +361,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+        this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {
           this.isuserblock = true
@@ -372,6 +378,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+        this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {
           this.isuserblock = true
@@ -387,6 +394,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   getuserLogout(token) {
     this.sportsService.userlogout(token).subscribe((res) => {
       console.log(res);
+      this.store.dispatch(new Auth.SetUnauthenticated());
     })
   }
 

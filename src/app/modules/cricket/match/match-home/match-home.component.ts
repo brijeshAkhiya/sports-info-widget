@@ -4,6 +4,7 @@ import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 import * as moment from "moment";
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: "app-match-home",
   templateUrl: "./match-home.component.html",
@@ -70,6 +71,7 @@ export class MatchHomeComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     private router: Router,
+    private title: Title,
     private cricketService: CricketService,
     private commonService: CommonService
   ) {
@@ -77,7 +79,7 @@ export class MatchHomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-    this.matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket', 'match')
+    this.matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'cricket', 'match')
     this.paramArticle.reqParams.aIds.push(this.matchid);
     this.activatedroute.params.subscribe(params => {
       this.matchid = this.commonService.getIds(params.id, 'cricket', 'match')
@@ -161,7 +163,7 @@ export class MatchHomeComponent implements OnInit {
             this.startLiveUpdateAfterTime();
           }
           if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted" || this.matchdata.sport_event_status.status == "delayed") {
-          this.getLiveUpdate(this);
+            this.getLiveUpdate(this);
           }
 
           this.setTitle();
@@ -347,12 +349,15 @@ export class MatchHomeComponent implements OnInit {
         if (res.data) {
           if (res.data.next_meetings && res.data.next_meetings.length > 0)
             this.nextmatches = this.commonService.sortArr(res.data.next_meetings, 'Do MMMM YYYY', 'scheduled', 'asc');
-
+          else
+            this.nextmatches = [];
           if (res.data.last_meetings && res.data.last_meetings.length > 0) {
             let last_meetings = res.data.last_meetings.filter((match) => match.period_scores);
             this.matchesresultdata = this.cricketService.initCompetitorScore(last_meetings)
             this.matchesresultdata = this.commonService.sortArr(this.matchesresultdata, 'Do MMMM YYYY', 'scheduled', 'desc');
           }
+          else
+            this.matchesresultdata = [];
         }
       });
   }
@@ -712,6 +717,7 @@ export class MatchHomeComponent implements OnInit {
           ball: timeline.ball_number,
           extra_runs:
             typeof timeline.bowling_params.extra_runs_conceded != "undefined"
+            // ? timeline.bowling_params.extra_runs_type
               ? timeline.bowling_params.extra_runs_type
               : 0
         };
@@ -951,13 +957,17 @@ export class MatchHomeComponent implements OnInit {
   }
 
   /** Change page title */
+  currentTeam:any;
+  oppoTeam:any;
   setTitle() {
     if (this.matchdata.sport_event_status.match_result)
-      document.title = this.matchdata.sport_event_status.match_result;
+      this.title.setTitle(this.matchdata.sport_event_status.match_result)
+    //document.title = this.matchdata.sport_event_status.match_result;
     else if (this.matchdata.sport_event_status.current_inning >= 1) {
       let currentInning = this.matchdata.statistics.innings.filter((inning) => inning.number == this.matchdata.sport_event_status.current_inning);
       if (currentInning) {
-        let currentTeamInning = currentInning[0].teams.filter((team) => team.id == currentInning[0].batting_team)
+        let currentTeamInning = this.currentTeam = currentInning[0].teams.filter((team) => team.id == currentInning[0].batting_team)
+        this.oppoTeam = currentInning[0].teams.filter((team) => team.id == currentInning[0].bowling_team)
         document.title = currentTeamInning[0].abbreviation +' ' +this.matchdata.sport_event_status.display_score + ' (' + this.matchdata.sport_event_status.display_overs + ' ov)';
       }
     }

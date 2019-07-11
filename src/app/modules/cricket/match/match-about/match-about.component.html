@@ -21,7 +21,11 @@
     <p class="light-text">
       <a [routerLink]="['/cricket/tournament', (data.sport_event.tournament.id | splitID), (data.sport_event.tournament.name | slugify) ]">
       {{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}
-      </a></p>
+      </a>
+       <span class="text-capitalize" *ngIf="data.sport_event.tournament_round &&  data.sport_event.tournament_round.name">
+         {{ (data.sport_event.season.name || data.sport_event.tournament.name) ? ' - '+ data.sport_event.tournament_round.name : data.sport_event.tournament_round.name  }}
+        </span>
+    </p>
     <h1 *ngIf="data.sport_event.competitors">
       {{data.sport_event.competitors[0].name}} vs {{data.sport_event?.competitors[1].name}}
     </h1>
@@ -83,7 +87,7 @@
           <h4 class="score"
             [ngClass]="{'running' : competitor.period_scores[0].number == data.sport_event_status.current_inning}"
             *ngIf="competitor.period_scores && competitor.period_scores[0]">
-            {{competitor.period_scores[0].display_score}} ({{competitor.period_scores[0].display_overs}} ov)
+            {{competitor.period_scores[0].display_score | cricketScore}} ({{competitor.period_scores[0].display_overs}} ov)
           </h4>
         </div>
       </ng-template>
