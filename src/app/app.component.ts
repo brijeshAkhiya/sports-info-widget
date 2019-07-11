@@ -45,12 +45,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     //get data from ngrx store through meta tags actions
-    this.store.subscribe((data: any) => {
-      let metadata = data.Metatags.MetaTags
+    this.store.select('Metatags').subscribe((data: any) => {
+      let metadata = data.Metatags
       let metaarray = [];
       metadata.map((data) => {
         let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
-        
         metaarray[routerUrl[4]] = data
       })
       this.metatagsObj = { ...metaarray }
@@ -78,8 +77,8 @@ export class AppComponent implements OnInit {
   }
 
   setmetatags(routerURL) {
-    console.log('routee',routerURL);
-    
+    console.log('routee', routerURL);
+
     let data = this.metatagsObj[routerURL]
     if (data) {
       this.meta.updateTag({ name: 'title', content: data.title ? data.title : 'Sports.info' });

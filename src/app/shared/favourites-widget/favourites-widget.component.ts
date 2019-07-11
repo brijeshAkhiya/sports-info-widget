@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SportsService } from "@providers/sports-service";
+import { Store } from "@ngrx/store";
+import * as fromRoot from '../../app-reducer'
 
 @Component({
   selector: 'app-favourites-widget',
@@ -11,32 +13,28 @@ export class FavouritesWidgetComponent implements OnInit {
   isadded: boolean = false
   userfavourites: any;
   isLogin: boolean = true;
-  constructor(private sportsService: SportsService) { }
+  constructor(private sportsService: SportsService, private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     if (localStorage.getItem('userT')) {
-      this.getuserfavourites()
-    }
-  }
-
-  //get user favourites
-  getuserfavourites() {
-    this.sportsService.getuserfavourite().subscribe((res: any) => {
-      this.userfavourites = res
-      this.userfavourites.data.map((data) => {
-        if (data.id == this.value.id) {
-          this.isadded = true
-        }
+      this.store.select('Favourites').subscribe((data)=>{
+        this.userfavourites = data.Favourites
+        console.log(this.userfavourites); 
+        this.userfavourites.map((data) => {
+          if (data.id == this.value.id) {
+            this.isadded = true
+          }
+        })
       })
-    })
+    }
   }
 
   addfav() {
     if (localStorage.getItem('userT')) {
       if (this.isadded) {
         this.isadded = false
-        this.userfavourites.data.splice(this.userfavourites.data.findIndex(v => v.id === this.value.id), 1);
-        this.sportsService.updatefavourites(this.userfavourites).subscribe((res: any) => {
+        this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
+        this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
           if (res) {
             console.log(res);
           }
@@ -57,8 +55,8 @@ export class FavouritesWidgetComponent implements OnInit {
   }
 
   updatefavourites(data) {
-    this.userfavourites.data.push(data);
-    this.sportsService.updatefavourites(this.userfavourites).subscribe((res: any) => {
+    this.userfavourites.push(data);
+    this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
       if (res) {
         console.log(res);
       }

@@ -4,6 +4,7 @@ import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 import * as moment from "moment";
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: "app-match-home",
   templateUrl: "./match-home.component.html",
@@ -70,6 +71,7 @@ export class MatchHomeComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     private router: Router,
+    private title: Title,
     private cricketService: CricketService,
     private commonService: CommonService
   ) {
@@ -77,7 +79,7 @@ export class MatchHomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-    this.matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket', 'match')
+    this.matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'cricket', 'match')
     this.paramArticle.reqParams.aIds.push(this.matchid);
     this.activatedroute.params.subscribe(params => {
       this.matchid = this.commonService.getIds(params.id, 'cricket', 'match')
@@ -161,7 +163,7 @@ export class MatchHomeComponent implements OnInit {
             this.startLiveUpdateAfterTime();
           }
           if (this.matchdata.sport_event_status.status == "live" || this.matchdata.sport_event_status.status == "interrupted" || this.matchdata.sport_event_status.status == "delayed") {
-          this.getLiveUpdate(this);
+            this.getLiveUpdate(this);
           }
 
           this.setTitle();
@@ -959,7 +961,8 @@ export class MatchHomeComponent implements OnInit {
   oppoTeam:any;
   setTitle() {
     if (this.matchdata.sport_event_status.match_result)
-      document.title = this.matchdata.sport_event_status.match_result;
+      this.title.setTitle(this.matchdata.sport_event_status.match_result)
+    //document.title = this.matchdata.sport_event_status.match_result;
     else if (this.matchdata.sport_event_status.current_inning >= 1) {
       let currentInning = this.matchdata.statistics.innings.filter((inning) => inning.number == this.matchdata.sport_event_status.current_inning);
       if (currentInning) {
