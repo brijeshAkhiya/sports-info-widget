@@ -20,9 +20,8 @@ export class CustomAdsWidgetComponent implements OnInit {
 
   ngOnInit() {
     //ngrx store code
-  
-    this.store.subscribe(data => {
-      let arr = data["ads"].Ads;
+    this.store.select('ads').subscribe((data: any) => {
+      let arr = data.Ads;
       arr.map(data => {
         if (!this.adsObj[data.eType])
           this.adsObj[data.eType] = [];
@@ -31,11 +30,11 @@ export class CustomAdsWidgetComponent implements OnInit {
       //pick random custom ad from ngrx store data obj
       if (this.adsObj[this.type])
         this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
-    });
-  } 
-  
+    })
+  }
+
   /** For load custom js */
-  loadJS(){
+  loadJS() {
     var myScript = document.createElement('script');
     myScript.textContent = ''; // TEMP Load Js
     document.head.appendChild(myScript);

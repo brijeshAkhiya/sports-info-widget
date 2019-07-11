@@ -23,7 +23,7 @@ export const reducers: ActionReducerMap<State> = {
 //auth states 
 
 export const getAuthState = createFeatureSelector<fromAuth.State>('auth');
-export const getIsAuth = createSelector(getAuthState,fromAuth.getIsAuth)
+export const getIsAuth = createSelector(getAuthState, fromAuth.getIsAuth)
 
 //ads states
 export const adsState = createFeatureSelector<fromAds.Ads>('ads');
@@ -34,10 +34,10 @@ export const getAdsState = createSelector(
 
 //meta tags states
 
-export const metaState = (state) => state;
+export const metaState = createFeatureSelector<fromMetatags.MetaTags>('MetaTags');
 export const getMetaState = createSelector(
     metaState,
-    state => state.Metatags
+    fromMetatags.getMetaTags
 )
 
 

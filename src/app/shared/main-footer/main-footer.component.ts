@@ -38,8 +38,9 @@ export class MainFooterComponent implements OnInit {
     if (this.isAuth$) {
       this.getUserfavourites();
     }
-    this.store.subscribe((data) => {
-      this.userfavourites = data.Favourites.Favourites
+    this.store.select('Favourites').subscribe((data:any)=>{
+      console.log(data);
+      this.userfavourites = data.Favourites
     })
   }
 

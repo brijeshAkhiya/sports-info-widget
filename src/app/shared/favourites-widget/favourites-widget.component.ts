@@ -17,8 +17,9 @@ export class FavouritesWidgetComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('userT')) {
-      this.store.subscribe((data) => {
-        this.userfavourites = data.Favourites.Favourites
+      this.store.select('Favourites').subscribe((data)=>{
+        this.userfavourites = data.Favourites
+        console.log(this.userfavourites); 
         this.userfavourites.map((data) => {
           if (data.id == this.value.id) {
             this.isadded = true
