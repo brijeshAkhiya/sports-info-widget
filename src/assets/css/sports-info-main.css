@@ -135,15 +135,16 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
-.main-container             { min-height: calc(100vh - 200px);}
-.row.sidebar-row            { margin: 0px -12px; }
-.sidebar-row .content-col   { padding: 0px 12px; width: calc(100% - 344px); }
-.sidebar-row .sidebar-col   { padding: 0px 12px; width: 344px; }
-.row.row-size12             { margin: 0px -12px; }
-.row-size12 [class*="col-"] { padding: 0px 12px; }
-.common-section             { padding: 48px 0px; }
-.common-section.top-padding { padding-bottom: 0px; }
-.sticky-sidebar             { position: sticky; top: 100px; }
+.main-container                 { min-height: calc(100vh - 200px);}
+.row.sidebar-row                { margin: 0px -12px; }
+.sidebar-row .content-col       { padding: 0px 12px; width: calc(100% - 344px); }
+.sidebar-row .sidebar-col       { padding: 0px 12px; width: 344px; }
+.row.row-size12                 { margin: 0px -12px; }
+.row-size12 [class*="col-"]     { padding: 0px 12px; }
+.common-section                 { padding: 48px 0px; }
+.common-section.top-padding     { padding-bottom: 0px; }
+.common-section.bottom-padding  { padding-top: 0px; }
+.sticky-sidebar                 { position: sticky; top: 100px; }
 
 /* -------- Title / Button CSS ------- */
 .common-title-btn                       { margin-bottom: 24px; }
@@ -394,7 +395,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     h2                      { font-size: 26px; line-height: 34px;}
     h3                      { font-size: 20px; line-height: 28px;}
     h4                      { font-size: 18px; line-height: 24px; }
-    h5                      { font-size: 17px; line-height: 21px;}
+    h5,h6                   { font-size: 17px; line-height: 21px;}
     p                       { margin-bottom: 16px;}
     p.bold-text             { line-height: 20px;}
 /* -------- Button Style ------- */

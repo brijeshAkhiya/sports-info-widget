@@ -37,7 +37,7 @@
 
 /* -------- Match Scoreline Section ------- */
 .scoreline-block                        { position: fixed; padding: 15px 0px; width: 100%; bottom: 0px; left: 0px; font-size: 20px; line-height: 30px; color: #fff; font-weight: 500; text-align: center; z-index: 1;}
-.scoreline-block:before                 { content: ""; display: block; position: absolute; left: 50%; bottom: -10px; width: calc(100% - 40px); height: calc(100% + 20px); border-radius: 24px 24px 0px 0px; background: #22336F; transform: translateX(-50%) perspective(1200px) rotateX(45deg) rotate(0deg); -webkit-transform: translateX(-50%) perspective(1200px) rotateX(45deg) rotate(0deg); z-index: -1;}
+.scoreline-block:before                 { content: ""; display: block; position: absolute; left: 50%; bottom: -11px; width: calc(100% - 40px); height: calc(100% + 20px); border-radius: 24px 24px 0px 0px; background: #22336F; transform: translateX(-50%) perspective(1200px) rotateX(45deg) rotate(0deg); -webkit-transform: translateX(-50%) perspective(1200px) rotateX(45deg) rotate(0deg); z-index: -1;}
 .scoreline-block p                      { margin: 0px; }
 .scoreline-block .item                  { width: calc(50% - 210px); }
 .scoreline-block .item p                { margin-right: 92px; display: inline-block; }

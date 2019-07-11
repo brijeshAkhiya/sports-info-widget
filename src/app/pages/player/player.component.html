@@ -70,8 +70,9 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
+              <!-- titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'], -->
               <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]="{
-                    titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
+                    titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
                     values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
                     subParams : 'batting',
                     header_title:'Batting Stats',

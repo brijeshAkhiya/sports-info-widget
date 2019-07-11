@@ -9,12 +9,17 @@
 .team-about-head .match-result li.win       { background: #ED1A33; }
 
 /* -------- Squad List ------- */
-h4                              { margin-bottom: 24px; }
+h4                              { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 2px solid rgba(0,0,0,0.05); }
+.squad-group                    { margin-bottom: 24px; }
+.squad-group:last-child         { margin-bottom: 0px; }
+.squad-group h6                 { margin-bottom: 16px; font-family: 'Muli', sans-serif; font-weight: 700; }
 .squad-item                     { margin-bottom: 24px; height: 340px; background: #fff; overflow: hidden; cursor: pointer; }
 .squad-item .item-desc          { padding: 16px; background: #fff; text-align: center; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .squad-item:hover .item-desc    { transform: translateY(-64px); -webkit-transform: translateY(-64px); }
 .squad-item .theme-btn          { opacity: 0;}
 .squad-item:hover .theme-btn    { opacity: 1;}
+.squad-item:hover .theme-btn span:before  { left: 0px; }
+.squad-item:hover .theme-btn span:after   { left: 100%; }
 .squad-item p                   { margin-bottom: 16px; line-height: 20px; font-weight: 500; }
 .squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
 
@@ -30,6 +35,11 @@ h4                              { margin-bottom: 24px; }
     .squad-item .theme-btn              { font-size: 14px; }
 }
 
+@media (min-width: 992px) and (max-width: 1199px) {
+/* -------- Squad List ------- */
+    h4                              { padding-bottom: 16px; }
+    .squad-group                    { margin-bottom: 16px; }
+}
 @media (min-width: 992px) and (max-width: 1199px) {
     .team-about-head .team-logo         { width: 180px; padding: 12px;}
     .team-about-head .team-info         { padding: 24px;}
@@ -59,8 +69,10 @@ h4                              { margin-bottom: 24px; }
     .team-about-head .team-info         { margin-left: 16px; padding: 10px 16px;}
     .team-about-head .team-info h5      { margin-bottom: 8px;}
     .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
+    h4                                  { padding-bottom: 12px; }
+    .squad-group                        { margin-bottom: 12px; }
 /* -------- Squad List ------- */
-    .squad-item                         { margin-bottom: 24px; height: 246px; background: #fff; overflow: hidden; cursor: pointer; }
+    .squad-item                         { margin-bottom: 18px; height: 246px; background: #fff; overflow: hidden; cursor: pointer; }
     .squad-item .item-desc              { padding: 12px 2px; }
     .squad-item:hover .item-desc        { transform: translateY(-52px); -webkit-transform: translateY(-52px); }
     .squad-item p                       { margin-bottom: 12px; }
