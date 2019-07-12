@@ -12,7 +12,7 @@
 .tour-stats-table .table tr th:first-child,
 .tour-stats-table .table tr td:first-child      { width: 60px;  }
 .tour-stats-table .table tr th:nth-child(2),
-.tour-stats-table .table tr td:nth-child(2)     { text-align: left; width: 25%;  font-weight: 500;  }
+.tour-stats-table .table tr td:nth-child(2)     { text-align: left; width: 70%;  font-weight: 500;  }
 .tour-stats-table .table tr td:first-child      { font-weight: 500; }
 .tour-stats-table .table tr th:nth-child(2)     { padding-left: 50px; }
 /* @-webkit-keyframes flag-anim {

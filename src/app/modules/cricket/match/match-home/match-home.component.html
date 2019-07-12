@@ -355,7 +355,7 @@
       </div>
     </div>
   </div>
-  <div class="scoreline-block d-flex justify-content-between"  *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
+  <div id="scoreline-block" class="scoreline-block d-flex justify-content-between"  *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
     <div class="item" *ngIf="batsmanList && batsmanList.length > 0">
       <p *ngFor="let batsman of batsmanList; let i = index;">
         {{batsman.name | split}} {{i == 0 ? "*" : ""}}
@@ -391,7 +391,7 @@
       </p>
     </div>
   </div>
-  <!-- <div class="scoreline-block d-flex justify-content-between" >
+  <!-- <div id="scoreline-block" class="scoreline-block d-flex justify-content-between" >
     <div class="item">
       <p >
        sadasdasd
