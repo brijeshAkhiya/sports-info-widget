@@ -104,13 +104,10 @@ import { LoginModalComponent } from './widget/login-modal/login-modal.component'
         TeamCardComponent,
         LoaderComponent,
         SidebarLinksComponent,
-<<<<<<< HEAD
         TeamsComponent,
         TeamComponent,
         PlayerComponent,
-=======
         LoginModalComponent,
->>>>>>> 94e4d48293083005cc63506cdff2e2d86e559959
     ],
     providers: [
         /** All Pipes */
