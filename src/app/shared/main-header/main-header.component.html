@@ -105,12 +105,11 @@
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
     </div>
-
   </div>
   <ul class="navbar-nav navbar-rightside login-search">
     <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
     <li *ngIf="!isLogin">
-      <a class="login" (click)="open(content)"></a>
+      <a class="login" (click)="openmodal()"></a>
     </li>
     <li ngbDropdown *ngIf="isLogin">
       <a class="login" [ngClass]="{'logged': isLogin}" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
@@ -132,24 +131,4 @@
     </li>
   </ul> -->
 </nav>
-
 <app-search [issearch]="issearch" [searchOpen]="searchOpen" (clickOutside)="close($event)"></app-search>
-
-<ng-template #content let-modal>
-  <div class="modal-body">
-    <h1>Sign In</h1>
-    <ul>
-      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">Sign in with Google</button>
-      </li>
-      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">Continue with
-          Facebook</button></li>
-    </ul>
-    <p class="signin-text">By signing in with Google or Facebook, you agree to
-      SportsInfo’s <a [routerLink]="['/terms-and-conditions']" (click)="closemodal()">Terms</a> and <a
-        [routerLink]="['/privacy-policy']" (click)="closemodal()">Privacy Policies</a>.</p>
-  </div>
-</ng-template>
-<div class="login-toast active d-flex align-items-center" *ngIf="isuserblock">
-  <img src="assets/images/blog/error-icon.svg">
-  <p class="dark-text">This email id "email id" is blocked by admin. Please contact to admin "email id of admin"</p>
-</div>
