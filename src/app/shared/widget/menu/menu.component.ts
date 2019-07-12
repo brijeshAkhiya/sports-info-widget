@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     if (typeof this.options != 'undefined') {
-      if (this.options.type == 'cricket') {
+      if (this.options.sport == 'cricket') {
         this.getCricketSeries();
       }
     }
@@ -50,6 +50,7 @@ export class MenuComponent implements OnInit {
   //get current cricket series 
   getCricketSeries() {
     this.sportsService.getcurrentseries().subscribe((res: any) => {
+      console.log(res);
       if (res.data) {
         this.series = res.data
       }

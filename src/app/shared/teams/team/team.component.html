@@ -8,7 +8,8 @@
 
         <div *ngIf="teamProfile"
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>{{teamProfile?.name}}</h1>
+          <h1 *ngIf="sport == 'cricket'">{{teamProfile?.name}}</h1>
+          <h1 *ngIf="sport == 'kabaddi'">{{teamProfile?.tname}}</h1>
           <app-favourites-widget [value]="{id:teamProfile?.id,type:'team',name:teamProfile?.name}">
           </app-favourites-widget>
         </div>
@@ -19,31 +20,53 @@
             <ng-template ngbTabTitle>About</ng-template>
             <app-loader *ngIf="loading"></app-loader>
             <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
+
             <ng-template ngbTabContent>
               <!-- About Team Section-->
-              <section class="team-about-head d-flex">
-                <div class="team-logo align-self-start rounded-box common-shadow">
-                  <div class="team-logo-img" [lazyLoad]="teamProfile?.id | logosurl"
-                    [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
-                </div>
-                <div class="team-info align-items-center rounded-box common-shadow">
-                  <h5 *ngIf="teamProfile?.abbreviation"><span class="title light-text">Abbreviation :
-                    </span>{{teamProfile?.abbreviation}}</h5>
-                  <h5 *ngIf="teamProfile?.manager_name"><span class="title light-text">Manager :
-                    </span>{{teamProfile?.manager_name | split}}</h5>
-                  <h5 *ngIf="teamProfile?.results">
-                    <span class="title light-text">Recent Matches : </span>
-                    <ul class="match-result">
-                      <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamProfile?.results">{{item}}</li>
-                    </ul>
-                  </h5>
-                </div>
-              </section>
+              <!--Cricket  About  Section-->
+              <ng-container *ngIf="sport == 'cricket'">
+                <section class="team-about-head d-flex">
+                  <div class="team-logo align-self-start rounded-box common-shadow">
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.id | logosurl"
+                      [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
+                  </div>
+                  <div class="team-info align-items-center rounded-box common-shadow">
+                    <h5 *ngIf="teamProfile?.abbreviation"><span class="title light-text">Abbreviation :
+                      </span>{{teamProfile?.abbreviation}}</h5>
+                    <h5 *ngIf="teamProfile?.manager_name"><span class="title light-text">Manager :
+                      </span>{{teamProfile?.manager_name | split}}</h5>
+                    <h5 *ngIf="teamProfile?.results">
+                      <span class="title light-text">Recent Matches : </span>
+                      <ul class="match-result">
+                        <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamProfile?.results">{{item}}</li>
+                      </ul>
+                    </h5>
+                  </div>
+                </section>
+              </ng-container>
+
+              <!--Kabaddi  About  Section-->
+              <ng-container *ngIf="sport == 'kabaddi'">
+                <section class="team-about-head d-flex">
+                  <div class="team-logo align-self-start rounded-box common-shadow">
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.teamlogo"
+                      [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
+                  </div>
+                  <div class="team-info align-items-center rounded-box common-shadow">
+                    <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span class="title light-text">Stadium :
+                      </span>{{teamProfile?.venue?.name}}
+                    </h5>
+                    <h5 *ngIf="teamProfile?.founded"><span class="title light-text">Founded :
+                      </span>{{teamProfile?.founded}}
+                    </h5>
+                  </div>
+                </section>
+              </ng-container>
+
               <!-- Squad Section-->
               <section class="common-section squad-list" *ngIf="teamProfile?.players">
                 <h4 class="squad-title">Squad</h4>
-                <div class="squad-group">
-                  <h6>Raiders</h6>
+                <div class="squad-group" *ngIf="sport == 'cricket'">
                   <div class="row row-size12">
                     <div class="col-xl-3 col-sm-4" *ngFor="let player of teamProfile?.players">
                       <div class="squad-item fullblock-link-container rounded-box common-shadow">
@@ -60,24 +83,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="squad-group">
-                  <h6>Defenders</h6>
-                  <div class="row row-size12">
-                    <div class="col-xl-3 col-sm-4" *ngFor="let player of teamProfile?.players">
-                      <div class="squad-item fullblock-link-container rounded-box common-shadow">
-                        <img alt="{{player.name | split}}" [lazyLoad]="player?.id| playerimage:['m']"
-                          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
-                        <div class="item-desc">
-                          <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
-                          <a [routerLink]="" class="theme-btn">View Player<span></span></a>
-                        </div>
-                        <a class="fullblock-link"
-                          [routerLink]="['/cricket/player', (player?.id | splitID), ((player?.name | split) | slugify )]">
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="squad-group" *ngIf="sport == 'kabaddi'">
+                  <ng-container *ngFor="let player of  objectKeys(teamProfile?.players)">
+                    <h6> {{player}}</h6>
+                    <ng-container *ngTemplateOutlet="kabaddiPlayer;context:{players:teamProfile?.players[player]}">
+                    </ng-container>
+                  </ng-container>
                 </div>
+
               </section>
             </ng-template>
           </ngb-tab>
@@ -135,3 +149,20 @@
     </div>
   </div>
 </section>
+
+<ng-template #kabaddiPlayer let-players="players">
+  <div class="row row-size12">
+    <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
+      <div class="squad-item fullblock-link-container rounded-box common-shadow">
+        <img alt="{{player.fullname}}" [lazyLoad]="player?.pid" [defaultImage]="cricketService.playerplaceholder"
+          [offset]="commonService.lazyloadoffset">
+        <div class="item-desc">
+          <p>{{player.fullname}} <span class="light-text">{{player.positionid | stringunder}}</span></p>
+          <a [routerLink]="" class="theme-btn">View Player<span></span></a>
+        </div>
+        <a class="fullblock-link" [routerLink]="['/kabaddi/player', (player?.pid), (player?.fullname | slugify )]">
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>

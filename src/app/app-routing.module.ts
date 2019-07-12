@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: './modules/cricket/cricket.module#CricketModule',
     },
     {
+        path: 'kabaddi',
+        loadChildren: './modules/kabaddi/kabaddi.module#KabaddiModule',
+    },
+    {
         path: 'blog',
         component: BlogsComponent
     },

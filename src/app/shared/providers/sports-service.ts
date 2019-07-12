@@ -403,4 +403,33 @@ export class SportsService {
   }
 
 
+  /**
+   * Kabaddi Services
+   */
+
+  //get teams
+  getkabadditeams() {
+    return this.http.get(
+      environment.apiUrl +
+      environment.version +
+      `/kabaddi/team/list?per_page=15&paged=1`
+    );
+  }
+  //get team details
+  getkabaddiTeamProfile(id) {
+    return this.http.get(
+      environment.apiUrl +
+      environment.version +
+      `/kabaddi/team/${id}/profile`
+    );
+  }
+
+  //get player profile
+  getKabaddiPlayerprofile(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/player/${id}`
+    );
+  }
+
+
 }

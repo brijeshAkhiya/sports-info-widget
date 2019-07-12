@@ -40,9 +40,6 @@ import { MatchCounterComponent } from './match/match-commentry/match-counter/mat
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
 import { AgmCoreModule } from '@agm/core';
-import { TeamsComponent } from '@app/pages/teams/teams.component';
-import { TeamComponent } from '@app/pages/teams/team/team.component';
-import { PlayerComponent } from '@app/pages/player/player.component';
 
 @NgModule({
   declarations: [
@@ -68,9 +65,6 @@ import { PlayerComponent } from '@app/pages/player/player.component';
     UpcomingComponent,
     CommentryComponent,
     LiveMatchTrackerComponent,
-    TeamsComponent,
-    TeamComponent,
-    PlayerComponent
   ],
   imports: [
     CommonModule,
