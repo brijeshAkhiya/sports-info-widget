@@ -12,9 +12,9 @@ import { TournamentStatsComponent } from './tournament/tournament-stats/tourname
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 import { MatchHomeComponent } from './match/match-home/match-home.component';
-import { TeamsComponent } from '@app/pages/teams/teams.component';
-import { TeamComponent } from '@app/pages/teams/team/team.component';
-import { PlayerComponent } from '@app/pages/player/player.component';
+import { TeamsComponent } from '@app/shared/teams/teams.component';
+import { TeamComponent } from '@app/shared/teams/team/team.component';
+import { PlayerComponent } from '@app/shared/player/player.component';
 
 const routes: Routes = [
     {
@@ -76,7 +76,8 @@ const routes: Routes = [
             },
             {
                 path: 'player/:id/:slug',
-                component: PlayerComponent
+                component: PlayerComponent,
+                data: { 'sport': 'cricket' }
             }
         ]
     }

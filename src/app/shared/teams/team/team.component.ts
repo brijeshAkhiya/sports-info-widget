@@ -21,6 +21,7 @@ export class TeamComponent implements OnInit {
   paramArticle = {}
   sport;
   routeParams;
+  objectKeys = Object.keys
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,11 +35,16 @@ export class TeamComponent implements OnInit {
     let data: any = this.activatedRoute.data;
     this.sport = data.value.sport;
     this.routeParams = this.activatedRoute.snapshot.params
-    this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, sport: this.sport }
-    if (this.routeParams.tournamentid)
-      this.getTournamentTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'), this.commonService.getIds(this.routeParams.tournamentid, 'cricket', 'tournament'))
-    else
-      this.getTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'));
+    if(this.sport == 'cricket'){
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, sport: this.sport }
+      if (this.routeParams.tournamentid)
+        this.getTournamentTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'), this.commonService.getIds(this.routeParams.tournamentid, 'cricket', 'tournament'))
+      else
+        this.getTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'));
+    }
+    else if(this.sport == 'kabaddi'){
+      this.getKabaddiTeamProfile(this.routeParams.teamid);
+    }
   }
 
   getTeamProfile(teamid) {
@@ -98,5 +104,26 @@ export class TeamComponent implements OnInit {
     }, (error) => {
       this.loadingFixture = false;
     });
+  }
+
+
+  getKabaddiTeamProfile(teamid) {
+    this.loading = true;
+    if (teamid) {
+      this.sportsService.getkabaddiTeamProfile(teamid).subscribe((res: any) => {
+        this.loading = false;
+        if (res.data)
+          this.teamProfile = res.data.items[0]
+          this.teamProfile.players = [];
+          this.teamProfile.squads.forEach(element => {
+            (this.teamProfile.players[element.positionname] = this.teamProfile.players[element.positionname] || []).push(element);
+          });
+          console.log(this.teamProfile);
+          console.log(Object.keys(this.teamProfile.players));
+          
+      }, (error) => {
+        this.loading = false;
+      })
+    }
   }
 }

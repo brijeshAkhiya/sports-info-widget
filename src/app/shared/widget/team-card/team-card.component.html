@@ -2,16 +2,36 @@
   <div class="row row-size12">
     <div class="col-md-6 col-lg-12 col-xl-6" *ngFor="let team of teams">
       <div class="team-item rounded-box common-shadow d-flex fullblock-link-container">
-        <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
-            [defaultImage]="cricketService.flagplaceholder" alt="team-flag"></div>
-        <div class="team-name">
-          <h4>{{team.name}}</h4>
-          <h5>{{team.abbreviation}}</h5>
-        </div>
-        <a *ngIf="tournament" class="fullblock-link"
-          [routerLink]="['/cricket/team', (tournament | splitID) ,(team.id | splitID),(team.name | slugify)]"></a>
-        <a *ngIf="!tournament" class="fullblock-link"
-          [routerLink]="['/cricket/team',(team.id | splitID),(team.name | slugify)]"></a>
+
+        <!-- Cricket Teams-->
+        <ng-container *ngIf="sport=='cricket'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
+              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+          </div>
+          <div class="team-name">
+            <h4>{{team.name}}</h4>
+            <h5>{{team.abbreviation}}</h5>
+          </div>
+          <a *ngIf="tournament" class="fullblock-link"
+            [routerLink]="['/cricket/team', (tournament | splitID) ,(team.id | splitID),(team.name | slugify)]"></a>
+          <a *ngIf="!tournament" class="fullblock-link"
+            [routerLink]="['/cricket/team',(team.id | splitID),(team.name | slugify)]">
+          </a>
+        </ng-container>
+
+        <!-- Kabaddi Teams-->
+        <ng-container *ngIf="sport=='kabaddi'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.teamlogo"
+              [defaultImage]="cricketService.flagplaceholder" alt="team?.tname">
+          </div>
+          <div class="team-name">
+            <h4>{{team.tname}}</h4>
+            <h5>{{team.city}}</h5>
+          </div>
+          <a class="fullblock-link" [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
+          </a>
+        </ng-container>
+
       </div>
     </div>
   </div>

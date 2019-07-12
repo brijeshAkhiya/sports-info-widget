@@ -357,8 +357,8 @@
   </div>
   <div class="scoreline-block d-flex justify-content-between"  *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
     <div class="item" *ngIf="batsmanList && batsmanList.length > 0">
-      <p *ngFor="let batsman of batsmanList">
-        {{batsman.name | split}}
+      <p *ngFor="let batsman of batsmanList; let i = index;">
+        {{batsman.name | split}} {{i == 0 ? "*" : ""}}
         <span>{{batsman.statistics && batsman.statistics.runs ? batsman.statistics.runs : 0}}
           <span
             class="light-white">({{batsman.statistics && batsman.statistics.balls_faced ? batsman.statistics.balls_faced : 0}})</span>
@@ -385,7 +385,7 @@
           </span>
         </span>
       </p>
-      <p *ngIf="matchdata.sport_event_status.current_inning">
+      <p *ngIf="matchdata.sport_event_status.current_inning == 2">
         <span class="light-white target">Target</span> 
         <span>{{matchdata.sport_event_status.target}}</span>
       </p>

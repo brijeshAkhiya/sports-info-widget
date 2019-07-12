@@ -48,10 +48,12 @@ export class AppComponent implements OnInit {
     this.store.select('Metatags').subscribe((data: any) => {
       let metadata = data.Metatags
       let metaarray = [];
-      metadata.map((data) => {
-        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
-        metaarray[routerUrl[4]] = data
-      })
+      if(metadata && metadata.length > 0){
+        metadata.map((data) => {
+          let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
+          metaarray[routerUrl[4]] = data
+        })
+      }
       this.metatagsObj = { ...metaarray }
     })
 

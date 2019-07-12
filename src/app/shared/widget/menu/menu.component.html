@@ -1,40 +1,63 @@
-<div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'cricket'">
-  <div class="sub-navabar-inner d-flex">
-    <a class="submenu-back" [routerLink]="['/cricket']">Cricket</a>
-    <div class="sub-navbar-container" id="sub-navbar-nav">
-      <ul #subnavbarmenu class="subnavbarmenu">
-        <li><a [routerLink]="['/cricket']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-        </li>
-        <li><a [routerLink]="['/cricket/fixtures']" routerLinkActive="active">Fixtures</a></li>
-        <li ngbDropdown *ngIf="series && series.length > 0">
-          <a id="dropdownBasic1" ngbDropdownToggle>Series</a>
-          <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <li ngbDropdownItem *ngFor="let item of series | slice:0:4"><a
-                [routerLink]="['/cricket/tournament',(item.id | splitID),(item.name | slugify)]">{{item.name}}</a></li>
-          </ul>
-        </li>
-        <li><a class="special-nav-item" [routerLink]="['/cricket/tournament/2474/world-cup']">World
-            Cup 2019</a></li>
-      </ul>
-      <div id="subnav-pointer" #subnavpointer></div>
+<ng-container *ngIf="options.sport == 'cricket'">
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
+    <div class="sub-navabar-inner d-flex">
+      <a class="submenu-back" [routerLink]="['/cricket']">Cricket</a>
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu">
+          <li><a [routerLink]="['/cricket']" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">Home</a>
+          </li>
+          <li><a [routerLink]="['/cricket/fixtures']" routerLinkActive="active">Fixtures</a></li>
+          <li ngbDropdown *ngIf="series && series.length > 0">
+            <a id="dropdownBasic1" ngbDropdownToggle>Series</a>
+            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <li ngbDropdownItem *ngFor="let item of series | slice:0:4"><a
+                  [routerLink]="['/cricket/tournament',(item.id | splitID),(item.name | slugify)]">{{item.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="special-nav-item" [routerLink]="['/cricket/tournament/2474/world-cup']">World
+              Cup 2019</a></li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
   </div>
-</div>
 
-<div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'tournament'">
-  <div class="sub-navabar-inner d-flex">
-    <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
-    <div class="sub-navbar-container" id="sub-navbar-nav">
-      <ul #subnavbarmenu class="subnavbarmenu">
-        <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-        <li><a [routerLink]="['./fixtures']" routerLinkActive="active">Fixtures</a></li>
-        <li><a [routerLink]="['./teams']" routerLinkActive="active">Teams</a></li>
-        <li><a [routerLink]="['./stats']" routerLinkActive="active">Stats</a></li>
-        <li><a [routerLink]="['./standings']" routerLinkActive="active">Standings</a></li>
-      </ul>
-      <div id="subnav-pointer" #subnavpointer></div>
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'tournament'">
+    <div class="sub-navabar-inner d-flex">
+      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu">
+          <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+          <li><a [routerLink]="['./fixtures']" routerLinkActive="active">Fixtures</a></li>
+          <li><a [routerLink]="['./teams']" routerLinkActive="active">Teams</a></li>
+          <li><a [routerLink]="['./stats']" routerLinkActive="active">Stats</a></li>
+          <li><a [routerLink]="['./standings']" routerLinkActive="active">Standings</a></li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
   </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="options.sport == 'kabaddi'">
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
+    <div class="sub-navabar-inner d-flex">
+      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu">
+          <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+          <li><a [routerLink]="['./fixtures']" routerLinkActive="active">Fixtures</a></li>
+          <li><a [routerLink]="['./teams']" routerLinkActive="active">Teams</a></li>
+          <li><a [routerLink]="['./stats']" routerLinkActive="active">Stats</a></li>
+          <li><a [routerLink]="['./table']" routerLinkActive="active">Table</a></li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</ng-container>

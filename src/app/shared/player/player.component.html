@@ -5,11 +5,12 @@
       <div class="content-col">
 
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!loading && (!playerData?.player)"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && (!playerData)"></app-no-data-widget>
 
         <div *ngIf="playerData"
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>{{playerData?.player?.name | split}}</h1>
+          <h1 *ngIf="sport == 'cricket'">{{playerData?.player?.name | split}}</h1>
+          <h1 *ngIf="sport == 'kabaddi'">{{playerData?.fullname}}</h1>
           <app-favourites-widget [value]="{id:playerid,type:'player',name:playerData?.player?.name | split}">
           </app-favourites-widget>
         </div>
@@ -20,7 +21,7 @@
             <!-- Profile Section-->
             <ng-template ngbTabTitle>Profile</ng-template>
             <ng-template ngbTabContent>
-              <section class="player-profile d-flex">
+              <section class="player-profile d-flex" *ngIf="sport == 'cricket'">
                 <div class="player-pic">
                   <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerData?.player?.id | playerimage:['m']"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
@@ -54,6 +55,41 @@
                     </div> -->
                 </div>
               </section>
+
+              <section class="player-profile d-flex" *ngIf="sport == 'kabaddi'">
+                <div class="player-pic">
+                  <img class="common-shadow rounded-box" alt="playerData?.fullname" [lazyLoad]="playerData?.pid"
+                    [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
+                </div>
+                <div class="player-info d-flex common-shadow rounded-box" >
+                  <div class="info-col">
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Full Name', value: playerData?.fullname  }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Born', value: playerData?.birthdate | date }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Nationality', value: playerData?.nationality }">
+                    </ng-container>
+                  </div>
+                  <div class="info-col">
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Position', value: playerData?.positionname }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Height', value: playerData?.height }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Weight', value: playerData?.weight }">
+                    </ng-container>
+                  </div>
+                  <!-- <div class="info-col">
+                        <p class="light-title">jersey no</p>
+                        <p>{{playerData?.jerseyno}}</p>
+                      </div> -->
+                </div>
+              </section>
               <section class="common-section top-padding quick-stats" *ngIf="stats">
                 <h4>Quick Stats</h4>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
@@ -70,10 +106,11 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
-              <!-- titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'], -->
+              <!--  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
+                    -->
               <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]="{
-                    titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
-                    values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
+                  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
+                  values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
                     subParams : 'batting',
                     header_title:'Batting Stats',
                     class : ['player-state'],
