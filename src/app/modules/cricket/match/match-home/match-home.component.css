@@ -37,7 +37,9 @@
 
 /* -------- Match Scoreline Section ------- */
 .scoreline-block                        { position: fixed; padding: 15px 0px; width: 100%; bottom: 0px; left: 0px; font-size: 20px; line-height: 30px; color: #fff; font-weight: 500; text-align: center; z-index: 1;}
-.scoreline-block:before                 { content: ""; display: block; position: absolute; left: 50%; bottom: -11px; width: calc(100% - 40px); height: calc(100% + 20px); border-radius: 24px 24px 0px 0px; background: #22336F; transform: translateX(-50%) perspective(1200px) rotateX(45deg) rotate(0deg); -webkit-transform: translateX(-50%) perspective(1200px) rotateX(45deg) rotate(0deg); z-index: -1;}
+.scoreline-block:after,
+.scoreline-block:before                 { content: ""; display: block; position: absolute; left: 20px; bottom: 0px; width: 60%; height: 100%; border-radius: 24px 24px 0px 0px; background: #22336F; transform: skewX(-35deg); -webkit-transform: skewX(-35deg); z-index: -1;}
+.scoreline-block:after                  { left: auto; right: 20px; transform: skewX(35deg); -webkit-transform: skewX(35deg); }
 .scoreline-block p                      { margin: 0px; }
 .scoreline-block .item                  { width: calc(50% - 210px); }
 .scoreline-block .item p                { margin-right: 92px; display: inline-block; }
@@ -46,9 +48,11 @@
 .scoreline-block .item:last-child p     { margin: 0px 0px 0px 12px;}
 .scoreline-block .item:last-child       { text-align: left; }
 .scoreline-block .item p .target        { margin-left: 12px; padding-left: 24px; position: relative;}
-.scoreline-block .target:before         { content: ""; display: block; position: absolute; left: 0px; top: 50%; height: 100%; width: 3px; transform: translateY(-50%); background: #fff; vertical-align: middle; margin-right: 24px; }
+.scoreline-block .target:before         { content: ""; display: block; position: absolute; left: 0px; top: 50%; height: 100%; width: 3px; transform: translateY(-50%); background: #fff; margin-right: 24px; }
 .scoreline-block .score                 { padding: 18px 32px; position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); font-size: 22px; line-height: 32px; text-transform: uppercase; }
-.scoreline-block .score:before          { content: ""; display: block; position: absolute; left: 50%; bottom:-11px; width: calc(100% - 10px); height: calc(100% + 28px); border-radius: 24px 24px 0px 0px; background: #ED1A33; transform: translateX(-50%) perspective(400px) rotateX(45deg) rotate(0deg); -webkit-transform: translateX(-50%) perspective(400px) rotateX(45deg) rotate(0deg); z-index: -1;}
+.scoreline-block .score:after,
+.scoreline-block .score:before          { content: ""; display: block; position: absolute; left: -5px; bottom: 0px; width: 60%; height: 100%; border-radius: 24px 24px 0px 0px; background: #ED1A33; transform: skewX(-25deg); -webkit-transform: skewX(-25deg); z-index: -1;}
+.scoreline-block .score:after           { left: auto; right: -5px; transform: skewX(25deg); -webkit-transform: skewX(25deg); }
 .scoreline-block .score .value          { margin: 0px 20px;}
 .scoreline-block .dark-red              { color: #930C1C; }
 .scoreline-block .light-white           { opacity: 0.62; }
@@ -60,7 +64,7 @@
     .scoreline-block                        { padding: 12px 0px; font-size: 18px; line-height: 28px; }
     .scoreline-block .item                  { width: calc(50% - 168px); }
     .scoreline-block .item p > span         { margin-left: 24px; }
-    .scoreline-block .score                 { padding: 14px 28px; font-size: 20px; line-height: 30px; }
+    .scoreline-block .score                 { padding: 16px 28px; font-size: 20px; line-height: 30px; }
     .scoreline-block .score .value          { margin: 0px 10px;}
 }
 @media (min-width: 1380px) and (max-width: 1499px) {
@@ -68,26 +72,26 @@
     .scoreline-block                        { padding: 11px 0px; font-size: 17px; line-height: 27px; }
     .scoreline-block .item                  { width: calc(50% - 158px); }
     .scoreline-block .item p > span         { margin-left: 14px; }
-    .scoreline-block .score                 { padding: 13px 24px; font-size: 19px; line-height: 28px; }
+    .scoreline-block .score                 { padding: 13px 32px; font-size: 19px; line-height: 28px; }
     .scoreline-block .score .value          { margin: 0px 8px;}
 }
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Match Scoreline Section ------- */
-    .scoreline-block:before                 { width: calc(100% - 24px); }
     .scoreline-block                        { padding: 8px 0px; font-size: 14px; line-height: 22px; }
     .scoreline-block .item                  { width: calc(50% - 148px); }
     .scoreline-block .item p > span         { margin-left: 12px; }
-    .scoreline-block .score                 { padding: 10px 20px; font-size: 17px; line-height: 27px; }
+    .scoreline-block .score                 { padding: 10px 36px; font-size: 17px; line-height: 27px; }
     .scoreline-block .score .value          { margin: 0px 8px;}
 }
 @media (min-width: 992px) and (max-width: 1199px) {
 /* -------- Match Scoreline Section ------- */
-    .scoreline-block:before                 { width: calc(100% - 18px); }
+    .scoreline-block:before                 { left: 14px; }
+    .scoreline-block:after                  { right: 14px; }
     .scoreline-block                        { padding: 8px 0px; font-size: 14px; line-height: 22px; }
     .scoreline-block .item                  { width: calc(50% - 136px); }
     .scoreline-block .item p                { margin-right: 48px;}
     .scoreline-block .item p > span         { margin-left: 8px; }
-    .scoreline-block .score                 { padding: 10px 16px; font-size: 16px; line-height: 26px; }
+    .scoreline-block .score                 { padding: 10px 32px; font-size: 16px; line-height: 26px; }
     .scoreline-block .score .value          { margin: 0px 6px;}
 
 }
@@ -99,7 +103,8 @@
 }
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Match Scoreline Section ------- */
-    .scoreline-block:before                 { width: calc(100% - 14px); }
+    .scoreline-block:before                 { left: 14px; }
+    .scoreline-block:after                  { right: 14px; }
     .scoreline-block                        { padding: 8px 0px; font-size: 12px; line-height: 21px; }
     .scoreline-block .item                  { width: calc(50% - 100px); }
     .scoreline-block .item p                { margin-right: 24px;}
@@ -107,7 +112,7 @@
     .scoreline-block .item:last-child p     { margin: 0px 0px 0px 6px; }
     .scoreline-block .item p .target        { margin-left: 6px; padding-left: 10px;}
     .scoreline-block .item p .target:before { width: 2px; }
-    .scoreline-block .score                 { padding: 8px 16px; font-size: 13px; line-height: 24px; }
+    .scoreline-block .score                 { padding: 11px 20px; font-size: 13px; line-height: 24px; }
     .scoreline-block .score .value          { margin: 0px 6px;}
 }
 
@@ -120,11 +125,11 @@
 /* -------- Match Information Section ------- */
     .team-lineup > div                      { padding: 8px 10px 8px 12px; line-height: 16px; }
 /* -------- Match Scoreline Section ------- */
-    .scoreline-block:before                 { width: calc(100% - 4px); }
+    .scoreline-block:before                 { left: 6px; }
+    .scoreline-block:after                  { right: 6px; }
     .scoreline-block                        { padding: 8px 0px; height: 20px; }
     .scoreline-block .item                  { display: none; }
-    .scoreline-block .score                 { padding: 6px 40px; font-size: 13px; line-height: 20px; }
-    .scoreline-block .score::before         { height: calc(100% + 22px); }
+    .scoreline-block .score                 { padding: 7px 40px; font-size: 13px; line-height: 20px; }
     .scoreline-block .score .value          { margin: 0px 12px;}
 }
 
