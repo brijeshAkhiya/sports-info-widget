@@ -9,7 +9,7 @@ import { NgxTinySliderModule } from 'ngx-tiny-slider';
 import { SocketIoModule } from 'ngx-socket-io';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MomentModule } from 'ngx-moment';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 /** All Pipes */
@@ -51,6 +51,7 @@ import { StringUnder } from './pipes/underlinepipe';
 import { TeamCardComponent } from './widget/team-card/team-card.component';
 import { LoaderComponent } from './widget/loader/loader.component';
 import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.component';
+import { LoginModalComponent } from './widget/login-modal/login-modal.component';
 
 
 
@@ -98,6 +99,7 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         TeamCardComponent,
         LoaderComponent,
         SidebarLinksComponent,
+        LoginModalComponent,
     ],
     providers: [
         /** All Pipes */
@@ -153,8 +155,10 @@ import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.comp
         FavouritesWidgetComponent,
         TeamCardComponent,
         LoaderComponent,
-        SidebarLinksComponent
+        SidebarLinksComponent,
+        LoginModalComponent
     ],
+    entryComponents:[LoginModalComponent]
 
 })
 export class SharedModule { }

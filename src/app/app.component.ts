@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Router, NavigationEnd } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +27,7 @@ import { SwUpdate } from '@angular/service-worker';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit,AfterContentInit {
   users$: Observable<any>
   socialUser: any
   socialUser2: any;
@@ -45,16 +45,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     //get data from ngrx store through meta tags actions
-    this.store.select('Metatags').subscribe((data: any) => {
-      let metadata = data.Metatags
-      let metaarray = [];
-      metadata.map((data) => {
-        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
-        metaarray[routerUrl[4]] = data
-      })
-      this.metatagsObj = { ...metaarray }
-    })
-
+    
     //susbcribe to router events
     this.router.events.subscribe((event) => {
       //scroll to top navigation related
@@ -117,6 +108,18 @@ export class AppComponent implements OnInit {
   updatewebsite() {
     this.isupdate = false
     window.location.reload(true);
+  }
+
+  ngAfterContentInit(){
+    this.store.select('Metatags').subscribe((data: any) => {
+      let metadata = data.MetaTags
+      let metaarray = [];
+      metadata.map((data) => {
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
+        metaarray[routerUrl[4]] = data
+      })
+      this.metatagsObj = { ...metaarray }
+    })
   }
 
   // myfn(){

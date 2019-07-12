@@ -1,8 +1,15 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from '@ngrx/store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from "angularx-social-login";
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
+
+import * as fromRoot from '../../../app-reducer'
+
+import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-blog-view',
@@ -24,12 +31,17 @@ export class BlogViewComponent implements OnInit {
   widgetblogs: any;
   hideBtn: boolean;
   isNocomment: boolean;
+  isAuth$: boolean;
+  socialUser: any;
 
   constructor(
     private router: Router,
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
-    public commonService: CommonService
+    public commonService: CommonService,
+    private modalService: NgbModal,
+    private authService: AuthService,
+    private store: Store<fromRoot.State>
   ) {
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -38,8 +50,9 @@ export class BlogViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('in blogview');
-    console.log('state::blogvieww', window.history.state);
+    this.store.select('auth').subscribe((data) => {
+      this.isAuth$ = data.isAuthenticated
+    });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
     if (window.history.state && window.history.state.id) {
@@ -47,6 +60,11 @@ export class BlogViewComponent implements OnInit {
     }
     else if (this.activatedroute.snapshot.params.slug)
       this.getBlogview(this.activatedroute.snapshot.params.slug);
+
+      this.authService.authState.subscribe((user) => {
+          this.socialUser = user;
+      });
+  
   }
 
 
@@ -137,7 +155,7 @@ export class BlogViewComponent implements OnInit {
         this.isNocomment = true
         setTimeout(() => {
           this.isNocomment = false
-        },3000);
+        }, 3000);
       }
       else {
         this.isloggedin = false
@@ -188,9 +206,9 @@ export class BlogViewComponent implements OnInit {
     let data = {
       nstart: 0,
       nLimit: 10,
-      aIds:this.blogdata.aIds
+      aIds: this.blogdata.aIds
     };
-    this.sportsService.getrelatedpost(data).subscribe((res:any) => {
+    this.sportsService.getrelatedpost(data).subscribe((res: any) => {
       if (res["data"]) {
         this.widgetblogs = res["data"];
       }
@@ -211,6 +229,11 @@ export class BlogViewComponent implements OnInit {
         }
       });
     }
+  }
+
+  //open login modal 
+  openmodal() {
+    this.modalService.open(LoginModalComponent);
   }
 
 }
