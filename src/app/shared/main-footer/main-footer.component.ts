@@ -36,6 +36,8 @@ export class MainFooterComponent implements OnInit {
     this.getContactDetails();
     this.isAuth$ = this.store.select(fromRoot.getIsAuth)
     if (this.isAuth$) {
+      console.log('in auth');
+      
       this.getUserfavourites();
     }
     this.store.select('Favourites').subscribe((data:any)=>{

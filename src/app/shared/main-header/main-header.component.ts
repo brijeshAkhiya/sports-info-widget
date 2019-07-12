@@ -8,19 +8,21 @@ import {
   AfterViewInit,
   HostListener
 } from "@angular/core";
-import { Router, NavigationExtras } from "@angular/router";
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-import { Store, select } from "@ngrx/store";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AuthService } from "angularx-social-login";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Observable } from 'rxjs';
+
+import { LoginModalComponent } from '../widget/login-modal/login-modal.component';
+
 import * as fromRoot from "../../app-reducer";
 import * as Auth from "../../store/auth/auth.actions";
 import * as Ads from "../../store/ads-management/ads.actions";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { SlugifyPipe } from "@pipes/slugpipe";
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
 import { CricketService } from "@providers/cricket-service";
-import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-main-header",
@@ -41,25 +43,19 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   slider = [];
   timeout;
   isLogin: boolean;
-  isuserblock: boolean;
-  value:Observable<any>;
   public windowinnerWidth: any;
+  isopen: boolean = false;
 
   constructor(
     private renderer2: Renderer2,
-    private el: ElementRef,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
-    private slugifyPipe: SlugifyPipe,
     private sportsService: SportsService,
     private modalService: NgbModal,
     private authService: AuthService,
-    private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
     private cricketService: CricketService,
     private commonService: CommonService,
-
-
   ) {
     //get custom ads data Funtion call --->
     this.getCustomAds();
@@ -94,8 +90,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getHeader();
-
-
     this.authService.authState.subscribe((user) => {
       console.log('checksocial', user);
       if (user == null) {
@@ -106,28 +100,10 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         this.socialUser = user;
         this.isLogin = true
         this.store.dispatch(new Auth.SetAuthenticated);
-        this.value = this.store.select(fromRoot.getIsAuth)
-        console.log('valueee', this.value);
       }
     });
 
     // this.innerWidth = window.innerWidth;
-  }
-
-  checklogin() {
-    this.modalService.open('content')
-  }
-  closemodal() {
-    this.modalService.dismissAll();
-  }
-
-  logout() {
-    this.authService.signOut().then(res => {
-      if (localStorage.getItem('userT')) {
-        this.getuserLogout(localStorage.getItem('userT'));
-        localStorage.removeItem('userT')
-      }
-    });
   }
 
   responsiveSticky(value) {
@@ -325,106 +301,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     });
   }
 
-
-
-  signInWithFB(): void {
-    this.socialLoginService
-      .signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then(res => {
-        if (res) {
-          this.socialUser = res;
-          this.validateSocialLogin('fb', res.authToken)
-          this.modalService.dismissAll();
-        }
-      });
-  }
-
-  signInWithGoogle(): void {
-    console.log('google click')
-    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.socialLoginService
-      .signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then(res => {
-        if (res) {
-          this.socialUser = res;
-          this.validateSocialLogin('google', res.idToken)
-          this.modalService.dismissAll();
-        }
-      })
-      .catch(error => { });
-  }
-
-  validateSocialLogin(type, token) {
-    if (type == 'fb') {
-      let data = {
-        sFbToken: token
-      }
-      this.sportsService.sociallogin(type, data).subscribe((res: any) => {
-        localStorage.setItem('userT', res.Authorization)
-        this.store.dispatch(new Auth.SetAuthenticated());
-      }, (error) => {
-        if (error.status == 401) {
-          this.isuserblock = true
-          setTimeout(() => {
-            this.isuserblock = false
-          }, 4000);
-          this.authService.signOut();
-        }
-      })
-    }
-    else if (type == 'google') {
-      let data = {
-        sGoogleToken: token
-      }
-      this.sportsService.sociallogin(type, data).subscribe((res: any) => {
-        localStorage.setItem('userT', res.Authorization)
-        this.store.dispatch(new Auth.SetAuthenticated());
-      }, (error) => {
-        if (error.status == 401) {
-          this.isuserblock = true
-          setTimeout(() => {
-            this.isuserblock = false
-          }, 4000);
-          this.authService.signOut();
-        }
-      })
-    }
-  }
-
-  getuserLogout(token) {
-    this.sportsService.userlogout(token).subscribe((res) => {
-      console.log(res);
-      this.store.dispatch(new Auth.SetUnauthenticated());
-    })
-  }
-
-  //Social login modal
-  closeResult: string;
-  open(content) {
-    this.modalService
-      .open(content, {
-        ariaLabelledBy: "modal-basic-title",
-        windowClass: "signin-modal"
-      })
-      .result.then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        reason => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return `with: ${reason}`;
-    }
-  }
   close($event) {
     if (!$event) {
       this.issearch = false;
@@ -443,11 +319,30 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       this.renderer2.removeClass(document.body, "search-box-open");
     }
   }
+  openmodal() {
+    this.modalService.open(LoginModalComponent);
+  }
   //search close
   closesearch() {
     this.issearch = false;
     // this.searchkey = "";
     this.renderer2.removeClass(document.body, "search-box-open");
+  }
+
+  getuserLogout(token) {
+    this.sportsService.userlogout(token).subscribe((res) => {
+      console.log(res);
+      this.store.dispatch(new Auth.SetUnauthenticated());
+    })
+  }
+
+  logout() {
+    this.authService.signOut().then(res => {
+      if (localStorage.getItem('userT')) {
+        this.getuserLogout(localStorage.getItem('userT'));
+        localStorage.removeItem('userT')
+      }
+    });
   }
 }
 

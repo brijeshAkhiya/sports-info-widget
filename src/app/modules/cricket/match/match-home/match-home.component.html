@@ -355,7 +355,7 @@
       </div>
     </div>
   </div>
-  <div class="scoreline-block d-flex justify-content-between"  *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
+  <!-- <div class="scoreline-block d-flex justify-content-between"  *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
     <div class="item" *ngIf="batsmanList && batsmanList.length > 0">
       <p *ngFor="let batsman of batsmanList; let i = index;">
         {{batsman.name | split}} {{i == 0 ? "*" : ""}}
@@ -386,6 +386,42 @@
         </span>
       </p>
       <p *ngIf="matchdata.sport_event_status.current_inning == 2">
+        <span class="light-white target">Target</span> 
+        <span>{{matchdata.sport_event_status.target}}</span>
+      </p>
+    </div>
+  </div> -->
+  <div class="scoreline-block d-flex justify-content-between" >
+    <div class="item">
+      <p >
+       sadasdasd
+        <span>12
+          <span
+            class="light-white">12</span>
+        </span>
+      </p>
+    </div>
+    <div class="score">
+      <span class="dark-red">
+        SA
+      </span>
+      <span>vs</span>
+        IND
+      <span class="value"> 12</span>
+      <span class="dark-red">OV : </span> 2
+    </div>
+    <div class="item" *ngIf="ballerList && ballerList.length > 0">
+      <p>{{ballerList[0].name | split}}
+        <span> 
+          {{ballerList[0].statistics && ballerList[0].statistics.wickets ? ballerList[0].statistics.wickets : 0}}
+          -
+          {{ballerList[0].statistics && ballerList[0].statistics.runs_conceded ? ballerList[0].statistics.runs_conceded : 0}}
+          <span class="light-white">
+            ({{ballerList[0].statistics && ballerList[0].statistics.overs_bowled ? ballerList[0].statistics.overs_bowled : 0}})
+          </span>
+        </span>
+      </p>
+      <p *ngIf="matchdata.sport_event_status.current_inning">
         <span class="light-white target">Target</span> 
         <span>{{matchdata.sport_event_status.target}}</span>
       </p>
