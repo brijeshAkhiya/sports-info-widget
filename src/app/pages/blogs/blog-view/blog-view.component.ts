@@ -10,6 +10,7 @@ import { CommonService } from '@providers/common-service';
 import * as fromRoot from '../../../app-reducer'
 
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blog-view',
@@ -36,6 +37,7 @@ export class BlogViewComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private meta:Meta,
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     public commonService: CommonService,
@@ -95,6 +97,7 @@ export class BlogViewComponent implements OnInit {
     if (id) {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.blogdata = res.data;
+        this.initSEOTags();
         this.getPopularArticles();
         // let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
         // if (type.toUpperCase() != this.blogdata.eType.toUpperCase())
@@ -119,6 +122,21 @@ export class BlogViewComponent implements OnInit {
     }
   }
 
+  initSEOTags(){
+    this.meta.updateTag({ name: 'title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ name: 'description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
+    this.meta.updateTag({ name: 'topic', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ name: 'subject', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ name: 'keywords', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ property: 'og:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ property: 'og:type', content: this.blogdata.eType ? this.blogdata.eType : 'Sports.info' });
+    this.meta.updateTag({ property: 'og:description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
+    this.meta.updateTag({ name: 'twitter:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ name: 'twitter:description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
+    this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url+this.blogdata.sImage ? this.blogdata.sImage : '' });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
+  }
 
   //video play event 
   videoplay() {
@@ -164,7 +182,6 @@ export class BlogViewComponent implements OnInit {
         }, 3000);
       }
     }
-
   }
 
   //sharable link 
@@ -210,7 +227,7 @@ export class BlogViewComponent implements OnInit {
     };
     this.sportsService.getrelatedpost(data).subscribe((res: any) => {
       if (res["data"]) {
-        this.widgetblogs = res["data"];
+        this.widgetblogs = res.data.filter((blog) => blog._id != this.blogdata._id);
       }
     });
   }

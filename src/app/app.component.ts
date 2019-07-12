@@ -80,7 +80,7 @@ export class AppComponent implements OnInit,AfterContentInit {
       this.meta.updateTag({ property: 'og:title', content: data['og:title'] ? data['og:title'] : 'Sports.info' });
       this.meta.updateTag({ property: 'og:type', content: data['og:type'] ? data['og:type'] : 'Sports.info' });
       this.meta.updateTag({ property: 'og:description', content: data['og:description'] ? data['og:description'] : 'Sports.info' });
-      this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
+      this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
     }
     else {
       this.meta.updateTag({ name: 'title', content: 'Sports.info' });
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit,AfterContentInit {
       this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
       this.meta.updateTag({ property: 'og:type', content: 'article' });
       this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ property: 'twitter:card', content: 'Sports.info' });
+      this.meta.updateTag({ name: 'twitter:card', content: 'Sports.info' });
     }
 
   }

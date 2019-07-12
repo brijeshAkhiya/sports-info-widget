@@ -31,7 +31,7 @@ export class MatchFactsFiguresComponent implements OnInit {
 
     if (this.matchdata) {
       this.getVenueData();
-      if (this.matchdata.sport_event_status.status == 'not_started')
+      if (this.matchdata.sport_event_status.status != 'ended' || this.matchdata.sport_event_status.status != 'closed')
         this.getMatchProbability();
 
     }

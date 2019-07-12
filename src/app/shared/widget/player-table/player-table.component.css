@@ -1,4 +1,4 @@
-/* -------- Tournament Standing Section ------- */
+/* -------- Tournament Standing Table ------- */
 .tour-stand-table .table tr th,
 .tour-stand-table .table tr td                  { width: 8%;}
 .tour-stand-table .table tr td:first-child      { width: 8%; font-weight: 500; }
@@ -8,7 +8,7 @@
 .tour-stats-table .table tr td:nth-child(2) img { margin: -12px 8px -9px 0px; height: 32px; width: auto; border-radius: 2px; }
 .tour-stand-table .table tr td:nth-child(2),
 .tour-stats-table .table tr td:nth-child(2)     { padding-right: 48px; }
-/* -------- Tournament Stats Section ------- */
+/* -------- Tournament Stats Table ------- */
 .tour-stats-table .table tr th:first-child,
 .tour-stats-table .table tr td:first-child      { width: 60px;  }
 .tour-stats-table .table tr th:nth-child(2),
@@ -28,25 +28,40 @@
   0%      { opacity: 0; transform: translateX(150%); -webkit-transform: translateX(150%); }
   100%    { opacity: 1; transform: translateX(0%); -webkit-transform: translateX(0%); }
 } */
-/* -------- Player Stats Section ------- */
+/* -------- Player Stats Table ------- */
 .player-state .table tr th:first-child,
 .player-state .table tr td:first-child    { text-align: left; width: 26%; text-transform: uppercase; }
-
-
+.player-state .table tr th:first-child:after { display: none; }
+.player-state .table tr th:after          { margin-top: -4px; margin-left: 6px; content: ""; display: inline-block; border-bottom: 10px solid #A3A3A3; border-left: 6px solid transparent; border-right: 6px solid transparent; vertical-align: middle; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.player-state .table tr th.active         { color: #EC4D60; }
+.player-state .table tr th.active:after   { border-top-color: #EC4D60; transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+.table-title-info                         { padding: 16px 0px; }
+.table-title-info ul li                   { margin-right: 30px; display: inline-block; }
+.table-title-info ul li:last-child        { margin-right: 0px; color: #7A7A7A; }
+.table-title-info span                    { color: #292929; font-weight: 500; }
+.table-title-info .game-card              { margin: -2px 3px 0px 0px; vertical-align: middle; }
 /***** Responsive CSS Start ******/
 
 @media (min-width: 1200px) and (max-width: 1379px) {
-/* -------- Tournament Standing Section ------- */
-    .tour-stand-table .table tr td:nth-child(2) img,
-    .tour-stats-table .table tr td:nth-child(2) img { height: 28px; }
-/* -------- Tournament Stats Section ------- */
-    .tour-stats-table .table tr th:nth-child(2)     { padding-left: 44px; }
+/* -------- Tournament Standing Table ------- */
+  .tour-stand-table .table tr td:nth-child(2) img,
+  .tour-stats-table .table tr td:nth-child(2) img { height: 28px; }
+/* -------- Tournament Stats Table ------- */
+  .tour-stats-table .table tr th:nth-child(2)     { padding-left: 44px; }
 }
 
 @media (max-width: 1199px) {
-/* -------- Tournament Standing Section ------- */
-    .tour-stand-table .table tr td:nth-child(2) img,
-    .tour-stats-table .table tr td:nth-child(2) img { height: 24px; }
-/* -------- Tournament Stats Section ------- */
-    .tour-stats-table .table tr th:nth-child(2)     { padding-left: 36px; }
+/* -------- Tournament Standing Table ------- */
+  .tour-stand-table .table tr td:nth-child(2) img,
+  .tour-stats-table .table tr td:nth-child(2) img { height: 24px; }
+/* -------- Tournament Stats Table ------- */
+  .tour-stats-table .table tr th:nth-child(2)     { padding-left: 36px; }
+/* -------- Player Stats Table ------- */
+  .player-state .table tr th:after          { margin-top: -4px; margin-left: 6px; border-bottom-width: 8px; border-left-width: 4px; border-right-width: 4px; }
+}
+
+@media (max-width: 767px) {
+/* -------- Player Stats Table ------- */
+  .player-state .table tr th:after          { margin-top: -2px; margin-left: 4px; border-bottom-width: 8px; border-left-width: 4px; border-right-width: 4px; }
+
 }
