@@ -423,11 +423,21 @@ export class SportsService {
       `/kabaddi/team/${id}/profile`
     );
   }
-
-  //get player profile
+  //get team details
   getKabaddiPlayerprofile(id) {
     return this.http.get(
-      environment.apiUrl + environment.version + `/kabaddi/player/${id}`
+      environment.apiUrl +
+      environment.version +
+      `/kabaddi/player/${id}`
+    );
+  }
+
+  //get player profile
+  getKabaddiMatchList(status, per_page, paged) {
+    per_page = (per_page) ? per_page : 10; 
+    paged = (paged) ? paged : 1; 
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/match/list?status=${status}&per_page=${per_page}&paged=${paged}`
     );
   }
 

@@ -13,7 +13,7 @@
 
                   <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
                   <p
-                    *ngIf="slide.status == 'not_started' || slide.match_status == 'ended' || slide.status == 'closed'; else matchStatus">
+                    *ngIf="slide.status == 'not_started'; else matchStatus">
                     {{slide.scheduled | amTimeAgo}}</p>
                   <ng-template #matchStatus>
                     <p class="live-result">{{slide.status ? slide.status : slide.match_status}}</p>

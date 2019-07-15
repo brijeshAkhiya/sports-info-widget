@@ -90,6 +90,7 @@
                       </div> -->
                 </div>
               </section>
+              
               <section class="common-section top-padding quick-stats" *ngIf="stats">
                 <h4>Quick Stats</h4>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
@@ -97,7 +98,7 @@
               </section>
               <section class="common-section top-padding" *ngIf="stats">
                 <h4>Major Teams</h4>
-                <app-team-card [teams]="playerData?.teams"></app-team-card>
+                <app-team-card [teams]="playerData?.teams" [sport]="sport"></app-team-card>
               </section>
             </ng-template>
           </ngb-tab>

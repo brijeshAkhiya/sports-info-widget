@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /** Internal Modules */
 import { SharedModule } from "@app/shared/shared.module";
@@ -10,13 +11,14 @@ import { HomeComponent } from './home/home.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { TableComponent } from './table/table.component';
+import { MatchComponent } from './match/match.component';
 
 @NgModule({
-  declarations: [KabaddiComponent, HomeComponent, FixturesComponent, StatsComponent, TableComponent],
+  declarations: [KabaddiComponent, HomeComponent, FixturesComponent, StatsComponent, TableComponent, MatchComponent],
   imports: [
     SharedModule,
     KabaddiRoutingModule,
-
+    NgbModule,
     CommonModule,
   ]
 })

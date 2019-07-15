@@ -75,17 +75,16 @@ export class PlayerComponent implements OnInit {
     this.sportsService.getKabaddiPlayerprofile(this.playerid).subscribe((res:any) => {
       this.loading = false;
       if (res.data) {
-        this.playerData = res.data.items.player_info
-        // if (res.data.statistics) {
-        //   let obj = {Matches : 0, Runs: 0, Wickets : 0};
-        //   res.data.statistics.map(s => {
-        //     obj.Matches += s.batting.matches;
-        //     obj.Runs += s.batting.runs;
-        //     obj.Wickets += s.bowling.wickets
-        //   })
-        //   this.stats =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
-        //   console.log(this.stats);          
-        // }
+        this.playerData = res.data.items.player_info;
+        if (res.data.items.stats) {
+          let obj = {'Matches' : 0, 'Raid Points': 0, 'Tackle Points' : 0};
+          res.data.items.stats.map(s => {
+            obj['Matches'] += (s.matchplayed != "") ? s.matchplayed : 0;
+            obj['Raid Points'] += (s.totalraidpoint != "") ? s.totalraidpoint : 0;
+            obj['Tackle Points'] += (s.totaltacklepoint != "") ? s.totaltacklepoint : 0;
+          })
+          this.stats =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
+        }
       }
     },
       (error) => {

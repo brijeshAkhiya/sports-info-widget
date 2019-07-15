@@ -1,3 +1,55 @@
-<p>
-  fixtures works!
-</p>
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+          <h1>Fixtures</h1>
+        </div>
+        <ngb-tabset class="common-tabs">
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="getFixtures()">Upcoming</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget [message]="'No recent fixtures'"
+                *ngIf="!paramsFixtures.loading && (!matchfixtures || matchfixtures?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="matchfixtures" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
+              <app-loader *ngIf="paramsFixtures.loading"></app-loader>
+              <button class="theme-btn down-btn" (click)="loadmore('fixture')"
+                *ngIf="!paramsFixtures.loading && matchfixtures?.length > 0 && paramsFixtures.loadmore">
+                Load More
+                <span></span>
+              </button>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="getResults()">Results</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget [message]="'No recent results'"
+                *ngIf="!paramsResults.loading &&  (!matchresults || matchresults?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="matchresults" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
+              <app-loader *ngIf="paramsResults.loading"></app-loader>
+              <button class="theme-btn down-btn" (click)="loadmore('result')"
+                *ngIf="!paramsResults.loading && matchresults?.length > 0 && paramsResults.loadmore">
+                Load More
+                <span></span>
+              </button>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!--points table widget-->
+          <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
