@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
@@ -66,6 +66,7 @@ export class MatchHomeComponent implements OnInit {
   playerList = {};
   scorecardinnings: any;
   matchInnings = [];
+  public windowinnerWidth: any;
   objectKeys = Object.keys
   constructor(
     private activatedroute: ActivatedRoute,
@@ -233,7 +234,27 @@ export class MatchHomeComponent implements OnInit {
     }
     console.log("this.fallofWickets", this.fallofWickets);
   }
-
+  //scoreline transition
+  responsiveSticky(value) {
+    if (window.pageYOffset > value) {
+      let element = document.getElementById('scoreline-block');
+      element.classList.add('active');
+    } else {
+      let element = document.getElementById('scoreline-block');
+      element.classList.remove('active');
+    }
+  }
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    this.windowinnerWidth = window.innerWidth;
+    if (this.windowinnerWidth < 768) {
+      this.responsiveSticky(280);
+      console.log("width change" + innerWidth);
+    }
+    else {
+      this.responsiveSticky(320);
+    }
+  }
   //get matchtimeline
   getMatchTimeline() {
     this.isshow = true;
@@ -717,7 +738,7 @@ export class MatchHomeComponent implements OnInit {
           ball: timeline.ball_number,
           extra_runs:
             typeof timeline.bowling_params.extra_runs_conceded != "undefined"
-            // ? timeline.bowling_params.extra_runs_type
+              // ? timeline.bowling_params.extra_runs_type
               ? timeline.bowling_params.extra_runs_type
               : 0
         };
@@ -957,8 +978,8 @@ export class MatchHomeComponent implements OnInit {
   }
 
   /** Change page title */
-  currentTeam:any;
-  oppoTeam:any;
+  currentTeam: any;
+  oppoTeam: any;
   setTitle() {
     if (this.matchdata.sport_event_status.match_result)
       this.title.setTitle(this.matchdata.sport_event_status.match_result)
@@ -968,7 +989,7 @@ export class MatchHomeComponent implements OnInit {
       if (currentInning) {
         let currentTeamInning = this.currentTeam = currentInning[0].teams.filter((team) => team.id == currentInning[0].batting_team)
         this.oppoTeam = currentInning[0].teams.filter((team) => team.id == currentInning[0].bowling_team)
-        document.title = currentTeamInning[0].abbreviation +' ' +this.matchdata.sport_event_status.display_score + ' (' + this.matchdata.sport_event_status.display_overs + ' ov)';
+        document.title = currentTeamInning[0].abbreviation + ' ' + this.matchdata.sport_event_status.display_score + ' (' + this.matchdata.sport_event_status.display_overs + ' ov)';
       }
     }
   }
