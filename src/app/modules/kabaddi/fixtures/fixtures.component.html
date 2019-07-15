@@ -16,11 +16,13 @@
               </app-no-data-widget>
               <app-schedule [data]="matchfixtures" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
               <app-loader *ngIf="paramsFixtures.loading"></app-loader>
-              <button class="theme-btn down-btn" (click)="loadmore('fixture')"
-                *ngIf="!paramsFixtures.loading && matchfixtures?.length > 0 && paramsFixtures.loadmore">
-                Load More
-                <span></span>
-              </button>
+              <div class="fixtures-loadmore">
+                <button class="theme-btn down-btn" (click)="loadmore('fixture')"
+                  *ngIf="!paramsFixtures.loading && matchfixtures?.length > 0 && paramsFixtures.loadmore">
+                  Load More
+                  <span></span>
+                </button>
+              </div>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
