@@ -1,3 +1,82 @@
-<p>
-  match works!
-</p>
+<!-- <app-loader *ngIf="isshow"></app-loader> -->
+<section class="common-section cricket-recentnews recentnews-section" *ngIf="!isshow">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
+        <!-- START - ABOUT MATCH-->
+        <app-match-about [data]="matchdata" [competitor]="competitor" [toss]="tossdecision" [sport]="'kabaddi'"></app-match-about>
+
+        <!-- END - ABOUT MATCH-->
+        <!-- START - MATCH TABS-->
+        <ngb-tabset class="common-tabs match-tabs">
+          <!-- START - MATCH COMMENTRY-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>Commentary</ng-template>
+            <ng-template ngbTabContent>
+              <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
+              <!-- <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
+                [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"
+                [showCommetry]="showCommetry">
+              </app-match-commentry> -->
+            </ng-template>
+          </ngb-tab>
+          <!-- END - MATCH COMMENTRY-->
+          <!-- START - LINEUPS-->
+          <ngb-tab >
+            <ng-template ngbTabTitle>Lineups</ng-template>
+            <ng-template ngbTabContent>
+            Lineups
+            </ng-template>
+          </ngb-tab>
+          <!-- END - LINEUPS-->
+          <!--START - Stats-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Stats</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+             Stats
+            </ng-template>
+          </ngb-tab>
+          <!--END - Stats-->
+          <!-- START - Info-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Info</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              Info
+            </ng-template>
+          </ngb-tab>
+          <!--START - NEWS TAB-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabContent>
+            News
+              <!-- <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              </app-blog-list> -->
+            </ng-template>
+          </ngb-tab>
+          <!--END - NEWS TAB-->
+
+        </ngb-tabset>
+        <!-- END - MATCH TABS-->
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+
+          <!--START - SIDERBAR ADS-->
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!--END - SIDERBAR ADS-->
+
+          <!--START - SIDERBAR STORY-->
+          <!-- <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:'Recommended Links'}"></app-sidebar-links> -->
+          <!--START - SIDERBAR STORY-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

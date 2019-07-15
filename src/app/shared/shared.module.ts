@@ -56,6 +56,7 @@ import { TeamsComponent } from './teams/teams.component';
 import { TeamComponent } from './teams/team/team.component';
 import { PlayerComponent } from './player/player.component';
 import { LoginModalComponent } from './widget/login-modal/login-modal.component';
+import { MatchAboutComponent } from './widget/match/about/about.component';
 
 
 
@@ -108,6 +109,7 @@ import { LoginModalComponent } from './widget/login-modal/login-modal.component'
         TeamComponent,
         PlayerComponent,
         LoginModalComponent,
+        MatchAboutComponent,
     ],
     providers: [
         /** All Pipes */
@@ -166,7 +168,8 @@ import { LoginModalComponent } from './widget/login-modal/login-modal.component'
         TeamCardComponent,
         LoaderComponent,
         SidebarLinksComponent,
-        LoginModalComponent
+        LoginModalComponent,
+        MatchAboutComponent
     ],
     entryComponents:[LoginModalComponent]
 

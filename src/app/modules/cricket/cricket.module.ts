@@ -26,7 +26,7 @@ import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fi
 
 import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
-import { MatchAboutComponent } from './match/match-about/match-about.component';
+// import { MatchAboutComponent } from './match/match-about/match-about.component';
 import { MatchCommentryComponent } from './match/match-commentry/match-commentry.component';
 import { MatchFactsFiguresComponent } from './match/match-facts-figures/match-facts-figures.component';
 import { MatchScorecardComponent } from './match/match-scorecard/match-scorecard.component';
@@ -56,7 +56,7 @@ import { AgmCoreModule } from '@agm/core';
     CricketFixturesViewComponent,
     MatchHomeComponent,
     LiveMatchTrackerComponent,
-    MatchAboutComponent,
+    // MatchAboutComponent,
     MatchCommentryComponent,
     MatchFactsFiguresComponent,
     MatchScorecardComponent,
@@ -79,7 +79,7 @@ import { AgmCoreModule } from '@agm/core';
   exports:[
     CricketSidebarComponent,
     MatchScheduleComponent, 
-    MatchAboutComponent
+    // MatchAboutComponent
   ]
 })
 export class CricketModule { }
