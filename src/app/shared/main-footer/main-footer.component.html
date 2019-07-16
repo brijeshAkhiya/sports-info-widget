@@ -33,13 +33,16 @@
 <app-flash-commentary></app-flash-commentary>
 <!--Favourite module start-->
 
-<button class="fav-btn" (click)="isapply = !isapply" *ngIf="userfavourites?.length > 0"></button>
+<button class="fav-btn" (click)="isapply = !isapply"></button>
 <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
 	<div class="head-btn-list">
 		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'delete-btn': isedit}"></button>
 		<button class="close-btn" (click)="isapply = false"></button>
 	</div>
-	<div class="fav-block">
+	<div class="fav-block" *ngIf="userfavourites?.length == 0">
+		<h5>No favourites !</h5>
+	</div>
+	<div class="fav-block" *ngIf="userfavourites?.length > 0">
 		<form>
 			<div class="search-box">
 				<input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}"
