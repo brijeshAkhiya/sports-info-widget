@@ -32,7 +32,7 @@
 }
 @media (max-width: 767px) {
     .sub-navabar                                { top: 44.6px; }
-    .submenu-back                               { padding: 12px;}
+    .submenu-back                               { padding: 12px; max-width: 38%;}
     .sub-navbar-container                       { margin-left: 16px; }
     .sub-navabar .dropdown-menu li a,
     .sub-navabar                                { font-size: 15px; }
