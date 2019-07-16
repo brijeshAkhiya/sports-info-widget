@@ -24,8 +24,8 @@ export class MainFooterComponent implements OnInit {
   isShow: boolean;
   topPosToStartShowing = 100;
   searchText;
-  isAuth$: Observable<boolean>
-  constructor(private sportsService: SportsService, private router: Router, private socketservice: SocketService,
+  isAuth$: any;
+  constructor(private sportsService: SportsService,private router: Router, private socketservice: SocketService,
     private socket: Socket,
     private slugifyPipe: SlugifyPipe,
     private splitIDPipe: StringsplitID,
@@ -34,14 +34,27 @@ export class MainFooterComponent implements OnInit {
 
   ngOnInit() {
     this.getContactDetails();
-    this.isAuth$ = this.store.select(fromRoot.getIsAuth)
-    if (this.isAuth$) {
-      console.log('in auth');
-      
-      this.getUserfavourites();
-    }
-    this.store.select('Favourites').subscribe((data:any)=>{
-      console.log(data);
+    this.store.select('auth').subscribe((data: any) => {
+      this.isAuth$ = data.isAuthenticated
+      if (this.isAuth$ == true) {
+        console.log('true');
+        this.getUserfavourites(); 
+      }
+      else {
+        this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
+        console.log('fav1:', JSON.parse(localStorage.getItem('favourites')));
+        this.userfavourites = this.userfavourites.map((singleitem) => {
+          return {
+            ...singleitem,
+            isSelect: false
+          }
+        });
+        console.log('fav:::', this.userfavourites);
+        this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
+      }
+    })
+   
+    this.store.select('Favourites').subscribe((data: any) => {
       this.userfavourites = data.Favourites
     })
   }
@@ -49,14 +62,14 @@ export class MainFooterComponent implements OnInit {
   //get user favourites
   getUserfavourites() {
     this.sportsService.getuserfavourite().subscribe((res: any) => {
-      this.userfavourites = res.data
+      this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
       this.userfavourites = this.userfavourites.map((singleitem) => {
         return {
           ...singleitem,
           isSelect: false
         }
       });
-      this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
+      console.log('fav:::', this.userfavourites);
     })
   }
 
@@ -106,22 +119,22 @@ export class MainFooterComponent implements OnInit {
         this.userfavourites.map((data) => {
           if (data.isSelect == true) {
             this.userfavourites.splice(this.userfavourites.findIndex(v => v.isSelect == true), 1);
+            localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
           }
         })
-        console.log('userfavnew', this.userfavourites);
-        this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
-          if (res) {
-            console.log(res);
-          }
-        })
+        if (localStorage.getItem('userT')) {
+          this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
+            if (res) {
+              console.log(res);
+            }
+          })
+        }
       }
       else {
         this.isedit = false
       }
     }
     else {
-      console.log('22');
-
       this.isedit = true
     }
   }

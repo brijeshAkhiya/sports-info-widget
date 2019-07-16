@@ -43,7 +43,7 @@ export class AppComponent implements OnInit,AfterContentInit {
     })
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     //get data from ngrx store through meta tags actions
     
     //susbcribe to router events

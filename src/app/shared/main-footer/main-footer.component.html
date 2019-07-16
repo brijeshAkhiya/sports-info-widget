@@ -31,10 +31,9 @@
 <button class="fav-btn scroll-top" *ngIf="isShow" (click)="gotoTop()"><img
 		src="/assets/images/right-arrow.svg"></button>
 <app-flash-commentary></app-flash-commentary>
-
 <!--Favourite module start-->
 
-<button class="fav-btn" (click)="isapply = !isapply" *ngIf="isAuth$ | async"></button>
+<button class="fav-btn" (click)="isapply = !isapply" *ngIf="userfavourites?.length > 0"></button>
 <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
 	<div class="head-btn-list">
 		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'delete-btn': isedit}"></button>
