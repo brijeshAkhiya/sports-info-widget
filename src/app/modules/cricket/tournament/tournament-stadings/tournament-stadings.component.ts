@@ -19,6 +19,7 @@ export class TournamentStadingsComponent implements OnInit {
     class:'tour-stand-table',
     tr_class:'tour-stand-table'
   }
+  isLoading: boolean = false;
 
   constructor(
     private sportsService: SportsService,
@@ -33,12 +34,17 @@ export class TournamentStadingsComponent implements OnInit {
 
   //get tournaments points table
   getTournamentPointsTable(id) {
+    this.isLoading = true;
     this.sportsService.gettournamentpointstable(id).subscribe((res:any) => {
+      this.isLoading = false;
       if (res.data) {
         res.data.map((data) => {
           this.pointstable = data.team_standings
         })
       }
+    },
+    error => {
+      this.isLoading = false;
     })
   }
 
