@@ -34,7 +34,7 @@ import { MatchFactsFiguresComponent } from "./match/match-facts-figures/match-fa
 import { MatchScorecardComponent } from "./match/match-scorecard/match-scorecard.component";
 import { UpcomingComponent } from "./match/upcoming/upcoming.component";
 import { RecommendedComponent } from "./match/recommended/recommended.component";
-import { MatchAboutComponent } from "./match/match-about/match-about.component";
+// import { MatchAboutComponent } from "./match/match-about/match-about.component";
 import { CricketFixturesViewComponent } from "./cricket-fixtures-view/cricket-fixtures-view.component";
 import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
 import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-view.component';
@@ -61,10 +61,10 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     MatchCounterComponent,
     MatchFactsFiguresComponent,
     MatchScorecardComponent,
-    MatchAboutComponent,
+    // MatchAboutComponent,
     UpcomingComponent,
     RecommendedComponent,
-    MatchAboutComponent,
+    // MatchAboutComponent,
     LiveMatchTrackerComponent,
     CustomTeamViewComponent
   ],
@@ -79,6 +79,6 @@ import { CustomTeamViewComponent } from './teams/custom-team-view/custom-team-vi
     LazyLoadImageModule
   ],
   providers: [SportsService, SocketService, SlugifyPipe, CricketService],
-  exports: [CommentryComponent, MatchCounterComponent, MatchAboutComponent]
+  exports: [CommentryComponent, MatchCounterComponent]
 })
 export class CricketModule {}

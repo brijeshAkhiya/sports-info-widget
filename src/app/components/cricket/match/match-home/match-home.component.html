@@ -5,8 +5,8 @@
       <div class="content-col">
         <app-loader *ngIf="!matchdata"></app-loader>
         <!-- START - ABOUT MATCH-->
-        <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision">
-        </app-match-about>
+        <!-- <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision">
+        </app-match-about> -->
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
