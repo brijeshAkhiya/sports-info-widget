@@ -26,7 +26,6 @@ import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fi
 
 import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
-import { MatchAboutComponent } from './match/match-about/match-about.component';
 import { MatchCommentryComponent } from './match/match-commentry/match-commentry.component';
 import { MatchFactsFiguresComponent } from './match/match-facts-figures/match-facts-figures.component';
 import { MatchScorecardComponent } from './match/match-scorecard/match-scorecard.component';
@@ -40,9 +39,6 @@ import { MatchCounterComponent } from './match/match-commentry/match-counter/mat
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
 import { AgmCoreModule } from '@agm/core';
-import { TeamsComponent } from '@app/pages/teams/teams.component';
-import { TeamComponent } from '@app/pages/teams/team/team.component';
-import { PlayerComponent } from '@app/pages/player/player.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +55,6 @@ import { PlayerComponent } from '@app/pages/player/player.component';
     CricketFixturesViewComponent,
     MatchHomeComponent,
     LiveMatchTrackerComponent,
-    MatchAboutComponent,
     MatchCommentryComponent,
     MatchFactsFiguresComponent,
     MatchScorecardComponent,
@@ -68,9 +63,6 @@ import { PlayerComponent } from '@app/pages/player/player.component';
     UpcomingComponent,
     CommentryComponent,
     LiveMatchTrackerComponent,
-    TeamsComponent,
-    TeamComponent,
-    PlayerComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +77,6 @@ import { PlayerComponent } from '@app/pages/player/player.component';
   exports:[
     CricketSidebarComponent,
     MatchScheduleComponent, 
-    MatchAboutComponent
   ]
 })
 export class CricketModule { }

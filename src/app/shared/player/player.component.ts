@@ -31,9 +31,18 @@ export class PlayerComponent implements OnInit {
   ngOnInit() {
     let data:any = this.activatedroute.data;
     this.sport = data.value.sport;
-    this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket','player')
+    console.log(this.activatedroute.snapshot);
+    console.log(this.sport);
+    
+    if(this.sport == 'cricket'){
+      this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport ,'player')
+      this.getPlayerInfo();
+    }
+    else if(this.sport == 'kabaddi'){
+      this.playerid = this.activatedroute.snapshot.params.id;
+      this.getKabbadiPlayerInfo();
+    }
     this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, aIds: [this.playerid] }, sport : this.sport }
-    this.getPlayerInfo();
   }
 
   getPlayerInfo() {
@@ -52,6 +61,29 @@ export class PlayerComponent implements OnInit {
           this.stats =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
           console.log(this.stats);
           
+        }
+      }
+    },
+      (error) => {
+        this.loading = false;
+      })
+  }
+
+
+  getKabbadiPlayerInfo() {
+    this.loading = true;
+    this.sportsService.getKabaddiPlayerprofile(this.playerid).subscribe((res:any) => {
+      this.loading = false;
+      if (res.data) {
+        this.playerData = res.data.items.player_info;
+        if (res.data.items.stats) {
+          let obj = {'Matches' : 0, 'Raid Points': 0, 'Tackle Points' : 0};
+          res.data.items.stats.map(s => {
+            obj['Matches'] += (s.matchplayed != "") ? s.matchplayed : 0;
+            obj['Raid Points'] += (s.totalraidpoint != "") ? s.totalraidpoint : 0;
+            obj['Tackle Points'] += (s.totaltacklepoint != "") ? s.totaltacklepoint : 0;
+          })
+          this.stats =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
         }
       }
     },

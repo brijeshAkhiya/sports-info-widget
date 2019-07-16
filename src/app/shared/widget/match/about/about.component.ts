@@ -5,14 +5,15 @@ import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: 'app-match-about',
-  templateUrl: './match-about.component.html',
-  styleUrls: ['./match-about.component.css']
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.css']
 })
 export class MatchAboutComponent implements OnInit {
 
   @Input() data: any;
   @Input() competitor: any;
   @Input() toss: any;
+  @Input() sport: any;
 
   teamsresultsscore;
 
@@ -24,6 +25,13 @@ export class MatchAboutComponent implements OnInit {
     console.log('toss',this.toss);
     console.log(this.data);
     console.log(this.competitor);
+
+    if(this.sport == 'cricket')
+      this.initCricket();
+
+ }
+
+ initCricket(){
     
   if(this.data['sport_event_status']['status'] == 'closed'){
     let compititors = this.data['sport_event']['competitors']
@@ -36,6 +44,6 @@ export class MatchAboutComponent implements OnInit {
       obj[sComp.qualifier].period_score = temp[0]
     })  
   }
+
  }
 }
-

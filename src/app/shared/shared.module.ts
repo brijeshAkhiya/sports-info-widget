@@ -52,7 +52,11 @@ import { StringUnder } from './pipes/underlinepipe';
 import { TeamCardComponent } from './widget/team-card/team-card.component';
 import { LoaderComponent } from './widget/loader/loader.component';
 import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.component';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamComponent } from './teams/team/team.component';
+import { PlayerComponent } from './player/player.component';
 import { LoginModalComponent } from './widget/login-modal/login-modal.component';
+import { MatchAboutComponent } from './widget/match/about/about.component';
 
 
 
@@ -101,7 +105,11 @@ import { LoginModalComponent } from './widget/login-modal/login-modal.component'
         TeamCardComponent,
         LoaderComponent,
         SidebarLinksComponent,
+        TeamsComponent,
+        TeamComponent,
+        PlayerComponent,
         LoginModalComponent,
+        MatchAboutComponent,
     ],
     providers: [
         /** All Pipes */
@@ -160,7 +168,8 @@ import { LoginModalComponent } from './widget/login-modal/login-modal.component'
         TeamCardComponent,
         LoaderComponent,
         SidebarLinksComponent,
-        LoginModalComponent
+        LoginModalComponent,
+        MatchAboutComponent
     ],
     entryComponents:[LoginModalComponent]
 

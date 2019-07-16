@@ -403,4 +403,48 @@ export class SportsService {
   }
 
 
+  /**
+   * Kabaddi Services
+   */
+
+  //get teams
+  getkabadditeams() {
+    return this.http.get(
+      environment.apiUrl +
+      environment.version +
+      `/kabaddi/team/list?per_page=15&paged=1`
+    );
+  }
+  //get team details
+  getkabaddiTeamProfile(id) {
+    return this.http.get(
+      environment.apiUrl +
+      environment.version +
+      `/kabaddi/team/${id}/profile`
+    );
+  }
+  //get team details
+  getKabaddiPlayerprofile(id) {
+    return this.http.get(
+      environment.apiUrl +
+      environment.version +
+      `/kabaddi/player/${id}`
+    );
+  }
+
+  //get player profile
+  getKabaddiMatchList(status, per_page, paged) {
+    per_page = (per_page) ? per_page : 10; 
+    paged = (paged) ? paged : 1; 
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/match/list?status=${status}&per_page=${per_page}&paged=${paged}`
+    );
+  }
+  getCompetitionInfo(){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/competition/info?per_page=50&paged=1`
+    );    
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
@@ -15,7 +15,6 @@ export class TeamsComponent implements OnInit {
   sport;
   tournamentid;
   teams;
-  paramsWidget:any = {}
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,12 +28,17 @@ export class TeamsComponent implements OnInit {
     let routeParams = this.activatedRoute.snapshot.params;
     console.log(this.activatedRoute.snapshot);
     console.log(routeParams);
+    console.log(data);
 
     this.sport = data.value.sport;
     this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'cricket', 'tournament');
+    console.log(this.sport);
+    
     if (this.sport == 'cricket') {
-      this.paramsWidget = { title: 'Current Series', type: 'currentseries', sport: this.sport, tournament: this.tournamentid }
       this.getTournamentTeams(this.tournamentid);
+    }
+    else if (this.sport == 'kabaddi') {
+      this.getKabaddiTeams();
     }
 
   }
@@ -47,6 +51,17 @@ export class TeamsComponent implements OnInit {
           this.teams = data.teams
         })
       }
+    })
+  }
+
+  //Kabaddi - Get teams
+  getKabaddiTeams() {
+    this.sportsService.getkabadditeams().subscribe((res: any) => {
+      console.log(res.data.items);
+      
+      if (res.data && res.data.items) {
+        this.teams = res.data.items;
+      }      
     })
   }
 }
