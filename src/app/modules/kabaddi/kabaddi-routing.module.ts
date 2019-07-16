@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import { TeamsComponent } from '@app/shared/teams/teams.component';
 import { TeamComponent } from '@app/shared/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/player/player.component';
+import { MatchComponent } from './match/match.component';
 
 const routes: Routes = [{
   path: '',
@@ -44,7 +45,11 @@ const routes: Routes = [{
         path: 'player/:id/:slug',
         component: PlayerComponent,
         data: { 'sport': 'kabaddi' }
-    }
+    },
+    {
+        path: 'match/:id/:slug',
+        component: MatchComponent
+    },
   ]
 }];
 

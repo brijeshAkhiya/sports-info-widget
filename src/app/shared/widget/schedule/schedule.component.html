@@ -135,8 +135,13 @@
 
         </div>
       </div>
+      <a class="details-btn"
+        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>Details</span></a>
+      <a class="fullblock-link"
+        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
+      </a>
     </div>
-    <a class="details-btn" [routerLink]=""><span>Details</span></a>
+    <!-- <a class="details-btn" [routerLink]=""><span>Details</span></a> -->
     <!-- <a class="fullblock-link"
         [routerLink]="">
       </a> -->
