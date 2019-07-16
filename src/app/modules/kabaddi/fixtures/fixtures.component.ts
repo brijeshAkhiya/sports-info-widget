@@ -12,12 +12,8 @@ import { CricketService } from '@providers/cricket-service';
 })
 export class FixturesComponent implements OnInit {
 
-  paramsFixtures = {reqParams : {'status': 1, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false  }
-  paramsResults = {reqParams : {'status': 2, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false }
-  loadingFixture: boolean = false;
-  loadingResult: boolean = false;
-  loadMoreFixture: boolean = false;
-  loadMoreResult: boolean = false;
+  paramsFixtures = {reqParams : {'status': 1, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : []  }
+  paramsResults = {reqParams : {'status': 2, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : [] }
   matchfixtures = [];
   matchresults = [];
   tournamentid;
@@ -45,10 +41,10 @@ export class FixturesComponent implements OnInit {
     this.sportsService.getKabaddiMatchList(this.paramsFixtures.reqParams.status, this.paramsFixtures.reqParams.per_page, this.paramsFixtures.reqParams.page).subscribe((res: any) => {
       
       this.paramsFixtures.loading = false;
-      if (res.data && res.data.items)
-      this.matchfixtures =  this.matchfixtures.concat(res.data.items);
-      this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'datestart', 'asc');
-        
+      if (res.data && res.data.items){
+        this.matchfixtures =  this.matchfixtures.concat(res.data.items);
+        this.paramsFixtures.data = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'datestart', 'asc');
+      }
       if(res.data.total_pages > this.paramsFixtures.reqParams.page)
         this.paramsFixtures.loadmore = true;
       else
@@ -68,8 +64,10 @@ export class FixturesComponent implements OnInit {
       .getKabaddiMatchList(this.paramsResults.reqParams.status, this.paramsResults.reqParams.per_page, this.paramsResults.reqParams.page)
       .subscribe((res: any) => {
         this.paramsResults.loading = false;
-        if (res.data && res.data.items)
-          this.matchresults = this.matchresults.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'desc'));
+        if (res.data && res.data.items){
+          this.matchresults =  this.matchresults.concat(res.data.items);
+          this.paramsResults.data = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'datestart', 'desc');
+        }
         if(res.data.total_pages > this.paramsResults.reqParams.page)
           this.paramsResults.loadmore = true;
         else
