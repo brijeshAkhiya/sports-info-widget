@@ -35,11 +35,13 @@
               </app-no-data-widget>
               <app-schedule [data]="matchresults" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
-              <button class="theme-btn down-btn" (click)="loadmore('result')"
-                *ngIf="!paramsResults.loading && matchresults?.length > 0 && paramsResults.loadmore">
-                Load More
-                <span></span>
-              </button>
+              <div class="fixtures-loadmore">
+                <button class="theme-btn down-btn" (click)="loadmore('result')"
+                  *ngIf="!paramsResults.loading && matchresults?.length > 0 && paramsResults.loadmore">
+                  Load More
+                  <span></span>
+                </button>
+              </div>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
