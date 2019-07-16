@@ -11,6 +11,7 @@ export class ComingSoonComponent implements OnInit {
   lottieConfig: any;
   sport: any;
   images = {
+    'kabaddi' : 'assets/images/coming-soon/kabaddi.jpg',
     'soccer' :'assets/images/coming-soon/football.jpg',
     'badminton' : 'assets/images/coming-soon/badminton.jpg',
     'basketball' : 'assets/images/coming-soon/basketball.jpg',
