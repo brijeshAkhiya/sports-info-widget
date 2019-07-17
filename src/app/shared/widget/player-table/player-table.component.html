@@ -11,14 +11,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of data;">
-        <ng-container *ngIf="options.sport == 'kabaddi'; else elseCricket">
+          <ng-container *ngIf="options.sport == 'kabaddi'; else elseCricket">
             <ng-container *ngTemplateOutlet="kabaddi;context:{item:item}">
             </ng-container>
-        </ng-container>
-        <ng-template #elseCricket>
+          </ng-container>
+          <ng-template #elseCricket>
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
-        </ng-template>
+          </ng-template>
         </tr>
       </tbody>
     </table>
@@ -42,25 +42,33 @@
 </div> -->
 
 <ng-template #cricket let-item="item">
-<ng-container *ngFor="let value of options.values">
-  <td *ngIf="value != 'image'; else data">
-    {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[options.subParams][value] ) : item[value]}}
-  </td>
-  <ng-template #data>
-    <td>
-      <a [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)] " 
-        >
-        <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
-          [defaultImage]="cricketService.flagplaceholder" alt="logo">
-        {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
-      </a>
+  <ng-container *ngFor="let value of options.values">
+    <td *ngIf="value != 'image'; else data">
+      {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[options.subParams][value] ) : item[value]}}
     </td>
-  </ng-template>
+    <ng-template #data>
+      <td>
+        <a
+          [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)] ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
+            [defaultImage]="cricketService.flagplaceholder" alt="logo">
+          {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
+        </a>
+      </td>
+    </ng-template>
   </ng-container>
 </ng-template>
 
-<ng-template #kabaddi  let-item="item">
+<ng-template #kabaddi let-item="item">
   <ng-container *ngFor="let value of options.values">
-    <td> {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value])}}  </td>
+    <td *ngIf="value != 'tname'; else link">
+      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value])}} </td>
+    <ng-template #link>
+      <td>
+        <a [routerLink]="['/kabaddi/team', item['tid'], (item.tname | slugify)]">
+          {{ item[value]}}
+        </a>
+      </td>
+    </ng-template>
   </ng-container>
 </ng-template>

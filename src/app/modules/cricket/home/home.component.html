@@ -1,4 +1,4 @@
-<!-- <app-cricket-menu></app-cricket-menu> -->
+
 <app-menu [options]="{sport:'cricket', type : 'home'}"></app-menu>
 <section class="common-section cricket-recentnews recentnews-section">
   <div class="container">
@@ -12,10 +12,6 @@
           <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
           <app-sidebar-links [sport]="'Cricket'" [link_type]="'popular'" [options]="{reqParams:{'eSport' : 'Cricket'}, type: 'tags', title:'Popular Right Now'}"></app-sidebar-links>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          <!-- <app-common-story-widget [title]="'Current Series'" [type]="'currentseries'" [data]="cricketseries">
-          </app-common-story-widget>
-          <app-common-story-widget [title]="'Popular Right Now'" [type]="'populartags'" [data]="populartags">
-          </app-common-story-widget> -->
         </div>
       </div>
     </div>

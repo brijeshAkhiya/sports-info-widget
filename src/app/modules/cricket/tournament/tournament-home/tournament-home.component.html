@@ -8,7 +8,11 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--Points table widget-->
-          <app-pointstable-widget *ngIf="tournamentid" [tournamentId]="tournamentid"></app-pointstable-widget>
+          <app-points-table *ngIf="tournamentid" [sport]="'cricket'" 
+          [options]="{
+            tournament : tournamentid
+          }" ></app-points-table>
+          
           <div class="common-widget tab-widget" *ngIf="battingleaders && bowlingleaders">
             <div class="widget-title">
               <h5>Top Scorers</h5>
