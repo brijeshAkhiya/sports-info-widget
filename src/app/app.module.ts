@@ -9,9 +9,10 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 /** External Modules */
 import {
-  SocialLoginModule, 
+  SocialLoginModule,
   AuthServiceConfig,
-  AuthService
+  AuthService,
+  LoginOpt
 } from "angularx-social-login";
 import {
   GoogleLoginProvider,
@@ -61,12 +62,20 @@ import { LoginModalComponent } from './shared/widget/login-modal/login-modal.com
 //socket config
 const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
 
+const googleLoginOptions: LoginOpt = {
+  client_id: '504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com',
+  scope: 'profile email',
+  ux_mode: 'redirect',
+  redirect_uri: environment.siteUrl
+}; // https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
+
+
 //social login firebase
 let authconfig = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider(
-      environment.googleOuthId
+      environment.googleOuthId, googleLoginOptions
     )
   },
   {
@@ -89,7 +98,7 @@ export function provideConfig() {
     ContactComponent,
     AdvertiseWithUsComponent,
     BlogsComponent,
-    
+
     MainHeaderComponent,
     MainFooterComponent,
     BlogViewComponent,
