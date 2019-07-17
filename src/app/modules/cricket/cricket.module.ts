@@ -18,7 +18,6 @@ import { FixturesComponent } from './fixtures/fixtures.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
 import { CricketSidebarComponent } from './cricket-sidebar/cricket-sidebar.component';
-import { MatchScheduleComponent } from './components/match-schedule/match-schedule.component';
 import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
@@ -48,7 +47,6 @@ import { AgmCoreModule } from '@agm/core';
     TournamentComponent,
     TournamentHomeComponent,
     CricketSidebarComponent,
-    MatchScheduleComponent,
     TournamentFixturesComponent,
     TournamentStadingsComponent,
     TournamentStatsComponent,
@@ -76,7 +74,6 @@ import { AgmCoreModule } from '@agm/core';
   providers: [SportsService, SocketService, SlugifyPipe, CricketService],
   exports:[
     CricketSidebarComponent,
-    MatchScheduleComponent, 
   ]
 })
 export class CricketModule { }

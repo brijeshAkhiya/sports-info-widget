@@ -54,7 +54,6 @@ import { BlogsComponent } from "./pages/blogs/blogs.component";
 
 import { MainHeaderComponent } from "./shared/main-header/main-header.component";
 import { MainFooterComponent } from "./shared/main-footer/main-footer.component";
-import { WriterProfileComponent } from "./components/writer/writer-profile/writer-profile.component";
 import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
 import { WriterComponent } from './pages/writer/writer.component';
 import { LoginModalComponent } from './shared/widget/login-modal/login-modal.component';
@@ -102,7 +101,6 @@ export function provideConfig() {
 
     MainHeaderComponent,
     MainFooterComponent,
-    WriterProfileComponent,
     BlogViewComponent,
     WriterComponent,
   ],

@@ -1,0 +1,32 @@
+/* -------- Goal Commentary ------- */
+.goal-commentary-list                   { margin-top: 24px; padding: 0px 32px 0px 24px; background: #fff; }
+.goal-commentary-list .icon-block       { width: 100px; font-size: 12px; line-height: 15px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.goal-commentary-list .icon             { width: 32px; height: 32px; background: no-repeat center center / cover; display: inline-block; vertical-align: middle; }
+.goal-commentary-list .icon.match-time  { background-image: url(assets/images/match/whistle-icon.svg);}
+.goal-commentary-list .icon.raid        { background-image: url(assets/images/match/time-icon.svg);}
+.goal-commentary-list .icon-block p     { margin-left: 4px; display: inline-block; vertical-align: middle; }
+.goal-commentary-list .desc-block       { padding: 24px 0px; border-bottom: 1px solid #EBEBEB; flex-grow: 1; -webkit-flex-grow: 1; }
+.goal-commentary-list .commentary-item:last-child .desc-block   { border: none; }
+.goal-commentary-list .title            { margin-bottom: 2px; font-weight: 600; color: #292929; }
+.goal-commentary-list .desc             { font-size: 14px; line-height: 20px; color: #3D3D3D; }
+.goal-commentary-list :last-child       { margin-bottom: 0px; }
+.goal-commentary-list .desc-block .score { padding-left: 8px;}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1199px) {
+    .goal-commentary-list               { padding: 0px 20px; }
+    .goal-commentary-list .icon-block   { width: 80px; }
+    .goal-commentary-list .icon         { width: 28px; height: 28px;}
+    .goal-commentary-list .desc-block   { padding: 20px 0px; }
+}
+@media (max-width: 767px) {
+    .goal-commentary-list               { padding: 0px 16px; }
+    .goal-commentary-list .icon-block   { width: 70px; }
+    .goal-commentary-list .icon         { width: 24px; height: 24px;}
+    .goal-commentary-list .desc-block   { padding: 16px 0px; }
+}
+@media (max-width: 575px) {
+    .goal-commentary-list .icon-block   { width: 56px; }
+    .goal-commentary-list .desc-block   { padding: 12px 0px; }
+    .goal-commentary-list .desc         { font-size: 12px; line-height: 18px; }
+}

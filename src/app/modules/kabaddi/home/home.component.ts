@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  options = { reqParams : { eSport : 'Kabaddi'}, title : 'Kabaddi' , type:'sport' , id :'kabaddi'}
   constructor() { }
 
   ngOnInit() {
