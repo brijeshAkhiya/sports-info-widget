@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>substitute</title>
+    <desc>Created with Sketch.</desc>
+    <g id="substitute" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-24" transform="translate(2.000000, 2.000000)">
+            <g id="Group-27">
+                <rect id="Rectangle" fill="#EBEBEB" opacity="0" x="0" y="0" width="28" height="28"></rect>
+                <g id="Group-26" transform="translate(4.666667, 12.250000)" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M18.6666667,9.33333333 L3.5,9.33333333 C1.56700338,9.33333333 -2.07365397e-16,7.76632996 0,5.83333333 L0,0" id="Path"></path>
+                    <polyline id="Path-7" points="18.6666667 9.33333333 13.4353943 4.10206095 18.6666667 9.33333333 13.4353943 14.5646057"></polyline>
+                </g>
+                <g id="Group-26-Copy" transform="translate(13.833333, 8.250000) scale(-1, -1) translate(-13.833333, -8.250000) translate(4.333333, 0.750000)" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M18.6666667,9.33333333 L3.5,9.33333333 C1.56700338,9.33333333 -2.07365397e-16,7.76632996 0,5.83333333 L0,0" id="Path"></path>
+                    <polyline id="Path-7" points="18.6666667 9.33333333 13.4353943 4.10206095 18.6666667 9.33333333 13.4353943 14.5646057"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

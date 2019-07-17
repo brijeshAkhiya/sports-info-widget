@@ -440,6 +440,11 @@ export class SportsService {
       environment.apiUrl + environment.version + `/kabaddi/match/list?status=${status}&per_page=${per_page}&paged=${paged}`
     );
   }
+  getMatchInfo(id){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/match/${id}/info`
+    );    
+  }
   getCompetitionInfo(){
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/competition/info?per_page=50&paged=1`
