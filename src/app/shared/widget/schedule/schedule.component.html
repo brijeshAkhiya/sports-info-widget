@@ -115,12 +115,12 @@
         <h6>vs</h6>
       </div>
       <!-- For Complete/Result Match -->
-      <div class="score-center-block" *ngIf="match?.status == 2 && match?.result?.winner != ''">
+      <div class="score-center-block" *ngIf="match?.status == 2">
         <p>ft</p>
         <div class="value d-flex justify-content-between">
-          <h4 class="dark-text" *ngIf="match?.status == 2 && match?.result?.winner != ''">{{match?.result?.home}}</h4>
+          <h4 class="dark-text" *ngIf="match?.result?.home">{{match?.result?.home}}</h4>
           <h4 class="dark-text">-</h4>
-          <h4 class="dark-text" *ngIf="match?.status == 2 && match?.result?.winner != ''">{{match?.result?.away}}</h4>
+          <h4 class="dark-text" *ngIf="match?.result?.away">{{match?.result?.away}}</h4>
         </div>
       </div>
 

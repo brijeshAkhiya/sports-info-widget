@@ -25,19 +25,20 @@ export class MainFooterComponent implements OnInit {
   topPosToStartShowing = 100;
   searchText;
   isAuth$: any;
-  constructor(private sportsService: SportsService,private router: Router, private socketservice: SocketService,
+  constructor(private sportsService: SportsService, 
+    private router:Router, 
+    private socketservice:SocketService,
     private socket: Socket,
     private slugifyPipe: SlugifyPipe,
     private splitIDPipe: StringsplitID,
-    private store: Store<fromRoot.State>) {
-  }
+    private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.getContactDetails();
     this.store.select('auth').subscribe((data: any) => {
       this.isAuth$ = data.isAuthenticated
       if (this.isAuth$ == true) {
-        this.getUserfavourites(); 
+        this.getUserfavourites();
       }
       else {
         this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
@@ -65,7 +66,7 @@ export class MainFooterComponent implements OnInit {
           isSelect: false
         }
       });
-      console.log('fav:::', this.userfavourites);
+      this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
     })
   }
 

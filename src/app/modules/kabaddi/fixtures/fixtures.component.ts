@@ -29,13 +29,25 @@ export class FixturesComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'cricket','tournament');
-    this.getFixtures();
+    // this.getFixtures();
+    this.loadData('fixture');
+  }
+
+  loadData(type){
+    if(type == 'fixture'){
+      if(this.paramsFixtures.data && this.paramsFixtures.data.length > 0 )
+        return false;
+      this.getFixtures();
+    }
+    else if(type == 'result'){
+      if(this.paramsResults.data && this.paramsResults.data.length > 0 )
+        return false;
+      this.getResults();
+    }
   }
 
   getFixtures() {
     console.log("getFixtures")
-    // if(this.matchfixtures && this.matchfixtures.length > 0 )
-    //   return false;
 
     this.paramsFixtures.loading = true;
     this.sportsService.getKabaddiMatchList(this.paramsFixtures.reqParams.status, this.paramsFixtures.reqParams.per_page, this.paramsFixtures.reqParams.page).subscribe((res: any) => {
@@ -56,8 +68,6 @@ export class FixturesComponent implements OnInit {
   }
 
   getResults() {
-    // if(this.matchresults && this.matchresults.length > 0 )
-    //   return false;
 
     this.paramsResults.loading = true;
     this.sportsService

@@ -55,7 +55,7 @@ export class AppComponent implements OnInit,AfterContentInit {
       window.scrollTo(0, 0)
       //change route get url 
       if (event instanceof NavigationEnd) {
-        this.setmetatags(event.url);
+        // this.setmetatags(event.url);
         //set meta tags from here...
         console.log('tagsobj', this.metatagsObj);
         //set page title 

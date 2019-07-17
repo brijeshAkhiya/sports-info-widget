@@ -35,8 +35,6 @@ import { SocketService } from './providers/socket.service';
 import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-widget.component';
 import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
 
-import { CommonStoryWidgetComponent } from './common-story-widget/common-story-widget.component';
-import { PointstableWidgetComponent } from './cricket/pointstable-widget/pointstable-widget.component';
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { ContentComponent } from './widget/content/content.component';
 import { SportsHomeComponent } from './sports-home/sports-home.component';
@@ -57,6 +55,7 @@ import { TeamComponent } from './teams/team/team.component';
 import { PlayerComponent } from './player/player.component';
 import { LoginModalComponent } from './widget/login-modal/login-modal.component';
 import { MatchAboutComponent } from './widget/match/about/about.component';
+import { PointsTableComponent } from './widget/points-table/points-table.component';
 
 
 
@@ -89,8 +88,6 @@ import { MatchAboutComponent } from './widget/match/about/about.component';
         StringsplitID,
         CricketScorePipe,
         /** All Componenets */
-        CommonStoryWidgetComponent, 
-        PointstableWidgetComponent,
         CustomAdsWidgetComponent, 
         NoDataWidgetComponent, 
         FlashCommentaryComponent, 
@@ -110,6 +107,7 @@ import { MatchAboutComponent } from './widget/match/about/about.component';
         PlayerComponent,
         LoginModalComponent,
         MatchAboutComponent,
+        PointsTableComponent,
     ],
     providers: [
         /** All Pipes */
@@ -151,8 +149,6 @@ import { MatchAboutComponent } from './widget/match/about/about.component';
         StringsplitID,
         CricketScorePipe,
         /** All Componenets */
-        CommonStoryWidgetComponent,
-        PointstableWidgetComponent,
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,
         FlashCommentaryComponent,
@@ -169,7 +165,8 @@ import { MatchAboutComponent } from './widget/match/about/about.component';
         LoaderComponent,
         SidebarLinksComponent,
         LoginModalComponent,
-        MatchAboutComponent
+        MatchAboutComponent,
+        PointsTableComponent
     ],
     entryComponents:[LoginModalComponent]
 
