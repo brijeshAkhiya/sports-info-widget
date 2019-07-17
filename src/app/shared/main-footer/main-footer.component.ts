@@ -37,23 +37,19 @@ export class MainFooterComponent implements OnInit {
     this.store.select('auth').subscribe((data: any) => {
       this.isAuth$ = data.isAuthenticated
       if (this.isAuth$ == true) {
-        console.log('true');
         this.getUserfavourites(); 
       }
       else {
         this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
-        console.log('fav1:', JSON.parse(localStorage.getItem('favourites')));
         this.userfavourites = this.userfavourites.map((singleitem) => {
           return {
             ...singleitem,
             isSelect: false
           }
         });
-        console.log('fav:::', this.userfavourites);
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
       }
     })
-   
     this.store.select('Favourites').subscribe((data: any) => {
       this.userfavourites = data.Favourites
     })
@@ -120,6 +116,7 @@ export class MainFooterComponent implements OnInit {
           if (data.isSelect == true) {
             this.userfavourites.splice(this.userfavourites.findIndex(v => v.isSelect == true), 1);
             localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
+            this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
           }
         })
         if (localStorage.getItem('userT')) {

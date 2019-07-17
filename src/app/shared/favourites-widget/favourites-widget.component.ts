@@ -33,7 +33,9 @@ export class FavouritesWidgetComponent implements OnInit {
       if (this.isadded) {
         this.isadded = false
         this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
+        
         localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
+        
         this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
           if (res) {
             console.log(res);
@@ -42,6 +44,7 @@ export class FavouritesWidgetComponent implements OnInit {
       }
       else {
         this.isadded = true
+      
         this.updatefavourites(this.value);
       }
     }
@@ -57,6 +60,12 @@ export class FavouritesWidgetComponent implements OnInit {
           this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
         }
         this.userfavourites.push(this.value)
+        this.userfavourites = this.userfavourites.map((singleitem) => {
+          return {
+            ...singleitem,
+            isSelect: false
+          }
+        });
         localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
         this.isadded = true
@@ -70,6 +79,12 @@ export class FavouritesWidgetComponent implements OnInit {
 
   updatefavourites(data) {
     this.userfavourites.push(data);
+    this.userfavourites = this.userfavourites.map((singleitem) => {
+      return {
+        ...singleitem,
+        isSelect: false
+      }
+    });
     localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
     this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
       if (res) {

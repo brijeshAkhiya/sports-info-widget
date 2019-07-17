@@ -83,7 +83,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { padding: 11px 0px 11px 24px;}
     nav .navbar-brand:before        { right: -28px; }
-    .navbar-nav .nav-link           { padding: 15px 9px; font-size: 15px; }
+    .navbar-nav .nav-link           { padding: 15px 7px; font-size: 14px; }
     nav .navbar-brand img           { width: 140px;}
     .login-search                   { margin: 0px 16px 0px auto; }
     .login-search > li > a              { margin: 0px 8px; width: 24px; height: 24px; }
@@ -113,12 +113,13 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Navbar CSS ------- */
-    nav .navbar-brand               { margin-right: 30px; padding: 8px 0px 10px 18px; }
-    nav .navbar-brand:before        { right: -22px;}
-    .navbar-nav .nav-link           { padding: 12px 6px; font-size: 12px; }
-    nav .navbar-brand img           { width: 120px;}
-    .login-search                   { margin: 0px 14px 0px auto; }
-    .login-search > li > a              { margin: 0px 6px; width: 16px; height: 16px; }
+    nav .navbar-brand               { margin-right: 30px; padding: 8px 0px 10px 15px; }
+    nav .navbar-brand:before        { right: -20px;}
+    .navbar-nav-container           { left: 8px; }
+    .navbar-nav .nav-link           { padding: 11px 5px; font-size: 11.7px; }
+    nav .navbar-brand img           { width: 106px;}
+    .login-search                   { margin: 0px 8px 0px auto; }
+    .login-search > li > a              { margin: 0px 5px; width: 18px; height: 18px; }
     .login-search li .dropdown-menu     { margin-top: 14px; }
 }
 
@@ -136,7 +137,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     nav .navbar-toggler.active .icon-bar:nth-child(3)   { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
     nav .navbar-toggler.active .icon-bar:nth-child(1),
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
-    .navbar-nav-container                               { margin-top: 50px; left: 0px;}
+    .navbar-nav-container                               { margin-top: 100px; left: 0px;}
     .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
     .menu-open .navbar-collapse.collapse                { left: 0px; }
     .navbar-nav .nav-link                               { padding: 8px 30px; }
