@@ -451,5 +451,18 @@ export class SportsService {
     );    
   }
 
+  getkabaddistats(param){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/competition/stats/${param}`
+    );    
+  }
+
+  //get kabaddi team list
+  getkabadditeamlist(params){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/team/list?per_page=${params.per_page}&paged=${params.page}`
+    );    
+  }
+
 
 }

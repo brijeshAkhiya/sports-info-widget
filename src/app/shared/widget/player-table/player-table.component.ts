@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
+import { KabaddiService } from '@app/modules/kabaddi/kabaddi.service';
 
 @Component({
   selector: 'app-player-table',
@@ -15,6 +16,7 @@ export class PlayerTableComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private cricketService: CricketService,
+    private kabaddiService: KabaddiService
   ) { }
 
   ngOnInit() {
