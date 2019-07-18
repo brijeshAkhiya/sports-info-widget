@@ -47,7 +47,7 @@
 
               <!--Kabaddi  About  Section-->
               <ng-container *ngIf="sport == 'kabaddi'">
-                <section class="team-about-head d-flex">
+                <section class="team-about-head d-flex" *ngIf="teamProfile?.founded != ''">
                   <div class="team-logo align-self-start rounded-box common-shadow">
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.teamlogo"
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
@@ -61,10 +61,12 @@
                     </h5>
                   </div>
                 </section>
+                <app-no-data-widget *ngIf="teamProfile?.founded == ''" [message]="'No Team data available'">
+                </app-no-data-widget>
               </ng-container>
 
               <!-- Squad Section-->
-              <section class="common-section squad-list" *ngIf="teamProfile?.players">
+              <section class="common-section squad-list" *ngIf="sport == 'cricket' && teamProfile?.players.length > 0">
                 <h4 class="squad-title">Squad</h4>
                 <div class="squad-group" *ngIf="sport == 'cricket'">
                   <div class="row row-size12">
@@ -83,15 +85,16 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="squad-group" *ngIf="sport == 'kabaddi'">
+              </section>
+              <section class="common-section squad-list" *ngIf="sport == 'kabaddi' && teamProfile?.squads.length > 0 ">
+                <h4 class="squad-title">Squad</h4>
+                <div class="squad-group">
                   <ng-container *ngFor="let player of  objectKeys(teamProfile?.players)">
                     <h6> {{player}}</h6>
                     <ng-container *ngTemplateOutlet="kabaddiPlayer;context:{players:teamProfile?.players[player]}">
                     </ng-container>
                   </ng-container>
                 </div>
-
               </section>
             </ng-template>
           </ngb-tab>
@@ -154,8 +157,8 @@
   <div class="row row-size12">
     <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
       <div class="squad-item fullblock-link-container rounded-box common-shadow">
-        <img alt="{{player.fullname}}" [lazyLoad]="player?.pid" [defaultImage]="cricketService.playerplaceholder"
-          [offset]="commonService.lazyloadoffset">
+        <img alt="{{player.fullname}}" [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamProfile?.tid+'.svg'"
+          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <div class="item-desc">
           <p>{{player.fullname}} <span class="light-text">{{player.positionid | stringunder}}</span></p>
           <a [routerLink]="" class="theme-btn">View Player<span></span></a>

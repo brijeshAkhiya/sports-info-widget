@@ -206,6 +206,7 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .common-tabs.black-filled > .nav-tabs             { margin: 0px; padding-top: 15px; background: #3D3D3D; border-radius: 4px 4px 0px 0px; }
 .common-tabs.black-filled > .nav-tabs .nav-link   { color: #fff; opacity: 0.4; }
 .common-tabs.black-filled > .nav-tabs .nav-link.active   { opacity: 1;  }
+.match-tabs                                         { position: relative;}
 
 /* -------- Filled Tab ------- */
 .filled-tabs > .nav-tabs                        { border: none; flex-wrap: nowrap; -webkit-flex-wrap: nowrap; }

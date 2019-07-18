@@ -2,14 +2,15 @@
   <div class="commentary-item d-flex align-items-center" *ngFor="let event of commentry.slice().reverse();">
    
     <div class="icon-block">
-      <div class="icon" 
-      [ngClass]= "event.event_type == 'card' ? event.card : event.event_type">
-    </div>
-      <p>{{event.event_time}}'</p>
+      <div class="icon" [ngClass]= "event.event_type == 'card' ? event.card : event.event_type">
+      </div>
+      <p *ngIf="event.event_time">{{event.event_time}}'</p>
     </div>
 
     <div class="desc-block d-flex justify-content-between align-items-center">
+      
       <div *ngIf="event.event_type == 'normal'">
+        <p class="title" *ngIf="event.super_event != ''"> Super {{event.super_event}}</p>
         <p class="desc">{{event.raider_name}} raid {{event.raid_event}}</p>
       </div>
       <div *ngIf="event.event_type == 'timeout'">
@@ -23,6 +24,15 @@
         <p class="title">{{event.card}} card</p>
         <p class="desc">{{event.player_name}} gets a {{event.card}} card</p>
       </div>
+      <div *ngIf="event.event_type == 'toss'">
+        <p class="title">Toss</p>
+        <p>{{event.winner}} win the toss and select the choice of {{event.decision}}</p>
+      </div>
+      <div *ngIf="event.event_type == 'result'">
+        <p class="title">Result</p>
+        <p> {{event.result}}</p>
+      </div>
+
       <div class="score" *ngIf="event.event_type == 'normal'">
         <h6>{{event.point_home_plus}}-{{event.point_away_plus}}</h6>
       </div>
