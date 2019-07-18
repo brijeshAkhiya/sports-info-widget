@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommonService } from "@providers/common-service";
 
 @Component({
-  selector: 'app-match-counter',
-  templateUrl: './match-counter.component.html',
-  styleUrls: ['./match-counter.component.css']
+  selector: 'app-countdown',
+  templateUrl: './countdown.component.html',
+  styleUrls: ['./countdown.component.css']
 })
-export class MatchCounterComponent implements OnInit {
+export class CountdownComponent implements OnInit {
 
   @Input() scheduled;
   matchstartedcase: boolean = false;
@@ -53,3 +53,4 @@ export class MatchCounterComponent implements OnInit {
     clearInterval(this.interval);
   }
 }
+

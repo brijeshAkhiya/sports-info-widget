@@ -1,5 +1,4 @@
-<app-match-counter *ngIf="data.sport_event_status.status == 'not_started'" [scheduled]="data.sport_event.scheduled">
-</app-match-counter>
+<app-countdown *ngIf="data.sport_event_status.status == 'not_started'" [scheduled]="data.sport_event.scheduled"></app-countdown>
 
 <!-- <div *ngIf="!data.timeline && data.sport_event_status.status == 'closed'">
   No commentary data available for this match!
