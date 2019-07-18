@@ -3,20 +3,22 @@ import * as fromAuth from "./store/auth/auth.reducer";
 import * as fromAds from "./store/ads-management/ads.reducer";
 import * as fromMetatags from "./store/meta-tags-management/meta-tags.reducer";
 import * as fromFavourites from "./store/favourites-management/favourites.reducer";
-
+import * as fromKabaddiTeamLogos from "./store/kabaddi-team-logo/kabaddi-team-logo.reducer";
 
 export interface State {
     auth: fromAuth.State;
     ads: fromAds.Ads,
     Metatags: fromMetatags.MetaTags,
-    Favourites: fromFavourites.Favourites
+    Favourites: fromFavourites.Favourites,
+    KabaddiLogos:fromKabaddiTeamLogos.KabaddiLogos
 }
 
 export const reducers: ActionReducerMap<State> = {
     auth: fromAuth.authReducer,
     ads: fromAds.adsReducer,
     Metatags: fromMetatags.metaTagsReducer,
-    Favourites: fromFavourites.favouritesReducer
+    Favourites: fromFavourites.favouritesReducer,
+    KabaddiLogos:fromKabaddiTeamLogos.KabaddiTeamLogosReducer
 };
 
 
@@ -48,3 +50,15 @@ export const getFavouriteState = createSelector(
     favouriteState,
     fromFavourites.getFavourites
 )
+
+//kabaddi team logos state
+
+
+//favourites states
+
+export const KabaddiTeamLogosState = createFeatureSelector<fromKabaddiTeamLogos.KabaddiLogos>('Favourites');
+export const getKabaddiTeamLogosState = createSelector(
+    KabaddiTeamLogosState,
+    fromKabaddiTeamLogos.getKabaddiTeamLogos
+)
+

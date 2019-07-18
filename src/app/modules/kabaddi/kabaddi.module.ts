@@ -12,6 +12,7 @@ import { FixturesComponent } from './fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { TableComponent } from './table/table.component';
 import { MatchComponent } from './match/match.component';
+import { KabaddiService } from './kabaddi.service';
 
 @NgModule({
   declarations: [KabaddiComponent, HomeComponent, FixturesComponent, StatsComponent, TableComponent, MatchComponent],
@@ -20,6 +21,7 @@ import { MatchComponent } from './match/match.component';
     KabaddiRoutingModule,
     NgbModule,
     CommonModule,
-  ]
+  ],
+  providers:[KabaddiService]
 })
 export class KabaddiModule { }
