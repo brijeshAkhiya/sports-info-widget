@@ -135,26 +135,28 @@
 </ng-container>
 
 <!-- <ng-container> -->
-<ng-container *ngIf="sport == 'kabaddi'">
+<ng-container *ngIf="sport == 'kabaddi' && data">
   <div
     class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team">
-        <h4>Gujarat Fortunegiants</h4>
+        <img [lazyLoad]="data.match_info.teams?.home?.logo" alt="data.match_info.teams?.home?.tname"
+          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{data.match_info.teams?.home?.tname}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team">
-        <h4>Gujarat Fortunegiants</h4>
+        <img [lazyLoad]="data.match_info.teams?.away?.logo" alt="data.match_info.teams?.away?.tname"
+          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{data.match_info.teams?.away?.tname}}</h4>
       </div>
     </div>
     <div class="tour-match-title show-anim">
       <p class="light-text">
-        <a [routerLink]="">
-          Pro Kabaddi League 18/19
+        <a [routerLink]="'/kabaddi'">
+          {{data?.match_info?.competition?.cname}}
         </a>
         <!-- <span class="text-capitalize" *ngIf="data.sport_event.tournament_round &&  data.sport_event.tournament_round.name">
          {{ (data.sport_event.season.name || data.sport_event.tournament.name) ? ' - '+ data.sport_event.tournament_round.name : data.sport_event.tournament_round.name  }}
@@ -165,38 +167,41 @@
     <div class="match-update show-anim">
       <p class="light-text">
         <ng-container>
-          <span>Trans Stadia, Ahmedabad |</span>
+          <span>{{data?.match_info?.venue?.name}} |</span>
         </ng-container>
-        12th May 2019
+        {{data?.match_info?.datestart | amDateFormat:'Do MMMM YYYY'}}
       </p>
     </div>
 
     <div class="current-match d-flex justify-content-between show-anim">
       <!--If match not started-->
-      <div>
-        <div class="current-team d-flex justify-content-between align-items-center">
-          <h4 class="winner d-flex align-items-center"><img src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"><a
-              href="/cricket/team/20454/183547/australia"> Gujarat Fortunegiants </a></h4>
-        </div>
-        <ul class="best-player-list">
-          <li><span>Nitin Tomar </span>15</li>
-          <li><span>Siddharth Desai </span>7</li>
-        </ul>
-      </div>
-      <div class="live-score">
+
+      <ng-container *ngTemplateOutlet="kabadditeam;context:{team:data.match_info.teams?.home}">
+      </ng-container>
+      <div class="live-score" *ngIf="data.match_info.gamestate != 0">
         <h5>ft</h5>
-        <h3>43 - 52</h3>
+        <h3>{{data.match_info.result?.home}} - {{data.match_info.result?.away}}</h3>
       </div>
-      <div>
-        <div class="current-team d-flex justify-content-between align-items-center">
-          <h4 class="winner d-flex align-items-center"><img src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"><a
-              href="/cricket/team/20454/183547/australia"> Gujarat Fortunegiants </a></h4>
-        </div>
-        <ul class="best-player-list">
-          <li><span>Nitin Tomar </span>15</li>
-          <li><span>Siddharth Desai </span>7</li>
-        </ul>
-      </div>
+      <ng-container *ngTemplateOutlet="kabadditeam;context:{team:data.match_info.teams?.away}">
+      </ng-container>
     </div>
   </div>
   <ng-container>
+
+    <ng-template #kabadditeam let-team="team">
+      <div>
+        <div class="current-team d-flex justify-content-between align-items-center">
+          <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
+            <img [lazyLoad]="team.logo" alt="team.tname" [defaultImage]="cricketService.playerplaceholder"
+              [offset]="commonService.lazyloadoffset">
+            <a [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
+              {{data.match_info.gamestate != 0 ? team.shortname : team.tname}}
+            </a>
+          </h4>
+        </div>
+        <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
+          <li><span>Nitin Tomar </span>15</li>
+          <li><span>Siddharth Desai </span>7</li>
+        </ul> -->
+      </div>
+    </ng-template>

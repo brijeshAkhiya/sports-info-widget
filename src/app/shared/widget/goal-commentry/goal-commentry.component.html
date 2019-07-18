@@ -26,11 +26,11 @@
       </div>
       <div *ngIf="event.event_type == 'toss'">
         <p class="title">Toss</p>
-        <p>{{event.winner}} win the toss and select the choice of {{event.decision}}</p>
+        <p class="desc">{{event.winner}} win the toss and select the choice of {{event.decision}}</p>
       </div>
       <div *ngIf="event.event_type == 'result'">
         <p class="title">Result</p>
-        <p> {{event.result}}</p>
+        <p class="desc"> {{event.result}}</p>
       </div>
 
       <div class="score" *ngIf="event.event_type == 'normal'">
