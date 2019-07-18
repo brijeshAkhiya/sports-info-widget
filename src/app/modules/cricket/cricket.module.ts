@@ -34,7 +34,6 @@ import { SportsService } from '@app/shared/providers/sports-service';
 import { SocketService } from '@app/shared/providers/socket.service';
 import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
 import { CricketService } from '@app/shared/providers/cricket-service';
-import { MatchCounterComponent } from './match/match-commentry/match-counter/match-counter.component';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
 import { AgmCoreModule } from '@agm/core';
@@ -56,7 +55,6 @@ import { AgmCoreModule } from '@agm/core';
     MatchCommentryComponent,
     MatchFactsFiguresComponent,
     MatchScorecardComponent,
-    MatchCounterComponent,
     RecommendedComponent,
     UpcomingComponent,
     CommentryComponent,

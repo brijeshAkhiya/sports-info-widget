@@ -1,32 +1,69 @@
-/* -------- Goal Commentary ------- */
-.goal-commentary-list                   { margin-top: 24px; padding: 0px 32px 0px 24px; background: #fff; }
-.goal-commentary-list .icon-block       { width: 100px; font-size: 12px; line-height: 15px; flex-shrink: 0; -webkit-flex-shrink: 0; }
-.goal-commentary-list .icon             { width: 32px; height: 32px; background: no-repeat center center / cover; display: inline-block; vertical-align: middle; }
-.goal-commentary-list .icon.match-time  { background-image: url(assets/images/match/whistle-icon.svg);}
-.goal-commentary-list .icon.raid        { background-image: url(assets/images/match/time-icon.svg);}
-.goal-commentary-list .icon-block p     { margin-left: 4px; display: inline-block; vertical-align: middle; }
-.goal-commentary-list .desc-block       { padding: 24px 0px; border-bottom: 1px solid #EBEBEB; flex-grow: 1; -webkit-flex-grow: 1; }
-.goal-commentary-list .commentary-item:last-child .desc-block   { border: none; }
-.goal-commentary-list .title            { margin-bottom: 2px; font-weight: 600; color: #292929; }
-.goal-commentary-list .desc             { font-size: 14px; line-height: 20px; color: #3D3D3D; }
-.goal-commentary-list :last-child       { margin-bottom: 0px; }
-.goal-commentary-list .desc-block .score { padding-left: 8px;}
+/* -------- Match Lienup ------- */
+.match-lienup                           { padding: 24px; background: #fff; }
+.match-lienup .lienup-row               { margin-bottom: 40px; }
+.match-lienup .lienup-row:last-child    { margin-bottom: 0px; }
+.match-lienup .lienup-row > *           { width: calc(50% - 64px); }
+.match-lienup .lienup-row > :first-child{ text-align: right; }
+.match-lienup .lienup-row.head-row      { margin-bottom: 24px; padding: 24px 0px; border-bottom: 2px solid #EBEBEB; }
+.match-lienup :last-child               { margin-bottom: 0px; }
+.match-lienup .head-row img             { margin-right: 12px; height: 44px; border: 2px solid #ECECEC; border-radius: 2px; }
+.match-lienup .head-row > :first-child img { margin-right: 0px; margin-left: 12px;}
+
+/* -------- Match Stats ------- */
+.match-stats                            { padding: 0px 40px 24px; background: #fff; }
+.match-stats .stat-row                  { margin-bottom: 40px; }
+.match-stats .stat-row:last-child       { margin-bottom: 0px; }
+.match-stats .stat-row > *              { flex-grow: 1; -webkit-flex-grow: 1; }
+.match-stats .stat-row .center-col      { padding: 0px 8px; width: 326px; text-align: center; flex-shrink: 0; -webkit-flex-shrink: 0; flex-grow: 0; -webkit-flex-grow: 0;  }
+.match-stats .stat-row > :first-child   { text-align: right; }
+.match-stats .stat-row.head-row         { margin-bottom: 24px; padding: 24px 0px; border-bottom: 2px solid #EBEBEB; }
+.match-stats .head-row img              { margin-right: 12px; height: 40px; border: 2px solid #ECECEC; border-radius: 2px; }
+.match-stats .head-row > :first-child img { margin-right: 0px; margin-left: 12px;}
+.match-stats p                          { margin: 0px; color: #3D3D3D; line-height: 20px; }
+.match-stats p b                        { font-weight: 500; display: inline-block; vertical-align: middle;}
+.match-stats .hightlight                { color: #ED1A33; }
+.match-stats .point-line                { margin-right: 8px; display: inline-block; width: calc(100% - 40px); height: 8px; background: #ED1A33; }
+.match-stats .stat-row > :first-child .point-line { margin-right: 0px; margin-left: 8px; }
 
 /***** Responsive CSS Start ******/
-@media (max-width: 1199px) {
-    .goal-commentary-list               { padding: 0px 20px; }
-    .goal-commentary-list .icon-block   { width: 80px; }
-    .goal-commentary-list .icon         { width: 28px; height: 28px;}
-    .goal-commentary-list .desc-block   { padding: 20px 0px; }
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+/* -------- Match Stats ------- */
+    .match-stats                            { padding: 0px 32px 20px; }
+    .match-stats .stat-row                  { margin-bottom: 32px; }
+    .match-stats .stat-row .center-col      { width: 300px;}
+    .match-stats .stat-row.head-row         { margin-bottom: 20px; padding: 20px 0px;}
 }
+
+@media (max-width: 1199px) {
+/* -------- Match Stats ------- */
+    .match-stats                        { padding: 0px 20px 12px; }
+    .match-stats .stat-row              { margin-bottom: 20px; }
+    .match-stats .stat-row .center-col  { width: 200px;}
+    .match-stats .stat-row.head-row     { margin-bottom: 12px; padding: 12px 0px;}
+}
+
 @media (max-width: 767px) {
-    .goal-commentary-list               { padding: 0px 16px; }
-    .goal-commentary-list .icon-block   { width: 70px; }
-    .goal-commentary-list .icon         { width: 24px; height: 24px;}
-    .goal-commentary-list .desc-block   { padding: 16px 0px; }
+/* -------- Match Stats ------- */
+    .match-stats                        { padding: 0px 12px 16px; }
+    .match-stats .stat-row              { margin-bottom: 12px; }
+    .match-stats .stat-row .center-col  { width: 180px;}
+    .match-stats .stat-row.head-row     { margin-bottom: 10px; padding: 10px 0px;}
+    .match-stats .point-line            { height: 5px; }
 }
 @media (max-width: 575px) {
-    .goal-commentary-list .icon-block   { width: 56px; }
-    .goal-commentary-list .desc-block   { padding: 12px 0px; }
-    .goal-commentary-list .desc         { font-size: 12px; line-height: 18px; }
+/* -------- Match Stats ------- */
+    .match-stats                        { padding: 0px 8px 16px; }
+    .match-stats .stat-row .center-col  { width: 120px;}
+    .match-stats .head-row p            { font-size: 11px; line-height: 16px; flex-direction: column; -webkit-flex-direction: column; }
+    .match-stats .point-row > :first-child p    { display: flex; display: -webkit-flex; }
+    .match-stats .point-row > :first-child p,
+    .match-stats .head-row > :first-child p { flex-direction: column-reverse; -webkit-flex-direction: column-reverse; }
+    .match-stats .point-row p > *,
+    .match-stats .head-row p > *            { margin-right: auto;}
+    .match-stats .point-row > :first-child p > *,
+    .match-stats .head-row > :first-child p > * { margin-left: auto; margin-right: 0;}
+    .match-stats .head-row img          { margin-bottom: 4px;}
+    .match-stats .point-row p .point-line,
+    .match-stats .point-row p b         { margin-top: 4px; display: block; }
 }

@@ -56,6 +56,8 @@ import { PlayerComponent } from './player/player.component';
 import { LoginModalComponent } from './widget/login-modal/login-modal.component';
 import { MatchAboutComponent } from './widget/match/about/about.component';
 import { PointsTableComponent } from './widget/points-table/points-table.component';
+import { GoalCommentryComponent } from './widget/goal-commentry/goal-commentry.component';
+import { CountdownComponent } from './widget/countdown/countdown.component';
 
 
 
@@ -108,6 +110,8 @@ import { PointsTableComponent } from './widget/points-table/points-table.compone
         LoginModalComponent,
         MatchAboutComponent,
         PointsTableComponent,
+        GoalCommentryComponent,
+        CountdownComponent,
     ],
     providers: [
         /** All Pipes */
@@ -166,7 +170,9 @@ import { PointsTableComponent } from './widget/points-table/points-table.compone
         SidebarLinksComponent,
         LoginModalComponent,
         MatchAboutComponent,
-        PointsTableComponent
+        PointsTableComponent,
+        GoalCommentryComponent,
+        CountdownComponent,
     ],
     entryComponents:[LoginModalComponent]
 

@@ -15,60 +15,12 @@
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
               <h5>Match Commentary</h5>
-              <div class="goal-commentary-list common-shadow rounded-box">
-                <div class="commentary-item d-flex align-items-center">
-                  <div class="icon-block">
-                    <div class="icon raid"></div>
-                    <p>40'</p>
-                  </div>
-                  <div class="desc-block d-flex justify-content-between align-items-center">
-                    <div>
-                      <p class="title">Full Time !</p>
-                      <p class="desc">Gujarat Fortunegiants 43, U Mumba 52</p>
-                    </div>
-                    <div class="score">
-                      <h6>43-51</h6>
-                    </div>
-                  </div>
-                </div>
-                <div class="commentary-item d-flex align-items-center">
-                  <div class="icon-block">
-                    <div class="icon match-time"></div>
-                    <p>40'</p>
-                  </div>
-                  <div class="desc-block d-flex justify-content-between align-items-center">
-                    <div>
-                      <p class="title">Full Time !</p>
-                      <p class="desc">Gujarat Fortunegiants 43, U Mumba 52</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="commentary-item d-flex align-items-center">
-                  <div class="icon-block">
-                    <div class="icon raid"></div>
-                    <p>40'</p>
-                  </div>
-                  <div class="desc-block d-flex justify-content-between align-items-center">
-                    <div>
-                      <p class="title">Full Time !</p>
-                      <p class="desc">Gujarat Fortunegiants 43, U Mumba 52</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="commentary-item d-flex align-items-center">
-                  <div class="icon-block">
-                  </div>
-                  <div class="desc-block d-flex justify-content-between align-items-center">
-                    <div>
-                      <p class="title">Toss</p>
-                      <p class="desc">Bengaluru Bulls win the toss & select the Choice of court</p>
-                    </div>
-                    <div class="score">
-                      <h6>43-51</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <app-loader *ngIf="loading"></app-loader>
+              <ng-container *ngIf="matchInfo">
+                  <app-no-data-widget *ngIf="!loading && !commentry &&  matchInfo.match_info.gamestate != 0"></app-no-data-widget>
+                  <app-goal-commentry *ngIf="commentry" [commentry]="commentry"></app-goal-commentry>
+                  <app-countdown *ngIf="!commentry && matchInfo.match_info.gamestate == 0" [scheduled]="matchInfo.match_info.datestart"></app-countdown>
+              </ng-container>
             </ng-template>
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
@@ -76,7 +28,27 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
-              Lineups
+              <div class="match-lienup common-shadow rounded-box">
+                <div class="lienup-row head-row d-flex align-items-center justify-content-between">
+                  <div>
+                    <p class="d-flex align-items-center justify-content-end"><b>Gujarat Fortunegiants</b><img
+                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team"></p>
+                  </div>
+                  <div>
+                    <p class="d-flex align-items-center"><img
+                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"
+                        alt="team"><b>Gujarat Fortunegiants</b></p>
+                  </div>
+                </div>
+                <div class="lienup-row d-flex align-items-center justify-content-between">
+                  <div>
+                    <p><b>7</b></p>
+                  </div>
+                  <div>
+                    <p class="hightlight"><b>9</b></p>
+                  </div>
+                </div>
+              </div>
             </ng-template>
           </ngb-tab>
           <!-- END - LINEUPS-->
@@ -86,7 +58,66 @@
               <div>Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
-              Stats
+              <div class="match-stats common-shadow rounded-box">
+                <div class="stat-row head-row d-flex align-items-center">
+                  <div>
+                    <p class="d-flex align-items-center justify-content-end"><b>Gujarat Fortunegiants</b><img
+                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team"></p>
+                  </div>
+                  <div class="center-col">
+                    <h5>Match Stats</h5>
+                  </div>
+                  <div>
+                    <p class="d-flex align-items-center"><img
+                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"
+                        alt="team"><b>Gujarat Fortunegiants</b></p>
+                  </div>
+                </div>
+                <div class="stat-row point-row d-flex align-items-center">
+                  <div>
+                    <p class="hightlight"><b>64</b><span class="point-line" style="width: 80%;"><span></span></span></p>
+                  </div>
+                  <div class="center-col">
+                    <p>Points %</p>
+                  </div>
+                  <div>
+                    <p><span class="point-line" style="width: 80%;"><span></span></span><b>44</b></p>
+                  </div>
+                </div>
+                <div class="stat-row d-flex align-items-center">
+                  <div>
+                    <p><b>7</b></p>
+                  </div>
+                  <div class="center-col">
+                    <p>Raid Points</p>
+                  </div>
+                  <div>
+                    <p class="hightlight"><b>9</b></p>
+                  </div>
+                </div>
+                <div class="stat-row d-flex align-items-center">
+                  <div>
+                    <p class="hightlight"><b>9</b></p>
+                  </div>
+                  <div class="center-col">
+                    <p>Tackle Points</p>
+                  </div>
+                  <div>
+                    <p><b>7</b></p>
+                  </div>
+                </div>
+                <div class="stat-row d-flex align-items-center">
+                  <div>
+                    <p class="hightlight"><b>9</b></p>
+                  </div>
+                  <div class="center-col">
+                    <p>All Out Points</p>
+                  </div>
+                  <div>
+                    <p><b>7</b></p>
+                  </div>
+                </div>
+              </div>
             </ng-template>
           </ngb-tab>
           <!--END - Stats-->
