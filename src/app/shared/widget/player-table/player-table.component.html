@@ -5,14 +5,14 @@
   <div class="table-responsive">
     <table class="table">
       <thead>
-        <tr [ngClass]="options.class_light_row ">
+        <tr [ngClass]="options.class_light_row">
           <th *ngFor="let title of options.titles" [innerHTML]="title"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of data;">
+        <tr *ngFor="let item of data;let i = index;">
           <ng-container *ngIf="options.sport == 'kabaddi'; else elseCricket">
-            <ng-container *ngTemplateOutlet="kabaddi;context:{item:item}">
+            <ng-container *ngTemplateOutlet="kabaddi;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
           <ng-template #elseCricket>
@@ -59,13 +59,17 @@
   </ng-container>
 </ng-template>
 
-<ng-template #kabaddi let-item="item">
+<ng-template #kabaddi let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="value != 'tname'; else link">
-      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value])}} </td>
+    <td *ngIf="(value != 'tname' && value != 'name'); else link">
+      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw'] : value == 'pid' ?  index : item[value])}}
+    </td>
     <ng-template #link>
       <td>
-        <a [routerLink]="['/kabaddi/team', item['tid'], (item.tname | slugify)]">
+        <a
+          [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player', item['pid'], (item.name | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="kabaddiService.getKabaddiLogo(item['tid'])"
+            [defaultImage]="cricketService.flagplaceholder" alt="logo">
           {{ item[value]}}
         </a>
       </td>
