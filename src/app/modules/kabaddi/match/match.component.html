@@ -17,9 +17,9 @@
               <h5>Match Commentary</h5>
               <app-loader *ngIf="loading"></app-loader>
               <ng-container *ngIf="matchInfo">
-                  <app-no-data-widget *ngIf="!loading && !commentry &&  matchInfo.match_info.gamestate != 0"></app-no-data-widget>
-                  <app-goal-commentry *ngIf="commentry" [commentry]="commentry"></app-goal-commentry>
-                  <app-countdown *ngIf="!commentry && matchInfo.match_info.gamestate == 0" [scheduled]="matchInfo.match_info.datestart"></app-countdown>
+                  <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0"></app-no-data-widget>
+                  <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
+                  <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0" [scheduled]="matchInfo.match_info.datestart"></app-countdown>
               </ng-container>
             </ng-template>
           </ngb-tab>
@@ -58,19 +58,20 @@
               <div>Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <div class="match-stats common-shadow rounded-box">
+              <div class="match-stats common-shadow rounded-box" *ngIf="matchInfo">
                 <div class="stat-row head-row d-flex align-items-center">
                   <div>
-                    <p class="d-flex align-items-center justify-content-end"><b>Gujarat Fortunegiants</b><img
-                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team"></p>
+                    <p class="d-flex align-items-center justify-content-end"><b>{{matchInfo.match_info.teams.home.tname}}</b>
+                      <img src="{{matchInfo.match_info.teams.home.logo}}" alt="team">
+                    </p>
                   </div>
                   <div class="center-col">
                     <h5>Match Stats</h5>
                   </div>
                   <div>
-                    <p class="d-flex align-items-center"><img
-                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"
-                        alt="team"><b>Gujarat Fortunegiants</b></p>
+                      <p class="d-flex align-items-center justify-content-end"><b>{{matchInfo.match_info.teams.away.tname}}</b>
+                        <img src="{{matchInfo.match_info.teams.away.logo}}" alt="team">
+                      </p>
                   </div>
                 </div>
                 <div class="stat-row point-row d-flex align-items-center">
