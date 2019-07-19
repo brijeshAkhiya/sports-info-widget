@@ -9,7 +9,7 @@ import { SportsService } from "@providers/sports-service";
   styleUrls: ['./match.component.css']
 })
 export class MatchComponent implements OnInit {
-
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10,eSport:'Kabaddi', aIds: [] } }
   loading: boolean = false;
   matchInfo;
   commentry = [];
@@ -23,6 +23,7 @@ export class MatchComponent implements OnInit {
 
   ngOnInit() {
     this.getMatchInfo(this.activatedroute.snapshot.params.id)
+    this.paramArticle.reqParams.aIds.push(this.activatedroute.snapshot.params.id);
   }
 
   getMatchInfo(id) {

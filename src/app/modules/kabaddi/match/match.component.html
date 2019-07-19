@@ -6,7 +6,6 @@
         <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
         <!-- START - ABOUT MATCH-->
         <app-match-about [data]="" [competitor]="" [toss]="" [sport]="'kabaddi'"></app-match-about>
-
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
@@ -17,9 +16,11 @@
               <h5>Match Commentary</h5>
               <app-loader *ngIf="loading"></app-loader>
               <ng-container *ngIf="matchInfo">
-                  <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0"></app-no-data-widget>
-                  <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
-                  <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0" [scheduled]="matchInfo.match_info.datestart"></app-countdown>
+                <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0">
+                </app-no-data-widget>
+                <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
+                <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
+                  [scheduled]="matchInfo.match_info.datestart"></app-countdown>
               </ng-container>
             </ng-template>
           </ngb-tab>
@@ -61,7 +62,8 @@
               <div class="match-stats common-shadow rounded-box" *ngIf="matchInfo">
                 <div class="stat-row head-row d-flex align-items-center">
                   <div>
-                    <p class="d-flex align-items-center justify-content-end"><b>{{matchInfo.match_info.teams.home.tname}}</b>
+                    <p class="d-flex align-items-center justify-content-end">
+                      <b>{{matchInfo.match_info.teams.home.tname}}</b>
                       <img src="{{matchInfo.match_info.teams.home.logo}}" alt="team">
                     </p>
                   </div>
@@ -69,9 +71,10 @@
                     <h5>Match Stats</h5>
                   </div>
                   <div>
-                      <p class="d-flex align-items-center justify-content-end"><b>{{matchInfo.match_info.teams.away.tname}}</b>
-                        <img src="{{matchInfo.match_info.teams.away.logo}}" alt="team">
-                      </p>
+                    <p class="d-flex align-items-center justify-content-end">
+                      <b>{{matchInfo.match_info.teams.away.tname}}</b>
+                      <img src="{{matchInfo.match_info.teams.away.logo}}" alt="team">
+                    </p>
                   </div>
                 </div>
                 <div class="stat-row point-row d-flex align-items-center">
@@ -128,16 +131,19 @@
               <div>Info</div>
             </ng-template>
             <ng-template ngbTabContent>
-              Info
+              <app-match-info-card [options]="{
+              sport:'kabaddi',
+             titles : ['Match', 'Tournament','Group','Venue'],
+             values : ['title', 'cname', 'group' ,'venue'] }
+             " [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
             </ng-template>
           </ngb-tab>
           <!--START - NEWS TAB-->
           <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
-              News
-              <!-- <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
-              </app-blog-list> -->
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              </app-blog-list>
             </ng-template>
           </ngb-tab>
           <!--END - NEWS TAB-->
