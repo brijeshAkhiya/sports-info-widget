@@ -11,7 +11,7 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1 *ngIf="sport == 'cricket'">{{playerData?.player?.name | split}}</h1>
           <h1 *ngIf="sport == 'kabaddi'">{{playerData?.fullname}}</h1>
-          <app-favourites-widget [value]=" sport == 'cricket' ?  {id:playerid,type:'player',sport:'cricket',name:playerData?.player?.name | split} : {id:playerData.pid,sport:'kabaddi',type:'player',name:playerData?.fullname}"
+          <app-favourites-widget [value]=" sport == 'cricket' ?  {id:playerid,type:'player',sport:'cricket',name:playerData?.player?.name | split} : {id:playerData.pid,sport:'kabaddi',teamid:teamid,type:'player',name:playerData?.fullname}"
             
           >
           </app-favourites-widget>

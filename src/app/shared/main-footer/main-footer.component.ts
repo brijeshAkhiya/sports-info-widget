@@ -25,9 +25,9 @@ export class MainFooterComponent implements OnInit {
   topPosToStartShowing = 100;
   searchText;
   isAuth$: any;
-  constructor(private sportsService: SportsService, 
-    private router:Router, 
-    private socketservice:SocketService,
+  constructor(private sportsService: SportsService,
+    private router: Router,
+    private socketservice: SocketService,
     private socket: Socket,
     private slugifyPipe: SlugifyPipe,
     private splitIDPipe: StringsplitID,
@@ -71,7 +71,7 @@ export class MainFooterComponent implements OnInit {
   }
 
   //favourites tags routing 
-  routingfromfav(type, id, name,sport) {
+  routingfromfav(type, id, name, sport, teamid) {
     if (this.isedit) {
       this.userfavourites = this.userfavourites.map((singleitem) => {
         if (singleitem.id == id && singleitem.isSelect == false) {
@@ -108,15 +108,15 @@ export class MainFooterComponent implements OnInit {
       }
       else if (type == 'tournament' && sport == 'kabaddi') {
         let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['kabaddi/tournament',id, slugname])
+        this.router.navigate(['kabaddi/tournament', id, slugname])
       }
       else if (type == 'team' && sport == 'kabaddi') {
         let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['kabaddi/team',id, slugname])
+        this.router.navigate(['kabaddi/team', id, slugname])
       }
       else if (type == 'player' && sport == 'kabaddi') {
         let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['kabaddi/player',id, slugname])
+        this.router.navigate(['kabaddi/player', teamid, id, slugname])
       }
     }
   }
