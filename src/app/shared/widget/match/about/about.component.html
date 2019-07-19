@@ -189,8 +189,8 @@
   <ng-container>
 
     <ng-template #kabadditeam let-team="team">
-      <div>
-        <div class="current-team d-flex justify-content-between align-items-center">
+      <div class="team-col">
+        <div class="current-team d-flex align-items-center">
           <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
             <img [lazyLoad]="team.logo" alt="team.tname" [defaultImage]="cricketService.playerplaceholder"
               [offset]="commonService.lazyloadoffset">
@@ -199,9 +199,9 @@
             </a>
           </h4>
         </div>
-        <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
+        <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
           <li><span>Nitin Tomar </span>15</li>
           <li><span>Siddharth Desai </span>7</li>
-        </ul> -->
+        </ul>
       </div>
     </ng-template>

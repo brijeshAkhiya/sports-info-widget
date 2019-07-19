@@ -21,7 +21,7 @@
         <p class="desc">{{event.player_in_name}} comes in for {{event.player_out_name}}</p>
       </div>
       <div *ngIf="event.event_type == 'card'">
-        <p class="title">{{event.card}} card</p>
+        <p class="title text-capitalize">{{event.card}} card</p>
         <p class="desc">{{event.player_name}} gets a {{event.card}} card</p>
       </div>
       <div *ngIf="event.event_type == 'toss'">

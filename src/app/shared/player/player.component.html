@@ -57,7 +57,7 @@
               </section>
               <section class="player-profile d-flex" *ngIf="sport == 'kabaddi'">
                 <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="playerData?.fullname" [lazyLoad]="playerData?.pid"
+                  <img class="common-shadow rounded-box" alt="playerData?.fullname" [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamid+'.svg'"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
                 </div>
                 <div class="player-info d-flex common-shadow rounded-box">
@@ -95,7 +95,7 @@
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
                 </ng-container>
               </section>
-              <section class="common-section top-padding" *ngIf="stats">
+              <section class="common-section top-padding" *ngIf="stats && sport == 'cricket'">
                 <h4>Major Teams</h4>
                 <app-team-card [teams]="playerData?.teams" [sport]="sport"></app-team-card>
               </section>

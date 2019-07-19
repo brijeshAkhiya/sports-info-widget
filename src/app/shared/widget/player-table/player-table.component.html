@@ -62,7 +62,7 @@
 <ng-template #kabaddi let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="(value != 'tname' && value != 'name'); else link">
-      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw'] : value == 'pid' ?  index : item[value])}}
+      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw'] : value == 'pid' ?  index : (item[value] && item[value] !='') ? item[value] : 0) }}
     </td>
     <ng-template #link>
       <td>

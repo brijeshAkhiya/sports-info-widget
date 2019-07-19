@@ -1,4 +1,5 @@
-<!-- <app-loader *ngIf="isshow"></app-loader> -->
+<app-loader *ngIf="loading"></app-loader>
+<app-no-data-widget *ngIf="!loading && (!matchInfo)"></app-no-data-widget>
 <section class="common-section cricket-recentnews recentnews-section" *ngIf="matchInfo">
   <div class="container">
     <div class="row sidebar-row">
@@ -13,7 +14,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <h5>Match Commentary</h5>
+              <!-- <h5>Match Commentary</h5> -->
               <app-loader *ngIf="loading"></app-loader>
               <ng-container *ngIf="matchInfo">
                 <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0">
@@ -26,35 +27,112 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
-                <div class="lienup-row head-row d-flex align-items-center justify-content-between">
-                  <div>
-                    <p class="d-flex align-items-center justify-content-end"><b>Gujarat Fortunegiants</b><img
-                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team"></p>
-                  </div>
-                  <div>
-                    <p class="d-flex align-items-center"><img
-                        src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"
-                        alt="team"><b>Gujarat Fortunegiants</b></p>
-                  </div>
-                </div>
                 <div class="lienup-row d-flex align-items-center justify-content-between">
                   <div>
-                    <p><b>7</b></p>
+                    <div class="heading">
+                      <p class="d-flex align-items-center justify-content-end"><b>Gujarat Fortunegiants</b><img
+                          src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team"></p>
+                    </div>
+                    <h5>Raiders</h5>
+                    <ul>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                    </ul>
+                    <h5>Defenders</h5>
+                    <ul>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                    </ul>
+                    <h5>All Rounders</h5>
+                    <ul>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                      <li>
+                        <p>Denice Ekdahl</p><span>12</span>
+                      </li>
+                    </ul>
                   </div>
                   <div>
-                    <p class="hightlight"><b>9</b></p>
+                    <div class="heading">
+                      <p class="d-flex align-items-center"><img
+                          src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"
+                          alt="team"><b>Gujarat Fortunegiants</b></p>
+                    </div>
+                    <h5>Raiders</h5>
+                    <ul>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                    </ul>
+                    <h5>Raiders</h5>
+                    <ul>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                    </ul>
+                    <h5>Raiders</h5>
+                    <ul>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                      <li>
+                        <span class="filled">12</span>
+                        <p>Denice Ekdahl</p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <!-- END - LINEUPS-->
           <!--START - Stats-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>
               <div>Stats</div>
             </ng-template>
@@ -123,10 +201,10 @@
                 </div>
               </div>
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <!--END - Stats-->
           <!-- START - Info-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>
               <div>Info</div>
             </ng-template>
@@ -139,9 +217,9 @@
              <h4 class="line-title">Venue Details</h4>
               <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails"></app-venue-map-card>
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <!--START - NEWS TAB-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
               <app-blog-list *ngIf="paramArticle" [options]="paramArticle">

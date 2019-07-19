@@ -90,7 +90,7 @@
                 <h4 class="squad-title">Squad</h4>
                 <div class="squad-group">
                   <ng-container *ngFor="let player of  objectKeys(teamProfile?.players)">
-                    <h6> {{player}}</h6>
+                    <h6 class="text-capitalize"> {{player}}</h6>
                     <ng-container *ngTemplateOutlet="kabaddiPlayer;context:{players:teamProfile?.players[player]}">
                     </ng-container>
                   </ng-container>
@@ -163,7 +163,7 @@
           <p>{{player.fullname}} <span class="light-text">{{player.positionid | stringunder}}</span></p>
           <a [routerLink]="" class="theme-btn">View Player<span></span></a>
         </div>
-        <a class="fullblock-link" [routerLink]="['/kabaddi/player', (player?.pid), (player?.fullname | slugify )]">
+        <a class="fullblock-link" [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">
         </a>
       </div>
     </div>

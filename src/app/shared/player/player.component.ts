@@ -19,6 +19,7 @@ export class PlayerComponent implements OnInit {
   playerData;
   paramArticle = {}
   stats;
+  teamid;
 
   constructor(
     private activatedroute: ActivatedRoute, 
@@ -41,6 +42,11 @@ export class PlayerComponent implements OnInit {
     else if(this.sport == 'kabaddi'){
       this.playerid = this.activatedroute.snapshot.params.id;
       this.getKabbadiPlayerInfo();
+      if(data.value.team){
+        this.teamid = this.activatedroute.snapshot.params.teamid
+      }
+      console.log(this.teamid);
+      
       this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, eSport : 'Kabaddi', aIds: [this.playerid] } }
     }
     
