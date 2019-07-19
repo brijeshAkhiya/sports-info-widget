@@ -1,6 +1,6 @@
 /* -------- Teams List ------- */
 .team-list .team-item                   { margin-bottom: 24px; padding: 24px 24px 24px 16px; background: #fff; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; border-left: 8px solid transparent; }
-.team-list .team-item:hover             { padding-left: 24px; border-left-color: #ED1A33;}
+.team-list .team-item:hover             { padding-left: 24px; padding-right: 16px; border-left-color: #ED1A33;}
 .team-list [class*="col-"]:nth-last-child(2) .team-item,
 .team-list [class*="col-"]:last-child .team-item    { margin-bottom: 0; }
 .team-list .team-item .team-flag img    { height: 80px; width: auto; border: 2px solid #EBEBEB; border-radius: 6px;}
@@ -12,13 +12,15 @@
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Teams List ------- */  
     .team-list .team-item .team-flag img{ height: 64px;}
-    .team-list .team-item:hover         { padding-left: 20px; }
+    .team-list .team-item:hover         { padding-left: 20px; padding-right: 12px; }
     .team-list .team-item .team-name    { padding-left: 12px;}
 }
 
 @media (max-width: 1199px) {
 /* -------- Teams List ------- */ 
     .team-list .team-item .team-flag img    { height: 64px;}
+    .team-list .team-item:hover         { padding-left: 20px; padding-right: 12px; }
+    .team-list .team-item .team-name    { padding-left: 12px;}
     .team-list [class*="col-"]:nth-last-child(2) .team-item { margin-bottom: 32px; }
 }
 
@@ -38,5 +40,5 @@
     .team-list [class*="col-"]:nth-last-child(2) .team-item,
     .team-list .team-item                   { margin-bottom: 16px; }
     .team-list .team-item                   { padding: 16px 16px 16px 10px; border-left-width: 6px; }
-    .team-list .team-item:hover             { padding-left: 18px;}
+    .team-list .team-item:hover             { padding-left: 18px; padding-right: 10px;}
 }

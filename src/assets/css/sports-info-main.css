@@ -305,6 +305,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     h1                      { font-size: 44px; line-height: 60px; }
     h2                      { font-size: 38px; line-height: 48px;}
     h3                      { font-size: 28px; line-height: 38px;}
+    h4                      { font-size: 22px; line-height: 30px;}
+    h5                      { font-size: 19px; line-height: 24px;}
 /******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .popular-main-item .item-img            { height: 440px; }

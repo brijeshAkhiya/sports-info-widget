@@ -17,6 +17,7 @@ export class MatchComponent implements OnInit {
   commentry = [];
   team = [];
   objectKeys = Object.keys
+  venuedetails = { lat: '', lng: '', name: '' };
 
   constructor(
     private sportsService: SportsService,
@@ -37,6 +38,7 @@ export class MatchComponent implements OnInit {
       this.loading = false;
       if (res.data) {
         this.matchInfo = res.data.items;
+        this.getVenuedetails();
         this.initTeam();
         this.initCommentry();
         this.initSquads();
@@ -46,10 +48,26 @@ export class MatchComponent implements OnInit {
     });
   }
 
+  getVenuedetails() {
+    if (this.matchInfo.match_info.venue.location = " ") {
+      console.log('in venue');
+      this.sportsService.getReverseGeo(this.matchInfo.match_info.venue.name).subscribe((res: any) => {
+        this.venuedetails.lat = res.results[0].geometry.location.lat;
+        this.venuedetails.lng = res.results[0].geometry.location.lng;
+        this.venuedetails.name = this.matchInfo.match_info.venue.name
+      })
+    }
+    else {
+      console.log('not in venue');
+      this.venuedetails.name = this.matchInfo.match_info.venue.name
+    }
+  }
+
+
+
   initCommentry() {
     if (!(this.matchInfo.event && this.matchInfo.event != ''))
       return false;
-
     let home = 0;
     let away = 0;
     let extraRun = { 'allout': 2, 'card': 1, 'super_raid': 1, 'super_tackle': 1 }

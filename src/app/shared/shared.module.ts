@@ -60,6 +60,7 @@ import { GoalCommentryComponent } from './widget/goal-commentry/goal-commentry.c
 import { CountdownComponent } from './widget/countdown/countdown.component';
 import { MatchInfoCardComponent } from './widget/match-info-card/match-info-card.component';
 import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -72,6 +73,7 @@ import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.co
         NgbModule,
         ClickOutsideModule,
         SocketIoModule,
+        AgmCoreModule,
         ReactiveFormsModule,
         FormsModule,
         LazyLoadImageModule

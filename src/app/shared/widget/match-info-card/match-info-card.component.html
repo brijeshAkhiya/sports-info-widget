@@ -1,25 +1,30 @@
 <div class="common-table match-info-table common-shadow rounded-box">
   <div class="table-responsive">
     <table class="table">
-      <tr *ngFor="let title of options.titles">
+      <tr *ngFor="let title of options.titles; let i = index">
         <td>{{title}}</td>
         <td>
-          <ng-container *ngIf="options.sport == 'kabaddi'; else elseCricket">
-            <ng-container *ngTemplateOutlet="kabaddi;context:{item:data.match_info}">
-            </ng-container>
+          <ng-container *ngIf="options.sport == 'kabaddi'">
+            {{options.values[i]}}
           </ng-container>
-          <ng-template #elseCricket>
-            <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
-            </ng-container>
-          </ng-template>
+          <ng-container *ngIf="options.sport == 'cricket'">
+             {{title == 'Match' ? options.values[i][0].name + ' ' +  'VS'  + ' ' + options.values[i][1].name  : ''}}
+             {{title == 'Series' ? (options.values[i].season ? options.values[i].season.name : options.values[i].tournament.name ) : ''}}
+             {{(title == 'Weather Condition' || title == 'Pitch Condition' || title == 'Outfield Conditions' || title == 'Match Refree') ? (options.values[i]) : ''}}
+
+             <p *ngIf="options.values[i].toss_won_by_team && title == 'Toss'">
+                <span>{{options.values[i].toss_won_by_team}} opt to
+                  {{ options.values[i].toss_decision ? options.values[i].toss_decision : 'bat'}}</span>
+              </p>
+              <div *ngIf="title == 'Umpires'">
+              <p *ngFor="let singleUmpire of options.values[i]">
+                  {{singleUmpire.name | split}} <span
+                    class="light-text">{{ singleUmpire.type === 'on_field' ? '(On Field)' : singleUmpire.type === '3rd' ? '(3rd Umpire)' : ''}}</span>
+                </p>
+              </div>
+          </ng-container>
         </td>
       </tr>
     </table>
   </div>
 </div>
-
-<ng-template #kabaddi let-item="item">
-  <ng-container *ngFor="let value of options.values">
-    {{ value == 'title' ? item[value] : ''}}
-  </ng-container>
-</ng-template>

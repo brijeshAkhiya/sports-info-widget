@@ -1,0 +1,7 @@
+
+/* -------- Match Information Section ------- */
+.match-info-table tr td                 { width: 50%; padding-left: 16px; text-align: left; }
+.match-info-table tr td:first-child     { width: 20%; font-weight: 600; text-transform: uppercase; }
+.match-info-table tr td:last-child      { border-left: 1px solid #EBEBEB; }
+.match-info-table tr td p               { margin-bottom: 8px;}
+.match-info-table tr td p:last-child    { margin-bottom: 0px;}
