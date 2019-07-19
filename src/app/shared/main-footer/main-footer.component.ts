@@ -71,7 +71,7 @@ export class MainFooterComponent implements OnInit {
   }
 
   //favourites tags routing 
-  routingfromfav(type, id, name) {
+  routingfromfav(type, id, name,sport) {
     if (this.isedit) {
       this.userfavourites = this.userfavourites.map((singleitem) => {
         if (singleitem.id == id && singleitem.isSelect == false) {
@@ -94,17 +94,29 @@ export class MainFooterComponent implements OnInit {
       if (type == 'sport') {
         this.router.navigate([id]);
       }
-      else if (type == 'tournament') {
+      else if (type == 'tournament' && sport == 'cricket') {
         let slugname = this.slugifyPipe.transform(name);
         this.router.navigate(['cricket/tournament', this.splitIDPipe.transform(id), slugname])
       }
-      else if (type == 'team') {
+      else if (type == 'team' && sport == 'cricket') {
         let slugname = this.slugifyPipe.transform(name);
         this.router.navigate(['cricket/team', this.splitIDPipe.transform(id), slugname])
       }
-      else if (type == 'player') {
+      else if (type == 'player' && sport == 'cricket') {
         let slugname = this.slugifyPipe.transform(name);
         this.router.navigate(['cricket/player', this.splitIDPipe.transform(id), slugname])
+      }
+      else if (type == 'tournament' && sport == 'kabaddi') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['kabaddi/tournament',id, slugname])
+      }
+      else if (type == 'team' && sport == 'kabaddi') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['kabaddi/team',id, slugname])
+      }
+      else if (type == 'player' && sport == 'kabaddi') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['kabaddi/player',id, slugname])
       }
     }
   }

@@ -10,7 +10,7 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1 *ngIf="sport == 'cricket'">{{teamProfile?.name}}</h1>
           <h1 *ngIf="sport == 'kabaddi'">{{teamProfile?.tname}}</h1>
-          <app-favourites-widget [value]="{id:teamProfile?.id,type:'team',name:teamProfile?.name}">
+          <app-favourites-widget [value]="sport == 'cricket'? {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name} : {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}">
           </app-favourites-widget>
         </div>
 
