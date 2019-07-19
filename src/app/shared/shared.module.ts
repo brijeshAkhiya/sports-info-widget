@@ -24,6 +24,7 @@ import { SlugifyPipe } from "./pipes/slugpipe";
 import { SafehtmlPipe } from './pipes/safehtml.pipe';
 import { StringsplitID } from './pipes/stringsplitID.pipe';
 import { CricketScorePipe } from './pipes/cricket-score.pipe';
+import { DateParsePipe } from './pipes/dateparse.pipe';
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
@@ -64,6 +65,7 @@ import { AgmCoreModule } from '@agm/core';
 
 
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -93,6 +95,7 @@ import { AgmCoreModule } from '@agm/core';
         FilterPipe,
         StringsplitID,
         CricketScorePipe,
+        DateParsePipe,
         /** All Componenets */
         CustomAdsWidgetComponent, 
         NoDataWidgetComponent, 
@@ -129,7 +132,8 @@ import { AgmCoreModule } from '@agm/core';
         FlashteamPipe,
         SlugifyPipe,  
         FilterPipe,      
-        SlugifyPipe,        
+        SlugifyPipe, 
+        DateParsePipe,       
         StringUnder,
         StringsplitID,
         CricketScorePipe,
@@ -148,6 +152,7 @@ import { AgmCoreModule } from '@agm/core';
         SafehtmlPipe,
         PlayerImagePipe,
         FlashteamPipe,
+        DateParsePipe,
         StripHtmlPipe,
         SplitPipe,
         TruncatePipe,

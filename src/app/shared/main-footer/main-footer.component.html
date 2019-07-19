@@ -53,7 +53,7 @@
 		<ul class="fav-list">
 			<li *ngFor="let item of (userfavourites | filter : searchText)"><button
 					[ngClass]="{'selected': item.isSelect}"
-					(click)="routingfromfav(item.type,item.id,item.name)">{{item.name}}</button></li>
+					(click)="routingfromfav(item.type,item.id,item.name,item.sport,item.teamid)">{{item.name}}</button></li>
 		</ul>
 	</div>
 </div>

@@ -10,7 +10,7 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1 *ngIf="sport == 'cricket'">{{teamProfile?.name}}</h1>
           <h1 *ngIf="sport == 'kabaddi'">{{teamProfile?.tname}}</h1>
-          <app-favourites-widget [value]="{id:teamProfile?.id,type:'team',name:teamProfile?.name}">
+          <app-favourites-widget [value]="sport == 'cricket'? {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name} : {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}">
           </app-favourites-widget>
         </div>
 
@@ -111,7 +111,7 @@
           </ngb-tab>
 
           <!-- Fixtures Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>
               <div (click)="getTeamFixtures()">Fixtures</div>
             </ng-template>
@@ -125,7 +125,7 @@
           </ngb-tab>
 
           <!-- Results Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>
               <div (click)="getTeamResults()">Results</div>
             </ng-template>
@@ -144,7 +144,7 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+          <app-sidebar-links  *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'"
             [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>

@@ -17,11 +17,11 @@
               <!-- <h5>Match Commentary</h5> -->
               <app-loader *ngIf="loading"></app-loader>
               <ng-container *ngIf="matchInfo">
-                <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0">
+                <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'" [message]="'Coming Soon..!'">
                 </app-no-data-widget>
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
-                <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
-                  [scheduled]="matchInfo.match_info.datestart"></app-countdown>
+                <!-- <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
+                  [scheduled]="matchInfo.match_info.datestart"></app-countdown> -->
               </ng-container>
             </ng-template>
           </ngb-tab>
@@ -36,7 +36,7 @@
                   <div>
                     <div class="heading">
                       <p class="d-flex align-items-center justify-content-end">
-                        <b>{{team[0].tname}}</b>
+                        <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
                         <img alt="{{team[0].tname}}" [lazyLoad]="team[0].logo"
                           [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
                       </p>
@@ -59,7 +59,7 @@
                       <p class="d-flex align-items-center">
                           <img alt="{{team[1].tname}}" [lazyLoad]="team[1].logo"
                             [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
-                          <b>{{team[1].tname}}</b>
+                            <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
                       </p>
                     </div>
                     <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
@@ -86,7 +86,7 @@
               <div>Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon'">
+              <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
               </app-no-data-widget>
               <!-- <div class="match-stats common-shadow rounded-box" *ngIf="matchInfo">
                 <div class="stat-row head-row d-flex align-items-center">
