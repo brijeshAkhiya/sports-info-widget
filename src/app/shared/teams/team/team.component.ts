@@ -35,14 +35,15 @@ export class TeamComponent implements OnInit {
     let data: any = this.activatedRoute.data;
     this.sport = data.value.sport;
     this.routeParams = this.activatedRoute.snapshot.params
-    if(this.sport == 'cricket'){
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, sport: this.sport }
+    if (this.sport == 'cricket') {
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, }
       if (this.routeParams.tournamentid)
         this.getTournamentTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'), this.commonService.getIds(this.routeParams.tournamentid, 'cricket', 'tournament'))
       else
         this.getTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'));
     }
-    else if(this.sport == 'kabaddi'){
+    else if (this.sport == 'kabaddi') {
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport:'Kabaddi', aIds: [this.routeParams.teamid] } }
       this.getKabaddiTeamProfile(this.routeParams.teamid);
     }
   }
@@ -114,13 +115,13 @@ export class TeamComponent implements OnInit {
         this.loading = false;
         if (res.data)
           this.teamProfile = res.data.items[0]
-          this.teamProfile.players = [];
-          this.teamProfile.squads.forEach(element => {
-            (this.teamProfile.players[element.positionname] = this.teamProfile.players[element.positionname] || []).push(element);
-          });
-          console.log(this.teamProfile);
-          console.log(Object.keys(this.teamProfile.players));
-          
+        this.teamProfile.players = [];
+        this.teamProfile.squads.forEach(element => {
+          (this.teamProfile.players[element.positionname] = this.teamProfile.players[element.positionname] || []).push(element);
+        });
+        console.log(this.teamProfile);
+        console.log(Object.keys(this.teamProfile.players));
+
       }, (error) => {
         this.loading = false;
       })

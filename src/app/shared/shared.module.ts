@@ -58,6 +58,8 @@ import { MatchAboutComponent } from './widget/match/about/about.component';
 import { PointsTableComponent } from './widget/points-table/points-table.component';
 import { GoalCommentryComponent } from './widget/goal-commentry/goal-commentry.component';
 import { CountdownComponent } from './widget/countdown/countdown.component';
+import { MatchInfoCardComponent } from './widget/match-info-card/match-info-card.component';
+import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.component';
 
 
 
@@ -112,6 +114,8 @@ import { CountdownComponent } from './widget/countdown/countdown.component';
         PointsTableComponent,
         GoalCommentryComponent,
         CountdownComponent,
+        MatchInfoCardComponent,
+        VenueMapCardComponent,
     ],
     providers: [
         /** All Pipes */
@@ -173,6 +177,8 @@ import { CountdownComponent } from './widget/countdown/countdown.component';
         PointsTableComponent,
         GoalCommentryComponent,
         CountdownComponent,
+        MatchInfoCardComponent,
+        VenueMapCardComponent
     ],
     entryComponents:[LoginModalComponent]
 

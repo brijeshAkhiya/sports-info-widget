@@ -47,8 +47,9 @@ export class PlayerComponent implements OnInit {
       }
       console.log(this.teamid);
       
+      this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, eSport : 'Kabaddi', aIds: [this.playerid] } }
     }
-    this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, aIds: [this.playerid] }, sport : this.sport }
+    
   }
 
   getPlayerInfo() {
