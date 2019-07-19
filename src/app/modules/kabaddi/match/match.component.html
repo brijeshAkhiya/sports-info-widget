@@ -1,11 +1,12 @@
 <!-- <app-loader *ngIf="isshow"></app-loader> -->
-<section class="common-section cricket-recentnews recentnews-section">
+<section class="common-section cricket-recentnews recentnews-section" *ngIf="matchInfo">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
         <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
         <!-- START - ABOUT MATCH-->
-        <app-match-about [data]="" [competitor]="" [toss]="" [sport]="'kabaddi'"></app-match-about>
+        <app-match-about [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'kabaddi'"></app-match-about>
+
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
