@@ -9,11 +9,12 @@ import { SportsService } from "@providers/sports-service";
   styleUrls: ['./match.component.css']
 })
 export class MatchComponent implements OnInit {
-  paramArticle = { reqParams: { nStart: 0, nLimit: 10,eSport:'Kabaddi', aIds: [] } }
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [] } }
   loading: boolean = false;
   matchInfo;
   commentry = [];
   team = [];
+  venuedetails = { lat: '', lng: '', name: '' };
 
   constructor(
     private sportsService: SportsService,
@@ -32,6 +33,7 @@ export class MatchComponent implements OnInit {
       this.loading = false;
       if (res.data) {
         this.matchInfo = res.data.items;
+        this.getVenuedetails();
         this.initTeam();
         this.initCommentry();
       }
@@ -40,16 +42,32 @@ export class MatchComponent implements OnInit {
     });
   }
 
+  getVenuedetails() {
+    if (this.matchInfo.match_info.venue.location = " ") {
+      console.log('in venue');
+      this.sportsService.getReverseGeo(this.matchInfo.match_info.venue.name).subscribe((res: any) => {
+        this.venuedetails.lat = res.results[0].geometry.location.lat;
+        this.venuedetails.lng = res.results[0].geometry.location.lng;
+        this.venuedetails.name = this.matchInfo.match_info.venue.name
+      })
+    }
+    else {
+      console.log('not in venue');
+      this.venuedetails.name = this.matchInfo.match_info.venue.name
+    }
+  }
+
+
+
   initCommentry() {
     if (!(this.matchInfo.event && this.matchInfo.event != ''))
       return false;
-
     let home = 0;
     let away = 0;
     let extraRun = { 'allout': 2, 'card': 1, 'super_raid': 1, 'super_tackle': 1 }
 
-    let temp:any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
-    this.commentry.push({event_type : 'toss', winner : temp[0].tname, decision : this.matchInfo.match_info.toss.decision})
+    let temp: any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
+    this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision })
 
     this.commentry = this.commentry.concat(this.matchInfo.event);
     this.commentry.forEach((match, index) => {
@@ -64,15 +82,15 @@ export class MatchComponent implements OnInit {
         }
       }
     });
-    this.commentry.push({event_type : 'result', result : this.matchInfo.match_info.result.text})
-    
+    this.commentry.push({ event_type: 'result', result: this.matchInfo.match_info.result.text })
+
   }
 
-  initTeam(){
-    this.team.push(Object.assign({'qualifier': 'home'}, this.matchInfo.match_info.teams.home));
-    this.team.push(Object.assign({'qualifier': 'away'}, this.matchInfo.match_info.teams.away));
+  initTeam() {
+    this.team.push(Object.assign({ 'qualifier': 'home' }, this.matchInfo.match_info.teams.home));
+    this.team.push(Object.assign({ 'qualifier': 'away' }, this.matchInfo.match_info.teams.away));
     console.log(this.team);
-    
+
   }
 
 }

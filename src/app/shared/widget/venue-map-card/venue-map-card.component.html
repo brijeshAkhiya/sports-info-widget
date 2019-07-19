@@ -1,3 +1,30 @@
-<p>
-  venue-map-card works!
-</p>
+<section class="venue-info rounded-box common-shadow" *ngIf="venuedetails">
+  <ng-container *ngIf="sport == 'cricket'">
+    <ng-container *ngIf="venuedetails.lat && venuedetails.long">
+      <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.long">
+        <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.long"></agm-marker>
+      </agm-map>
+    </ng-container>
+    <p *ngIf="venuedetails?.name">
+      <span>Venue :</span>
+      {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
+    </p>
+    <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
+    <p *ngIf="venuedetails?.bowling_ends"><span>Ends
+        :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
+  </ng-container>
+
+  <ng-container *ngIf="sport == 'kabaddi'">
+    <ng-container *ngIf="venuedetails.lat && venuedetails.lng">
+      <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.lng">
+        <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.lng"></agm-marker>
+      </agm-map>
+    </ng-container>
+    <p *ngIf="venuedetails?.name">
+      <span>Venue :</span>
+      {{venuedetails?.name}}
+    </p>
+    <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
+  </ng-container>
+  
+</section>

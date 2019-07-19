@@ -16,10 +16,12 @@
 .probability-block                              { padding: 24px 24px 18px; }
 .probability-section .team-block img            { height: 107px; width: auto; border-radius: 4.44px; box-shadow: 0px 5px 8px rgba(0,0,0,0.14), 0px 8px 35px rgba(0,0,0,0.11); -webkit-box-shadow: 0px 5px 8px rgba(0,0,0,0.14), 0px 8px 35px rgba(0,0,0,0.11);}
 .probability-section .team-block h3             { margin: 0px 42px; display: inline-block; font-size: 64px; line-height: 84px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; font-style: normal; vertical-align: middle; }
+agm-map                                         { height: 300px; }
 .venue-info                                     { padding: 16px; background: #fff; }
 .venue-info p                                   { margin: 16px 0px 0px 8px; font-size: 18px; line-height: 23px; font-weight: 500;}
 .venue-info p span                              { margin-right: 8px; color: #A3A3A3; font-weight: 400; }
-agm-map                                         { height: 300px; }
+
+/***** Responsive CSS Start ******/
 
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Facts & Figures Section ------- */

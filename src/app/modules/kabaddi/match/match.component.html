@@ -7,7 +7,6 @@
         <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
         <!-- START - ABOUT MATCH-->
         <app-match-about [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'kabaddi'"></app-match-about>
-
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
@@ -211,10 +210,12 @@
             </ng-template>
             <ng-template ngbTabContent>
               <app-match-info-card [options]="{
-              sport:'kabaddi',
-             titles : ['Match', 'Tournament','Group','Venue'],
-             values : ['title', 'cname', 'group' ,'venue'] }
+             sport:'kabaddi',
+             titles : ['Match', 'Tournament','Zone','Venue'],
+             values : [matchInfo.match_info.title,matchInfo.match_info.competition.cname,matchInfo.match_info.zone ? matchInfo.match_info.zone : '-',matchInfo.match_info.venue.name] }
              " [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
+             <h4 class="line-title">Venue Details</h4>
+              <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails"></app-venue-map-card>
             </ng-template>
           </ngb-tab> -->
           <!--START - NEWS TAB-->
@@ -226,17 +227,14 @@
             </ng-template>
           </ngb-tab>
           <!--END - NEWS TAB-->
-
         </ngb-tabset>
         <!-- END - MATCH TABS-->
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
-
           <!--START - SIDERBAR ADS-->
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--END - SIDERBAR ADS-->
-
           <!--START - SIDERBAR STORY-->
           <!-- <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
             [options]="{type: 'current', title:'Recommended Links'}"></app-sidebar-links> -->

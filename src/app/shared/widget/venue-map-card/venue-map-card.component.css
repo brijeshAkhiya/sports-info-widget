@@ -1,0 +1,16 @@
+/* -------- Venue Card ------- */
+agm-map                                         { height: 300px; }
+.venue-info                                     { padding: 16px; background: #fff; }
+.venue-info p                                   { margin: 16px 0px 0px 8px; font-size: 18px; line-height: 23px; font-weight: 500;}
+.venue-info p span                              { margin-right: 8px; color: #A3A3A3; font-weight: 400; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1199px) {
+    agm-map                                     { height: 280px; }
+}
+
+@media (max-width: 767px) {
+    agm-map                                     { height: 240px; }
+    .venue-info p                               { font-size: 16px; line-height: 22px; }
+}
