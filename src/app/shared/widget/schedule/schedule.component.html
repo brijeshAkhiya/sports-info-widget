@@ -95,7 +95,7 @@
           {{ (match?.subtitle ) ? ' - ' + match?.subtitle : ''}}</span>
       </h6>
       <p class="stadium-nm" *ngIf="match.venue && match.venue.name">{{match.venue.name}}</p>
-      <p class="time-line" *ngIf="type == 'fixture'">{{match.datestart | date:'h:mm a'}}</p>
+      <p class="time-line" *ngIf="type == 'fixture'">{{ match.datestart | dateparse | date:'h:mm a'}}</p>
       <p class="result-line">{{(match?.result) ? match?.result.text : '' }}</p>
     </div>
     <div class="match-teams d-flex align-items-center">
