@@ -1,13 +1,18 @@
 /* -------- Match Lienup ------- */
-.match-lienup                           { padding: 24px; background: #fff; }
-.match-lienup .lienup-row               { margin-bottom: 40px; }
-.match-lienup .lienup-row:last-child    { margin-bottom: 0px; }
-.match-lienup .lienup-row > *           { width: calc(50% - 64px); }
+.match-lienup                           { padding: 24px 104px; background: #fff; }
+.match-lienup .lienup-row :last-child   { margin-bottom: 0px; }
+.match-lienup .lienup-row > *           { width: 41.67%; }
 .match-lienup .lienup-row > :first-child{ text-align: right; }
-.match-lienup .lienup-row.head-row      { margin-bottom: 24px; padding: 24px 0px; border-bottom: 2px solid #EBEBEB; }
+.match-lienup .lienup-row .heading      { padding: 32px 0px; }
 .match-lienup :last-child               { margin-bottom: 0px; }
-.match-lienup .head-row img             { margin-right: 12px; height: 44px; border: 2px solid #ECECEC; border-radius: 2px; }
-.match-lienup .head-row > :first-child img { margin-right: 0px; margin-left: 12px;}
+.match-lienup .heading img              { margin-right: 12px; height: 44px; border: 2px solid #ECECEC; border-radius: 2px; }
+.match-lienup .lienup-row > :first-child .heading img { margin-right: 0px; margin-left: 12px;}
+.match-lienup h5                        { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #EBEBEB; }
+.match-lienup ul                        { margin-bottom: 40px;}
+.match-lienup ul li                     { margin-bottom: 16px; line-height: 20px; }
+.match-lienup ul li p                   { margin: 0px 8px; display: inline-block; vertical-align: middle; }
+.match-lienup ul li span                { display: inline-block; width: 26px; height: 26px; font-size: 12px; line-height: 22px; color: #292929; font-weight: 700; border: 2px solid #E0E0E0; text-align: center; border-radius: 50%; vertical-align: middle;}
+.match-lienup ul li span.filled         { background: #292929; color: #fff; border-color: #292929; }
 
 /* -------- Match Stats ------- */
 .match-stats                            { padding: 0px 40px 24px; background: #fff; }
@@ -28,6 +33,8 @@
 /***** Responsive CSS Start ******/
 
 @media (min-width: 1200px) and (max-width: 1379px) {
+/* -------- Match Lienup ------- */
+    .match-lienup                           { padding: 24px 84px; }
 /* -------- Match Stats ------- */
     .match-stats                            { padding: 0px 32px 20px; }
     .match-stats .stat-row                  { margin-bottom: 32px; }
@@ -36,6 +43,11 @@
 }
 
 @media (max-width: 1199px) {
+/* -------- Match Lienup ------- */
+    .match-lienup                           { padding: 24px 48px; }
+    .match-lienup .lienup-row .heading      { padding: 24px 0px; }
+    .match-lienup ul                        { margin-bottom: 32px;}
+    .match-lienup ul li                     { margin-bottom: 12px;}
 /* -------- Match Stats ------- */
     .match-stats                        { padding: 0px 20px 12px; }
     .match-stats .stat-row              { margin-bottom: 20px; }
@@ -44,6 +56,8 @@
 }
 
 @media (max-width: 767px) {
+/* -------- Match Lienup ------- */
+    .match-lienup                       { padding: 20px 32px; }
 /* -------- Match Stats ------- */
     .match-stats                        { padding: 0px 12px 16px; }
     .match-stats .stat-row              { margin-bottom: 12px; }
@@ -52,6 +66,17 @@
     .match-stats .point-line            { height: 5px; }
 }
 @media (max-width: 575px) {
+/* -------- Match Lienup ------- */
+    .match-lienup                               { padding: 16px 16px; }
+    .match-lienup .lienup-row                   { flex-direction: column; -webkit-flex-direction: column; }
+    .match-lienup .lienup-row > *               { width: 100%; }
+    .match-lienup .lienup-row > :first-child    { text-align: left; }
+    .match-lienup .lienup-row > :first-child p  { margin-left: 0px; }
+    .match-lienup .lienup-row > :first-child .heading p     { flex-direction: row-reverse; -webkit-flex-direction: row-reverse; }
+    .match-lienup .lienup-row > :first-child .heading img   { margin-right: 12px; margin-left: 0px; }
+    .match-lienup h5                            { margin-bottom: 12px; padding-bottom: 8px; }
+    .match-lienup ul                            { margin-bottom: 24px;}
+    .match-lienup ul li                         { margin-bottom: 8px; }
 /* -------- Match Stats ------- */
     .match-stats                        { padding: 0px 8px 16px; }
     .match-stats .stat-row .center-col  { width: 120px;}

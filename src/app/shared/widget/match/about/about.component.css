@@ -46,6 +46,7 @@
 .match-main-title.goal-type .current-team h4        { text-transform: capitalize; width: 100%; }
 .goal-type .current-match > :last-child h4          { flex-direction: row-reverse; -webkit-flex-direction: row-reverse; }
 .goal-type .current-match > :last-child h4 img      { margin-left: 12px; margin-right: 0px; }
+.goal-type .team-col                                { flex-grow: 1; -webkit-flex-grow: 1; }
 .goal-type .live-score                              { margin-top: -15px; padding: 0px 6px; width: 132px; align-self: stretch; -webkit-align-self: stretch; flex-shrink: 0; -webkit-flex-shrink: 0; text-align: center; }
 .goal-type .live-score h5                           { margin: 0px; color: #A3A3A3; font-weight: 700; text-transform: uppercase; }
 .goal-type .best-player-list                        { margin-bottom: 16px; }
@@ -148,12 +149,14 @@
     .match-main-title .match-update             { text-align: left; }
 /* -------- Goal Type Match Title ------- */
     .match-main-title .current-match            { flex-direction: row; -webkit-flex-direction: row; }
-
-    .goal-type .current-match > :last-child     { text-align: left; }
-    .goal-type .current-match > :last-child h4  { flex-direction: row; -webkit-flex-direction: row; }
-    /* .match-main-title.goal-type .current-match, */
-    .match-main-title.goal-type .current-team   { justify-content: center !important; }
-    .goal-type .current-match > :last-child h4 img      { margin-left: 12px; margin-right: 0px; }
-    .goal-type .live-score                      { width: auto; }
+    .goal-type .current-match > :last-child h4,
+    .match-main-title.goal-type .current-team h4    { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
+    .goal-type .current-match h4 img                { margin-bottom: 6px; margin-right: calc(100% - 24px); }
+    .goal-type .current-match > :last-child h4 img  { margin-right: 0px; margin-left: calc(100% - 24px); }
+    .goal-type .live-score                      { width: 76px; padding: 0px 6px; }
+    .goal-type .live-score h5                   { font-size: 12px; line-height: 20px; }
+    .goal-type .live-score h3                   { font-size: 16px; line-height: 22px;}
+    .goal-type .best-player-list li             { margin-right: 0px; margin-bottom: 6px; font-size: 13px; line-height: 18px; }
+    
 }    
     

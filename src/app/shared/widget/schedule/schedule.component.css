@@ -46,6 +46,7 @@
 .schedule-tour-list .score-center-block     { margin: -10px 12px 0px; width: 100px; text-transform: uppercase; text-align: center; }
 .schedule-tour-list .score-center-block p   { margin-bottom: 0px; font-weight: 700; color: #ccc; }
 .schedule-tour-list .score-center-block h4  { font-weight: 700; }
+.schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
