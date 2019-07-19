@@ -17,11 +17,11 @@
               <!-- <h5>Match Commentary</h5> -->
               <app-loader *ngIf="loading"></app-loader>
               <ng-container *ngIf="matchInfo">
-                <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0">
+                <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'" [message]="'Coming Soon..!'">
                 </app-no-data-widget>
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
-                <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
-                  [scheduled]="matchInfo.match_info.datestart"></app-countdown>
+                <!-- <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
+                  [scheduled]="matchInfo.match_info.datestart"></app-countdown> -->
               </ng-container>
             </ng-template>
           </ngb-tab>
@@ -86,7 +86,7 @@
               <div>Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon'">
+              <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
               </app-no-data-widget>
               <!-- <div class="match-stats common-shadow rounded-box" *ngIf="matchInfo">
                 <div class="stat-row head-row d-flex align-items-center">

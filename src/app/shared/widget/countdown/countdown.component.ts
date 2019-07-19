@@ -19,6 +19,7 @@ export class CountdownComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.scheduled =this.scheduled.replace(/\s/g, "T");
     let starttime = new Date(this.scheduled).getTime();
     let currenttime = new Date().getTime();
     if (currenttime > starttime) {
