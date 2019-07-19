@@ -103,7 +103,7 @@
           </ngb-tab>
 
           <!-- Stats Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>Stats</ng-template>
             <ng-template ngbTabContent>
               <!--  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
@@ -143,7 +143,7 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
+          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
 
           <!-- <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="'cricketseries'">
           </app-common-story-widget> -->

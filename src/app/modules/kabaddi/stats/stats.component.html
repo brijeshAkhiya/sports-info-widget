@@ -6,7 +6,7 @@
           <h1>Statistics</h1>
         </div>
         <app-loader *ngIf="isloading"></app-loader>
-        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'kabaddi'" [message]="'Coming Soon'"></app-no-data-widget>
         <ngb-tabset class="common-tabs black-filled" *ngIf="stats?.length > 0">
           <ngb-tab>
             <ng-template ngbTabTitle>Points</ng-template>
@@ -72,8 +72,8 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--Recommended links-->
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
-            [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
+          <!-- <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links> -->
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
 
         </div>

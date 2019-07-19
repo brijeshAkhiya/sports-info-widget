@@ -6,7 +6,7 @@
           <h1>Table</h1>
         </div>
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!info"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && !info"></app-no-data-widget>
         
         <ng-container *ngIf="info && info.standings">
         <ng-container *ngFor="let standing of info.standings">
