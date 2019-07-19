@@ -4,13 +4,15 @@
   <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
     <div class="probability-block d-flex align-items-center justify-content-between">
       <div class="team-block">
-        <img class="team-flag" [lazyLoad]="comp1.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
+        <img class="team-flag" [lazyLoad]="comp1.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+          [offset]="commonService.lazyloadoffset">
         <h3 *ngIf="matchprobability">{{comp1.probability}}%</h3>
       </div>
 
       <div class="team-block">
         <h3 *ngIf="matchprobability">{{comp2.probability}}%</h3>
-        <img class="team-flag" [lazyLoad]="comp2.id | logosurl" [defaultImage]="cricketService.flagplaceholder"  [offset]="commonService.lazyloadoffset" >
+        <img class="team-flag" [lazyLoad]="comp2.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
+          [offset]="commonService.lazyloadoffset">
       </div>
     </div>
     <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage">
@@ -31,20 +33,7 @@
 
 <!-- START - VENUE-->
 <h4 class="line-title">Venue Details</h4>
-<section class="venue-info rounded-box common-shadow" *ngIf="venuedetails">
-  <ng-container *ngIf="venuedetails.lat && venuedetails.long">
-    <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.long">
-      <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.long"></agm-marker>
-    </agm-map>
-  </ng-container>
-  <p *ngIf="venuedetails?.name">
-    <span>Venue :</span>
-    {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
-  </p>
-  <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
-  <p *ngIf="venuedetails?.bowling_ends"><span>Ends
-      :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
-</section>
+<app-venue-map-card [venuedetails]="venuedetails" [sport]="'cricket'" *ngIf="venuedetails"></app-venue-map-card>
 <div *ngIf="!venuedetails">
   No venue details available for this match!
 </div>

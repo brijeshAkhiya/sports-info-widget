@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-venue-map-card',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./venue-map-card.component.css']
 })
 export class VenueMapCardComponent implements OnInit {
-
+  @Input() venuedetails;
+  @Input() sport;
   constructor() { }
 
   ngOnInit() {

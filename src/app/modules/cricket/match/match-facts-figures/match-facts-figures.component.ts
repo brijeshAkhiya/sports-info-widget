@@ -47,7 +47,6 @@ export class MatchFactsFiguresComponent implements OnInit {
       } else {
         // TODO - Reverse Geo coding
         console.log('reverse geo code');
-        
         this.sportsService.getReverseGeo(this.venuedetails.name).subscribe((res: any) => {
           this.venuedetails.lat = res.results[0].geometry.location.lat;
           this.venuedetails.long = res.results[0].geometry.location.lng;
