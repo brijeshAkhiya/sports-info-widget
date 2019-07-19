@@ -55,13 +55,12 @@
                     </div> -->
                 </div>
               </section>
-
               <section class="player-profile d-flex" *ngIf="sport == 'kabaddi'">
                 <div class="player-pic">
                   <img class="common-shadow rounded-box" alt="playerData?.fullname" [lazyLoad]="playerData?.pid"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
                 </div>
-                <div class="player-info d-flex common-shadow rounded-box" >
+                <div class="player-info d-flex common-shadow rounded-box">
                   <div class="info-col">
                     <ng-container
                       *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Full Name', value: playerData?.fullname  }">

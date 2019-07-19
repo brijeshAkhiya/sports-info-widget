@@ -1,0 +1,25 @@
+<div class="common-table match-info-table common-shadow rounded-box">
+  <div class="table-responsive">
+    <table class="table">
+      <tr *ngFor="let title of options.titles">
+        <td>{{title}}</td>
+        <td>
+          <ng-container *ngIf="options.sport == 'kabaddi'; else elseCricket">
+            <ng-container *ngTemplateOutlet="kabaddi;context:{item:data.match_info}">
+            </ng-container>
+          </ng-container>
+          <ng-template #elseCricket>
+            <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
+            </ng-container>
+          </ng-template>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #kabaddi let-item="item">
+  <ng-container *ngFor="let value of options.values">
+    {{ value == 'title' ? item[value] : ''}}
+  </ng-container>
+</ng-template>
