@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from "@providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: 'app-match',
@@ -9,14 +11,17 @@ import { SportsService } from "@providers/sports-service";
   styleUrls: ['./match.component.css']
 })
 export class MatchComponent implements OnInit {
-  paramArticle = { reqParams: { nStart: 0, nLimit: 10,eSport:'Kabaddi', aIds: [] } }
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [] } }
   loading: boolean = false;
   matchInfo;
   commentry = [];
   team = [];
+  objectKeys = Object.keys
 
   constructor(
     private sportsService: SportsService,
+    public commonService: CommonService,
+    public cricketService: CricketService,
     private activatedroute: ActivatedRoute
   ) {
   }
@@ -34,6 +39,7 @@ export class MatchComponent implements OnInit {
         this.matchInfo = res.data.items;
         this.initTeam();
         this.initCommentry();
+        this.initSquads();
       }
     }, (error) => {
       this.loading = false;
@@ -48,8 +54,8 @@ export class MatchComponent implements OnInit {
     let away = 0;
     let extraRun = { 'allout': 2, 'card': 1, 'super_raid': 1, 'super_tackle': 1 }
 
-    let temp:any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
-    this.commentry.push({event_type : 'toss', winner : temp[0].tname, decision : this.matchInfo.match_info.toss.decision})
+    let temp: any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
+    this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision })
 
     this.commentry = this.commentry.concat(this.matchInfo.event);
     this.commentry.forEach((match, index) => {
@@ -64,15 +70,29 @@ export class MatchComponent implements OnInit {
         }
       }
     });
-    this.commentry.push({event_type : 'result', result : this.matchInfo.match_info.result.text})
-    
+    this.commentry.push({ event_type: 'result', result: this.matchInfo.match_info.result.text })
+
   }
 
-  initTeam(){
-    this.team.push(Object.assign({'qualifier': 'home'}, this.matchInfo.match_info.teams.home));
-    this.team.push(Object.assign({'qualifier': 'away'}, this.matchInfo.match_info.teams.away));
+  initTeam() {
+    this.team.push(Object.assign({ 'qualifier': 'home' }, this.matchInfo.match_info.teams.home));
+    this.team.push(Object.assign({ 'qualifier': 'away' }, this.matchInfo.match_info.teams.away));
     console.log(this.team);
-    
+
   }
 
+  initSquads() {
+    this.team.forEach((team, index) => {
+      let tempArr;
+      if (team.qualifier == 'home')
+        tempArr = this.matchInfo.squad.home;
+      else
+        tempArr = this.matchInfo.squad.away;
+      this.team[index].players = [];
+      tempArr.forEach(element => {
+        (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
+      });
+    })
+    console.log(this.team);
+  }
 }
