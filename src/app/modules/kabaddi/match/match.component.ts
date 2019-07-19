@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from "@providers/sports-service";
+import { CricketService } from "@providers/cricket-service";
+import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: 'app-match',
@@ -14,10 +16,13 @@ export class MatchComponent implements OnInit {
   matchInfo;
   commentry = [];
   team = [];
+  objectKeys = Object.keys
   venuedetails = { lat: '', lng: '', name: '' };
 
   constructor(
     private sportsService: SportsService,
+    public commonService: CommonService,
+    public cricketService: CricketService,
     private activatedroute: ActivatedRoute
   ) {
   }
@@ -36,6 +41,7 @@ export class MatchComponent implements OnInit {
         this.getVenuedetails();
         this.initTeam();
         this.initCommentry();
+        this.initSquads();
       }
     }, (error) => {
       this.loading = false;
@@ -93,4 +99,18 @@ export class MatchComponent implements OnInit {
 
   }
 
+  initSquads() {
+    this.team.forEach((team, index) => {
+      let tempArr;
+      if (team.qualifier == 'home')
+        tempArr = this.matchInfo.squad.home;
+      else
+        tempArr = this.matchInfo.squad.away;
+      this.team[index].players = [];
+      tempArr.forEach(element => {
+        (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
+      });
+    })
+    console.log(this.team);
+  }
 }

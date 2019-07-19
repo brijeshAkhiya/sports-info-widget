@@ -305,6 +305,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     h1                      { font-size: 44px; line-height: 60px; }
     h2                      { font-size: 38px; line-height: 48px;}
     h3                      { font-size: 28px; line-height: 38px;}
+    h4                      { font-size: 22px; line-height: 30px;}
+    h5                      { font-size: 19px; line-height: 24px;}
 /******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .popular-main-item .item-img            { height: 440px; }
@@ -335,21 +337,22 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 @media (min-width: 992px) and (max-width: 1199px) {
     body                    { font-size: 15px; line-height: 25px; }
     h1                      { font-size: 40px; line-height: 56px; }
-    h2                      { font-size: 36px; line-height: 46px;}
-    h3                      { font-size: 26px; line-height: 36px;}
+    h2                      { font-size: 36px; line-height: 46px; }
+    h3                      { font-size: 26px; line-height: 36px; }
     h4                      { font-size: 20px; line-height: 28px; }
-    h5                      { font-size: 18px; line-height: 22px;}
+    h5                      { font-size: 18px; line-height: 22px; }
+    h6                      { font-size: 17px; line-height: 24px; }
     p.bold-text             { line-height: 20px;}
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .common-section             { padding: 40px 0px; }
 /* -------- Popular Articles Section ------- */
     .popular-list-4 [class*="col-"]:nth-child(3) .popular-item      { margin-bottom: 0px;}
-    .popular-main-item .item-img            { height: 360px; }
-    .common-popular-list .item-desc         { min-height: 64px; }
+    .popular-main-item .item-img                    { height: 360px; }
+    .common-popular-list .item-desc                 { min-height: 64px; }
 /* -------- Common News Section ------- */
-    .common-news-list .common-news-img          { width: 220px; height: 181px;}
-    .common-news-list .common-news-desc         { width: calc(100% - 220px);}
+    .common-news-list .common-news-img              { width: 220px; height: 181px;}
+    .common-news-list .common-news-desc             { width: calc(100% - 220px);}
 /* -------- Writer Tab ------- */
     .common-tabs.writer-tab > .nav-tabs             { margin: -31px 0px 24px 160px;}
     .common-tabs.writer-tab > .nav-tabs .nav-link   { margin: 0px 14px; font-size: 15px;}
@@ -359,7 +362,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .sidebar-row .content-col,
-    .sidebar-row .sidebar-col   { width: 100%; }
+    .sidebar-row .sidebar-col           { width: 100%; }
 /* -------- Common Widget Block ------- */
     .common-stories-widget,
     .common-widget                      { margin: 24px 0px;}
@@ -375,6 +378,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     h3                      { font-size: 22px; line-height: 30px;}
     h4                      { font-size: 20px; line-height: 28px; }
     h5                      { font-size: 18px; line-height: 22px;}
+    h6                      { font-size: 17px; line-height: 24px;}
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
     .common-section         { padding: 36px 0px; }

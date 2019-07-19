@@ -8,15 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NoDataWidgetComponent implements OnInit {
   imagepath: { image: string; };
   @Input() message;
+  @Input() sport;
   
   constructor() { }
 
   ngOnInit() {
-    let array = [
-      {image:'assets/images/no_data_1.svg'},
-      {image:'assets/images/no_data_2.svg'},
-    ]
-    this.imagepath = array[Math.floor(Math.random() * array.length)];
+    if(this.sport == 'kabaddi'){
+      this.imagepath = { image : 'assets/images/match/kabaddi_no_data.svg' };
+    }else{
+      let array = [
+        {image:'assets/images/no_data_1.svg'},
+        {image:'assets/images/no_data_2.svg'},
+      ]
+      this.imagepath = array[Math.floor(Math.random() * array.length)];
+    }
   }
 
 }

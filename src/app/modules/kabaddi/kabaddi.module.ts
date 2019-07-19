@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /** Internal Modules */
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SharedModule } from "@app/shared/shared.module";
 
 import { KabaddiRoutingModule } from './kabaddi-routing.module';
@@ -17,6 +18,7 @@ import { KabaddiService } from './kabaddi.service';
 @NgModule({
   declarations: [KabaddiComponent, HomeComponent, FixturesComponent, StatsComponent, TableComponent, MatchComponent],
   imports: [
+    LazyLoadImageModule,
     SharedModule,
     KabaddiRoutingModule,
     NgbModule,

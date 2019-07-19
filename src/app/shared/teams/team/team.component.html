@@ -111,7 +111,7 @@
           </ngb-tab>
 
           <!-- Fixtures Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>
               <div (click)="getTeamFixtures()">Fixtures</div>
             </ng-template>
@@ -125,7 +125,7 @@
           </ngb-tab>
 
           <!-- Results Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>
               <div (click)="getTeamResults()">Results</div>
             </ng-template>
@@ -144,7 +144,7 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+          <app-sidebar-links  *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'"
             [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>

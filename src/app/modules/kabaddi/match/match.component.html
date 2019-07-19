@@ -27,117 +27,68 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
-          <!-- <ngb-tab>
+          <ngb-tab >
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
                 <div class="lienup-row d-flex align-items-center justify-content-between">
+                  
                   <div>
                     <div class="heading">
-                      <p class="d-flex align-items-center justify-content-end"><b>Gujarat Fortunegiants</b><img
-                          src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png" alt="team"></p>
+                      <p class="d-flex align-items-center justify-content-end">
+                        <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
+                        <img alt="{{team[0].tname}}" [lazyLoad]="team[0].logo"
+                          [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+                      </p>
                     </div>
-                    <h5>Raiders</h5>
-                    <ul>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                    </ul>
-                    <h5>Defenders</h5>
-                    <ul>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                    </ul>
-                    <h5>All Rounders</h5>
-                    <ul>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                      <li>
-                        <p>Denice Ekdahl</p><span>12</span>
-                      </li>
-                    </ul>
+                    <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
+                        <h5 class="text-capitalize">{{squad}}</h5>
+                        <ul><li *ngFor="let player of team[0]?.players[squad]"> 
+                          <p  class="text-capitalize">
+                            <a [routerLink]="['/kabaddi/player', team[0]?.tid, player?.pid, (player?.name | slugify )]">
+                              {{player.name}}
+                            </a>
+                          </p>
+                          <!-- <span>12</span> -->
+                        </li></ul>
+                    </ng-container>
                   </div>
+
                   <div>
                     <div class="heading">
-                      <p class="d-flex align-items-center"><img
-                          src="https://rest.entitysport.com/kabaddi/assets/team/logo_5cb831660a04a.png"
-                          alt="team"><b>Gujarat Fortunegiants</b></p>
+                      <p class="d-flex align-items-center">
+                          <img alt="{{team[1].tname}}" [lazyLoad]="team[1].logo"
+                            [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+                            <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
+                      </p>
                     </div>
-                    <h5>Raiders</h5>
-                    <ul>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                    </ul>
-                    <h5>Raiders</h5>
-                    <ul>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                    </ul>
-                    <h5>Raiders</h5>
-                    <ul>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                      <li>
-                        <span class="filled">12</span>
-                        <p>Denice Ekdahl</p>
-                      </li>
-                    </ul>
+                    <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
+                        <h5  class="text-capitalize">{{squad}}</h5>
+                        <ul><li *ngFor="let player of team[1]?.players[squad]">
+                          <!-- <span>12</span> -->
+                          <p  class="text-capitalize">
+                            <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
+                              {{player.name}}
+                            </a>
+                          </p>
+                        </li>
+                      </ul>
+                    </ng-container>
                   </div>
                 </div>
               </div>
             </ng-template>
-          </ngb-tab> -->
+          </ngb-tab> 
           <!-- END - LINEUPS-->
           <!--START - Stats-->
-          <!-- <ngb-tab>
+        <ngb-tab>
             <ng-template ngbTabTitle>
               <div>Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <div class="match-stats common-shadow rounded-box" *ngIf="matchInfo">
+              <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon'">
+              </app-no-data-widget>
+              <!-- <div class="match-stats common-shadow rounded-box" *ngIf="matchInfo">
                 <div class="stat-row head-row d-flex align-items-center">
                   <div>
                     <p class="d-flex align-items-center justify-content-end">
@@ -199,12 +150,12 @@
                     <p><b>7</b></p>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </ng-template>
-          </ngb-tab> -->
+          </ngb-tab> 
           <!--END - Stats-->
           <!-- START - Info-->
-          <!-- <ngb-tab>
+          <ngb-tab>
             <ng-template ngbTabTitle>
               <div>Info</div>
             </ng-template>
@@ -217,9 +168,9 @@
              <h4 class="line-title">Venue Details</h4>
               <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails"></app-venue-map-card>
             </ng-template>
-          </ngb-tab> -->
+          </ngb-tab>
           <!--START - NEWS TAB-->
-          <!-- <ngb-tab>
+          <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
               <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
