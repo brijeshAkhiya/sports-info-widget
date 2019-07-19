@@ -5,8 +5,8 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>Statistics</h1>
         </div>
-        <app-loader *ngIf="!stats"></app-loader>
-        <app-no-data-widget *ngIf="stats?.length == 0"></app-no-data-widget>
+        <app-loader *ngIf="isloading"></app-loader>
+        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)"></app-no-data-widget>
         <ngb-tabset class="common-tabs black-filled" *ngIf="stats?.length > 0">
           <ngb-tab>
             <ng-template ngbTabTitle>Points</ng-template>

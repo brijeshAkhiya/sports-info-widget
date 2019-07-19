@@ -13,9 +13,7 @@ import { CricketService } from '@providers/cricket-service';
 export class FixturesComponent implements OnInit {
 
   paramsFixtures = {reqParams : {'status': 1, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : []  }
-  paramsResults = {reqParams : {'status': 2, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : [] }
-  matchfixtures = [];
-  matchresults = [];
+  paramsResults = {reqParams : {'status': 2, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : [] }  
   tournamentid;
 
   constructor(
@@ -54,14 +52,13 @@ export class FixturesComponent implements OnInit {
       
       this.paramsFixtures.loading = false;
       if (res.data && res.data.items){
-        this.matchfixtures =  this.matchfixtures.concat(res.data.items);
-        this.paramsFixtures.data = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'datestart', 'asc');
+        this.paramsFixtures.data =  this.paramsFixtures.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'asc'));
       }
       if(res.data.total_pages > this.paramsFixtures.reqParams.page)
         this.paramsFixtures.loadmore = true;
       else
         this.paramsFixtures.loadmore = true;
-      console.log( this.matchfixtures);
+        
     }, (error) => {
       this.paramsFixtures.loading = false;
     });
@@ -75,8 +72,7 @@ export class FixturesComponent implements OnInit {
       .subscribe((res: any) => {
         this.paramsResults.loading = false;
         if (res.data && res.data.items){
-          this.matchresults =  this.matchresults.concat(res.data.items);
-          this.paramsResults.data = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'datestart', 'desc');
+          this.paramsResults.data =  this.paramsResults.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'desc'));
         }
         if(res.data.total_pages > this.paramsResults.reqParams.page)
           this.paramsResults.loadmore = true;

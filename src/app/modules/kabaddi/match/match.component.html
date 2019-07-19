@@ -1,4 +1,5 @@
-<!-- <app-loader *ngIf="isshow"></app-loader> -->
+<app-loader *ngIf="loading"></app-loader>
+<app-no-data-widget *ngIf="!loading && (!matchInfo)"></app-no-data-widget>
 <section class="common-section cricket-recentnews recentnews-section" *ngIf="matchInfo">
   <div class="container">
     <div class="row sidebar-row">
@@ -14,7 +15,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
-              <h5>Match Commentary</h5>
+              <!-- <h5>Match Commentary</h5> -->
               <app-loader *ngIf="loading"></app-loader>
               <ng-container *ngIf="matchInfo">
                   <app-no-data-widget *ngIf="!loading && commentry.length == 0 &&  matchInfo.match_info.gamestate != 0"></app-no-data-widget>
@@ -25,7 +26,7 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
@@ -50,10 +51,10 @@
                 </div>
               </div>
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <!-- END - LINEUPS-->
           <!--START - Stats-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>
               <div>Stats</div>
             </ng-template>
@@ -120,26 +121,26 @@
                 </div>
               </div>
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <!--END - Stats-->
           <!-- START - Info-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>
               <div>Info</div>
             </ng-template>
             <ng-template ngbTabContent>
               Info
             </ng-template>
-          </ngb-tab>
+          </ngb-tab> -->
           <!--START - NEWS TAB-->
-          <ngb-tab>
+          <!-- <ngb-tab>
             <ng-template ngbTabTitle>News</ng-template>
             <ng-template ngbTabContent>
               News
               <!-- <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
               </app-blog-list> -->
-            </ng-template>
-          </ngb-tab>
+             <!--</ng-template>
+          </ngb-tab> -->
           <!--END - NEWS TAB-->
 
         </ngb-tabset>

@@ -101,7 +101,7 @@
     <div class="match-teams d-flex align-items-center">
       <div class="match-team d-flex align-items-center">
         <div class="team-info">
-          <h5 [ngClass]="{'winner': match?.result?.winner == match?.teams?.home?.tid}">
+          <h5>
             {{match?.teams?.home?.shortname}}</h5>
         </div>
         <div class="team-flag">
@@ -118,9 +118,9 @@
       <div class="score-center-block" *ngIf="match?.status == 2">
         <p>ft</p>
         <div class="value d-flex justify-content-between">
-          <h4 class="dark-text" *ngIf="match?.result?.home">{{match?.result?.home}}</h4>
+          <h4 class="dark-text" *ngIf="match?.result?.home"  [ngClass]="{'looser': match?.result?.winner != match?.teams?.home?.tid}">{{match?.result?.home}}</h4>
           <h4 class="dark-text">-</h4>
-          <h4 class="dark-text" *ngIf="match?.result?.away">{{match?.result?.away}}</h4>
+          <h4 class="dark-text" *ngIf="match?.result?.away"  [ngClass]="{'looser': match?.result?.winner != match?.teams?.away?.tid}">{{match?.result?.away}}</h4>
         </div>
       </div>
 
@@ -130,7 +130,7 @@
             [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.away?.tname}}" />
         </div>
         <div class="team-info">
-          <h5 [ngClass]="{'winner': match?.result?.winner == match?.teams?.away?.tid}">
+          <h5>
             {{match?.teams?.away?.shortname}}</h5>
 
         </div>

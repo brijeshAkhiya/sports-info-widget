@@ -8,6 +8,8 @@
 .goal-commentary-list .icon.yellow      { background-image: url(assets/images/match/card-yellow.svg);}
 .goal-commentary-list .icon.red         { background-image: url(assets/images/match/card-red.svg);}
 .goal-commentary-list .icon.substitution  { background-image: url(assets/images/match/substitute.svg);}
+.goal-commentary-list .icon.toss         { background-image: url(assets/images/match/toss.svg);}
+.goal-commentary-list .icon.result  { background-image: url(assets/images/match/result.svg);}
 .goal-commentary-list .icon-block p     { margin-left: 4px; display: inline-block; vertical-align: middle; }
 .goal-commentary-list .desc-block       { padding: 24px 0px; border-bottom: 1px solid #EBEBEB; flex-grow: 1; -webkit-flex-grow: 1; }
 .goal-commentary-list .commentary-item:last-child .desc-block   { border: none; }

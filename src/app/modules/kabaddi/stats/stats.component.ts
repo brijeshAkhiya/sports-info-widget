@@ -9,7 +9,9 @@ import { CommonService } from '@app/shared/providers/common-service';
   styleUrls: ['./stats.component.css']
 })
 export class StatsComponent implements OnInit {
+
   stats: any;
+  isloading:boolean = false;
 
   constructor(
     private commonService: CommonService,
@@ -21,11 +23,14 @@ export class StatsComponent implements OnInit {
   }
 
   getTournamentStats(params) {
+    this.isloading = true;
     this.sportsService.getkabaddistats(params).subscribe((res: any) => {
+      this.isloading = false;
       if (res) {
         this.stats = res.data
       }
-    })
+    },
+    error => this.isloading = false)
   }
 
 }

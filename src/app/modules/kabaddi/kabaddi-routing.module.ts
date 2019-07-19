@@ -47,6 +47,11 @@ const routes: Routes = [{
         data: { 'sport': 'kabaddi' }
     },
     {
+        path: 'player/:teamid/:id/:slug',
+        component: PlayerComponent,
+        data: { 'sport': 'kabaddi', team: true }
+    },
+    {
         path: 'match/:id/:slug',
         component: MatchComponent
     },
