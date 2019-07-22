@@ -11,9 +11,11 @@ import { SportsService } from "@providers/sports-service";
 export class SportsHomeComponent implements OnInit {
 
   @Input() options;
+  @Input() sport;
   @Input() page_type;
   @Input() blog_type;
   private tabSet: any;
+
 
   @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
     this.tabSet = content;

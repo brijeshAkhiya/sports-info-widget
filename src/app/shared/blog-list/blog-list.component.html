@@ -4,7 +4,7 @@
     <app-blog-card [posts]="articles" *ngIf="!options.card_type"  [card_type]="'list'"></app-blog-card>
 </div>
 <app-loader *ngIf="isLoading"></app-loader>
-<app-no-data-widget *ngIf="!isLoading && articles?.length == 0 || !articles"></app-no-data-widget>
+<app-no-data-widget *ngIf="!isLoading && articles?.length == 0 || !articles" [sport]="sport"></app-no-data-widget>
 
 <div class="text-center">
   <button class="theme-btn down-btn" (click)="loadmore()" *ngIf="!isLoading && articles?.length > 0 && isLoadMore">

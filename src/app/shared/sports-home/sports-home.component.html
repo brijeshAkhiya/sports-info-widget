@@ -49,14 +49,14 @@
                 <div>Videos</div>
             </ng-template>
             <ng-template ngbTabContent>
-                <app-blog-list *ngIf="videoArticlesParams" [options]="{'reqParams': videoArticlesParams}">
+                <app-blog-list *ngIf="videoArticlesParams" [options]="{'reqParams': videoArticlesParams}" [sport]="sport">
                 </app-blog-list>
             </ng-template>
         </ngb-tab>
 
         <ngb-tab title="Recommended">
             <ng-template ngbTabContent>
-                <app-blog-list *ngIf="popularArticlesParams" [options]="{'reqParams': popularArticlesParams, 'type' : 'popular'}">
+                <app-blog-list *ngIf="popularArticlesParams" [options]="{'reqParams': popularArticlesParams, 'type' : 'popular'}" [sport]="sport">
                 </app-blog-list>
             </ng-template>
         </ngb-tab>

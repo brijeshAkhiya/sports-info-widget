@@ -9,7 +9,7 @@ import { SportsService } from '@providers/sports-service';
 export class BlogListComponent implements OnInit {
   
   @Input() options; 
-
+  @Input() sport;
   isLoading: boolean = false;
   isLoadMore: boolean = true;
   articles = [];

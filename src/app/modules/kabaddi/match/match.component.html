@@ -9,9 +9,9 @@
         <app-match-about [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'kabaddi'"></app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
-        <ngb-tabset class="common-tabs match-tabs">
+        <ngb-tabset class="common-tabs match-tabs" [activeId]="matchInfo.match_info.gamestate == 0 ? 'lineups' : 'commentry'">
           <!-- START - MATCH COMMENTRY-->
-          <ngb-tab>
+          <ngb-tab id="commentry">
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
               <!-- <h5>Match Commentary</h5> -->
@@ -27,11 +27,11 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
-          <ngb-tab >
+          <ngb-tab  id="lineups">
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
-                <div class="lienup-row d-flex align-items-center justify-content-between">
+                <div class="lienup-row d-flex align-items-start justify-content-between">
                   
                   <div>
                     <div class="heading">
