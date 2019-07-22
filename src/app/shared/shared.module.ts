@@ -25,6 +25,7 @@ import { SafehtmlPipe } from './pipes/safehtml.pipe';
 import { StringsplitID } from './pipes/stringsplitID.pipe';
 import { CricketScorePipe } from './pipes/cricket-score.pipe';
 import { DateParsePipe } from './pipes/dateparse.pipe';
+import { StringtoNumberPipe } from './pipes/string-to-number.pipe';
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
@@ -66,6 +67,7 @@ import { AgmCoreModule } from '@agm/core';
 
 
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -96,6 +98,7 @@ import { AgmCoreModule } from '@agm/core';
         StringsplitID,
         CricketScorePipe,
         DateParsePipe,
+        StringtoNumberPipe,
         /** All Componenets */
         CustomAdsWidgetComponent, 
         NoDataWidgetComponent, 
@@ -137,6 +140,7 @@ import { AgmCoreModule } from '@agm/core';
         StringUnder,
         StringsplitID,
         CricketScorePipe,
+        StringtoNumberPipe,
         /** All Providers*/
         SportsService,
         SocketService,
@@ -163,6 +167,7 @@ import { AgmCoreModule } from '@agm/core';
         StringUnder,
         StringsplitID,
         CricketScorePipe,
+        StringtoNumberPipe,
         /** All Componenets */
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,
