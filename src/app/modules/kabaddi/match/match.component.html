@@ -33,8 +33,72 @@
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
+                <div class="ground-map-block">
+                  <div class="ground-map">
+                    <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
+                    <ul class="ground-player-list">
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Suresh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Ramesh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                    </ul>
+                    <ul class="ground-player-list list-2">
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Suresh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Ramesh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
                 <div class="lienup-row d-flex align-items-start justify-content-between">
-
                   <div>
                     <div class="heading">
                       <p class="d-flex align-items-center justify-content-end">
@@ -130,7 +194,7 @@
                       [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
                       <span class="point-line"
                         [style.width]="((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) + '%'"><span></span></span>
-                        <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
+                      <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
                     </p>
                   </div>
                 </div>
