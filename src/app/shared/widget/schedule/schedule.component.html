@@ -85,7 +85,6 @@
 
 
 <ng-template #kabaddi let-match="match" let-type="type">
-
   <div class="schedule-item kabaddi-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.match_result}">
     <div class="match-desc">
@@ -95,7 +94,9 @@
           {{ (match?.subtitle ) ? ' - ' + match?.subtitle : ''}}</span>
       </h6>
       <p class="stadium-nm" *ngIf="match.venue && match.venue.name">{{match.venue.name}}</p>
-      <p class="time-line" *ngIf="type == 'fixture'">{{ match.datestart | dateparse | date:'h:mm a'}}</p>
+
+      <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}
+      </p>
       <p class="result-line">{{(match?.result) ? match?.result.text : '' }}</p>
     </div>
     <div class="match-teams d-flex align-items-center">
@@ -118,9 +119,13 @@
       <div class="score-center-block" *ngIf="match?.status == 2">
         <p>ft</p>
         <div class="value d-flex justify-content-between">
-          <h4 class="dark-text" *ngIf="match?.result?.home"  [ngClass]="{'looser': match?.result?.winner != match?.teams?.home?.tid &&  match?.result?.tie != 'true'}">{{match?.result?.home}}</h4>
+          <h4 class="dark-text" *ngIf="match?.result?.home"
+            [ngClass]="{'looser': match?.result?.winner != match?.teams?.home?.tid &&  match?.result?.tie != 'true'}">
+            {{match?.result?.home}}</h4>
           <h4 class="dark-text">-</h4>
-          <h4 class="dark-text" *ngIf="match?.result?.away"  [ngClass]="{'looser': match?.result?.winner != match?.teams?.away?.tid  && match?.result?.tie != 'true'}">{{match?.result?.away}}</h4>
+          <h4 class="dark-text" *ngIf="match?.result?.away"
+            [ngClass]="{'looser': match?.result?.winner != match?.teams?.away?.tid  && match?.result?.tie != 'true'}">
+            {{match?.result?.away}}</h4>
         </div>
       </div>
 
@@ -137,8 +142,7 @@
       </div>
       <a class="details-btn"
         [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>Details</span></a>
-      <a class="fullblock-link"
-        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
+      <a class="fullblock-link" [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
       </a>
     </div>
     <!-- <a class="details-btn" [routerLink]=""><span>Details</span></a> -->
