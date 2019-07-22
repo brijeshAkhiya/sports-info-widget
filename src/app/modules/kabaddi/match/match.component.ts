@@ -18,6 +18,7 @@ export class MatchComponent implements OnInit {
   team = [];
   objectKeys = Object.keys
   venuedetails = { lat: '', lng: '', name: '' };
+  matchStats: any;
 
   constructor(
     private sportsService: SportsService,
@@ -29,7 +30,19 @@ export class MatchComponent implements OnInit {
 
   ngOnInit() {
     this.getMatchInfo(this.activatedroute.snapshot.params.id)
+    this.getMatchstats(this.activatedroute.snapshot.params.id)
     this.paramArticle.reqParams.aIds.push(this.activatedroute.snapshot.params.id);
+  }
+
+  getMatchstats(id) {
+    this.sportsService.getMatchStats(id).subscribe((res: any) => {
+      this.loading = false;
+      if (res.data) {
+        this.matchStats = res.data.items;
+      }
+    }, (error) => {
+      this.loading = false;
+    });
   }
 
   getMatchInfo(id) {

@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl : 'https://dev.backend.sports.info',
+  apiUrl : 'https://backend.sports.info',
   version: '/api/v1',
   socket: {
-    baseUrl: 'https://dev.backend.sports.info',
+    baseUrl: 'https://backend.sports.info',
     config: {}
   },
   s3Url : 'https://d1ldsx0apuyt84.cloudfront.net/',

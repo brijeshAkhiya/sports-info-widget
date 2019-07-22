@@ -160,7 +160,9 @@
         <img alt="{{player.fullname}}" [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamProfile?.tid+'.svg'"
           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <div class="item-desc">
-          <p>{{player.fullname}} <span class="light-text">{{player.positionid | stringunder}}</span></p>
+          <p>{{player.fullname}}
+             <!-- <span class="light-text">{{player.positionid | stringunder}}</span> -->
+          </p>
           <a [routerLink]="" class="theme-btn">View Player<span></span></a>
         </div>
         <a class="fullblock-link" [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">
