@@ -261,12 +261,20 @@
                   <div class="d-flex match-info-title align-items-center">
                     <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
                       [defaultImage]="cricketService.flagplaceholder">
-                    <h4>{{competitor[team].name}}</h4>
+                    <h4>
+                      <a
+                        [routerLink]="['/cricket/player', (competitor[team].id | splitID), ((competitor[team].name | split ) | slugify) ]">
+                        {{competitor[team].name | split}}
+                      </a>
+                    </h4>
                   </div>
                   <div class="common-table team-lineup d-flex common-shadow rounded-box">
                     <ng-container *ngFor="let key of objectKeys(playerList)">
                       <div *ngIf="playerList[key].team_type === team">
-                        {{playerList[key].name | split}}
+                          <a
+                            [routerLink]="['/cricket/player', (playerList[key].id | splitID), ((playerList[key].name | split ) | slugify) ]">
+                            {{playerList[key].name | split}}
+                          </a>
                       </div>
                     </ng-container>
                   </div>
