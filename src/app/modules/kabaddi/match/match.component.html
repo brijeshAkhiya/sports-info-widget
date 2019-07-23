@@ -16,7 +16,7 @@
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
               <!-- <h5>Match Commentary</h5> -->
-              <app-loader *ngIf="loading"></app-loader>
+              <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
                 <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'"
                   [message]="'Coming Soon..!'">
@@ -33,8 +33,72 @@
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
+                <div class="ground-map-block">
+                  <div class="ground-map">
+                    <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
+                    <ul class="ground-player-list">
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Suresh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Ramesh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                    </ul>
+                    <ul class="ground-player-list list-2">
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Suresh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Ramesh</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                      <li>
+                        <div class="number">12</div>
+                        <p>Nathaniel</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
                 <div class="lienup-row d-flex align-items-start justify-content-between">
-
                   <div>
                     <div class="heading">
                       <p class="d-flex align-items-center justify-content-end">
@@ -46,7 +110,7 @@
                     </div>
                     <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
                       <h5 class="text-capitalize">{{squad}}</h5>
-                      <ul>
+                      <ul class="lienup-list">
                         <li *ngFor="let player of team[0]?.players[squad]">
                           <p class="text-capitalize">
                             <a [routerLink]="['/kabaddi/player', team[0]?.tid, player?.pid, (player?.name | slugify )]">
@@ -70,7 +134,7 @@
                     </div>
                     <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
                       <h5 class="text-capitalize">{{squad}}</h5>
-                      <ul>
+                      <ul class="lienup-list">
                         <li *ngFor="let player of team[1]?.players[squad]">
                           <!-- <span>12</span> -->
                           <p class="text-capitalize">
@@ -90,9 +154,11 @@
           <!--START - Stats-->
           <ngb-tab *ngIf="matchInfo.match_info.gamestate != 0">
             <ng-template ngbTabTitle>
-              <div>Stats</div>
+              <div (click)="getMatchstats(matchInfo.match_info.mid)">Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-loader *ngIf="statsLoading"></app-loader>
+              <app-no-data-widget *ngIf="!statsLoading && (!matchStats)"></app-no-data-widget>
               <!-- <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
               </app-no-data-widget> -->
               <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">
@@ -115,23 +181,24 @@
                 </div>
                 <div class="stat-row point-row d-flex align-items-center">
                   <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
-                      <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
-                        class="point-line"
-                        [style.width]="((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100)  + '%'"><span></span></span>
-                    </p>
+                      <p
+                        [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
+                        <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
+                          class="point-line"
+                          [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+                      </p>
                   </div>
                   <div class="center-col">
                     <p>Points %</p>
                   </div>
                   <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
-                      <span class="point-line"
-                        [style.width]="((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) + '%'"><span></span></span>
-                        <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
-                    </p>
+                      <p
+                        [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
+                        <span
+                          class="point-line"
+                          [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+                          <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
+                        </p>
                   </div>
                 </div>
                 <div class="stat-row d-flex align-items-center">

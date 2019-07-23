@@ -236,12 +236,13 @@ export class MatchHomeComponent implements OnInit {
   }
   //scoreline transition
   responsiveSticky(value) {
-    if (window.pageYOffset > value) {
-      let element = document.getElementById('scoreline-block');
-      element.classList.add('active');
-    } else {
-      let element = document.getElementById('scoreline-block');
-      element.classList.remove('active');
+    let element = document.getElementById('scoreline-block');
+    if(element != null){
+      if (window.pageYOffset > value) {
+        element.classList.add('active');
+      } else {
+        element.classList.remove('active');
+      }
     }
   }
   @HostListener('window:scroll', ['$event'])
@@ -635,10 +636,10 @@ export class MatchHomeComponent implements OnInit {
       ].commentry.unshift({ data: temp });
     }
 
-    // if (this.data.sport_event_status.status == "live") {
+    if (this.data.sport_event_status.status == "live") {
     this.getCurrentOverSummery();
     this.getCurrentPlayers();
-    // }
+    }
 
     this.getTossDecision();
 
