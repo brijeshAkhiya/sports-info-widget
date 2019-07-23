@@ -1,4 +1,3 @@
-
 <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
 <div class="common-widget tab-widget">
   <div class="widget-title">
@@ -14,7 +13,7 @@
     </ngb-tab>
     <ngb-tab>
       <ng-template ngbTabTitle>
-        <div (click)="getMatchResults()">Results</div>
+        <div>Results</div>
       </ng-template>
       <ng-template ngbTabContent>
         <ng-container
@@ -36,7 +35,8 @@
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
 
       <div class="title d-flex justify-content-between">
-        <p><b>{{match.season_name ? match.season_name : match.tournament_name}} </b> <span class="text-capitalize">{{ match.tournament_round ? ' - '+match.tournament_round : '' }}</span> </p>
+        <p><b>{{match.season_name ? match.season_name : match.tournament_name}} </b> <span
+            class="text-capitalize">{{ match.tournament_round ? ' - '+match.tournament_round : '' }}</span> </p>
         <p>{{match.scheduled | amTimeAgo}}</p>
       </div>
 
@@ -62,7 +62,7 @@
     </li>
 
     <li>
-      <a class="view-all-btn" [state]="{ type: type, data : matches }"
+      <a class="view-all-btn"
         [routerLink]="type == 'fixture' ? ['/cricket/recent/fixtures'] : ['/cricket/recent/results']">
         View All
         <span></span>

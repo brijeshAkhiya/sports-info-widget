@@ -9,7 +9,8 @@ import { NgxTinySliderModule } from 'ngx-tiny-slider';
 import { SocketIoModule } from 'ngx-socket-io';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { MomentModule } from 'ngx-moment';
-import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 /** All Pipes */
@@ -62,8 +63,7 @@ import { GoalCommentryComponent } from './widget/goal-commentry/goal-commentry.c
 import { CountdownComponent } from './widget/countdown/countdown.component';
 import { MatchInfoCardComponent } from './widget/match-info-card/match-info-card.component';
 import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.component';
-import { AgmCoreModule } from '@agm/core';
-
+import { ApiStoreComponent } from './api-store/api-store.component';
 
 
 
@@ -124,6 +124,7 @@ import { AgmCoreModule } from '@agm/core';
         CountdownComponent,
         MatchInfoCardComponent,
         VenueMapCardComponent,
+        ApiStoreComponent,
     ],
     providers: [
         /** All Pipes */
@@ -190,7 +191,8 @@ import { AgmCoreModule } from '@agm/core';
         GoalCommentryComponent,
         CountdownComponent,
         MatchInfoCardComponent,
-        VenueMapCardComponent
+        VenueMapCardComponent,
+        ApiStoreComponent
     ],
     entryComponents:[LoginModalComponent]
 

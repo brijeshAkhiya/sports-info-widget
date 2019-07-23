@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="143px" viewBox="0 0 56 143" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Rectangle</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Kabaddi-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Kabaddi-Tournament-Standings-Copy-4" transform="translate(-1384.000000, -326.000000)" fill="#1F1F1F">
+            <g id="Group-12" transform="translate(1384.000000, 0.000000)">
+                <path d="M56,480.0625 L56,469.079646 C56,451.188504 44.8113742,435.207267 28,429.085937 L20.0996558,426.209278 C8.03169739,421.815113 7.27628806e-15,410.343064 0,397.5 C-7.27628806e-15,384.656936 8.03169739,373.184887 20.0996558,368.790722 L28,365.914062 C44.8113742,359.792733 56,343.811496 56,325.920354 L56,314.9375 L56,480.0625 Z" id="Rectangle"></path>
+            </g>
+        </g>
+    </g>
+</svg>
