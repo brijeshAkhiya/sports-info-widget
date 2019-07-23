@@ -54,8 +54,8 @@
 		</ul>
 	</div>
 	<div class="footer-btn-list">
-		<button class="delete-btn active" (click)="isapply = false"></button>
-		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'save-btn': isedit}">Edit</button>
+		<button class="delete-btn" [ngClass]="{'active': isedit}" (click)="removefavourite()"></button>
+		<button class="edit-btn"  [ngClass]="{'save-btn': isedit}"  (click)="isedit = !isedit">{{ isedit ? 'Save' : 'Edit' }}</button>
 	</div>
 	<div class="fav-btn-block">
 		<button class="fav-btn" [ngClass]="{'active': isapply}" (click)="isapply = !isapply">
