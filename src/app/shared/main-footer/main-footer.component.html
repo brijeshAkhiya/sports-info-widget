@@ -33,12 +33,8 @@
 <app-flash-commentary></app-flash-commentary>
 <!--Favourite module start-->
 
-<button class="fav-btn" (click)="isapply = !isapply"></button>
 <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
-	<div class="head-btn-list">
-		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'delete-btn': isedit}"></button>
-		<button class="close-btn" (click)="isapply = false"></button>
-	</div>
+	<h1 class="white-text">Favourites</h1>
 	<div class="fav-block" *ngIf="userfavourites?.length == 0">
 		<h5>No favourites !</h5>
 	</div>
@@ -53,7 +49,18 @@
 		<ul class="fav-list">
 			<li *ngFor="let item of (userfavourites | filter : searchText)"><button
 					[ngClass]="{'selected': item.isSelect}"
-					(click)="routingfromfav(item.type,item.id,item.name,item.sport,item.teamid)">{{item.name}}</button></li>
+					(click)="routingfromfav(item.type,item.id,item.name,item.sport,item.teamid)">{{item.name}}</button>
+			</li>
 		</ul>
+	</div>
+	<div class="footer-btn-list">
+		<button class="delete-btn active" (click)="isapply = false"></button>
+		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'save-btn': isedit}">Edit</button>
+	</div>
+	<div class="fav-btn-block">
+		<button class="fav-btn active" (click)="isapply = !isapply">
+			<span></span>
+		</button>
+		<img src="assets/images/fav-btn-shape.svg">
 	</div>
 </div>
