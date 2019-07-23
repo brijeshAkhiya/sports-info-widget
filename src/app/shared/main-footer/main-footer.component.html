@@ -58,7 +58,7 @@
 		<button class="edit-btn" (click)="removefavourite()" [ngClass]="{'save-btn': isedit}">Edit</button>
 	</div>
 	<div class="fav-btn-block">
-		<button class="fav-btn active" (click)="isapply = !isapply">
+		<button class="fav-btn" [ngClass]="{'active': isapply}" (click)="isapply = !isapply">
 			<span></span>
 		</button>
 		<img src="assets/images/fav-btn-shape.svg">
