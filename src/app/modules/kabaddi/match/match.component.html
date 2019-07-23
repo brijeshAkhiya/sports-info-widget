@@ -38,13 +38,13 @@
                     <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
                     <ul class="ground-player-list">
                       <li *ngFor="let player of team[0].squad">
-                        <div class="number">12</div>
+                        <div class="number">{{player?.shirtnumber}}</div>
                         <p>{{player.name}}</p>
                       </li>
                     </ul>
                     <ul class="ground-player-list list-2" >
                       <li *ngFor="let player of team[1].squad">
-                        <div class="number">12</div>
+                        <div class="number">{{player?.shirtnumber}}</div>
                         <p>{{player.name}}</p>
                       </li>
                     </ul>
@@ -70,7 +70,7 @@
                               {{player.name}}
                             </a>
                           </p>
-                          <!-- <span>12</span> -->
+                          <span>{{player?.shirtnumber}}</span>
                         </li>
                       </ul>
                     </ng-container>
@@ -91,7 +91,7 @@
                       <h5 class="text-capitalize">{{squad}}</h5>
                       <ul class="lienup-list">
                         <li *ngFor="let player of team[1]?.players[squad]">
-                          <!-- <span>12</span> -->
+                          <span>{{player?.shirtnumber}}</span>
                           <p class="text-capitalize">
                             <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
                               {{player.name}}
