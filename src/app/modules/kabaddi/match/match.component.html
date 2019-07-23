@@ -33,67 +33,19 @@
             <ng-template ngbTabTitle>Lineups</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
-                <div class="ground-map-block">
+                <div class="ground-map-block" *ngIf="matchInfo.lineup.length != 0">
                   <div class="ground-map">
                     <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
                     <ul class="ground-player-list">
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Suresh</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Ramesh</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
+                      <li *ngFor="let player of team[0].squad">
+                        <div class="number">{{player?.shirtnumber}}</div>
+                        <p>{{player.name}}</p>
                       </li>
                     </ul>
-                    <ul class="ground-player-list list-2">
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Suresh</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Ramesh</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
-                      </li>
-                      <li>
-                        <div class="number">12</div>
-                        <p>Nathaniel</p>
+                    <ul class="ground-player-list list-2" >
+                      <li *ngFor="let player of team[1].squad">
+                        <div class="number">{{player?.shirtnumber}}</div>
+                        <p>{{player.name}}</p>
                       </li>
                     </ul>
                   </div>
@@ -108,7 +60,8 @@
                           [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
                       </p>
                     </div>
-                    <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
+                    <!-- <ng-container *ngIf="team[0]?.players?.length > 0"> -->
+                      <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
                       <h5 class="text-capitalize">{{squad}}</h5>
                       <ul class="lienup-list">
                         <li *ngFor="let player of team[0]?.players[squad]">
@@ -117,10 +70,11 @@
                               {{player.name}}
                             </a>
                           </p>
-                          <!-- <span>12</span> -->
+                          <span>{{player?.shirtnumber}}</span>
                         </li>
                       </ul>
                     </ng-container>
+                  <!-- </ng-container> -->
                   </div>
 
                   <div>
@@ -132,11 +86,12 @@
                             [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
                       </p>
                     </div>
-                    <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
+                    <!-- <ng-container *ngIf="team[1]?.players?.length > 0"> -->
+                      <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
                       <h5 class="text-capitalize">{{squad}}</h5>
                       <ul class="lienup-list">
                         <li *ngFor="let player of team[1]?.players[squad]">
-                          <!-- <span>12</span> -->
+                          <span>{{player?.shirtnumber}}</span>
                           <p class="text-capitalize">
                             <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
                               {{player.name}}
@@ -145,6 +100,7 @@
                         </li>
                       </ul>
                     </ng-container>
+                  <!-- </ng-container> -->
                   </div>
                 </div>
               </div>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SportsService } from "@providers/sports-service";
+import { Store } from "@ngrx/store";
+import * as fromRoot from "../../../app-reducer";
+
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cricket-sidebar',
@@ -12,72 +14,22 @@ import { Router } from '@angular/router';
 })
 export class CricketSidebarComponent implements OnInit {
 
-  loadingFixture: boolean = false;
-  loadingResult: boolean = false;
   matchfixtures;
   matchresults;
 
   constructor(
-    private sportsService: SportsService,
     public commonService: CommonService,
-    public cricketService: CricketService,
-    private router: Router
+    private store: Store<fromRoot.State>,
+    public cricketService: CricketService
   ) { }
 
   ngOnInit() {
-    this.getMatchFixtures();
+    this.store.select('SportsFixtures').subscribe((data: any) => {
+      this.matchfixtures = data.fixtures
+    })
+    this.store.select('SportsResults').subscribe((data: any) => {
+      this.matchresults = data.results
+    })
   }
-
-  //get 3 days matches fixtures - HOME
-  getMatchFixtures() {
-    this.loadingFixture = true;
-    this.sportsService.getmatchfixtures().subscribe((res: any) => {
-      this.loadingFixture = false;
-      if (res.data)
-        this.matchfixtures = res.data;
-    }, (error) => {
-      this.loadingFixture = false;
-    });
-  }
-
-  //get 3 days results -HOME
-  getMatchResults() {
-    this.loadingResult = true;
-    this.sportsService
-      .getmatchresults()
-      .subscribe((res: any) => {
-        this.loadingResult = false;
-
-        if (res.data.length > 0) {
-          this.matchresults = res.data;
-          this.matchresults = this.matchresults.map((data, matchIndex) => {
-            let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
-            let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
-            if(data.period_scores){
-            data.period_scores.map((pscore, index) => {
-              if (pscore.home_score) {
-                (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
-              } else {
-                (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
-              }
-            })
-          }
-            return data;
-          });
-          console.log('matchresults:last:', this.matchresults);
-        }
-      }, (error) => {
-        this.loadingResult = false;
-      });
-  }
-
-
-  //get match detail
-  matchDetail(id, team1, team2) {
-    let teams = team1.concat("-", team2);
-    this.router.navigate(["/cricket/match", btoa(id), teams]);
-  }
-
-
 
 }
