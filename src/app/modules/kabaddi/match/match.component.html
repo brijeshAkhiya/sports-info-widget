@@ -16,7 +16,7 @@
             <ng-template ngbTabTitle>Commentary</ng-template>
             <ng-template ngbTabContent>
               <!-- <h5>Match Commentary</h5> -->
-              <app-loader *ngIf="loading"></app-loader>
+              <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
                 <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'"
                   [message]="'Coming Soon..!'">
@@ -154,9 +154,11 @@
           <!--START - Stats-->
           <ngb-tab *ngIf="matchInfo.match_info.gamestate != 0">
             <ng-template ngbTabTitle>
-              <div>Stats</div>
+              <div (click)="getMatchstats(matchInfo.match_info.mid)">Stats</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-loader *ngIf="statsLoading"></app-loader>
+              <app-no-data-widget *ngIf="!statsLoading && (!matchStats)"></app-no-data-widget>
               <!-- <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
               </app-no-data-widget> -->
               <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">
@@ -179,23 +181,24 @@
                 </div>
                 <div class="stat-row point-row d-flex align-items-center">
                   <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
-                      <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
-                        class="point-line"
-                        [style.width]="((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100)  + '%'"><span></span></span>
-                    </p>
+                      <p
+                        [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
+                        <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
+                          class="point-line"
+                          [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+                      </p>
                   </div>
                   <div class="center-col">
                     <p>Points %</p>
                   </div>
                   <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
-                      <span class="point-line"
-                        [style.width]="((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) + '%'"><span></span></span>
-                      <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
-                    </p>
+                      <p
+                        [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
+                        <span
+                          class="point-line"
+                          [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+                          <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
+                        </p>
                   </div>
                 </div>
                 <div class="stat-row d-flex align-items-center">

@@ -44,8 +44,12 @@
               </div>
               <ul class="tag-list" *ngIf="blogdata?.aTags && blogdata?.aTags.length > 0">
                 <li *ngFor="let item of blogdata?.aTags">
-                  <a
+                  <a *ngIf="item.sport == 'Cricket'"
                     [routerLink]="(item.type == 'Player') ? ['/cricket/player',(item.id | splitID), ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',(item.id | splitID), (item.name | slugify)]  : ['/cricket/team',(item.id | splitID), (item.name | slugify)])">
+                    {{item?.name | split}}
+                  </a>
+                  <a *ngIf="item.sport == 'Kabaddi'"
+                    [routerLink]="(item.type == 'Player') ? ['/kabaddi/player',(item.id), ((item?.name | split ) | slugify) ] :  ['/kabaddi']">
                     {{item?.name | split}}
                   </a>
                 </li>

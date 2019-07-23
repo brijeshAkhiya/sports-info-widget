@@ -13,6 +13,7 @@ import { CommonService } from "@providers/common-service";
 export class MatchComponent implements OnInit {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [] } }
   loading: boolean = false;
+  statsLoading: boolean = false;
   matchInfo;
   commentry = [];
   team = [];
@@ -30,25 +31,25 @@ export class MatchComponent implements OnInit {
 
   ngOnInit() {
     this.getMatchInfo(this.activatedroute.snapshot.params.id)
-    this.getMatchstats(this.activatedroute.snapshot.params.id)
+    // this.getMatchstats(this.activatedroute.snapshot.params.id)
     this.paramArticle.reqParams.aIds.push(this.activatedroute.snapshot.params.id);
   }
 
   getMatchstats(id) {
+    this.statsLoading = true;
     this.sportsService.getMatchStats(id).subscribe((res: any) => {
-      this.loading = false;
+      this.statsLoading = false;
       if (res.data) {
         this.matchStats = res.data.items;
       }
     }, (error) => {
-      this.loading = false;
+      this.statsLoading = false;
     });
   }
 
   getMatchInfo(id) {
     this.loading = true;
     this.sportsService.getMatchInfo(id).subscribe((res: any) => {
-      this.loading = false;
       if (res.data) {
         this.matchInfo = res.data.items;
         this.getVenuedetails();
@@ -56,6 +57,7 @@ export class MatchComponent implements OnInit {
         this.initCommentry();
         this.initSquads();
       }
+      this.loading = false;
     }, (error) => {
       this.loading = false;
     });
@@ -83,7 +85,7 @@ export class MatchComponent implements OnInit {
       return false;
     let home = 0;
     let away = 0;
-    let extraRun = { 'allout': 2, 'card': 1, 'super_raid': 1, 'super_tackle': 1 }
+    let extraRun = { 'allout': 0 }
 
     let temp: any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
     this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision })
@@ -119,11 +121,25 @@ export class MatchComponent implements OnInit {
         tempArr = this.matchInfo.squad.home;
       else
         tempArr = this.matchInfo.squad.away;
-      this.team[index].players = [];
-      tempArr.forEach(element => {
-        (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
-      });
+        this.team[index].players = [];
+        this.team[index].squad = this.sorting(this.matchInfo.lineup[team.qualifier].starting7);
+        tempArr.forEach(element => {
+          (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
+        });
     })
     console.log(this.team);
   }
+
+  sorting(arr) {
+    return arr.sort(function (a, b) {
+      if (a.role == 'raider') 
+        return -1;
+      else if (a.role == 'allrounder') 
+        return 0;
+      else 
+        return 1;
+    });
+  }
+
+
 }
