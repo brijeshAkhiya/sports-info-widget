@@ -53,7 +53,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="footer-btn-list">
+	<div class="footer-btn-list" *ngIf="userfavourites?.length > 0">
 		<button class="delete-btn" [ngClass]="{'active': isedit}" (click)="removefavourite()"></button>
 		<button class="edit-btn"  [ngClass]="{'save-btn': isedit}"  (click)="isedit = !isedit">{{ isedit ? 'Save' : 'Edit' }}</button>
 	</div>
