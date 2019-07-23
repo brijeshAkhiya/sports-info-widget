@@ -29,6 +29,7 @@ export class FixturesComponent implements OnInit {
     this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'cricket','tournament');
     // this.getFixtures();
     this.loadData('fixture');
+    this.loadData('result');
   }
 
   loadData(type){
