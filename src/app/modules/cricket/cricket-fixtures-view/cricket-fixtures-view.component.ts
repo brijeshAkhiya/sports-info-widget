@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
-import { SportsService } from "@providers/sports-service"
+import { Store } from "@ngrx/store";
+import * as fromRoot from "../../../app-reducer";
+
 import { CommonService } from "@providers/common-service";
 import { CricketService } from "@providers/cricket-service";
 
@@ -20,63 +22,38 @@ export class CricketFixturesViewComponent implements OnInit {
   selectedTab;
 
   constructor(
-    private sportsService: SportsService,
     private commonService: CommonService,
     private cricketService: CricketService,
     private activatedroute: ActivatedRoute,
-  ) {}
+    private store: Store<fromRoot.State>
+  ) { }
 
   ngOnInit() {
     let fromtype = this.activatedroute.snapshot.params.type;
     if (fromtype == "fixtures") {
       this.selectedTab = "upcoming";
-      if(window.history.state.data){
-        this.matchfixtures = this.commonService.sortArr(window.history.state.data, 'Do MMMM YYYY', 'scheduled', 'asc');
-      }
-      else
-        this.getMatchFixtures();
-
+      this.getMatchFixtures();
     } else if (fromtype == "results") {
       this.selectedTab = "results";
-      if(window.history.state.data){
-        this.matchresults = this.commonService.sortArr(window.history.state.data, 'Do MMMM YYYY', 'scheduled', 'desc');
-      }
-      else
-        this.getMatchResults();
+      this.getMatchResults();
     }
   }
 
   //get 3 days matches fixtures - HOME
   getMatchFixtures() {
-    if(this.matchfixtures && this.matchfixtures.length > 0 )
-      return false;
-
     this.loadingFixture = true;
-    this.sportsService.getmatchfixtures().subscribe((res: any) => {
-      this.loadingFixture = false;
-      if (res.data)
-        this.matchfixtures = this.commonService.sortArr(res.data, 'Do MMMM YYYY', 'scheduled', 'asc');
-    }, (error) => {
-      this.loadingFixture = false;
-    });
+    this.store.select('SportsFixtures').subscribe((res) => {
+      this.loadingFixture = false
+      this.matchfixtures = this.commonService.sortArr(res.fixtures, 'Do MMMM YYYY', 'scheduled', 'asc')
+    })
   }
 
   //get 3 days results -HOME
   getMatchResults() {
-    if(this.matchresults && this.matchresults.length > 0 )
-      return false;
-
     this.loadingResult = true;
-    this.sportsService
-      .getmatchresults()
-      .subscribe((res: any) => {
-        this.loadingResult = false;
-        if (res.data){
-           this.matchresults =this.cricketService.initCompetitorScore(res.data)
-           this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
-        }
-      }, (error) => {
-        this.loadingResult = false;
-      });
+    this.store.select('SportsResults').subscribe((res) => {
+      this.loadingResult = false
+      this.matchresults = this.commonService.sortArr(res.results, 'Do MMMM YYYY', 'scheduled', 'desc')
+    })
   }
 }
