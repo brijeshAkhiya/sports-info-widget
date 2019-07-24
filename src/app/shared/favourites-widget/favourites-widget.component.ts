@@ -20,6 +20,7 @@ export class FavouritesWidgetComponent implements OnInit {
     this.store.select('Favourites').subscribe((data) => {
       this.userfavourites = data.Favourites
       console.log(this.userfavourites);
+      this.isadded = false
       this.userfavourites.map((data) => {
         if (data.id == this.value.id) {
           this.isadded = true
