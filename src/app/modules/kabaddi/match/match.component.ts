@@ -20,6 +20,9 @@ export class MatchComponent implements OnInit {
   objectKeys = Object.keys
   venuedetails = { lat: '', lng: '', name: '' };
   matchStats: any;
+  dummyAPICall = 62;
+  interval;
+  timeout;
 
   constructor(
     private sportsService: SportsService,
@@ -52,6 +55,10 @@ export class MatchComponent implements OnInit {
     this.sportsService.getMatchInfo(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data.items;
+
+        if (this.matchInfo.match_info.gamestate == 0) {
+          this.startLiveUpdateAfterTime();
+        }
         this.getVenuedetails();
         this.initTeam();
         this.initCommentry();
@@ -61,6 +68,68 @@ export class MatchComponent implements OnInit {
     }, (error) => {
       this.loading = false;
     });
+  }
+
+  getLiveUpdate(classThis){
+    console.log("getLiveUpdate");
+    this.interval = setInterval(() => {
+      //TEMP
+      this.dummyAPICall++;
+      classThis.sportsService
+        .getKabaddiDummyCall(this.dummyAPICall)
+        // .getmatchtimelineDetlaDirect(this.dummyAPICall)
+        .subscribe(res => {
+          console.log(res); 
+          let matchData = res.data.data.items; 
+          this.matchInfo = res.data.data.items;
+          if(matchData.match_info.status == 3){
+            this.initTeam();
+            this.initSquads();
+            this.initCommentry();
+          }
+          if(matchData.match_info.status == 2){
+            this.initCommentry();
+            this.clearTimeInterval();
+          }
+        });
+    }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP
+
+  }
+
+
+  startLiveUpdateAfterTime(){
+
+    console.log("startLiveUpdateAfterTime");
+    let remainingTime = this.commonService.getRemainigTimeofMatch(
+      this.matchInfo.match_info.datestart
+    );
+    console.log(remainingTime);
+    
+    let remainingMiliSec = this.commonService.miliseconds(
+      remainingTime.hours,
+      remainingTime.minutes,
+      remainingTime.seconds
+    );
+    remainingMiliSec =
+      remainingMiliSec - this.commonService.miliseconds(0, 5, 0); 
+    // if (remainingTime.days == 0 && remainingTime.hours < 5) {
+      this.timeout = setTimeout(() => {
+        this.getLiveUpdate(this);
+      }, 10);
+    // }, remainingMiliSec);
+    // }
+  }
+
+  /** Clear Interval and timeout on destroy */
+  clearTimeInterval() {
+    console.log("clearTimeInterval");
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
+  }
+
+  ngOnDestroy() {
+    console.log("ngOnDestroy");
+    this.clearTimeInterval();
   }
 
   getVenuedetails() {
@@ -75,33 +144,35 @@ export class MatchComponent implements OnInit {
       this.venuedetails.name = this.matchInfo.match_info.venue.name
     }
   }
-
-
-
   initCommentry() {
+    console.log("initCommentry");
+    
     if (!(this.matchInfo.event && this.matchInfo.event != ''))
       return false;
     let home = 0;
     let away = 0;
-    let extraRun = { 'allout': 0 }
+    // check if toss is already exists in commentry
+    let existsToss = this.commentry.filter((commentry) => commentry.event_type == 'toss');
+    if(existsToss.length == 0){
+      let temp: any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
+      this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision })
+    }
 
-    let temp: any = this.team.filter(team => team.tid == this.matchInfo.match_info.toss.winner)
-    this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision })
+    this.matchInfo.event.forEach(event => {
+      let temp = this.commentry.filter(commentry => commentry.event_time == event.event_time);
+      if(temp.length == 0)
+        this.commentry.push(event);
+    });
 
-    this.commentry = this.commentry.concat(this.matchInfo.event);
+    // this.commentry = this.commentry.concat(this.matchInfo.event);
     this.commentry.forEach((match, index) => {
       this.commentry[index].point_home_plus = (home += (match.point_home ? match.point_home : 0));
       this.commentry[index].point_away_plus = (away += (match.point_away ? match.point_away : 0));
-      // if (this.commentry[index].allout == "true") {
-      //   if (match.bounus == '') {
-      //     if (match.allout_team_id == this.matchInfo.match_info.teams.home.tid)
-      //       this.commentry[index].point_away_plus = (away += extraRun.allout);
-      //     else if (match.allout_team_id == this.matchInfo.match_info.teams.away.tid)
-      //       this.commentry[index].point_home_plus = (home += extraRun.allout);
-      //   }
-      // }
     });
-    this.commentry.push({ event_type: 'result', result: this.matchInfo.match_info.result.text })
+    if(this.matchInfo.match_info.result.text != '')
+      this.commentry.push({ event_type: 'result', result: this.matchInfo.match_info.result.text });
+    console.log(this.commentry);
+    
 
   }
 
@@ -120,13 +191,13 @@ export class MatchComponent implements OnInit {
       else
         tempArr = this.matchInfo.squad.away;
         this.team[index].players = [];
-        console.log(this.matchInfo.lineup[team.qualifier]);
         
         this.team[index].squad = this.matchInfo.lineup && this.matchInfo.lineup[team.qualifier] ? this.sorting(this.matchInfo.lineup[team.qualifier].starting7) : [];
         tempArr.forEach(element => {
           (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
         });
-    })
+    });
+
     console.log(this.team);
   }
 

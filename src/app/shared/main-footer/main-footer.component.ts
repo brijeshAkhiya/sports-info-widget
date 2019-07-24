@@ -42,12 +42,14 @@ export class MainFooterComponent implements OnInit {
       }
       else {
         this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
-        this.userfavourites = this.userfavourites.map((singleitem) => {
-          return {
-            ...singleitem,
-            isSelect: false
-          }
-        });
+        if(this.userfavourites && this.userfavourites.length > 0){
+          this.userfavourites = this.userfavourites.map((singleitem) => {
+            return {
+              ...singleitem,
+              isSelect: false
+            }
+          });
+        }
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
       }
     })

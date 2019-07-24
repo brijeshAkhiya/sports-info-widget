@@ -470,6 +470,11 @@ export class SportsService {
       environment.apiUrl + environment.version + `/kabaddi/team/list?per_page=${params.per_page}&paged=${params.page}`
     );    
   }
+  getKabaddiDummyCall(id){
+    return this.http.get(
+      `http://192.168.11.118:3008/api/v1/user/json/${id}`
+    ); 
+  }
 
 
 }

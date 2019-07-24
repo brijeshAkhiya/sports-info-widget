@@ -553,45 +553,6 @@ export class MatchHomeComponent implements OnInit {
           overCommentry = currentInningCommentry.slice(firstIndex);
 
         console.log(overCommentry)
-        // // get first index of this innings over
-        // let firstOverIndex = currentInningCommentry.findIndex(
-        //   commentry =>
-        //     commentry.over_number == over.number &&
-        //     commentry.inning == innings.number
-        // );
-
-        // get last index of innings over
-        // let nextOver = over.number + 1;
-        // let lastOverIndex = currentInningCommentry.findIndex(
-        //   commentry =>
-        //     commentry.over_number == nextOver &&
-        //     commentry.inning == innings.number
-        // );
-
-        // Single Over commentry of Inning - get commentry of current overs to Next Over
-        // console.log("lastOverIndex", lastOverIndex);
-        // console.log("firstOverIndex", firstOverIndex);
-        // let overCommentry = [];
-        // if (innings.number == 1 && over.number == 1)
-        //   overCommentry = currentInningCommentry.slice(0, lastOverIndex);
-        // else if (lastOverIndex > 0)
-        //   overCommentry = currentInningCommentry.slice(
-        //     firstOverIndex,
-        //     lastOverIndex
-        //   );
-        // else if (firstOverIndex > 0) {
-        //   let lastOverIndex = currentInningCommentry.findIndex(
-        //     commentry =>
-        //       commentry.type == "match_ended" ||
-        //       commentry.type == "close_of_play"
-        //   );
-        //   if (lastOverIndex > 0)
-        //     overCommentry = currentInningCommentry.slice(
-        //       firstOverIndex,
-        //       lastOverIndex
-        //     );
-        //   else overCommentry = currentInningCommentry.slice(firstOverIndex);
-        // }
 
         /** Display Over Display Score */
         let overDisplayScore = [];
@@ -805,9 +766,11 @@ export class MatchHomeComponent implements OnInit {
           let isExist = false;
           let lengthComm = this.inningWiseCommentry[0].commentry.length - 1;
           this.inningWiseCommentry[0].commentry.forEach(element => {
-            element.data.forEach(ele => {
-              if (ele.id == timeline.id) isExist = true;
-            });
+            if(element.data && element.data.length > 0){
+              element.data.forEach(ele => {
+                if (ele.id == timeline.id) isExist = true;
+              });
+            }
           });
           if (!isExist)
             this.inningWiseCommentry[0].commentry[0].data.unshift(timeline);

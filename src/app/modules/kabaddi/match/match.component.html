@@ -9,8 +9,7 @@
         <app-match-about [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'kabaddi'"></app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
-        <ngb-tabset class="common-tabs match-tabs"
-          [activeId]="matchInfo.match_info.gamestate == 0 ? 'lineups' : 'commentry'">
+        <ngb-tabset class="common-tabs match-tabs">
           <!-- START - MATCH COMMENTRY-->
           <ngb-tab id="commentry">
             <ng-template ngbTabTitle>Commentary</ng-template>
@@ -22,8 +21,8 @@
                   [message]="'Coming Soon..!'">
                 </app-no-data-widget>
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
-                <!-- <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
-                  [scheduled]="matchInfo.match_info.datestart"></app-countdown> -->
+                <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
+                  [scheduled]="matchInfo.match_info.timestampstart" [sport]="'kabaddi'"></app-countdown>
               </ng-container>
             </ng-template>
           </ngb-tab>
@@ -91,7 +90,7 @@
                       <h5 class="text-capitalize">{{squad}}</h5>
                       <ul class="lienup-list">
                         <li *ngFor="let player of team[1]?.players[squad]">
-                          <span>{{player?.shirtnumber}}</span>
+                        <span>{{player?.shirtnumber}}</span>
                           <p class="text-capitalize">
                             <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
                               {{player.name}}
