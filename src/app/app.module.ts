@@ -57,6 +57,7 @@ import { MainFooterComponent } from "./shared/main-footer/main-footer.component"
 import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
 import { WriterComponent } from './pages/writer/writer.component';
 import { LoginModalComponent } from './shared/widget/login-modal/login-modal.component';
+import { EffectsModule } from '@ngrx/effects';
 
 
 //socket config
@@ -130,6 +131,7 @@ export function provideConfig() {
       enabled: environment.production
     }),
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25 // Retains last 25 states
     })

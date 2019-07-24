@@ -125,13 +125,12 @@ export class MainFooterComponent implements OnInit {
     if (this.isedit) {
       let isselectedtags = this.userfavourites.some((data) => data.isSelect == true);
       if (isselectedtags) {
-        this.userfavourites.map((data) => {
-          if (data.isSelect == true) {
-            this.userfavourites.splice(this.userfavourites.findIndex(v => v.isSelect == true), 1);
+        console.log('user fav::',this.userfavourites);
+            console.log('splice::',this.userfavourites.findIndex(v => v.isSelect == true));
+            this.userfavourites = this.userfavourites.filter(data => data.isSelect == false);
             localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
             this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
-          }
-        })
+        
         if (localStorage.getItem('userT')) {
           this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
             if (res) {
