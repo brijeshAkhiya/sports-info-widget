@@ -11,6 +11,7 @@
       
       <div *ngIf="event.event_type == 'normal'">
         <p class="title" *ngIf="event.super_event != ''"> Super {{event.super_event}}</p>
+        <p class="title" *ngIf="event.allout == 'true'"> All out</p>
         <p class="desc">{{event.raider_name}} raid {{event.raid_event}}</p>
       </div>
       <div *ngIf="event.event_type == 'timeout'">

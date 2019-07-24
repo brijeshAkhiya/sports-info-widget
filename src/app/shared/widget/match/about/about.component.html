@@ -171,6 +171,7 @@
         </ng-container>
         {{data?.match_info?.datestart | amDateFormat:'Do MMMM YYYY'}}
       </p>
+      <p class="live-match" *ngIf="data?.match_info?.status == 3">Live</p>      
     </div>
 
     <div class="current-match d-flex justify-content-between show-anim">

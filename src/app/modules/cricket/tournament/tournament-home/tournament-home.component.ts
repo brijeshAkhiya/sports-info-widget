@@ -37,7 +37,7 @@ export class TournamentHomeComponent implements OnInit {
     let temp: Array<any> = [this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket','tournament')]
     this.tournamentid = this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket','tournament');
     let name = this.activatedroute.snapshot.params.slug
-    this.options = { reqParams: { aIds: [this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket','tournament')] }, title: name.replace(/-/g, " "),id:this.tournamentid,name:name.replace(/-/g, " "),type:'tournament' }
+    this.options = { reqParams: { aIds: [this.commonService.getIds(this.activatedroute.snapshot.params.id,'cricket','tournament')] }, title: name.replace(/-/g, " "),id:this.tournamentid,name:name.replace(/-/g, " "),type:'tournament' ,sport:'cricket'}
     this.getTournamentsLeader();
     this.getTournamentPointsTable();
     this.getTournamentTeams();

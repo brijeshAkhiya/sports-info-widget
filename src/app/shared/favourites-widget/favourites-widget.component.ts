@@ -19,9 +19,9 @@ export class FavouritesWidgetComponent implements OnInit {
   ngOnInit() {
     this.store.select('Favourites').subscribe((data) => {
       this.userfavourites = data.Favourites
-      console.log(this.userfavourites);
+      this.isadded = false
       this.userfavourites.map((data) => {
-        if (data.id == this.value.id) {
+        if (data.id == this.value.id && data.type == this.value.type) {
           this.isadded = true
         }
       })
