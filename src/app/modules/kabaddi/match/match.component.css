@@ -58,7 +58,6 @@
 .match-stats .stat-row > :first-child .point-line { margin-right: 0px; margin-left: 8px; }
 
 /***** Responsive CSS Start ******/
-
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Match Lienup ------- */
     .match-lienup                           { padding: 24px 56px; }

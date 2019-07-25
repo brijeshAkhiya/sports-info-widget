@@ -116,8 +116,8 @@
 /* -------- Tournament Fixtures For Kabaddi ------- */
     .schedule-item.kabaddi-item .match-team                 { width: calc(50% - 40px); flex-direction: column; -webkit-flex-direction: column; flex-shrink: 0; -webkit-flex-shrink: 0; }
     .schedule-item.kabaddi-item .match-teams                {justify-content: space-between; -webkit-justify-content: space-between;}
-    .schedule-item .match-teams .match-team:first-child     { text-align: left; justify-content: start; -webkit-justify-content: start; }
+    .schedule-item.kabaddi-item .match-teams .match-team:first-child     { text-align: left; justify-content: start; -webkit-justify-content: start; }
     .schedule-item.kabaddi-item .match-teams .match-team .team-info     { margin-top: 5px; text-align: center; }
-    .schedule-item .match-teams .match-team:first-child .team-info      { order: 2; }
+    .schedule-item.kabaddi-item .match-teams .match-team:first-child .team-info      { order: 2; }
     .schedule-item.kabaddi-item h5                          { font-size: 13px; line-height: 17px; }
 }

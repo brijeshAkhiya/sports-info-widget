@@ -32,7 +32,7 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 .fav-block-box .footer-btn-list         { position: absolute; width: 100%; left: 0; bottom: 0px; }
 .footer-btn-list .edit-btn              { padding: 20px; width: 100%; background: #FFC800; font-size: 24px; line-height: 32px; color: #fff; border: none; border-radius: 0; text-transform: uppercase; position: relative; }
 .footer-btn-list .edit-btn.save-btn     { background: #fff; color: #1F1F1F; }
-.footer-btn-list .delete-btn            { margin-bottom: 24px; position: absolute; width: 80px; height: 80px; background: #1F1F1F url(assets/images/delete-icon.svg) no-repeat center center / 46% 46%; border: 2px solid #525252; border-radius: 50%; left: 50%; transform: translate(-50%, 200%); -webkit-transform: translate(-50%, 200%); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.footer-btn-list .delete-btn            { margin-bottom: 24px; position: absolute; width: 80px; height: 80px; background: #1F1F1F url(assets/images/delete-icon.svg) no-repeat center center / 46% 46%; border: 2px solid #525252; border-radius: 50%; left: 50%; transform: translate(-50%, 200%); -webkit-transform: translate(-50%, 200%); transition: all 0.3s cubic-bezier(1,-0.6,0,1.4); -webkit-transition: all 0.3s cubic-bezier(1,-0.6,0,1.4); }
 .footer-btn-list .delete-btn:hover      { background-color: #FFC800; border-color: #FFC800; }
 .footer-btn-list .delete-btn.active     { transform: translate(-50%, -125%); -webkit-transform: translate(-50%, -125%); }
 .fav-block-box .fav-btn-block           { position: absolute; left: 1px; top: 50%; transform: translate(-100% , -50%); }

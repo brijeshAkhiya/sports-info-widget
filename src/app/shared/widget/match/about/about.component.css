@@ -133,7 +133,7 @@
 /* -------- Match Animation ------- */
     .match-main-title .teams-animation img      { margin-bottom: 10px; height: 32px; }
 /* -------- Goal Type Match Title ------- */
-    .match-main-title .current-match            { flex-direction: row; -webkit-flex-direction: row; }
+    .match-main-title.goal-type .current-match            { flex-direction: row; -webkit-flex-direction: row; }
 }
 
 @media (max-width: 575px) {
