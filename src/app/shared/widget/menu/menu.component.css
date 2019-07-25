@@ -43,7 +43,7 @@
 @media (max-width: 575px) {
     .sub-navabar                                { top: 40.5px; }
     .sub-navabar .sub-navabar-inner             { position: relative; -webkit-box-pack: start !important; -ms-flex-pack: start !important; justify-content: flex-start !important; }
-    .submenu-back                               { padding: 12px;}
+    .submenu-back                               { max-width: 50%;}
     .sub-navbar-container                       { margin-left: 16px; display: flex; overflow: scroll; }
     .sub-navabar .subnavbarmenu                 { display: flex; }
     .sub-navabar .dropdown-menu li a,
