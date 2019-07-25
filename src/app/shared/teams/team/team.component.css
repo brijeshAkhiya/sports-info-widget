@@ -20,7 +20,7 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
 .squad-item:hover .theme-btn    { opacity: 1;}
 .squad-item:hover .theme-btn span:before  { left: 0px; }
 .squad-item:hover .theme-btn span:after   { left: 100%; }
-.squad-item p                   { margin-bottom: 16px; line-height: 20px; font-weight: 500; }
+.squad-item p                   { margin-bottom: 16px; line-height: 20px; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
 
 /***** Responsive CSS Start ******/
