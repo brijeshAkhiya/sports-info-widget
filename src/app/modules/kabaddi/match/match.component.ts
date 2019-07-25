@@ -58,7 +58,9 @@ export class MatchComponent implements OnInit {
 
         if (this.matchInfo.match_info.gamestate == 0) {
           this.startLiveUpdateAfterTime();
-        }
+        }else if (this.matchInfo.match_info.status == 3)
+          this.getLiveUpdate(this);
+
         this.getVenuedetails();
         this.initTeam();
         this.initCommentry();
@@ -76,23 +78,27 @@ export class MatchComponent implements OnInit {
       //TEMP
       this.dummyAPICall++;
       classThis.sportsService
-        .getKabaddiDummyCall(this.dummyAPICall)
-        // .getmatchtimelineDetlaDirect(this.dummyAPICall)
+      .getMatchInfo(this.matchInfo.match_info.mid)
+      // .getKabaddiDummyCall(this.dummyAPICall)
         .subscribe(res => {
           console.log(res); 
-          let matchData = res.data.data.items; 
-          this.matchInfo = res.data.data.items;
+          // let matchData = res.data.data.items; 
+          // this.matchInfo = res.data.data.items;
+          let matchData = res.data.items; 
+          this.matchInfo = res.data.items;
           if(matchData.match_info.status == 3){
             this.initTeam();
             this.initSquads();
+            this.commentry = [];
             this.initCommentry();
           }
           if(matchData.match_info.status == 2){
+            this.commentry = [];
             this.initCommentry();
             this.clearTimeInterval();
           }
         });
-    }, classThis.commonService.miliseconds(0, 0, 12)); // TEMP
+    }, classThis.commonService.miliseconds(0, 0, 8)); // TEMP
 
   }
 
@@ -159,8 +165,8 @@ export class MatchComponent implements OnInit {
     }
 
     this.matchInfo.event.forEach(event => {
-      let temp = this.commentry.filter(commentry => commentry.event_time == event.event_time);
-      if(temp.length == 0)
+      // let temp = this.commentry.filter(commentry => commentry.event_time == event.event_time);
+      // if(temp.length == 0)
         this.commentry.push(event);
     });
 
@@ -202,6 +208,7 @@ export class MatchComponent implements OnInit {
   }
 
   sorting(arr) {
+    return arr;
     return arr.sort(function (a, b) {
       if (a.role == 'raider') 
         return -1;
