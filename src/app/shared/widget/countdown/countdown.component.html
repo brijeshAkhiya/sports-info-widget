@@ -1,11 +1,11 @@
 <div class="match-counter">
-    <p *ngIf="!matchstartedcase">Match starts in ...</p>
-    <p *ngIf="matchstartedcase">Stay tuned for match updates...</p>
-    <div class="match-counter-block d-flex align-items-center justify-content-center"
-      *ngIf="remainingTime">
-      <p *ngIf="remainingTime.days != 0"><span class="time-num">{{remainingTime.days}}:</span><span class="time-unit">D</span></p>
-      <p><span class="time-num">{{remainingTime.hours}}:</span><span class="time-unit">H</span></p>
-      <p><span class="time-num">{{remainingTime.minutes}}:</span><span class="time-unit">M</span></p>
-      <p><span class="time-num">{{remainingTime.seconds}}</span><span class="time-unit">S</span></p>
-    </div>
+  <p *ngIf="!matchstartedcase">Match starts in ...</p>
+  <p *ngIf="matchstartedcase">Stay tuned for match updates...</p>
+  <div class="match-counter-block d-flex align-items-center justify-content-center" *ngIf="remainingTime">
+    <p *ngIf="remainingTime.days != 0"><span class="time-num">{{remainingTime.days}}:</span><span
+        class="time-unit">D</span></p>
+    <p><span class="time-num">{{remainingTime.hours}}:</span><span class="time-unit">H</span></p>
+    <p><span class="time-num">{{remainingTime.minutes}}:</span><span class="time-unit">M</span></p>
+    <p><span class="time-num">{{remainingTime.seconds}}</span><span class="time-unit">S</span></p>
   </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonService } from "@providers/common-service";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-countdown',
@@ -21,14 +22,17 @@ export class CountdownComponent implements OnInit {
 
   ngOnInit() {
     let starttime;
-    if(this.sport == 'kabaddi'){
-      starttime = new Date(new Date().setTime(this.scheduled));
+    if (this.sport == 'kabaddi') {
+      this.scheduled = moment.utc((this.scheduled)).format()
+      this.scheduled = this.scheduled.replace(/\s/g, "T");
+      starttime = new Date(this.scheduled).getTime();
     }
-    else{
-      this.scheduled =this.scheduled.replace(/\s/g, "T");
+    else {
+      this.scheduled = this.scheduled.replace(/\s/g, "T");
       starttime = new Date(this.scheduled).getTime();
     }
     let currenttime = new Date().getTime();
+
     if (currenttime > starttime) {
       this.matchstartedcase = true;
     }

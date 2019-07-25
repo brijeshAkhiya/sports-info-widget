@@ -26,7 +26,6 @@ export class FixturesComponent implements OnInit {
     this.getCricketSeries();
   }
 
-
   //get current cricket series 
   getCricketSeries() {
     this.sportsService.getcricketfixtures().pipe(distinctUntilChanged()).subscribe((res: any) => {

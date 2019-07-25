@@ -97,7 +97,7 @@ export class BlogViewComponent implements OnInit {
     if (id) {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.blogdata = res.data;
-        this.initSEOTags();
+       // this.initSEOTags();
         this.getPopularArticles();
         // let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
         // if (type.toUpperCase() != this.blogdata.eType.toUpperCase())

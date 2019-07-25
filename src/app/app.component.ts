@@ -56,8 +56,8 @@ export class AppComponent implements OnInit,AfterContentInit {
       //change route get url 
       if (event instanceof NavigationEnd) {
         // console.log("event", event, event.url.includes('/article'));
-        if(event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))        
-          this.setmetatags(event.url);
+        // if(event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))        
+        //   this.setmetatags(event.url);
         //set meta tags from here...
         // console.log('tagsobj', this.metatagsObj);
         //set page title 

@@ -9,7 +9,7 @@
         <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'kabaddi'" [message]="'Coming Soon..!'"></app-no-data-widget>
         <ngb-tabset class="common-tabs black-filled" *ngIf="stats?.length > 0">
           <ngb-tab>
-            <ng-template ngbTabTitle>Points</ng-template>
+            <ng-template ngbTabTitle><div (click)="getTournamentStats('totalpoint')">Points</div></ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
                           sport:'kabaddi',

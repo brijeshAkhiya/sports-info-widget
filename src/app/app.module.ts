@@ -66,7 +66,7 @@ const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
 const googleLoginOptions: LoginOpt = {
   client_id: '504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com',
   scope: 'profile email',
-  ux_mode: 'redirect',
+  ux_mode: 'redirect',  
   redirect_uri: environment.siteUrl
 }; // https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
 
