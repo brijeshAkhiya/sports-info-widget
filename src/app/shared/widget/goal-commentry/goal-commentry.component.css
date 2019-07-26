@@ -16,7 +16,7 @@
 .goal-commentary-list .title            { margin-bottom: 2px; font-weight: 600; color: #292929; }
 .goal-commentary-list .desc             { font-size: 14px; line-height: 20px; color: #3D3D3D; }
 .goal-commentary-list :last-child       { margin-bottom: 0px; }
-.goal-commentary-list .desc-block .score { padding-left: 8px;}
+.goal-commentary-list .desc-block .score { padding-left: 8px; flex-shrink: 0; -webkit-flex-shrink: 0; }
 
 /***** Responsive CSS Start ******/
 @media (max-width: 1199px) {

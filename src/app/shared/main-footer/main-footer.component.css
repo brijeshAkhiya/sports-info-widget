@@ -72,7 +72,7 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 
 @media (max-width: 991px) {
 /* -------- Favourite Block CSS ------- */
-    .fav-block-box                          { padding: 13px 16px; width: 320px;}
+    .fav-block-box                          { padding: 13px 16px; width: 330px;}
     .fav-block-box h1                       { margin-bottom: 18px; padding-bottom: 10px; }
     .fav-block-box input                    { padding: 10px 48px 10px 14px; font-size: 16px; line-height: 21px;}
     .fav-block-box .fav-list                { height: calc(100vh - 225px);}
@@ -105,7 +105,7 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 
 @media (max-width: 575px) {
 /* -------- Favourite Block CSS ------- */
-    .fav-block-box                          { padding: 13px 16px; width: 280px;}
+    .fav-block-box                          { padding: 13px 16px; max-width: 84%; }
     .fav-block-box h1                       { margin-bottom: 18px; padding-bottom: 10px; }
     .fav-block-box input                    { padding: 8px 44px 8px 14px; font-size: 15px; line-height: 20px;}
     .fav-block-box .search-box button       { width: 24px; height: 24px;}
@@ -113,6 +113,5 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
     .fav-block-box .fav-list button         { padding: 3px 6px; font-size: 13px; line-height: 17px;}
     .footer-btn-list .edit-btn              { padding: 10px; font-size: 16px; line-height: 22px; }
     .footer-btn-list .delete-btn            { margin-bottom: 10px; width: 42px; height: 42px; }
-    .fav-block-box .fav-btn-block img       { width: 38px; }
-    .fav-block-box .fav-btn-block .fav-btn  { width: 28px; height: 28px;}
+
 }
