@@ -9,9 +9,110 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
             <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+            <app-fixtures-sidebar-widget [sport]="'kabaddi'"></app-fixtures-sidebar-widget>
             <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
             <!--Points table widget-->
-            <app-points-table [sport]="'kabaddi'" ></app-points-table>
+          
+            <!--Kabaddi top scorers-->
+            <!-- <div class="common-widget tab-widget" *ngIf="scorerdata && scorerdata?.length > 0 ">
+              <div class="widget-title">
+                <h5>Top Scorers</h5>
+              </div>
+              <ngb-tabset class="common-tabs">
+                <ngb-tab>
+                  <ng-template ngbTabTitle><div (click)="gettopscorer('totalpoint')">Points</div></ng-template>
+                  <ng-template ngbTabContent>
+                    <ul class="common-list player-score-list">
+                      <li class="top-player d-flex" *ngFor="let item of (scorerdata | slice:0:1);let i = index;">
+                        <img alt="player" [offset]="commonService.lazyloadoffset"
+                          [lazyLoad]="cricketService.playerplaceholder"
+                          [defaultImage]="cricketService.playerplaceholder">
+                        <div class="top-player-inner">
+                          <p class="num">{{i+1}}.</p>
+                          <div class="player-names">
+                            <p class="name">
+                              <a
+                                [routerLink]="['/cricket/player',(item.pid ),(item.name | slugify)]">
+                                {{item.name | split}}
+                              </a>
+                            </p>
+                            <p class="team">{{item.tname}}</p>
+                          </div>
+                          <div class="player-score">
+                            <h3>{{item.totalpoint}}</h3>
+                            <p class="score-property">Points</p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="common-player d-flex justify-content-between align-items-center"
+                        *ngFor="let item of (scorerdata | slice:1:10);let i = index;">
+                        <p class="num">{{i+2}}.</p>
+                        <div class="player-names">
+                          <p class="name">
+                            <a
+                              [routerLink]="['/kabaddi/player', (item.tid) , (item.pid ),(item.name | slugify)]">
+                              {{item.name | split}}
+                            </a>
+                          </p>
+                          <p class="team">{{item.tname}}</p>
+                        </div>
+                        <div class="player-score">
+                          <h3>{{item.totalpoint}}</h3>
+                          <p class="score-property">Points</p>
+                        </div>
+                      </li>
+                      <li><a class="view-all-btn" [routerLink]="['./stats']">View all</a></li>
+                    </ul>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab>
+                  <ng-template ngbTabTitle><div (click)="gettopscorer('raidtotalpoint')">Raid Points</div></ng-template>
+                  <ng-template ngbTabContent>
+                    <ul class="common-list player-score-list">
+                      <li class="top-player d-flex" *ngFor="let item of (scorerdata | slice:0:1);let i = index;">
+                        <img alt="player" [offset]="commonService.lazyloadoffset"
+                          [lazyLoad]="cricketService.playerplaceholder"
+                          [defaultImage]="cricketService.playerplaceholder">
+                        <div class="top-player-inner">
+                          <p class="num">{{i+1}}.</p>
+                          <div class="player-names">
+                            <p class="name">
+                              <a
+                                [routerLink]="['/cricket/player',(item.pid ),(item.name | slugify)]">
+                                {{item.name | split}}
+                              </a>
+                            </p>
+                            <p class="team">{{item.tname}}</p>
+                          </div>
+                          <div class="player-score">
+                            <h3>{{item.raidtotalpoint}}</h3>
+                            <p class="score-property">Points</p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="common-player d-flex justify-content-between align-items-center"
+                        *ngFor="let item of (scorerdata | slice:1:10);let i = index;">
+                        <p class="num">{{i+2}}.</p>
+                        <div class="player-names">
+                          <p class="name">
+                            <a
+                              [routerLink]="['/kabaddi/player', (item.tid) , (item.pid ),(item.name | slugify)]">
+                              {{item.name | split}}
+                            </a>
+                          </p>
+                          <p class="team">{{item.tname}}</p>
+                        </div>
+                        <div class="player-score">
+                          <h3>{{item.raidtotalpoint}}</h3>
+                          <p class="score-property">Points</p>
+                        </div>
+                      </li>
+                      <li><a class="view-all-btn" [routerLink]="['./stats']">View all</a></li>
+                    </ul>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+            </div> -->
         </div>
       </div>
     </div>

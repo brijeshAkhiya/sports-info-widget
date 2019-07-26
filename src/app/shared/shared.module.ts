@@ -64,6 +64,7 @@ import { CountdownComponent } from './widget/countdown/countdown.component';
 import { MatchInfoCardComponent } from './widget/match-info-card/match-info-card.component';
 import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.component';
 import { ApiStoreComponent } from './api-store/api-store.component';
+import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget/fixtures-sidebar-widget.component';
 
 
 
@@ -125,6 +126,7 @@ import { ApiStoreComponent } from './api-store/api-store.component';
         MatchInfoCardComponent,
         VenueMapCardComponent,
         ApiStoreComponent,
+        FixturesSidebarWidgetComponent,
     ],
     providers: [
         /** All Pipes */
@@ -192,7 +194,8 @@ import { ApiStoreComponent } from './api-store/api-store.component';
         CountdownComponent,
         MatchInfoCardComponent,
         VenueMapCardComponent,
-        ApiStoreComponent
+        ApiStoreComponent,
+        FixturesSidebarWidgetComponent
     ],
     entryComponents:[LoginModalComponent]
 

@@ -51,10 +51,8 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--points table widget-->
-          <app-points-table *ngIf="tournamentid" [sport]="'cricket'" 
-          [options]="{
-            tournament : tournamentid
-          }" ></app-points-table>
+          <app-points-table [sport]="'kabaddi'" 
+         ></app-points-table>
 
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>

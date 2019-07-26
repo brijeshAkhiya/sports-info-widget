@@ -47,10 +47,8 @@ export class FixturesComponent implements OnInit {
 
   getFixtures() {
     console.log("getFixtures")
-
     this.paramsFixtures.loading = true;
     this.sportsService.getKabaddiMatchList(this.paramsFixtures.reqParams.status, this.paramsFixtures.reqParams.per_page, this.paramsFixtures.reqParams.page).subscribe((res: any) => {
-      
       this.paramsFixtures.loading = false;
       if (res.data && res.data.items){
         this.paramsFixtures.data =  this.paramsFixtures.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'asc'));
@@ -59,11 +57,12 @@ export class FixturesComponent implements OnInit {
         this.paramsFixtures.loadmore = true;
       else
         this.paramsFixtures.loadmore = true;
-        
     }, (error) => {
       this.paramsFixtures.loading = false;
     });
   }
+
+  
 
   getResults() {
 

@@ -137,8 +137,59 @@
               <app-schedule [data]="matchresults" [type]="'result'" [sport]="sport"></app-schedule>
             </ng-template>
           </ngb-tab>
+
+
+            <!--New fixtures -->
+
+           <!-- Fixtures Section-->
+        <ngb-tab *ngIf="sport == 'kabaddi'">
+          <ng-template ngbTabTitle>
+            <div (click)="loadData('fixture')">Fixtures</div>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <app-no-data-widget [message]="'No recent fixtures'"
+              *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
+            </app-no-data-widget>
+            <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
+            <app-loader *ngIf="paramsFixtures.loading"></app-loader>
+            <div class="fixtures-loadmore">
+              <button class="theme-btn down-btn" (click)="loadmore('fixture')"
+                *ngIf="!paramsFixtures.loading && paramsFixtures.data?.length > 0 && paramsFixtures.loadmore">
+                Load More
+                <span></span>
+              </button>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <!-- Results Section-->
+        <ngb-tab *ngIf="sport == 'kabaddi'">
+          <ng-template ngbTabTitle>
+            <div (click)="loadData('result')">Results</div>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <app-no-data-widget [message]="'No recent results'"
+              *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
+            </app-no-data-widget>
+            <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
+            <app-loader *ngIf="paramsResults.loading"></app-loader>
+            
+            <div class="fixtures-loadmore">
+            <button class="theme-btn down-btn" (click)="loadmore('result')"
+              *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
+              Load More
+              <span></span>
+            </button>
+            </div>
+          </ng-template>
+        </ngb-tab>
+    
+
+
         </ngb-tabset>
       </div>
+
+       
 
       <!-- Sidebar Section-->
       <div class="sidebar-col">
