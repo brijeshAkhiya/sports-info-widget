@@ -85,8 +85,8 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .owl-theme .owl-nav                             { position: absolute; margin: 0px; left: 0px; top: 50%; width: 100%; }
 .owl-theme .owl-nav [class*="owl-"]             { position: absolute; margin: 0px; width: 44px; height: 44px; background: rgba(255,255,255,0.10); font-size: 0px; transform: translateY(-50%); -webkit-transform: translateY(-50%); border: none; border-radius: 16px;  transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
 .owl-theme .owl-nav [class*="owl-"]:hover       { background-color: rgba(255,255,255,0.20);}
-.owl-theme .owl-nav .owl-prev                   { left: -74px; }
-.owl-theme .owl-nav .owl-next                   { right: -74px;}
+.owl-theme .owl-nav .owl-prev                   { left: -60px; }
+.owl-theme .owl-nav .owl-next                   { right: -60px;}
 .owl-theme .owl-nav [class*="owl-"]:after       { content: ""; position: absolute; left: 0px; top: 0px; height: 100%; width: 100%; background: url(assets/images/right-arrow.svg) no-repeat center center;}
 .owl-theme .owl-nav .owl-prev:after             { transform: rotate(180deg); -webkit-transform: rotate(180deg); }
 .fixture-slider .owl-theme .owl-nav [class*="owl-"]         { top: 29px; width: 32px; height: 32px; filter: grayscale(1) opacity(0.4); -webkit-filter: grayscale(1) opacity(0.4); }

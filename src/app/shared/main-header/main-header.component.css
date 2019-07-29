@@ -1,6 +1,7 @@
 /* -------- Header Slider CSS ------- */
-.header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1111; }
-.header-live-slider                                     { padding: 12px 74px; position: relative; }
+.slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 160px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; }
+.header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1113; }
+.header-live-slider                                     { margin-left: 24px; padding: 12px 60px; width: calc(100% - 184px); position: relative;  }
 .header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 105px; background: #fff;  cursor: pointer; border-radius: 4px; }
 .header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 12px; line-height: 16px; font-family: 'IBM Plex Sans', sans-serif;}
 .header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-family: 'IBM Plex Sans Condensed', sans-serif;  }
