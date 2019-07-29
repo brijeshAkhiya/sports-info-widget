@@ -27,7 +27,11 @@ export class PlayerComponent implements OnInit {
     private sportsService: SportsService, 
     private cricketService: CricketService, 
     private commonService: CommonService, 
-  ) { }
+  ) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+  }
 
   ngOnInit() {
     let data:any = this.activatedroute.data;
