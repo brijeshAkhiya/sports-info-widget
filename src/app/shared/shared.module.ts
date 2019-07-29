@@ -65,6 +65,7 @@ import { MatchInfoCardComponent } from './widget/match-info-card/match-info-card
 import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.component';
 import { ApiStoreComponent } from './api-store/api-store.component';
 import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget/fixtures-sidebar-widget.component';
+import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 
 
 
@@ -127,6 +128,7 @@ import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget
         VenueMapCardComponent,
         ApiStoreComponent,
         FixturesSidebarWidgetComponent,
+        UppersliderComponent,
     ],
     providers: [
         /** All Pipes */

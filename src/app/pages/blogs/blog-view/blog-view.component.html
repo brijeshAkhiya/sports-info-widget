@@ -1,5 +1,5 @@
 <ng-container *ngIf="blogdata">
-  <div class="blog-complete-line"></div>
+  <!-- <div class="blog-complete-line"></div> -->
   <section class="blog-banner" [defaultImage]="commonService.largeblogPlaceholder"
     [offset]="commonService.lazyloadoffset" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
     <ng-container *ngIf="blogdata?.eType == 'Video'">
