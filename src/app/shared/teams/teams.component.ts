@@ -15,6 +15,8 @@ export class TeamsComponent implements OnInit {
   sport;
   tournamentid;
   teams;
+  scorerdata: any;
+  isloading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,8 +31,8 @@ export class TeamsComponent implements OnInit {
     console.log(this.activatedRoute.snapshot);
     console.log(routeParams);
     console.log(data);
-
     this.sport = data.value.sport;
+
     this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'cricket', 'tournament');
     console.log(this.sport);
     
@@ -40,8 +42,22 @@ export class TeamsComponent implements OnInit {
     else if (this.sport == 'kabaddi') {
       this.getKabaddiTeams();
     }
-
+    this.gettopscorer('totalpoint');
   }
+
+  //get kabaddi top scorers
+
+  gettopscorer(type){
+    this.isloading = true;
+    this.sportsService.getkabaddistats(type).subscribe((res: any) => {
+      this.isloading = false;
+      if (res) {
+        this.scorerdata = res.data
+      }
+    },
+    error => this.isloading = false)
+  }
+
 
   //Cricket - Get tournament teams
   getTournamentTeams(id) {

@@ -476,5 +476,13 @@ export class SportsService {
     ); 
   }
 
+  getkabadditeamfixtures(teamid,params){
+    console.log(params);
+    
+    return this.http.get(
+      environment.apiUrl + environment.version + `/kabaddi/team/${teamid}/matches?per_page=${params.reqParams.per_page}&paged=${params.reqParams.page}&status=${params.reqParams.status}`
+    ); 
+  }
+
 
 }

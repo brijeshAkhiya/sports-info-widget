@@ -6,10 +6,13 @@
           <h1>Statistics</h1>
         </div>
         <app-loader *ngIf="isloading"></app-loader>
-        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'kabaddi'" [message]="'Coming Soon..!'"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'kabaddi'"
+          [message]="'Coming Soon..!'"></app-no-data-widget>
         <ngb-tabset class="common-tabs black-filled" *ngIf="stats?.length > 0">
           <ngb-tab>
-            <ng-template ngbTabTitle><div (click)="getTournamentStats('totalpoint')">Points</div></ng-template>
+            <ng-template ngbTabTitle>
+              <div (click)="getTournamentStats('totalpoint')">Points</div>
+            </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
                           sport:'kabaddi',
@@ -23,7 +26,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('raidtotal')">Raid</div>
+              <div (click)="getTournamentStats('raidtotalpoint')">Raid</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]="{
@@ -38,7 +41,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('tackletotal')">Tackle</div>
+              <div (click)="getTournamentStats('tackletotalpoint')">Tackle</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
@@ -74,6 +77,7 @@
           <!--Recommended links-->
           <!-- <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
             [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links> -->
+          <app-points-table [sport]="'kabaddi'"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
 
         </div>

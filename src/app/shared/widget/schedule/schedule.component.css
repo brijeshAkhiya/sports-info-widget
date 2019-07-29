@@ -48,6 +48,7 @@
 .schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700;  }
 .schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
+
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Fixtures List ------- */

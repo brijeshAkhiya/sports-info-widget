@@ -54,7 +54,7 @@ export class MainFooterComponent implements OnInit {
       }
     })
     this.store.select('Favourites').subscribe((data: any) => {
-      this.userfavourites = data.Favourites
+      this.userfavourites = data.Favourites ? data.Favourites : []
     })
   }
 

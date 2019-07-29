@@ -7,12 +7,14 @@ import { HomeRoutingModule } from './home-routing.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MomentModule } from 'ngx-moment';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 /** Internal Modules */
 import { SharedModule } from "@app/shared/shared.module";
 import { CricketModule } from "@app/modules/cricket/cricket.module";
 
 import { HomeComponent } from './home.component';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { HomeComponent } from './home.component';
 
     LazyLoadImageModule,
     MomentModule,
+    CarouselModule,
     NgScrollbarModule,
 
     HomeRoutingModule,

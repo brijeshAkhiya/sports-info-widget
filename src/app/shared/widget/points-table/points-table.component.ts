@@ -34,7 +34,7 @@ export class PointsTableComponent implements OnInit {
         tournamentId : this.options.tournament
       }            
     }
-    else if(this.sport == 'cricket'){
+    else if(this.sport == 'kabaddi'){
       this.loadKabaddiPoints();      
       this.data = {
         header_title : 'Points Table',
@@ -60,7 +60,9 @@ export class PointsTableComponent implements OnInit {
   loadKabaddiPoints(){ 
     this.sportsService.getCompetitionInfo().subscribe((res:any) => {
       if (res.data) {
-          this.pointstable = res.data.standings;
+          this.pointstable = res.data.standings[0].tables;
+          console.log(this.pointstable);
+          
       }
     })
   }

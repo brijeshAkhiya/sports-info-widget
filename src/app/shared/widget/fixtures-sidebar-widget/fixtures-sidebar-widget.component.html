@@ -1,0 +1,154 @@
+<div class="common-widget tab-widget">
+  <div class="widget-title">
+    <h5>{{sport ? sport : ''}}</h5>
+  </div>
+  <ngb-tabset class="common-tabs">
+    <ngb-tab title="Fixtures">
+      <ng-template ngbTabContent>
+        <ng-container
+          *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
+        </ng-container>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <div>Results</div>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <ng-container
+          *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
+        </ng-container>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+
+<ng-template #sidebarMatch let-loader="loader" let-matches="matches" let-type="type">
+  <app-loader *ngIf="loader"></app-loader>
+  <app-no-data-widget [message]="type =='result' ? 'No recent results' : 'No recent fixtures' "
+    *ngIf="(!matches || matches?.length == 0)"></app-no-data-widget>
+  <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'cricket'">
+    <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
+
+      <div class="title d-flex justify-content-between">
+        <p><b>{{match.season_name ? match.season_name : match.tournament_name}} </b> <span
+            class="text-capitalize">{{ match.tournament_round ? ' - '+match.tournament_round : '' }}</span> </p>
+        <p>{{match.scheduled | amTimeAgo}}</p>
+      </div>
+
+      <div *ngFor="let item of match?.competitors">
+        <!-- <ng-container *ngTemplateOutlet="match_team;context:{match: match, team:item}">
+        </ng-container> -->
+        <div class="match-info d-flex justify-content-between align-items-center">
+          <p [ngClass]="{'match-winner': match?.winner_id == item?.id}"><img [offset]="commonService.lazyloadoffset"
+              [lazyLoad]="item?.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
+            {{(match.match_result) ? item?.abbreviation : item?.name}}
+          </p>
+          <p *ngIf="match.match_result">
+            <ng-container *ngFor="let score of item.p_new; let i = index">
+              {{score?.display_score | cricketScore}}
+              {{i == item.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
+            </ng-container>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <p class="result-line" *ngIf="type == 'result'; else match_schedule ">
+            {{ match.match_result ? match.match_result : match.match_status }}
+          </p>
+          <ng-template #match_schedule>
+            <p class="result-line">Starts {{match.scheduled | amLocal | amDateFormat:'LT'}}
+              {{(match.city_name) ? '| ' + match.city_name : ''}}</p>
+          </ng-template>
+        </div>
+      </div>
+      <a class="fullblock-link"
+        [routerLink]="['/cricket/match', (match.id | splitID) ,(match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]">
+      </a>
+    </li>
+
+    <li>
+      <a class="view-all-btn"
+        [routerLink]="(type == 'fixture' && sport == 'cricket' ) ? ['/cricket/recent/fixtures'] :  (type == 'result' && sport == 'cricket' ) ?  ['/cricket/recent/results'] : ''">
+        View All
+        <span></span>
+      </a>
+    </li>
+  </ul>
+  <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'kabaddi'">
+    <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
+      <div class="title d-flex justify-content-between">
+        <p><b>{{match?.competition?.cname ? match?.competition?.cname: ''}}</b> <span class="text-capitalize"></span>
+        </p>
+        <p>{{match.timestampstart | amFromUnix | amTimeAgo}}</p>
+      </div>
+      <div>
+        <div class="match-info d-flex justify-content-between align-items-center">
+          <p
+            [ngClass]="{'match-winner': match?.result?.winner == match?.teams?.home?.tid &&  match?.result?.tie != 'true' }">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.logo"
+              [defaultImage]="cricketService.flagplaceholder">
+            {{ match?.teams?.home?.tname}}
+          </p>
+          <p *ngIf="match?.status == 2">
+            <ng-container>
+              {{match?.result?.home}}
+            </ng-container>
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="match-info d-flex justify-content-between align-items-center">
+          <p
+            [ngClass]="{'match-winner': match?.result?.winner == match?.teams?.away?.tid &&  match?.result?.tie != 'true'}">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.logo"
+              [defaultImage]="cricketService.flagplaceholder">
+            {{ match?.teams?.away?.tname}}
+          </p>
+          <p *ngIf="match?.status == 2">
+            <ng-container>
+              {{match?.result?.away}}
+            </ng-container>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <p class="result-line" *ngIf="type == 'result'; else match_schedule ">
+            {{ match?.result?.text }}
+          </p>
+          <ng-template #match_schedule>
+            <p class="result-line">Starts {{match.timestampstart | amFromUnix | amLocal | amDateFormat:'LT'}} |
+              {{ match?.venue?.name }}</p>
+          </ng-template>
+        </div>
+      </div>
+      <a class="fullblock-link" [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
+      </a>
+    </li>
+    <li>
+      <a class="view-all-btn"
+        [routerLink]="'/kabaddi/fixtures'">
+        View All
+        <span></span>
+      </a>
+    </li>
+  </ul>
+</ng-template>
+
+<!-- <ng-template #match_team let-team="team" let-match="match">
+  <div class="match-info d-flex justify-content-between align-items-center">
+    <p [ngClass]="{'match-winner': match?.winner_id == team?.id}"><img [offset]="commonService.lazyloadoffset"
+        [lazyLoad]="team?.id | logosurl" [defaultImage]="cricketService.flagplaceholder">
+      {{(match.match_result) ? team?.abbreviation : team?.name}}
+    </p>
+    <p *ngIf="match.match_result">
+      <ng-container *ngFor="let score of team.p_new; let i = index">
+        {{score?.display_score | cricketScore}}
+        {{i == team.p_new.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
+      </ng-container>
+    </p>
+  </div>
+</ng-template> -->

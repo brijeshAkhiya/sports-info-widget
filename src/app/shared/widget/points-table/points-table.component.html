@@ -33,7 +33,7 @@
     </td>
     <ng-template #data>
       <td>
-          <a
+        <a
           [routerLink]="['/cricket/team', (options.tournament | splitID) ,(item.team.id | splitID),(item.team.name | slugify)]">
           {{item.team.abbreviation ? item.team.abbreviation : item.team.name}}</a>
       </td>
@@ -44,7 +44,7 @@
 <ng-template #kabaddi let-item="item">
   <ng-container *ngFor="let value of data.values">
     <td *ngIf="value != 'tname'; else link">
-      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value])}} </td>
+      {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value] ? item[value] : 0)}} </td>
     <ng-template #link>
       <td>
         <a [routerLink]="['/kabaddi/team', item['tid'], (item.tname | slugify)]">
