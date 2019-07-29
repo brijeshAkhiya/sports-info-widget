@@ -386,6 +386,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 /* -------- Common Widget Block ------- */
     .common-stories-widget,
     .common-widget                      { margin: 24px 0px;}
+    .fixture-slider                     { margin-top: 24px; display: block; }
     app-custom-ads-widget:first-child   { margin-top: 24px; }
 /* -------- Scorecard Tab ------- */
     .filled-tabs.test-match > .nav-tabs .nav-link            { font-size: 15px; line-height: 21px; }
@@ -432,6 +433,8 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .add-to-fav-btn:before  { width: 26px; height: 26px; background-size: 14px 14px; }
     .add-to-fav-btn.added   { padding: 9px 26px 9px 4px;}
     .add-to-fav-btn.added:before       { transform: translate(144px,-50%) rotate(360deg); -webkit-transform: translate(144px,-50%) rotate(360deg);}
+/* -------- Slider Button Style ------- */
+    .fixture-slider .owl-theme .owl-nav [class*="owl-"] { top: 25px;}
 /* -------- Loader Style ------- */
     .no-data-available                  { margin: 36px 0px 0px; }
 
