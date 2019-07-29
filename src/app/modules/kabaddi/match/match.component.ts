@@ -118,12 +118,12 @@ export class MatchComponent implements OnInit {
     );
     remainingMiliSec =
       remainingMiliSec - this.commonService.miliseconds(0, 5, 0); 
-    // if (remainingTime.days == 0 && remainingTime.hours < 5) {
+    if (remainingTime.days == 0 && remainingTime.hours < 0 && remainingTime.minutes < 15) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
-      }, 10);
-    // }, remainingMiliSec);
-    // }
+      // }, 10);
+    }, remainingMiliSec);
+    }
   }
 
   /** Clear Interval and timeout on destroy */

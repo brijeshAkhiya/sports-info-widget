@@ -46,7 +46,6 @@ export class FixturesComponent implements OnInit {
   }
 
   getFixtures() {
-    console.log("getFixtures")
     this.paramsFixtures.loading = true;
     this.sportsService.getKabaddiMatchList(this.paramsFixtures.reqParams.status, this.paramsFixtures.reqParams.per_page, this.paramsFixtures.reqParams.page).subscribe((res: any) => {
       this.paramsFixtures.loading = false;
@@ -63,7 +62,6 @@ export class FixturesComponent implements OnInit {
   }
 
   
-
   getResults() {
 
     this.paramsResults.loading = true;
