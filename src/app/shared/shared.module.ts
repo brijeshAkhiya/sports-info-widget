@@ -66,9 +66,7 @@ import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.co
 import { ApiStoreComponent } from './api-store/api-store.component';
 import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget/fixtures-sidebar-widget.component';
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
-
-
-
+import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
 
 @NgModule({
     imports: [
@@ -129,6 +127,7 @@ import { UppersliderComponent } from './widget/upperslider/upperslider.component
         ApiStoreComponent,
         FixturesSidebarWidgetComponent,
         UppersliderComponent,
+        TopScorerWidgetComponent,
     ],
     providers: [
         /** All Pipes */
@@ -197,7 +196,8 @@ import { UppersliderComponent } from './widget/upperslider/upperslider.component
         MatchInfoCardComponent,
         VenueMapCardComponent,
         ApiStoreComponent,
-        FixturesSidebarWidgetComponent
+        FixturesSidebarWidgetComponent,
+        TopScorerWidgetComponent
     ],
     entryComponents:[LoginModalComponent]
 
