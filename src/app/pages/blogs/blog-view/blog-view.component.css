@@ -67,7 +67,11 @@
 .login-toast.active                 { bottom: 30px;}
 .login-toast p                      { margin: 0px; font-weight: 500; }
 .login-toast img                    { margin: 0px 12px; width: 32px; }
-
+.comment-dropdown .dropdown-toggle          { padding: 0px 8px; border: none; background: transparent; }
+.comment-dropdown .dropdown-toggle::after   { margin-bottom: -3px; border-top: 6px solid #7A7A7A; border-right-width: 5px; border-left-width: 5px; }
+.comment-dropdown .dropdown-menu            { padding: 0px; background: transparent; border: none; border-radius: 0; left: auto !important; right: 0px !important; }
+.comment-dropdown .dropdown-item            { padding: 10px; background: #fff; color: #ED1A33; line-height: 18px; font-weight: 600; border-radius: 3px; }
+.comment-dropdown .dropdown-item span       { margin-left: 4px; display: inline-block; vertical-align: middle; }
 
 @media (min-width: 1200px) and (max-width: 1379px) {
     .blog-banner                    { height: 580px; }
