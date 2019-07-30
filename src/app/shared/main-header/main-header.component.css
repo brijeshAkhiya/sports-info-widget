@@ -1,7 +1,13 @@
 /* -------- Header Slider CSS ------- */
-.slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 160px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; }
 .header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1113; }
-.header-live-slider                                     { margin-left: 24px; padding: 12px 60px; width: calc(100% - 184px); position: relative;  }
+.slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 150px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; text-align: left; }
+.slider-sports-dropdown .dropdown-toggle::after         { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(assets/images/dropdown-arrow.svg) no-repeat center center / cover; border: none; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.slider-sports-dropdown.show .dropdown-toggle::after    { transform: translatey(-50%) rotate(180deg); -webkit-transform: translatey(-50%) rotate(180deg); }
+.slider-sports-dropdown .dropdown-menu                  { margin-top: 8px; padding: 0px; min-width: 100%; border: none; border-radius: 4px; overflow: hidden; }
+.slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 10px 12px; font-size: 14px; line-height: 18px; color: #292929; font-weight: 600; }
+.slider-sports-dropdown .dropdown-menu .dropdown-item.selected,
+.slider-sports-dropdown .dropdown-menu .dropdown-item:hover { background: #FFE6E9; color: #ED1A33; }
+.header-live-slider                                     { margin-left: 24px; padding: 12px 50px; width: calc(100% - 174px); position: relative;  }
 .header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 105px; background: #fff;  cursor: pointer; border-radius: 4px; }
 .header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 12px; line-height: 16px; font-family: 'IBM Plex Sans', sans-serif;}
 .header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-family: 'IBM Plex Sans Condensed', sans-serif;  }
@@ -80,6 +86,11 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
+/* -------- Header Slider CSS ------- */
+    .slider-sports-dropdown .dropdown-toggle            { padding: 8px 12px; width: 130px; font-size: 14px; line-height: 18px; }
+    .slider-sports-dropdown .dropdown-toggle::after     { width: 20px; height: 20px; right: 12px; }
+    .header-live-slider                                 { margin-left: 12px; width: calc(100% - 142px); }
+    .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { padding: 11px 0px 11px 24px;}
     nav .navbar-brand:before        { right: -28px; }
@@ -99,6 +110,11 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 
 
 @media (max-width: 991px) {
+/* -------- Header Slider CSS ------- */
+    .slider-sports-dropdown .dropdown-toggle            { padding: 7px 10px; width: 110px; font-size: 12px; line-height: 17px; }
+    .slider-sports-dropdown .dropdown-toggle::after     { width: 18px; height: 18px; right: 10px; }
+    .header-live-slider                                 { margin-left: 12px; width: calc(100% - 122px); }
+    .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
 /* -------- Serch Box CSS ------- */
     .search-bar                                     { padding: 12px 0px; background: #fff;}
     .search-bar .search-box                         { width: 80%; }
@@ -154,7 +170,9 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 
 @media (max-width: 575px) {
 /* -------- Header Slider CSS ------- */
-    .header-live-slider                                     { padding: 12px 24px;}
+    .slider-sports-dropdown                                 { margin-top: 12px;}
+    .header-live-slider                                     { margin-left: 0px; padding: 12px 24px; width: 100%;}
+    .header-live-section .header-live-inner                 { flex-direction: column; -webkit-flex-direction: column; }
     .header-live-slider .slider-item-inner                  { min-height: 105px; }
     .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
 /* -------- Navbar CSS ------- */

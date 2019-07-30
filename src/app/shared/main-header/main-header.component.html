@@ -1,10 +1,10 @@
 <div class="header-live-section" *ngIf="slider.length > 0">
   <div class="container">
-    <div class="d-flex align-items-center">
+    <div class="header-live-inner d-flex align-items-center">
       <div ngbDropdown class="slider-sports-dropdown">
-        <button id="dropdownSports" ngbDropdownToggle>Cricket</button>
+        <button id="dropdownSports" ngbDropdownToggle>Field Hockey</button>
         <div ngbDropdownMenu aria-labelledby="dropdownSports">
-          <button ngbDropdownItem>Cricket</button>
+          <button ngbDropdownItem class="selected">Cricket</button>
           <button ngbDropdownItem>Kabaddi</button>
         </div>
       </div>
@@ -48,7 +48,7 @@
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
                         <img [lazyLoad]="competitor?.id| logosurl"
-                          [defaultImage]="cricketService.flagplaceholder">{{competitor?.name}}</p>
+                          [defaultImage]="cricketService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p *ngIf="competitor?.period_scores"><b>
                           {{competitor?.period_scores.display_score | cricketScore}}
                           ({{competitor?.period_scores.display_overs}}
@@ -57,7 +57,7 @@
                   </ng-template>
 
                   <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-xl-9">
                       <p class="result-line" *ngIf="slide.match_status == 'live'">
                         {{slide.venue_name ? slide.venue_name : ''}}</p>
                       <p class="result-line" *ngIf="slide.match_status != 'live'">
