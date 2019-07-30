@@ -8,6 +8,7 @@ import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 
 import * as fromRoot from '../../../app-reducer'
+import * as Auth from "@store/auth/auth.actions";
 
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
 import { Meta } from '@angular/platform-browser';
@@ -37,7 +38,7 @@ export class BlogViewComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private meta:Meta,
+    private meta: Meta,
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     public commonService: CommonService,
@@ -63,10 +64,10 @@ export class BlogViewComponent implements OnInit {
     else if (this.activatedroute.snapshot.params.slug)
       this.getBlogview(this.activatedroute.snapshot.params.slug);
 
-      this.authService.authState.subscribe((user) => {
-          this.socialUser = user;
-      });
-  
+    this.authService.authState.subscribe((user) => {
+      this.socialUser = user;
+    });
+
   }
 
 
@@ -97,7 +98,7 @@ export class BlogViewComponent implements OnInit {
     if (id) {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.blogdata = res.data;
-       // this.initSEOTags();
+        // this.initSEOTags();
         this.getPopularArticles();
         // let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
         // if (type.toUpperCase() != this.blogdata.eType.toUpperCase())
@@ -122,7 +123,7 @@ export class BlogViewComponent implements OnInit {
     }
   }
 
-  initSEOTags(){
+  initSEOTags() {
     this.meta.updateTag({ name: 'title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
     this.meta.updateTag({ name: 'topic', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
@@ -133,7 +134,7 @@ export class BlogViewComponent implements OnInit {
     this.meta.updateTag({ property: 'og:description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
     this.meta.updateTag({ name: 'twitter:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'twitter:description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
-    this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url+this.blogdata.sImage ? this.blogdata.sImage : '' });
+    this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }
@@ -157,6 +158,13 @@ export class BlogViewComponent implements OnInit {
           if (res) {
             this.usercommentvalue = ''
             this.getBlogComments(this.blogdata._id, { iPostId: this.blogdata._id, nStart: 0, nLimit: this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
+          }
+        }, (error: any) => {
+          if (error.status == 401) {
+            console.log('status', error);
+            this.store.dispatch(new Auth.SetUnauthenticated());
+            this.authService.signOut();
+            localStorage.removeItem('userT');
           }
         })
       }

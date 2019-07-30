@@ -4,8 +4,7 @@ import { CommonService } from '@providers/common-service';
 import { SportsService } from '@app/shared/providers/sports-service';
 
 import * as fromRoot from "@app/app-reducer";
-import * as KabaddiFixtures from "@store/kabaddi-fixtures/kabaddi-fixtures.actions";
-import * as KabaddiResults from "@store/kabaddi-results/kabaddi-results.actions";
+import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
 import { Store } from "@ngrx/store";
 
 
@@ -27,25 +26,23 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.sport == 'cricket') {
-      this.store.select('CricketFixtures').subscribe((data: any) => {
-        this.fixturesdata = data.cricketfixtures
-      })
-      this.store.select('CricketResults').subscribe((data: any) => {
-        this.resultsdata = data.cricketresults
+      this.store.select('Cricket').subscribe((data: any) => {
+        this.fixturesdata = data.fixtures
+        this.resultsdata = data.results
       })
     }
     else if (this.sport == 'kabaddi') {
-      this.store.select('KabaddiFixtures').subscribe((data: any) => {
-        if (data.kabaddifixtures.length > 0) {
-          this.fixturesdata = data.kabaddifixtures
+      this.store.select('Kabaddi').subscribe((data: any) => {
+        if (data.fixtures.length > 0) {
+          this.fixturesdata = data.fixtures
         }
         else {
           this.getKabaddiFixtures();
         }
       })
-      this.store.select('KabaddiResults').subscribe((data: any) => {
-        if (data.kabaddiresults.length > 0) {
-          this.resultsdata = data.kabaddiresults
+      this.store.select('Kabaddi').subscribe((data: any) => {
+        if (data.results.length > 0) {
+          this.resultsdata = data.results
         }
         else {
           this.getKabaddiResults();
@@ -62,8 +59,8 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       // paramsFixtures.loading = false;
       this.loader = false
       if (res.data && res.data.items) {
-        paramsFixtures.data =res.data.items
-        this.store.dispatch(new KabaddiFixtures.KabaddiFixtures(paramsFixtures.data))
+        paramsFixtures.data = res.data.items
+        this.store.dispatch(new Kabaddi.KabaddiFixtures(paramsFixtures.data))
       }
     }, (error) => {
       this.loader = false
@@ -77,8 +74,8 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
     this.sportsService.getKabaddiMatchList(paramsResults.reqParams.status, paramsResults.reqParams.per_page, paramsResults.reqParams.page).subscribe((res: any) => {
       this.loader = false
       if (res.data && res.data.items) {
-        paramsResults.data =res.data.items
-        this.store.dispatch(new KabaddiResults.KabaddiResults(paramsResults.data))
+        paramsResults.data = res.data.items
+        this.store.dispatch(new Kabaddi.KabaddiResults(paramsResults.data))
       }
     }, (error) => {
       this.loader = false

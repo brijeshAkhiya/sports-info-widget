@@ -84,6 +84,7 @@
                 <a [routerLink]="['/writer',video?.iId?._id]">{{video.iId.sFirstName}}
                   {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
               </p>
+              <span>{{video?.nCommentsCount}}</span>
               <p class="view white-view">{{video.nViewCounts}}</p>
             </div>
           </div>
