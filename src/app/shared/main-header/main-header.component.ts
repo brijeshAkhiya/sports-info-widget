@@ -75,13 +75,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       0: {
         items: 1
       },
-      540: {
+      458: {
         items: 2
       },
-      783: {
+      656: {
         items: 3
       },
-      1150: {
+      1046: {
         items: 4
       }
     },
@@ -123,8 +123,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     this.windowinnerWidth = window.innerWidth;
-    if (this.windowinnerWidth < 768) {
-      this.responsiveSticky(128);
+    if (this.windowinnerWidth < 576) {
+      this.responsiveSticky(176);
       console.log("width change" + innerWidth);
     }
     else {

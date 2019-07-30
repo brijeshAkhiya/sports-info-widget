@@ -31,7 +31,7 @@ export class MenuComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-    if (window.pageYOffset > 129) {
+    if (window.pageYOffset > 176) {
       let element = document.getElementById('sub-navabar');
       element.classList.add('fixed-nav');
       let bodyelement = document.getElementById('main-body');
