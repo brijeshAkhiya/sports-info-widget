@@ -18,8 +18,14 @@
           <a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}{{post.iId.sLastName}}</a>
           {{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
         </p>
-        <span>{{post.nCommentsCount}}</span>
-        <p class="view">{{post.nViewCounts}}</p>
+        <ul class="count-list">
+          <li>
+            <p class="comment"><span>{{post.nCommentsCount}}</span></p>
+          </li>
+          <li>
+            <p class="view"><span>{{post.nViewCounts}}</span></p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -68,8 +74,14 @@
       <div class="author-info d-flex justify-content-between align-items-center">
         <p class="author"><a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}
             {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-        <span>{{post.nCommentsCount}}</span>
-        <p class="view">{{post.nViewCounts}}</p>
+        <ul class="count-list">
+          <li>
+            <p class="comment"><span>{{post.nCommentsCount}}</span></p>
+          </li>
+          <li>
+            <p class="view"><span>{{post.nViewCounts}}</span></p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
