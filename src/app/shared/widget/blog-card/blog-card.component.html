@@ -1,6 +1,7 @@
 <ng-container *ngIf="card_type == 'banner'">
   <div class="popular-main-item common-shadow" *ngFor="let post of posts | slice:start:end">
-    <div class="item-img common-zoom-container fullblock-link-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+    <div class="item-img common-zoom-container fullblock-link-container"
+      [ngClass]="{'common-news-video': post.eType == 'Video'}">
       <div class="common-zoom-img" [defaultImage]="commonService.largeblogPlaceholder"
         [offset]="commonService.lazyloadoffset" [lazyLoad]="post.sImage | resizeImage:['m']">
       </div>
@@ -17,7 +18,14 @@
           <a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}{{post.iId.sLastName}}</a>
           {{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
         </p>
-        <p class="view">{{post.nViewCounts}}</p>
+        <ul class="count-list">
+          <li>
+            <p class="comment"><span>123</span></p>
+          </li>
+          <li>
+            <p class="view"><span>{{post.nViewCounts}}</span></p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -28,7 +36,8 @@
     <div class="row row-size12">
       <div class="col-sm-6 col-xl-3" *ngFor="let post of posts | slice:start:end ">
         <div class="popular-item common-shadow">
-          <div class="img-block common-zoom-container fullblock-link-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+          <div class="img-block common-zoom-container fullblock-link-container"
+            [ngClass]="{'common-news-video': post.eType == 'Video'}">
             <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
               [lazyLoad]="post.sImage | resizeImage:['s']"></div>
             <a class="fullblock-link" [state]="{ id: post._id }"
@@ -47,8 +56,9 @@
 
 <ng-container *ngIf="card_type == 'list'">
   <div class="common-news-item d-flex common-shadow" *ngFor="let post of posts">
-    <div class="common-news-img common-zoom-container fullblock-link-container" [ngClass]="{'common-news-video': post.eType == 'Video'}"
-      [state]="{ id: post._id }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">
+    <div class="common-news-img common-zoom-container fullblock-link-container"
+      [ngClass]="{'common-news-video': post.eType == 'Video'}" [state]="{ id: post._id }"
+      [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">
       <div class="common-zoom-img" [defaultImage]="commonService.smallblogPlaceholder"
         [lazyLoad]="post.sImage | resizeImage:['s']"></div>
       <a class="fullblock-link" [state]="{ id: post._id }"
@@ -62,9 +72,16 @@
           [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       </div>
       <div class="author-info d-flex justify-content-between align-items-center">
-        <p class="author"><a  [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}
+        <p class="author"><a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}
             {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-        <p class="view">{{post.nViewCounts}}</p>
+        <ul class="count-list">
+          <li>
+            <p class="comment"><span>123</span></p>
+          </li>
+          <li>
+            <p class="view"><span>{{post.nViewCounts}}</span></p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -75,16 +92,15 @@
     <div class="row row-size12">
       <div class="col-sm-6" *ngFor="let post of posts">
         <div class="web-news-item common-shadow rounded-box">
-          <div class="web-news-img common-zoom-container fullblock-link-container" [ngClass]="{'common-news-video': post.eType == 'Video'}">
+          <div class="web-news-img common-zoom-container fullblock-link-container"
+            [ngClass]="{'common-news-video': post.eType == 'Video'}">
             <div class="common-zoom-img" [offset]="commonService.lazyloadoffset"
               [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="post.sImage | resizeImage:['s']">
             </div>
-            <a class="fullblock-link" [state]="{ id: post._id }"
-              [routerLink]="['/blog' , post.sSlug ]"></a>
+            <a class="fullblock-link" [state]="{ id: post._id }" [routerLink]="['/blog' , post.sSlug ]"></a>
           </div>
           <div class="news-desc">
-            <h5><a [state]="{ id: post._id }"
-                [routerLink]="['/blog' , post.sSlug ]">{{post.sTitle}}</a>
+            <h5><a [state]="{ id: post._id }" [routerLink]="['/blog' , post.sSlug ]">{{post.sTitle}}</a>
             </h5>
           </div>
         </div>
@@ -98,7 +114,8 @@
     <div class="row row-size12">
       <div class="col-sm-3" *ngFor="let item of posts | slice:start:end ">
         <div class="popular-item common-shadow">
-          <div class="img-block common-zoom-container fullblock-link-container" [ngClass]="{'common-news-video': item?.eType == 'Video'}">
+          <div class="img-block common-zoom-container fullblock-link-container"
+            [ngClass]="{'common-news-video': item?.eType == 'Video'}">
             <div class="common-zoom-img" [lazyLoad]="item?.sImage | resizeImage:['s']">
               <a class="fullblock-link" [state]="{ id: item._id }"
                 [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]"></a>

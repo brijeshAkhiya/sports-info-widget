@@ -84,7 +84,14 @@
                 <a [routerLink]="['/writer',video?.iId?._id]">{{video.iId.sFirstName}}
                   {{video.iId.sLastName}}</a>{{video.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
               </p>
-              <p class="view white-view">{{video.nViewCounts}}</p>
+              <ul class="count-list">
+                <li>
+                  <p class="comment white-icon"><span>123</span></p>
+                </li>
+                <li>
+                  <p class="view white-icon"><span>{{video.nViewCounts}}</span></p>
+                </li>
+              </ul>
             </div>
           </div>
           <!-- <a class="fullblock-link" [routerLink]="[(video.eType |lowercase), video.sSlug ]"></a> -->

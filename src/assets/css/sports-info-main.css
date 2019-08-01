@@ -124,6 +124,7 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .no-data-available-white h5         { margin: 64px 0px 0px; text-align: center;color: #fff !important; }
 
 /******* Header Section CSS Start ******/
+app-main-header                     { display: block; background: #22336F;}
 .modal-backdrop.show                { opacity: 0.65; z-index: 11111 !important; }
 .modal                              { z-index: 11111;}
 .modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
@@ -167,8 +168,14 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .author-info p.author a                 { margin-right: 4px; color: #2990F8; font-weight: 600; text-transform: uppercase;  }
 .author-info p.author a:hover,
 .author-info p.author a:focus           { color: #22336F; }
-.author-info .view:before               { content: ""; margin: 0px 4px 2px 0px; display: inline-block; width: 20px; height: 18px; background: url(assets/images/view-icon.svg) no-repeat center center / 20px auto; vertical-align: middle; }
-.author-info .view.white-view:before    { background-image: url(assets/images/view-white-icon.svg); }
+.author-info .count-list                { margin: 0px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.author-info .count-list li             { margin-left: 12px; display: inline-block; }
+.author-info .count-list li:first-child { margin-left: 0px; }
+.author-info .count-list li span        { display: inline-block; vertical-align: middle; }
+.author-info .count-list p:before       { content: ""; margin-right: 4px; display: inline-block; width: 20px; height: 20px; background: no-repeat center center / 20px auto; vertical-align: middle; }
+.author-info .count-list .comment:before    { background-image: url(assets/images/comment-icon.svg); }
+.author-info .count-list .view:before       { background-image: url(assets/images/view-icon.svg); }
+.author-info .count-list .white-icon:before { filter: brightness(0) invert(1); -webkit-filter: brightness(0) invert(1); -ms-filter: brightness(0) invert(1); }
 .common-popular-list .popular-item      { border-radius: 4px; background: #fff; }
 .common-popular-list .img-block         { height: 170px; cursor: pointer; border-radius: 4px; position: relative; }
 .common-popular-list .item-desc         { padding: 12px; min-height: 90px; }
@@ -185,7 +192,7 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .common-news-video:hover:after              { background-image: url(assets/images/play-btn-anim.png);}
 .common-news-list .common-news-desc         { width: calc(100% - 280px); padding: 0px 0px 16px 16px; position: relative; }
 .common-news-list .news-excerpt p           { cursor: pointer;} 
-.common-news-list .author-info              { padding: 0px 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
+.common-news-list .author-info              { padding-left: 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
 
 /* -------- Common Widget Block ------- */
 .common-widget                      { margin-bottom: 24px; background: #fff; border-radius: 4px; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.04); overflow: hidden;}
