@@ -4,11 +4,8 @@ import * as fromAds from "@store/ads-management/ads.reducer";
 import * as fromMetatags from "@store/meta-tags-management/meta-tags.reducer";
 import * as fromFavourites from "@store/favourites-management/favourites.reducer";
 import * as fromKabaddiTeamLogos from "@store/kabaddi-team-logo/kabaddi-team-logo.reducer";
-import * as fromCricketFixtures  from '@store/cricket-fixtures/cricket-fixtures.reducer'
-import * as fromCricketResults from "@store/cricket-results/cricket-results.reducer";
-import * as fromKabaddiFixtures  from "@store/kabaddi-fixtures/kabaddi-fixtures.reducer";
-import * as fromKabaddiResults  from "@store/kabaddi-results/kabaddi-results.reducer";
-import * as fromKabaddiMatchData  from "@store/kabaddi-match-data/kabaddi-match-data.reducer";
+import * as fromCricket from '@store/cricket/cricket.reducer'
+import * as fromKabaddi from '@store/kabaddi/kabaddi.reducer'
 
 export interface State {
     auth: fromAuth.State;
@@ -16,11 +13,8 @@ export interface State {
     Metatags: fromMetatags.MetaTags,
     Favourites: fromFavourites.Favourites,
     KabaddiLogos: fromKabaddiTeamLogos.KabaddiLogos,
-    CricketFixtures: fromCricketFixtures.CricketFixtures,
-    CricketResults:fromCricketResults.CricketResults,
-    KabaddiFixtures:fromKabaddiFixtures.KabaddiFixtures,
-    KabaddiResults:fromKabaddiResults.KabaddiResults,
-    KabaddiMatchData:fromKabaddiMatchData.KabaddiMatchData
+    Cricket: fromCricket.CricketData,
+    Kabaddi: fromKabaddi.KabaddiData
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -29,11 +23,8 @@ export const reducers: ActionReducerMap<State> = {
     Metatags: fromMetatags.metaTagsReducer,
     Favourites: fromFavourites.favouritesReducer,
     KabaddiLogos: fromKabaddiTeamLogos.KabaddiTeamLogosReducer,
-    CricketFixtures: fromCricketFixtures.CricketFixturesReducer,
-    CricketResults:fromCricketResults.CricketResultsReducer,
-    KabaddiFixtures:fromKabaddiFixtures.KabaddiFixturesReducer,
-    KabaddiResults:fromKabaddiResults.KabaddiResultsReducer,
-    KabaddiMatchData:fromKabaddiMatchData.KabaddiMatchDataReducer
+    Cricket: fromCricket.CircketReducer,
+    Kabaddi: fromKabaddi.KabaddiReducer
 };
 
 
@@ -73,49 +64,5 @@ export const getKabaddiTeamLogosState = createSelector(
     KabaddiTeamLogosState,
     fromKabaddiTeamLogos.getKabaddiTeamLogos
 )
-
-//cricket fixtures data
-
-
-export const CricketFixturesState = createFeatureSelector<fromCricketFixtures.CricketFixtures>('CricketFixtures');
-export const getCricketFixtures = createSelector(
-    CricketFixturesState,
-    fromCricketFixtures.getCricketFixtures
-)
-
-//cricket results data 
-
-export const CricketResultsState = createFeatureSelector<fromCricketResults.CricketResults>('CricketResults');
-export const getCricketResults = createSelector(
-    CricketResultsState,
-    fromCricketResults.getCricketResults
-)
-
-//Kabaddi fixtures data 
-
-export const KabaddiFixturesState = createFeatureSelector<fromKabaddiFixtures.KabaddiFixtures>('KabaddiFixtures');
-export const getKabaddiFixtures = createSelector(
-    KabaddiFixturesState,
-    fromKabaddiFixtures.getKabaddiFixtures
-)
-
-//Kabaddi results data
-
-export const KabaddiResultsState = createFeatureSelector<fromKabaddiResults.KabaddiResults>('KabaddiResults');
-export const getKabaddiResults = createSelector(
-    KabaddiResultsState,
-    fromKabaddiResults.getKabaddiResults
-)
-
-//kabaddi match data 
-
-
-// export const KabaddiMatchDataState = createFeatureSelector<fromKabaddiMatchData.KabaddiMatchData>('');
-// export const getKabaddiResults = createSelector(
-//     KabaddiResultsState,
-//     fromKabaddiResults.getKabaddiResults
-// )
-
-
 
 

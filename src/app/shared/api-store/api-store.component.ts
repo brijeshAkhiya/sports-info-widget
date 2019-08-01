@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '@providers/sports-service'
 
-import { Store, createAction } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app-reducer";
-import * as CricketFixtures from "../../store/cricket-fixtures/cricket-fixtures.actions";
-import * as CricketResults from "../../store/cricket-results/cricket-results.actions";
+import * as Cricket from "@store/cricket/cricket.actions";
 
 @Component({
   selector: 'app-api-store',
@@ -26,10 +25,10 @@ export class ApiStoreComponent implements OnInit {
     this.sportsService.getmatchfixtures().subscribe((res: any) => {
       // this.loadingFixture = false;
       if (res.data)
-        this.store.dispatch(new CricketFixtures.CircketFixtures(res.data))
+        this.store.dispatch(new Cricket.CricketFixtures(res.data))
     }, (error) => {
       // this.loadingFixture = false;
-    });
+    })
   }
 
   //get 3 days results -HOME
@@ -55,7 +54,7 @@ export class ApiStoreComponent implements OnInit {
             }
             return data;
           });
-          this.store.dispatch(new CricketResults.CricketResults(res.data))
+          this.store.dispatch(new Cricket.CricketResults(res.data))
         }
       }, (error) => {
         // this.loadingResult = false;

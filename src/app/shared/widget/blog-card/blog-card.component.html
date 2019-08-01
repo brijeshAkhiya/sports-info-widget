@@ -20,7 +20,7 @@
         </p>
         <ul class="count-list">
           <li>
-            <p class="comment"><span>123</span></p>
+            <p class="comment"><span>{{post.nCommentsCount}}</span></p>
           </li>
           <li>
             <p class="view"><span>{{post.nViewCounts}}</span></p>
@@ -76,7 +76,7 @@
             {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
         <ul class="count-list">
           <li>
-            <p class="comment"><span>123</span></p>
+            <p class="comment"><span>{{post.nCommentsCount}}</span></p>
           </li>
           <li>
             <p class="view"><span>{{post.nViewCounts}}</span></p>

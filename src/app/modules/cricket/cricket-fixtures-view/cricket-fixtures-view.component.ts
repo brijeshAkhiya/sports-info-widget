@@ -42,18 +42,18 @@ export class CricketFixturesViewComponent implements OnInit {
   //get 3 days matches fixtures - HOME
   getMatchFixtures() {
     this.loadingFixture = true;
-    this.store.select('CricketFixtures').subscribe((res) => {
+    this.store.select('Cricket').subscribe((res) => {
       this.loadingFixture = false
-      this.matchfixtures = this.commonService.sortArr(res.cricketfixtures, 'Do MMMM YYYY', 'scheduled', 'asc')
+      this.matchfixtures = this.commonService.sortArr(res.fixtures, 'Do MMMM YYYY', 'scheduled', 'asc')
     })
   }
 
   //get 3 days results -HOME
   getMatchResults() {
     this.loadingResult = true;
-    this.store.select('CricketResults').subscribe((res) => {
+    this.store.select('Cricket').subscribe((res) => {
       this.loadingResult = false
-      this.matchresults = this.commonService.sortArr(res.cricketresults, 'Do MMMM YYYY', 'scheduled', 'desc')
+      this.matchresults = this.commonService.sortArr(res.results, 'Do MMMM YYYY', 'scheduled', 'desc')
     })
   }
 }

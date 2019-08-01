@@ -35,13 +35,13 @@
               </app-no-data-widget>
               <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
-              
+
               <div class="fixtures-loadmore">
-              <button class="theme-btn down-btn" (click)="loadmore('result')"
-                *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
-                Load More
-                <span></span>
-              </button>
+                <button class="theme-btn down-btn" (click)="loadmore('result')"
+                  *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
+                  Load More
+                  <span></span>
+                </button>
               </div>
             </ng-template>
           </ngb-tab>
@@ -51,9 +51,7 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--points table widget-->
-          <app-points-table [sport]="'kabaddi'" 
-         ></app-points-table>
-
+          <app-points-table [sport]="'kabaddi'"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
       </div>
