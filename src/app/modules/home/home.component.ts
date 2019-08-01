@@ -51,7 +51,9 @@ export class HomeComponent implements OnInit {
 
   //slide change Event
   changeSlide(event){
-    this.sport = event.slides[0].id
+    console.log(event);
+    if(event.slides.length > 0)
+      this.sport = event.slides[0].id
   }
 
   //get banner posts

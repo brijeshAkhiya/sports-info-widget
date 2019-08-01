@@ -5,8 +5,7 @@
   <ngb-tabset class="common-tabs">
     <ngb-tab title="Fixtures">
       <ng-template ngbTabContent>
-        <ng-container
-          *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
+        <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
         </ng-container>
       </ng-template>
     </ngb-tab>
@@ -15,18 +14,19 @@
         <div>Results</div>
       </ng-template>
       <ng-template ngbTabContent>
-        <ng-container
-          *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
+        <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
         </ng-container>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
 </div>
 
-<ng-template #sidebarMatch let-loader="loader" let-matches="matches" let-type="type">
+<ng-template #sidebarMatch let-matches="matches" let-type="type">
   <app-loader *ngIf="loader"></app-loader>
   <app-no-data-widget [message]="type =='result' ? 'No recent results' : 'No recent fixtures' "
-    *ngIf="(!matches || matches?.length == 0)"></app-no-data-widget>
+    *ngIf="!loader && (!matches || matches?.length == 0)">
+  </app-no-data-widget>
+
   <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'cricket'">
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
 
@@ -77,6 +77,7 @@
       </a>
     </li>
   </ul>
+
   <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'kabaddi'">
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
       <div class="title d-flex justify-content-between">
@@ -129,8 +130,7 @@
       </a>
     </li>
     <li>
-      <a class="view-all-btn"
-        [routerLink]="'/kabaddi/fixtures'">
+      <a class="view-all-btn" [routerLink]="'/kabaddi/fixtures'">
         View All
         <span></span>
       </a>

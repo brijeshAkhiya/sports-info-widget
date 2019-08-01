@@ -476,6 +476,13 @@ export class SportsService {
     ); 
   }
 
+  //get player profile
+  getKabaddiMatchDummyList(filename) {
+    return this.http.get(
+      `http://localhost:3008/api/v1/user/matchlist/${filename}`
+    );
+  }
+
   getkabadditeamfixtures(teamid,params){
     console.log(params);
     

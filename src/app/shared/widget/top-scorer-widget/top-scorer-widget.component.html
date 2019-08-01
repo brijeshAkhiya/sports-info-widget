@@ -36,7 +36,7 @@
         <p class="num">{{i+1}}.</p>
         <div class="player-names">
           <p class="name">
-            <a [routerLink]="['/kabaddi/player',(item.pid ),(item.name | slugify)]">
+            <a [routerLink]="['/kabaddi/player', (item.tid) , (item.pid ),(item.name | slugify)]">
               {{item.name | split}}
             </a>
           </p>

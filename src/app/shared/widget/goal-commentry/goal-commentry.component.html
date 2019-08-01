@@ -10,6 +10,7 @@
     <div class="desc-block d-flex justify-content-between align-items-center">
       
       <div *ngIf="event.event_type == 'normal'">
+        <p class="title" *ngIf="event.raid_type == 'doordie'"> Do or Die</p>
         <p class="title" *ngIf="event.super_event != ''"> Super {{event.super_event}}</p>
         <p class="title" *ngIf="event.allout == 'true'"> All out</p>
         <p class="desc">{{event.raider_name}} raid {{event.raid_event}}</p>

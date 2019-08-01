@@ -1,0 +1,184 @@
+/* -------- Header Slider CSS ------- */
+.header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1113; }
+.slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 150px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; text-align: left; }
+.slider-sports-dropdown .dropdown-toggle::after         { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(assets/images/dropdown-arrow.svg) no-repeat center center / cover; border: none; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.slider-sports-dropdown.show .dropdown-toggle::after    { transform: translatey(-50%) rotate(180deg); -webkit-transform: translatey(-50%) rotate(180deg); }
+.slider-sports-dropdown .dropdown-menu                  { margin-top: 8px; padding: 0px; min-width: 100%; border: none; border-radius: 4px; overflow: hidden; }
+.slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 10px 12px; font-size: 14px; line-height: 18px; color: #292929; font-weight: 600; }
+.slider-sports-dropdown .dropdown-menu .dropdown-item.selected,
+.slider-sports-dropdown .dropdown-menu .dropdown-item:hover { background: #FFE6E9; color: #ED1A33; }
+.header-live-slider                                     { margin-left: 24px; padding: 12px 50px; width: calc(100% - 174px); position: relative;  }
+.header-live-slider .slider-item-inner                  { margin: 0px 8px; padding: 8px; min-height: 105px; background: #fff;  cursor: pointer; border-radius: 4px; }
+.header-live-slider .slider-item-inner p                { margin-bottom: 4px; font-size: 12px; line-height: 16px; font-family: 'IBM Plex Sans', sans-serif;}
+.header-live-slider .slider-item .title p               { font-size: 12px; line-height: 15px; color: #A5A5A5; font-family: 'IBM Plex Sans Condensed', sans-serif;  }
+.header-live-slider .slider-item .title p:last-child    { padding-left: 14px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.header-live-slider .slider-item .title p.live-result           { color: #ED1A33; text-transform: capitalize; }
+.header-live-slider .slider-item .title p.live-result:before    { content: ""; margin: 4px 4px 0px -10px; width: 6px; height: 6px; background: #ED1A33; display: inline-block; vertical-align: top; border-radius: 50%; }
+.header-live-slider .slider-item .title .tour-name      { white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.header-live-slider .slider-item .title p b             { color: #595959; font-weight: 700;}
+.header-live-slider .slider-item .match-winner::after   { content: ""; margin: 0px 5px 4px; display: inline-block; height: 12px; width: 12px; background: url(assets/images/winner-cup.svg); vertical-align: middle; }
+.header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; height: 16px; width: auto; display: inline-block; }
+.header-live-slider .slider-item .match-info p          { color: #292929; font-weight: 500; }
+.header-live-slider .slider-item .result-line           { margin: 1px 0px 0px; font-size: 11px; line-height: 14px; }
+
+/* -------- Navbar CSS ------- */
+nav.navbar                      { padding: 0px; width: 100%; background: #22336F; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; text-transform: uppercase; top: 0; z-index: 1112; }
+nav.navbar.sticky               { position: fixed; top: 0;}
+nav .navbar-brand               { margin-right: 48px; padding: 6px 0px 6px 48px; display: inline-block;  position: relative; }
+/* nav .navbar-brand:before        { content: ""; position: absolute; width: 52px; height: calc(100% + 0px); right: -50px; top: 0px; background: url(assets/images/logo-shape.svg) no-repeat center center / 100% 100%; } */
+nav .navbar-brand:before        { content: ""; position: absolute; width: 200%; height: calc(100% + 0px); right: -38px; bottom: 0px; background: #fff; transform: skewX(24deg) perspective(1200px); -webkit-transform: skewX(24deg) perspective(1200px); border-radius: 0px 28px 0px 0px; }
+nav .navbar-brand img           { position: relative; z-index: 1;}
+.navbar-nav                     { position: relative; } 
+.navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; white-space: nowrap; }
+.navbar-nav li .nav-link.active,
+.navbar-nav li .nav-link:hover,
+.navbar-nav li .nav-link:focus   { opacity: 1; }
+.navbar-nav-container           { position: absolute; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
+.login-search                   { margin: 0px 36px 0px auto; }
+.login-search > li > a          { margin: 0px 12px; width: 32px; height: 32px; display: block; background: no-repeat center center / cover; opacity: 0.3;}
+.login-search li a.search       { background-image: url(assets/images/search-icon.svg); }
+.login-search li a.search.active{ background-image: url(assets/images/close-icon.svg); opacity: 1; }
+.login-search li a.login        { background-image: url(assets/images/user-icon.svg); }
+.login-search li a.login.logged { border-radius: 50%; border: 2px solid #fff; opacity: 1; }
+.login-search li .login.dropdown-toggle::after  { display: none; }
+.login-search li .dropdown-menu             { margin-top: 8px; padding: 0px; min-width: 220px; top: 100% !important; left: auto !important; right: 0 !important; transform: translate(0) !important; -webkit-transform: translate(0) !important; border-radius: 0px 0px 4px 4px; border: none; box-shadow: 0px 2px 16px rgba(0,0,0,0.08); -webkit-box-shadow: 0px 2px 16px rgba(0,0,0,0.08); overflow: hidden; }
+.login-search li .dropdown-menu li          { padding: 0px; }
+.login-search li .dropdown-menu a           { padding: 16px 24px; display: block; font-size: 16px; line-height: 20px; }
+.login-search li .dropdown-menu a:hover,
+.login-search li .dropdown-menu a:focus     { background: #fff; }
+
+/* -------- Serch Box CSS ------- */
+.common-serch-box               { z-index: -112; opacity: 0; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.common-serch-box.show          { z-index: 112; opacity: 1; }
+.search-bar                     { padding: 48px 0px; background: #fff; text-align: center; transform: translateY(-100%); -webkit-transform: translateY(-100%); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.common-serch-box.show .search-bar              { transform: translateY(0%); -webkit-transform: translateY(0%); }
+.search-bar form ::-webkit-input-placeholder    { color: #A3A3A3; opacity: 1; }
+.search-bar form ::-moz-placeholder             { color: #A3A3A3; opacity: 1; }
+.search-bar form :-ms-input-placeholder         { color: #A3A3A3; opacity: 1; }
+.search-bar form :-moz-placeholder              { color: #A3A3A3; opacity: 1; }
+.search-bar .search-box         { width: 60%; display: inline-block; position: relative;  vertical-align: middle; }
+.search-bar input               { padding: 0px 50px 8px 0px; width: 100%; font-size: 40px; line-height: 50px; font-weight: 400; border: none; border-bottom: 2px solid #EBEBEB; border-radius: 0px; }
+.search-bar input:focus         { border-color: #ED1A33; }
+.search-bar .search-box button  { position: absolute; width: 44px; height: 44px; top: 50%; right: 4px; transform: translateY(-50%); background: url(assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; opacity: 0.5; }
+.search-bar .search-close       { display: none; margin-left: 8px; width: 24px; height: 24px; background: url(assets/images/close-icon.svg) no-repeat center center; filter: invert(1); -webkit-filter: invert(1); opacity: 0.3; vertical-align: middle; border: none; }
+.search-bar .search-close:hover { opacity: 0.6;}
+.search-result .common-title-btn        { padding-bottom: 16px; border-bottom: 2px solid rgba(255,255,255,0.2);  }
+.search-result .common-title-btn h3     { margin: 0px; }
+.search-result                  { padding: 50px 0px; }
+.search-result .common-popular-list .item-desc  { min-height: 68px; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1379px) {
+    .navbar-nav-container           { position: relative; left: 15px; transform: translateX(0%); -webkit-transform: translateX(0%); }
+}
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+/* -------- Navbar CSS ------- */
+    nav .navbar-brand               { padding: 10px 0px 9px 24px;}
+/* -------- Serch Box CSS ------- */
+    .search-bar                     { padding: 32px 0px; background: #fff;}
+    .search-bar input               { font-size: 26px; line-height: 34px; }
+    .search-result                  { padding: 32px 0px; }
+    .search-bar .search-box button  { width: 26px; height: 26px;}
+    .search-result .common-popular-list .item-desc  { min-height: 90px; }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+/* -------- Header Slider CSS ------- */
+    .slider-sports-dropdown .dropdown-toggle            { padding: 8px 12px; width: 130px; font-size: 14px; line-height: 18px; }
+    .slider-sports-dropdown .dropdown-toggle::after     { width: 20px; height: 20px; right: 12px; }
+    .header-live-slider                                 { margin-left: 12px; width: calc(100% - 142px); }
+    .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
+/* -------- Navbar CSS ------- */
+    nav .navbar-brand               { padding: 11px 0px 11px 24px;}
+    nav .navbar-brand:before        { right: -28px; }
+    .navbar-nav .nav-link           { padding: 15px 7px; font-size: 14px; }
+    nav .navbar-brand img           { width: 140px;}
+    .login-search                   { margin: 0px 16px 0px auto; }
+    .login-search > li > a              { margin: 0px 8px; width: 24px; height: 24px; }
+    .login-search li .dropdown-menu     { margin-top: 14px; }
+/* -------- Serch Box CSS ------- */
+    .search-bar                     { padding: 16px 0px; background: #fff;}
+    .search-bar input               { font-size: 20px; line-height: 26px; }
+    .search-result                  { padding: 20px 0px; }
+    .search-bar .search-box button  { width: 20px; height: 20px;}
+    .search-result .common-popular-list .img-block  { height: 110px; }
+    .search-result .common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
+}
+
+
+@media (max-width: 991px) {
+/* -------- Header Slider CSS ------- */
+    .slider-sports-dropdown .dropdown-toggle            { padding: 7px 10px; width: 110px; font-size: 12px; line-height: 17px; }
+    .slider-sports-dropdown .dropdown-toggle::after     { width: 18px; height: 18px; right: 10px; }
+    .header-live-slider                                 { margin-left: 12px; width: calc(100% - 122px); }
+    .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
+/* -------- Serch Box CSS ------- */
+    .search-bar                                     { padding: 12px 0px; background: #fff;}
+    .search-bar .search-box                         { width: 80%; }
+    .search-bar input                               { font-size: 18px; line-height: 22px; }
+    .search-result                                  { padding: 20px 0px; }
+    .search-bar .search-box button                  { width: 20px; height: 20px;}
+    .search-result .common-popular-list .img-block  { height: 110px; }
+    .search-result .common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
+    .search-result .common-popular-list > .row      { flex-wrap: nowrap; -webkit-flex-wrap: nowrap; overflow: scroll; }
+    .search-result .common-popular-list > .row > [class*="col-"] { min-width: 220px;}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+/* -------- Navbar CSS ------- */
+    nav .navbar-brand               { margin-right: 30px; padding: 8px 0px 10px 15px; }
+    nav .navbar-brand:before        { right: -20px;}
+    .navbar-nav-container           { left: 8px; }
+    .navbar-nav .nav-link           { padding: 11px 5px; font-size: 11.7px; }
+    nav .navbar-brand img           { width: 106px;}
+    .login-search                   { margin: 0px 8px 0px auto; }
+    .login-search > li > a              { margin: 0px 5px; width: 18px; height: 18px; }
+    .login-search li .dropdown-menu     { margin-top: 14px; }
+}
+
+@media (max-width: 767px) {
+/* -------- Navbar CSS ------- */
+    nav.navbar.menu-open                                { overflow: visible;}
+    nav .navbar-brand                                   { margin-right: 24px; padding: 6px 0px 6px 12px;}
+    nav .navbar-brand:before                            { right: -28px; }
+    nav .navbar-brand img                               { width: 160px;}
+    nav .navbar-toggler                                 { margin: 0px 15px; position: absolute; top: 50%; right: 0; transform: translateY(-50%); -webkit-transform: translateY(-50%); padding: 0px; width: 26px; height: 26px; border: none !important; border-radius: 0px; }
+    nav .navbar-toggler .icon-bar                       { margin: 0px; width: 100%; height: 3px; display: block; background: #fff; position: absolute; top: calc(50% - 1px); transition: all 0.2s ease-in; -webkit-transition: all 0.2s ease-in; border-radius: 2px; }
+    nav .navbar-toggler .icon-bar:nth-child(1)          { top: calc(50% - 9px); }
+    nav .navbar-toggler .icon-bar:nth-child(4)          { top: calc(50% + 7px); }
+    nav .navbar-toggler.active .icon-bar:nth-child(2)   { -webkit-transform: rotate(45deg); transform: rotate(45deg); }
+    nav .navbar-toggler.active .icon-bar:nth-child(3)   { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
+    nav .navbar-toggler.active .icon-bar:nth-child(1),
+    nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
+    .navbar-nav-container                               { margin-top: 100px; left: 0px;}
+    .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+    .menu-open .navbar-collapse.collapse                { left: 0px; }
+    .navbar-nav .nav-link                               { padding: 8px 30px; }
+    .login-search                                       { margin: 0px 50px 0px 0px; flex-direction: row; -webkit-flex-direction: row; }
+    .login-search > li > a                              { margin: 0px 6px; width: 24px; height: 24px; }
+    .login-search li .dropdown-menu                     { margin-top: 14px; }
+
+    /* .login-search > li > a                                  { margin: 8px 30px;}
+    .login-search li .dropdown-menu                     { margin-left: 30px; min-width: 180px; right: auto !important; left: 0px !important; } */
+/* -------- Serch Box CSS ------- */
+    .search-bar .search-close                           { display: inline-block; }
+    .search-result                                      { padding: 16px 0px; }
+}
+
+@media (max-width: 575px) {
+/* -------- Header Slider CSS ------- */
+    .slider-sports-dropdown                                 { margin-top: 12px;}
+    .header-live-slider                                     { margin-left: 0px; padding: 12px 24px; width: 100%;}
+    .header-live-section .header-live-inner                 { flex-direction: column; -webkit-flex-direction: column; }
+    .header-live-slider .slider-item-inner                  { min-height: 105px; }
+    .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
+/* -------- Navbar CSS ------- */
+    nav .navbar-brand:before                            { right: -22px; transform: skewX(20deg) perspective(1200px); -webkit-transform: skewX(20deg) perspective(1200px); border-radius: 0px 18px 0px 0px; }
+    nav .navbar-brand img                               { width: 140px;}
+/* -------- Serch Box CSS ------- */
+    .search-bar input                               { font-size: 16px; line-height: 20px; }
+    .search-result .common-title-btn h3             { font-size: 18px; }
+}
