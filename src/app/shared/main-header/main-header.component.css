@@ -3,7 +3,7 @@
 .slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 150px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; text-align: left; }
 .slider-sports-dropdown .dropdown-toggle::after         { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(assets/images/dropdown-arrow.svg) no-repeat center center / cover; border: none; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .slider-sports-dropdown.show .dropdown-toggle::after    { transform: translatey(-50%) rotate(180deg); -webkit-transform: translatey(-50%) rotate(180deg); }
-.slider-sports-dropdown .dropdown-menu                  { margin-top: 8px; padding: 0px; min-width: 100%; border: none; border-radius: 4px; overflow: hidden; }
+.slider-sports-dropdown .dropdown-menu                  { margin-top: 8px; padding: 0px; min-width: 100%; border: none; border-radius: 4px; overflow: hidden; box-shadow: 0px 4px 18px rgba(0,0,0,0.24); -webkit-box-shadow: 0px 4px 18px rgba(0,0,0,0.24); }
 .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 10px 12px; font-size: 14px; line-height: 18px; color: #292929; font-weight: 600; }
 .slider-sports-dropdown .dropdown-menu .dropdown-item.selected,
 .slider-sports-dropdown .dropdown-menu .dropdown-item:hover { background: #FFE6E9; color: #ED1A33; }
@@ -141,7 +141,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 
 @media (max-width: 767px) {
 /* -------- Navbar CSS ------- */
-    nav.navbar.menu-open                                { overflow: visible;}
+    nav.navbar.menu-open                                { overflow: visible; z-index: 1113;}
     nav .navbar-brand                                   { margin-right: 24px; padding: 6px 0px 6px 12px;}
     nav .navbar-brand:before                            { right: -28px; }
     nav .navbar-brand img                               { width: 160px;}
@@ -170,9 +170,9 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 
 @media (max-width: 575px) {
 /* -------- Header Slider CSS ------- */
-    .slider-sports-dropdown                                 { margin-top: 12px;}
+    .slider-sports-dropdown                                 { margin-bottom: 12px;}
     .header-live-slider                                     { margin-left: 0px; padding: 12px 24px; width: 100%;}
-    .header-live-section .header-live-inner                 { flex-direction: column; -webkit-flex-direction: column; }
+    .header-live-section .header-live-inner                 { flex-direction: column-reverse; -webkit-flex-direction: column-reverse; }
     .header-live-slider .slider-item-inner                  { min-height: 105px; }
     .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
 /* -------- Navbar CSS ------- */
