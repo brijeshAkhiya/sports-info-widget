@@ -43,6 +43,21 @@ export class KabaddiEffects {
         take(1)
     );
 
+    @Effect()
+    loadKabaddiLiveSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType(Kabaddi.LOAD_KABADDI_LIVE_MATCHES),
+        tap(() => console.log('in kabaddi effect')),
+        switchMap((action: any) =>
+            this.sportsService.getKabaddiMatchList('3', '10', '1').pipe(
+                map((response: any) => new Kabaddi.LoadKabaddiLiveSuccess(response.data.items)),
+                catchError(() => {
+                    this.store.dispatch(new Kabaddi.LoadKabaddiLive());
+                    return EMPTY;
+                })
+            )),
+        take(1)
+    );
+
 }
 
 
