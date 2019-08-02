@@ -33,7 +33,7 @@ import { AdsenseModule } from 'ng2-adsense';
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { reducers } from "./app-reducer";
-
+import { effects } from './app-effects';
 
 /** All  Internal Modules */
 import { SharedModule } from "./shared/shared.module";
@@ -58,6 +58,7 @@ import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
 import { WriterComponent } from './pages/writer/writer.component';
 import { LoginModalComponent } from './shared/widget/login-modal/login-modal.component';
 import { EffectsModule } from '@ngrx/effects';
+
 
 
 //socket config
@@ -131,7 +132,7 @@ export function provideConfig() {
       enabled: environment.production
     }),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25 // Retains last 25 states
     })
