@@ -28,10 +28,10 @@
 		</div>
 	</div>
 </footer>
-
-<button class="scroll-top" *ngIf="isShow" (click)="gotoTop()"><img
-		src="/assets/images/right-arrow.svg"></button>
-<app-flash-commentary></app-flash-commentary>
+<div class="scroll-flash-block">
+	<button class="scroll-top" *ngIf="isShow" (click)="gotoTop()"><img src="/assets/images/right-arrow.svg"></button>
+	<app-flash-commentary></app-flash-commentary>
+</div>
 <!--Favourite module start-->
 <div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
 	<h1 class="white-text">Favourites</h1>

@@ -1,6 +1,9 @@
 <div class="flash-comm-btn-box">
-  <button class="flash-comm-btn" [ngClass]="{'active': isshow}" (click)="isapply = !isapply"
+  <!-- <button class="flash-comm-btn" [ngClass]="{'active': isshow}" (click)="isapply = !isapply"
     *ngIf="livematches && livematches?.length > 0">
+  </button> -->
+  <button class="flash-comm-btn" [ngClass]="{'active': isshow}" (click)="isapply = !isapply"
+    >
   </button>
   <ul class="flash-match-list" [ngClass]="{'active': isapply}">
     <li *ngFor="let item of livematches">
