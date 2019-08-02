@@ -118,13 +118,8 @@
                 <div class="comment-desc">
                   <div class="d-flex justify-content-between">
                     <p class="commenter-info"><span class="light-blue-color">{{comment.sFirstName}}
-                        {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-                    <!-- <div ngbDropdown class="comment-dropdown">
-                      <button id="dropdownDeleteComment" ngbDropdownToggle></button>
-                      <div ngbDropdownMenu aria-labelledby="dropdownDeleteComment">
-                        <button ngbDropdownItem class="common-shadow"><img src="assets/images/blog/delete-red-icon.svg"><span>Delete</span></button>
-                      </div>
-                    </div> -->
+                        {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}
+                    </p>
                   </div>
                   <p>{{comment.sComment}}</p>
                 </div>
