@@ -38,13 +38,18 @@
                     <ul class="ground-player-list">
                       <li *ngFor="let player of team[0].squad">
                         <div class="number">{{player?.shirtnumber}}</div>
-                        <p>{{player.name}}</p>
+                        <p>
+                          <a [routerLink]="['/kabaddi/player', team[0]?.tid, player?.pid, (player?.name | slugify )]">
+                            {{player.name}}
+                          </a></p>
                       </li>
                     </ul>
-                    <ul class="ground-player-list list-2" >
+                    <ul class="ground-player-list list-2">
                       <li *ngFor="let player of team[1].squad">
                         <div class="number">{{player?.shirtnumber}}</div>
-                        <p>{{player.name}}</p>
+                        <p><a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
+                            {{player.name}}
+                          </a></p>
                       </li>
                     </ul>
                   </div>
@@ -60,7 +65,7 @@
                       </p>
                     </div>
                     <!-- <ng-container *ngIf="team[0]?.players?.length > 0"> -->
-                      <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
+                    <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
                       <h5 class="text-capitalize">{{squad}}</h5>
                       <ul class="lienup-list">
                         <li *ngFor="let player of team[0]?.players[squad]">
@@ -73,7 +78,7 @@
                         </li>
                       </ul>
                     </ng-container>
-                  <!-- </ng-container> -->
+                    <!-- </ng-container> -->
                   </div>
 
                   <div>
@@ -86,11 +91,11 @@
                       </p>
                     </div>
                     <!-- <ng-container *ngIf="team[1]?.players?.length > 0"> -->
-                      <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
+                    <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
                       <h5 class="text-capitalize">{{squad}}</h5>
                       <ul class="lienup-list">
                         <li *ngFor="let player of team[1]?.players[squad]">
-                        <span>{{player?.shirtnumber}}</span>
+                          <span>{{player?.shirtnumber}}</span>
                           <p class="text-capitalize">
                             <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
                               {{player.name}}
@@ -99,7 +104,7 @@
                         </li>
                       </ul>
                     </ng-container>
-                  <!-- </ng-container> -->
+                    <!-- </ng-container> -->
                   </div>
                 </div>
               </div>
@@ -120,8 +125,15 @@
                 <div class="stat-row head-row d-flex align-items-center">
                   <div>
                     <p class="d-flex align-items-center justify-content-end">
-                      <b>{{matchStats.match_info.teams.home.tname}}</b>
-                      <img [src]="matchStats.match_info.teams.home.logo" alt="team">
+                      <b>
+                        <a
+                          [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.home?.tid, (matchStats?.match_info?.teams?.home?.tname | slugify )]">
+                          {{matchStats.match_info.teams.home.tname}}
+                        </a>
+                      </b>
+                      <img alt="{{matchStats?.match_info?.teams?.home?.tname}}"
+                        [lazyLoad]="matchStats?.match_info?.teams?.home?.logo"
+                        [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
                     </p>
                   </div>
                   <div class="center-col">
@@ -129,31 +141,35 @@
                   </div>
                   <div>
                     <p class="d-flex align-items-center justify-content-end">
-                      <b>{{matchStats.match_info.teams.away.tname}}</b>
-                      <img [src]="matchStats.match_info.teams.away.logo" alt="team">
+                      <a
+                        [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.away?.tid, (matchStats?.match_info?.teams?.away?.tname | slugify )]">
+                        {{matchStats.match_info.teams.away.tname}}
+                      </a>
+                      <img alt="{{matchStats?.match_info?.teams?.away?.tname}}"
+                        [lazyLoad]="matchStats?.match_info?.teams?.away?.logo"
+                        [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
                     </p>
                   </div>
                 </div>
                 <div class="stat-row point-row d-flex align-items-center">
                   <div>
-                      <p
-                        [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
-                        <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
-                          class="point-line"
-                          [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
-                      </p>
+                    <p
+                      [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
+                      <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
+                        class="point-line"
+                        [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+                    </p>
                   </div>
                   <div class="center-col">
                     <p>Points %</p>
                   </div>
                   <div>
-                      <p
-                        [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
-                        <span
-                          class="point-line"
-                          [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
-                          <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
-                        </p>
+                    <p
+                      [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
+                      <span class="point-line"
+                        [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+                      <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
+                    </p>
                   </div>
                 </div>
                 <div class="stat-row d-flex align-items-center">

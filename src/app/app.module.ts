@@ -2,7 +2,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
@@ -28,6 +28,8 @@ import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdsenseModule } from 'ng2-adsense';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 //store configuration modules import
 import { StoreModule } from "@ngrx/store";
@@ -64,12 +66,12 @@ import { EffectsModule } from '@ngrx/effects';
 //socket config
 const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
 
-const googleLoginOptions: LoginOpt = {
-  client_id: '504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com',
-  scope: 'profile email',
-  ux_mode: 'redirect',  
-  redirect_uri: environment.siteUrl
-}; // https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
+// const googleLoginOptions: LoginOpt = {
+//   client_id: '504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com',
+//   scope: 'profile email',
+//   ux_mode: 'redirect',  
+//   redirect_uri: environment.siteUrl
+// }; // https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
 
 
 //social login firebase
@@ -77,7 +79,7 @@ let authconfig = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider(
-      environment.googleOuthId, googleLoginOptions
+      environment.googleOuthId
     )
   },
   {
@@ -89,6 +91,10 @@ let authconfig = new AuthServiceConfig([
 export function provideConfig() {
   return authconfig;
 }
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 @NgModule({
   declarations: [
@@ -113,6 +119,13 @@ export function provideConfig() {
       adSlot: 7259870550,
     }),
     SocketIoModule.forRoot(config),
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [HttpClient]
+        }
+    }),
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,

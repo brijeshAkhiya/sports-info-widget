@@ -12,6 +12,7 @@ import { MomentModule } from 'ngx-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 /** All Pipes */
 import { TruncatePipe } from './pipes/truncatepipe';
@@ -80,7 +81,8 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         AgmCoreModule,
         ReactiveFormsModule,
         FormsModule,
-        LazyLoadImageModule
+        LazyLoadImageModule,
+        CarouselModule
     ],
     declarations: [
         /** All Pipes */
@@ -197,7 +199,8 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         VenueMapCardComponent,
         ApiStoreComponent,
         FixturesSidebarWidgetComponent,
-        TopScorerWidgetComponent
+        TopScorerWidgetComponent,
+        UppersliderComponent
     ],
     entryComponents:[LoginModalComponent]
 

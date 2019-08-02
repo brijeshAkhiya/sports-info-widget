@@ -257,7 +257,7 @@ export class SportsService {
   //add user comment 
   addusercomment(data){
     let headers = new HttpHeaders({
-      'Authorization': 'dhdahajh272728'
+      'Authorization': localStorage.getItem('userT')
     });
     return this.http.post(
       environment.apiUrl + environment.version + `/comments`,
@@ -474,6 +474,13 @@ export class SportsService {
     return this.http.get(
       `http://192.168.11.118:3008/api/v1/user/json/${id}`
     ); 
+  }
+
+  //get player profile
+  getKabaddiMatchDummyList(filename) {
+    return this.http.get(
+      `http://localhost:3008/api/v1/user/matchlist/${filename}`
+    );
   }
 
   getkabadditeamfixtures(teamid,params){

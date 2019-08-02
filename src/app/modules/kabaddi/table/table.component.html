@@ -12,7 +12,7 @@
           <ng-container *ngFor="let standing of info.standings">
             <app-player-table [data]="standing.tables" [options]=" {
                   titles : ['POS', 'TEAM', 'P', 'W', 'L', 'D', 'SD', 'PTS'],
-                  values : ['position', 'tname', 'matchplayed', 'win', 'loss', 'draw', 'scoredifference', 'totalpoints'],
+                  values : ['position', 'tname', 'matchplayed', 'win', 'loss', 'draw', 'scoredifference', 'points'],
                   class : ['tour-stats-table'],
                   class_light_row : ['light-row'],
                   header_title : standing.name,
@@ -27,7 +27,7 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-top-scorer-widget [sport]="'kabaddi'"></app-top-scorer-widget>
-          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <!-- <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
         </div>
       </div>
     </div>

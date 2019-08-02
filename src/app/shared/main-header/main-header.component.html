@@ -1,78 +1,5 @@
-<div class="header-live-section" *ngIf="slider.length > 0">
-  <div class="container">
-    <div class="header-live-inner d-flex align-items-center">
-      <div ngbDropdown class="slider-sports-dropdown">
-        <button id="dropdownSports" ngbDropdownToggle>Field Hockey</button>
-        <div ngbDropdownMenu aria-labelledby="dropdownSports">
-          <button ngbDropdownItem class="selected">Cricket</button>
-          <button ngbDropdownItem>Kabaddi</button>
-        </div>
-      </div>
-      <div class="header-live-slider">
-        <owl-carousel-o [options]="customOptions">
-          <ng-container class="items" *ngFor="let slide of slider">
-            <ng-template carouselSlide>
-              <!--Live matches-->
-              <div class="slider-item"
-                [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-' +slide.competitors.away.abbreviation)]">
-                <div class="slider-item-inner">
-                  <div class="title d-flex justify-content-between">
-                    <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
-                        class="text-capitalize">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span>
-                    </p>
+<app-upperslider></app-upperslider>
 
-                    <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
-                    <p *ngIf="slide.status == 'not_started'; else matchStatus">
-                      {{slide.scheduled | amTimeAgo}}</p>
-                    <ng-template #matchStatus>
-                      <p class="live-result">{{slide.status ? slide.status : slide.match_status}}</p>
-                    </ng-template>
-                  </div>
-
-                  <ng-container *ngIf="slide?.competitors?.away?.show_first; else home_first">
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away, match:slide}">
-                    </ng-container>
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home, match:slide}">
-                    </ng-container>
-                  </ng-container>
-                  <ng-template #home_first>
-                    <ng-container>
-                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home, match:slide}">
-                      </ng-container>
-                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away, match:slide}">
-                      </ng-container>
-                    </ng-container>
-                  </ng-template>
-
-                  <ng-template #team let-competitor="competitor" let-match="match">
-                    <div class="match-info d-flex justify-content-between align-items-center">
-                      <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
-                          [defaultImage]="cricketService.flagplaceholder">{{competitor?.abbreviation}}</p>
-                      <p *ngIf="competitor?.period_scores"><b>
-                          {{competitor?.period_scores.display_score | cricketScore}}
-                          ({{competitor?.period_scores.display_overs}}
-                          ov)</b></p>
-                    </div>
-                  </ng-template>
-
-                  <div class="row">
-                    <div class="col-xl-9">
-                      <p class="result-line" *ngIf="slide.match_status == 'live'">
-                        {{slide.venue_name ? slide.venue_name : ''}}</p>
-                      <p class="result-line" *ngIf="slide.match_status != 'live'">
-                        {{slide.match_result ? slide.match_result : slide.venue_name}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ng-container>
-        </owl-carousel-o>
-      </div>
-    </div>
-  </div>
-</div>
 <nav class="navbar navbar-expand-md" id="navbar" [ngClass]="{'menu-open': isapply}" (scroll)="onWindowScroll($event);">
   <a class="navbar-brand" routerLink="/"><img src="/assets/images/logo.svg" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -87,17 +14,17 @@
     <div class="navbar-nav-container" id="navbar-nav">
       <ul class="navbar-nav" #navbarnav>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cricket" routerLinkActive="active" (click)="isapply = false">Cricket</a>
+          <a class="nav-link" routerLink="/cricket" routerLinkActive="active" (click)="isapply = false" [innerHTML]="'Cricket' | translate" ></a>
         </li>
         <li class="nav-item">
           <!-- <a class="nav-link" [routerLink]="['/coming-soon/kabaddi']" routerLinkActive="active"
             (click)="isapply = false">Kabaddi</a> -->
           <a class="nav-link" [routerLink]="['/kabaddi']" routerLinkActive="active"
-            (click)="isapply = false">Kabaddi</a>
+            (click)="isapply = false" >Kabaddi</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/soccer']" routerLinkActive="active"
-            (click)="isapply = false">soccer</a>
+            (click)="isapply = false">Soccer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/badminton']" routerLinkActive="active"

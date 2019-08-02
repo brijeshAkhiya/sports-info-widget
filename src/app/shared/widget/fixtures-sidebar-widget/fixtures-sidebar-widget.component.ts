@@ -26,8 +26,8 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.fixturesdata = []
-    this.resultsdata = []
+    this.fixturesdata = [];
+    this.resultsdata = [];
     if (this.sport == 'cricket') {
       this.store.select('Cricket').subscribe((data: any) => {
         this.fixturesdata = data.fixtures
@@ -55,7 +55,7 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
     let paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, data: [] }
     this.loader = true
     this.sportsService.getKabaddiMatchList(paramsFixtures.reqParams.status, paramsFixtures.reqParams.per_page, paramsFixtures.reqParams.page).subscribe((res: any) => {
-      // paramsFixtures.loading = false;
+        // paramsFixtures.loading = false;
       this.loader = false
       if (res.data && res.data.items) {
         paramsFixtures.data = res.data.items

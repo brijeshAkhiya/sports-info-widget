@@ -28,11 +28,17 @@ export class MatchComponent implements OnInit {
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
-    private activatedroute: ActivatedRoute
+    private activatedroute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
+    /**To reload router if routing in same page */
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
     this.getMatchInfo(this.activatedroute.snapshot.params.id)
     // this.getMatchstats(this.activatedroute.snapshot.params.id)
     this.paramArticle.reqParams.aIds.push(this.activatedroute.snapshot.params.id);
@@ -118,7 +124,7 @@ export class MatchComponent implements OnInit {
     );
     remainingMiliSec =
       remainingMiliSec - this.commonService.miliseconds(0, 5, 0); 
-    if (remainingTime.days == 0 && remainingTime.hours < 0 && remainingTime.minutes < 15) {
+    if (remainingTime.days == 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
       // }, 10);

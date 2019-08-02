@@ -13,6 +13,7 @@ import * as MetaTags from "./store/meta-tags-management/meta-tags.actions";
 import * as fromRoot from './app-reducer'
 import * as Auth from './store/auth/auth.actions';
 import { environment } from "@env";
+import {TranslateService} from '@ngx-translate/core';
 
 /** Providers */
 import { CommonService } from "@providers/common-service";
@@ -35,7 +36,18 @@ export class AppComponent implements OnInit,AfterContentInit {
   mutedcolor: any
   metatagsObj = {};
   isupdate: boolean
-  constructor(private http: HttpClient, private swupdate: SwUpdate, private commonservice: CommonService, private sportsservice: SportsService, private router: Router, private meta: Meta, private pagetitle: Title, private socialLoginService: AuthService, private store: Store<fromRoot.State>) {
+  constructor(
+    private http: HttpClient, 
+    private swupdate: SwUpdate, 
+    private commonservice: CommonService, 
+    private sportsservice: SportsService, 
+    private router: Router, 
+    private meta: Meta, 
+    private pagetitle: Title, 
+    private socialLoginService: AuthService, 
+    private store: Store<fromRoot.State>,
+    private translate: TranslateService
+    ) {
 
     this.getMetaTags();
     this.swupdate.available.subscribe((res) => {
@@ -44,6 +56,11 @@ export class AppComponent implements OnInit,AfterContentInit {
   }
 
   ngOnInit() {    
+
+    let selectedLang = 'english' //(window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info') ? window.location.host.split('.')[0] : 'english';
+    console.log(selectedLang)
+    this.translate.setDefaultLang(selectedLang);
+
     //get data from ngrx store through meta tags actions
     
     //susbcribe to router events
@@ -56,8 +73,8 @@ export class AppComponent implements OnInit,AfterContentInit {
       //change route get url 
       if (event instanceof NavigationEnd) {
         // console.log("event", event, event.url.includes('/article'));
-        // if(event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))        
-        //   this.setmetatags(event.url);
+        if(event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))        
+          this.setmetatags(event.url);
         //set meta tags from here...
         // console.log('tagsobj', this.metatagsObj);
         //set page title 
@@ -74,27 +91,43 @@ export class AppComponent implements OnInit,AfterContentInit {
 
     let data = this.metatagsObj[routerURL]
     if (data) {
-      this.meta.updateTag({ name: 'title', content: data.title ? data.title : 'Sports.info' });
-      this.meta.updateTag({ name: 'description', content: data.description ? data.description : 'Sports.info' });
-      this.meta.updateTag({ name: 'topic', content: data.topic ? data.topic : 'Sports.info' });
-      this.meta.updateTag({ name: 'subject', content: data.subject ? data.subject : 'Sports.info' });
-      this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Sports.info' });
-      this.meta.updateTag({ property: 'og:title', content: data['og:title'] ? data['og:title'] : 'Sports.info' });
-      this.meta.updateTag({ property: 'og:type', content: data['og:type'] ? data['og:type'] : 'Sports.info' });
-      this.meta.updateTag({ property: 'og:description', content: data['og:description'] ? data['og:description'] : 'Sports.info' });
-      this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
+      if(data.title){
+        this.meta.updateTag({ name: 'title', content: data.title });
+        this.meta.updateTag({ property: 'og:title', content: data.title });
+        this.meta.updateTag({ name: 'twitter:title', content: data.title });
+      }
+      this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports' });
+      
+      if(data.description){
+        this.meta.updateTag({ name: 'description', content: data.description });
+        this.meta.updateTag({ name: 'og:description', content: data.description });
+        this.meta.updateTag({ name: 'twitter:description', content: data.description });
+      }
+      if(data.image){
+        this.meta.updateTag({ name: 'twitter:image', content: data.image });
+        this.meta.updateTag({ name: 'twitter:image:src', content: data.image });
+        this.meta.updateTag({ name: 'og:image', content: data.image });
+      }
+      if(data.topic)
+        this.meta.updateTag({ name: 'topic', content:  data.topic  });
+      if(data.subject)
+        this.meta.updateTag({ name: 'subject', content: data.subject  });
+      if(data['og:type'])
+        this.meta.updateTag({ property: 'og:type', content: data['og:type']  });
+      if(data['twitter:card'])
+        this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
     }
-    else {
-      this.meta.updateTag({ name: 'title', content: 'Sports.info' });
-      this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-      this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-      this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-      this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
-      this.meta.updateTag({ property: 'og:type', content: 'article' });
-      this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ name: 'twitter:card', content: 'Sports.info' });
-    }
+    // else {
+    //   this.meta.updateTag({ name: 'title', content: 'Sports.info' });
+    //   this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    //   this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
+    //   this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
+    //   this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
+    //   this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
+    //   this.meta.updateTag({ property: 'og:type', content: 'article' });
+    //   this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    //   this.meta.updateTag({ name: 'twitter:card', content: 'Sports.info' });
+    // }
 
   }
 
