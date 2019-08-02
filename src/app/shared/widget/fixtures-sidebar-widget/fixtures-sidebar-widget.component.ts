@@ -6,6 +6,7 @@ import { SportsService } from '@app/shared/providers/sports-service';
 import * as fromRoot from "@app/app-reducer";
 import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
 import { Store } from "@ngrx/store";
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -34,20 +35,16 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       })
     }
     else if (this.sport == 'kabaddi') {
+      this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
+      this.store.dispatch(new Kabaddi.LoadKabaddiResults())
       this.store.select('Kabaddi').subscribe((data: any) => {
         if (data.fixtures.length > 0) {
+          console.log('after effects', data.fixtures);
           this.fixturesdata = data.fixtures
         }
-        else {
-          this.getKabaddiFixtures();
-        }
-      })
-      this.store.select('Kabaddi').subscribe((data: any) => {
         if (data.results.length > 0) {
+          console.log('after effects', data.results);
           this.resultsdata = data.results
-        }
-        else {
-          this.getKabaddiResults();
         }
       })
     }

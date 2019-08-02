@@ -3,6 +3,10 @@ export const CRICKET_FIXTURES_MATCHES = '[Cricket Fixtures Matches] Save Cricket
 export const CRICKET_RESULTS_MATCHES = '[Cricket Results Matches] Save Cricket Results Matches';
 export const CRICKET_LIVE_MATCHES = '[Cricket Live Matches] Save Cricket Live Matches';
 export const CRICKET_MATCH_INFO = '[Cricket Live Matches] Save Cricket Live Matches';
+export const LOAD_CRICKET_FIXTURES = '[Cricket Fixtures] Load Cricket Fixtures';
+export const LOAD_CRICKET_FIXTURES_SUCCESS = '[Cricket Fixtures] Load Success';
+export const LOAD_CRICKET_RESULTS = '[Cricket Results] Load Cricket Results';
+export const LOAD_CRICKET_RESULTS_SUCCESS = '[Cricket Results] Load Success';
 
 export class CricketFixtures implements Action {
     readonly type = CRICKET_FIXTURES_MATCHES
@@ -25,4 +29,26 @@ export class CricketMatchInfo implements Action {
     constructor(public payload: any) { }
 }
 
-export type CricketActions = CricketFixtures | CricketLiveMatches | CricketResults | CricketMatchInfo
+
+export class LoadCricketFixtures implements Action {
+    readonly type = LOAD_CRICKET_FIXTURES
+
+}
+
+export class LoadCricketFixturesSuccess implements Action {
+    readonly type = LOAD_CRICKET_FIXTURES_SUCCESS
+    constructor(public payload: any) { }
+}
+
+
+export class LoadCricketResults implements Action {
+    readonly type = LOAD_CRICKET_RESULTS
+
+}
+
+export class LoadCricketResultsSuccess implements Action {
+    readonly type = LOAD_CRICKET_RESULTS_SUCCESS
+    constructor(public payload: any) { }
+}
+
+export type CricketActions = CricketFixtures | CricketLiveMatches | CricketResults | CricketMatchInfo | LoadCricketFixtures | LoadCricketFixturesSuccess | LoadCricketResults | LoadCricketResultsSuccess
