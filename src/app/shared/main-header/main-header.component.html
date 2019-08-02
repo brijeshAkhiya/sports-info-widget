@@ -14,17 +14,17 @@
     <div class="navbar-nav-container" id="navbar-nav">
       <ul class="navbar-nav" #navbarnav>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cricket" routerLinkActive="active" (click)="isapply = false">Cricket</a>
+          <a class="nav-link" routerLink="/cricket" routerLinkActive="active" (click)="isapply = false" [innerHTML]="'Cricket' | translate" ></a>
         </li>
         <li class="nav-item">
           <!-- <a class="nav-link" [routerLink]="['/coming-soon/kabaddi']" routerLinkActive="active"
             (click)="isapply = false">Kabaddi</a> -->
           <a class="nav-link" [routerLink]="['/kabaddi']" routerLinkActive="active"
-            (click)="isapply = false">Kabaddi</a>
+            (click)="isapply = false" >Kabaddi</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/soccer']" routerLinkActive="active"
-            (click)="isapply = false">soccer</a>
+            (click)="isapply = false">Soccer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/badminton']" routerLinkActive="active"

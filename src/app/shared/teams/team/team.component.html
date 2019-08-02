@@ -10,7 +10,8 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1 *ngIf="sport == 'cricket'">{{teamProfile?.name}}</h1>
           <h1 *ngIf="sport == 'kabaddi'">{{teamProfile?.tname}}</h1>
-          <app-favourites-widget [value]="sport == 'cricket'? {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name} : {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}">
+          <app-favourites-widget
+            [value]="sport == 'cricket'? {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name} : {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}">
           </app-favourites-widget>
         </div>
 
@@ -66,35 +67,48 @@
               </ng-container>
 
               <!-- Squad Section-->
-              <section class="common-section squad-list" *ngIf="sport == 'cricket' && teamProfile?.players.length > 0">
-                <h4 class="squad-title">Squad</h4>
-                <div class="squad-group" *ngIf="sport == 'cricket'">
-                  <div class="row row-size12">
-                    <div class="col-xl-3 col-sm-4" *ngFor="let player of teamProfile?.players">
-                      <div class="squad-item fullblock-link-container rounded-box common-shadow">
-                        <img alt="{{player.name | split}}" [lazyLoad]="player?.id| playerimage:['m']"
-                          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
-                        <div class="item-desc">
-                          <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
-                          <a [routerLink]="" class="theme-btn">View Player<span></span></a>
+              <section class="common-section squad-list" *ngIf="sport == 'cricket'">
+                <h4 class="squad-title" *ngIf="teamProfile?.players?.length > 0;then cricket_squad else no_players">
+                  Squad
+                </h4>
+                <ng-template #cricket_squad>
+                  <div class="squad-group">
+                    <div class="row row-size12">
+                      <div class="col-xl-3 col-sm-4" *ngFor="let player of teamProfile?.players">
+                        <div class="squad-item fullblock-link-container rounded-box common-shadow">
+                          <img alt="{{player.name | split}}" [lazyLoad]="player?.id| playerimage:['m']"
+                            [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+                          <div class="item-desc">
+                            <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
+                            <a [routerLink]="" class="theme-btn">View Player<span></span></a>
+                          </div>
+                          <a class="fullblock-link"
+                            [routerLink]="['/cricket/player', (player?.id | splitID), ((player?.name | split) | slugify )]">
+                          </a>
                         </div>
-                        <a class="fullblock-link"
-                          [routerLink]="['/cricket/player', (player?.id | splitID), ((player?.name | split) | slugify )]">
-                        </a>
                       </div>
                     </div>
                   </div>
-                </div>
+                </ng-template>
               </section>
-              <section class="common-section squad-list" *ngIf="sport == 'kabaddi' && teamProfile?.squads.length > 0 ">
-                <h4 class="squad-title">Squad</h4>
-                <div class="squad-group">
-                  <ng-container *ngFor="let player of  objectKeys(teamProfile?.players)">
-                    <h6 class="text-capitalize"> {{player}}</h6>
-                    <ng-container *ngTemplateOutlet="kabaddiPlayer;context:{players:teamProfile?.players[player]}">
+              <ng-template #no_players>
+                <app-no-data-widget [message]="'No Team squad data available'">
+                </app-no-data-widget>
+              </ng-template>
+
+              <section class="common-section squad-list" *ngIf="sport == 'kabaddi'">
+                <h4 class="squad-title" *ngIf="teamProfile?.squads?.length > 0;then kabaddi_squad else no_players">
+                  Squad
+                </h4>
+                <ng-template #kabaddi_squad>
+                  <div class="squad-group">
+                    <ng-container *ngFor="let player of  objectKeys(teamProfile?.players)">
+                      <h6 class="text-capitalize"> {{player}}</h6>
+                      <ng-container *ngTemplateOutlet="kabaddiPlayer;context:{players:teamProfile?.players[player]}">
+                      </ng-container>
                     </ng-container>
-                  </ng-container>
-                </div>
+                  </div>
+                </ng-template>
               </section>
             </ng-template>
           </ngb-tab>
@@ -139,63 +153,63 @@
           </ngb-tab>
 
 
-            <!--New fixtures -->
+          <!--New fixtures -->
 
-           <!-- Fixtures Section-->
-        <ngb-tab *ngIf="sport == 'kabaddi'">
-          <ng-template ngbTabTitle>
-            <div (click)="loadData('fixture')">Fixtures</div>
-          </ng-template>
-          <ng-template ngbTabContent>
-            <app-no-data-widget [message]="'No recent fixtures'"
-              *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
-            </app-no-data-widget>
-            <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
-            <app-loader *ngIf="paramsFixtures.loading"></app-loader>
-            <div class="fixtures-loadmore">
-              <button class="theme-btn down-btn" (click)="loadmore('fixture')"
-                *ngIf="!paramsFixtures.loading && paramsFixtures.data?.length > 0 && paramsFixtures.loadmore">
-                Load More
-                <span></span>
-              </button>
-            </div>
-          </ng-template>
-        </ngb-tab>
+          <!-- Fixtures Section-->
+          <ngb-tab *ngIf="sport == 'kabaddi'">
+            <ng-template ngbTabTitle>
+              <div (click)="loadData('fixture')">Fixtures</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget [message]="'No recent fixtures'"
+                *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
+              <app-loader *ngIf="paramsFixtures.loading"></app-loader>
+              <div class="fixtures-loadmore">
+                <button class="theme-btn down-btn" (click)="loadmore('fixture')"
+                  *ngIf="!paramsFixtures.loading && paramsFixtures.data?.length > 0 && paramsFixtures.loadmore">
+                  Load More
+                  <span></span>
+                </button>
+              </div>
+            </ng-template>
+          </ngb-tab>
 
-        <!-- Results Section-->
-        <ngb-tab *ngIf="sport == 'kabaddi'">
-          <ng-template ngbTabTitle>
-            <div (click)="loadData('result')">Results</div>
-          </ng-template>
-          <ng-template ngbTabContent>
-            <app-no-data-widget [message]="'No recent results'"
-              *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
-            </app-no-data-widget>
-            <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
-            <app-loader *ngIf="paramsResults.loading"></app-loader>
-            
-            <div class="fixtures-loadmore">
-            <button class="theme-btn down-btn" (click)="loadmore('result')"
-              *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
-              Load More
-              <span></span>
-            </button>
-            </div>
-          </ng-template>
-        </ngb-tab>
-    
+          <!-- Results Section-->
+          <ngb-tab *ngIf="sport == 'kabaddi'">
+            <ng-template ngbTabTitle>
+              <div (click)="loadData('result')">Results</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget [message]="'No recent results'"
+                *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
+              <app-loader *ngIf="paramsResults.loading"></app-loader>
+
+              <div class="fixtures-loadmore">
+                <button class="theme-btn down-btn" (click)="loadmore('result')"
+                  *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
+                  Load More
+                  <span></span>
+                </button>
+              </div>
+            </ng-template>
+          </ngb-tab>
+
 
 
         </ngb-tabset>
       </div>
 
-       
+
 
       <!-- Sidebar Section-->
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links  *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'"
+          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'"
             [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
@@ -212,11 +226,12 @@
           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <div class="item-desc">
           <p>{{player.fullname}}
-             <span class="light-text">{{player.shirtnumber}}</span>
+            <span class="light-text">{{player.shirtnumber}}</span>
           </p>
           <a [routerLink]="" class="theme-btn">View Player<span></span></a>
         </div>
-        <a class="fullblock-link" [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">
+        <a class="fullblock-link"
+          [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">
         </a>
       </div>
     </div>

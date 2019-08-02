@@ -98,7 +98,7 @@ export class BlogViewComponent implements OnInit {
     if (id) {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.blogdata = res.data;
-        // this.initSEOTags();
+        this.initSEOTags();
         this.getPopularArticles();
         // let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
         // if (type.toUpperCase() != this.blogdata.eType.toUpperCase())
@@ -124,17 +124,27 @@ export class BlogViewComponent implements OnInit {
   }
 
   initSEOTags() {
+    console.log("initSEOTags", this.blogdata)
+    this.meta.updateTag({ name: 'name', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ name: 'description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
-    this.meta.updateTag({ name: 'topic', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ property: 'og:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    this.meta.updateTag({ name: 'twitter:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'subject', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'keywords', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ property: 'og:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ property: 'og:type', content: this.blogdata.eType ? this.blogdata.eType : 'Sports.info' });
-    this.meta.updateTag({ property: 'og:description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
-    this.meta.updateTag({ name: 'twitter:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ name: 'twitter:description', content: this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info' });
+
+    this.meta.updateTag({ name: 'description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    this.meta.updateTag({ property: 'og:description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    this.meta.updateTag({ name: 'twitter:description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    
+    this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
+    this.meta.updateTag({ name: 'twitter:image:src', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
+    this.meta.updateTag({ property: 'og:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
+    this.meta.updateTag({ property: 'og:image:secure_url', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
+    this.meta.updateTag({ property: 'og:image:width', content: '640' });
+    this.meta.updateTag({ property: 'og:image:height', content: '400' });
+
+    this.meta.updateTag({ property: 'og:url', content: window.location.href });    
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }

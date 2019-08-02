@@ -83,9 +83,21 @@ export class UppersliderComponent implements OnInit {
 
       this.slider = [];
       this.clearTimeInterval();
+      let isLiveUpdate = false;
       console.log("store subscribe");
       console.log(res);
-      
+
+      if (res.live.length > 0){ 
+        this.slider = this.slider.concat(res.live);
+        this.getLiveKabaddiUpdate(this);
+        isLiveUpdate = true;
+      }else {
+        if(!this.storeUpdated.live){
+          this.getKabaddiLive();    
+          this.storeUpdated.live = true;  
+        }
+      }
+
       if (res.results.length > 0) 
         this.slider = this.slider.concat(res.results.slice(0,3));
       else if(!this.storeUpdated.result){
@@ -100,20 +112,11 @@ export class UppersliderComponent implements OnInit {
         this.storeUpdated.fixture = true
       }
 
-      if (res.live.length > 0){ 
-        this.slider = this.slider.concat(res.live);
-        this.getLiveKabaddiUpdate(this);
-      }else {
-        if(!this.storeUpdated.live){
-          this.getKabaddiLive();    
-          this.storeUpdated.live = true;  
-        }else{
-             
-          let minTime = new Date(Math.min.apply(null, res.fixtures.map(function (e) {
-            return new Date(moment.utc(e.datestart).format());
-          })));
-          this.startLiveUpdateAfterTime(moment.utc(minTime).format());
-        }
+      if(!isLiveUpdate){             
+        let minTime = new Date(Math.min.apply(null, res.fixtures.map(function (e) {
+          return new Date(moment.utc(e.datestart).format());
+        })));
+        this.startLiveUpdateAfterTime(moment.utc(minTime).format());
       }
 
     });

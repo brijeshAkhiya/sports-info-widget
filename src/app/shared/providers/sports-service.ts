@@ -257,7 +257,7 @@ export class SportsService {
   //add user comment 
   addusercomment(data){
     let headers = new HttpHeaders({
-      'Authorization': 'dhdahajh272728'
+      'Authorization': localStorage.getItem('userT')
     });
     return this.http.post(
       environment.apiUrl + environment.version + `/comments`,
