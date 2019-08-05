@@ -69,6 +69,7 @@ import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
 import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.component';
+import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.component';
 
 @NgModule({
     imports: [
@@ -132,6 +133,7 @@ import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.co
         UppersliderComponent,
         TopScorerWidgetComponent,
         PageNotFoundComponent,
+        FixturesCardComponent
     ],
     providers: [
         /** All Pipes */
@@ -202,7 +204,8 @@ import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.co
         FixturesSidebarWidgetComponent,
         TopScorerWidgetComponent,
         UppersliderComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        FixturesCardComponent
     ],
     entryComponents:[LoginModalComponent]
 
