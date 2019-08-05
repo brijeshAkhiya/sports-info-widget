@@ -68,6 +68,7 @@ import { ApiStoreComponent } from './api-store/api-store.component';
 import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget/fixtures-sidebar-widget.component';
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
+import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.component';
 
 @NgModule({
     imports: [
@@ -130,6 +131,7 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         FixturesSidebarWidgetComponent,
         UppersliderComponent,
         TopScorerWidgetComponent,
+        FixturesCardComponent
     ],
     providers: [
         /** All Pipes */
@@ -200,7 +202,8 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         ApiStoreComponent,
         FixturesSidebarWidgetComponent,
         TopScorerWidgetComponent,
-        UppersliderComponent
+        UppersliderComponent,
+        FixturesCardComponent
     ],
     entryComponents:[LoginModalComponent]
 

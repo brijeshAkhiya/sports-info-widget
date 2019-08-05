@@ -1,38 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-fixtures',
-  templateUrl: './fixtures.component.html',
-  styleUrls: ['./fixtures.component.css']
+  selector: 'app-fixtures-card',
+  templateUrl: './fixtures-card.component.html',
+  styleUrls: ['./fixtures-card.component.css']
 })
-export class FixturesComponent implements OnInit {
-
+export class FixturesCardComponent implements OnInit {
+  @Input() sport: any
+  @Input() title: any
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
-  tournamentid;
+  internationSchedule = [];
+  domesticSchedule = [];
 
   constructor(
-    private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
-    private router: Router,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
-    this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
-    // this.getFixtures();
-    this.loadData('fixture');
-    this.loadData('result');
+    if (this.sport == 'kabaddi') {
+      this.loadKabaddi('fixture')
+      this.loadKabaddi('result')
+    }
+    else if (this.sport == 'cricket') {
+      this.getCricketSeries();
+    }
   }
 
-  loadData(type) {
+  loadKabaddi(type) {
     if (type == 'fixture') {
       if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
         return false;
@@ -61,8 +63,8 @@ export class FixturesComponent implements OnInit {
     });
   }
 
-
   getResults() {
+
     this.paramsResults.loading = true;
     this.sportsService
       .getKabaddiMatchList(this.paramsResults.reqParams.status, this.paramsResults.reqParams.per_page, this.paramsResults.reqParams.page)
@@ -90,4 +92,22 @@ export class FixturesComponent implements OnInit {
       this.getResults();
     }
   }
+
+  //get current cricket series 
+  getCricketSeries() {
+    this.sportsService.getcricketfixtures().pipe(distinctUntilChanged()).subscribe((res: any) => {
+      if (res.data) {
+        let cricketseries = res.data;
+        cricketseries.map((data) => {
+          if (data.category == 'International')
+            this.internationSchedule.push(data);
+          else
+            this.domesticSchedule.push(data)
+        });
+        this.internationSchedule = this.commonService.sortArr(this.internationSchedule, 'MMMM YYYY', 'start_date', 'desc');
+        this.domesticSchedule = this.commonService.sortArr(this.domesticSchedule, 'MMMM YYYY', 'start_date', 'desc');
+      }
+    });
+  }
+
 }
