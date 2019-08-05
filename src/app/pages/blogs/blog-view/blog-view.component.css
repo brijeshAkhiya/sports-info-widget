@@ -68,8 +68,10 @@
 .comment-action li:last-child:after { display: none; }
 .comment-action li a                { font-weight: 600; }
 .comment-action li a:hover          { color: #ED1A33; }
+.comment-item form textarea         { margin-top: 8px; height: 72px; font-size: 16px; line-height: 24px; }
 .cmt-act-btn-list                   { margin: 12px 0px 0px; }
 .cmt-act-btn-list li                { margin-right: 16px; display: inline-block; }
+.cmt-act-btn-list li:last-child     { margin: 0px;}
 .cmt-act-btn                        { padding: 8px 16px; background: #3C3C3C; font-size: 16px; line-height: 20px; color: #fff; font-family: 'Muli', sans-serif; font-weight: 900; border: none; border-radius: 4px; }
 .cmt-act-btn.red-btn                { background: #ED1A33; }
 .cmt-view-btn                       { padding: 16px; width: 100%; background: #fff; font-size: 20px; line-height: 25px; color: #3E3E3E; font-family: 'IBM Plex Sans Condensed', sans-serif; border: 2px solid #E4E4E4; border-radius: 2px; }
@@ -78,12 +80,12 @@
 .login-toast.active                 { bottom: 30px;}
 .login-toast p                      { margin: 0px; font-weight: 500; }
 .login-toast img                    { margin: 0px 12px; width: 32px; }
-.comment-dropdown .dropdown-toggle          { padding: 0px 8px; border: none; background: transparent; }
-.comment-dropdown .dropdown-toggle::after   { margin-bottom: -3px; border-top: 6px solid #7A7A7A; border-right-width: 5px; border-left-width: 5px; }
-.comment-dropdown .dropdown-menu            { padding: 0px; background: transparent; border: none; border-radius: 0; left: auto !important; right: 0px !important; }
-.comment-dropdown .dropdown-item            { padding: 10px; background: #fff; color: #ED1A33; line-height: 18px; font-weight: 600; border-radius: 3px; }
-.comment-dropdown .dropdown-item span       { margin-left: 4px; display: inline-block; vertical-align: middle; }
-
+.comment-delete-modal .modal-header { padding: 16px 24px; border-bottom: 2px solid #ECECEC; align-items: center; -webkit-align-items: center; }
+.comment-delete-modal .modal-header .close { margin: 0px; padding: 0px; opacity: 1; color: #CCCCCC;}
+.comment-delete-modal .modal-header .close:hover { opacity: 1; color: #292929;}
+.comment-delete-modal .modal-body   { padding: 32px 24px; }
+.comment-delete-modal .modal-footer { padding: 24px; background: #F0F2F9; border: none; }
+.comment-delete-modal .cmt-act-btn-list { margin: 0px;}
 @media (min-width: 1200px) and (max-width: 1379px) {
     .blog-banner                    { height: 580px; }
 /* -------- Article Content Section ------- */
@@ -114,8 +116,12 @@
 }
 
 @media (max-width: 991px) {
-    .blog-banner                    { height: 400px; }
-    .cmt-view-btn                   { padding: 12px; font-size: 16px; line-height: 22px; }
+    .blog-banner                        { height: 400px; }
+    .cmt-view-btn                       { padding: 12px; font-size: 16px; line-height: 22px; }
+    .cmt-act-btn                        { padding: 6px 14px; font-size: 14px; line-height: 18px;  }
+    .comment-delete-modal .modal-header { padding: 12px 16px; }
+    .comment-delete-modal .modal-body   { padding: 20px 16px; }
+    .comment-delete-modal .modal-footer { padding: 16px; }
 }
 
 @media (max-width: 767px) {
