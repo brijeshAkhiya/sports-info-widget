@@ -47,7 +47,6 @@ import { environment } from "../environments/environment";
 /** All Components */
 import { AppComponent } from "./app.component";
 import { ComingSoonComponent } from "./pages/coming-soon/coming-soon.component";
-import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 import { CmsContentComponent } from './pages/cms-content/cms-content.component';
 import { AboutComponent } from "./pages/about/about.component";
 import { ContactComponent } from "./pages/contact/contact.component";
@@ -100,7 +99,6 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     ComingSoonComponent,
-    PageNotFoundComponent,
     CmsContentComponent,
     AboutComponent,
     ContactComponent,
@@ -158,7 +156,7 @@ export function createTranslateLoader(http: HttpClient) {
     }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 
 
 })

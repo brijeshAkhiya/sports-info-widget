@@ -3,11 +3,10 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-loader *ngIf="!matchdata"></app-loader>
+        <app-loader *ngIf="loader"></app-loader>
+        <app-page-not-found *ngIf="!loader && !matchdata"></app-page-not-found>
         <!-- START - ABOUT MATCH-->
         <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision" [sport]="'cricket'"></app-match-about>
-        <!-- <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision">
-        </app-match-about> -->
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
@@ -232,7 +231,7 @@
             </ng-template>
             <ng-template ngbTabContent>
               <app-match-facts-figures [matchdata]="matchdata" [teamLastmatch]="lastmatches"
-                [teamMatchResult]="matchesresultdata"></app-match-facts-figures>
+                [teamMatchResult]="lastmatches"></app-match-facts-figures>
             </ng-template>
           </ngb-tab>
           <!-- END - FACTS AND FIGURES-->

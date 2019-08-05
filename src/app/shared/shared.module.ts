@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { LottieAnimationViewModule } from "ng-lottie";
 
 /** All Pipes */
 import { TruncatePipe } from './pipes/truncatepipe';
@@ -67,6 +68,7 @@ import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.co
 import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget/fixtures-sidebar-widget.component';
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
+import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.component';
 
 @NgModule({
     imports: [
@@ -81,7 +83,8 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         ReactiveFormsModule,
         FormsModule,
         LazyLoadImageModule,
-        CarouselModule
+        CarouselModule,
+        LottieAnimationViewModule,
     ],
     declarations: [
         /** All Pipes */
@@ -128,6 +131,7 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         FixturesSidebarWidgetComponent,
         UppersliderComponent,
         TopScorerWidgetComponent,
+        PageNotFoundComponent,
     ],
     providers: [
         /** All Pipes */
@@ -197,7 +201,8 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
         VenueMapCardComponent,
         FixturesSidebarWidgetComponent,
         TopScorerWidgetComponent,
-        UppersliderComponent
+        UppersliderComponent,
+        PageNotFoundComponent
     ],
     entryComponents:[LoginModalComponent]
 

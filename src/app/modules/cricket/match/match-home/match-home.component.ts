@@ -11,43 +11,15 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ["./match-home.component.css"]
 })
 export class MatchHomeComponent implements OnInit {
-  paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [] } }
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [] } }  
   matchid: any;
-  matchstatus: any;
-  sportevent: any;
-  hours: any;
-  minutes: any;
-  seconds: any;
-  team1id: any;
-  team2id: any;
-  nextmatches: any[];
-  lastmatches = [];
-  matchesresultdata: any;
-  venuedetails: any;
-  manofthematch: any;
+  nextmatches = [];
+  lastmatches = [];  
   scorecards = [];
   teams: { id: string; data: any }[];
-  // teamsbytype: { qualifier: string; data: any }[];
-  matcheventstatus: any;
-  battingteam1: any = [];
-  battingteam2: any = [];
-  bowlingteam1: any = [];
-  bowlingteam2: any = [];
-  objnew = {};
-  objnew2 = {};
-  objnew3 = {};
-  venuelat: any;
-  venuelong: any;
-  matchprobability: any;
   matchdata: any;
-  widget1title = "Recommended Links";
-  widget1type = "currentseries";
-  fallofwicket1data = [];
-  fallofwicket2data = [];
   teamObj = {};
   data: any;
-  timeline: any;
-  statistics: any;
   inningWiseCommentry = [];
   showCommetry: boolean = false;
   interval;
@@ -60,14 +32,14 @@ export class MatchHomeComponent implements OnInit {
   isshow: boolean;
   tossdecision: any = {};
   batsmanList;
-  testcheck: any;
-  dummyAPICall = 450;
   fallofWickets = [];
   playerList = {};
   scorecardinnings: any;
   matchInnings = [];
   public windowinnerWidth: any;
-  objectKeys = Object.keys
+  objectKeys = Object.keys;
+  loader: boolean = false;
+
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
@@ -136,16 +108,13 @@ export class MatchHomeComponent implements OnInit {
   }
   /** Get Match Data */
   getMatchData() {
-    // this.sportsService.getmatchtimelineDetlaDirect(this.matchid).subscribe((res:any)=>{
-    //   console.log('scorecard::',res);
-    // })
-    console.log('matchid::', this.matchid);
 
+    this.loader = true;
     this.sportsService.getmatchtimeline(this.matchid).subscribe(
       (res: any) => {
 
+        this.loader = false;
         this.initData();
-        //res = res.result;
         this.isshow = true;
         if (res.data) {
           console.log(res.data);
@@ -172,10 +141,11 @@ export class MatchHomeComponent implements OnInit {
         }
       },
       error => {
-        if (error["error"].status == 400 || error["error"].status == 403) {
-          this.isshow = false;
-          this.router.navigate(["/page-not-found"]);
-        }
+        this.loader = false;
+        // if (error["error"].status == 400 || error["error"].status == 403) {
+        //   this.isshow = false;
+        //   this.router.navigate(["/page-not-found"]);
+        // }
       }
     );
   }
@@ -256,51 +226,6 @@ export class MatchHomeComponent implements OnInit {
       this.responsiveSticky(320);
     }
   }
-  //get matchtimeline
-  getMatchTimeline() {
-    this.isshow = true;
-    this.sportsService.getmatchtimeline(this.matchid).subscribe(
-      res => {
-        if (res["data"]) {
-          this.isshow = false;
-          this.data = res["data"];
-          this.matchdata = res["data"];
-          console.log("data::::", res["data"]);
-          this.matchstatus = res["data"]["sport_event_status"].status;
-          this.sportevent = res["data"]["sport_event"];
-          this.venuedetails = res["data"]["sport_event"]["venue"];
-          this.team1id = res["data"]["sport_event"]["competitors"][0].id;
-          this.team2id = res["data"]["sport_event"]["competitors"][1].id;
-          if (this.team1id && this.team2id) {
-            console.log("teamvstaem");
-            this.getTeamvsTeamdata(); //to get team vs team data
-          }
-
-          if (this.matchstatus == "not_started") {
-            console.log("status::", this.matchstatus);
-            // this.getMatchProbability();
-          } else if (
-            this.matchstatus == "closed" ||
-            this.matchstatus == "live"
-          ) {
-            this.manofthematch = res["data"]["statistics"]["man_of_the_match"];
-            this.matcheventstatus = res["data"]["sport_event_status"];
-            this.scorecards = res["data"]["statistics"]["innings"];
-            console.log("scorecards", this.scorecards);
-            this.getmatchteamlineup();
-          }
-          this.getTossDecision();
-          this.getCommentries();
-        }
-      },
-      error => {
-        if (error["error"].status == 400 || error["error"].status == 403) {
-          this.isshow = false;
-          this.router.navigate(["/page-not-found"]);
-        }
-      }
-    );
-  }
 
   /** Get Match Players - Line up */
   getmatchteamlineup() {
@@ -375,11 +300,11 @@ export class MatchHomeComponent implements OnInit {
             this.nextmatches = [];
           if (res.data.last_meetings && res.data.last_meetings.length > 0) {
             let last_meetings = res.data.last_meetings.filter((match) => match.period_scores);
-            this.matchesresultdata = this.cricketService.initCompetitorScore(last_meetings)
-            this.matchesresultdata = this.commonService.sortArr(this.matchesresultdata, 'Do MMMM YYYY', 'scheduled', 'desc');
+            this.lastmatches = this.cricketService.initCompetitorScore(last_meetings)
+            this.lastmatches = this.commonService.sortArr(this.lastmatches, 'Do MMMM YYYY', 'scheduled', 'desc');
           }
           else
-            this.matchesresultdata = [];
+            this.lastmatches = [];
         }
       });
   }
@@ -895,13 +820,9 @@ export class MatchHomeComponent implements OnInit {
   getLiveUpdate(classThis) {
     console.log("getLiveUpdate");
     this.interval = setInterval(() => {
-      //TEMP
-      this.dummyAPICall++;
       classThis.sportsService
         .getmatchtimelineDetla(classThis.data.sport_event.id)
-        // .getmatchtimelineDetlaDirect(this.dummyAPICall)
         .subscribe(res => {
-          // res = res.result; // TEMP
           this.data = res.data;
           this.matchdata = res.data;
 
