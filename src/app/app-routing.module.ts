@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: './modules/kabaddi/kabaddi.module#KabaddiModule',
     },
     {
+        path: 'soccer',
+        loadChildren: './modules/soccer/soccer.module#SoccerModule',
+    },
+    {
         path: 'blog',
         component: BlogsComponent
     },
@@ -62,35 +66,35 @@ const routes: Routes = [
     },
     {
         path: 'writer/:id',
-        component:WriterComponent
+        component: WriterComponent
     },
     {
         path: 'coming-soon/:sport',
-        component:ComingSoonComponent
+        component: ComingSoonComponent
     },
     {
         path: 'about-us',
-        component:AboutComponent
+        component: AboutComponent
     },
     {
         path: 'contact-us',
-        component:ContactComponent
+        component: ContactComponent
     },
     {
         path: 'privacy-policy',
-        component:CmsContentComponent
+        component: CmsContentComponent
     },
     {
         path: 'terms-and-conditions',
-        component:CmsContentComponent
+        component: CmsContentComponent
     },
     {
         path: 'advertise-with-us',
-        component:AdvertiseWithUsComponent
+        component: AdvertiseWithUsComponent
     },
     {
         path: '**',
-        component:PageNotFoundComponent
+        component: PageNotFoundComponent
     },
 ]
 
