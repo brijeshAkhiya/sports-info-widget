@@ -35,7 +35,7 @@ export function KabaddiReducer(state = initialState, action: KabaddiActions): an
         case KABADDI_RESULTS_MATCHES:
             return { ...state, results: action.payload };
         case KABADDI_MATCH_INFO:
-            return { ...state, results: action.payload };
+            return { ...state, info: action.payload };
         default: {
             return state
         }

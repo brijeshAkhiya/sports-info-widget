@@ -6,6 +6,8 @@ import * as fromFavourites from "@store/favourites-management/favourites.reducer
 import * as fromKabaddiTeamLogos from "@store/kabaddi-team-logo/kabaddi-team-logo.reducer";
 import * as fromCricket from '@store/cricket/cricket.reducer'
 import * as fromKabaddi from '@store/kabaddi/kabaddi.reducer'
+import * as fromSoccer from '@store/soccer/soccer.reducer'
+
 
 export interface State {
     auth: fromAuth.State;
@@ -14,7 +16,8 @@ export interface State {
     Favourites: fromFavourites.Favourites,
     KabaddiLogos: fromKabaddiTeamLogos.KabaddiLogos,
     Cricket: fromCricket.CricketData,
-    Kabaddi: fromKabaddi.KabaddiData
+    Kabaddi: fromKabaddi.KabaddiData,
+    Soccer: fromSoccer.SoccerData
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -24,7 +27,8 @@ export const reducers: ActionReducerMap<State> = {
     Favourites: fromFavourites.favouritesReducer,
     KabaddiLogos: fromKabaddiTeamLogos.KabaddiTeamLogosReducer,
     Cricket: fromCricket.CircketReducer,
-    Kabaddi: fromKabaddi.KabaddiReducer
+    Kabaddi: fromKabaddi.KabaddiReducer,
+    Soccer: fromSoccer.SoccerReducer
 };
 
 

@@ -17,21 +17,11 @@ export class HomeComponent implements OnInit {
     private commonService: CommonService,
     private sportsService: SportsService,
     private cricketService:CricketService
-  ) {  this.gettopscorer('totalpoint');}
+  ) { }
 
   ngOnInit() {
    
   }
 
-  gettopscorer(type){
-    this.isloading = true;
-    this.sportsService.getkabaddistats(type).subscribe((res: any) => {
-      this.isloading = false;
-      if (res) {
-        this.scorerdata = res.data
-      }
-    },
-    error => this.isloading = false)
-  }
 
 }

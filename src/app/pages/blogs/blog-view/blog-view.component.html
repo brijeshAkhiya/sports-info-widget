@@ -114,7 +114,8 @@
             </div>
             <div class="comment-list" *ngIf="blogcomments?.length != 0">
               <div class="comment-item d-flex align-items-start" *ngFor="let comment of blogcomments">
-                <img class="commenter-img" alt="commenter" [src]="commonService.commenterPlaceholder" [lazyLoad]="comment?.sProfilePicture">
+                <img class="commenter-img" alt="commenter" [src]="commonService.commenterPlaceholder"
+                  [lazyLoad]="comment?.sProfilePicture">
                 <div class="comment-desc">
                   <div class="d-flex justify-content-between">
                     <p class="commenter-info"><span class="light-blue-color">{{comment.sFirstName}}
@@ -122,6 +123,18 @@
                     </p>
                   </div>
                   <p>{{comment.sComment}}</p>
+                  <form>
+                    <textarea class="form-control">What a match</textarea>
+                  </form>
+                  <ul class="cmt-act-btn-list">
+                    <li><button class="cmt-act-btn">Save</button></li>
+                    <li><button class="cmt-act-btn red-btn">Cancel</button></li>
+                  </ul>
+                  <ul class="comment-action">
+                    <li>12 mins ago</li>
+                    <li><a>Edit</a></li>
+                    <li><a (click)="open(content)">Delete</a></li>
+                  </ul>
                 </div>
               </div>
               <!-- <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="blogcomments.length > 0">VIEW
@@ -137,3 +150,24 @@
     </div>
   </section>
 </ng-container>
+
+
+<ng-template #content let-modal>
+  <div class="comment-delete-modal">
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-basic-title">Delete Comment</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Are you sure you want to delete this comment ?
+    </div>
+    <div class="modal-footer">
+      <ul class="cmt-act-btn-list">
+        <li><button class="cmt-act-btn" (click)="modal.close('Save click')">Keep</button></li>
+        <li><button class="cmt-act-btn red-btn" (click)="modal.close('Save click')">Delete</button></li>
+      </ul>
+    </div>
+  </div>
+</ng-template>

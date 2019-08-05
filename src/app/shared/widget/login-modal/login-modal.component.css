@@ -1,0 +1,9 @@
+.signin-modal h1                    { opacity: 0.20; font-style: normal; }
+.signin-modal .modal-body           { padding: 24px; text-align: center; }
+.signin-modal ul                    { margin-bottom: 0px; }
+.signin-modal button                { margin-bottom: 22px; width: 100%; padding: 18px; border: 2px solid #EBEBEB; background: transparent; font-size: 20px; line-height: 40px; border-radius: 4px; }
+.signin-modal button img            { margin-top: -2px; margin-right: 16px; width: 40px; }
+.signin-modal button.fb-button      { background: #1778F2; color: #fff; border-color: #1778F2; }
+.signin-modal p a                   { color: #ED1A33; font-weight: 700; text-decoration: underline; }
+.signin-modal p a:hover             { text-decoration: none; }
+.signin-modal .signin-text          { margin: 0px; }
