@@ -148,7 +148,7 @@
     .match-main-title .player-pic               { width: 66px; }
     .match-main-title .match-update             { text-align: left; }
 /* -------- Goal Type Match Title ------- */
-    .match-main-title .current-match            { flex-direction: row; -webkit-flex-direction: row; }
+    .match-main-title .goal-type .current-match     { flex-direction: row; -webkit-flex-direction: row; }
     .goal-type .current-match > :last-child h4,
     .match-main-title.goal-type .current-team h4    { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
     .goal-type .current-match h4 img                { margin-bottom: 6px; margin-right: calc(100% - 24px); }
