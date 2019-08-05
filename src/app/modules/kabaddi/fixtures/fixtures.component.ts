@@ -5,6 +5,10 @@ import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
 
+import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
+import { Store } from "@ngrx/store";
+import * as fromRoot from "@app/app-reducer";
+
 @Component({
   selector: 'app-fixtures',
   templateUrl: './fixtures.component.html',
@@ -22,14 +26,33 @@ export class FixturesComponent implements OnInit {
     public commonService: CommonService,
     public cricketService: CricketService,
     private router: Router,
+    private store: Store<fromRoot.State>
   ) {
    }
 
   ngOnInit() {
     this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'cricket','tournament');
     // this.getFixtures();
-    this.loadData('fixture');
-    this.loadData('result');
+    // this.loadData('fixture');
+    // this.loadData('result');
+    this.loadFromStore();
+  }
+  loadFromStore(){
+
+    this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
+    this.store.dispatch(new Kabaddi.LoadKabaddiResults())
+    this.store.select('Kabaddi').subscribe((data: any) => {
+      if (data.fixtures.length > 0) {
+        console.log('after effects', data.fixtures);
+        this.paramsFixtures.data = this.commonService.sortArr(data.fixtures, 'Do MMMM YYYY', 'datestart', 'asc')
+        this.paramsFixtures.loadmore = true;
+      }
+      if (data.results.length > 0) {
+        console.log('after effects', data.results);
+        this.paramsResults.data = this.commonService.sortArr(data.results, 'Do MMMM YYYY', 'datestart', 'desc')
+        this.paramsResults.loadmore = true;
+      }
+    })
   }
 
   loadData(type){

@@ -49,7 +49,6 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   };
-  storeUpdated = {'fixture': false, 'result' : false, 'live': false}
   
   constructor(
     private sportsService: SportsService,
@@ -64,9 +63,7 @@ export class UppersliderComponent implements OnInit {
 
   selectSport(sport){
     this.sport = sport;
-    this.slider = [];
-    console.log(this.interval);
-    
+    this.slider = [];    
     this.loadData();
   }
 
@@ -79,6 +76,9 @@ export class UppersliderComponent implements OnInit {
   }
 
   loadKabaddiData(){
+    this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
+    this.store.dispatch(new Kabaddi.LoadKabaddiResults())
+    this.store.dispatch(new Kabaddi.LoadKabaddiLive())
     this.store.select('Kabaddi').subscribe((res: any) => {  
 
       this.slider = [];
@@ -91,37 +91,20 @@ export class UppersliderComponent implements OnInit {
         this.slider = this.slider.concat(res.live);
         this.getLiveKabaddiUpdate(this);
         isLiveUpdate = true;
-      }else {
-        if(!this.storeUpdated.live){
-          this.getKabaddiLive();    
-          this.storeUpdated.live = true;  
-        }
       }
 
       if (res.results.length > 0) 
         this.slider = this.slider.concat(res.results.slice(0,3));
-      else if(!this.storeUpdated.result){
-        this.getKabaddiResults();
-        this.storeUpdated.result = true
-      }
-
       if (res.fixtures.length > 0) 
         this.slider = this.slider.concat(res.fixtures.slice(0,3));
-      else if(!this.storeUpdated.fixture){
-        this.getKabaddiFixtures();
-        this.storeUpdated.fixture = true
-      }
-
       if(!isLiveUpdate){             
         let minTime = new Date(Math.min.apply(null, res.fixtures.map(function (e) {
           return new Date(moment.utc(e.datestart).format());
         })));
         this.startLiveUpdateAfterTime(moment.utc(minTime).format());
       }
-
     });
     console.log("slider");
-    
     console.log(this.slider);
   }
 
@@ -281,38 +264,6 @@ export class UppersliderComponent implements OnInit {
   ngOnDestroy() {
     console.log("ngOnDestroy");
     this.clearTimeInterval();
-  }
-
-  getKabaddiFixtures() {    
-    let paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, data: [] }
-    this.sportsService.getKabaddiMatchList(paramsFixtures.reqParams.status, paramsFixtures.reqParams.per_page, paramsFixtures.reqParams.page).subscribe((res: any) => {
-      // this.sportsService.getKabaddiMatchDummyList('fixture_list').subscribe((res: any) => {
-        // res = res.data;
-      if (res.data && res.data.items) {
-        paramsFixtures.data = res.data.items      
-        this.store.dispatch(new Kabaddi.KabaddiFixtures(paramsFixtures.data))
-      }
-    });
-  }
-
-  getKabaddiResults() {
-    let paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, data: [] }
-    this.sportsService.getKabaddiMatchList(paramsResults.reqParams.status, paramsResults.reqParams.per_page, paramsResults.reqParams.page).subscribe((res: any) => {
-      if (res.data && res.data.items) {
-        paramsResults.data = res.data.items  
-        this.store.dispatch(new Kabaddi.KabaddiResults(paramsResults.data))
-      }
-    });
-  }
-
-  getKabaddiLive() {
-    let paramsResults = { reqParams: { 'status': 3, 'per_page': 10, 'page': 1 }, data: [] }
-    this.sportsService.getKabaddiMatchList(paramsResults.reqParams.status, paramsResults.reqParams.per_page, paramsResults.reqParams.page).subscribe((res: any) => {
-      if (res.data && res.data.items) {
-        paramsResults.data = res.data.items
-        this.store.dispatch(new Kabaddi.KabaddiLiveMatches(paramsResults.data))
-      }
-    });
   }
 
 }
