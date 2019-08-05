@@ -1,27 +1,28 @@
-<app-page-not-found *ngIf="!loader && !blogdata"></app-page-not-found>
-<app-loader *ngIf="loader"></app-loader>
-<ng-container *ngIf="!loader && blogdata">
-  <!-- <div class="blog-complete-line"></div> -->
-  <section class="blog-banner" [defaultImage]="commonService.largeblogPlaceholder"
-    [offset]="commonService.lazyloadoffset" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
-    <ng-container *ngIf="blogdata?.eType == 'Video'">
-      <div class="video-container" [ngClass]="{'show': isplay}">
-        <video controls="true" controlsList="nodownload" #videoPlayer>
-          <source [src]="commonService.s3Url+blogdata?.sVideo | safehtml:['video']" type="video/mp4"
-            *ngIf="blogdata?.sVideo">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <button class="video-play-btn" (click)="videoplay()"></button>
-    </ng-container>
-    <div class="banner-inner">
-      <div class="container">
-        <div class="banner-desc">
-          <h1 class="white-text">{{blogdata?.sTitle}}</h1>
-          <div class="author-info d-flex justify-content-between align-items-center">
-            <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}
-              </a>{{blogdata?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-            <ul class="count-list">
+<ng-container *ngIf="blogdata">
+  <div class="blog-complete-line">
+    <div id="blogCompleteLine"></div>
+  </div>
+  <div id="blogOuterSection">
+    <section class="blog-banner" [defaultImage]="commonService.largeblogPlaceholder"
+      [offset]="commonService.lazyloadoffset" [lazyLoad]="blogdata?.sImage | resizeImage:['s']">
+      <ng-container *ngIf="blogdata?.eType == 'Video'">
+        <div class="video-container" [ngClass]="{'show': isplay}">
+          <video controls="true" controlsList="nodownload" #videoPlayer>
+            <source [src]="commonService.s3Url+blogdata?.sVideo | safehtml:['video']" type="video/mp4"
+              *ngIf="blogdata?.sVideo">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <button class="video-play-btn" (click)="videoplay()"></button>
+      </ng-container>
+      <div class="banner-inner">
+        <div class="container">
+          <div class="banner-desc">
+            <h1 class="white-text">{{blogdata?.sTitle}}</h1>
+            <div class="author-info d-flex justify-content-between align-items-center">
+              <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}
+                </a>{{blogdata?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+              <ul class="count-list">
                 <li>
                   <p class="comment white-icon"><span>{{blogdata?.nCommentsCount}}</span></p>
                 </li>
@@ -29,72 +30,73 @@
                   <p class="view white-icon"><span>{{blogdata?.nViewCounts}}</span></p>
                 </li>
               </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <section class="common-section blog-content-section">
-    <div class="container">
-      <div class="row sidebar-row">
-        <div class="content-col">
-          <div class="blog-inner d-flex">
-            <div class="social-block">
-              <ul class="sticky-social-list">
-                <li><button (click)="sharablelink('facebook')"><img
-                      src="/assets/images/blog/facebook-share-icon-color.svg"></button></li>
-                <li><button (click)="sharablelink('twitter')"><img
-                      src="/assets/images/blog/twitter-share-icon-color.svg"></button></li>
-                <li><button (click)="sharablelink('whatsapp')"><img
-                      src="/assets/images/blog/whatsapp-share-icon-color.svg"></button></li>
-              </ul>
-            </div>
-            <div class="blog-content-block">
-              <div class="blog-content" [innerHTML]="blogdata?.sDescription | safehtml">
+    </section>
+    <section class="common-section blog-content-section">
+      <div class="container">
+        <div class="row sidebar-row">
+          <div class="content-col">
+            <div class="blog-inner d-flex">
+              <div class="social-block">
+                <ul class="sticky-social-list">
+                  <li><button (click)="sharablelink('facebook')"><img
+                        src="/assets/images/blog/facebook-share-icon-color.svg"></button></li>
+                  <li><button (click)="sharablelink('twitter')"><img
+                        src="/assets/images/blog/twitter-share-icon-color.svg"></button></li>
+                  <li><button (click)="sharablelink('whatsapp')"><img
+                        src="/assets/images/blog/whatsapp-share-icon-color.svg"></button></li>
+                </ul>
               </div>
-              <ul class="tag-list" *ngIf="blogdata?.aTags && blogdata?.aTags.length > 0">
-                <li *ngFor="let item of blogdata?.aTags">
-                  <a *ngIf="item.sport == 'Cricket'"
-                    [routerLink]="(item.type == 'Player') ? ['/cricket/player',(item.id | splitID), ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',(item.id | splitID), (item.name | slugify)]  : ['/cricket/team',(item.id | splitID), (item.name | slugify)])">
-                    {{item?.name | split}}
-                  </a>
-                  <a *ngIf="item.sport == 'Kabaddi'"
-                    [routerLink]="(item.type == 'Player') ? ['/kabaddi/player',(item.id), ((item?.name | split ) | slugify) ] :  ['/kabaddi']">
-                    {{item?.name | split}}
-                  </a>
-                </li>
-              </ul>
-              <div class="blog-author d-flex align-items-center">
-                <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"
-                  [offset]="commonService.lazyloadoffset"></div>
-                <div class="author-desc">
-                  <h6>
-                    <a
-                      [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}}{{blogdata?.iId?.sLastName}}</a>
-                  </h6>
-                  <p>{{blogdata?.iId?.sBio}}</p>
+              <div class="blog-content-block">
+                <div class="blog-content" [innerHTML]="blogdata?.sDescription | safehtml">
+                </div>
+                <ul class="tag-list" *ngIf="blogdata?.aTags && blogdata?.aTags.length > 0">
+                  <li *ngFor="let item of blogdata?.aTags">
+                    <a *ngIf="item.sport == 'Cricket'"
+                      [routerLink]="(item.type == 'Player') ? ['/cricket/player',(item.id | splitID), ((item?.name | split ) | slugify) ] : ( (item.type == 'Tournament') ? ['/cricket/tournament',(item.id | splitID), (item.name | slugify)]  : ['/cricket/team',(item.id | splitID), (item.name | slugify)])">
+                      {{item?.name | split}}
+                    </a>
+                    <a *ngIf="item.sport == 'Kabaddi'"
+                      [routerLink]="(item.type == 'Player') ? ['/kabaddi/player',(item.id), ((item?.name | split ) | slugify) ] :  ['/kabaddi']">
+                      {{item?.name | split}}
+                    </a>
+                  </li>
+                </ul>
+                <div class="blog-author d-flex align-items-center">
+                  <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"
+                    [offset]="commonService.lazyloadoffset"></div>
+                  <div class="author-desc">
+                    <h6>
+                      <a
+                        [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}}{{blogdata?.iId?.sLastName}}</a>
+                    </h6>
+                    <p>{{blogdata?.iId?.sBio}}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="sidebar-col">
-          <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <div class="common-stories-widget common-shadow rounded-box">
-              <h5>Readlist</h5>
-              <ul class="common-list">
-                <li *ngFor="let item of widgetblogs | slice:0:5"><a [state]="{ id: item._id }"
-                    [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
-              </ul>
+          <div class="sidebar-col">
+            <div class="sticky-sidebar">
+              <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+              <div class="common-stories-widget common-shadow rounded-box">
+                <h5>Readlist</h5>
+                <ul class="common-list">
+                  <li *ngFor="let item of widgetblogs | slice:0:5"><a [state]="{ id: item._id }"
+                      [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
+                </ul>
+              </div>
+              <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
             </div>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
   <section class="common-section comments-section">
     <div class="container">
       <div class="row sidebar-row">

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -286,6 +286,16 @@ export class BlogViewComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  // When the user scrolls the page, execute myFunction 
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+      var blogHeight = document.getElementById("blogOuterSection");
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("blogCompleteLine").style.width = scrolled + "%";
   }
 
 }
