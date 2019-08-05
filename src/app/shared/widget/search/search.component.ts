@@ -40,7 +40,11 @@ export class SearchComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.nameField.nativeElement.focus();
+  } 
+
+  ngOnChanges() {
+    if(this.issearch)
+      this.nameField.nativeElement.focus();
   }
 
 
