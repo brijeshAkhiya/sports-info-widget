@@ -35,7 +35,9 @@ export class BlogViewComponent implements OnInit {
   isNocomment: boolean;
   isAuth$: boolean;
   socialUser: any;
-  closeResult: string; 
+  closeResult: string;
+  collectid = [];
+  index:any; 
 
   constructor(
     private router: Router,
@@ -287,6 +289,26 @@ export class BlogViewComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return  `with: ${reason}`;
+    }
+  }
+
+  // delete comment
+  deletecomment(id)
+  {
+    console.log(id)
+    this.blogcomments.forEach(element => {
+      this.collectid.push(element._id);
+    });
+    if(this.collectid.includes(id))
+    {
+      this.index = this.blogcomments.findIndex(data => data._id === id)
+      this.blogcomments.splice(this.index,1);
+      this.sportsService.deleteusercomment(id).
+          subscribe(res=>
+            console.log('res'),
+            error=>{
+              console.log(error)
+            });
     }
   }
 

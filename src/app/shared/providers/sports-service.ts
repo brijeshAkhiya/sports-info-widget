@@ -265,6 +265,16 @@ export class SportsService {
     );
   }
 
+  deleteusercomment(id){
+    console.log(id)
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('userT')
+    });
+    return this.http.delete(
+      environment.apiUrl + environment.version + '/comments/'+id, {headers: headers} );
+  }
+
+
   //post website inquiries
 
   postinquiries(data) {

@@ -130,6 +130,8 @@
                     </p>
                   </div>
                   <p>{{comment.sComment}}</p>
+                  <p>{{comment.iId}}</p>
+                  <button (click)="deletecomment(comment._id)">Delete</button>
                   <form>
                     <textarea class="form-control">What a match</textarea>
                   </form>
