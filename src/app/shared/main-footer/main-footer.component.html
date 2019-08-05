@@ -33,7 +33,7 @@
 	<app-flash-commentary></app-flash-commentary>
 </div>
 <!--Favourite module start-->
-<div class="fav-block-box" [ngClass]="{'fav-show': isapply}">
+<div class="fav-block-box" [ngClass]="{'fav-show': isapply}" #favContainer>
 	<h1 class="white-text">Favourites</h1>
 	<div class="fav-block" *ngIf="userfavourites?.length == 0">
 		<h5 class="white-text">No favourites !</h5>

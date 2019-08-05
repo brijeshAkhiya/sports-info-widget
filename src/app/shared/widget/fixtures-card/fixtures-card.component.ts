@@ -1,61 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
-
-import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
-import { Store } from "@ngrx/store";
-import * as fromRoot from "@app/app-reducer";
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-fixtures',
-  templateUrl: './fixtures.component.html',
-  styleUrls: ['./fixtures.component.css']
+  selector: 'app-fixtures-card',
+  templateUrl: './fixtures-card.component.html',
+  styleUrls: ['./fixtures-card.component.css']
 })
-export class FixturesComponent implements OnInit {
-
+export class FixturesCardComponent implements OnInit {
+  @Input() sport: any
+  @Input() title: any
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
-  tournamentid;
+  internationSchedule = [];
+  domesticSchedule = [];
 
   constructor(
-    private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
-    private router: Router,
-    private store: Store<fromRoot.State>
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
-    this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
-    // this.getFixtures();
-    // this.loadData('fixture');
-    // this.loadData('result');
-    this.loadFromStore();
-  }
-  loadFromStore(){
-
-    this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
-    this.store.dispatch(new Kabaddi.LoadKabaddiResults())
-    this.store.select('Kabaddi').subscribe((data: any) => {
-      if (data.fixtures.length > 0) {
-        console.log('after effects', data.fixtures);
-        this.paramsFixtures.data = this.commonService.sortArr(data.fixtures, 'Do MMMM YYYY', 'datestart', 'asc')
-        this.paramsFixtures.loadmore = true;
-      }
-      if (data.results.length > 0) {
-        console.log('after effects', data.results);
-        this.paramsResults.data = this.commonService.sortArr(data.results, 'Do MMMM YYYY', 'datestart', 'desc')
-        this.paramsResults.loadmore = true;
-      }
-    })
+    if (this.sport == 'kabaddi') {
+      this.loadKabaddi('fixture')
+      this.loadKabaddi('result')
+    }
+    else if (this.sport == 'cricket') {
+      this.getCricketSeries();
+    }
   }
 
-  loadData(type) {
+  loadKabaddi(type) {
     if (type == 'fixture') {
       if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
         return false;
@@ -84,8 +63,8 @@ export class FixturesComponent implements OnInit {
     });
   }
 
-
   getResults() {
+
     this.paramsResults.loading = true;
     this.sportsService
       .getKabaddiMatchList(this.paramsResults.reqParams.status, this.paramsResults.reqParams.per_page, this.paramsResults.reqParams.page)
@@ -113,4 +92,22 @@ export class FixturesComponent implements OnInit {
       this.getResults();
     }
   }
+
+  //get current cricket series 
+  getCricketSeries() {
+    this.sportsService.getcricketfixtures().pipe(distinctUntilChanged()).subscribe((res: any) => {
+      if (res.data) {
+        let cricketseries = res.data;
+        cricketseries.map((data) => {
+          if (data.category == 'International')
+            this.internationSchedule.push(data);
+          else
+            this.domesticSchedule.push(data)
+        });
+        this.internationSchedule = this.commonService.sortArr(this.internationSchedule, 'MMMM YYYY', 'start_date', 'desc');
+        this.domesticSchedule = this.commonService.sortArr(this.domesticSchedule, 'MMMM YYYY', 'start_date', 'desc');
+      }
+    });
+  }
+
 }

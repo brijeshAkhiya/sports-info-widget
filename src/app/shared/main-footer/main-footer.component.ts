@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, ViewChild } from "@angular/core";
 import { SportsService } from "@providers/sports-service";
 import { SocketService } from '@providers/socket.service';
 import { Socket } from "ngx-socket-io";
@@ -25,6 +25,17 @@ export class MainFooterComponent implements OnInit {
   topPosToStartShowing = 100;
   searchText;
   isAuth$: any;
+  @ViewChild('favContainer') favContainer;
+  
+  @HostListener('document:click', ['$event.target'])
+  public onClick(targetElement) {
+    const clickedInside = this.favContainer.nativeElement.contains(targetElement);
+    console.log(clickedInside);    
+    if (!clickedInside) {
+      this.isapply = false;
+    }
+  }
+
   constructor(private sportsService: SportsService,
     private router: Router,
     private socketservice: SocketService,
@@ -93,6 +104,7 @@ export class MainFooterComponent implements OnInit {
       })
     }
     else {
+      this.isapply = false;
       if (type == 'sport') {
         this.router.navigate([id]);
       }
