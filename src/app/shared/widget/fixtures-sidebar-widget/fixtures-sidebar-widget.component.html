@@ -9,10 +9,7 @@
         </ng-container>
       </ng-template>
     </ngb-tab>
-    <ngb-tab>
-      <ng-template ngbTabTitle>
-        <div>Results</div>
-      </ng-template>
+    <ngb-tab title="Results">
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
         </ng-container>

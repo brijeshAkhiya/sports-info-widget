@@ -30,6 +30,8 @@ import { CricketService } from "@providers/cricket-service";
   styleUrls: ["./main-header.component.css"]
 })
 export class MainHeaderComponent implements OnInit, AfterViewInit {
+  @ViewChild('navbarcontainer') navbarcontainer;
+  @ViewChild('navbarButton') navbarButton;
   @ViewChild("navpointer") navpointer: ElementRef;
   @ViewChild("navbarnav") navbarnav: ElementRef;
   @ViewChild("navbarmenu") navbarmenu: ElementRef;
@@ -42,6 +44,16 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   isLogin: boolean;
   public windowinnerWidth: any;
   isopen: boolean = false;
+
+
+  @HostListener('document:click', ['$event.target'])
+  public onClick(targetElement) {
+    const clickedInside = this.navbarcontainer.nativeElement.contains(targetElement);
+    const navbarButtonInside = this.navbarButton.nativeElement.contains(targetElement);
+    if (!clickedInside && !navbarButtonInside) {
+      this.isapply = false;
+    }
+  }
 
   constructor(
     private renderer2: Renderer2,

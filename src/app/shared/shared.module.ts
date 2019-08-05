@@ -64,7 +64,6 @@ import { GoalCommentryComponent } from './widget/goal-commentry/goal-commentry.c
 import { CountdownComponent } from './widget/countdown/countdown.component';
 import { MatchInfoCardComponent } from './widget/match-info-card/match-info-card.component';
 import { VenueMapCardComponent } from './widget/venue-map-card/venue-map-card.component';
-import { ApiStoreComponent } from './api-store/api-store.component';
 import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget/fixtures-sidebar-widget.component';
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
@@ -127,7 +126,6 @@ import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.comp
         CountdownComponent,
         MatchInfoCardComponent,
         VenueMapCardComponent,
-        ApiStoreComponent,
         FixturesSidebarWidgetComponent,
         UppersliderComponent,
         TopScorerWidgetComponent,
@@ -199,7 +197,6 @@ import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.comp
         CountdownComponent,
         MatchInfoCardComponent,
         VenueMapCardComponent,
-        ApiStoreComponent,
         FixturesSidebarWidgetComponent,
         TopScorerWidgetComponent,
         UppersliderComponent,
