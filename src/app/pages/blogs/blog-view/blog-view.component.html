@@ -19,7 +19,14 @@
           <div class="author-info d-flex justify-content-between align-items-center">
             <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}
               </a>{{blogdata?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
-            <p class="view white-view">{{blogdata?.nViewCounts}}</p>
+            <ul class="count-list">
+                <li>
+                  <p class="comment white-icon"><span>{{blogdata?.nCommentsCount}}</span></p>
+                </li>
+                <li>
+                  <p class="view white-icon"><span>{{blogdata?.nViewCounts}}</span></p>
+                </li>
+              </ul>
           </div>
         </div>
       </div>
