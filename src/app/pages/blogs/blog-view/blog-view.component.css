@@ -62,12 +62,16 @@
 .comment-item .commenter-info       { margin-bottom: 2px; font-size: 14px; line-height: 18px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; }
 .comment-item .commenter-info span  { margin-right: 4px; }
 .comment-item p                     { margin: 0px; color: #3D3D3D; }
-.comment-action ul                  { margin: 8px 0px 0px; }
+.comment-action                     { margin: 8px 0px 0px; }
 .comment-action li                  { margin-right: 8px; padding-right: 8px; display: inline-block; line-height: 18px; color: #7A7A7A; font-weight: 500; position: relative; }
 .comment-action li:after            { content: ""; display: block; position: absolute; height: 100%; width: 1px; right: 0px; top: 0px; background: #CCCCCC; vertical-align: middle; }
 .comment-action li:last-child:after { display: none; }
 .comment-action li a                { font-weight: 600; }
 .comment-action li a:hover          { color: #ED1A33; }
+.cmt-act-btn-list                   { margin: 12px 0px 0px; }
+.cmt-act-btn-list li                { margin-right: 16px; display: inline-block; }
+.cmt-act-btn                        { padding: 8px 16px; background: #3C3C3C; font-size: 16px; line-height: 20px; color: #fff; font-family: 'Muli', sans-serif; font-weight: 900; border: none; border-radius: 4px; }
+.cmt-act-btn.red-btn                { background: #ED1A33; }
 .cmt-view-btn                       { padding: 16px; width: 100%; background: #fff; font-size: 20px; line-height: 25px; color: #3E3E3E; font-family: 'IBM Plex Sans Condensed', sans-serif; border: 2px solid #E4E4E4; border-radius: 2px; }
 .cmt-view-btn:hover                 { background: #ED1A33; color: #fff; border-color: #ED1A33; }
 .login-toast                        { position: fixed; padding: 16px 16px 16px 0px; min-width: 266px; background: #fff; bottom: -120px; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); border-left: 6px solid #F7B500; border-radius: 4px; box-shadow: 0px 4px 16px rgba(0,0,0,0.24); -webkit-box-shadow: 0px 4px 16px rgba(0,0,0,0.24); z-index: 8; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
