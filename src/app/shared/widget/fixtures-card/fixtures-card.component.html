@@ -1,0 +1,110 @@
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+          <h1>{{title ? title : 'Fixtures'}}</h1>
+        </div>
+        <!--Kabaddi sport-->
+        <ngb-tabset class="common-tabs" *ngIf="sport == 'kabaddi'">
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="loadKabaddi('fixture')">Upcoming</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget [message]="'No recent fixtures'"
+                *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
+              <app-loader *ngIf="paramsFixtures.loading"></app-loader>
+              <div class="fixtures-loadmore">
+                <button class="theme-btn down-btn" (click)="loadmore('fixture')"
+                  *ngIf="!paramsFixtures.loading && paramsFixtures.data?.length > 0 && paramsFixtures.loadmore">
+                  Load More
+                  <span></span>
+                </button>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div (click)="loadKabaddi('result')">Results</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget [message]="'No recent results'"
+                *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
+              <app-loader *ngIf="paramsResults.loading"></app-loader>
+
+              <div class="fixtures-loadmore">
+                <button class="theme-btn down-btn" (click)="loadmore('result')"
+                  *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
+                  Load More
+                  <span></span>
+                </button>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+        <!--Cricket sport -->
+        <ngb-tabset class="common-tabs" *ngIf="sport == 'cricket'">
+          <ngb-tab>
+            <ng-template ngbTabTitle>International</ng-template>
+            <ng-template ngbTabContent>
+              <ng-container *ngTemplateOutlet="schedule;context:{ schedules:internationSchedule}">
+              </ng-container>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Domestic</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <ng-container *ngTemplateOutlet="schedule;context:{ schedules:domesticSchedule}">
+              </ng-container>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <!--points table widget-->
+          <app-points-table [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-points-table>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--For cricket template-->
+<ng-template #schedule let-schedules="schedules">
+  <app-loader *ngIf="!schedules"></app-loader>
+  <app-no-data-widget *ngIf="schedules?.length == 0"></app-no-data-widget>
+  <div class="schedule-list" *ngIf="schedules.length > 0">
+    <div class="schedule-month d-flex" *ngFor="let schedule of schedules">
+      <div class="month-title">
+        <div class="sticky-month">
+          <h5>{{schedule.key}}</h5>
+        </div>
+      </div>
+      <div class="schedule-items">
+        <div class="schedule-item rounded-box common-shadow fullblock-link-container"
+          *ngFor="let item of schedule.data">
+          <div class="schedule-title d-flex justify-content-between">
+            <h4><a
+                [routerLink]="['/cricket/tournament', (item.tournament_id | splitID) ,(item.name | slugify)]">{{item.name}}</a>
+            </h4>
+            <!-- <h5>{{item.matches}} Matches</h5> -->
+          </div>
+          <p class="schedule-date">{{item.start_date | amDateFormat:'MMM DD'}} -
+            {{item.end_date | amDateFormat:'MMM DD'}}</p>
+          <a class="fullblock-link"
+            [routerLink]="['/cricket/tournament', (item.tournament_id | splitID) ,(item.name | slugify)]"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

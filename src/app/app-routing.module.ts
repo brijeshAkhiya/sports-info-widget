@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ComingSoonComponent } from './pages/coming-soon/coming-soon.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { CmsContentComponent } from './pages/cms-content/cms-content.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
@@ -10,6 +9,7 @@ import { AdvertiseWithUsComponent } from './pages/advertise-with-us/advertise-wi
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { WriterComponent } from './pages/writer/writer.component';
 import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
+import { PageNotFoundComponent } from '@app/shared/widget/page-not-found/page-not-found.component';
 
 const routes: Routes = [
     {

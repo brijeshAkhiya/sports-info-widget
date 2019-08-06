@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input } from '@angular/core';
+// import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +21,8 @@ import { Meta } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogViewComponent implements OnInit {
-
+  
+  @ViewChild('videoPlayer') videoplayer: ElementRef;
   isLoadMoreComments: boolean = true;
   blogdata: any;
   previewtype: any;
@@ -29,7 +31,6 @@ export class BlogViewComponent implements OnInit {
   usercommentvalue = ''
   isloggedin: boolean = true;
   isplay: boolean = false
-  @ViewChild('videoPlayer') videoplayer: ElementRef;
   widgetblogs: any;
   hideBtn: boolean;
   isNocomment: boolean;
@@ -39,6 +40,7 @@ export class BlogViewComponent implements OnInit {
   collectid = [];
   index:any; 
   hidetextfield:boolean=false;
+  loader: boolean = false; 
 
   constructor(
     private router: Router,
@@ -100,22 +102,19 @@ export class BlogViewComponent implements OnInit {
 
   getBlogview(id) {
     if (id) {
+      this.loader = true;
       this.sportsService.getblogview(id).subscribe((res: any) => {
+        this.loader = false;
         this.blogdata = res.data;
         this.initSEOTags();
         this.getPopularArticles();
-        // let type = (this.previewtype == "detail") ? this.url.value[0].path : this.url.value[1].path;
-        // if (type.toUpperCase() != this.blogdata.eType.toUpperCase())
-        //   this.router.navigate(['/page-not-found'])
 
         if (this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id)
 
         this.getBlogComments(this.blogdata._id, this.initBlogParams(this.blogdata._id));
       }, (error) => {
-        if (error['error'].status == 500 || error['error'].status == 400) {
-          this.router.navigate(['/page-not-found'])
-        }
+        this.loader = false;
       });
     }
   }
@@ -354,6 +353,16 @@ export class BlogViewComponent implements OnInit {
               console.log(error)
             });
     }
+  }
+
+  // When the user scrolls the page, execute myFunction 
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+      var blogHeight = document.getElementById("blogOuterSection");
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("blogCompleteLine").style.width = scrolled + "%";
   }
 
 }
