@@ -174,7 +174,7 @@ export class BlogViewComponent implements OnInit {
             this.getBlogComments(this.blogdata._id, { iPostId: this.blogdata._id, nStart: 0, nLimit: this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
           }
         }, (error: any) => {
-          if (error.status == 401) {
+          if (error.status == 401) {  
             console.log('status', error);
             this.store.dispatch(new Auth.SetUnauthenticated());
             this.authService.signOut();
@@ -275,34 +275,34 @@ export class BlogViewComponent implements OnInit {
     this.modalService.open(LoginModalComponent);
   }
 
-  // open(content,id) {
-  //   console.log(id)
-  //   const modelRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //     // this.closeResult = 'delete';
-  //     console.log(this.closeResult)
-  //   }, (reason) => {
-
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //     console.log(this.closeResult)
-  //   });
-  // }
-
   open(content,id) {
-    const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.confirmationBoxTitle = 'Delete Comment';
-    modalRef.componentInstance.confirmationMessage = 'Do you want to delete comment?';
+    console.log(id)
+    const modelRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      // this.closeResult = 'delete';
+      console.log(this.closeResult)
+    }, (reason) => {
+
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult)
+    });
+  }
+
+  // open(content,id) {
+  //   const modalRef = this.modalService.open(NgbdModalContent);
+  //   modalRef.componentInstance.confirmationBoxTitle = 'Delete Comment';
+  //   modalRef.componentInstance.confirmationMessage = 'Do you want to delete comment?';
     
-    modalRef.result.then((userResponse) => {
-      console.log(`User's choice: ${userResponse} ${id}`)
-    },
-    (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-          console.log(this.closeResult)
-      });
+  //   modalRef.result.then((userResponse) => {
+  //     console.log(`User's choice: ${userResponse} ${id}`)
+  //   },
+  //   (reason) => {
+  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //         console.log(this.closeResult)
+  //     });
   
     
-  }
+  // }
     
   
 
@@ -357,43 +357,6 @@ export class BlogViewComponent implements OnInit {
   }
 
 }
-
-@Component({
-  selector: 'ngbd-modal-content',
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">{{confirmationBoxTitle}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>{{confirmationMessage}}</p>
-    </div>
-    <div class="modal-footer">
-    
-      <button type="button" class="btn btn-secondary" (click)="keep();">Yes</button>
-      <button type="button" class="btn btn-secondary" (click)="delete();">No</button>
-    </div>
-  `
-})
-export class NgbdModalContent {
-  @Input() confirmationBoxTitle;
-  @Input() confirmationMessage;
-
-  constructor(public activeModal: NgbActiveModal) {}
-
- keep()
- {
-   this.activeModal.close(true);
- }
- delete()
- {
-   console.log('delete')
-   this.activeModal.close(false);
- }
-  
-} 
 
 
 
