@@ -134,20 +134,21 @@
                     </p>
                   </div>
                   <p>{{comment.sComment}}</p>
-                  <form *ngIf="hidetextfield == true">
-                    <textarea class="form-control">What a match</textarea>
-                  </form>
+                  <form *ngIf="comment._id == commentid && hidetextfield == true">
+                    <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
+                 
                   <ul class="cmt-act-btn-list">
-                    <li><button class="cmt-act-btn" (click)="savecomment(InputComment.value)">Save</button></li>
+                    <li><button class="cmt-act-btn" (click)="savecomment(commentid,InputComment.value)">Save</button></li>
                     <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
                   </ul>
-                  </form>
+                 </form>
                   <ul class="comment-action">
                     <li>12 mins ago</li>
-                    <li (click)="editcomment()"><a>Edit
+                    <li (click)="editcomment(comment._id)"><a>Edit
                     </a></li>
                     <li><a (click)="open(content,comment._id)">Delete</a></li>
                   </ul>
+            
                 </div>
               </div>
               <!-- <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="blogcomments.length > 0">VIEW
@@ -178,8 +179,8 @@
     </div>
     <div class="modal-footer">
       <ul class="cmt-act-btn-list">
-        <li><button class="cmt-act-btn" (click)="modal.close('Save click')">Keep</button></li>
-        <li><button class="cmt-act-btn red-btn" (click)="modal.close('Save click')">Delete</button></li>
+        <li><button class="cmt-act-btn" (click)="modal.close('keep')">Keep</button></li>
+        <li><button class="cmt-act-btn red-btn" (click)="modal.close('delete')">Delete</button></li>
       </ul>
     </div>
   </div>

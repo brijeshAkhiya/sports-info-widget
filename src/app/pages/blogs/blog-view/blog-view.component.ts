@@ -106,6 +106,7 @@ export class BlogViewComponent implements OnInit {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.loader = false;
         this.blogdata = res.data;
+        console.log(res.data)
         this.initSEOTags();
         this.getPopularArticles();
 
@@ -204,9 +205,11 @@ export class BlogViewComponent implements OnInit {
       }
     }
   }
+  
 
   //sharable link 
   sharablelink(platform) {
+    // console.log(data)
     let url = `${this.commonService.siteUrl}${this.blogdata.eType.toLowerCase()}/${this.blogdata.sSlug}`;
     if (platform == 'facebook') {
       window.open(`http://www.facebook.com/sharer.php?u=${url}`, '_blank');
@@ -223,6 +226,7 @@ export class BlogViewComponent implements OnInit {
   initBlogParams(id) {
     this.commentsParam.iPostId = id;
     this.commentsParam.nStart = this.blogcomments.length;
+    console.log(this.blogcomments)
     return this.commentsParam;
   }
 
@@ -231,12 +235,14 @@ export class BlogViewComponent implements OnInit {
     this.sportsService.getblogcommnets(this.initBlogParams(this.blogdata._id)).subscribe((res: any) => {
       if (res.data && res.data.length > 0) {
         this.blogcomments = this.blogcomments.concat(res.data)
+        console.log(this.blogcomments)
         if (this.commentsParam.nLimit > res.data.length)
           this.isLoadMoreComments = false;
       } else {
         this.isLoadMoreComments = false;
       }
     });
+    
     //  this.getBlogComments(this.blogdata._id,this.initBlogParams(this.blogdata._id))
   }
 
@@ -254,12 +260,14 @@ export class BlogViewComponent implements OnInit {
   }
 
   //to get blog comments
-  //to get blog comments
   getBlogComments(id, data) {
+    console.log(id)
+    console.log(data)
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
         if (res.data && res.data.length > 0) {
           this.blogcomments = res.data
+          console.log(this.blogcomments)
           if (this.commentsParam.nLimit > res.data.length)
             this.isLoadMoreComments = false;
         } else {
@@ -267,6 +275,7 @@ export class BlogViewComponent implements OnInit {
         }
       });
     }
+   
   }
 
   //open login modal 
@@ -276,34 +285,18 @@ export class BlogViewComponent implements OnInit {
 
   open(content,id) {
     console.log(id)
-    const modelRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      // this.closeResult = 'delete';
-      console.log(this.closeResult)
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+    if(result == "delete")
+    {
+      this.deletecomment(id);
+    }
     }, (reason) => {
 
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       console.log(this.closeResult)
     });
   }
-
-  // open(content,id) {
-  //   const modalRef = this.modalService.open(NgbdModalContent);
-  //   modalRef.componentInstance.confirmationBoxTitle = 'Delete Comment';
-  //   modalRef.componentInstance.confirmationMessage = 'Do you want to delete comment?';
-    
-  //   modalRef.result.then((userResponse) => {
-  //     console.log(`User's choice: ${userResponse} ${id}`)
-  //   },
-  //   (reason) => {
-  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //         console.log(this.closeResult)
-  //     });
-  
-    
-  // }
-    
-  
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -315,17 +308,19 @@ export class BlogViewComponent implements OnInit {
     }
   }
   //save comment
-  editcomment()
+  commentid;
+  editcomment(id)
   {
-    console.log('edit')
+    this.commentid = id; 
     this.hidetextfield = !this.hidetextfield;
   }
-  // data;
-  savecomment(data)
-  {
-    // this.data = document.getElementById('savecmt').innerHTML;
-    console.log(data)
 
+  savecomment(id,data)
+  {
+    console.log(data,id)
+    this.sportsService.Editcomment(id,data).
+        subscribe(res=> console.log('done'),
+        err=>console.log(err))
     this.hidetextfield = false;
   }
 
@@ -335,24 +330,16 @@ export class BlogViewComponent implements OnInit {
     console.log('cancel')
   }
 
-  // delete comment
   deletecomment(id)
   {
     console.log(id)
-    this.blogcomments.forEach(element => {
-      this.collectid.push(element._id);
-    });
-    if(this.collectid.includes(id))
-    {
-      this.index = this.blogcomments.findIndex(data => data._id === id)
-      this.blogcomments.splice(this.index,1);
-      this.sportsService.deleteusercomment(id).
-          subscribe(res=>
-            console.log('res'),
-            error=>{
-              console.log(error)
-            });
-    }
+    this.index = this.blogcomments.findIndex(data => data._id == id);
+    this.sportsService.deleteusercomment(id).
+        subscribe(res=>
+        this.blogcomments.splice(this.index,1),
+               error=>{
+                  console.log(error)
+                });
   }
 
   // When the user scrolls the page, execute myFunction 
