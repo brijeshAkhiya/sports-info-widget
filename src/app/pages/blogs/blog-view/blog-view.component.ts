@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from '@ngrx/store';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "angularx-social-login";
 
 import { SportsService } from "@providers/sports-service";
@@ -38,6 +38,7 @@ export class BlogViewComponent implements OnInit {
   closeResult: string;
   collectid = [];
   index:any; 
+  hidetextfield:boolean=false;
 
   constructor(
     private router: Router,
@@ -274,13 +275,36 @@ export class BlogViewComponent implements OnInit {
     this.modalService.open(LoginModalComponent);
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  // open(content,id) {
+  //   console.log(id)
+  //   const modelRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //     // this.closeResult = 'delete';
+  //     console.log(this.closeResult)
+  //   }, (reason) => {
+
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //     console.log(this.closeResult)
+  //   });
+  // }
+
+  open(content,id) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.confirmationBoxTitle = 'Delete Comment';
+    modalRef.componentInstance.confirmationMessage = 'Do you want to delete comment?';
+    
+    modalRef.result.then((userResponse) => {
+      console.log(`User's choice: ${userResponse} ${id}`)
+    },
+    (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          console.log(this.closeResult)
+      });
+  
+    
   }
+    
+  
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -290,6 +314,26 @@ export class BlogViewComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+  //save comment
+  editcomment()
+  {
+    console.log('edit')
+    this.hidetextfield = !this.hidetextfield;
+  }
+  // data;
+  savecomment(data)
+  {
+    // this.data = document.getElementById('savecmt').innerHTML;
+    console.log(data)
+
+    this.hidetextfield = false;
+  }
+
+  cancelcomment()
+  {
+    this.hidetextfield = false;
+    console.log('cancel')
   }
 
   // delete comment
@@ -313,5 +357,43 @@ export class BlogViewComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">{{confirmationBoxTitle}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{confirmationMessage}}</p>
+    </div>
+    <div class="modal-footer">
+    
+      <button type="button" class="btn btn-secondary" (click)="keep();">Yes</button>
+      <button type="button" class="btn btn-secondary" (click)="delete();">No</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() confirmationBoxTitle;
+  @Input() confirmationMessage;
+
+  constructor(public activeModal: NgbActiveModal) {}
+
+ keep()
+ {
+   this.activeModal.close(true);
+ }
+ delete()
+ {
+   console.log('delete')
+   this.activeModal.close(false);
+ }
+  
+} 
+
 
 

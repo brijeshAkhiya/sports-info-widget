@@ -56,7 +56,7 @@ import { BlogsComponent } from "./pages/blogs/blogs.component";
 
 import { MainHeaderComponent } from "./shared/main-header/main-header.component";
 import { MainFooterComponent } from "./shared/main-footer/main-footer.component";
-import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
+import { BlogViewComponent, NgbdModalContent } from './pages/blogs/blog-view/blog-view.component';
 import { WriterComponent } from './pages/writer/writer.component';
 import { LoginModalComponent } from './shared/widget/login-modal/login-modal.component';
 import { EffectsModule } from '@ngrx/effects';
@@ -106,7 +106,7 @@ export function createTranslateLoader(http: HttpClient) {
     ContactComponent,
     AdvertiseWithUsComponent,
     BlogsComponent,
-
+    NgbdModalContent,
     MainHeaderComponent,
     MainFooterComponent,
     BlogViewComponent,
@@ -159,6 +159,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
+  entryComponents:[NgbdModalContent ]
 
 
 })

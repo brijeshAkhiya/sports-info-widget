@@ -130,19 +130,21 @@
                     </p>
                   </div>
                   <p>{{comment.sComment}}</p>
-                  <p>{{comment.iId}}</p>
-                  <button (click)="deletecomment(comment._id)">Delete</button>
-                  <form>
-                    <textarea class="form-control">What a match</textarea>
-                  </form>
+                  <!-- <p>{{comment.iId}}</p> -->
+                  <!-- <button (click)="deletecomment(comment._id)">Delete</button> -->
+                  <form *ngIf="hidetextfield == true">
+                    <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
+
                   <ul class="cmt-act-btn-list">
-                    <li><button class="cmt-act-btn">Save</button></li>
-                    <li><button class="cmt-act-btn red-btn">Cancel</button></li>
+                    <li><button class="cmt-act-btn" (click)="savecomment(InputComment.value)">Save</button></li>
+                    <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
                   </ul>
+                  </form>
                   <ul class="comment-action">
                     <li>12 mins ago</li>
-                    <li><a>Edit</a></li>
-                    <li><a (click)="open(content)">Delete</a></li>
+                    <li (click)="editcomment()"><a>Edit
+                    </a></li>
+                    <li><a (click)="open(content,comment._id)">Delete</a></li>
                   </ul>
                 </div>
               </div>
