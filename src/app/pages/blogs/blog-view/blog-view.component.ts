@@ -308,7 +308,7 @@ export class BlogViewComponent implements OnInit {
     }
   }
   //save comment
-  commentid;
+  commentid;change;setinterval;
   editcomment(id)
   {
     this.commentid = id; 
@@ -319,8 +319,12 @@ export class BlogViewComponent implements OnInit {
   {
     console.log(data,id)
     this.sportsService.Editcomment(id,data).
-        subscribe(res=> console.log('done'),
-        err=>console.log(err))
+        subscribe(
+          data=>
+          {   
+            console.log(data)
+          },
+        err=>console.log(err));
     this.hidetextfield = false;
   }
 
@@ -333,7 +337,7 @@ export class BlogViewComponent implements OnInit {
   deletecomment(id)
   {
     console.log(id)
-    this.index = this.blogcomments.findIndex(data => data._id == id);
+    this.index = this.blogcomments.findIndex(data => data._id === id);
     this.sportsService.deleteusercomment(id).
         subscribe(res=>
         this.blogcomments.splice(this.index,1),
