@@ -112,8 +112,9 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 @media (max-width: 575px) {
 /* -------- Banner Section ------- */
     .home-banner:after                      { height: 16px;}
-    .popular-video-section .pattern         { display: none; }
     .home-banner .common-banner-pattern     { left: -105%; top: 40%; transform: rotate(-164deg) translate(-40% , 43%) scale(1.1); -webkit-transform: rotate(-164deg) translate(-40% , 43%) scale(1.1); }
+    .popular-video-section .pattern         { display: none; }
+    .main-popular-video .video-desc         { padding: 20px; }
 
 }
 

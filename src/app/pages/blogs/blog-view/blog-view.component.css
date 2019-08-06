@@ -1,4 +1,4 @@
-.blog-complete-line         { width: 100%; position: sticky; position: -webkit-sticky; top: 50px; z-index: 6; overflow: hidden; }
+.blog-complete-line         { width: 100%; position: sticky; position: -webkit-sticky; top: 51px; z-index: 6; overflow: hidden; }
 .blog-complete-line #blogCompleteLine { width: 0%; height: 6px; background: #ED1A33; transition: all 0.15s ease-in-out; -webkit-transition: all 0.15s ease-in-out; }
 .blog-banner                { margin-top: -6px; height: 670px; background: #1B2A5A no-repeat top center / cover; position: relative; overflow: hidden; }
 .blog-banner:after          { content: ""; position: absolute; width: 100%; height: 50%; bottom: 0px; background-image: linear-gradient( to bottom, rgba(27,42,90,0.00), rgba(27,42,90,1)); z-index: 1;}
@@ -117,7 +117,7 @@
 }
 
 @media (max-width: 991px) {
-    .blog-complete-line                 { top: 42px; }
+    .blog-complete-line                 { top: 43px; }
     .blog-banner                        { height: 400px; }
     .cmt-view-btn                       { padding: 12px; font-size: 16px; line-height: 22px; }
     .cmt-act-btn                        { padding: 6px 14px; font-size: 14px; line-height: 18px;  }
@@ -128,7 +128,7 @@
 }
 
 @media (max-width: 767px) {
-    .blog-complete-line             { top: 44px; }
+    .blog-complete-line             { top: 45px; }
     .blog-banner                    { height: 360px; }
     .blog-banner .banner-desc       { padding: 16px 0px 16px; }
     .blog-banner video              { height: auto; width: 86%; }
@@ -153,7 +153,7 @@
 }
 
 @media (max-width: 575px) {
-    .blog-complete-line             { top: 40px; }
+    .blog-complete-line             { top: 41px; }
     .blog-banner                    { height: 320px; }
     .blog-banner h1                 { font-size: 24px; line-height: 30px;}
     .blog-banner video              { width: 100%; }
