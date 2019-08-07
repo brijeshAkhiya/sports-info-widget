@@ -1,17 +1,17 @@
 import { KabaddiActions, LOAD_KABADDI_RESULTS, LOAD_KABADDI_RESULTS_SUCCESS, KABADDI_LIVE_MATCHES, KABADDI_FIXTURES_MATCHES, KABADDI_RESULTS_MATCHES, KABADDI_MATCH_INFO, LOAD_KABADDI_FIXTURES, LOAD_KABADDI_FIXTURES_SUCCESS, LOAD_KABADDI_LIVE_MATCHES, LOAD_KABADDI_LIVE_MATCHES_SUCCESS } from "./kabaddi.actions";
 
 export interface KabaddiData {
-    fixtures: [],
-    live: [],
-    results: [],
-    info: []
+    fixtures: {},
+    live: {},
+    results: {},
+    info: {}
 }
 
 const initialState = {
-    fixtures: [],
-    live: [],
-    results: [],
-    info: []
+    fixtures: {},
+    live: {},
+    results: {},
+    info: {}
 };
 
 export function KabaddiReducer(state = initialState, action: KabaddiActions): any {

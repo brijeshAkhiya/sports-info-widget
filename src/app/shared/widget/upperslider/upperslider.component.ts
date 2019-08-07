@@ -87,18 +87,18 @@ export class UppersliderComponent implements OnInit {
       console.log("store subscribe");
       console.log(res);
 
-      if (res.live.length > 0){ 
-        this.slider = this.slider.concat(res.live);
+      if(Object.entries(res.live).length > 0 && res.live.items.length > 0){ 
+        this.slider = this.slider.concat(res.live.items);
         this.getLiveKabaddiUpdate(this);
         isLiveUpdate = true;
       }
 
-      if (res.results.length > 0) 
-        this.slider = this.slider.concat(res.results.slice(0,3));
-      if (res.fixtures.length > 0) 
-        this.slider = this.slider.concat(res.fixtures.slice(0,3));
-      if(!isLiveUpdate){             
-        let minTime = new Date(Math.min.apply(null, res.fixtures.map(function (e) {
+      if(Object.entries(res.results).length > 0 && res.results.items.length > 0)
+        this.slider = this.slider.concat(res.results.items.slice(0,3));
+      if(Object.entries(res.fixtures).length > 0 && res.fixtures.items.length > 0) 
+        this.slider = this.slider.concat(res.fixtures.items.slice(0,3));
+      if(!isLiveUpdate && (Object.entries(res.fixtures).length > 0 && res.fixtures.items.length > 0)){             
+        let minTime = new Date(Math.min.apply(null, res.fixtures.items.map(function (e) {
           return new Date(moment.utc(e.datestart).format());
         })));
         this.startLiveUpdateAfterTime(moment.utc(minTime).format());

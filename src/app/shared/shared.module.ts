@@ -133,7 +133,7 @@ import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.comp
         UppersliderComponent,
         TopScorerWidgetComponent,
         PageNotFoundComponent,
-        FixturesCardComponent
+        FixturesCardComponent,
     ],
     providers: [
         /** All Pipes */

@@ -5,6 +5,11 @@ import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
 import { distinctUntilChanged } from 'rxjs/operators';
 
+import * as fromRoot from "@app/app-reducer";
+import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
+import * as Cricket from "@store/cricket/cricket.actions";
+import { Store } from "@ngrx/store";
+
 @Component({
   selector: 'app-fixtures-card',
   templateUrl: './fixtures-card.component.html',
@@ -15,22 +20,40 @@ export class FixturesCardComponent implements OnInit {
   @Input() title: any
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
-  internationSchedule = [];
-  domesticSchedule = [];
 
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
     if (this.sport == 'kabaddi') {
-      this.loadKabaddi('fixture')
-      this.loadKabaddi('result')
+      this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
+      this.store.dispatch(new Kabaddi.LoadKabaddiResults())
+      this.store.select('Kabaddi').subscribe((data: any) => {
+        console.log(data);
+        
+        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
+          this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'))
+        }
+        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0 && data.fixtures > this.paramsFixtures.reqParams.page)
+          this.paramsFixtures.loadmore = true;
+        else
+          this.paramsFixtures.loadmore = true;
+          
+        if (Object.entries(data.results).length > 0 && data.results.items.length > 0) {
+          this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(data.results.items, 'Do MMMM YYYY', 'datestart', 'desc'));
+        }
+        if (Object.entries(data.results).length > 0 && data.results.items.length > 0 && data.results.total_pages > this.paramsResults.reqParams.page)
+          this.paramsResults.loadmore = true;
+        else
+          this.paramsResults.loadmore = true;
+      })
     }
     else if (this.sport == 'cricket') {
-      this.getCricketSeries();
+      // this.getCricketSeries();
     }
   }
 
@@ -91,23 +114,6 @@ export class FixturesCardComponent implements OnInit {
       this.paramsResults.reqParams.page += 1;
       this.getResults();
     }
-  }
-
-  //get current cricket series 
-  getCricketSeries() {
-    this.sportsService.getcricketfixtures().pipe(distinctUntilChanged()).subscribe((res: any) => {
-      if (res.data) {
-        let cricketseries = res.data;
-        cricketseries.map((data) => {
-          if (data.category == 'International')
-            this.internationSchedule.push(data);
-          else
-            this.domesticSchedule.push(data)
-        });
-        this.internationSchedule = this.commonService.sortArr(this.internationSchedule, 'MMMM YYYY', 'start_date', 'desc');
-        this.domesticSchedule = this.commonService.sortArr(this.domesticSchedule, 'MMMM YYYY', 'start_date', 'desc');
-      }
-    });
   }
 
 }

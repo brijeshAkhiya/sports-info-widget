@@ -1,2 +1,68 @@
 <app-menu [options]="{sport : 'cricket', type: 'home'}"></app-menu>
-<app-fixtures-card [sport]="'cricket'" [title]="'Schedule'"></app-fixtures-card>
+
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+          <h1>Schedule</h1>
+        </div>
+        <ngb-tabset class="common-tabs">
+          <ngb-tab>
+            <ng-template ngbTabTitle>International</ng-template>
+            <ng-template ngbTabContent>
+              <ng-container *ngTemplateOutlet="schedule;context:{ schedules:internationSchedule}">
+              </ng-container>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>Domestic</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <ng-container *ngTemplateOutlet="schedule;context:{ schedules:domesticSchedule}">
+              </ng-container>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #schedule let-schedules="schedules">
+  <app-loader *ngIf="!schedules"></app-loader>
+  <app-no-data-widget *ngIf="schedules?.length == 0"></app-no-data-widget>
+  <div class="schedule-list" *ngIf="schedules.length > 0">
+    <div class="schedule-month d-flex" *ngFor="let schedule of schedules">
+      <div class="month-title">
+        <div class="sticky-month">
+          <h5>{{schedule.key}}</h5>
+        </div>
+      </div>
+      <div class="schedule-items">
+        <div class="schedule-item rounded-box common-shadow fullblock-link-container"
+          *ngFor="let item of schedule.data">
+          <div class="schedule-title d-flex justify-content-between">
+            <h4><a
+                [routerLink]="['/cricket/tournament', (item.tournament_id | splitID) ,(item.name | slugify)]">{{item.name}}</a>
+            </h4>
+            <!-- <h5>{{item.matches}} Matches</h5> -->
+          </div>
+          <p class="schedule-date">{{item.start_date | amDateFormat:'MMM DD'}} -
+            {{item.end_date | amDateFormat:'MMM DD'}}</p>
+          <a class="fullblock-link"
+            [routerLink]="['/cricket/tournament', (item.tournament_id | splitID) ,(item.name | slugify)]"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
