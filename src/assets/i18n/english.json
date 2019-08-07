@@ -1,13 +1,24 @@
 {
-    "Header_menu": {
-        "Cricket": "Cricket",
-        "Kabaddi": "Kabaddi",
-        "Soccer": "Soccer",
-        "Badminton": "Badminton",
-        "Basketball": "Basketball",
-        "Field_Hockey": "Field Hockey",
-        "Racing": "Racing",
-        "Tennis_sports": "Tennis sports",
-        "Logout":"Logout"
-      }
+  "Header_menu": {
+    "Cricket": "Cricket",
+    "Kabaddi": "Kabaddi",
+    "Soccer": "Soccer",
+    "Badminton": "Badminton",
+    "Basketball": "Basketball",
+    "Field_Hockey": "Field Hockey",
+    "Racing": "Racing",
+    "Tennis_sports": "Tennis sports",
+    "Logout": "Logout"
+  },
+  "Footer": {
+    "About": "About",
+    "Contact": "Contact",
+    "Blog": "Blog",
+    "Advertise_with_us": "Advertise with us",
+    "Terms_and_Conditions": "Terms & Conditions",
+    "Privacy_Policy": "Privacy Policy",
+    "Favourites": "Favourites",
+    "No_favourites": "No favourites !"
+  }
+
 }
