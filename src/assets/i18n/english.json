@@ -20,8 +20,16 @@
     "Favourites": "Favourites",
     "No_favourites": "No favourites !"
   },
-  "About_us":{
-    "readers_text":"What our readers say"
+  "About_us": {
+    "readers_text": "What our readers say"
+  },
+  "Contact_us": {
+    "Contact_Us": "Contact Us",
+    "Send_message": "Send us a message",
+    "required_field": "This field is required!",
+    "valid_email_msg": "Please enter valid email address",
+    "Submit": "Submit",
+    "response_submit_msg": "Your response was submitted successfully.",
+    "submit_another": "Submit another response"
   }
-  
 }
