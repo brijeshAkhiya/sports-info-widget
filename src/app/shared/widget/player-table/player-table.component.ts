@@ -20,6 +20,7 @@ export class PlayerTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.data)
   }
 
 }

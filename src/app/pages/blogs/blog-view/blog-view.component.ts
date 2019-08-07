@@ -14,6 +14,8 @@ import * as Auth from "@store/auth/auth.actions";
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
 import { Meta } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
+import { ObsEvent } from 'ng-lazyload-image/src/types';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-blog-view',
@@ -64,6 +66,7 @@ export class BlogViewComponent implements OnInit {
   ngOnInit() {
     this.store.select('auth').subscribe((data) => {
       this.isAuth$ = data.isAuthenticated
+      console.log(data)
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
@@ -322,7 +325,7 @@ export class BlogViewComponent implements OnInit {
     console.log(data,id)
     this.sportsService.Editcomment(id,data).
         subscribe(
-          (res:any)=>
+          (res: any)=>
           {   
             this.index = this.blogcomments.findIndex(data => data._id == res.data._id);
             this.blogcomments[this.index].sComment = res.data.sComment;

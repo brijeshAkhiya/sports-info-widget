@@ -43,26 +43,26 @@ export class LoginModalComponent implements OnInit {
       .signIn(FacebookLoginProvider.PROVIDER_ID)
       .then(res => {
         console.log(res)
-        // if (res) {
-        //   this.socialUser = res;
-        //   this.validateSocialLogin('fb', res.authToken)
-        //   this.modalService.dismissAll();
-        // }
+        if (res) {
+          this.socialUser = res;
+          this.validateSocialLogin('fb', res.authToken)
+          this.modalService.dismissAll();
+        }
       });
   }
 
   signInWithGoogle(): void {
     console.log('google click')
-    // this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.socialLoginService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(res => {
         console.log(res)
-        // if (res) {
-        //   this.socialUser = res;
-        //   this.validateSocialLogin('google', res.idToken)
-        //   this.modalService.dismissAll();
-        // }
+        if (res) {
+          this.socialUser = res;
+          this.validateSocialLogin('google', res.idToken)
+          this.modalService.dismissAll();
+        }
       })
       .catch(error => { });
   }
