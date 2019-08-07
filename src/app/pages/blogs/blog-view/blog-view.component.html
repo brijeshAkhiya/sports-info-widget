@@ -133,11 +133,7 @@
                         {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}
                     </p>
                   </div>
-                  <p *ngIf="comment._id == commentid && status == 200;else usercomment">{{newcomment}}</p>
-                  <ng-template #usercomment>
-                    {{comment.sComment}}
-                  </ng-template>
-
+                  <p>{{comment.sComment}}</p>
                   <form *ngIf="comment._id == commentid && hidetextfield == true">
                     <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
                  
@@ -145,18 +141,16 @@
                     <li><button class="cmt-act-btn" (click)="savecomment(commentid,InputComment.value)">Save</button></li>
                     <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
                   </ul>
-                 </form>
-                  <ul class="comment-action">
+                 </form >
+                  <ul class="comment-action" >
                     <li>12 mins ago</li>
-                    <li (click)="editcomment(comment._id)"><a>Edit
-                    </a></li>
-                    <li><a (click)="open(content,comment._id)">Delete</a></li>
-                  </ul>
+                        <li (click)="editcomment(comment._id)"><a>Edit
+                        </a></li>
+                        <li><a (click)="open(content,comment._id)">Delete</a></li>
+                    </ul>
             
                 </div>
               </div>
-              <!-- <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="blogcomments.length > 0">VIEW
-                  MORE</button> -->
               <div class="text-center">
                 <button class="theme-btn down-btn" (click)="viewmorecomments()" *ngIf="isLoadMoreComments">VIEW
                   MORE<span></span></button>

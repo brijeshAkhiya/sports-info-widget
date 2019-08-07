@@ -13,6 +13,7 @@ import * as Auth from "@store/auth/auth.actions";
 
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
 import { Meta } from '@angular/platform-browser';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-blog-view',
@@ -41,11 +42,8 @@ export class BlogViewComponent implements OnInit {
   index:any; 
   hidetextfield:boolean=false;
   loader: boolean = false; 
-  interval: any;
-  newcomment: any;
-  change:any;
-  commentid:any;
-  status:any;
+  commentid: any;
+  
 
   constructor(
     private router: Router,
@@ -313,7 +311,6 @@ export class BlogViewComponent implements OnInit {
     }
   }
   //save comment
-
   editcomment(id)
   {
     this.commentid = id; 
@@ -325,14 +322,13 @@ export class BlogViewComponent implements OnInit {
     console.log(data,id)
     this.sportsService.Editcomment(id,data).
         subscribe(
-          res=>
+          (res:any)=>
           {   
-            this.change = res;
-            this.status = this.change.status;
-            this.newcomment = this.change.data.sComment;
+            this.index = this.blogcomments.findIndex(data => data._id == res.data._id);
+            this.blogcomments[this.index].sComment = res.data.sComment;
           },
         err=>console.log(err));
-    this.hidetextfield = false;
+        this.hidetextfield = false;
   }
 
   cancelcomment()
