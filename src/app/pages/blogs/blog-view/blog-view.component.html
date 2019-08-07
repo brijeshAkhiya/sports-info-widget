@@ -133,7 +133,11 @@
                         {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}
                     </p>
                   </div>
-                  <p>{{comment.sComment}}</p>
+                  <p *ngIf="comment._id == commentid && status == 200;else usercomment">{{interval}}</p>
+                  <ng-template #usercomment>
+                    {{comment.sComment}}
+                  </ng-template>
+
                   <form *ngIf="comment._id == commentid && hidetextfield == true">
                     <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
                  

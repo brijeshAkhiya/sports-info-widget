@@ -41,6 +41,7 @@ export class BlogViewComponent implements OnInit {
   index:any; 
   hidetextfield:boolean=false;
   loader: boolean = false; 
+  interval: any;
 
   constructor(
     private router: Router,
@@ -308,7 +309,7 @@ export class BlogViewComponent implements OnInit {
     }
   }
   //save comment
-  commentid;change;setinterval;
+  commentid;change;setinterval;status;
   editcomment(id)
   {
     this.commentid = id; 
@@ -320,9 +321,11 @@ export class BlogViewComponent implements OnInit {
     console.log(data,id)
     this.sportsService.Editcomment(id,data).
         subscribe(
-          data=>
+          res=>
           {   
-            console.log(data)
+            this.change = res;
+            this.status = this.change.status;
+            this.interval = this.change.data.sComment;
           },
         err=>console.log(err));
     this.hidetextfield = false;
