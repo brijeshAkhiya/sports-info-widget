@@ -14,37 +14,37 @@
     <div class="navbar-nav-container" id="navbar-nav">
       <ul class="navbar-nav" #navbarnav>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cricket" routerLinkActive="active" (click)="isapply = false" [innerHTML]="'Cricket' | translate" ></a>
+          <a class="nav-link" routerLink="/cricket" routerLinkActive="active" (click)="isapply = false">{{'Header_menu.Cricket' | translate}}</a>
         </li>
         <li class="nav-item">
           <!-- <a class="nav-link" [routerLink]="['/coming-soon/kabaddi']" routerLinkActive="active"
             (click)="isapply = false">Kabaddi</a> -->
           <a class="nav-link" [routerLink]="['/kabaddi']" routerLinkActive="active"
-            (click)="isapply = false" >Kabaddi</a>
+            (click)="isapply = false" >{{'Header_menu.Kabaddi' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/soccer']" routerLinkActive="active"
-            (click)="isapply = false">Soccer</a>
+            (click)="isapply = false">{{'Header_menu.Soccer' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/badminton']" routerLinkActive="active"
-            (click)="isapply = false">Badminton</a>
+            (click)="isapply = false">{{'Header_menu.Badminton' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/basketball']" routerLinkActive="active"
-            (click)="isapply = false">Basketball</a>
+            (click)="isapply = false">{{'Header_menu.Basketball' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/field-Hockey']" routerLinkActive="active"
-            (click)="isapply = false">Field Hockey</a>
+            (click)="isapply = false">{{'Header_menu.Field_Hockey' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/racing']" routerLinkActive="active"
-            (click)="isapply = false">Racing</a>
+            (click)="isapply = false">{{'Header_menu.Racing' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/coming-soon/tennis-sports']" routerLinkActive="active"
-            (click)="isapply = false">Tennis sports</a>
+            (click)="isapply = false">{{'Header_menu.Tennis_sports' | translate}}</a>
         </li>
       </ul>
       <!-- <div id="nav-pointer" #navpointer></div> -->
@@ -58,7 +58,7 @@
     <li ngbDropdown *ngIf="isLogin">
       <a class="login" [ngClass]="{'logged': isLogin}" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
       <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <li ngbDropdownItem><a (click)="logout()">Logout</a></li>
+        <li ngbDropdownItem><a (click)="logout()">{{'Header_menu.Logout' | translate}}</a></li>
       </ul>
     </li>
   </ul>
