@@ -47,14 +47,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group" [ngClass]="{'has-error': submitted && f.sName.errors}">
-                      <input type="text" class="form-control" placeholder="Full Name" formControlName="sName">
+                      <input type="text" class="form-control" placeholder="{{'Contact_us.Full_Name' | translate}}" formControlName="sName">
                       <span
                         *ngIf="submitted && f.sName.hasError('required')">{{'Contact_us.required_field' | translate}}</span>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" [ngClass]="{'has-error': submitted && f.sEmail.errors}">
-                      <input type="email" class="form-control" placeholder="Email" formControlName="sEmail">
+                      <input type="email" class="form-control" placeholder="{{'Contact_us.Email' | translate}}" formControlName="sEmail">
                       <span
                         *ngIf="submitted && f.sEmail.hasError('required')">{{'Contact_us.required_field' | translate}}</span>
                       <span
@@ -65,7 +65,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group" [ngClass]="{'has-error': submitted && f.sSubject.errors}">
-                      <input type="text" class="form-control" placeholder="Subject" formControlName="sSubject">
+                      <input type="text" class="form-control" placeholder="{{'Contact_us.Subject' | translate}}" formControlName="sSubject">
                       <span
                         *ngIf="submitted && f.sSubject.hasError('required')">{{'Contact_us.required_field' | translate}}</span>
                     </div>
@@ -74,7 +74,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group" [ngClass]="{'has-error': submitted && f.sMessage.errors}">
-                      <textarea type="text" class="form-control" placeholder="Message"
+                      <textarea type="text" class="form-control" placeholder="{{'Contact_us.Message' | translate}}"
                         formControlName="sMessage"></textarea>
                       <span
                         *ngIf="submitted && f.sMessage.hasError('required')">{{'Contact_us.required_field' | translate}}</span>
