@@ -42,6 +42,8 @@ export class BlogViewComponent implements OnInit {
   hidetextfield:boolean=false;
   loader: boolean = false; 
   interval: any;
+  newcomment: any;
+  change;
 
   constructor(
     private router: Router,
@@ -309,7 +311,7 @@ export class BlogViewComponent implements OnInit {
     }
   }
   //save comment
-  commentid;change;setinterval;status;
+  commentid;status;
   editcomment(id)
   {
     this.commentid = id; 
@@ -325,7 +327,7 @@ export class BlogViewComponent implements OnInit {
           {   
             this.change = res;
             this.status = this.change.status;
-            this.interval = this.change.data.sComment;
+            this.newcomment = this.change.data.sComment;
           },
         err=>console.log(err));
     this.hidetextfield = false;
