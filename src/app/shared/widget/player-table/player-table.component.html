@@ -5,8 +5,14 @@
   <div class="table-responsive"> 
     <table class="table"> 
       <thead>
-        <tr [ngClass]="options.class_light_row">
-          <th *ngFor="let title of options.titles" [innerHTML]="title"></th>
+        <tr [ngClass]="options.class_light_row" id='aa'>
+          <th *ngFor="let title of options.titles" sortable="title" [innerHTML]="title" name="superraid" (click)="name($event)">
+          </th>
+          <!-- <th sortColumn [sortKey]="'pid'" [data]="data" >aa</th>
+          <th >bb</th>
+          <th scope="col" sortable="raidsuccessful" (sort)="onSort($event)">xx</th>
+          <th scope="col" sortable="superraid" (sort)="onSort($event)">ii</th>
+          <th scope="col" sortable="raidtotalpoint" (sort)="onSort($event)">oo</th> -->
         </tr>
       </thead>
       <tbody>

@@ -205,9 +205,10 @@ import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.comp
         TopScorerWidgetComponent,
         UppersliderComponent,
         PageNotFoundComponent,
-        FixturesCardComponent
+        FixturesCardComponent,
+   
     ],
-    entryComponents:[LoginModalComponent]
+    entryComponents:[LoginModalComponent ],
 
 })
 export class SharedModule { }
