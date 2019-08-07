@@ -43,7 +43,9 @@ export class BlogViewComponent implements OnInit {
   loader: boolean = false; 
   interval: any;
   newcomment: any;
-  change;
+  change:any;
+  commentid:any;
+  status:any;
 
   constructor(
     private router: Router,
@@ -311,7 +313,7 @@ export class BlogViewComponent implements OnInit {
     }
   }
   //save comment
-  commentid;status;
+
   editcomment(id)
   {
     this.commentid = id; 
