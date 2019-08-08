@@ -237,12 +237,13 @@ export class UppersliderComponent implements OnInit {
   }
 
   sortBySchedule(arr) {
+    console.log(arr)
     return arr.sort(function (a, b) {
       if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
         return -1
       }
       else if (a.status == 'not_started') {
-        if (a.scheduled && b.scheduled) {
+        if (a.scheduled && b.scheduled) { 
           let aDate: any = new Date(a.scheduled);
           let bDate: any = new Date(b.scheduled);
           return aDate - bDate;

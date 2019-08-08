@@ -3,92 +3,70 @@ import { Component, OnInit, Input, ViewChildren, Directive, Output,EventEmitter,
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
 import { KabaddiService } from '@app/modules/kabaddi/kabaddi.service';
+import { stringify } from '@angular/compiler/src/util';
+import { filter, findIndex } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-player-table',
   templateUrl: './player-table.component.html',
   styleUrls: ['./player-table.component.css']
 })
-
-@Directive({selector: 'th[shortable]'})
-
 export class PlayerTableComponent implements OnInit {
   
-
   @Input() data: any[];
   @Input() options;
-  @Input() sortable: string;
-  values=[];
   private toggleSort: boolean = false;
-
-  // @Input('sortKey') key: any;
+  alltitle: any;
+  allvalue: any;
+  index: any;
+  object: any;
+  value: any;
 
   constructor(
     private commonService: CommonService,
     private cricketService: CricketService,
     private kabaddiService: KabaddiService,
-    private el: ElementRef, private renderer: Renderer
-  ) {
-    
-   }
+    private el: ElementRef, 
+    private renderer: Renderer) {
+  }
 
-  ngOnInit() {
-    console.log(this.sortable)
-    console.log(this.options)
-    console.log(this.options.values)
-    this.renderer.listen(this.el.nativeElement, 'click', (event) => {
-      let parentNode = this.el.nativeElement.parentNode;
-      let children   = parentNode.children;
-
-      if(this.data)
+  ngOnInit() 
+  {
+      this.renderer.listen(this.el.nativeElement, 'click', (event) => {
+      if(this.data && this.value)
       {
-        //  let sortedData: any = this.sortArray();
+         let sortedData: any = this.sortArray();
       }  
       this.toggleSort = !this.toggleSort;
     })
   }
-  name(event)
+  
+  getname(event)
   {
-    var target = event.target || event.srcElement || event.currentTarget;
-    var idAttr = target.attributes.name;
-    var value = idAttr.nodeValue;
-    console.log(value)
-     this.values = this.options.values;
-    // this.options.forEach(element => {
-    //   this.values = element.values;
-    // });
-    console.log(this.values.includes(value))
+    this.value = event.target.attributes.title.nodeValue;
+    this.alltitle = this.options.titles;
+    this.allvalue = this.options.values;
+    this.alltitle.forEach(element => {
+      if(element == this.value)
+      {
+        this.index = this.alltitle.findIndex(element=> element == this.value)
+        this.object = this.allvalue[this.index];
+      }
+    });
   }
-
-  // sortArray (): Array<any> {
-  //   let tempArray: Array<any> = this.data;
-  //   tempArray.sort((a, b) => {
-  //     // let aKey = a[this.key];
-  //       this.options.forEach(element => {
-  //           this.values = element.values;
-  //       });
-      
-  //       let str1: string = a[this.options.values].toLowerCase();
-  //       let str2: string = b[this.options.values].toLowerCase();
-  //       if (this.toggleSort) {
-  //         if (str1 < str2) {
-  //           return -1;
-  //         }
-  //         if (str1 > str2) {
-  //           return 1;
-  //         }
-  //       }
-  //       else {
-  //         if (str1 > str2) {
-  //           return -1;
-  //         }
-  //         if (str1 < str2) {
-  //           return 1;
-  //         }
-  //       }
-  //     return 0;
-  //   });
-  //   return tempArray;
-  // }
+  
+  sortArray () 
+  {
+    if(this.toggleSort)
+    {
+       this.data.sort((a, b) => b[this.object] - a[this.object] )
+    }
+    else
+    {
+      this.data.sort((a, b) => a[this.object] - b[this.object] )
+    }
+  }
   
 }

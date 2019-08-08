@@ -2,17 +2,11 @@
   <div class="table-title" *ngIf="options.header_title">
     <h6>{{options.header_title}}</h6>
   </div>
-  <div class="table-responsive"> 
+  <div class="table-responsive" id="dtBasicExample"> 
     <table class="table"> 
       <thead>
-        <tr [ngClass]="options.class_light_row" id='aa'>
-          <th *ngFor="let title of options.titles" sortable="title" [innerHTML]="title" name="superraid" (click)="name($event)">
-          </th>
-          <!-- <th sortColumn [sortKey]="'pid'" [data]="data" >aa</th>
-          <th >bb</th>
-          <th scope="col" sortable="raidsuccessful" (sort)="onSort($event)">xx</th>
-          <th scope="col" sortable="superraid" (sort)="onSort($event)">ii</th>
-          <th scope="col" sortable="raidtotalpoint" (sort)="onSort($event)">oo</th> -->
+        <tr [ngClass]="options.class_light_row">
+          <th *ngFor="let title of options.titles" [innerHTML]="title" title="{{title}}" (click)="getname($event)"></th>
         </tr>
       </thead>
       <tbody>
