@@ -44,5 +44,12 @@
     "Phone":"Phone",
     "how_can_help":"How can we help ?",
     "advertise_submit_text":"Your ads inquiry submitted to admin. he will contact you soon."
+  },
+  "Blog_Module":{
+    "blogs":"Blogs",
+    "Search_results":"Search Results",
+    "Videos":"Videos",
+    "Articles":"Articles",
+    "Recent_Stories":"Recent Stories"
   }
 }
