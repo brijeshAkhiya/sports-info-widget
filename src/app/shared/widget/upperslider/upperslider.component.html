@@ -9,13 +9,9 @@
         </div>
       </div> -->
       <div class="slider-sports-selection">
-        <owl-carousel-o [options]="customOptions1">
-          <ng-template carouselSlide><div class="slide-item">Cricket</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Kabaddi</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Badminton</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Basketball</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Field Hockey</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Tennis sports</div></ng-template>
+        <owl-carousel-o [options]="customOptions1" (changed)="changeSlide($event)">
+          <ng-template carouselSlide [id]="'Cricket'"><div class="slide-item">Cricket</div></ng-template>
+          <ng-template carouselSlide [id]="'Kabaddi'"><div class="slide-item">Kabaddi</div></ng-template>
         </owl-carousel-o>
       </div>
       <div class="header-live-slider" *ngIf="slider.length > 0">
