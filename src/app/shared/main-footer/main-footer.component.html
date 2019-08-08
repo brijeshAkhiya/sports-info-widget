@@ -2,13 +2,13 @@
 	<div class="footer-inner">
 		<div class="container">
 			<ul class="footer-nav-links">
-				<li><a [routerLink]="['/about-us']">About</a></li>
-				<li><a [routerLink]="['/contact-us']">Contact</a></li>
-				<li><a [routerLink]="['/blog']">Blog</a></li>
-				<li><a [routerLink]="['/advertise-with-us']">Advertise with us</a></li>
+				<li><a [routerLink]="['/about-us']">{{'Footer.About' | translate}}</a></li>
+				<li><a [routerLink]="['/contact-us']">{{'Footer.Contact' | translate}}</a></li>
+				<li><a [routerLink]="['/blog']">{{'Footer.Blog' | translate}}</a></li>
+				<li><a [routerLink]="['/advertise-with-us']">{{'Footer.Advertise_with_us' | translate}}</a></li>
 				<!-- <li><a>Sitemap</a></li> -->
-				<li><a [routerLink]="['/terms-and-conditions']">Terms & Conditions</a></li>
-				<li><a [routerLink]="['/privacy-policy']">Privacy Policy</a></li>
+				<li><a [routerLink]="['/terms-and-conditions']">{{'Footer.Terms_and_Conditions' | translate}}</a></li>
+				<li><a [routerLink]="['/privacy-policy']">{{'Footer.Privacy_Policy' | translate}}</a></li>
 			</ul>
 			<ul class="footer-social-links">
 				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sFbPageLink']"><img
@@ -34,9 +34,9 @@
 </div>
 <!--Favourite module start-->
 <div class="fav-block-box" [ngClass]="{'fav-show': isapply}" #favContainer>
-	<h1 class="white-text">Favourites</h1>
+	<h1 class="white-text">{{'Footer.Favourites' | translate}}</h1>
 	<div class="fav-block" *ngIf="userfavourites?.length == 0">
-		<h5 class="white-text">No favourites !</h5>
+		<h5 class="white-text">{{'Footer.No_favourites' | translate}}</h5>
 	</div>
 	<div class="fav-block" *ngIf="userfavourites?.length > 0">
 		<form>

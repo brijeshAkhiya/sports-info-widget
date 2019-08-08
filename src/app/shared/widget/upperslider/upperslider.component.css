@@ -1,6 +1,8 @@
 /* -------- Header Slider CSS ------- */
 .header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1113; }
 .header-live-inner                                      { min-height: 80px; }
+.slider-sports-selection                                { padding: 40px 0px; width: 150px; }
+.slider-sports-selection .slide-item                    { color: #fff; text-transform: uppercase; font-weight: 500; text-align: center; }
 .slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 150px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; text-align: left; }
 .slider-sports-dropdown .dropdown-toggle::after         { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(assets/images/dropdown-arrow.svg) no-repeat center center / cover; border: none; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .slider-sports-dropdown.show .dropdown-toggle::after    { transform: translatey(-50%) rotate(180deg); -webkit-transform: translatey(-50%) rotate(180deg); }
@@ -40,10 +42,14 @@
     .header-live-slider                                 { margin-left: 12px; width: calc(100% - 122px); }
     .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
 }
-
+@media (min-width: 575px) {
+    .slider-sports-selection                                { padding: 40px 0px; }
+    .slider-sports-selection .slide-item                    { transform: rotate(-90deg); -webkit-transform: rotate(-90deg); }
+}
 @media (max-width: 575px) {
 /* -------- Header Slider CSS ------- */
     .slider-sports-dropdown                                 { margin-bottom: 12px;}
+    .slider-sports-selection                                { padding: 2px 0px 12px; }
     .header-live-slider                                     { margin-left: 0px; padding: 12px 24px; width: 100%;}
     .header-live-section .header-live-inner                 { flex-direction: column-reverse; -webkit-flex-direction: column-reverse; }
     .header-live-slider .slider-item-inner                  { min-height: 105px; }

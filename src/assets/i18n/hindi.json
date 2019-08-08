@@ -1,3 +1,13 @@
 {
-    "Cricket": "क्रिकेट"
+    "Header_menu": {
+        "Cricket": "क्रिकेट",
+        "Kabaddi": "Kabaddi",
+        "Soccer": "Soccer",
+        "Badminton": "Badminton",
+        "Basketball": "Basketball",
+        "Field_Hockey": "Field Hockey",
+        "Racing": "Racing",
+        "Tennis_sports": "Tennis sports",
+        "Logout":"Logout"
+      }
 }

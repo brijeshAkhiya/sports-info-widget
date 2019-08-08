@@ -19,7 +19,7 @@ export class KabaddiEffects {
         tap(() => console.log('in kabaddi effect')),
         switchMap((action: any) =>
             this.sportsService.getKabaddiMatchList('1', '10', '1').pipe(
-                map((response: any) => new Kabaddi.LoadKabaddiFixturesSuccess(response.data.items)),
+                map((response: any) => new Kabaddi.LoadKabaddiFixturesSuccess(response.data)),
                 catchError(() => {
                     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
                     return EMPTY;
@@ -34,7 +34,7 @@ export class KabaddiEffects {
         tap(() => console.log('in kabaddi effect')),
         switchMap((action: any) =>
             this.sportsService.getKabaddiMatchList('2', '10', '1').pipe(
-                map((response: any) => new Kabaddi.LoadKabaddiResultsSuccess(response.data.items)),
+                map((response: any) => new Kabaddi.LoadKabaddiResultsSuccess(response.data)),
                 catchError(() => {
                     this.store.dispatch(new Kabaddi.LoadKabaddiResults());
                     return EMPTY;
@@ -49,7 +49,7 @@ export class KabaddiEffects {
         tap(() => console.log('in kabaddi effect')),
         switchMap((action: any) =>
             this.sportsService.getKabaddiMatchList('3', '10', '1').pipe(
-                map((response: any) => new Kabaddi.LoadKabaddiLiveSuccess(response.data.items)),
+                map((response: any) => new Kabaddi.LoadKabaddiLiveSuccess(response.data)),
                 catchError(() => {
                     this.store.dispatch(new Kabaddi.LoadKabaddiLive());
                     return EMPTY;

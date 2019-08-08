@@ -6,7 +6,7 @@
           <h1>{{title ? title : 'Fixtures'}}</h1>
         </div>
         <!--Kabaddi sport-->
-        <ngb-tabset class="common-tabs" *ngIf="sport == 'kabaddi'">
+        <ngb-tabset class="common-tabs">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div (click)="loadKabaddi('fixture')">Upcoming</div>
@@ -47,25 +47,7 @@
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
-        <!--Cricket sport -->
-        <ngb-tabset class="common-tabs" *ngIf="sport == 'cricket'">
-          <ngb-tab>
-            <ng-template ngbTabTitle>International</ng-template>
-            <ng-template ngbTabContent>
-              <ng-container *ngTemplateOutlet="schedule;context:{ schedules:internationSchedule}">
-              </ng-container>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab>
-            <ng-template ngbTabTitle>
-              <div>Domestic</div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <ng-container *ngTemplateOutlet="schedule;context:{ schedules:domesticSchedule}">
-              </ng-container>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
+        
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">

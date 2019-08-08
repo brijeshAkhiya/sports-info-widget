@@ -1,10 +1,48 @@
 {
+  "Header_menu": {
     "Cricket": "Cricket",
     "Kabaddi": "Kabaddi",
     "Soccer": "Soccer",
     "Badminton": "Badminton",
     "Basketball": "Basketball",
-    "Field Hockey": "Field Hockey",
+    "Field_Hockey": "Field Hockey",
     "Racing": "Racing",
-    "Tennis sports": "Tennis sports"
+    "Tennis_sports": "Tennis sports",
+    "Logout": "Logout"
+  },
+  "Footer": {
+    "About": "About",
+    "Contact": "Contact",
+    "Blog": "Blog",
+    "Advertise_with_us": "Advertise with us",
+    "Terms_and_Conditions": "Terms & Conditions",
+    "Privacy_Policy": "Privacy Policy",
+    "Favourites": "Favourites",
+    "No_favourites": "No favourites !"
+  },
+  "About_us": {
+    "readers_text": "What our readers say"
+  },
+  "Contact_us": {
+    "Contact_Us": "Contact Us",
+    "Send_message": "Send us a message",
+    "required_field": "This field is required!",
+    "valid_email_msg": "Please enter valid email address",
+    "Submit": "Submit",
+    "response_submit_msg": "Your response was submitted successfully.",
+    "submit_another": "Submit another response",
+    "Full_Name":"Full Name",
+    "Email":"Email",
+    "Subject":"Subject",
+    "Message":"Message"
+  },
+  "Advertise_with_us":{
+    "Advertise_with_us":"Advertise with us",
+    "ready_to_text":"Ready to reach our audience?",
+    "fill_form_text":"Fill up this form and our staff will contact you soon.",
+    "Company":"Company",
+    "Phone":"Phone",
+    "how_can_help":"How can we help ?",
+    "advertise_submit_text":"Your ads inquiry submitted to admin. he will contact you soon."
+  }
 }

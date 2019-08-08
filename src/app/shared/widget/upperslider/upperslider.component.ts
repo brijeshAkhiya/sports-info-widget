@@ -16,13 +16,13 @@ import { CricketService } from "@providers/cricket-service";
 export class UppersliderComponent implements OnInit {
 
   timerStartTime = {
-    'Cricket' : { 'timeout' : {'hours' :  5}, 'beforeTimeStart' : '10', 'interval' : '8'}, // beforeTimeStart(Min) - from when to start fetching live data, interval in sec
-    'Kabaddi' : { 'timeout' : {'hours' :  5}, 'beforeTimeStart' : '10', 'interval' : '5'}, // interval in sec
+    'Cricket': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '8' }, // beforeTimeStart(Min) - from when to start fetching live data, interval in sec
+    'Kabaddi': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5' }, // interval in sec
   }
   sport = 'Cricket';
   interval;
   slider = [];
-  timeout;  
+  timeout;
   customOptions: any = {
     loop: false,
     mouseDrag: true,
@@ -49,7 +49,29 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   };
-  
+  customOptions1= {
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
+  }
   constructor(
     private sportsService: SportsService,
     private commonService: CommonService,
@@ -61,25 +83,25 @@ export class UppersliderComponent implements OnInit {
     this.loadData();
   }
 
-  selectSport(sport){
+  selectSport(sport) {
     this.sport = sport;
-    this.slider = [];    
+    this.slider = [];
     this.loadData();
   }
 
-  loadData(){
-    if(this.sport == 'Kabaddi'){
+  loadData() {
+    if (this.sport == 'Kabaddi') {
       this.loadKabaddiData();
     }
-    else if (this.sport == 'Cricket')    
+    else if (this.sport == 'Cricket')
       this.getCricketHeader();
   }
 
-  loadKabaddiData(){
+  loadKabaddiData() {
     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
     this.store.dispatch(new Kabaddi.LoadKabaddiResults())
     this.store.dispatch(new Kabaddi.LoadKabaddiLive())
-    this.store.select('Kabaddi').subscribe((res: any) => {  
+    this.store.select('Kabaddi').subscribe((res: any) => {
 
       this.slider = [];
       this.clearTimeInterval();
@@ -87,18 +109,18 @@ export class UppersliderComponent implements OnInit {
       console.log("store subscribe");
       console.log(res);
 
-      if (res.live.length > 0){ 
-        this.slider = this.slider.concat(res.live);
+      if (Object.entries(res.live).length > 0 && res.live.items.length > 0) {
+        this.slider = this.slider.concat(res.live.items);
         this.getLiveKabaddiUpdate(this);
         isLiveUpdate = true;
       }
 
-      if (res.results.length > 0) 
-        this.slider = this.slider.concat(res.results.slice(0,3));
-      if (res.fixtures.length > 0) 
-        this.slider = this.slider.concat(res.fixtures.slice(0,3));
-      if(!isLiveUpdate){             
-        let minTime = new Date(Math.min.apply(null, res.fixtures.map(function (e) {
+      if (Object.entries(res.results).length > 0 && res.results.items.length > 0)
+        this.slider = this.slider.concat(res.results.items.slice(0, 3));
+      if (Object.entries(res.fixtures).length > 0 && res.fixtures.items.length > 0)
+        this.slider = this.slider.concat(res.fixtures.items.slice(0, 3));
+      if (!isLiveUpdate && (Object.entries(res.fixtures).length > 0 && res.fixtures.items.length > 0)) {
+        let minTime = new Date(Math.min.apply(null, res.fixtures.items.map(function (e) {
           return new Date(moment.utc(e.datestart).format());
         })));
         this.startLiveUpdateAfterTime(moment.utc(minTime).format());
@@ -108,32 +130,32 @@ export class UppersliderComponent implements OnInit {
     console.log(this.slider);
   }
 
-  getLiveKabaddiUpdate(classThis){
-    
+  getLiveKabaddiUpdate(classThis) {
+
     let paramsLive = { reqParams: { 'status': 3, 'per_page': 10, 'page': 1 }, data: [] }
     this.interval = setInterval(() => {
 
       classThis.sportsService
-      // .getKabaddiMatchDummyList('live_list')
-      .getKabaddiMatchList(paramsLive.reqParams.status, paramsLive.reqParams.per_page, paramsLive.reqParams.page).subscribe((res: any) => {
-          console.log(res); 
+        // .getKabaddiMatchDummyList('live_list')
+        .getKabaddiMatchList(paramsLive.reqParams.status, paramsLive.reqParams.per_page, paramsLive.reqParams.page).subscribe((res: any) => {
+          console.log(res);
           res = res;
-          if(res.data.items.length > 0){
+          if (res.data.items.length > 0) {
             res.data.items.forEach(match => {
               let matchIndex = this.slider.findIndex((slide) => slide.mid == match.mid);
-              if(matchIndex >= 0){                
+              if (matchIndex >= 0) {
                 this.slider[matchIndex].result = match.result;
                 this.slider[matchIndex].status = match.status;
                 this.slider[matchIndex].status_str = match.status_str;
               }
             });
           }
-          else{
+          else {
             this.clearTimeInterval();
             this.loadKabaddiData();
           }
         });
-    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Kabaddi.interval)); 
+    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Kabaddi.interval));
   }
 
   getCricketHeader() {
@@ -159,7 +181,7 @@ export class UppersliderComponent implements OnInit {
       let livematchcount = res.data.filter(match => match.status == "live" || match.status == "interrupted" || match.status == "delayed")
       if (livematchcount.length > 0)
         this.getLiveUpdateSlider(this);
-      else{
+      else {
         let upcomingMatchcount = res.data.filter(match => match.status == "not_started")
         if (upcomingMatchcount.length > 0) {
           let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function (e) {
@@ -173,20 +195,20 @@ export class UppersliderComponent implements OnInit {
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
-  startLiveUpdateAfterTime(scheduled) {    
+  startLiveUpdateAfterTime(scheduled) {
     console.log("startLiveUpdateAfterTime");
-    
+
     let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
 
-    let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds); 
+    let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds);
     remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, this.timerStartTime[this.sport].beforeTimeStart, 0);
 
     console.log("remainingMiliSec", remainingMiliSec);
     if (remainingTime.days == 0 && remainingTime.hours < this.timerStartTime[this.sport].timeout.hours) {
       this.timeout = setTimeout(() => {
-        if(this.sport == 'Kabaddi')
+        if (this.sport == 'Kabaddi')
           this.getLiveKabaddiUpdate(this)
-        else if(this.sport == 'Cricket')
+        else if (this.sport == 'Cricket')
           this.getLiveUpdateSlider(this)
       }, remainingMiliSec);
     }
@@ -219,7 +241,7 @@ export class UppersliderComponent implements OnInit {
         // this.slider = this.sortBySchedule(res.data);   
         res.data.forEach((match, index) => {
           let indexSlider = this.slider.findIndex((slide) => slide.id == match.id);
-          if(indexSlider >= 0){
+          if (indexSlider >= 0) {
             this.slider[indexSlider].status = match.status;
             if (match.match_data && match.match_data.period_scores) {
               this.setPeriodScore(match, indexSlider, match.match_data.period_scores)
@@ -233,7 +255,7 @@ export class UppersliderComponent implements OnInit {
       });
     }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Cricket.interval)); // TEMP 
     console.log(this.interval);
-    
+
   }
 
   sortBySchedule(arr) {
