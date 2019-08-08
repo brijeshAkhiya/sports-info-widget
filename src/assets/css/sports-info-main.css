@@ -95,6 +95,14 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .fixture-slider .owl-theme .owl-nav [class*="owl-"]:after   { background-image: url(assets/images/right-arrow-red-small.svg); }
 .fixture-slider .owl-theme .owl-nav .owl-prev       { left: 15px; }
 .fixture-slider .owl-theme .owl-nav .owl-next       { right: 15px;}
+.slider-sports-selection owl-stage > div                            { transform: rotate(90deg) !important; -webkit-transform: rotate(90deg) !important; }
+.slider-sports-selection .owl-theme .owl-nav [class*="owl-"]        { width: 16px; height: 16px; background-color: transparent; left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
+.slider-sports-selection .owl-theme .owl-nav [class*="owl-"]:after  { background-image: url(../images/sport-select-arrow.svg); }
+.slider-sports-selection .owl-theme .owl-nav .owl-prev:after        { transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+
+.slider-sports-selection .owl-theme .owl-nav .owl-prev                   { top: -40px; }
+.slider-sports-selection .owl-theme .owl-nav .owl-next                   { bottom: -40px;}
+
 /* -------- Image Zoom Style ------- */
 .common-zoom-container  { overflow: hidden; }
 .common-zoom-img        { height: 100%; background: #F4F4F5 no-repeat center center / cover; transition: all 0.3s ease-in-out; }
