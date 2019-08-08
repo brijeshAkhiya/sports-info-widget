@@ -15,7 +15,8 @@ export class MenuComponent implements OnInit {
   @Input() options;
   @Input() name;
   series;
-
+  public windowinnerWidth: any;
+  
   constructor(
     private sportsService: SportsService,
     private cricketService: CricketService
@@ -29,9 +30,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-    if (window.pageYOffset > 176) {
+  responsiveSticky(value) {
+    if (window.pageYOffset > value) {
       let element = document.getElementById('sub-navabar');
       element.classList.add('fixed-nav');
       let bodyelement = document.getElementById('main-body');
@@ -43,6 +43,19 @@ export class MenuComponent implements OnInit {
       bodyelement.classList.remove('sticky-submenu');
     }
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    this.windowinnerWidth = window.innerWidth;
+    if (this.windowinnerWidth < 576) {
+      this.responsiveSticky(176);
+      console.log("width change" + innerWidth);
+    }
+    else {
+      this.responsiveSticky(129);
+    }
+  }
+
   ngOnDestroy(){
     let bodyelement = document.getElementById('main-body');
     bodyelement.classList.remove('sticky-submenu');

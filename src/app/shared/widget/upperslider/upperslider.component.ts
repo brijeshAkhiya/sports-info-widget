@@ -56,20 +56,7 @@ export class UppersliderComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1
-      }
-    },
+    items: 1,
     nav: true
   }
   constructor(

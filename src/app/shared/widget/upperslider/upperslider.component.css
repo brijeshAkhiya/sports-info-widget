@@ -30,6 +30,7 @@
 /* -------- Header Slider CSS ------- */
     .slider-sports-dropdown .dropdown-toggle            { padding: 8px 12px; width: 130px; font-size: 14px; line-height: 18px; }
     .slider-sports-dropdown .dropdown-toggle::after     { width: 20px; height: 20px; right: 12px; }
+    .slider-sports-selection                            {  width: 142px; }
     .header-live-slider                                 { margin-left: 12px; width: calc(100% - 142px); }
     .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
 }
@@ -39,6 +40,7 @@
 /* -------- Header Slider CSS ------- */
     .slider-sports-dropdown .dropdown-toggle            { padding: 7px 10px; width: 110px; font-size: 12px; line-height: 17px; }
     .slider-sports-dropdown .dropdown-toggle::after     { width: 18px; height: 18px; right: 10px; }
+    .slider-sports-selection                            {  width: 122px; }
     .header-live-slider                                 { margin-left: 12px; width: calc(100% - 122px); }
     .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
 }
