@@ -36,8 +36,8 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       this.store.dispatch(new Cricket.LoadCricketFixtures())
       this.store.dispatch(new Cricket.LoadCricketResults())
       this.store.select('Cricket').subscribe((data: any) => {
-        this.fixturesdata = data.fixtures
-        this.resultsdata = data.results;
+        this.fixturesdata = data.fixtures;//(Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) ? data.fixtures.items : [];
+        this.resultsdata = data.results; //(Object.entries(data.results).length > 0 && data.results.items.length > 0) ? data.results.items : [];
         this.loader = false;
       })
     }
@@ -51,14 +51,14 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
         if(data){
           this.loader = false;
         }
-        if (data.fixtures.length > 0) {
+        // if (data.fixtures.length > 0) {
           console.log('after effects', data.fixtures);
-          this.fixturesdata = data.fixtures
-        }
-        if (data.results.length > 0) {
+          this.fixturesdata = (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) ? data.fixtures.items : [];
+        // }
+        // if (data.results.length > 0) {
           console.log('after effects', data.results);
-          this.resultsdata = data.results
-        }
+          this.resultsdata =  (Object.entries(data.results).length > 0 && data.results.items.length > 0) ? data.results.items : [];
+        // }
       })
     }
   }
