@@ -64,7 +64,7 @@
 .comment-item .commenter-info span  { margin-right: 4px; }
 .comment-item p                     { margin: 0px; color: #3D3D3D; }
 .comment-action                     { margin: 8px 0px 0px; }
-.comment-action li                  { margin-right: 8px; padding-right: 8px; display: inline-block; line-height: 18px; color: #7A7A7A; font-weight: 500; position: relative; }
+.comment-action li                  { margin-right: 8px; padding-right: 8px; display: inline-block; font-size: 14px; line-height: 18px; color: #7A7A7A; font-weight: 500; position: relative; }
 .comment-action li:after            { content: ""; display: block; position: absolute; height: 100%; width: 1px; right: 0px; top: 0px; background: #CCCCCC; vertical-align: middle; }
 .comment-action li:last-child:after { display: none; }
 .comment-action li a                { font-weight: 600; }
