@@ -1,6 +1,6 @@
 <!-- START - MATCH PROBABAILITY-->
 <div *ngIf="['not_started', 'live', 'delayed'].includes(matchdata.sport_event_status.status)">
-  <h4 class="line-title">Win Probability</h4>
+  <h4 class="line-title">{{ 'Cricket_Module.Win_Probability' | translate}}</h4>
   <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
     <div class="probability-block d-flex align-items-center justify-content-between">
       <div class="team-block">
@@ -8,7 +8,6 @@
           [offset]="commonService.lazyloadoffset">
         <h3 *ngIf="matchprobability">{{comp1.probability}}%</h3>
       </div>
-
       <div class="team-block">
         <h3 *ngIf="matchprobability">{{comp2.probability}}%</h3>
         <img class="team-flag" [lazyLoad]="comp2.id | logosurl" [defaultImage]="cricketService.flagplaceholder"
@@ -20,21 +19,20 @@
     </div>
   </div>
   <div *ngIf="matchprobability?.length == 0" style="margin-bottom:20px;">
-    No probability data available for this match!
+    {{'Cricket_Module.no_probability_msg' | translate}}
   </div>
 </div>
 <!-- END - MATCH PROBABAILITY-->
 
-
 <section class="last-meetings-section" *ngIf="teamMatchResult && teamMatchResult?.length > 0">
-  <h4 class="line-title">Last meetings</h4>
+  <h4 class="line-title">{{'Cricket_Module.Last_meetings' | translate}}</h4>
   <app-schedule [data]="teamMatchResult" [type]="'result'" [sport]="'cricket'"></app-schedule>
 </section>
 
 <!-- START - VENUE-->
-<h4 class="line-title">Venue Details</h4>
+<h4 class="line-title">{{'Cricket_Module.Venue_Details' | translate}}</h4>
 <app-venue-map-card [venuedetails]="venuedetails" [sport]="'cricket'" *ngIf="venuedetails"></app-venue-map-card>
 <div *ngIf="!venuedetails">
-  No venue details available for this match!
+  {{'Cricket_Module.no_venue_details_avail' | translate}}
 </div>
 <!-- END - VENUE-->
