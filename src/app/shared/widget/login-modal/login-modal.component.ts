@@ -74,6 +74,7 @@ export class LoginModalComponent implements OnInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+        localStorage.setItem('userId', res.data._id)
         this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {
@@ -91,6 +92,7 @@ export class LoginModalComponent implements OnInit {
       }
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
         localStorage.setItem('userT', res.Authorization)
+        localStorage.setItem('userId', res.data._id)
         this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {

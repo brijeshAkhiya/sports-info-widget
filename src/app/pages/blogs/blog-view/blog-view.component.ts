@@ -24,7 +24,7 @@ import { userInfo } from 'os';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogViewComponent implements OnInit {
-  
+
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   isLoadMoreComments: boolean = true;
   blogdata: any;
@@ -41,11 +41,12 @@ export class BlogViewComponent implements OnInit {
   socialUser: any;
   closeResult: string;
   collectid = [];
-  index:any; 
-  hidetextfield:boolean=false;
-  loader: boolean = false; 
+  index: any;
+  hidetextfield: boolean = false;
+  loader: boolean = false;
   commentid: any;
-  
+  userId: string;
+
 
   constructor(
     private router: Router,
@@ -66,7 +67,7 @@ export class BlogViewComponent implements OnInit {
   ngOnInit() {
     this.store.select('auth').subscribe((data) => {
       this.isAuth$ = data.isAuthenticated
-      console.log(data)
+      this.userId = localStorage.getItem('userId') ? localStorage.getItem('userId') : '';
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
@@ -142,10 +143,10 @@ export class BlogViewComponent implements OnInit {
     this.meta.updateTag({ name: 'subject', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'keywords', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
 
-    this.meta.updateTag({ name: 'description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
-    this.meta.updateTag({ property: 'og:description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
-    this.meta.updateTag({ name: 'twitter:description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
-    
+    this.meta.updateTag({ name: 'description', content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    this.meta.updateTag({ property: 'og:description', content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    this.meta.updateTag({ name: 'twitter:description', content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+
     this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
     this.meta.updateTag({ name: 'twitter:image:src', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
@@ -154,7 +155,7 @@ export class BlogViewComponent implements OnInit {
     this.meta.updateTag({ property: 'og:image:width', content: '640' });
     this.meta.updateTag({ property: 'og:image:height', content: '400' });
 
-    this.meta.updateTag({ property: 'og:url', content: window.location.href });    
+    this.meta.updateTag({ property: 'og:url', content: window.location.href });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }
@@ -180,7 +181,7 @@ export class BlogViewComponent implements OnInit {
             this.getBlogComments(this.blogdata._id, { iPostId: this.blogdata._id, nStart: 0, nLimit: this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
           }
         }, (error: any) => {
-          if (error.status == 401) {  
+          if (error.status == 401) {
             console.log('status', error);
             this.store.dispatch(new Auth.SetUnauthenticated());
             this.authService.signOut();
@@ -211,7 +212,7 @@ export class BlogViewComponent implements OnInit {
       }
     }
   }
-  
+
 
   //sharable link 
   sharablelink(platform) {
@@ -248,7 +249,7 @@ export class BlogViewComponent implements OnInit {
         this.isLoadMoreComments = false;
       }
     });
-    
+
     //  this.getBlogComments(this.blogdata._id,this.initBlogParams(this.blogdata._id))
   }
 
@@ -281,7 +282,7 @@ export class BlogViewComponent implements OnInit {
         }
       });
     }
-   
+
   }
 
   //open login modal 
@@ -289,14 +290,13 @@ export class BlogViewComponent implements OnInit {
     this.modalService.open(LoginModalComponent);
   }
 
-  open(content,id) {
+  open(content, id) {
     console.log(id)
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.closeResult = `Closed with: ${result}`;
-    if(result == "delete")
-    {
-      this.deletecomment(id);
-    }
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if (result == "delete") {
+        this.deletecomment(id);
+      }
     }, (reason) => {
 
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -310,56 +310,53 @@ export class BlogViewComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
   //save comment
-  editcomment(id)
-  {
-    this.commentid = id; 
+  editcomment(id) {
+    this.commentid = id;
     this.hidetextfield = !this.hidetextfield;
   }
 
-  savecomment(id,data)
-  {
-    console.log(data,id)
-    this.sportsService.Editcomment(id,data).
+  savecomment(id, data) {
+    console.log(data, id)
+    if (data != null && data.trim() != '') {
+      this.sportsService.Editcomment(id, data).
         subscribe(
-          (res: any)=>
-          {   
+          (res: any) => {
             this.index = this.blogcomments.findIndex(data => data._id == res.data._id);
             this.blogcomments[this.index].sComment = res.data.sComment;
           },
-        err=>console.log(err));
-        this.hidetextfield = false;
+          err => console.log(err));
+      this.hidetextfield = false;
+    }
   }
 
-  cancelcomment()
-  {
+  cancelcomment() {
     this.hidetextfield = false;
     console.log('cancel')
   }
 
-  deletecomment(id)
-  {
+  deletecomment(id) {
     console.log(id)
     this.index = this.blogcomments.findIndex(data => data._id === id);
     this.sportsService.deleteusercomment(id).
-        subscribe(res=>
-        this.blogcomments.splice(this.index,1),
-               error=>{
-                  console.log(error)
-                });
+      subscribe(res =>
+        this.blogcomments.splice(this.index, 1),
+        error => {
+          console.log(error)
+        });
   }
 
   // When the user scrolls the page, execute myFunction 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-      var blogHeight = document.getElementById("blogOuterSection");
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      document.getElementById("blogCompleteLine").style.width = scrolled + "%";
+    var blogHeight = document.getElementById("blogOuterSection");
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("blogCompleteLine").style.width = scrolled + "%";
   }
 
 }

@@ -130,7 +130,7 @@
                 <div class="comment-desc">
                   <div class="d-flex justify-content-between">
                     <p class="commenter-info"><span class="light-blue-color">{{comment.sFirstName}}
-                        {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}
+                        {{comment.sLastName}}</span>
                     </p>
                   </div>
                   <p>{{comment.sComment}}</p>
@@ -142,11 +142,11 @@
                     <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
                   </ul>
                  </form >
-                  <ul class="comment-action">
-                    <li>12 mins ago</li>
-                        <li (click)="editcomment(comment._id)"><a>Edit
+                  <ul class="comment-action" >
+                    <li>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</li>
+                        <li (click)="editcomment(comment._id)" *ngIf="comment.iId == userId"><a>Edit
                         </a></li>
-                        <li><a (click)="open(content,comment._id)">Delete</a></li>
+                        <li *ngIf="comment.iId == userId"><a (click)="open(content,comment._id)">Delete</a></li>
                     </ul> 
                 </div>
               </div>
