@@ -14,8 +14,6 @@ export class PlayerTableComponent implements OnInit {
   @Input() data: any[];
   @Input() options;
   private toggleSort: boolean = false;
-  alltitle: any;
-  allvalue: any;
   index: any;
   object: any;
   value: any;
@@ -31,13 +29,11 @@ export class PlayerTableComponent implements OnInit {
   getname(event)
   {
     this.value = event.target.attributes.title.nodeValue;
-    this.alltitle = this.options.titles;
-    this.allvalue = this.options.values;
-    this.alltitle.forEach(element => {
+    this.options.titles.forEach(element => {
       if(element == this.value)
       {
-        this.index = this.alltitle.findIndex(element=> element == this.value)
-        this.object = this.allvalue[this.index];
+        this.index = this.options.titles.findIndex(element=> element == this.value)
+        this.object = this.options.values[this.index];
         this.sortArray();
         this.toggleSort = !this.toggleSort;
       }
