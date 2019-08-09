@@ -130,26 +130,26 @@
                 <div class="comment-desc">
                   <div class="d-flex justify-content-between">
                     <p class="commenter-info"><span class="light-blue-color">{{comment.sFirstName}}
-                        {{comment.sLastName}}</span>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}
+                        {{comment.sLastName}}</span>
                     </p>
                   </div>
                   <p>{{comment.sComment}}</p>
-                  <!-- <form>
-                    <textarea class="form-control">What a match</textarea>
-                  </form>
+                  <form *ngIf="comment._id == commentid && hidetextfield == true">
+                    <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
+                 
                   <ul class="cmt-act-btn-list">
-                    <li><button class="cmt-act-btn">Save</button></li>
-                    <li><button class="cmt-act-btn red-btn">Cancel</button></li>
+                    <li><button class="cmt-act-btn" (click)="savecomment(commentid,InputComment.value)">Save</button></li>
+                    <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
                   </ul>
-                  <ul class="comment-action">
-                    <li>12 mins ago</li>
-                    <li><a>Edit</a></li>
-                    <li><a (click)="open(content)">Delete</a></li>
-                  </ul> -->
+                 </form >
+                  <ul class="comment-action" >
+                    <li>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</li>
+                        <li (click)="editcomment(comment._id)" *ngIf="comment.iId == userId"><a>Edit
+                        </a></li>
+                        <li *ngIf="comment.iId == userId"><a (click)="open(content,comment._id)">Delete</a></li>
+                    </ul> 
                 </div>
               </div>
-              <!-- <button class="cmt-view-btn" (click)="viewmorecomments()" *ngIf="blogcomments.length > 0">VIEW
-                  MORE</button>-->
               <div class="text-center">
                 <button class="theme-btn down-btn" (click)="viewmorecomments()" *ngIf="isLoadMoreComments">VIEW
                   MORE<span></span></button>
@@ -176,8 +176,8 @@
     </div>
     <div class="modal-footer">
       <ul class="cmt-act-btn-list">
-        <li><button class="cmt-act-btn" (click)="modal.close('Save click')">Keep</button></li>
-        <li><button class="cmt-act-btn red-btn" (click)="modal.close('Save click')">Delete</button></li>
+        <li><button class="cmt-act-btn" (click)="modal.close('keep')">Keep</button></li>
+        <li><button class="cmt-act-btn red-btn" (click)="modal.close('delete')">Delete</button></li>
       </ul>
     </div>
   </div>

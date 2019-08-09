@@ -200,6 +200,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
       if (localStorage.getItem('userT')) {
         this.getuserLogout(localStorage.getItem('userT'));
         localStorage.removeItem('userT')
+        localStorage.removeItem('userId')
       }
     });
   }

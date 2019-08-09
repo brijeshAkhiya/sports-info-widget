@@ -35,7 +35,7 @@ export class FavouritesWidgetComponent implements OnInit {
       if (this.isadded) {
         this.isadded = false
         this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
-        
+        console.log(this.userfavourites)
         localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
         
         this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {

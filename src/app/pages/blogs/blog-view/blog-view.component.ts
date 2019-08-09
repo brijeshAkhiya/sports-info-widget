@@ -1,7 +1,8 @@
+// import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input, HostListener } from '@angular/core';
 import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from '@ngrx/store';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from "angularx-social-login";
 
 import { SportsService } from "@providers/sports-service";
@@ -12,6 +13,9 @@ import * as Auth from "@store/auth/auth.actions";
 
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
 import { Meta } from '@angular/platform-browser';
+import { filter } from 'rxjs/operators';
+import { ObsEvent } from 'ng-lazyload-image/src/types';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-blog-view',
@@ -20,7 +24,7 @@ import { Meta } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogViewComponent implements OnInit {
-  
+
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   isLoadMoreComments: boolean = true;
   blogdata: any;
@@ -36,7 +40,13 @@ export class BlogViewComponent implements OnInit {
   isAuth$: boolean;
   socialUser: any;
   closeResult: string;
-  loader: boolean = false; 
+  collectid = [];
+  index: any;
+  hidetextfield: boolean = false;
+  loader: boolean = false;
+  commentid: any;
+  userId: string;
+
 
   constructor(
     private router: Router,
@@ -57,6 +67,7 @@ export class BlogViewComponent implements OnInit {
   ngOnInit() {
     this.store.select('auth').subscribe((data) => {
       this.isAuth$ = data.isAuthenticated
+      this.userId = localStorage.getItem('userId') ? localStorage.getItem('userId') : '';
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
@@ -102,6 +113,7 @@ export class BlogViewComponent implements OnInit {
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.loader = false;
         this.blogdata = res.data;
+        console.log(res.data)
         this.initSEOTags();
         this.getPopularArticles();
 
@@ -131,10 +143,10 @@ export class BlogViewComponent implements OnInit {
     this.meta.updateTag({ name: 'subject', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
     this.meta.updateTag({ name: 'keywords', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
 
-    this.meta.updateTag({ name: 'description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
-    this.meta.updateTag({ property: 'og:description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
-    this.meta.updateTag({ name: 'twitter:description', content: (this.blogdata.sShortDesc) ?  this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
-    
+    this.meta.updateTag({ name: 'description', content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    this.meta.updateTag({ property: 'og:description', content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+    this.meta.updateTag({ name: 'twitter:description', content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info') });
+
     this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
     this.meta.updateTag({ name: 'twitter:image:src', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
@@ -143,7 +155,7 @@ export class BlogViewComponent implements OnInit {
     this.meta.updateTag({ property: 'og:image:width', content: '640' });
     this.meta.updateTag({ property: 'og:image:height', content: '400' });
 
-    this.meta.updateTag({ property: 'og:url', content: window.location.href });    
+    this.meta.updateTag({ property: 'og:url', content: window.location.href });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }
@@ -201,8 +213,10 @@ export class BlogViewComponent implements OnInit {
     }
   }
 
+
   //sharable link 
   sharablelink(platform) {
+    // console.log(data)
     let url = `${this.commonService.siteUrl}${this.blogdata.eType.toLowerCase()}/${this.blogdata.sSlug}`;
     if (platform == 'facebook') {
       window.open(`http://www.facebook.com/sharer.php?u=${url}`, '_blank');
@@ -219,6 +233,7 @@ export class BlogViewComponent implements OnInit {
   initBlogParams(id) {
     this.commentsParam.iPostId = id;
     this.commentsParam.nStart = this.blogcomments.length;
+    console.log(this.blogcomments)
     return this.commentsParam;
   }
 
@@ -227,12 +242,14 @@ export class BlogViewComponent implements OnInit {
     this.sportsService.getblogcommnets(this.initBlogParams(this.blogdata._id)).subscribe((res: any) => {
       if (res.data && res.data.length > 0) {
         this.blogcomments = this.blogcomments.concat(res.data)
+        console.log(this.blogcomments)
         if (this.commentsParam.nLimit > res.data.length)
           this.isLoadMoreComments = false;
       } else {
         this.isLoadMoreComments = false;
       }
     });
+
     //  this.getBlogComments(this.blogdata._id,this.initBlogParams(this.blogdata._id))
   }
 
@@ -250,12 +267,14 @@ export class BlogViewComponent implements OnInit {
   }
 
   //to get blog comments
-  //to get blog comments
   getBlogComments(id, data) {
+    console.log(id)
+    console.log(data)
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
         if (res.data && res.data.length > 0) {
           this.blogcomments = res.data
+          console.log(this.blogcomments)
           if (this.commentsParam.nLimit > res.data.length)
             this.isLoadMoreComments = false;
         } else {
@@ -263,6 +282,7 @@ export class BlogViewComponent implements OnInit {
         }
       });
     }
+
   }
 
   //open login modal 
@@ -270,11 +290,17 @@ export class BlogViewComponent implements OnInit {
     this.modalService.open(LoginModalComponent);
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  open(content, id) {
+    console.log(id)
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      if (result == "delete") {
+        this.deletecomment(id);
+      }
     }, (reason) => {
+
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult)
     });
   }
 
@@ -284,20 +310,56 @@ export class BlogViewComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
+  }
+  //save comment
+  editcomment(id) {
+    this.commentid = id;
+    this.hidetextfield = !this.hidetextfield;
+  }
+
+  savecomment(id, data) {
+    console.log(data, id)
+    if (data != null && data.trim() != '') {
+      this.sportsService.Editcomment(id, data).
+        subscribe(
+          (res: any) => {
+            this.index = this.blogcomments.findIndex(data => data._id == res.data._id);
+            this.blogcomments[this.index].sComment = res.data.sComment;
+          },
+          err => console.log(err));
+      this.hidetextfield = false;
+    }
+  }
+
+  cancelcomment() {
+    this.hidetextfield = false;
+    console.log('cancel')
+  }
+
+  deletecomment(id) {
+    console.log(id)
+    this.index = this.blogcomments.findIndex(data => data._id === id);
+    this.sportsService.deleteusercomment(id).
+      subscribe(res =>
+        this.blogcomments.splice(this.index, 1),
+        error => {
+          console.log(error)
+        });
   }
 
   // When the user scrolls the page, execute myFunction 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-      var blogHeight = document.getElementById("blogOuterSection");
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      document.getElementById("blogCompleteLine").style.width = scrolled + "%";
+    var blogHeight = document.getElementById("blogOuterSection");
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("blogCompleteLine").style.width = scrolled + "%";
   }
 
 }
+
 
 

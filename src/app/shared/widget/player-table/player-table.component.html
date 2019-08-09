@@ -2,11 +2,11 @@
   <div class="table-title" *ngIf="options.header_title">
     <h6>{{options.header_title}}</h6>
   </div>
-  <div class="table-responsive">
-    <table class="table">
+  <div class="table-responsive" id="dtBasicExample"> 
+    <table class="table"> 
       <thead>
         <tr [ngClass]="options.class_light_row">
-          <th *ngFor="let title of options.titles" [innerHTML]="title"></th>
+          <th *ngFor="let title of options.titles" [innerHTML]="title" title="{{title}}" (click)="getname($event)"></th>
         </tr>
       </thead>
       <tbody>
