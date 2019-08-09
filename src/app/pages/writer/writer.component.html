@@ -9,24 +9,24 @@
                 <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
                 <p>{{writerdata?.writerData?.sBio}}</p>
               </div>
-              <p class="view-info">Posts : <b>{{writerdata?.writerData?.nPostsCount}}</b> | Views : <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
+              <p class="view-info">{{'Blog_Module.Posts' | translate}} : <b>{{writerdata?.writerData?.nPostsCount}}</b> | {{'Blog_Module.Views' | translate}} : <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
             </div>
           </div>
           <ngb-tabset class="common-tabs writer-tab">
             <ngb-tab>
-              <ng-template ngbTabTitle>Latest</ng-template>
+              <ng-template ngbTabTitle>{{'Blog_Module.Latest' | translate}}</ng-template>
               <ng-template ngbTabContent>             
                   <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10 }, 'type':'writer'}"></app-blog-list>
               </ng-template>
             </ngb-tab>
             <ngb-tab>
-              <ng-template ngbTabTitle><div >Most Read</div></ng-template>
+              <ng-template ngbTabTitle><div>{{'Blog_Module.Most_Read' | translate}}</div></ng-template>
               <ng-template ngbTabContent>         
                 <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'MostViewed' }, 'type':'writer'}"></app-blog-list> 
               </ng-template>
             </ngb-tab>
             <ngb-tab>
-              <ng-template ngbTabTitle><div >Videos</div></ng-template>
+              <ng-template ngbTabTitle><div>{{'Blog_Module.Videos' | translate}}</div></ng-template>
               <ng-template ngbTabContent>             
                   <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'Videos' }, 'type':'writer'}"></app-blog-list>  
               </ng-template>
@@ -38,7 +38,7 @@
             <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
             <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
             <div class="common-stories-widget common-shadow rounded-box">
-              <h5>From this writer</h5>
+              <h5>{{'Blog_Module.From_this_writer' | translate}}</h5>
               <ul class="common-list">
                   <li *ngFor="let item of writerdata?.posts?.posts | slice:0:5"><a
                     [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>

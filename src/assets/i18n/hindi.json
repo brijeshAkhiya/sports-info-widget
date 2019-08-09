@@ -9,5 +9,12 @@
         "Racing": "Racing",
         "Tennis_sports": "Tennis sports",
         "Logout":"Logout"
+      },
+      "Blog_Module":{
+        "blogs":"Blogs11",
+        "Search_results":"Search Results",
+        "Videos":"Videos",
+        "Articles":"Articles",
+        "Recent_Stories":"Recent Stories"
       }
 }

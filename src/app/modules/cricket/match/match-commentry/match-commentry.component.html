@@ -1,5 +1,4 @@
 <app-countdown *ngIf="data.sport_event_status.status == 'not_started'" [scheduled]="data.sport_event.scheduled"></app-countdown>
-
 <!-- <div *ngIf="!data.timeline && data.sport_event_status.status == 'closed'">
   No commentary data available for this match!
 </div> -->
@@ -13,7 +12,7 @@
         <table class="table" *ngIf="batsmanList.length > 0">
           <thead>
             <tr>
-              <th class="text-uppercase">Batsman</th>
+              <th class="text-uppercase">{{'Cricket_Module.Batsman' | translate}}</th>
               <th>R</th>
               <th>B</th>
               <th>4s</th>
@@ -43,7 +42,7 @@
         <table class="table" *ngIf="ballerList.length > 0">
           <thead>
             <tr>
-              <th>Bowler</th>
+              <th>{{'Cricket_Module.Bowler' | translate}}</th>
               <th>Ov</th>
               <th>M</th>
               <th>R</th>
@@ -67,7 +66,7 @@
       </div>
     </div>
     <div class="this-over-block d-flex align-items-center" *ngIf="oversummery && oversummery.length > 0">
-      <h5>This over :</h5>
+      <h5>{{'Cricket_Module.This_over' | translate}} :</h5>
       <ul>
         <ng-container *ngFor="let over of oversummery">
           <li [ngClass]="{'hightlight': over.wickets=='W' || over.extra_runs || over.run == 4 || over.run == 6}">
@@ -103,7 +102,7 @@
 
   <!--If Match is cancelled -->
   <ng-container *ngIf="data.sport_event_status.status == 'cancelled'" >
-      Match is cancelled!
+    {{'Cricket_Module.Match_is_cancelled' | translate}}
       <app-no-data-widget></app-no-data-widget>
   </ng-container>
 

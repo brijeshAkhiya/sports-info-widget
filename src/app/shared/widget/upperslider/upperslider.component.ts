@@ -70,6 +70,19 @@ export class UppersliderComponent implements OnInit {
     this.loadData();
   }
 
+  //change slide select sport event
+  changeSlide(event){
+    if(event.slides.length > 0){
+      this.sport = event.slides[0].id
+      console.log('sports::',this.sport);
+      console.log('sliderdata',this.slider);
+      
+      this.slider = [];
+      this.loadData();
+  
+    }
+  }
+
   selectSport(sport) {
     this.sport = sport;
     this.slider = [];
