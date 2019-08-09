@@ -74,7 +74,7 @@
       </div>
     </div>
     <a class="details-btn"
-      [routerLink]="['/cricket/match', (match.id | splitID), (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]"><span>Details</span></a>
+      [routerLink]="['/cricket/match', (match.id | splitID), (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
     <a class="fullblock-link"
       [routerLink]="['/cricket/match', (match.id | splitID),  (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]">
     </a>
@@ -141,7 +141,7 @@
         </div>
       </div>
       <a class="details-btn"
-        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>Details</span></a>
+        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link" [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
       </a>
     </div>

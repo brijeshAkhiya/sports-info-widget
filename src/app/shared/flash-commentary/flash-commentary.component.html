@@ -22,7 +22,7 @@
     <button class="close-btn" (click)="isapply = false"></button>
   </div>
   <div class="flash-comm-block">
-    <h5>Flash Score</h5>
+    <h5>{{ 'Shared_module.flash_score' | translate }}</h5>
     <!-- <form>      this section not used for now it will be used later when multiple sports are there
       <div class="search-box">
         <input type="text" placeholder="Select sport">
@@ -30,7 +30,7 @@
       </div>
     </form> -->
     <ul class="flash-comm-list">
-      <li *ngIf="!livematches || livematches.length == 0">Ooops! No live commentaries available at the moment.</li>
+      <li *ngIf="!livematches || livematches.length == 0">{{ 'Shared_module.no_live_commentry_available' | translate }}.</li>
       <li *ngFor="let item of livematches"><button (click)="reqJoinRoom(item.id,item.competitors)"
           [ngClass]="{'selected': item.id == currentmatchid}">{{item.competitors}}</button></li>
     </ul>

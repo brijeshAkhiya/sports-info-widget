@@ -10,12 +10,12 @@
       </div> -->
       <div class="slider-sports-selection">
         <owl-carousel-o [options]="customOptions1">
-          <ng-template carouselSlide><div class="slide-item">Cricket</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Kabaddi</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Badminton</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Basketball</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Field Hockey</div></ng-template>
-          <ng-template carouselSlide><div class="slide-item">Tennis sports</div></ng-template>
+          <ng-template carouselSlide><div class="slide-item">{{ 'Header_menu.Cricket' | translate }}</div></ng-template>
+          <ng-template carouselSlide><div class="slide-item">{{ 'Header_menu.Kabaddi' | translate }}</div></ng-template>
+          <ng-template carouselSlide><div class="slide-item">{{ 'Header_menu.Badminton' | translate }}</div></ng-template>
+          <ng-template carouselSlide><div class="slide-item">{{ 'Header_menu.Basketball' | translate }}</div></ng-template>
+          <ng-template carouselSlide><div class="slide-item">{{ 'Header_menu.Field_Hockey' | translate }}</div></ng-template>
+          <ng-template carouselSlide><div class="slide-item">{{ 'Header_menu.Tennis_sports' | translate }}</div></ng-template>
         </owl-carousel-o>
       </div>
       <div class="header-live-slider" *ngIf="slider.length > 0">

@@ -9,8 +9,8 @@
 
         <div class="common-title-btn d-flex justify-content-between align-items-center"
             *ngIf="popularArticles.length > 1">
-            <h4>Related news</h4>
-            <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['article']"> View All<span></span></a>
+            <h4>{{ 'Shared_module.related_news' | translate }}</h4>
+            <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['article']">{{ 'widgetModule.View_all' | translate }} <span></span></a>
         </div>
         <app-blog-card [posts]="popularArticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog-card>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
@@ -27,7 +27,7 @@
         <!--Latest Article Tab-->
         <ngb-tab id="latest">
             <ng-template ngbTabTitle>
-                <div>Latest</div>
+                <div>{{ 'Shared_module.latest' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
                 <app-loader *ngIf="isLoading"></app-loader>
@@ -46,7 +46,7 @@
         <!--Videos tab start-->
         <ngb-tab id="videos">
             <ng-template ngbTabTitle>
-                <div>Videos</div>
+                <div>{{ 'Shared_module.videos' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
                 <app-blog-list *ngIf="videoArticlesParams" [options]="{'reqParams': videoArticlesParams}" [sport]="sport">

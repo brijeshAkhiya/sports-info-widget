@@ -1,18 +1,18 @@
 <div class="signin-modal">
   <div class="modal-body">
-    <h1>Sign In</h1>
+    <h1>{{ 'widgetModule.sign_in' | translate }}</h1>
     <ul>
-      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">Sign in with Google</button>
+      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">{{ 'widgetModule.sign_in_with_google' | translate }}</button>
       </li>
-      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">Continue with
-          Facebook</button></li>
+      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">{{ 'widgetModule.continue_with_fb' | translate }}</button></li>
     </ul>
-    <p class="signin-text">By signing in with Google or Facebook, you agree to
-      SportsInfo’s <a [routerLink]="['/terms-and-conditions']" (click)="closemodal()">Terms</a> and <a
-        [routerLink]="['/privacy-policy']" (click)="closemodal()">Privacy Policies</a>.</p>
+    <p class="signin-text">{{ 'widgetModule.agree_with_facebook' | translate }}
+       <a [routerLink]="['/terms-and-conditions']" (click)="closemodal()">{{ 'widgetModule.terms' | translate }}</a>
+       {{ 'widgetModule.and' | translate }} <a [routerLink]="['/privacy-policy']" (click)="closemodal()">
+        {{ 'widgetModule.Privacy_policy' | translate }}</a>.</p>
   </div>
 </div>
 <div class="login-toast active d-flex align-items-center" *ngIf="isuserblock">
   <img src="assets/images/blog/error-icon.svg">
-  <p class="dark-text">This email id "email id" is blocked by admin. Please contact to admin "email id of admin"</p>
+  <p class="dark-text">{{ 'widgetModule.block_by_admin' | translate }}</p>
 </div>

@@ -14,6 +14,7 @@ import { StatsComponent } from './stats/stats.component';
 import { TableComponent } from './table/table.component';
 import { MatchComponent } from './match/match.component';
 import { KabaddiService } from './kabaddi.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [KabaddiComponent, HomeComponent, FixturesComponent, StatsComponent, TableComponent, MatchComponent],
@@ -23,6 +24,7 @@ import { KabaddiService } from './kabaddi.service';
     KabaddiRoutingModule,
     NgbModule,
     CommonModule,
+    TranslateModule
   ],
   providers:[KabaddiService]
 })

@@ -21,7 +21,7 @@
           <ngb-tab>
 
             <!-- Profile Section-->
-            <ng-template ngbTabTitle>Profile</ng-template>
+            <ng-template ngbTabTitle>{{ 'Shared_module.profile' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <section class="player-profile d-flex" *ngIf="sport == 'cricket'">
                 <div class="player-pic">
@@ -93,12 +93,12 @@
               </section>
               
               <section class="common-section top-padding quick-stats" *ngIf="stats">
-                <h4>Quick Stats</h4>
+                <h4>{{ 'Shared_module.quick_stats' | translate }}</h4>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
                 </ng-container>
               </section>
               <section class="common-section top-padding" *ngIf="stats && sport == 'cricket'">
-                <h4>Major Teams</h4>
+                <h4>{{ 'Shared_module.major_teams' | translate }}</h4>
                 <app-team-card [teams]="playerData?.teams" [sport]="sport"></app-team-card>
               </section>
             </ng-template>
@@ -106,7 +106,7 @@
 
           <!-- Stats Section-->
           <ngb-tab *ngIf="sport != 'kabaddi'">
-            <ng-template ngbTabTitle>Stats</ng-template>
+            <ng-template ngbTabTitle>{{ 'widgetModule.Stats' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <!--  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
                     -->
@@ -134,7 +134,7 @@
 
           <!-- News Section-->
           <ngb-tab>
-            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
               </app-blog-list>
