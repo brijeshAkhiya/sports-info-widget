@@ -9,7 +9,7 @@
         <ngb-tabset class="common-tabs">
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="loadKabaddi('fixture')">Upcoming</div>
+              <div (click)="loadKabaddi('fixture')">{{ 'widgetModule.Upcoming' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget [message]="'No recent fixtures'"
@@ -20,7 +20,7 @@
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('fixture')"
                   *ngIf="!paramsFixtures.loading && paramsFixtures.data?.length > 0 && paramsFixtures.loadmore">
-                  Load More
+                  {{ 'widgetModule.Load_more' | translate }}
                   <span></span>
                 </button>
               </div>
@@ -28,7 +28,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="loadKabaddi('result')">Results</div>
+              <div (click)="loadKabaddi('result')">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget [message]="'No recent results'"
@@ -40,7 +40,7 @@
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('result')"
                   *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
-                  Load More
+                  {{ 'widgetModule.Load_more' | translate }}
                   <span></span>
                 </button>
               </div>

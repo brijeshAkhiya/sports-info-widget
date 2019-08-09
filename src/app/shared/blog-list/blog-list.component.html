@@ -8,7 +8,7 @@
 
 <div class="text-center">
   <button class="theme-btn down-btn" (click)="loadmore()" *ngIf="!isLoading && articles?.length > 0 && isLoadMore">
-    Load More
+      {{ 'widgetModule.Load_more' | translate }}
     <span></span>
   </button>
 
