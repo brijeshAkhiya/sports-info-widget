@@ -6,11 +6,11 @@
       </agm-map>
     </ng-container>
     <p *ngIf="venuedetails?.name">
-      <span>Venue :</span>
+      <span>{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
-    <p *ngIf="venuedetails?.bowling_ends"><span>Ends
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
+    <p *ngIf="venuedetails?.bowling_ends"><span>{{ 'widgetModule.Ends' | translate }} 
         :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
   </ng-container>
 
@@ -21,10 +21,10 @@
       </agm-map>
     </ng-container>
     <p *ngIf="venuedetails?.name">
-      <span>Venue :</span>
+      <span>{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span>Capacity :</span>{{venuedetails?.capacity}}</p>
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
   </ng-container>
   
 </section>

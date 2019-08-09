@@ -104,7 +104,6 @@ export function createTranslateLoader(http: HttpClient) {
     ContactComponent,
     AdvertiseWithUsComponent,
     BlogsComponent,
-
     MainHeaderComponent,
     MainFooterComponent,
     BlogViewComponent,

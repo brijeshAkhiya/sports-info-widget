@@ -207,9 +207,10 @@ import { TranslateModule } from '@ngx-translate/core';
         TopScorerWidgetComponent,
         UppersliderComponent,
         PageNotFoundComponent,
-        FixturesCardComponent
+        FixturesCardComponent,
+   
     ],
-    entryComponents:[LoginModalComponent]
+    entryComponents:[LoginModalComponent ],
 
 })
 export class SharedModule { }
