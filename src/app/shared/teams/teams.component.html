@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-          <h1>Teams</h1>
+          <h1>{{ 'widgetModule.Teams' | translate }} </h1>
         </div>
         <app-loader *ngIf="!teams"></app-loader>
         <app-no-data-widget *ngIf="teams?.length == 0"></app-no-data-widget>

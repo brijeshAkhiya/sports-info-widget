@@ -56,7 +56,7 @@
             {{ match.match_result ? match.match_result : match.match_status }}
           </p>
           <ng-template #match_schedule>
-            <p class="result-line">Starts {{match.scheduled | amLocal | amDateFormat:'LT'}}
+            <p class="result-line">{{ 'widgetModule.starts' | translate }} {{match.scheduled | amLocal | amDateFormat:'LT'}}
               {{(match.city_name) ? '| ' + match.city_name : ''}}</p>
           </ng-template>
         </div>
@@ -69,7 +69,7 @@
     <li>
       <a class="view-all-btn"
         [routerLink]="(type == 'fixture' && sport == 'cricket' ) ? ['/cricket/recent/fixtures'] :  (type == 'result' && sport == 'cricket' ) ?  ['/cricket/recent/results'] : ''">
-        View All
+        {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>
     </li>
@@ -128,7 +128,7 @@
     </li>
     <li>
       <a class="view-all-btn" [routerLink]="'/kabaddi/fixtures'">
-        View All
+        {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>
     </li>

@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-          <h1>Statistics</h1>
+          <h1>{{ 'Kabaddi_Module.Statistics' | translate }}</h1>
         </div>
         <app-loader *ngIf="isloading"></app-loader>
         <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'kabaddi'"
@@ -11,7 +11,7 @@
         <ngb-tabset class="common-tabs black-filled" *ngIf="stats?.length > 0">
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('totalpoint')">Points</div>
+              <div (click)="getTournamentStats('totalpoint')">{{ 'widgetModule.points' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
@@ -26,7 +26,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('raidtotalpoint')">Raid</div>
+              <div (click)="getTournamentStats('raidtotalpoint')">{{ 'Kabaddi_Module.raid' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]="{
@@ -41,7 +41,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('tackletotalpoint')">Tackle</div>
+              <div (click)="getTournamentStats('tackletotalpoint')">{{ 'Kabaddi_Module.Tackle' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
@@ -56,7 +56,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('card')">Cards</div>
+              <div (click)="getTournamentStats('card')">{{ 'Kabaddi_Module.Cards' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {

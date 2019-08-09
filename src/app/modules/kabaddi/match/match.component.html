@@ -12,7 +12,7 @@
         <ngb-tabset class="common-tabs match-tabs">
           <!-- START - MATCH COMMENTRY-->
           <ngb-tab id="commentry">
-            <ng-template ngbTabTitle>Commentary</ng-template>
+            <ng-template ngbTabTitle>{{ 'Kabaddi_Module.commentary' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <!-- <h5>Match Commentary</h5> -->
               <!-- <app-loader *ngIf="loading"></app-loader> -->
@@ -29,7 +29,7 @@
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
           <ngb-tab id="lineups">
-            <ng-template ngbTabTitle>Lineups</ng-template>
+            <ng-template ngbTabTitle>{{ 'Kabaddi_Module.Lineups' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <div class="match-lienup common-shadow rounded-box">
                 <div class="ground-map-block" *ngIf="matchInfo.lineup.length != 0">
@@ -114,7 +114,7 @@
           <!--START - Stats-->
           <ngb-tab *ngIf="matchInfo.match_info.gamestate != 0">
             <ng-template ngbTabTitle>
-              <div (click)="getMatchstats(matchInfo.match_info.mid)">Stats</div>
+              <div (click)="getMatchstats(matchInfo.match_info.mid)">{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="statsLoading"></app-loader>
@@ -137,7 +137,7 @@
                     </p>
                   </div>
                   <div class="center-col">
-                    <h5>Match Stats</h5>
+                    <h5>{{ 'Kabaddi_Module.match_stats' | translate }}</h5>
                   </div>
                   <div>
                     <p class="d-flex align-items-center justify-content-end">
@@ -161,7 +161,7 @@
                     </p>
                   </div>
                   <div class="center-col">
-                    <p>Points %</p>
+                    <p>{{ 'widgetModule.points' | translate }}%</p>
                   </div>
                   <div>
                     <p
@@ -179,7 +179,7 @@
                       <b>{{matchStats.team_stats.home.raidtotalpoint}}</b></p>
                   </div>
                   <div class="center-col">
-                    <p>Raid Points</p>
+                    <p>{{ 'widgetModule.Raid_Points' | translate }}</p>
                   </div>
                   <div>
                     <p
@@ -194,7 +194,7 @@
                       <b>{{matchStats.team_stats.home.tackletotalpoint}}</b></p>
                   </div>
                   <div class="center-col">
-                    <p>Tackle Points</p>
+                    <p>{{ 'Kabaddi_Module.tackle_point' | translate }}</p>
                   </div>
                   <div>
                     <p
@@ -209,7 +209,7 @@
                       <b>{{matchStats.team_stats.home.alloutpoint}}</b></p>
                   </div>
                   <div class="center-col">
-                    <p>All Out Points</p>
+                    <p>{{ 'Kabaddi_Module.all_out_point' | translate }}</p>
                   </div>
                   <div>
                     <p
@@ -224,7 +224,7 @@
                       <b>{{matchStats.team_stats.home.extrapoint}}</b></p>
                   </div>
                   <div class="center-col">
-                    <p>Extra Points</p>
+                    <p>{{ 'Kabaddi_Module.extra_points' | translate }}</p>
                   </div>
                   <div>
                     <p
@@ -239,7 +239,7 @@
           <!-- START - Info-->
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div>Info</div>
+              <div>{{ 'Kabaddi_Module.Info' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-match-info-card [options]="{
@@ -247,14 +247,14 @@
              titles : ['Match', 'Tournament','Zone','Venue'],
              values : [matchInfo.match_info.title,matchInfo.match_info.competition.cname,matchInfo.match_info.zone ? matchInfo.match_info.zone : '-',matchInfo.match_info.venue.name] }
              " [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
-              <h4 class="line-title">Venue Details</h4>
+              <h4 class="line-title">{{ 'Kabaddi_Module.venue_details' | translate }}</h4>
               <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails">
               </app-venue-map-card>
             </ng-template>
           </ngb-tab>
           <!--START - NEWS TAB-->
           <ngb-tab>
-            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
               </app-blog-list>

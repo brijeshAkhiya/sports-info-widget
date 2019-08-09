@@ -13,7 +13,7 @@
              {{(title == 'Weather Condition' || title == 'Pitch Condition' || title == 'Outfield Conditions' || title == 'Match Refree') ? (options.values[i]) : ''}}
 
              <p *ngIf="options.values[i].toss_won_by_team && title == 'Toss'">
-                <span>{{options.values[i].toss_won_by_team}} opt to
+                <span>{{options.values[i].toss_won_by_team}} {{ 'widgetModule.opt_to' | translate }}
                   {{ options.values[i].toss_decision ? options.values[i].toss_decision : 'bat'}}</span>
               </p>
               <div *ngIf="title == 'Umpires'">

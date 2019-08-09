@@ -70,6 +70,7 @@ import { UppersliderComponent } from './widget/upperslider/upperslider.component
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
 import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.component';
 import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -86,6 +87,7 @@ import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.comp
         LazyLoadImageModule,
         CarouselModule,
         LottieAnimationViewModule,
+        TranslateModule
     ],
     declarations: [
         /** All Pipes */
