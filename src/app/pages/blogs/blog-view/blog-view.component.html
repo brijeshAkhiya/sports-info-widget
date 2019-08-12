@@ -1,4 +1,6 @@
-<ng-container *ngIf="blogdata">
+<app-page-not-found *ngIf="!loader && !blogdata"></app-page-not-found>
+<app-loader *ngIf="loader"></app-loader>
+<ng-container *ngIf="!loader && blogdata">
   <div class="blog-complete-line">
     <div id="blogCompleteLine"></div>
   </div>
