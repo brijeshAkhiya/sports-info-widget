@@ -68,7 +68,7 @@
       <td>
         <a
           [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player', item['pid'], (item.name | slugify)] : '' ">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="kabaddiService.getKabaddiLogo(item['tid'])"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="logo">
           {{ item[value]}}
         </a>

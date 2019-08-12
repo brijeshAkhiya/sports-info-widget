@@ -106,7 +106,7 @@
             {{match?.teams?.home?.shortname}}</h5>
         </div>
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.logo"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.home?.tname}}" />
         </div>
       </div>
@@ -131,7 +131,7 @@
 
       <div class="match-team d-flex align-items-center">
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.logo"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.tid | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.away?.tname}}" />
         </div>
         <div class="team-info">
