@@ -50,7 +50,7 @@
               <ng-container *ngIf="sport == 'kabaddi'">
                 <section class="team-about-head d-flex" *ngIf="teamProfile?.founded != ''">
                   <div class="team-logo align-self-start rounded-box common-shadow">
-                    <div class="team-logo-img" [lazyLoad]="teamProfile?.teamlogo"
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.tid | logosurl:'kabaddi'"
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">

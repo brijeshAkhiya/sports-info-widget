@@ -48,7 +48,6 @@ export class AppComponent implements OnInit,AfterContentInit {
     private store: Store<fromRoot.State>,
     private translate: TranslateService
     ) {
-
     this.getMetaTags();
     this.swupdate.available.subscribe((res) => {
       this.isupdate = true
@@ -56,11 +55,9 @@ export class AppComponent implements OnInit,AfterContentInit {
   }
 
   ngOnInit() {    
-
     let selectedLang = 'english' //(window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info') ? window.location.host.split('.')[0] : 'english';
     console.log(selectedLang)
     this.translate.setDefaultLang(selectedLang);
-
     //get data from ngrx store through meta tags actions
     
     //susbcribe to router events

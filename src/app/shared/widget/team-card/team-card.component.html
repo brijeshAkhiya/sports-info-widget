@@ -21,7 +21,7 @@
 
         <!-- Kabaddi Teams-->
         <ng-container *ngIf="sport=='kabaddi'">
-          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.teamlogo"
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.tid | logosurl:'kabaddi'"
               [defaultImage]="cricketService.flagplaceholder" alt="team?.tname">
           </div>
           <div class="team-name">
