@@ -3,13 +3,13 @@
     <h5>{{sport ? sport : ''}}</h5>
   </div>
   <ngb-tabset class="common-tabs">
-    <ngb-tab title="Fixtures">
+    <ngb-tab title="{{'Cricket_Module.Fixtures' | translate}}">
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
         </ng-container>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Results">
+    <ngb-tab title="{{'Cricket_Module.Results' | translate}}">
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
         </ng-container>
