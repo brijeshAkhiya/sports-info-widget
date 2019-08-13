@@ -35,7 +35,8 @@ export class AppComponent implements OnInit, AfterContentInit {
   vibrantcolor: any
   mutedcolor: any
   metatagsObj = {};
-  isupdate: boolean
+  isupdate: boolean;
+  showCookiepopup:boolean = false
   constructor(
     private http: HttpClient,
     private swupdate: SwUpdate,
@@ -52,14 +53,15 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.swupdate.available.subscribe((res) => {
       this.isupdate = true
     })
-    // if (!this.readCookie('iscookieenabled')) {
-    //   console.log('set cokieee');
-    //   console.log('show pop up');
-    //   document.cookie = "iscookieenabled=true";
-    // }
-    // else {
-    //   console.log('not show1 popup');
-    // }
+    if (!this.readCookie('iscookieenabled')) {
+      console.log('show pop up');
+      this.showCookiepopup = true
+      document.cookie = "iscookieenabled=true";
+    }
+    else {
+      this.showCookiepopup = false
+      console.log('not show popup');
+    }
   }
 
   ngOnInit() {
