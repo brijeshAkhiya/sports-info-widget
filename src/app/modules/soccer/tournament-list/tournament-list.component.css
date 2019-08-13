@@ -1,3 +1,6 @@
+.search-box                 { width: 210px; position: relative; }
+.search-box .form-control   { font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; border: 2px solid #D5D8DC; border-radius: 2em; }
+.search-box button          { position: absolute; width: 24px; height: 24px; right: 16px; bottom: 50%; transform: translateY(50%); -webkit-transform: translateY(50%); background: url(assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; }
 .soccer-tournaments-list                { background: #fff; overflow: hidden; }
 .soccer-tournaments-list .item          { padding: 24px; border: 1px solid #EBEBEB; border-left-width: 0px; border-top-width: 0px; }
 .soccer-tournaments-list .item:nth-child(even)         { border-right-width: 0px; }
@@ -22,4 +25,9 @@
     .soccer-tournaments-list .item          { padding: 16px; border-right-width: 0px;}
     .soccer-tournaments-list .item:nth-last-child(2) { border-bottom-width: 1px;}
     .soccer-tournaments-list h6             { margin-bottom: 5px; }
+}
+
+@media (max-width: 575px) {
+    .soccer-tournaments-title       { flex-direction: column; -webkit-flex-direction: column; }
+    .soccer-tournaments-title form  { margin-top: 8px; }
 }
