@@ -92,6 +92,8 @@
     .schedule-tour-list p                   { margin-bottom: 6px;}
 /* -------- Tournament Fixtures For Kabaddi ------- */
     .schedule-tour-list .score-center-block     { margin: -5px 8px 0px; padding-top: 5px; }
+/* -------- Tournament Fixtures For Soccer ------- */
+
 }
 
 @media (max-width: 767px) {
