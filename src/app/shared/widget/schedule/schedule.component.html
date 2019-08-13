@@ -1,4 +1,4 @@
-<div class="schedule-list schedule-tour-list">
+<div class="schedule-list schedule-tour-list" *ngIf="sport != 'soccer'; else soccer_list">
   <div class="schedule-month d-flex" *ngFor="let item of data">
     <div class="month-title">
       <div class="sticky-month">
@@ -151,108 +151,67 @@
 
 </ng-template>
 
-<div class="soccer-tour-list">
-  <div class="soccer-tour rounded-box common-shadow">
-    <div class="soccer-tour-title">
-      <p>Copa America 2019</p>
-    </div>
-    <div class="schedule-tour-list">
-      <div
-        class="schedule-item soccer-item d-flex align-items-center fullblock-link-container">
-
-        <div class="match-teams d-flex align-items-center">
-          <div class="match-team d-flex align-items-center">
-            <div class="team-info">
-              <h5>Bolivia</h5>
-            </div>
-            <div class="team-flag">
-              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
-            </div>
-          </div>
-
-          <!-- For Upcoming Match -->
-          <!-- <div class="vs-block">
-              <h6>vs</h6>
-            </div> -->
-          <!-- For Complete/Result Match -->
-          <div class="score-center-block">
-            <p>ft</p>
-            <div class="value d-flex justify-content-between">
-              <h4 class="dark-text">4</h4>
-              <h4 class="dark-text">-</h4>
-              <h4 class="dark-text">0</h4>
-            </div>
-          </div>
-
-          <div class="match-team d-flex align-items-center">
-            <div class="team-flag">
-              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
-            </div>
-            <div class="team-info">
-              <h5>Peru</h5>
-            </div>
-          </div>
-          <a class="details-btn"><span>Details</span></a>
-          <a class="fullblock-link">
-          </a>
-        </div>
-        <div class="match-desc text-center">
-          <h6>
-            <span class="text-capitalize">03:00 AM</span>
-          </h6>
-          <p class="stadium-nm">Estadio do Maracana, Brazil</p>
-          <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
-            <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
-        </div>
+<ng-template #soccer_list>
+  <div class="soccer-tour-list">
+    <div class="soccer-tour rounded-box common-shadow" *ngFor="let item of data">
+      <div class="soccer-tour-title">
+        <p>{{item.data.season.name}}</p>
       </div>
-      <div
-        class="schedule-item soccer-item d-flex align-items-center fullblock-link-container">
+      <div class="schedule-tour-list">
+        <div class="schedule-item soccer-item d-flex align-items-center fullblock-link-container"
+          *ngFor="let match of item.data.matches">
 
-        <div class="match-teams d-flex align-items-center">
-          <div class="match-team d-flex align-items-center">
-            <div class="team-info">
-              <h5>Bolivia</h5>
+          <div class="match-teams d-flex align-items-center">
+            <div class="match-team d-flex align-items-center">
+              <div class="team-info">
+                <h5>{{match.sport_event.competitors[0].name}}</h5>
+              </div>
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
+                  [defaultImage]="cricketService.flagplaceholder" alt="{{match.sport_event.competitors[0].name}}">
+              </div>
             </div>
-            <div class="team-flag">
-              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
-            </div>
-          </div>
 
-          <!-- For Upcoming Match -->
-          <!-- <div class="vs-block">
+            <!-- For Upcoming Match -->
+            <div class="vs-block" *ngIf="match.sport_event_status.match_status != 'ended'">
               <h6>vs</h6>
-            </div> -->
-          <!-- For Complete/Result Match -->
-          <div class="score-center-block">
-            <p>ft</p>
-            <div class="value d-flex justify-content-between">
-              <h4 class="dark-text">4</h4>
-              <h4 class="dark-text">-</h4>
-              <h4 class="dark-text">0</h4>
             </div>
-          </div>
+            <!-- For Complete/Result Match -->
+            <div class="score-center-block" *ngIf="match.sport_event_status.match_status == 'ended'">
+              <p>ft</p>
+              <div class="value d-flex justify-content-between">
+                <h4 class="dark-text">{{match.sport_event.competitors[0].qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</h4>
+                <h4 class="dark-text">-</h4>
+                <h4 class="dark-text">{{match.sport_event.competitors[1].qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</h4>
+              </div>
+            </div>
 
-          <div class="match-team d-flex align-items-center">
-            <div class="team-flag">
-              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
+            <div class="match-team d-flex align-items-center">
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
+                  [defaultImage]="cricketService.flagplaceholder" alt="{{match.sport_event.competitors[1].name}}">
+              </div>
+              <div class="team-info">
+                <h5>{{match.sport_event.competitors[1].name}}</h5>
+              </div>
             </div>
-            <div class="team-info">
-              <h5>Peru</h5>
-            </div>
+            <a class="details-btn"><span>Details</span></a>
+            <a class="fullblock-link">
+            </a>
           </div>
-          <a class="details-btn"><span>Details</span></a>
-          <a class="fullblock-link">
-          </a>
-        </div>
-        <div class="match-desc text-center">
-          <h6>
-            <span class="text-capitalize">03:00 AM</span>
-          </h6>
-          <p class="stadium-nm">Estadio do Maracana, Brazil</p>
-          <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
+          <div class="match-desc text-center">
+            <h6>
+              <span class="text-capitalize">{{match.sport_event.start_time | date:'h:mm a'}}</span>
+            </h6>
+            <p class="stadium-nm" *ngIf="match.sport_event.venue">
+              {{match.sport_event.venue?.name}}, {{match.sport_event.venue?.city_name}},
+              {{match.sport_event.venue?.country_name}}
+            </p>
+            <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
             <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>

@@ -514,5 +514,18 @@ export class SportsService {
     ); 
   }
 
+  /**
+   * Soccer Services
+   */
+
+  //get Daily Summary
+  getSoccerDailySummary(date) {
+    return this.http.get(
+      environment.apiUrl +
+      environment.version +
+      `/soccer/daily/summaries/${date}`
+    );
+  }
+
 
 }
