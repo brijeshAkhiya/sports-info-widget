@@ -79,3 +79,22 @@
       <div class="clearfix"></div>
     </div>
   </div>
+
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'tournament'">
+    <div class="sub-navabar-inner d-flex">
+      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu">
+          <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'widgetModule.Home' | translate }}</a></li>
+          <li><a [routerLink]="['./fixtures']" routerLinkActive="active">{{ 'widgetModule.Fixtures' | translate }}</a></li>
+          <li><a [routerLink]="['./teams']" routerLinkActive="active">Clubs</a></li>
+          <li><a [routerLink]="['./stats']" routerLinkActive="active">{{ 'widgetModule.Stats' | translate }}</a></li>
+          <li><a [routerLink]="['./standings']" routerLinkActive="active">{{ 'widgetModule.Table' | translate }}</a></li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  
+  </ng-container>

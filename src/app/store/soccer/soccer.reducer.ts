@@ -1,17 +1,19 @@
-import { SoccerActions, LOAD_SOCCER_RESULTS, LOAD_SOCCER_RESULTS_SUCCESS, SOCCER_LIVE_MATCHES, SOCCER_FIXTURES_MATCHES, SOCCER_RESULTS_MATCHES, SOCCER_MATCH_INFO, LOAD_SOCCER_FIXTURES_SUCCESS, LOAD_SOCCER_FIXTURES, LOAD_SOCCER_LIVE_MATCHES_SUCCESS, LOAD_SOCCER_LIVE_MATCHES } from "./soccer.actions";
+import { SoccerActions, LOAD_SOCCER_RESULTS, LOAD_SOCCER_RESULTS_SUCCESS, SOCCER_LIVE_MATCHES, SOCCER_FIXTURES_MATCHES, SOCCER_RESULTS_MATCHES, SOCCER_MATCH_INFO, LOAD_SOCCER_FIXTURES_SUCCESS, LOAD_SOCCER_FIXTURES, LOAD_SOCCER_LIVE_MATCHES_SUCCESS, LOAD_SOCCER_LIVE_MATCHES, LOAD_SOCCER_TOURNAMENTS_LIST, LOAD_SOCCER_TOURNAMENTS_LISTSUCCESS } from "./soccer.actions";
 
 export interface SoccerData {
     fixtures: [],
     live: [],
     results: [],
-    info: []
+    info: [],
+    tournamentlist: []
 }
 
 const initialState = {
     fixtures: [],
     live: [],
     results: [],
-    info: []
+    info: [],
+    tournamentlist: []
 };
 
 export function SoccerReducer(state = initialState, action: SoccerActions): any {
@@ -36,6 +38,10 @@ export function SoccerReducer(state = initialState, action: SoccerActions): any 
             return { ...state, results: action.payload };
         case SOCCER_MATCH_INFO:
             return { ...state, info: action.payload };
+        case LOAD_SOCCER_TOURNAMENTS_LIST:
+            return state
+        case LOAD_SOCCER_TOURNAMENTS_LISTSUCCESS:
+            return { ...state, tournamentlist: action.payload };
         default: {
             return state
         }
