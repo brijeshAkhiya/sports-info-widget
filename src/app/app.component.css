@@ -9,6 +9,12 @@
 .new-ver-toast p a:hover span:before    { left: 0px; }
 .new-ver-toast p a:hover span:after     { left: 100%; }
 
+/* -------- Cookie CSS ------- */
+.cookies-notification               { padding: 24px 32px; width: 100%; background: #1F1F1F; position: fixed; bottom: 0px; z-index: 6;  transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.cookies-notification p a           { text-decoration: underline;}
+.cookies-notification button        { margin-left: 12px; height: 40px; width: 40px; background: #3D3D3D url(../assets/images/close-icon.svg) no-repeat center center /  50% auto; border: none; border-radius: 50%; flex-shrink: 0; }
+.cookies-notification.cookies-hide   { transform: translateY(100%); -webkit-transform: translateY(100%); }
+
 @media (min-width: 992px) and (max-width: 1199px) {
     .new-ver-toast                      { padding: 12px 12px 12px 32px; width: 660px;}
     .new-ver-toast p                    { font-size: 19px; line-height: 28px; }
@@ -19,6 +25,8 @@
     .new-ver-toast                      { padding: 10px 10px 10px 24px; width: 560px;}
     .new-ver-toast p                    { font-size: 17px; line-height: 22px; }
     .new-ver-toast p span               { width: 48px; height: 48px;}
+/* -------- Cookie CSS ------- */
+    .cookies-notification               { padding: 20px 24px; }
 }
 
 @media (max-width: 767px) {
@@ -26,6 +34,9 @@
     .new-ver-toast p                    { font-size: 13px; line-height: 18px; }
     .new-ver-toast p span               { margin-left: 4px; width: 48px; height: 48px; }
     .new-ver-toast p:last-child         { text-align: right;}
+/* -------- Cookie CSS ------- */
+    .cookies-notification               { padding: 16px 20px; }
+    .cookies-notification button        { margin-left: 10px; height: 32px; width: 32px; }
 }
 
 @media (max-width: 575px) {

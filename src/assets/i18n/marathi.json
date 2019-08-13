@@ -219,5 +219,66 @@
       "quick_stats": "द्रुत आकडेवारी",
       "Recent_matches": "अलीकडील सामने",
       "no_live_commentry_available": "अरेरे! याक्षणी कोणतीही थेट भाष्य उपलब्ध नाही"
-  }
+  },
+
+    "Cricket_Module2": {
+        "Schedule": "वेळापत्रक",
+        "to": "करण्यासाठी",
+        "Did": "केले",
+        "player": "खेळाडू",
+        "Yet": "अद्याप",
+        "not": "नाही",
+        "High_Score": "उच्च स्कोअर",
+        "bat": "एक",
+        "Catches": "झेल",
+        "Domestic": "घरगुती",
+        "Economy_Rate": "अर्थव्यवस्था दर",
+        "International": "आंतरराष्ट्रीय"
+    },
+    "Kabaddi_Module2": {
+        "Red": "लाल",
+        "Zone": "झोन",
+        "Yellow": "पिवळा",
+        "Successfull_tackles": "सक्सेसफुल टॅकल्स",
+        "Super_Tackles": "सुपर टॅक्सल्स",
+        "Raids_Points": "छापे पॉइंट्स",
+        "Successfull_raids": "सक्सेसफुल छापे",
+        "Tournament": "स्पर्धा",
+        "Green": "हिरवा",
+        "Tackle_Points": "बिंदू हाताळणे",
+        "Super_Raids": "सुपर रेड"
+    },
+    "widget_Module2": {
+        "No_Team_squad": "कार्यसंघा पथकाचा कोणताही डेटा उपलब्ध नाही",
+        "No_data_available": "माहिती उपलब्ध नाही!",
+        "No_team_results": "संघाचा कोणताही निकाल नाही",
+        "Added_to_favourites": "आवडींमध्ये जोडले",
+        "Add_to_favourites": "आवडीमध्ये जोडा",
+        "No_Team_data_available": "कार्यसंघ डेटा उपलब्ध नाही",
+        "Recommended_Stories": "शिफारस केलेल्या कथा",
+        "No_team_fixtures": "टीम फिक्स्चर नाही"
+    },
+    "Shared_Module2": {
+        "Position": "स्थिती",
+        "Nationality": "राष्ट्रीयत्व",
+        "Weight": "वजन",
+        "Batting_Stats": "फलंदाजीची आकडेवारी",
+        "Bowling_Style": "बॉलिंग शैली",
+        "Bowling_Stats": "बॉलिंग आकडेवारी",
+        "Height": "उंची",
+        "Points_Table": "गुण सारणी",
+        "Viewers": "दर्शक",
+        "Born": "जन्म",
+        "Role": "भूमिका",
+        "Batting_Style": "फलंदाजीची शैली",
+        "Game_type": "खेळाचा प्रकार",
+        "TEAM": "कार्यसंघ"
+    },
+    "Blog_Module2": {
+        "Edit": "संपादित करा",
+        "Add_a_comment": "एक टिप्पणी जोडा",
+        "Search_results": "शोध परिणाम",
+        "Recommended": "शिफारस केली",
+        "Search_articles": "लेख शोधा"
+    }
 }

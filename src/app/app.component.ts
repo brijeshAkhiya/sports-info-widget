@@ -13,7 +13,7 @@ import * as MetaTags from "./store/meta-tags-management/meta-tags.actions";
 import * as fromRoot from './app-reducer'
 import * as Auth from './store/auth/auth.actions';
 import { environment } from "@env";
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 /** Providers */
 import { CommonService } from "@providers/common-service";
@@ -28,39 +28,51 @@ import { SwUpdate } from '@angular/service-worker';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit,AfterContentInit {
+export class AppComponent implements OnInit, AfterContentInit {
   users$: Observable<any>
   socialUser: any
   socialUser2: any;
   vibrantcolor: any
   mutedcolor: any
   metatagsObj = {};
-  isupdate: boolean
+  isupdate: boolean;
+  showCookiepopup:boolean = false
   constructor(
-    private http: HttpClient, 
-    private swupdate: SwUpdate, 
-    private commonservice: CommonService, 
-    private sportsservice: SportsService, 
-    private router: Router, 
-    private meta: Meta, 
-    private pagetitle: Title, 
-    private socialLoginService: AuthService, 
+    private http: HttpClient,
+    private swupdate: SwUpdate,
+    private commonservice: CommonService,
+    private sportsservice: SportsService,
+    private router: Router,
+    private meta: Meta,
+    private pagetitle: Title,
+    private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
     private translate: TranslateService
-    ) {
+  ) {
     this.getMetaTags();
     this.swupdate.available.subscribe((res) => {
       this.isupdate = true
     })
+    if (!this.readCookie('iscookieenabled')) {
+      console.log('show pop up');
+      this.showCookiepopup = true
+      document.cookie = "iscookieenabled=true";
+    }
+    else {
+      this.showCookiepopup = false
+      console.log('not show popup');
+    }
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+
+    //console.log(this.readCookie('isenabled'));
 
     let selectedLang = 'english' //bengali //(window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info') ? window.location.host.split('.')[0] : 'english';
     console.log(selectedLang)
     this.translate.setDefaultLang(selectedLang);
     //get data from ngrx store through meta tags actions
-    
+
     //susbcribe to router events
     this.router.events.subscribe((event) => {
       //scroll to top navigation related
@@ -71,7 +83,7 @@ export class AppComponent implements OnInit,AfterContentInit {
       //change route get url 
       if (event instanceof NavigationEnd) {
         // console.log("event", event, event.url.includes('/article'));
-        if(event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))        
+        if (event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
         //set meta tags from here...
         // console.log('tagsobj', this.metatagsObj);
@@ -89,30 +101,30 @@ export class AppComponent implements OnInit,AfterContentInit {
 
     let data = this.metatagsObj[routerURL]
     if (data) {
-      if(data.title){
+      if (data.title) {
         this.meta.updateTag({ name: 'title', content: data.title });
         this.meta.updateTag({ property: 'og:title', content: data.title });
         this.meta.updateTag({ name: 'twitter:title', content: data.title });
       }
       this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports' });
-      
-      if(data.description){
+
+      if (data.description) {
         this.meta.updateTag({ name: 'description', content: data.description });
         this.meta.updateTag({ name: 'og:description', content: data.description });
         this.meta.updateTag({ name: 'twitter:description', content: data.description });
       }
-      if(data.image){
+      if (data.image) {
         this.meta.updateTag({ name: 'twitter:image', content: data.image });
         this.meta.updateTag({ name: 'twitter:image:src', content: data.image });
         this.meta.updateTag({ name: 'og:image', content: data.image });
       }
-      if(data.topic)
-        this.meta.updateTag({ name: 'topic', content:  data.topic  });
-      if(data.subject)
-        this.meta.updateTag({ name: 'subject', content: data.subject  });
-      if(data['og:type'])
-        this.meta.updateTag({ property: 'og:type', content: data['og:type']  });
-      if(data['twitter:card'])
+      if (data.topic)
+        this.meta.updateTag({ name: 'topic', content: data.topic });
+      if (data.subject)
+        this.meta.updateTag({ name: 'subject', content: data.subject });
+      if (data['og:type'])
+        this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
+      if (data['twitter:card'])
         this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
     }
     // else {
@@ -129,6 +141,19 @@ export class AppComponent implements OnInit,AfterContentInit {
 
   }
 
+  //get cookie by name 
+  readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+
   //get meta tags 
   getMetaTags() {
     this.sportsservice.getmetatags().subscribe((res: any) => {
@@ -143,7 +168,7 @@ export class AppComponent implements OnInit,AfterContentInit {
     window.location.reload(true);
   }
 
-  ngAfterContentInit(){
+  ngAfterContentInit() {
     this.store.select('Metatags').subscribe((data: any) => {
       let metadata = data.MetaTags
       let metaarray = [];

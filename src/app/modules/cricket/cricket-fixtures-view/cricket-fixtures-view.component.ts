@@ -38,7 +38,7 @@ export class CricketFixturesViewComponent implements OnInit {
       this.getMatchResults();
     }
   }
-
+  
   //get 3 days matches fixtures - HOME
   getMatchFixtures() {
     this.loadingFixture = true;

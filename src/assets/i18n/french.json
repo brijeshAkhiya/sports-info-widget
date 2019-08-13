@@ -219,5 +219,66 @@
       "commentary": "Commentaire",
       "Tackle": "Tacle",
       "Statistics": "Statistiques"
-  }
+  },
+
+  "Cricket_Module2": {
+    "Schedule": "Programme",
+    "Did": "Fait",
+    "Catches": "Les captures",
+    "Economy_Rate": "Taux d'économie",
+    "International": "International",
+    "Domestic": "National",
+    "High_Score": "Score élevé",
+    "not": "ne pas",
+    "Yet": "Encore",
+    "player": "joueur",
+    "to": "à",
+    "bat": "un"
+},
+"Shared_Module2": {
+    "Game_type": "Type de jeu",
+    "TEAM": "ÉQUIPE",
+    "Height": "la taille",
+    "Born": "Née",
+    "Viewers": "Les spectateurs",
+    "Nationality": "Nationalité",
+    "Position": "Position",
+    "Weight": "Poids",
+    "Bowling_Stats": "Statistiques Bowling",
+    "Role": "Rôle",
+    "Batting_Stats": "Statistiques au bâton",
+    "Bowling_Style": "Style de bowling",
+    "Points_Table": "Tableau des points",
+    "Batting_Style": "Style de frappeur"
+},
+"Blog_Module2": {
+    "Search_results": "Résultats de la recherche",
+    "Add_a_comment": "Ajouter un commentaire",
+    "Recommended": "conseillé",
+    "Edit": "modifier",
+    "Search_articles": "Rechercher des articles"
+},
+"Kabaddi_Module2": {
+    "Super_Tackles": "Super Tackles",
+    "Green": "vert",
+    "Yellow": "Jaune",
+    "Zone": "Zone",
+    "Super_Raids": "Super Raids",
+    "Red": "rouge",
+    "Successfull_raids": "Raids réussis",
+    "Raids_Points": "Raids Points",
+    "Tournament": "Tournoi",
+    "Successfull_tackles": "Des tacles réussis",
+    "Tackle_Points": "Points d'attaque"
+},
+"widget_Module2": {
+    "Add_to_favourites": "Ajouter aux Favoris",
+    "No_team_results": "Aucun résultat d'équipe",
+    "Recommended_Stories": "Histoires recommandées",
+    "Added_to_favourites": "Ajouté aux favoris",
+    "No_team_fixtures": "Aucun match d'équipe",
+    "No_data_available": "Pas de données disponibles!",
+    "No_Team_data_available": "Aucune donnée d'équipe disponible",
+    "No_Team_squad": "Aucune donnée sur l'équipe disponible"
+}
 }

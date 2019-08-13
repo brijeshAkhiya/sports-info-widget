@@ -3,7 +3,7 @@
     <div class="container">
       <div class="search-box">
         <form>
-          <input type="text" #name placeholder="Search articles …" [(ngModel)]="searchkey"
+          <input type="text" #name placeholder="{{'Blog_Module2.Search_articles' | translate}} …" [(ngModel)]="searchkey"
             [ngModelOptions]="{standalone: true}" autofocus="autofocus" (keyup)="valuechange($event)">
           <button type="submit" (click)="search()"></button>
         </form>

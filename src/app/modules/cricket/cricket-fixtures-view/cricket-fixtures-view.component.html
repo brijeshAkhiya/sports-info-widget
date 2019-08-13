@@ -13,7 +13,7 @@
             <ng-template ngbTabContent>
               <app-loader *ngIf="loadingFixture"></app-loader>
               <app-no-data-widget  [message]="('Cricket_Module.No_recent_fixtures' | translate)" *ngIf="!loadingFixture && matchfixtures && matchfixtures?.length == 0">
-              </app-no-data-widget>
+              </app-no-data-widget> 
               <app-schedule [data]="matchfixtures" [type]="'fixture'" [sport]="'cricket'"></app-schedule>
             </ng-template>
           </ngb-tab>

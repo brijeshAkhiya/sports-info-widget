@@ -72,19 +72,29 @@
           <li><a [routerLink]="['/soccer']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'widgetModule.Home' | translate }}</a>
           </li>
           <li><a [routerLink]="['/soccer/fixtures']" routerLinkActive="active">{{ 'widgetModule.Fixtures' | translate }}</a></li>
-          <!-- <li ngbDropdown *ngIf="series && series.length > 0">
-            <a id="dropdownBasic1" ngbDropdownToggle>Series</a>
-            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <li ngbDropdownItem *ngFor="let item of series | slice:0:4"><a
-                  [routerLink]="['/cricket/tournament',(item.id | splitID),(item.name | slugify)]">{{item.name}}</a>
-              </li>
-            </ul>
-          </li> -->
-          <!-- <li><a class="special-nav-item" [routerLink]="['/cricket/tournament/2474/world-cup']">World
-              Cup 2019</a></li> -->
+          <li><a [routerLink]="['/soccer/tournaments']" routerLinkActive="active">Tournaments</a></li>
         </ul>
         <div id="subnav-pointer" #subnavpointer></div>
       </div>
       <div class="clearfix"></div>
     </div>
   </div>
+
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'tournament'">
+    <div class="sub-navabar-inner d-flex">
+      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu">
+          <li><a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'widgetModule.Home' | translate }}</a></li>
+          <li><a [routerLink]="['./fixtures']" routerLinkActive="active">{{ 'widgetModule.Fixtures' | translate }}</a></li>
+          <li><a [routerLink]="['./teams']" routerLinkActive="active">Clubs</a></li>
+          <li><a [routerLink]="['./stats']" routerLinkActive="active">{{ 'widgetModule.Stats' | translate }}</a></li>
+          <li><a [routerLink]="['./standings']" routerLinkActive="active">{{ 'widgetModule.Table' | translate }}</a></li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  
+  </ng-container>

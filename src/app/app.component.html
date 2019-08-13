@@ -46,3 +46,12 @@
   <p>New version of SportsInfo is available.</p>
   <p><a (click)="updatewebsite()">Take me there <span></span></a></p>
 </div>
+
+<div class="cookies-notification white-text d-flex align-items-center justify-content-between" [ngClass]="{'cookies-hide': !showCookiepopup}">
+  <div>
+    <p class="no-margin">Hi! We use cookies on this website to help operate our site and for analytics purposes. For
+      more on how we use cookies, go<a [routerLink]="['/terms-and-conditions']"> here</a>.</p>
+    <p class="no-margin">By continuing to use our services, you are giving us your consent to use cookies.</p>
+  </div>
+  <button class="cookies-close" (click)="showCookiepopup = false"></button>
+</div>

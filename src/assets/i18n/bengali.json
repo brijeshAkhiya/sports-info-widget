@@ -219,5 +219,67 @@
     },
     "About_us": {
         "readers_text": "আমাদের পাঠকরা যা বলে"
+    },
+
+        "Shared_Module2": {
+            "Born": "স্বভাবসিদ্ধ",
+            "Weight": "ওজন",
+            "Batting_Style": "ব্যাটিং স্টাইল",
+            "Points_Table": "পয়েন্টস সারণী",
+            "Batting_Stats": "ব্যাটিং পরিসংখ্যান",
+            "Bowling_Stats": "বোলিংয়ের পরিসংখ্যান",
+            "TEAM": "টীম",
+            "Game_type": "খেলার ধরণ",
+            "Nationality": "জাতীয়তা",
+            "Height": "উচ্চতা",
+            "Role": "ভূমিকা",
+            "Position": "অবস্থান",
+            "Viewers": "দর্শকরা",
+            "Bowling_Style": "বোলিং স্টাইল"
+        },
+        "Kabaddi_Module2": {
+            "Super_Raids": "সুপার রেড",
+            "Successfull_tackles": "সাফল্যপূর্ণ ট্যাকল",
+            "Tournament": "টুর্নামেন্ট",
+            "Yellow": "হলুদ",
+            "Red": "লাল",
+            "Zone": "মণ্ডল",
+            "Raids_Points": "রেইড পয়েন্টস",
+            "Green": "সবুজ",
+            "Super_Tackles": "সুপার ট্যাকলস",
+            "Successfull_raids": "সফল অভিযান",
+            "Tackle_Points": "পয়েন্টগুলি মোকাবেলা করুন"
+        },
+        "widget_Module2": {
+            "Add_to_favourites": "ফেভারিটে যোগ করুন",
+            "Recommended_Stories": "প্রস্তাবিত গল্প",
+            "No_Team_data_available": "কোনও দল তথ্য উপলব্ধ নেই",
+            "No_data_available": "কোন তথ্য নেই!",
+            "No_Team_squad": "কোনও দলের স্কোয়াড ডেটা উপলব্ধ নেই",
+            "Added_to_favourites": "ফেভারিটে যোগ করা হয়েছে",
+            "No_team_fixtures": "কোনও দল ফিক্সচার নেই",
+            "No_team_results": "কোনও দল ফলাফল নেই"
+        },
+        "Cricket_Module2": {
+            "International": "আন্তর্জাতিক",
+            "player": "খেলোয়াড়",
+            "Domestic": "গার্হস্থ্য",
+            "Catches": "ক্যাচ",
+            "High_Score": "উচ্চ স্কোর",
+            "not": "না",
+            "Did": "করেছিল",
+            "Yet": "এখনো",
+            "to": "থেকে",
+            "Schedule": "তফসিল",
+            "Economy_Rate": "ইকোনমি রেট",
+            "bat": "একটি"
+        },
+        "Blog_Module2": {
+            "Add_a_comment": "একটা মন্তব্য যোগ করুন",
+            "Edit": "সম্পাদন করা",
+            "Recommended": "প্রস্তাবিত",
+            "Search_articles": "নিবন্ধ অনুসন্ধান করুন",
+            "Search_results": "অনুসন্ধান ফলাফল"
+        }
     }
-}
+

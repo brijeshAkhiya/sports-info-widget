@@ -48,13 +48,13 @@
 .schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700;  }
 .schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
-/* -------- Tournament Fixtures For Sc ------- */
+/* -------- Tournament Fixtures For Soccer ------- */
 .soccer-tour-list .soccer-tour              { margin-bottom: 24px; padding: 16px 24px 24px; background: #fff; }
 .soccer-tour-list .soccer-tour:last-child   { margin: 0px; }
 .soccer-tour-list .soccer-tour-title        { padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; }
 .soccer-tour-list .soccer-tour-title p      { margin: 0px; line-height: 20px; font-weight: 600; text-transform: uppercase; }
 .schedule-tour-list .soccer-item            { padding: 24px 16px 16px; flex-direction: column; -webkit-flex-direction: column; }
-.schedule-tour-list .soccer-item:nth-child(even) { background: #FCFCFD; }
+.schedule-tour-list .soccer-item:nth-child(even) { background: #F7F7F8; }
 .schedule-item.soccer-item .match-desc,
 .schedule-item.soccer-item .match-teams     { width: 100%; }
 .schedule-item.soccer-item .match-desc      { padding-top: 16px; }
@@ -92,6 +92,8 @@
     .schedule-tour-list p                   { margin-bottom: 6px;}
 /* -------- Tournament Fixtures For Kabaddi ------- */
     .schedule-tour-list .score-center-block     { margin: -5px 8px 0px; padding-top: 5px; }
+/* -------- Tournament Fixtures For Soccer ------- */
+
 }
 
 @media (max-width: 767px) {

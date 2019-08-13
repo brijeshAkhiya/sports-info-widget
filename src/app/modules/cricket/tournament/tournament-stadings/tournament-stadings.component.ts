@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@app/shared/providers/common-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tournament-stadings',
@@ -13,7 +14,7 @@ export class TournamentStadingsComponent implements OnInit {
   
   pointstable: any;
   options = {
-    titles : ['POS', 'TEAM', 'M', 'W', 'L', 'D', 'N/R', 'P', 'NRR'],
+    titles : ['POS',this.translateService.get('Shared_Module2.TEAM')['value'], 'M', 'W', 'L', 'D', 'N/R', 'P', 'NRR'],
     values : ['rank', 'image', 'played', 'win', 'loss', 'draw', 'no_result', 'points', 'net_run_rate'],
     image_type :'team',
     class:'tour-stand-table',
@@ -24,7 +25,8 @@ export class TournamentStadingsComponent implements OnInit {
   constructor(
     private sportsService: SportsService,
     private commonService: CommonService,
-    private activatedroute: ActivatedRoute
+    private activatedroute: ActivatedRoute,
+    private translateService:TranslateService
     ) { }
 
   ngOnInit() {    

@@ -137,8 +137,8 @@
                             </tr>
                             <tr *ngIf="checkYetBat(item?.teams[0]?.statistics?.batting?.players)">
                               <td colspan="6">
-                                <b> {{matchdata.sport_event_status.status == 'live' ? 'Yet' : 'Did'}}
-                                  {{matchdata.sport_event_status.status == 'live' ? 'to' : 'not'}} bat : </b>
+                                <b> {{matchdata.sport_event_status.status == 'live' ? ('Cricket_Module2.Yet' | translate) : ('Cricket_Module2.Did' | translate)}}
+                                  {{matchdata.sport_event_status.status == 'live' ? ('Cricket_Module2.to' | translate) : ('Cricket_Module2.not' | translate)}} {{ 'Cricket_Module2.bat' | translate }} : </b>
                                 <span class="batsman-text not-bat-text">
                                   <ng-container *ngFor="let notBat of item?.teams[0]?.statistics?.batting?.players">
                                     <ng-container *ngIf="notBat && notBat.statistics.length === 0">

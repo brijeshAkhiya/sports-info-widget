@@ -1,0 +1,44 @@
+<app-menu [options]="{sport:'soccer', type :'home'}"></app-menu>
+<section class="common-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div
+          class="common-title-btn soccer-tournaments-title big-title-btn d-flex justify-content-between align-items-center">
+          <h1>Tournaments</h1>
+          <form>
+            <div class="search-box">
+              <input type="text" class="form-control" placeholder="Search tournaments" [(ngModel)]="searchText"
+                [ngModelOptions]="{standalone:true}" />
+              <button type="submit"></button>
+            </div>
+          </form>
+        </div>
+        <app-loader *ngIf="!tournamentlist"></app-loader>
+        <app-no-data-widget *ngIf="tournamentlist?.length == 0" [message]="'No tournaments data available!'">
+        </app-no-data-widget>
+        <div class="row no-gutters soccer-tournaments-list common-round common-shadow"
+          *ngIf="tournamentlist?.length > 0">
+          <div class="col-xl-6 col-lg-12 col-md-6 item"
+            *ngFor="let tournament of (tournamentlist | filter : searchText)">
+            <h6 class="one-line-text">{{tournament?.name}}</h6>
+            <ul class="no-margin light-text">
+              <li><a [routerLink]="['/']">Home</a></li>
+              <li><a [routerLink]="['/']">Fixtures</a></li>
+              <li><a [routerLink]="['/']">Clubs</a></li>
+              <li><a [routerLink]="['/']">Stats</a></li>
+              <li><a [routerLink]="['/']">Table</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <!--points table widget-->
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

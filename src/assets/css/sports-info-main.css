@@ -44,6 +44,8 @@ p                       { margin-bottom: 24px; }
 p.bold-text             { line-height: 22px; font-family: 'Muli', sans-serif; font-weight: 700; } 
 p.small-text            { line-height: 20px; }
 img                     { max-width: 100%; }
+.no-margin              { margin: 0px; }
+.one-line-text          { white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .search-box-open        { min-height: 500px; height: 100%; overflow: hidden !important; position: fixed; width: 100%;}
 
 /******* Common Element CSS End *********/
@@ -354,6 +356,9 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
     .add-to-fav-btn:before  { width: 32px; height: 32px; }
     .add-to-fav-btn.added   { padding: 14px 46px 14px 26px;}
     .add-to-fav-btn.added:before   { transform: translate(158px,-50%) rotate(360deg); -webkit-transform: translate(158px,-50%) rotate(360deg);}
+/* -------- Slider Button Style ------- */
+    .soccer-fixture-filter .owl-theme .owl-nav .owl-prev       { left: -28px; }
+    .soccer-fixture-filter .owl-theme .owl-nav .owl-next       { right: -28px;}
 /******* Middle Section CSS Start ******/
 /* -------- Popular Articles Section ------- */
     .common-popular-list .popular-item      { margin-bottom: 24px;}

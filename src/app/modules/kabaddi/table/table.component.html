@@ -11,7 +11,7 @@
         <ng-container *ngIf="info && info.standings">
           <ng-container *ngFor="let standing of info.standings">
             <app-player-table [data]="standing.tables" [options]=" {
-                  titles : ['POS', 'TEAM', 'P', 'W', 'L', 'D', 'SD', 'PTS'],
+                  titles : ['POS',('Shared_Module2.TEAM' | translate), 'P', 'W', 'L', 'D', 'SD', 'PTS'],
                   values : ['position', 'tname', 'matchplayed', 'win', 'loss', 'draw', 'scoredifference', 'points'],
                   class : ['tour-stats-table'],
                   class_light_row : ['light-row'],
