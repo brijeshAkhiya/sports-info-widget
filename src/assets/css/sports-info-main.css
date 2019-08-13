@@ -45,6 +45,7 @@ p.bold-text             { line-height: 22px; font-family: 'Muli', sans-serif; fo
 p.small-text            { line-height: 20px; }
 img                     { max-width: 100%; }
 .no-margin              { margin: 0px; }
+.one-line-text          { white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .search-box-open        { min-height: 500px; height: 100%; overflow: hidden !important; position: fixed; width: 100%;}
 
 /******* Common Element CSS End *********/
