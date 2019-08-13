@@ -72,16 +72,7 @@
           <li><a [routerLink]="['/soccer']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'widgetModule.Home' | translate }}</a>
           </li>
           <li><a [routerLink]="['/soccer/fixtures']" routerLinkActive="active">{{ 'widgetModule.Fixtures' | translate }}</a></li>
-          <!-- <li ngbDropdown *ngIf="series && series.length > 0">
-            <a id="dropdownBasic1" ngbDropdownToggle>Series</a>
-            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <li ngbDropdownItem *ngFor="let item of series | slice:0:4"><a
-                  [routerLink]="['/cricket/tournament',(item.id | splitID),(item.name | slugify)]">{{item.name}}</a>
-              </li>
-            </ul>
-          </li> -->
-          <!-- <li><a class="special-nav-item" [routerLink]="['/cricket/tournament/2474/world-cup']">World
-              Cup 2019</a></li> -->
+          <li><a [routerLink]="['/soccer/tournaments']" routerLinkActive="active">Tournaments</a></li>
         </ul>
         <div id="subnav-pointer" #subnavpointer></div>
       </div>

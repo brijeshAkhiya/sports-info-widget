@@ -10,9 +10,10 @@ import { SoccerRoutingModule } from './soccer-routing.module';
 import { SoccerComponent } from './soccer.component';
 import { HomeComponent } from './home/home.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
+import { TournamentListComponent } from './tournament-list/tournament-list.component';
 
 @NgModule({
-  declarations: [SoccerComponent, HomeComponent, FixturesComponent],
+  declarations: [SoccerComponent, HomeComponent, FixturesComponent, TournamentListComponent],
   imports: [
     CommonModule,
     NgbModule,
