@@ -12,7 +12,7 @@
           <video controls="true" controlsList="nodownload" #videoPlayer>
             <source [src]="commonService.s3Url+blogdata?.sVideo | safehtml:['video']" type="video/mp4"
               *ngIf="blogdata?.sVideo">
-              {{'Blog_Module.browser_not_support_video_tag' | translate}}
+            {{'Blog_Module.browser_not_support_video_tag' | translate}}
           </video>
         </div>
         <button class="video-play-btn" (click)="videoplay()"></button>
@@ -72,8 +72,8 @@
                     [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.writerPlaceholder"></div>
                   <div class="author-desc">
                     <h6>
-                      <a
-                        [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</a>
+                      <a [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}}
+                        {{blogdata?.iId?.sLastName}}</a>
                     </h6>
                     <p>{{blogdata?.iId?.sBio}}</p>
                   </div>
@@ -109,8 +109,8 @@
               <img class="commenter-img" [lazyLoad]="socialUser?.photoUrl"
                 [defaultImage]="commonService.commenterPlaceholder" alt="commenter">
               <form class="d-flex align-items-center">
-                <textarea class="expand" placeholder="Add a comment…" [(ngModel)]="usercommentvalue"
-                  [ngModelOptions]="{standalone:true}"></textarea>
+                <textarea class="expand" placeholder="{{'Blog_Module2.Add_a_comment' | translate}}…"
+                  [(ngModel)]="usercommentvalue" [ngModelOptions]="{standalone:true}"></textarea>
                 <button type="submit" class="theme-btn" (click)="clicksubmit()"
                   *ngIf="isAuth$">{{'Blog_Module.Post' | translate}}<span></span></button>
                 <button type="submit" class="theme-btn" (click)="openmodal()"
@@ -138,22 +138,26 @@
                   <p>{{comment.sComment}}</p>
                   <form *ngIf="comment._id == commentid && hidetextfield == true">
                     <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
-                 
-                  <ul class="cmt-act-btn-list">
-                    <li><button class="cmt-act-btn" (click)="savecomment(commentid,InputComment.value)">Save</button></li>
-                    <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
-                  </ul>
-                 </form >
-                  <ul class="comment-action" >
+
+                    <ul class="cmt-act-btn-list">
+                      <li><button class="cmt-act-btn" (click)="savecomment(commentid,InputComment.value)">Save</button>
+                      </li>
+                      <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
+                    </ul>
+                  </form>
+                  <ul class="comment-action">
                     <li>{{ comment?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</li>
-                        <li (click)="editcomment(comment._id)" *ngIf="comment.iId == userId"><a>Edit
-                        </a></li>
-                        <li *ngIf="comment.iId == userId"><a (click)="open(content,comment._id)">Delete</a></li>
-                    </ul> 
+                    <li (click)="editcomment(comment._id)" *ngIf="comment.iId == userId">
+                      <a>{{'Blog_Module2.Edit' | translate}}
+                      </a></li>
+                    <li *ngIf="comment.iId == userId"><a
+                        (click)="open(content,comment._id)">{{'Blog_Module.Delete' | translate}}</a></li>
+                  </ul>
                 </div>
               </div>
               <div class="text-center">
-                <button class="theme-btn down-btn" (click)="viewmorecomments()" *ngIf="isLoadMoreComments">{{'Blog_Module.VIEW_MORE' | translate}}<span></span></button>
+                <button class="theme-btn down-btn" (click)="viewmorecomments()"
+                  *ngIf="isLoadMoreComments">{{'Blog_Module.VIEW_MORE' | translate}}<span></span></button>
               </div>
             </div>
           </div>
@@ -176,8 +180,10 @@
     </div>
     <div class="modal-footer">
       <ul class="cmt-act-btn-list">
-        <li><button class="cmt-act-btn" (click)="modal.close('Save click')">{{'Blog_Module.Keep' | translate}}</button></li>
-        <li><button class="cmt-act-btn red-btn" (click)="modal.close('delete')">{{'Blog_Module.Delete' | translate}}</button></li>
+        <li><button class="cmt-act-btn" (click)="modal.close('Save click')">{{'Blog_Module.Keep' | translate}}</button>
+        </li>
+        <li><button class="cmt-act-btn red-btn"
+            (click)="modal.close('delete')">{{'Blog_Module.Delete' | translate}}</button></li>
       </ul>
     </div>
   </div>

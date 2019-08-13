@@ -16,7 +16,7 @@
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
                           sport:'kabaddi',
-                          titles : ['POS', 'player', 'Points'],
+                          titles : ['POS', ('Cricket_Module2.player' | translate),('widgetModule.points' | translate)],
                           values : ['pid', 'name', 'totalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -31,7 +31,7 @@
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]="{
                           sport:'kabaddi',
-                          titles : ['POS', 'player','Successfull raids','Super Raids','Raids Points'],
+                          titles : ['POS', ('Cricket_Module2.player' | translate), ('Kabaddi_Module2.Successfull_raids' | translate),('Kabaddi_Module2.Super_Raids' | translate),('Kabaddi_Module2.Raids_Points' | translate)],
                           values : ['pid', 'name', 'raidsuccessful','superraid','raidtotalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -46,7 +46,7 @@
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
                           sport:'kabaddi',
-                          titles : ['POS', 'player', 'Successfull tackles','Super Tackles','Tackle Points'],
+                          titles : ['POS',('Cricket_Module2.player' | translate),('Kabaddi_Module2.Successfull_tackles' | translate),('Kabaddi_Module2.Super_Tackles' | translate),('Kabaddi_Module2.Tackle_Points' | translate)],
                           values : ['pid', 'name', 'tacklesuccessful','supertackles','tackletotalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -61,7 +61,7 @@
             <ng-template ngbTabContent>
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
                             sport:'kabaddi',
-                            titles : ['POS', 'player', 'Green' ,'Yellow' , 'Red'],
+                            titles : ['POS', ('Cricket_Module2.player' | translate), ('Kabaddi_Module2.Green' | translate) ,('Kabaddi_Module2.Yellow' | translate) , ('Kabaddi_Module2.Red' | translate)],
                             values : ['pid', 'name', 'greencard' , 'yellowcard' ,'redcard'],
                             class : ['tour-stats-table'],
                             class_light_row : ['light-row']

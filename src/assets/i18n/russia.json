@@ -219,5 +219,66 @@
   },
   "About_us": {
       "readers_text": "Что говорят наши читатели"
-  }
+  },
+
+  "Cricket_Module2": {
+    "International": "Международный",
+    "to": "в",
+    "Schedule": "График",
+    "not": "не",
+    "bat": "",
+    "Yet": "Еще",
+    "player": "игрок",
+    "High_Score": "Рекорд",
+    "Catches": "Уловы",
+    "Domestic": "внутренний",
+    "Did": "Сделал",
+    "Economy_Rate": "Экономный тариф"
+},
+"Shared_Module2": {
+    "Game_type": "Тип игры",
+    "Weight": "Вес",
+    "Position": "Позиция",
+    "Bowling_Style": "Стиль боулинга",
+    "TEAM": "КОМАНДА",
+    "Born": "Родившийся",
+    "Batting_Stats": "Статистика ватина",
+    "Points_Table": "Таблица очков",
+    "Height": "Рост",
+    "Viewers": "Зрителям",
+    "Batting_Style": "Стиль ватина",
+    "Role": "Роль",
+    "Nationality": "Национальность",
+    "Bowling_Stats": "Боулинг Статистика"
+},
+"Kabaddi_Module2": {
+    "Super_Raids": "Супер Рейды",
+    "Yellow": "желтый",
+    "Tackle_Points": "Очки для снастей",
+    "Successfull_tackles": "Успешные решения",
+    "Tournament": "Турнир",
+    "Zone": "зона",
+    "Successfull_raids": "Успешные рейды",
+    "Red": "красный",
+    "Super_Tackles": "Супер снасти",
+    "Green": "зеленый",
+    "Raids_Points": "Рейдовые очки"
+},
+"Blog_Module2": {
+    "Recommended": "рекомендуемые",
+    "Search_results": "результаты поиска",
+    "Edit": "редактировать",
+    "Search_articles": "Поиск статей",
+    "Add_a_comment": "Добавить комментарий"
+},
+"widget_Module2": {
+    "No_team_results": "Нет результатов команды",
+    "Add_to_favourites": "Добавить в избранное",
+    "Recommended_Stories": "Рекомендуемые истории",
+    "No_Team_squad": "Данные команды не доступны",
+    "No_team_fixtures": "Нет командных матчей",
+    "No_data_available": "Данные недоступны!",
+    "Added_to_favourites": "Добавлено в избранное",
+    "No_Team_data_available": "Данные команды отсутствуют"
+}
 }

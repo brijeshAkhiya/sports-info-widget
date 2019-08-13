@@ -219,5 +219,66 @@
       "all_out_point": "كل النقاط",
       "match_stats": "إحصائيات المباراة",
       "Lineups": "الإصطفافات"
-  }
+  },
+
+  "Cricket_Module2": {
+    "Did": "فعل",
+    "player": "لاعب",
+    "International": "دولي",
+    "to": "إلى",
+    "Catches": "المصيد",
+    "not": "ليس",
+    "Domestic": "المنزلي",
+    "bat": "ل",
+    "Economy_Rate": "معدل الاقتصاد",
+    "High_Score": "درجة عالية",
+    "Schedule": "جدول",
+    "Yet": "بعد"
+},
+"Blog_Module2": {
+    "Add_a_comment": "اضف تعليق",
+    "Edit": "تصحيح",
+    "Search_results": "نتائج البحث",
+    "Recommended": "موصى به",
+    "Search_articles": "البحث عن المقالات"
+},
+"Kabaddi_Module2": {
+    "Red": "أحمر",
+    "Tournament": "المسابقة",
+    "Green": "أخضر",
+    "Zone": "منطقة",
+    "Successfull_raids": "غارات ناجحة",
+    "Super_Tackles": "يتناول السوبر",
+    "Raids_Points": "غارات نقاط",
+    "Super_Raids": "سوبر الغارات",
+    "Tackle_Points": "معالجة النقاط",
+    "Yellow": "الأصفر",
+    "Successfull_tackles": "نجاح يعالج"
+},
+"widget_Module2": {
+    "Add_to_favourites": "أضف إلى المفضلة",
+    "Added_to_favourites": "يضاف إلى المفضلة",
+    "No_team_fixtures": "لا جدول المباريات",
+    "No_team_results": "لا توجد نتائج للفريق",
+    "Recommended_Stories": "قصص الموصى بها",
+    "No_Team_squad": "لا تتوفر بيانات فرق الفريق",
+    "No_Team_data_available": "لا تتوفر بيانات الفريق",
+    "No_data_available": "لا تتوافر بيانات!"
+},
+"Shared_Module2": {
+    "Role": "وظيفة",
+    "Weight": "وزن",
+    "Born": "مولود",
+    "Nationality": "جنسية",
+    "Game_type": "نوع اللعبة",
+    "Position": "موضع",
+    "Batting_Style": "أسلوب الضرب",
+    "Bowling_Stats": "احصائيات البولينج",
+    "Points_Table": "جدول النقاط",
+    "Batting_Stats": "إحصائيات الضرب",
+    "TEAM": "الفريق",
+    "Height": "ارتفاع",
+    "Viewers": "المشاهدين",
+    "Bowling_Style": "البولينج ستايل"
+}
 }

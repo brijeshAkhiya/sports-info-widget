@@ -222,8 +222,72 @@
   "raid":"Raid",
   "Tackle":"Tackle",
   "Cards":"Cards"
+},
 
+
+"Cricket_Module2":{
+  "Schedule":"Schedule",
+  "Domestic":"Domestic",
+  "International":"International",
+  "player":"player",
+  "High_Score":"High Score",
+  "Economy_Rate":"Economy Rate",
+  "Catches":"Catches",
+  "Yet":"Yet",
+  "Did":"Did",
+  "to":"to",
+  "not":"not",
+  "bat":"bat"
+
+},
+"Kabaddi_Module2":{
+  "Successfull_raids":"Successfull raids",
+  "Super_Raids":"Super Raids",
+  "Raids_Points":"Raids Points",
+  "Successfull_tackles":"Successfull tackles",
+  "Super_Tackles":"Super Tackles",
+  "Tackle_Points":"Tackle Points",
+  "Green":"Green",
+  "Yellow":"Yellow",
+  "Red":"Red",
+  "Tournament":"Tournament",
+  "Zone":"Zone"
+},
+
+"Blog_Module2":{
+  "Search_results":"Search Results",
+  "Search_articles":"Search articles",
+  "Recommended":"Recommended",
+  "Edit":"Edit",
+  "Add_a_comment":"Add a comment"
+},
+"widget_Module2":{
+  "Add_to_favourites":"Add to favourites",
+  "Added_to_favourites":"Added to favourites",
+  "No_data_available":"No data available!",
+  "No_Team_data_available":"No Team data available",
+  "No_Team_squad":"No Team squad data available",
+  "No_team_fixtures":"No team fixtures",
+  "No_team_results":"No team results",
+  "Recommended_Stories":"Recommended Stories"
+},
+"Shared_Module2":{
+  "Points_Table":"Points Table",
+  "Viewers":"Viewers",
+  "Born":"Born",
+  "Nationality":"Nationality",
+  "Batting_Style":"Batting Style",
+  "Bowling_Style":"Bowling Style",
+  "Role":"Role",
+  "Position":"Position",
+  "Height":"Height",
+  "Weight":"Weight",
+  "Batting_Stats":"Batting Stats",
+  "Bowling_Stats":"Bowling Stats",
+  "TEAM":"TEAM",
+  "Game_type":"Game type"
 }
+
 
 
   

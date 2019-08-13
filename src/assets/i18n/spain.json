@@ -219,5 +219,66 @@
       "Statistics": "Estadística",
       "commentary": "Comentario",
       "Lineups": "Alineaciones"
-  }
+  },
+
+  "Cricket_Module2": {
+    "Domestic": "Nacional",
+    "Schedule": "Programar",
+    "Yet": "Todavía",
+    "player": "jugador",
+    "not": "no",
+    "Did": "Hizo",
+    "to": "a",
+    "High_Score": "Puntuación más alta",
+    "Economy_Rate": "Tasa de economía",
+    "Catches": "Capturas",
+    "bat": "uno",
+    "International": "Internacional"
+},
+"widget_Module2": {
+    "Add_to_favourites": "Agregar a favoritos",
+    "No_data_available": "¡Datos no disponibles!",
+    "Recommended_Stories": "Historias recomendadas",
+    "Added_to_favourites": "Agregado a favoritos",
+    "No_Team_squad": "No hay datos del equipo disponibles.",
+    "No_team_results": "No hay resultados del equipo",
+    "No_team_fixtures": "No hay partidos de equipo",
+    "No_Team_data_available": "No hay datos del equipo disponibles"
+},
+"Blog_Module2": {
+    "Edit": "Editar",
+    "Add_a_comment": "Añadir un comentario",
+    "Search_results": "Resultados de la búsqueda",
+    "Recommended": "Recomendado",
+    "Search_articles": "Buscar artículos"
+},
+"Kabaddi_Module2": {
+    "Green": "Verde",
+    "Zone": "Zona",
+    "Red": "rojo",
+    "Yellow": "Amarillo",
+    "Tournament": "Torneo",
+    "Raids_Points": "Puntos de incursiones",
+    "Super_Tackles": "Super Tackles",
+    "Successfull_tackles": "Tacleadas exitosas",
+    "Successfull_raids": "Redadas exitosas",
+    "Super_Raids": "Super redadas",
+    "Tackle_Points": "Tackle Points"
+},
+"Shared_Module2": {
+    "Position": "Posición",
+    "Game_type": "Tipo de juego",
+    "Nationality": "Nacionalidad",
+    "Born": "Nacido",
+    "Weight": "Peso",
+    "Role": "Papel",
+    "TEAM": "EQUIPO",
+    "Height": "Altura",
+    "Points_Table": "Tabla de puntos",
+    "Bowling_Style": "Estilo de bolos",
+    "Batting_Style": "Estilo de bateo",
+    "Viewers": "Espectadores",
+    "Bowling_Stats": "Estadísticas de bolos",
+    "Batting_Stats": "Estadísticas de bateo"
+}
 }

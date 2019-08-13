@@ -219,5 +219,66 @@
   },
   "About_us": {
       "readers_text": "Cosa dicono i nostri lettori"
-  }
+  },
+
+  "Cricket_Module2": {
+    "player": "giocatore",
+    "International": "Internazionale",
+    "Schedule": "Programma",
+    "to": "a",
+    "Yet": "Ancora",
+    "High_Score": "Punteggio alto",
+    "Domestic": "Domestico",
+    "Did": "Did",
+    "not": "non",
+    "Catches": "Le catture",
+    "bat": "un",
+    "Economy_Rate": "Tasso di economia"
+},
+"Shared_Module2": {
+    "Height": "Altezza",
+    "Role": "Ruolo",
+    "Born": "Nato",
+    "Nationality": "Nazionalità",
+    "Game_type": "Tipo di gioco",
+    "Position": "Posizione",
+    "Weight": "Peso",
+    "TEAM": "SQUADRA",
+    "Viewers": "Gli spettatori",
+    "Batting_Stats": "Statistiche di battuta",
+    "Batting_Style": "Stile di battuta",
+    "Bowling_Stats": "Statistiche di bowling",
+    "Bowling_Style": "Stile bowling",
+    "Points_Table": "Tabella dei punti"
+},
+"Kabaddi_Module2": {
+    "Zone": "Zona",
+    "Green": "verde",
+    "Yellow": "Giallo",
+    "Tournament": "Torneo",
+    "Red": "Rosso",
+    "Successfull_tackles": "Affrontare con successo",
+    "Super_Raids": "Super Raid",
+    "Super_Tackles": "Super Tackles",
+    "Tackle_Points": "Punti di contrasto",
+    "Raids_Points": "Punti Raid",
+    "Successfull_raids": "Incursioni riuscite"
+},
+"Blog_Module2": {
+    "Search_results": "risultati di ricerca",
+    "Edit": "modificare",
+    "Recommended": "Consigliato",
+    "Add_a_comment": "Aggiungi un commento",
+    "Search_articles": "Cerca articoli"
+},
+"widget_Module2": {
+    "Add_to_favourites": "Aggiungi ai preferiti",
+    "No_data_available": "Nessun dato disponibile!",
+    "No_team_fixtures": "Nessuna partita di squadra",
+    "Recommended_Stories": "Storie consigliate",
+    "No_team_results": "Nessun risultato di squadra",
+    "Added_to_favourites": "Aggiunto ai preferiti",
+    "No_Team_data_available": "Nessun dato disponibile sul team",
+    "No_Team_squad": "Nessun dato disponibile per la squadra"
+}
 }

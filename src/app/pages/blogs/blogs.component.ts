@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import { map, filter } from 'rxjs/operators';
 import { SportsService } from '@providers/sports-service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blogs',
@@ -18,9 +19,11 @@ export class BlogsComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private router: Router,
     private sportsService: SportsService,
+    private translateService:TranslateService
   ) {
     console.log(this.activatedroute);
-
+    console.log(this.translateService.get('Blog_Module2.Search_results')['value']);
+    
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -31,11 +34,11 @@ export class BlogsComponent implements OnInit {
     this.getRecentArticles();
     let blogState = window.history.state;
     console.log('state::', blogState);
-
+    
     /** Search post  */
     if (this.activatedroute.routeConfig.path == 'search/:key') {
       this.options.reqParams.sSearch = this.activatedroute.snapshot.url[1].path ? this.activatedroute.snapshot.url[1].path : blogState.sSearch;
-      this.blog_title = 'Search Results';
+      this.blog_title = this.translateService.get('Blog_Module2.Search_results')['value'];
       this.options.reqParams.nLimit = 5;
       if (blogState.data)
         this.options.data = blogState.data;
@@ -43,10 +46,10 @@ export class BlogsComponent implements OnInit {
     /** Article and Videos Blog post  */
     else if (this.activatedroute.routeConfig.path == 'article' || this.activatedroute.routeConfig.path == 'video') {
       if (this.activatedroute.routeConfig.path == 'video') {
-        this.blog_title = 'Videos';
+        this.blog_title = this.translateService.get('Blog_Module.Videos')['value'];
         this.options.reqParams.eType = 'Video'
       } else {
-        this.blog_title = 'Articles';
+        this.blog_title = this.translateService.get('Blog_Module.Articles')['value'];
       }
       if (typeof blogState.type != 'undefined') {
         this.options.reqParams.eType = (this.activatedroute.routeConfig.path == 'video') ? 'Video' : 'Article'
@@ -55,7 +58,7 @@ export class BlogsComponent implements OnInit {
     }
     /** Admin Blogs */
     else if (this.activatedroute.routeConfig.path == 'blog') {
-      this.blog_title = 'Blogs';
+      this.blog_title = this.translateService.get('Blog_Module.blogs')['value'];
       this.options.type = this.options.card_type = 'admin';
     }
   }

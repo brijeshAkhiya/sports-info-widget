@@ -219,5 +219,66 @@
       "Cards": "पत्ते",
       "venue_details": "स्थान का विवरण",
       "tackle_point": "टैकल पॉइंट्स"
-  }
+  },
+
+    "Cricket_Module2": {
+        "High_Score": "उच्च स्कोर",
+        "Schedule": "अनुसूची",
+        "Did": "किया था",
+        "Domestic": "घरेलू",
+        "Catches": "कैच",
+        "to": "सेवा मेरे",
+        "not": "नहीं",
+        "International": "अंतरराष्ट्रीय",
+        "player": "खिलाड़ी",
+        "Yet": "अभी तक",
+        "Economy_Rate": "अर्थव्यवस्था दर",
+        "bat": "एक"
+    },
+    "Shared_Module2": {
+        "Height": "ऊंचाई",
+        "Viewers": "दर्शकों",
+        "Born": "उत्पन्न होने वाली",
+        "Nationality": "राष्ट्रीयता",
+        "Game_type": "खेल का प्रकार",
+        "Position": "पद",
+        "Weight": "वजन",
+        "TEAM": "टीम",
+        "Role": "भूमिका",
+        "Bowling_Stats": "बॉलिंग स्टैट्स",
+        "Points_Table": "अंक तालिका",
+        "Batting_Style": "बैटिंग स्टाइल",
+        "Bowling_Style": "बॉलिंग स्टाइल",
+        "Batting_Stats": "बैटिंग स्टैट्स"
+    },
+    "widget_Module2": {
+        "No_data_available": "कोई डेटा उपलब्ध नहीं है!",
+        "Add_to_favourites": "पसंदीदा में जोड़ें",
+        "No_team_fixtures": "कोई टीम तय नहीं",
+        "No_team_results": "कोई टीम परिणाम नहीं",
+        "No_Team_squad": "टीम का कोई दल उपलब्ध नहीं है",
+        "No_Team_data_available": "कोई टीम डेटा उपलब्ध नहीं है",
+        "Added_to_favourites": "पसंदीदा में जोड़ा गया",
+        "Recommended_Stories": "अनुशंसित कहानियां"
+    },
+    "Blog_Module2": {
+        "Add_a_comment": "एक टिप्पणी जोड़े",
+        "Edit": "संपादित करें",
+        "Recommended": "सिफारिश की",
+        "Search_results": "खोज परिणाम",
+        "Search_articles": "लेख खोजें"
+    },
+    "Kabaddi_Module2": {
+        "Red": "लाल",
+        "Tournament": "टूर्नामेंट",
+        "Yellow": "पीला",
+        "Super_Raids": "सुपर छापे",
+        "Green": "हरा",
+        "Zone": "क्षेत्र",
+        "Super_Tackles": "सुपर टैकल",
+        "Successfull_raids": "उत्तराधिकारी छापे",
+        "Tackle_Points": "टैकल पॉइंट्स",
+        "Raids_Points": "बिंदुओं को उठाता है",
+        "Successfull_tackles": "सक्सेसफुल टैकल"
+    }
 }

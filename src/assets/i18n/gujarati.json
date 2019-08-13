@@ -219,5 +219,67 @@
       "venue_details": "સ્થળ વિગતો",
       "tackle_point": "પોઇન્ટ પોઇન્ટ",
       "Cards": "કાર્ડ્સ"
-  }
+  },
+
+
+  "Shared_Module2": {
+    "Height": ".ંચાઈ",
+    "TEAM": "ટીમ",
+    "Batting_Style": "બેટિંગ શૈલી",
+    "Nationality": "રાષ્ટ્રીયતા",
+    "Game_type": "રમત પ્રકાર",
+    "Bowling_Stats": "બlingલિંગ આંકડા",
+    "Weight": "વજન",
+    "Bowling_Style": "બોલિંગ શૈલી",
+    "Batting_Stats": "બેટિંગ આંકડા",
+    "Viewers": "દર્શકો",
+    "Role": "ભૂમિકા",
+    "Position": "સ્થિતિ",
+    "Points_Table": "પોઇન્ટ્સ ટેબલ",
+    "Born": "જન્મ"
+},
+"Kabaddi_Module2": {
+    "Tournament": "પ્રતયોગીતા",
+    "Red": "લાલ",
+    "Yellow": "પીળો",
+    "Super_Tackles": "સુપર ટackક્લ્સ",
+    "Raids_Points": "દરોડા પોઇંટ્સ",
+    "Tackle_Points": "પોઇન્ટ પોઇન્ટ",
+    "Green": "લીલા",
+    "Super_Raids": "સુપર રેડ",
+    "Successfull_raids": "સફળતાપૂર્વક દરોડા",
+    "Successfull_tackles": "સક્સેસફૂલ ટેક્સલ્સ",
+    "Zone": "ઝોન"
+},
+"Cricket_Module2": {
+    "player": "ખેલાડી",
+    "not": "નથી",
+    "Yet": "છતાં",
+    "Economy_Rate": "ઇકોનોમી રેટ",
+    "to": "માટે",
+    "International": "આંતરરાષ્ટ્રીય",
+    "Catches": "કેચ",
+    "High_Score": "ઉચ્ચ સ્કોર",
+    "Did": "કર્યું",
+    "Schedule": "સમયપત્રક",
+    "bat": "એક",
+    "Domestic": "ઘરેલું"
+},
+"Blog_Module2": {
+    "Search_articles": "લેખો શોધો",
+    "Search_results": "શોધ પરિણામો",
+    "Recommended": "ભલામણ કરેલ",
+    "Edit":"સંપાદિત કરો",
+    "Add_a_comment":"એક ટિપ્પણી ઉમેરો"
+},
+"widget_Module2": {
+    "No_Team_data_available": "કોઈ ટીમ ડેટા ઉપલબ્ધ નથી",
+    "No_team_fixtures": "કોઈ ટીમ ફિક્સર નથી",
+    "No_data_available": "કોઈ ડેટા ઉપલબ્ધ નથી!",
+    "No_Team_squad": "કોઈ ટીમની ટુકડી ડેટા ઉપલબ્ધ નથી",
+    "No_team_results": "કોઈ ટીમ પરિણામ નથી",
+    "Recommended_Stories": "ભલામણ કરેલ વાર્તાઓ",
+    "Added_to_favourites": "મનપસંદમાં ઉમેર્યું",
+    "Add_to_favourites": "મનપસંદમાં ઉમેરો"
+}
 }

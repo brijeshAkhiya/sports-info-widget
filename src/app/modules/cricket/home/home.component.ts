@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SportsService } from "@providers/sports-service";
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,10 +12,11 @@ export class HomeComponent implements OnInit {
   cricketseries = [];
   populartags = [];
 
-  options = { reqParams : { eSport : 'Cricket'}, title : 'Cricket' , type:'sport' , id :'cricket'}
+  options = { reqParams : { eSport : 'Cricket'}, title : this.translateservice.get('Header_menu.Cricket')['value'], type:'sport' , id :'cricket'}
 
   constructor(
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    private translateservice:TranslateService
   ) { }
 
   ngOnInit() {
