@@ -54,7 +54,7 @@
 .soccer-tour-list .soccer-tour-title        { padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; }
 .soccer-tour-list .soccer-tour-title p      { margin: 0px; line-height: 20px; font-weight: 600; text-transform: uppercase; }
 .schedule-tour-list .soccer-item            { padding: 24px 16px 16px; flex-direction: column; -webkit-flex-direction: column; }
-.schedule-tour-list .soccer-item:nth-child(even) { background: #FCFCFD; }
+.schedule-tour-list .soccer-item:nth-child(even) { background: #F7F7F8; }
 .schedule-item.soccer-item .match-desc,
 .schedule-item.soccer-item .match-teams     { width: 100%; }
 .schedule-item.soccer-item .match-desc      { padding-top: 16px; }
