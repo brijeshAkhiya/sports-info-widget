@@ -515,4 +515,15 @@ export class SportsService {
   }
 
 
+  /**
+   * Soccer Services
+   */
+
+   getSoccerTournamentList(){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/seasons`
+    );  
+   }
+
+
 }

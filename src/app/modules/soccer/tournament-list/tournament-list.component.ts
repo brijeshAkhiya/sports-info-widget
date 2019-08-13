@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SportsService } from '@app/shared/providers/sports-service';
 
 @Component({
   selector: 'app-tournament-list',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TournamentListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sportsSerivce:SportsService) { }
 
   ngOnInit() {
+    this.getTournamentList();
+  }
+
+  getTournamentList(){
+    this.sportsSerivce.getSoccerTournamentList().subscribe((res:any)=>{
+      console.log('soccer res:',res);
+      
+    })
   }
 
 }
