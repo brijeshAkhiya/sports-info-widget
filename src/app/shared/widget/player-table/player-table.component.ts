@@ -29,15 +29,18 @@ export class PlayerTableComponent implements OnInit {
   getname(event)
   {
     this.value = event.target.attributes.title.nodeValue;
-    this.options.titles.forEach(element => {
-      if(element == this.value)
-      {
+    console.log(event.target.attributes.title);
+    console.log(this.options.titles);
+    
+    // this.options.titles.forEach(element => {
+    //   if(element == this.value)
+    //   {
         this.index = this.options.titles.findIndex(element=> element == this.value)
         this.object = this.options.values[this.index];
         this.sortArray();
         this.toggleSort = !this.toggleSort;
-      }
-    }); 
+    //   }
+    // }); 
   }
   
   sortArray () 
