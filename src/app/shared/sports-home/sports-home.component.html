@@ -54,7 +54,7 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab title="Recommended">
+        <ngb-tab title="{{ 'Blog_Module2.Recommended' | translate }}">
             <ng-template ngbTabContent>
                 <app-blog-list *ngIf="popularArticlesParams" [options]="{'reqParams': popularArticlesParams, 'type' : 'popular'}" [sport]="sport">
                 </app-blog-list>

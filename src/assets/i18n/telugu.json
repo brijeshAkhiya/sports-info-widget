@@ -219,5 +219,65 @@
       "commentary": "వ్యాఖ్యానం",
       "all_out_point": "ఆల్ అవుట్ పాయింట్లు",
       "extra_points": "అదనపు పాయింట్లు"
-  }
+  },
+  "Cricket_Module2": {
+    "Schedule": "షెడ్యూల్",
+    "Catches": "క్యాచ్లు",
+    "player": "క్రీడాకారుడు",
+    "International": "అంతర్జాతీయ",
+    "Domestic": "దేశీయ",
+    "Did": "తెలుసా",
+    "not": "కాదు",
+    "Yet": "ఇంకా",
+    "High_Score": "అత్యధిక స్కోరు",
+    "to": "కు",
+    "bat": "ఒక",
+    "Economy_Rate": "ఆర్థిక రేటు"
+},
+"Blog_Module2": {
+    "Recommended": "సిఫార్సు",
+    "Edit": "మార్చు",
+    "Search_results": "శోధన ఫలితాలు",
+    "Search_articles": "కథనాలను శోధించండి",
+    "Add_a_comment": "వ్యాఖ్యను జోడించండి"
+},
+"Shared_Module2": {
+    "Height": "ఎత్తు",
+    "Position": "స్థానం",
+    "Viewers": "వీక్షకులు",
+    "TEAM": "జట్టు",
+    "Role": "పాత్ర",
+    "Born": "బోర్న్",
+    "Weight": "బరువు",
+    "Nationality": "జాతీయత",
+    "Game_type": "గేమ్ రకం",
+    "Batting_Style": "బ్యాటింగ్ శైలి",
+    "Batting_Stats": "బ్యాటింగ్ గణాంకాలు",
+    "Points_Table": "పాయింట్ల పట్టిక",
+    "Bowling_Style": "బౌలింగ్ శైలి",
+    "Bowling_Stats": "బౌలింగ్ గణాంకాలు"
+},
+"Kabaddi_Module2": {
+    "Green": "గ్రీన్",
+    "Yellow": "పసుపు",
+    "Tournament": "టోర్నమెంట్",
+    "Red": "రెడ్",
+    "Zone": "జోన్",
+    "Raids_Points": "రైడ్స్ పాయింట్లు",
+    "Super_Tackles": "సూపర్ టాకిల్స్",
+    "Successfull_raids": "విజయవంతమైన దాడులు",
+    "Super_Raids": "సూపర్ రైడ్స్",
+    "Successfull_tackles": "విజయవంతమైన టాకిల్స్",
+    "Tackle_Points": "పాయింట్లను పరిష్కరించండి"
+},
+"widget_Module2": {
+    "No_data_available": "సమాచారం అందుబాటులో లేదు!",
+    "Add_to_favourites": "ఇష్టమైన వాటికి జోడించండి",
+    "No_Team_squad": "టీమ్ స్క్వాడ్ డేటా అందుబాటులో లేదు",
+    "Recommended_Stories": "సిఫార్సు చేసిన కథలు",
+    "No_team_results": "జట్టు ఫలితాలు లేవు",
+    "Added_to_favourites": "ఇష్టమైన వాటికి జోడించబడింది",
+    "No_team_fixtures": "జట్టు మ్యాచ్లు లేవు",
+    "No_Team_data_available": "జట్టు డేటా అందుబాటులో లేదు"
+}
 }

@@ -31,24 +31,24 @@
                 <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData?.player">
                   <div class="info-col">
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Full Name', value: playerData?.player.full_name ? playerData?.player.full_name : playerData?.player.name }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Contact_us.Full_Name' | translate), value: playerData?.player.full_name ? playerData?.player.full_name : playerData?.player.name }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Born', value: playerData?.player?.date_of_birth | date }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Born' | translate), value: playerData?.player?.date_of_birth | date }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Nationality', value: playerData?.player?.nationality }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.player?.nationality }">
                     </ng-container>
                   </div>
                   <div class="info-col">
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Batting Style', value: playerData?.player?.batting_style | stringunder }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Batting_Style' | translate), value: playerData?.player?.batting_style | stringunder }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Bowling Style', value: playerData?.player?.bowling_style | stringunder }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Bowling_Style' | translate), value: playerData?.player?.bowling_style | stringunder }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Role', value: playerData?.player?.type | stringunder }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Role' | translate), value: playerData?.player?.type | stringunder }">
                     </ng-container>
                   </div>
                   <!-- <div class="info-col">
@@ -65,24 +65,24 @@
                 <div class="player-info d-flex common-shadow rounded-box">
                   <div class="info-col">
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Full Name', value: playerData?.fullname  }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Contact_us.Full_Name' | translate), value: playerData?.fullname  }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Born', value: playerData?.birthdate | date }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Born' | translate), value: playerData?.birthdate | date }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Nationality', value: playerData?.nationality }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title:('Shared_Module2.Nationality' | translate), value: playerData?.nationality }">
                     </ng-container>
                   </div>
                   <div class="info-col">
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Position', value: playerData?.positionname }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Position' | translate), value: playerData?.positionname }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Height', value: playerData?.height }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title:  ('Shared_Module2.Height' | translate), value: playerData?.height }">
                     </ng-container>
                     <ng-container
-                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: 'Weight', value: playerData?.weight }">
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Weight' | translate), value: playerData?.weight }">
                     </ng-container>
                   </div>
                   <!-- <div class="info-col">
@@ -111,20 +111,20 @@
               <!--  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
                     -->
               <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]="{
-                  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
+                  titles : [('Shared_Module2.Game_type' | translate), 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
                   values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
                     subParams : 'batting',
-                    header_title:'Batting Stats',
+                    header_title:('Shared_Module2.Batting_Stats' | translate),
                     class : ['player-state'],
                     class_light_row : ['light-row']
                   }">
               </app-player-table>
 
               <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]=" {
-                  titles : ['Game type', 'MAT', 'INN', 'OV', 'Maiden', 'R', 'W', 'AVG', 'SR', 'Eco', '5Ws', '10Ws'],
+                  titles : [('Shared_Module2.Game_type' | translate), 'MAT', 'INN', 'OV', 'Maiden', 'R', 'W', 'AVG', 'SR', 'Eco', '5Ws', '10Ws'],
                   values : ['type', 'matches', 'innings', 'overs', 'maidens', 'runs', 'wickets', 'average', 'strike_rate', 'economy', 'five_wicket_hauls', 'ten_wicket_hauls'],
                   subParams : 'bowling',
-                  header_title:'Bowling Stats',
+                  header_title:('Shared_Module2.Bowling_Stats' | translate),
                   class : ['player-state'],
                   class_light_row : ['light-row']
                 }">
@@ -145,7 +145,7 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
+          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
 
           <!-- <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="'cricketseries'">
           </app-common-story-widget> -->

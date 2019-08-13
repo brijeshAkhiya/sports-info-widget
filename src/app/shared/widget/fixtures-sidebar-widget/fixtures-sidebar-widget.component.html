@@ -1,6 +1,6 @@
 <div class="common-widget tab-widget">
   <div class="widget-title">
-    <h5>{{sport ? sport : ''}}</h5>
+    <h5>{{ sport == 'cricket' ? ('Header_menu.Cricket' | translate) : sport == 'kabaddi' ? ('Header_menu.Kabaddi' | translate) : ''}}</h5>
   </div>
   <ngb-tabset class="common-tabs">
     <ngb-tab title="{{'Cricket_Module.Fixtures' | translate}}">

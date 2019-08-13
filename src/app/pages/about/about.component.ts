@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about',
@@ -42,12 +43,12 @@ export class AboutComponent implements OnInit {
   ];
   
   statistics = [
-    {title:'Articles' , count: '4,200+' },
-    {title:'Videos' , count: '1,400' },
-    {title:'Viewers' , count: '45,000+' },
+    {title:this.translateservice.get('Blog_Module.Articles')['value'] , count: '4,200+' },
+    {title:this.translateservice.get('Blog_Module.Videos')['value'] , count: '1,400' },
+    {title:this.translateservice.get('Shared_Module2.Viewers')['value'], count: '45,000+'},
   ]
   
-  constructor() { }
+  constructor(private translateservice:TranslateService) { }
 
   ngOnInit() {
   }

@@ -5,11 +5,11 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>Schedule</h1>
+          <h1>{{'Cricket_Module2.Schedule' | translate}}</h1>
         </div>
         <ngb-tabset class="common-tabs">
           <ngb-tab>
-            <ng-template ngbTabTitle>International</ng-template>
+            <ng-template ngbTabTitle>{{'Cricket_Module2.International' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <ng-container *ngTemplateOutlet="schedule;context:{ schedules:internationSchedule}">
               </ng-container>
@@ -17,7 +17,7 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div>Domestic</div>
+              <div>{{'Cricket_Module2.Domestic' | translate}}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <ng-container *ngTemplateOutlet="schedule;context:{ schedules:domesticSchedule}">
