@@ -28,6 +28,7 @@
 		</div>
 	</div>
 </footer>
+
 <div class="scroll-flash-block">
 	<button class="scroll-top" *ngIf="isShow" (click)="gotoTop()"><img src="/assets/images/right-arrow.svg"></button>
 	<app-flash-commentary></app-flash-commentary>
@@ -55,7 +56,8 @@
 	</div>
 	<div class="footer-btn-list" *ngIf="userfavourites?.length > 0">
 		<button class="delete-btn" [ngClass]="{'active': isedit}" (click)="removefavourite()"></button>
-		<button class="edit-btn"  [ngClass]="{'save-btn': isedit}"  (click)="isedit = !isedit">{{ isedit ? 'Save' : 'Edit' }}</button>
+		<button class="edit-btn" [ngClass]="{'save-btn': isedit}"
+			(click)="isedit = !isedit">{{ isedit ? 'Save' : 'Edit' }}</button>
 	</div>
 	<div class="fav-btn-block">
 		<button class="fav-btn" [ngClass]="{'active': isapply}" (click)="isapply = !isapply">
