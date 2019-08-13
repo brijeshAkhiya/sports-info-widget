@@ -82,8 +82,6 @@
 
 </ng-template>
 
-
-
 <ng-template #kabaddi let-match="match" let-type="type">
   <div class="schedule-item kabaddi-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.match_result}">
@@ -152,3 +150,109 @@
   </div>
 
 </ng-template>
+
+<div class="soccer-tour-list">
+  <div class="soccer-tour rounded-box common-shadow">
+    <div class="soccer-tour-title">
+      <p>Copa America 2019</p>
+    </div>
+    <div class="schedule-tour-list">
+      <div
+        class="schedule-item soccer-item d-flex align-items-center fullblock-link-container">
+
+        <div class="match-teams d-flex align-items-center">
+          <div class="match-team d-flex align-items-center">
+            <div class="team-info">
+              <h5>Bolivia</h5>
+            </div>
+            <div class="team-flag">
+              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
+            </div>
+          </div>
+
+          <!-- For Upcoming Match -->
+          <!-- <div class="vs-block">
+              <h6>vs</h6>
+            </div> -->
+          <!-- For Complete/Result Match -->
+          <div class="score-center-block">
+            <p>ft</p>
+            <div class="value d-flex justify-content-between">
+              <h4 class="dark-text">4</h4>
+              <h4 class="dark-text">-</h4>
+              <h4 class="dark-text">0</h4>
+            </div>
+          </div>
+
+          <div class="match-team d-flex align-items-center">
+            <div class="team-flag">
+              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
+            </div>
+            <div class="team-info">
+              <h5>Peru</h5>
+            </div>
+          </div>
+          <a class="details-btn"><span>Details</span></a>
+          <a class="fullblock-link">
+          </a>
+        </div>
+        <div class="match-desc text-center">
+          <h6>
+            <span class="text-capitalize">03:00 AM</span>
+          </h6>
+          <p class="stadium-nm">Estadio do Maracana, Brazil</p>
+          <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
+            <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+        </div>
+      </div>
+      <div
+        class="schedule-item soccer-item d-flex align-items-center fullblock-link-container">
+
+        <div class="match-teams d-flex align-items-center">
+          <div class="match-team d-flex align-items-center">
+            <div class="team-info">
+              <h5>Bolivia</h5>
+            </div>
+            <div class="team-flag">
+              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
+            </div>
+          </div>
+
+          <!-- For Upcoming Match -->
+          <!-- <div class="vs-block">
+              <h6>vs</h6>
+            </div> -->
+          <!-- For Complete/Result Match -->
+          <div class="score-center-block">
+            <p>ft</p>
+            <div class="value d-flex justify-content-between">
+              <h4 class="dark-text">4</h4>
+              <h4 class="dark-text">-</h4>
+              <h4 class="dark-text">0</h4>
+            </div>
+          </div>
+
+          <div class="match-team d-flex align-items-center">
+            <div class="team-flag">
+              <img src="../../../../assets/images/sample/India-flag.svg" alt="flag" />
+            </div>
+            <div class="team-info">
+              <h5>Peru</h5>
+            </div>
+          </div>
+          <a class="details-btn"><span>Details</span></a>
+          <a class="fullblock-link">
+          </a>
+        </div>
+        <div class="match-desc text-center">
+          <h6>
+            <span class="text-capitalize">03:00 AM</span>
+          </h6>
+          <p class="stadium-nm">Estadio do Maracana, Brazil</p>
+          <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
+            <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

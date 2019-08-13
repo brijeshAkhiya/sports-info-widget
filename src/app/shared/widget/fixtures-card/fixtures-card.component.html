@@ -5,8 +5,95 @@
         <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
         </div>
+        <!--soccer sport-->
+        <div class="soccer-fixture-filter d-flex align-items-center justify-content-between" *ngIf="sport == 'soccer'">
+          <div class="fixture-slider-block d-flex align-items-center">
+            <div class="soccer-fixture-slider text-center">
+              <owl-carousel-o [options]="customOptions">
+                <ng-container class="items">
+                  <ng-template carouselSlide>
+                    <div class="fix-slide active-slide">
+                      <h5>3</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>4</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>5</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>6</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>7</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>8</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>9</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>10</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>11</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                  <ng-template carouselSlide>
+                    <div class="fix-slide">
+                      <h5>12</h5>
+                      <p>AUG</p>
+                    </div>
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+            </div>
+            <div class="fixture-date">
+              <input class="form-control d-none" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker
+                #d="ngbDatepicker" [placement]="bottom">
+              <button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+          <div class="soccer-fixture-selection">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownSoccerFixture"
+                ngbDropdownToggle>International</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownSoccerFixture">
+                <button ngbDropdownItem>Domestic</button>
+                <button ngbDropdownItem>International</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-schedule></app-schedule>
         <!--Kabaddi sport-->
-        <ngb-tabset class="common-tabs">
+        <ngb-tabset class="common-tabs" *ngIf="sport != 'soccer'">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div (click)="loadKabaddi('fixture')">{{ 'widgetModule.Upcoming' | translate }}</div>
@@ -15,7 +102,7 @@
               <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                 *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
               </app-no-data-widget>
-              <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
+              <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="sport"></app-schedule>
               <app-loader *ngIf="paramsFixtures.loading"></app-loader>
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('fixture')"
@@ -34,7 +121,7 @@
               <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                 *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
               </app-no-data-widget>
-              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
+              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="sport"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
 
               <div class="fixtures-loadmore">
@@ -47,7 +134,7 @@
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
-        
+
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
