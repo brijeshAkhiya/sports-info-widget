@@ -34,7 +34,7 @@ export class FixturesCardComponent implements OnInit {
       this.store.dispatch(new Kabaddi.LoadKabaddiResults())
       this.store.select('Kabaddi').subscribe((data: any) => {
         console.log(data);
-        
+
         if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
           this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'))
         }
@@ -42,7 +42,7 @@ export class FixturesCardComponent implements OnInit {
           this.paramsFixtures.loadmore = true;
         else
           this.paramsFixtures.loadmore = true;
-          
+
         if (Object.entries(data.results).length > 0 && data.results.items.length > 0) {
           this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(data.results.items, 'Do MMMM YYYY', 'datestart', 'desc'));
         }
@@ -115,5 +115,24 @@ export class FixturesCardComponent implements OnInit {
       this.getResults();
     }
   }
-
+  // Soccer Fixtures Date Slider
+  customOptions: any = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    lazyLoad: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 7,
+      },
+      612: {
+        items: 7,
+      }
+    },
+    nav: true
+  }
 }
