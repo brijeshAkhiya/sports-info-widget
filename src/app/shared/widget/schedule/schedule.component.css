@@ -19,7 +19,7 @@
 .schedule-list .schedule-item.schedule-hover:hover *       { color: #fff !important; }
 
 /* -------- Tournament Fixtures List ------- */
-.schedule-tour-list .schedule-item      { padding-bottom: 16px; min-height: 112px; overflow: hidden; position: relative;}
+.schedule-tour-list .schedule-item      { padding-bottom: 16px; min-height: 112px; overflow: hidden; position: relative; background: #fff;}
 .schedule-item .match-desc              { width: 200px; align-self: flex-start; -webkit-align-self: flex-start; }
 .schedule-item .match-teams             { width: calc(100% - 208px); }
 .schedule-tour-list .schedule-item *:last-child         { margin-bottom: 0px; }
@@ -48,6 +48,16 @@
 .schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700;  }
 .schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
+/* -------- Tournament Fixtures For Sc ------- */
+.soccer-tour-list .soccer-tour              { margin-bottom: 24px; padding: 16px 24px 24px; background: #fff; }
+.soccer-tour-list .soccer-tour:last-child   { margin: 0px; }
+.soccer-tour-list .soccer-tour-title        { padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; }
+.soccer-tour-list .soccer-tour-title p      { margin: 0px; line-height: 20px; font-weight: 600; text-transform: uppercase; }
+.schedule-tour-list .soccer-item            { padding: 24px 16px 16px; flex-direction: column; -webkit-flex-direction: column; }
+.schedule-tour-list .soccer-item:nth-child(even) { background: #FCFCFD; }
+.schedule-item.soccer-item .match-desc,
+.schedule-item.soccer-item .match-teams     { width: 100%; }
+.schedule-item.soccer-item .match-desc      { padding-top: 16px; }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
