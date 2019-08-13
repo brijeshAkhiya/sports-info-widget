@@ -48,7 +48,7 @@
 .schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700;  }
 .schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
-/* -------- Tournament Fixtures For Sc ------- */
+/* -------- Tournament Fixtures For Soccer ------- */
 .soccer-tour-list .soccer-tour              { margin-bottom: 24px; padding: 16px 24px 24px; background: #fff; }
 .soccer-tour-list .soccer-tour:last-child   { margin: 0px; }
 .soccer-tour-list .soccer-tour-title        { padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; }
