@@ -15,7 +15,7 @@
               <app-no-data-widget [message]="'No recent fixtures'"
                 *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
               </app-no-data-widget>
-              <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="'kabaddi'"></app-schedule>
+              <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="sport"></app-schedule>
               <app-loader *ngIf="paramsFixtures.loading"></app-loader>
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('fixture')"
@@ -34,7 +34,7 @@
               <app-no-data-widget [message]="'No recent results'"
                 *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
               </app-no-data-widget>
-              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="'kabaddi'"></app-schedule>
+              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="sport"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
 
               <div class="fixtures-loadmore">
