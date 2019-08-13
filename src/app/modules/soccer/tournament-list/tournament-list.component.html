@@ -5,79 +5,13 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>Tournaments</h1>
         </div>
-        <div class="row no-gutters soccer-tournaments-list common-round common-shadow">
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Kazakhstan Cup 2019</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Latvia Cup 2019</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Kazakhstan Cup 2019</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Kazakhstan Cup 2019</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Kazakhstan Cup 2019</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">UEFA European Championship Qualifying</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Kazakhstan Cup 2019</h6>
-            <ul class="no-margin light-text">
-              <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
-            </ul>
-          </div>
-          <div class="col-xl-6 col-lg-12 col-md-6 item">
-            <h6 class="one-line-text">Kazakhstan Cup 2019</h6>
+        <app-loader *ngIf="!tournamentlist"></app-loader>
+        <app-no-data-widget *ngIf="tournamentlist?.length == 0" [message]="'No tournaments data available!'">
+        </app-no-data-widget>
+        <div class="row no-gutters soccer-tournaments-list common-round common-shadow"
+          *ngIf="tournamentlist?.length > 0">
+          <div class="col-xl-6 col-lg-12 col-md-6 item" *ngFor="let tournament of tournamentlist">
+            <h6 class="one-line-text">{{tournament?.name}}</h6>
             <ul class="no-margin light-text">
               <li><a [routerLink]="['/']">Home</a></li>
               <li><a [routerLink]="['/']">Fixtures</a></li>
@@ -92,7 +26,6 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--points table widget-->
-
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
       </div>

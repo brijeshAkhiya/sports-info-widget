@@ -11,7 +11,7 @@ import { Observable, EMPTY } from 'rxjs';
 @Injectable()
 export class SoccerEffects {
 
-    constructor(private actions$: Actions, private sportsService: SportsService,private store: Store<fromRoot.State>) { }
+    constructor(private actions$: Actions, private sportsService: SportsService, private store: Store<fromRoot.State>) { }
 
     @Effect()
     loadSoccerFixturesSuccess$: Observable<Action> = this.actions$.pipe(
@@ -52,6 +52,22 @@ export class SoccerEffects {
                 map((response: any) => new Soccer.LoadSoccerLiveSuccess(response.data.items)),
                 catchError(() => {
                     this.store.dispatch(new Soccer.LoadSoccerLive());
+                    return EMPTY;
+                })
+            )),
+        take(1)
+    );
+
+    //get soccer tournament list effect
+    @Effect()
+    loadSoccerTournamentListSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType(Soccer.LOAD_SOCCER_TOURNAMENTS_LIST),
+        tap(() => console.log('in soccer tournament list effect')),
+        switchMap((action: any) =>
+            this.sportsService.getSoccerTournamentList().pipe(
+                map((response: any) => new Soccer.LoadSoccerTournamentListSuccess(response.data)),
+                catchError(() => {
+                    this.store.dispatch(new Soccer.LoadSoccerTournamentList());
                     return EMPTY;
                 })
             )),

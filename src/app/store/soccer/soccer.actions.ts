@@ -9,6 +9,10 @@ export const LOAD_SOCCER_RESULTS = '[Soccer Results] Load Soccer Results';
 export const LOAD_SOCCER_RESULTS_SUCCESS = '[Soccer Results] Load Success';
 export const LOAD_SOCCER_LIVE_MATCHES = '[Soccer Live] Load Soccer Live';
 export const LOAD_SOCCER_LIVE_MATCHES_SUCCESS = '[Soccer Live] Load Success';
+export const LOAD_SOCCER_TOURNAMENTS_LIST = '[Soccer Tournaments list] Load Soccer Tournaments list';
+export const LOAD_SOCCER_TOURNAMENTS_LISTSUCCESS = '[Soccer Tournaments list] Load Soccer Tournaments list Success';
+
+
 
 export class SoccerFixtures implements Action {
     readonly type = SOCCER_FIXTURES_MATCHES
@@ -63,8 +67,21 @@ export class LoadSoccerLiveSuccess implements Action {
     constructor(public payload: any) { }
 }
 
+
+export class LoadSoccerTournamentList implements Action {
+    readonly type = LOAD_SOCCER_TOURNAMENTS_LIST
+}
+
+
+export class LoadSoccerTournamentListSuccess implements Action {
+    readonly type = LOAD_SOCCER_TOURNAMENTS_LISTSUCCESS
+    constructor(public payload: any) { }
+}
+
 export type SoccerActions = SoccerFixtures | SoccerLiveMatches
     | SoccerResults | SoccerMatchInfo
     | LoadSoccerFixtures | LoadSoccerFixturesSuccess
     | LoadSoccerResults | LoadSoccerResultsSuccess
     | LoadSoccerLive | LoadSoccerLiveSuccess
+    | LoadSoccerTournamentList
+    | LoadSoccerTournamentListSuccess

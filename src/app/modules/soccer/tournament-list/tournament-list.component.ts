@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SportsService } from '@app/shared/providers/sports-service';
+
+import * as fromRoot from "@app/app-reducer";
+import * as Soccer from "@store/soccer/soccer.actions";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: 'app-tournament-list',
@@ -7,17 +10,16 @@ import { SportsService } from '@app/shared/providers/sports-service';
   styleUrls: ['./tournament-list.component.css']
 })
 export class TournamentListComponent implements OnInit {
+  tournamentlist: any;
 
-  constructor(private sportsSerivce:SportsService) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    this.getTournamentList();
-  }
-
-  getTournamentList(){
-    this.sportsSerivce.getSoccerTournamentList().subscribe((res:any)=>{
-      console.log('soccer res:',res);
-      
+    this.store.dispatch(new Soccer.LoadSoccerTournamentList())
+    this.store.select('Soccer').subscribe((data: any) => {
+      if (data.tournamentlist.length > 0) {
+        this.tournamentlist = data.tournamentlist
+      }
     })
   }
 
