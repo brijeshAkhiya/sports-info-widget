@@ -11,6 +11,7 @@ import { Store } from "@ngrx/store";
 })
 export class TournamentListComponent implements OnInit {
   tournamentlist: any;
+  searchText;
 
   constructor(private store: Store<fromRoot.State>) { }
 
