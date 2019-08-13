@@ -37,6 +37,7 @@ import { CricketService } from '@app/shared/providers/cricket-service';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule,
     CricketRoutingModule,
     SharedModule,
+    TranslateModule
   ],
   providers: [SportsService, SocketService, SlugifyPipe, CricketService],
   exports:[

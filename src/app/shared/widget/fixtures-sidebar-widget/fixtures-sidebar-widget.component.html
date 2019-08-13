@@ -3,13 +3,13 @@
     <h5>{{sport ? sport : ''}}</h5>
   </div>
   <ngb-tabset class="common-tabs">
-    <ngb-tab title="Fixtures">
+    <ngb-tab title="{{'Cricket_Module.Fixtures' | translate}}">
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
         </ng-container>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Results">
+    <ngb-tab title="{{'Cricket_Module.Results' | translate}}">
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
         </ng-container>
@@ -20,7 +20,7 @@
 
 <ng-template #sidebarMatch let-matches="matches" let-type="type">
   <app-loader *ngIf="loader"></app-loader>
-  <app-no-data-widget [message]="type =='result' ? 'No recent results' : 'No recent fixtures' "
+  <app-no-data-widget [message]="type =='result' ? ('Cricket_Module.No_recent_results' | translate) : ('Cricket_Module.No_recent_fixtures' | translate) "
     *ngIf="!loader && (!matches || matches?.length == 0)">
   </app-no-data-widget>
 
@@ -56,7 +56,7 @@
             {{ match.match_result ? match.match_result : match.match_status }}
           </p>
           <ng-template #match_schedule>
-            <p class="result-line">Starts {{match.scheduled | amLocal | amDateFormat:'LT'}}
+            <p class="result-line">{{ 'widgetModule.starts' | translate }} {{match.scheduled | amLocal | amDateFormat:'LT'}}
               {{(match.city_name) ? '| ' + match.city_name : ''}}</p>
           </ng-template>
         </div>
@@ -69,7 +69,7 @@
     <li>
       <a class="view-all-btn"
         [routerLink]="(type == 'fixture' && sport == 'cricket' ) ? ['/cricket/recent/fixtures'] :  (type == 'result' && sport == 'cricket' ) ?  ['/cricket/recent/results'] : ''">
-        View All
+        {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>
     </li>
@@ -86,7 +86,7 @@
         <div class="match-info d-flex justify-content-between align-items-center">
           <p
             [ngClass]="{'match-winner': match?.result?.winner == match?.teams?.home?.tid &&  match?.result?.tie != 'true' }">
-            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.logo"
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
               [defaultImage]="cricketService.flagplaceholder">
             {{ match?.teams?.home?.tname}}
           </p>
@@ -101,7 +101,7 @@
         <div class="match-info d-flex justify-content-between align-items-center">
           <p
             [ngClass]="{'match-winner': match?.result?.winner == match?.teams?.away?.tid &&  match?.result?.tie != 'true'}">
-            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.logo"
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.tid | logosurl:'kabaddi'"
               [defaultImage]="cricketService.flagplaceholder">
             {{ match?.teams?.away?.tname}}
           </p>
@@ -128,7 +128,7 @@
     </li>
     <li>
       <a class="view-all-btn" [routerLink]="'/kabaddi/fixtures'">
-        View All
+        {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>
     </li>

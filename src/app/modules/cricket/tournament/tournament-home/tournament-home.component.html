@@ -11,14 +11,13 @@
           <app-points-table *ngIf="tournamentid" [sport]="'cricket'" [options]="{
             tournament : tournamentid
           }"></app-points-table>
-
           <div class="common-widget tab-widget" *ngIf="battingleaders && bowlingleaders">
             <div class="widget-title">
-              <h5>Top Scorers</h5>
+              <h5>{{'Cricket_Module.Top_Scorers' | translate}}</h5>
             </div>
             <ngb-tabset class="common-tabs">
               <ngb-tab>
-                <ng-template ngbTabTitle>Batting</ng-template>
+                <ng-template ngbTabTitle>{{'Cricket_Module.Batting' | translate}}</ng-template>
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of battingleaders | slice:0:1">
@@ -38,7 +37,7 @@
                         </div>
                         <div class="player-score">
                           <h3>{{item.total}}</h3>
-                          <p class="score-property">Runs</p>
+                          <p class="score-property">{{'Cricket_Module.Runs' | translate}}</p>
                         </div>
                       </div>
                     </li>
@@ -55,15 +54,15 @@
                       </div>
                       <div class="player-score">
                         <h3>{{item.total}}</h3>
-                        <p class="score-property">Runs</p>
+                        <p class="score-property">{{'Cricket_Module.Runs' | translate}}</p>
                       </div>
                     </li>
-                    <li><a class="view-all-btn" [routerLink]="['./stats']">View all</a></li>
+                    <li><a class="view-all-btn" [routerLink]="['./stats']">{{'Home_Main_Page.View_All' | translate}}</a></li>
                   </ul>
                 </ng-template>
               </ngb-tab>
               <ngb-tab>
-                <ng-template ngbTabTitle>Bowling</ng-template>
+                <ng-template ngbTabTitle>{{'Cricket_Module.Bowling' | translate}}</ng-template>
                 <ng-template ngbTabContent>
                   <ul class="common-list player-score-list">
                     <li class="top-player d-flex" *ngFor="let item of bowlingleaders | slice:0:1">
@@ -82,7 +81,7 @@
                         </div>
                         <div class="player-score">
                           <h3>{{item.total}}</h3>
-                          <p class="score-property">wickets</p>
+                          <p class="score-property">{{'Cricket_Module.wickets' | translate}}</p>
                         </div>
                       </div>
                     </li>
@@ -99,17 +98,17 @@
                       </div>
                       <div class="player-score">
                         <h3>{{item.total}}</h3>
-                        <p class="score-property">wickets</p>
+                        <p class="score-property">{{'Cricket_Module.wickets' | translate}}</p>
                       </div>
                     </li>
-                    <li><a class="view-all-btn" [routerLink]="['./stats']">View all</a></li>
+                    <li><a class="view-all-btn" [routerLink]="['./stats']">{{'Home_Main_Page.View_All' | translate}}</a></li>
                   </ul>
                 </ng-template>
               </ngb-tab>
             </ngb-tabset>
           </div>
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
-            <h5>Teams</h5>
+            <h5>{{'Cricket_Module.Teams' | translate}}</h5>
             <ul class="common-list">
               <li *ngFor="let item of teamsname | slice:0:5"><a
                   [routerLink]="['/cricket/team', (tournamentid | splitID) ,(item.id | splitID),(item.name | slugify)]">

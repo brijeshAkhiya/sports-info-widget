@@ -10,28 +10,28 @@
     <div class="desc-block d-flex justify-content-between align-items-center">
       
       <div *ngIf="event.event_type == 'normal'">
-        <p class="title" *ngIf="event.raid_type == 'doordie'"> Do or Die</p>
-        <p class="title" *ngIf="event.super_event != ''"> Super {{event.super_event}}</p>
-        <p class="title" *ngIf="event.allout == 'true'"> All out</p>
+        <p class="title" *ngIf="event.raid_type == 'doordie'">{{ 'widgetModule.do_or_die' | translate }}</p>
+        <p class="title" *ngIf="event.super_event != ''"> {{ 'widgetModule.super' | translate }} {{event.super_event}}</p>
+        <p class="title" *ngIf="event.allout == 'true'"> {{ 'widgetModule.all_out' | translate }}</p>
         <p class="desc">{{event.raider_name}} raid {{event.raid_event}}</p>
       </div>
       <div *ngIf="event.event_type == 'timeout'">
-        <p class="title">Timeout</p>
+        <p class="title">{{ 'widgetModule.time_out' | translate }}</p>
       </div>
       <div *ngIf="event.event_type == 'substitution'">
-        <p class="title">Substitution</p>
-        <p class="desc">{{event.player_in_name}} comes in for {{event.player_out_name}}</p>
+        <p class="title">{{ 'widgetModule.substitution' | translate }}</p>
+        <p class="desc">{{event.player_in_name}} {{ 'widgetModule.comes_in_for' | translate }} {{event.player_out_name}}</p>
       </div>
       <div *ngIf="event.event_type == 'card'">
-        <p class="title text-capitalize">{{event.card}} card</p>
-        <p class="desc">{{event.player_name}} gets a {{event.card}} card</p>
+        <p class="title text-capitalize">{{event.card}} {{ 'widgetModule.card' | translate }}</p>
+        <p class="desc">{{event.player_name}} {{ 'widgetModule.gets_a' | translate }} {{event.card}} card</p>
       </div>
       <div *ngIf="event.event_type == 'toss'">
-        <p class="title">Toss</p>
-        <p class="desc">{{event.winner}} win the toss and select the choice of {{event.decision}}</p>
+        <p class="title">{{ 'widgetModule.toss' | translate }}</p>
+        <p class="desc">{{event.winner}} {{ 'widgetModule.wins_toss_select_choice' | translate }} {{event.decision}}</p>
       </div>
       <div *ngIf="event.event_type == 'result'">
-        <p class="title">Result</p>
+        <p class="title">{{ 'widgetModule.result' | translate }}</p>
         <p class="desc"> {{event.result}}</p>
       </div>
 

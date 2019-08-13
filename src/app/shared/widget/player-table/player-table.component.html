@@ -2,11 +2,11 @@
   <div class="table-title" *ngIf="options.header_title">
     <h6>{{options.header_title}}</h6>
   </div>
-  <div class="table-responsive">
-    <table class="table">
+  <div class="table-responsive" id="dtBasicExample"> 
+    <table class="table"> 
       <thead>
         <tr [ngClass]="options.class_light_row">
-          <th *ngFor="let title of options.titles" [innerHTML]="title"></th>
+          <th *ngFor="let title of options.titles" [innerHTML]="title" title="{{title}}" (click)="getname($event)"></th>
         </tr>
       </thead>
       <tbody>
@@ -68,7 +68,7 @@
       <td>
         <a
           [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player', item['pid'], (item.name | slugify)] : '' ">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="kabaddiService.getKabaddiLogo(item['tid'])"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="logo">
           {{ item[value]}}
         </a>

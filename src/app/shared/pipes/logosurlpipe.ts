@@ -8,8 +8,13 @@ export class LogosUrlPipe implements PipeTransform {
 
   constructor(public commonService: CommonService) {}
 
-  transform(value: any): any {
-    if (value) {
+  transform(value: any,sport:any): any {
+    if (value && sport == 'kabaddi' ) {
+      return (
+        `${this.commonService.s3Url}logos/kabaddi-${value}.svg`
+      );
+    }
+    else{
       return (
         `${this.commonService.s3Url}logos/${value}.png`
       );

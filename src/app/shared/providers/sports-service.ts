@@ -248,6 +248,7 @@ export class SportsService {
 
   //get blog comments
   getblogcommnets(data) {
+    console.log(data)
     return this.http.post(
       environment.apiUrl + environment.version + `/comments/list`,
       data
@@ -256,6 +257,7 @@ export class SportsService {
 
   //add user comment 
   addusercomment(data){
+    console.log(data)
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
@@ -264,6 +266,27 @@ export class SportsService {
       data,{ headers: headers }
     );
   }
+
+  //editcomment
+  Editcomment(id,data)
+  {
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('userT')
+    });
+    const Body= {'sComment' : data}
+    return this.http.put(environment.apiUrl + environment.version + `/comments/${id}`,Body,{headers: headers});
+  }
+
+  // deletecomment  
+  deleteusercomment(id){
+    console.log(id)
+    let headers = new HttpHeaders({
+      'Authorization': localStorage.getItem('userT')
+    });
+    return this.http.delete(
+      environment.apiUrl + environment.version + `/comments/${id}`, {headers: headers});
+  }
+
 
   //post website inquiries
 

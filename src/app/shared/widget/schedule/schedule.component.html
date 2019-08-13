@@ -74,7 +74,7 @@
       </div>
     </div>
     <a class="details-btn"
-      [routerLink]="['/cricket/match', (match.id | splitID), (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]"><span>Details</span></a>
+      [routerLink]="['/cricket/match', (match.id | splitID), (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
     <a class="fullblock-link"
       [routerLink]="['/cricket/match', (match.id | splitID),  (match.competitors[0].abbreviation + '-' +match.competitors[1].abbreviation)]">
     </a>
@@ -104,7 +104,7 @@
             {{match?.teams?.home?.shortname}}</h5>
         </div>
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.logo"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.home?.tname}}" />
         </div>
       </div>
@@ -129,7 +129,7 @@
 
       <div class="match-team d-flex align-items-center">
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.logo"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.tid | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.away?.tname}}" />
         </div>
         <div class="team-info">
@@ -139,7 +139,7 @@
         </div>
       </div>
       <a class="details-btn"
-        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>Details</span></a>
+        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link" [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
       </a>
     </div>

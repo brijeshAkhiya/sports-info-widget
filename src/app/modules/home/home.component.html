@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-5 col-md-7 col-sm-9 col-10">
-          <h1 class="white-text">Top Highlights</h1>
+          <h1 class="white-text">{{'Home_Main_Page.Top_Highlights' | translate}}</h1>
           <ul class="banner-news-list">
             <li *ngFor="let post of banners;let i = index;">
               <a [state]="{ id: post._id }" [routerLink]="[(post.eType |lowercase) , post.sSlug ]"
@@ -60,9 +60,9 @@
     <div class="row row-size12">
       <div class="col-xl-9">
         <div class="common-title-btn d-flex justify-content-between align-items-center">
-          <h4 class="white-text">Popular Videos</h4>
+          <h4 class="white-text">{{'Home_Main_Page.Popular_Videos' | translate}}</h4>
           <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['/video']" *ngIf="popularvideos.length > 4">
-            View All<span></span></a>
+            {{'Home_Main_Page.View_All' | translate}}<span></span></a>
         </div>
       </div>
     </div>

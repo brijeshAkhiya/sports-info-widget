@@ -1,11 +1,11 @@
 <div class="common-widget tab-widget" *ngIf="kabaddiscoredata && kabaddiscoredata?.length > 0">
   <div class="widget-title">
-    <h5>Top Scorers</h5>
+    <h5>{{ 'widgetModule.top_score' | translate }}</h5>
   </div>
   <ngb-tabset class="common-tabs" *ngIf="sport == 'kabaddi'">
     <ngb-tab>
       <ng-template ngbTabTitle>
-        <div (click)="gettopscorer('totalpoint')">Points</div>
+        <div (click)="gettopscorer('totalpoint')">{{ 'widgetModule.points' | translate }}</div>
       </ng-template>
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarScore;context:{ scoredata:kabaddiscoredata,sport:sport}">
@@ -14,7 +14,7 @@
     </ngb-tab>
     <ngb-tab>
       <ng-template ngbTabTitle>
-        <div (click)="gettopscorer('raidtotalpoint')">Raid Points</div>
+        <div (click)="gettopscorer('raidtotalpoint')">{{ 'widgetModule.Raid_Points' | translate }}</div>
       </ng-template>
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarScore;context:{ scoredata:kabaddiscoredata,sport:sport}">
@@ -44,7 +44,7 @@
         </div>
         <div class="player-score">
           <h3>{{item.totalpoint}}</h3>
-          <p class="score-property">Points</p>
+          <p class="score-property">{{ 'widgetModule.points' | translate }}</p>
         </div>
       </div>
     </li>
@@ -61,9 +61,9 @@
       </div>
       <div class="player-score">
         <h3>{{item.totalpoint}}</h3>
-        <p class="score-property">Points</p>
+        <p class="score-property">{{ 'widgetModule.points' | translate }}</p>
       </div>
     </li>
-    <li><a class="view-all-btn" [routerLink]="['/kabaddi/stats']">View all</a></li>
+    <li><a class="view-all-btn" [routerLink]="['/kabaddi/stats']">{{ 'widgetModule.view_all' | translate }}</a></li>
   </ul>
 </ng-template>

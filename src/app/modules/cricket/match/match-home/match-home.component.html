@@ -12,7 +12,7 @@
         <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
           <!-- START - MATCH COMMENTRY-->
           <ngb-tab>
-            <ng-template ngbTabTitle>Commentary</ng-template>
+            <ng-template ngbTabTitle>{{'Cricket_Module.Commentary' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
@@ -24,7 +24,7 @@
           <!-- END - MATCH COMMENTRY-->
           <!-- START - SCORECARDS-->
           <ngb-tab *ngIf="matchInnings?.length > 0">
-            <ng-template ngbTabTitle>Scorecard</ng-template>
+            <ng-template ngbTabTitle>{{'Cricket_Module.Scorecard' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs scorecard-tab"
                 [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
@@ -32,7 +32,7 @@
                   <ng-template ngbTabTitle>
                     <span>{{teamObj[item.batting_team].name}}
                       <span class="test-inng">
-                        {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(1st Inning)' : '(2nd Inning)' : ''}}
+                        {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(' + ('Cricket_Module.1st_Inning' | translate) +')' : '(' + ('Cricket_Module.2nd_Inning' | translate) + ')' : ''}}
                       </span>
                     </span>
                   </ng-template>
@@ -42,7 +42,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th class="text-uppercase">Batsman</th>
+                              <th class="text-uppercase">{{'Cricket_Module.Batsman' | translate}}</th>
                               <th>R</th>
                               <th>B</th>
                               <th>4s</th>
@@ -111,7 +111,7 @@
                             </tr>
                             <tr>
                               <td>
-                                Extras<p class="batsman-text">( b -
+                                {{'Cricket_Module.Extras' | translate}}<p class="batsman-text">( b -
                                   {{item?.teams[1]?.statistics?.bowling?.byes ? item?.teams[1]?.statistics?.bowling?.byes : '0'}},
                                   w -
                                   {{item?.teams[1]?.statistics?.bowling?.wides ? item?.teams[1]?.statistics?.bowling?.wides : '0'}},
@@ -127,9 +127,8 @@
                             </tr>
                             <tr>
                               <td>
-                                <b>Total</b>
-                                <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} runs per
-                                  over)</p>
+                                <b>{{'Cricket_Module.Total' | translate}}</b>
+                                <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} {{'Cricket_Module.runs_per_over' | translate}})</p>
                               </td>
                               <td>
                                 <b>{{item?.teams[1]?.statistics?.bowling?.extras > 0 ? item?.teams[0]?.statistics?.batting?.runs + item?.teams[1]?.statistics?.bowling?.extras : item?.teams[0]?.statistics?.batting?.runs}}</b>
@@ -158,7 +157,7 @@
                     <div class="common-table common-shadow rounded-box"
                       *ngIf="matchdata.sport_event.tournament.type != 'first_class' && fallofWickets[item.number]">
                       <div class="table-title" *ngIf="fallofWickets.length > 0">
-                        <h6 class="text-uppercase">Fall of Wickets</h6>
+                        <h6 class="text-uppercase">{{'Cricket_Module.Fall_of_Wickets' | translate}}</h6>
                       </div>
                       <ul class="fall-wicket-list" *ngIf="fallofWickets.length > 0">
                         <li *ngFor="let item of fallofWickets[item.number]">
@@ -180,7 +179,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th>Bowler</th>
+                              <th>{{'Cricket_Module.Bowler' | translate}}</th>
                               <th>Ov</th>
                               <th>M</th>
                               <th>DB</th>
@@ -216,7 +215,7 @@
           <!--START - LIVE MATCH TRACKER-->
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div>Hawk Eye</div>
+              <div>{{'Cricket_Module.Hawk_Eye' | translate}}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-live-match-tracker [matchid]="matchid" *ngIf="matchid">
@@ -227,7 +226,7 @@
           <!-- START - FACTS AND FIGURES-->
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div>Facts & Figures</div>
+              <div>{{'Cricket_Module.Facts_and_Figures' | translate}}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-match-facts-figures [matchdata]="matchdata" [teamLastmatch]="lastmatches"
@@ -238,12 +237,12 @@
           <!-- Match information starts -->
           <ngb-tab *ngIf="tossdecision.toss_won_by_team">
             <ng-template ngbTabTitle>
-              <div>Info</div>
+              <div>{{'Cricket_Module.Info' | translate}}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-match-info-card [options]="{
                 sport:'cricket',
-                titles : ['Match','Series','Toss','Weather Condition','Pitch Condition','Outfield Conditions','Umpires','Match Refree'],
+                titles : [('Cricket_Module.Match' | translate),('Cricket_Module.Series' | translate),('Cricket_Module.Toss' | translate),('Cricket_Module.Weather_Condition' | translate),('Cricket_Module.Pitch_Condition' | translate),('Cricket_Module.Outfield_Conditions' | translate),('Cricket_Module.Umpires' | translate),('Cricket_Module.Match_Refree' | translate)],
                 values : [matchdata.sport_event.competitors,
                 matchdata.sport_event,
                 tossdecision,
@@ -285,7 +284,7 @@
 
           <!--START - NEWS TAB-->
           <ngb-tab>
-            <ng-template ngbTabTitle>News</ng-template>
+            <ng-template ngbTabTitle>{{'Cricket_Module.News' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
               </app-blog-list>
@@ -295,7 +294,7 @@
 
           <!--START - UPCOMING-->
           <ngb-tab>
-            <ng-template ngbTabTitle>Upcoming</ng-template>
+            <ng-template ngbTabTitle>{{'Cricket_Module.Upcoming' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="!nextmatches"></app-loader>
               <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
@@ -316,7 +315,7 @@
 
           <!--START - SIDERBAR STORY-->
           <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
-            [options]="{type: 'current', title:'Recommended Links'}"></app-sidebar-links>
+            [options]="{type: 'current', title:('Cricket_Module.Recommended_Links' | translate)}"></app-sidebar-links>
           <!--START - SIDERBAR STORY-->
 
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
@@ -355,7 +354,7 @@
         </span>
       </p>
       <p *ngIf="matchdata.sport_event_status.current_inning == 2">
-        <span class="light-white target">Target</span> 
+        <span class="light-white target">{{'Cricket_Module.Target' | translate}}</span> 
         <span>{{matchdata.sport_event_status.target}}</span>
       </p>
     </div>

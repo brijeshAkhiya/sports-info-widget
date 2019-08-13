@@ -43,18 +43,19 @@
       </p>
       <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
       <!-- TODO Delay class-->
-      <p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">Match is
+      <p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">
+          {{ 'widgetModule.match_is' | translate }}
         {{ data.sport_event_status.status }}</p>
       <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
-        <span>{{toss.toss_won_by_team}} opt to {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+        <span>{{toss.toss_won_by_team}} {{ 'widgetModule.opt_to' | translate }} {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
       </p>
       <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 1 && toss.toss_won_by_team "
-        class="live-match">Live
-        <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} opt to
+        class="live-match">{{ 'widgetModule.live' | translate }}
+        <span *ngIf="toss.toss_won_by_team">| {{toss.toss_won_by_team}} {{ 'widgetModule.opt_to' | translate }}
           {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
       </p>
       <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2"
-        class="live-match">Live | {{data.sport_event_status.equation}}
+        class="live-match">{{ 'widgetModule.live' | translate }} | {{data.sport_event_status.equation}}
       </p>
     </div>
 
@@ -105,7 +106,7 @@
             [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         </div>
         <div class="player-info">
-          <p class="light-text">Player of the Match</p>
+          <p class="light-text">{{ 'widgetModule.player_of_the_match' | translate }}</p>
           <h5 class="theme-color">
             <a
               [routerLink]="['/cricket/player', (data.statistics.man_of_the_match[0].id | splitID), ((data.statistics.man_of_the_match[0].name | split ) | slugify) ]">
@@ -118,11 +119,11 @@
         *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
         <ul class="sec-inngs-state-list">
           <li>
-            <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">Required rate</span>: <span
+            <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">{{ 'widgetModule.required_rate' | translate }}</span>: <span
                 class="value">{{data.sport_event_status.run_rate_required}}</span></p>
           </li>
           <li>
-            <p *ngIf="data.sport_event_status.run_rate"><span class="title">Current rate</span>: <span
+            <p *ngIf="data.sport_event_status.run_rate"><span class="title">{{ 'widgetModule.current_rate' | translate }}</span>: <span
                 class="value">{{data.sport_event_status.run_rate}}</span></p>
           </li>
           <!-- <li>
@@ -140,7 +141,7 @@
     class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="data.match_info.teams?.home?.logo" alt="data.match_info.teams?.home?.tname"
+        <img [lazyLoad]="data.match_info.teams?.home?.tid | logosurl:'kabaddi'" alt="data.match_info.teams?.home?.tname"
           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <h4>{{data.match_info.teams?.home?.tname}}</h4>
       </div>
@@ -148,7 +149,7 @@
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img [lazyLoad]="data.match_info.teams?.away?.logo" alt="data.match_info.teams?.away?.tname"
+        <img [lazyLoad]="data.match_info.teams?.away?.tid | logosurl:'kabaddi'" alt="data.match_info.teams?.away?.tname"
           [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <h4>{{data.match_info.teams?.away?.tname}}</h4>
       </div>
@@ -171,7 +172,7 @@
         </ng-container>
         {{data?.match_info?.datestart | amDateFormat:'Do MMMM YYYY'}}
       </p>
-      <p class="live-match" *ngIf="data?.match_info?.status == 3">Live</p>      
+      <p class="live-match" *ngIf="data?.match_info?.status == 3">{{ 'widgetModule.live' | translate }}</p>      
     </div>
 
     <div class="current-match d-flex justify-content-between show-anim">
@@ -188,7 +189,6 @@
     </div>
   </div>
   <ng-container>
-
     <ng-template #kabadditeam let-team="team">
       <div class="team-col">
         <div class="current-team d-flex align-items-center">

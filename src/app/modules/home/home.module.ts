@@ -14,6 +14,7 @@ import { SharedModule } from "@app/shared/shared.module";
 import { CricketModule } from "@app/modules/cricket/cricket.module";
 
 import { HomeComponent } from './home.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { HomeComponent } from './home.component';
     MomentModule,
     CarouselModule,
     NgScrollbarModule,
-
+    TranslateModule,
     HomeRoutingModule,
     SharedModule,
     CricketModule,

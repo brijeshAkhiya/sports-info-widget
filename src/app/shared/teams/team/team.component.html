@@ -18,7 +18,7 @@
         <ngb-tabset class="common-tabs" *ngIf="teamProfile">
           <!-- About Section-->
           <ngb-tab>
-            <ng-template ngbTabTitle>About</ng-template>
+            <ng-template ngbTabTitle>{{ 'Footer.About' | translate }}</ng-template>
             <app-loader *ngIf="loading"></app-loader>
             <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
 
@@ -32,12 +32,12 @@
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.abbreviation"><span class="title light-text">Abbreviation :
+                    <h5 *ngIf="teamProfile?.abbreviation"><span class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
                       </span>{{teamProfile?.abbreviation}}</h5>
-                    <h5 *ngIf="teamProfile?.manager_name"><span class="title light-text">Manager :
+                    <h5 *ngIf="teamProfile?.manager_name"><span class="title light-text">{{ 'Shared_module.Manager' | translate }} :
                       </span>{{teamProfile?.manager_name | split}}</h5>
                     <h5 *ngIf="teamProfile?.results">
-                      <span class="title light-text">Recent Matches : </span>
+                      <span class="title light-text"> {{ 'Shared_module.Recent_matches' | translate }}: </span>
                       <ul class="match-result">
                         <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamProfile?.results">{{item}}</li>
                       </ul>
@@ -50,14 +50,14 @@
               <ng-container *ngIf="sport == 'kabaddi'">
                 <section class="team-about-head d-flex" *ngIf="teamProfile?.founded != ''">
                   <div class="team-logo align-self-start rounded-box common-shadow">
-                    <div class="team-logo-img" [lazyLoad]="teamProfile?.teamlogo"
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.tid | logosurl:'kabaddi'"
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span class="title light-text">Stadium :
+                    <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
                       </span>{{teamProfile?.venue?.name}}
                     </h5>
-                    <h5 *ngIf="teamProfile?.founded"><span class="title light-text">Founded :
+                    <h5 *ngIf="teamProfile?.founded"><span class="title light-text"> {{ 'Shared_module.Founded' | translate }}:
                       </span>{{teamProfile?.founded}}
                     </h5>
                   </div>
@@ -69,7 +69,7 @@
               <!-- Squad Section-->
               <section class="common-section squad-list" *ngIf="sport == 'cricket'">
                 <h4 class="squad-title" *ngIf="teamProfile?.players?.length > 0;then cricket_squad else no_players">
-                  Squad
+                    {{ 'Shared_module.Squad' | translate }}
                 </h4>
                 <ng-template #cricket_squad>
                   <div class="squad-group">
@@ -80,7 +80,7 @@
                             [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
                           <div class="item-desc">
                             <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
-                            <a [routerLink]="" class="theme-btn">View Player<span></span></a>
+                            <a [routerLink]="" class="theme-btn"> {{ 'Shared_module.view_player' | translate }}<span></span></a>
                           </div>
                           <a class="fullblock-link"
                             [routerLink]="['/cricket/player', (player?.id | splitID), ((player?.name | split) | slugify )]">
@@ -98,7 +98,7 @@
 
               <section class="common-section squad-list" *ngIf="sport == 'kabaddi'">
                 <h4 class="squad-title" *ngIf="teamProfile?.squads?.length > 0;then kabaddi_squad else no_players">
-                  Squad
+                    {{ 'Shared_module.Squad' | translate }}
                 </h4>
                 <ng-template #kabaddi_squad>
                   <div class="squad-group">
@@ -116,7 +116,7 @@
           <!-- News Section-->
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div>News</div>
+              <div> {{ 'Shared_module.news' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
@@ -127,7 +127,7 @@
           <!-- Fixtures Section-->
           <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>
-              <div (click)="getTeamFixtures()">Fixtures</div>
+              <div (click)="getTeamFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="loadingFixture"></app-loader>
@@ -141,7 +141,7 @@
           <!-- Results Section-->
           <ngb-tab *ngIf="sport != 'kabaddi'">
             <ng-template ngbTabTitle>
-              <div (click)="getTeamResults()">Results</div>
+              <div (click)="getTeamResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="loadingResult"></app-loader>
@@ -158,7 +158,7 @@
           <!-- Fixtures Section-->
           <ngb-tab *ngIf="sport == 'kabaddi'">
             <ng-template ngbTabTitle>
-              <div (click)="loadData('fixture')">Fixtures</div>
+              <div (click)="loadData('fixture')">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget [message]="'No recent fixtures'"
@@ -169,7 +169,7 @@
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('fixture')"
                   *ngIf="!paramsFixtures.loading && paramsFixtures.data?.length > 0 && paramsFixtures.loadmore">
-                  Load More
+                  {{ 'widgetModule.Load_more' | translate }}
                   <span></span>
                 </button>
               </div>
@@ -179,7 +179,7 @@
           <!-- Results Section-->
           <ngb-tab *ngIf="sport == 'kabaddi'">
             <ng-template ngbTabTitle>
-              <div (click)="loadData('result')">Results</div>
+              <div (click)="loadData('result')">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget [message]="'No recent results'"
@@ -191,7 +191,7 @@
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('result')"
                   *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">
-                  Load More
+                  {{ 'widgetModule.Load_more' | translate }}
                   <span></span>
                 </button>
               </div>
@@ -228,7 +228,7 @@
           <p>{{player.fullname}}
             <span class="light-text">{{player.shirtnumber}}</span>
           </p>
-          <a [routerLink]="" class="theme-btn">View Player<span></span></a>
+          <a [routerLink]="" class="theme-btn"> {{ 'Shared_module.view_player' | translate }}<span></span></a>
         </div>
         <a class="fullblock-link"
           [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">

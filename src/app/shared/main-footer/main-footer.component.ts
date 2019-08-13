@@ -30,7 +30,7 @@ export class MainFooterComponent implements OnInit {
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
     const clickedInside = this.favContainer.nativeElement.contains(targetElement);
-    console.log(clickedInside);    
+    // console.log(clickedInside);    
     if (!clickedInside) {
       this.isapply = false;
     }

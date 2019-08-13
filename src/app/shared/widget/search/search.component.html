@@ -15,13 +15,13 @@
     <div class="container">
       <div class="common-title-btn d-flex justify-content-between align-items-center"
         *ngIf="searchdata?.length != 0 && searchdata">
-        <h3 class="white-text">Search Results</h3>
-        <button class="theme-btn" *ngIf="searchdata && searchdata?.length > 4" (click)="blogList()">View
-          All<span></span></button>
+        <h3 class="white-text">{{ 'widgetModule.search_result' | translate }}</h3>
+        <button class="theme-btn" *ngIf="searchdata && searchdata?.length > 4" (click)="blogList()">
+            {{ 'widgetModule.view_all' | translate }}<span></span></button>
       </div>
       <div class="no-data-available-white" *ngIf="searchdata && searchdata?.length == 0 && noresults">
         <h5>
-          No results found!
+            {{ 'widgetModule.no_result_found' | translate }}
         </h5>
       </div>
       <app-blog-card [posts]="searchdata" [start]="0" [end]="4" [card_type]="'search'"></app-blog-card>

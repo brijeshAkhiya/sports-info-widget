@@ -3,16 +3,16 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-          <h1>Statistics</h1>
+          <h1>{{'Cricket_Module.Statistics' | translate}}</h1>
         </div>
         <app-loader *ngIf="isLoading"></app-loader>
         <app-no-data-widget *ngIf="!isLoading && !stats?.batting"></app-no-data-widget>
         <ngb-tabset class="filled-tabs" *ngIf="stats?.batting">
-          <ngb-tab title="Batting" *ngIf="stats?.batting">
+          <ngb-tab title="{{'Cricket_Module.Batting' | translate}}" *ngIf="stats?.batting">
             <ng-template ngbTabContent>
               <ngb-tabset class="common-tabs black-filled">
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Score</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Score' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.batting?.highest_score" [data]="stats?.batting?.highest_score"
                       [options]=" {
@@ -25,7 +25,7 @@
                   </ng-template>
                 </ngb-tab>
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Runs</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Runs' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.batting?.top_runs" [data]="stats?.batting?.top_runs" [options]="{
                           titles : ['POS', 'player', 'Runs'],
@@ -37,7 +37,7 @@
                   </ng-template>
                 </ngb-tab>
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Average</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Average' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.batting?.top_average" [data]="stats?.batting?.top_average"
                       [options]=" {
@@ -54,12 +54,12 @@
           </ngb-tab>
 
           <!--Bowling stats-->
-          <ngb-tab title="Bowling" *ngIf="stats?.bowling">
+          <ngb-tab title="{{'Cricket_Module.Bowling' | translate}}" *ngIf="stats?.bowling">
             <ng-template ngbTabContent>
               <ngb-tabset class="common-tabs black-filled">
                 <!--Top wickets-->
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Top</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Top' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_wickets" [data]="stats?.bowling?.top_wickets"
                       [options]=" {
@@ -73,7 +73,7 @@
                 </ngb-tab>
                 <!--Bowling average-->
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Average</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Average' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_bowling_average"
                       [data]="stats?.bowling?.top_bowling_average" [options]=" {
@@ -86,7 +86,7 @@
                   </ng-template>
                 </ngb-tab>
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Economy</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Economy' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_economy" [data]="stats?.bowling?.top_economy"
                       [options]="{
@@ -102,11 +102,11 @@
             </ng-template>
           </ngb-tab>
           <!--Fielding stats-->
-          <ngb-tab title="Fielding" *ngIf="stats?.fielding">
+          <ngb-tab title="{{'Cricket_Module.Fielding' | translate}}" *ngIf="stats?.fielding">
             <ng-template ngbTabContent>
               <ngb-tabset class="common-tabs black-filled">
                 <ngb-tab>
-                  <ng-template ngbTabTitle>Top Catches</ng-template>
+                  <ng-template ngbTabTitle>{{'Cricket_Module.Top_Catches' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.fielding?.top_catches" [data]="stats?.fielding?.top_catches"
                       [options]=" {
@@ -127,7 +127,7 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--Recommended links-->
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:'Current Series'}"></app-sidebar-links>
+          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
 
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
 
