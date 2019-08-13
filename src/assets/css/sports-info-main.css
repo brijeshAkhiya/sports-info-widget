@@ -139,7 +139,6 @@ app-main-header                     { display: block; background: #22336F;}
 .modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
 .modal.show .modal-dialog           { left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 
-
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
 .main-container                 { min-height: calc(100vh - 200px);}
@@ -318,6 +317,9 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 .player-score-list li.top-player .num       { margin-bottom: 4px; }
 .player-score-list li.top-player .name      { font-size: 16px; line-height: 23px; }
 .player-score-list li.top-player .player-score  { position: absolute; right: 12px; bottom: 12px;}
+
+/* -------- Soccer Pages ------- */
+.fixture-date .dropdown-menu                { left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
 
 /******** Middle Section CSS End *******/
 
