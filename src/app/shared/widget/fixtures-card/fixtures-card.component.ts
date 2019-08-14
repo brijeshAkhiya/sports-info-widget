@@ -19,8 +19,8 @@ import { Store } from "@ngrx/store";
 export class FixturesCardComponent implements OnInit {
   @Input() sport: any
   @Input() title: any
-  paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
-  paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
+  paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid : '' }
+  paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid : '' }
   paramSoccer:any
   customDate;
   model: any;
@@ -62,8 +62,8 @@ export class FixturesCardComponent implements OnInit {
     else if (this.sport == 'soccer') {
       this.paramSoccer = { loading: false, loadmore: false, data: []}      
       if(typeof this.activatedroute.parent.snapshot.params.id != 'undefined'){
-        this.paramSoccer.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
-        this.getSoccerTournamentData(this.paramSoccer.tournamentid);
+        this.paramsFixtures.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
+        this.getSoccerTournamentData(this.paramsFixtures.tournamentid);
       }else{
         this.paramSoccer = { loading: false, loadmore: false, data: [], fullData: [], 
           selectedDate: { year: moment().format('YYYY'), month : moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM')},
@@ -150,8 +150,8 @@ export class FixturesCardComponent implements OnInit {
         this.paramsFixtures.loading = false;
         this.paramsResults.loading = false;        
         if(res.data.summaries && res.data.summaries.length > 0){
-          this.paramsFixtures.data = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started');
-          this.paramsResults.data = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed');
+          this.paramsFixtures.data = this.paramsFixtures.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'), 'Do MMMM YYYY', 'start_time', 'asc'));
+          this.paramsResults.data = this.paramsResults.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'), 'Do MMMM YYYY', 'start_time', 'desc'));
           console.log(this.paramsFixtures.data);
           
         }
@@ -160,6 +160,23 @@ export class FixturesCardComponent implements OnInit {
         this.paramsResults.loading = false;
       });
 
+  }
+
+  sortArr(data, format, date_param, sort_type) {
+    data.sort((a, b) => {
+      if (sort_type === 'asc') {
+        return new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? 1 : 0;
+      } else {
+        return new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? 1 : 0;
+      }
+    })
+    let dateObj = {}
+    data.map((data) => {
+      let mdate = moment(data['sport_event'][date_param]).format(format);
+      if (!dateObj[mdate]) dateObj[mdate] = [];
+      dateObj[mdate].push(data)
+    })
+    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
   loadKabaddi(type) {
