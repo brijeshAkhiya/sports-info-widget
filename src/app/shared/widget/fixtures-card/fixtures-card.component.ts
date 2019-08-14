@@ -242,4 +242,5 @@ export class FixturesCardComponent implements OnInit {
     },
     nav: true
   }
+
 }
