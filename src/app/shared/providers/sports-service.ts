@@ -256,35 +256,34 @@ export class SportsService {
   }
 
   //add user comment 
-  addusercomment(data){
+  addusercomment(data) {
     console.log(data)
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
     return this.http.post(
       environment.apiUrl + environment.version + `/comments`,
-      data,{ headers: headers }
+      data, { headers: headers }
     );
   }
 
   //editcomment
-  Editcomment(id,data)
-  {
+  Editcomment(id, data) {
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
-    const Body= {'sComment' : data}
-    return this.http.put(environment.apiUrl + environment.version + `/comments/${id}`,Body,{headers: headers});
+    const Body = { 'sComment': data }
+    return this.http.put(environment.apiUrl + environment.version + `/comments/${id}`, Body, { headers: headers });
   }
 
   // deletecomment  
-  deleteusercomment(id){
+  deleteusercomment(id) {
     console.log(id)
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
     return this.http.delete(
-      environment.apiUrl + environment.version + `/comments/${id}`, {headers: headers});
+      environment.apiUrl + environment.version + `/comments/${id}`, { headers: headers });
   }
 
 
@@ -376,14 +375,14 @@ export class SportsService {
   }
 
   //get meta tags 
-  getmetatags(){
+  getmetatags() {
     return this.http.get(
-      environment.apiUrl + environment.version + `/seotags` 
+      environment.apiUrl + environment.version + `/seotags`
     );
   }
 
   //social login 
-  sociallogin(type,data){
+  sociallogin(type, data) {
     return this.http.post(
       environment.apiUrl + environment.version + `/login/${type}`,
       data
@@ -391,7 +390,7 @@ export class SportsService {
   }
 
   //social logout
-  userlogout(token){
+  userlogout(token) {
     let headers = new HttpHeaders({
       'Authorization': token
     });
@@ -401,23 +400,23 @@ export class SportsService {
   }
 
   //update favourites 
-  updatefavourites(data){
+  updatefavourites(data) {
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
     return this.http.put(
       environment.apiUrl + environment.version + `/favorites`,
-      data,{ headers: headers }
+      data, { headers: headers }
     );
   }
 
   //get user favourites
-  getuserfavourite(){
+  getuserfavourite() {
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
     return this.http.get(
-      environment.apiUrl + environment.version + `/favorites` ,{headers:headers}
+      environment.apiUrl + environment.version + `/favorites`, { headers: headers }
     );
   }
 
@@ -457,46 +456,46 @@ export class SportsService {
 
   //get player profile
   getKabaddiMatchList(status, per_page, paged) {
-    per_page = (per_page) ? per_page : 10; 
-    paged = (paged) ? paged : 1; 
+    per_page = (per_page) ? per_page : 10;
+    paged = (paged) ? paged : 1;
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/match/list?status=${status}&per_page=${per_page}&paged=${paged}`
     );
   }
-  getMatchInfo(id){
+  getMatchInfo(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/match/${id}/info`
-    );    
+    );
   }
 
-  getMatchStats(id){
+  getMatchStats(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/match/${id}/stats`
-    );    
+    );
   }
 
-  getCompetitionInfo(){
+  getCompetitionInfo() {
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/competition/info?per_page=50&paged=1`
-    );    
+    );
   }
 
-  getkabaddistats(param){
+  getkabaddistats(param) {
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/competition/stats/${param}`
-    );    
+    );
   }
 
   //get kabaddi team list
-  getkabadditeamlist(params){
+  getkabadditeamlist(params) {
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/team/list?per_page=${params.per_page}&paged=${params.page}`
-    );    
+    );
   }
-  getKabaddiDummyCall(id){
+  getKabaddiDummyCall(id) {
     return this.http.get(
       `http://192.168.11.118:3008/api/v1/user/json/${id}`
-    ); 
+    );
   }
 
   //get player profile
@@ -506,12 +505,12 @@ export class SportsService {
     );
   }
 
-  getkabadditeamfixtures(teamid,params){
+  getkabadditeamfixtures(teamid, params) {
     console.log(params);
-    
+
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/team/${teamid}/matches?per_page=${params.reqParams.per_page}&paged=${params.reqParams.page}&status=${params.reqParams.status}`
-    ); 
+    );
   }
 
 
@@ -519,11 +518,18 @@ export class SportsService {
    * Soccer Services
    */
 
-   getSoccerTournamentList(){
+  getSoccerTournamentList() {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/seasons`
-    );  
-   }
+    );
+  }
+
+  // get soccer season leaders
+  getSoccerseasonleaders(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/seasons/${id}/leaders`
+    );
+  }
 
 
 }

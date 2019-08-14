@@ -286,6 +286,11 @@
   "Bowling_Stats":"Bowling Stats",
   "TEAM":"TEAM",
   "Game_type":"Game type"
+},
+"Soccer_Module":{
+  "Tournaments":"Tournaments",
+  "Search_tournaments":"Search tournaments",
+  "No_tournaments_data_available":"No tournaments data available!"
 }
 
 
