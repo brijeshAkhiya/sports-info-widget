@@ -57,7 +57,7 @@
 .schedule-tour-list .soccer-item:nth-child(even) { background: #F7F7F8; }
 .schedule-item.soccer-item .match-desc,
 .schedule-item.soccer-item .match-teams     { width: 100%; }
-.schedule-item.soccer-item .match-desc      { padding-top: 16px; }
+.schedule-item.soccer-item .match-desc      { padding-top: 8px; }
 .soccer-item .match-teams .team-flag img    { display: block; height: 24px;}
 
 /***** Responsive CSS Start ******/
