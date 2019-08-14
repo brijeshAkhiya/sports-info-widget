@@ -1,5 +1,5 @@
 /* -------- Fixtures List ------- */
-.fixtures-loadmore      { margin-top: 32px; text-align: center; }
+.fixtures-loadmore                          { margin-top: 32px; text-align: center; }
 .schedule-list .schedule-list-inner .schedule-month:last-child,
 .schedule-list .schedule-month              { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 2px solid rgba(0,0,0,0.05); }
 .schedule-list .schedule-list-inner:last-child .schedule-month,
@@ -44,7 +44,7 @@
 .schedule-item:hover .details-btn       { right: 0px;}
 
 /* -------- Tournament Fixtures List For Soccer ------- */
-.soccer-fixture-filter                          { margin-bottom: 24px; padding: 16px 16px 24px; background: #fff; border-radius: 0px 0px 4px 4px; text-transform: uppercase;}
+.soccer-fixture-filter                          { margin-bottom: 24px; padding: 0px 16px 24px; background: #fff; border-radius: 0px 0px 4px 4px; text-transform: uppercase;}
 .soccer-fixture-filter .soccer-fixture-slider   { padding: 0px 48px; width: 415px; }
 .soccer-fixture-filter .fix-slide               { opacity: 0.4; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; cursor: pointer;}
 .soccer-fixture-filter .fix-slide:hover,
@@ -88,7 +88,7 @@
     .match-teams .vs-block h6               { margin: 0px 10px; }
     .schedule-tour-list p                   { margin-bottom: 6px;}
 /* -------- Tournament Fixtures List For Soccer ------- */
-    .soccer-fixture-filter                          { padding: 8px 12px 20px; }
+    .soccer-fixture-filter                          { padding: 0px 12px 20px; }
     .soccer-fixture-filter .soccer-fixture-slider   { padding: 0px 20px; width: 350px; }
 }
 
@@ -104,6 +104,12 @@
     .schedule-tour-list .complete-match h5  { margin-bottom: 2px; font-size: 15px; line-height: 19px; }
     .schedule-tour-list .schedule-item      { padding-left: 4px;}
     .schedule-tour-list p                   { margin-bottom: 5px; font-size: 13px; line-height: 18px;}
+/* -------- Tournament Fixtures List For Soccer ------- */
+    .soccer-fixtures-title,
+    .soccer-fixture-filter                      { flex-direction: column; -webkit-flex-direction: column; }
+    .soccer-fixture-filter                      { padding: 0px 12px 16px; }
+    .soccer-fixture-filter .dropdown-toggle     { margin-top: 16px; padding: 8px 14px; }
+    .fixture-date button.calendar               { margin-right: 0px; }
 }
 
 @media (max-width: 575px) {
@@ -123,6 +129,13 @@
     .complete-match .match-teams .match-team:first-child .team-info     { order: 2; }
     .complete-match .match-teams .match-team                { width: 100%; }
     .match-teams .vs-block h6                       { padding: 2px; }
+/* -------- Tournament Fixtures List For Soccer ------- */
+    .soccer-fixture-filter .soccer-fixture-slider   { width: 290px; }
+    .soccer-fixture-filter h5                       { font-size: 15px; line-height: 19px; }
+    .soccer-fixture-filter .fix-slide p             { font-size: 11px; line-height: 19px; }
+}
+@media (max-width: 381px) {
+    .soccer-fixture-filter .soccer-fixture-slider   { width: 250px; }
 }
     
     

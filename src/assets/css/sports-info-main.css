@@ -322,6 +322,12 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 
 /* -------- Soccer Pages ------- */
 .fixture-date .dropdown-menu                { left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
+ngb-datepicker .btn-link                    { color: #c4c4c4; }
+ngb-datepicker .btn-link:hover              { color: #ED1A33; }
+ngb-datepicker .ngb-dp-weekday              { font-weight: 700; font-style: normal; color: #22336F; }
+ngb-datepicker .ngb-dp-day                  { font-size: 14px; font-weight: 500; }
+ngb-datepicker .btn-light                   { color: #bfbfbf; }
+ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 
 /******** Middle Section CSS End *******/
 

@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
+import { ActivatedRoute } from '@angular/router';
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
 import { CricketService } from '@providers/cricket-service';
-import { distinctUntilChanged } from 'rxjs/operators';
 
 import * as fromRoot from "@app/app-reducer";
 import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
@@ -26,6 +26,7 @@ export class FixturesCardComponent implements OnInit {
   model: any;
 
   constructor(
+    private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
@@ -33,6 +34,7 @@ export class FixturesCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.activatedroute.parent.snapshot.params.id);
     if (this.sport == 'kabaddi') {
       this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
       this.store.dispatch(new Kabaddi.LoadKabaddiResults())
@@ -58,13 +60,20 @@ export class FixturesCardComponent implements OnInit {
       // this.getCricketSeries();
     }
     else if (this.sport == 'soccer') {
-      this.paramSoccer = { loading: false, loadmore: false, data: [], fullData: [], 
-        selectedDate: { year: moment().format('YYYY'), month : moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM')},
-        filterCategory: [],
-        selectedCategory: {name: 'All'}
+      this.paramSoccer = { loading: false, loadmore: false, data: []}      
+      if(typeof this.activatedroute.parent.snapshot.params.id != 'undefined'){
+        this.paramSoccer.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
+        this.getSoccerTournamentData(this.paramSoccer.tournamentid);
+      }else{
+        this.paramSoccer = { loading: false, loadmore: false, data: [], fullData: [], 
+          selectedDate: { year: moment().format('YYYY'), month : moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM')},
+          filterCategory: [],
+          selectedCategory: {name: 'All'}
+        }
+        this.loadDate(this.paramSoccer.selectedDate);
+        this.getSoccerData();
+
       }
-      this.loadDate(this.paramSoccer.selectedDate);
-      this.getSoccerData();
     }
   }
   loadDate(current){
@@ -107,7 +116,6 @@ export class FixturesCardComponent implements OnInit {
   }
 
   getSoccerData(){
-    window['moment'] = moment();
     this.paramSoccer.loading = true;
     this.sportsService
       .getSoccerDailySummary(moment(`${this.paramSoccer.selectedDate.year}-${this.paramSoccer.selectedDate.month}-${this.paramSoccer.selectedDate.day}`).format('YYYY-MM-DD'))
@@ -131,6 +139,27 @@ export class FixturesCardComponent implements OnInit {
       }, (error) => {
         this.paramSoccer.loading = false;   
       });
+  }
+
+  getSoccerTournamentData(id){
+    this.paramsFixtures.loading = true;
+    this.paramsResults.loading = true;
+    this.sportsService
+      .getSoccerTournamentMatches(id)
+      .subscribe((res: any) => {     
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;        
+        if(res.data.summaries && res.data.summaries.length > 0){
+          this.paramsFixtures.data = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started');
+          this.paramsResults.data = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed');
+          console.log(this.paramsFixtures.data);
+          
+        }
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+      });
+
   }
 
   loadKabaddi(type) {
@@ -199,14 +228,16 @@ export class FixturesCardComponent implements OnInit {
     dots: false,
     autoHeight: true,
     lazyLoad: true,
-    navSpeed: 700,
+    navSpeed: 150,
     navText: ['', ''],
     responsive: {
       0: {
         items: 7,
+        slideBy: 7
       },
       612: {
         items: 7,
+        slideBy: 7
       }
     },
     nav: true
