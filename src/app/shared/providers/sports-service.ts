@@ -526,14 +526,17 @@ export class SportsService {
     );
   }
 
-
-  /**
-   * Soccer Services
-   */
-
+  // Get Tournament List
   getSoccerTournamentList() {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/seasons`
+    );
+  }
+
+  // Get Tournament Matches
+  getSoccerTournamentMatches(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/seasons/${id}/summaries`
     );
   }
 

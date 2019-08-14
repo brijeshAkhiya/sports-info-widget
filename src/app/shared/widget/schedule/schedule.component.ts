@@ -12,6 +12,7 @@ export class ScheduleComponent implements OnInit {
   @Input() data;
   @Input() type;
   @Input() sport;
+  @Input() tournament;
 
   constructor(
     public commonService: CommonService,
