@@ -33,31 +33,18 @@ export class TeamsComponent implements OnInit {
     console.log(data);
     this.sport = data.value.sport;
 
-    this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'cricket', 'tournament');
-    console.log(this.sport);
-    
     if (this.sport == 'cricket') {
+      this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'cricket', 'tournament');
       this.getTournamentTeams(this.tournamentid);
     }
     else if (this.sport == 'kabaddi') {
       this.getKabaddiTeams();
     }
-    this.gettopscorer('totalpoint');
+    else if (this.sport == 'soccer') {
+      this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'soccer', 'tournament');
+      this.getSoccerSeasonTeams(this.tournamentid);
+    }
   }
-
-  //get kabaddi top scorers
-
-  gettopscorer(type){
-    this.isloading = true;
-    this.sportsService.getkabaddistats(type).subscribe((res: any) => {
-      this.isloading = false;
-      if (res) {
-        this.scorerdata = res.data
-      }
-    },
-    error => this.isloading = false)
-  }
-
 
   //Cricket - Get tournament teams
   getTournamentTeams(id) {
@@ -74,10 +61,29 @@ export class TeamsComponent implements OnInit {
   getKabaddiTeams() {
     this.sportsService.getkabadditeams().subscribe((res: any) => {
       console.log(res.data.items);
-      
+
       if (res.data && res.data.items) {
         this.teams = res.data.items;
-      }      
+      }
     })
   }
+
+  //Soccer - get season teams 
+  getSoccerSeasonTeams(id) {
+    this.sportsService.getsoccerseasonteams(id).subscribe((res: any) => {
+      let array = []
+      res.data.map((data) => {
+        data.groups.map((gdata) => {
+          gdata.competitors.map((cdata) => {
+            let isteamexist = array.some((obj) => obj.id == cdata.id);
+            if (!isteamexist) {
+              array.push(cdata)
+            }
+          })
+        })
+      })
+      this.teams = array
+    })
+  }
+
 }

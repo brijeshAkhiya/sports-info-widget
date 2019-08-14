@@ -547,5 +547,12 @@ export class SportsService {
     );
   }
 
+  //get soccer season clubs/teams 
+  getsoccerseasonteams(id){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/seasons/${id}/teams`
+    );
+  }
+
 
 }

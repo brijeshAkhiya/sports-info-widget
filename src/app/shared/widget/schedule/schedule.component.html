@@ -225,7 +225,7 @@
       </div>
       <div class="schedule-tour-list">
         <div class="schedule-item soccer-item d-flex align-items-center fullblock-link-container"
-          *ngFor="let match of item.data.matches">
+          *ngFor="let match of item.data.matches" [ngClass]="{'complete-match' : match?.sport_event_status.status=='closed'}">
 
           <div class="match-teams d-flex align-items-center">
             <div class="match-team d-flex align-items-center">

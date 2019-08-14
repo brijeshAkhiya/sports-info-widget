@@ -25,7 +25,7 @@
             <ul class="no-margin light-text">
               <li><a [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">Home</a></li>
               <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a></li>
-              <li><a [routerLink]="['/']">Clubs</a></li>
+              <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">Clubs</a></li>
               <li><a [routerLink]="['/']">Stats</a></li>
               <li><a [routerLink]="['/']">Table</a></li>
             </ul>

@@ -3,13 +3,13 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-          <h1>{{ 'widgetModule.Teams' | translate }} </h1>
+          <h1>{{  sport == 'soccer' ?  ('Soccer_Module.Clubs' | translate)  : ('widgetModule.Teams' | translate) }}
+          </h1>
         </div>
         <app-loader *ngIf="!teams"></app-loader>
         <app-no-data-widget *ngIf="teams?.length == 0"></app-no-data-widget>
         <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
-        <!-- 
-            For Kabaddi 
+        <!-- For Kabaddi 
             <div class="team-group-list">
             <div class="team-group common-section top-padding">
               <h4>Group A</h4>
@@ -27,7 +27,8 @@
           <app-top-scorer-widget [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-top-scorer-widget>
           <!--Current series widget-->
           <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
-            [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}" *ngIf="sport == 'cricket'"></app-sidebar-links>
+            [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"
+            *ngIf="sport == 'cricket'"></app-sidebar-links>
           <!-- <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
         </div>
       </div>
