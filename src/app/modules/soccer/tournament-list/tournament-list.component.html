@@ -24,7 +24,7 @@
             <h6 class="one-line-text">{{tournament?.name}}</h6>
             <ul class="no-margin light-text">
               <li><a [routerLink]="['/']">Home</a></li>
-              <li><a [routerLink]="['/']">Fixtures</a></li>
+              <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a></li>
               <li><a [routerLink]="['/']">Clubs</a></li>
               <li><a [routerLink]="['/']">Stats</a></li>
               <li><a [routerLink]="['/']">Table</a></li>

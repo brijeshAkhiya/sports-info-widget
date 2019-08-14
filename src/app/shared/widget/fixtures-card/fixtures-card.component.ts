@@ -70,6 +70,13 @@ export class FixturesCardComponent implements OnInit {
   loadDate(current){
     this.customDate = new Array<number>(moment(`${current.year}-${current.month}-${current.day}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
   }
+  selectDate(day){    
+    this.paramSoccer.data = [];
+    this.paramSoccer.selectedDate.day = day;
+    this.loadDate(this.paramSoccer.selectedDate);
+    this.customOptions.startPosition = day;
+    this.getSoccerData()
+  }
   dateChange($e){    
     this.paramSoccer.data = [];
     this.paramSoccer.selectedDate = { 

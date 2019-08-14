@@ -12,7 +12,7 @@
               <owl-carousel-o [options]="customOptions">
                 <ng-container class="items">
                   <ng-template carouselSlide *ngFor="let date of customDate"> 
-                    <div class="fix-slide" (click)="getSoccerData()" [class.active-slide]="paramSoccer.selectedDate.day ==  date">
+                    <div class="fix-slide" (click)="selectDate(date)" [class.active-slide]="paramSoccer.selectedDate.day ==  date">
                       <h5>{{date}}</h5>
                       <p>{{paramSoccer.selectedDate.monthStr}}</p>
                     </div>

@@ -163,12 +163,12 @@
 
           <div class="match-teams d-flex align-items-center">
             <div class="match-team d-flex align-items-center">
-              <div class="team-info">
-                <h5>{{match.sport_event.competitors[0].name}}</h5>
+              <div class="team-info" >
+                <h5 [ngClass]="{'winner': match?.sport_event_status.winner_id == match.sport_event.competitors[0]?.id}">{{match.sport_event.competitors[0].abbreviation}}</h5>
               </div>
               <div class="team-flag">
                 <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
-                  [defaultImage]="cricketService.flagplaceholder" alt="{{match.sport_event.competitors[0].name}}">
+                  [defaultImage]="cricketService.flagplaceholder" alt="{{match.sport_event.competitors[0].abbreviation}}">
               </div>
             </div>
 
@@ -189,10 +189,10 @@
             <div class="match-team d-flex align-items-center">
               <div class="team-flag">
                 <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
-                  [defaultImage]="cricketService.flagplaceholder" alt="{{match.sport_event.competitors[1].name}}">
+                  [defaultImage]="cricketService.flagplaceholder" alt="{{match.sport_event.competitors[1].abbreviation}}">
               </div>
               <div class="team-info">
-                <h5>{{match.sport_event.competitors[1].name}}</h5>
+                <h5 [ngClass]="{'winner': match?.sport_event_status.winner_id == match.sport_event.competitors[1]?.id}">{{match.sport_event.competitors[1].abbreviation}}</h5>
               </div>
             </div>
             <a class="details-btn"><span>Details</span></a>
