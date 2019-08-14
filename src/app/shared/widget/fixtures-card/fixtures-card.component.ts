@@ -199,14 +199,16 @@ export class FixturesCardComponent implements OnInit {
     dots: false,
     autoHeight: true,
     lazyLoad: true,
-    navSpeed: 700,
+    navSpeed: 150,
     navText: ['', ''],
     responsive: {
       0: {
         items: 7,
+        slideBy: 7
       },
       612: {
         items: 7,
+        slideBy: 7
       }
     },
     nav: true
