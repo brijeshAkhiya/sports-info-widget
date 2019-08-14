@@ -7,6 +7,7 @@ import { FixturesComponent } from './fixtures/fixtures.component';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
+import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 
 
 const routes: Routes = [{
@@ -32,6 +33,10 @@ const routes: Routes = [{
                 {
                     path: '',
                     component: TournamentHomeComponent
+                },
+                {
+                    path: 'fixtures',
+                    component: TournamentFixturesComponent
                 }
             ]
         },

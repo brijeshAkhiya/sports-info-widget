@@ -22,6 +22,10 @@ export class TopScorerWidgetComponent implements OnInit {
     if (this.sport == 'kabaddi') {
       this.gettopscorer('totalpoint');
     }
+    else if(this.sport == 'soccer'){
+      console.log('soccer');
+      
+    }
   }
 
   //get kabaddi scorers
@@ -33,7 +37,15 @@ export class TopScorerWidgetComponent implements OnInit {
         this.kabaddiscoredata = res.data
       }
     },
-      error => this.isloading = false)
+      (error) => this.isloading = false)
   }
+
+  getsoccerscorer(id){
+    this.isloading = true
+    this.sportsService.getSoccerseasonleaders(id).subscribe((res:any)=>{
+    })
+  }
+
+  
 
 }

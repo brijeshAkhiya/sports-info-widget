@@ -19,8 +19,8 @@ export class FavouritesWidgetComponent implements OnInit {
   ngOnInit() {
     this.store.select('Favourites').subscribe((data) => {
       console.log(data);
-      
-      this.userfavourites = (typeof data.Favourites != 'undefined' && data.Favourites != null) ? data.Favourites : [] 
+
+      this.userfavourites = (typeof data.Favourites != 'undefined' && data.Favourites != null) ? data.Favourites : []
       this.isadded = false
       this.userfavourites.map((data) => {
         if (data.id == this.value.id && data.type == this.value.type) {
@@ -37,7 +37,7 @@ export class FavouritesWidgetComponent implements OnInit {
         this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
         console.log(this.userfavourites)
         localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
-        
+
         this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
           if (res) {
             console.log(res);
@@ -46,7 +46,7 @@ export class FavouritesWidgetComponent implements OnInit {
       }
       else {
         this.isadded = true
-      
+
         this.updatefavourites(this.value);
       }
     }

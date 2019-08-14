@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as moment from 'moment';
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
@@ -20,6 +21,9 @@ export class FixturesCardComponent implements OnInit {
   @Input() title: any
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
+  paramSoccer:any
+  customDate;
+  model: any;
 
   constructor(
     private sportsService: SportsService,
@@ -33,8 +37,6 @@ export class FixturesCardComponent implements OnInit {
       this.store.dispatch(new Kabaddi.LoadKabaddiFixtures())
       this.store.dispatch(new Kabaddi.LoadKabaddiResults())
       this.store.select('Kabaddi').subscribe((data: any) => {
-        console.log(data);
-
         if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
           this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'))
         }
@@ -55,22 +57,96 @@ export class FixturesCardComponent implements OnInit {
     else if (this.sport == 'cricket') {
       // this.getCricketSeries();
     }
+    else if (this.sport == 'soccer') {
+      this.paramSoccer = { loading: false, loadmore: false, data: [], fullData: [], 
+        selectedDate: { year: moment().format('YYYY'), month : moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM')},
+        filterCategory: [],
+        selectedCategory: {name: 'All'}
+      }
+      this.loadDate(this.paramSoccer.selectedDate);
+      this.getSoccerData();
+    }
+  }
+  loadDate(current){
+    this.customDate = new Array<number>(moment(`${current.year}-${current.month}-${current.day}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
+  }
+  selectDate(day){    
+    this.paramSoccer.data = [];
+    this.paramSoccer.selectedDate.day = day;
+    this.loadDate(this.paramSoccer.selectedDate);
+    this.customOptions.startPosition = day;
+    this.getSoccerData()
+  }
+  dateChange($e){    
+    this.paramSoccer.data = [];
+    this.paramSoccer.selectedDate = { 
+      year: this.model.year, month: this.model.month, day: this.model.day, 
+      monthStr: moment(`${this.model.year}-${this.model.month}-${this.model.day}`).format('MMM') 
+    };
+    this.loadDate(this.paramSoccer.selectedDate);
+    this.customOptions.startPosition = this.model.day;
+    this.getSoccerData()
+  }
+  filter(category){
+    let obj = {};
+    this.paramSoccer.selectedCategory = category;
+    if(category.name == 'All'){
+      this.paramSoccer.fullData.map((data) => {
+          if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
+          obj[data.sport_event.sport_event_context.season.id].matches.push(data)
+      })
+    }else{
+      this.paramSoccer.fullData.map((data) => {
+        if(category.id == data.sport_event.sport_event_context.category.id){
+          if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
+          obj[data.sport_event.sport_event_context.season.id].matches.push(data)
+        }
+      })
+    }
+    this.paramSoccer.data =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
+  }
+
+  getSoccerData(){
+    window['moment'] = moment();
+    this.paramSoccer.loading = true;
+    this.sportsService
+      .getSoccerDailySummary(moment(`${this.paramSoccer.selectedDate.year}-${this.paramSoccer.selectedDate.month}-${this.paramSoccer.selectedDate.day}`).format('YYYY-MM-DD'))
+      .subscribe((res: any) => {     
+        this.paramSoccer.loading = false;   
+        if(res.data && res.data.summaries && res.data.summaries.length > 0){
+          this.paramSoccer.fullData = res.data.summaries;
+          let obj = {};
+          let category = {};
+          res.data.summaries.map((data) => {
+            // Category for filter
+            if (!category[data.sport_event.sport_event_context.category.id]) category[data.sport_event.sport_event_context.category.id] = data.sport_event.sport_event_context.category;
+
+            if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
+            obj[data.sport_event.sport_event_context.season.id].matches.push(data)
+          })
+          this.paramSoccer.data =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
+          this.paramSoccer.filterCategory =  Object.keys(category).map(key => ({ key, data: category[key] }));
+          
+        }
+      }, (error) => {
+        this.paramSoccer.loading = false;   
+      });
   }
 
   loadKabaddi(type) {
     if (type == 'fixture') {
       if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
         return false;
-      this.getFixtures();
+      this.getKabaddiFixtures();
     }
     else if (type == 'result') {
       if (this.paramsResults.data && this.paramsResults.data.length > 0)
         return false;
-      this.getResults();
+      this.getKabaddiResults();
     }
   }
 
-  getFixtures() {
+  getKabaddiFixtures() {
     this.paramsFixtures.loading = true;
     this.sportsService.getKabaddiMatchList(this.paramsFixtures.reqParams.status, this.paramsFixtures.reqParams.per_page, this.paramsFixtures.reqParams.page).subscribe((res: any) => {
       this.paramsFixtures.loading = false;
@@ -86,7 +162,7 @@ export class FixturesCardComponent implements OnInit {
     });
   }
 
-  getResults() {
+  getKabaddiResults() {
 
     this.paramsResults.loading = true;
     this.sportsService
@@ -108,11 +184,11 @@ export class FixturesCardComponent implements OnInit {
   loadmore(type) {
     if (type == 'fixture') {
       this.paramsFixtures.reqParams.page += 1;
-      this.getFixtures();
+      this.getKabaddiFixtures();
     }
     else if (type == 'result') {
       this.paramsResults.reqParams.page += 1;
-      this.getResults();
+      this.getKabaddiResults();
     }
   }
   // Soccer Fixtures Date Slider
