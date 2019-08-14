@@ -290,7 +290,8 @@
 "Soccer_Module":{
   "Tournaments":"Tournaments",
   "Search_tournaments":"Search tournaments",
-  "No_tournaments_data_available":"No tournaments data available!"
+  "No_tournaments_data_available":"No tournaments data available!",
+  "Clubs":"Clubs"
 }
 
 

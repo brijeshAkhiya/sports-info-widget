@@ -128,7 +128,7 @@ export class CommonService {
     }
     else if(sport == 'soccer'){
       if (type == 'tournament') {
-        return 'sr:competition:' + id
+        return 'sr:season:' + id
       }
     }
   }

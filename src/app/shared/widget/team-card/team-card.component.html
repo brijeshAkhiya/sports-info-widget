@@ -21,14 +21,26 @@
 
         <!-- Kabaddi Teams-->
         <ng-container *ngIf="sport=='kabaddi'">
-          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.tid | logosurl:'kabaddi'"
-              [defaultImage]="cricketService.flagplaceholder" alt="team?.tname">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
+              [lazyLoad]="team?.tid | logosurl:'kabaddi'" [defaultImage]="cricketService.flagplaceholder"
+              alt="team?.tname">
           </div>
           <div class="team-name">
             <h4>{{team.tname}}</h4>
             <!-- <h5>{{team.city}}</h5> -->
           </div>
           <a class="fullblock-link" [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="sport=='soccer'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
+              [defaultImage]="cricketService.flagplaceholder" alt="team?.name">
+          </div>
+          <div class="team-name">
+            <h4>{{team.name}}</h4>
+          </div>
+          <a class="fullblock-link" [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
           </a>
         </ng-container>
 
