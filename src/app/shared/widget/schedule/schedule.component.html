@@ -87,7 +87,7 @@
 </ng-template>
 
 <ng-template #kabaddi let-match="match" let-type="type">
-  <div class="schedule-item kabaddi-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
+  <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.match_result}">
     <div class="match-desc">
       <h6>
@@ -227,9 +227,8 @@
         <p>{{item.data.season.name}}</p>
       </div>
       <div class="schedule-tour-list">
-        <div class="schedule-item soccer-item d-flex align-items-center fullblock-link-container"
-          *ngFor="let match of item.data.matches"
-          [ngClass]="{'complete-match' : match?.sport_event_status.status=='closed'}">
+        <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"
+          *ngFor="let match of item.data.matches" [ngClass]="{'complete-match' : match?.sport_event_status.status=='closed'}">
 
           <div class="match-teams d-flex align-items-center">
             <div class="match-team d-flex align-items-center">
