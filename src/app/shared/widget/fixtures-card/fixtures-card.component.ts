@@ -24,6 +24,7 @@ export class FixturesCardComponent implements OnInit {
   paramSoccer:any
   customDate;
   model: any;
+  tournamentid:any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -63,7 +64,9 @@ export class FixturesCardComponent implements OnInit {
       this.paramSoccer = { loading: false, loadmore: false, data: []}      
       if(typeof this.activatedroute.parent.snapshot.params.id != 'undefined'){
         this.paramsFixtures.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
+        this.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
         this.getSoccerTournamentData(this.paramsFixtures.tournamentid);
+        // this.getscoccerpointtable(this.paramsFixtures.tournamentid);
       }else{
         this.paramSoccer = { loading: false, loadmore: false, data: [], fullData: [], 
           selectedDate: { year: moment().format('YYYY'), month : moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM')},
@@ -72,7 +75,8 @@ export class FixturesCardComponent implements OnInit {
         }
         this.loadDate(this.paramSoccer.selectedDate);
         this.getSoccerData();
-
+        console.log(this.paramsFixtures.tournamentid)
+        // this.getscoccerpointtable(this.paramsFixtures.tournamentid);
       }
     }
   }
@@ -152,7 +156,7 @@ export class FixturesCardComponent implements OnInit {
         if(res.data.summaries && res.data.summaries.length > 0){
           this.paramsFixtures.data = this.paramsFixtures.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'), 'Do MMMM YYYY', 'start_time', 'asc'));
           this.paramsResults.data = this.paramsResults.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'), 'Do MMMM YYYY', 'start_time', 'desc'));
-          console.log(this.paramsFixtures.data);
+          // console.log(this.paramsFixtures.data);
           
         }
       }, (error) => {
@@ -178,6 +182,16 @@ export class FixturesCardComponent implements OnInit {
     })
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
+
+  // getscoccerpointtable(tid){
+  //   console.log('in')
+  //   this.sportsService.getsoccerpointtable(tid).
+  //           subscribe((res:any)=>{
+  //             console.log(res.data)
+  //           },err=>{
+  //             console.log(err)
+  //           });
+  // }
 
   loadKabaddi(type) {
     if (type == 'fixture') {
