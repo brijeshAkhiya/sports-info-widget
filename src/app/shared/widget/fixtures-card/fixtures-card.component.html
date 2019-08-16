@@ -6,7 +6,7 @@
           <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
         </div>
         <!--soccer sport-->
-        <ng-container  *ngIf="sport == 'soccer' && !paramSoccer.tournamentid; else anothersport">
+        <ng-container  *ngIf="sport == 'soccer' && !paramsFixtures.tournamentid; else anothersport">
           <div class="soccer-fixture-filter d-flex align-items-center justify-content-between">
             <div class="fixture-slider-block d-flex align-items-center">
               <div class="soccer-fixture-slider text-center">

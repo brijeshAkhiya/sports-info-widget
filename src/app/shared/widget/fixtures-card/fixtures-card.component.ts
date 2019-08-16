@@ -62,7 +62,7 @@ export class FixturesCardComponent implements OnInit {
     else if (this.sport == 'soccer') {
       this.paramSoccer = { loading: false, loadmore: false, data: []}      
       if(typeof this.activatedroute.parent.snapshot.params.id != 'undefined'){
-        this.paramsFixtures.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
+        this.paramsFixtures.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
         this.getSoccerTournamentData(this.paramsFixtures.tournamentid);
       }else{
         this.paramSoccer = { loading: false, loadmore: false, data: [], fullData: [], 

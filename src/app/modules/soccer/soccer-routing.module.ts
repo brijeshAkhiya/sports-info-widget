@@ -10,6 +10,7 @@ import { TournamentHomeComponent } from './tournament/tournament-home/tournament
 import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TeamsComponent } from '@app/shared/teams/teams.component';
 import { TeamComponent } from '@app/shared/teams/team/team.component';
+import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
 
 
 const routes: Routes = [{
@@ -56,6 +57,10 @@ const routes: Routes = [{
             path: 'team/:teamid/:slug',
             component: TeamComponent,
             data: { 'sport': 'soccer' }
+        },
+        {
+            path: 'match/:id/:slug',
+            component: TournamentMatchComponent
         },
     ]
 }];
