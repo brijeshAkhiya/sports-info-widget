@@ -16,10 +16,18 @@
             <ng-container *ngTemplateOutlet="kabaddi;context:{item:item}">
             </ng-container>
           </ng-container>
+
           <ng-template #elseCricket>
+            <ng-container *ngIf="data.sport == 'cricket';else elseSoccer">
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
-            </ng-container>
+              </ng-container> 
+              </ng-container>
           </ng-template>
+
+          <ng-template #elseSoccer>
+              <ng-container *ngTemplateOutlet="soccer;context:{item:item}">
+              </ng-container>
+            </ng-template>
         </tr>
       </tbody>
     </table>
@@ -36,7 +44,7 @@
         <a
           [routerLink]="['/cricket/team', (options.tournament | splitID) ,(item.team.id | splitID),(item.team.name | slugify)]">
           {{item.team.abbreviation ? item.team.abbreviation : item.team.name}}</a>
-      </td>
+        </td>
     </ng-template>
   </ng-container>
 </ng-template>
@@ -54,3 +62,18 @@
     </ng-template>
   </ng-container>
 </ng-template>
+
+<ng-template #soccer let-item="item">
+    <ng-container *ngFor="let value of data.values">
+      <td *ngIf="value != 'image'; else data">
+        {{data.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[data.subParams][value] ) : item[value]}}
+      </td>
+      <ng-template #data>
+        <td>
+          <a
+            [routerLink]="['/soccer/team', (options.tournament | splitID) ,(item.competitor.id | splitID),(item.competitor.name | slugify)]">
+           {{item.competitor.abbreviation ? item.competitor.abbreviation : item.competitor.name}}</a>
+        </td>
+      </ng-template>
+    </ng-container>
+  </ng-template>

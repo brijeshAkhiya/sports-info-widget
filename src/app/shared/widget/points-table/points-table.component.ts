@@ -23,7 +23,9 @@ export class PointsTableComponent implements OnInit {
     private translateService:TranslateService
     ) { }
 
-  ngOnInit() {    
+  ngOnInit() {  
+    console.log(this.sport)  
+    console.log(this.options)
     if(this.sport == 'cricket'){
       this.loadCricketPoints();
       this.data = {
@@ -33,7 +35,7 @@ export class PointsTableComponent implements OnInit {
         class : ['tour-stats-table'],
         class_light_row : ['light-row'],
         sport : 'cricket',
-        tournamentId : this.options.tournament
+        tournamentId : this.options.tournament  
       }            
     }
     else if(this.sport == 'kabaddi'){
@@ -47,6 +49,20 @@ export class PointsTableComponent implements OnInit {
         sport : 'kabaddi'
       }
     }
+    else if(this.sport == 'soccer')
+    {
+        this.loadsoccerpointtable();
+        this.data = {
+          header_title : this.translateService.get('Shared_Module2.Points_Table')['value'],
+          titles : [this.translateService.get('Shared_Module2.TEAM')['value'], 'P', 'W', 'L', 'D', 'GD', 'Pts'],
+          values : ['image','played', 'win', 'loss', 'draw', 'goals_diff', 'points'],
+          class : ['tour-stats-table'],
+          class_light_row : ['light-row'],
+          sport : 'soccer',
+          tournamentId : this.options.tournament  
+
+        }
+    } 
   }
 
   loadCricketPoints(){
@@ -54,6 +70,7 @@ export class PointsTableComponent implements OnInit {
       if (res.data) {
         res.data.map((data) => {
           this.pointstable = data.team_standings
+          console.log(this.pointstable)
         })
       }
     })
@@ -63,7 +80,17 @@ export class PointsTableComponent implements OnInit {
     this.sportsService.getCompetitionInfo().subscribe((res:any) => {
       if (res.data) {
           this.pointstable = res.data.standings[0].tables;
+          console.log(this.pointstable)
       }
     })
+  }
+
+  loadsoccerpointtable(){
+    this.sportsService.getsoccerpointtable(this.options.tournament).subscribe((res:any)=>{
+      if(res.data){
+        this.pointstable = res.data.standings[0].groups[0].standings;
+        console.log(this.pointstable)
+      }
+    },err=>{ console.log(err)});
   }
 }

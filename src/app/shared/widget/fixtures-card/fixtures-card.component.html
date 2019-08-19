@@ -6,7 +6,7 @@
           <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
         </div>
         <!--soccer sport-->
-        <ng-container  *ngIf="sport == 'soccer' && !paramSoccer.tournamentid; else anothersport">
+        <ng-container  *ngIf="sport == 'soccer' && !paramsFixtures.tournamentid; else anothersport">
           <div class="soccer-fixture-filter d-flex align-items-center justify-content-between">
             <div class="fixture-slider-block d-flex align-items-center">
               <div class="soccer-fixture-slider text-center">
@@ -86,8 +86,15 @@
             </ngb-tab>
           </ngb-tabset>
         </ng-template>
+    </div>
 
-      </div>
+    <!-- soccer points table -->
+      <div class="sidebar-col">
+          <div class="sticky-sidebar">
+             <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+          </div>
+        </div>
+
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
