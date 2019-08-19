@@ -89,7 +89,7 @@ export class PointsTableComponent implements OnInit {
     this.sportsService.getsoccerpointtable(this.options.tournament).subscribe((res:any)=>{
       if(res.data){
         this.pointstable = res.data.standings[0].groups[0].standings;
-        console.log(this.pointstable)
+        console.log('point table',this.pointstable)
       }
     },err=>{ console.log(err)});
   }
