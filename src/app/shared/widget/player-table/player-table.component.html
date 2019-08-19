@@ -11,10 +11,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of data;let i = index;">
-          <ng-container *ngIf="options.sport == 'kabaddi'; else elseCricket">
+        
+          <ng-container *ngIf="options.sport == 'kabaddi';else elseCricket">
             <ng-container *ngTemplateOutlet="kabaddi;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
+          <ng-template *ngIf="options.sport == 'soccer'">
+            <ng-container *ngTemplateOutlet="soccer;context:{item:item}">
+            </ng-container>
+          </ng-template>
           <ng-template #elseCricket>
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
@@ -59,6 +64,25 @@
   </ng-container>
 </ng-template>
 
+<ng-template #soccer let-item="item">
+  <ng-container *ngFor="let value of options.values">
+    {{item[value]}}
+    <!-- <td *ngIf="value != 'image'; else data">
+      {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[options.subParams][value] ) : item[value]}}
+    </td>
+    <ng-template #data>
+      <td>
+        <a
+          [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)] ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
+            [defaultImage]="cricketService.flagplaceholder" alt="logo">
+          {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
+        </a>
+      </td>
+    </ng-template> -->
+  </ng-container>
+</ng-template>
+
 <ng-template #kabaddi let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="(value != 'tname' && value != 'name'); else link">
@@ -76,3 +100,4 @@
     </ng-template>
   </ng-container>
 </ng-template>
+

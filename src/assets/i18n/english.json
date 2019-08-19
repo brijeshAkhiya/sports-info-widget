@@ -291,7 +291,11 @@
   "Tournaments":"Tournaments",
   "Search_tournaments":"Search tournaments",
   "No_tournaments_data_available":"No tournaments data available!",
-  "Clubs":"Clubs"
+  "Clubs":"Clubs",
+  "Goals":"Goals",
+  "Assists":"Assists",
+  "Cards":"Cards",
+  "Own_Goals":"Own Goals"
 }
 
 
