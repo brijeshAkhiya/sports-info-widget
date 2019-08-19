@@ -12,6 +12,7 @@ import { TeamsComponent } from '@app/shared/teams/teams.component';
 import { TeamComponent } from '@app/shared/teams/team/team.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
+import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
 
 
 const routes: Routes = [{
@@ -66,6 +67,10 @@ const routes: Routes = [{
             path: 'team/:teamid/:slug',
             component: TeamComponent,
             data: { 'sport': 'soccer' }
+        },
+        {
+            path: 'match/:id/:slug',
+            component: TournamentMatchComponent
         },
     ]
 }];

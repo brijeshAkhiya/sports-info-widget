@@ -282,7 +282,8 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .common-table.striped-table .table tr   { border: none; }
 .common-table .table thead .light-row                   { background: #EBEBEB;}
 .common-table.striped-table .table tr:nth-child(even)   { background: #F4F4F5; }
-
+app-player-table .common-table              { margin-bottom: 24px; }
+app-player-table:last-child .common-table   { margin-bottom: 0px; }
 /* -------- Form Elements Style ------- */
 form .form-group                    { margin-bottom: 24px;  }
 form .form-control                  { padding: 12px 16px; font-size: 20px; line-height: 24px; color: #292929; border: 2px solid #EBEBEB; font-weight: 400; border-radius: 4px; outline: none !important; }

@@ -13,13 +13,20 @@ export class ScheduleComponent implements OnInit {
   @Input() type;
   @Input() sport;
   @Input() tournament;
-
+  listtype = 'simple';
   constructor(
     public commonService: CommonService,
     public cricketService: CricketService
   ) { }
 
   ngOnInit() {
+    if(this.sport == 'soccer'){
+      if(!(typeof this.tournament != 'undefined' && this.tournament != ''))
+        this.listtype = 'datelist'
+    }
+  }
+  replace(str){
+    return str.replace(/_/g, " ")
   }
 
 }
