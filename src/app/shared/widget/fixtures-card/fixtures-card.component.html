@@ -86,8 +86,15 @@
             </ngb-tab>
           </ngb-tabset>
         </ng-template>
+    </div>
 
-      </div>
+    <!-- soccer points table -->
+      <div class="sidebar-col">
+          <div class="sticky-sidebar">
+             <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+          </div>
+        </div>
+
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>

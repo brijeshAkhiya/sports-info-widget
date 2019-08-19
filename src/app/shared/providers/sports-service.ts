@@ -554,5 +554,12 @@ export class SportsService {
     );
   }
 
+  getsoccerpointtable(id)
+  {
+    return this.http.get(
+      environment.apiUrl + environment.version+ `/soccer/seasons/${id}/standings`
+    );
+  }
+
 
 }
