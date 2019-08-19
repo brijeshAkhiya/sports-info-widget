@@ -16,6 +16,7 @@
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.batting?.highest_score" [data]="stats?.batting?.highest_score"
                       [options]=" {
+                        sport:'cricket',
                           titles : ['POS',('Cricket_Module2.player' | translate), ('Cricket_Module2.High_Score' | translate)],
                           values : ['rank', 'image', 'total'],
                           class : ['tour-stats-table'],
@@ -28,6 +29,7 @@
                   <ng-template ngbTabTitle>{{'Cricket_Module.Runs' | translate}}</ng-template>
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.batting?.top_runs" [data]="stats?.batting?.top_runs" [options]="{
+                          sport:'cricket',
                           titles : ['POS', ('Cricket_Module2.player' | translate), ('Cricket_Module.Runs' | translate)],
                           values : ['rank', 'image', 'total'],
                           class : ['tour-stats-table'],
@@ -41,6 +43,7 @@
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.batting?.top_average" [data]="stats?.batting?.top_average"
                       [options]=" {
+                          sport:'cricket',
                           titles : ['POS', ('Cricket_Module2.player' | translate),('Cricket_Module.Average' | translate)],
                           values : ['rank', 'image', 'average'],
                           class : ['tour-stats-table'],
@@ -63,6 +66,7 @@
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_wickets" [data]="stats?.bowling?.top_wickets"
                       [options]=" {
+                          'sport':'cricket',
                           titles : ['POS', ('Cricket_Module2.player' | translate),('Cricket_Module.Wickets' | translate)],
                           values : ['rank', 'image', 'total'],
                           class : ['tour-stats-table'],
@@ -77,6 +81,7 @@
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_bowling_average"
                       [data]="stats?.bowling?.top_bowling_average" [options]=" {
+                          sport:'cricket',
                           titles : ['POS', ('Cricket_Module2.player' | translate), ('Cricket_Module.Average' | translate)],
                           values : ['rank', 'image', 'average'],
                           class : ['tour-stats-table'],
@@ -90,6 +95,7 @@
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.bowling?.top_economy" [data]="stats?.bowling?.top_economy"
                       [options]="{
+                        sport:'cricket',
                           titles : ['POS', ('Cricket_Module2.player' | translate),('Cricket_Module2.Economy_Rate' | translate)],
                           values : ['rank', 'image', 'rate'],
                           class : ['tour-stats-table'],
@@ -110,6 +116,7 @@
                   <ng-template ngbTabContent>
                     <app-player-table *ngIf="stats?.fielding?.top_catches" [data]="stats?.fielding?.top_catches"
                       [options]=" {
+                        sport:'cricket',
                           titles : ['POS', ('Cricket_Module2.player' | translate), ('Cricket_Module2.Catches' | translate)],
                           values : ['rank', 'image', 'total'],
                           class : ['tour-stats-table'],

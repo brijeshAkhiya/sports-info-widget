@@ -10,7 +10,7 @@ import { KabaddiService } from '@app/modules/kabaddi/kabaddi.service';
   styleUrls: ['./player-table.component.css']
 })
 export class PlayerTableComponent implements OnInit {
-  
+
   @Input() data: any[];
   @Input() options;
   private toggleSort: boolean = false;
@@ -21,40 +21,36 @@ export class PlayerTableComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private cricketService: CricketService,
-    private kabaddiService: KabaddiService)
-  {}
+    private kabaddiService: KabaddiService) { }
 
   ngOnInit() {
-    console.log(this.options);
+    console.log(this.data);
+
   }
-  
-  getname(event)
-  {
+
+  getname(event) {
     this.value = event.target.attributes.title.nodeValue;
     console.log(event.target.attributes.title);
     console.log(this.options.titles);
-    
+
     // this.options.titles.forEach(element => {
     //   if(element == this.value)
     //   {
-        this.index = this.options.titles.findIndex(element=> element == this.value)
-        this.object = this.options.values[this.index];
-        this.sortArray();
-        this.toggleSort = !this.toggleSort;
+    this.index = this.options.titles.findIndex(element => element == this.value)
+    this.object = this.options.values[this.index];
+    this.sortArray();
+    this.toggleSort = !this.toggleSort;
     //   }
     // }); 
   }
-  
-  sortArray () 
-  {
-    if(this.toggleSort)
-    {
-       this.data.sort((a, b) => b[this.object] - a[this.object] )
+
+  sortArray() {
+    if (this.toggleSort) {
+      this.data.sort((a, b) => b[this.object] - a[this.object])
     }
-    else
-    {
-      this.data.sort((a, b) => a[this.object] - b[this.object] )
+    else {
+      this.data.sort((a, b) => a[this.object] - b[this.object])
     }
   }
-  
+
 }

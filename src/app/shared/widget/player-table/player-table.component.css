@@ -8,10 +8,10 @@
 .tour-stats-table .table tr td:nth-child(2) img { margin: -12px 8px -9px 0px; height: 32px; width: auto; border-radius: 2px; }
 .tour-stand-table .table tr td:nth-child(2),
 .tour-stats-table .table tr td:nth-child(2)     { padding-right: 48px; }
-/* .tour-stand-table .table tr td:first-child:before   { content: ""; display: block; position: absolute; width: 8px; height: 100%; top: 0; left: 0; background: #FA6400; }
-.tour-stand-table .table tr td.champions-league     { background: #FA6400; }
-.tour-stand-table .table tr td.europa-league        { background: #0091FF; }
-.tour-stand-table .table tr td.relegation           { background: #FF0000; } */
+.tour-stand-table .table tr td:first-child:before   { content: ""; display: block; position: absolute; width: 8px; height: 100%; top: 0; left: 0;}
+.tour-stand-table .table tr td.champions-league:before     { background: #FA6400; }
+.tour-stand-table .table tr td.europa-league:before        { background: #0091FF; }
+.tour-stand-table .table tr td.relegation:before           { background: #FF0000; }
 /* -------- Tournament Stats Table ------- */
 .tour-stats-table .table tr th:first-child,
 .tour-stats-table .table tr td:first-child      { width: 60px;  }
