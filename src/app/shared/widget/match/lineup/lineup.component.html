@@ -79,7 +79,7 @@
           <h5 class="text-capitalize">{{squad}}</h5>
           <ul class="lienup-list">
             <li *ngFor="let player of team[1]?.players[squad]">
-              <span>{{player?.shirtnumber}}</span>
+              <span class="filled" >{{player?.shirtnumber}}</span>
               <p class="text-capitalize">
                 <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
                   {{player.name}}
@@ -145,7 +145,7 @@
                   {{player.name}}
                 </a>
               </p>
-              <span>{{player?.shirtnumber}}</span>
+              <span class="filled" [ngStyle]="{'background':'#FEB80B', 'border-color': '#FEB80B', 'color': '#242020' }">{{player?.shirtnumber}}</span>
             </li>
           </ul>
         </ng-container>
@@ -167,7 +167,8 @@
           <h5 class="text-capitalize">{{squad}}</h5>
           <ul class="lienup-list">
             <li *ngFor="let player of team[1]?.players[squad]">
-              <span>{{player?.shirtnumber}}</span>
+              <span class="filled" [ngStyle]="{'background':'#FEB80B', 'border-color': '#FEB80B', 'color': '#242020' }">{{player?.shirtnumber}}</span>
+
               <p class="text-capitalize">
                 <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
                   {{player.name}}

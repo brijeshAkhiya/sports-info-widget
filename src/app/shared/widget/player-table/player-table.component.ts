@@ -24,7 +24,9 @@ export class PlayerTableComponent implements OnInit {
     private kabaddiService: KabaddiService)
   {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.options);
+  }
   
   getname(event)
   {

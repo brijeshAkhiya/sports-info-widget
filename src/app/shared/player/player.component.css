@@ -14,11 +14,6 @@ h4                                      { margin-bottom: 19px;}
 /* -------- Player Stats Section ------- */
 app-player-table .player-state            { margin-bottom: 24px; }
 app-player-table:last-child .player-state { margin-bottom: 0px; }
-.player-state .game-card                  { margin: -2px 0px -6px; }
-.game-card                                { width: 16px; height: 24px; display: inline-block; border: 1px solid; border-radius: 2px; }
-.game-card.red                            { background: #FA4040; border-color: #E00606; }
-.game-card.yellow                         { background: #FAD340; border-color: #FAC640; }
-.game-card.green                          { background: #6EC611; border-color: #68B00C; }
 
 /***** Responsive CSS Start ******/
 
