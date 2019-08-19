@@ -71,6 +71,7 @@ import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-
 import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.component';
 import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { LineupComponent } from './widget/match/lineup/lineup.component';
 
 @NgModule({
     imports: [
@@ -136,6 +137,7 @@ import { TranslateModule } from '@ngx-translate/core';
         TopScorerWidgetComponent,
         PageNotFoundComponent,
         FixturesCardComponent,
+        LineupComponent,
     ],
     providers: [
         /** All Pipes */
@@ -208,6 +210,7 @@ import { TranslateModule } from '@ngx-translate/core';
         UppersliderComponent,
         PageNotFoundComponent,
         FixturesCardComponent,
+        LineupComponent
    
     ],
     entryComponents:[LoginModalComponent ],

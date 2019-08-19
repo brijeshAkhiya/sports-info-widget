@@ -1,0 +1,84 @@
+<div class="match-lienup common-shadow rounded-box" [ngClass]="{'soccer-lineup' : sport=='soccer', 'kabaddi-lineup': sport=='kabaddi'}">
+  <!-- Start Ground -->
+  <div class="ground-map-block" *ngIf="lineup.length != 0">
+    <div class="ground-map" *ngIf="team.length != 0">
+      <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
+      <ul class="ground-player-list">
+        <li *ngFor="let player of team[0].squad">
+          <div class="number">{{player?.shirtnumber}}</div>
+          <p>
+            <a [routerLink]="['/kabaddi/player', team[0]?.tid, player?.pid, (player?.name | slugify )]">
+              {{player.name}}
+            </a></p>
+        </li>
+      </ul>
+      <ul class="ground-player-list list-2">
+        <li *ngFor="let player of team[1].squad">
+          <div class="number">{{player?.shirtnumber}}</div>
+          <p><a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
+              {{player.name}}
+            </a></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- End Ground -->
+
+  <div class="lienup-row d-flex align-items-start justify-content-between">
+
+    <!-- Start Team 1 Squads-->
+    <div>
+      <div class="heading">
+        <p class="d-flex align-items-center justify-content-end">
+          <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
+          <img alt="{{team[0].tname}}" [lazyLoad]="team[0].logo" [defaultImage]="cricketService.teamPlaceholder"
+            [offset]="commonService.lazyloadoffset">
+        </p>
+      </div>
+      <!-- <ng-container *ngIf="team[0]?.players?.length > 0"> -->
+      <ng-container *ngFor="let squad of objectKeys(team[0]?.players).sort()">
+        <h5 class="text-capitalize">{{squad}}</h5>
+        <ul class="lienup-list">
+          <li *ngFor="let player of team[0]?.players[squad]">
+            <p class="text-capitalize">
+              <a [routerLink]="['/kabaddi/player', team[0]?.tid, player?.pid, (player?.name | slugify )]">
+                {{player.name}}
+              </a>
+            </p>
+            <span>{{player?.shirtnumber}}</span>
+          </li>
+        </ul>
+      </ng-container>
+      <!-- </ng-container> -->
+    </div>
+    <!-- End Team 1 Squads-->
+
+    <!-- Start Team 2 Squads-->
+    <div>
+      <div class="heading">
+        <p class="d-flex align-items-center">
+          <img alt="{{team[1].tname}}" [lazyLoad]="team[1].logo" [defaultImage]="cricketService.teamPlaceholder"
+            [offset]="commonService.lazyloadoffset">
+          <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
+        </p>
+      </div>
+      <!-- <ng-container *ngIf="team[1]?.players?.length > 0"> -->
+      <ng-container *ngFor="let squad of objectKeys(team[1]?.players).sort()">
+        <h5 class="text-capitalize">{{squad}}</h5>
+        <ul class="lienup-list">
+          <li *ngFor="let player of team[1]?.players[squad]">
+            <span>{{player?.shirtnumber}}</span>
+            <p class="text-capitalize">
+              <a [routerLink]="['/kabaddi/player', team[1]?.tid, player?.pid, (player?.name | slugify )]">
+                {{player.name}}
+              </a>
+            </p>
+          </li>
+        </ul>
+      </ng-container>
+      <!-- </ng-container> -->
+    </div>
+    <!-- End Team 2 Squads-->
+
+  </div>
+</div>
