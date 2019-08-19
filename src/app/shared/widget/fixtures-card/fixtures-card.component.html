@@ -42,20 +42,6 @@
           <app-schedule *ngIf="paramSoccer.data.length > 0" [data]="paramSoccer.data" [sport]="sport"></app-schedule>
         </ng-container>
 
-
-        <div class="sidebar-col">
-            <div class="sticky-sidebar">
-              <!-- <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget> -->
-              <!--points table widget-->
-              <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
-              <!-- <app-points-table *ngIf="tid" [sport]="'soccer'" 
-              [options]="{ tournament : tid }" ></app-points-table> -->
-              <!-- <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
-            </div>
-          </div>
-    
-        
-
         <!--Kabaddi sport-->
         <ng-template #anothersport>
           <ngb-tabset class="common-tabs">
@@ -100,8 +86,15 @@
             </ngb-tab>
           </ngb-tabset>
         </ng-template>
+    </div>
 
-      </div>
+    <!-- soccer points table -->
+      <div class="sidebar-col">
+          <div class="sticky-sidebar">
+             <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+          </div>
+        </div>
+
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>

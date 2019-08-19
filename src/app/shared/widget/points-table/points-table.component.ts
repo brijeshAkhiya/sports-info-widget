@@ -55,7 +55,7 @@ export class PointsTableComponent implements OnInit {
         this.data = {
           header_title : this.translateService.get('Shared_Module2.Points_Table')['value'],
           titles : [this.translateService.get('Shared_Module2.TEAM')['value'], 'P', 'W', 'L', 'D', 'GD', 'Pts'],
-          values : ['played', 'win', 'loss', 'draw', 'goals_diff', 'points'],
+          values : ['image','played', 'win', 'loss', 'draw', 'goals_diff', 'points'],
           class : ['tour-stats-table'],
           class_light_row : ['light-row'],
           sport : 'soccer',
@@ -80,6 +80,7 @@ export class PointsTableComponent implements OnInit {
     this.sportsService.getCompetitionInfo().subscribe((res:any) => {
       if (res.data) {
           this.pointstable = res.data.standings[0].tables;
+          console.log(this.pointstable)
       }
     })
   }
@@ -88,7 +89,7 @@ export class PointsTableComponent implements OnInit {
     this.sportsService.getsoccerpointtable(this.options.tournament).subscribe((res:any)=>{
       if(res.data){
         this.pointstable = res.data.standings[0].groups[0].standings;
-        console.log(res.data.standings[0].groups[0].standings)
+        console.log(this.pointstable)
       }
     },err=>{ console.log(err)});
   }
