@@ -26,8 +26,8 @@
               <li><a [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">Home</a></li>
               <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a></li>
               <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">Clubs</a></li>
-              <li><a [routerLink]="['/']">Stats</a></li>
-              <li><a [routerLink]="['/']">Table</a></li>
+              <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">Stats</a></li>
+              <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">Table</a></li>
             </ul>
           </div>
         </div>
