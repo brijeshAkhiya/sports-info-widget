@@ -146,10 +146,10 @@ export class MatchComponent implements OnInit {
 
   getVenuedetails() {
     if (this.matchInfo.match_info.venue.location = " ") {
+      this.venuedetails.name = this.matchInfo.match_info.venue.name
       this.sportsService.getReverseGeo(this.matchInfo.match_info.venue.name).subscribe((res: any) => {
         this.venuedetails.lat = res.results[0].geometry.location.lat;
         this.venuedetails.lng = res.results[0].geometry.location.lng;
-        this.venuedetails.name = this.matchInfo.match_info.venue.name
       })
     }
     else {

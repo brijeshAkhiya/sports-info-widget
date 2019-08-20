@@ -43,7 +43,7 @@
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
             <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
-            <img alt="{{team[0].tname}}" [lazyLoad]="team[0].logo" [defaultImage]="cricketService.teamPlaceholder"
+            <img alt="{{team[0].tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'" [defaultImage]="cricketService.teamPlaceholder"
               [offset]="commonService.lazyloadoffset">
           </p>
         </div>
@@ -69,7 +69,7 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center">
-            <img alt="{{team[1].tname}}" [lazyLoad]="team[1].logo" [defaultImage]="cricketService.teamPlaceholder"
+            <img alt="{{team[1].tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'" [defaultImage]="cricketService.teamPlaceholder"
               [offset]="commonService.lazyloadoffset">
             <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
           </p>

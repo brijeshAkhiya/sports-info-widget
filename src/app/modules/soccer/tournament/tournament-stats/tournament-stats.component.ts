@@ -13,6 +13,7 @@ export class TournamentStatsComponent implements OnInit {
   tournamentid: string;
   stats: any = [];
   players: any[];
+  isloading;
 
   constructor(
     private commonService: CommonService,
