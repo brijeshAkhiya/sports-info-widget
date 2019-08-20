@@ -2,7 +2,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
@@ -59,6 +59,8 @@ import { BlogViewComponent } from './pages/blogs/blog-view/blog-view.component';
 import { WriterComponent } from './pages/writer/writer.component';
 import { LoginModalComponent } from './shared/widget/login-modal/login-modal.component';
 import { EffectsModule } from '@ngrx/effects';
+
+import { AppInterceptor } from './shared/providers/app.interceptor';
 
 
 
@@ -149,6 +151,11 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
+      multi: true
+    },
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
