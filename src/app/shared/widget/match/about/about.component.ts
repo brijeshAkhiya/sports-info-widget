@@ -28,6 +28,8 @@ export class MatchAboutComponent implements OnInit {
 
     if(this.sport == 'cricket')
       this.initCricket();
+    // else if(this.sport == 'soccer')
+    //   this.initSoccer();
 
  }
 
@@ -44,6 +46,20 @@ export class MatchAboutComponent implements OnInit {
       obj[sComp.qualifier].period_score = temp[0]
     })  
   }
+ }
 
+ initSoccer(){
+    
+  if(this.data['sport_event_status']['status'] == 'closed'){
+    let compititors = this.data['sport_event']['competitors']
+    let scores = this.data['sport_event_status']['period_scores']
+    
+    let obj = {}  
+    compititors.map((sComp)=>{
+      obj[sComp.qualifier] = sComp
+      let temp = (sComp.qualifier == 'home') ?  this.data['sport_event_status']['period_scores'].filter((score)=> {return score.home_score} ) : this.data['sport_event_status']['period_scores'].filter((score)=> {return score.away_score} )
+      obj[sComp.qualifier].period_score = temp[0]
+    })  
+  }
  }
 }

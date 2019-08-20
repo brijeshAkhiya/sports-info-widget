@@ -21,6 +21,8 @@ export class CountdownComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.sport);
+    
     let starttime;
     if (this.sport == 'kabaddi') {
       this.scheduled = moment.utc((this.scheduled)).format()

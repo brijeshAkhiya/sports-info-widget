@@ -130,6 +130,9 @@ export class CommonService {
       if (type == 'tournament') {
         return 'sr:season:' + id
       }
+      else if (type == 'match') {
+        return 'sr:sport_event:' + id
+      }
     }
   }
 

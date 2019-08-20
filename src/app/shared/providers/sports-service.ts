@@ -561,5 +561,19 @@ export class SportsService {
     );
   }
 
+  // Get Match Summary
+  getSoccerMatchSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/match/${id}/summaries`
+    );
+  }
+
+  // Get Match Lineups
+  getSoccerMatchLineup(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/match/${id}/lineups`
+    );
+  }
+
 
 }

@@ -19,9 +19,11 @@
         </app-no-data-widget>
         <div class="row no-gutters soccer-tournaments-list common-round common-shadow"
           *ngIf="tournamentlist?.length > 0">
-          <div class="col-xl-6 col-lg-12 col-md-6 item"
+          <div class="col-xl-6 col-lg-12 col-md-6 item fullblock-link-container"
             *ngFor="let tournament of (tournamentlist | filter : searchText)">
-            <h6 class="one-line-text">{{tournament?.name}}</h6>
+            <h6 class="one-line-text">
+                <a [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">{{tournament?.name}}</a>
+            </h6>
             <ul class="no-margin light-text">
               <li><a [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">Home</a></li>
               <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a></li>
@@ -29,6 +31,9 @@
               <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">Stats</a></li>
               <li><a [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">Table</a></li>
             </ul>
+            <a class="fullblock-link"
+              [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">
+            </a>
           </div>
         </div>
       </div>

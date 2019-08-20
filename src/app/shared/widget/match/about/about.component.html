@@ -22,11 +22,11 @@
       <p class="light-text">
         <a
           [routerLink]="['/cricket/tournament', (data.sport_event.tournament.id | splitID), (data.sport_event.tournament.name | slugify) ]">
-          {{data.sport_event.season.name ? data.sport_event.season.name : data.sport_event.tournament.name }}
+          {{data.sport_event.season?.name ? data.sport_event.season?.name : data.sport_event.tournament.name }}
         </a>
         <span class="text-capitalize"
           *ngIf="data.sport_event.tournament_round &&  data.sport_event.tournament_round.name">
-          {{ (data.sport_event.season.name || data.sport_event.tournament.name) ? ' - '+ data.sport_event.tournament_round.name : data.sport_event.tournament_round.name  }}
+          {{ (data.sport_event.season?.name || data.sport_event.tournament.name) ? ' - '+ data.sport_event.tournament_round?.name : data.sport_event.tournament_round?.name  }}
         </span>
       </p>
       <h1 *ngIf="data.sport_event.competitors">
@@ -44,10 +44,11 @@
       <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
       <!-- TODO Delay class-->
       <p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">
-          {{ 'widgetModule.match_is' | translate }}
+        {{ 'widgetModule.match_is' | translate }}
         {{ data.sport_event_status.status }}</p>
       <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
-        <span>{{toss.toss_won_by_team}} {{ 'widgetModule.opt_to' | translate }} {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
+        <span>{{toss.toss_won_by_team}} {{ 'widgetModule.opt_to' | translate }}
+          {{toss.toss_decision ? toss.toss_decision : 'bat'}}</span>
       </p>
       <p *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 1 && toss.toss_won_by_team "
         class="live-match">{{ 'widgetModule.live' | translate }}
@@ -119,11 +120,13 @@
         *ngIf="data.sport_event_status.status == 'live' && data.sport_event_status.current_inning == 2">
         <ul class="sec-inngs-state-list">
           <li>
-            <p *ngIf="data.sport_event_status.run_rate_required"><span class="title">{{ 'widgetModule.required_rate' | translate }}</span>: <span
+            <p *ngIf="data.sport_event_status.run_rate_required"><span
+                class="title">{{ 'widgetModule.required_rate' | translate }}</span>: <span
                 class="value">{{data.sport_event_status.run_rate_required}}</span></p>
           </li>
           <li>
-            <p *ngIf="data.sport_event_status.run_rate"><span class="title">{{ 'widgetModule.current_rate' | translate }}</span>: <span
+            <p *ngIf="data.sport_event_status.run_rate"><span
+                class="title">{{ 'widgetModule.current_rate' | translate }}</span>: <span
                 class="value">{{data.sport_event_status.run_rate}}</span></p>
           </li>
           <!-- <li>
@@ -135,7 +138,6 @@
   </div>
 </ng-container>
 
-<!-- <ng-container> -->
 <ng-container *ngIf="sport == 'kabaddi' && data">
   <div
     class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
@@ -172,12 +174,10 @@
         </ng-container>
         {{data?.match_info?.datestart | amDateFormat:'Do MMMM YYYY'}}
       </p>
-      <p class="live-match" *ngIf="data?.match_info?.status == 3">{{ 'widgetModule.live' | translate }}</p>      
+      <p class="live-match" *ngIf="data?.match_info?.status == 3">{{ 'widgetModule.live' | translate }}</p>
     </div>
 
     <div class="current-match d-flex justify-content-between show-anim">
-      <!--If match not started-->
-
       <ng-container *ngTemplateOutlet="kabadditeam;context:{team:data.match_info.teams?.home}">
       </ng-container>
       <div class="live-score" *ngIf="data.match_info.gamestate != 0">
@@ -188,21 +188,96 @@
       </ng-container>
     </div>
   </div>
-  <ng-container>
-    <ng-template #kabadditeam let-team="team">
-      <div class="team-col">
-        <div class="current-team d-flex align-items-center">
-          <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
-            <img [lazyLoad]="team.logo" alt="team.tname" [defaultImage]="cricketService.playerplaceholder"
-              [offset]="commonService.lazyloadoffset">
-            <a [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
-              {{data.match_info.gamestate != 0 ? team.shortname : team.tname}}
-            </a>
-          </h4>
-        </div>
-        <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
-          <li><span>Nitin Tomar </span>15</li>
-          <li><span>Siddharth Desai </span>7</li>
-        </ul> -->
+</ng-container>
+
+<ng-template #kabadditeam let-team="team">
+  <div class="team-col">
+    <div class="current-team d-flex align-items-center">
+      <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
+        <img [lazyLoad]="team.logo" alt="team.tname" [defaultImage]="cricketService.playerplaceholder"
+          [offset]="commonService.lazyloadoffset">
+        <a [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
+          {{data.match_info.gamestate != 0 ? team.shortname : team.tname}}
+        </a>
+      </h4>
+    </div>
+    <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
+      <li><span>Nitin Tomar </span>15</li>
+      <li><span>Siddharth Desai </span>7</li>
+    </ul> -->
+  </div>
+</ng-template>
+
+
+<ng-container *ngIf="sport == 'soccer' && data">
+
+  <!-- Start Animation -->
+  <div
+    class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+    <div class="teams-animation d-flex justify-content-around align-items-center">
+      <div class="team-anim">
+        <img [lazyLoad]="competitor.home.id | logosurl:'soccer'" alt="{{competitor.home.name}}"
+          [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{competitor.home.name}}</h4>
       </div>
-    </ng-template>
+      <div class="team-anim vs-anim">
+        <h5>VS</h5>
+      </div>
+      <div class="team-anim">
+        <img [lazyLoad]="competitor.away.id | logosurl:'soccer'" alt="{{competitor.away.name}}"
+          [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{competitor.away.name}}</h4>
+      </div>
+    </div>
+    <!-- End Animation -->
+
+    <div class="tour-match-title show-anim">
+      <p class="light-text">
+        <a
+          [routerLink]="['/soccer/tournament',(data?.sport_event?.sport_event_context?.season?.id | splitID),(data?.sport_event?.sport_event_context?.season?.name | slugify)]">
+          {{data?.sport_event?.sport_event_context?.season?.name}}
+        </a>
+      </p>
+    </div>
+
+    <div class="match-update show-anim">
+      <p class="light-text">
+        <ng-container *ngIf="data.sport_event.venue">
+          <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
+        </ng-container>
+        {{data.sport_event.start_time | amDateFormat:'Do MMMM YYYY'}}
+      </p>
+      <p class="live-match" *ngIf="data.sport_event_status?.status == 'live' ">{{ 'widgetModule.live' | translate }}</p>
+    </div>
+
+    <div class="current-match d-flex justify-content-between show-anim">
+      <ng-container *ngTemplateOutlet="soccerteam;context:{team:competitor?.home}">
+      </ng-container>
+      <div class="live-score" *ngIf="data.sport_event_status.status != 'not_started'">
+        <h5>ft</h5>
+        <h3>{{data.sport_event_status?.home_score}} - {{data.sport_event_status?.away_score}}</h3>
+      </div>
+      <ng-container *ngTemplateOutlet="soccerteam;context:{team:competitor?.away}">
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-template #soccerteam let-team="team">
+  <div class="team-col">
+    <div class="current-team d-flex align-items-center">
+      <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.sport_event_status?.winner_id == team?.id}">
+        <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}"
+          [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <a [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+          {{data.sport_event_status.status == 'not_started' ? team.name : team.abbreviation}}
+        </a>
+      </h4>
+    </div>
+    <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
+        <li><span>Nitin Tomar </span>15</li>
+        <li><span>Siddharth Desai </span>7</li>
+      </ul> -->
+  </div>
+</ng-template>
