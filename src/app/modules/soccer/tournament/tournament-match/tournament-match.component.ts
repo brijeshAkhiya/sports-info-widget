@@ -83,7 +83,7 @@ export class TournamentMatchComponent implements OnInit {
         // this.getVenuedetails();
         // this.initTeam();
         // this.initCommentry();
-        if(this.matchLineups.lineups.length > 0)
+        if(Object.entries(this.matchLineups.lineups).length > 0)
           this.initSquads();
       }
       this.loading = false;
@@ -95,8 +95,6 @@ export class TournamentMatchComponent implements OnInit {
 
 
   initTeam() {
-    // this.team.push(Object.assign({ 'qualifier': 'home' }, this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'home')[0] ));
-    // this.team.push(Object.assign({ 'qualifier': 'away' }, this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'away')[0] ));
     this.team.home =  this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'home')[0];
     this.team.away = this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'away')[0];
     console.log(this.team);
@@ -105,42 +103,38 @@ export class TournamentMatchComponent implements OnInit {
 
   initSquads() {
 
-    
-    // this.team.filter((comp) => comp.qualifier == 'home')[0].jersey = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].jersey;
-    // this.team.filter((comp) => comp.qualifier == 'away')[0].jersey = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].jersey;
-    this.team.home.jersey = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].jersey;
-    this.team.away.jersey = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].jersey;
+    this.team.home = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0];
+    this.team.away = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0];
 
-    // this.team.forEach((team, index) => {
-    //   let tempArr;
-    //   if(!this.matchLineups.lineups || this.matchLineups.lineups.length == 0)
-    //     return false;
-    //   if (team.qualifier == 'home')
-    //     tempArr = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players
-    //   else
-    //     tempArr = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players
-        
-    //     this.team[index].players = [];
-        
-    //     this.team[index].squad = tempArr ? this.sorting(tempArr) : [];
-    //     tempArr.forEach(element => {
-    //       (this.team[index].players[element.type] = this.team[index].players[element.type] || []).push(element);
-    //     });
-    // });
-
-    let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players
-    this.team.home.squad = tempHomeSquad ? this.sorting(tempHomeSquad) : [];
-    this.team.home.players = [];
+    //Team with role
+    let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
+    this.team.home.squad = []
     tempHomeSquad.forEach(element => {
-      ( this.team.home.players[element.type] =  this.team.home.players[element.type] || []).push(element);
+      (this.team.home.squad[element.type] =  this.team.home.squad[element.type] || []).push(element);
     });
+    //Team with formated type
+    if(this.team.home.formation && this.team.home.formation.type){
+      let players = this.sortingByRole(this.team.home.players);
+      (this.team.home.formated_players =  this.team.home.formated_players || []).push(players.slice(0, 1));
+      this.team.home.formation.type.split('-').forEach((formationType, index) => {
+          this.team.home.formated_players.push(players.slice(0, formationType));
+      });
+    }
 
-    let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players
-    this.team.away.squad = tempAwaySquad ? this.sorting(tempAwaySquad) : [];
-    this.team.away.players = [];
+    //Team with role
+    let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
+    this.team.away.squad = []
     tempAwaySquad.forEach(element => {
-      ( this.team.away.players[element.type] =  this.team.away.players[element.type] || []).push(element);
+      (this.team.away.squad[element.type] =  this.team.away.squad[element.type] || []).push(element);
     });
+    //Team with formated type
+    if(this.team.away.formation && this.team.away.formation.type){
+      let players = this.sortingByRole(this.team.away.players);
+      (this.team.away.formated_players =  this.team.away.formated_players || []).push(players.slice(0, 1));
+      this.team.away.formation.type.split('-').forEach((formationType, index) => {
+          this.team.away.formated_players.push(players.slice(0, formationType));
+      });
+    }
 
     console.log(this.team);
 
@@ -156,5 +150,11 @@ export class TournamentMatchComponent implements OnInit {
       else 
         return 1;
     });
+  }
+
+  sortingByRole(arr) {
+    return arr.sort(function(a, b) { 
+      return a.order - b.order;
+    })
   }
 }
