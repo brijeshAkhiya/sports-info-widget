@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   mutedcolor: any
   metatagsObj = {};
   isupdate: boolean;
-  showCookiepopup:boolean = false
+  showCookiepopup: boolean = false
   constructor(
     private http: HttpClient,
     private swupdate: SwUpdate,
@@ -70,6 +70,8 @@ export class AppComponent implements OnInit, AfterContentInit {
 
     let selectedLang = 'english' //bengali //(window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info') ? window.location.host.split('.')[0] : 'english';
     console.log(selectedLang)
+    //save language to localstorage
+    localStorage.setItem('userLng', selectedLang)
     this.translate.setDefaultLang(selectedLang);
     //get data from ngrx store through meta tags actions
 

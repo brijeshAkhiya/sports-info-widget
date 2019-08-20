@@ -21,9 +21,13 @@ export class LineupComponent implements OnInit {
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
-    ) { }
+    ) { 
+    }
 
   ngOnInit() {
+    console.log(this.lineup);
+    console.log(this.team);
+    
   }
 
 }

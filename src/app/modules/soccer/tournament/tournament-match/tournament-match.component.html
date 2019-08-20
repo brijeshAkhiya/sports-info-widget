@@ -25,12 +25,12 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
-          <ngb-tab id="lineups" >
+          <ngb-tab id="lineups" *ngIf="(matchLineups?.lineups | json) != '{}'">
             <ng-template ngbTabTitle >
-              <div>{{ 'Kabaddi_Module.Lineups' | translate }}</div>
+              <div>{{ 'Kabaddi_Module.Lineups' | translate }} </div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-lineup [lineup]="matchLineups.lineups" [team]="team" [sport]="'soccer'"> </app-lineup>
+              <app-lineup [lineup]="matchLineups" [team]="team" [sport]="'soccer'"> </app-lineup>
             </ng-template>
           </ngb-tab>
           <!-- END - LINEUPS-->
