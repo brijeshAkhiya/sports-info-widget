@@ -3,6 +3,7 @@
 .ground-map                             { margin: 0px auto; width: 640px; position: relative; }
 .ground-map img                         { width: 100%; }
 .ground-map .ground-player-list li      { width: 60px; text-align: center; position: absolute; top: 50%; left: 20px; transform: translateY(-50%); -webkit-transform: translateY(-50%);}
+.kabaddi-map .ground-map .ground-player-list li { }
 .ground-map .number                     { margin: 0px auto; width: 40px; height: 40px; background: #fff; line-height: 40px; color: #ED1A33; font-weight: bold; border-radius: 50%; }
 .ground-map .list-2 .number             { margin-bottom: 2px; background: #292929; color: #fff; } 
 .ground-map li p                        { font-size: 12px; line-height: 14px; color: #fff; font-weight: 500; }
@@ -39,7 +40,9 @@
 .match-lienup .lienup-list li p                   { margin: 0px 8px; width: calc(100% - 44px); display: inline-block; vertical-align: middle; }
 .match-lienup .lienup-list li span                { display: inline-block; width: 26px; height: 26px; font-size: 12px; line-height: 22px; color: #292929; font-weight: 700; border: 2px solid #E0E0E0; text-align: center; border-radius: 50%; vertical-align: middle;}
 .match-lienup .lienup-list li span.filled         { background: #292929; color: #fff; border-color: #292929; }
-/* [ngStyle]="{'background':'#FEB80B', 'border-color': '#FEB80B', 'color': '#242020' } */
+
+/* -------- Soccer Match Lienup ------- */
+.soccer-map     { }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
