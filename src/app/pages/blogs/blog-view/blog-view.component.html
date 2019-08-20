@@ -62,7 +62,7 @@
                       {{item?.name | split}}
                     </a>
                     <a *ngIf="item.sport == 'Kabaddi'"
-                      [routerLink]="(item.type == 'Player') ? ['/kabaddi/player',(item.id), ((item?.name | split ) | slugify) ] :  ['/kabaddi']">
+                      [routerLink]="(item.type == 'Player') ? ['/kabaddi/player',(item.id), ((item?.name | split ) | slugify) ] : (item.type == 'Team') ? ['/kabaddi/team',(item.id),(item.name | slugify)] : (item.type == 'Tournament') ? ['/kabaddi'] :  (item.type == 'Match') ? ['/kabaddi/match',(item.id),(item.name | slugify)] : ['/kabaddi']">
                       {{item?.name | split}}
                     </a>
                   </li>
