@@ -2,8 +2,8 @@
   <div class="table-title" *ngIf="options.header_title">
     <h6>{{options.header_title}}</h6>
   </div>
-  <div class="table-responsive" id="dtBasicExample"> 
-    <table class="table"> 
+  <div class="table-responsive" id="dtBasicExample">
+    <table class="table">
       <thead>
         <tr [ngClass]="options.class_light_row">
           <th *ngFor="let title of options.titles" [innerHTML]="title" title="{{title}}" (click)="getname($event)"></th>
@@ -11,26 +11,25 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of data;let i = index;">
-        
-          <ng-container *ngIf="options.sport == 'kabaddi';else elseCricket">
+          <ng-container *ngIf="options.sport == 'kabaddi'">
             <ng-container *ngTemplateOutlet="kabaddi;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
-          <ng-template *ngIf="options.sport == 'soccer'">
+          <ng-container *ngIf="options.sport == 'soccer'">
             <ng-container *ngTemplateOutlet="soccer;context:{item:item}">
             </ng-container>
-          </ng-template>
-          <ng-template #elseCricket>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'cricket'">
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
-          </ng-template>
+          </ng-container>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<!-- <div class="table-title-info">
-  <ul>
+<div class="table-title-info" *ngIf="options.sport == 'soccer'">
+  <!-- <ul>
     <li><span>P:</span> Matches played</li>
     <li><span>RP:</span> Raid Points</li>
     <li><span>TP:</span> Tackle Points</li>
@@ -38,16 +37,16 @@
   <ul>
     <li><span>H5:</span> High 5s</li>
     <li><span>S10:</span> Super 10s</li>
-  </ul>
+  </ul> -->
   <ul>
-    <li><span class="game-card green"></span><span>:</span> Green Cards</li>
+    <!-- <li><span class="game-card green"></span><span>:</span> Green Cards</li>
     <li><span class="game-card yellow"></span><span>:</span> Yellow Cards</li>
-    <li><span class="game-card red"></span><span>:</span> Red Cards</li>
+    <li><span class="game-card red"></span><span>:</span> Red Cards</li> -->
     <li><span class="game-card square orange"></span><span>:</span> Champions League group stage</li>
     <li><span class="game-card square skyblue"></span><span>:</span> Europa League group stage</li>
     <li><span class="game-card square red"></span><span>:</span> Relegation</li>
   </ul>
-</div> -->
+</div>
 
 <ng-template #cricket let-item="item">
   <ng-container *ngFor="let value of options.values">
@@ -69,20 +68,21 @@
 
 <ng-template #soccer let-item="item">
   <ng-container *ngFor="let value of options.values">
-    {{item[value]}}
-    <!-- <td *ngIf="value != 'image'; else data">
-      {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[options.subParams][value] ) : item[value]}}
+    <td *ngIf="value != 'competitor.name';else data"
+      [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
+      {{item[value]}}
     </td>
     <ng-template #data>
       <td>
-        <a
-          [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)] ">
+        {{item[value]}}
+        <!-- <a
+          [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
             [defaultImage]="cricketService.flagplaceholder" alt="logo">
           {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
-        </a>
+        </a> -->
       </td>
-    </ng-template> -->
+    </ng-template>
   </ng-container>
 </ng-template>
 
@@ -103,4 +103,3 @@
     </ng-template>
   </ng-container>
 </ng-template>
-

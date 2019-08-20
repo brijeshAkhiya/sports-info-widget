@@ -71,7 +71,7 @@
       <ng-template #data>
         <td>
           <a
-            [routerLink]="['/soccer/team', (options.tournament | splitID) ,(item.competitor.id | splitID),(item.competitor.name | slugify)]">
+            [routerLink]="['/soccer/team',(options.tournament | splitID) ,(item.competitor.id | splitID),(item.competitor.name | slugify)]">
            {{item.competitor.abbreviation ? item.competitor.abbreviation : item.competitor.name}}</a>
         </td>
       </ng-template>
