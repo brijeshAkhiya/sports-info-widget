@@ -5,7 +5,7 @@
   <ngb-tabset class="common-tabs" *ngIf="sport == 'kabaddi'">
     <ngb-tab>
       <ng-template ngbTabTitle>
-        <div (click)="gettopscorer('totalpoint')">{{ 'widgetModule.points' | translate }}</div>
+        <div (click)="gettopscorer('raidtotalpoint')">{{ 'widgetModule.Raid_Points' | translate }}</div>
       </ng-template>
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarScore;context:{ scoredata:kabaddiscoredata,sport:sport}">
@@ -14,7 +14,7 @@
     </ngb-tab>
     <ngb-tab>
       <ng-template ngbTabTitle>
-        <div (click)="gettopscorer('raidtotalpoint')">{{ 'widgetModule.Raid_Points' | translate }}</div>
+        <div (click)="gettopscorer('tackletotalpoint')">{{ 'Kabaddi_Module.tackle_point' | translate }}</div>
       </ng-template>
       <ng-template ngbTabContent>
         <ng-container *ngTemplateOutlet="sidebarScore;context:{ scoredata:kabaddiscoredata,sport:sport}">
@@ -43,7 +43,7 @@
           <p class="team">{{item.tname}}</p>
         </div>
         <div class="player-score">
-          <h3>{{item.totalpoint}}</h3>
+          <h3>{{kabadditype == 'raidtotalpoint' ? item.raidtotalpoint : item.tackletotalpoint}}</h3>
           <p class="score-property">{{ 'widgetModule.points' | translate }}</p>
         </div>
       </div>
@@ -60,7 +60,7 @@
         <p class="team">{{item.tname}}</p>
       </div>
       <div class="player-score">
-        <h3>{{item.totalpoint}}</h3>
+        <h3>{{kabadditype == 'raidtotalpoint' ? item.raidtotalpoint : item.tackletotalpoint}}</h3>
         <p class="score-property">{{ 'widgetModule.points' | translate }}</p>
       </div>
     </li>
