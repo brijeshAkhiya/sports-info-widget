@@ -43,7 +43,7 @@
 		<form>
 			<div class="search-box">
 				<input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone:true}"
-					placeholder="Search favorites ...">
+					placeholder="{{'Shared_Module3.Search_favourites' | translate}} ...">
 				<button type="submit"></button>
 			</div>
 		</form>
@@ -57,7 +57,7 @@
 	<div class="footer-btn-list" *ngIf="userfavourites?.length > 0">
 		<button class="delete-btn" [ngClass]="{'active': isedit}" (click)="removefavourite()"></button>
 		<button class="edit-btn" [ngClass]="{'save-btn': isedit}"
-			(click)="isedit = !isedit">{{ isedit ? 'Save' : 'Edit' }}</button>
+			(click)="isedit = !isedit">{{ isedit ? ('Shared_Module3.Save' | translate) : ('Blog_Module2.Edit' | translate) }}</button>
 	</div>
 	<div class="fav-btn-block">
 		<button class="fav-btn" [ngClass]="{'active': isapply}" (click)="isapply = !isapply">
