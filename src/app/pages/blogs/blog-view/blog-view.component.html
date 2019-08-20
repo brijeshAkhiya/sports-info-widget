@@ -140,9 +140,11 @@
                     <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
 
                     <ul class="cmt-act-btn-list">
-                      <li><button class="cmt-act-btn" (click)="savecomment(commentid,InputComment.value)">Save</button>
+                      <li><button class="cmt-act-btn"
+                          (click)="savecomment(commentid,InputComment.value)">{{'Shared_Module3.Save' | translate}}</button>
                       </li>
-                      <li><button class="cmt-act-btn red-btn" (click)="cancelcomment()">Cancel</button></li>
+                      <li><button class="cmt-act-btn red-btn"
+                          (click)="cancelcomment()">{{'widget_Module3.Cancel' | translate}}</button></li>
                     </ul>
                   </form>
                   <ul class="comment-action">

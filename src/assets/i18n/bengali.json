@@ -284,7 +284,11 @@
         "Shared_Module3":{
             "Save":"রক্ষা",
             "Search_favourites":"অনুসন্ধান পছন্দ"
-        }
+        },
+        "widget_Module3":{
+            "Cancel":"বাতিল"
+          }
+          
     }
 
 
