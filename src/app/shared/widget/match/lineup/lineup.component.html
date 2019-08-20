@@ -13,7 +13,7 @@
 
   <ng-template #kabaddi>
     <!-- Start Ground -->
-    <div class="ground-map-block" *ngIf="lineup.length != 0">
+    <div class="ground-map-block kabaddi-map" *ngIf="lineup.length != 0">
       <div class="ground-map" *ngIf="team.length != 0">
         <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
         <ul class="ground-player-list">
@@ -98,9 +98,9 @@
 
   <ng-template #soccer>
     <!-- Start Ground -->
-    <div class="ground-map-block" *ngIf="team.home?.formation?.type && team.away?.formation?.type">
+    <div class="ground-map-block soccer-map" *ngIf="team.home?.formation?.type && team.away?.formation?.type">
       <div class="ground-map" *ngIf="team.length != 0">
-        <img src="assets/images/match/kabaddi-ground.svg" alt="kabaddi-ground">
+        <img src="assets/images/match/soccer-ground.svg" alt="kabaddi-ground">
         <ul class="ground-player-list" *ngFor="let formated_players of team.home.formated_players">
           <li *ngFor="let player of formated_players">
             <div class="number">{{player?.jersey_number}}</div>
