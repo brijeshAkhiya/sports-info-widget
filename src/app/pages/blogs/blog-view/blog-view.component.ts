@@ -353,10 +353,12 @@ export class BlogViewComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     var blogHeight = document.getElementById("blogOuterSection");
+    if(blogHeight){
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     var height = blogHeight.scrollHeight - document.documentElement.clientHeight;
     var scrolled = (winScroll / height) * 100;
     document.getElementById("blogCompleteLine").style.width = scrolled + "%";
+    }
   }
 
 }
