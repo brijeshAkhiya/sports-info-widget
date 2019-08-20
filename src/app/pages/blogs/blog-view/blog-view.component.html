@@ -135,7 +135,7 @@
                         {{comment.sLastName}}</span>
                     </p>
                   </div>
-                  <p>{{comment.sComment}}</p>
+                  <p *ngIf="!(comment._id == commentid && hidetextfield == true)">{{comment.sComment}}</p>
                   <form *ngIf="comment._id == commentid && hidetextfield == true">
                     <textarea class="form-control" #InputComment>{{comment.sComment}}</textarea>
 

@@ -42,6 +42,7 @@ export class PlayerComponent implements OnInit {
     if(this.sport == 'cricket'){
       this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport ,'player')
       this.getPlayerInfo();
+      this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, eSport : 'Cricket', aIds: [this.playerid] } }
     }
     else if(this.sport == 'kabaddi'){
       this.playerid = this.activatedroute.snapshot.params.id;
@@ -62,6 +63,8 @@ export class PlayerComponent implements OnInit {
       this.loading = false;
       if (res.data) {
         this.playerData = res.data
+        console.log('statas::',res);
+        
         if (res.data.statistics) {
           let obj = {Matches : 0, Runs: 0, Wickets : 0};
           res.data.statistics.map(s => {

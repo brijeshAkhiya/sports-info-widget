@@ -32,9 +32,11 @@
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.abbreviation"><span class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
+                    <h5 *ngIf="teamProfile?.abbreviation"><span
+                        class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
                       </span>{{teamProfile?.abbreviation}}</h5>
-                    <h5 *ngIf="teamProfile?.manager_name"><span class="title light-text">{{ 'Shared_module.Manager' | translate }} :
+                    <h5 *ngIf="teamProfile?.manager_name"><span
+                        class="title light-text">{{ 'Shared_module.Manager' | translate }} :
                       </span>{{teamProfile?.manager_name | split}}</h5>
                     <h5 *ngIf="teamProfile?.results">
                       <span class="title light-text"> {{ 'Shared_module.Recent_matches' | translate }}: </span>
@@ -54,22 +56,25 @@
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
+                    <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span
+                        class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
                       </span>{{teamProfile?.venue?.name}}
                     </h5>
-                    <h5 *ngIf="teamProfile?.founded"><span class="title light-text"> {{ 'Shared_module.Founded' | translate }}:
+                    <h5 *ngIf="teamProfile?.founded"><span class="title light-text">
+                        {{ 'Shared_module.Founded' | translate }}:
                       </span>{{teamProfile?.founded}}
                     </h5>
                   </div>
-                </section>                                                      
-                <app-no-data-widget *ngIf="teamProfile?.founded == ''" [message]="('widget_Module2.No_Team_data_available' | translate)">
+                </section>
+                <app-no-data-widget *ngIf="teamProfile?.founded == ''"
+                  [message]="('widget_Module2.No_Team_data_available' | translate)">
                 </app-no-data-widget>
               </ng-container>
 
               <!-- Squad Section-->
               <section class="common-section squad-list" *ngIf="sport == 'cricket'">
                 <h4 class="squad-title" *ngIf="teamProfile?.players?.length > 0;then cricket_squad else no_players">
-                    {{ 'Shared_module.Squad' | translate }}
+                  {{ 'Shared_module.Squad' | translate }}
                 </h4>
                 <ng-template #cricket_squad>
                   <div class="squad-group">
@@ -80,7 +85,8 @@
                             [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
                           <div class="item-desc">
                             <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
-                            <a [routerLink]="" class="theme-btn"> {{ 'Shared_module.view_player' | translate }}<span></span></a>
+                            <a [routerLink]="" class="theme-btn">
+                              {{ 'Shared_module.view_player' | translate }}<span></span></a>
                           </div>
                           <a class="fullblock-link"
                             [routerLink]="['/cricket/player', (player?.id | splitID), ((player?.name | split) | slugify )]">
@@ -98,7 +104,7 @@
 
               <section class="common-section squad-list" *ngIf="sport == 'kabaddi'">
                 <h4 class="squad-title" *ngIf="teamProfile?.squads?.length > 0;then kabaddi_squad else no_players">
-                    {{ 'Shared_module.Squad' | translate }}
+                  {{ 'Shared_module.Squad' | translate }}
                 </h4>
                 <ng-template #kabaddi_squad>
                   <div class="squad-group">
@@ -125,7 +131,7 @@
           </ngb-tab>
 
           <!-- Fixtures Section-->
-          <ngb-tab *ngIf="sport != 'kabaddi'">
+          <ngb-tab *ngIf="sport == 'cricket'">
             <ng-template ngbTabTitle>
               <div (click)="getTeamFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
@@ -139,7 +145,7 @@
           </ngb-tab>
 
           <!-- Results Section-->
-          <ngb-tab *ngIf="sport != 'kabaddi'">
+          <ngb-tab *ngIf="sport == 'cricket'">
             <ng-template ngbTabTitle>
               <div (click)="getTeamResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
