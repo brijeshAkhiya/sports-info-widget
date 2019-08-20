@@ -68,7 +68,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
     //console.log(this.readCookie('isenabled'));
 
-    let selectedLang = 'bengali' //bengali //(window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info') ? window.location.host.split('.')[0] : 'english';
+    let selectedLang = 'english' //bengali //(window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info') ? window.location.host.split('.')[0] : 'english';
     console.log(selectedLang)
     this.translate.setDefaultLang(selectedLang);
     //get data from ngrx store through meta tags actions
