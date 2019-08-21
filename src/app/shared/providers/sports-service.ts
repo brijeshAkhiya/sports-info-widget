@@ -582,5 +582,13 @@ export class SportsService {
     );
   }
 
+  //get soccer top-scorers
+  getsoccerTopScorer(id)
+  {
+    return this.http.get(
+      environment.apiUrl + environment.version+ `/soccer/seasons/${id}/leaders`
+    );
+  }
+
 
 }
