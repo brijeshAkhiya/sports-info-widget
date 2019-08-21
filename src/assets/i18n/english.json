@@ -186,7 +186,9 @@
     "venue":"Venue",
     "Capacity":"Capacity",
     "Ends":"Ends",
-    "starts":"Starts"
+    "starts":"Starts",
+    "goals":"Goals",
+    "assists":"Assists"
 },
 
 "Shared_module":{

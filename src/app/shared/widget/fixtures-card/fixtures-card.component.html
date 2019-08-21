@@ -102,12 +102,21 @@
         </ng-template>
       </div>
 
+       <!-- soccer points table & top-score table -->
+       <div class="sidebar-col">
+        <div class="sticky-sidebar">
+           <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+           <app-top-scorer-widget [sport]="'soccer'" *ngIf="sport == 'soccer'"></app-top-scorer-widget>
+        </div>
+      </div>
+
+
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--points table widget-->
-          <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"
-            [options]="{ tournament : tournamentid }"></app-points-table>
+          <!-- <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"
+            [options]="{ tournament : tournamentid }"></app-points-table> -->
           <app-points-table [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>

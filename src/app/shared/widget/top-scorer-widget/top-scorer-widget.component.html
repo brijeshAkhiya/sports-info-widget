@@ -67,3 +67,81 @@
     <li><a class="view-all-btn" [routerLink]="['/kabaddi/stats']">{{ 'widgetModule.view_all' | translate }}</a></li>
   </ul>
 </ng-template>
+
+<!-- soccer -->
+<div class="common-widget tab-widget" *ngIf="soccerscoredata && soccerscoredata?.length > 0">
+  <div class="widget-title">
+    <h5>{{ 'widgetModule.top_score' | translate }}</h5>
+  </div>
+  <ngb-tabset class="common-tabs" *ngIf="sport == 'soccer'">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <div (click)="getsoccerTopScorer('goals')">{{ 'widgetModule.goals' | translate }}</div>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <ng-container *ngTemplateOutlet="soccersidebarScore;context:{ scoredata:data,sport:sport}">
+        </ng-container>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <div (click)="getsoccerTopScorer('assists')">{{ 'widgetModule.assists' | translate }}</div>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <ng-container *ngTemplateOutlet="soccersidebarScore;context:{ scoredata:data,sport:sport}">
+        </ng-container>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+
+<!-- soccer score table -->
+
+  <ng-template #soccersidebarScore let-scoredata="scoredata">
+    <app-loader *ngIf="isloading"></app-loader>
+    <app-no-data-widget [message]="'No Data Available'" *ngIf="(!scoredata || scoredata?.length == 0)">
+    </app-no-data-widget>
+    <ul class="common-list player-score-list">
+      <li class="top-player d-flex" *ngFor="let item of (scoredata | slice:0:1);let i = index;">
+           <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="cricketService.playerplaceholder"
+          [defaultImage]="cricketService.playerplaceholder">
+        <ng-container *ngFor="let player of item.competitors">
+        <div class="top-player-inner">
+          <p class="num">{{item.rank}}.</p>
+          <div class="player-names">
+            <p class="name">
+              <a [routerLink]="['/soccer/player', (player.id | splitID) , (item.id | splitID),(item.name | slugify)]">
+                {{item.name | split}}
+              </a>
+            </p>
+            <p class="team">{{player.abbreviation}}</p>
+          </div>
+          <div class="player-score">
+            <h3>{{player.datapoints[0].value}}</h3>
+            <p class="score-property">{{ 'widgetModule.goals' | translate }}</p>
+          </div>
+        </div>
+        </ng-container>
+      </li>
+      <li class="common-player d-flex justify-content-between align-items-center"
+        *ngFor="let item of (scoredata | slice:1:5);let i = index;">
+        <ng-container *ngFor="let player of item.competitors">
+        <p class="num">{{item.rank}}.</p>
+        <div class="player-names">
+          <p class="name">
+            <a [routerLink]="['/soccer/player', (player.id | splitID) , (item.id | splitID),(item.name | slugify)]">
+              {{item.name | split}}
+            </a>
+          </p>
+          <p class="team">{{player.abbreviation}}</p> 
+        </div>
+        <div class="player-score">  
+          <h3>{{player.datapoints[0].value}}</h3>
+          <p class="score-property">{{ 'widgetModule.goals' | translate }}</p>
+        </div>
+        </ng-container>
+      </li>
+     <li><a class="view-all-btn" [routerLink]="['/soccer/stats']">{{ 'widgetModule.view_all' | translate }}</a></li>
+    </ul>
+  </ng-template> 
+   

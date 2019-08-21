@@ -17,6 +17,7 @@ export class PlayerTableComponent implements OnInit {
   index: any;
   object: any;
   value: any;
+  sort:any;
 
   constructor(
     private commonService: CommonService,
@@ -29,19 +30,23 @@ export class PlayerTableComponent implements OnInit {
   }
 
   getname(event) {
-    this.value = event.target.attributes.title.nodeValue;
-    console.log(event.target.attributes.title);
-    console.log(this.options.titles);
 
-    // this.options.titles.forEach(element => {
-    //   if(element == this.value)
-    //   {
-    this.index = this.options.titles.findIndex(element => element == this.value)
+    console.log(this.data)
+    this.value = event.target.attributes.title.nodeValue;
+    this.index = this.options.titles.findIndex(element=> element == this.value)
     this.object = this.options.values[this.index];
+    if(this.options.sport == 'kabaddi' && this.object == 'loss')
+    {
+        this.data = this.data.map(element => {
+          this.sort = element.matchplayed - element.win - element.draw;
+          let set = Object.assign({}, element);
+              set.loss = this.sort;
+            return set;
+        }); 
+    }
     this.sortArray();
     this.toggleSort = !this.toggleSort;
-    //   }
-    // }); 
+    
   }
 
   sortArray() {

@@ -15,6 +15,11 @@ export class PointsTableComponent implements OnInit {
   @Input() options;
   data;
   pointstable;
+  private toggleSort: boolean = false;
+  value: any;
+  index: any;
+  object: any;
+  sort: number;
 
   constructor(
     public commonService:CommonService,
@@ -92,5 +97,39 @@ export class PointsTableComponent implements OnInit {
         console.log('point table',this.pointstable)
       }
     },err=>{ console.log(err)});
+  }
+
+  sorttable(event)
+  {
+    this.value = event.target.attributes.title.nodeValue;
+    this.data.titles.forEach(element => {
+      if(element == this.value)
+      {
+        this.index = this.data.titles.findIndex(element=> element == this.value)
+        this.object = this.data.values[this.index];
+        if(this.sport == 'kabaddi' && this.object == 'loss')
+        {
+          this.pointstable = this.pointstable.map(element => {
+              this.sort = element.matchplayed - element.win - element.draw;
+              let set = Object.assign({}, element);
+                  set.loss = this.sort;
+                return set;
+            }); 
+        }
+        this.sortArray(); 
+        this.toggleSort = !this.toggleSort;
+      }
+    }); 
+  }
+  sortArray () 
+  {
+    if(this.toggleSort)
+    {
+       this.pointstable.sort((a, b) => b[this.object] - a[this.object] )
+    }
+    else
+    {
+      this.pointstable.sort((a, b) => a[this.object] - b[this.object] )
+    }
   }
 }
