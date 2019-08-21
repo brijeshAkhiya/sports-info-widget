@@ -101,28 +101,34 @@
     <div class="ground-map-block soccer-map" *ngIf="team.home?.formation?.type && team.away?.formation?.type">
       <div class="ground-map" *ngIf="team.length != 0">
         <img src="assets/images/match/soccer-ground.svg" alt="kabaddi-ground">
-        <ul class="ground-player-list" *ngFor="let formated_players of team.home.formated_players">
-          <li *ngFor="let player of formated_players">
-            <div class="number">{{player?.jersey_number}}</div>
-            <p>
-              <a
-                [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                {{player.name}}
-              </a>
-            </p>
-          </li>
-        </ul>
-        <ul class="ground-player-list list-2" *ngFor="let formated_players of team.away.formated_players">
-          <li *ngFor="let player of formated_players">
-            <div class="number">{{player?.jersey_number}}</div>
-            <p>
-              <a
-                [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                {{player.name}}
-              </a>
-            </p>
-          </li>
-        </ul>
+        <div class="ground-player-lists d-flex">
+          <div class="d-flex align-items-center justify-content-around">
+            <ul class="ground-player-list" *ngFor="let formated_players of team.home.formated_players">
+              <li *ngFor="let player of formated_players">
+                <div class="number">{{player?.jersey_number}}</div>
+                <p>
+                  <a
+                    [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                    {{player.name | slice:0:15}}
+                  </a>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex align-items-center justify-content-around">
+            <ul class="ground-player-list list-2" *ngFor="let formated_players of team.away.formated_players">
+              <li *ngFor="let player of formated_players">
+                <div class="number">{{player?.jersey_number}}</div>
+                <p>
+                  <a
+                    [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                    {{player.name | slice:0:15}}
+                  </a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <!-- End Ground -->
@@ -132,28 +138,30 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
-            <b><a [routerLink]="['/soccer/team', (team.home?.id | splitID), (team.home?.name | slugify )]">{{team.home.name}}</a></b>
-            <span *ngIf="team.home?.formation?.type">{{team.home?.formation?.type}}</span>
+            <span><b><a
+                  [routerLink]="['/soccer/team', (team.home?.id | splitID), (team.home?.name | slugify )]">{{team.home.name}}</a></b>
+              <span *ngIf="team.home?.formation?.type">{{team.home?.formation?.type}}</span>
+            </span>
             <img alt="{{team.home.name}}" [lazyLoad]="" [defaultImage]="cricketService.teamPlaceholder"
               [offset]="commonService.lazyloadoffset">
           </p>
         </div>
         <!-- <ng-container *ngIf="team.home?.players?.length > 0"> -->
-          <ng-container *ngFor="let role of objectKeys(team.home?.squad).sort()">
-            <h5 class="text-capitalize">{{role}}</h5>
-            <ul class="lienup-list">
-              <li *ngFor="let player of team.home?.squad[role]">
-                <p class="text-capitalize">
-                  <a
-                    [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                    {{player.name}}
-                  </a>
-                </p>
-                <span class="filled"
-                  [ngStyle]="{'background':'#'+team.home?.jersey.base, 'border-color': (team.home?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.home?.jersey.base, 'color': '#'+team[0]?.jersey.number }">{{player?.jersey_number}}</span>
-              </li>
-            </ul>
-          </ng-container>
+        <ng-container *ngFor="let role of objectKeys(team.home?.squad).sort()">
+          <h5 class="text-capitalize">{{role}}</h5>
+          <ul class="lienup-list">
+            <li *ngFor="let player of team.home?.squad[role]">
+              <p class="text-capitalize">
+                <a
+                  [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                  {{player.name}}
+                </a>
+              </p>
+              <span class="filled"
+                [ngStyle]="{'background':'#'+team.home?.jersey.base, 'border-color': (team.home?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.home?.jersey.base, 'color': '#'+team[0]?.jersey.number }">{{player?.jersey_number}}</span>
+            </li>
+          </ul>
+        </ng-container>
         <!-- </ng-container> -->
       </div>
       <!-- End Team 1 Squads-->
@@ -164,26 +172,29 @@
           <p class="d-flex align-items-center">
             <img alt="{{team.away.tname}}" [lazyLoad]="team.away.logo" [defaultImage]="cricketService.teamPlaceholder"
               [offset]="commonService.lazyloadoffset">
-            <b><a [routerLink]="['/soccer/team', (team.away?.id | splitID), (team.away?.name | slugify )]">{{team.away.name}}</a></b>
-            <span *ngIf="team.away?.formation?.type">{{team.away?.formation?.type}}</span>
+            <span><b><a
+                  [routerLink]="['/soccer/team', (team.away?.id | splitID), (team.away?.name | slugify )]">{{team.away.name}}</a></b>
+                  <span *ngIf="team.away?.formation?.type">{{team.away?.formation?.type}}</span>
+            </span>
+
           </p>
         </div>
         <!-- <ng-container *ngIf="team.away?.players?.length > 0"> -->
-          <ng-container *ngFor="let role of objectKeys(team.away?.squad).sort()">
-            <h5 class="text-capitalize">{{role}}</h5>
-            <ul class="lienup-list">
-              <li *ngFor="let player of team.away?.squad[role]">
-                <span class="filled"
-                  [ngStyle]="{'background':'#'+team.away?.jersey.base, 'border-color': (team.away?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">{{player?.jersey_number}}</span>
-                <p class="text-capitalize">
-                  <a
-                    [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                    {{player.name}}
-                  </a>
-                </p>
-              </li>
-            </ul>
-          </ng-container>
+        <ng-container *ngFor="let role of objectKeys(team.away?.squad).sort()">
+          <h5 class="text-capitalize">{{role}}</h5>
+          <ul class="lienup-list">
+            <li *ngFor="let player of team.away?.squad[role]">
+              <span class="filled"
+                [ngStyle]="{'background':'#'+team.away?.jersey.base, 'border-color': (team.away?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">{{player?.jersey_number}}</span>
+              <p class="text-capitalize">
+                <a
+                  [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                  {{player.name}}
+                </a>
+              </p>
+            </li>
+          </ul>
+        </ng-container>
         <!-- </ng-container> -->
       </div>
       <!-- End Team 2 Squads-->
