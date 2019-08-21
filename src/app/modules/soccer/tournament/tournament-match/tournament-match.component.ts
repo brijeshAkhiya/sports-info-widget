@@ -14,13 +14,13 @@ export class TournamentMatchComponent implements OnInit {
 
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [] } }
   loading: boolean = false;
-  // statsLoading: boolean = false;
+  statsLoading: boolean = false;
   matchInfo;
   matchLineups;
   commentry = [];
   team:any = {};
   // venuedetails = { lat: '', lng: '', name: '' };
-  // matchStats: any;
+  matchStats: any;
   // dummyAPICall = 62;
   // interval;
   // timeout;
@@ -57,7 +57,7 @@ export class TournamentMatchComponent implements OnInit {
 
         // this.getVenuedetails();
         this.initTeam();
-        this.getMatchLineup(this.matchInfo.sport_event.id)
+        // this.getMatchLineup(this.matchInfo.sport_event.id)
         // this.initCommentry();
         // this.initSquads();
       }
@@ -93,6 +93,21 @@ export class TournamentMatchComponent implements OnInit {
     
   }
 
+
+  getMatchstats(id) {
+    this.statsLoading = true;
+    this.sportsService.getSoccerMatchTimeline(id).subscribe((res: any) => {
+      this.statsLoading = false;
+      if (res.data && res.data.statistics) {
+        this.team.home.statistics = res.data.statistics.total.competitors.filter((comp) => comp.qualifier == 'home')[0]
+        this.team.away.statistics = res.data.statistics.total.competitors.filter((comp) => comp.qualifier == 'away')[0]
+        console.log(this.team);
+        
+      }
+    }, (error) => {
+      this.statsLoading = false;
+    });
+  }
 
   initTeam() {
     this.team.home =  this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'home')[0];

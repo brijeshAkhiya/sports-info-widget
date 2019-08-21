@@ -575,5 +575,12 @@ export class SportsService {
     );
   }
 
+  // Get Match Lineups
+  getSoccerMatchTimeline(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/match/${id}/timeline`
+    );
+  }
+
 
 }
