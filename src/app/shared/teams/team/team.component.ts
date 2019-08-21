@@ -22,8 +22,8 @@ export class TeamComponent implements OnInit {
   sport;
   routeParams;
   objectKeys = Object.keys
-  paramsFixtures = {reqParams : {'status': 1, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : []  }
-  paramsResults = {reqParams : {'status': 2, 'per_page' : 10, 'page': 1}, loading : false, loadmore : false, data : [] }  
+  paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
+  paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,6 +36,8 @@ export class TeamComponent implements OnInit {
 
     let data: any = this.activatedRoute.data;
     this.sport = data.value.sport;
+    console.log(this.sport);
+
     this.routeParams = this.activatedRoute.snapshot.params
     if (this.sport == 'cricket') {
       this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, }
@@ -45,7 +47,7 @@ export class TeamComponent implements OnInit {
         this.getTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'));
     }
     else if (this.sport == 'kabaddi') {
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport:'Kabaddi', aIds: [this.routeParams.teamid] } }
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.routeParams.teamid] } }
       this.getKabaddiTeamProfile(this.routeParams.teamid);
     }
   }
@@ -78,46 +80,34 @@ export class TeamComponent implements OnInit {
 
 
   getTeamResults() {
-    // if (this.matchresults && this.matchresults.length > 0)
-    //   return false;
-
-    // this.loadingResult = true;
-    // this.sportsService
-    //   .getteamresults(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'))
-    //   .subscribe((res: any) => {
-    //     this.loadingResult = false;
-    //     if (res.data) {
-    //       this.matchresults = this.cricketService.initCompetitorScore(res.data)
-    //       this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
-    //     }
-    //   }, (error) => {
-    //     this.loadingResult = false;
-    //   });
+    if (this.matchresults && this.matchresults.length > 0)
+      return false;
+    this.loadingResult = true;
+    this.sportsService
+      .getteamresults(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'))
+      .subscribe((res: any) => {
+        this.loadingResult = false;
+        if (res.data) {
+          this.matchresults = this.cricketService.initCompetitorScore(res.data)
+          this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
+        }
+      }, (error) => {
+        this.loadingResult = false;
+      });
   }
 
   getTeamFixtures() {
-    // if (this.matchfixtures && this.matchfixtures.length > 0)
-    //   return false;
+    if (this.matchfixtures && this.matchfixtures.length > 0)
+      return false;
+    this.loadingFixture = true;
+    this.sportsService.getteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')).subscribe((res: any) => {
+      this.loadingFixture = false;
+      if (res.data.schedule)
+        this.matchfixtures = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'asc');
+    }, (error) => {
+      this.loadingFixture = false;
+    });
 
-    // this.loadingFixture = true;
-    // this.sportsService.getteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')).subscribe((res: any) => {
-    //   this.loadingFixture = false;
-    //   if (res.data.schedule)
-    //     this.matchfixtures = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'asc');
-    // }, (error) => {
-    //   this.loadingFixture = false;
-    // });
-    //  if (this.matchfixtures && this.matchfixtures.length > 0)
-    //   return false;
-    // let KabaddireqParams = { teamid:this.routeParams.teamid,per_page:10,page:1,status:1 }
-    // this.loadingFixture = true;
-    // this.sportsService.getkabadditeamfixtures(KabaddireqParams).subscribe((res: any) => {
-    //   this.loadingFixture = false;
-    //   if (res.data.schedule)
-    //     this.matchfixtures = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'asc');
-    // }, (error) => {
-    //   this.loadingFixture = false;
-    // });
   }
 
 
@@ -143,14 +133,14 @@ export class TeamComponent implements OnInit {
 
 
 
-  loadData(type){
-    if(type == 'fixture'){
-      if(this.paramsFixtures.data && this.paramsFixtures.data.length > 0 )
+  loadData(type) {
+    if (type == 'fixture') {
+      if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
         return false;
       this.getFixtures();
     }
-    else if(type == 'result'){
-      if(this.paramsResults.data && this.paramsResults.data.length > 0 )
+    else if (type == 'result') {
+      if (this.paramsResults.data && this.paramsResults.data.length > 0)
         return false;
       this.getResults();
     }
@@ -159,12 +149,12 @@ export class TeamComponent implements OnInit {
   getFixtures() {
     console.log("getFixtures")
     this.paramsFixtures.loading = true;
-    this.sportsService.getkabadditeamfixtures(this.routeParams.teamid,this.paramsFixtures).subscribe((res: any) => {
+    this.sportsService.getkabadditeamfixtures(this.routeParams.teamid, this.paramsFixtures).subscribe((res: any) => {
       this.paramsFixtures.loading = false;
-      if (res.data && res.data.items){
-        this.paramsFixtures.data =  this.paramsFixtures.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'asc'));
+      if (res.data && res.data.items) {
+        this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'asc'));
       }
-      if(res.data.total_pages > this.paramsFixtures.reqParams.page)
+      if (res.data.total_pages > this.paramsFixtures.reqParams.page)
         this.paramsFixtures.loadmore = true;
       else
         this.paramsFixtures.loadmore = false;
@@ -173,19 +163,19 @@ export class TeamComponent implements OnInit {
     });
   }
 
-  
+
 
   getResults() {
 
     this.paramsResults.loading = true;
     this.sportsService
-      .getkabadditeamfixtures(this.routeParams.teamid,this.paramsResults)
+      .getkabadditeamfixtures(this.routeParams.teamid, this.paramsResults)
       .subscribe((res: any) => {
         this.paramsResults.loading = false;
-        if (res.data && res.data.items){
-          this.paramsResults.data =  this.paramsResults.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'desc'));
+        if (res.data && res.data.items) {
+          this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'desc'));
         }
-        if(res.data.total_pages > this.paramsResults.reqParams.page)
+        if (res.data.total_pages > this.paramsResults.reqParams.page)
           this.paramsResults.loadmore = true;
         else
           this.paramsResults.loadmore = false;
@@ -193,13 +183,13 @@ export class TeamComponent implements OnInit {
         this.paramsResults.loading = false;
       });
   }
-  
-  loadmore(type){
-    if(type == 'fixture'){
-      this.paramsFixtures.reqParams.page += 1; 
+
+  loadmore(type) {
+    if (type == 'fixture') {
+      this.paramsFixtures.reqParams.page += 1;
       this.getFixtures();
     }
-    else if(type == 'result'){
+    else if (type == 'result') {
       this.paramsResults.reqParams.page += 1;
       this.getResults();
     }

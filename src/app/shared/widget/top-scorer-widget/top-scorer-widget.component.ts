@@ -12,6 +12,7 @@ export class TopScorerWidgetComponent implements OnInit {
   @Input() sport: any
   isloading: boolean;
   kabaddiscoredata: any;
+  kabadditype: any;
   constructor(
     private sportsService: SportsService,
     private commonService: CommonService,
@@ -20,7 +21,7 @@ export class TopScorerWidgetComponent implements OnInit {
 
   ngOnInit() {
     if (this.sport == 'kabaddi') {
-      this.gettopscorer('totalpoint');
+      this.gettopscorer('raidtotalpoint');
     }
     else if(this.sport == 'soccer'){
       console.log('soccer');
@@ -30,6 +31,7 @@ export class TopScorerWidgetComponent implements OnInit {
 
   //get kabaddi scorers
   gettopscorer(type) {
+    this.kabadditype = type
     this.isloading = true;
     this.sportsService.getkabaddistats(type).subscribe((res: any) => {
       this.isloading = false;
