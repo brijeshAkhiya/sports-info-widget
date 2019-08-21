@@ -57,7 +57,7 @@ export class TournamentMatchComponent implements OnInit {
 
         // this.getVenuedetails();
         this.initTeam();
-        // this.getMatchLineup(this.matchInfo.sport_event.id)
+        this.getMatchLineup(this.matchInfo.sport_event.id)
         // this.initCommentry();
         // this.initSquads();
       }
@@ -99,8 +99,9 @@ export class TournamentMatchComponent implements OnInit {
     this.sportsService.getSoccerMatchTimeline(id).subscribe((res: any) => {
       this.statsLoading = false;
       if (res.data && res.data.statistics) {
-        this.team.home.statistics = res.data.statistics.total.competitors.filter((comp) => comp.qualifier == 'home')[0]
-        this.team.away.statistics = res.data.statistics.total.competitors.filter((comp) => comp.qualifier == 'away')[0]
+        this.team.home.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics
+        this.team.away.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics
+        this.matchStats = res.data.statistics;
         console.log(this.team);
         
       }

@@ -13,14 +13,18 @@ export class MatchStatsComponent implements OnInit {
 
   @Input() matchStats;
   @Input() sport;
+  @Input() info;
 
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,
     public cricketService: CricketService,
-    ) { }
+    ) {
+      
+     }
 
   ngOnInit() {
+    console.log(this.matchStats);
   }
 
 }
