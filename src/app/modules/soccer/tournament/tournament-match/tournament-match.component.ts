@@ -131,9 +131,9 @@ export class TournamentMatchComponent implements OnInit {
     //Team with formated type
     if(this.team.home.formation && this.team.home.formation.type){
       let players = this.sortingByRole(this.team.home.players);
-      (this.team.home.formated_players =  this.team.home.formated_players || []).push(players.slice(0, 1));
+      (this.team.home.formated_players =  this.team.home.formated_players || []).push(players.splice(0, 1));
       this.team.home.formation.type.split('-').forEach((formationType, index) => {
-          this.team.home.formated_players.push(players.slice(0, formationType));
+          this.team.home.formated_players.push(players.splice(0, formationType));
       });
     }
 
@@ -145,10 +145,10 @@ export class TournamentMatchComponent implements OnInit {
     });
     //Team with formated type
     if(this.team.away.formation && this.team.away.formation.type){
-      let players = this.sortingByRole(this.team.away.players);
-      (this.team.away.formated_players =  this.team.away.formated_players || []).push(players.slice(0, 1));
+      let players = window['players'] = this.sortingByRole(this.team.away.players);
+      (this.team.away.formated_players =  this.team.away.formated_players || []).push(players.splice(0, 1));
       this.team.away.formation.type.split('-').forEach((formationType, index) => {
-          this.team.away.formated_players.push(players.slice(0, formationType));
+          this.team.away.formated_players.push(players.splice(0, formationType));
       });
     }
 
