@@ -1,5 +1,4 @@
 /* -------- Facts & Figures Section ------- */
-.line-title                                     { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #EBEBEB; }
 .team-probability                               { width: 0px; height: 6px; position: relative;}
 .probability-fill                               { position: absolute; height: 100%; background: #ED1A33; animation: prob-fill 0.4s ease-in-out 0.5s forwards; -webkit-animation: prob-fill 0.4s ease-in-out 0.5s forwards; }
 @-webkit-keyframes prob-fill {
