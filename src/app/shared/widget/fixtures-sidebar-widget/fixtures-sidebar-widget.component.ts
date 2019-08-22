@@ -68,44 +68,38 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       })
     }
     else if (this.sport == 'soccer') {
-      this.paramSoccer = { loading: false, loadmore: false, data: [],results:[],fixtures:[] }
+      this.paramSoccer = { loading: false, loadmore: false, data: [], results: [], fixtures: [] }
       this.getSoccerData();
       this.loader = false
     }
   }
 
   getSoccerData() {
+    let today = new Date();
     this.paramSoccer.loading = true;
     this.sportsService
-      .getSoccerDailySummary('2019-08-21')
+      .getSoccerDailySummary(this.convertDate(today))
       .subscribe((res: any) => {
         this.paramSoccer.loading = false;
         if (res.data && res.data.summaries && res.data.summaries.length > 0) {
           this.paramSoccer.fullData = res.data.summaries;
-          this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started')
-          this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed')
+          this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == 'International Clubs')
+          this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == 'International Clubs')
         }
       }, (error) => {
         this.paramSoccer.loading = false;
       });
   }
 
-  sortArr(data, format, date_param, sort_type) {
-    data.sort((a, b) => {
-      if (sort_type === 'asc') {
-        return new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? 1 : 0;
-      } else {
-        return new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? 1 : 0;
-      }
-    })
-    let dateObj = {}
-    data.map((data) => {
-      let mdate = moment(data['sport_event'][date_param]).format(format);
-      if (!dateObj[mdate]) dateObj[mdate] = [];
-      dateObj[mdate].push(data)
-    })
-    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
+  convertDate(date) {
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth() + 1).toString();
+    var dd = date.getDate().toString();
+    var mmChars = mm.split('');
+    var ddChars = dd.split('');
+    return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
   }
+
 
 
 
