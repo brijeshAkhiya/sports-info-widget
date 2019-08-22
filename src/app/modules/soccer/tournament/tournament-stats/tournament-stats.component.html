@@ -18,7 +18,7 @@
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport:'soccer',
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Goals' | translate)],
-                          values : ['rank','name','player.competitors[0].datapoints[0].value'],
+                          values : ['rank','name','value'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
                         }">
@@ -30,44 +30,44 @@
               <div (click)="getdata('assists')">{{ 'Soccer_Module.Assists' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]="{
-                          sport:'kabaddi',
-                          titles : ['POS', ('Cricket_Module2.player' | translate), ('Kabaddi_Module2.Successfull_raids' | translate),('Kabaddi_Module2.Super_Raids' | translate),('Kabaddi_Module2.Raids_Points' | translate)],
-                          values : ['pid', 'name', 'raidsuccessful','superraid','raidtotalpoint'],
+              <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
+                          sport:'soccer',
+                          titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Assists' | translate)],
+                          values : ['rank','name','value'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
                         }">
-              </app-player-table> -->
+              </app-player-table>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('tackletotalpoint')">{{ 'Soccer_Module.Cards' | translate }}</div>
+              <div (click)="getCarddata()">{{ 'Soccer_Module.Cards' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
-                          sport:'kabaddi',
-                          titles : ['POS',('Cricket_Module2.player' | translate),('Kabaddi_Module2.Successfull_tackles' | translate),('Kabaddi_Module2.Super_Tackles' | translate),('Kabaddi_Module2.Tackle_Points' | translate)],
-                          values : ['pid', 'name', 'tacklesuccessful','supertackles','tackletotalpoint'],
+              <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
+                          sport:'soccer',
+                          titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Red_cards' | translate),('Soccer_Module.Yellow_cards' | translate)],
+                          values : ['rank','name','red_cards','yellow_cards'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
                         }">
-              </app-player-table> -->
+              </app-player-table>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="getTournamentStats('card')">{{ 'Soccer_Module.Own_Goals' | translate }}</div>
+              <div (click)="getdata('own_goals')">{{ 'Soccer_Module.Own_Goals' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
-                            sport:'kabaddi',
-                            titles : ['POS', ('Cricket_Module2.player' | translate), ('Kabaddi_Module2.Green' | translate) ,('Kabaddi_Module2.Yellow' | translate) , ('Kabaddi_Module2.Red' | translate)],
-                            values : ['pid', 'name', 'greencard' , 'yellowcard' ,'redcard'],
-                            class : ['tour-stats-table'],
-                            class_light_row : ['light-row']
-                          }">
-              </app-player-table> -->
+              <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
+                          sport:'soccer',
+                          titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Assists' | translate)],
+                          values : ['rank','name','value'],
+                          class : ['tour-stats-table'],
+                          class_light_row : ['light-row']
+                        }">
+              </app-player-table>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>

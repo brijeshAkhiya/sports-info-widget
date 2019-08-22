@@ -70,7 +70,7 @@
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="value != 'competitor.name';else data"
       [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
-      {{item[value]}}
+      {{ (item[value] && item[value] !='') ? item[value] : 0 }}
     </td>
     <ng-template #data>
       <td>

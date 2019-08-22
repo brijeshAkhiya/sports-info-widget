@@ -44,6 +44,7 @@ export class TournamentStatsComponent implements OnInit {
         data.leaders.map((ldata) => {
           ldata.players.map((pdata) => {
             pdata['rank'] = ldata.rank
+            pdata['value'] = pdata.competitors[0].datapoints[0].value
             if (array.length < 10) {
               array.push(pdata)
             }
@@ -55,5 +56,27 @@ export class TournamentStatsComponent implements OnInit {
     this.players = array
     console.log('stat-arr', this.players);
   }
+
+  getCarddata(){
+    let array = []
+    this.players = []
+    this.stats.map((data) => {
+      if (data.type == 'red_cards' || data.type == 'yellow_cards') {
+        data.leaders.map((ldata) => {
+          ldata.players.map((pdata) => {
+            pdata['rank'] = ldata.rank
+            pdata[data.type] = pdata.competitors[0].datapoints[0].value
+            if (array.length < 10) {
+              array.push(pdata)
+            }
+          })
+        })
+      }
+    })
+
+    this.players = array
+    console.log('stat-arr', this.players);
+  }
+
 
 }
