@@ -21,6 +21,7 @@ export class TournamentMatchComponent implements OnInit {
   team:any = {};
   // venuedetails = { lat: '', lng: '', name: '' };
   matchStats: any;
+  info;
   // dummyAPICall = 62;
   // interval;
   // timeout;
@@ -66,6 +67,10 @@ export class TournamentMatchComponent implements OnInit {
     }, (error) => {
       this.loading = false;
     });
+  }
+
+  setMatchInfo(){
+    
   }
 
   getMatchLineup(id){
