@@ -22,7 +22,6 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
   fixturesdata: any
   resultsdata: any
   loader: boolean;
-  paramSoccer: any
 
   constructor(
     private sportsService: SportsService,
@@ -68,26 +67,23 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       })
     }
     else if (this.sport == 'soccer') {
-      this.paramSoccer = { loading: false, loadmore: false, data: [], results: [], fixtures: [] }
       this.getSoccerData();
-      this.loader = false
     }
   }
 
   getSoccerData() {
     let today = new Date();
-    this.paramSoccer.loading = true;
+    this.loader = true
     this.sportsService
       .getSoccerDailySummary(this.convertDate(today))
       .subscribe((res: any) => {
-        this.paramSoccer.loading = false;
+        this.loader = false
         if (res.data && res.data.summaries && res.data.summaries.length > 0) {
-          this.paramSoccer.fullData = res.data.summaries;
           this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == 'International Clubs')
           this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == 'International Clubs')
         }
       }, (error) => {
-        this.paramSoccer.loading = false;
+        this.loader = false
       });
   }
 
