@@ -7,9 +7,9 @@
         </div>
 
         <app-loader *ngIf="isloading"></app-loader>
-        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'soccer'">
+        <app-no-data-widget *ngIf="!isloading && (!players || players?.length == 0)" [sport]="'soccer'">
         </app-no-data-widget>
-        <ngb-tabset class="common-tabs black-filled">
+        <ngb-tabset class="common-tabs black-filled" *ngIf="players?.length > 0">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div (click)="getdata('goals')">{{ 'Soccer_Module.Goals' | translate }}</div>

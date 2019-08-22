@@ -28,10 +28,14 @@ export class TournamentStatsComponent implements OnInit {
 
   //get soccer season leaders
   getSoccerSeasonLeaders(id) {
+   
     this.sportsService.getSoccerseasonleaders(id).subscribe((res: any) => {
       console.log('soccer-leaders', res);
+      this.isloading = false
       this.stats = res.data.lists
       this.getdata('goals');
+    },(error)=>{
+      this.isloading = false
     })
   }
 
@@ -39,6 +43,7 @@ export class TournamentStatsComponent implements OnInit {
     console.log('type:', type);
     let array = []
     this.players = []
+    this.isloading = true
     this.stats.map((data) => {
       if (data.type == type) {
         data.leaders.map((ldata) => {
@@ -52,7 +57,7 @@ export class TournamentStatsComponent implements OnInit {
         })
       }
     })
-
+    this.isloading = false
     this.players = array
     console.log('stat-arr', this.players);
   }

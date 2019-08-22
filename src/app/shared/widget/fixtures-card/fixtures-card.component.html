@@ -110,6 +110,7 @@
           <app-sidebar-links *ngIf="sport == 'soccer'" [sport]="'Soccer'" [link_type]="'tournament'"
           [options]="{type: 'current', title:('Soccer_Module.Current_Tournaments' | translate)}"></app-sidebar-links>
           <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+          <app-top-scorer-widget [sport]="'soccer'" *ngIf="sport == 'soccer'"></app-top-scorer-widget>
           <app-points-table [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
