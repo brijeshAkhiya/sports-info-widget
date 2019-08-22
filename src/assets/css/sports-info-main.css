@@ -50,7 +50,7 @@ img                     { max-width: 100%; }
 
 /******* Common Element CSS End *********/
 .common-overlay:after   { content: ""; position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; background-image: linear-gradient(to bottom, rgba(0,0,0,0.00), rgba(0,0,0,0.63)); }
-.common-shadow          { box-shadow: 0px 2px 8px rgba(0,0,0,0.04); -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.04); }
+.common-shadow          { background: #fff; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.04); }
 .rounded-box            { border-radius: 4px; }
 
 /* -------- Color Style ------- */
@@ -110,6 +110,7 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .common-zoom-container  { overflow: hidden; }
 .common-zoom-img        { height: 100%; background: #F4F4F5 no-repeat center center / cover; transition: all 0.3s ease-in-out; }
 .common-zoom-container.common-full-img:hover .common-zoom-img,
+.common-zoom-container:hover .common-zoom-img,
 .common-zoom-img:hover  { transform: scale(1.05); -webkit-transform: scale(1.05); }
 
 /* -------- Full Block Link Style ------- */
@@ -320,6 +321,9 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 .player-score-list li.top-player .num       { margin-bottom: 4px; }
 .player-score-list li.top-player .name      { font-size: 16px; line-height: 23px; }
 .player-score-list li.top-player .player-score  { position: absolute; right: 12px; bottom: 12px;}
+
+/* -------- Sports Match Page ------- */
+.line-title                                     { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #EBEBEB; }
 
 /* -------- Soccer Pages ------- */
 .fixture-date .dropdown-menu                { left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }

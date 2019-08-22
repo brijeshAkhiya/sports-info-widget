@@ -18,14 +18,16 @@
         <h5>{{ 'Kabaddi_Module.match_stats' | translate }}</h5>
       </div>
       <div>
-        <p class="d-flex align-items-center justify-content-end">
-          <a
-            [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.away?.tid, (matchStats?.match_info?.teams?.away?.tname | slugify )]">
-            {{matchStats.match_info.teams.away.tname}}
-          </a>
+        <p class="d-flex align-items-center">
           <img alt="{{matchStats?.match_info?.teams?.away?.tname}}"
             [lazyLoad]="matchStats?.match_info?.teams?.away?.tid | logosurl:'kabaddi'"
             [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+          <b>
+            <a
+              [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.away?.tid, (matchStats?.match_info?.teams?.away?.tname | slugify )]">
+              {{matchStats.match_info.teams.away.tname}}
+            </a>
+          </b>
         </p>
       </div>
     </div>
@@ -113,13 +115,11 @@
       <div>
         <p class="d-flex align-items-center justify-content-end">
           <b>
-            <a
-              [routerLink]="['/kabaddi/team', (matchStats?.home?.id | splitID), (matchStats?.home?.name | slugify )]">
+            <a [routerLink]="['/kabaddi/team', (matchStats?.home?.id | splitID), (matchStats?.home?.name | slugify )]">
               {{matchStats?.home?.name}}
             </a>
           </b>
-          <img alt="{{matchStats?.home?.name}}"
-            [lazyLoad]="matchStats?.home?.id | logosurl:'soccer'"
+          <img alt="{{matchStats?.home?.name}}" [lazyLoad]="matchStats?.home?.id | logosurl:'soccer'"
             [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
         </p>
       </div>
@@ -127,37 +127,37 @@
         <h5>{{ 'Kabaddi_Module.match_stats' | translate }}</h5>
       </div>
       <div>
-        <p class="d-flex align-items-center justify-content-end">         
-          <a
-            [routerLink]="['/kabaddi/team', (matchStats?.away?.id | splitID), (matchStats?.away?.name | slugify )]">
-            {{matchStats?.away?.name}}
-          </a>
-          <img alt="{{matchStats?.away?.name}}"
-            [lazyLoad]="matchStats?.away?.id | logosurl:'soccer'"
+        <p class="d-flex align-items-center">
+          <img alt="{{matchStats?.away?.name}}" [lazyLoad]="matchStats?.away?.id | logosurl:'soccer'"
             [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+          <b>
+            <a [routerLink]="['/kabaddi/team', (matchStats?.away?.id | splitID), (matchStats?.away?.name | slugify )]">
+              {{matchStats?.away?.name}}
+            </a>
+          </b>
         </p>
       </div>
     </div>
 
     <div class="stat-row d-flex align-items-center">
       <div>
-        <p
-          [ngClass]="{'hightlight': info.sport_event_status.home_score > info.sport_event_status.away_score}">
+        <p [ngClass]="{'hightlight': info.sport_event_status.home_score > info.sport_event_status.away_score}">
           <b>{{info.sport_event_status.home_score}}</b></p>
       </div>
       <div class="center-col">
         <p>{{ 'Soccer_Module.Goals' | translate }}</p>
       </div>
       <div>
-        <p
-          [ngClass]="{'hightlight': info.sport_event_status.away_score > info.sport_event_status.home_score}">
+        <p [ngClass]="{'hightlight': info.sport_event_status.away_score > info.sport_event_status.home_score}">
           <b>{{info.sport_event_status.away_score}}</b></p>
       </div>
     </div>
 
-    <div class="stat-row point-row d-flex align-items-center" *ngIf="matchStats.home.statistics.hasOwnProperty('ball_possession')">
+    <div class="stat-row point-row d-flex align-items-center"
+      *ngIf="matchStats.home.statistics.hasOwnProperty('ball_possession')">
       <div>
-        <p [ngClass]="{'hightlight': matchStats.home.statistics.ball_possession > matchStats.away.statistics.ball_possession}">
+        <p
+          [ngClass]="{'hightlight': matchStats.home.statistics.ball_possession > matchStats.away.statistics.ball_possession}">
           <b>{{ ((matchStats.home.statistics.ball_possession) / ((matchStats.home.statistics.ball_possession | strTonumber) + (matchStats.away.statistics.ball_possession | strTonumber)) * 100) | number:'2.0-0' }}</b><span
             class="point-line"
             [ngStyle]="{'width': 'calc('+ ((matchStats.home.statistics.ball_possession) / ((matchStats.home.statistics.ball_possession | strTonumber) + (matchStats.away.statistics.ball_possession | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
@@ -167,7 +167,8 @@
         <p>{{ 'Soccer_Module.Possession' | translate }}%</p>
       </div>
       <div>
-        <p [ngClass]="{'hightlight': matchStats.away.statistics.ball_possession > matchStats.home.statistics.ball_possession}">
+        <p
+          [ngClass]="{'hightlight': matchStats.away.statistics.ball_possession > matchStats.home.statistics.ball_possession}">
           <span class="point-line"
             [ngStyle]="{'width': 'calc('+ ((matchStats.away.statistics.ball_possession) / ((matchStats.home.statistics.ball_possession | strTonumber) + (matchStats.away.statistics.ball_possession | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
           <b>{{ ((matchStats.away.statistics.ball_possession) / ((matchStats.home.statistics.ball_possession | strTonumber) + (matchStats.away.statistics.ball_possession | strTonumber)) * 100) | number:'2.0-0' }}</b>
@@ -177,21 +178,20 @@
 
     <div class="stat-row d-flex align-items-center" *ngIf="matchStats.home.statistics.hasOwnProperty('shots_total')">
       <div>
-        <p
-          [ngClass]="{'hightlight': matchStats.home.statistics.shots_total > matchStats.away.statistics.shots_total}">
+        <p [ngClass]="{'hightlight': matchStats.home.statistics.shots_total > matchStats.away.statistics.shots_total}">
           <b>{{matchStats.home.statistics.shots_total}}</b></p>
       </div>
       <div class="center-col">
         <p>{{ 'Soccer_Module.Shots'  | translate }}</p>
       </div>
       <div>
-        <p
-          [ngClass]="{'hightlight': matchStats.away.statistics.shots_total > matchStats.home.statistics.shots_total}">
+        <p [ngClass]="{'hightlight': matchStats.away.statistics.shots_total > matchStats.home.statistics.shots_total}">
           <b>{{matchStats.away.statistics.shots_total}}</b></p>
       </div>
     </div>
 
-    <div class="stat-row d-flex align-items-center" *ngIf="matchStats.home.statistics.hasOwnProperty('shots_on_target')">
+    <div class="stat-row d-flex align-items-center"
+      *ngIf="matchStats.home.statistics.hasOwnProperty('shots_on_target')">
       <div>
         <p
           [ngClass]="{'hightlight': matchStats.home.statistics.shots_on_target > matchStats.away.statistics.shots_on_target}">
@@ -257,32 +257,28 @@
 
     <div class="stat-row d-flex align-items-center" *ngIf="matchStats.home.statistics.hasOwnProperty('red_cards')">
       <div>
-        <p
-          [ngClass]="{'hightlight': matchStats.home.statistics.red_cards > matchStats.away.statistics.red_cards}">
+        <p [ngClass]="{'hightlight': matchStats.home.statistics.red_cards > matchStats.away.statistics.red_cards}">
           <b>{{matchStats.home.statistics.red_cards}}</b></p>
       </div>
       <div class="center-col">
         <p>{{ 'Soccer_Module.Red_cards'  | translate }}</p>
       </div>
       <div>
-        <p
-          [ngClass]="{'hightlight': matchStats.away.statistics.red_cards > matchStats.home.statistics.red_cards}">
+        <p [ngClass]="{'hightlight': matchStats.away.statistics.red_cards > matchStats.home.statistics.red_cards}">
           <b>{{matchStats.away.statistics.red_cards}}</b></p>
       </div>
     </div>
 
     <div class="stat-row d-flex align-items-center" *ngIf="matchStats.home.statistics.hasOwnProperty('fouls')">
       <div>
-        <p
-          [ngClass]="{'hightlight': matchStats.home.statistics.fouls > matchStats.away.statistics.fouls}">
+        <p [ngClass]="{'hightlight': matchStats.home.statistics.fouls > matchStats.away.statistics.fouls}">
           <b>{{matchStats.home.statistics.fouls}}</b></p>
       </div>
       <div class="center-col">
         <p>{{ 'Soccer_Module.Fouls'  | translate }}</p>
       </div>
       <div>
-        <p
-          [ngClass]="{'hightlight': matchStats.away.statistics.fouls > matchStats.home.statistics.fouls}">
+        <p [ngClass]="{'hightlight': matchStats.away.statistics.fouls > matchStats.home.statistics.fouls}">
           <b>{{matchStats.away.statistics.fouls}}</b></p>
       </div>
     </div>

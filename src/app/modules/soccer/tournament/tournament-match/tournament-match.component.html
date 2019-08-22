@@ -26,7 +26,7 @@
           <!-- END - MATCH COMMENTRY-->
           <!-- START - LINEUPS-->
           <ngb-tab id="lineups" *ngIf="(matchLineups?.lineups | json) != '{}'">
-            <ng-template ngbTabTitle >
+            <ng-template ngbTabTitle>
               <div>{{ 'Kabaddi_Module.Lineups' | translate }} </div>
             </ng-template>
             <ng-template ngbTabContent>
@@ -42,7 +42,38 @@
             <ng-template ngbTabContent>
               <app-loader *ngIf="statsLoading"></app-loader>
               <app-no-data-widget *ngIf="!statsLoading && (!matchStats)"></app-no-data-widget>
-              <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo" *ngIf="team.home.statistics && team.away.statistics"></app-match-stats>
+              <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
+                *ngIf="team.home.statistics && team.away.statistics"></app-match-stats>
+              <section class="common-section top-padding">
+                <h4 class="line-title">Head-to-Head</h4>
+                <div class="head-to-head common-shadow rounded-box d-flex justify-content-between align-items-center">
+                  <div class="head-team d-flex justify-content-between align-items-center">
+                    <img class="flag-img" src="../../../../../assets/images/sample/India-flag.svg">
+                    <div class="">
+                      <p class="no-margin">Wins</p>
+                      <h1>16</h1>
+                    </div>
+                  </div>
+                  <div class="head-center">
+                    <p class="no-margin">Played</p>
+                    <h1>23</h1>
+                    <p class="no-margin">Draw : 3</p>
+                  </div>
+                  <div class="head-team d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="no-margin">Wins</p>
+                      <h1>16</h1>
+                    </div>
+                    <img class="flag-img" src="../../../../../assets/images/sample/India-flag.svg">
+                  </div>
+                </div>
+              </section>
+              <section class="common-section top-padding">
+                <h4 class="line-title">Last Meetings</h4>
+                <div>
+                  Last Meetings
+                </div>
+              </section>
               <!-- <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
               </app-no-data-widget> -->
               <!-- <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">

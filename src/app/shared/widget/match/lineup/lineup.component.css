@@ -33,6 +33,7 @@
 /* -- Soccer Ground Lienup -- */
 .soccer-map .ground-player-lists    { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
 .soccer-map .ground-player-lists > div          { width: 50%; }
+.soccer-map .ground-player-lists > div:last-child { flex-direction: row-reverse; -webkit-flex-direction: row-reverse; }
 .soccer-map .ground-map .ground-player-list li  { height: 68px; margin-bottom: 18px;}
 .soccer-map .ground-map .ground-player-list li:last-child { margin-bottom: 0; }
 
