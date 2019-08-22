@@ -2,18 +2,20 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <div class="common-title-btn soccer-fixtures-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+        <div
+          class="common-title-btn soccer-fixtures-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
         </div>
         <!--soccer sport-->
-        <ng-container  *ngIf="sport == 'soccer' && !paramsFixtures.tournamentid; else anothersport">
+        <ng-container *ngIf="sport == 'soccer' && !paramsFixtures.tournamentid; else anothersport">
           <div class="soccer-fixture-filter d-flex align-items-center justify-content-between">
             <div class="fixture-slider-block d-flex align-items-center">
               <div class="soccer-fixture-slider text-center">
                 <owl-carousel-o [options]="customOptions">
                   <ng-container class="items">
-                    <ng-template carouselSlide *ngFor="let date of customDate"> 
-                      <div class="fix-slide" (click)="selectDate(date)" [class.active-slide]="paramSoccer.selectedDate.day ==  date">
+                    <ng-template carouselSlide *ngFor="let date of customDate">
+                      <div class="fix-slide" (click)="selectDate(date)"
+                        [class.active-slide]="paramSoccer.selectedDate.day ==  date">
                         <h5>{{date}}</h5>
                         <p>{{paramSoccer.selectedDate.monthStr}}</p>
                       </div>
@@ -24,16 +26,26 @@
               <div class="fixture-date">
                 <input class="form-control d-none" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker
                   #d="ngbDatepicker" [placement]="bottom" (ngModelChange)="dateChange($event)">
-                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                <button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                  type="button"></button>
               </div>
             </div>
             <div class="soccer-fixture-selection">
               <div ngbDropdown class="d-inline-block" autoClose="outside" #myDrop="ngbDropdown">
-                <button class="btn btn-outline-primary" id="dropdownSoccerFixture"
+                <button class="btn btn-outline-primary" id="dropdownSoccerFixture" placement="right-bottom"
                   ngbDropdownToggle>{{paramSoccer.selectedCategory?.name}}</button>
-                <div  autoClose="outside" ngbDropdownMenu aria-labelledby="dropdownSoccerFixture">
-                    <button ngbDropdownItem (click)="filter({name: 'All'})">All</button>
-                    <button ngbDropdownItem  *ngFor="let category of paramSoccer.filterCategory"  (click)="filter(category.data);myDrop.close();">{{category.data.name}}</button>
+                <div autoClose="outside" ngbDropdownMenu aria-labelledby="dropdownSoccerFixture">
+                  <form>
+                    <div class="search-box">
+                      <input type="text" class="form-control" placeholder="Search the list" />
+                      <button type="submit"></button>
+                    </div>
+                  </form>
+                  <div class="item-list">
+                    <button ngbDropdownItem class="selected" (click)="filter({name: 'All'})">All</button>
+                    <button ngbDropdownItem *ngFor="let category of paramSoccer.filterCategory"
+                      (click)="filter(category.data);myDrop.close();">{{category.data.name}}</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -53,7 +65,8 @@
                 <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                   *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
                 </app-no-data-widget>
-                <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="sport" [tournament]="paramsFixtures.tournamentid" ></app-schedule>
+                <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="sport"
+                  [tournament]="paramsFixtures.tournamentid"></app-schedule>
                 <app-loader *ngIf="paramsFixtures.loading"></app-loader>
                 <div class="fixtures-loadmore">
                   <button class="theme-btn down-btn" (click)="loadmore('fixture')"
@@ -72,7 +85,8 @@
                 <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                   *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
                 </app-no-data-widget>
-                <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="sport" [tournament]="paramsResults.tournamentid"></app-schedule>
+                <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="sport"
+                  [tournament]="paramsResults.tournamentid"></app-schedule>
                 <app-loader *ngIf="paramsResults.loading"></app-loader>
 
                 <div class="fixtures-loadmore">
@@ -86,7 +100,16 @@
             </ngb-tab>
           </ngb-tabset>
         </ng-template>
-    </div>
+      </div>
+
+       <!-- soccer points table & top-score table -->
+       <div class="sidebar-col">
+        <div class="sticky-sidebar">
+           <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+           <app-top-scorer-widget [sport]="'soccer'" *ngIf="sport == 'soccer'"></app-top-scorer-widget>
+        </div>
+      </div>
+
 
       <div class="sidebar-col">
         <div class="sticky-sidebar">

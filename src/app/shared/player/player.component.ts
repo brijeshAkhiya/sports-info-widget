@@ -20,6 +20,8 @@ export class PlayerComponent implements OnInit {
   paramArticle = {}
   stats;
   teamid;
+  battingdata =[];
+  bowlingdata=[];
 
   constructor(
     private activatedroute: ActivatedRoute, 
@@ -74,6 +76,15 @@ export class PlayerComponent implements OnInit {
           })
           this.stats =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
           console.log(this.stats);
+
+          //short table batting & bowling
+          this.playerData.statistics.map(element=>{
+            element.batting['type'] = element.type;
+            element.bowling['type'] = element.type;
+            this.battingdata.push(element.batting)
+            this.bowlingdata.push(element.bowling)
+      });
+          
           
         }
       }

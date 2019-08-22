@@ -110,7 +110,7 @@
             <ng-template ngbTabContent>
               <!--  titles : ['Game type', 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '<span class=\'game-card green\'></span>', '<span class=\'game-card yellow\'></span>', '<span class=\'game-card red\'></span>' ],
                     -->
-              <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]="{
+              <app-player-table *ngIf="playerData?.statistics" [data]="battingdata" [options]="{
                   titles : [('Shared_Module2.Game_type' | translate), 'MAT', 'INN', 'R', 'AVG', 'SR', 'HS', '100s', '50s', '4s', '6s'],
                   values : ['type', 'matches', 'innings', 'runs', 'average', 'strike_rate', 'highest_score', 'hundreds', 'fifties', 'fours', 'sixes'],
                     subParams : 'batting',
@@ -121,7 +121,7 @@
                   }">
               </app-player-table>
 
-              <app-player-table *ngIf="playerData?.statistics" [data]="playerData?.statistics" [options]=" {
+              <app-player-table *ngIf="playerData?.statistics" [data]="bowlingdata" [options]=" {
                   titles : [('Shared_Module2.Game_type' | translate), 'MAT', 'INN', 'OV', 'Maiden', 'R', 'W', 'AVG', 'SR', 'Eco', '5Ws', '10Ws'],
                   values : ['type', 'matches', 'innings', 'overs', 'maidens', 'runs', 'wickets', 'average', 'strike_rate', 'economy', 'five_wicket_hauls', 'ten_wicket_hauls'],
                   subParams : 'bowling',

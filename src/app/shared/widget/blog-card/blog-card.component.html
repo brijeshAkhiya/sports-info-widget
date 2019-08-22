@@ -15,7 +15,7 @@
         [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       <div class="author-info d-flex justify-content-between align-items-center">
         <p class="author">
-          <a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}{{post.iId.sLastName}}</a>
+          <a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}} {{post.iId.sLastName}}</a>
           {{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
         </p>
         <ul class="count-list">
@@ -72,7 +72,7 @@
           [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       </div>
       <div class="author-info d-flex justify-content-between align-items-center">
-        <p class="author"><a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}
+        <p class="author"><a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}} 
             {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
         <ul class="count-list">
           <li>

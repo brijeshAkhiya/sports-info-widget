@@ -7,7 +7,7 @@
     <table class="table">
       <thead>
         <tr [ngClass]="data.class_light_row ">
-          <th *ngFor="let title of data.titles" [innerHTML]="title"></th>
+          <th *ngFor="let title of data.titles" [innerHTML]="title" title="{{title}}" (click)="sorttable($event);"></th>
         </tr>
       </thead>
       <tbody>

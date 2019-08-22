@@ -575,5 +575,20 @@ export class SportsService {
     );
   }
 
+  // Get Match Lineups
+  getSoccerMatchTimeline(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/match/${id}/timeline`
+    );
+  }
+
+  //get soccer top-scorers
+  getsoccerTopScorer(id)
+  {
+    return this.http.get(
+      environment.apiUrl + environment.version+ `/soccer/seasons/${id}/leaders`
+    );
+  }
+
 
 }

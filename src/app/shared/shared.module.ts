@@ -72,6 +72,7 @@ import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.co
 import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LineupComponent } from './widget/match/lineup/lineup.component';
+import { MatchStatsComponent } from './widget/match/match-stats/match-stats.component';
 
 @NgModule({
     imports: [
@@ -138,6 +139,7 @@ import { LineupComponent } from './widget/match/lineup/lineup.component';
         PageNotFoundComponent,
         FixturesCardComponent,
         LineupComponent,
+        MatchStatsComponent,
     ],
     providers: [
         /** All Pipes */
@@ -210,7 +212,8 @@ import { LineupComponent } from './widget/match/lineup/lineup.component';
         UppersliderComponent,
         PageNotFoundComponent,
         FixturesCardComponent,
-        LineupComponent
+        LineupComponent,
+        MatchStatsComponent
    
     ],
     entryComponents:[LoginModalComponent ],

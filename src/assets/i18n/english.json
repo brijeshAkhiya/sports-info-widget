@@ -186,7 +186,9 @@
     "venue":"Venue",
     "Capacity":"Capacity",
     "Ends":"Ends",
-    "starts":"Starts"
+    "starts":"Starts",
+    "goals":"Goals",
+    "assists":"Assists"
 },
 
 "Shared_module":{
@@ -296,7 +298,15 @@
   "Assists":"Assists",
   "Cards":"Cards",
   "Own_Goals":"Own Goals",
-  "Current_Tournaments":"Current Tournaments"
+  "Current_Tournaments":"Current Tournaments",
+  "Shots":"Shots",
+  "Shots_on_target":"Shots on target",
+  "Shots_saved":"Shots saved",
+  "Corners":"Corners",
+  "Red_cards":"Red Cards",
+  "Yellow_cards":"Yellow Cards",
+  "Fouls":"Fouls",
+  "Possession":"Possession"
 },
 "Shared_Module3":{
   "Save":"Save",

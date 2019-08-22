@@ -37,11 +37,12 @@
           <!--START - Stats-->
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <!-- <div (click)="getMatchstats(matchInfo.match_info.mid)">{{ 'widgetModule.Stats' | translate }}</div> -->
+              <div (click)="getMatchstats(matchInfo.sport_event.id)">{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-loader *ngIf="statsLoading"></app-loader>
-              <app-no-data-widget *ngIf="!statsLoading && (!matchStats)"></app-no-data-widget> -->
+              <app-loader *ngIf="statsLoading"></app-loader>
+              <app-no-data-widget *ngIf="!statsLoading && (!matchStats)"></app-no-data-widget>
+              <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo" *ngIf="team.home.statistics && team.away.statistics"></app-match-stats>
               <!-- <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
               </app-no-data-widget> -->
               <!-- <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">

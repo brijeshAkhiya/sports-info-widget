@@ -50,9 +50,8 @@
 
 <ng-template #cricket let-item="item">
   <ng-container *ngFor="let value of options.values">
-    {{value}}
     <td *ngIf="value != 'image'; else data">
-      {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[options.subParams][value] ) : item[value]}}
+      {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[value] ) : item[value]}}
     </td>
     <ng-template #data>
       <td>

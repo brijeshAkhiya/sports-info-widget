@@ -20,7 +20,6 @@
 <ng-template #tabs>
     <div class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
         <h1 *ngIf="options">{{options.title}}</h1>
-        <!-- <button class="add-to-fav-btn"><span>Add to favorites</span></button> -->
         <app-favourites-widget [value]="{id:options.id,name:options.title,type:options.type,sport:options.sport}"></app-favourites-widget>
     </div>
     <ngb-tabset class="common-tabs" (tabChange)="beforeChange($event)">
@@ -31,7 +30,7 @@
             </ng-template>
             <ng-template ngbTabContent>
                 <app-loader *ngIf="isLoading"></app-loader>
-                <app-no-data-widget *ngIf="!isLoading && recentArticles?.length == 0 || !recentArticles"></app-no-data-widget>
+                <app-no-data-widget *ngIf="!isLoading && recentArticles?.length == 0 || !recentArticles" [sport]="sport"></app-no-data-widget>
                 <app-blog-card [posts]="recentArticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog-card>
                 <!-- <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget> -->
                 <app-blog-card [posts]="recentArticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog-card>
