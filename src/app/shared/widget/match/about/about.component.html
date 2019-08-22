@@ -271,7 +271,7 @@
         <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}"
           [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset">
         <a [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
-          {{data.sport_event_status.status == 'not_started' ? team.name : team.abbreviation}}
+          {{team.name}}
         </a>
       </h4>
     </div>
