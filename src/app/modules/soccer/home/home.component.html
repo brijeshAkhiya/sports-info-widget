@@ -8,8 +8,11 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <!-- <app-fixtures-sidebar-widget [sport]="'kabaddi'"></app-fixtures-sidebar-widget> -->
-          
+          <app-fixtures-sidebar-widget [sport]="'soccer'"></app-fixtures-sidebar-widget>
+          <app-sidebar-links [sport]="'Soccer'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:('Soccer_Module.Current_Tournaments' | translate)}"></app-sidebar-links>
+            <app-sidebar-links [sport]="'Soccer'" [link_type]="'popular'"
+            [options]="{reqParams:{'eSport' : 'Soccer'}, type: 'tags', title:('Cricket_Module.Popular_Right_Now' | translate)}"></app-sidebar-links>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <!--Points table widget-->
           <!--Kabaddi top scorers-->

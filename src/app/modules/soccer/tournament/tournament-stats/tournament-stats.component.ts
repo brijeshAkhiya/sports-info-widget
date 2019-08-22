@@ -36,21 +36,22 @@ export class TournamentStatsComponent implements OnInit {
   }
 
   getdata(type) {
-    console.log('type:',type);
+    console.log('type:', type);
     let array = []
     this.players = []
     this.stats.map((data) => {
       if (data.type == type) {
         data.leaders.map((ldata) => {
           ldata.players.map((pdata) => {
+            pdata['rank'] = ldata.rank
             if (array.length < 10) {
-              array.push({ rank: ldata.rank, player: pdata })
+              array.push(pdata)
             }
           })
         })
       }
     })
-   
+
     this.players = array
     console.log('stat-arr', this.players);
   }

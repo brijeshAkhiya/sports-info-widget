@@ -295,7 +295,8 @@
   "Goals":"Goals",
   "Assists":"Assists",
   "Cards":"Cards",
-  "Own_Goals":"Own Goals"
+  "Own_Goals":"Own Goals",
+  "Current_Tournaments":"Current Tournaments"
 },
 "Shared_Module3":{
   "Save":"Save",
@@ -304,8 +305,5 @@
 "widget_Module3":{
   "Cancel":"Cancel"
 }
-
-
-
   
 }

@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     if (!this.readCookie('iscookieenabled')) {
       console.log('show pop up');
       this.showCookiepopup = true
-      document.cookie = "iscookieenabled=true";
+      document.cookie = "iscookieenabled=true ; expires=Thu, 31 Dec 2020 12:00:00 UTC";
     }
     else {
       this.showCookiepopup = false
