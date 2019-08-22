@@ -49,7 +49,8 @@ export class TournamentMatchComponent implements OnInit {
     this.sportsService.getSoccerMatchSummary(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
-
+        console.log(this.matchInfo);
+        
         // if (this.matchInfo.match_info.gamestate == 0) {
         //   this.startLiveUpdateAfterTime();
         // }else if (this.matchInfo.match_info.status == 3)
