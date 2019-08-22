@@ -21,9 +21,9 @@ export class SportsHomeComponent implements OnInit {
     this.tabSet = content;
   };
 
-  popularArticlesParams: any = { nStart: 0, nLimit: 10 }
-  recentArticlesParams: any = { nStart: 0, nLimit: 10, eSort: 'Latest' }
-  videoArticlesParams: any = { nStart: 0, nLimit: 10, eType: 'Video' }
+  popularArticlesParams: any = { nStart: 0, nLimit: 10, eSport: this.sport }
+  recentArticlesParams: any = { nStart: 0, nLimit: 10, eSort: 'Latest', eSport: this.sport }
+  videoArticlesParams: any = { nStart: 0, nLimit: 10, eType: 'Video', eSport: this.sport }
   popularArticles = [];
   recentArticles = [];
   isLoading: boolean = false;

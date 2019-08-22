@@ -2,19 +2,32 @@
   <h5>{{options.title}}</h5>
   <ul class="common-list">
     <li *ngFor="let item of data | slice:0:5">
-      
+
       <a *ngIf="link_type == 'blogs'" [state]="{ id: item._id }"
         [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle | truncate:[60,'...']}}
       </a>
-      <a *ngIf="link_type == 'tournament'" [state]="{ id: item.id }"
+      <a *ngIf="link_type == 'tournament' && sport == 'Cricket'" [state]="{ id: item.id }"
         [routerLink]="['/cricket/tournament', (item.id | splitID), (item.name | slugify)] ">{{ item.name | split }}
       </a>
 
-      <a *ngIf="link_type != 'blogs' && link_type != 'tournament'" [routerLink]=" item.type == 'Team' ? 
+      <a *ngIf="link_type != 'blogs' && link_type != 'tournament' && sport == 'Cricket'" [routerLink]=" item.type == 'Team' ? 
       ['/cricket/team',(item._id | splitID),(item.name | slugify)] 
       : item.type == 'Player' 
       ? ['/cricket/player',(item._id | splitID), ((item.name | split) | slugify)] 
       : item.type == 'Tournament' ? ['/cricket/tournament',(item._id | splitID) ,(item.name | slugify)] 
+      : ''">
+        {{ item.name | split }}
+      </a>
+
+      <a *ngIf="link_type == 'tournament' && sport == 'Soccer'" [state]="{ id: item.id }"
+        [routerLink]="['/soccer/tournament', (item.id | splitID), (item.name | slugify)] ">{{ item.name | split }}
+      </a>
+
+      <a *ngIf="link_type != 'blogs' && link_type != 'tournament' && sport == 'Soccer'" [routerLink]=" item.type == 'Team' ? 
+      ['/soccer/team',(item._id | splitID),(item.name | slugify)] 
+      : item.type == 'Player' 
+      ? ['/soccer/player',(item._id | splitID), ((item.name | split) | slugify)] 
+      : item.type == 'Tournament' ? ['/soccer/tournament',(item._id | splitID) ,(item.name | slugify)] 
       : ''">
         {{ item.name | split }}
       </a>

@@ -19,19 +19,21 @@ export class SidebarLinksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(!this.data){
-      if(this.link_type == 'blogs' && this.options.type  == 'recent')
+    if (!this.data) {
+      if (this.link_type == 'blogs' && this.options.type == 'recent')
         this.getRecentPosts();
-      else if(this.link_type == 'tournament' && this.options.type  == 'current')
+      else if (this.link_type == 'tournament' && this.options.type == 'current' && this.sport == 'Cricket')
         this.getCurrentSeries();
-      else if(this.link_type == 'popular' && this.options.type  == 'tags')
+      else if (this.link_type == 'popular' && this.options.type == 'tags')
         this.getPopularTags();
+      else if (this.sport == 'Soccer' && this.link_type == 'tournament' && this.options.type == 'current')
+        this.getSoccerCurrentTournament();
     }
   }
 
   //get recent posts
   getRecentPosts() {
-    this.sportsService.getrecentpost({eType: "",nLimit: 10}).subscribe((res:any) => {
+    this.sportsService.getrecentpost({ eType: "", nLimit: 10 }).subscribe((res: any) => {
       if (res.data) {
         this.data = res.data;
       }
@@ -39,7 +41,7 @@ export class SidebarLinksComponent implements OnInit {
   }
   //get current cricket series
   getCurrentSeries() {
-    this.sportsService.getcurrentseries().subscribe((res:any) => {
+    this.sportsService.getcurrentseries().subscribe((res: any) => {
       if (res.data) {
         this.data = res.data;
       }
@@ -48,11 +50,20 @@ export class SidebarLinksComponent implements OnInit {
 
   //get popular cricket tags
   getPopularTags() {
-    this.sportsService.getpopulartags(this.options.reqParams).subscribe((res:any) => {
+    this.sportsService.getpopulartags(this.options.reqParams).subscribe((res: any) => {
       if (res.data) {
         this.data = res.data;
       }
     });
+  }
+
+  //get soccer current tournament 
+  getSoccerCurrentTournament() {
+    this.sportsService.getSoccerTournamentList().subscribe((res: any) => {
+      if (res.data) {
+        this.data = res.data
+      }
+    })
   }
 
 }

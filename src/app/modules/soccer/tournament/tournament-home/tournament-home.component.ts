@@ -36,7 +36,7 @@ export class TournamentHomeComponent implements OnInit {
   ngOnInit() {
     this.tournamentid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'tournament');
     let name = this.activatedroute.snapshot.params.slug
-    this.options = { reqParams: { aIds: [this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'tournament')] }, title: name.replace(/-/g, " "), id: this.tournamentid, name: name.replace(/-/g, " "), type: 'tournament', sport: 'soccer' }
+    this.options = { reqParams: { aIds: [this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'tournament')],eSport:'Soccer' }, title: name.replace(/-/g, " "), id: this.tournamentid, name: name.replace(/-/g, " "), type: 'tournament', sport: 'soccer' }
   }
 
 }

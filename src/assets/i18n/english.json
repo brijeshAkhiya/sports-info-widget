@@ -298,6 +298,7 @@
   "Assists":"Assists",
   "Cards":"Cards",
   "Own_Goals":"Own Goals",
+  "Current_Tournaments":"Current Tournaments",
   "Shots":"Shots",
   "Shots_on_target":"Shots on target",
   "Shots_saved":"Shots saved",
@@ -314,8 +315,5 @@
 "widget_Module3":{
   "Cancel":"Cancel"
 }
-
-
-
   
 }

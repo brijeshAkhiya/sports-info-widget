@@ -28,7 +28,7 @@
     </table>
   </div>
 </div>
-<div class="table-title-info" *ngIf="options.sport == 'soccer'">
+<div class="table-title-info" *ngIf="options.sport == 'soccer' && options.soccertable == 'true' && data?.length > 0">
   <!-- <ul>
     <li><span>P:</span> Matches played</li>
     <li><span>RP:</span> Raid Points</li>
@@ -68,19 +68,19 @@
 
 <ng-template #soccer let-item="item">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="value != 'competitor.name';else data"
+    <td *ngIf="(value != 'teamname' && value != 'name');else data"
       [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
-      {{item[value]}}
+      {{ (item[value] && item[value] !='') ? item[value] : 0 }}
     </td>
     <ng-template #data>
       <td>
-        {{item[value]}}
-        <!-- <a
-          [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)]">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
+        <a
+          [routerLink]="options.image_type == 'team' ? ['/soccer/team',(item?.competitor?.id | splitID),(item?.competitor?.name | slugify)] : ['/soccer/player',(item?.id | splitID),(item?.name | split | slugify)]">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]=" (options.image_type == 'team') ?  (item?.competitor?.id | logosurl:'soccer') : (item?.competitors[0]?.id | logosurl:'soccer')"
             [defaultImage]="cricketService.flagplaceholder" alt="logo">
-          {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
-        </a> -->
+          {{ (options.image_type == 'team') ? item[value] : item[value] | split}}
+        </a>
       </td>
     </ng-template>
   </ng-container>

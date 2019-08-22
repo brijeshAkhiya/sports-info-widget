@@ -25,6 +25,7 @@ export class FixturesCardComponent implements OnInit {
   customDate;
   model: any;
   tournamentid:any;
+  searchText:string;
 
   constructor(
     private activatedroute: ActivatedRoute,

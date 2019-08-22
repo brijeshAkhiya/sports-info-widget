@@ -198,12 +198,11 @@
             </ng-template>
             <ng-template ngbTabContent>
               <!-- <app-match-info-card [options]="{
-             sport:'kabaddi',
-             titles : [('Cricket_Module.Match' | translate), ('Kabaddi_Module2.Tournament' | translate), ('Kabaddi_Module2.Zone' | translate),('widgetModule.venue' | translate)],
-             values : [matchInfo.match_info.title,matchInfo.match_info.competition.cname,matchInfo.match_info.zone ? matchInfo.match_info.zone : '-',matchInfo.match_info.venue.name] }
-             " [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
-              <h4 class="line-title">{{ 'Kabaddi_Module.venue_details' | translate }}</h4>
-              <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails">
+             sport:'soccer',
+             titles : [('Cricket_Module.Match' | translate), ('Kabaddi_Module2.Tournament' | translate), ('Kabaddi_Module2.Zone' | translate),('widgetModule.venue' | translate),('Cricket_Module.Weather_Condition' | translate),('Cricket_Module.Pitch_Condition' | translate),'Referee'],
+             values : [matchInfo.sport_event.competitors, matchInfo.sport_event?.sport_event_context?.season?.name ,matchInfo.sport_event.sport_event_context.group?.name ,matchInfo.sport_event.venue?.name, matchInfo.sport_event.sport_event_conditions ,matchInfo.sport_event.sport_event_conditions, matchInfo.sport_event.sport_event_conditions] }" [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
+              <h4 class="line-title">{{ 'Kabaddi_Module.venue_details' | translate }}</h4> -->
+              <!-- <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails">
               </app-venue-map-card> -->
             </ng-template>
           </ngb-tab>
@@ -211,8 +210,8 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
-              </app-blog-list> -->
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              </app-blog-list>
             </ng-template>
           </ngb-tab>
           <!--END - NEWS TAB-->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tournament',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tournament.component.css']
 })
 export class TournamentComponent implements OnInit {
-
-  constructor() { }
+  tournamentname: any;
+  
+  constructor(private activatedroute: ActivatedRoute) { }
 
   ngOnInit() {
+    let name = this.activatedroute.snapshot.params.slug
+    this.tournamentname =  name.replace(/-/g," ")
   }
-
 }

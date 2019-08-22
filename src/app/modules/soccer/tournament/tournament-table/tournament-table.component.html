@@ -11,9 +11,11 @@
         <ng-container *ngIf="pointstable">
           <app-player-table [data]="pointstable[0]?.groups[0]?.standings" [options]="{
                   titles : ['POS',('Shared_Module2.TEAM' | translate),'P', 'W', 'L', 'D', 'GF','GA','GD','PTS'],
-                  values : ['rank', 'competitor.name', 'played', 'win', 'loss', 'draw', 'goals_for','goals_against','goals_diff','points'],
+                  values : ['rank', 'teamname', 'played', 'win', 'loss', 'draw', 'goals_for','goals_against','goals_diff','points'],
                   class : ['tour-stand-table'],
-                  sport : 'soccer'
+                  sport : 'soccer',
+                  soccertable : 'true',
+                  image_type:'team'
                 }">
           </app-player-table>
         </ng-container>
@@ -21,6 +23,9 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-sidebar-links [sport]="'Soccer'" [link_type]="'popular'"
+            [options]="{reqParams:{'eSport' : 'Soccer'}, type: 'tags', title:('Cricket_Module.Popular_Right_Now' | translate)}">
+          </app-sidebar-links>
           <!-- <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
         </div>
       </div>

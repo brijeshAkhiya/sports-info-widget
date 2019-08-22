@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CricketService } from '@providers/cricket-service';
 import { CommonService } from '@providers/common-service';
+import * as moment from 'moment';
+
+import { SportsService } from "@providers/sports-service";
+
 
 import * as fromRoot from "@app/app-reducer";
 import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
@@ -20,8 +24,9 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
   loader: boolean;
 
   constructor(
-    private cricketService: CricketService, 
-    public commonService: CommonService, 
+    private sportsService: SportsService,
+    public commonService: CommonService,
+    public cricketService: CricketService,
     private store: Store<fromRoot.State>
   ) { }
 
@@ -47,20 +52,52 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       this.store.select('Kabaddi').subscribe((data: any) => {
         console.log("subscribe");
         console.log(data);
-         
-        if(data){
+
+        if (data) {
           this.loader = false;
         }
         // if (data.fixtures.length > 0) {
-          console.log('after effects', data.fixtures);
-          this.fixturesdata = (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) ? data.fixtures.items : [];
+        console.log('after effects', data.fixtures);
+        this.fixturesdata = (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) ? data.fixtures.items : [];
         // }
         // if (data.results.length > 0) {
-          console.log('after effects', data.results);
-          this.resultsdata =  (Object.entries(data.results).length > 0 && data.results.items.length > 0) ? data.results.items : [];
+        console.log('after effects', data.results);
+        this.resultsdata = (Object.entries(data.results).length > 0 && data.results.items.length > 0) ? data.results.items : [];
         // }
       })
     }
+    else if (this.sport == 'soccer') {
+      this.getSoccerData();
+    }
   }
+
+  getSoccerData() {
+    let today = new Date();
+    this.loader = true
+    this.sportsService
+      .getSoccerDailySummary(this.convertDate(today))
+      .subscribe((res: any) => {
+        this.loader = false
+        if (res.data && res.data.summaries && res.data.summaries.length > 0) {
+          this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == 'International Clubs')
+          this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == 'International Clubs')
+        }
+      }, (error) => {
+        this.loader = false
+      });
+  }
+
+  convertDate(date) {
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth() + 1).toString();
+    var dd = date.getDate().toString();
+    var mmChars = mm.split('');
+    var ddChars = dd.split('');
+    return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+  }
+
+
+
+
 
 }
