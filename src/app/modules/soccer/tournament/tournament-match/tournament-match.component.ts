@@ -52,6 +52,14 @@ export class TournamentMatchComponent implements OnInit {
         this.matchInfo = res.data;
         console.log(this.matchInfo);
         
+        this.matchInfo.match_title = this.matchInfo.sport_event.competitors[0].name + ' ' +  'VS'  + ' ' + this.matchInfo.sport_event.competitors[1].name;
+        if(this.matchInfo.sport_event.venue){
+          this.matchInfo.venuedetails = this.matchInfo.sport_event.venue
+          this.matchInfo.venuedetails.lat = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[0])
+          this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
+        }
+        console.log(this.matchInfo.venuedetails);
+        
         // if (this.matchInfo.match_info.gamestate == 0) {
         //   this.startLiveUpdateAfterTime();
         // }else if (this.matchInfo.match_info.status == 3)
@@ -67,10 +75,6 @@ export class TournamentMatchComponent implements OnInit {
     }, (error) => {
       this.loading = false;
     });
-  }
-
-  setMatchInfo(){
-    
   }
 
   getMatchLineup(id){

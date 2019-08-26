@@ -105,7 +105,7 @@
       </div>
 
       <div class="sidebar-col">
-        <div class="sticky-sidebar">
+        <div [ngClass]="{'sticky-sidebar': sport != 'soccer'}">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--points table widget-->
           <app-top-scorer-widget [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"></app-top-scorer-widget>
@@ -113,7 +113,7 @@
             [options]="{type: 'current', title:('Soccer_Module.Current_Tournaments' | translate)}"></app-sidebar-links>
           <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"
             [options]="{ tournament : tournamentid }"></app-points-table>
-          <app-top-scorer-widget [sport]="'soccer'" *ngIf="sport == 'soccer'"></app-top-scorer-widget>
+          <!-- <app-top-scorer-widget [sport]="'soccer'" *ngIf="sport == 'soccer'"></app-top-scorer-widget> -->
           <app-points-table [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>

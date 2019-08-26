@@ -44,7 +44,7 @@
               <app-no-data-widget *ngIf="!statsLoading && (!matchStats)"></app-no-data-widget>
               <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
                 *ngIf="team.home.statistics && team.away.statistics"></app-match-stats>
-              <section class="common-section top-padding">
+              <!-- <section class="common-section top-padding">
                 <h4 class="line-title">Head-to-Head</h4>
                 <div class="head-to-head common-shadow rounded-box d-flex justify-content-between align-items-center">
                   <div class="head-team d-flex justify-content-between align-items-center">
@@ -73,121 +73,7 @@
                 <div>
                   Last Meetings
                 </div>
-              </section>
-              <!-- <app-no-data-widget [sport]="'kabaddi'" [message]="'Coming Soon..!'">
-              </app-no-data-widget> -->
-              <!-- <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">
-                <div class="stat-row head-row d-flex align-items-center">
-                  <div>
-                    <p class="d-flex align-items-center justify-content-end">
-                      <b>
-                        <a
-                          [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.home?.tid, (matchStats?.match_info?.teams?.home?.tname | slugify )]">
-                          {{matchStats.match_info.teams.home.tname}}
-                        </a>
-                      </b>
-                      <img alt="{{matchStats?.match_info?.teams?.home?.tname}}"
-                        [lazyLoad]="matchStats?.match_info?.teams?.home?.logo"
-                        [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
-                    </p>
-                  </div>
-                  <div class="center-col">
-                    <h5>{{ 'Kabaddi_Module.match_stats' | translate }}</h5>
-                  </div>
-                  <div>
-                    <p class="d-flex align-items-center justify-content-end">
-                      <a
-                        [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.away?.tid, (matchStats?.match_info?.teams?.away?.tname | slugify )]">
-                        {{matchStats.match_info.teams.away.tname}}
-                      </a>
-                      <img alt="{{matchStats?.match_info?.teams?.away?.tname}}"
-                        [lazyLoad]="matchStats?.match_info?.teams?.away?.logo"
-                        [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
-                    </p>
-                  </div>
-                </div>
-                <div class="stat-row point-row d-flex align-items-center">
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.match_info.result?.home > matchStats.match_info.result?.away}">
-                      <b>{{ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b><span
-                        class="point-line"
-                        [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.home) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
-                    </p>
-                  </div>
-                  <div class="center-col">
-                    <p>{{ 'widgetModule.points' | translate }}%</p>
-                  </div>
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.match_info.result?.away > matchStats.match_info.result?.home}">
-                      <span class="point-line"
-                        [ngStyle]="{'width': 'calc('+ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
-                      <b>{{ ((matchStats.match_info.result?.away) / ((matchStats.match_info.result?.home | strTonumber) + (matchStats.match_info.result?.away | strTonumber)) * 100) | number:'2.0-0' }}</b>
-                    </p>
-                  </div>
-                </div>
-                <div class="stat-row d-flex align-items-center">
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.home.raidtotalpoint > matchStats.team_stats.away.raidtotalpoint}">
-                      <b>{{matchStats.team_stats.home.raidtotalpoint}}</b></p>
-                  </div>
-                  <div class="center-col">
-                    <p>{{ 'widgetModule.Raid_Points' | translate }}</p>
-                  </div>
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.away.raidtotalpoint > matchStats.team_stats.home.raidtotalpoint}">
-                      <b>{{matchStats.team_stats.away.raidtotalpoint}}</b></p>
-                  </div>
-                </div>
-                <div class="stat-row d-flex align-items-center">
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.home.tackletotalpoint > matchStats.team_stats.away.tackletotalpoint}">
-                      <b>{{matchStats.team_stats.home.tackletotalpoint}}</b></p>
-                  </div>
-                  <div class="center-col">
-                    <p>{{ 'Kabaddi_Module.tackle_point' | translate }}</p>
-                  </div>
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.away.tackletotalpoint > matchStats.team_stats.home.tackletotalpoint}">
-                      <b>{{matchStats.team_stats.away.tackletotalpoint}}</b></p>
-                  </div>
-                </div>
-                <div class="stat-row d-flex align-items-center">
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.home.alloutpoint > matchStats.team_stats.away.alloutpoint }">
-                      <b>{{matchStats.team_stats.home.alloutpoint}}</b></p>
-                  </div>
-                  <div class="center-col">
-                    <p>{{ 'Kabaddi_Module.all_out_point' | translate }}</p>
-                  </div>
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.away.alloutpoint > matchStats.team_stats.home.alloutpoint}">
-                      <b>{{matchStats.team_stats.away.alloutpoint}}</b></p>
-                  </div>
-                </div>
-                <div class="stat-row d-flex align-items-center">
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.home.extrapoint > matchStats.team_stats.away.extrapoint}">
-                      <b>{{matchStats.team_stats.home.extrapoint}}</b></p>
-                  </div>
-                  <div class="center-col">
-                    <p>{{ 'Kabaddi_Module.extra_points' | translate }}</p>
-                  </div>
-                  <div>
-                    <p
-                      [ngClass]="{'hightlight': matchStats.team_stats.away.extrapoint > matchStats.team_stats.home.extrapoint}">
-                      <b>{{matchStats.team_stats.away.extrapoint}}</b></p>
-                  </div>
-                </div>
-              </div> -->
+              </section> -->
             </ng-template>
           </ngb-tab>
           <!--END - Stats-->
@@ -197,13 +83,13 @@
               <div>{{ 'Kabaddi_Module.Info' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-match-info-card [options]="{
+              <app-match-info-card [options]="{
              sport:'soccer',
              titles : [('Cricket_Module.Match' | translate), ('Kabaddi_Module2.Tournament' | translate), ('Kabaddi_Module2.Zone' | translate),('widgetModule.venue' | translate),('Cricket_Module.Weather_Condition' | translate),('Cricket_Module.Pitch_Condition' | translate),'Referee'],
-             values : [matchInfo.sport_event.competitors, matchInfo.sport_event?.sport_event_context?.season?.name ,matchInfo.sport_event.sport_event_context.group?.name ,matchInfo.sport_event.venue?.name, matchInfo.sport_event.sport_event_conditions ,matchInfo.sport_event.sport_event_conditions, matchInfo.sport_event.sport_event_conditions] }" [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card> -->
+             values : [matchInfo.match_title, matchInfo.sport_event?.sport_event_context?.season?.name ,matchInfo.sport_event.sport_event_context.group?.name ,matchInfo.sport_event.venue?.name, matchInfo.sport_event.sport_event_conditions?.weather?.overall_conditions ,matchInfo.sport_event.sport_event_conditions?.weather?.pitch_conditions, matchInfo.sport_event.sport_event_conditions?.referee?.name] }" [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
               <!-- <h4 class="line-title">{{ 'Kabaddi_Module.venue_details' | translate }}</h4> -->
-              <!-- <app-venue-map-card [sport]="'kabaddi'" [venuedetails]="venuedetails" *ngIf="venuedetails">
-              </app-venue-map-card> -->
+              <app-venue-map-card [sport]="'soccer'" [venuedetails]="matchInfo?.venuedetails" *ngIf="matchInfo?.venuedetails">
+              </app-venue-map-card>
             </ng-template>
           </ngb-tab>
           <!--START - NEWS TAB-->

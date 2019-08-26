@@ -26,5 +26,18 @@
     </p>
     <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
   </ng-container>
+
+  <ng-container *ngIf="sport == 'soccer'">
+    <ng-container *ngIf="venuedetails.lat && venuedetails.lng">
+      <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.lng">
+        <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.lng"></agm-marker>
+      </agm-map>
+    </ng-container>
+    <p *ngIf="venuedetails?.name">
+      <span>{{ 'widgetModule.venue' | translate }} :</span>
+      {{venuedetails?.name}}
+    </p>
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
+  </ng-container>
   
 </section>
