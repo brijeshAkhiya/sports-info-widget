@@ -93,7 +93,7 @@ export function provideConfig() {
   return authconfig;
 }
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n_v1/', '.json');
 }
 
 

@@ -24,7 +24,7 @@
               </div>
           </ng-container>
           <ng-container *ngIf="options.sport == 'soccer'">
-            {{title == 'Match' ? options.values[i][0].name + ' ' +  'VS'  + ' ' + options.values[i][1].name  : ''}}
+            {{options.values[i]}}
             <!-- {{title == 'Series' ? (options.values[i].season ? options.values[i].season.name : options.values[i].tournament.name ) : ''}}
             {{(title == 'Weather Condition' || title == 'Pitch Condition' || title == 'Outfield Conditions' || title == 'Match Refree') ? (options.values[i]) : ''}}
 

@@ -21,6 +21,7 @@ export class TournamentMatchComponent implements OnInit {
   team:any = {};
   // venuedetails = { lat: '', lng: '', name: '' };
   matchStats: any;
+  info;
   // dummyAPICall = 62;
   // interval;
   // timeout;
@@ -50,6 +51,14 @@ export class TournamentMatchComponent implements OnInit {
       if (res.data) {
         this.matchInfo = res.data;
         console.log(this.matchInfo);
+        
+        this.matchInfo.match_title = this.matchInfo.sport_event.competitors[0].name + ' ' +  'VS'  + ' ' + this.matchInfo.sport_event.competitors[1].name;
+        if(this.matchInfo.sport_event.venue){
+          this.matchInfo.venuedetails = this.matchInfo.sport_event.venue
+          this.matchInfo.venuedetails.lat = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[0])
+          this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
+        }
+        console.log(this.matchInfo.venuedetails);
         
         // if (this.matchInfo.match_info.gamestate == 0) {
         //   this.startLiveUpdateAfterTime();

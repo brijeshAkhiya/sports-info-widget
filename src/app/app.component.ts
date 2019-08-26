@@ -72,8 +72,6 @@ export class AppComponent implements OnInit, AfterContentInit {
       if(window.location.host.split('.')[0])
         selectedLang = window.location.host.split('.')[0];
     } 
-    // let selectedLang = (window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info' && !window.location.host.includes('localhost')) ? window.location.host.split('.')[0] : 'english';
-    console.log(selectedLang)
     //save language to localstorage
     localStorage.setItem('userLng', selectedLang)
     this.translate.setDefaultLang(selectedLang);
