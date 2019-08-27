@@ -23,6 +23,7 @@
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
           </ng-container>
+
         </tr>
       </tbody>
     </table>
@@ -77,8 +78,8 @@
         <a
           [routerLink]="options.image_type == 'team' ? ['/soccer/team',(item?.competitor?.id | splitID),(item?.competitor?.name | slugify)] : ['/soccer/player',(item?.id | splitID),(item?.name | split | slugify)]">
           <img [offset]="commonService.lazyloadoffset"
-            [lazyLoad]=" (options.image_type == 'team') ?  (item?.competitor?.id | logosurl:'soccer') : (item?.competitors[0]?.id | logosurl:'soccer')"
-            [defaultImage]="cricketService.flagplaceholder" alt="logo">
+            [lazyLoad]="(options.image_type == 'team') ?  (item?.competitor?.id | logosurl:'soccer') : (item?.competitors[0]?.id | logosurl:'soccer')"
+            [defaultImage]="cricketService.flagplaceholder" alt="logo" *ngIf="options.image_type == 'team'">
           {{ (options.image_type == 'team') ? item[value] : item[value] | split}}
         </a>
       </td>
@@ -94,7 +95,7 @@
     <ng-template #link>
       <td>
         <a
-          [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player', item['pid'], (item.name | slugify)] : '' ">
+          [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
             [defaultImage]="cricketService.flagplaceholder" alt="logo">
           {{ item[value]}}

@@ -40,7 +40,7 @@
           <div class="team-name">
             <h4>{{team.name}}</h4>
           </div>
-          <a class="fullblock-link" [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+          <a class="fullblock-link" [routerLink]="['/soccer/team',(tournament | splitID),(team.id | splitID),(team.name | slugify)]">
           </a>
         </ng-container>
 

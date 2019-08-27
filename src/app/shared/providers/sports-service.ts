@@ -609,5 +609,12 @@ export class SportsService {
     );
   }
 
+  //get soccer team stats (season wise)
+  getsoccerteamstats(tournamentid,teamid){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/seasons/${tournamentid}/teams/${teamid}/statistics`
+    );
+  }
+
 
 }

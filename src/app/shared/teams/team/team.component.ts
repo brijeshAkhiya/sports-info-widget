@@ -22,7 +22,7 @@ export class TeamComponent implements OnInit {
   sport;
   routeParams;
   objectKeys = Object.keys
-  soccerteamplayers = { midfielder: [], forward: [], goalkeeper: [], defender: [] }
+  soccerteamplayers = { midfielder: [], forward: [], goalkeeper: [], defender: [], playerstats: [] }
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
 
@@ -237,6 +237,34 @@ export class TeamComponent implements OnInit {
     }, (error) => {
       this.loadingFixture = false;
     });
+
+  }
+
+  //soccer team stats 
+  getSoccerTeamStats() {
+    this.soccerteamplayers.playerstats = []
+    let teamid = this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')
+    let tournamentid = this.commonService.getIds(this.routeParams.tournamentid, 'soccer', 'tournament')
+    if (teamid && tournamentid) {
+      this.loading = true
+      this.sportsService.getsoccerteamstats(tournamentid, teamid).subscribe((res: any) => {
+        this.loading = false;
+        if (res.data)
+          res.data.competitor.players.map((pdata) => {
+            pdata['minutes'] = pdata['statistics']['minutes_played']
+            pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
+            pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
+            pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
+            pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0
+            pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
+            pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
+            this.soccerteamplayers.playerstats.push(pdata)
+          })
+        console.log('playerstat', this.soccerteamplayers.playerstats);
+      }, (error) => {
+        this.loading = false;
+      })
+    }
 
   }
 
