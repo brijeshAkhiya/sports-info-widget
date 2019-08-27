@@ -146,7 +146,7 @@
               [offset]="commonService.lazyloadoffset">
           </p>
         </div>
-        <!-- <ng-container *ngIf="team.home?.players?.length > 0"> -->
+        <ng-container *ngIf="team.home?.squad && team.home?.squad?.length > 0">
         <ng-container *ngFor="let role of objectKeys(team.home?.squad).sort()">
           <h5 class="text-capitalize">{{role}}</h5>
           <ul class="lienup-list">
@@ -158,11 +158,11 @@
                 </a>
               </p>
               <span class="filled"
-                [ngStyle]="{'background':'#'+team.home?.jersey.base, 'border-color': (team.home?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.home?.jersey.base, 'color': '#'+team[0]?.jersey.number }">{{player?.jersey_number}}</span>
+                [ngStyle]="{'background':'#'+team.home?.jersey.base, 'border-color': (team.home?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.home?.jersey.base, 'color': '#'+team.home?.jersey.number }">{{player?.jersey_number}}</span>
             </li>
           </ul>
         </ng-container>
-        <!-- </ng-container> -->
+        </ng-container>
       </div>
       <!-- End Team 1 Squads-->
 
@@ -179,7 +179,7 @@
 
           </p>
         </div>
-        <!-- <ng-container *ngIf="team.away?.players?.length > 0"> -->
+        <ng-container *ngIf="team.away?.squad && team.away?.squad?.length > 0">
         <ng-container *ngFor="let role of objectKeys(team.away?.squad).sort()">
           <h5 class="text-capitalize">{{role}}</h5>
           <ul class="lienup-list">
@@ -195,7 +195,7 @@
             </li>
           </ul>
         </ng-container>
-        <!-- </ng-container> -->
+        </ng-container>
       </div>
       <!-- End Team 2 Squads-->
 

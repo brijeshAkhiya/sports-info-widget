@@ -47,7 +47,7 @@ export class TournamentMatchComponent implements OnInit {
 
   getMatchInfo(id) {
     this.loading = true;
-    this.sportsService.getSoccerMatchSummary(id).subscribe((res: any) => {
+    this.sportsService.getSoccerMatchTimeline(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
         console.log(this.matchInfo);
@@ -93,7 +93,7 @@ export class TournamentMatchComponent implements OnInit {
         // this.getVenuedetails();
         // this.initTeam();
         // this.initCommentry();
-        if(Object.entries(this.matchLineups.lineups).length > 0)
+        // if(Object.entries(this.matchLineups.lineups).length > 0)
           this.initSquads();
       }
       this.loading = false;
@@ -112,8 +112,6 @@ export class TournamentMatchComponent implements OnInit {
         this.team.home.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics
         this.team.away.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics
         this.matchStats = res.data.statistics;
-        console.log(this.team);
-        
       }
     }, (error) => {
       this.statsLoading = false;
@@ -129,37 +127,44 @@ export class TournamentMatchComponent implements OnInit {
 
   initSquads() {
 
-    this.team.home = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0];
-    this.team.away = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0];
+    if(Object.entries(this.matchLineups.lineups).length > 0){
+      this.team.home = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0];
+      this.team.away = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0];
 
-    //Team with role
-    let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
-    this.team.home.squad = []
-    tempHomeSquad.forEach(element => {
-      (this.team.home.squad[element.type] =  this.team.home.squad[element.type] || []).push(element);
-    });
-    //Team with formated type
-    if(this.team.home.formation && this.team.home.formation.type){
-      let players = this.sortingByRole(this.team.home.players);
-      (this.team.home.formated_players =  this.team.home.formated_players || []).push(players.splice(0, 1));
-      this.team.home.formation.type.split('-').forEach((formationType, index) => {
-          this.team.home.formated_players.push(players.splice(0, formationType));
+      //Team with role
+      let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
+      this.team.home.squad = []
+      tempHomeSquad.forEach(element => {
+        (this.team.home.squad[element.type] =  this.team.home.squad[element.type] || []).push(element);
       });
+      //Team with formated type
+      if(this.team.home.formation && this.team.home.formation.type){
+        let players = this.sortingByRole(this.team.home.players);
+        (this.team.home.formated_players =  this.team.home.formated_players || []).push(players.splice(0, 1));
+        this.team.home.formation.type.split('-').forEach((formationType, index) => {
+            this.team.home.formated_players.push(players.splice(0, formationType));
+        });
+      }
+
+      //Team with role
+      let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
+      this.team.away.squad = []
+      tempAwaySquad.forEach(element => {
+        (this.team.away.squad[element.type] =  this.team.away.squad[element.type] || []).push(element);
+      });
+      //Team with formated type
+      if(this.team.away.formation && this.team.away.formation.type){
+        let players = window['players'] = this.sortingByRole(this.team.away.players);
+        (this.team.away.formated_players =  this.team.away.formated_players || []).push(players.splice(0, 1));
+        this.team.away.formation.type.split('-').forEach((formationType, index) => {
+            this.team.away.formated_players.push(players.splice(0, formationType));
+        });
+      }
     }
-
-    //Team with role
-    let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
-    this.team.away.squad = []
-    tempAwaySquad.forEach(element => {
-      (this.team.away.squad[element.type] =  this.team.away.squad[element.type] || []).push(element);
-    });
-    //Team with formated type
-    if(this.team.away.formation && this.team.away.formation.type){
-      let players = window['players'] = this.sortingByRole(this.team.away.players);
-      (this.team.away.formated_players =  this.team.away.formated_players || []).push(players.splice(0, 1));
-      this.team.away.formation.type.split('-').forEach((formationType, index) => {
-          this.team.away.formated_players.push(players.splice(0, formationType));
-      });
+    if (this.matchInfo.statistics && Object.entries(this.matchInfo.statistics).length > 0) {
+      this.team.home.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics
+      this.team.away.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics
+      this.matchStats = this.matchInfo.statistics;
     }
 
     console.log(this.team);
