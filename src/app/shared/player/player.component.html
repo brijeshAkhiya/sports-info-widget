@@ -11,9 +11,9 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1 *ngIf="sport == 'cricket'">{{playerData?.player?.name | split}}</h1>
           <h1 *ngIf="sport == 'kabaddi'">{{playerData?.fullname}}</h1>
-          <app-favourites-widget [value]=" sport == 'cricket' ?  {id:playerid,type:'player',sport:'cricket',name:playerData?.player?.name | split} : {id:playerData.pid,sport:'kabaddi',teamid:teamid,type:'player',name:playerData?.fullname}"
-            
-          >
+          <h1 *ngIf="sport == 'soccer'">{{playerData?.player?.name | split}}</h1>
+          <app-favourites-widget
+            [value]=" sport == 'cricket' ?  {id:playerid,type:'player',sport:'cricket',name:playerData?.player?.name | split} : sport == 'kabaddi' ?  {id:playerData.pid,sport:'kabaddi',teamid:teamid,type:'player',name:playerData?.fullname} : sport == 'soccer' ? {id:playerid,type:'player',sport:'soccer',name:playerData?.player?.name | split} : ''">
           </app-favourites-widget>
         </div>
 
@@ -59,7 +59,8 @@
               </section>
               <section class="player-profile d-flex" *ngIf="sport == 'kabaddi'">
                 <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="playerData?.fullname" [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamid+'.svg'"
+                  <img class="common-shadow rounded-box" alt="playerData?.fullname"
+                    [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamid+'.svg'"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
                 </div>
                 <div class="player-info d-flex common-shadow rounded-box">
@@ -91,7 +92,39 @@
                       </div> -->
                 </div>
               </section>
-              
+
+              <section class="player-profile d-flex" *ngIf="sport == 'soccer'">
+                <div class="player-pic">
+                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerData?.player?.id | playerimage:['m']"
+                    [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
+                </div>
+                <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData?.player">
+                  <div class="info-col">
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Contact_us.Full_Name' | translate), value:playerData?.player.name | split}">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Born' | translate), value: playerData?.player?.date_of_birth | date }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.player?.nationality }">
+                    </ng-container>
+                  </div>
+                  <div class="info-col">
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Position' | translate), value: playerData?.player?.type }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Height' | translate), value: playerData?.player?.height + ' ' +'cm' }">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="playerInfoCardContent;context:{ title: ('Shared_Module2.Weight' | translate), value: playerData?.player?.weight + ' ' +'kg' }">
+                    </ng-container>
+                  </div>
+                </div>
+              </section>
+
+
               <section class="common-section top-padding quick-stats" *ngIf="stats">
                 <h4>{{ 'Shared_module.quick_stats' | translate }}</h4>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
@@ -100,6 +133,13 @@
               <section class="common-section top-padding" *ngIf="stats && sport == 'cricket'">
                 <h4>{{ 'Shared_module.major_teams' | translate }}</h4>
                 <app-team-card [teams]="playerData?.teams" [sport]="sport"></app-team-card>
+              </section>
+              <section class="common-section top-padding" *ngIf="sport == 'soccer'">
+                <h4>{{ 'Shared_module.major_teams' | translate }}</h4>
+                <app-team-card [teams]="playerData?.roles" [sport]="sport" [type]="'player'"
+                  *ngIf="playerData?.roles && playerData?.roles?.length > 0"></app-team-card>
+                <app-team-card [teams]="playerData?.competitors" [sport]="sport"
+                  *ngIf="!(playerData?.roles && playerData?.roles?.length > 0)"></app-team-card>
               </section>
             </ng-template>
           </ngb-tab>
@@ -147,7 +187,8 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
+          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
 
           <!-- <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="'cricketseries'">
           </app-common-story-widget> -->
@@ -172,6 +213,6 @@
 <ng-template #playerInfoCardContent let-value="value" let-title="title">
   <div class="info-item" *ngIf="value">
     <p class="light-title">{{title}}</p>
-    <p>{{value}}</p>
+    <p>{{value }}</p>
   </div>
 </ng-template>

@@ -306,7 +306,8 @@
   "Red_cards":"Red Cards",
   "Yellow_cards":"Yellow Cards",
   "Fouls":"Fouls",
-  "Possession":"Possession"
+  "Possession":"Possession",
+  "Country":"Country"
 },
 "Shared_Module3":{
   "Save":"Save",

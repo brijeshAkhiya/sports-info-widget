@@ -126,12 +126,18 @@ export class CommonService {
         return 'sr:player:' + id
       }
     }
-    else if(sport == 'soccer'){
+    else if (sport == 'soccer') {
       if (type == 'tournament') {
         return 'sr:season:' + id
       }
       else if (type == 'match') {
         return 'sr:sport_event:' + id
+      }
+      else if (type == 'team') {
+        return 'sr:competitor:' + id
+      }
+      else if(type == 'player'){
+        return 'sr:player:'+id
       }
     }
   }

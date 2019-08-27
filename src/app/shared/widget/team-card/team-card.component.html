@@ -33,7 +33,7 @@
           </a>
         </ng-container>
 
-        <ng-container *ngIf="sport=='soccer'">
+        <ng-container *ngIf="sport=='soccer' && type == 'teams'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
               [defaultImage]="cricketService.flagplaceholder" alt="team?.name">
           </div>
@@ -41,6 +41,19 @@
             <h4>{{team.name}}</h4>
           </div>
           <a class="fullblock-link" [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="sport=='soccer' && type == 'player'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
+              [lazyLoad]="team?.competitor?.id | logosurl:'soccer'" [defaultImage]="cricketService.flagplaceholder"
+              alt="team?.competitor?.name">
+          </div>
+          <div class="team-name">
+            <h4>{{team?.competitor?.name}}</h4>
+          </div>
+          <a class="fullblock-link"
+            [routerLink]="['/soccer/team',(team.competitor.id | splitID),(team.competitor.name | split | slugify)]">
           </a>
         </ng-container>
 

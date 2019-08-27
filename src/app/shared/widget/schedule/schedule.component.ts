@@ -20,12 +20,12 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.sport == 'soccer'){
-      if(!(typeof this.tournament != 'undefined' && this.tournament != ''))
+    if (this.sport == 'soccer') {
+      if (!(typeof this.tournament != 'undefined' && this.tournament != ''))
         this.listtype = 'datelist'
     }
   }
-  replace(str){
+  replace(str) {
     return str.replace(/_/g, " ")
   }
 
