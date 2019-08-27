@@ -1,4 +1,4 @@
-<div class="goal-commentary-list common-shadow rounded-box" *ngIf="commentry">
+<div class="goal-commentary-list common-shadow rounded-box" *ngIf="sport == 'kabaddi' && commentry">
   <div class="commentary-item d-flex align-items-center" *ngFor="let event of commentry.slice().reverse();">
    
     <div class="icon-block">
@@ -42,3 +42,32 @@
 
   </div>
 </div>
+
+<div class="goal-commentary-list common-shadow rounded-box" *ngIf="sport == 'soccer' && commentry">
+    <div class="commentary-item d-flex align-items-center" *ngFor="let event of commentry.slice().reverse();">
+     <ng-container *ngIf="event.commentaries">
+        <div class="icon-block">
+          <div class="icon" [ngClass]= "event.type">
+          </div>
+          <p *ngIf="event.match_clock">{{event.match_clock}}'</p>
+        </div>
+    
+        <div class="desc-block d-flex justify-content-between align-items-center" >        
+            <p class="desc">{{event.commentaries[0].text}}</p>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="event.type == 'break_start'">
+        <div class="icon-block">
+          <div class="icon" [ngClass]= "event.type">
+          </div>
+          <p *ngIf="event.match_clock">{{event.match_clock}}'</p>
+        </div>
+    
+        <div class="desc-block d-flex justify-content-between align-items-center" >  
+          <p class="title" >{{ 'Soccer_Module.half_time' | translate }}</p>      
+          <p class="desc"></p>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
+import { CarouselComponent } from 'ngx-owl-carousel-o';
 
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from '@providers/common-service';
@@ -17,6 +18,9 @@ import { Store } from "@ngrx/store";
   styleUrls: ['./fixtures-card.component.css']
 })
 export class FixturesCardComponent implements OnInit {
+  
+  @ViewChild('gallery') public gallery: CarouselComponent;
+
   @Input() sport: any
   @Input() title: any
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid : '' }
@@ -83,12 +87,19 @@ export class FixturesCardComponent implements OnInit {
   }
   loadDate(current){
     this.customDate = new Array<number>(moment(`${current.year}-${current.month}-${current.day}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
+    console.log(this.gallery);   
+    if(this.gallery) 
+    this.gallery.to(current.day);
   }
   selectDate(day){    
     this.paramSoccer.data = [];
     this.paramSoccer.selectedDate.day = day;
     this.loadDate(this.paramSoccer.selectedDate);
     this.customOptions.startPosition = day;
+
+    console.log(this.gallery);   
+    window['gallery'] = this.gallery
+    this.gallery.to(day);
     this.getSoccerData()
   }
   dateChange($e){    
@@ -99,6 +110,9 @@ export class FixturesCardComponent implements OnInit {
     };
     this.loadDate(this.paramSoccer.selectedDate);
     this.customOptions.startPosition = this.model.day;
+    console.log(this.gallery);   
+    window['gallery'] = this.gallery
+    this.gallery.to(this.model.day);
     this.getSoccerData()
   }
   filter(category){
@@ -106,12 +120,14 @@ export class FixturesCardComponent implements OnInit {
     this.paramSoccer.selectedCategory = category;
     if(category.name == 'All'){
       this.paramSoccer.fullData.map((data) => {
+        if(data.sport_event.sport_event_context){
           if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
           obj[data.sport_event.sport_event_context.season.id].matches.push(data)
+        }
       })
     }else{
       this.paramSoccer.fullData.map((data) => {
-        if(category.id == data.sport_event.sport_event_context.category.id){
+        if(data.sport_event.sport_event_context && category.id == data.sport_event.sport_event_context.category.id){
           if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
           obj[data.sport_event.sport_event_context.season.id].matches.push(data)
         }
@@ -132,10 +148,13 @@ export class FixturesCardComponent implements OnInit {
           let category = {};
           res.data.summaries.map((data) => {
             // Category for filter
-            if (!category[data.sport_event.sport_event_context.category.id]) category[data.sport_event.sport_event_context.category.id] = data.sport_event.sport_event_context.category;
+            if(data.sport_event.sport_event_context){
+              if (!category[data.sport_event.sport_event_context.category.id]) category[data.sport_event.sport_event_context.category.id] = data.sport_event.sport_event_context.category;
 
-            if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
-            obj[data.sport_event.sport_event_context.season.id].matches.push(data)
+              if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = {'season' : data.sport_event.sport_event_context.season, matches : []};
+              obj[data.sport_event.sport_event_context.season.id].matches.push(data)
+            }
+              
           })
           this.paramSoccer.data =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
           this.paramSoccer.filterCategory =  Object.keys(category).map(key => ({ key, data: category[key] }));
