@@ -79,26 +79,18 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       .subscribe((res: any) => {
         this.loader = false
         if (res.data && res.data.summaries && res.data.summaries.length > 0) {
-        this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == 'International Clubs')
-        if(this.fixturesdata.length == 0){
-        this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started')
-        console.log('fixtures data',this.fixturesdata);
-        
-        }
-          this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == 'International Clubs')
+          this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs')
+          if (this.fixturesdata.length == 0) {
+            this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started')
+          }
+          this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs')
+          if (this.resultsdata.length == 0) {
+            this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed')
+          }
         }
       }, (error) => {
         this.loader = false
       });
-  }
-
-  filterSoccerData(data, type, category, season) {
-    if (type == 'fixture') {
-      return data.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == category, '')
-    }
-    else {
-      return data.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == category, '')
-    }
   }
 
   convertDate(date) {
