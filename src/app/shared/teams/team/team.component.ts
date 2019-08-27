@@ -22,6 +22,7 @@ export class TeamComponent implements OnInit {
   sport;
   routeParams;
   objectKeys = Object.keys
+  soccerteamplayers = { midfielder: [], forward: [], goalkeeper: [], defender: [] }
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
 
@@ -49,6 +50,10 @@ export class TeamComponent implements OnInit {
     else if (this.sport == 'kabaddi') {
       this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.routeParams.teamid] } }
       this.getKabaddiTeamProfile(this.routeParams.teamid);
+    }
+    else if (this.sport == 'soccer') {
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')] } }
+      this.getSoccerTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team'))
     }
   }
 
@@ -182,6 +187,57 @@ export class TeamComponent implements OnInit {
       }, (error) => {
         this.paramsResults.loading = false;
       });
+  }
+
+
+  //soccer team profile 
+  getSoccerTeamProfile(teamid) {
+    this.loading = true;
+    if (teamid) {
+      this.sportsService.getsoccerteamprofile(teamid).subscribe((res: any) => {
+        this.loading = false;
+        if (res.data)
+          this.teamProfile = res.data
+        this.teamProfile.players.map((data) => {
+          if (data.type == 'defender') {
+            this.soccerteamplayers.defender.push(data)
+          }
+          else if (data.type == 'midfielder') {
+            this.soccerteamplayers.midfielder.push(data)
+          }
+          else if (data.type == 'forward') {
+            this.soccerteamplayers.forward.push(data)
+          }
+          else if (data.type == 'goalkeeper') {
+            this.soccerteamplayers.goalkeeper.push(data)
+          }
+        })
+      }, (error) => {
+        this.loading = false;
+      })
+    }
+  }
+
+  //soccer team fixtures
+  getsoccerTeamFixtures() {
+    if (this.matchfixtures && this.matchfixtures.length > 0)
+      return false;
+    this.loadingFixture = true;
+    this.sportsService.getsoccerteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')).subscribe((res: any) => {
+      this.loadingFixture = false;
+      this.matchfixtures = []
+      res.data.summaries.map((match) => {
+        if (match.sport_event_status.status == 'not_started') {
+          match['start_time'] = match.sport_event.start_time
+          this.matchfixtures.push(match)
+        }
+      })
+      this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'start_time', 'asc')
+      console.log('match::', this.matchfixtures);
+    }, (error) => {
+      this.loadingFixture = false;
+    });
+
   }
 
   loadmore(type) {

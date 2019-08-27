@@ -13,6 +13,7 @@ export class TeamCardComponent implements OnInit {
   @Input() teams;
   @Input() sport;
   @Input() tournament;
+  @Input() type;
 
   constructor(
     public cricketService: CricketService,
@@ -20,6 +21,9 @@ export class TeamCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(this.sport == 'soccer' && this.type == undefined){
+      this.type = 'teams'
+    }
   }
 
 }

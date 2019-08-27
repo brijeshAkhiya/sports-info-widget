@@ -14,8 +14,13 @@
           [offset]="commonService.lazyloadoffset">
       </div>
     </div>
-    <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage">
-      <div class="probability-fill"></div>
+    <div class="team-probability-outer d-flex justify-content-between">
+      <div *ngIf="stylepercentage" class="team-probability" [style.width]="stylepercentage">
+        <div class="probability-fill"></div>
+      </div>
+      <div class="team-probability" style="width: 10%;">
+        <div class="probability-fill"></div>
+      </div>
     </div>
   </div>
   <p *ngIf="matchprobability?.length == 0">

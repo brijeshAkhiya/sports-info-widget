@@ -136,6 +136,14 @@ export class MainFooterComponent implements OnInit {
         let slugname = this.slugifyPipe.transform(name);
         this.router.navigate(['soccer/tournament', this.splitIDPipe.transform(id), slugname])
       }
+      else if (type == 'team' && sport == 'soccer'){
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['soccer/team', this.splitIDPipe.transform(id), slugname])
+      }
+      else if (type == 'player' && sport == 'soccer'){
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['soccer/player', this.splitIDPipe.transform(id), slugname])
+      }
     }
   }
   //remove favourites function

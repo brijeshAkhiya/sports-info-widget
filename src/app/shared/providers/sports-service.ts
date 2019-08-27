@@ -548,16 +548,15 @@ export class SportsService {
   }
 
   //get soccer season clubs/teams 
-  getsoccerseasonteams(id){
+  getsoccerseasonteams(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/seasons/${id}/teams`
     );
   }
 
-  getsoccerpointtable(id)
-  {
+  getsoccerpointtable(id) {
     return this.http.get(
-      environment.apiUrl + environment.version+ `/soccer/seasons/${id}/standings`
+      environment.apiUrl + environment.version + `/soccer/seasons/${id}/standings`
     );
   }
 
@@ -583,10 +582,30 @@ export class SportsService {
   }
 
   //get soccer top-scorers
-  getsoccerTopScorer(id)
-  {
+  getsoccerTopScorer(id) {
     return this.http.get(
-      environment.apiUrl + environment.version+ `/soccer/seasons/${id}/leaders`
+      environment.apiUrl + environment.version + `/soccer/seasons/${id}/leaders`
+    );
+  }
+
+  //get soccer team profile
+  getsoccerteamprofile(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/team/${id}`
+    );
+  }
+
+  //get soccer team fixtures 
+  getsoccerteamfixtures(id){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/team/${id}/summaries`
+    );
+  }
+
+  //get soccer player info
+  getsoccerplayerinfo(id){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/player/${id}`
     );
   }
 

@@ -13,6 +13,7 @@ import { TeamComponent } from '@app/shared/teams/team/team.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
+import { PlayerComponent } from '@app/shared/player/player.component';
 
 
 const routes: Routes = [{
@@ -66,6 +67,11 @@ const routes: Routes = [{
         {
             path: 'team/:teamid/:slug',
             component: TeamComponent,
+            data: { 'sport': 'soccer' }
+        },
+        {
+            path: 'player/:id/:slug',
+            component: PlayerComponent,
             data: { 'sport': 'soccer' }
         },
         {

@@ -224,7 +224,7 @@
   <div class="soccer-tour-list" *ngIf="data.length > 0">
     <div class="soccer-tour rounded-box common-shadow" *ngFor="let item of data">
       <div class="soccer-tour-title">
-        <p>{{item.data.season.name}}</p>
+        <p>{{item?.data?.season?.name}}</p>
       </div>
       <div class="schedule-tour-list">
         <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"

@@ -56,6 +56,11 @@ export class PlayerComponent implements OnInit {
       
       this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, eSport : 'Kabaddi', aIds: [this.playerid] } }
     }
+    else if(this.sport == 'soccer'){
+      this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport ,'player')
+      this.getSoccerPlayerInfo();
+      this.paramArticle = { reqParams : { nStart: 0, nLimit: 10, eSport : 'Soccer', aIds: [this.playerid] } }
+    }
     
   }
 
@@ -110,6 +115,21 @@ export class PlayerComponent implements OnInit {
           })
           this.stats =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
         }
+      }
+    },
+      (error) => {
+        this.loading = false;
+      })
+  }
+
+  getSoccerPlayerInfo(){
+    this.loading = true;
+    this.sportsService.getsoccerplayerinfo(this.playerid).subscribe((res:any) => {
+      this.loading = false;
+      console.log(res.data);
+      
+      if (res.data) {
+        this.playerData = res.data;
       }
     },
       (error) => {

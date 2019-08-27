@@ -307,7 +307,8 @@
   "Yellow_cards":"Yellow Cards",
   "Fouls":"Fouls",
   "Possession":"Possession",
-  "half_time": "Half Time"
+  "half_time": "Half Time",
+  "Country":"Country"
 },
 "Shared_Module3":{
   "Save":"Save",

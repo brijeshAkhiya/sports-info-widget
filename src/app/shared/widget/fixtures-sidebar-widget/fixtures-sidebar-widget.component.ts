@@ -79,12 +79,22 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       .subscribe((res: any) => {
         this.loader = false
         if (res.data && res.data.summaries && res.data.summaries.length > 0) {
-          this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == 'International Clubs')
+        //  this.fixturesdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == 'International Clubs')
+          this.filterSoccerData(res.data.summaries, 'fixture','International Clubs','')
           this.resultsdata = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == 'International Clubs')
         }
       }, (error) => {
         this.loader = false
       });
+  }
+
+  filterSoccerData(data, type, category, season) {
+    if (type == 'fixture') {
+      return data.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name == category, '')
+    }
+    else {
+      return data.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name == category, '')
+    }
   }
 
   convertDate(date) {

@@ -10,8 +10,9 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
           <h1 *ngIf="sport == 'cricket'">{{teamProfile?.name}}</h1>
           <h1 *ngIf="sport == 'kabaddi'">{{teamProfile?.tname}}</h1>
+          <h1 *ngIf="sport == 'soccer'">{{teamProfile?.competitor?.name}}</h1>
           <app-favourites-widget
-            [value]="sport == 'cricket'? {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name} : {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}">
+            [value]="sport == 'cricket'? {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name} : sport == 'kabaddi' ?  {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname} : sport == 'soccer' ? {id:teamProfile?.competitor?.id,type:'team',sport:'soccer',name:teamProfile?.competitor?.name} : ''">
           </app-favourites-widget>
         </div>
 
@@ -71,6 +72,33 @@
                 </app-no-data-widget>
               </ng-container>
 
+              <!--Soccer About Section-->
+              <ng-container *ngIf="sport == 'soccer'">
+                <section class="team-about-head d-flex">
+                  <div class="team-logo align-self-start rounded-box common-shadow">
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'soccer'"
+                      [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
+                  </div>
+                  <div class="team-info align-items-center rounded-box common-shadow">
+                    <h5 *ngIf="teamProfile?.competitor?.country"><span
+                        class="title light-text">{{ 'Soccer_Module.Country' | translate }} :
+                      </span>{{teamProfile?.competitor?.country}}</h5>
+                    <h5 *ngIf="teamProfile?.venue?.name"><span
+                        class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
+                      </span>{{teamProfile?.venue?.name}}</h5>
+                    <!-- <h5 *ngIf="teamProfile?.venue?.name"><span
+                        class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
+                      </span>{{teamProfile?.venue?.name}}</h5> -->
+                    <h5 *ngIf="teamProfile?.manager?.name"><span
+                        class="title light-text">{{ 'Shared_module.Manager' | translate }} :
+                      </span>{{teamProfile?.manager?.name}}</h5>
+                    <h5 *ngIf="teamProfile?.competitor?.abbreviation"><span
+                        class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
+                      </span>{{teamProfile?.competitor?.abbreviation}}</h5>
+                  </div>
+                </section>
+              </ng-container>
+
               <!-- Squad Section-->
               <section class="common-section squad-list" *ngIf="sport == 'cricket'">
                 <h4 class="squad-title" *ngIf="teamProfile?.players?.length > 0;then cricket_squad else no_players">
@@ -111,6 +139,21 @@
                     <ng-container *ngFor="let player of  objectKeys(teamProfile?.players)">
                       <h6 class="text-capitalize"> {{player}}</h6>
                       <ng-container *ngTemplateOutlet="kabaddiPlayer;context:{players:teamProfile?.players[player]}">
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </ng-template>
+              </section>
+
+              <section class="common-section squad-list" *ngIf="sport == 'soccer'">
+                <h4 class="squad-title" *ngIf="teamProfile?.players?.length > 0;then soccer_squad else no_players">
+                  {{ 'Shared_module.Squad' | translate }}
+                </h4>
+                <ng-template #soccer_squad>
+                  <div class="squad-group">
+                    <ng-container *ngFor="let player of  objectKeys(soccerteamplayers)">
+                      <h6 class="text-capitalize"> {{player}}</h6>
+                      <ng-container *ngTemplateOutlet="soccerPlayer;context:{players:soccerteamplayers[player]}">
                       </ng-container>
                     </ng-container>
                   </div>
@@ -158,6 +201,21 @@
             </ng-template>
           </ngb-tab>
 
+          <!--Soccer fixtures section-->
+
+          <ngb-tab *ngIf="sport == 'soccer'">
+            <ng-template ngbTabTitle>
+              <div (click)="getsoccerTeamFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-loader *ngIf="loadingFixture"></app-loader>
+              <app-no-data-widget [message]="('widget_Module2.No_team_fixtures' | translate)"
+                *ngIf="!loadingFixture &&  (!matchfixtures || matchfixtures?.length == 0)">
+              </app-no-data-widget>
+              <app-schedule [data]="matchfixtures" [type]="'fixture'" [sport]="sport" [tournament]="' '"
+                *ngIf="matchfixtures?.length > 0"></app-schedule>
+            </ng-template>
+          </ngb-tab>
 
           <!--New fixtures -->
 
@@ -238,6 +296,26 @@
         </div>
         <a class="fullblock-link"
           [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #soccerPlayer let-players="players">
+  <div class="row row-size12">
+    <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
+      <div class="squad-item fullblock-link-container rounded-box common-shadow">
+        <img alt="{{player.name}}" [lazyLoad]="player?.id| playerimage:['m']"
+          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <div class="item-desc">
+          <p>{{player.name | split}}
+            <span class="light-text">{{player.jersey_number}}</span>
+          </p>
+          <a [routerLink]="" class="theme-btn"> {{ 'Shared_module.view_player' | translate }}<span></span></a>
+        </div>
+        <a class="fullblock-link"
+          [routerLink]="['/soccer/player',(player?.id | splitID), (player?.name | split | slugify )]">
         </a>
       </div>
     </div>
