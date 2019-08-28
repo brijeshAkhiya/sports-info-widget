@@ -20,9 +20,6 @@ import { TournamentStatsComponent } from './tournament/tournament-stats/tourname
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
 
-
-
-
 @NgModule({
   declarations: [SoccerComponent, HomeComponent, FixturesComponent, TournamentListComponent, TournamentComponent, TournamentHomeComponent, TournamentFixturesComponent, TournamentStatsComponent, TournamentTableComponent,TournamentMatchComponent],
   
