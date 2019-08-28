@@ -20,7 +20,7 @@
                 <!-- <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'"
                   [message]="'Coming Soon..!'">
                 </app-no-data-widget> -->
-                <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry"></app-goal-commentry>
+                <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry" [sport]="'kabaddi'"></app-goal-commentry>
                 <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
                   [scheduled]="matchInfo.match_info.datestart" [sport]="'kabaddi'"></app-countdown>
               </ng-container>

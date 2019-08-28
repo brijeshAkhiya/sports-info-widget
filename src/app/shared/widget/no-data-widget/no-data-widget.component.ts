@@ -15,6 +15,9 @@ export class NoDataWidgetComponent implements OnInit {
   ngOnInit() {
     if(this.sport == 'kabaddi'){
       this.imagepath = { image : 'assets/images/match/kabaddi_no_data.svg' };
+    }
+    else if(this.sport == 'soccer'){
+      this.imagepath = { image : 'assets/images/match/soccer/no_data_football.svg' };
     }else{
       let array = [
         {image:'assets/images/no_data_1.svg'},

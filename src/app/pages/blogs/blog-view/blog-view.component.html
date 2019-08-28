@@ -22,8 +22,9 @@
           <div class="banner-desc">
             <h1 class="white-text">{{blogdata?.sTitle}}</h1>
             <div class="author-info d-flex justify-content-between align-items-center">
-              <p class="author"><a>{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}
-                </a>{{blogdata?.dCreatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
+              <p class="author">
+                  <a [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}} {{blogdata?.iId?.sLastName}}</a>
+                  {{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
               <ul class="count-list">
                 <li>
                   <p class="comment white-icon"><span>{{blogdata?.nCommentsCount}}</span></p>

@@ -132,7 +132,7 @@
       </div>
     </div>
     <!-- End Ground -->
-
+    <!-- {{team | json}} -->
     <div class="lienup-row d-flex align-items-start justify-content-between" *ngIf="team.length != 0">
       <!-- Start Team 1 Squads-->
       <div>
@@ -146,7 +146,7 @@
               [offset]="commonService.lazyloadoffset">
           </p>
         </div>
-        <ng-container *ngIf="team.home?.squad && team.home?.squad?.length > 0">
+        <!-- <ng-container *ngIf="team.home?.squad && team.home?.squad?.length > 0"> -->
         <ng-container *ngFor="let role of objectKeys(team.home?.squad).sort()">
           <h5 class="text-capitalize">{{role}}</h5>
           <ul class="lienup-list">
@@ -162,7 +162,7 @@
             </li>
           </ul>
         </ng-container>
-        </ng-container>
+        <!-- </ng-container> -->
       </div>
       <!-- End Team 1 Squads-->
 
@@ -179,7 +179,7 @@
 
           </p>
         </div>
-        <ng-container *ngIf="team.away?.squad && team.away?.squad?.length > 0">
+        <!-- <ng-container *ngIf="team.away?.squad && team.away?.squad?.length > 0"> -->
         <ng-container *ngFor="let role of objectKeys(team.away?.squad).sort()">
           <h5 class="text-capitalize">{{role}}</h5>
           <ul class="lienup-list">
@@ -195,7 +195,7 @@
             </li>
           </ul>
         </ng-container>
-        </ng-container>
+        <!-- </ng-container> -->
       </div>
       <!-- End Team 2 Squads-->
 

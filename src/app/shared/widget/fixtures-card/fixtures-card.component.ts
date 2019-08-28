@@ -87,19 +87,19 @@ export class FixturesCardComponent implements OnInit {
   }
   loadDate(current){
     this.customDate = new Array<number>(moment(`${current.year}-${current.month}-${current.day}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
-    console.log(this.gallery);   
-    if(this.gallery) 
-    this.gallery.to(current.day);
+
+    window['gallery'] = this.gallery
+    console.log(this.gallery);  
+    console.log(current.day, this.gallery,  current.day > 7);     
+    if(this.gallery && current.day > 7) 
+    this.gallery.to("28");
   }
   selectDate(day){    
+    window['gallery'] = this.gallery
     this.paramSoccer.data = [];
     this.paramSoccer.selectedDate.day = day;
     this.loadDate(this.paramSoccer.selectedDate);
-    this.customOptions.startPosition = day;
-
-    console.log(this.gallery);   
-    window['gallery'] = this.gallery
-    this.gallery.to(day);
+    this.gallery.to("28");
     this.getSoccerData()
   }
   dateChange($e){    
@@ -113,7 +113,12 @@ export class FixturesCardComponent implements OnInit {
     console.log(this.gallery);   
     window['gallery'] = this.gallery
     this.gallery.to(this.model.day);
+    this.gallery.to("28");
     this.getSoccerData()
+  }
+  changeSlide($e){
+    console.log("daklsdsad", $e);
+    
   }
   filter(category){
     let obj = {};
