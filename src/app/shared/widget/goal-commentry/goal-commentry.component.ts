@@ -9,9 +9,12 @@ export class GoalCommentryComponent implements OnInit {
 
   @Input() commentry;
   @Input() sport;
+  @Input() team;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.team);
+    
   }
 
 }

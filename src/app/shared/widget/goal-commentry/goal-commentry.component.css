@@ -4,7 +4,8 @@
 .goal-commentary-list .icon             { width: 32px; height: 32px; background: no-repeat center center / cover; display: inline-block; vertical-align: middle; }
 /* .goal-commentary-list .icon        { background-image: url(assets/images/match/whistle-icon.svg);} */
 .goal-commentary-list .icon.normal,
-.goal-commentary-list .icon.throw_in        { background-image: url(assets/images/match/whistle-icon.svg);}
+.goal-commentary-list .icon.throw_in ,
+.goal-commentary-list .icon.offside        { background-image: url(assets/images/match/whistle-icon.svg);}
 .goal-commentary-list .icon.timeout  { background-image: url(assets/images/match/time-icon.svg);}
 .goal-commentary-list .icon.green       { background-image: url(assets/images/match/card-green.svg);}
 .goal-commentary-list .icon.yellow,
@@ -19,7 +20,8 @@
 .goal-commentary-list .icon.period_start,
 .goal-commentary-list .icon.match_ended,
 .goal-commentary-list .icon.match_started,
-.goal-commentary-list .icon.break_start         { background-image: url(assets/images/match/soccer/period.svg);}
+.goal-commentary-list .icon.break_start ,
+.goal-commentary-list .icon.period_score         { background-image: url(assets/images/match/soccer/period.svg);}
 .goal-commentary-list .icon.shot_saved,
 .goal-commentary-list .icon.shot_on_target         { background-image: url(assets/images/match/soccer/shot_on.svg);}
 .goal-commentary-list .icon.shot_off_target         { background-image: url(assets/images/match/soccer/shot_off.svg);}

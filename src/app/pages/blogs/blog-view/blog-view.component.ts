@@ -71,6 +71,9 @@ export class BlogViewComponent implements OnInit {
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == "blog-preview") ? 'preview' : 'detail';
+
+    console.log("windowstate", window.history.state);
+    
     if (window.history.state && window.history.state.id) {
       this.getBlogview(window.history.state.id);
     }
@@ -254,11 +257,13 @@ export class BlogViewComponent implements OnInit {
   }
 
   getPopularArticles() {
-    let data = {
+    let data:any = {
       nstart: 0,
       nLimit: 10,
       aIds: this.blogdata.aIds
     };
+    if(window.history.state.sport)
+      data.eSport = window.history.state.sport.charAt(0).toUpperCase() + window.history.state.sport.slice(1);
     this.sportsService.getrelatedpost(data).subscribe((res: any) => {
       if (res["data"]) {
         this.widgetblogs = res.data.filter((blog) => blog._id != this.blogdata._id);

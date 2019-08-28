@@ -12,6 +12,7 @@ export class BlogCardComponent implements OnInit {
   @Input() start: any;
   @Input() end: any;
   @Input() card_type: any;
+  @Input() sport: any;
   
   constructor(
     public commonService: CommonService

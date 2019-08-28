@@ -6,7 +6,7 @@
       <div class="content-col">
         <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
         <!-- START - ABOUT MATCH-->
-        <app-match-about [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'soccer'"></app-match-about>
+        <app-match-about *ngIf="team.home && team.away" [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'soccer'"></app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
@@ -17,9 +17,10 @@
               <!-- <h5>Match Commentary</h5> -->
               <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
-                <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0" [commentry]="matchInfo?.timeline" [sport]="'soccer'"></app-goal-commentry>
+                <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0" 
+                  [commentry]="matchInfo?.timeline" [sport]="'soccer'" [team]="team"></app-goal-commentry>
                 <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
-                  [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
+                  [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'" ></app-countdown>
                 <app-no-data-widget *ngIf="matchInfo.sport_event_status?.status == 'closed' && !matchInfo?.timeline" [sport]="'soccer'"></app-no-data-widget>
               </ng-container>
             </ng-template>

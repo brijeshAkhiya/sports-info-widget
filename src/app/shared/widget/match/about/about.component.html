@@ -247,7 +247,10 @@
         </ng-container>
         {{data.sport_event.start_time | amDateFormat:'Do MMMM YYYY'}}
       </p>
-      <p class="live-match" *ngIf="data.sport_event_status?.status == 'live' ">{{ 'widgetModule.live' | translate }}</p>
+      {{data.match_time | json}}
+      <p class="live-match" *ngIf="data.sport_event_status?.status == 'live' ">{{ 'widgetModule.live' | translate }}
+        <span *ngIf="data.match_time">{{data.match_time}}</span>
+      </p>
     </div>
 
     <div class="current-match d-flex justify-content-between show-anim">

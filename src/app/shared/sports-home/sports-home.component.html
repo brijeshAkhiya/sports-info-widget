@@ -4,7 +4,7 @@
     </ng-container>
 
     <ng-container *ngIf="options.blog_type !='recent'">
-        <app-blog-card [posts]="popularArticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog-card>
+        <app-blog-card [posts]="popularArticles" [start]="0" [end]="1" [card_type]="'banner'" [sport]="options.sport"></app-blog-card>
         <!-- <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget> -->
 
         <div class="common-title-btn d-flex justify-content-between align-items-center"
@@ -12,7 +12,7 @@
             <h4>{{ 'Shared_module.related_news' | translate }}</h4>
             <a class="theme-btn" [state]="{ type: 'popular' }" [routerLink]="['article']">{{ 'widgetModule.View_all' | translate }} <span></span></a>
         </div>
-        <app-blog-card [posts]="popularArticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog-card>
+        <app-blog-card [posts]="popularArticles" [start]="1" [end]="5" [card_type]="'small'"  [sport]="options.sport"></app-blog-card>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
     </ng-container>
 </div>
@@ -31,12 +31,12 @@
             <ng-template ngbTabContent>
                 <app-loader *ngIf="isLoading"></app-loader>
                 <app-no-data-widget *ngIf="!isLoading && recentArticles?.length == 0 || !recentArticles" [sport]="sport"></app-no-data-widget>
-                <app-blog-card [posts]="recentArticles" [start]="0" [end]="1" [card_type]="'banner'"></app-blog-card>
+                <app-blog-card [posts]="recentArticles" [start]="0" [end]="1" [card_type]="'banner'"  [sport]="sport"></app-blog-card>
                 <!-- <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget> -->
-                <app-blog-card [posts]="recentArticles" [start]="1" [end]="5" [card_type]="'small'"></app-blog-card>
+                <app-blog-card [posts]="recentArticles" [start]="1" [end]="5" [card_type]="'small'"  [sport]="sport"></app-blog-card>
                 <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
                 <app-blog-list *ngIf="recentArticles.length > 5"
-                    [options]="{'reqParams': recentArticlesParams, 'data':recentArticles, 'start': 5, 'end' : 8}">
+                    [options]="{'reqParams': recentArticlesParams, 'data':recentArticles, 'start': 5, 'end' : 8}" [sport]="sport">
                 </app-blog-list>
             </ng-template>
         </ngb-tab>

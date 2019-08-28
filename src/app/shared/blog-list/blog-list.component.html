@@ -1,7 +1,7 @@
 
 <div class="common-news-list" *ngIf="articles && articles?.length > 0">
-    <app-blog-card [posts]="articles" *ngIf="options.card_type" [card_type]="options.card_type"></app-blog-card>
-    <app-blog-card [posts]="articles" *ngIf="!options.card_type"  [card_type]="'list'"></app-blog-card>
+    <app-blog-card [posts]="articles" *ngIf="options.card_type" [card_type]="options.card_type"  [sport]="sport"></app-blog-card>
+    <app-blog-card [posts]="articles" *ngIf="!options.card_type"  [card_type]="'list'"  [sport]="sport"></app-blog-card>
 </div>
 <app-loader *ngIf="isLoading"></app-loader>
 <app-no-data-widget *ngIf="!isLoading && articles?.length == 0 || !articles" [sport]="sport"></app-no-data-widget>

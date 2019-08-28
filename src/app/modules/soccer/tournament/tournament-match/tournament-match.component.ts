@@ -23,8 +23,8 @@ export class TournamentMatchComponent implements OnInit {
   matchStats: any;
   info;
   // dummyAPICall = 62;
-  // interval;
-  // timeout;
+  interval;
+  timeout;
 
   constructor(
     private sportsService: SportsService,
@@ -55,15 +55,17 @@ export class TournamentMatchComponent implements OnInit {
         this.matchInfo.match_title = this.matchInfo.sport_event.competitors[0].name + ' ' +  'VS'  + ' ' + this.matchInfo.sport_event.competitors[1].name;
         if(this.matchInfo.sport_event.venue){
           this.matchInfo.venuedetails = this.matchInfo.sport_event.venue
-          this.matchInfo.venuedetails.lat = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[0])
-          this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
+          if(this.matchInfo.sport_event.venue.map_coordinates){
+            this.matchInfo.venuedetails.lat = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[0])
+            this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
+          }
         }
         console.log(this.matchInfo.venuedetails);
         
-        // if (this.matchInfo.match_info.gamestate == 0) {
-        //   this.startLiveUpdateAfterTime();
-        // }else if (this.matchInfo.match_info.status == 3)
-        //   this.getLiveUpdate(this);
+        if (this.matchInfo.sport_event_status.status == 'upcoming') {
+          this.startLiveUpdateAfterTime();
+        }else if (this.matchInfo.sport_event_status.status == 'live')
+          this.getLiveUpdate(this);
 
         // this.getVenuedetails();
         this.initTeam();
@@ -169,6 +171,82 @@ export class TournamentMatchComponent implements OnInit {
 
     console.log(this.team);
 
+  }
+
+  getLiveUpdate(classThis){
+    console.log("getLiveUpdate");
+    this.interval = setInterval(() => {
+      //TEMP
+      // this.dummyAPICall++;
+      classThis.sportsService
+      .getSoccerMatchTimeline(this.matchInfo.sport_event.id)
+      // .getKabaddiDummyCall(this.dummyAPICall)
+        .subscribe(res => {
+          console.log(res); 
+          // let matchData = res.data.items; 
+          // this.matchInfo = res.data.items;
+          if(res.data.sport_event_status.status == 'live'){
+            // this.initTeam();
+            // this.initSquads();
+            // this.commentry = [];
+            this.initCommentry(res.data.timeline);
+          }
+          // if(matchData.match_info.status == 2){
+          //   this.commentry = [];
+          //   this.initCommentry();
+          //   this.clearTimeInterval();
+          // }
+        });
+    }, classThis.commonService.miliseconds(0, 0, 8)); // TEMP
+
+  }
+
+  initCommentry(commentry) {
+    console.log("initCommentry");
+    commentry.forEach(element => {
+      // console.log(this.matchInfo.timeline.findIndex( (timeline) => timeline.id == element.id));      
+      if(this.matchInfo.timeline.findIndex( (timeline) => timeline.id == element.id)  == -1)
+      this.matchInfo.timeline.push(element)
+    });
+    console.log(this.matchInfo.timeline.reverse().slice(0,1)[0].match_time);
+    
+    //stoppage_time
+    this.matchInfo.match_time = this.matchInfo.timeline.reverse().slice(0,1)[0] 
+  }
+
+  startLiveUpdateAfterTime(){
+
+    console.log("startLiveUpdateAfterTime");
+    let remainingTime = this.commonService.getRemainigTimeofMatch(
+      this.matchInfo.match_info.datestart
+    );
+    console.log(remainingTime);
+    
+    let remainingMiliSec = this.commonService.miliseconds(
+      remainingTime.hours,
+      remainingTime.minutes,
+      remainingTime.seconds
+    );
+    remainingMiliSec =
+      remainingMiliSec - this.commonService.miliseconds(0, 5, 0); 
+    if (remainingTime.days == 0 && remainingTime.hours < 5) {
+      this.timeout = setTimeout(() => {
+        this.getLiveUpdate(this);
+      // }, 10);
+    }, remainingMiliSec);
+    }
+  }
+
+  /** Clear Interval and timeout on destroy */
+  clearTimeInterval() {
+    console.log("clearTimeInterval");
+    clearInterval(this.interval);
+    clearTimeout(this.timeout);
+  }
+
+  ngOnDestroy() {
+    console.log("ngOnDestroy");
+    this.clearTimeInterval();
   }
 
   sorting(arr) {
