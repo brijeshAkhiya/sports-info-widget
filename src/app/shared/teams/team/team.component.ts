@@ -52,6 +52,8 @@ export class TeamComponent implements OnInit {
       this.getKabaddiTeamProfile(this.routeParams.teamid);
     }
     else if (this.sport == 'soccer') {
+      console.log(this.routeParams.tournamentid);
+
       this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')] } }
       this.getSoccerTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team'))
     }
@@ -248,10 +250,11 @@ export class TeamComponent implements OnInit {
     if (teamid && tournamentid) {
       this.loading = true
       this.sportsService.getsoccerteamstats(tournamentid, teamid).subscribe((res: any) => {
-        this.loading = false;
         if (res.data)
           res.data.competitor.players.map((pdata) => {
-            pdata['minutes'] = pdata['statistics']['minutes_played']
+            
+            
+            pdata['minutes'] = pdata['statistics']['minutes_played'] ? pdata['statistics']['minutes_played'] : 0
             pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
             pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
             pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
@@ -259,6 +262,7 @@ export class TeamComponent implements OnInit {
             pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
             pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
             this.soccerteamplayers.playerstats.push(pdata)
+            this.loading = false;
           })
         console.log('playerstat', this.soccerteamplayers.playerstats);
       }, (error) => {

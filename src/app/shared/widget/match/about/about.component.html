@@ -273,7 +273,7 @@
       <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.sport_event_status?.winner_id == team?.id}">
         <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}"
           [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <a [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+        <a [routerLink]=" data?.sport_event?.sport_event_context?.season.id  ?  ['/soccer/team', (data?.sport_event?.sport_event_context?.season.id | splitID),(team.id | splitID),(team.name | slugify)]  : ['/soccer/team',(team.id | splitID),(team.name | slugify)]">
           {{team.name}}
         </a>
       </h4>
