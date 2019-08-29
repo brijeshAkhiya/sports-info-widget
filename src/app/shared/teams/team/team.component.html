@@ -4,7 +4,7 @@
 
       <div class="content-col">
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
 
         <div *ngIf="teamProfile"
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
@@ -21,7 +21,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Footer.About' | translate }}</ng-template>
             <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
+            <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
 
             <ng-template ngbTabContent>
               <!-- About Team Section-->
@@ -68,7 +68,7 @@
                   </div>
                 </section>
                 <app-no-data-widget *ngIf="teamProfile?.founded == ''"
-                  [message]="('widget_Module2.No_Team_data_available' | translate)">
+                  [message]="('widget_Module2.No_Team_data_available' | translate)"  [sport]="sport">
                 </app-no-data-widget>
               </ng-container>
 
@@ -126,7 +126,7 @@
                 </ng-template>
               </section>
               <ng-template #no_players>
-                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)">
+                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)"  [sport]="sport">
                 </app-no-data-widget>
               </ng-template>
 
@@ -169,7 +169,7 @@
             </ng-template>
             <app-loader *ngIf="loading"></app-loader>
             <app-no-data-widget *ngIf="!loading && soccerteamplayers?.playerstats?.length == 0"
-              [message]="'No stats data available!'">
+              [message]="'No stats data available!'"  [sport]="sport">
             </app-no-data-widget>
             <ng-template ngbTabContent>
               <ng-container>

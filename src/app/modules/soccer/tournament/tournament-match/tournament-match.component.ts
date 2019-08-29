@@ -64,8 +64,10 @@ export class TournamentMatchComponent implements OnInit {
         
         if (this.matchInfo.sport_event_status.status == 'upcoming') {
           this.startLiveUpdateAfterTime();
-        }else if (this.matchInfo.sport_event_status.status == 'live')
+        }else if (this.matchInfo.sport_event_status.status == 'live' && this.matchInfo.sport_event_status.status == 'ended'){
           this.getLiveUpdate(this);
+          this.initCommentry(res.data.timeline);
+        }
 
         // this.getVenuedetails();
         this.initTeam();
@@ -189,6 +191,7 @@ export class TournamentMatchComponent implements OnInit {
             // this.initTeam();
             // this.initSquads();
             // this.commentry = [];
+            this.matchInfo.statistics = res.data.statistics;
             this.initCommentry(res.data.timeline);
           }
           // if(matchData.match_info.status == 2){
@@ -204,14 +207,21 @@ export class TournamentMatchComponent implements OnInit {
   initCommentry(commentry) {
     console.log("initCommentry");
     commentry.forEach(element => {
-      // console.log(this.matchInfo.timeline.findIndex( (timeline) => timeline.id == element.id));      
       if(this.matchInfo.timeline.findIndex( (timeline) => timeline.id == element.id)  == -1)
       this.matchInfo.timeline.push(element)
     });
-    console.log(this.matchInfo.timeline.reverse().slice(0,1)[0].match_time);
-    
     //stoppage_time
-    this.matchInfo.match_time = this.matchInfo.timeline.reverse().slice(0,1)[0] 
+    let tempTimeline:any = [...this.matchInfo.timeline]; 
+    console.log(tempTimeline)
+    tempTimeline = tempTimeline.splice(this.matchInfo.timeline.length - 1, 1)[0]
+    console.log(tempTimeline)
+    // tempTimeline = tempTimeline.pop();
+    if(typeof tempTimeline.match_time != 'undefined'){
+      if(typeof tempTimeline.stoppage_time != 'undefined')
+        this.matchInfo.match_time = tempTimeline.match_time + " + " + tempTimeline.stoppage_time.toString(); 
+      else
+        this.matchInfo.match_time = tempTimeline.match_time; 
+    }
   }
 
   startLiveUpdateAfterTime(){
