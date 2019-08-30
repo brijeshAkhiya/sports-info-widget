@@ -46,12 +46,15 @@
               <app-no-data-widget *ngIf="!lineupLoading && (!matchStats)" [sport]="'soccer'" ></app-no-data-widget>
               <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
                 *ngIf="!lineupLoading && team.home.statistics && team.away.statistics"></app-match-stats>
-              <!-- <section class="common-section top-padding">
+              <section class="common-section top-padding">
                 <h4 class="line-title">Head-to-Head</h4>
                 <div class="head-to-head common-shadow rounded-box d-flex justify-content-between align-items-center">
                   <div class="head-team d-flex justify-content-between align-items-center">
-                    <img class="flag-img" src="assets/images/sample/India-flag.svg">
-                    <div class="">
+                    <div class="flag-block">
+                      <img class="flag-img" src="assets/images/sample/India-flag.svg">
+                      <p>Liverpool</p>
+                    </div>
+                    <div>
                       <p class="no-margin">Wins</p>
                       <h1>16</h1>
                     </div>
@@ -66,11 +69,14 @@
                       <p class="no-margin">Wins</p>
                       <h1>16</h1>
                     </div>
-                    <img class="flag-img" src="assets/images/sample/India-flag.svg">
+                    <div class="flag-block">
+                      <img class="flag-img" src="assets/images/sample/India-flag.svg">
+                      <p>Wolverhampton Wanderers</p>
+                    </div>
                   </div>
                 </div>
               </section>
-              <section class="common-section top-padding">
+              <!-- <section class="common-section top-padding">
                 <h4 class="line-title">Form</h4>
                 <div class="form-teams-block common-shadow rounded-box d-flex">
                   <div>
