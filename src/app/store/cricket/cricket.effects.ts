@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, take } from 'rxjs/operators';
+import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import * as fromRoot from "../../app-reducer";
 import * as Cricket from "@store/cricket/cricket.actions";
 import { Action, Store } from '@ngrx/store';
@@ -16,8 +16,11 @@ export class CricketsEffects {
     @Effect()
     loadCricketFixturesSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Cricket.LOAD_CRICKET_FIXTURES),
+        tap(() => this.store.dispatch(new Cricket.CricketStartLoading())
+        ),
         switchMap((action: any) => this.sportsService.getmatchfixtures().pipe(
             map((response: any) => new Cricket.LoadCricketFixturesSuccess(response.data)),
+            tap(() => this.store.dispatch(new Cricket.CricketStopLoading())),
             catchError(() => {
                 this.store.dispatch(new Cricket.LoadCricketFixtures());
                 return EMPTY;

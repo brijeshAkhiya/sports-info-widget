@@ -41,9 +41,11 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       this.store.dispatch(new Cricket.LoadCricketFixtures())
       this.store.dispatch(new Cricket.LoadCricketResults())
       this.store.select('Cricket').subscribe((data: any) => {
+        if (data) {
+          this.loader = data.loader;
+        }
         this.fixturesdata = data.fixtures;//(Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) ? data.fixtures.items : [];
         this.resultsdata = data.results; //(Object.entries(data.results).length > 0 && data.results.items.length > 0) ? data.results.items : [];
-        this.loader = false;
       })
     }
     else if (this.sport == 'kabaddi') {
@@ -51,10 +53,8 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       this.store.dispatch(new Kabaddi.LoadKabaddiResults())
       this.store.select('Kabaddi').subscribe((data: any) => {
         console.log("subscribe");
-        console.log(data);
-
         if (data) {
-          this.loader = false;
+          this.loader = data.loader;
         }
         // if (data.fixtures.length > 0) {
         console.log('after effects', data.fixtures);
@@ -69,19 +69,23 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
     else if (this.sport == 'soccer') {
       this.store.dispatch(new Soccer.LoadSoccerFixtures())
       this.store.select('Soccer').subscribe((data: any) => {
+        console.log('loader', data.loader);
         if (data.fixtures) {
-          this.loader = false
+          this.loader = data.loader
         }
         if (data.fixtures && data.fixtures.length > 0) {
           this.fixturesdata = data.fixtures.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs')
-          if (this.fixturesdata.length == 0) {
-            this.fixturesdata = data.fixtures.filter((match) => match.sport_event_status.status == 'not_started')
+          console.log(this.fixturesdata < 4);
+          if (this.fixturesdata.length < 4) {
+            this.fixturesdata = this.fixturesdata.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+            console.log(this.fixturesdata);
           }
           this.resultsdata = data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs')
-          if (this.resultsdata.length == 0) {
-            this.resultsdata = data.fixtures.filter((match) => match.sport_event_status.status == 'closed')
+          if (this.resultsdata.length < 4) {
+            this.resultsdata = this.resultsdata.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
           }
         }
+
       })
 
     }

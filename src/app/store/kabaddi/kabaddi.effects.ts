@@ -16,10 +16,12 @@ export class KabaddiEffects {
     @Effect()
     loadKabaddiFixturesSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Kabaddi.LOAD_KABADDI_FIXTURES),
-        tap(() => console.log('in kabaddi effect')),
+        tap(() => this.store.dispatch(new Kabaddi.KabaddiStartLoading())
+        ),
         switchMap((action: any) =>
             this.sportsService.getKabaddiMatchList('1', '10', '1').pipe(
                 map((response: any) => new Kabaddi.LoadKabaddiFixturesSuccess(response.data)),
+                tap(() => this.store.dispatch(new Kabaddi.KabaddiStopLoading())),
                 catchError(() => {
                     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
                     return EMPTY;

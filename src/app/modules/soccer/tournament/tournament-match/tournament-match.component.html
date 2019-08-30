@@ -6,7 +6,8 @@
       <div class="content-col">
         <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
         <!-- START - ABOUT MATCH-->
-        <app-match-about *ngIf="team.home && team.away" [data]="matchInfo" [competitor]="team" [toss]="" [sport]="'soccer'"></app-match-about>
+        <app-match-about *ngIf="team.home && team.away" [data]="matchInfo" [competitor]="team" [toss]=""
+          [sport]="'soccer'"></app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
@@ -17,11 +18,12 @@
               <!-- <h5>Match Commentary</h5> -->
               <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
-                <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0" 
+                <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0"
                   [commentry]="matchInfo?.timeline" [sport]="'soccer'" [team]="team"></app-goal-commentry>
                 <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
-                  [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'" ></app-countdown>
-                <app-no-data-widget *ngIf="matchInfo.sport_event_status?.status == 'closed' && !matchInfo?.timeline" [sport]="'soccer'"></app-no-data-widget>
+                  [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
+                <app-no-data-widget *ngIf="matchInfo.sport_event_status?.status == 'closed' && !matchInfo?.timeline"
+                  [sport]="'soccer'"></app-no-data-widget>
               </ng-container>
             </ng-template>
           </ngb-tab>
@@ -39,38 +41,57 @@
           <!--START - Stats-->
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div >{{ 'widgetModule.Stats' | translate }}</div>
+              <div>{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <!-- <app-loader *ngIf="statsLoading"></app-loader> -->
-              <app-no-data-widget *ngIf="(!matchStats)" [sport]="'soccer'" ></app-no-data-widget>
+              <app-no-data-widget *ngIf="(!matchStats)" [sport]="'soccer'"></app-no-data-widget>
               <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
                 *ngIf="team.home.statistics && team.away.statistics"></app-match-stats>
-              <!-- <section class="common-section top-padding">
+
+            <!--head to head section start-->
+              <!-- <section class="common-section top-padding" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
                 <h4 class="line-title">Head-to-Head</h4>
                 <div class="head-to-head common-shadow rounded-box d-flex justify-content-between align-items-center">
                   <div class="head-team d-flex justify-content-between align-items-center">
-                    <img class="flag-img" src="assets/images/sample/India-flag.svg">
+                    <img class="flag-img" [offset]="commonService.lazyloadoffset"
+                      [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
+                      [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                      {{headtohead?.teams?.team1?.name}}
                     <div class="">
                       <p class="no-margin">Wins</p>
-                      <h1>16</h1>
+                      <h1>{{headtohead?.teams?.team1?.total}}</h1>
                     </div>
                   </div>
                   <div class="head-center">
                     <p class="no-margin">Played</p>
-                    <h1>23</h1>
-                    <p class="no-margin">Draw : 3</p>
+                    <h1>{{headtohead?.totalmatches}}</h1>
+                    <p class="no-margin">Draw : {{headtohead?.draw}}</p>
                   </div>
                   <div class="head-team d-flex justify-content-between align-items-center">
                     <div>
                       <p class="no-margin">Wins</p>
-                      <h1>16</h1>
+                      <h1>{{headtohead?.teams?.team2?.total}}</h1>
                     </div>
-                    <img class="flag-img" src="assets/images/sample/India-flag.svg">
+                    <img class="flag-img" [offset]="commonService.lazyloadoffset"
+                      [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
+                      [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                      {{headtohead?.teams?.team2?.name}}
                   </div>
                 </div>
-              </section>
-              <section class="common-section top-padding">
+              </section> -->
+             <!--head to head section end-->
+
+              <!-- last meetings section -->
+              <!-- <section class="last-meetings-section" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
+                <h4 class="line-title">{{'Cricket_Module.Last_meetings' | translate}}</h4>
+                <app-schedule [data]="teamvsteamdata" [type]="'result'" [sport]="'soccer'" [tournament]="' '"
+                  *ngIf="teamvsteamdata?.length > 0"></app-schedule>
+              </section> -->
+               <!-- last meetings section end-->
+
+
+              <!-- <section class="common-section top-padding">
                 <h4 class="line-title">Form</h4>
                 <div class="form-teams-block common-shadow rounded-box d-flex">
                   <div>
@@ -200,12 +221,15 @@
               <div>{{ 'Kabaddi_Module.Info' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-match-info-card [options]="{
+              <app-match-info-card
+                [options]="{
              sport:'soccer',
              titles : [('Cricket_Module.Match' | translate), ('Kabaddi_Module2.Tournament' | translate), ('Kabaddi_Module2.Zone' | translate),('widgetModule.venue' | translate),('Cricket_Module.Weather_Condition' | translate),('Cricket_Module.Pitch_Condition' | translate),'Referee'],
-             values : [matchInfo.match_title, matchInfo.sport_event?.sport_event_context?.season?.name ,matchInfo.sport_event.sport_event_context.group?.name ,matchInfo.sport_event.venue?.name, matchInfo.sport_event.sport_event_conditions?.weather?.overall_conditions ,matchInfo.sport_event.sport_event_conditions?.weather?.pitch_conditions, matchInfo.sport_event.sport_event_conditions?.referee?.name] }" [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
+             values : [matchInfo.match_title, matchInfo.sport_event?.sport_event_context?.season?.name ,matchInfo.sport_event.sport_event_context.group?.name ,matchInfo.sport_event.venue?.name, matchInfo.sport_event.sport_event_conditions?.weather?.overall_conditions ,matchInfo.sport_event.sport_event_conditions?.weather?.pitch_conditions, matchInfo.sport_event.sport_event_conditions?.referee?.name] }"
+                [data]="matchInfo" *ngIf="matchInfo"></app-match-info-card>
               <!-- <h4 class="line-title">{{ 'Kabaddi_Module.venue_details' | translate }}</h4> -->
-              <app-venue-map-card [sport]="'soccer'" [venuedetails]="matchInfo?.venuedetails" *ngIf="matchInfo?.venuedetails">
+              <app-venue-map-card [sport]="'soccer'" [venuedetails]="matchInfo?.venuedetails"
+                *ngIf="matchInfo?.venuedetails">
               </app-venue-map-card>
             </ng-template>
           </ngb-tab>

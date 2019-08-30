@@ -35,7 +35,7 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-sports-home [options]="{page_type:'home',reqParams :{nStart:0, nLimit:5, eType:'Article'}}">
+        <app-sports-home [options]="{page_type:'home',reqParams :{nStart:0, nLimit:5, eType:'Article',bRemoveBannerPosts:true}}">
         </app-sports-home>
       </div>
 
@@ -126,7 +126,7 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4}}">
+        <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4,bRemoveBannerPosts:true}}">
         </app-sports-home>
       </div>
       <div class="sidebar-col">

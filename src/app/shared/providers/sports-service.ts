@@ -616,5 +616,12 @@ export class SportsService {
     );
   }
 
+  //get soccer team vs team data (for match stats)
+  getsoccerteamvsteamdata(team1,team2){
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/team/${team1}/team/${team2}`
+    );
+  }
+
 
 }

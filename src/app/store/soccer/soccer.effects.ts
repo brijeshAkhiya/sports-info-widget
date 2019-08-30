@@ -18,15 +18,18 @@ export class SoccerEffects {
     @Effect()
     loadSoccerFixturesSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Soccer.LOAD_SOCCER_FIXTURES),
-        tap(() => console.log('in soccer fixtures effect')),
+        tap(() => this.store.dispatch(new Soccer.SoccerStartLoading())
+        ),
         switchMap((action: any) =>
             this.sportsService.getSoccerDailySummary(this.commonService.convertDate(this.date)).pipe(
                 map((response: any) => new Soccer.LoadSoccerFixturesSuccess(response.data.summaries)),
+                tap(() => this.store.dispatch(new Soccer.SoccerStopLoading())),
                 catchError(() => {
                     this.store.dispatch(new Soccer.LoadSoccerFixtures());
                     return EMPTY;
                 })
             )),
+
         take(1)
     );
 
