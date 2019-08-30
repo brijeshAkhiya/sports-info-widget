@@ -17,7 +17,7 @@
 .schedule-list .schedule-item .schedule-date { margin: 0px; font-size: 18px; line-height: 23px; font-weight: 500; color: #A3A3A3;} 
 .schedule-list .schedule-item:hover         { background: #ED1A33; box-shadow: 0px 2px 8px rgba(237,26,51,0.16); -webkit-box-shadow: 0px 2px 8px rgba(237,26,51,0.16); }
 .schedule-list .schedule-item *             { transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
-.schedule-list .schedule-item:hover *       { color: #fff !important; }
+/* .schedule-list .schedule-item:hover *       { color: #fff !important; } */
 
 /* -------- Tournament Fixtures List ------- */
 .schedule-tour-list .schedule-item      { padding-bottom: 16px; overflow: hidden; position: relative; cursor: pointer;}
@@ -52,7 +52,7 @@
 .soccer-fixture-filter .fix-slide p             { margin: 0px; font-size: 12px; line-height: 15px; font-weight: 600; }
 .soccer-fixture-filter .owl-item.active:last-child { opacity: 0.5;}
 .fixture-date                                   { position: relative;}
-.fixture-date button.calendar                   { margin: 0px 8px; display: block; width: 24px; height: 24px; background: url(assets/images/calender-icon.svg) no-repeat center center / cover; border: none; }
+.fixture-date button.calendar                   { margin: 0px 8px; display: block; width: 24px; height: 24px; background: transparent url(assets/images/calender-icon.svg) no-repeat center center / cover !important; border: none; }
 .soccer-fixture-selection .dropdown-menu        { margin-top: 5px; padding: 0; border-radius: 4px;  font-family: 'IBM Plex Sans Condensed', sans-serif; z-index: 11111; }
 .soccer-fixture-filter .dropdown-toggle         { padding: 11px 40px 11px 16px; width: 160px; background: transparent; line-height: 20px; color: #292929; border: 2px solid #D5D8DC; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; border-radius: 2em; position: relative; text-align: left; text-overflow: ellipsis; overflow: hidden;}
 .soccer-fixture-filter .dropdown-toggle:after   { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(assets/images/dropdown-arrow.svg) center center/cover no-repeat; border: none; filter: invert(1); -webkit-filter: invert(1); opacity: 0.5; transition: all .3s ease-in-out; -webkit-transition: .3s ease-in-out; }

@@ -15,6 +15,7 @@ export class TeamComponent implements OnInit {
   loading: boolean = false;
   loadingFixture: boolean = false;
   loadingResult: boolean = false;
+  statsLoading: boolean = false;
   matchfixtures;
   matchresults;
   teamProfile;
@@ -250,25 +251,26 @@ export class TeamComponent implements OnInit {
     let teamid = this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')
     let tournamentid = this.commonService.getIds(this.routeParams.tournamentid, 'soccer', 'tournament')
     if (teamid && tournamentid) {
-      this.loading = true
+      this.statsLoading = true
       this.sportsService.getsoccerteamstats(tournamentid, teamid).subscribe((res: any) => {
-        if (res.data)
+        this.statsLoading = false;
+        if (res.data && res.data.competitor && res.data.competitor.players){
           res.data.competitor.players.map((pdata) => {
-            
-            
-            pdata['minutes'] = pdata['statistics']['minutes_played'] ? pdata['statistics']['minutes_played'] : 0
-            pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
-            pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
-            pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
-            pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0
-            pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
-            pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
-            this.soccerteamplayers.playerstats.push(pdata)
-            this.loading = false;
+            if(pdata['statistics']){
+              pdata['minutes'] = pdata['statistics']['minutes_played'] ? pdata['statistics']['minutes_played'] : 0
+              pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
+              pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
+              pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
+              pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0
+              pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
+              pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
+              this.soccerteamplayers.playerstats.push(pdata)
+            }
           })
         console.log('playerstat', this.soccerteamplayers.playerstats);
+        }
       }, (error) => {
-        this.loading = false;
+        this.statsLoading = false;
       })
     }
 

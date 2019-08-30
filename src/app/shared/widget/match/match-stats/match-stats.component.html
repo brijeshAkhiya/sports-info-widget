@@ -115,7 +115,7 @@
       <div>
         <p class="d-flex align-items-center justify-content-end">
           <b>
-            <a [routerLink]="['/kabaddi/team', (matchStats?.home?.id | splitID), (matchStats?.home?.name | slugify )]">
+            <a [routerLink]="['/soccer/team', (matchStats?.home?.id | splitID), (matchStats?.home?.name | slugify )]">
               {{matchStats?.home?.name}}
             </a>
           </b>
@@ -131,7 +131,7 @@
           <img alt="{{matchStats?.away?.name}}" [lazyLoad]="matchStats?.away?.id | logosurl:'soccer'"
             [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           <b>
-            <a [routerLink]="['/kabaddi/team', (matchStats?.away?.id | splitID), (matchStats?.away?.name | slugify )]">
+            <a [routerLink]="['/soccer/team', (matchStats?.away?.id | splitID), (matchStats?.away?.name | slugify )]">
               {{matchStats?.away?.name}}
             </a>
           </b>

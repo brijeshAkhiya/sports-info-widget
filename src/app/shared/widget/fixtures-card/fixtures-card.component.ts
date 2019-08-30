@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
@@ -15,7 +15,8 @@ import { Store } from "@ngrx/store";
 @Component({
   selector: 'app-fixtures-card',
   templateUrl: './fixtures-card.component.html',
-  styleUrls: ['./fixtures-card.component.css']
+  styleUrls: ['./fixtures-card.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FixturesCardComponent implements OnInit {
   

@@ -102,13 +102,15 @@ export class CommonService {
   }
 
   getPagetitlebyurl(url) {
+    let title;
     if (this.titleObj[url]) {
-      return this.titleObj[url].title
+      title = this.titleObj[url].title
     }
     else {
       var last = url.split("/").pop();
-      return last.replace(/-/g, ' ');
+      title = last.replace(/-/g, ' ');
     }
+    return  title.charAt(0).toUpperCase() + title.slice(1)
   }
 
   getIds(id, sport, type) {

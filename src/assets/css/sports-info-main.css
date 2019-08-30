@@ -325,7 +325,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 /* -------- Sports Match Page ------- */
 .line-title                                     { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #EBEBEB; }
 
-/* -------- Soccer Pages ------- */
+/******* Soccer Pages ******/
 .fixture-date .dropdown-menu                { left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
 ngb-datepicker .btn-link                    { color: #c4c4c4; }
 ngb-datepicker .btn-link:hover              { color: #ED1A33; }
@@ -511,6 +511,10 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 /* -------- Login Toast Style ------- */
     .login-toast                        { padding: 10px 10px 10px 0px; }
     .login-toast img                    { margin: 0px 8px; width: 24px; }
+
+/******* Soccer Pages ******/
+    .fixture-date .dropdown-menu                { left: auto; right: 0; transform: translateX(0%); -webkit-transform: translateX(0%); }
+
 }
 
 @media (min-width: 576px) and (max-width: 767px) {

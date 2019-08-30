@@ -44,20 +44,22 @@
               <div>{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <!-- <app-loader *ngIf="statsLoading"></app-loader> -->
-              <app-no-data-widget *ngIf="(!matchStats)" [sport]="'soccer'"></app-no-data-widget>
+              <app-loader *ngIf="lineupLoading"></app-loader>
+              <app-no-data-widget *ngIf="!lineupLoading && (!matchStats)" [sport]="'soccer'" ></app-no-data-widget>
               <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
-                *ngIf="team.home.statistics && team.away.statistics"></app-match-stats>
+                *ngIf="!lineupLoading && team.home.statistics && team.away.statistics"></app-match-stats>
 
             <!--head to head section start-->
               <!-- <section class="common-section top-padding" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
                 <h4 class="line-title">Head-to-Head</h4>
                 <div class="head-to-head common-shadow rounded-box d-flex justify-content-between align-items-center">
                   <div class="head-team d-flex justify-content-between align-items-center">
+                    <div class="flag-block">
                     <img class="flag-img" [offset]="commonService.lazyloadoffset"
                       [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
                       [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
-                      {{headtohead?.teams?.team1?.name}}
+                      <p>{{headtohead?.teams?.team1?.name}}</p>
+                    </div>
                     <div class="">
                       <p class="no-margin">Wins</p>
                       <h1>{{headtohead?.teams?.team1?.total}}</h1>

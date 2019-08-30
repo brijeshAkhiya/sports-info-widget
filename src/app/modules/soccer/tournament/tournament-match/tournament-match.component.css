@@ -1,6 +1,9 @@
 /* -------- Head-to-Head Section ------- */
 .head-to-head                   { padding: 24px; text-align: center; }
 .head-to-head .head-team        { width: 50%; }
+.head-to-head  .flag-block p    { margin: 8px 0px 0px; font-weight: 500;}
+.head-to-head  .flag-block:first-child { text-align: left; }
+.head-to-head  .flag-block:last-child { text-align: right;}
 .head-to-head .head-center      { width: 30%; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .head-to-head h1                { margin: -10px 0px; font-family: inherit; font-style: normal; }
 .head-to-head .head-center h1   { font-size: 64px; line-height: 84px; }
