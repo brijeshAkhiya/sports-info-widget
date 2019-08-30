@@ -6,20 +6,22 @@ import * as Soccer from "@store/soccer/soccer.actions";
 
 import { Action, Store } from '@ngrx/store';
 import { SportsService } from '@app/shared/providers/sports-service';
+import { CommonService } from '@app/shared/providers/common-service';
+
 import { Observable, EMPTY } from 'rxjs';
 
 @Injectable()
 export class SoccerEffects {
-
-    constructor(private actions$: Actions, private sportsService: SportsService, private store: Store<fromRoot.State>) { }
+    date = new Date()
+    constructor(private actions$: Actions, private sportsService: SportsService, private commonService: CommonService, private store: Store<fromRoot.State>) { }
 
     @Effect()
     loadSoccerFixturesSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Soccer.LOAD_SOCCER_FIXTURES),
-        tap(() => console.log('in soccer effect')),
+        tap(() => console.log('in soccer fixtures effect')),
         switchMap((action: any) =>
-            this.sportsService.getKabaddiMatchList('1', '10', '1').pipe(
-                map((response: any) => new Soccer.LoadSoccerFixturesSuccess(response.data.items)),
+            this.sportsService.getSoccerDailySummary(this.commonService.convertDate(this.date)).pipe(
+                map((response: any) => new Soccer.LoadSoccerFixturesSuccess(response.data.summaries)),
                 catchError(() => {
                     this.store.dispatch(new Soccer.LoadSoccerFixtures());
                     return EMPTY;

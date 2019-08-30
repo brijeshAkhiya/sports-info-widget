@@ -14,9 +14,9 @@ export class TopScorerWidgetComponent implements OnInit {
   isloading: boolean;
   kabaddiscoredata: any;
   kabadditype: any;
-  tournamentid:any;
+  tournamentid: any;
   soccerscoredata: any;
-  data=[];
+  data = [];
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -29,12 +29,12 @@ export class TopScorerWidgetComponent implements OnInit {
     if (this.sport == 'kabaddi') {
       this.gettopscorer('raidtotalpoint');
     }
-    else if(this.sport == 'soccer'){
-      this.tournamentid =  this.commonService.getIds(this.activatedroute.parent.snapshot.params.id ,'soccer','tournament');
+    else if (this.sport == 'soccer') {
+      this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
       console.log(this.tournamentid);
       this.getsoccerTopScorer('goals');
       console.log('soccer');
-      
+
     }
   }
 
@@ -51,33 +51,39 @@ export class TopScorerWidgetComponent implements OnInit {
       (error) => this.isloading = false)
   }
 
-  getsoccerscorer(id){
+  getsoccerscorer(id) {
     this.isloading = true
-    this.sportsService.getSoccerseasonleaders(id).subscribe((res:any)=>{
+    this.sportsService.getSoccerseasonleaders(id).subscribe((res: any) => {
     })
   }
 
   // get soccer top-scorers
-  getsoccerTopScorer(type)
-  {
+  getsoccerTopScorer(type) {
     this.data = [];
     this.isloading = true;
-      this.sportsService.getsoccerTopScorer(this.tournamentid).subscribe((res:any)=>{
+    this.sportsService.getsoccerTopScorer(this.tournamentid).subscribe((res: any) => {
       this.isloading = false;
       this.soccerscoredata = res.data.lists;
-      this.soccerscoredata.map(element => {if(element.type == type){
-            element.leaders.map(element => {
-              element.players.map(value=>{ 
-                value['rank'] = element.rank;
-                if(this.data.length<5){
-                      this.data.push(value)}
+      this.soccerscoredata.map(element => {
+        if (element.type == type) {
+          if (element.leaders && element.leaders.length > 0) {
+            element.leaders.map(leader => {
+              if (leader.players && leader.players.length > 0) {
+                leader.players.map(value => {
+                  value['rank'] = leader.rank;
+                  if (this.data.length < 5) {
+                    this.data.push(value)
+                  }
                 });
-          });}
-        });
-    } 
-    ,err=>{console.log(err)});
+              }
+            });
+          }
+        }
+      });
+    }
+      , err => { console.log(err) });
   }
 
-  
+
 
 }

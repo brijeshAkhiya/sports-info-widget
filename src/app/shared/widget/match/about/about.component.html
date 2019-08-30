@@ -247,9 +247,8 @@
         </ng-container>
         {{data.sport_event.start_time | amDateFormat:'Do MMMM YYYY'}}
       </p>
-      {{data.match_time | json}}
       <p class="live-match" *ngIf="data.sport_event_status?.status == 'live' ">{{ 'widgetModule.live' | translate }}
-        <span *ngIf="data.match_time">{{data.match_time}}</span>
+        <span *ngIf="data.match_time"> | {{data.match_time}}</span>
       </p>
     </div>
 
@@ -257,7 +256,11 @@
       <ng-container *ngTemplateOutlet="soccerteam;context:{team:competitor?.home}">
       </ng-container>
       <div class="live-score" *ngIf="data.sport_event_status.status != 'not_started'">
-        <h5>ft</h5>
+        <h5  *ngIf="data.sport_event_status.status != 'not_started'">
+          {{data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended' 
+            ?  'FT' 
+            : (data.sport_event_status.status == 'live' && data.sport_event_status.match_status == '2nd_half' ? 'HT' : '')}}
+        </h5>
         <h3>{{data.sport_event_status?.home_score}} - {{data.sport_event_status?.away_score}}</h3>
       </div>
       <ng-container *ngTemplateOutlet="soccerteam;context:{team:competitor?.away}">
@@ -273,7 +276,7 @@
       <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.sport_event_status?.winner_id == team?.id}">
         <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}"
           [defaultImage]="cricketService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <a [routerLink]="['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+        <a [routerLink]=" data?.sport_event?.sport_event_context?.season.id  ?  ['/soccer/team', (data?.sport_event?.sport_event_context?.season.id | splitID),(team.id | splitID),(team.name | slugify)]  : ['/soccer/team',(team.id | splitID),(team.name | slugify)]">
           {{team.name}}
         </a>
       </h4>

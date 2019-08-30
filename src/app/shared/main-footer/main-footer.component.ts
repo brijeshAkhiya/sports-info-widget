@@ -25,13 +25,13 @@ export class MainFooterComponent implements OnInit {
   topPosToStartShowing = 100;
   searchText;
   isAuth$: any;
+
   @ViewChild('favContainer') favContainer;
   
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
     const clickedInside = this.favContainer.nativeElement.contains(targetElement);
-    // console.log(clickedInside);    
-    if (!clickedInside) {
+    if (!clickedInside && !this.isedit) {
       this.isapply = false;
     }
   }

@@ -11,7 +11,7 @@
           <div class="soccer-fixture-filter d-flex align-items-center justify-content-between">
             <div class="fixture-slider-block d-flex align-items-center">
               <div class="soccer-fixture-slider text-center">
-                <owl-carousel-o [options]="customOptions" #gallery (changed)="changeSlide($event)">
+                <owl-carousel-o [options]="customOptions" #gallery (initialized)="initialized($e)">
                   <ng-container class="items">
                     <ng-template carouselSlide *ngFor="let date of customDate" [id]="date">
                       <div class="fix-slide" (click)="selectDate(date)"

@@ -42,7 +42,7 @@ export class TeamsComponent implements OnInit {
     }
     else if (this.sport == 'soccer') {
       this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'soccer', 'tournament');
-      console.log(this.tournamentid)
+      console.log('tournament:',this.tournamentid)
       this.getSoccerSeasonTeams(this.tournamentid);
     }
   }

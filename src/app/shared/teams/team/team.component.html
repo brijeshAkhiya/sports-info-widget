@@ -4,7 +4,7 @@
 
       <div class="content-col">
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
 
         <div *ngIf="teamProfile"
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
@@ -21,7 +21,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Footer.About' | translate }}</ng-template>
             <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
+            <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
 
             <ng-template ngbTabContent>
               <!-- About Team Section-->
@@ -68,7 +68,7 @@
                   </div>
                 </section>
                 <app-no-data-widget *ngIf="teamProfile?.founded == ''"
-                  [message]="('widget_Module2.No_Team_data_available' | translate)">
+                  [message]="('widget_Module2.No_Team_data_available' | translate)"  [sport]="sport">
                 </app-no-data-widget>
               </ng-container>
 
@@ -126,7 +126,7 @@
                 </ng-template>
               </section>
               <ng-template #no_players>
-                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)">
+                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)"  [sport]="sport">
                 </app-no-data-widget>
               </ng-template>
 
@@ -163,18 +163,19 @@
           </ngb-tab>
 
           <!--Soccer club stats section-->
-          <ngb-tab *ngIf="sport == 'soccer'">
+          <ngb-tab *ngIf="sport == 'soccer' && routeParams.tournamentid">
             <ng-template ngbTabTitle>
               <div (click)="getSoccerTeamStats()">{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
             <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && soccerteamplayers?.playerstats?.length == 0" [message]="'No stats data available!'">
+            <app-no-data-widget *ngIf="!loading && soccerteamplayers?.playerstats?.length == 0"
+              [message]="'No stats data available!'"  [sport]="sport">
             </app-no-data-widget>
             <ng-template ngbTabContent>
               <ng-container>
                 <app-player-table [data]="soccerteamplayers?.playerstats" [options]="{
-                      titles : [('Shared_Module2.TEAM' | translate),'P', 'SI', 'SO', 'GS', 'AS','Yellow Card','Red Card'],
-                      values : ['name', 'minutes', 'substituted_in', 'substituted_out', 'goals_scored', 'assists','yellow_cards','red_cards'],
+                      titles : ['No.',('Soccer_Module.PLAYER' | translate),'P', 'SI', 'SO', 'GS', 'AS',('Soccer_Module.Yellow_cards' | translate),('Soccer_Module.Red_cards' | translate)],
+                      values : ['Index','name', 'minutes', 'substituted_in', 'substituted_out', 'goals_scored', 'assists','yellow_cards','red_cards'],
                       class : ['tour-stand-table'],
                       sport : 'soccer',
                       teamstats:'true'

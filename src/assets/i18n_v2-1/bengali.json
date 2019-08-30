@@ -28,7 +28,7 @@
         "About": "আমাদের সম্পর্কে",
         "Contact": "যোগাযোগ",
         "No_favourites": "কোনো প্রিয় নেই",
-        "Advertise_with_us": "আমাদের কাছে বিজ্ঞাপন দিন",
+        "Advertise_with_us": "আমাদের বিজ্ঞাপন দিন",
         "Favourites": "প্রিয়",
         "Terms_and_Conditions": "নিয়ম ও শর্তাবলী",
         "Privacy_Policy": "গোপনীয়তা নীতি"
@@ -126,7 +126,7 @@
         "top_score": "শীর্ষ স্কোর",
         "substitution": "বিকল্প",
         "do_or_die": "কর অথবা মর",
-        "View_all": "সব দেখ",
+        "View_all": "সব দেখুন",
         "Results": "ফলাফল",
         "continue_with_fb": "ফেসবুক দিয়ে চালিয়ে যান",
         "block_by_admin": "অ্যাডমিন দ্বারা অবরুদ্ধ করা হয়েছে।",
@@ -204,91 +204,94 @@
         "Info": "তথ্য"
     },
     "Advertise_with_us": {
-        "Advertise_with_us": "আমাদের কাছে বিজ্ঞাপন করুন",
+        "Advertise_with_us": "আমাদের বিজ্ঞাপন দিন",
         "Phone": "ফোন",
         "fill_form_text": "এই ফর্মটি পূরণ করুন এবং আমাদের কর্মীরা শীঘ্রই আপনার সঙ্গে যোগাযোগ করবে।",
         "Company": "কোম্পানি",
-        "ready_to_text": "আমাদের দর্শকদের কাছে পৌঁছতে প্রস্তুত?",
+        "ready_to_text": "আমাদের পাঠকদের কাছে পৌঁছতে প্রস্তুত?",
         "advertise_submit_text": "আপনার বিজ্ঞাপন সংক্রান্ত জিজ্ঞাস্য প্রশাসকের কাছে জমা দিন। তিনি শীঘ্রই আপনার সাথে যোগাযোগ করবেন।",
         "how_can_help": "আমরা কিভাবে সাহায্য করতে পারি ?"
     },
     "Home_Main_Page": {
-        "View_All": " সব দেখুন",
+        "View_All": "সব দেখুন",
         "Popular_Videos": "জনপ্রিয় ভিডিও",
-        "Top_Highlights": "শীর্ষ হাইলাইটস"
+        "Top_Highlights": "সেরা খবর"
     },
     "About_us": {
-        "readers_text": "আমাদের পাঠকরা যা বলে"
+        "readers_text": "আমাদের পাঠকরা যা বলেন"
     },
-
-        "Shared_Module2": {
-            "Born": "জন্ম",
-            "Weight": "ওজন",
-            "Batting_Style": "ব্যাটিং স্টাইল",
-            "Points_Table": "পয়েন্ট টেবিল",
-            "Batting_Stats": "ব্যাটিং পরিসংখ্যান",
-            "Bowling_Stats": "বোলিং পরিসংখ্যান",
-            "TEAM": "টিম",
-            "Game_type": "খেলার ধরণ",
-            "Nationality": "নাগরিকত্ব",
-            "Height": "উচ্চতা",
-            "Role": "ভূমিকা",
-            "Position": "অবস্থান",
-            "Viewers": "দর্শক",
-            "Bowling_Style": "বোলিং স্টাইল"
-        },
-        "Kabaddi_Module2": {
-            "Super_Raids": "সুপার রেইড",
-            "Successfull_tackles": "সফল ট্যাকল",
-            "Tournament": "টুর্নামেন্ট",
-            "Yellow": "হলুদ",
-            "Red": "লাল",
-            "Zone": "জোন",
-            "Raids_Points": "রেইড পয়েন্টস",
-            "Green": "সবুজ",
-            "Super_Tackles": "সুপার ট্যাকল",
-            "Successfull_raids": "সফল রেইড",
-            "Tackle_Points": "ট্যাকল পয়েন্ট"
-        },
-        "widget_Module2": {
-            "Add_to_favourites": "ফেভারিটে যোগ করুন",
-            "Recommended_Stories": "প্রস্তাবিত গল্প",
-            "No_Team_data_available": "দলের কোনও তথ্য উপলব্ধ নেই",
-            "No_data_available": "কোন তথ্য নেই",
-            "No_Team_squad": "কোনও দলের স্কোয়াড নেই",
-            "Added_to_favourites": "ফেভারিটে যোগ করা হয়েছে",
-            "No_team_fixtures": "কোনও দলের সূচী নেই",
-            "No_team_results": "কোনও দলের ফলাফল নেই"
-        },
-        "Cricket_Module2": {
-            "International": "আন্তর্জাতিক",
-            "player": "খেলোয়াড়",
-            "Domestic": "ঘরোয়া",
-            "Catches": "ক্যাচ",
-            "High_Score": "উচ্চ স্কোর",
-            "not": "না",
-            "Did": "করেছিল",
-            "Yet": "এখনো",
-            "to": "পর্যন্ত",
-            "Schedule": "সূচী",
-            "Economy_Rate": "ইকোনমি রেট",
-            "bat": "ব্যাট"
-        },
-        "Blog_Module2": {
-            "Add_a_comment": "একটা মন্তব্য যোগ করুন",
-            "Edit": "সম্পাদন করা",
-            "Recommended": "প্রস্তাবিত",
-            "Search_articles": "নিবন্ধ অনুসন্ধান করুন",
-            "Search_results": "অনুসন্ধানের ফলাফল"
-        },
-        "Shared_Module3":{
-            "Save":"রক্ষা",
-            "Search_favourites":"অনুসন্ধান পছন্দ"
-        },
-        "widget_Module3":{
-            "Cancel":"বাতিল"
-          }
-          
+    "Shared_Module2": {
+        "Born": "জন্ম",
+        "Weight": "ওজন",
+        "Batting_Style": "ব্যাটিং স্টাইল",
+        "Points_Table": "পয়েন্ট টেবিল",
+        "Batting_Stats": "ব্যাটিং পরিসংখ্যান",
+        "Bowling_Stats": "বোলিং পরিসংখ্যান",
+        "TEAM": "টিম",
+        "Game_type": "খেলার ধরণ",
+        "Nationality": "নাগরিকত্ব",
+        "Height": "উচ্চতা",
+        "Role": "ভূমিকা",
+        "Position": "অবস্থান",
+        "Viewers": "দর্শক",
+        "Bowling_Style": "বোলিং স্টাইল"
+    },
+    "Kabaddi_Module2": {
+        "Super_Raids": "সুপার রেইড",
+        "Successfull_tackles": "সফল ট্যাকল",
+        "Tournament": "টুর্নামেন্ট",
+        "Yellow": "হলুদ",
+        "Red": "লাল",
+        "Zone": "জোন",
+        "Raids_Points": "রেইড পয়েন্টস",
+        "Green": "সবুজ",
+        "Super_Tackles": "সুপার ট্যাকল",
+        "Successfull_raids": "সফল রেইড",
+        "Tackle_Points": "ট্যাকল পয়েন্ট"
+    },
+    "widget_Module2": {
+        "Add_to_favourites": "ফেভারিটে যোগ করুন",
+        "Recommended_Stories": "প্রস্তাবিত গল্প",
+        "No_Team_data_available": "দলের কোনও তথ্য উপলব্ধ নেই",
+        "No_data_available": "কোন তথ্য নেই",
+        "No_Team_squad": "কোনও দলের স্কোয়াড নেই",
+        "Added_to_favourites": "ফেভারিটে যোগ করা হয়েছে",
+        "No_team_fixtures": "কোনও দলের সূচী নেই",
+        "No_team_results": "কোনও দলের ফলাফল নেই"
+    },
+    "Cricket_Module2": {
+        "International": "আন্তর্জাতিক",
+        "player": "খেলোয়াড়",
+        "Domestic": "ঘরোয়া",
+        "Catches": "ক্যাচ",
+        "High_Score": "উচ্চ স্কোর",
+        "not": "না",
+        "Did": "করেছিল",
+        "Yet": "এখনো",
+        "to": "পর্যন্ত",
+        "Schedule": "সূচী",
+        "Economy_Rate": "ইকোনমি রেট",
+        "bat": "ব্যাট"
+    },
+    "Blog_Module2": {
+        "Add_a_comment": "একটা মন্তব্য যোগ করুন",
+        "Edit": "সম্পাদন করা",
+        "Recommended": "প্রস্তাবিত",
+        "Search_articles": "নিবন্ধ অনুসন্ধান করুন",
+        "Search_results": "অনুসন্ধানের ফলাফল"
+    },
+    "Shared_Module3": {
+        "Save": "রক্ষা",
+        "Search_favourites": "অনুসন্ধান পছন্দ",
+        "new_version_available":"স্পোর্টস ইনফো এর নতুন সংস্করণ উপলব্ধ।",
+        "Take_me_there":"সেখানে আমাকে নিতে",
+        "cookie_text":"নমস্কার! আমাদের ওয়েবসাইটটি পরিচালনা করতে এবং বিশ্লেষণের উদ্দেশ্যে আমরা এই ওয়েবসাইটে কুকি ব্যবহার করি। আমরা কীভাবে কুকি ব্যবহার করি সে সম্পর্কে আরও তথ্যের জন্য",
+        "go":"যাওয়া",
+        "here":"এখানে",
+        "cookie_continue_use_text":"আমাদের পরিষেবাগুলি ব্যবহার অব্যাহত রেখে, আপনি আমাদের কুকি ব্যবহারের জন্য সম্মতি দিচ্ছেন।",
+        "Coming_Soon":"শীঘ্রই আসছে"
+    },
+    "widget_Module3": {
+        "Cancel": "বাতিল"
     }
-
-
+}

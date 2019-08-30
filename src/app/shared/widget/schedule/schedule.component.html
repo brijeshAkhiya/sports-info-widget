@@ -211,9 +211,9 @@
       </div>
 
       <a class="details-btn"
-        [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-' +match.sport_event.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+        [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
-        [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-' +match.sport_event.competitors[1].abbreviation)]">
+        [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
       </a>
     </div>
   </div>
@@ -277,9 +277,9 @@
             </div>
 
             <a class="details-btn"
-              [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-' +match.sport_event.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+              [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
             <a class="fullblock-link"
-              [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-' +match.sport_event.competitors[1].abbreviation)]">
+              [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
             </a>
 
           </div>

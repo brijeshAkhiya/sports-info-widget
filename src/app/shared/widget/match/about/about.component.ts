@@ -23,7 +23,7 @@ export class MatchAboutComponent implements OnInit {
 
   ngOnInit() {  
     console.log('toss',this.toss);
-    console.log(this.data);
+    console.log('datacheck',this.data);
     console.log(this.competitor);
 
     if(this.sport == 'cricket')
