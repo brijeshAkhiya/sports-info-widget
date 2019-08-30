@@ -4,7 +4,7 @@
 .schedule-list .schedule-list-inner:last-child .schedule-month,
 .schedule-list .schedule-month:last-child   { margin-bottom: 0px; padding-bottom: 0px; border: none; }
 .schedule-list .month-title                 { width: 174px; padding-right: 16px; }
-.schedule-list .schedule-items              { width: calc(100% - 174px);  }
+.schedule-list .schedule-items              { flex-grow: 1; -webkit-flex-grow: 1; }
 .schedule-list .month-title h5              { margin-top: 4px; font-family: 'IBM Plex Sans Condensed', sans-serif; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out; opacity: 0.3; text-transform: uppercase;}
 .schedule-list .month-title .sticky-month   { position: sticky; position: -webkit-sticky; top: 100px; }
 .schedule-month:hover .month-title h5       { color: #ED1A33; opacity: 1;  }
@@ -63,11 +63,14 @@
 .soccer-tour-list .soccer-tour .score-center-block { min-width: 124px; padding: 0px 26px; text-align: center; }
 .soccer-tour .score-center-block h4         { margin: 0px; font-size: 16px; line-height: 20px; }
 
+/* -- Arabic CSS -- */
+.arabic .schedule-list .month-title     { padding-right: 0px; padding-left: 16px; }
+
+
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Fixtures List ------- */
     .schedule-list .month-title                 { width: 120px; }
-    .schedule-list .schedule-items              { width: calc(100% - 120px);  }
 /* -------- Tournament Fixtures List ------- */
     .schedule-item .match-desc              { width: 160px; }
     .schedule-item .match-teams             { width: calc(100% - 168px); }
@@ -81,7 +84,6 @@
 @media (max-width: 1199px) {
 /* -------- Fixtures List ------- */
     .schedule-list .month-title                 { width: 100px; }
-    .schedule-list .schedule-items              { width: calc(100% - 100px); }
 /* -------- Tournament Fixtures List ------- */
     .schedule-tour-list .schedule-item      { padding: 16px 16px 16px 12px; flex-direction: column; -webkit-flex-direction: column; }
     .schedule-item .match-desc,
@@ -106,7 +108,6 @@
     .schedule-list .schedule-list-inner .schedule-month:last-child,
     .schedule-list .schedule-month              { margin-bottom: 24px; padding-bottom: 24px;}
     .schedule-list .month-title                 { width: 90px; }
-    .schedule-list .schedule-items              { width: calc(100% - 90px); }
     .schedule-list .schedule-item .schedule-date { font-size: 15px; line-height: 20px;}
 /* -------- Tournament Fixtures List ------- */
     .match-teams .team-flag img             { height: 34px;}
@@ -118,8 +119,7 @@
 @media (max-width: 575px) {
 /* -------- Fixtures List ------- */
     .schedule-list .schedule-month              { flex-direction: column; -webkit-flex-direction: column; }
-    .schedule-list .month-title,
-    .schedule-list .schedule-items              { width: 100%; }
+    .schedule-list .month-title                 { width: 100%; }
     .schedule-list .schedule-item               { padding: 16px;}
     .schedule-list .month-title h5              { margin-bottom: 16px;}
     .schedule-list .month-title .sticky-month   { position: static; }

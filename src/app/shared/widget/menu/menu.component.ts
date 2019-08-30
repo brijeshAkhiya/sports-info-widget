@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { SportsService } from '@providers/sports-service'
 import { CricketService } from '@providers/cricket-service'
@@ -6,7 +6,8 @@ import { CricketService } from '@providers/cricket-service'
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MenuComponent implements OnInit {
 

@@ -12,26 +12,14 @@
 .tour-stand-table .table tr td.champions-league:before     { background: #FA6400; }
 .tour-stand-table .table tr td.europa-league:before        { background: #0091FF; }
 .tour-stand-table .table tr td.relegation:before           { background: #FF0000; }
+
 /* -------- Tournament Stats Table ------- */
 .tour-stats-table .table tr th:first-child,
 .tour-stats-table .table tr td:first-child      { width: 60px;  }
 .tour-stats-table .table tr th:nth-child(2),
-.tour-stats-table .table tr td:nth-child(2)     { text-align: left; width: 70%;  font-weight: 500;  }
+.tour-stats-table .table tr td:nth-child(2)     { text-align: left; width: 70%; font-weight: 500;  }
 .tour-stats-table .table tr td:first-child      { font-weight: 500; }
 .tour-stats-table .table tr th:nth-child(2)     { padding-left: 50px; }
-/* @-webkit-keyframes flag-anim {
-  0%      { transform: translate(-50%,-50%) scale(0); left: 50%; -webkit-transform: translate(-50%,-50%) scale(0); opacity: 0; }
-  10%     { opacity: 1; left: 50%;}
-  40%,50% { transform: translate(-75%,-50%) scale(1); left: 0%; -webkit-transform: translate(-75%,-50%) scale(1); opacity: 1; top: -100px; }
-  78%     { transform: translate(-75%,-50%) scale(1); left: 0%; -webkit-transform: translate(-75%,-50%) scale(1); opacity: 1; top: -100px; }
-  86%     { transform: translate(-75%,-50%) scale(0.9); left: 0%; -webkit-transform: translate(-75%,-50%) scale(0.9); opacity: 1; top: -100px; }
-  92%     { transform: translate(-75%,-50%) scale(1.1); left: 0%; -webkit-transform: translate(-75%,-50%) scale(1.1); opacity: 1; top: -100px; }
-  100%    { transform: translate(-75%,-50%) scale(1); left: 0%; -webkit-transform: translate(-75%,-50%) scale(1); opacity: 1; top: -100px; transform-origin: top left; -webkit-transform-origin: top left; }
-} */
-/* @keyframes flag-anim {
-  0%      { opacity: 0; transform: translateX(150%); -webkit-transform: translateX(150%); }
-  100%    { opacity: 1; transform: translateX(0%); -webkit-transform: translateX(0%); }
-} */
 
 /* -------- Player Stats Table ------- */
 .player-state .table tr th:first-child,
@@ -56,6 +44,13 @@
 .game-card.orange                         { background: #FA6400; border-color: #FA6400; }
 .game-card.skyblue                        { background: #0091FF; border-color: #0091FF; }
 
+/* -- Arabic CSS -- */
+.arabic .tour-stand-table .table tr th:nth-child(2),
+.arabic .tour-stand-table .table tr td:nth-child(2),
+.arabic .tour-stats-table .table tr th:nth-child(2),
+.arabic .tour-stats-table .table tr td:nth-child(2)       { text-align: right; }
+.arabic .tour-stand-table .table tr td:nth-child(2),
+.arabic .tour-stats-table .table tr td:nth-child(2)       { padding-right: 48px; }
 /***** Responsive CSS Start ******/
 
 @media (min-width: 1200px) and (max-width: 1379px) {
