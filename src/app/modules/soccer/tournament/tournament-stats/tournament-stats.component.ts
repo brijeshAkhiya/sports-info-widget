@@ -29,6 +29,7 @@ export class TournamentStatsComponent implements OnInit {
   //get soccer season leaders
   getSoccerSeasonLeaders(id) {
    
+    this.isloading = true;
     this.sportsService.getSoccerseasonleaders(id).subscribe((res: any) => {
       console.log('soccer-leaders', res);
       this.isloading = false

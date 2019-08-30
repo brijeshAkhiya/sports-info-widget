@@ -79,11 +79,9 @@ export class UppersliderComponent implements OnInit {
     if(event.slides.length > 0){
       this.sport = event.slides[0].id
       console.log('sports::',this.sport);
-      console.log('sliderdata',this.slider);
-      
+      console.log('sliderdata',this.slider);      
       this.slider = [];
-      this.loadData();
-  
+      this.loadData();  
     }
   }
 
@@ -98,6 +96,8 @@ export class UppersliderComponent implements OnInit {
       this.loadKabaddiData();
     }
     else if (this.sport == 'Cricket')
+      this.getCricketHeader();
+    else if (this.sport == 'Soccer')
       this.getCricketHeader();
   }
 

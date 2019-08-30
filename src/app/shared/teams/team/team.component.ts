@@ -252,7 +252,8 @@ export class TeamComponent implements OnInit {
     if (teamid && tournamentid) {
       this.loading = true
       this.sportsService.getsoccerteamstats(tournamentid, teamid).subscribe((res: any) => {
-        if (res.data)
+        this.loading = false;
+        if (res.data && res.data.competitor && res.data.competitor.players){
           res.data.competitor.players.map((pdata) => {
             
             
@@ -264,9 +265,9 @@ export class TeamComponent implements OnInit {
             pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
             pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
             this.soccerteamplayers.playerstats.push(pdata)
-            this.loading = false;
           })
         console.log('playerstat', this.soccerteamplayers.playerstats);
+        }
       }, (error) => {
         this.loading = false;
       })
