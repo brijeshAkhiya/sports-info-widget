@@ -97,7 +97,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Navbar CSS ------- */
-    nav .navbar-brand               { margin-right: 28px; padding: 3px 8px 3px 12px; }
+    nav .navbar-brand               { margin-right: 28px; padding: 3px 8px 4px 12px; }
     nav .navbar-brand:before        { right: -20px;}
     .navbar-nav-container           { left: 8px; }
     .navbar-nav .nav-link           { padding: 11px 5px; font-size: 11.7px; }
@@ -110,7 +110,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 @media (max-width: 767px) {
 /* -------- Navbar CSS ------- */
     nav.navbar.menu-open                                { overflow: visible; z-index: 1113;}
-    nav .navbar-brand                                   { margin-right: 24px; padding: 2px 4px 3px 16px;}
+    nav .navbar-brand                                   { margin-right: 24px; padding: 3px 4px 3px 16px;}
     nav .navbar-brand:before                            { right: -28px; }
     nav .navbar-brand img                               { max-width: 126px; }
     nav .navbar-toggler                                 { margin: 0px 15px; position: absolute; top: 50%; right: 0; transform: translateY(-50%); -webkit-transform: translateY(-50%); padding: 0px; width: 26px; height: 26px; border: none !important; border-radius: 0px; }
