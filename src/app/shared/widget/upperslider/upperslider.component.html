@@ -9,10 +9,10 @@
         </div>
       </div> -->
       <div class="slider-sports-selection">
-        <owl-carousel-o [options]="customOptions1" (changed)="changeSlide($event)">
+        <owl-carousel-o [options]="customOptions1" (changed)="changeSlide($event)" #sportsSlider>
           <ng-template carouselSlide [id]="'Cricket'"><div class="slide-item">{{ 'Header_menu.Cricket' | translate }}</div></ng-template>
           <ng-template carouselSlide [id]="'Kabaddi'"><div class="slide-item">{{ 'Header_menu.Kabaddi' | translate }}</div></ng-template>
-          <ng-template carouselSlide [id]="'Soccer'"><div class="slide-item">{{ 'Header_menu.Soccer' | translate }}</div></ng-template>
+          <!-- <ng-template carouselSlide [id]="'Soccer'"><div class="slide-item">{{ 'Header_menu.Soccer' | translate }}</div></ng-template> -->
         </owl-carousel-o>
         
       </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from "@ngrx/store";
 import * as moment from 'moment';
+import { CarouselComponent } from 'ngx-owl-carousel-o';
 
 import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
 import * as fromRoot from "@app/app-reducer";
@@ -63,6 +64,8 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   }
+  @ViewChild('sportsSlider') public sportsSlider: CarouselComponent;
+
   constructor(
     private sportsService: SportsService,
     private commonService: CommonService,
@@ -70,16 +73,18 @@ export class UppersliderComponent implements OnInit {
     private store: Store<fromRoot.State>
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    if(localStorage.getItem("selectedSport") != null) 
+      this.sport = localStorage.getItem("selectedSport");
     this.loadData();
+    
   }
 
   //change slide select sport event
   changeSlide(event){
     if(event.slides.length > 0){
       this.sport = event.slides[0].id
-      console.log('sports::',this.sport);
-      console.log('sliderdata',this.slider);      
+      localStorage.setItem("selectedSport", this.sport);
       this.slider = [];
       this.loadData();  
     }
@@ -92,13 +97,18 @@ export class UppersliderComponent implements OnInit {
   }
 
   loadData() {
-    if (this.sport == 'Kabaddi') {
+    if (this.sport == 'Kabaddi')
       this.loadKabaddiData();
-    }
     else if (this.sport == 'Cricket')
       this.getCricketHeader();
     else if (this.sport == 'Soccer')
       this.getCricketHeader();
+
+    if(this.sportsSlider){
+      setTimeout(() => {
+        this.sportsSlider.to(this.sport.toString()); 
+      });
+    }
   }
 
   loadKabaddiData() {
