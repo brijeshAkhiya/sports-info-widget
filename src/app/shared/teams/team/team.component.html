@@ -20,10 +20,9 @@
           <!-- About Section-->
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Footer.About' | translate }}</ng-template>
-            <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
-
             <ng-template ngbTabContent>
+              <app-loader *ngIf="loading"></app-loader>
+              <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
               <!-- About Team Section-->
               <!--Cricket  About  Section-->
               <ng-container *ngIf="sport == 'cricket'">
@@ -68,7 +67,7 @@
                   </div>
                 </section>
                 <app-no-data-widget *ngIf="teamProfile?.founded == ''"
-                  [message]="('widget_Module2.No_Team_data_available' | translate)"  [sport]="sport">
+                  [message]="('widget_Module2.No_Team_data_available' | translate)" [sport]="sport">
                 </app-no-data-widget>
               </ng-container>
 
@@ -126,7 +125,7 @@
                 </ng-template>
               </section>
               <ng-template #no_players>
-                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)"  [sport]="sport">
+                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)" [sport]="sport">
                 </app-no-data-widget>
               </ng-template>
 
@@ -167,12 +166,12 @@
             <ng-template ngbTabTitle>
               <div (click)="getSoccerTeamStats()">{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
-            <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && soccerteamplayers?.playerstats?.length == 0"
-              [message]="'No stats data available!'"  [sport]="sport">
-            </app-no-data-widget>
             <ng-template ngbTabContent>
-              <ng-container>
+              <app-loader *ngIf="loading"></app-loader>
+              <app-no-data-widget *ngIf="!loading && soccerteamplayers?.playerstats?.length == 0"
+                [message]="'No stats data available!'" [sport]="sport">
+              </app-no-data-widget>
+              <ng-container *ngIf="!loading && soccerteamplayers?.playerstats?.length > 0">
                 <app-player-table [data]="soccerteamplayers?.playerstats" [options]="{
                       titles : ['No.',('Soccer_Module.PLAYER' | translate),'P', 'SI', 'SO', 'GS', 'AS',('Soccer_Module.Yellow_cards' | translate),('Soccer_Module.Red_cards' | translate)],
                       values : ['Index','name', 'minutes', 'substituted_in', 'substituted_out', 'goals_scored', 'assists','yellow_cards','red_cards'],

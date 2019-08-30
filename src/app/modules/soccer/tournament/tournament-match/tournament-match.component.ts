@@ -15,6 +15,7 @@ export class TournamentMatchComponent implements OnInit {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [] } }
   loading: boolean = false;
   statsLoading: boolean = false;
+  lineupLoading: boolean = false;
   matchInfo;
   matchLineups;
   commentry = [];
@@ -83,7 +84,7 @@ export class TournamentMatchComponent implements OnInit {
 
   getMatchLineup(id){
     console.log("getMatchLineup");
-    this.loading = true;
+    this.lineupLoading = true;
     this.sportsService.getSoccerMatchLineup(id).subscribe((res: any) => {
       if (res.data) {
         this.matchLineups = res.data;
@@ -100,9 +101,9 @@ export class TournamentMatchComponent implements OnInit {
         // if(Object.entries(this.matchLineups.lineups).length > 0)
           this.initSquads();
       }
-      this.loading = false;
+      this.lineupLoading = false;
     }, (error) => {
-      this.loading = false;
+      this.lineupLoading = false;
     });
     
   }

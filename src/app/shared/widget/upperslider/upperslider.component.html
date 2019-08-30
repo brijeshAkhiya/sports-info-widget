@@ -12,6 +12,7 @@
         <owl-carousel-o [options]="customOptions1" (changed)="changeSlide($event)">
           <ng-template carouselSlide [id]="'Cricket'"><div class="slide-item">{{ 'Header_menu.Cricket' | translate }}</div></ng-template>
           <ng-template carouselSlide [id]="'Kabaddi'"><div class="slide-item">{{ 'Header_menu.Kabaddi' | translate }}</div></ng-template>
+          <ng-template carouselSlide [id]="'Soccer'"><div class="slide-item">{{ 'Header_menu.Soccer' | translate }}</div></ng-template>
         </owl-carousel-o>
         
       </div>
@@ -74,7 +75,7 @@
             <ng-template carouselSlide>
               <!--Live matches-->
               <div class="slider-item"
-                [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-' +slide.competitors.away.abbreviation)]">
+                [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-vs-' +slide.competitors.away.abbreviation)]">
                 <div class="slider-item-inner">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
