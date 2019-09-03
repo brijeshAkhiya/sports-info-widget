@@ -65,13 +65,13 @@ export class TournamentMatchComponent implements OnInit {
             this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
           }
         }
-        console.log(this.matchInfo.venuedetails);
 
         if (this.matchInfo.sport_event_status.status == 'upcoming') {
           this.startLiveUpdateAfterTime();
-        } else if (this.matchInfo.sport_event_status.status == 'live' && this.matchInfo.sport_event_status.status == 'ended') {
+        } else if (this.matchInfo.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status == 'ended') {
           this.getLiveUpdate(this);
-          this.initCommentry(res.data.timeline);
+          if(res.data.timeline)
+            this.initCommentry(res.data.timeline);
         }
 
         // this.getVenuedetails();
