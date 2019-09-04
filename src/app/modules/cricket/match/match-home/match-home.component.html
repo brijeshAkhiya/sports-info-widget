@@ -243,17 +243,17 @@
               <app-match-info-card [options]="{
                 sport:'cricket',
                 titles : [('Cricket_Module.Match' | translate),('Cricket_Module.Series' | translate),('Cricket_Module.Toss' | translate),('Cricket_Module.Weather_Condition' | translate),('Cricket_Module.Pitch_Condition' | translate),('Cricket_Module.Outfield_Conditions' | translate),('Cricket_Module.Umpires' | translate),('Cricket_Module.Match_Refree' | translate)],
-                values : [matchdata.sport_event.competitors,
-                matchdata.sport_event,
-                tossdecision,
-               (matchdata.sport_event_conditions.weather_info.weather_conditions | stringunder),
-               (matchdata.sport_event_conditions.pitch_info.pitch_conditions | stringunder),
-               (matchdata.sport_event_conditions?.outfield_info?.outfield_conditions | stringunder),
-               matchdata.sport_event_conditions.referees.umpires,
-               (matchdata.sport_event_conditions?.referees?.referee?.name | split)
+                values : [
+                matchdata.sport_event.competitors[0].name + ' ' +  'VS'  + ' ' + matchdata.sport_event.competitors[1].name,
+                matchdata.sport_event.season ? matchdata.sport_event.season.name : matchdata.sport_event.tournament.name,
+                tossdecision.toss_won_by_team + ('widgetModule.opt_to' | translate) + (tossdecision.toss_decision ? tossdecision.toss_decision : 'bat'),
+                (matchdata.sport_event_conditions.weather_info.weather_conditions | stringunder),
+                (matchdata.sport_event_conditions.pitch_info.pitch_conditions | stringunder),
+                (matchdata.sport_event_conditions?.outfield_info?.outfield_conditions | stringunder),                
+                matchdata.sport_event_conditions.referees.umpires,
+                (matchdata.sport_event_conditions?.referees?.referee?.name | split)
                 ] }
                 " [data]="matchdata" *ngIf="matchdata"></app-match-info-card>
-             
               <ng-container *ngIf="playerList && objectKeys(playerList).length > 0">
                 <div *ngFor="let team of objectKeys(competitor)">
                   <div class="d-flex match-info-title align-items-center">
