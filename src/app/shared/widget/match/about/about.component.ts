@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 
@@ -6,7 +6,8 @@ import { CommonService } from "@providers/common-service";
 @Component({
   selector: 'app-match-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  styleUrls: ['./about.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MatchAboutComponent implements OnInit {
 

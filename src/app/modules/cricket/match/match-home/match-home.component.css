@@ -21,13 +21,14 @@
 .bowler-table.common-table .table td                    { width: 8%; }
 .bowler-table.common-table .table tr th:first-child,
 .bowler-table.common-table .table tr td:first-child     { width: 40%; text-align: left; }
+.common-table .table tr td .current-player      { font-weight: 500; }
 
 /* -------- Match Information Section ------- */
-.match-info-table tr td                 { width: 50%; padding-left: 16px; text-align: left; }
+/* .match-info-table tr td                 { width: 50%; padding-left: 16px; text-align: left; }
 .match-info-table tr td:first-child     { width: 20%; font-weight: 600; text-transform: uppercase; }
 .match-info-table tr td:last-child      { border-left: 1px solid #EBEBEB; }
 .match-info-table tr td p               { margin-bottom: 8px;}
-.match-info-table tr td p:last-child    { margin-bottom: 0px;}
+.match-info-table tr td p:last-child    { margin-bottom: 0px;} */
 .match-info-title                       { margin: 32px 0px 16px; }
 .match-info-title img                   { margin-right: 8px; height: 40px; border-radius: 2px; }
 .match-info-title h4                    { margin: 0px; }
@@ -57,6 +58,12 @@
 .scoreline-block .score .value          { margin: 0px 20px;}
 .scoreline-block .dark-red              { color: #930C1C; }
 .scoreline-block .light-white           { opacity: 0.62; }
+
+/* -- Arabic CSS -- */
+.arabic .batsman-table.common-table .table tr th:first-child,
+.arabic .batsman-table.common-table .table tr td:first-child,
+.arabic .bowler-table.common-table .table tr th:first-child,
+.arabic .bowler-table.common-table .table tr td:first-child { text-align: right;}
 
 /***** Responsive CSS Start ******/
 
@@ -135,8 +142,6 @@
 }
 
 @media (max-width: 575px) {
-/* -------- Match Title List ------- */
-    .match-main-title .player-pic               { width: 66px; }
 /* -------- Match Scoreline Section ------- */
     .scoreline-block .score                 { padding: 6px 20px; width: 60%; min-width: 240px; }
     .scoreline-block .score .value          { margin: 0px 6px;}

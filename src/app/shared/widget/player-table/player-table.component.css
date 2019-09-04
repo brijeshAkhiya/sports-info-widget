@@ -48,9 +48,15 @@
 .arabic .tour-stand-table .table tr th:nth-child(2),
 .arabic .tour-stand-table .table tr td:nth-child(2),
 .arabic .tour-stats-table .table tr th:nth-child(2),
-.arabic .tour-stats-table .table tr td:nth-child(2)       { text-align: right; }
+.arabic .tour-stats-table .table tr td:nth-child(2),
+.arabic .player-state .table tr th:first-child,
+.arabic .player-state .table tr td:first-child          { text-align: right; }
 .arabic .tour-stand-table .table tr td:nth-child(2),
-.arabic .tour-stats-table .table tr td:nth-child(2)       { padding-right: 48px; }
+.arabic .tour-stats-table .table tr td:nth-child(2)       { padding-right: 10px; padding-left: 48px; }
+.arabic .tour-stand-table .table tr td:nth-child(2) img,
+.arabic .tour-stats-table .table tr td:nth-child(2) img { margin-right: 0px; margin-left: 8px; }
+.arabic .tour-stats-table .table tr th:nth-child(2)     { padding-left: 10px; padding-right: 50px; }
+
 /***** Responsive CSS Start ******/
 
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -59,6 +65,10 @@
   .tour-stats-table .table tr td:nth-child(2) img { height: 28px; }
 /* -------- Tournament Stats Table ------- */
   .tour-stats-table .table tr th:nth-child(2)     { padding-left: 44px; }
+  
+/* -- Arabic CSS -- */
+  .arabic .tour-stats-table .table tr th:nth-child(2)     { padding-right: 44px; }
+
 }
 
 @media (max-width: 1199px) {
@@ -69,6 +79,9 @@
   .tour-stats-table .table tr th:nth-child(2)     { padding-left: 36px; }
 /* -------- Player Stats Table ------- */
   .player-state .table tr th:after          { margin-top: -4px; margin-left: 6px; border-bottom-width: 8px; border-left-width: 4px; border-right-width: 4px; }
+
+/* -- Arabic CSS -- */
+  .arabic .tour-stats-table .table tr th:nth-child(2)     { padding-left: 6px; padding-right: 36px; }
 }
 @media (max-width: 991px) {
 /* -------- Tournament Standing Table ------- */

@@ -9,7 +9,7 @@
 .team-about-head .match-result li.win       { background: #ED1A33; }
 
 /* -------- Squad List ------- */
-h4                              { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 2px solid rgba(0,0,0,0.05); }
+.squad-list h4                  { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 2px solid rgba(0,0,0,0.05); }
 .squad-group                    { margin-bottom: 24px; }
 .squad-group:last-child         { margin-bottom: 0px; }
 .squad-group h6                 { margin-bottom: 16px; font-family: 'Muli', sans-serif; font-weight: 700; }
@@ -23,6 +23,9 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
 .squad-item p                   { margin-bottom: 16px; line-height: 20px; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
 .fixtures-loadmore      { margin-top: 32px; text-align: center; }
+
+/* -- Arabic CSS -- */
+.arabic .team-about-head .team-info     { margin-left: 0px; margin-right: 24px; }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -38,7 +41,7 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
 
 @media (min-width: 992px) and (max-width: 1199px) {
 /* -------- Squad List ------- */
-    h4                              { padding-bottom: 16px; }
+    .squad-list h4                  { padding-bottom: 16px; }
     .squad-group                    { margin-bottom: 16px; }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -62,6 +65,9 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
     .squad-item                         { margin-bottom: 24px; height: 320px; background: #fff; overflow: hidden; cursor: pointer; }
     .squad-item .item-desc              { padding: 12px 2px; }
     .squad-item:hover .item-desc        { transform: translateY(-60px); -webkit-transform: translateY(-60px); }
+/* -- Arabic CSS -- */
+    .arabic .team-about-head .team-info { margin-right: 16px; }
+
 }
 
 @media (max-width: 767px) {
@@ -70,7 +76,7 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
     .team-about-head .team-info         { margin-left: 16px; padding: 10px 16px;}
     .team-about-head .team-info h5      { margin-bottom: 8px;}
     .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
-    h4                                  { padding-bottom: 12px; }
+    .squad-list h4                      { padding-bottom: 12px; }
     .squad-group                        { margin-bottom: 12px; }
 /* -------- Squad List ------- */
     .squad-item                         { margin-bottom: 18px; height: 246px; background: #fff; overflow: hidden; cursor: pointer; }
@@ -78,6 +84,8 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
     .squad-item:hover .item-desc        { transform: translateY(-52px); -webkit-transform: translateY(-52px); }
     .squad-item p                       { margin-bottom: 12px; }
     .squad-item .theme-btn              { font-size: 13px; }
+/* -- Arabic CSS -- */
+    .arabic .team-about-head .team-info { margin-right: 16px; }
 }
 
 @media (max-width: 575px) {
@@ -94,5 +102,7 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
     .squad-item p                               { margin-bottom: 10px; }
     .squad-item .theme-btn                      { font-size: 13px; padding: 8px 40px 8px 8px;  }
     .squad-item .theme-btn span                 { width: 32px; }
+/* -- Arabic CSS -- */
+    .arabic .team-about-head .team-info { margin-right: 0px; }
 
 }

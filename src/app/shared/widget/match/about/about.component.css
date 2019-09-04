@@ -54,6 +54,15 @@
 .goal-type .best-player-list li:last-child          { margin: 0px; }
 .goal-type .best-player-list li span                { color: #292929; font-weight: 500; }
 
+/* -- Arabic CSS -- */
+.arabic .match-main-title .match-update             { text-align: left; }
+.arabic .match-main-title .current-teams            { padding-right: 0px; padding-left: 32px; }
+.arabic .match-main-title .current-team img         { margin-right: 0px; margin-left: 12px; }
+.arabic .match-main-title .match-win-player         { padding-left: 0px; border-left: none; padding-right: 32px; border-right: 2px solid #ECECEC; }
+.arabic .match-main-title .player-pic               { margin-right: 0px; margin-left: 16px; }
+
+
+
 /* -------- Content Animation ------- */
 @-webkit-keyframes show-anim {
     0%      { opacity: 0; }
@@ -117,6 +126,12 @@
     .match-main-title .teams-animation img      { margin-bottom: 10px; height: 48px; }
 /* -------- Goal Type Match Title ------- */
     .goal-type .live-score                      { margin-top: -8px; padding: 0px 6px; width: 112px; }
+
+/* -- Arabic CSS -- */
+    .arabic .match-main-title .current-teams            { padding-left: 12px; }
+    .arabic .match-main-title .match-win-player         { padding-right: 12px; }
+    .arabic .match-main-title .player-pic               { margin-left: 12px; }
+
 }
 
 @media (max-width: 767px) {
@@ -134,6 +149,10 @@
     .match-main-title .teams-animation img      { margin-bottom: 10px; height: 32px; }
 /* -------- Goal Type Match Title ------- */
     .match-main-title.goal-type .current-match            { flex-direction: row; -webkit-flex-direction: row; }
+
+/* -- Arabic CSS -- */
+    .arabic .match-main-title .current-teams            { padding: 0px; }
+    .arabic .match-main-title .match-win-player         { padding-right: 0px; border-right: none; }
 }
 
 @media (max-width: 575px) {
@@ -157,6 +176,10 @@
     .goal-type .live-score h5                   { font-size: 12px; line-height: 20px; }
     .goal-type .live-score h3                   { font-size: 16px; line-height: 22px;}
     .goal-type .best-player-list li             { margin-right: 0px; margin-bottom: 6px; font-size: 13px; line-height: 18px; }
-    
+
+/* -- Arabic CSS -- */
+    .arabic .match-main-title .match-update             { text-align: right; }
+    .arabic .match-main-title .current-team img         { margin-left: 6px; }
+
 }    
     

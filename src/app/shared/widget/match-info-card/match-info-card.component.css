@@ -6,3 +6,7 @@
 .match-info-table tr td:last-child      { border-left: 1px solid #EBEBEB; }
 .match-info-table tr td p               { margin-bottom: 8px;}
 .match-info-table tr td p:last-child    { margin-bottom: 0px;}
+
+/* -- Arabic CSS -- */
+.arabic .match-info-table tr td             { text-align: right; }
+.arabic .match-info-table tr td:last-child  { border-left: none; border-right: 1px solid #EBEBEB; }
