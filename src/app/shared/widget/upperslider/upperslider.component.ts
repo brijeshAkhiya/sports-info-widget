@@ -174,7 +174,6 @@ export class UppersliderComponent implements OnInit {
 
   getCricketHeader() {
     this.sportsService.getheaderslider().subscribe((res: any) => {
-
       this.slider = this.sortBySchedule(res.data);
       this.slider.forEach((match, index) => {
 

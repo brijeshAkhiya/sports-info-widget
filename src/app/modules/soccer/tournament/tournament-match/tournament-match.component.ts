@@ -28,6 +28,7 @@ export class TournamentMatchComponent implements OnInit {
   timeout;
   teamvsteamdata: any;
   headtohead;
+  teamssummary: { team1: { info: any; matches: any[]; }; team2: { info: any; matches: any[]; }; };
 
   constructor(
     private sportsService: SportsService,
@@ -55,7 +56,8 @@ export class TournamentMatchComponent implements OnInit {
       if (res.data) {
         this.matchInfo = res.data;
         console.log(this.matchInfo);
-        // this.getSoccerTeamvsTeam(this.matchInfo.sport_event.competitors)
+        this.getSoccerTeamvsTeam(this.matchInfo.sport_event.competitors)
+        this.getTeamsSummumaries(this.matchInfo.sport_event.competitors)
 
         this.matchInfo.match_title = this.matchInfo.sport_event.competitors[0].name + ' ' + 'VS' + ' ' + this.matchInfo.sport_event.competitors[1].name;
         if (this.matchInfo.sport_event.venue) {
@@ -93,7 +95,6 @@ export class TournamentMatchComponent implements OnInit {
       if (res.data) {
         this.matchLineups = res.data;
         console.log(this.matchLineups);
-
         // if (this.matchInfo.match_info.gamestate == 0) {
         //   this.startLiveUpdateAfterTime();
         // }else if (this.matchInfo.match_info.status == 3)
@@ -109,7 +110,6 @@ export class TournamentMatchComponent implements OnInit {
     }, (error) => {
       this.lineupLoading = false;
     });
-
   }
 
 
@@ -149,6 +149,69 @@ export class TournamentMatchComponent implements OnInit {
       this.headtohead = head
       this.teamvsteamdata = this.commonService.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc')
     })
+  }
+
+
+  getTeamsSummumaries(teams) {
+    let teamssummary = { team1: { info: teams[0], matches: [] }, team2: { info: teams[1], matches: [] } }
+
+    this.sportsService.getsoccerteamsummaries(teams[0].id).subscribe((res: any) => {
+      let team1data = res.data.summaries
+      team1data = team1data.filter((match) => match.sport_event_status.status == 'closed')
+      team1data = team1data.sort((a, b) => {
+        return new Date(a['start_time']) < new Date(b['start_time']) ? -1 : new Date(a['start_time']) > new Date(b['start_time']) ? 1 : 0;
+      })
+      teamssummary.team1.matches = team1data.slice(0, 5)
+      teamssummary.team1.matches.map((obj) => {
+        obj.sport_event.competitors.map((comp) => {
+          if (comp.id != teams[0].id) {
+            obj['oppteamid'] = comp.id
+            obj['oppteamname'] = comp.name
+          }
+        })
+        if (obj.sport_event_status.winner_id == teams[0].id && obj.sport_event_status.winner_id) {
+          obj['result'] = 'winner'
+        }
+        else if (!(obj.sport_event_status.winner_id == teams[0].id) && obj.sport_event_status.winner_id) {
+          obj['result'] = 'loss'
+        }
+        else {
+          obj['result'] = 'draw'
+        }
+      })
+    })
+
+    this.sportsService.getsoccerteamsummaries(teams[1].id).subscribe((res: any) => {
+      let team2data = res.data.summaries
+      team2data = team2data.filter((match) => match.sport_event_status.status == 'closed')
+      team2data = team2data.sort((a, b) => {
+        return new Date(a['start_time']) < new Date(b['start_time']) ? -1 : new Date(a['start_time']) > new Date(b['start_time']) ? 1 : 0;
+      })
+      teamssummary.team2.matches = team2data.slice(0, 5)
+      teamssummary.team2.matches.map((obj) => {
+        obj.sport_event.competitors.map((comp) => {
+          if (comp.id != teams[1].id) {
+            obj['oppteamid'] = comp.id
+            obj['oppteamname'] = comp.name
+          }
+        })
+        if (obj.sport_event_status.winner_id == teams[1].id && obj.sport_event_status.winner_id) {
+          obj['result'] = 'winner'
+        }
+        else if (!(obj.sport_event_status.winner_id == teams[1].id) && obj.sport_event_status.winner_id) {
+          obj['result'] = 'loss'
+        }
+        else {
+          obj['result'] = 'draw'
+        }
+      })
+    })
+
+    this.teamssummary = teamssummary
+
+    console.log('final::', teamssummary);
+
+
   }
 
   initTeam() {
