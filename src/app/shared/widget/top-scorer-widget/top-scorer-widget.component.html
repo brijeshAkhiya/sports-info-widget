@@ -110,7 +110,7 @@
           <p class="num">{{item.rank}}.</p>
           <div class="player-names">
             <p class="name">
-              <a [routerLink]="['/soccer/player', (player.id | splitID) ,(item.name | slugify)]">
+              <a [routerLink]="['/soccer/player', (item.id | splitID) ,(item.name | slugify)]">
                 {{item.name | split}}
               </a>
             </p>
@@ -129,7 +129,7 @@
         <p class="num">{{item.rank}}.</p>
         <div class="player-names">
           <p class="name">
-            <a [routerLink]="['/soccer/player', (player.id | splitID),(item.name | slugify)]">
+            <a [routerLink]="['/soccer/player', (item.id | splitID),(item.name | slugify)]">
               {{item.name | split}}
             </a>
           </p>

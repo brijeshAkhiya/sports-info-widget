@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
 
 import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
+import * as Soccer from "@store/soccer/soccer.actions";
 import * as fromRoot from "@app/app-reducer";
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
@@ -19,6 +20,7 @@ export class UppersliderComponent implements OnInit {
   timerStartTime = {
     'Cricket': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '8' }, // beforeTimeStart(Min) - from when to start fetching live data, interval in sec
     'Kabaddi': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5' }, // interval in sec
+    'Soccer': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5' }, // interval in sec
   }
   sport = 'Cricket';
   interval;
@@ -76,39 +78,108 @@ export class UppersliderComponent implements OnInit {
   ngOnInit() { 
     if(localStorage.getItem("selectedSport") != null) 
       this.sport = localStorage.getItem("selectedSport");
-    this.loadData();
+
+    if(this.sportsSlider){
+      setTimeout(() => {
+        this.sportsSlider.to(this.sport.toString()); 
+        this.loadData();
+      });
+    }
     
   }
 
   //change slide select sport event
   changeSlide(event){
-    if(event.slides.length > 0){
+    console.log("changeSlide");
+    
+    if(this.slider.length > 0 && event.slides.length > 0){
       this.sport = event.slides[0].id
       localStorage.setItem("selectedSport", this.sport);
       this.slider = [];
       this.loadData();  
+      this.clearTimeInterval();
     }
   }
 
-  selectSport(sport) {
-    this.sport = sport;
-    this.slider = [];
-    this.loadData();
-  }
-
   loadData() {
+    console.log("load Data");
+    
     if (this.sport == 'Kabaddi')
       this.loadKabaddiData();
     else if (this.sport == 'Cricket')
       this.getCricketHeader();
     else if (this.sport == 'Soccer')
-      this.getCricketHeader();
+      this.loadSoccerData();
+  }
 
-    if(this.sportsSlider){
-      setTimeout(() => {
-        this.sportsSlider.to(this.sport.toString()); 
-      });
-    }
+  loadSoccerData() {
+    console.log("loadSoccerData");
+    
+    this.store.dispatch(new Soccer.LoadSoccerFixtures())
+    this.store.select('Soccer').subscribe((data: any) => {
+      let isSoccerLiveUpdate = false;
+      if (data.fixtures && data.fixtures.length > 0) {
+
+        let live = this.slider = data.fixtures.filter((match) => match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs')
+        if (this.slider.length < 4) {
+          live = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'live'  && match.sport_event.coverage.sport_event_properties.scores == 'live'  && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+        }
+        console.log("todays live matches", this.slider);  
+        if(live.length > 0){
+          this.getLiveSoccerUpdate(this);
+          isSoccerLiveUpdate = true;
+        }  
+
+        let fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started'  && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'));
+        // if (this.slider.length < 4) {
+          fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started'  && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+        // }
+        console.log("upcoming with live coverage", this.slider);    
+        // this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'))
+        // if (this.slider.length < 50) {
+          this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+        // }
+
+        if (!isSoccerLiveUpdate && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
+          let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
+            return new Date(moment.utc(e.sport_event.start_time).format());
+          })));
+          console.log(minTime);          
+          this.startLiveUpdateAfterTime(moment.utc(minTime).format());
+        }
+        console.log(this.slider);    
+      }
+    })
+  }
+
+  replace(str) {
+    return (str != null) ? str.replace(/_/g, " ") : str;
+  }
+  getLiveSoccerUpdate(classThis) {
+    console.log("getLiveSoccerUpdate");
+    
+    let date = new Date();
+    this.interval = setInterval(() => {
+      classThis.sportsService
+        .getSoccerDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
+          console.log(res);
+          if (res.data.summaries.length > 0) {
+            res.data.summaries.forEach(match => {
+              let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.sport_event.id);
+              if (matchIndex >= 0) {
+                this.slider[matchIndex].sport_event = match.sport_event;
+                this.slider[matchIndex].sport_event_status = match.sport_event_status;
+              }
+            });
+            console.log(this.slider);
+            
+          }
+          else {
+            this.clearTimeInterval();
+            this.loadSoccerData();
+          }
+        });
+    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Soccer.interval));
   }
 
   loadKabaddiData() {
@@ -151,7 +222,7 @@ export class UppersliderComponent implements OnInit {
 
       classThis.sportsService
         // .getKabaddiMatchDummyList('live_list')
-        .getKabaddiMatchList(paramsLive.reqParams.status, paramsLive.reqParams.per_page, paramsLive.reqParams.page).subscribe((res: any) => {
+        .getSoccerDailySummary(paramsLive.reqParams.status, paramsLive.reqParams.per_page, paramsLive.reqParams.page).subscribe((res: any) => {
           console.log(res);
           res = res;
           if (res.data.items.length > 0) {
@@ -224,6 +295,8 @@ export class UppersliderComponent implements OnInit {
           this.getLiveKabaddiUpdate(this)
         else if (this.sport == 'Cricket')
           this.getLiveUpdateSlider(this)
+        else if (this.sport == 'Soccer')
+          this.getLiveSoccerUpdate(this)
       }, remainingMiliSec);
     }
   }

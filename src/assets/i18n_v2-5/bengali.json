@@ -10,6 +10,19 @@
         "Soccer": "ফুটবল",
         "Field_Hockey": "ফিল্ড হকি"
     },
+    "Footer": {
+        "Blog": "ব্লগ",
+        "About": "আমাদের সম্পর্কে",
+        "Contact": "যোগাযোগ",
+        "No_favourites": "কোনো প্রিয় নেই",
+        "Advertise_with_us": "আমাদের বিজ্ঞাপন দিন",
+        "Favourites": "প্রিয়",
+        "Terms_and_Conditions": "নিয়ম ও শর্তাবলী",
+        "Privacy_Policy": "গোপনীয়তা নীতি"
+    },
+    "About_us": {
+        "readers_text": "আমাদের পাঠকরা যা বলেন"
+    },
     "Contact_us": {
         "submit_another": "আর একটি জমা করুন",
         "Contact_Us": "আমাদের সঙ্গে যোগাযোগ করুন",
@@ -23,15 +36,44 @@
         "Full_Name": "সম্পূর্ণ নাম",
         "Submit": "জমা দিন"
     },
-    "Footer": {
-        "Blog": "ব্লগ",
-        "About": "আমাদের সম্পর্কে",
-        "Contact": "যোগাযোগ",
-        "No_favourites": "কোনো প্রিয় নেই",
+    "Advertise_with_us": {
         "Advertise_with_us": "আমাদের বিজ্ঞাপন দিন",
-        "Favourites": "প্রিয়",
-        "Terms_and_Conditions": "নিয়ম ও শর্তাবলী",
-        "Privacy_Policy": "গোপনীয়তা নীতি"
+        "Phone": "ফোন",
+        "fill_form_text": "এই ফর্মটি পূরণ করুন এবং আমাদের কর্মীরা শীঘ্রই আপনার সঙ্গে যোগাযোগ করবে।",
+        "Company": "কোম্পানি",
+        "ready_to_text": "আমাদের পাঠকদের কাছে পৌঁছতে প্রস্তুত?",
+        "advertise_submit_text": "আপনার বিজ্ঞাপন সংক্রান্ত জিজ্ঞাস্য প্রশাসকের কাছে জমা দিন। তিনি শীঘ্রই আপনার সাথে যোগাযোগ করবেন।",
+        "how_can_help": "আমরা কিভাবে সাহায্য করতে পারি ?"
+    },
+    "Blog_Module": {
+        "Posts": "পোস্ট",
+        "From_this_writer": "এই লেখকের কাছ থেকে",
+        "Articles": "প্রবন্ধ",
+        "Post": "পোস্ট",
+        "Recent_Stories": "সাম্প্রতিক গল্প",
+        "must_be_login_text": "মন্তব্য করতে লগ ইন করতে হবে।",
+        "VIEW_MORE": "আরো দেখুন",
+        "Search_results": "অনুসন্ধানের ফলাফল",
+        "Latest": "সর্বশেষ",
+        "Delete": "মুছে ফেলা",
+        "Videos": "ভিডিও",
+        "Load_More": "আর তথ্য",
+        "Comments": "মন্তব্য",
+        "Readlist": "রিড লিস্ট",
+        "want_to_delete": "মুছতে চাই",
+        "blogs": "ব্লগ",
+        "Views": "দেখেছে",
+        "Please_enter_your_comment": "অনুগ্রহ করে আপনার মন্তব্য লিখুন",
+        "Keep": "রাখা",
+        "browser_not_support_video_tag": "আপনার ব্রাউজার ভিডিও ট্যাগ সমর্থন করে না।",
+        "Login": "লগইন",
+        "Most_Read": "সর্বাধিক পঠিত",
+        "Delete_Comment": "মন্তব্য মুছুন"
+    },
+    "Home_Main_Page": {
+        "View_All": "সব দেখুন",
+        "Popular_Videos": "জনপ্রিয় ভিডিও",
+        "Top_Highlights": "সেরা খবর"
     },
     "Cricket_Module": {
         "Series": "সিরিজ",
@@ -143,32 +185,9 @@
         "agree_with_facebook": "ফেসবুকের সঙ্গে সম্মত হন",
         "gets_a": "পান একটি",
         "view_all": "সব দেখুন",
-        "Privacy_policy": "গোপনীয়তা নীতি"
-    },
-    "Blog_Module": {
-        "Posts": "পোস্ট",
-        "From_this_writer": "এই লেখকের কাছ থেকে",
-        "Articles": "প্রবন্ধ",
-        "Post": "পোস্ট",
-        "Recent_Stories": "সাম্প্রতিক গল্প",
-        "must_be_login_text": "মন্তব্য করতে লগ ইন করতে হবে।",
-        "VIEW_MORE": "আরো দেখুন",
-        "Search_results": "অনুসন্ধানের ফলাফল",
-        "Latest": "সর্বশেষ",
-        "Delete": "মুছে ফেলা",
-        "Videos": "ভিডিও",
-        "Load_More": "আর তথ্য",
-        "Comments": "মন্তব্য",
-        "Readlist": "রিড লিস্ট",
-        "want_to_delete": "মুছতে চাই",
-        "blogs": "ব্লগ",
-        "Views": "দেখেছে",
-        "Please_enter_your_comment": "অনুগ্রহ করে আপনার মন্তব্য লিখুন",
-        "Keep": "রাখা",
-        "browser_not_support_video_tag": "আপনার ব্রাউজার ভিডিও ট্যাগ সমর্থন করে না।",
-        "Login": "লগইন",
-        "Most_Read": "সর্বাধিক পঠিত",
-        "Delete_Comment": "মন্তব্য মুছুন"
+        "Privacy_policy": "গোপনীয়তা নীতি",
+        "goals":"গোল",
+        "assists":"সহায়তা"
     },
     "Shared_module": {
         "Manager": "ম্যানেজার",
@@ -203,22 +222,49 @@
         "Tackle": "ট্যাকল",
         "Info": "তথ্য"
     },
-    "Advertise_with_us": {
-        "Advertise_with_us": "আমাদের বিজ্ঞাপন দিন",
-        "Phone": "ফোন",
-        "fill_form_text": "এই ফর্মটি পূরণ করুন এবং আমাদের কর্মীরা শীঘ্রই আপনার সঙ্গে যোগাযোগ করবে।",
-        "Company": "কোম্পানি",
-        "ready_to_text": "আমাদের পাঠকদের কাছে পৌঁছতে প্রস্তুত?",
-        "advertise_submit_text": "আপনার বিজ্ঞাপন সংক্রান্ত জিজ্ঞাস্য প্রশাসকের কাছে জমা দিন। তিনি শীঘ্রই আপনার সাথে যোগাযোগ করবেন।",
-        "how_can_help": "আমরা কিভাবে সাহায্য করতে পারি ?"
+    "Cricket_Module2": {
+        "International": "আন্তর্জাতিক",
+        "player": "খেলোয়াড়",
+        "Domestic": "ঘরোয়া",
+        "Catches": "ক্যাচ",
+        "High_Score": "উচ্চ স্কোর",
+        "not": "না",
+        "Did": "করেছিল",
+        "Yet": "এখনো",
+        "to": "পর্যন্ত",
+        "Schedule": "সূচী",
+        "Economy_Rate": "ইকোনমি রেট",
+        "bat": "ব্যাট"
     },
-    "Home_Main_Page": {
-        "View_All": "সব দেখুন",
-        "Popular_Videos": "জনপ্রিয় ভিডিও",
-        "Top_Highlights": "সেরা খবর"
+    "Kabaddi_Module2": {
+        "Super_Raids": "সুপার রেইড",
+        "Successfull_tackles": "সফল ট্যাকল",
+        "Tournament": "টুর্নামেন্ট",
+        "Yellow": "হলুদ",
+        "Red": "লাল",
+        "Zone": "জোন",
+        "Raids_Points": "রেইড পয়েন্টস",
+        "Green": "সবুজ",
+        "Super_Tackles": "সুপার ট্যাকল",
+        "Successfull_raids": "সফল রেইড",
+        "Tackle_Points": "ট্যাকল পয়েন্ট"
     },
-    "About_us": {
-        "readers_text": "আমাদের পাঠকরা যা বলেন"
+    "Blog_Module2": {
+        "Add_a_comment": "একটা মন্তব্য যোগ করুন",
+        "Edit": "সম্পাদন করা",
+        "Recommended": "প্রস্তাবিত",
+        "Search_articles": "নিবন্ধ অনুসন্ধান করুন",
+        "Search_results": "অনুসন্ধানের ফলাফল"
+    },
+    "widget_Module2": {
+        "Add_to_favourites": "ফেভারিটে যোগ করুন",
+        "Recommended_Stories": "প্রস্তাবিত গল্প",
+        "No_Team_data_available": "দলের কোনও তথ্য উপলব্ধ নেই",
+        "No_data_available": "কোন তথ্য নেই",
+        "No_Team_squad": "কোনও দলের স্কোয়াড নেই",
+        "Added_to_favourites": "ফেভারিটে যোগ করা হয়েছে",
+        "No_team_fixtures": "কোনও দলের সূচী নেই",
+        "No_team_results": "কোনও দলের ফলাফল নেই"
     },
     "Shared_Module2": {
         "Born": "জন্ম",
@@ -236,50 +282,6 @@
         "Viewers": "দর্শক",
         "Bowling_Style": "বোলিং স্টাইল"
     },
-    "Kabaddi_Module2": {
-        "Super_Raids": "সুপার রেইড",
-        "Successfull_tackles": "সফল ট্যাকল",
-        "Tournament": "টুর্নামেন্ট",
-        "Yellow": "হলুদ",
-        "Red": "লাল",
-        "Zone": "জোন",
-        "Raids_Points": "রেইড পয়েন্টস",
-        "Green": "সবুজ",
-        "Super_Tackles": "সুপার ট্যাকল",
-        "Successfull_raids": "সফল রেইড",
-        "Tackle_Points": "ট্যাকল পয়েন্ট"
-    },
-    "widget_Module2": {
-        "Add_to_favourites": "ফেভারিটে যোগ করুন",
-        "Recommended_Stories": "প্রস্তাবিত গল্প",
-        "No_Team_data_available": "দলের কোনও তথ্য উপলব্ধ নেই",
-        "No_data_available": "কোন তথ্য নেই",
-        "No_Team_squad": "কোনও দলের স্কোয়াড নেই",
-        "Added_to_favourites": "ফেভারিটে যোগ করা হয়েছে",
-        "No_team_fixtures": "কোনও দলের সূচী নেই",
-        "No_team_results": "কোনও দলের ফলাফল নেই"
-    },
-    "Cricket_Module2": {
-        "International": "আন্তর্জাতিক",
-        "player": "খেলোয়াড়",
-        "Domestic": "ঘরোয়া",
-        "Catches": "ক্যাচ",
-        "High_Score": "উচ্চ স্কোর",
-        "not": "না",
-        "Did": "করেছিল",
-        "Yet": "এখনো",
-        "to": "পর্যন্ত",
-        "Schedule": "সূচী",
-        "Economy_Rate": "ইকোনমি রেট",
-        "bat": "ব্যাট"
-    },
-    "Blog_Module2": {
-        "Add_a_comment": "একটা মন্তব্য যোগ করুন",
-        "Edit": "সম্পাদন করা",
-        "Recommended": "প্রস্তাবিত",
-        "Search_articles": "নিবন্ধ অনুসন্ধান করুন",
-        "Search_results": "অনুসন্ধানের ফলাফল"
-    },
     "Shared_Module3": {
         "Save": "রক্ষা",
         "Search_favourites": "অনুসন্ধান পছন্দ",
@@ -293,5 +295,31 @@
     },
     "widget_Module3": {
         "Cancel": "বাতিল"
+    },
+    "Soccer_Module":{
+      "Tournaments":"প্রতিযোগিতা",
+      "Search_tournaments":"টুর্নামেন্ট অনুসন্ধান করুন",
+      "No_tournaments_data_available":"কোনও টুর্নামেন্টের ডেটা উপলব্ধ নেই!",
+      "Clubs":"ক্লাব",
+      "goals":"গোল",
+      "Assists":"সহায়তা",
+      "Cards":"তাস",
+      "Own_Goals":"নিজস্ব লক্ষ্য",
+      "Current_Tournaments":"বর্তমান টুর্নামেন্টস",
+      "Shots":"শটস",
+      "Shots_on_target":"টার্গেটের শট",
+      "Shots_saved":"শট সংরক্ষণ করা হয়েছে",
+      "Corners":"কোণে",
+      "Red_cards":"রেড কার্ড",
+      "Yellow_cards":"হলুদ কার্ড",
+      "Fouls":"নিয়মভঙ্গ বা ফাউল",
+      "Possession":"দখল",
+      "half_time":"অর্ধেক সময়",
+      "Country":"দেশ",
+      "PLAYER":"প্লেয়ার",
+      "Minutes_Played":"মিনিট খেলেছে",
+      "Substituted_In":"প্রতিস্থাপিত",
+      "Substituted_Out":"প্রতিস্থাপিত",
+      "Goals_Scored":"গোল স্কোরড"
     }
 }

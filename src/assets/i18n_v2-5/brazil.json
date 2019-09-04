@@ -286,9 +286,47 @@
     "Bowling_Stats":"Bowling Stats",
     "TEAM":"TEAM",
     "Game_type":"Game type"
+  },
+  "Soccer_Module":{
+    "Tournaments":"Tournaments",
+    "Search_tournaments":"Search tournaments",
+    "No_tournaments_data_available":"No tournaments data available!",
+    "Clubs":"Clubs",
+    "Goals":"Goals",
+    "Assists":"Assists",
+    "Cards":"Cards",
+    "Own_Goals":"Own Goals",
+    "Current_Tournaments":"Current Tournaments",
+    "Shots":"Shots",
+    "Shots_on_target":"Shots on target",
+    "Shots_saved":"Shots saved",
+    "Corners":"Corners",
+    "Red_cards":"Red Cards",
+    "Yellow_cards":"Yellow Cards",
+    "Fouls":"Fouls",
+    "Possession":"Possession",
+    "half_time": "Half Time",
+    "Country":"Country",
+    "PLAYER":"PLAYER",
+    "Minutes_Played":"Minutes Played",
+    "Substituted_In":"Substituted In",
+    "Substituted_Out":"Substituted Out",
+    "Goals_Scored":"Goals Scored"
+  },
+  "Shared_Module3":{
+    "Save":"Save",
+    "Search_favourites":"Search favourites",
+    "new_version_available":"New version of SportsInfo is available.",
+    "Take_me_there":"Take me there",
+    "cookie_text":"Hi! We use cookies on this website to help operate our site and for analytics purposes. For more on how we use cookies",
+    "go":"go",
+    "here":"here",
+    "cookie_continue_use_text":"By continuing to use our services, you are giving us your consent to use cookies.",
+    "Coming_Soon":"Coming Soon"
+  },
+  "widget_Module3":{
+    "Cancel":"Cancel"
   }
-  
-  
   
     
   }
