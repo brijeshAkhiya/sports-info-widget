@@ -47,7 +47,7 @@
               <app-loader *ngIf="lineupLoading"></app-loader>
               <app-no-data-widget *ngIf="!lineupLoading && (!matchStats)" [sport]="'soccer'"></app-no-data-widget>
               <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
-                *ngIf="!lineupLoading && team.home.statistics && team.away.statistics"></app-match-stats>
+                *ngIf="!lineupLoading && team?.home?.statistics && team?.away?.statistics"></app-match-stats>
 
               <!--head to head section start-->
               <section class="common-section top-padding" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">

@@ -87,7 +87,9 @@ export class FixturesCardComponent implements OnInit {
     }
   }
   loadDate(current){
-    this.customDate = new Array<number>(moment(`${current.year}-${current.month}-${current.day}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
+    console.log("adsasdsada");
+    console.log(current);
+    this.customDate = new Array<any>(moment(`${current.year}-${current.month}-${current.day.toString()}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
     if(this.gallery){ 
       var temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day)
       if(temp.length == 0 || this.gallery.slidesOutputData.slides.length > 7 )   
@@ -102,18 +104,23 @@ export class FixturesCardComponent implements OnInit {
   }
   selectDate(day){     
     this.paramSoccer.data = [];
-    this.paramSoccer.selectedDate.day = day;
+    this.paramSoccer.selectedDate.day = this.checkDateWithZero(day);
     this.loadDate(this.paramSoccer.selectedDate);
     this.getSoccerData()
   }
   dateChange($e){    
     this.paramSoccer.data = [];
     this.paramSoccer.selectedDate = { 
-      year: this.model.year, month: this.model.month, day: this.model.day, 
-      monthStr: moment(`${this.model.year}-${this.model.month}-${this.model.day}`).format('MMM') 
+      year: this.model.year, 
+      month: this.checkDateWithZero(this.model.month), 
+      day: this.checkDateWithZero(this.model.day), 
+      monthStr: moment(`${this.model.year}-${this.checkDateWithZero(this.model.month)}-${this.checkDateWithZero(this.model.day)}`).format('MMM') 
     };
     this.loadDate(this.paramSoccer.selectedDate);
     this.getSoccerData()
+  }
+  checkDateWithZero(value){
+    return (value != 0 && value.toString().length == 1) ? "0" + value : value;
   }
   filter(category){
     let obj = {};

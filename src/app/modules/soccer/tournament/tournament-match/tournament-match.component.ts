@@ -67,13 +67,13 @@ export class TournamentMatchComponent implements OnInit {
             this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
           }
         }
-        console.log(this.matchInfo.venuedetails);
 
         if (this.matchInfo.sport_event_status.status == 'upcoming') {
           this.startLiveUpdateAfterTime();
-        } else if (this.matchInfo.sport_event_status.status == 'live' && this.matchInfo.sport_event_status.status == 'ended') {
+        } else if (this.matchInfo.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status == 'ended') {
           this.getLiveUpdate(this);
-          this.initCommentry(res.data.timeline);
+          if(res.data.timeline)
+            this.initCommentry(res.data.timeline);
         }
 
         // this.getVenuedetails();
@@ -279,11 +279,12 @@ export class TournamentMatchComponent implements OnInit {
           console.log(res);
           // let matchData = res.data.items; 
           // this.matchInfo = res.data.items;
-          if (res.data.sport_event_status.status == 'live') {
+          if (res.data.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status != res.data.sport_event_status.status) {
             // this.initTeam();
             // this.initSquads();
             // this.commentry = [];
             this.matchInfo.statistics = res.data.statistics;
+            if(res.data.timeline.length > 0)
             this.initCommentry(res.data.timeline);
           }
           // if(matchData.match_info.status == 2){

@@ -202,19 +202,9 @@ export class TeamComponent implements OnInit {
         if (res.data)
           this.teamProfile = res.data
         if(this.teamProfile.players && this.teamProfile.players.length > 0){
+          this.teamProfile.players_type = [];
           this.teamProfile.players.map((data) => {
-            if (data.type == 'defender') {
-              this.soccerteamplayers.defender.push(data)
-            }
-            else if (data.type == 'midfielder') {
-              this.soccerteamplayers.midfielder.push(data)
-            }
-            else if (data.type == 'forward') {
-              this.soccerteamplayers.forward.push(data)
-            }
-            else if (data.type == 'goalkeeper') {
-              this.soccerteamplayers.goalkeeper.push(data)
-            }
+          (this.teamProfile.players_type[data.type] = this.teamProfile.players_type[data.type] || []).push(data);
           })
         }
       }, (error) => {

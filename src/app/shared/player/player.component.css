@@ -1,4 +1,4 @@
-.player-profile .player-pic             { width: 233px;}
+.player-profile .player-pic             { width: 233px; height: 240px; overflow: hidden;}
 .player-profile .player-pic img         { width: 100%; }
 .player-profile .player-info            { margin-left: 24px; padding: 24px; background: #fff; flex: 1; -webkit-flex: 1; -ms-flex: 1; }
 .player-profile .info-col               { padding: 0px 8px; flex: 1; -webkit-flex: 1; -ms-flex: 1; }
@@ -18,20 +18,20 @@ app-player-table:last-child .player-state { margin-bottom: 0px; }
 /***** Responsive CSS Start ******/
 
 @media (min-width: 992px) and (max-width: 1199px) {
-    .player-profile .player-pic             { width: 160px;}
+    .player-profile .player-pic             { width: 160px; height: 180px;}
     .player-profile .player-info            { padding: 20px 14px; }
 
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .player-profile .player-pic             { width: 160px;}
+    .player-profile .player-pic             { width: 160px; height: 180px;}
     .player-profile .player-info            { padding: 20px 14px; }
     .player-profile p.light-title           { margin-bottom: 4px; }
     .player-profile p                       { margin-bottom: 18px;}
 }
 
 @media (max-width: 767px) {
-    .player-profile .player-pic             { width: 120px;}
+    .player-profile .player-pic             { width: 120px; height: 140px;}
     .player-profile .player-info            { padding: 16px 10px; }
     .player-profile p.light-title           { margin-bottom: 4px; }
     .player-profile p                       { margin-bottom: 16px;}

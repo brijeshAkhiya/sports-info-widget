@@ -150,9 +150,9 @@
                 </h4>
                 <ng-template #soccer_squad>
                   <div class="squad-group">
-                    <ng-container *ngFor="let player of  objectKeys(soccerteamplayers)">
+                    <ng-container *ngFor="let player of  objectKeys(teamProfile.players_type)">
                       <h6 class="text-capitalize"> {{player}}</h6>
-                      <ng-container *ngTemplateOutlet="soccerPlayer;context:{players:soccerteamplayers[player]}">
+                      <ng-container *ngTemplateOutlet="soccerPlayer;context:{players:teamProfile?.players_type[player]}">
                       </ng-container>
                     </ng-container>
                   </div>
