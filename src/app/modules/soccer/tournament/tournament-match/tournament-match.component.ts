@@ -216,7 +216,7 @@ export class TournamentMatchComponent implements OnInit {
           console.log(res);
           // let matchData = res.data.items; 
           // this.matchInfo = res.data.items;
-          if (res.data.sport_event_status.status == 'live') {
+          if (res.data.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status != res.data.sport_event_status.status) {
             // this.initTeam();
             // this.initSquads();
             // this.commentry = [];
