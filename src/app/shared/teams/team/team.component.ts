@@ -205,21 +205,6 @@ export class TeamComponent implements OnInit {
           this.teamProfile.players_type = [];
           this.teamProfile.players.map((data) => {
           (this.teamProfile.players_type[data.type] = this.teamProfile.players_type[data.type] || []).push(data);
-
-            // if (data.type == 'defender') {
-            //   this.soccerteamplayers.defender.push(data)
-            // }
-            // else if (data.type == 'midfielder') {
-            //   this.soccerteamplayers.midfielder.push(data)
-            // }
-            // else if (data.type == 'forward') {
-            //   this.soccerteamplayers.forward.push(data)
-            // }
-            // else if (data.type == 'goalkeeper') {
-            //   this.soccerteamplayers.goalkeeper.push(data)
-            // }
-            console.log(this.teamProfile.players_type);
-            
           })
         }
       }, (error) => {
