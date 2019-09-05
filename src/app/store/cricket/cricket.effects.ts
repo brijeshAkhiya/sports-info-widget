@@ -12,7 +12,7 @@ import { Observable, EMPTY } from 'rxjs';
 @Injectable()
 export class CricketsEffects {
     constructor(private actions$: Actions, private sportsService: SportsService, private store: Store<fromRoot.State>) { }
-    
+
     @Effect()
     loadCricketFixturesSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Cricket.LOAD_CRICKET_FIXTURES),
@@ -28,6 +28,23 @@ export class CricketsEffects {
         )),
         take(1)
     );
+
+    //cricket upper- slider effects
+
+    @Effect()
+    loadCricketSliderSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType(Cricket.LOAD_CRICKET_SLIDER),
+        switchMap((action: any) => this.sportsService.getheaderslider().pipe(
+            map((response: any) => new Cricket.LoadCricketSliderSuccess(response.data)),
+            catchError(() => {
+                this.store.dispatch(new Cricket.LoadCricketSlider());
+                return EMPTY;
+            })
+        )),
+        take(1)
+    );
+
+    //cricket sidebar widget results effects
 
     @Effect()
     loadCricketResultsSuccess$: Observable<Action> = this.actions$.pipe(

@@ -32,37 +32,7 @@ export class SoccerEffects {
 
         take(1)
     );
-
-    @Effect()
-    loadSoccerResultsSuccess$: Observable<Action> = this.actions$.pipe(
-        ofType(Soccer.LOAD_SOCCER_RESULTS),
-        tap(() => console.log('in soccer effect')),
-        switchMap((action: any) =>
-            this.sportsService.getKabaddiMatchList('2', '10', '1').pipe(
-                map((response: any) => new Soccer.LoadSoccerResultsSuccess(response.data.items)),
-                catchError(() => {
-                    this.store.dispatch(new Soccer.LoadSoccerResults());
-                    return EMPTY;
-                })
-            )),
-        take(1)
-    );
-
-    @Effect()
-    loadSoccerLiveSuccess$: Observable<Action> = this.actions$.pipe(
-        ofType(Soccer.LOAD_SOCCER_LIVE_MATCHES),
-        tap(() => console.log('in soccer effect')),
-        switchMap((action: any) =>
-            this.sportsService.getKabaddiMatchList('3', '10', '1').pipe(
-                map((response: any) => new Soccer.LoadSoccerLiveSuccess(response.data.items)),
-                catchError(() => {
-                    this.store.dispatch(new Soccer.LoadSoccerLive());
-                    return EMPTY;
-                })
-            )),
-        take(1)
-    );
-
+    
     //get soccer tournament list effect
     @Effect()
     loadSoccerTournamentListSuccess$: Observable<Action> = this.actions$.pipe(

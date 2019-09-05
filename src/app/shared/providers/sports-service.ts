@@ -596,30 +596,37 @@ export class SportsService {
   }
 
   //get soccer team fixtures 
-  getsoccerteamfixtures(id){
+  getsoccerteamfixtures(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/team/${id}/summaries`
     );
   }
 
   //get soccer player info
-  getsoccerplayerinfo(id){
+  getsoccerplayerinfo(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/player/${id}`
     );
   }
 
   //get soccer team stats (season wise)
-  getsoccerteamstats(tournamentid,teamid){
+  getsoccerteamstats(tournamentid, teamid) {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/seasons/${tournamentid}/teams/${teamid}/statistics`
     );
   }
 
   //get soccer team vs team data (for match stats)
-  getsoccerteamvsteamdata(team1,team2){
+  getsoccerteamvsteamdata(team1, team2) {
     return this.http.get(
       environment.apiUrl + environment.version + `/soccer/team/${team1}/team/${team2}`
+    );
+  }
+
+  //get soccer team summaries data ( for match summary)
+  getsoccerteamsummaries(teamid) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/soccer/team/${teamid}/summaries`
     );
   }
 
