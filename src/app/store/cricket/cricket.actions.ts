@@ -9,13 +9,21 @@ export const LOAD_CRICKET_RESULTS = '[Cricket Results] Load Cricket Results';
 export const LOAD_CRICKET_RESULTS_SUCCESS = '[Cricket Results] Load Success';
 export const CRICKET_START_LOADING = '[UI] Cricket Start Loading';
 export const CRICKET_STOP_LOADING = '[UI] Cricket Stop Loading';
+export const LOAD_CRICKET_SLIDER = '[Cricket Slider] Load Cricket Slider Data';
+export const LOAD_CRICKET_SLIDER_SUCCESS = '[Cricket Slider] Load Success';
+
+
+
+
+
+
 
 export class CricketStartLoading implements Action {
-    readonly type =  CRICKET_START_LOADING   
+    readonly type = CRICKET_START_LOADING
 }
 
 export class CricketStopLoading implements Action {
-    readonly type =  CRICKET_STOP_LOADING
+    readonly type = CRICKET_STOP_LOADING
 }
 
 export class CricketFixtures implements Action {
@@ -61,4 +69,15 @@ export class LoadCricketResultsSuccess implements Action {
     constructor(public payload: any) { }
 }
 
-export type CricketActions = CricketFixtures | CricketLiveMatches | CricketResults | CricketMatchInfo | LoadCricketFixtures | LoadCricketFixturesSuccess | LoadCricketResults | LoadCricketResultsSuccess | CricketStartLoading | CricketStopLoading
+
+export class LoadCricketSlider implements Action {
+    readonly type = LOAD_CRICKET_SLIDER
+}
+
+export class LoadCricketSliderSuccess implements Action {
+    readonly type = LOAD_CRICKET_SLIDER_SUCCESS
+    constructor(public payload: any) { }
+}
+
+export type CricketActions = CricketFixtures | CricketLiveMatches | CricketResults | CricketMatchInfo | LoadCricketFixtures | LoadCricketFixturesSuccess | LoadCricketResults | LoadCricketResultsSuccess
+    | CricketStartLoading | CricketStopLoading | LoadCricketSlider | LoadCricketSliderSuccess

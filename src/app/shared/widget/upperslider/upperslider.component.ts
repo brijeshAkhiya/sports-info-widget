@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
 
+import * as Cricket from "@store/cricket/cricket.actions";
 import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
 import * as Soccer from "@store/soccer/soccer.actions";
 import * as fromRoot from "@app/app-reducer";
@@ -52,7 +53,7 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   };
-  customOptions1= {
+  customOptions1 = {
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
@@ -75,35 +76,35 @@ export class UppersliderComponent implements OnInit {
     private store: Store<fromRoot.State>
   ) { }
 
-  ngOnInit() { 
-    if(localStorage.getItem("selectedSport") != null) 
+  ngOnInit() {
+    if (localStorage.getItem("selectedSport") != null)
       this.sport = localStorage.getItem("selectedSport");
 
-    if(this.sportsSlider){
+    if (this.sportsSlider) {
       setTimeout(() => {
-        this.sportsSlider.to(this.sport.toString()); 
+        this.sportsSlider.to(this.sport.toString());
         this.loadData();
       });
     }
-    
+
   }
 
   //change slide select sport event
-  changeSlide(event){
+  changeSlide(event) {
     console.log("changeSlide");
-    
-    if(this.slider.length > 0 && event.slides.length > 0){
+
+    if (this.slider.length > 0 && event.slides.length > 0) {
       this.sport = event.slides[0].id
       localStorage.setItem("selectedSport", this.sport);
       this.slider = [];
-      this.loadData();  
+      this.loadData();
       this.clearTimeInterval();
     }
   }
 
   loadData() {
     console.log("load Data");
-    
+
     if (this.sport == 'Kabaddi')
       this.loadKabaddiData();
     else if (this.sport == 'Cricket')
@@ -114,7 +115,7 @@ export class UppersliderComponent implements OnInit {
 
   loadSoccerData() {
     console.log("loadSoccerData");
-    
+
     this.store.dispatch(new Soccer.LoadSoccerFixtures())
     this.store.select('Soccer').subscribe((data: any) => {
       let isSoccerLiveUpdate = false;
@@ -122,10 +123,10 @@ export class UppersliderComponent implements OnInit {
 
         let live = this.slider = data.fixtures.filter((match) => match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs')
         if (this.slider.length < 4) {
-          live = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'live'  && match.sport_event.coverage.sport_event_properties.scores == 'live'  && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+          live = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
         }
-        console.log("todays live matches", this.slider);  
-        if(live.length > 0){
+        console.log("todays live matches", this.slider);
+        if (live.length > 0) {
           this.getLiveSoccerUpdate(this);
           isSoccerLiveUpdate = true;
         }   
@@ -135,9 +136,9 @@ export class UppersliderComponent implements OnInit {
           this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
         // }
 
-        let fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started'  && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'));
+        let fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'));
         // if (this.slider.length < 4) {
-          fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started'  && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+        fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
         // }
         console.log("upcoming with live coverage", this.slider);    
        
@@ -146,10 +147,10 @@ export class UppersliderComponent implements OnInit {
           let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
             return new Date(moment.utc(e.sport_event.start_time).format());
           })));
-          console.log(minTime);          
+          console.log(minTime);
           this.startLiveUpdateAfterTime(moment.utc(minTime).format());
         }
-        console.log(this.slider);    
+        console.log(this.slider);
       }
     })
   }
@@ -159,7 +160,7 @@ export class UppersliderComponent implements OnInit {
   }
   getLiveSoccerUpdate(classThis) {
     console.log("getLiveSoccerUpdate");
-    
+
     let date = new Date();
     this.interval = setInterval(() => {
       classThis.sportsService
@@ -174,7 +175,7 @@ export class UppersliderComponent implements OnInit {
               }
             });
             console.log(this.slider);
-            
+
           }
           else {
             this.clearTimeInterval();
@@ -246,16 +247,15 @@ export class UppersliderComponent implements OnInit {
   }
 
   getCricketHeader() {
-    this.sportsService.getheaderslider().subscribe((res: any) => {
-      this.slider = this.sortBySchedule(res.data);
+    this.store.dispatch(new Cricket.LoadCricketSlider());
+    this.store.select('Cricket').subscribe((res: any) => {
+      this.slider = this.sortBySchedule(res.slider);
       this.slider.forEach((match, index) => {
-
         let compObj = {};
         match.competitors.map(s => {
           compObj[s.qualifier] = s
         });
         this.slider[index].competitors = compObj
-
         if (match.match_data && match.match_data.period_scores)
           this.setPeriodScore(match, index, match.match_data.period_scores)
         else if (match.period_scores)
@@ -264,11 +264,11 @@ export class UppersliderComponent implements OnInit {
           this.slider[index].competitors["home"].show_first = true;
       });
 
-      let livematchcount = res.data.filter(match => match.status == "live" || match.status == "interrupted" || match.status == "delayed")
+      let livematchcount = res.slider.filter(match => match.status == "live" || match.status == "interrupted" || match.status == "delayed")
       if (livematchcount.length > 0)
         this.getLiveUpdateSlider(this);
       else {
-        let upcomingMatchcount = res.data.filter(match => match.status == "not_started")
+        let upcomingMatchcount = res.slider.filter(match => match.status == "not_started")
         if (upcomingMatchcount.length > 0) {
           let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function (e) {
             return new Date(e.scheduled);
@@ -276,8 +276,7 @@ export class UppersliderComponent implements OnInit {
           this.startLiveUpdateAfterTime(minTime);
         }
       }
-
-    });
+    })
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
@@ -353,7 +352,7 @@ export class UppersliderComponent implements OnInit {
         return -1
       }
       else if (a.status == 'not_started') {
-        if (a.scheduled && b.scheduled) { 
+        if (a.scheduled && b.scheduled) {
           let aDate: any = new Date(a.scheduled);
           let bDate: any = new Date(b.scheduled);
           return aDate - bDate;
