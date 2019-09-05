@@ -128,17 +128,19 @@ export class UppersliderComponent implements OnInit {
         if(live.length > 0){
           this.getLiveSoccerUpdate(this);
           isSoccerLiveUpdate = true;
-        }  
+        }   
+        
+        // this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'))
+        // if (this.slider.length < 50) {
+          this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
+        // }
 
         let fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started'  && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'));
         // if (this.slider.length < 4) {
           fixtures = this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'not_started'  && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
         // }
         console.log("upcoming with live coverage", this.slider);    
-        // this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context && match.sport_event.sport_event_context.category.name == 'International Clubs'))
-        // if (this.slider.length < 50) {
-          this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled' && match.sport_event.sport_event_context.category.name != 'International Clubs'))
-        // }
+       
 
         if (!isSoccerLiveUpdate && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
           let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
