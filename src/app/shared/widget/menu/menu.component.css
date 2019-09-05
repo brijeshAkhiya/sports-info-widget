@@ -5,7 +5,6 @@
 .sub-navabar .sub-navabar-inner                 { justify-content: center; -webkit-justify-content: center; }
 .sub-navabar .subnavbarmenu                     { margin: 0px;}
 .sub-navabar .subnavbarmenu:after               { content: ""; display: block; clear: both;}
-.sub-navabar .subnavbarmenu > li                  { float: left;  }
 .sub-navabar .subnavbarmenu > li > a                { margin: 0px 16px; padding: 12px 0px; display: block; color: #fff; font-weight: 500; text-transform: capitalize; position: relative; overflow: hidden;}
 .sub-navabar .subnavbarmenu > li > a:hover          { color: #fff;}
 .sub-navabar .subnavbarmenu > li:first-child > a    { margin-left: 0px; }
@@ -27,6 +26,8 @@
 
 /* -- Arabic CSS -- */
 .arabic .submenu-back                           { padding-left: 32px; padding-right: 12px; border-right: none; border-left: 4px solid #294089; }
+.arabic .sub-navbar-container                   { margin-left: 0px; margin-right: 32px;}
+.arabic .sub-navabar .subnavbarmenu > li:first-child > a    { margin-right: 0px; margin-left: 16px; }
 
 /***** Responsive CSS Start ******/
 
@@ -45,6 +46,8 @@
     .sub-navabar .dropdown-menu li a            { padding: 10px 15px; }
 /* -- Arabic CSS -- */
     .arabic .submenu-back                       { padding: 12px; }
+    .arabic .sub-navbar-container               { margin-right: 16px;}
+    .arabic .sub-navabar .subnavbarmenu > li:first-child > a    { margin-left: 12px; }
 
 }
 
@@ -52,14 +55,16 @@
     .sub-navabar                                { top: 40.5px; }
     .sub-navabar .sub-navabar-inner             { position: relative; -webkit-box-pack: start !important; -ms-flex-pack: start !important; justify-content: flex-start !important; }
     .submenu-back                               { max-width: 50%;}
-    .sub-navbar-container                       { margin-left: 16px; display: flex; overflow: scroll; }
+    .sub-navbar-container                       { display: flex; overflow: scroll; }
     .sub-navabar .subnavbarmenu                 { display: flex; }
     .sub-navabar .dropdown-menu li a,
     .sub-navabar                                { font-size: 14px; line-height: 18px;}
-    .sub-navabar .subnavbarmenu > li > a        { margin: 0px 12px;}
+    .sub-navabar .subnavbarmenu > li > a        { margin: 0px 10px;}
 /** dropdown menu ***/
     .sub-navbar-container,
     .sub-navabar .subnavbarmenu > li.dropdown   { position: static; }
     .sub-navabar .dropdown-menu:before          { display: none; }
     .sub-navabar .dropdown-menu                 { padding: 0px 16px; width: 100%; }
+/* -- Arabic CSS -- */
+    .arabic .sub-navabar .subnavbarmenu > li:first-child > a    { margin-left: 10px; }
 }

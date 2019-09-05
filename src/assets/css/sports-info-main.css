@@ -142,6 +142,9 @@ app-main-header                     { display: block; background: #22336F;}
 .modal                              { z-index: 11111;}
 .modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
 .modal.show .modal-dialog           { left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
+/* -- Arabic CSS -- */
+.arabic .modal.show .modal-dialog   { left: auto; right: 50%; -webkit-transform: translate(50%,-50%); transform: translate(50%,-50%); }
+
 
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */

@@ -44,10 +44,17 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 .search-result                  { padding: 50px 0px; }
 .search-result .common-popular-list .item-desc  { min-height: 68px; }
 
+/* -- Arabic CSS -- */
+.arabic nav .navbar-brand               { margin-right: 0px; margin-left: 48px; padding-left: 0px; padding-right: 48px; }
+.arabic nav .navbar-brand:before        { right: auto; left: -38px; transform: skewX(-24deg) perspective(1200px); -webkit-transform: skewX(-24deg) perspective(1200px); border-radius: 28px 0px 0px 0px; }
+.arabic .login-search                   { margin-right: auto; margin-left: 36px;}
+
 /***** Responsive CSS Start ******/
 
 @media (max-width: 1379px) {
     .navbar-nav-container           { position: relative; left: 15px; transform: translateX(0%); -webkit-transform: translateX(0%); }
+/* -- Arabic CSS -- */
+    .arabic .navbar-nav-container   { left: auto; right: 15px; }
 }
 
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -59,6 +66,9 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .search-result                  { padding: 32px 0px; }
     .search-bar .search-box button  { width: 26px; height: 26px;}
     .search-result .common-popular-list .item-desc  { min-height: 90px; }
+
+/* -- Arabic CSS -- */
+    .arabic nav .navbar-brand       { padding-right: 24px; }
 
 }
 
@@ -78,6 +88,11 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .search-bar .search-box button  { width: 20px; height: 20px;}
     .search-result .common-popular-list .img-block  { height: 110px; }
     .search-result .common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
+/* -- Arabic CSS -- */
+    .arabic nav .navbar-brand           { padding-right: 24px; }
+    .arabic nav .navbar-brand:before    { left: -28px; }
+    .arabic .login-search               { margin-left: 16px;}
+
 }
 
 
@@ -104,6 +119,11 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
     .login-search                   { margin: 0px 8px 0px auto; }
     .login-search > li > a              { margin: 0px 5px; width: 18px; height: 18px; }
     .login-search li .dropdown-menu     { margin-top: 14px; }
+
+/* -- Arabic CSS -- */
+    .arabic nav .navbar-brand           { margin-left: 30px; padding-right: 15px;}
+    .arabic nav .navbar-brand:before    { left: -20px; }
+    .arabic .login-search               { margin-left: 8px;}
 }
 
 @media (max-width: 767px) {
@@ -133,6 +153,12 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 /* -------- Serch Box CSS ------- */
     .search-bar .search-close                           { display: inline-block; }
     .search-result                                      { padding: 16px 0px; }
+
+/* -- Arabic CSS -- */
+    .arabic nav .navbar-brand               { margin-left: 24px; padding-right: 12px;}
+    .arabic nav .navbar-brand:before        { left: -28px; }
+    .arabic nav .navbar-toggler             { right: auto; left: 0;}
+    .arabic .login-search                   { margin-left: 50px;}
 }
 
 @media (max-width: 575px) {
@@ -142,4 +168,7 @@ nav .navbar-brand img           { position: relative; z-index: 1;}
 /* -------- Serch Box CSS ------- */
     .search-bar input                               { font-size: 16px; line-height: 20px; }
     .search-result .common-title-btn h3             { font-size: 18px; }
+/* -- Arabic CSS -- */
+    .arabic nav .navbar-brand:before        { left: -22px; }
+
 }
