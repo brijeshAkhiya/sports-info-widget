@@ -1,10 +1,11 @@
-import { CricketActions, LOAD_CRICKET_FIXTURES, CRICKET_START_LOADING, CRICKET_STOP_LOADING, LOAD_CRICKET_RESULTS_SUCCESS, CRICKET_LIVE_MATCHES, CRICKET_FIXTURES_MATCHES, CRICKET_RESULTS_MATCHES, CRICKET_MATCH_INFO, LOAD_CRICKET_FIXTURES_SUCCESS, LOAD_CRICKET_RESULTS } from "./cricket.actions";
+import { CricketActions, LOAD_CRICKET_FIXTURES,LOAD_CRICKET_SLIDER,LOAD_CRICKET_SLIDER_SUCCESS, CRICKET_START_LOADING, CRICKET_STOP_LOADING, LOAD_CRICKET_RESULTS_SUCCESS, CRICKET_LIVE_MATCHES, CRICKET_FIXTURES_MATCHES, CRICKET_RESULTS_MATCHES, CRICKET_MATCH_INFO, LOAD_CRICKET_FIXTURES_SUCCESS, LOAD_CRICKET_RESULTS } from "./cricket.actions";
 
 export interface CricketData {
     fixtures: [],
     live: [],
     results: [],
     info: [],
+    slider:[],
     loader: boolean
 }
 
@@ -13,11 +14,16 @@ const initialState = {
     live: [],
     results: [],
     info: [],
+    slider:[],
     loader: false
 };
 
 export function CircketReducer(state = initialState, action: CricketActions): any {
     switch (action.type) {
+        case LOAD_CRICKET_SLIDER:
+            return state
+        case LOAD_CRICKET_SLIDER_SUCCESS:
+            return { ...state, slider: action.payload };
         case LOAD_CRICKET_FIXTURES:
             return state
         case LOAD_CRICKET_FIXTURES_SUCCESS:
