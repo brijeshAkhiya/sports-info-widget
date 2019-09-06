@@ -78,22 +78,31 @@
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'soccer'"
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
-                  <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.competitor?.country"><span
-                        class="title light-text">{{ 'Soccer_Module.Country' | translate }} :
-                      </span>{{teamProfile?.competitor?.country}}</h5>
-                    <h5 *ngIf="teamProfile?.venue?.name"><span
+                  <div class="team-info soccer-team-info d-flex align-items-center rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
+                        <p *ngIf="teamProfile?.competitor?.country">{{teamProfile?.competitor?.country}}</p>
+                      </div>
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Shared_module.Stadium' | translate }}</p>
+                        <p *ngIf="teamProfile?.venue?.name"> {{teamProfile?.venue?.name}} </p>
+                      </div>
+                    </div>
+                    <!-- <p *ngIf="teamProfile?.venue?.name"><p
                         class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
-                      </span>{{teamProfile?.venue?.name}}</h5>
-                    <!-- <h5 *ngIf="teamProfile?.venue?.name"><span
-                        class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
-                      </span>{{teamProfile?.venue?.name}}</h5> -->
-                    <h5 *ngIf="teamProfile?.manager?.name"><span
-                        class="title light-text">{{ 'Shared_module.Manager' | translate }} :
-                      </span>{{teamProfile?.manager?.name}}</h5>
-                    <h5 *ngIf="teamProfile?.competitor?.abbreviation"><span
-                        class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
-                      </span>{{teamProfile?.competitor?.abbreviation}}</h5>
+                      </p>{{teamProfile?.venue?.name}}</p> -->
+                    <div class="info-col">
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Shared_module.Manager' | translate }}</p>
+                        <p *ngIf="teamProfile?.manager?.name"> {{teamProfile?.manager?.name}} </p>
+                      </div>
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
+                        <p *ngIf="teamProfile?.competitor?.abbreviation"> {{teamProfile?.competitor?.abbreviation}} </p>
+                      </div>
+                    </div>
+                    <div class="info-col"></div>
                   </div>
                 </section>
               </ng-container>
@@ -152,7 +161,8 @@
                   <div class="squad-group">
                     <ng-container *ngFor="let player of  objectKeys(teamProfile.players_type)">
                       <h6 class="text-capitalize"> {{player}}</h6>
-                      <ng-container *ngTemplateOutlet="soccerPlayer;context:{players:teamProfile?.players_type[player]}">
+                      <ng-container
+                        *ngTemplateOutlet="soccerPlayer;context:{players:teamProfile?.players_type[player]}">
                       </ng-container>
                     </ng-container>
                   </div>
