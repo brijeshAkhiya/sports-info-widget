@@ -12,7 +12,8 @@
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
           <!-- START - MATCH COMMENTRY-->
-          <ngb-tab id="commentry" *ngIf="matchInfo?.sport_event?.coverage?.sport_event_properties?.commentary">
+          <ngb-tab id="commentry"
+            *ngIf="matchInfo.sport_event_status?.status == 'not_started' || ((matchInfo.sport_event_status?.status == 'live' || matchInfo.sport_event_status?.status == 'closed') && matchInfo?.sport_event?.coverage?.sport_event_properties?.commentary)">
             <ng-template ngbTabTitle>{{ 'Kabaddi_Module.commentary' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <!-- <h5>Match Commentary</h5> -->
@@ -22,7 +23,7 @@
                   [commentry]="matchInfo?.timeline" [sport]="'soccer'" [team]="team"></app-goal-commentry>
                 <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
                   [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
-                <app-no-data-widget *ngIf="matchInfo.sport_event_status?.status == 'closed' && !matchInfo?.timeline"
+                <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
                   [sport]="'soccer'"></app-no-data-widget>
               </ng-container>
             </ng-template>
@@ -45,7 +46,9 @@
             </ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="lineupLoading"></app-loader>
-              <app-no-data-widget *ngIf="!lineupLoading && (!matchStats)" [sport]="'soccer'"></app-no-data-widget>
+              <app-no-data-widget
+                *ngIf="!lineupLoading && (!matchStats) && teamvsteamdata?.length == 0 && (teamssummary.team1.matches.length == 0 && teamssummary.team2.matches.length)"
+                [sport]="'soccer'"></app-no-data-widget>
               <app-match-stats [sport]="'soccer'" [matchStats]="team" [info]="matchInfo"
                 *ngIf="!lineupLoading && team?.home?.statistics && team?.away?.statistics"></app-match-stats>
 
@@ -58,7 +61,12 @@
                       <img class="flag-img" [offset]="commonService.lazyloadoffset"
                         [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
                         [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
-                      <p>{{headtohead?.teams?.team1?.name}}</p>
+                      <p>
+                        <a
+                          [routerLink]="['/soccer/team', (headtohead?.teams?.team1?.id | splitID), (headtohead?.teams?.team1?.name | slugify )]">
+                          {{headtohead?.teams?.team1?.name}}
+                        </a>
+                      </p>
                     </div>
                     <div class="">
                       <p class="no-margin">Wins</p>
@@ -75,10 +83,17 @@
                       <p class="no-margin">Wins</p>
                       <h1>{{headtohead?.teams?.team2?.total}}</h1>
                     </div>
-                    <img class="flag-img" [offset]="commonService.lazyloadoffset"
-                      [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
-                      [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
-                    {{headtohead?.teams?.team2?.name}}
+                    <div class="flag-block">
+                      <img class="flag-img" [offset]="commonService.lazyloadoffset"
+                        [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
+                        [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                      <p>
+                        <a
+                          [routerLink]="['/soccer/team', (headtohead?.teams?.team2?.id | splitID), (headtohead?.teams?.team2?.name | slugify )]">
+                          {{headtohead?.teams?.team2?.name}}
+                        </a>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -101,17 +116,26 @@
                     <div>
                       <img class="flag-img" [lazyLoad]="teamssummary?.team1?.info?.id | logosurl:'soccer'"
                         [defaultImage]="cricketService.flagplaceholder" alt="team">
-                      <h5>{{teamssummary?.team1?.info?.name}}</h5>
+                      <h5>
+                        <a
+                          [routerLink]="['/soccer/team', (teamssummary?.team1?.info?.id | splitID), (teamssummary?.team1?.info?.name | slugify )]">
+                          {{teamssummary?.team1?.info?.name}}
+                        </a>
+                      </h5>
                     </div>
                     <ul class="form-match-list">
                       <li *ngFor="let match of teamssummary.team1.matches">
-                        <div ngbDropdown class="d-inline-block">
-                          <button
-                            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}"
-                            id="dropdownBasic1"
-                            ngbDropdownToggle>{{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}</button>
+
+                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                          <button id="dropdownBasic1" ngbDropdownAnchor (mouseover)="myDrop.open()"
+                            (mouseout)="myDrop.close();"
+                            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}">
+                            {{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}
+                          </button>
                           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <h1>{{ match?.sport_event_status?.home_score + ' - ' + match?.sport_event_status?.away_score  }}</h1>
+                            <h1>
+                              {{ match?.sport_event_status?.home_score + '-' + match?.sport_event_status?.away_score  }}
+                            </h1>
                             <p class="t-name">vs {{match?.oppteamname}}<img
                                 [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
                                 [defaultImage]="cricketService.flagplaceholder" alt="team"></p>
@@ -122,26 +146,37 @@
                     </ul>
                   </div>
                   <div>
+
                     <div class="">
                       <img class="flag-img" [lazyLoad]="teamssummary?.team2?.info?.id | logosurl:'soccer'"
                         [defaultImage]="cricketService.flagplaceholder" alt="team">
-                      <h5>{{teamssummary?.team2?.info?.name}}</h5>
+                      <h5>
+                        <a
+                          [routerLink]="['/soccer/team', (teamssummary?.team2?.info?.id | splitID), (teamssummary?.team2?.info?.name | slugify )]">
+                          {{teamssummary?.team2?.info?.name}}
+                        </a>
+                      </h5>
                     </div>
                     <ul class="form-match-list">
                       <li *ngFor="let match of teamssummary.team2.matches">
-                        <div ngbDropdown class="d-inline-block">
-                          <button
-                            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}"
-                            id="dropdownBasic1"
-                            ngbDropdownToggle>{{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}</button>
+
+                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                          <button id="dropdownBasic1" ngbDropdownAnchor (mouseover)="myDrop.open()"
+                            (mouseout)="myDrop.close();"
+                            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}">
+                            {{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}
+                          </button>
                           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <h1>{{ match?.sport_event_status?.home_score + '-' + match?.sport_event_status?.away_score  }}</h1>
+                            <h1>
+                              {{ match?.sport_event_status?.home_score + '-' + match?.sport_event_status?.away_score  }}
+                            </h1>
                             <p class="t-name">vs {{match?.oppteamname}}<img
                                 [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
                                 [defaultImage]="cricketService.flagplaceholder" alt="team"></p>
                             <p class="no-margin">{{match?.sport_event?.season?.name}}</p>
                           </div>
                         </div>
+
                     </ul>
                   </div>
                 </div>

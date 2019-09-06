@@ -69,7 +69,7 @@
             <ng-template carouselSlide>
               <!--Live matches-->
               <div class="slider-item"
-                [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-vs-' +slide.competitors.away.abbreviation)]">
+                [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)]">
                 <div class="slider-item-inner">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
@@ -84,17 +84,17 @@
                     </ng-template>
                   </div>
 
-                  <ng-container *ngIf="slide?.competitors?.away?.show_first; else home_first">
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away, match:slide}">
+                  <ng-container *ngIf="slide?.competitorsObj?.away?.show_first; else home_first">
+                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
                     </ng-container>
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home, match:slide}">
+                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
                     </ng-container>
                   </ng-container>
                   <ng-template #home_first>
                     <ng-container>
-                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.home, match:slide}">
+                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
                       </ng-container>
-                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitors?.away, match:slide}">
+                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
                       </ng-container>
                     </ng-container>
                   </ng-template>
