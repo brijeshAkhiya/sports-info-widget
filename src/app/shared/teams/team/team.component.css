@@ -24,6 +24,14 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
 .squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
 .fixtures-loadmore      { margin-top: 32px; text-align: center; }
 
+/* -------- Soccer Team Info ------- */
+.team-about-head .team-info.soccer-team-info { padding-top: 24px; padding-bottom: 24px; }
+.soccer-team-info .info-col                 { flex-grow: 1;}
+.soccer-team-info .info-item                { margin-bottom: 40px; }
+.soccer-team-info .info-item:last-child     { margin-bottom: 0px; }
+.soccer-team-info  p                        { margin-bottom: 0px; font-weight: 500; }
+.soccer-team-info .title                    { margin-bottom: 6px; font-size: 12px; line-height: 15px; font-weight: 600; text-transform: uppercase; }
+
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
     .team-about-head .team-logo         { width: 190px; }
@@ -37,16 +45,13 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-/* -------- Squad List ------- */
-    h4                              { padding-bottom: 16px; }
-    .squad-group                    { margin-bottom: 16px; }
-}
-@media (min-width: 992px) and (max-width: 1199px) {
     .team-about-head .team-logo         { width: 180px; padding: 12px;}
     .team-about-head .team-info         { padding: 24px;}
     .team-about-head .team-info h5      { margin-bottom: 16px;}
     .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
 /* -------- Squad List ------- */
+    h4                              { padding-bottom: 16px; }
+    .squad-group                    { margin-bottom: 16px; }
     .squad-item                         { margin-bottom: 24px; height: 276px; background: #fff; overflow: hidden; cursor: pointer; }
     .squad-item .item-desc              { padding: 12px 2px; }
     .squad-item:hover .item-desc        { transform: translateY(-58px); -webkit-transform: translateY(-58px); }
@@ -62,6 +67,9 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
     .squad-item                         { margin-bottom: 24px; height: 320px; background: #fff; overflow: hidden; cursor: pointer; }
     .squad-item .item-desc              { padding: 12px 2px; }
     .squad-item:hover .item-desc        { transform: translateY(-60px); -webkit-transform: translateY(-60px); }
+/* -------- Soccer Team Info ------- */
+    .team-about-head .team-info.soccer-team-info { padding-top: 20px; padding-bottom: 20px; }
+    .soccer-team-info .info-item                { margin-bottom: 20px; }
 }
 
 @media (max-width: 767px) {
@@ -78,6 +86,10 @@ h4                              { margin-bottom: 24px; padding-bottom: 24px; bor
     .squad-item:hover .item-desc        { transform: translateY(-52px); -webkit-transform: translateY(-52px); }
     .squad-item p                       { margin-bottom: 12px; }
     .squad-item .theme-btn              { font-size: 13px; }
+/* -------- Soccer Team Info ------- */
+    .team-about-head .team-info.soccer-team-info { padding-top: 20px; padding-bottom: 20px; }
+    .soccer-team-info .info-item                { margin-bottom: 16px; }
+    .soccer-team-info .title                    { margin-bottom: 4px; }
 }
 
 @media (max-width: 575px) {
