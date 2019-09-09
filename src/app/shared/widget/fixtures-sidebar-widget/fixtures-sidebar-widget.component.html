@@ -7,13 +7,17 @@
   <ngb-tabset class="common-tabs">
     <ngb-tab title="{{'Cricket_Module.Fixtures' | translate}}">
       <ng-template ngbTabContent>
-        <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
+        <ng-container>
+          <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: fixturesdata, type:'fixture',sport:sport}">
+          </ng-container>
         </ng-container>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="{{'Cricket_Module.Results' | translate}}">
       <ng-template ngbTabContent>
-        <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
+        <ng-container>
+          <ng-container *ngTemplateOutlet="sidebarMatch;context:{ matches: resultsdata, type:'result',sport:sport}">
+          </ng-container>
         </ng-container>
       </ng-template>
     </ngb-tab>
@@ -24,10 +28,10 @@
   <app-loader *ngIf="loader"></app-loader>
   <app-no-data-widget
     [message]="type =='result' ? ('Cricket_Module.No_recent_results' | translate) : ('Cricket_Module.No_recent_fixtures' | translate) "
-    *ngIf="!loader && (!matches || matches?.length == 0)">
+    *ngIf="!loader && (!matches || matches?.length == 0)" [sport]="sport">
   </app-no-data-widget>
 
-  <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'cricket'">
+  <ul class="common-list cricket-list cricket" *ngIf="matches && matches.length > 0 && sport == 'cricket'">
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
 
       <div class="title d-flex justify-content-between">
@@ -79,7 +83,7 @@
     </li>
   </ul>
 
-  <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'kabaddi'">
+  <ul class="common-list cricket-list kabaddi" *ngIf="matches && matches.length > 0 && sport == 'kabaddi' && type">
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
       <div class="title d-flex justify-content-between">
         <p><b>{{match?.competition?.cname ? match?.competition?.cname: ''}}</b> <span class="text-capitalize"></span>
@@ -119,7 +123,7 @@
       <div class="row">
         <div class="col-md-9">
           <p class="result-line" *ngIf="type == 'result'; else match_schedule ">
-            {{ match?.result?.text }}
+            {{ match?.result?.text }} 
           </p>
           <ng-template #match_schedule>
             <p class="result-line">Starts {{match.timestampstart | amFromUnix | amLocal | amDateFormat:'LT'}} |
@@ -138,7 +142,7 @@
     </li>
   </ul>
 
-  <ul class="common-list cricket-list" *ngIf="matches && matches.length > 0 && sport == 'soccer'">
+  <ul class="common-list cricket-list soccer" *ngIf="matches && matches.length > 0 && sport == 'soccer' && type">
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
       <div class="title d-flex justify-content-between">
         <p><b>{{match.sport_event.sport_event_context.season.name ? match.sport_event.sport_event_context.season.name : ''}}

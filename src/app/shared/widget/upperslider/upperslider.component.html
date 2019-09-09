@@ -16,7 +16,8 @@
             <ng-template carouselSlide>
               <!--Live matches-->
 
-              <div class="slider-item">
+              <div class="slider-item"
+              [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{ slide?.competition?.cname ? slide?.competition?.cname : slide?.title}}
@@ -68,7 +69,9 @@
           <ng-container class="items" *ngFor="let slide of slider">
             <ng-template carouselSlide>
               <!--Live matches-->
-              <div class="slider-item">
+              <div class="slider-item"
+              [routerLink]="['/cricket/match',(slide.id | splitID),(slide?.competitorsObj?.home?.abbreviation + '-vs-' +slide?.competitorsObj?.away?.abbreviation)]">
+
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
@@ -118,7 +121,7 @@
                         {{slide.match_result ? slide.match_result : slide.venue_name}}</p>
                     </div>
                   </div>
-                  <a class="fullblock-link" [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitors.home.abbreviation + '-vs-' +slide.competitors.away.abbreviation)]"></a>
+                  <a class="fullblock-link" [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)]"></a>
                 </div>
               </div>
             </ng-template>
@@ -129,7 +132,8 @@
           <ng-container class="items" *ngFor="let slide of slider">
             <ng-template carouselSlide>
               <!--Live matches-->
-              <div class="slider-item">
+              <div class="slider-item"
+              [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}} </b> 
