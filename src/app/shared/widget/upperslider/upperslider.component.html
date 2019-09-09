@@ -1,14 +1,20 @@
 <div class="header-live-section">
   <div class="container">
     <div class="header-live-inner d-flex align-items-center">
-      
+
       <div class="slider-sports-selection">
         <owl-carousel-o [options]="customOptions1" (changed)="changeSlide($event)" #sportsSlider>
-          <ng-template carouselSlide [id]="'Cricket'"><div class="slide-item">{{ 'Header_menu.Cricket' | translate }}</div></ng-template>
-          <ng-template carouselSlide [id]="'Kabaddi'"><div class="slide-item">{{ 'Header_menu.Kabaddi' | translate }}</div></ng-template>
-          <ng-template carouselSlide [id]="'Soccer'"><div class="slide-item">{{ 'Header_menu.Soccer' | translate }}</div></ng-template>
+          <ng-template carouselSlide [id]="'Cricket'">
+            <div class="slide-item">{{ 'Header_menu.Cricket' | translate }}</div>
+          </ng-template>
+          <ng-template carouselSlide [id]="'Kabaddi'">
+            <div class="slide-item">{{ 'Header_menu.Kabaddi' | translate }}</div>
+          </ng-template>
+          <ng-template carouselSlide [id]="'Soccer'">
+            <div class="slide-item">{{ 'Header_menu.Soccer' | translate }}</div>
+          </ng-template>
         </owl-carousel-o>
-        
+
       </div>
       <div class="header-live-slider" *ngIf="slider.length > 0">
         <owl-carousel-o [options]="customOptions" *ngIf="sport == 'Kabaddi'">
@@ -17,7 +23,7 @@
               <!--Live matches-->
 
               <div class="slider-item"
-              [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]">
+                [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{ slide?.competition?.cname ? slide?.competition?.cname : slide?.title}}
@@ -59,7 +65,8 @@
                         {{slide?.result?.text != '' ? slide?.result?.text : slide?.venue?.name}}</p>
                     </div>
                   </div>
-                  <a class="fullblock-link" [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]"></a>
+                  <a class="fullblock-link"
+                    [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]"></a>
                 </div>
               </div>
             </ng-template>
@@ -70,7 +77,7 @@
             <ng-template carouselSlide>
               <!--Live matches-->
               <div class="slider-item"
-              [routerLink]="['/cricket/match',(slide.id | splitID),(slide?.competitorsObj?.home?.abbreviation + '-vs-' +slide?.competitorsObj?.away?.abbreviation)]">
+                [routerLink]="['/cricket/match',(slide.id | splitID),(slide?.competitorsObj?.home?.abbreviation + '-vs-' +slide?.competitorsObj?.away?.abbreviation)]">
 
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
@@ -87,16 +94,20 @@
                   </div>
 
                   <ng-container *ngIf="slide?.competitorsObj?.away?.show_first; else home_first">
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
+                    <ng-container
+                      *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
                     </ng-container>
-                    <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
+                    <ng-container
+                      *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
                     </ng-container>
                   </ng-container>
                   <ng-template #home_first>
                     <ng-container>
-                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
+                      <ng-container
+                        *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
                       </ng-container>
-                      <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
+                      <ng-container
+                        *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
                       </ng-container>
                     </ng-container>
                   </ng-template>
@@ -121,7 +132,8 @@
                         {{slide.match_result ? slide.match_result : slide.venue_name}}</p>
                     </div>
                   </div>
-                  <a class="fullblock-link" [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)]"></a>
+                  <a class="fullblock-link"
+                    [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)]"></a>
                 </div>
               </div>
             </ng-template>
@@ -133,24 +145,33 @@
             <ng-template carouselSlide>
               <!--Live matches-->
               <div class="slider-item"
-              [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]">
+                [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name"><b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}} </b> 
-                      <span class="text-capitalize">{{slide?.sport_event?.sport_event_context?.stage ? replace(slide?.sport_event?.sport_event_context?.stage.phase) : ''}} </span>
+                    <p class="tour-name">
+                      <b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}}
+                      </b>
+                      <span
+                        class="text-capitalize">{{slide?.sport_event?.sport_event_context?.stage ? replace(slide?.sport_event?.sport_event_context?.stage.phase) : ''}}
+                      </span>
                     </p>
 
                     <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
-                    <p *ngIf="slide?.sport_event_status?.status == 'not_started' || slide?.sport_event_status?.status == 'closed'; else matchStatus">
+                    <p
+                      *ngIf="slide?.sport_event_status?.status == 'not_started' || slide?.sport_event_status?.status == 'closed'; else matchStatus">
                       {{slide.sport_event.start_time  | amTimeAgo}}</p>
                     <ng-template #matchStatus>
-                      <p class="live-result">{{slide?.sport_event_status?.status ? slide?.sport_event_status?.status : slide?.sport_event_status?.match_status}}</p>
+                      <p class="live-result">
+                        {{slide?.sport_event_status?.status ? slide?.sport_event_status?.status : slide?.sport_event_status?.match_status}}
+                      </p>
                     </ng-template>
                   </div>
 
-                  <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.sport_event?.competitors[0], match:slide}">
+                  <ng-container
+                    *ngTemplateOutlet="team;context:{competitor:slide?.sport_event?.competitors[0], match:slide}">
                   </ng-container>
-                  <ng-container *ngTemplateOutlet="team;context:{competitor:slide?.sport_event?.competitors[1], match:slide}">
+                  <ng-container
+                    *ngTemplateOutlet="team;context:{competitor:slide?.sport_event?.competitors[1], match:slide}">
                   </ng-container>
 
                   <ng-template #team let-competitor="competitor" let-match="match">
@@ -159,7 +180,8 @@
                         <img [lazyLoad]="competitor?.id| logosurl"
                           [defaultImage]="cricketService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
-                          {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b></p>
+                          {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
+                      </p>
                     </div>
                   </ng-template>
 
@@ -171,7 +193,8 @@
                         {{slide.match_result ? slide.match_result : slide.venue_name}}</p> -->
                     </div>
                   </div>
-                  <a class="fullblock-link" [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
+                  <a class="fullblock-link"
+                    [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
             </ng-template>
