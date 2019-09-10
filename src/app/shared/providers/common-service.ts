@@ -153,5 +153,15 @@ export class CommonService {
     return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
   }
 
+  sortByName(data, key){
+    return data.sort((a, b) => {
+      if (a.key < b.key) {
+        return  -1;
+      } else {
+        return  1;
+      }
+    })
+  }
+
 
 }

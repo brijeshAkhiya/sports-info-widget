@@ -105,7 +105,7 @@
           <div class="d-flex align-items-center justify-content-around">
             <ul class="ground-player-list" *ngFor="let formated_players of team.home.formated_players">
               <li *ngFor="let player of formated_players">
-                <div class="number">{{player?.jersey_number}}</div>
+                <div class="number" [ngStyle]="{'background':'#'+team.home?.jersey.base, 'color': '#'+team.home?.jersey.number }">{{player?.jersey_number}}</div>
                 <p>
                   <a
                     [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
@@ -118,7 +118,7 @@
           <div class="d-flex align-items-center justify-content-around">
             <ul class="ground-player-list list-2" *ngFor="let formated_players of team.away.formated_players">
               <li *ngFor="let player of formated_players">
-                <div class="number">{{player?.jersey_number}}</div>
+                <div class="number" [ngStyle]="{'background':'#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">{{player?.jersey_number}}</div>
                 <p>
                   <a
                     [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">

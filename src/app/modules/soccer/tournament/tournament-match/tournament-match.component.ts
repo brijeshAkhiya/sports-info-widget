@@ -284,7 +284,7 @@ export class TournamentMatchComponent implements OnInit {
             // this.initSquads();
             // this.commentry = [];
             this.matchInfo.statistics = res.data.statistics;
-            if(res.data.timeline.length > 0)
+            if(res.data.timeline)
             this.initCommentry(res.data.timeline);
           }
           // if(matchData.match_info.status == 2){

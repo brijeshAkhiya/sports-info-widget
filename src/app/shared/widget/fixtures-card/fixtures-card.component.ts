@@ -125,6 +125,7 @@ export class FixturesCardComponent implements OnInit {
   filter(category){
     let obj = {};
     this.paramSoccer.selectedCategory = category;
+    console.log(this.paramSoccer.selectedCategory);
     if(category.name == 'All'){
       this.paramSoccer.fullData.map((data) => {
         if(data.sport_event.sport_event_context){
@@ -163,8 +164,10 @@ export class FixturesCardComponent implements OnInit {
             }
               
           })
+          // category = this.commonService.sortByName(category, 'name');
           this.paramSoccer.data =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
           this.paramSoccer.filterCategory =  Object.keys(category).map(key => ({ key, data: category[key] }));
+          console.log(this.paramSoccer.filterCategory)
           
         }
       }, (error) => {
