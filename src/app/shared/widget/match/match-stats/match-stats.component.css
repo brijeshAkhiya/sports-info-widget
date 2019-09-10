@@ -15,6 +15,13 @@
 .match-stats .hightlight .point-line    { background: #ED1A33; }
 .match-stats .stat-row > :first-child .point-line { margin-right: 0px; margin-left: 8px; }
 
+/* -- Arabic CSS -- */
+.arabic .match-stats .head-row img                  { margin-right: 0px;  margin-left: 12px; }
+.arabic .match-stats .head-row > :first-child img   { margin-right: 12px; margin-left: 0px;}
+.arabic .match-stats .point-line                    { margin-right: 0px; margin-left: 8px;}
+.arabic .match-stats .stat-row > :first-child .point-line { margin-right: 8px; margin-left: 0px; }
+.arabic .match-stats .stat-row > :first-child       { text-align: left; }
+
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Match Stats ------- */
@@ -55,4 +62,10 @@
     .match-stats .head-row img          { margin-bottom: 4px; height: 28px; }
     .match-stats .point-row p .point-line,
     .match-stats .point-row p b         { margin-top: 4px; display: block; }
+
+/* -- Arabic CSS -- */
+    .arabic .match-stats .head-row img                      { margin-left: auto; margin-right: 0px; }
+    .arabic .match-stats .stat-row > :first-child .point-line,
+    .arabic .match-stats .point-row > :first-child p > *,
+    .arabic .match-stats .head-row > :first-child p > *     { margin-right: auto; margin-left: 0;}
 }

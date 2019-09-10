@@ -11,6 +11,10 @@
 .soccer-tournaments-list .item li a     { margin-right: 12px; display: block; position: relative; z-index: 5; }
 .soccer-tournaments-list .item li:last-child a { margin: 0px; }
 
+/* -- Arabic CSS -- */
+.arabic .soccer-tournaments-list .item                  { border-left-width: 1px; border-right-width: 0px; }
+.arabic .soccer-tournaments-list .item:nth-child(even)  { border-left-width: 0px;}
+
 /***** Responsive CSS Start ******/
 @media (max-width: 1199px) {
     .soccer-tournaments-list .item          { padding: 20px; }
@@ -19,12 +23,16 @@
 @media (min-width: 992px) and (max-width: 1199px) {
     .soccer-tournaments-list .item          { border-right-width: 0px;}
     .soccer-tournaments-list .item:nth-last-child(2) { border-bottom-width: 1px;}
+/* -- Arabic CSS -- */
+    .arabic .soccer-tournaments-list .item                  { border-left-width: 0px;}
 }
 
 @media (max-width: 767px) {
     .soccer-tournaments-list .item          { padding: 16px; border-right-width: 0px;}
     .soccer-tournaments-list .item:nth-last-child(2) { border-bottom-width: 1px;}
     .soccer-tournaments-list h6             { margin-bottom: 5px; }
+/* -- Arabic CSS -- */
+    .arabic .soccer-tournaments-list .item                  { border-left-width: 0px; }
 }
 
 @media (max-width: 575px) {

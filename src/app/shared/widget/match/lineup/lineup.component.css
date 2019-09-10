@@ -54,6 +54,10 @@
 .match-lienup .lienup-list li span                { display: inline-block; width: 26px; height: 26px; font-size: 12px; line-height: 22px; color: #292929; font-weight: 700; border: 2px solid #E0E0E0; text-align: center; border-radius: 50%; vertical-align: middle;}
 .match-lienup .lienup-list li span.filled         { background: #292929; color: #fff; border-color: #292929; }
 
+/* -- Arabic CSS -- */
+.arabic .match-lienup .heading img              { margin-right: 0px; margin-left: 12px; }
+.arabic .match-lienup .lienup-row > :first-child .heading img { margin-right: 12px; margin-left: 0px;}
+.arabic .match-lienup .lienup-row > :first-child    { text-align: left; }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -142,6 +146,8 @@
     .match-lienup h5                            { margin-bottom: 12px; padding-bottom: 8px; }
     .match-lienup .lienup-list                            { margin-bottom: 24px;}
     .match-lienup .lienup-list li                         { margin-bottom: 8px; }
-    
+/* -- Arabic CSS -- */
+    .arabic .match-lienup .lienup-row > :first-child    { text-align: right; }
+    .arabic .match-lienup .lienup-row > :first-child .heading img   { margin-right: 0px; margin-left: 12px; }
 }
     

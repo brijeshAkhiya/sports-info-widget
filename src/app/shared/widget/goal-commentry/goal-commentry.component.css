@@ -5,48 +5,57 @@
 /* .goal-commentary-list .icon        { background-image: url(assets/images/match/whistle-icon.svg);} */
 .goal-commentary-list .icon.normal,
 .goal-commentary-list .icon.throw_in ,
-.goal-commentary-list .icon.offside        { background-image: url(assets/images/match/whistle-icon.svg);}
-.goal-commentary-list .icon.timeout  { background-image: url(assets/images/match/time-icon.svg);}
-.goal-commentary-list .icon.green       { background-image: url(assets/images/match/card-green.svg);}
+.goal-commentary-list .icon.offside         { background-image: url(assets/images/match/whistle-icon.svg);}
+.goal-commentary-list .icon.timeout         { background-image: url(assets/images/match/time-icon.svg);}
+.goal-commentary-list .icon.green           { background-image: url(assets/images/match/card-green.svg);}
 .goal-commentary-list .icon.yellow,
-.goal-commentary-list .icon.yellow_card      { background-image: url(assets/images/match/card-yellow.svg);}
+.goal-commentary-list .icon.yellow_card     { background-image: url(assets/images/match/card-yellow.svg);}
 .goal-commentary-list .icon.red,
-.goal-commentary-list .icon.red_card          { background-image: url(assets/images/match/card-red.svg);}
-.goal-commentary-list .icon.substitution  { background-image: url(assets/images/match/substitute.svg);}
-.goal-commentary-list .icon.toss         { background-image: url(assets/images/match/toss.svg);}
+.goal-commentary-list .icon.red_card        { background-image: url(assets/images/match/card-red.svg);}
+.goal-commentary-list .icon.substitution    { background-image: url(assets/images/match/substitute.svg);}
+.goal-commentary-list .icon.toss            { background-image: url(assets/images/match/toss.svg);}
 .goal-commentary-list .icon.free_kick,
 .goal-commentary-list .icon.corner_kick,
-.goal-commentary-list .icon.goal_kick         { background-image: url(assets/images/match/soccer/soccer-shoe.svg);}
+.goal-commentary-list .icon.goal_kick       { background-image: url(assets/images/match/soccer/soccer-shoe.svg);}
 .goal-commentary-list .icon.period_start,
 .goal-commentary-list .icon.match_ended,
 .goal-commentary-list .icon.match_started,
 .goal-commentary-list .icon.break_start ,
-.goal-commentary-list .icon.period_score         { background-image: url(assets/images/match/soccer/period.svg);}
+.goal-commentary-list .icon.period_score    { background-image: url(assets/images/match/soccer/period.svg);}
 .goal-commentary-list .icon.shot_saved,
-.goal-commentary-list .icon.shot_on_target         { background-image: url(assets/images/match/soccer/shot_on.svg);}
-.goal-commentary-list .icon.shot_off_target         { background-image: url(assets/images/match/soccer/shot_off.svg);}
-.goal-commentary-list .icon.score_change         { background-image: url(assets/images/match/soccer/ic_goal.svg);}
-.goal-commentary-list .icon.result  { background-image: url(assets/images/match/result.svg);}
-.goal-commentary-list .icon-block p     { margin-left: 4px; display: inline-block; vertical-align: middle; }
-.goal-commentary-list .desc-block       { padding: 24px 0px; border-bottom: 1px solid #EBEBEB; flex-grow: 1; -webkit-flex-grow: 1; }
+.goal-commentary-list .icon.shot_on_target  { background-image: url(assets/images/match/soccer/shot_on.svg);}
+.goal-commentary-list .icon.shot_off_target { background-image: url(assets/images/match/soccer/shot_off.svg);}
+.goal-commentary-list .icon.score_change    { background-image: url(assets/images/match/soccer/ic_goal.svg);}
+.goal-commentary-list .icon.result          { background-image: url(assets/images/match/result.svg);}
+.goal-commentary-list .icon-block p         { margin-left: 4px; display: inline-block; vertical-align: middle; }
+.goal-commentary-list .desc-block           { padding: 24px 0px; border-bottom: 1px solid #EBEBEB; flex-grow: 1; -webkit-flex-grow: 1; }
 .goal-commentary-list .commentary-item:last-child .desc-block   { border: none; }
-.goal-commentary-list .title            { margin-bottom: 2px; font-weight: 600; color: #292929; }
-.goal-commentary-list .desc             { font-size: 14px; line-height: 20px; color: #3D3D3D; }
-.goal-commentary-list :last-child       { margin-bottom: 0px; }
-.goal-commentary-list .desc-block .score { padding-left: 8px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.goal-commentary-list .title                { margin-bottom: 2px; font-weight: 600; color: #292929; }
+.goal-commentary-list .desc                 { font-size: 14px; line-height: 20px; color: #3D3D3D; }
+.goal-commentary-list :last-child           { margin-bottom: 0px; }
+.goal-commentary-list .desc-block .score    { padding-left: 8px; flex-shrink: 0; -webkit-flex-shrink: 0; }
 
+/* -- Arabic CSS -- */
+.arabic .goal-commentary-list                   { padding-right: 24px; padding-left: 32px; }
+.arabic .goal-commentary-list .icon-block p     { margin-left: 0; margin-right: 4px;}
+.arabic .goal-commentary-list .desc-block .score    { padding-left: 0; padding-right: 8px; }
 /***** Responsive CSS Start ******/
 @media (max-width: 1199px) {
-    .goal-commentary-list               { padding: 0px 20px; }
+    .goal-commentary-list               { padding: 0px 18px 0px 20px; }
     .goal-commentary-list .icon-block   { width: 80px; }
     .goal-commentary-list .icon         { width: 28px; height: 28px;}
     .goal-commentary-list .desc-block   { padding: 20px 0px; }
+/* -- Arabic CSS -- */
+    .arabic .goal-commentary-list       { padding-right: 18px; padding-left: 20px; }
+
 }
 @media (max-width: 767px) {
-    .goal-commentary-list               { padding: 0px 16px; }
+    .goal-commentary-list               { padding: 0px 16px 0px 14px; }
     .goal-commentary-list .icon-block   { width: 70px; }
     .goal-commentary-list .icon         { width: 24px; height: 24px;}
     .goal-commentary-list .desc-block   { padding: 16px 0px; }
+/* -- Arabic CSS -- */
+    .arabic .goal-commentary-list       { padding-right: 14px; padding-left: 16px; }
 }
 @media (max-width: 575px) {
     .goal-commentary-list .icon-block   { width: 56px; }

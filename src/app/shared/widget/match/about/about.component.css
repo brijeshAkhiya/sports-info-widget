@@ -60,7 +60,7 @@
 .arabic .match-main-title .current-team img         { margin-right: 0px; margin-left: 12px; }
 .arabic .match-main-title .match-win-player         { padding-left: 0px; border-left: none; padding-right: 32px; border-right: 2px solid #ECECEC; }
 .arabic .match-main-title .player-pic               { margin-right: 0px; margin-left: 16px; }
-
+.arabic .goal-type .current-match > :last-child h4 img      { margin-left: 0px; margin-right: 12px; }
 
 
 /* -------- Content Animation ------- */
@@ -180,6 +180,9 @@
 /* -- Arabic CSS -- */
     .arabic .match-main-title .match-update             { text-align: right; }
     .arabic .match-main-title .current-team img         { margin-left: 6px; }
+    .goal-type .current-match h4 img                    { margin-bottom: 6px; margin-right: calc(100% - 24px); }
+    .arabic .goal-type .current-match h4 img                { margin-left: calc(100% - 24px); }
+    .arabic .goal-type .current-match > :last-child h4 img  { margin-right: calc(100% - 24px); }
 
 }    
     
