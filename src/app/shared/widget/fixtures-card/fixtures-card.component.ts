@@ -87,43 +87,45 @@ export class FixturesCardComponent implements OnInit {
     }
   }
   loadDate(current){
-    this.customDate = new Array<number>(moment(`${current.year}-${current.month}-${current.day}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
-
-    window['gallery'] = this.gallery
-    console.log(this.gallery);  
-    console.log(current.day, this.gallery,  current.day > 7);     
-    if(this.gallery && current.day > 7) 
-    this.gallery.to("28");
+    console.log("adsasdsada");
+    console.log(current);
+    this.customDate = new Array<any>(moment(`${current.year}-${current.month}-${current.day.toString()}`).daysInMonth()).fill(0, 0).map((x,i)=>i+1); 
+    if(this.gallery){ 
+      var temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day)
+      if(temp.length == 0 || this.gallery.slidesOutputData.slides.length > 7 )   
+        this.gallery.to(current.day.toString());
+    }
   }
-  selectDate(day){    
-    window['gallery'] = this.gallery
+  initialized($e){
+    setTimeout(() => {
+      if(this.gallery.slidesOutputData.slides.length > 7 )   
+        this.gallery.to(this.paramSoccer.selectedDate.day.toString());
+    }, );
+  }
+  selectDate(day){     
     this.paramSoccer.data = [];
-    this.paramSoccer.selectedDate.day = day;
+    this.paramSoccer.selectedDate.day = this.checkDateWithZero(day);
     this.loadDate(this.paramSoccer.selectedDate);
-    this.gallery.to("28");
     this.getSoccerData()
   }
   dateChange($e){    
     this.paramSoccer.data = [];
     this.paramSoccer.selectedDate = { 
-      year: this.model.year, month: this.model.month, day: this.model.day, 
-      monthStr: moment(`${this.model.year}-${this.model.month}-${this.model.day}`).format('MMM') 
+      year: this.model.year, 
+      month: this.checkDateWithZero(this.model.month), 
+      day: this.checkDateWithZero(this.model.day), 
+      monthStr: moment(`${this.model.year}-${this.checkDateWithZero(this.model.month)}-${this.checkDateWithZero(this.model.day)}`).format('MMM') 
     };
     this.loadDate(this.paramSoccer.selectedDate);
-    this.customOptions.startPosition = this.model.day;
-    console.log(this.gallery);   
-    window['gallery'] = this.gallery
-    this.gallery.to(this.model.day);
-    this.gallery.to("28");
     this.getSoccerData()
   }
-  changeSlide($e){
-    console.log("daklsdsad", $e);
-    
+  checkDateWithZero(value){
+    return (value != 0 && value.toString().length == 1) ? "0" + value : value;
   }
   filter(category){
     let obj = {};
     this.paramSoccer.selectedCategory = category;
+    console.log(this.paramSoccer.selectedCategory);
     if(category.name == 'All'){
       this.paramSoccer.fullData.map((data) => {
         if(data.sport_event.sport_event_context){
@@ -162,8 +164,10 @@ export class FixturesCardComponent implements OnInit {
             }
               
           })
+          // category = this.commonService.sortByName(category, 'name');
           this.paramSoccer.data =  Object.keys(obj).map(key => ({ key, data: obj[key] }));
           this.paramSoccer.filterCategory =  Object.keys(category).map(key => ({ key, data: category[key] }));
+          console.log(this.paramSoccer.filterCategory)
           
         }
       }, (error) => {

@@ -16,7 +16,7 @@
             </ng-container>
           </ng-container>
           <ng-container *ngIf="options.sport == 'soccer'">
-            <ng-container *ngTemplateOutlet="soccer;context:{item:item}">
+            <ng-container *ngTemplateOutlet="soccer;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
           <ng-container *ngIf="options.sport == 'cricket'">
@@ -29,7 +29,7 @@
     </table>
   </div>
 </div>
-<div class="table-title-info" *ngIf="options.sport == 'soccer' && options.soccertable == 'true' && data?.length > 0">
+<div class="table-title-info">
   <!-- <ul>
     <li><span>P:</span> Matches played</li>
     <li><span>RP:</span> Raid Points</li>
@@ -39,7 +39,14 @@
     <li><span>H5:</span> High 5s</li>
     <li><span>S10:</span> Super 10s</li>
   </ul> -->
-  <ul>
+  <ul *ngIf="options.sport == 'soccer' && options.teamstats == 'true' && data?.length > 0">
+    <li><span>P: </span>{{'Soccer_Module.Minutes_Played' | translate}}</li>
+    <li><span>SI: </span>{{'Soccer_Module.Substituted_In' | translate}}</li>
+    <li><span>SO: </span>{{'Soccer_Module.Substituted_Out' | translate}}</li>
+    <li><span>GS: </span>{{'Soccer_Module.Goals_Scored' | translate}}</li>
+    <li><span>AS: </span>{{'Soccer_Module.Assists' | translate}}</li>
+  </ul>
+  <ul *ngIf="options.sport == 'soccer' && options.soccertable == 'true' && data?.length > 0">
     <!-- <li><span class="game-card green"></span><span>:</span> Green Cards</li>
     <li><span class="game-card yellow"></span><span>:</span> Yellow Cards</li>
     <li><span class="game-card red"></span><span>:</span> Red Cards</li> -->
@@ -67,11 +74,11 @@
   </ng-container>
 </ng-template>
 
-<ng-template #soccer let-item="item">
+<ng-template #soccer let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="(value != 'teamname' && value != 'name');else data"
       [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
-      {{ (item[value] && item[value] !='') ? item[value] : 0 }}
+      {{ value == 'Index' ? index : (item[value] && item[value] !='') ? item[value]  : 0 }}
     </td>
     <ng-template #data>
       <td>

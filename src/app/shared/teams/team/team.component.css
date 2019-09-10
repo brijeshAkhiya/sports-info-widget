@@ -40,16 +40,13 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-/* -------- Squad List ------- */
-    .squad-list h4                  { padding-bottom: 16px; }
-    .squad-group                    { margin-bottom: 16px; }
-}
-@media (min-width: 992px) and (max-width: 1199px) {
     .team-about-head .team-logo         { width: 180px; padding: 12px;}
     .team-about-head .team-info         { padding: 24px;}
     .team-about-head .team-info h5      { margin-bottom: 16px;}
     .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
 /* -------- Squad List ------- */
+    h4                              { padding-bottom: 16px; }
+    .squad-group                    { margin-bottom: 16px; }
     .squad-item                         { margin-bottom: 24px; height: 276px; background: #fff; overflow: hidden; cursor: pointer; }
     .squad-item .item-desc              { padding: 12px 2px; }
     .squad-item:hover .item-desc        { transform: translateY(-58px); -webkit-transform: translateY(-58px); }
@@ -65,9 +62,9 @@
     .squad-item                         { margin-bottom: 24px; height: 320px; background: #fff; overflow: hidden; cursor: pointer; }
     .squad-item .item-desc              { padding: 12px 2px; }
     .squad-item:hover .item-desc        { transform: translateY(-60px); -webkit-transform: translateY(-60px); }
-/* -- Arabic CSS -- */
-    .arabic .team-about-head .team-info { margin-right: 16px; }
-
+/* -------- Soccer Team Info ------- */
+    .team-about-head .team-info.soccer-team-info { padding-top: 20px; padding-bottom: 20px; }
+    .soccer-team-info .info-item                { margin-bottom: 20px; }
 }
 
 @media (max-width: 767px) {
@@ -84,8 +81,10 @@
     .squad-item:hover .item-desc        { transform: translateY(-52px); -webkit-transform: translateY(-52px); }
     .squad-item p                       { margin-bottom: 12px; }
     .squad-item .theme-btn              { font-size: 13px; }
-/* -- Arabic CSS -- */
-    .arabic .team-about-head .team-info { margin-right: 16px; }
+/* -------- Soccer Team Info ------- */
+    .team-about-head .team-info.soccer-team-info { padding-top: 20px; padding-bottom: 20px; }
+    .soccer-team-info .info-item                { margin-bottom: 16px; }
+    .soccer-team-info .title                    { margin-bottom: 4px; }
 }
 
 @media (max-width: 575px) {

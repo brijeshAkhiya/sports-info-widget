@@ -5,7 +5,7 @@
       <div class="content-col">
 
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!loading && (!playerData)"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && (!playerData)" [sport]="sport"></app-no-data-widget>
 
         <div *ngIf="playerData"
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
@@ -24,8 +24,8 @@
             <ng-template ngbTabTitle>{{ 'Shared_module.profile' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <section class="player-profile d-flex" *ngIf="sport == 'cricket'">
-                <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="" [lazyLoad]="playerData?.player?.id | playerimage:['m']"
+                <div class="player-pic common-shadow rounded-box">
+                  <img class="" alt="" [lazyLoad]="playerData?.player?.id | playerimage:['m']"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="cricketService.playerplaceholder">
                 </div>
                 <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData?.player">

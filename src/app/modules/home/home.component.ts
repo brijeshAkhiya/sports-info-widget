@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
 
   //get popular videos
   getPopularVideos() {
-    this.sportsService.getpopularpost({eType: "Video"}).subscribe((res:any) => {
+    this.sportsService.getpopularpost({eType: "Video",bRemoveBannerPosts:true}).subscribe((res:any) => {
       if (res.data) 
         this.popularvideos = res.data;
     });

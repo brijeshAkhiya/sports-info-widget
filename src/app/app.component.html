@@ -43,15 +43,17 @@
 <app-main-footer></app-main-footer>
 <app-api-store></app-api-store>
 <div class="new-ver-toast d-flex justify-content-between align-items-center" [ngClass]="{active: isupdate}">
-  <p>New version of SportsInfo is available.</p>
-  <p><a (click)="updatewebsite()">Take me there <span></span></a></p>
+  <p>{{'Shared_Module3.new_version_available' | translate}}</p>
+  <p><a (click)="updatewebsite()">{{'Shared_Module3.Take_me_there' | translate}} <span></span></a></p>
 </div>
 
-<div class="cookies-notification white-text d-flex align-items-center justify-content-between" [ngClass]="{'cookies-hide': !showCookiepopup}">
+<div class="cookies-notification white-text d-flex align-items-center justify-content-between"
+  [ngClass]="{'cookies-hide': !showCookiepopup}">
   <div>
-    <p class="no-margin">Hi! We use cookies on this website to help operate our site and for analytics purposes. For
-      more on how we use cookies, go<a [routerLink]="['/terms-and-conditions']"> here</a>.</p>
-    <p class="no-margin">By continuing to use our services, you are giving us your consent to use cookies.</p>
+    <p class="no-margin">{{'Shared_Module3.cookie_text' | translate}}, {{'Shared_Module3.go' | translate}}<a
+        [routerLink]="['/terms-and-conditions']">
+        {{'Shared_Module3.here' | translate}}</a>.</p>
+    <p class="no-margin">{{'Shared_Module3.cookie_continue_use_text' | translate}}</p>
   </div>
   <button class="cookies-close" (click)="showCookiepopup = false"></button>
 </div>

@@ -1,6 +1,9 @@
 /* -------- Head-to-Head Section ------- */
 .head-to-head                   { padding: 24px; text-align: center; }
 .head-to-head .head-team        { width: 50%; }
+.head-to-head  .flag-block p    { margin: 8px 0px 0px; font-weight: 500;}
+.head-to-head  .flag-block:first-child { text-align: left; }
+.head-to-head  .flag-block:last-child { text-align: right;}
 .head-to-head .head-center      { width: 30%; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .head-to-head h1                { margin: -10px 0px; font-family: inherit; font-style: normal; }
 .head-to-head .head-center h1   { font-size: 64px; line-height: 84px; }
@@ -16,7 +19,7 @@
 .form-teams-block .dropdown-toggle::after   { display: none; }
 .form-teams-block .dropdown-toggle.win      { background: #6DD400;}
 .form-teams-block .dropdown-toggle.loss     { background: #FA3000;}
-.form-teams-block .dropdown-menu            { padding: 4px 12px 12px; width: 240px; top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important; font-size: inherit; line-height: inherit; color: #292929; border: 2px solid #EBEBEB; border-radius: 4px; text-align: center;}
+.form-teams-block .dropdown-menu            { padding: 4px 12px 12px; width: 240px; top: 100% !important; left: 50% !important; transform: translate(-50%, 0%) !important; -webkit-transform: translate(-50%, 0%) !important; font-size: inherit; line-height: inherit; color: #292929; border: 2px solid #EBEBEB; border-radius: 4px; text-align: center;}
 .form-teams-block .dropdown-menu h1         { margin: 0px 0px -3px; }
 .form-teams-block .t-name                   { margin-bottom: 8px; font-weight: 500; }
 .form-teams-block .t-name img               { margin-left: 2px; height: 20px; border-radius: 2px; }

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl : 'https://backend.sports.info',
+  apiUrl : 'https://dev.backend.sports.info',
   version: '/api/v1',
   socket: {
     baseUrl: 'https://backend.sports.info',

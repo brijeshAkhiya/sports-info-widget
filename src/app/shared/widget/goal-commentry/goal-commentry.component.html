@@ -50,7 +50,7 @@
         <div class="icon-block">
           <div class="icon" [ngClass]= "event.type">
           </div>
-          <p *ngIf="event.match_clock">{{event.match_clock}}'</p>
+          <p *ngIf="event.match_time">{{event.match_time}}' <span *ngIf="event.stoppage_time"> + {{event.stoppage_time}}'</span></p>
         </div>
     
         <div class="desc-block d-flex justify-content-between align-items-center" >   
@@ -64,7 +64,7 @@
         <div class="icon-block">
           <div class="icon" [ngClass]= "event.type">
           </div>
-          <p *ngIf="event.match_clock">{{event.match_clock}}'</p>
+          <p *ngIf="event.match_time">{{event.match_time}}' <span *ngIf="event.stoppage_time"> + {{event.stoppage_time}}'</span></p>
         </div>
     
         <div class="desc-block d-flex justify-content-between align-items-center" >  

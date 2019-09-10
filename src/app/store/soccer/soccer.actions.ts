@@ -11,7 +11,16 @@ export const LOAD_SOCCER_LIVE_MATCHES = '[Soccer Live] Load Soccer Live';
 export const LOAD_SOCCER_LIVE_MATCHES_SUCCESS = '[Soccer Live] Load Success';
 export const LOAD_SOCCER_TOURNAMENTS_LIST = '[Soccer Tournaments list] Load Soccer Tournaments list';
 export const LOAD_SOCCER_TOURNAMENTS_LISTSUCCESS = '[Soccer Tournaments list] Load Soccer Tournaments list Success';
+export const SOCCER_START_LOADING = '[UI] Soccer Start Loading';
+export const SOCCER_STOP_LOADING = '[UI] Soccer Stop Loading';
 
+export class SoccerStartLoading implements Action {
+    readonly type =  SOCCER_START_LOADING   
+}
+
+export class SoccerStopLoading implements Action {
+    readonly type =  SOCCER_STOP_LOADING
+}
 
 
 export class SoccerFixtures implements Action {
@@ -85,3 +94,5 @@ export type SoccerActions = SoccerFixtures | SoccerLiveMatches
     | LoadSoccerLive | LoadSoccerLiveSuccess
     | LoadSoccerTournamentList
     | LoadSoccerTournamentListSuccess
+    | SoccerStartLoading
+    | SoccerStopLoading

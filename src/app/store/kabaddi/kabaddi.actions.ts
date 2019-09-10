@@ -9,6 +9,17 @@ export const LOAD_KABADDI_RESULTS = '[Kabaddi Results] Load Kabaddi Results';
 export const LOAD_KABADDI_RESULTS_SUCCESS = '[Kabaddi Results] Load Success';
 export const LOAD_KABADDI_LIVE_MATCHES = '[Kabaddi Live] Load Kabaddi Live';
 export const LOAD_KABADDI_LIVE_MATCHES_SUCCESS = '[Kabaddi Live] Load Success';
+export const KABADDI_START_LOADING = '[UI] Kabaddi Start Loading';
+export const KABADDI_STOP_LOADING = '[UI] Kabaddi Stop Loading';
+
+export class KabaddiStartLoading implements Action {
+    readonly type =  KABADDI_START_LOADING   
+}
+
+export class KabaddiStopLoading implements Action {
+    readonly type =  KABADDI_STOP_LOADING
+}
+
 
 export class KabaddiFixtures implements Action {
     readonly type = KABADDI_FIXTURES_MATCHES
@@ -67,4 +78,5 @@ export type KabaddiActions = KabaddiFixtures | KabaddiLiveMatches
     | KabaddiResults | KabaddiMatchInfo
     | LoadKabaddiFixtures | LoadKabaddiFixturesSuccess
     | LoadKabaddiResults | LoadKabaddiResultsSuccess
-    | LoadKabaddiLive | LoadKabaddiLiveSuccess
+    | LoadKabaddiLive | LoadKabaddiLiveSuccess 
+    | KabaddiStartLoading | KabaddiStopLoading

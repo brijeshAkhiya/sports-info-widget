@@ -4,7 +4,7 @@
 
       <div class="content-col">
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
 
         <div *ngIf="teamProfile"
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
@@ -20,10 +20,9 @@
           <!-- About Section-->
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Footer.About' | translate }}</ng-template>
-            <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && !teamProfile"></app-no-data-widget>
-
             <ng-template ngbTabContent>
+              <app-loader *ngIf="loading"></app-loader>
+              <app-no-data-widget *ngIf="!loading && !teamProfile" [sport]="sport"></app-no-data-widget>
               <!-- About Team Section-->
               <!--Cricket  About  Section-->
               <ng-container *ngIf="sport == 'cricket'">
@@ -68,7 +67,7 @@
                   </div>
                 </section>
                 <app-no-data-widget *ngIf="teamProfile?.founded == ''"
-                  [message]="('widget_Module2.No_Team_data_available' | translate)">
+                  [message]="('widget_Module2.No_Team_data_available' | translate)" [sport]="sport">
                 </app-no-data-widget>
               </ng-container>
 
@@ -79,22 +78,31 @@
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'soccer'"
                       [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
-                  <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.competitor?.country"><span
-                        class="title light-text">{{ 'Soccer_Module.Country' | translate }} :
-                      </span>{{teamProfile?.competitor?.country}}</h5>
-                    <h5 *ngIf="teamProfile?.venue?.name"><span
+                  <div class="team-info soccer-team-info d-flex align-items-center rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
+                        <p *ngIf="teamProfile?.competitor?.country">{{teamProfile?.competitor?.country}}</p>
+                      </div>
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Shared_module.Stadium' | translate }}</p>
+                        <p *ngIf="teamProfile?.venue?.name"> {{teamProfile?.venue?.name}} </p>
+                      </div>
+                    </div>
+                    <!-- <p *ngIf="teamProfile?.venue?.name"><p
                         class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
-                      </span>{{teamProfile?.venue?.name}}</h5>
-                    <!-- <h5 *ngIf="teamProfile?.venue?.name"><span
-                        class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
-                      </span>{{teamProfile?.venue?.name}}</h5> -->
-                    <h5 *ngIf="teamProfile?.manager?.name"><span
-                        class="title light-text">{{ 'Shared_module.Manager' | translate }} :
-                      </span>{{teamProfile?.manager?.name}}</h5>
-                    <h5 *ngIf="teamProfile?.competitor?.abbreviation"><span
-                        class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
-                      </span>{{teamProfile?.competitor?.abbreviation}}</h5>
+                      </p>{{teamProfile?.venue?.name}}</p> -->
+                    <div class="info-col">
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Shared_module.Manager' | translate }}</p>
+                        <p *ngIf="teamProfile?.manager?.name"> {{teamProfile?.manager?.name}} </p>
+                      </div>
+                      <div class="info-item">
+                        <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
+                        <p *ngIf="teamProfile?.competitor?.abbreviation"> {{teamProfile?.competitor?.abbreviation}} </p>
+                      </div>
+                    </div>
+                    <div class="info-col"></div>
                   </div>
                 </section>
               </ng-container>
@@ -126,7 +134,7 @@
                 </ng-template>
               </section>
               <ng-template #no_players>
-                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)">
+                <app-no-data-widget [message]="('widget_Module2.No_Team_squad' | translate)" [sport]="sport">
                 </app-no-data-widget>
               </ng-template>
 
@@ -151,9 +159,10 @@
                 </h4>
                 <ng-template #soccer_squad>
                   <div class="squad-group">
-                    <ng-container *ngFor="let player of  objectKeys(soccerteamplayers)">
+                    <ng-container *ngFor="let player of  objectKeys(teamProfile.players_type)">
                       <h6 class="text-capitalize"> {{player}}</h6>
-                      <ng-container *ngTemplateOutlet="soccerPlayer;context:{players:soccerteamplayers[player]}">
+                      <ng-container
+                        *ngTemplateOutlet="soccerPlayer;context:{players:teamProfile?.players_type[player]}">
                       </ng-container>
                     </ng-container>
                   </div>
@@ -163,18 +172,19 @@
           </ngb-tab>
 
           <!--Soccer club stats section-->
-          <ngb-tab *ngIf="sport == 'soccer'">
+          <ngb-tab *ngIf="sport == 'soccer' && routeParams.tournamentid">
             <ng-template ngbTabTitle>
               <div (click)="getSoccerTeamStats()">{{ 'widgetModule.Stats' | translate }}</div>
             </ng-template>
-            <app-loader *ngIf="loading"></app-loader>
-            <app-no-data-widget *ngIf="!loading && soccerteamplayers?.playerstats?.length == 0" [message]="'No stats data available!'">
-            </app-no-data-widget>
             <ng-template ngbTabContent>
-              <ng-container>
+              <app-loader *ngIf="statsLoading"></app-loader>
+              <app-no-data-widget *ngIf="!statsLoading && soccerteamplayers?.playerstats?.length == 0"
+                [message]="'No stats data available!'" [sport]="sport">
+              </app-no-data-widget>
+              <ng-container *ngIf="!statsLoading && soccerteamplayers?.playerstats?.length > 0">
                 <app-player-table [data]="soccerteamplayers?.playerstats" [options]="{
-                      titles : [('Shared_Module2.TEAM' | translate),'P', 'SI', 'SO', 'GS', 'AS','Yellow Card','Red Card'],
-                      values : ['name', 'minutes', 'substituted_in', 'substituted_out', 'goals_scored', 'assists','yellow_cards','red_cards'],
+                      titles : ['No.',('Soccer_Module.PLAYER' | translate),'P', 'SI', 'SO', 'GS', 'AS',('Soccer_Module.Yellow_cards' | translate),('Soccer_Module.Red_cards' | translate)],
+                      values : ['Index','name', 'minutes', 'substituted_in', 'substituted_out', 'goals_scored', 'assists','yellow_cards','red_cards'],
                       class : ['tour-stand-table'],
                       sport : 'soccer',
                       teamstats:'true'

@@ -102,13 +102,15 @@ export class CommonService {
   }
 
   getPagetitlebyurl(url) {
+    let title;
     if (this.titleObj[url]) {
-      return this.titleObj[url].title
+      title = this.titleObj[url].title
     }
     else {
       var last = url.split("/").pop();
-      return last.replace(/-/g, ' ');
+      title = last.replace(/-/g, ' ');
     }
+    return  title.charAt(0).toUpperCase() + title.slice(1)
   }
 
   getIds(id, sport, type) {
@@ -136,10 +138,30 @@ export class CommonService {
       else if (type == 'team') {
         return 'sr:competitor:' + id
       }
-      else if(type == 'player'){
-        return 'sr:player:'+id
+      else if (type == 'player') {
+        return 'sr:player:' + id
       }
     }
   }
+
+  convertDate(date) {
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth() + 1).toString();
+    var dd = date.getDate().toString();
+    var mmChars = mm.split('');
+    var ddChars = dd.split('');
+    return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+  }
+
+  sortByName(data, key){
+    return data.sort((a, b) => {
+      if (a.key < b.key) {
+        return  -1;
+      } else {
+        return  1;
+      }
+    })
+  }
+
 
 }

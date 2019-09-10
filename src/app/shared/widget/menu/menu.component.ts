@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit {
   onWindowScroll(e) {
     this.windowinnerWidth = window.innerWidth;
     if (this.windowinnerWidth < 576) {
-      this.responsiveSticky(176);
+      this.responsiveSticky(163);
       console.log("width change" + innerWidth);
     }
     else {

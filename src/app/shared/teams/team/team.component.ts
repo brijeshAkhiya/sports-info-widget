@@ -16,6 +16,7 @@ export class TeamComponent implements OnInit {
   loading: boolean = false;
   loadingFixture: boolean = false;
   loadingResult: boolean = false;
+  statsLoading: boolean = false;
   matchfixtures;
   matchresults;
   teamProfile;
@@ -53,6 +54,8 @@ export class TeamComponent implements OnInit {
       this.getKabaddiTeamProfile(this.routeParams.teamid);
     }
     else if (this.sport == 'soccer') {
+      console.log(this.routeParams.tournamentid);
+
       this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')] } }
       this.getSoccerTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team'))
     }
@@ -199,20 +202,12 @@ export class TeamComponent implements OnInit {
         this.loading = false;
         if (res.data)
           this.teamProfile = res.data
-        this.teamProfile.players.map((data) => {
-          if (data.type == 'defender') {
-            this.soccerteamplayers.defender.push(data)
-          }
-          else if (data.type == 'midfielder') {
-            this.soccerteamplayers.midfielder.push(data)
-          }
-          else if (data.type == 'forward') {
-            this.soccerteamplayers.forward.push(data)
-          }
-          else if (data.type == 'goalkeeper') {
-            this.soccerteamplayers.goalkeeper.push(data)
-          }
-        })
+        if(this.teamProfile.players && this.teamProfile.players.length > 0){
+          this.teamProfile.players_type = [];
+          this.teamProfile.players.map((data) => {
+          (this.teamProfile.players_type[data.type] = this.teamProfile.players_type[data.type] || []).push(data);
+          })
+        }
       }, (error) => {
         this.loading = false;
       })
@@ -247,23 +242,26 @@ export class TeamComponent implements OnInit {
     let teamid = this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')
     let tournamentid = this.commonService.getIds(this.routeParams.tournamentid, 'soccer', 'tournament')
     if (teamid && tournamentid) {
-      this.loading = true
+      this.statsLoading = true
       this.sportsService.getsoccerteamstats(tournamentid, teamid).subscribe((res: any) => {
-        this.loading = false;
-        if (res.data)
+        this.statsLoading = false;
+        if (res.data && res.data.competitor && res.data.competitor.players){
           res.data.competitor.players.map((pdata) => {
-            pdata['minutes'] = pdata['statistics']['minutes_played']
-            pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
-            pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
-            pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
-            pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0
-            pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
-            pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
-            this.soccerteamplayers.playerstats.push(pdata)
+            if(pdata['statistics']){
+              pdata['minutes'] = pdata['statistics']['minutes_played'] ? pdata['statistics']['minutes_played'] : 0
+              pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
+              pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
+              pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
+              pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0
+              pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
+              pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
+              this.soccerteamplayers.playerstats.push(pdata)
+            }
           })
         console.log('playerstat', this.soccerteamplayers.playerstats);
+        }
       }, (error) => {
-        this.loading = false;
+        this.statsLoading = false;
       })
     }
 

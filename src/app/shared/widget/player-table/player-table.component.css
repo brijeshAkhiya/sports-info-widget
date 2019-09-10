@@ -24,10 +24,6 @@
 /* -------- Player Stats Table ------- */
 .player-state .table tr th:first-child,
 .player-state .table tr td:first-child    { text-align: left; width: 26%; text-transform: uppercase; }
-.player-state .table tr th:first-child:after { display: none; }
-/* .player-state .table tr th:after          { margin-top: -4px; margin-left: 6px; content: ""; display: inline-block; border-bottom: 10px solid #A3A3A3; border-left: 6px solid transparent; border-right: 6px solid transparent; vertical-align: middle; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; } */
-.player-state .table tr th.active         { color: #EC4D60; }
-.player-state .table tr th.active:after   { border-bottom-color: #EC4D60; transform: rotate(180deg); -webkit-transform: rotate(180deg); }
 .table-title-info                         { padding: 40px 0px; }
 .table-title-info ul                      { margin-bottom: 18px;}
 .table-title-info ul:last-child           { margin-bottom: 0px; }
