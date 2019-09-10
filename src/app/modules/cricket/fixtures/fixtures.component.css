@@ -15,7 +15,7 @@
 .schedule-list .schedule-item h5            { padding-left: 12px; color: #A3A3A3; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; flex-shrink: 0; -webkit-flex-shrink: 0;  }
 .schedule-list .schedule-item .schedule-date { margin: 0px; font-size: 18px; line-height: 23px; font-weight: 500; color: #A3A3A3;} 
 .schedule-list .schedule-item:hover         { background: #ED1A33; box-shadow: 0px 2px 8px rgba(237,26,51,0.16); -webkit-box-shadow: 0px 2px 8px rgba(237,26,51,0.16); }
-.schedule-list .schedule-item *             { transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.schedule-list .schedule-item *             { transition: all 0.1s ease-in-out; -webkit-transition: all 0.1s ease-in-out;}
 .schedule-list .schedule-item:hover *       { color: #fff !important; }
 
 /* -------- Tournament Fixtures List ------- */
