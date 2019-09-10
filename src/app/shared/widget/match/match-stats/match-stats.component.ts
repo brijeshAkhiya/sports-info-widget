@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 import { SportsService } from "@providers/sports-service";
 import { CricketService } from "@providers/cricket-service";
@@ -7,7 +7,8 @@ import { CommonService } from "@providers/common-service";
 @Component({
   selector: 'app-match-stats',
   templateUrl: './match-stats.component.html',
-  styleUrls: ['./match-stats.component.css']
+  styleUrls: ['./match-stats.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MatchStatsComponent implements OnInit {
 

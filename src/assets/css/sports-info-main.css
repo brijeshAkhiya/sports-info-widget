@@ -12,6 +12,7 @@
 ::-moz-selection        { color: #fff; background: #ED1A33; }
 ::selection             { color: #fff; background: #ED1A33; }
 body                    { font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252; }
+.arabic                 { direction: rtl; text-align: right; }
 .sticky-mainmenu        { padding-top: 50px; }
 .sticky-mainmenu.sticky-submenu         { padding-top: 95px; }
 .sticky-mainmenu .header-live-section   { opacity: 0; }
@@ -141,6 +142,9 @@ app-main-header                     { display: block; background: #22336F;}
 .modal                              { z-index: 11111;}
 .modal-dialog                       { margin: 15px 0px; width: 500px; max-width: 90%; }
 .modal.show .modal-dialog           { left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
+/* -- Arabic CSS -- */
+.arabic .modal.show .modal-dialog   { left: auto; right: 50%; -webkit-transform: translate(50%,-50%); transform: translate(50%,-50%); }
+
 
 /******* Middle Section CSS Start ******/
 /* -------- Custom Grid CSS ------- */
@@ -186,6 +190,10 @@ app-main-header                     { display: block; background: #22336F;}
 .common-popular-list .item-desc p a     { display: block; color: #292929; }
 .common-popular-list .item-desc p a:focus, 
 .common-popular-list .item-desc p a:hover            { color: #ED1A33; }
+/* -- Arabic CSS -- */
+.arabic .author-info .count-list li:last-child  { margin-left: 0px; }
+.arabic .author-info .count-list li:first-child { margin-left: 12px; }
+.arabic .author-info .count-list p:before       { margin-right: 0px; margin-left: 4px; }
 
 /* -------- Common News Section ------- */
 .common-news-list .common-news-item         { margin-bottom: 24px; padding: 16px; background: #fff; border-radius: 4px; }
@@ -196,6 +204,10 @@ app-main-header                     { display: block; background: #22336F;}
 .common-news-list .common-news-desc         { width: calc(100% - 280px); padding: 0px 0px 16px 16px; position: relative; }
 .common-news-list .news-excerpt p           { cursor: pointer;} 
 .common-news-list .author-info              { padding-left: 16px; position: absolute; width: 100%; left: 0px; bottom: 0px; }
+/* -- Arabic CSS -- */
+.arabic .common-news-list .common-news-img:before   { right: auto; left: -40px; transform: skewX(45deg); transform: skewX(45deg); }
+.arabic .common-news-list .common-news-desc         { padding-left: 0px; padding-right: 16px; }
+.arabic .common-news-list .author-info              { padding-left: 0px; padding-right: 16px;}
 
 /* -------- Common Widget Block ------- */
 .common-widget                      { margin-bottom: 24px; background: #fff; border-radius: 4px; box-shadow: 0px 2px 8px rgba(0,0,0,0.04); -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.04); overflow: hidden;}
@@ -254,6 +266,8 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .common-widget .cricket-list .match-info img    { margin: -3px 4px 0px 0px; width: 20px; display: inline-block;}
 .common-widget .cricket-list .match-info p      { margin-bottom: 12px; }
 .common-widget .cricket-list .result-line       { margin: 0px; font-size: 12px; line-height: 18px; font-family: 'IBM Plex Sans Condensed', sans-serif; }
+/* -- Arabic CSS -- */
+.arabic .common-widget .cricket-list .match-info img    { margin-right: 0px; margin-left: 4px;}
 
 /* -------- Common Stories Widget Block ------- */
 .common-stories-widget                  { margin-bottom: 24px; padding: 20px 24px 24px; background: #fff; }
@@ -266,6 +280,8 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 .common-stories-widget li a:before      { margin-top: -3px; content: ""; display: inline-block; width: 0px; height: 2px; vertical-align: middle; background: #292929; transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; }
 .common-stories-widget li a:hover:before{ margin-right: 8px; width: 18px;}
 .common-stories-widget li:last-child a  { margin-bottom: 0px; padding-bottom: 0px; border: none; }
+/* -- Arabic CSS -- */
+.arabic .common-stories-widget li a:hover:before { margin-right: 0px; margin-left: 8px; }
 
 /* -------- Table Style ------- */
 .common-table                           { background: #fff; overflow: hidden; }
@@ -493,6 +509,8 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
     .common-news-list .common-news-img      { margin-bottom: 16px;}
     .common-news-list .common-news-desc     { padding: 0px 0px 16px 0px; }
     .common-news-list .author-info          { padding: 0px; }
+/* -- Arabic CSS -- */
+    .common-news-list .author-info          { padding: 0px;}
 
 /* -------- Common Widget Block ------- */
     .common-widget .widget-title                    { padding: 6px 6px 8px; }

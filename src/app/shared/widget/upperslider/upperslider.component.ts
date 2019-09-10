@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Store } from "@ngrx/store";
 import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
@@ -14,7 +15,8 @@ import { CricketService } from "@providers/cricket-service";
 @Component({
   selector: 'app-upperslider',
   templateUrl: './upperslider.component.html',
-  styleUrls: ['./upperslider.component.css']
+  styleUrls: ['./upperslider.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UppersliderComponent implements OnInit {
 
@@ -37,6 +39,7 @@ export class UppersliderComponent implements OnInit {
     lazyLoad: true,
     navSpeed: 700,
     navText: ["", ""],
+    // rtl:true,
     responsive: {
       0: {
         items: 1
@@ -60,6 +63,7 @@ export class UppersliderComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     navText: ['', ''],
+    // rtl:true,
     responsive: {
       0: {
         items: 1

@@ -26,6 +26,9 @@
 .reader-slider-nav.owl-theme .owl-nav [class*="owl-"]:hover:after { -webkit-filter: brightness(0) invert(1); filter: brightness(0) invert(1); }
 .reader-slider-nav.owl-theme.mob-reader-slider-nav      { display: none; }
 
+/* -- Arabic CSS -- */
+.arabic .reader-slider-nav.owl-theme .owl-nav [class*="owl-"]   { transform: rotate(180deg); -webkit-transform: rotate(180deg); }
+
 @media (max-width: 991px) {
     .common-desc-block img              { margin-top: 24px; }
     .about-count .count-item:after      { height: 6px; }

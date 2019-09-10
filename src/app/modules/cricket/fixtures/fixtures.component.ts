@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs/operators';
 import * as moment from 'moment';
 
@@ -9,7 +9,8 @@ import { CommonService } from '@providers/common-service';
 @Component({
   selector: 'app-fixtures',
   templateUrl: './fixtures.component.html',
-  styleUrls: ['./fixtures.component.css']
+  styleUrls: ['./fixtures.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FixturesComponent implements OnInit {
 

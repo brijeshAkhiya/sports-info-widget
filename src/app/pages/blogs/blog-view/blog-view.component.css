@@ -54,7 +54,7 @@
 .write-comments form                { flex-grow: 1; -webkit-flex-grow: 1;}
 .write-comments textarea            { margin: 5px 16px 0px 0px; padding: 16px; height: 52px; background: #fff; width: 100%; line-height: 20px; border: none; resize: none; overflow: hidden; border-radius: 4px; }
 .write-comments textarea.expand     { height: auto; min-height: 90px; max-height: 200px; overflow: auto; }
-.write-comments form button         { min-height: 52px; background: #3C3C3C; }
+.write-comments form button         { min-height: 52px; background: #3C3C3C; flex-shrink: 0; -webkit-flex-shrink: 0;}
 .write-comments form button:hover,
 .write-comments form button:focus   { background: #3C3C3C; box-shadow: none; -webkit-box-shadow: none;}
 .write-comments form button span    { background: #292929; }
@@ -86,7 +86,13 @@
 .comment-delete-modal .modal-header .close:hover { opacity: 1; color: #292929;}
 .comment-delete-modal .modal-body   { padding: 32px 24px; }
 .comment-delete-modal .modal-footer { padding: 24px; background: #F0F2F9; border: none; }
-.comment-delete-modal .cmt-act-btn-list { margin: 0px;}
+.comment-delete-modal .cmt-act-btn-list { margin: 0;}
+
+/* -- Arabic CSS -- */
+.arabic .blog-author .author-img,
+.arabic .comments-section .commenter-img,
+.arabic .write-comments textarea            { margin-right: 0; margin-left: 16px;}
+
 @media (min-width: 1200px) and (max-width: 1379px) {
     .blog-banner                    { height: 580px; }
 /* -------- Article Content Section ------- */
@@ -169,4 +175,8 @@
     .comments-section .commenter-img    { margin-right: 12px; width: 60px;}
     .write-comments form                { flex-direction: column; -webkit-flex-direction: column;}
     .write-comments form button         { margin-top: 10px; min-height: initial;}
+
+/* -- Arabic CSS -- */
+    .arabic .blog-author .author-img,
+    .arabic .comments-section .commenter-img { margin-left: 12px;}
 }

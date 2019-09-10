@@ -36,7 +36,7 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 .footer-btn-list .delete-btn:hover      { background-color: #FFC800; border-color: #FFC800; }
 .footer-btn-list .delete-btn.active     { transform: translate(-50%, -125%); -webkit-transform: translate(-50%, -125%); }
 .fav-block-box .fav-btn-block           { position: absolute; left: 1px; top: 50%; transform: translate(-100% , -50%); }
-.fav-block-box .fav-btn-block .fav-btn  { position: absolute; width: 44px; height: 44px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: #FFC800 url(assets/images/fav-star-white.svg) no-repeat center center / 50% 50%; border-radius: 50%; border: none !important; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; overflow: hidden; }
+.fav-block-box .fav-btn-block .fav-btn  { position: absolute; width: 44px; height: 44px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: #FFC800 url(assets/images/fav-star-white.svg) no-repeat center center / 50% 50%; border-radius: 50%; border: none !important; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; overflow: hidden; z-index: 1; }
 .fav-block-box .fav-btn-block .fav-btn:hover            { transform: translate(-50%, -50%) rotate(75deg); -webkit-transform: translate(-50%, -50%) rotate(75deg); }
 .fav-block-box .fav-btn-block .fav-btn.active           { background-image: none; }
 .fav-block-box .fav-btn-block .fav-btn.active:hover     { transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }
@@ -48,6 +48,13 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 .scroll-top                             { width: 64px; height: 64px; background: rgba(0,0,0,0.28) no-repeat center center / 50% 50%; border-radius: 50%; border: none !important; z-index: 7; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .scroll-top img                         { width: 32%; transform: rotate(-90deg); -webkit-transform: rotate(-90deg);}
 .scroll-top:hover                       { box-shadow: none; -webkit-box-shadow: none; }
+
+/* -- Arabic CSS -- */
+.arabic .scroll-flash-block             { right: auto; left: 32px; }
+.arabic .fav-block-box                  { right: auto; left: 0px; transform: translateX(-100%); -webkit-transform: translateX(-100%); }
+.arabic .fav-block-box.fav-show         { transform: translateX(0%); -webkit-transform: translateX(0%); }
+.arabic .fav-block-box .fav-btn-block           { left: auto; right: 1px; transform: translate(100% , -50%); }
+.arabic .fav-btn-block img              { transform: rotate(-180deg); -webkit-transform: rotate(-180deg); }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -102,6 +109,9 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 /* -------- Scroll Top CSS ------- */
     .scroll-flash-block                 { right: 16px; bottom: 16px; }
     .scroll-top                         { width: 48px; height: 48px; }
+
+/* -- Arabic CSS -- */
+    .arabic .scroll-flash-block         { left: 16px; }
 }
 
 
