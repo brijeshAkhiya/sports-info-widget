@@ -56,7 +56,7 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   };
-  customOptions1 = {
+  customOptions1: any = {
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
@@ -85,9 +85,13 @@ export class UppersliderComponent implements OnInit {
 
     this.loadAllSportsData()
 
-    if (localStorage.getItem("selectedSport") != null)
+    if (localStorage.getItem("selectedSport") != null){
       this.sport = localStorage.getItem("selectedSport");
-
+    }
+    if(localStorage.getItem("userLng") === 'arabic'){
+      this.customOptions.rtl = true; 
+      this.customOptions1.rtl = true;
+    }
     if (this.sportsSlider) {
       setTimeout(() => {
         console.log("setTimeout");

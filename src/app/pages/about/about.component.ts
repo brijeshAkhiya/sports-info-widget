@@ -51,6 +51,9 @@ export class AboutComponent implements OnInit {
   constructor(private translateservice:TranslateService) { }
 
   ngOnInit() {
+    if(localStorage.getItem("userLng") === 'arabic'){
+      this.customOptions.rtl = true; 
+    }
   }
 
   customOptions: any = {

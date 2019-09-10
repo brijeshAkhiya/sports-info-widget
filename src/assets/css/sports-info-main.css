@@ -107,6 +107,9 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .soccer-fixture-filter .owl-theme .owl-nav [class*="owl-"] { top: inherit; }
 .soccer-fixture-filter .owl-theme .owl-nav .owl-prev       { left: -48px; }
 .soccer-fixture-filter .owl-theme .owl-nav .owl-next       { right: -48px;}
+/* -- Arabic CSS -- */
+.arabic .slider-sports-selection .owl-theme .owl-nav [class*="owl-"] { left: auto; right: 50%; transform: translateX(50%); -webkit-transform: translateX(50%); }
+
 /* -------- Image Zoom Style ------- */
 .common-zoom-container  { overflow: hidden; }
 .common-zoom-img        { height: 100%; background: #F4F4F5 no-repeat center center / cover; transition: all 0.3s ease-in-out; }

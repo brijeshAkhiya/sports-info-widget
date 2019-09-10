@@ -100,7 +100,7 @@
               <!--head to head section end-->
 
               <!-- last meetings section -->
-              <section class="last-meetings-section" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
+              <section class="common-section top-padding last-meetings-section" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
                 <h4 class="line-title">{{'Cricket_Module.Last_meetings' | translate}}</h4>
                 <app-schedule [data]="teamvsteamdata" [type]="'result'" [sport]="'soccer'" [tournament]="' '"
                   *ngIf="teamvsteamdata?.length > 0"></app-schedule>
