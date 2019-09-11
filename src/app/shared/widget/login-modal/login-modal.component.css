@@ -8,8 +8,14 @@
 .signin-modal p a:hover             { text-decoration: none; }
 .signin-modal .signin-text          { margin: 0px; }
 
+/* -- Arabic CSS -- */
+.arabic .signin-modal button img    { margin-left: 0px; margin-left: 16px; }
+
 @media (max-width: 767px) {
     .signin-modal .modal-body           { padding: 16px; }
     .signin-modal button                { margin-bottom: 10px; width: 100%; padding: 10px; font-size: 16px; line-height: 24px; }
     .signin-modal button img            { margin-right: 8px; width: 24px; }
+/* -- Arabic CSS -- */
+    .arabic .signin-modal button img    { margin-left: 8px; }
+
 }

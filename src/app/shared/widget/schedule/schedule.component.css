@@ -4,7 +4,7 @@
 .schedule-list .schedule-list-inner:last-child .schedule-month,
 .schedule-list .schedule-month:last-child   { margin-bottom: 0px; padding-bottom: 0px; border: none; }
 .schedule-list .month-title                 { width: 174px; padding-right: 16px; }
-.schedule-list .schedule-items              { width: calc(100% - 174px);  }
+.schedule-list .schedule-items              { flex-grow: 1; -webkit-flex-grow: 1; }
 .schedule-list .month-title h5              { margin-top: 4px; font-family: 'IBM Plex Sans Condensed', sans-serif; transition: all 0.35s ease-in-out; -webkit-transition: all 0.35s ease-in-out; opacity: 0.3; text-transform: uppercase;}
 .schedule-list .month-title .sticky-month   { position: sticky; position: -webkit-sticky; top: 100px; }
 .schedule-month:hover .month-title h5       { color: #ED1A33; opacity: 1;  }
@@ -38,14 +38,14 @@
 .match-teams .team-info                 { padding: 0px 12px; }
 .match-teams .team-flag                 { border: 2px solid #E5E5E5; border-radius: 3px; overflow: hidden; }
 .match-teams .team-flag img             { height: 46px; width: auto;}
-.schedule-item .details-btn             { position: absolute; width: 32px; height: 100%; background: #ED1A33; font-size: 14px; line-height: 32px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: #fff; right: -32px; top: 0px; border-radius: 4px; text-transform: uppercase; }
-.schedule-item .details-btn span        { position: relative; color: #fff; display: block; top: calc(50% + 2px); transform: rotate(-90deg); -webkit-transform: rotate(-90deg); }
-.schedule-item:hover .details-btn       { right: 0px;}
+.schedule-item .details-btn             { position: absolute; width: 32px; height: 100%; background: #ED1A33; font-size: 14px; line-height: 32px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: #fff; right: 0px; transform: translateX(100%); -webkit-transform: translateX(100%); top: 0px; border-radius: 4px; text-transform: uppercase; }
+.schedule-item .details-btn span        { position: relative; color: #fff; display: block; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); -webkit-transform: translate(-50%, -50%) rotate(-90deg); }
+.schedule-item:hover .details-btn       { transform: translateX(0%); -webkit-transform: translateX(0%); }
 
 /* -------- Tournament Fixtures For Kabaddi ------- */
 .schedule-tour-list .score-center-block     { margin: -10px 12px 0px; width: 100px; text-transform: uppercase; text-align: center; }
 .schedule-tour-list .score-center-block p   { margin-bottom: 0px; font-weight: 700; color: #ccc; }
-.schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700;  }
+.schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; }
 .schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
 /* -------- Tournament Fixtures For Soccer ------- */
@@ -63,11 +63,15 @@
 .soccer-tour-list .soccer-tour .score-center-block { min-width: 124px; padding: 0px 26px; text-align: center; }
 .soccer-tour .score-center-block h4         { margin: 0px; font-size: 16px; line-height: 20px; }
 
+/* -- Arabic CSS -- */
+.arabic .schedule-list .month-title         { padding-right: 0px; padding-left: 16px; }
+.arabic .schedule-item .details-btn         { right: auto; left: 0; transform: translateX(-100%); -webkit-transform: translateX(-100%);  }
+.arabic .schedule-item:hover .details-btn   { transform: translateX(0%); -webkit-transform: translateX(0%); }
+
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Fixtures List ------- */
     .schedule-list .month-title                 { width: 120px; }
-    .schedule-list .schedule-items              { width: calc(100% - 120px);  }
 /* -------- Tournament Fixtures List ------- */
     .schedule-item .match-desc              { width: 160px; }
     .schedule-item .match-teams             { width: calc(100% - 168px); }
@@ -81,7 +85,6 @@
 @media (max-width: 1199px) {
 /* -------- Fixtures List ------- */
     .schedule-list .month-title                 { width: 100px; }
-    .schedule-list .schedule-items              { width: calc(100% - 100px); }
 /* -------- Tournament Fixtures List ------- */
     .schedule-tour-list .schedule-item      { padding: 16px 16px 16px 12px; flex-direction: column; -webkit-flex-direction: column; }
     .schedule-item .match-desc,
@@ -106,7 +109,6 @@
     .schedule-list .schedule-list-inner .schedule-month:last-child,
     .schedule-list .schedule-month              { margin-bottom: 24px; padding-bottom: 24px;}
     .schedule-list .month-title                 { width: 90px; }
-    .schedule-list .schedule-items              { width: calc(100% - 90px); }
     .schedule-list .schedule-item .schedule-date { font-size: 15px; line-height: 20px;}
 /* -------- Tournament Fixtures List ------- */
     .match-teams .team-flag img             { height: 34px;}
@@ -118,8 +120,7 @@
 @media (max-width: 575px) {
 /* -------- Fixtures List ------- */
     .schedule-list .schedule-month              { flex-direction: column; -webkit-flex-direction: column; }
-    .schedule-list .month-title,
-    .schedule-list .schedule-items              { width: 100%; }
+    .schedule-list .month-title                 { width: 100%; }
     .schedule-list .schedule-item               { padding: 16px;}
     .schedule-list .month-title h5              { margin-bottom: 16px;}
     .schedule-list .month-title .sticky-month   { position: static; }

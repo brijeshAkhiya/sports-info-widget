@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "@providers/sports-service";
 import { CommonService } from "@providers/common-service";
@@ -7,7 +7,8 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: "app-match-home",
   templateUrl: "./match-home.component.html",
-  styleUrls: ["./match-home.component.css"]
+  styleUrls: ["./match-home.component.css"],
+  encapsulation: ViewEncapsulation.None
 })
 export class MatchHomeComponent implements OnInit {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, aIds: [] } }  

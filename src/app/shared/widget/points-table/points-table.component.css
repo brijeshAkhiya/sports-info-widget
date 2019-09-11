@@ -9,6 +9,9 @@
 .point-table-widget .table tr th:first-child,
 .point-table-widget .table tr td:first-child    { text-align: left; }
 .point-table-widget .table tr td:first-child    { font-weight: 500; width: 30%; }
+/* -- Arabic CSS -- */
+.arabic .point-table-widget .table tr th:first-child,
+.arabic .point-table-widget .table tr td:first-child    { text-align: right; }
 
 @media (max-width: 991px) {
     .point-table-widget h6                      { margin: 6px 8px 0px; }

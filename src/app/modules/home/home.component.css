@@ -39,6 +39,12 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 .popular-video-section .pattern-left                    { width: 44%; left: -20%; top: -60%; transform: rotate(-92deg); -webkit-transform: rotate(-92deg); }
 .popular-video-section .pattern-right                   { right: -25%; bottom: -65%; transform: rotate(120deg); -webkit-transform: rotate(120deg); }
 
+/* -------- Arabic CSS ------- */
+.arabic .home-banner                                { direction: ltr; }
+.arabic .home-banner .banner-news-list              { border-left: none; border-right: 4px solid rgba(236,236,236,0.1); }
+.arabic .home-banner .banner-news-list li a:before  { left: auto; right: -4px;}
+.arabic .home-popular-vid-list                      { padding-right: 0px; padding-left: 16px; }
+
 /***** Responsive CSS Start ******/
 @media (min-width: 1380px) and (max-width: 1499px) {
     .home-banner .common-banner-pattern     { left: -94%; top: -14%; }
@@ -55,7 +61,9 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-popular-vid-list .video-img           { height: 166px; }
     .popular-video-section .pattern-left        { left: -20%; top: -37%; }
     .popular-video-section .pattern-right       { right: -26%; bottom: -42%; }
-
+/* -------- Arabic CSS ------- */
+    .arabic .home-banner .banner-news-list li a { padding: 0px 24px 0px 0px; }
+    .arabic .home-popular-vid-list              { padding-left: 26px; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -69,6 +77,9 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-popular-vid-list .video-img           { height: 146px; }
     .popular-video-section .pattern-left        { left: -20%; top: -37%; }
     .popular-video-section .pattern-right       { right: -26%; bottom: -42%; }
+/* -------- Arabic CSS ------- */
+    .arabic .home-banner .banner-news-list li a { padding: 0px 22px 0px 0px; }
+    .arabic .home-popular-vid-list              { padding-left: 30px; }
 }
 
 @media (max-width: 991px) {
@@ -89,6 +100,9 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .home-popular-vid-list .video-img       { height: 120px; }
     .popular-video-section .pattern-left    { left: -20%; top: -37%; }
     .popular-video-section .pattern-right   { right: -26%; bottom: -42%; }
+/* -------- Arabic CSS ------- */
+    .arabic .home-banner .banner-news-list li a { padding: 0px 18px 0px 0px; }
+    .arabic .home-popular-vid-list              { padding-left: 20px; }
 }
 
 @media (max-width: 767px) {
@@ -103,10 +117,12 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
     .main-popular-video .play-btn           { width: 100px; }
     .home-popular-vid-list                  { padding: 0px; height: initial; display: flex;}
     .home-popular-vid-list .video-item      { margin: 0px 16px 0px 0px; width: 280px; flex-shrink: 0; -webkit-flex-shrink: 0; }
-    /* .home-popular-vid-list                  { padding: 0px 12%; height: 360px; } */
     .home-popular-vid-list .video-img       { height: 120px; }
     .popular-video-section .pattern-left    { left: -20%; top: -37%; }
     .popular-video-section .pattern-right   { right: -26%; bottom: -42%; }
+/* -------- Arabic CSS ------- */
+    .arabic .home-banner .banner-news-list li a { padding: 0px 14px 0px 0px; }
+    .arabic .home-popular-vid-list          { padding: 0px; }
 }
 
 @media (max-width: 575px) {

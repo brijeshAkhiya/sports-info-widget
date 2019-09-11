@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 import { CommonService } from "@providers/common-service";
 
 @Component({
   selector: 'app-team-card',
   templateUrl: './team-card.component.html',
-  styleUrls: ['./team-card.component.css']
+  styleUrls: ['./team-card.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TeamCardComponent implements OnInit {
 

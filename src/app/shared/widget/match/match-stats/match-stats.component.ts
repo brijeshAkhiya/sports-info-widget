@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-match-stats',
   templateUrl: './match-stats.component.html',
-  styleUrls: ['./match-stats.component.css']
+  styleUrls: ['./match-stats.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MatchStatsComponent implements OnInit {
 

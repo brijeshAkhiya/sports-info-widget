@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild } from "@angular/core";
+import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation } from "@angular/core";
 import { SportsService } from "@providers/sports-service";
 import { SocketService } from '@providers/socket.service';
 import { Socket } from "ngx-socket-io";
@@ -14,7 +14,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: "app-main-footer",
   templateUrl: "./main-footer.component.html",
-  styleUrls: ["./main-footer.component.css"]
+  styleUrls: ["./main-footer.component.css"],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainFooterComponent implements OnInit {
   isapply: boolean = false;

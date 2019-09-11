@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Renderer, ViewEncapsulation } from '@angular/core';
 import { CommonService } from '@providers/common-service';
 
 
 @Component({
   selector: 'app-player-table',
   templateUrl: './player-table.component.html',
-  styleUrls: ['./player-table.component.css']
+  styleUrls: ['./player-table.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PlayerTableComponent implements OnInit {
 

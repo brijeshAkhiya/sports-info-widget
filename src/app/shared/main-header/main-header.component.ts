@@ -6,7 +6,8 @@ import {
   ViewChild,
   ChangeDetectorRef,
   AfterViewInit,
-  HostListener
+  HostListener,
+  ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -26,7 +27,8 @@ import { CommonService } from '@providers/common-service';
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.css']
+  styleUrls: ['./main-header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('navbarcontainer') navbarcontainer;

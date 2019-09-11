@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { SportsService } from "@providers/sports-service";
 import { Observable } from "rxjs";
 
 @Component({
   selector: "app-flash-commentary",
   templateUrl: "./flash-commentary.component.html",
-  styleUrls: ["./flash-commentary.component.css"]
+  styleUrls: ["./flash-commentary.component.css"],
+  encapsulation: ViewEncapsulation.None
 })
 export class FlashCommentaryComponent implements OnInit {
   socket: any;

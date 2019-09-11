@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Store } from "@ngrx/store";
-import * as fromRoot from "../../../app-reducer";
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../app-reducer';
 
-import { CommonService } from "@providers/common-service";
+import { CommonService } from '@providers/common-service';
 
 @Component({
-  selector: "app-cricket-fixtures-view",
-  templateUrl: "./cricket-fixtures-view.component.html",
-  styleUrls: ["./cricket-fixtures-view.component.css"],
+  selector: 'app-cricket-fixtures-view',
+  templateUrl: './cricket-fixtures-view.component.html',
+  styleUrls: ['./cricket-fixtures-view.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CricketFixturesViewComponent implements OnInit {
@@ -28,15 +28,14 @@ export class CricketFixturesViewComponent implements OnInit {
 
   ngOnInit() {
     let fromtype = this.activatedroute.snapshot.params.type;
-    if (fromtype == "fixtures") {
-      this.selectedTab = "upcoming";
+    if (fromtype == 'fixtures') {
+      this.selectedTab = 'upcoming';
       this.getMatchFixtures();
-    } else if (fromtype == "results") {
-      this.selectedTab = "results";
+    } else if (fromtype == 'results') {
+      this.selectedTab = 'results';
       this.getMatchResults();
     }
   }
-  
   //get 3 days matches fixtures - HOME
   getMatchFixtures() {
     this.loadingFixture = true;

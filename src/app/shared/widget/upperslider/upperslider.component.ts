@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
@@ -13,7 +14,8 @@ import { CommonService } from '@providers/common-service';
 @Component({
   selector: 'app-upperslider',
   templateUrl: './upperslider.component.html',
-  styleUrls: ['./upperslider.component.css']
+  styleUrls: ['./upperslider.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UppersliderComponent implements OnInit {
 
@@ -36,6 +38,7 @@ export class UppersliderComponent implements OnInit {
     lazyLoad: true,
     navSpeed: 700,
     navText: ['', ''],
+    // rtl:true,
     responsive: {
       0: {
         items: 1
@@ -52,13 +55,14 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   };
-  customOptions1 = {
+  customOptions1: any = {
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
     dots: false,
     navSpeed: 700,
     navText: ['', ''],
+    // rtl:true,
     responsive: {
       0: {
         items: 1
@@ -79,9 +83,13 @@ export class UppersliderComponent implements OnInit {
 
     this.loadAllSportsData();
 
-    if (localStorage.getItem('selectedSport') != null)
+    if (localStorage.getItem('selectedSport') != null) {
       this.sport = localStorage.getItem('selectedSport');
-
+    }
+    if (localStorage.getItem('userLng') === 'arabic') {
+      this.customOptions.rtl = true;
+      this.customOptions1.rtl = true;
+    }
     if (this.sportsSlider) {
       setTimeout(() => {
         console.log('setTimeout');
@@ -113,8 +121,7 @@ export class UppersliderComponent implements OnInit {
       localStorage.setItem('selectedSport', this.sport);
       this.slider = [];
       this.loadData();
-    }
-    else if (this.sport == 'Cricket') {
+    } else if (this.sport == 'Cricket') {
       this.clearTimeInterval();
       localStorage.setItem('selectedSport', this.sport);
       this.slider = [];
@@ -149,8 +156,7 @@ export class UppersliderComponent implements OnInit {
         this.slider = this.slider.concat(fixtures);
         if (liveMatches.length > 0 && !this.timerStartTime.Soccer.isLiveUpdate) {
           this.getLiveSoccerUpdate(this);
-        }
-        else if (!this.timerStartTime.Soccer.isLiveUpdate && !this.timerStartTime.Soccer.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
+        } else if (!this.timerStartTime.Soccer.isLiveUpdate && !this.timerStartTime.Soccer.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
           let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
             return new Date(moment.utc(e.sport_event.start_time).format());
           })));
@@ -175,8 +181,7 @@ export class UppersliderComponent implements OnInit {
                 this.slider[matchIndex].sport_event_status = match.sport_event_status;
               }
             });
-          }
-          else {
+          } else {
             this.clearTimeInterval();
             this.loadSoccerData();
           }
@@ -233,8 +238,7 @@ export class UppersliderComponent implements OnInit {
                 this.slider[matchIndex].status_str = match.status_str;
               }
             });
-          }
-          else {
+          } else {
             this.clearTimeInterval();
             this.loadKabaddiData();
           }
@@ -296,8 +300,7 @@ export class UppersliderComponent implements OnInit {
             this.slider[indexSlider].status = match.status;
             if (match.match_data && match.match_data.period_scores) {
               this.setPeriodScore(match, indexSlider, match.match_data.period_scores);
-            }
-            else if (match.period_scores)
+            } else if (match.period_scores)
               this.setPeriodScore(match, indexSlider, match.period_scores);
             else
               this.slider[indexSlider].competitorsObj['home'].show_first = true;
@@ -364,15 +367,13 @@ export class UppersliderComponent implements OnInit {
     return arr.sort(function (a, b) {
       if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
         return -1;
-      }
-      else if (a.status == 'not_started') {
+      } else if (a.status == 'not_started') {
         if (a.scheduled && b.scheduled) {
           let aDate: any = new Date(a.scheduled);
           let bDate: any = new Date(b.scheduled);
           return aDate - bDate;
         }
-      }
-      else {
+      } else {
         return 0;
       }
     });
