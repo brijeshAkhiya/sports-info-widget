@@ -1,9 +1,9 @@
 /* -------- Head-to-Head Section ------- */
 .head-to-head                   { padding: 24px; text-align: center; }
 .head-to-head .head-team        { width: 50%; }
-.head-to-head  .flag-block p    { margin: 8px 0px 0px; font-weight: 500;}
-.head-to-head  .flag-block:first-child { text-align: left; }
-.head-to-head  .flag-block:last-child { text-align: right;}
+.head-to-head .flag-block p     { margin: 8px 0px 0px; font-weight: 500;}
+.head-to-head .flag-block:first-child   { text-align: left; }
+.head-to-head .flag-block:last-child    { text-align: right;}
 .head-to-head .head-center      { width: 30%; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .head-to-head h1                { margin: -10px 0px; font-family: inherit; font-style: normal; }
 .head-to-head .head-center h1   { font-size: 64px; line-height: 84px; }
@@ -23,6 +23,11 @@
 .form-teams-block .dropdown-menu h1         { margin: 0px 0px -3px; }
 .form-teams-block .t-name                   { margin-bottom: 8px; font-weight: 500; }
 .form-teams-block .t-name img               { margin-left: 2px; height: 20px; border-radius: 2px; }
+
+/* -- Arabic CSS -- */
+.arabic .form-teams-block > div:first-child         { border-right: none; border-left: 2px solid #EBEBEB; }
+.arabic .head-to-head .flag-block:first-child       { text-align: right; }
+.arabic .head-to-head .flag-block:last-child        { text-align: left;}
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -64,7 +69,7 @@
 
 @media (max-width: 576px) {
     .head-to-head                   { padding: 12px 8px; }
-    .head-to-head .flag-img         { margin-bottom: 8px; height: 36px; }
+    .head-to-head .flag-img         { height: 36px; }
     .head-to-head h1                { margin: -4px 0px; }
     .head-to-head .head-center h1   { font-size: 30px; line-height: 42px; }
 /* -------- Match Form Section ------- */
@@ -73,4 +78,6 @@
     .form-teams-block > div:first-child         { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; border-right: none; }
     .form-teams-block .flag-img                 { height: 42px; }
     .form-teams-block .form-match-list          { margin: 12px 0px 0px; }
+/* -- Arabic CSS -- */
+    .arabic .form-teams-block > div:first-child         { border-left: none; }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
@@ -7,7 +7,8 @@ import { CommonService } from '@providers/common-service';
 @Component({
   selector: 'app-tournament-match',
   templateUrl: './tournament-match.component.html',
-  styleUrls: ['./tournament-match.component.css']
+  styleUrls: ['./tournament-match.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TournamentMatchComponent implements OnInit {
 
@@ -127,9 +128,12 @@ export class TournamentMatchComponent implements OnInit {
 
   /* get team vs team data  */
   getSoccerTeamvsTeam(teams) {
-    let head = { teams:
-      { team1: { id: teams[0].id, name: teams[0].name, total: 0 },
-      team2: { id: teams[1].id, name: teams[1].name, total: 0 } },
+    let head = {
+      teams:
+      {
+        team1: { id: teams[0].id, name: teams[0].name, total: 0 },
+        team2: { id: teams[1].id, name: teams[1].name, total: 0 }
+      },
       draw: 0, totalmatches: 0
     };
     this.sportsService.getsoccerteamvsteamdata(teams[0].id, teams[1].id).subscribe((res: any) => {
@@ -280,8 +284,8 @@ export class TournamentMatchComponent implements OnInit {
             // this.initSquads();
             // this.commentry = [];
             this.matchInfo.statistics = res.data.statistics;
-            if(res.data.timeline)
-            this.initCommentry(res.data.timeline);
+            if (res.data.timeline)
+              this.initCommentry(res.data.timeline);
           }
           // if(matchData.match_info.status == 2){
           //   this.commentry = [];

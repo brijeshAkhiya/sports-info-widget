@@ -27,7 +27,8 @@
 /* -------- Arabic CSS ------- */
 .arabic .header-live-slider .slider-item .title p:last-child            { padding-left: 0px; padding-right: 14px; }
 .arabic .header-live-slider .slider-item .title p.live-result:before    { content: ""; margin-right: -10px; margin-left: 4px; }
-/* .arabic .slider-sports-selection .owl-theme .owl-nav [class*="owl-"]    { left: auto; right: 50%; } */
+.arabic .header-live-slider .slider-item .match-info img                { margin-right: 0px; margin-left: 4px; }
+.arabic .slider-sports-selection .owl-theme .owl-nav [class*="owl-"]    { left: auto; right: 50%; transform: translateX(50%); -webkit-transform: translateX(50%); }
 
 /***** Responsive CSS Start ******/
 
