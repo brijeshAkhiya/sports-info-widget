@@ -11,7 +11,7 @@ import { CricketService } from '@providers/cricket-service';
   selector: 'app-cricket-fixtures-view',
   templateUrl: './cricket-fixtures-view.component.html',
   styleUrls: ['./cricket-fixtures-view.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class CricketFixturesViewComponent implements OnInit {
 

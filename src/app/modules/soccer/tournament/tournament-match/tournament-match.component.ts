@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { SportsService } from "@providers/sports-service";
@@ -8,7 +8,8 @@ import { CommonService } from "@providers/common-service";
 @Component({
   selector: 'app-tournament-match',
   templateUrl: './tournament-match.component.html',
-  styleUrls: ['./tournament-match.component.css']
+  styleUrls: ['./tournament-match.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TournamentMatchComponent implements OnInit {
 
