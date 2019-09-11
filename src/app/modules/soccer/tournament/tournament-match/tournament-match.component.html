@@ -60,7 +60,7 @@
                     <div class="flag-block">
                       <img class="flag-img" [offset]="commonService.lazyloadoffset"
                         [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
-                        [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                        [defaultImage]="commonService.flagplaceholder" alt="team-flag">
                       <p>
                         <a
                           [routerLink]="['/soccer/team', (headtohead?.teams?.team1?.id | splitID), (headtohead?.teams?.team1?.name | slugify )]">
@@ -86,7 +86,7 @@
                     <div class="flag-block">
                       <img class="flag-img" [offset]="commonService.lazyloadoffset"
                         [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
-                        [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+                        [defaultImage]="commonService.flagplaceholder" alt="team-flag">
                       <p>
                         <a
                           [routerLink]="['/soccer/team', (headtohead?.teams?.team2?.id | splitID), (headtohead?.teams?.team2?.name | slugify )]">
@@ -115,7 +115,7 @@
                   <div>
                     <div>
                       <img class="flag-img" [lazyLoad]="teamssummary?.team1?.info?.id | logosurl:'soccer'"
-                        [defaultImage]="cricketService.flagplaceholder" alt="team">
+                        [defaultImage]="commonService.flagplaceholder" alt="team">
                       <h5>
                         <a
                           [routerLink]="['/soccer/team', (teamssummary?.team1?.info?.id | splitID), (teamssummary?.team1?.info?.name | slugify )]">
@@ -138,7 +138,7 @@
                             </h1>
                             <p class="t-name">vs {{match?.oppteamname}}<img
                                 [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
-                                [defaultImage]="cricketService.flagplaceholder" alt="team"></p>
+                                [defaultImage]="commonService.flagplaceholder" alt="team"></p>
                             <p class="no-margin">{{match?.sport_event?.season?.name}}</p>
                           </div>
                         </div>
@@ -149,7 +149,7 @@
 
                     <div class="">
                       <img class="flag-img" [lazyLoad]="teamssummary?.team2?.info?.id | logosurl:'soccer'"
-                        [defaultImage]="cricketService.flagplaceholder" alt="team">
+                        [defaultImage]="commonService.flagplaceholder" alt="team">
                       <h5>
                         <a
                           [routerLink]="['/soccer/team', (teamssummary?.team2?.info?.id | splitID), (teamssummary?.team2?.info?.name | slugify )]">
@@ -172,7 +172,7 @@
                             </h1>
                             <p class="t-name">vs {{match?.oppteamname}}<img
                                 [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
-                                [defaultImage]="cricketService.flagplaceholder" alt="team"></p>
+                                [defaultImage]="commonService.flagplaceholder" alt="team"></p>
                             <p class="no-margin">{{match?.sport_event?.season?.name}}</p>
                           </div>
                         </div>

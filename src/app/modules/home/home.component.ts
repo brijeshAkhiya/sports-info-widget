@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { CommonService } from '@providers/common-service'
-import { SportsService } from '@providers/sports-service'
+import { CommonService } from '@providers/common-service';
+import { SportsService } from '@providers/sports-service';
 
-import * as fromRoot from "@app/app-reducer";
-import { Store } from "@ngrx/store";
+import * as fromRoot from '@app/app-reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   banners = [];
   sport: any;
 
-  customOptions:any = {
+  customOptions: any = {
     loop: true,
     mouseDrag: false,
     touchDrag: false,
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       }
     },
     nav: true
-  }
+  };
 
 
   constructor(
@@ -44,51 +44,51 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sport = 'cricket'
+    this.sport = 'Cricket';
     this.getBannerPost();
     this.getPopularVideos();
   }
 
-  //slide change Event
-  changeSlide(event){
+  /* //slide change Event */
+  changeSlide(event) {
     console.log(event);
-    if(event.slides.length > 0)
-      this.sport = event.slides[0].id
+    if (event.slides.length > 0)
+      this.sport = event.slides[0].id;
   }
 
-  //get banner posts
+  /* //get banner posts */
   getBannerPost() {
-    this.sportsService.getbannerpost().subscribe((res:any) => {
-      if (res.data) 
-        this.banners = res.data; 
-        this.initHighlightInterval(0);
+    this.sportsService.getbannerpost().subscribe((res: any) => {
+      if (res.data)
+        this.banners = res.data;
+      this.initHighlightInterval(0);
     });
   }
   /** Highlight Blog in interval */
-  initHighlightInterval(initValue){
-    let i = initValue;        
+  initHighlightInterval(initValue) {
+    let i = initValue;
     this.highlightImageInterval = setInterval(() => {
       this.highlightImage = i;
-      i = (this.banners.length - 1 == i) ? 0 : i+1;
-    }, 3000 ); 
-  }  
+      i = (this.banners.length - 1 === i) ? 0 : i + 1;
+    }, 3000);
+  }
 
   /** Stop Highlight Blog on mouseover */
-  stopHighlightInterval(highlightIndex){
+  stopHighlightInterval(highlightIndex) {
     this.highlightImage = highlightIndex;
     clearInterval(this.highlightImageInterval);
   }
 
-  //get popular videos
+  /* //get popular videos */
   getPopularVideos() {
-    this.sportsService.getpopularpost({eType: "Video",bRemoveBannerPosts:true}).subscribe((res:any) => {
-      if (res.data) 
+    this.sportsService.getpopularpost({ eType: 'Video', bRemoveBannerPosts: true }).subscribe((res: any) => {
+      if (res.data)
         this.popularvideos = res.data;
     });
   }
 
   ngOnDestroy() {
-    console.log("ngOnDestroy");
+    console.log('ngOnDestroy');
     clearInterval(this.highlightImageInterval);
   }
 

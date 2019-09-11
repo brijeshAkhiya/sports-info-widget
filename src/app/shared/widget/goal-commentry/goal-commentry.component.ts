@@ -13,8 +13,6 @@ export class GoalCommentryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.team);
-    
   }
 
 }

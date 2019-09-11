@@ -7,34 +7,33 @@ import {
   ChangeDetectorRef,
   AfterViewInit,
   HostListener
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { AuthService } from "angularx-social-login";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AuthService } from 'angularx-social-login';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
 import { LoginModalComponent } from '../widget/login-modal/login-modal.component';
 
-import * as fromRoot from "../../app-reducer";
-import * as Auth from "../../store/auth/auth.actions";
-import * as Ads from "../../store/ads-management/ads.actions";
+import * as fromRoot from '../../app-reducer';
+import * as Auth from '../../store/auth/auth.actions';
+import * as Ads from '../../store/ads-management/ads.actions';
 
-import { SportsService } from "@providers/sports-service";
-import { CommonService } from "@providers/common-service";
-import { CricketService } from "@providers/cricket-service";
+import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 
 @Component({
-  selector: "app-main-header",
-  templateUrl: "./main-header.component.html",
-  styleUrls: ["./main-header.component.css"]
+  selector: 'app-main-header',
+  templateUrl: './main-header.component.html',
+  styleUrls: ['./main-header.component.css']
 })
 export class MainHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('navbarcontainer') navbarcontainer;
   @ViewChild('navbarButton') navbarButton;
-  @ViewChild("navpointer") navpointer: ElementRef;
-  @ViewChild("navbarnav") navbarnav: ElementRef;
-  @ViewChild("navbarmenu") navbarmenu: ElementRef;
+  @ViewChild('navpointer') navpointer: ElementRef;
+  @ViewChild('navbarnav') navbarnav: ElementRef;
+  @ViewChild('navbarmenu') navbarmenu: ElementRef;
   @ViewChild('searchOpen') searchOpen;
   isapply: boolean = false;
   socialUser: any;
@@ -63,7 +62,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal,
     private authService: AuthService,
     private store: Store<fromRoot.State>,
-    private cricketService: CricketService,
     private commonService: CommonService,
   ) {
     //get custom ads data Funtion call --->
@@ -107,7 +105,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.windowinnerWidth = window.innerWidth;
     if (this.windowinnerWidth < 576) {
       this.responsiveSticky(163);
-      console.log("width change" + innerWidth);
+      console.log('width change' + innerWidth);
     }
     else {
       this.responsiveSticky(129);
@@ -122,8 +120,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   getCustomAds() {
     this.sportsService.getcustomadsbanner().subscribe(
       res => {
-        if (res["data"]) {
-          this.store.dispatch(new Ads.SaveAds(res["data"]));
+        if (res['data']) {
+          this.store.dispatch(new Ads.SaveAds(res['data']));
         }
       },
       error => {
@@ -138,16 +136,16 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     var navrect = navel.getBoundingClientRect();
     var el = document.getElementById(`nav-link${linkid}`); //get particular id nav-element
     var rect = el.getBoundingClientRect();
-    var curPoint = rect["x"] - navrect["x"];
+    var curPoint = rect['x'] - navrect['x'];
     this.renderer2.setStyle(
       this.navpointer.nativeElement,
-      "width",
-      rect.width + "px"
+      'width',
+      rect.width + 'px'
     ); //set
     this.renderer2.setStyle(
       this.navpointer.nativeElement,
-      "left",
-      curPoint + "px"
+      'left',
+      curPoint + 'px'
     );
   }
 
@@ -156,14 +154,14 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     if (routerlink) {
       this.router.navigate([`${routerlink}`]);
     } else {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
   }
 
   close($event) {
     if (!$event) {
       this.issearch = false;
-      this.renderer2.removeClass(document.body, "search-box-open");
+      this.renderer2.removeClass(document.body, 'search-box-open');
     }
 
   }
@@ -172,10 +170,10 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.isapply = false;
     if (!this.issearch) {
       this.issearch = true;
-      this.renderer2.addClass(document.body, "search-box-open");
+      this.renderer2.addClass(document.body, 'search-box-open');
     } else {
       this.issearch = false;
-      this.renderer2.removeClass(document.body, "search-box-open");
+      this.renderer2.removeClass(document.body, 'search-box-open');
     }
   }
   openmodal() {
@@ -185,7 +183,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   closesearch() {
     this.issearch = false;
     // this.searchkey = "";
-    this.renderer2.removeClass(document.body, "search-box-open");
+    this.renderer2.removeClass(document.body, 'search-box-open');
   }
 
   getuserLogout(token) {

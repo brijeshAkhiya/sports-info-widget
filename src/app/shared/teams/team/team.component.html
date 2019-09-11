@@ -29,7 +29,7 @@
                 <section class="team-about-head d-flex">
                   <div class="team-logo align-self-start rounded-box common-shadow">
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.id | logosurl"
-                      [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">
                     <h5 *ngIf="teamProfile?.abbreviation"><span
@@ -53,7 +53,7 @@
                 <section class="team-about-head d-flex" *ngIf="teamProfile?.founded != ''">
                   <div class="team-logo align-self-start rounded-box common-shadow">
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.tid | logosurl:'kabaddi'"
-                      [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info align-items-center rounded-box common-shadow">
                     <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span
@@ -76,7 +76,7 @@
                 <section class="team-about-head d-flex">
                   <div class="team-logo align-self-start rounded-box common-shadow">
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'soccer'"
-                      [defaultImage]="cricketService.teamsplaceholder" [offset]="commonService.lazyloadoffset"></div>
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info soccer-team-info d-flex align-items-center rounded-box common-shadow">
                     <div class="info-col">
@@ -118,7 +118,7 @@
                       <div class="col-xl-3 col-sm-4" *ngFor="let player of teamProfile?.players">
                         <div class="squad-item fullblock-link-container rounded-box common-shadow">
                           <img alt="{{player.name | split}}" [lazyLoad]="player?.id| playerimage:['m']"
-                            [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+                            [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
                           <div class="item-desc">
                             <p>{{player.name | split}} <span class="light-text">{{player.type | stringunder}}</span></p>
                             <a [routerLink]="" class="theme-btn">
@@ -319,7 +319,7 @@
     <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
       <div class="squad-item fullblock-link-container rounded-box common-shadow">
         <img alt="{{player.fullname}}" [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamProfile?.tid+'.svg'"
-          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <div class="item-desc">
           <p>{{player.fullname}}
             <span class="light-text">{{player.shirtnumber}}</span>
@@ -339,7 +339,7 @@
     <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
       <div class="squad-item fullblock-link-container rounded-box common-shadow">
         <img alt="{{player.name}}" [lazyLoad]="player?.id| playerimage:['m']"
-          [defaultImage]="cricketService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <div class="item-desc">
           <p>{{player.name | split}}
             <span class="light-text">{{player.jersey_number}}</span>

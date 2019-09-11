@@ -52,7 +52,7 @@
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner':  match?.result?.winner == competitor?.tid }">
                         <img [lazyLoad]="competitor?.logo"
-                          [defaultImage]="cricketService.flagplaceholder">{{competitor?.shortname}}</p>
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.shortname}}</p>
                       <p *ngIf="match?.result[qualifier] != 0"><b>{{match?.result[qualifier]}}</b></p>
                     </div>
                   </ng-template>
@@ -116,7 +116,7 @@
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
                         <img [lazyLoad]="competitor?.id| logosurl"
-                          [defaultImage]="cricketService.flagplaceholder">{{competitor?.abbreviation}}</p>
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p *ngIf="competitor?.period_scores"><b>
                           {{competitor?.period_scores.display_score | cricketScore}}
                           ({{competitor?.period_scores.display_overs}}
@@ -178,7 +178,7 @@
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
                         <img [lazyLoad]="competitor?.id| logosurl"
-                          [defaultImage]="cricketService.flagplaceholder">{{competitor?.abbreviation}}</p>
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
                       </p>

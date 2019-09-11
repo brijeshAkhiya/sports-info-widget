@@ -30,8 +30,8 @@
   </app-no-data-widget>
   <ul class="common-list player-score-list">
     <li class="top-player d-flex" *ngFor="let item of (scoredata | slice:0:1);let i = index;">
-      <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="cricketService.playerplaceholder"
-        [defaultImage]="cricketService.playerplaceholder">
+      <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="commonService.playerplaceholder"
+        [defaultImage]="commonService.playerplaceholder">
       <div class="top-player-inner">
         <p class="num">{{i+1}}.</p>
         <div class="player-names">
@@ -103,8 +103,8 @@
     </app-no-data-widget>
     <ul class="common-list player-score-list">
       <li class="top-player d-flex" *ngFor="let item of (scoredata | slice:0:1);let i = index;">
-           <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="cricketService.playerplaceholder"
-          [defaultImage]="cricketService.playerplaceholder">
+           <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="commonService.playerplaceholder"
+          [defaultImage]="commonService.playerplaceholder">
         <ng-container *ngFor="let player of item.competitors">
         <div class="top-player-inner">
           <p class="num">{{item.rank}}.</p>

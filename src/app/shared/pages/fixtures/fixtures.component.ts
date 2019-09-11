@@ -12,16 +12,18 @@ import * as Cricket from '@store/cricket/cricket.actions';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-fixtures-card',
-  templateUrl: './fixtures-card.component.html',
-  styleUrls: ['./fixtures-card.component.css'],
+  selector: 'app-fixtures',
+  templateUrl: './fixtures.component.html',
+  styleUrls: ['./fixtures.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FixturesCardComponent implements OnInit {
+export class FixturesComponent implements OnInit {
+
 
   @ViewChild('gallery') public gallery: CarouselComponent;
 
-  @Input() sport: any;
+  params;
+  // @Input() sport: any;
   @Input() title: any;
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
@@ -39,19 +41,21 @@ export class FixturesCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.sport)
+    const data: any = this.activatedroute.data;
+    this.params = data.value;
+    console.log(this.params.sport);
     console.log(this.activatedroute.parent.snapshot.params.id);
-    if (this.sport == 'Kabaddi') {
+    if (this.params.sport == 'Kabaddi') {
       this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
       this.store.dispatch(new Kabaddi.LoadKabaddiResults());
       this.store.select('Kabaddi').subscribe((data: any) => {
         if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
           this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'));
         }
-        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0 && data.fixtures > this.paramsFixtures.reqParams.page)
+        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0 && data.fixtures.total_pages > this.paramsFixtures.reqParams.page)
           this.paramsFixtures.loadmore = true;
         else
-          this.paramsFixtures.loadmore = true;
+          this.paramsFixtures.loadmore = false;
 
         if (Object.entries(data.results).length > 0 && data.results.items.length > 0) {
           this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(data.results.items, 'Do MMMM YYYY', 'datestart', 'desc'));
@@ -59,11 +63,11 @@ export class FixturesCardComponent implements OnInit {
         if (Object.entries(data.results).length > 0 && data.results.items.length > 0 && data.results.total_pages > this.paramsResults.reqParams.page)
           this.paramsResults.loadmore = true;
         else
-          this.paramsResults.loadmore = true;
+          this.paramsResults.loadmore = false;
       });
-    } else if (this.sport == 'cricket') {
+    } else if (this.params.sport == 'Cricket') {
       // this.getCricketSeries();
-    } else if (this.sport == 'Soccer') {
+    } else if (this.params.sport == 'Soccer') {
       this.paramSoccer = { loading: false, loadmore: false, data: [] };
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
         this.paramsFixtures.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
@@ -89,12 +93,12 @@ export class FixturesCardComponent implements OnInit {
     console.log(current);
     this.customDate = new Array<any>(moment(`${current.year}-${current.month}-${current.day.toString()}`).daysInMonth()).fill(0, 0).map((x, i) => i + 1);
     if (this.gallery) {
-      let temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day);
+      const temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day);
       if (temp.length == 0 || this.gallery.slidesOutputData.slides.length > 7)
         this.gallery.to(current.day.toString());
     }
   }
-  initialized($e) {
+  initializedSlider($e) {
     setTimeout(() => {
       if (this.gallery.slidesOutputData.slides.length > 7)
         this.gallery.to(this.paramSoccer.selectedDate.day.toString());
@@ -143,7 +147,7 @@ export class FixturesCardComponent implements OnInit {
   }
 
   getSoccerData() {
-    console.log("getSoccerData");
+    console.log('getSoccerData');
 
     this.paramSoccer.loading = true;
     this.sportsService
@@ -215,15 +219,6 @@ export class FixturesCardComponent implements OnInit {
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
-  // getscoccerpointtable(tid){
-  //   console.log('in')
-  //   this.sportsService.getsoccerpointtable(tid).
-  //           subscribe((res:any)=>{
-  //             console.log(res.data)
-  //           },err=>{
-  //             console.log(err)
-  //           });
-  // }
 
   loadKabaddi(type) {
     if (type == 'fixture') {
@@ -250,6 +245,7 @@ export class FixturesCardComponent implements OnInit {
         this.paramsFixtures.loadmore = false;
     }, (error) => {
       this.paramsFixtures.loading = false;
+      this.paramsFixtures.loadmore = false;
     });
   }
 
@@ -269,6 +265,7 @@ export class FixturesCardComponent implements OnInit {
           this.paramsResults.loadmore = false;
       }, (error) => {
         this.paramsResults.loading = false;
+        this.paramsResults.loadmore = false;
       });
   }
 

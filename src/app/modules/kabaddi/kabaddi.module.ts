@@ -7,17 +7,14 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SharedModule } from "@app/shared/shared.module";
 
 import { KabaddiRoutingModule } from './kabaddi-routing.module';
-import { KabaddiComponent } from './kabaddi.component';
 import { HomeComponent } from './home/home.component';
-import { FixturesComponent } from './fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { TableComponent } from './table/table.component';
 import { MatchComponent } from './match/match.component';
-import { KabaddiService } from './kabaddi.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [KabaddiComponent, HomeComponent, FixturesComponent, StatsComponent, TableComponent, MatchComponent],
+  declarations: [HomeComponent, StatsComponent, TableComponent, MatchComponent],
   imports: [
     LazyLoadImageModule,
     SharedModule,
@@ -26,6 +23,6 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     TranslateModule
   ],
-  providers:[KabaddiService]
+  providers: []
 })
 export class KabaddiModule { }

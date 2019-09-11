@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SportsService } from "@providers/sports-service";
-import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 
 import { Router } from '@angular/router';
@@ -23,8 +22,7 @@ export class MatchFactsFiguresComponent implements OnInit {
 
   constructor(
     private sportsService: SportsService,
-    private router: Router,
-    public cricketService: CricketService, private commonService: CommonService) { }
+    private router: Router, private commonService: CommonService) { }
 
   ngOnInit() {
     console.log(this.teamMatchResult);

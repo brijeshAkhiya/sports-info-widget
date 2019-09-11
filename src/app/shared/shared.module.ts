@@ -13,7 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { LottieAnimationViewModule } from "ng-lottie";
+import { LottieAnimationViewModule } from 'ng-lottie';
 
 /** All Pipes */
 import { TruncatePipe } from './pipes/truncatepipe';
@@ -22,8 +22,8 @@ import { SplitPipe } from './pipes/stringsplitpipe';
 import { StripHtmlPipe } from './pipes/striphtmlpipe';
 import { LogosUrlPipe } from './pipes/logosurlpipe';
 import { PlayerImagePipe } from './pipes/playerimageurl.pipe';
-import { FlashteamPipe } from "./pipes/flashteamsname.pipe";
-import { SlugifyPipe } from "./pipes/slugpipe";
+import { FlashteamPipe } from './pipes/flashteamsname.pipe';
+import { SlugifyPipe } from './pipes/slugpipe';
 import { SafehtmlPipe } from './pipes/safehtml.pipe';
 import { StringsplitID } from './pipes/stringsplitID.pipe';
 import { CricketScorePipe } from './pipes/cricket-score.pipe';
@@ -33,7 +33,6 @@ import { StringtoNumberPipe } from './pipes/string-to-number.pipe';
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
 import { CommonService } from './providers/common-service';
-import { CricketService } from './providers/cricket-service';
 import { SocketService } from './providers/socket.service';
 
 /** All Componenets */
@@ -73,6 +72,9 @@ import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.comp
 import { TranslateModule } from '@ngx-translate/core';
 import { LineupComponent } from './widget/match/lineup/lineup.component';
 import { MatchStatsComponent } from './widget/match/match-stats/match-stats.component';
+import { HomeComponent } from './pages/home/home.component';
+import { RouterComponent } from './widget/router/router.component';
+import { FixturesComponent } from './pages/fixtures/fixtures.component';
 
 @NgModule({
     imports: [
@@ -97,9 +99,9 @@ import { MatchStatsComponent } from './widget/match/match-stats/match-stats.comp
         ResizeImagePipe,
         SafehtmlPipe,
         LogosUrlPipe,
-        PlayerImagePipe, 
-        StripHtmlPipe, 
-        SplitPipe, 
+        PlayerImagePipe,
+        StripHtmlPipe,
+        SplitPipe,
         StringUnder,
         FlashteamPipe,
         SlugifyPipe,
@@ -109,15 +111,15 @@ import { MatchStatsComponent } from './widget/match/match-stats/match-stats.comp
         DateParsePipe,
         StringtoNumberPipe,
         /** All Componenets */
-        CustomAdsWidgetComponent, 
-        NoDataWidgetComponent, 
-        FlashCommentaryComponent, 
-        ContentComponent, 
-        SportsHomeComponent, 
-        BlogListComponent, 
-        MenuComponent, 
-        PlayerTableComponent, 
-        BlogCardComponent, 
+        CustomAdsWidgetComponent,
+        NoDataWidgetComponent,
+        FlashCommentaryComponent,
+        ContentComponent,
+        SportsHomeComponent,
+        BlogListComponent,
+        MenuComponent,
+        PlayerTableComponent,
+        BlogCardComponent,
         ScheduleComponent, SearchComponent,
         FavouritesWidgetComponent,
         TeamCardComponent,
@@ -140,19 +142,22 @@ import { MatchStatsComponent } from './widget/match/match-stats/match-stats.comp
         FixturesCardComponent,
         LineupComponent,
         MatchStatsComponent,
+        HomeComponent,
+        RouterComponent,
+        FixturesComponent,
     ],
     providers: [
         /** All Pipes */
-        TruncatePipe, 
+        TruncatePipe,
         ResizeImagePipe,
         SplitPipe,
         LogosUrlPipe,
         SafehtmlPipe,
         FlashteamPipe,
-        SlugifyPipe,  
-        FilterPipe,      
-        SlugifyPipe, 
-        DateParsePipe,       
+        SlugifyPipe,
+        FilterPipe,
+        SlugifyPipe,
+        DateParsePipe,
         StringUnder,
         StringsplitID,
         CricketScorePipe,
@@ -160,11 +165,10 @@ import { MatchStatsComponent } from './widget/match/match-stats/match-stats.comp
         /** All Providers*/
         SportsService,
         SocketService,
-        CommonService, 
-        CricketService
+        CommonService
     ],
     exports: [
-        NgxTinySliderModule, 
+        NgxTinySliderModule,
 
         /** All Pipes */
         TruncatePipe,
@@ -214,9 +218,9 @@ import { MatchStatsComponent } from './widget/match/match-stats/match-stats.comp
         FixturesCardComponent,
         LineupComponent,
         MatchStatsComponent
-   
+
     ],
-    entryComponents:[LoginModalComponent ],
+    entryComponents: [LoginModalComponent],
 
 })
 export class SharedModule { }

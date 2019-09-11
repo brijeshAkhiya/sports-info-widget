@@ -23,7 +23,7 @@
                     <li class="top-player d-flex" *ngFor="let item of battingleaders | slice:0:1">
                       <img alt="player" [offset]="commonService.lazyloadoffset"
                         [lazyLoad]="item?.player.id| playerimage:['m']"
-                        [defaultImage]="cricketService.playerplaceholder">
+                        [defaultImage]="commonService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">
@@ -68,7 +68,7 @@
                     <li class="top-player d-flex" *ngFor="let item of bowlingleaders | slice:0:1">
                       <img alt="player" [offset]="commonService.lazyloadoffset"
                         [lazyLoad]="item?.player.id| playerimage:['m']"
-                        [defaultImage]="cricketService.playerplaceholder">
+                        [defaultImage]="commonService.playerplaceholder">
                       <div class="top-player-inner">
                         <p class="num">{{item.rank}}.</p>
                         <div class="player-names">

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { SportsService } from "@providers/sports-service";
-import { CricketService } from "@providers/cricket-service";
-import { CommonService } from "@providers/common-service";
+import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-tournament-match',
@@ -12,7 +11,7 @@ import { CommonService } from "@providers/common-service";
 })
 export class TournamentMatchComponent implements OnInit {
 
-  paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [] } }
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [] } };
   loading: boolean = false;
   statsLoading: boolean = false;
   lineupLoading: boolean = false;
@@ -33,7 +32,6 @@ export class TournamentMatchComponent implements OnInit {
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,
-    public cricketService: CricketService,
     private activatedroute: ActivatedRoute,
     private router: Router
   ) { }
@@ -44,7 +42,7 @@ export class TournamentMatchComponent implements OnInit {
       return false;
     };
     let matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'match');
-    this.getMatchInfo(matchid)
+    this.getMatchInfo(matchid);
 
     // this.getMatchstats(this.activatedroute.snapshot.params.id)
     this.paramArticle.reqParams.aIds.push(matchid);
@@ -56,29 +54,29 @@ export class TournamentMatchComponent implements OnInit {
       if (res.data) {
         this.matchInfo = res.data;
         console.log(this.matchInfo);
-        this.getSoccerTeamvsTeam(this.matchInfo.sport_event.competitors)
-        this.getTeamsSummumaries(this.matchInfo.sport_event.competitors)
+        this.getSoccerTeamvsTeam(this.matchInfo.sport_event.competitors);
+        this.getTeamsSummumaries(this.matchInfo.sport_event.competitors);
 
         this.matchInfo.match_title = this.matchInfo.sport_event.competitors[0].name + ' ' + 'VS' + ' ' + this.matchInfo.sport_event.competitors[1].name;
         if (this.matchInfo.sport_event.venue) {
-          this.matchInfo.venuedetails = this.matchInfo.sport_event.venue
+          this.matchInfo.venuedetails = this.matchInfo.sport_event.venue;
           if (this.matchInfo.sport_event.venue.map_coordinates) {
-            this.matchInfo.venuedetails.lat = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[0])
-            this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1])
+            this.matchInfo.venuedetails.lat = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[0]);
+            this.matchInfo.venuedetails.lng = parseFloat(this.matchInfo.sport_event.venue.map_coordinates.split(',')[1]);
           }
         }
 
-        if (this.matchInfo.sport_event_status.status == 'upcoming') {
+        if (this.matchInfo.sport_event_status.status === 'upcoming') {
           this.startLiveUpdateAfterTime();
-        } else if (this.matchInfo.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status == 'ended') {
+        } else if (this.matchInfo.sport_event_status.status === 'live' || this.matchInfo.sport_event_status.status === 'ended') {
           this.getLiveUpdate(this);
-          if(res.data.timeline)
+          if (res.data.timeline)
             this.initCommentry(res.data.timeline);
         }
 
         // this.getVenuedetails();
         this.initTeam();
-        this.getMatchLineup(this.matchInfo.sport_event.id)
+        this.getMatchLineup(this.matchInfo.sport_event.id);
         // this.initCommentry();
         // this.initSquads();
       }
@@ -89,7 +87,7 @@ export class TournamentMatchComponent implements OnInit {
   }
 
   getMatchLineup(id) {
-    console.log("getMatchLineup");
+    console.log('getMatchLineup');
     this.lineupLoading = true;
     this.sportsService.getSoccerMatchLineup(id).subscribe((res: any) => {
       if (res.data) {
@@ -118,8 +116,8 @@ export class TournamentMatchComponent implements OnInit {
     this.sportsService.getSoccerMatchTimeline(id).subscribe((res: any) => {
       this.statsLoading = false;
       if (res.data && res.data.statistics) {
-        this.team.home.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics
-        this.team.away.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics
+        this.team.home.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier === 'home')[0].statistics;
+        this.team.away.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier === 'away')[0].statistics;
         this.matchStats = res.data.statistics;
       }
     }, (error) => {
@@ -127,87 +125,85 @@ export class TournamentMatchComponent implements OnInit {
     });
   }
 
-  //get team vs team data 
+  /* get team vs team data  */
   getSoccerTeamvsTeam(teams) {
-    let head = { teams: { team1: { id: teams[0].id, name: teams[0].name, total: 0 }, team2: { id: teams[1].id, name: teams[1].name, total: 0 } }, draw: 0, totalmatches: 0 }
+    let head = { teams:
+      { team1: { id: teams[0].id, name: teams[0].name, total: 0 },
+      team2: { id: teams[1].id, name: teams[1].name, total: 0 } },
+      draw: 0, totalmatches: 0
+    };
     this.sportsService.getsoccerteamvsteamdata(teams[0].id, teams[1].id).subscribe((res: any) => {
-      this.teamvsteamdata = res.data.last_meetings ? res.data.last_meetings : []
+      this.teamvsteamdata = res.data.last_meetings ? res.data.last_meetings : [];
       this.teamvsteamdata.map((match) => {
-        head.totalmatches += 1
+        head.totalmatches += 1;
         if (match.sport_event_status.winner_id) {
-          if (head.teams.team1.id == match.sport_event_status.winner_id) {
-            head.teams.team1.total += 1
+          if (head.teams.team1.id === match.sport_event_status.winner_id) {
+            head.teams.team1.total += 1;
+          } else {
+            head.teams.team2.total += 1;
           }
-          else {
-            head.teams.team2.total += 1
-          }
+        } else {
+          head.draw += 1;
         }
-        else {
-          head.draw += 1
-        }
-      })
-      this.headtohead = head
-      this.teamvsteamdata = this.commonService.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc')
-    })
+      });
+      this.headtohead = head;
+      this.teamvsteamdata = this.commonService.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc');
+    });
   }
 
 
   getTeamsSummumaries(teams) {
-    let teamssummary = { team1: { info: teams[0], matches: [] }, team2: { info: teams[1], matches: [] } }
+    let teamssummary = { team1: { info: teams[0], matches: [] }, team2: { info: teams[1], matches: [] } };
 
     this.sportsService.getsoccerteamsummaries(teams[0].id).subscribe((res: any) => {
-      let team1data = res.data.summaries
-      team1data = team1data.filter((match) => match.sport_event_status.status == 'closed')
+      let team1data = res.data.summaries;
+      team1data = team1data.filter((match) => match.sport_event_status.status == 'closed');
       team1data = team1data.sort((a, b) => {
         return new Date(a['start_time']) < new Date(b['start_time']) ? -1 : new Date(a['start_time']) > new Date(b['start_time']) ? 1 : 0;
-      })
-      teamssummary.team1.matches = team1data.slice(0, 5)
+      });
+      teamssummary.team1.matches = team1data.slice(0, 5);
       teamssummary.team1.matches.map((obj) => {
         obj.sport_event.competitors.map((comp) => {
           if (comp.id != teams[0].id) {
-            obj['oppteamid'] = comp.id
-            obj['oppteamname'] = comp.name
+            obj['oppteamid'] = comp.id;
+            obj['oppteamname'] = comp.name;
           }
-        })
+        });
         if (obj.sport_event_status.winner_id == teams[0].id && obj.sport_event_status.winner_id) {
-          obj['result'] = 'winner'
+          obj['result'] = 'winner';
+        } else if (!(obj.sport_event_status.winner_id == teams[0].id) && obj.sport_event_status.winner_id) {
+          obj['result'] = 'loss';
+        } else {
+          obj['result'] = 'draw';
         }
-        else if (!(obj.sport_event_status.winner_id == teams[0].id) && obj.sport_event_status.winner_id) {
-          obj['result'] = 'loss'
-        }
-        else {
-          obj['result'] = 'draw'
-        }
-      })
-    })
+      });
+    });
 
     this.sportsService.getsoccerteamsummaries(teams[1].id).subscribe((res: any) => {
-      let team2data = res.data.summaries
-      team2data = team2data.filter((match) => match.sport_event_status.status == 'closed')
+      let team2data = res.data.summaries;
+      team2data = team2data.filter((match) => match.sport_event_status.status == 'closed');
       team2data = team2data.sort((a, b) => {
         return new Date(a['start_time']) < new Date(b['start_time']) ? -1 : new Date(a['start_time']) > new Date(b['start_time']) ? 1 : 0;
-      })
-      teamssummary.team2.matches = team2data.slice(0, 5)
+      });
+      teamssummary.team2.matches = team2data.slice(0, 5);
       teamssummary.team2.matches.map((obj) => {
         obj.sport_event.competitors.map((comp) => {
           if (comp.id != teams[1].id) {
-            obj['oppteamid'] = comp.id
-            obj['oppteamname'] = comp.name
+            obj['oppteamid'] = comp.id;
+            obj['oppteamname'] = comp.name;
           }
-        })
+        });
         if (obj.sport_event_status.winner_id == teams[1].id && obj.sport_event_status.winner_id) {
-          obj['result'] = 'winner'
+          obj['result'] = 'winner';
+        } else if (!(obj.sport_event_status.winner_id == teams[1].id) && obj.sport_event_status.winner_id) {
+          obj['result'] = 'loss';
+        } else {
+          obj['result'] = 'draw';
         }
-        else if (!(obj.sport_event_status.winner_id == teams[1].id) && obj.sport_event_status.winner_id) {
-          obj['result'] = 'loss'
-        }
-        else {
-          obj['result'] = 'draw'
-        }
-      })
-    })
+      });
+    });
 
-    this.teamssummary = teamssummary
+    this.teamssummary = teamssummary;
 
     console.log('final::', teamssummary);
 
@@ -229,7 +225,7 @@ export class TournamentMatchComponent implements OnInit {
 
       //Team with role
       let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
-      this.team.home.squad = []
+      this.team.home.squad = [];
       tempHomeSquad.forEach(element => {
         (this.team.home.squad[element.type] = this.team.home.squad[element.type] || []).push(element);
       });
@@ -244,7 +240,7 @@ export class TournamentMatchComponent implements OnInit {
 
       //Team with role
       let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
-      this.team.away.squad = []
+      this.team.away.squad = [];
       tempAwaySquad.forEach(element => {
         (this.team.away.squad[element.type] = this.team.away.squad[element.type] || []).push(element);
       });
@@ -258,8 +254,8 @@ export class TournamentMatchComponent implements OnInit {
       }
     }
     if (this.matchInfo.statistics && Object.entries(this.matchInfo.statistics).length > 0) {
-      this.team.home.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics
-      this.team.away.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics
+      this.team.home.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics;
+      this.team.away.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics;
       this.matchStats = this.matchInfo.statistics;
     }
 
@@ -268,7 +264,7 @@ export class TournamentMatchComponent implements OnInit {
   }
 
   getLiveUpdate(classThis) {
-    console.log("getLiveUpdate");
+    console.log('getLiveUpdate');
     this.interval = setInterval(() => {
       //TEMP
       // this.dummyAPICall++;
@@ -277,7 +273,7 @@ export class TournamentMatchComponent implements OnInit {
         // .getKabaddiDummyCall(this.dummyAPICall)
         .subscribe(res => {
           console.log(res);
-          // let matchData = res.data.items; 
+          // let matchData = res.data.items;
           // this.matchInfo = res.data.items;
           if (res.data.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status != res.data.sport_event_status.status) {
             // this.initTeam();
@@ -298,20 +294,20 @@ export class TournamentMatchComponent implements OnInit {
   }
 
   initCommentry(commentry) {
-    console.log("initCommentry");
+    console.log('initCommentry');
     commentry.forEach(element => {
       if (this.matchInfo.timeline.findIndex((timeline) => timeline.id == element.id) == -1)
-        this.matchInfo.timeline.push(element)
+        this.matchInfo.timeline.push(element);
     });
     //stoppage_time
     let tempTimeline: any = [...this.matchInfo.timeline];
-    console.log(tempTimeline)
-    tempTimeline = tempTimeline.splice(this.matchInfo.timeline.length - 1, 1)[0]
-    console.log(tempTimeline)
+    console.log(tempTimeline);
+    tempTimeline = tempTimeline.splice(this.matchInfo.timeline.length - 1, 1)[0];
+    console.log(tempTimeline);
     // tempTimeline = tempTimeline.pop();
     if (typeof tempTimeline.match_time != 'undefined') {
       if (typeof tempTimeline.stoppage_time != 'undefined')
-        this.matchInfo.match_time = tempTimeline.match_time + " + " + tempTimeline.stoppage_time.toString();
+        this.matchInfo.match_time = tempTimeline.match_time + ' + ' + tempTimeline.stoppage_time.toString();
       else
         this.matchInfo.match_time = tempTimeline.match_time;
     }
@@ -319,7 +315,7 @@ export class TournamentMatchComponent implements OnInit {
 
   startLiveUpdateAfterTime() {
 
-    console.log("startLiveUpdateAfterTime");
+    console.log('startLiveUpdateAfterTime');
     let remainingTime = this.commonService.getRemainigTimeofMatch(
       this.matchInfo.match_info.datestart
     );
@@ -342,13 +338,13 @@ export class TournamentMatchComponent implements OnInit {
 
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
-    console.log("clearTimeInterval");
+    console.log('clearTimeInterval');
     clearInterval(this.interval);
     clearTimeout(this.timeout);
   }
 
   ngOnDestroy() {
-    console.log("ngOnDestroy");
+    console.log('ngOnDestroy');
     this.clearTimeInterval();
   }
 
@@ -367,6 +363,6 @@ export class TournamentMatchComponent implements OnInit {
   sortingByRole(arr) {
     return arr.sort(function (a, b) {
       return a.order - b.order;
-    })
+    });
   }
 }

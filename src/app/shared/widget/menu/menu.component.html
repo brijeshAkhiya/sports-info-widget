@@ -1,4 +1,4 @@
-<ng-container *ngIf="options.sport == 'cricket'">
+<ng-container *ngIf="options.sport == 'Cricket'">
   <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
     <div class="sub-navabar-inner d-flex">
       <a class="submenu-back" [routerLink]="['/cricket']">{{ 'Header_menu.Cricket' | translate }}</a>
@@ -47,10 +47,10 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="options.sport == 'kabaddi'">
+<ng-container *ngIf="options.sport == 'Kabaddi'">
   <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
     <div class="sub-navabar-inner d-flex">
-      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <a class="submenu-back" [routerLink]="['./']">Pro Kabaddi League</a>
       <div class="sub-navbar-container" id="sub-navbar-nav">
         <ul #subnavbarmenu class="subnavbarmenu">
           <li><a [routerLink]="['./']" routerLinkActive="active"
@@ -69,7 +69,7 @@
 </ng-container>
 
 
-<ng-container *ngIf="options.sport == 'soccer'">
+<ng-container *ngIf="options.sport == 'Soccer'">
   <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
     <div class="sub-navabar-inner d-flex">
       <a class="submenu-back" [routerLink]="['/soccer']">{{ 'Header_menu.Soccer' | translate }}</a>
@@ -80,7 +80,8 @@
           </li>
           <li><a [routerLink]="['/soccer/fixtures']"
               routerLinkActive="active">{{ 'widgetModule.Fixtures' | translate }}</a></li>
-          <li><a [routerLink]="['/soccer/tournaments']" routerLinkActive="active">{{ 'Soccer_Module.Tournaments' | translate }}</a></li>
+          <li><a [routerLink]="['/soccer/tournaments']"
+              routerLinkActive="active">{{ 'Soccer_Module.Tournaments' | translate }}</a></li>
         </ul>
         <div id="subnav-pointer" #subnavpointer></div>
       </div>

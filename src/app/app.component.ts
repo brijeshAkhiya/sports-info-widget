@@ -1,26 +1,26 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
-import { Router, NavigationEnd } from "@angular/router";
-import { Location } from "@angular/common";
+import { Router, NavigationEnd } from '@angular/router';
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store'
+import { Store } from '@ngrx/store';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { filter } from 'rxjs/operators'
+import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-import * as MetaTags from "./store/meta-tags-management/meta-tags.actions";
-import * as fromRoot from './app-reducer'
+import { AuthService } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import * as MetaTags from './store/meta-tags-management/meta-tags.actions';
+import * as fromRoot from './app-reducer';
 import * as Auth from './store/auth/auth.actions';
-import { environment } from "@env";
+import { environment } from '@env';
 import { TranslateService } from '@ngx-translate/core';
 
 /** Providers */
-import { CommonService } from "@providers/common-service";
-import { SportsService } from "@providers/sports-service";
+import { CommonService } from '@providers/common-service';
+import { SportsService } from '@providers/sports-service';
 import { SwUpdate } from '@angular/service-worker';
 
-//vibrant import 
+/* vibrant import  */
 // declare var Vibrant: any;
 // import '../assets/js/vibrant.js';
 @Component({
@@ -28,15 +28,16 @@ import { SwUpdate } from '@angular/service-worker';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit, AfterContentInit {
-  users$: Observable<any>
-  socialUser: any
+  users$: Observable<any>;
+  socialUser: any;
   socialUser2: any;
-  vibrantcolor: any
-  mutedcolor: any
+  vibrantcolor: any;
+  mutedcolor: any;
   metatagsObj = {};
   isupdate: boolean;
-  showCookiepopup: boolean = false
+  showCookiepopup: boolean = false;
   constructor(
     private http: HttpClient,
     private swupdate: SwUpdate,
@@ -51,66 +52,74 @@ export class AppComponent implements OnInit, AfterContentInit {
   ) {
     this.getMetaTags();
     this.swupdate.available.subscribe((res) => {
-      this.isupdate = true
-    })
+      this.isupdate = true;
+    });
     if (!this.readCookie('iscookieenabled')) {
-      console.log('show pop up');
-      this.showCookiepopup = true
-      document.cookie = "iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC";
-    }
-    else {
-      this.showCookiepopup = false
-      console.log('not show popup');
+      this.showCookiepopup = true;
+      document.cookie = 'iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC';
+    } else {
+      this.showCookiepopup = false;
     }
   }
 
   ngOnInit() {
 
-    //console.log(this.readCookie('isenabled'));
     let selectedLang = 'english';
-    if((window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info' && !window.location.host.includes('localhost') && !window.location.host.includes('192.168'))){
-      if(window.location.host.split('.')[0])
+    if ((window.location.host !== 'www.sports.info' &&
+      window.location.host !== 'dev.sports.info' &&
+      !window.location.host.includes('localhost') &&
+      !window.location.host.includes('192.168'))) {
+      if (window.location.host.split('.')[0])
         selectedLang = window.location.host.split('.')[0];
-    } 
-    //save language to localstorage
-    localStorage.setItem('userLng', selectedLang)
+    }
+    /* //save language to localstorage */
+    localStorage.setItem('userLng', selectedLang);
     this.translate.setDefaultLang(selectedLang);
-    //get data from ngrx store through meta tags actions
 
-    //susbcribe to router events
+    let element = document.getElementById('main-body');
+    if (selectedLang === 'arabic' && element != null)
+      element.classList.add('arabic');
+
+    /* //get data from ngrx store through meta tags actions */
+
+    /*  //susbcribe to router events */
     this.router.events.subscribe((event) => {
-      //scroll to top navigation related
+      /*  //scroll to top navigation related */
       if (!(event instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
-      //change route get url 
+      window.scrollTo(0, 0);
+      /* //change route get url */
       if (event instanceof NavigationEnd) {
-        // console.log("event", event, event.url.includes('/article'));
-        if (event.url != '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
+        /*         // console.log("event", event, event.url.includes('/article')); */
+        if (event.url !== '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
-        //set meta tags from here...
-        // console.log('tagsobj', this.metatagsObj);
-        //set page title 
+        /*         //set meta tags from here... */
+        /*         // console.log('tagsobj', this.metatagsObj); */
+        /*         //set page title */
         let title = this.commonservice.getPagetitlebyurl(event.url);
         if (title != null) {
           this.pagetitle.setTitle(title);
         }
       }
-    })
+    });
   }
-
   setmetatags(routerURL) {
     console.log('routee', routerURL);
 
-    let data = this.metatagsObj[routerURL]
+    let data = this.metatagsObj[routerURL];
     if (data) {
       if (data.title) {
         this.meta.updateTag({ name: 'title', content: data.title });
         this.meta.updateTag({ property: 'og:title', content: data.title });
         this.meta.updateTag({ name: 'twitter:title', content: data.title });
       }
-      this.meta.updateTag({ name: 'keywords', content: data.keywords ? data.keywords : 'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports' });
+      this.meta.updateTag(
+        {
+          name: 'keywords', content: data.keywords ?
+            data.keywords :
+            'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports'
+        });
 
       if (data.description) {
         this.meta.updateTag({ name: 'description', content: data.description });
@@ -131,23 +140,12 @@ export class AppComponent implements OnInit, AfterContentInit {
       if (data['twitter:card'])
         this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
     }
-    // else {
-    //   this.meta.updateTag({ name: 'title', content: 'Sports.info' });
-    //   this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-    //   this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-    //   this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-    //   this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-    //   this.meta.updateTag({ property: 'og:title', content: 'Sports.info' });
-    //   this.meta.updateTag({ property: 'og:type', content: 'article' });
-    //   this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-    //   this.meta.updateTag({ name: 'twitter:card', content: 'Sports.info' });
-    // }
 
   }
 
-  //get cookie by name 
+  /* //get cookie by name */
   readCookie(name) {
-    var nameEQ = name + "=";
+    var nameEQ = name + '=';
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
@@ -158,59 +156,30 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
 
-  //get meta tags 
+  /* //get meta tags */
   getMetaTags() {
     this.sportsservice.getmetatags().subscribe((res: any) => {
       if (res.data.length > 0) {
         this.store.dispatch(new MetaTags.SaveMetaTags(res.data));
       }
-    })
+    });
   }
 
   updatewebsite() {
-    this.isupdate = false
+    this.isupdate = false;
     window.location.reload(true);
   }
 
   ngAfterContentInit() {
     this.store.select('Metatags').subscribe((data: any) => {
-      let metadata = data.MetaTags
+      let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
-        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
-        metaarray[routerUrl[4]] = data
-      })
-      this.metatagsObj = { ...metaarray }
-    })
+        // tslint:disable-next-line: max-line-length
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
+        metaarray[routerUrl[4]] = data;
+      });
+      this.metatagsObj = { ...metaarray };
+    });
   }
-
-  // myfn(){
-  //   const ele:HTMLImageElement = <HTMLImageElement>document.getElementById('img');
-
-  //   var vibrant = new Vibrant(ele);
-  //   var swatches = vibrant.swatches()
-
-
-  //   for (var swatch in swatches){
-  //       if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "Vibrant"){
-  //           console.log(swatch, swatches[swatch].getHex())
-
-  //           this.vibrantcolor = swatches[swatch].getHex();
-  //           console.log('vibrant',this.vibrantcolor);
-
-
-  //       }
-  //       if (swatches.hasOwnProperty(swatch) && swatches[swatch] && swatch == "DarkMuted"){
-  //         console.log(swatch, swatches[swatch].getHex())
-
-  //         this.mutedcolor = swatches[swatch].getHex();
-  //         console.log('muted',this.mutedcolor);
-
-
-  //     }
-  //          // console.log('111',swatches[swatch].getHex()[0]);
-  //   }    
-  // }
-
-
 }

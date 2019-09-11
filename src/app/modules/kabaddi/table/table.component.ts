@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
-import { CricketService } from '@app/shared/providers/cricket-service';
 
 @Component({
   selector: 'app-table',
@@ -10,24 +9,23 @@ import { CricketService } from '@app/shared/providers/cricket-service';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
- 
+
   info: any;
-  loading: boolean = false;
+  loading = false;
   isloading: boolean;
   scorerdata: any;
 
   constructor(
     private sportsService: SportsService,
-    private commonService: CommonService,
-    private cricketService:CricketService
+    private commonService: CommonService
     ) { }
 
-  ngOnInit() {   
-    this.getPointsTable()
+  ngOnInit() {
+    this.getPointsTable();
     this.gettopscorer('totalpoint');
   }
 
-  //get tournaments points table
+  /* get tournaments points table */
   getPointsTable() {
     this.loading = true;
     this.sportsService.getCompetitionInfo().subscribe((res:any) => {
@@ -38,19 +36,19 @@ export class TableComponent implements OnInit {
     },
     error => {
       this.loading = false;
-    })
+    });
   }
 
-  //get kabaddi scorers
-  gettopscorer(type){
+  /*get kabaddi scorers */
+  gettopscorer(type) {
     this.isloading = true;
     this.sportsService.getkabaddistats(type).subscribe((res: any) => {
       this.isloading = false;
       if (res) {
-        this.scorerdata = res.data
+        this.scorerdata = res.data;
       }
     },
-    error => this.isloading = false)
+    error => this.isloading = false);
   }
 
 

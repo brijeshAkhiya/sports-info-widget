@@ -258,7 +258,7 @@
                 <div *ngFor="let team of objectKeys(competitor)">
                   <div class="d-flex match-info-title align-items-center">
                     <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
-                      [defaultImage]="cricketService.flagplaceholder">
+                      [defaultImage]="commonService.flagplaceholder">
                     <h4>
                       <a
                         [routerLink]="['/cricket/player', (competitor[team].id | splitID), ((competitor[team].name | split ) | slugify) ]">

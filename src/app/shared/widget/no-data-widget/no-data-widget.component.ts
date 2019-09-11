@@ -9,20 +9,19 @@ export class NoDataWidgetComponent implements OnInit {
   imagepath: { image: string; };
   @Input() message;
   @Input() sport;
-  
+
   constructor() { }
 
   ngOnInit() {
-    if(this.sport == 'kabaddi'){
-      this.imagepath = { image : 'assets/images/match/kabaddi_no_data.svg' };
-    }
-    else if(this.sport == 'soccer'){
-      this.imagepath = { image : 'assets/images/match/soccer/no_data_football.svg' };
-    }else{
-      let array = [
-        {image:'assets/images/no_data_1.svg'},
-        {image:'assets/images/no_data_2.svg'},
-      ]
+    if (this.sport === 'Kabaddi') {
+      this.imagepath = { image: 'assets/images/match/kabaddi_no_data.svg' };
+    } else if (this.sport === 'Soccer') {
+      this.imagepath = { image: 'assets/images/match/soccer/no_data_football.svg' };
+    } else {
+      const array = [
+        { image: 'assets/images/no_data_1.svg' },
+        { image: 'assets/images/no_data_2.svg' },
+      ];
       this.imagepath = array[Math.floor(Math.random() * array.length)];
     }
   }

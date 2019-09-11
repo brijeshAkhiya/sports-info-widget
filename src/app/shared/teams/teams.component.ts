@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
-import { CricketService } from '@providers/cricket-service';
 import { CommonService } from '@providers/common-service';
 
 @Component({
@@ -21,13 +20,12 @@ export class TeamsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private sportsService: SportsService,
-    public cricketService: CricketService,
     public commonService: CommonService
   ) { }
 
   ngOnInit() {
-    let data: any = this.activatedRoute.data
-    let routeParams = this.activatedRoute.snapshot.params;
+    const data: any = this.activatedRoute.data;
+    const routeParams = this.activatedRoute.snapshot.params;
     console.log(this.activatedRoute.snapshot);
     console.log(routeParams);
     console.log(data);
@@ -36,29 +34,27 @@ export class TeamsComponent implements OnInit {
     if (this.sport == 'cricket') {
       this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'cricket', 'tournament');
       this.getTournamentTeams(this.tournamentid);
-    }
-    else if (this.sport == 'kabaddi') {
+    } else if (this.sport == 'kabaddi') {
       this.getKabaddiTeams();
-    }
-    else if (this.sport == 'soccer') {
+    } else if (this.sport == 'soccer') {
       this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'soccer', 'tournament');
-      console.log('tournament:',this.tournamentid)
+      console.log('tournament:', this.tournamentid);
       this.getSoccerSeasonTeams(this.tournamentid);
     }
   }
 
-  //Cricket - Get tournament teams
+  /* //Cricket - Get tournament teams */
   getTournamentTeams(id) {
     this.sportsService.gettournamentteams(id).subscribe((res: any) => {
       if (res.data) {
         res.data.groups.map((data) => {
-          this.teams = data.teams
-        })
+          this.teams = data.teams;
+        });
       }
-    })
+    });
   }
 
-  //Kabaddi - Get teams
+  /*  //Kabaddi - Get teams */
   getKabaddiTeams() {
     this.sportsService.getkabadditeams().subscribe((res: any) => {
       console.log(res.data.items);
@@ -66,25 +62,25 @@ export class TeamsComponent implements OnInit {
       if (res.data && res.data.items) {
         this.teams = res.data.items;
       }
-    })
+    });
   }
 
-  //Soccer - get season teams 
+  /* //Soccer - get season teams */
   getSoccerSeasonTeams(id) {
     this.sportsService.getsoccerseasonteams(id).subscribe((res: any) => {
-      let array = []
+      const array = [];
       res.data.map((data) => {
         data.groups.map((gdata) => {
           gdata.competitors.map((cdata) => {
-            let isteamexist = array.some((obj) => obj.id == cdata.id);
+            const isteamexist = array.some((obj) => obj.id == cdata.id);
             if (!isteamexist) {
-              array.push(cdata)
+              array.push(cdata);
             }
-          })
-        })
-      })
-      this.teams = array
-    })
+          });
+        });
+      });
+      this.teams = array;
+    });
   }
 
 }

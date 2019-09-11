@@ -6,7 +6,7 @@
         <!-- Cricket Teams-->
         <ng-container *ngIf="sport=='cricket'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
-              [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+              [defaultImage]="commonService.flagplaceholder" alt="team-flag">
           </div>
           <div class="team-name">
             <h4>{{team.name}}</h4>
@@ -22,7 +22,7 @@
         <!-- Kabaddi Teams-->
         <ng-container *ngIf="sport=='kabaddi'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
-              [lazyLoad]="team?.tid | logosurl:'kabaddi'" [defaultImage]="cricketService.flagplaceholder"
+              [lazyLoad]="team?.tid | logosurl:'kabaddi'" [defaultImage]="commonService.flagplaceholder"
               alt="team?.tname">
           </div>
           <div class="team-name">
@@ -35,7 +35,7 @@
 
         <ng-container *ngIf="sport=='soccer' && type == 'teams'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
-              [defaultImage]="cricketService.flagplaceholder" alt="team?.name">
+              [defaultImage]="commonService.flagplaceholder" alt="team?.name">
           </div>
           <div class="team-name">
             <h4>{{team.name}}</h4>
@@ -46,7 +46,7 @@
 
         <ng-container *ngIf="sport=='soccer' && type == 'player'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
-              [lazyLoad]="team?.competitor?.id | logosurl:'soccer'" [defaultImage]="cricketService.flagplaceholder"
+              [lazyLoad]="team?.competitor?.id | logosurl:'soccer'" [defaultImage]="commonService.flagplaceholder"
               alt="team?.competitor?.name">
           </div>
           <div class="team-name">

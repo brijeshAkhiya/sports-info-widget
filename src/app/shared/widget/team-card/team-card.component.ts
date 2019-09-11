@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 
 @Component({
@@ -16,12 +15,11 @@ export class TeamCardComponent implements OnInit {
   @Input() type;
 
   constructor(
-    public cricketService: CricketService,
     public commonService: CommonService
   ) { }
 
   ngOnInit() {
-    if(this.sport == 'soccer' && this.type == undefined){
+    if (this.sport == 'soccer' && this.type == undefined) {
       this.type = 'teams'
     }
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CricketService } from "@providers/cricket-service";
-import { CommonService } from "@providers/common-service";
+import { CommonService } from '@providers/common-service';
 
 
 @Component({
@@ -18,48 +17,48 @@ export class MatchAboutComponent implements OnInit {
   teamsresultsscore;
 
   constructor(
-    private cricketService: CricketService, private commonService: CommonService
-    ) { }
+    private commonService: CommonService
+  ) { }
 
-  ngOnInit() {  
-    console.log('toss',this.toss);
-    console.log('datacheck',this.data);
+  ngOnInit() {
+    console.log('toss', this.toss);
+    console.log('datacheck', this.data);
     console.log(this.competitor);
 
-    if(this.sport == 'cricket')
+    if (this.sport == 'cricket')
       this.initCricket();
     // else if(this.sport == 'soccer')
     //   this.initSoccer();
 
- }
-
- initCricket(){
-    
-  if(this.data['sport_event_status']['status'] == 'closed'){
-    let compititors = this.data['sport_event']['competitors']
-    let scores = this.data['sport_event_status']['period_scores']
-    
-    let obj = {}  
-    compititors.map((sComp)=>{
-      obj[sComp.qualifier] = sComp
-      let temp = (sComp.qualifier == 'home') ?  this.data['sport_event_status']['period_scores'].filter((score)=> {return score.home_score} ) : this.data['sport_event_status']['period_scores'].filter((score)=> {return score.away_score} )
-      obj[sComp.qualifier].period_score = temp[0]
-    })  
   }
- }
 
- initSoccer(){
-    
-  if(this.data['sport_event_status']['status'] == 'closed'){
-    let compititors = this.data['sport_event']['competitors']
-    let scores = this.data['sport_event_status']['period_scores']
-    
-    let obj = {}  
-    compititors.map((sComp)=>{
-      obj[sComp.qualifier] = sComp
-      let temp = (sComp.qualifier == 'home') ?  this.data['sport_event_status']['period_scores'].filter((score)=> {return score.home_score} ) : this.data['sport_event_status']['period_scores'].filter((score)=> {return score.away_score} )
-      obj[sComp.qualifier].period_score = temp[0]
-    })  
+  initCricket() {
+
+    if (this.data['sport_event_status']['status'] == 'closed') {
+      const compititors = this.data['sport_event']['competitors'];
+      const scores = this.data['sport_event_status']['period_scores'];
+
+      const obj = {};
+      compititors.map((sComp) => {
+        obj[sComp.qualifier] = sComp;
+        const temp = (sComp.qualifier == 'home') ? this.data['sport_event_status']['period_scores'].filter((score) => score.home_score) : this.data['sport_event_status']['period_scores'].filter((score) => score.away_score);
+        obj[sComp.qualifier].period_score = temp[0];
+      });
+    }
   }
- }
+
+  initSoccer() {
+
+    if (this.data['sport_event_status']['status'] == 'closed') {
+      const compititors = this.data['sport_event']['competitors'];
+      const scores = this.data['sport_event_status']['period_scores'];
+
+      const obj = {};
+      compititors.map((sComp) => {
+        obj[sComp.qualifier] = sComp;
+        const temp = (sComp.qualifier == 'home') ? this.data['sport_event_status']['period_scores'].filter((score) => score.home_score) : this.data['sport_event_status']['period_scores'].filter((score) => score.away_score);
+        obj[sComp.qualifier].period_score = temp[0];
+      });
+    }
+  }
 }

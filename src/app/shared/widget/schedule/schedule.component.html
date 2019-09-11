@@ -7,15 +7,15 @@
     </div>
     <div class="schedule-items">
       <ng-container *ngFor="let match of item.data">
-        <ng-container *ngIf="sport == 'cricket'">
+        <ng-container *ngIf="sport == 'Cricket'">
           <ng-container *ngTemplateOutlet="cricket;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="sport == 'kabaddi'">
+        <ng-container *ngIf="sport == 'Kabaddi'">
           <ng-container *ngTemplateOutlet="kabaddi;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="sport == 'soccer'">
+        <ng-container *ngIf="sport == 'Soccer'">
           <ng-container *ngTemplateOutlet="soccer;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
@@ -52,7 +52,7 @@
         </div>
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.competitors[0]?.id | logosurl"
-            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+            [defaultImage]="commonService.flagplaceholder" alt="team-flag">
         </div>
       </div>
 
@@ -63,7 +63,7 @@
       <div class="match-team d-flex align-items-center">
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.competitors[1]?.id | logosurl"
-            [defaultImage]="cricketService.flagplaceholder" alt="team-flag">
+            [defaultImage]="commonService.flagplaceholder" alt="team-flag">
         </div>
         <div class="team-info">
           <h5 [ngClass]="{'winner':  match?.winner_id == match?.competitors[1]?.id}">
@@ -109,7 +109,7 @@
         </div>
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
-            [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.home?.tname}}" />
+            [defaultImage]="commonService.flagplaceholder" alt="{{match?.teams?.home?.tname}}" />
         </div>
       </div>
 
@@ -134,7 +134,7 @@
       <div class="match-team d-flex align-items-center">
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.tid | logosurl:'kabaddi'"
-            [defaultImage]="cricketService.flagplaceholder" alt="{{match?.teams?.away?.tname}}" />
+            [defaultImage]="commonService.flagplaceholder" alt="{{match?.teams?.away?.tname}}" />
         </div>
         <div class="team-info">
           <h5>
@@ -164,7 +164,7 @@
         <span
           class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? match?.sport_event?.sport_event_context?.round?.name : '' }}</span>
       </h6>
-      <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event.venue?.name}}</p>
+      <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
       <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
       </p>
       <!-- <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
@@ -176,7 +176,7 @@
             {{match.sport_event?.competitors[0].abbreviation}}</h5>
         </div>
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="" [defaultImage]="cricketService.flagplaceholder"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="" [defaultImage]="commonService.flagplaceholder"
             alt="{{match.sport_event?.competitors[0].abbreviation}}">
         </div>
       </div>
@@ -201,7 +201,7 @@
 
       <div class="match-team d-flex align-items-center">
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="" [defaultImage]="cricketService.flagplaceholder"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="" [defaultImage]="commonService.flagplaceholder"
             alt="{{match.sport_event.competitors[1].abbreviation}}">
         </div>
         <div class="team-info">
@@ -240,7 +240,7 @@
               </div>
               <div class="team-flag">
                 <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
-                  [defaultImage]="cricketService.flagplaceholder"
+                  [defaultImage]="commonService.flagplaceholder"
                   alt="{{match.sport_event?.competitors[0].abbreviation}}">
               </div>
             </div>
@@ -266,7 +266,7 @@
             <div class="match-team d-flex align-items-center">
               <div class="team-flag">
                 <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
-                  [defaultImage]="cricketService.flagplaceholder"
+                  [defaultImage]="commonService.flagplaceholder"
                   alt="{{match.sport_event.competitors[1].abbreviation}}">
               </div>
               <div class="team-info">

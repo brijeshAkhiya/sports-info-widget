@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
-import { SlugifyPipe } from "@pipes/slugpipe";
+import { SlugifyPipe } from '@pipes/slugpipe';
 import { SplitPipe } from '@pipes/stringsplitpipe';
 
 import { CommonService } from '@providers/common-service';
-import { CricketService } from "@providers/cricket-service";
 import { SportsService } from '@providers/sports-service';
 
 @Component({
@@ -21,7 +20,6 @@ export class TournamentHomeComponent implements OnInit {
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
-    private cricketService: CricketService,
     private slugifyPipe: SlugifyPipe,
     private splitpipe: SplitPipe,
     private router: Router,
@@ -35,8 +33,11 @@ export class TournamentHomeComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'tournament');
-    let name = this.activatedroute.snapshot.params.slug
-    this.options = { reqParams: { aIds: [this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'tournament')],eSport:'Soccer' }, title: name.replace(/-/g, " "), id: this.tournamentid, name: name.replace(/-/g, " "), type: 'tournament', sport: 'soccer' }
+    const name = this.activatedroute.snapshot.params.slug;
+    this.options = { reqParams:
+      { aIds: [this.commonService.getIds(this.activatedroute.snapshot.params.id, 'soccer', 'tournament')], eSport: 'Soccer' },
+      title: name.replace(/-/g, ' '), id: this.tournamentid, name: name.replace(/-/g, ' '), type: 'tournament', sport: 'soccer'
+    };
   }
 
 }

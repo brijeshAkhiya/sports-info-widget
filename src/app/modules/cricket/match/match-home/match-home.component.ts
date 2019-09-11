@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SportsService } from "@providers/sports-service";
-import { CricketService } from "@providers/cricket-service";
 import { CommonService } from "@providers/common-service";
 import * as moment from "moment";
 import { Title } from '@angular/platform-browser';
@@ -45,7 +44,6 @@ export class MatchHomeComponent implements OnInit {
     private sportsService: SportsService,
     private router: Router,
     private title: Title,
-    private cricketService: CricketService,
     private commonService: CommonService
   ) {
     /**To reload router if routing in same page */
@@ -300,7 +298,7 @@ export class MatchHomeComponent implements OnInit {
             this.nextmatches = [];
           if (res.data.last_meetings && res.data.last_meetings.length > 0) {
             let last_meetings = res.data.last_meetings.filter((match) => match.period_scores);
-            this.lastmatches = this.cricketService.initCompetitorScore(last_meetings)
+            this.lastmatches = this.commonService.initCompetitorScore(last_meetings)
             this.lastmatches = this.commonService.sortArr(this.lastmatches, 'Do MMMM YYYY', 'scheduled', 'desc');
           }
           else

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from '@angular/core';
 
-import { SportsService } from '@providers/sports-service'
-import { CricketService } from '@providers/cricket-service'
+import { SportsService } from '@providers/sports-service';
 
 @Component({
   selector: 'app-menu',
@@ -16,58 +15,49 @@ export class MenuComponent implements OnInit {
   @Input() name;
   series;
   public windowinnerWidth: any;
-  
+
   constructor(
-    private sportsService: SportsService,
-    private cricketService: CricketService
+    private sportsService: SportsService
   ) { }
 
   ngOnInit() {
-    if (typeof this.options != 'undefined') {
-      if (this.options.sport == 'cricket') {
+    if (typeof this.options !== 'undefined') {
+      if (this.options.sport === 'Cricket') {
         this.getCricketSeries();
       }
     }
   }
 
   responsiveSticky(value) {
+    const element = document.getElementById('sub-navabar');
+    const bodyelement = document.getElementById('main-body');
     if (window.pageYOffset > value) {
-      let element = document.getElementById('sub-navabar');
-      element.classList.add('fixed-nav');
-      let bodyelement = document.getElementById('main-body');
-      bodyelement.classList.add('sticky-submenu');
+      if (element != null) element.classList.add('fixed-nav');
+      if (bodyelement != null) bodyelement.classList.add('sticky-submenu');
     } else {
-      let element = document.getElementById('sub-navabar');
-      element.classList.remove('fixed-nav');
-      let bodyelement = document.getElementById('main-body');
-      bodyelement.classList.remove('sticky-submenu');
+      if (element != null) element.classList.remove('fixed-nav');
+      if (bodyelement != null) bodyelement.classList.remove('sticky-submenu');
     }
   }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     this.windowinnerWidth = window.innerWidth;
-    if (this.windowinnerWidth < 576) {
-      this.responsiveSticky(163);
-      console.log("width change" + innerWidth);
-    }
-    else {
-      this.responsiveSticky(129);
-    }
+    if (this.windowinnerWidth < 576) this.responsiveSticky(163);
+    else this.responsiveSticky(129);
   }
 
-  ngOnDestroy(){
-    let bodyelement = document.getElementById('main-body');
-    bodyelement.classList.remove('sticky-submenu');
+  ngOnDestroy() {
+    const bodyelement = document.getElementById('main-body');
+    if (bodyelement != null) bodyelement.classList.remove('sticky-submenu');
   }
-  //get current cricket series 
+  /* get current cricket series  */
   getCricketSeries() {
     this.sportsService.getcurrentseries().subscribe((res: any) => {
       console.log(res);
-      if (res.data) {
-        this.series = res.data
-      }
-    })
+      if (res.data)
+        this.series = res.data;
+    });
   }
 
 }

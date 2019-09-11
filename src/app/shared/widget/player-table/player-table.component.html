@@ -66,7 +66,7 @@
         <a
           [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)] ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
-            [defaultImage]="cricketService.flagplaceholder" alt="logo">
+            [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ (options.image_type == 'team') ?  item.team.name : item.player.name | split}}
         </a>
       </td>
@@ -86,7 +86,7 @@
           [routerLink]="options.image_type == 'team' ? ['/soccer/team',(item?.competitor?.id | splitID),(item?.competitor?.name | slugify)] : ['/soccer/player',(item?.id | splitID),(item?.name | split | slugify)]">
           <img [offset]="commonService.lazyloadoffset"
             [lazyLoad]="(options.image_type == 'team') ?  (item?.competitor?.id | logosurl:'soccer') : (item?.competitors[0]?.id | logosurl:'soccer')"
-            [defaultImage]="cricketService.flagplaceholder" alt="logo" *ngIf="options.image_type == 'team'">
+            [defaultImage]="commonService.flagplaceholder" alt="logo" *ngIf="options.image_type == 'team'">
           {{ (options.image_type == 'team') ? item[value] : item[value] | split}}
         </a>
       </td>
@@ -104,7 +104,7 @@
         <a
           [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
-            [defaultImage]="cricketService.flagplaceholder" alt="logo">
+            [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}
         </a>
       </td>

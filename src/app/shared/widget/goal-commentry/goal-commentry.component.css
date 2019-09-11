@@ -9,7 +9,8 @@
 .goal-commentary-list .icon.timeout  { background-image: url(assets/images/match/time-icon.svg);}
 .goal-commentary-list .icon.green       { background-image: url(assets/images/match/card-green.svg);}
 .goal-commentary-list .icon.yellow,
-.goal-commentary-list .icon.yellow_card      { background-image: url(assets/images/match/card-yellow.svg);}
+.goal-commentary-list .icon.yellow_card   ,
+.goal-commentary-list .icon.yellow_red_card      { background-image: url(assets/images/match/card-yellow.svg);}
 .goal-commentary-list .icon.red,
 .goal-commentary-list .icon.red_card          { background-image: url(assets/images/match/card-red.svg);}
 .goal-commentary-list .icon.substitution  { background-image: url(assets/images/match/substitute.svg);}
@@ -17,6 +18,8 @@
 .goal-commentary-list .icon.free_kick,
 .goal-commentary-list .icon.corner_kick,
 .goal-commentary-list .icon.goal_kick         { background-image: url(assets/images/match/soccer/soccer-shoe.svg);}
+.goal-commentary-list .icon.injury,
+.goal-commentary-list .icon.injury_return         { background-image: url(assets/images/match/soccer/ic_injury.svg);}
 .goal-commentary-list .icon.period_start,
 .goal-commentary-list .icon.match_ended,
 .goal-commentary-list .icon.match_started,

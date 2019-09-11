@@ -19,6 +19,14 @@
         {{ item.name | split }}
       </a>
 
+      <a *ngIf="sport == 'Kabaddi'" [state]="{ id: item.id }" [routerLink]="item.type == 'Tournament' ? 
+      ['/kabaddi'] 
+      : item.type == 'Team' 
+      ? ['/kabaddi/team', item.id, (item.name | slugify)] 
+      : ''">
+        {{ item.name | split }}
+      </a>
+
       <a *ngIf="link_type == 'tournament' && sport == 'Soccer'" [state]="{ id: item.id }"
         [routerLink]="['/soccer/tournament', (item.id | splitID), (item.name | slugify)] ">{{ item.name | split }}
       </a>

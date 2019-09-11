@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
-import { CricketService } from '@providers/cricket-service';
 import { CommonService } from '@providers/common-service';
 
 @Component({
@@ -12,51 +11,46 @@ import { CommonService } from '@providers/common-service';
 })
 export class TeamComponent implements OnInit {
 
-  loading: boolean = false;
-  loadingFixture: boolean = false;
-  loadingResult: boolean = false;
-  statsLoading: boolean = false;
+  loading = false;
+  loadingFixture = false;
+  loadingResult = false;
+  statsLoading = false;
   matchfixtures;
   matchresults;
   teamProfile;
-  paramArticle = {}
+  paramArticle = {};
   sport;
   routeParams;
-  objectKeys = Object.keys
-  soccerteamplayers = { midfielder: [], forward: [], goalkeeper: [], defender: [], playerstats: [] }
-  paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
-  paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] }
+  objectKeys = Object.keys;
+  soccerteamplayers = { midfielder: [], forward: [], goalkeeper: [], defender: [], playerstats: [] };
+  paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] };
+  paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [] };
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private sportsService: SportsService,
-    public cricketService: CricketService,
     public commonService: CommonService
   ) { }
 
   ngOnInit() {
 
-    let data: any = this.activatedRoute.data;
+    const data: any = this.activatedRoute.data;
     this.sport = data.value.sport;
-    console.log(this.sport);
-
-    this.routeParams = this.activatedRoute.snapshot.params
-    if (this.sport == 'cricket') {
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, }
+    this.routeParams = this.activatedRoute.snapshot.params;
+    if (this.sport === 'Cricket') {
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team')] }, };
       if (this.routeParams.tournamentid)
-        this.getTournamentTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'), this.commonService.getIds(this.routeParams.tournamentid, 'cricket', 'tournament'))
+        this.getTournamentTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'), this.commonService.getIds(this.routeParams.tournamentid, 'cricket', 'tournament'));
       else
         this.getTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'cricket', 'team'));
-    }
-    else if (this.sport == 'kabaddi') {
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.routeParams.teamid] } }
+    } else if (this.sport === 'Kabaddi') {
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.routeParams.teamid] } };
       this.getKabaddiTeamProfile(this.routeParams.teamid);
-    }
-    else if (this.sport == 'soccer') {
+    } else if (this.sport === 'Soccer') {
       console.log(this.routeParams.tournamentid);
 
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')] } }
-      this.getSoccerTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team'))
+      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')] } };
+      this.getSoccerTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team'));
     }
   }
 
@@ -66,10 +60,10 @@ export class TeamComponent implements OnInit {
       this.sportsService.getteamprofileview(teamid).subscribe((res: any) => {
         this.loading = false;
         if (res.data)
-          this.teamProfile = res.data
+          this.teamProfile = res.data;
       }, (error) => {
         this.loading = false;
-      })
+      });
     }
   }
 
@@ -79,10 +73,10 @@ export class TeamComponent implements OnInit {
       this.sportsService.getteamprofile(tournamentid, teamid).subscribe((res: any) => {
         this.loading = false;
         if (res.data)
-          this.teamProfile = res.data
+          this.teamProfile = res.data;
       }, (error) => {
         this.loading = false;
-      })
+      });
     }
   }
 
@@ -96,7 +90,7 @@ export class TeamComponent implements OnInit {
       .subscribe((res: any) => {
         this.loadingResult = false;
         if (res.data) {
-          this.matchresults = this.cricketService.initCompetitorScore(res.data)
+          this.matchresults = this.commonService.initCompetitorScore(res.data);
           this.matchresults = this.commonService.sortArr(this.matchresults, 'Do MMMM YYYY', 'scheduled', 'desc');
         }
       }, (error) => {
@@ -125,29 +119,25 @@ export class TeamComponent implements OnInit {
       this.sportsService.getkabaddiTeamProfile(teamid).subscribe((res: any) => {
         this.loading = false;
         if (res.data)
-          this.teamProfile = res.data.items[0]
+          this.teamProfile = res.data.items[0];
         this.teamProfile.players = [];
         this.teamProfile.squads.forEach(element => {
           (this.teamProfile.players[element.positionname] = this.teamProfile.players[element.positionname] || []).push(element);
         });
-        console.log(this.teamProfile);
-        console.log(Object.keys(this.teamProfile.players));
-
       }, (error) => {
         this.loading = false;
-      })
+      });
     }
   }
 
 
 
   loadData(type) {
-    if (type == 'fixture') {
+    if (type === 'fixture') {
       if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
         return false;
       this.getFixtures();
-    }
-    else if (type == 'result') {
+    } else if (type === 'result') {
       if (this.paramsResults.data && this.paramsResults.data.length > 0)
         return false;
       this.getResults();
@@ -155,7 +145,7 @@ export class TeamComponent implements OnInit {
   }
 
   getFixtures() {
-    console.log("getFixtures")
+    console.log('getFixtures');
     this.paramsFixtures.loading = true;
     this.sportsService.getkabadditeamfixtures(this.routeParams.teamid, this.paramsFixtures).subscribe((res: any) => {
       this.paramsFixtures.loading = false;
@@ -193,41 +183,41 @@ export class TeamComponent implements OnInit {
   }
 
 
-  //soccer team profile 
+  /* //soccer team profile */
   getSoccerTeamProfile(teamid) {
     this.loading = true;
     if (teamid) {
       this.sportsService.getsoccerteamprofile(teamid).subscribe((res: any) => {
         this.loading = false;
         if (res.data)
-          this.teamProfile = res.data
-        if(this.teamProfile.players && this.teamProfile.players.length > 0){
+          this.teamProfile = res.data;
+        if (this.teamProfile.players && this.teamProfile.players.length > 0) {
           this.teamProfile.players_type = [];
           this.teamProfile.players.map((data) => {
-          (this.teamProfile.players_type[data.type] = this.teamProfile.players_type[data.type] || []).push(data);
-          })
+            (this.teamProfile.players_type[data.type] = this.teamProfile.players_type[data.type] || []).push(data);
+          });
         }
       }, (error) => {
         this.loading = false;
-      })
+      });
     }
   }
 
-  //soccer team fixtures
+  /* //soccer team fixtures */
   getsoccerTeamFixtures() {
     if (this.matchfixtures && this.matchfixtures.length > 0)
       return false;
     this.loadingFixture = true;
     this.sportsService.getsoccerteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')).subscribe((res: any) => {
       this.loadingFixture = false;
-      this.matchfixtures = []
+      this.matchfixtures = [];
       res.data.summaries.map((match) => {
-        if (match.sport_event_status.status == 'not_started') {
-          match['start_time'] = match.sport_event.start_time
-          this.matchfixtures.push(match)
+        if (match.sport_event_status.status === 'not_started') {
+          match['start_time'] = match.sport_event.start_time;
+          this.matchfixtures.push(match);
         }
-      })
-      this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'start_time', 'asc')
+      });
+      this.matchfixtures = this.commonService.sortArr(this.matchfixtures, 'Do MMMM YYYY', 'start_time', 'asc');
       console.log('match::', this.matchfixtures);
     }, (error) => {
       this.loadingFixture = false;
@@ -235,43 +225,42 @@ export class TeamComponent implements OnInit {
 
   }
 
-  //soccer team stats 
+  /* //soccer team stats */
   getSoccerTeamStats() {
-    this.soccerteamplayers.playerstats = []
-    let teamid = this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')
-    let tournamentid = this.commonService.getIds(this.routeParams.tournamentid, 'soccer', 'tournament')
+    this.soccerteamplayers.playerstats = [];
+    const teamid = this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team');
+    const tournamentid = this.commonService.getIds(this.routeParams.tournamentid, 'soccer', 'tournament');
     if (teamid && tournamentid) {
-      this.statsLoading = true
+      this.statsLoading = true;
       this.sportsService.getsoccerteamstats(tournamentid, teamid).subscribe((res: any) => {
         this.statsLoading = false;
-        if (res.data && res.data.competitor && res.data.competitor.players){
+        if (res.data && res.data.competitor && res.data.competitor.players) {
           res.data.competitor.players.map((pdata) => {
-            if(pdata['statistics']){
-              pdata['minutes'] = pdata['statistics']['minutes_played'] ? pdata['statistics']['minutes_played'] : 0
-              pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0
-              pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0
-              pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0
-              pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0
-              pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0
-              pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0
-              this.soccerteamplayers.playerstats.push(pdata)
+            if (pdata['statistics']) {
+              pdata['minutes'] = pdata['statistics']['minutes_played'] ? pdata['statistics']['minutes_played'] : 0;
+              pdata['substituted_in'] = pdata['statistics']['substituted_in'] ? pdata['statistics']['substituted_in'] : 0;
+              pdata['substituted_out'] = pdata['statistics']['substituted_out'] ? pdata['statistics']['substituted_out'] : 0;
+              pdata['goals_scored'] = pdata['statistics']['goals_scored'] ? pdata['statistics']['goals_scored'] : 0;
+              pdata['assists'] = pdata['statistics']['assists'] ? pdata['statistics']['assists'] : 0;
+              pdata['yellow_cards'] = pdata['statistics']['yellow_cards'] ? pdata['statistics']['yellow_cards'] : 0;
+              pdata['red_cards'] = pdata['statistics']['red_cards'] ? pdata['statistics']['red_cards'] : 0;
+              this.soccerteamplayers.playerstats.push(pdata);
             }
-          })
-        console.log('playerstat', this.soccerteamplayers.playerstats);
+          });
+          console.log('playerstat', this.soccerteamplayers.playerstats);
         }
       }, (error) => {
         this.statsLoading = false;
-      })
+      });
     }
 
   }
 
   loadmore(type) {
-    if (type == 'fixture') {
+    if (type === 'fixture') {
       this.paramsFixtures.reqParams.page += 1;
       this.getFixtures();
-    }
-    else if (type == 'result') {
+    } else if (type === 'result') {
       this.paramsResults.reqParams.page += 1;
       this.getResults();
     }

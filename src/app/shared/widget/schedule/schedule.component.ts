@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CommonService } from "@providers/common-service";
-import { CricketService } from "@providers/cricket-service";
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-schedule',
@@ -15,18 +14,20 @@ export class ScheduleComponent implements OnInit {
   @Input() tournament;
   listtype = 'simple';
   constructor(
-    public commonService: CommonService,
-    public cricketService: CricketService
+    public commonService: CommonService
   ) { }
 
   ngOnInit() {
-    if (this.sport == 'soccer') {
-      if (!(typeof this.tournament != 'undefined' && this.tournament != ''))
-        this.listtype = 'datelist'
+    console.log(this.data);
+    console.log(this.sport);
+
+    if (this.sport === 'Soccer') {
+      if (typeof this.tournament === 'undefined' || this.tournament === '')
+        this.listtype = 'datelist';
     }
   }
   replace(str) {
-    return str.replace(/_/g, " ")
+    return str.replace(/_/g, ' ');
   }
 
 }

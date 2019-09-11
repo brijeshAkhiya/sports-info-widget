@@ -22,7 +22,7 @@
         <h1 *ngIf="options">{{options.title}}</h1>
         <app-favourites-widget [value]="{id:options.id,name:options.title,type:options.type,sport:options.sport}"></app-favourites-widget>
     </div>
-    <ngb-tabset class="common-tabs" (tabChange)="beforeChange($event)">
+    <ngb-tabset class="common-tabs">
         <!--Latest Article Tab-->
         <ngb-tab id="latest">
             <ng-template ngbTabTitle>

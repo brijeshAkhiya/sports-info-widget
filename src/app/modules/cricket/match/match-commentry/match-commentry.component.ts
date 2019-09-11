@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: 'app-match-commentry',
@@ -12,15 +11,13 @@ export class MatchCommentryComponent implements OnInit {
   @Input() commentry: any;
   @Input() oversummery: any;
   @Input() ballerList: any;
-  @Input() batsmanList:any;
-  @Input() showCommetry:any;
+  @Input() batsmanList: any;
+  @Input() showCommetry: any;
   ballers: any;
   currentover;
 
   constructor(
-    private cricketService: CricketService
   ) {}
 
-  ngOnInit(){
-  }
+  ngOnInit() {}
 }

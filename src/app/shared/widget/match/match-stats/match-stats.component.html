@@ -11,7 +11,7 @@
           </b>
           <img alt="{{matchStats?.match_info?.teams?.home?.tname}}"
             [lazyLoad]="matchStats?.match_info?.teams?.home?.tid | logosurl:'kabaddi'"
-            [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+            [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
         </p>
       </div>
       <div class="center-col">
@@ -21,7 +21,7 @@
         <p class="d-flex align-items-center">
           <img alt="{{matchStats?.match_info?.teams?.away?.tname}}"
             [lazyLoad]="matchStats?.match_info?.teams?.away?.tid | logosurl:'kabaddi'"
-            [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+            [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           <b>
             <a
               [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.away?.tid, (matchStats?.match_info?.teams?.away?.tname | slugify )]">
@@ -120,7 +120,7 @@
             </a>
           </b>
           <img alt="{{matchStats?.home?.name}}" [lazyLoad]="matchStats?.home?.id | logosurl:'soccer'"
-            [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+            [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
         </p>
       </div>
       <div class="center-col">
@@ -129,7 +129,7 @@
       <div>
         <p class="d-flex align-items-center">
           <img alt="{{matchStats?.away?.name}}" [lazyLoad]="matchStats?.away?.id | logosurl:'soccer'"
-            [defaultImage]="cricketService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+            [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           <b>
             <a [routerLink]="['/soccer/team', (matchStats?.away?.id | splitID), (matchStats?.away?.name | slugify )]">
               {{matchStats?.away?.name}}

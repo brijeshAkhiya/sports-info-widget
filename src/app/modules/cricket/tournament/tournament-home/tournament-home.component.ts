@@ -6,7 +6,6 @@ import { SlugifyPipe } from "@pipes/slugpipe";
 import { SplitPipe } from '@pipes/stringsplitpipe';
 
 import { CommonService } from '@providers/common-service';
-import { CricketService } from "@providers/cricket-service";
 import { SportsService } from '@providers/sports-service';
 
 @Component({
@@ -25,8 +24,7 @@ export class TournamentHomeComponent implements OnInit {
   teamsname: any;
   constructor(
     private activatedroute: ActivatedRoute,
-    private sportsService: SportsService, 
-    private cricketService: CricketService, 
+    private sportsService: SportsService,
     private slugifyPipe: SlugifyPipe,
     private splitpipe: SplitPipe,
     private router: Router,

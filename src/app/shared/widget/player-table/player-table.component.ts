@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, ElementRef, Renderer } from '@angular/core';
 import { CommonService } from '@providers/common-service';
-import { CricketService } from '@providers/cricket-service';
-import { KabaddiService } from '@app/modules/kabaddi/kabaddi.service';
 
 
 @Component({
@@ -13,16 +11,14 @@ export class PlayerTableComponent implements OnInit {
 
   @Input() data: any[];
   @Input() options;
-  private toggleSort: boolean = false;
+  private toggleSort = false;
   index: any;
   object: any;
   value: any;
-  sort:any;
+  sort: any;
 
   constructor(
-    private commonService: CommonService,
-    private cricketService: CricketService,
-    private kabaddiService: KabaddiService) { }
+    private commonService: CommonService) { }
 
   ngOnInit() {
     console.log(this.data);
@@ -31,30 +27,28 @@ export class PlayerTableComponent implements OnInit {
 
   getname(event) {
 
-    console.log(this.data)
+    console.log(this.data);
     this.value = event.target.attributes.title.nodeValue;
-    this.index = this.options.titles.findIndex(element=> element == this.value)
+    this.index = this.options.titles.findIndex(element => element == this.value);
     this.object = this.options.values[this.index];
-    if(this.options.sport == 'kabaddi' && this.object == 'loss')
-    {
-        this.data = this.data.map(element => {
-          this.sort = element.matchplayed - element.win - element.draw;
-          let set = Object.assign({}, element);
-              set.loss = this.sort;
-            return set;
-        }); 
+    if (this.options.sport === 'Kabaddi' && this.object == 'loss') {
+      this.data = this.data.map(element => {
+        this.sort = element.matchplayed - element.win - element.draw;
+        const set = Object.assign({}, element);
+        set.loss = this.sort;
+        return set;
+      });
     }
     this.sortArray();
     this.toggleSort = !this.toggleSort;
-    
+
   }
 
   sortArray() {
     if (this.toggleSort) {
-      this.data.sort((a, b) => b[this.object] - a[this.object])
-    }
-    else {
-      this.data.sort((a, b) => a[this.object] - b[this.object])
+      this.data.sort((a, b) => b[this.object] - a[this.object]);
+    } else {
+      this.data.sort((a, b) => a[this.object] - b[this.object]);
     }
   }
 

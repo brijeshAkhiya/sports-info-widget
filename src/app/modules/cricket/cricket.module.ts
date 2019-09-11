@@ -9,11 +9,9 @@ import { MomentModule } from 'ngx-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /** Internal Modules */
-import { SharedModule } from "@app/shared/shared.module";
+import { SharedModule } from '@app/shared/shared.module';
 
 /** Componenets */
-import { CricketComponent } from './cricket.component';
-import { HomeComponent } from './home/home.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
@@ -33,7 +31,6 @@ import { UpcomingComponent } from './match/upcoming/upcoming.component';
 import { SportsService } from '@app/shared/providers/sports-service';
 import { SocketService } from '@app/shared/providers/socket.service';
 import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
-import { CricketService } from '@app/shared/providers/cricket-service';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
 import { AgmCoreModule } from '@agm/core';
@@ -41,8 +38,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    CricketComponent, 
-    HomeComponent,
     FixturesComponent,
     TournamentComponent,
     TournamentHomeComponent,
@@ -71,8 +66,8 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     TranslateModule
   ],
-  providers: [SportsService, SocketService, SlugifyPipe, CricketService],
-  exports:[
+  providers: [SportsService, SocketService, SlugifyPipe],
+  exports: [
     CricketSidebarComponent,
   ]
 })

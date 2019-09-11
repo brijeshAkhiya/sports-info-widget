@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SportsService } from '@app/shared/providers/sports-service';
 import { CommonService } from '@app/shared/providers/common-service';
-import { CricketService } from '@app/shared/providers/cricket-service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -22,7 +21,6 @@ export class TopScorerWidgetComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
     private commonService: CommonService,
-    private cricketService: CricketService
   ) { }
 
   ngOnInit() {
@@ -70,7 +68,7 @@ export class TopScorerWidgetComponent implements OnInit {
             element.leaders.map(leader => {
               if (leader.players && leader.players.length > 0) {
                 leader.players.map(value => {
-                  value['rank'] = leader.rank;                  
+                  value['rank'] = leader.rank;
                   if (this.data.length < 5) {
                     this.data.push(value)
                   }

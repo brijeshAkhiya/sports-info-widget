@@ -5,7 +5,6 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../app-reducer";
 
 import { CommonService } from "@providers/common-service";
-import { CricketService } from "@providers/cricket-service";
 
 @Component({
   selector: "app-cricket-fixtures-view",
@@ -23,7 +22,6 @@ export class CricketFixturesViewComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private cricketService: CricketService,
     private activatedroute: ActivatedRoute,
     private store: Store<fromRoot.State>
   ) { }

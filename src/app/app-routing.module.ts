@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: './modules/soccer/soccer.module#SoccerModule',
     },
     {
+        path: 'basketball',
+        loadChildren: './modules/basketball/basketball.module#BasketballModule',
+    },
+    {
         path: 'blog',
         component: BlogsComponent
     },

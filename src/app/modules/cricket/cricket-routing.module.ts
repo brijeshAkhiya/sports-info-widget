@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CricketComponent } from './cricket.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from '@app/shared/pages/home/home.component';
+import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
 
 import { TournamentComponent } from './tournament/tournament.component';
@@ -19,11 +19,12 @@ import { PlayerComponent } from '@app/shared/player/player.component';
 const routes: Routes = [
     {
         path: '',
-        component: CricketComponent,
+        component: RouterComponent,
         children: [
             {
                 path: '',
-                component: HomeComponent
+                component: HomeComponent,
+                data: { 'sport': 'Cricket' }
             },
             {
                 path: 'fixtures',
@@ -81,7 +82,7 @@ const routes: Routes = [
             }
         ]
     }
-]
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

@@ -15,7 +15,9 @@
               <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                 *ngIf="!loadingFixture && (!matchfixtures || matchfixtures?.length == 0)">
               </app-no-data-widget>
-              <app-schedule [data]="matchfixtures" [type]="'fixture'" [sport]="'cricket'"></app-schedule>
+              <app-schedule *ngIf="matchfixtures?.length > 0" [data]="matchfixtures" [type]="'fixture'"
+                [sport]="'Cricket'">
+              </app-schedule>
             </ng-template>
           </ngb-tab>
           <ngb-tab>
@@ -27,7 +29,7 @@
               <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                 *ngIf="!loadingResult && (!matchresults || matchresults?.length == 0)">
               </app-no-data-widget>
-              <app-schedule [data]="matchresults" [type]="'result'" [sport]="'cricket'"></app-schedule>
+              <app-schedule [data]="matchresults" [type]="'result'" [sport]="'Cricket'"></app-schedule>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
@@ -36,10 +38,9 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--points table widget-->
-          <app-points-table *ngIf="tournamentid" [sport]="'cricket'" 
-          [options]="{
+          <app-points-table *ngIf="tournamentid" [sport]="'Cricket'" [options]="{
             tournament : tournamentid
-          }" ></app-points-table>
+          }"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
       </div>
