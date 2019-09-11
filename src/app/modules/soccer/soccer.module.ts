@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@app/shared/shared.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { SoccerRoutingModule } from './soccer-routing.module';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
@@ -15,6 +16,7 @@ import { TournamentHomeComponent } from './tournament/tournament-home/tournament
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
+import { FixturesSoccerComponent } from './fixtures/fixtures.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { TournamentMatchComponent } from './tournament/tournament-match/tourname
     TournamentHomeComponent,
     TournamentStatsComponent,
     TournamentTableComponent,
-    TournamentMatchComponent
+    TournamentMatchComponent,
+    FixturesSoccerComponent
   ],
 
   imports: [
     CommonModule,
     NgbModule,
+    CarouselModule,
     SoccerRoutingModule,
     LazyLoadImageModule,
     SharedModule,

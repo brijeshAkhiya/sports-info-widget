@@ -68,7 +68,6 @@ import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
 import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.component';
-import { FixturesCardComponent } from './widget/fixtures-card/fixtures-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LineupComponent } from './widget/match/lineup/lineup.component';
 import { MatchStatsComponent } from './widget/match/match-stats/match-stats.component';
@@ -139,7 +138,6 @@ import { FixturesComponent } from './pages/fixtures/fixtures.component';
         UppersliderComponent,
         TopScorerWidgetComponent,
         PageNotFoundComponent,
-        FixturesCardComponent,
         LineupComponent,
         MatchStatsComponent,
         HomeComponent,
@@ -215,7 +213,6 @@ import { FixturesComponent } from './pages/fixtures/fixtures.component';
         TopScorerWidgetComponent,
         UppersliderComponent,
         PageNotFoundComponent,
-        FixturesCardComponent,
         LineupComponent,
         MatchStatsComponent
 

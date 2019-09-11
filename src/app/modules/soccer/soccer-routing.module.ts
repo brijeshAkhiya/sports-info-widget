@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { HomeComponent } from '@app/shared/pages/home/home.component';
 import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component';
+
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
@@ -13,6 +14,7 @@ import { TournamentStatsComponent } from './tournament/tournament-stats/tourname
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
 import { PlayerComponent } from '@app/shared/player/player.component';
+import { FixturesSoccerComponent } from './fixtures/fixtures.component';
 
 
 const routes: Routes = [{
@@ -26,7 +28,7 @@ const routes: Routes = [{
         },
         {
             path: 'fixtures',
-            component: FixturesComponent,
+            component: FixturesSoccerComponent,
             data: { 'sport': 'Soccer' }
         },
         {

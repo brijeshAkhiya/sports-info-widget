@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   ngOnInit() {
 
     //console.log(this.readCookie('isenabled'));
-    let selectedLang = 'arabic';
+    let selectedLang = 'english';
     if ((window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info' && !window.location.host.includes('localhost') && !window.location.host.includes('192.168'))) {
       if (window.location.host.split('.')[0])
         selectedLang = window.location.host.split('.')[0];

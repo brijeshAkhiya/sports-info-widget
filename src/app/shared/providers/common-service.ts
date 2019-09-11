@@ -108,9 +108,8 @@ export class CommonService {
     let title;
     if (this.titleObj[url]) {
       title = this.titleObj[url].title;
-    }
-    else {
-      var last = url.split('/').pop();
+    } else {
+      let last = url.split('/').pop();
       title = last.replace(/-/g, ' ');
     }
     return title.charAt(0).toUpperCase() + title.slice(1);
@@ -120,39 +119,32 @@ export class CommonService {
     if (sport == 'cricket') {
       if (type == 'tournament') {
         return 'sr:tournament:' + id;
-      }
-      else if (type == 'match') {
+      } else if (type == 'match') {
         return 'sr:match:' + id;
-      }
-      else if (type == 'team') {
+      } else if (type == 'team') {
         return 'sr:competitor:' + id;
-      }
-      else if (type == 'player') {
+      } else if (type == 'player') {
         return 'sr:player:' + id;
       }
-    }
-    else if (sport == 'soccer') {
+    } else if (sport == 'soccer') {
       if (type == 'tournament') {
         return 'sr:season:' + id;
-      }
-      else if (type == 'match') {
+      } else if (type == 'match') {
         return 'sr:sport_event:' + id;
-      }
-      else if (type == 'team') {
+      } else if (type == 'team') {
         return 'sr:competitor:' + id;
-      }
-      else if (type == 'player') {
+      } else if (type == 'player') {
         return 'sr:player:' + id;
       }
     }
   }
 
   convertDate(date) {
-    var yyyy = date.getFullYear().toString();
-    var mm = (date.getMonth() + 1).toString();
-    var dd = date.getDate().toString();
-    var mmChars = mm.split('');
-    var ddChars = dd.split('');
+    let yyyy = date.getFullYear().toString();
+    let mm = (date.getMonth() + 1).toString();
+    let dd = date.getDate().toString();
+    let mmChars = mm.split('');
+    let ddChars = dd.split('');
     return yyyy + '-' + (mmChars[1] ? mm : '0' + mmChars[0]) + '-' + (ddChars[1] ? dd : '0' + ddChars[0]);
   }
 
@@ -166,18 +158,18 @@ export class CommonService {
     });
   }
 
-  initCompetitorScore(arr){
+  initCompetitorScore(arr) {
     return arr.map((data, matchIndex) => {
       let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
       let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
-      if(data.period_scores){
+      if (data.period_scores) {
         data.period_scores.map((pscore, index) => {
           if (pscore.home_score) {
-            (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
+            (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore);
           } else {
-            (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
+            (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore);
           }
-        })
+        });
       }
       return data;
     });

@@ -1,0 +1,53 @@
+/* -------- Fixtures List ------- */
+.fixtures-loadmore                          { margin-top: 32px; text-align: center; }
+
+/* -------- Tournament Fixtures List For Soccer ------- */
+.soccer-fixture-filter                          { margin-bottom: 24px; padding: 0px 16px 24px; background: #fff; border-radius: 0px 0px 4px 4px; text-transform: uppercase;}
+.soccer-fixture-filter .soccer-fixture-slider   { padding: 0px 48px; width: 415px; }
+.soccer-fixture-filter .fix-slide               { opacity: 0.4; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; cursor: pointer;}
+.soccer-fixture-filter .fix-slide:hover,
+.soccer-fixture-filter .fix-slide.active-slide  { opacity: 1; }
+.soccer-fixture-filter .fix-slide p             { margin: 0px; font-size: 12px; line-height: 15px; font-weight: 600; }
+.soccer-fixture-filter .owl-item.active:last-child { opacity: 0.5;}
+.fixture-date                                   { position: relative;}
+.fixture-date button.calendar                   { margin: 0px 8px; display: block; width: 24px; height: 24px; background: transparent url(assets/images/calender-icon.svg) no-repeat center center / cover !important; border: none; }
+.soccer-fixture-selection .dropdown-menu        { margin-top: 5px; padding: 0; border-radius: 4px;  font-family: 'IBM Plex Sans Condensed', sans-serif; z-index: 111; top: 100% !important; transform: translate(0, 0) !important; -webkit-transform: translate(0, 0) !important; }
+.soccer-fixture-filter .dropdown-toggle         { padding: 11px 40px 11px 16px; width: 160px; background: transparent !important; line-height: 20px; color: #292929 !important; border: 2px solid #D5D8DC !important; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 600; border-radius: 2em; position: relative; text-align: left; text-overflow: ellipsis; overflow: hidden;}
+.soccer-fixture-filter .dropdown-toggle:after   { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(assets/images/dropdown-arrow.svg) center center/cover no-repeat; border: none; filter: invert(1); -webkit-filter: invert(1); opacity: 0.5; transition: all .3s ease-in-out; -webkit-transition: .3s ease-in-out; }
+.soccer-fixture-selection .search-box           { margin: 8px; position: relative; }
+.soccer-fixture-selection .item-list            { max-height: 200px; border-top: 1px solid #D5D8DC; overflow: auto;}
+.soccer-fixture-selection .form-control         { padding: 6px 26px 6px 7px; font-size: 14px; line-height: 18px; border: 2px solid #D5D8DC; border-radius: 2px; }
+.soccer-fixture-selection .search-box button    { position: absolute; width: 16px; height: 16px; right: 7px; bottom: 50%; transform: translateY(50%); -webkit-transform: translateY(50%); background: url(assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; }
+.soccer-fixture-selection .dropdown-item        { padding: 5px 16px; }
+.soccer-fixture-selection .dropdown-item:hover,
+.soccer-fixture-selection .dropdown-item.selected { background: #F5F5F5; }
+/***** Responsive CSS Start ******/
+
+
+@media (max-width: 1199px) {
+/* -------- Tournament Fixtures List For Soccer ------- */
+    .soccer-fixture-filter                          { padding: 0px 12px 20px; }
+    .soccer-fixture-filter .soccer-fixture-slider   { padding: 0px 20px; width: 350px; }
+}
+
+@media (max-width: 767px) {
+/* -------- Tournament Fixtures List For Soccer ------- */
+    .soccer-fixtures-title,
+    .soccer-fixture-filter                      { flex-direction: column; -webkit-flex-direction: column; }
+    .soccer-fixture-filter                      { padding: 0px 12px 16px; }
+    .soccer-fixture-filter .dropdown-toggle     { margin-top: 16px; padding: 8px 14px; }
+    .fixture-date button.calendar               { margin-right: 0px; }
+}
+
+@media (max-width: 575px) {
+/* -------- Tournament Fixtures List For Soccer ------- */
+    .soccer-fixture-filter .soccer-fixture-slider   { width: 290px; }
+    .soccer-fixture-filter h5                       { font-size: 15px; line-height: 19px; }
+    .soccer-fixture-filter .fix-slide p             { font-size: 11px; line-height: 19px; }
+}
+@media (max-width: 381px) {
+/* -------- Tournament Fixtures List For Soccer ------- */
+    .soccer-fixture-filter .soccer-fixture-slider   { width: 250px; }
+}
+    
+    

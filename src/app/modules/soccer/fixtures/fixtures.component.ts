@@ -7,22 +7,19 @@ import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 
 import * as fromRoot from '@app/app-reducer';
-import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
-import * as Cricket from '@store/cricket/cricket.actions';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-fixtures-card',
-  templateUrl: './fixtures-card.component.html',
-  styleUrls: ['./fixtures-card.component.css'],
+  selector: 'app-fixtures',
+  templateUrl: './fixtures.component.html',
+  styleUrls: ['./fixtures.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FixturesCardComponent implements OnInit {
+export class FixturesSoccerComponent implements OnInit {
 
   @ViewChild('gallery') public gallery: CarouselComponent;
 
-  @Input() sport: any;
-  @Input() title: any;
+  params;
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   paramSoccer: any;
@@ -39,62 +36,29 @@ export class FixturesCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.sport)
-    console.log(this.activatedroute.parent.snapshot.params.id);
-    if (this.sport == 'Kabaddi') {
-      this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
-      this.store.dispatch(new Kabaddi.LoadKabaddiResults());
-      this.store.select('Kabaddi').subscribe((data: any) => {
-        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
-          this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'));
-        }
-        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0 && data.fixtures > this.paramsFixtures.reqParams.page)
-          this.paramsFixtures.loadmore = true;
-        else
-          this.paramsFixtures.loadmore = true;
+    const data: any = this.activatedroute.data;
+    this.params = data.value;
 
-        if (Object.entries(data.results).length > 0 && data.results.items.length > 0) {
-          this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(data.results.items, 'Do MMMM YYYY', 'datestart', 'desc'));
-        }
-        if (Object.entries(data.results).length > 0 && data.results.items.length > 0 && data.results.total_pages > this.paramsResults.reqParams.page)
-          this.paramsResults.loadmore = true;
-        else
-          this.paramsResults.loadmore = true;
-      });
-    } else if (this.sport == 'cricket') {
-      // this.getCricketSeries();
-    } else if (this.sport == 'Soccer') {
-      this.paramSoccer = { loading: false, loadmore: false, data: [] };
-      if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
-        this.paramsFixtures.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-        this.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-        this.getSoccerTournamentData(this.paramsFixtures.tournamentid);
-        // this.getscoccerpointtable(this.paramsFixtures.tournamentid);
-      } else {
-        this.paramSoccer = {
-          loading: false, loadmore: false, data: [], fullData: [],
-          selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
-          filterCategory: [],
-          selectedCategory: { name: 'All' }
-        };
-        this.loadDate(this.paramSoccer.selectedDate);
-        this.getSoccerData();
-        console.log(this.paramsFixtures.tournamentid);
-        // this.getscoccerpointtable(this.paramsFixtures.tournamentid);
-      }
-    }
+    this.paramSoccer = {
+      loading: false, loadmore: false, data: [], fullData: [],
+      selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
+      filterCategory: [],
+      selectedCategory: { name: 'All' }
+    };
+    this.loadDate(this.paramSoccer.selectedDate);
+    this.getSoccerData();
   }
   loadDate(current) {
-    console.log('adsasdsada');
-    console.log(current);
     this.customDate = new Array<any>(moment(`${current.year}-${current.month}-${current.day.toString()}`).daysInMonth()).fill(0, 0).map((x, i) => i + 1);
-    if (this.gallery) {
-      let temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day);
+    console.log(this.gallery);
+
+    if (this.gallery && this.gallery.slidesOutputData) {
+      const temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day);
       if (temp.length == 0 || this.gallery.slidesOutputData.slides.length > 7)
         this.gallery.to(current.day.toString());
     }
   }
-  initialized($e) {
+  initializedSlider($e) {
     setTimeout(() => {
       if (this.gallery.slidesOutputData.slides.length > 7)
         this.gallery.to(this.paramSoccer.selectedDate.day.toString());
@@ -143,7 +107,7 @@ export class FixturesCardComponent implements OnInit {
   }
 
   getSoccerData() {
-    console.log("getSoccerData");
+    console.log('getSoccerData');
 
     this.paramSoccer.loading = true;
     this.sportsService
@@ -215,73 +179,8 @@ export class FixturesCardComponent implements OnInit {
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
-  // getscoccerpointtable(tid){
-  //   console.log('in')
-  //   this.sportsService.getsoccerpointtable(tid).
-  //           subscribe((res:any)=>{
-  //             console.log(res.data)
-  //           },err=>{
-  //             console.log(err)
-  //           });
-  // }
-
-  loadKabaddi(type) {
-    if (type == 'fixture') {
-      if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
-        return false;
-      this.getKabaddiFixtures();
-    } else if (type == 'result') {
-      if (this.paramsResults.data && this.paramsResults.data.length > 0)
-        return false;
-      this.getKabaddiResults();
-    }
-  }
-
-  getKabaddiFixtures() {
-    this.paramsFixtures.loading = true;
-    this.sportsService.getKabaddiMatchList(this.paramsFixtures.reqParams.status, this.paramsFixtures.reqParams.per_page, this.paramsFixtures.reqParams.page).subscribe((res: any) => {
-      this.paramsFixtures.loading = false;
-      if (res.data && res.data.items) {
-        this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'asc'));
-      }
-      if (res.data.total_pages > this.paramsFixtures.reqParams.page)
-        this.paramsFixtures.loadmore = true;
-      else
-        this.paramsFixtures.loadmore = false;
-    }, (error) => {
-      this.paramsFixtures.loading = false;
-    });
-  }
-
-  getKabaddiResults() {
-
-    this.paramsResults.loading = true;
-    this.sportsService
-      .getKabaddiMatchList(this.paramsResults.reqParams.status, this.paramsResults.reqParams.per_page, this.paramsResults.reqParams.page)
-      .subscribe((res: any) => {
-        this.paramsResults.loading = false;
-        if (res.data && res.data.items) {
-          this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'desc'));
-        }
-        if (res.data.total_pages > this.paramsResults.reqParams.page)
-          this.paramsResults.loadmore = true;
-        else
-          this.paramsResults.loadmore = false;
-      }, (error) => {
-        this.paramsResults.loading = false;
-      });
-  }
-
-  loadmore(type) {
-    if (type == 'fixture') {
-      this.paramsFixtures.reqParams.page += 1;
-      this.getKabaddiFixtures();
-    } else if (type == 'result') {
-      this.paramsResults.reqParams.page += 1;
-      this.getKabaddiResults();
-    }
-  }
   // Soccer Fixtures Date Slider
+  // tslint:disable-next-line: member-ordering
   customOptions: any = {
     mouseDrag: true,
     touchDrag: true,
