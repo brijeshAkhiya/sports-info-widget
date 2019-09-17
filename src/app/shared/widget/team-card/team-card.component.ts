@@ -20,7 +20,7 @@ export class TeamCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.sport == 'soccer' && this.type == undefined) {
+    if (this.sport == 'Soccer' && this.type == undefined) {
       this.type = 'teams'
     }
   }

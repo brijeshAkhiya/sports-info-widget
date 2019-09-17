@@ -3,29 +3,35 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-          <h1>{{  sport == 'soccer' ?  ('Soccer_Module.Clubs' | translate)  : ('widgetModule.Teams' | translate) }}
+          <h1>{{  sport == 'Soccer' ?  ('Soccer_Module.Clubs' | translate)  : ('widgetModule.Teams' | translate) }}
           </h1>
         </div>
-        <app-loader *ngIf="!teams"></app-loader>
-        <app-no-data-widget *ngIf="teams?.length == 0"></app-no-data-widget>
-        <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
-        <!-- For Kabaddi 
-            <div class="team-group-list">
+        <app-loader *ngIf="isloading"></app-loader>
+        <app-no-data-widget *ngIf="!isloading && !teams"></app-no-data-widget>
+
+        <!-- For Group  -->
+        <ng-container *ngIf="sport == 'Basketball'; else commonList">
+          <div class="team-group-list" *ngFor="let team of teams">
             <div class="team-group common-section top-padding">
-              <h4>Group A</h4>
-              <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
+              <h4>{{team.alias}}</h4>
+              <app-team-card [teams]="team.teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
             </div>
-            <div class="team-group common-section top-padding">
-              <h4>Group B</h4>
-              <app-team-card [teams]="teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
-            </div>          
-          </div> -->
+          </div>
+        </ng-container>
+
+        <!-- For Simple list  -->
+        <ng-template #commonList>
+          <app-team-card *ngIf="!isloading && teams && teams.length > 0" [teams]="teams" [sport]="sport"
+            [tournament]="tournamentid"></app-team-card>
+        </ng-template>
+
       </div>
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-top-scorer-widget [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-top-scorer-widget>
-          <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
+          <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"
+            [options]="{ tournament : tournamentid }"></app-points-table>
 
           <!--Current series widget-->
           <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"

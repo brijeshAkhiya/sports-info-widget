@@ -22,7 +22,6 @@ export class CricketsEffects {
             map((response: any) => new Cricket.LoadCricketFixturesSuccess(response.data)),
             tap(() => this.store.dispatch(new Cricket.CricketStopLoading())),
             catchError(() => {
-                this.store.dispatch(new Cricket.LoadCricketFixtures());
                 return EMPTY;
             })
         )),
@@ -37,7 +36,6 @@ export class CricketsEffects {
         switchMap((action: any) => this.sportsService.getheaderslider().pipe(
             map((response: any) => new Cricket.LoadCricketSliderSuccess(response.data)),
             catchError(() => {
-                this.store.dispatch(new Cricket.LoadCricketSlider());
                 return EMPTY;
             })
         )),
@@ -68,7 +66,6 @@ export class CricketsEffects {
                 return new Cricket.LoadCricketResultsSuccess(res.data)
             }),
             catchError(() => {
-                this.store.dispatch(new Cricket.LoadCricketResults());
                 return EMPTY;
             })
         )),

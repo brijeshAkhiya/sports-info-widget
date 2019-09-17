@@ -12,7 +12,7 @@ import { CommonService } from '@providers/common-service';
 })
 export class PlayerComponent implements OnInit {
 
-  loading: boolean = false;
+  loading = false;
   sport;
   playerid;
   playerData;
@@ -36,31 +36,79 @@ export class PlayerComponent implements OnInit {
   ngOnInit() {
     let data: any = this.activatedroute.data;
     this.sport = data.value.sport;
-    console.log(this.activatedroute.snapshot);
-    console.log(this.sport);
+    this.teamid = data.value.team;
+    this.getPlayerInfo();
 
-    if (this.sport == 'cricket') {
-      this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
-      this.getPlayerInfo();
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.playerid] } };
-    } else if (this.sport == 'kabaddi') {
-      this.playerid = this.activatedroute.snapshot.params.id;
-      this.getKabbadiPlayerInfo();
-      if (data.value.team) {
-        this.teamid = this.activatedroute.snapshot.params.teamid;
-      }
-      console.log(this.teamid);
+    // if (this.sport == 'cricket') {
+    //   this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
+    //   this.getPlayerInfo();
+    //   this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.playerid] } };
+    // } else if (this.sport == 'kabaddi') {
+    //   this.playerid = this.activatedroute.snapshot.params.id;
+    //   this.getKabbadiPlayerInfo();
+    //   if (data.value.team) {
+    //     this.teamid = this.activatedroute.snapshot.params.teamid;
+    //   }
+    //   console.log(this.teamid);
 
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.playerid] } };
-    } else if (this.sport == 'soccer') {
-      this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
-      this.getSoccerPlayerInfo();
-      this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.playerid] } };
-    }
+    //   this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.playerid] } };
+    // } else if (this.sport == 'soccer') {
+    //   this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
+    //   this.getSoccerPlayerInfo();
+    //   this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.playerid] } };
+    // }
 
   }
 
   getPlayerInfo() {
+    this.loading = true;
+    switch (this.sport) {
+      case 'Cricket': {
+        this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'cricket', 'player');
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.playerid] } };
+        this.sportsService.getplayerprofile(this.playerid).subscribe(this.playerSuccess, this.playerError);
+        break;
+      }
+      case 'Kabaddi': {
+        this.playerid = this.activatedroute.snapshot.params.id;
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.playerid] } };
+        if (this.teamid) {
+          this.teamid = this.activatedroute.snapshot.params.teamid;
+        }
+        this.sportsService.getKabaddiPlayerprofile(this.playerid).subscribe(this.playerSuccess, this.playerError);
+        break;
+      }
+      case 'Soccer': {
+        this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.playerid] } };
+        this.sportsService.getsoccerplayerinfo(this.playerid).subscribe(this.playerSuccess, this.playerError);
+        break;
+      }
+    }
+  }
+
+  playerSuccess = (res) => {
+    console.log(res);
+    this.loading = false;
+    switch (this.sport) {
+      case 'Cricket': {
+        break;
+      }
+      case 'Kabaddi': {
+        break;
+      }
+      case 'Soccer': {
+        break;
+      }
+    }
+  }
+
+  playerError = (err) => {
+    console.log(err);
+    this.loading = false;
+  }
+
+  getPlayerInfo2() {
     this.loading = true;
     this.sportsService.getplayerprofile(this.playerid).subscribe((res: any) => {
       this.loading = false;

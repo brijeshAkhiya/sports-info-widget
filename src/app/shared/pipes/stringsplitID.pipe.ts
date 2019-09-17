@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class StringsplitID implements PipeTransform {
     transform(input: string): any {
-        if (input) {            
-            return input.split(':')[2]
+        if (input) {
+            return input.split(':')[2];
         }
     }
 }

@@ -10,7 +10,7 @@ import { CommonService } from '@providers/common-service';
   styleUrls: ['./fixtures.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FixturesComponent implements OnInit {
+export class CricketFixturesComponent implements OnInit {
 
   internationSchedule = [];
   domesticSchedule = [];

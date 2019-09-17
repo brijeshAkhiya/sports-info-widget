@@ -6,8 +6,8 @@ import { HomeComponent } from '@app/shared/pages/home/home.component';
 import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { TableComponent } from './table/table.component';
-import { TeamsComponent } from '@app/shared/teams/teams.component';
-import { TeamComponent } from '@app/shared/teams/team/team.component';
+import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
+import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/player/player.component';
 import { MatchComponent } from './match/match.component';
 
@@ -36,22 +36,22 @@ const routes: Routes = [{
     {
       path: 'teams',
       component: TeamsComponent,
-      data: { 'sport': 'kabaddi' }
+      data: { 'sport': 'Kabaddi' }
     },
     {
       path: 'team/:teamid/:slug',
       component: TeamComponent,
-      data: { 'sport': 'kabaddi' }
+      data: { 'sport': 'Kabaddi' }
     },
     {
       path: 'player/:id/:slug',
       component: PlayerComponent,
-      data: { 'sport': 'kabaddi' }
+      data: { 'sport': 'Kabaddi' }
     },
     {
       path: 'player/:teamid/:id/:slug',
       component: PlayerComponent,
-      data: { 'sport': 'kabaddi', team: true }
+      data: { 'sport': 'Kabaddi', team: true }
     },
     {
       path: 'match/:id/:slug',

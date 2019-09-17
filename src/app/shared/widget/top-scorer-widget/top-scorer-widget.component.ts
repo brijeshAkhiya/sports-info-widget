@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./top-scorer-widget.component.css']
 })
 export class TopScorerWidgetComponent implements OnInit {
-  @Input() sport: any
+  @Input() sport: any;
   isloading: boolean;
   kabaddiscoredata: any;
   kabadditype: any;
@@ -38,21 +38,21 @@ export class TopScorerWidgetComponent implements OnInit {
 
   //get kabaddi scorers
   gettopscorer(type) {
-    this.kabadditype = type
+    this.kabadditype = type;
     this.isloading = true;
     this.sportsService.getkabaddistats(type).subscribe((res: any) => {
       this.isloading = false;
       if (res) {
-        this.kabaddiscoredata = res.data
+        this.kabaddiscoredata = res.data;
       }
     },
-      (error) => this.isloading = false)
+      (error) => this.isloading = false);
   }
 
   getsoccerscorer(id) {
-    this.isloading = true
+    this.isloading = true;
     this.sportsService.getSoccerseasonleaders(id).subscribe((res: any) => {
-    })
+    });
   }
 
   // get soccer top-scorers
@@ -70,7 +70,7 @@ export class TopScorerWidgetComponent implements OnInit {
                 leader.players.map(value => {
                   value['rank'] = leader.rank;
                   if (this.data.length < 5) {
-                    this.data.push(value)
+                    this.data.push(value);
                   }
                 });
               }
@@ -79,7 +79,7 @@ export class TopScorerWidgetComponent implements OnInit {
         }
       });
     }
-      , err => { console.log(err) });
+      , err => { console.log(err); });
   }
 
 
