@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
-import * as fromRoot from "../../app-reducer";
-import * as Soccer from "@store/soccer/soccer.actions";
+import * as fromRoot from '../../app-reducer';
+import * as Soccer from '@store/soccer/soccer.actions';
 
 import { Action, Store } from '@ngrx/store';
 import { SportsService } from '@app/shared/providers/sports-service';
@@ -12,7 +12,7 @@ import { Observable, EMPTY } from 'rxjs';
 
 @Injectable()
 export class SoccerEffects {
-    date = new Date()
+    date = new Date();
     constructor(private actions$: Actions, private sportsService: SportsService, private commonService: CommonService, private store: Store<fromRoot.State>) { }
 
     @Effect()
@@ -25,15 +25,15 @@ export class SoccerEffects {
                 map((response: any) => new Soccer.LoadSoccerFixturesSuccess(response.data.summaries)),
                 tap(() => this.store.dispatch(new Soccer.SoccerStopLoading())),
                 catchError(() => {
-                    this.store.dispatch(new Soccer.LoadSoccerFixtures());
+                    this.store.dispatch(new Soccer.SoccerStopLoading());
                     return EMPTY;
                 })
             )),
 
         take(1)
     );
-    
-    //get soccer tournament list effect
+
+    /* //get soccer tournament list effect */
     @Effect()
     loadSoccerTournamentListSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Soccer.LOAD_SOCCER_TOURNAMENTS_LIST),
@@ -42,7 +42,7 @@ export class SoccerEffects {
             this.sportsService.getSoccerTournamentList().pipe(
                 map((response: any) => new Soccer.LoadSoccerTournamentListSuccess(response.data)),
                 catchError(() => {
-                    this.store.dispatch(new Soccer.LoadSoccerTournamentList());
+                    this.store.dispatch(new Soccer.SoccerStopLoading());
                     return EMPTY;
                 })
             )),

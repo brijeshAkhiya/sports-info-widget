@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
-import * as fromRoot from "../../app-reducer";
-import * as Kabaddi from "@store/kabaddi/kabaddi.actions";
+import * as fromRoot from '../../app-reducer';
+import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 
 import { Action, Store } from '@ngrx/store';
 import { SportsService } from '@app/shared/providers/sports-service';
@@ -23,7 +23,7 @@ export class KabaddiEffects {
                 map((response: any) => new Kabaddi.LoadKabaddiFixturesSuccess(response.data)),
                 tap(() => this.store.dispatch(new Kabaddi.KabaddiStopLoading())),
                 catchError(() => {
-                    this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
+                    this.store.dispatch(new Kabaddi.KabaddiStopLoading());
                     return EMPTY;
                 })
             )),
@@ -38,7 +38,7 @@ export class KabaddiEffects {
             this.sportsService.getKabaddiMatchList('2', '10', '1').pipe(
                 map((response: any) => new Kabaddi.LoadKabaddiResultsSuccess(response.data)),
                 catchError(() => {
-                    this.store.dispatch(new Kabaddi.LoadKabaddiResults());
+                    this.store.dispatch(new Kabaddi.KabaddiStopLoading());
                     return EMPTY;
                 })
             )),
@@ -53,16 +53,12 @@ export class KabaddiEffects {
             this.sportsService.getKabaddiMatchList('3', '10', '1').pipe(
                 map((response: any) => new Kabaddi.LoadKabaddiLiveSuccess(response.data)),
                 catchError(() => {
-                    this.store.dispatch(new Kabaddi.LoadKabaddiLive());
+                    this.store.dispatch(new Kabaddi.KabaddiStopLoading());
                     return EMPTY;
                 })
             )),
         take(1)
     );
-
-
-    //
-
 }
 
 

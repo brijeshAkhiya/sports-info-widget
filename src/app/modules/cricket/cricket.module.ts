@@ -12,14 +12,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@app/shared/shared.module';
 
 /** Componenets */
-import { FixturesComponent } from './fixtures/fixtures.component';
+import { CricketFixturesComponent } from './fixtures/fixtures.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
-import { CricketSidebarComponent } from './cricket-sidebar/cricket-sidebar.component';
-import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
-import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 
 import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
@@ -38,14 +35,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    FixturesComponent,
+    CricketFixturesComponent,
     TournamentComponent,
     TournamentHomeComponent,
-    CricketSidebarComponent,
-    TournamentFixturesComponent,
     TournamentStadingsComponent,
     TournamentStatsComponent,
-    CricketFixturesViewComponent,
     MatchHomeComponent,
     LiveMatchTrackerComponent,
     MatchCommentryComponent,
@@ -68,7 +62,6 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   providers: [SportsService, SocketService, SlugifyPipe],
   exports: [
-    CricketSidebarComponent,
   ]
 })
 export class CricketModule { }

@@ -8,8 +8,8 @@ import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
-import { TeamsComponent } from '@app/shared/teams/teams.component';
-import { TeamComponent } from '@app/shared/teams/team/team.component';
+import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
+import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
@@ -51,7 +51,7 @@ const routes: Routes = [{
                 {
                     path: 'clubs',
                     component: TeamsComponent,
-                    data: { 'sport': 'soccer' }
+                    data: { 'sport': 'Soccer' }
                 },
                 {
                     path: 'stats',
@@ -66,17 +66,17 @@ const routes: Routes = [{
         {
             path: 'team/:tournamentid/:teamid/:slug',
             component: TeamComponent,
-            data: { 'sport': 'soccer' }
+            data: { 'sport': 'Soccer' }
         },
         {
             path: 'team/:teamid/:slug',
             component: TeamComponent,
-            data: { 'sport': 'soccer' }
+            data: { 'sport': 'Soccer' }
         },
         {
             path: 'player/:id/:slug',
             component: PlayerComponent,
-            data: { 'sport': 'soccer' }
+            data: { 'sport': 'Soccer' }
         },
         {
             path: 'match/:id/:slug',

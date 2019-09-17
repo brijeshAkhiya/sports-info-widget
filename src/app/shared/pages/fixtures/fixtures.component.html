@@ -1,4 +1,4 @@
-<!-- <app-fixtures-card [sport]="params.sport"></app-fixtures-card> -->
+<app-menu *ngIf="!tournamentid" [options]="{ sport: params.sport, type: 'home' }"></app-menu>
 <section class="common-section cricket-recentnews recentnews-section">
   <div class="container">
     <div class="row sidebar-row">
@@ -11,14 +11,14 @@
         <ngb-tabset class="common-tabs">
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="loadKabaddi('fixture')">{{ 'widgetModule.Upcoming' | translate }}</div>
+              <div>{{ 'widgetModule.Upcoming' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                 *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
               </app-no-data-widget>
               <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="params.sport"
-                [tournament]="paramsFixtures.tournamentid"></app-schedule>
+                [tournament]="tournamentid"></app-schedule>
               <app-loader *ngIf="paramsFixtures.loading"></app-loader>
               <div class="fixtures-loadmore">
                 <button class="theme-btn down-btn" (click)="loadmore('fixture')"
@@ -31,14 +31,14 @@
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div (click)="loadKabaddi('result')">{{ 'widgetModule.Results' | translate }}</div>
+              <div>{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                 *ngIf="!paramsResults.loading &&  (!paramsResults.data || paramsResults.data?.length == 0)">
               </app-no-data-widget>
               <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="params.sport"
-                [tournament]="paramsResults.tournamentid"></app-schedule>
+                [tournament]="tournamentid"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
 
               <div class="fixtures-loadmore">

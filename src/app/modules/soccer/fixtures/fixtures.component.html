@@ -1,3 +1,4 @@
+<app-menu [options]="{ sport: 'Soccer', type: 'home' }"></app-menu>
 <section class="common-section cricket-recentnews recentnews-section">
   <div class="container">
     <div class="row sidebar-row">
@@ -23,7 +24,7 @@
                 </ng-container>
               </owl-carousel-o>
             </div>
-            <!-- Date picket-->
+            <!-- Date picker-->
             <div class="fixture-date">
               <input class="form-control d-none" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker
                 #d="ngbDatepicker" [placement]="bottom" (ngModelChange)="dateChange($event)">
@@ -59,6 +60,8 @@
         </div>
 
         <app-loader *ngIf="paramSoccer.loading"></app-loader>
+        <app-no-data-widget *ngIf="!paramSoccer.loading && (!paramSoccer.data || paramSoccer.data?.length == 0)">
+        </app-no-data-widget>
         <app-schedule *ngIf="paramSoccer.data.length > 0" [data]="paramSoccer.data" [sport]="params.sport">
         </app-schedule>
 

@@ -3,17 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from '@app/shared/pages/home/home.component';
 import { RouterComponent } from '@app/shared/widget/router/router.component';
-import { FixturesComponent } from './fixtures/fixtures.component';
+import { CricketFixturesComponent } from './fixtures/fixtures.component';
+import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component';
 
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
-import { TournamentFixturesComponent } from './tournament/tournament-fixtures/tournament-fixtures.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
-import { CricketFixturesViewComponent } from './cricket-fixtures-view/cricket-fixtures-view.component';
 import { MatchHomeComponent } from './match/match-home/match-home.component';
-import { TeamsComponent } from '@app/shared/teams/teams.component';
-import { TeamComponent } from '@app/shared/teams/team/team.component';
+import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
+import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/player/player.component';
 
 const routes: Routes = [
@@ -28,11 +27,12 @@ const routes: Routes = [
             },
             {
                 path: 'fixtures',
-                component: FixturesComponent
+                component: CricketFixturesComponent
             },
             {
                 path: 'recent/:type',
-                component: CricketFixturesViewComponent
+                component: FixturesComponent,
+                data: { 'sport': 'Cricket' }
             },
             {
                 path: 'tournament/:id/:slug',
@@ -44,12 +44,13 @@ const routes: Routes = [
                     },
                     {
                         path: 'fixtures',
-                        component: TournamentFixturesComponent
+                        component: FixturesComponent,
+                        data: { 'sport': 'Cricket' }
                     },
                     {
                         path: 'teams',
                         component: TeamsComponent,
-                        data: { 'sport': 'cricket' }
+                        data: { 'sport': 'Cricket' }
                     },
                     {
                         path: 'stats',
@@ -68,17 +69,17 @@ const routes: Routes = [
             {
                 path: 'team/:tournamentid/:teamid/:slug',
                 component: TeamComponent,
-                data: { 'sport': 'cricket' }
+                data: { 'sport': 'Cricket' }
             },
             {
                 path: 'team/:teamid/:slug',
                 component: TeamComponent,
-                data: { 'sport': 'cricket' }
+                data: { 'sport': 'Cricket' }
             },
             {
                 path: 'player/:id/:slug',
                 component: PlayerComponent,
-                data: { 'sport': 'cricket' }
+                data: { 'sport': 'Cricket' }
             }
         ]
     }

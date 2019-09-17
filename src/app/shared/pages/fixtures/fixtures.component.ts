@@ -27,11 +27,7 @@ export class FixturesComponent implements OnInit {
   @Input() title: any;
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
-  paramSoccer: any;
-  customDate;
-  model: any;
   tournamentid: any;
-  searchText: string;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -41,39 +37,47 @@ export class FixturesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const data: any = this.activatedroute.data;
-    this.params = data.value;
+    const routeData: any = this.activatedroute.data;
+    this.params = routeData.value;
     console.log(this.params.sport);
-    console.log(this.activatedroute.parent.snapshot.params.id);
-    if (this.params.sport == 'Kabaddi') {
+
+    if (this.params.sport == 'Cricket') {
+      /* Tournaments Fixtures */
+      if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
+        this.getCricketMatchFixtures(this.tournamentid);
+        this.getCricketMatchResults(this.tournamentid);
+      } else {
+        /* View all - recent fixtures */
+        this.store.dispatch(new Cricket.LoadCricketFixtures());
+        this.store.dispatch(new Cricket.LoadCricketResults());
+        this.store.select('Cricket').subscribe((data: any) => {
+          if (data.fixtures.length > 0)
+            this.paramsFixtures.data = this.commonService.sortArr(data.fixtures, 'Do MMMM YYYY', 'scheduled', 'asc');
+          if (data.results.length > 0)
+            this.paramsResults.data = this.commonService.sortArr(data.results, 'Do MMMM YYYY', 'scheduled', 'desc');
+        });
+      }
+    } else if (this.params.sport == 'Kabaddi') {
       this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
       this.store.dispatch(new Kabaddi.LoadKabaddiResults());
       this.store.select('Kabaddi').subscribe((data: any) => {
         if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
           this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'));
         }
-        if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0 && data.fixtures.total_pages > this.paramsFixtures.reqParams.page)
-          this.paramsFixtures.loadmore = true;
-        else
-          this.paramsFixtures.loadmore = false;
+        this.paramsFixtures.loadmore = this.checkKabaddiDataLoadMore(data.fixtures, this.paramsFixtures);
 
         if (Object.entries(data.results).length > 0 && data.results.items.length > 0) {
           this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(data.results.items, 'Do MMMM YYYY', 'datestart', 'desc'));
         }
-        if (Object.entries(data.results).length > 0 && data.results.items.length > 0 && data.results.total_pages > this.paramsResults.reqParams.page)
-          this.paramsResults.loadmore = true;
-        else
-          this.paramsResults.loadmore = false;
+        this.paramsResults.loadmore = this.checkKabaddiDataLoadMore(data.results, this.paramsResults);
       });
-    } else if (this.params.sport == 'Cricket') {
-      // this.getCricketSeries();
+
     } else if (this.params.sport == 'Soccer') {
-      this.paramSoccer = { loading: false, loadmore: false, data: [] };
+      // Tournament Fixtures
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
-        this.paramsFixtures.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-        this.tournamentid = this.paramsResults.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-        this.getSoccerTournamentData(this.paramsFixtures.tournamentid);
-        // this.getscoccerpointtable(this.paramsFixtures.tournamentid);
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
+        this.getSoccerTournamentData(this.tournamentid);
       }
     }
   }
@@ -87,10 +91,14 @@ export class FixturesComponent implements OnInit {
         this.paramsFixtures.loading = false;
         this.paramsResults.loading = false;
         if (res.data.summaries && res.data.summaries.length > 0) {
-          this.paramsFixtures.data = this.paramsFixtures.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'), 'Do MMMM YYYY', 'start_time', 'asc'));
-          this.paramsResults.data = this.paramsResults.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'), 'Do MMMM YYYY', 'start_time', 'desc'));
-          // console.log(this.paramsFixtures.data);
-
+          this.paramsFixtures.data = this.paramsFixtures.data.concat(
+            this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'),
+              'Do MMMM YYYY', 'start_time', 'asc')
+          );
+          this.paramsResults.data = this.paramsResults.data.concat(
+            this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'),
+              'Do MMMM YYYY', 'start_time', 'desc')
+          );
         }
       }, (error) => {
         this.paramsFixtures.loading = false;
@@ -108,25 +116,18 @@ export class FixturesComponent implements OnInit {
       }
     });
     const dateObj = {};
-    data.map((data) => {
-      const mdate = moment(data['sport_event'][date_param]).format(format);
+    data.map((obj) => {
+      const mdate = moment(obj['sport_event'][date_param]).format(format);
       if (!dateObj[mdate]) dateObj[mdate] = [];
-      dateObj[mdate].push(data);
+      dateObj[mdate].push(obj);
     });
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
-
-  loadKabaddi(type) {
-    if (type == 'fixture') {
-      if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
-        return false;
-      this.getKabaddiFixtures();
-    } else if (type == 'result') {
-      if (this.paramsResults.data && this.paramsResults.data.length > 0)
-        return false;
-      this.getKabaddiResults();
-    }
+  checkKabaddiDataLoadMore(arr, params) {
+    if (Object.entries(arr).length > 0 && arr.items.length > 0 && arr.total_pages > params.reqParams.page)
+      return true;
+    return false;
   }
 
   getKabaddiFixtures() {
@@ -136,10 +137,7 @@ export class FixturesComponent implements OnInit {
       if (res.data && res.data.items) {
         this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'asc'));
       }
-      if (res.data.total_pages > this.paramsFixtures.reqParams.page)
-        this.paramsFixtures.loadmore = true;
-      else
-        this.paramsFixtures.loadmore = false;
+      this.paramsFixtures.loadmore = this.checkKabaddiDataLoadMore(res.data, this.paramsFixtures);
     }, (error) => {
       this.paramsFixtures.loading = false;
       this.paramsFixtures.loadmore = false;
@@ -147,7 +145,6 @@ export class FixturesComponent implements OnInit {
   }
 
   getKabaddiResults() {
-
     this.paramsResults.loading = true;
     this.sportsService
       .getKabaddiMatchList(this.paramsResults.reqParams.status, this.paramsResults.reqParams.per_page, this.paramsResults.reqParams.page)
@@ -156,10 +153,7 @@ export class FixturesComponent implements OnInit {
         if (res.data && res.data.items) {
           this.paramsResults.data = this.paramsResults.data.concat(this.commonService.sortArr(res.data.items, 'Do MMMM YYYY', 'datestart', 'desc'));
         }
-        if (res.data.total_pages > this.paramsResults.reqParams.page)
-          this.paramsResults.loadmore = true;
-        else
-          this.paramsResults.loadmore = false;
+        this.paramsResults.loadmore = this.checkKabaddiDataLoadMore(res.data, this.paramsResults);
       }, (error) => {
         this.paramsResults.loading = false;
         this.paramsResults.loadmore = false;
@@ -175,6 +169,52 @@ export class FixturesComponent implements OnInit {
       this.getKabaddiResults();
     }
   }
+
+  /*
+    loadKabaddi(type) {
+      console.log("loadKabaddi")
+      if (type == 'fixture') {
+        if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
+          return false;
+        this.getKabaddiFixtures();
+      } else if (type == 'result') {
+        if (this.paramsResults.data && this.paramsResults.data.length > 0)
+          return false;
+        this.getKabaddiResults();
+      }
+    } */
+
+
+  /* get 3 days matches fixtures - HOME */
+  getCricketMatchFixtures(id) {
+    this.paramsFixtures.loading = true;
+    this.sportsService
+      .gettournamentfixtures(id)
+      .subscribe((res: any) => {
+        this.paramsFixtures.loading = false;
+        if (res.data)
+          this.paramsFixtures.data = this.commonService.sortArr(res.data, 'Do MMMM YYYY', 'scheduled', 'asc');
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+        this.paramsFixtures.loadmore = false;
+      });
+  }
+
+  /* get 3 days results -HOME */
+  getCricketMatchResults(id) {
+    this.paramsResults.loading = true;
+    this.sportsService
+      .gettournamentresults(id)
+      .subscribe((res: any) => {
+        this.paramsResults.loading = false;
+        if (res.data)
+          this.paramsResults.data = this.commonService.sortArr(res.data, 'Do MMMM YYYY', 'scheduled', 'desc');
+      }, (error) => {
+        this.paramsResults.loading = false;
+        this.paramsResults.loadmore = false;
+      });
+  }
+
   // Soccer Fixtures Date Slider
   customOptions: any = {
     mouseDrag: true,
