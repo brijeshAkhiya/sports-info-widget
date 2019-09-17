@@ -643,5 +643,10 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/teams/${teamid}/profile`
     );
   }
+  getBasketballPlayerInfo(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/player/${id}/profile`
+    );
+  }
 
 }

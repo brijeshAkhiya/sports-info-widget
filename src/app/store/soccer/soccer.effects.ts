@@ -25,6 +25,7 @@ export class SoccerEffects {
                 map((response: any) => new Soccer.LoadSoccerFixturesSuccess(response.data.summaries)),
                 tap(() => this.store.dispatch(new Soccer.SoccerStopLoading())),
                 catchError(() => {
+                    this.store.dispatch(new Soccer.SoccerStopLoading());
                     return EMPTY;
                 })
             )),
@@ -41,6 +42,7 @@ export class SoccerEffects {
             this.sportsService.getSoccerTournamentList().pipe(
                 map((response: any) => new Soccer.LoadSoccerTournamentListSuccess(response.data)),
                 catchError(() => {
+                    this.store.dispatch(new Soccer.SoccerStopLoading());
                     return EMPTY;
                 })
             )),

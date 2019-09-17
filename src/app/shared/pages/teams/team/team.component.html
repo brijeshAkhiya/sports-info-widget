@@ -10,26 +10,24 @@
           class="common-title-btn big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
           [ngSwitch]="sport">
           <ng-container *ngSwitchCase="'Cricket'">
-            <h1>{{teamProfile?.name}}</h1>
-            <app-favourites-widget [value]="{id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name}">
-            </app-favourites-widget>
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.id,type:'team',sport:'cricket',name:teamProfile?.name}}">
+            </ng-container>
           </ng-container>
           <ng-container *ngSwitchCase="'Kabaddi'">
-            <h1>{{teamProfile?.tname}}</h1>
-            <app-favourites-widget [value]="{id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}">
-            </app-favourites-widget>
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.tname, options : {id:teamProfile?.tid,type:'team',sport:'kabaddi',name:teamProfile?.tname}}">
+            </ng-container>
           </ng-container>
           <ng-container *ngSwitchCase="'Soccer'">
-            <h1>{{teamProfile?.competitor?.name}}</h1>
-            <app-favourites-widget
-              [value]="{id:teamProfile?.competitor?.id,type:'team',sport:'soccer',name:teamProfile?.competitor?.name} ">
-            </app-favourites-widget>
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'soccer',name:teamProfile?.competitor?.name}}">
+            </ng-container>
           </ng-container>
           <ng-container *ngSwitchCase="'Basketball'">
-            <h1>{{teamProfile?.name}}</h1>
-            <app-favourites-widget
-              [value]="{id:teamProfile?.competitor?.id,type:'team',sport:'basketball',name:teamProfile?.name} ">
-            </app-favourites-widget>
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'basketball',name:teamProfile?.name}}">
+            </ng-container>
           </ng-container>
         </div>
 
@@ -361,42 +359,8 @@
   </div>
 </section>
 
-<ng-template #kabaddiPlayer let-players="players">
-  <div class="row row-size12">
-    <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
-      <div class="squad-item fullblock-link-container rounded-box common-shadow">
-        <img alt="{{player.fullname}}" [lazyLoad]="commonService.s3Url+'players/kabaddi-'+teamProfile?.tid+'.svg'"
-          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
-        <div class="item-desc">
-          <p>{{player.fullname}}
-            <span class="light-text">{{player.shirtnumber}}</span>
-          </p>
-          <a [routerLink]="" class="theme-btn"> {{ 'Shared_module.view_player' | translate }}<span></span></a>
-        </div>
-        <a class="fullblock-link"
-          [routerLink]="['/kabaddi/player', teamProfile?.tid, player?.pid, (player?.fullname | slugify )]">
-        </a>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #soccerPlayer let-players="players">
-  <div class="row row-size12">
-    <div class="col-xl-3 col-sm-4" *ngFor="let player of players">
-      <div class="squad-item fullblock-link-container rounded-box common-shadow">
-        <img alt="{{player.name}}" [lazyLoad]="player?.id| playerimage:['m']"
-          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
-        <div class="item-desc">
-          <p>{{player.name | split}}
-            <span class="light-text">{{player.jersey_number}}</span>
-          </p>
-          <a [routerLink]="" class="theme-btn"> {{ 'Shared_module.view_player' | translate }}<span></span></a>
-        </div>
-        <a class="fullblock-link"
-          [routerLink]="['/soccer/player',(player?.id | splitID), (player?.name | split | slugify )]">
-        </a>
-      </div>
-    </div>
-  </div>
+<ng-template #title let-title="title" let-options="options">
+  <h1>{{title}}</h1>
+  <app-favourites-widget [value]="options">
+  </app-favourites-widget>
 </ng-template>

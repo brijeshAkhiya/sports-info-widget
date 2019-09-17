@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
-import * as fromRoot from "../../app-reducer";
-import * as Cricket from "@store/cricket/cricket.actions";
+import * as fromRoot from '../../app-reducer';
+import * as Cricket from '@store/cricket/cricket.actions';
 import { Action, Store } from '@ngrx/store';
 import { SportsService } from '@app/shared/providers/sports-service';
 import { Observable, EMPTY } from 'rxjs';
@@ -22,13 +22,14 @@ export class CricketsEffects {
             map((response: any) => new Cricket.LoadCricketFixturesSuccess(response.data)),
             tap(() => this.store.dispatch(new Cricket.CricketStopLoading())),
             catchError(() => {
+                this.store.dispatch(new Cricket.CricketStopLoading());
                 return EMPTY;
             })
         )),
         take(1)
     );
 
-    //cricket upper- slider effects
+    /* //cricket upper- slider effects */
 
     @Effect()
     loadCricketSliderSuccess$: Observable<Action> = this.actions$.pipe(
@@ -36,13 +37,14 @@ export class CricketsEffects {
         switchMap((action: any) => this.sportsService.getheaderslider().pipe(
             map((response: any) => new Cricket.LoadCricketSliderSuccess(response.data)),
             catchError(() => {
+                this.store.dispatch(new Cricket.CricketStopLoading());
                 return EMPTY;
             })
         )),
         take(1)
     );
 
-    //cricket sidebar widget results effects
+    /* //cricket sidebar widget results effects */
 
     @Effect()
     loadCricketResultsSuccess$: Observable<Action> = this.actions$.pipe(
@@ -55,17 +57,18 @@ export class CricketsEffects {
                     if (data.period_scores) {
                         data.period_scores.map((pscore, index) => {
                             if (pscore.home_score) {
-                                (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore)
+                                (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore);
                             } else {
-                                (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore)
+                                (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore);
                             }
-                        })
+                        });
                     }
                     return data;
                 });
-                return new Cricket.LoadCricketResultsSuccess(res.data)
+                return new Cricket.LoadCricketResultsSuccess(res.data);
             }),
             catchError(() => {
+                this.store.dispatch(new Cricket.CricketStopLoading());
                 return EMPTY;
             })
         )),

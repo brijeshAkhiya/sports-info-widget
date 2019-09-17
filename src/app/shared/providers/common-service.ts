@@ -139,6 +139,8 @@ export class CommonService {
     } else if (sport == 'basketball') {
       if (type == 'team') {
         return 'sr:team:' + id;
+      } else if (type == 'player') {
+        return 'sr:player:' + id;
       }
     }
   }
