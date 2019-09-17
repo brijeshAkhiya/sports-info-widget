@@ -39,7 +39,7 @@
 .match-teams .team-flag                 { border: 2px solid #E5E5E5; border-radius: 3px; overflow: hidden; }
 .match-teams .team-flag img             { height: 46px; width: auto;}
 .schedule-item .details-btn             { position: absolute; width: 32px; height: 100%; background: #ED1A33; font-size: 14px; line-height: 32px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: #fff; right: 0px; transform: translateX(100%); -webkit-transform: translateX(100%); top: 0px; border-radius: 4px; text-transform: uppercase; }
-.schedule-item .details-btn span        { position: relative; color: #fff; display: block; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); -webkit-transform: translate(-50%, -50%) rotate(-90deg); }
+.schedule-item .details-btn span        { position: absolute; color: #fff; display: block; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); -webkit-transform: translate(-50%, -50%) rotate(-90deg); }
 .schedule-item:hover .details-btn       { transform: translateX(0%); -webkit-transform: translateX(0%); }
 
 /* -------- Tournament Fixtures For Kabaddi ------- */

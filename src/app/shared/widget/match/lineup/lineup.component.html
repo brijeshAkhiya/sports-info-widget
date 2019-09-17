@@ -1,3 +1,104 @@
+<!-- NBA Ground -->
+<!-- <div class="nba-map-block common-shadow rounded-box">
+  <p class="title">Shot chart</p>
+  <div class="nba-map-inner d-flex">
+    <div class="nba-map">
+      <img src="assets/images/match/nba-ground.svg" alt="nba-ground">
+      <div class="ground-player-lists d-flex">
+        <div class="d-flex align-items-center justify-content-around">
+          <ul class="goal-list">
+            <li class="" [ngStyle]="{'top': '10%'}">
+              <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                <button id="dropdownBasic1" ngbDropdownAnchor (mouseover)="myDrop.open()" (mouseout)="myDrop.close();">
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <p><b class="one-line-text">Draymond Green</b></p>
+                  <p><strong>GOAL</strong></p>
+                  <p>12:23 <span class="point">2</span></p>
+                </div>
+              </div>
+            </li>
+            <li class="made" [ngStyle]="{'top': '30%'}">
+              <div class="d-inline-block" ngbDropdown #myDrop2="ngbDropdown">
+                <button id="dropdownBasic2" ngbDropdownAnchor (mouseover)="myDrop2.open()"
+                  (mouseout)="myDrop2.close();">
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                  <p><b class="one-line-text">Draymond Green</b></p>
+                  <p><strong>GOAL</strong></p>
+                  <p>12:23 <span class="point">2</span></p>
+                </div>
+              </div>
+            </li>
+            <li class="opp-team" [ngStyle]="{'top': '20%', 'left': '70%'}">
+              <div class="d-inline-block" ngbDropdown #myDrop3="ngbDropdown">
+                <button id="dropdownBasic3" ngbDropdownAnchor (mouseover)="myDrop3.open()"
+                  (mouseout)="myDrop3.close();">
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+                  <p><b class="one-line-text">Draymond Green</b></p>
+                  <p><strong>GOAL</strong></p>
+                  <p>12:23 <span class="point">2</span></p>
+                </div>
+              </div>
+            </li>
+            <li class="opp-team made" [ngStyle]="{'top': '60%', 'left': '80%'}">
+              <div class="d-inline-block" ngbDropdown #myDrop4="ngbDropdown">
+                <button id="dropdownBasic4" ngbDropdownAnchor (mouseover)="myDrop4.open()"
+                  (mouseout)="myDrop4.close();">
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic4">
+                  <p><b class="one-line-text">Draymond Green</b></p>
+                  <p><strong>GOAL</strong></p>
+                  <p>12:23 <span class="point">2</span></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="map-selection">
+      <p>Team</p>
+      <div ngbDropdown class="common-dropdown">
+        <button id="dropdownBasic1" ngbDropdownToggle>ALL</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem>Team - 1</button>
+          <button ngbDropdownItem>Team 2</button>
+          <button ngbDropdownItem>Team 3</button>
+        </div>
+      </div>
+      <p>Quarter</p>
+      <div ngbDropdown class="common-dropdown">
+        <button id="dropdownBasic2" ngbDropdownToggle>Both</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+          <button ngbDropdownItem class="selected">Team - 1</button>
+          <button ngbDropdownItem>Team 2</button>
+          <button ngbDropdownItem>Team 3</button>
+        </div>
+      </div>
+      <ul>
+        <li>
+          <div class="custom-check-box">
+            <Input type="checkbox" class="form-check-input"/>
+            <div class="custom-check"></div>
+          </div>
+          <span>Made</span>
+        </li>
+        <li>
+          <div class="custom-check-box">
+            <Input type="checkbox" class="form-check-input"/>
+            <div class="custom-check"></div>
+          </div>
+          <span>Miss</span>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+
+</div> -->
+
 <div class="match-lienup common-shadow rounded-box"
   [ngClass]="{'soccer-lineup' : sport=='soccer', 'kabaddi-lineup': sport=='kabaddi'}">
 
@@ -43,8 +144,8 @@
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
             <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
-            <img alt="{{team[0].tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'" [defaultImage]="commonService.teamPlaceholder"
-              [offset]="commonService.lazyloadoffset">
+            <img alt="{{team[0].tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'"
+              [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           </p>
         </div>
         <!-- <ng-container *ngIf="team[0]?.players?.length > 0"> -->
@@ -69,8 +170,8 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center">
-            <img alt="{{team[1].tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'" [defaultImage]="commonService.teamPlaceholder"
-              [offset]="commonService.lazyloadoffset">
+            <img alt="{{team[1].tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'"
+              [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
             <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
           </p>
         </div>
@@ -100,12 +201,14 @@
     <!-- Start Ground -->
     <div class="ground-map-block soccer-map" *ngIf="team.home?.formation?.type && team.away?.formation?.type">
       <div class="ground-map" *ngIf="team.length != 0">
-        <img src="assets/images/match/soccer-ground.svg" alt="kabaddi-ground">
+        <img src="assets/images/match/soccer-ground.svg" alt="soccer-ground">
         <div class="ground-player-lists d-flex">
           <div class="d-flex align-items-center justify-content-around">
             <ul class="ground-player-list" *ngFor="let formated_players of team.home.formated_players">
               <li *ngFor="let player of formated_players">
-                <div class="number" [ngStyle]="{'background':'#'+team.home?.jersey.base, 'color': '#'+team.home?.jersey.number }">{{player?.jersey_number}}</div>
+                <div class="number"
+                  [ngStyle]="{'background':'#'+team.home?.jersey.base, 'color': '#'+team.home?.jersey.number }">
+                  {{player?.jersey_number}}</div>
                 <p>
                   <a
                     [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
@@ -118,7 +221,9 @@
           <div class="d-flex align-items-center justify-content-around">
             <ul class="ground-player-list list-2" *ngFor="let formated_players of team.away.formated_players">
               <li *ngFor="let player of formated_players">
-                <div class="number" [ngStyle]="{'background':'#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">{{player?.jersey_number}}</div>
+                <div class="number"
+                  [ngStyle]="{'background':'#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">
+                  {{player?.jersey_number}}</div>
                 <p>
                   <a
                     [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
@@ -131,6 +236,8 @@
         </div>
       </div>
     </div>
+
+
     <!-- End Ground -->
     <!-- {{team | json}} -->
     <div class="lienup-row d-flex align-items-start justify-content-between" *ngIf="team.length != 0">
@@ -174,7 +281,7 @@
               [offset]="commonService.lazyloadoffset">
             <span><b><a
                   [routerLink]="['/soccer/team', (team.away?.id | splitID), (team.away?.name | slugify )]">{{team.away.name}}</a></b>
-                  <span *ngIf="team.away?.formation?.type">{{team.away?.formation?.type}}</span>
+              <span *ngIf="team.away?.formation?.type">{{team.away?.formation?.type}}</span>
             </span>
 
           </p>

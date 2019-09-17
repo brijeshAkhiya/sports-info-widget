@@ -137,6 +137,17 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 .no-data-available img              { width: 320px; max-width: 70%; }
 .no-data-available-white h5         { margin: 64px 0px 0px; text-align: center;color: #fff !important; }
 
+/* -------- Dropdown And Custom Checkbox Style ------- */
+.common-dropdown .dropdown-toggle           { padding: 8px 12px; background: transparent; font-size: 16px; line-height: 20px; border: 2px solid #EBEBEB; border-radius: 2em; text-align: left; }
+.common-dropdown .dropdown-toggle:after     { position: absolute; width: 20px; height: 20px; top: 50%; right: 16px; transform: translateY(-50%); -webkit-transform: translateY(-50%); background: url(../images/dropdown-arrow.svg) no-repeat center center / cover; border: none; filter: invert(1); -webkit-filter: invert(1); opacity: 0.5; transition: all .3s ease-in-out; -webkit-transition: .3s ease-in-out;}
+.common-dropdown .dropdown-menu             { padding: 0px; width: 100%; border: none; box-shadow: 0px 4px 18px rgba(0,0,0,0.16); -webkit-box-shadow: 0px 4px 18px rgba(0,0,0,0.16); border-radius: 4px; overflow: hidden; }
+.common-dropdown .dropdown-item             { padding: 10px 12px; background: #fff;}
+.common-dropdown .dropdown-item:hover,
+.common-dropdown .dropdown-item.selected    { background: #FFE6E9; color: #ED1A33; }
+.custom-check-box                           { margin-right: 8px; display: inline-block; position: relative; vertical-align: middle;}
+.custom-check-box .custom-check             { width: 20px; height: 20px; border-radius: 3.3px; border: 2px solid #CCCCCC; transition: all .2s ease-in-out; -webkit-transition: .2s ease-in-out;}
+.custom-check-box input:checked ~ .custom-check { background: #ED1A33 url(../images/check-icon.svg) no-repeat center center / 100% auto; border-color: #ED1A33; } 
+.custom-check-box input                     { margin: 0px; top: 0px; left: 0px; height: 100%; width: 100%; cursor: pointer; opacity: 0;}
 /******* Header Section CSS Start ******/
 app-main-header                     { display: block; background: #22336F;}
 .modal-backdrop.show                { opacity: 0.65; z-index: 11111 !important; }
