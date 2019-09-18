@@ -10,7 +10,8 @@ h4                                      { margin-bottom: 19px;}
 .quick-stats .stat-item:after           { content: ""; position: absolute; display: block; width: 100%; height: 8px; left: 0px; bottom: -8px; background: #ED1A33; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .quick-stats .stat-item:hover:after     { bottom: 0; }
 .quick-stats h1                         { margin-bottom: 4px; font-family: 'IBM Plex Sans', sans-serif; font-style: normal; }
-.quick-stats p                          { margin: 0px; font-size: 14px; line-height: 18px; color: #A3A3A3; font-weight: 600; text-transform: uppercase; }
+.quick-stats .stat-item p               { margin: 0px; font-size: 14px; line-height: 18px; font-weight: 600; text-transform: uppercase; }
+.quick-stats .nba-title h6              { margin: 4px 0px 8px 6px; }
 
 /* -------- Player Stats Section ------- */
 app-player-table .player-state            { margin-bottom: 24px; }
