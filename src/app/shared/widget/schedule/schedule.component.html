@@ -88,7 +88,8 @@
 
 <ng-template #kabaddi let-match="match" let-type="type">
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
-    [ngClass]="{'complete-match' : match?.match_result}">
+    [ngClass]="{'complete-match' : match?.match_result}"
+    *ngIf="match?.teams?.home?.tid != '' && match?.teams?.away?.tid != ''">
     <div class="match-desc">
       <h6>
         <!-- {{match.tournament_name ? match.tournament_name : ''}}  -->
@@ -153,11 +154,16 @@
       </a> -->
   </div>
   <!-- Final Match Layout -->
-  <div class="schedule-item kabaddi-item d-flex align-items-center justify-content-center text-center rounded-box common-shadow">
-    <div class="match-desc">
-      <h6 class="text-uppercase">Final</h6>
-      <p class="stadium-nm">The Arena by Transstadia, Ahmedabad</p>
-      <p class="time-line">03:00 AM </p>
+  <div
+    class="schedule-item kabaddi-item d-flex align-items-center justify-content-center text-center rounded-box common-shadow"
+    *ngIf="match?.teams?.home?.tid == '' && match?.teams?.away?.tid == ''">
+    <div class=" match-desc">
+      <h6 class="text-uppercase">
+        <span class="text-capitalize">{{ match.round ? (match.round  | stringunder:"_") : '' }}
+          {{ (match?.subtitle ) ? ' - ' + (match.subtitle  | stringunder:"-") : ''}}</span>
+      </h6>
+      <p class="stadium-nm" *ngIf="match.venue && match.venue.name">{{match.venue.name}}</p>
+      <p class="time-line">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
     </div>
   </div>
 </ng-template>
@@ -224,7 +230,7 @@
       </a>
     </div>
   </div>
-  
+
 </ng-template>
 
 <ng-template #soccer_list>

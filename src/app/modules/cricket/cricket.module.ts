@@ -19,14 +19,12 @@ import { TournamentStadingsComponent } from './tournament/tournament-stadings/to
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 
 import { MatchHomeComponent } from './match/match-home/match-home.component';
-import { LiveMatchTrackerComponent } from './match/live-match-tracker/live-match-tracker.component';
 import { MatchCommentryComponent } from './match/match-commentry/match-commentry.component';
 import { MatchFactsFiguresComponent } from './match/match-facts-figures/match-facts-figures.component';
 import { MatchScorecardComponent } from './match/match-scorecard/match-scorecard.component';
 import { RecommendedComponent } from './match/recommended/recommended.component';
 import { UpcomingComponent } from './match/upcoming/upcoming.component';
 import { SportsService } from '@app/shared/providers/sports-service';
-import { SocketService } from '@app/shared/providers/socket.service';
 import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
 
@@ -41,14 +39,12 @@ import { TranslateModule } from '@ngx-translate/core';
     TournamentStadingsComponent,
     TournamentStatsComponent,
     MatchHomeComponent,
-    LiveMatchTrackerComponent,
     MatchCommentryComponent,
     MatchFactsFiguresComponent,
     MatchScorecardComponent,
     RecommendedComponent,
     UpcomingComponent,
     CommentryComponent,
-    LiveMatchTrackerComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +56,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SharedModule,
     TranslateModule
   ],
-  providers: [SportsService, SocketService, SlugifyPipe],
+  providers: [SportsService, SlugifyPipe],
   exports: [
   ]
 })

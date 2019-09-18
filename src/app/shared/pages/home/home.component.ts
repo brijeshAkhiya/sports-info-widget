@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { CommonService } from '@providers/common-service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private translateservice: TranslateService
+    private translateservice: TranslateService,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,10 @@ export class HomeComponent implements OnInit {
       title: this.translateservice.get(this.params.sport)['value'],
       type: 'sport'
     };
+    if (this.activatedRoute.snapshot.params.id)
+      this.options.tournamentid = this.commonService.getIds(this.activatedRoute.snapshot.params.id, 'cricket', 'tournament');
+    console.log(this.options);
+
   }
 
 }

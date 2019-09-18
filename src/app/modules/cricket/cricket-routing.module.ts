@@ -13,7 +13,7 @@ import { TournamentStadingsComponent } from './tournament/tournament-stadings/to
 import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
-import { PlayerComponent } from '@app/shared/player/player.component';
+import { PlayerComponent } from '@app/shared/pages/player/player.component';
 
 const routes: Routes = [
     {
@@ -40,7 +40,8 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        component: TournamentHomeComponent
+                        component: HomeComponent,
+                        data: { 'sport': 'Cricket' }
                     },
                     {
                         path: 'fixtures',

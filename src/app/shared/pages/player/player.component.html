@@ -191,8 +191,10 @@
                 <h4>{{ 'Shared_module.major_teams' | translate }}</h4>
                 <app-team-card [teams]="playerData?.roles" [sport]="sport" [type]="'player'"
                   *ngIf="playerData?.roles && playerData?.roles?.length > 0"></app-team-card>
-                <!-- <app-team-card [teams]="playerData?.competitors" [sport]="sport"
-                  *ngIf="!(playerData?.roles && playerData?.roles?.length > 0)"></app-team-card> -->
+              </section>
+              <section class="common-section top-padding" *ngIf="playerData?.teams && sport == 'Basketball'">
+                <h4>{{ 'Shared_module.major_teams' | translate }}</h4>
+                <app-team-card [teams]="playerData?.teams" [sport]="sport"></app-team-card>
               </section>
             </ng-template>
           </ngb-tab>
@@ -252,7 +254,7 @@
 
 <ng-template #quickStateCard let-stats="stats">
   <div class="row row-size12">
-    <div class="col-md-4" *ngFor="let stat of stats">
+    <div [ngClass]="sport == 'Basketball' ? 'col-md-3' : 'col-md-4'" *ngFor="let stat of stats">
       <div class="common-shadow rounded-box stat-item">
         <h1>{{stat.data}}</h1>
         <p class="light-text">{{stat.key}}</p>

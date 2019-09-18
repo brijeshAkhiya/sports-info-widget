@@ -29,6 +29,19 @@
             </ng-template>
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
+
+          <!--START - LIVE MATCH TRACKER-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{'Cricket_Module.Hawk_Eye' | translate}}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-live-match-tracker [matchid]="matchInfo?.sport_event?.id" *ngIf="matchInfo?.sport_event?.id">
+              </app-live-match-tracker>
+            </ng-template>
+          </ngb-tab>
+          <!--END - LIVE MATCH TRACKER-->
+
           <!-- START - LINEUPS-->
           <ngb-tab id="lineups" *ngIf="matchLineups?.lineups && (matchLineups?.lineups | json) != '{}'">
             <ng-template ngbTabTitle>
@@ -100,9 +113,10 @@
               <!--head to head section end-->
 
               <!-- last meetings section -->
-              <section class="common-section top-padding last-meetings-section" *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
+              <section class="common-section top-padding last-meetings-section"
+                *ngIf="teamvsteamdata && teamvsteamdata?.length > 0">
                 <h4 class="line-title">{{'Cricket_Module.Last_meetings' | translate}}</h4>
-                <app-schedule [data]="teamvsteamdata" [type]="'result'" [sport]="'soccer'" [tournament]="' '"
+                <app-schedule [data]="teamvsteamdata" [type]="'result'" [sport]="'Soccer'" [tournament]="' '"
                   *ngIf="teamvsteamdata?.length > 0"></app-schedule>
               </section>
               <!-- last meetings section end-->
