@@ -5,7 +5,7 @@ import { HomeComponent } from '@app/shared/pages/home/home.component';
 import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
-import { PlayerComponent } from '@app/shared/player/player.component';
+import { PlayerComponent } from '@app/shared/pages/player/player.component';
 
 const routes: Routes = [
   {

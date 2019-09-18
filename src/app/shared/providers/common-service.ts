@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { Store } from '@ngrx/store';
 import * as moment from 'moment';
-import * as fromRoot from '../../app-reducer';
-import * as MetaTags from '../../store/meta-tags-management/meta-tags.actions';
-
-import { Router } from '@angular/router';
-
-import { SlugifyPipe } from '@pipes/slugpipe';
 
 @Injectable()
 export class CommonService {
@@ -24,19 +17,10 @@ export class CommonService {
   public siteUrl;
   titleObj;
 
-  constructor(
-    private slugifyPipe: SlugifyPipe,
-    private router: Router,
-    private store: Store<fromRoot.State>
-  ) {
+  constructor() {
     this.s3Url = environment.s3Url;
     this.siteUrl = environment.siteUrl;
     this.getPageTitles();
-  }
-
-  /* writer view  */
-  writerview(id) {
-    this.router.navigate(['/writer', btoa(id)]);
   }
 
   /** Get Milli seconds from Hr, min and seconds */

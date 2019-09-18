@@ -150,9 +150,9 @@ export class UppersliderComponent implements OnInit {
 
       if (data.fixtures && data.fixtures.length > 0) {
 
-        let liveMatches = this.slider = data.fixtures.filter((match) => match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context);
-        this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled'));
-        let fixtures = data.fixtures.filter((match) => match.sport_event_status.status == 'not_started' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context);
+        let liveMatches = this.slider = data.fixtures.filter((match) => match.sport_event_status && match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context);
+        this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status && match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled'));
+        let fixtures = data.fixtures.filter((match) => match.sport_event_status && match.sport_event_status.status == 'not_started' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context);
         this.slider = this.slider.concat(fixtures);
         if (liveMatches.length > 0 && !this.timerStartTime.Soccer.isLiveUpdate) {
           this.getLiveSoccerUpdate(this);
@@ -173,7 +173,7 @@ export class UppersliderComponent implements OnInit {
       classThis.sportsService
         .getSoccerDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
           if (res.data.summaries.length > 0) {
-            this.store.dispatch(new Soccer.LoadSoccerLiveSuccess(res.data.summaries.filter((match) => match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context)));
+            this.store.dispatch(new Soccer.LoadSoccerLiveSuccess(res.data.summaries.filter((match) => match.sport_event_status && match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context)));
             res.data.summaries.forEach(match => {
               let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.sport_event.id);
               if (matchIndex >= 0) {

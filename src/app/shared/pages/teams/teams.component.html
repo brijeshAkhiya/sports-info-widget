@@ -11,8 +11,8 @@
 
         <!-- For Group  -->
         <ng-container *ngIf="sport == 'Basketball'; else commonList">
-          <div class="team-group-list" *ngFor="let team of teams">
-            <div class="team-group common-section top-padding">
+          <div class="team-group-list">
+            <div class="team-group common-section top-padding" *ngFor="let team of teams">
               <h4>{{team.alias}}</h4>
               <app-team-card [teams]="team.teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
             </div>

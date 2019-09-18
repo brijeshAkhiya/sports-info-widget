@@ -148,7 +148,9 @@ export class PlayerComponent implements OnInit {
             res.data.seasons.forEach((season, key) => {
               if (season.teams && season.teams.length > 0) {
                 season.teams.forEach(team => {
-                  this.playerData.teams.push(team);
+                  if (this.playerData.teams.some((teamObj) => teamObj.sr_id == team.sr_id) == false) {
+                    this.playerData.teams.push(team);
+                  }
                   if (key == 0) {
                     obj['PPG'] += (team.average.points != '') ? team.average.points : 0;
                     obj['REB'] += (team.average.rebounds != '') ? team.average.rebounds : 0;
@@ -158,15 +160,7 @@ export class PlayerComponent implements OnInit {
                 });
               }
             });
-            // res.data.seasons[0].teams.map(team => {
-            //   obj['PPG'] += (team.average.points != '') ? team.average.points : 0;
-            //   obj['REB'] += (team.average.rebounds != '') ? team.average.rebounds : 0;
-            //   obj['AST'] += (team.average.assists != '') ? team.average.assists : 0;
-            //   obj['PER'] += (team.average.efficiency != '') ? team.average.efficiency : 0;
-            // });
-            console.log(this.playerData);
-
-            this.stats = Object.keys(obj).map(key => ({ key, data: obj[key] / res.data.seasons[0].teams.length }));
+            this.stats = Object.keys(obj).map(key => ({ key, data: (obj[key] / res.data.seasons[0].teams.length).toFixed(2) }));
           }
         }
         break;

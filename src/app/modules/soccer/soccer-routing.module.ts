@@ -13,7 +13,7 @@ import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
-import { PlayerComponent } from '@app/shared/player/player.component';
+import { PlayerComponent } from '@app/shared/pages/player/player.component';
 import { FixturesSoccerComponent } from './fixtures/fixtures.component';
 
 

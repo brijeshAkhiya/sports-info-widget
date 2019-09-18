@@ -14,8 +14,8 @@ export class AppInterceptor implements HttpInterceptor {
 
     constructor() { }
     intercept(request: HttpRequest<any>, next: HttpHandler) {
-        //google maps api doesnt allow extra header params - Fix condition --->
-        if (!request.url.includes('maps.googleapis.com/maps/api')) {
+/*         //google maps api doesnt allow extra header params - Fix condition --->
+ */        if (!request.url.includes('maps.googleapis.com/maps/api')) {
             request = request.clone({
                 setHeaders: {
                     Language: localStorage.getItem('userLng') ? localStorage.getItem('userLng') : null

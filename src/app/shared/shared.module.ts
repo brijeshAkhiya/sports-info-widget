@@ -14,6 +14,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { LottieAnimationViewModule } from 'ng-lottie';
+import { TranslateModule } from '@ngx-translate/core';
 
 /** All Pipes */
 import { TruncatePipe } from './pipes/truncatepipe';
@@ -29,34 +30,37 @@ import { StringsplitID } from './pipes/stringsplitID.pipe';
 import { CricketScorePipe } from './pipes/cricket-score.pipe';
 import { DateParsePipe } from './pipes/dateparse.pipe';
 import { StringtoNumberPipe } from './pipes/string-to-number.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { StringUnder } from './pipes/underlinepipe';
 
 /** All Providers*/
 import { SportsService } from './providers/sports-service';
 import { CommonService } from './providers/common-service';
 import { SocketService } from './providers/socket.service';
+import { FixturesComponent } from './pages/fixtures/fixtures.component';
 
 /** All Componenets */
-import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-widget.component';
-import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
+import { TeamsComponent } from './pages/teams/teams.component';
+import { TeamComponent } from './pages/teams/team/team.component';
+import { PlayerComponent } from './pages/player/player.component';
+import { HomeComponent } from './pages/home/home.component';
 
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
-import { ContentComponent } from './widget/content/content.component';
 import { SportsHomeComponent } from './sports-home/sports-home.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
+import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
+
+import { CustomAdsWidgetComponent } from './widget/custom-ads-widget/custom-ads-widget.component';
+import { NoDataWidgetComponent } from './widget/no-data-widget/no-data-widget.component';
+import { ContentComponent } from './widget/content/content.component';
 import { MenuComponent } from './widget/menu/menu.component';
 import { PlayerTableComponent } from './widget/player-table/player-table.component';
 import { BlogCardComponent } from './widget/blog-card/blog-card.component';
 import { ScheduleComponent } from './widget/schedule/schedule.component';
 import { SearchComponent } from './widget/search/search.component';
-import { FavouritesWidgetComponent } from './favourites-widget/favourites-widget.component';
-import { FilterPipe } from './pipes/filter.pipe';
-import { StringUnder } from './pipes/underlinepipe';
 import { TeamCardComponent } from './widget/team-card/team-card.component';
 import { LoaderComponent } from './widget/loader/loader.component';
 import { SidebarLinksComponent } from './widget/sidebar-links/sidebar-links.component';
-import { TeamsComponent } from './pages/teams/teams.component';
-import { TeamComponent } from './pages/teams/team/team.component';
-import { PlayerComponent } from './player/player.component';
 import { LoginModalComponent } from './widget/login-modal/login-modal.component';
 import { MatchAboutComponent } from './widget/match/about/about.component';
 import { PointsTableComponent } from './widget/points-table/points-table.component';
@@ -68,12 +72,10 @@ import { FixturesSidebarWidgetComponent } from './widget/fixtures-sidebar-widget
 import { UppersliderComponent } from './widget/upperslider/upperslider.component';
 import { TopScorerWidgetComponent } from './widget/top-scorer-widget/top-scorer-widget.component';
 import { PageNotFoundComponent } from './widget/page-not-found/page-not-found.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { LineupComponent } from './widget/match/lineup/lineup.component';
 import { MatchStatsComponent } from './widget/match/match-stats/match-stats.component';
-import { HomeComponent } from './pages/home/home.component';
 import { RouterComponent } from './widget/router/router.component';
-import { FixturesComponent } from './pages/fixtures/fixtures.component';
+import { LiveMatchTrackerComponent } from './widget/match/live-match-tracker/live-match-tracker.component';
 
 @NgModule({
     imports: [
@@ -143,6 +145,7 @@ import { FixturesComponent } from './pages/fixtures/fixtures.component';
         HomeComponent,
         RouterComponent,
         FixturesComponent,
+        LiveMatchTrackerComponent,
     ],
     providers: [
         /** All Pipes */
@@ -214,7 +217,8 @@ import { FixturesComponent } from './pages/fixtures/fixtures.component';
         UppersliderComponent,
         PageNotFoundComponent,
         LineupComponent,
-        MatchStatsComponent
+        MatchStatsComponent,
+        LiveMatchTrackerComponent
 
     ],
     entryComponents: [LoginModalComponent],
