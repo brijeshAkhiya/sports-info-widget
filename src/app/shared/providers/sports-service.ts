@@ -649,4 +649,9 @@ export class SportsService {
     );
   }
 
+  getBasketballstats(year, season) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/${year}/${season}/stats`
+    );
+  }
 }

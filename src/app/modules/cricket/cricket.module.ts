@@ -7,6 +7,8 @@ import { CricketRoutingModule } from './cricket-routing.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MomentModule } from 'ngx-moment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 /** Internal Modules */
 import { SharedModule } from '@app/shared/shared.module';
@@ -27,9 +29,6 @@ import { UpcomingComponent } from './match/upcoming/upcoming.component';
 import { SportsService } from '@app/shared/providers/sports-service';
 import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
-
-import { AgmCoreModule } from '@agm/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [

@@ -7,10 +7,6 @@ import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/pages/player/player.component';
 
-import { FixturesComponent } from './fixtures/fixtures.component';
-import { StatsComponent } from './stats/stats.component';
-import { StandingsComponent } from './standings/standings.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -19,34 +15,22 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        data: { 'sport': 'Basketball' }
+        data: { 'sport': 'Racing' }
       },
       {
         path: 'teams',
         component: TeamsComponent,
-        data: { 'sport': 'Basketball' }
+        data: { 'sport': 'Racing' }
       },
       {
         path: 'team/:teamid/:slug',
         component: TeamComponent,
-        data: { 'sport': 'Basketball' }
+        data: { 'sport': 'Racing' }
       },
       {
         path: 'player/:id/:slug',
         component: PlayerComponent,
-        data: { 'sport': 'Basketball' }
-      },
-      {
-        path: 'fixtures',
-        component: FixturesComponent
-      },
-      {
-        path: 'stats',
-        component: StatsComponent
-      },
-      {
-        path: 'standings',
-        component: StandingsComponent
+        data: { 'sport': 'Racing' }
       },
     ],
   }
@@ -56,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BasketballRoutingModule { }
+export class RacingRoutingModule { }

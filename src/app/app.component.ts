@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   mutedcolor: any;
   metatagsObj = {};
   isupdate: boolean;
-  showCookiepopup: boolean = false;
+  showCookiepopup = false;
   constructor(
     private http: HttpClient,
     private swupdate: SwUpdate,
@@ -64,7 +64,6 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
 
-    //console.log(this.readCookie('isenabled'));
     let selectedLang = 'english';
     if ((window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info' && !window.location.host.includes('localhost') && !window.location.host.includes('192.168'))) {
       if (window.location.host.split('.')[0])
@@ -74,8 +73,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     if (selectedLang === 'arabic' && element != null) {
       element.classList.add('arabic');
     }
-    //save language to localstorage
-    localStorage.setItem('userLng', selectedLang)
+    /* //save language to localstorage */
+    localStorage.setItem('userLng', selectedLang);
     this.translate.setDefaultLang(selectedLang);
 
     /* //get data from ngrx store through meta tags actions */
@@ -89,8 +88,9 @@ export class AppComponent implements OnInit, AfterContentInit {
       window.scrollTo(0, 0);
       /* //change route get url */
       if (event instanceof NavigationEnd) {
-        /*         // console.log("event", event, event.url.includes('/article')); */
-        if (event.url !== '/' && (!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
+        console.log(event.url);
+
+        if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
         /*         //set meta tags from here... */
         /*         // console.log('tagsobj', this.metatagsObj); */
@@ -106,6 +106,11 @@ export class AppComponent implements OnInit, AfterContentInit {
     console.log('routee', routerURL);
 
     let data = this.metatagsObj[routerURL];
+    if (!data) {
+      data = this.metatagsObj['/'];
+    }
+    console.log(this.metatagsObj[routerURL]);
+
     if (data) {
       if (data.title) {
         this.meta.updateTag({ name: 'title', content: data.title });
@@ -143,10 +148,10 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   /* //get cookie by name */
   readCookie(name) {
-    var nameEQ = name + '=';
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
+    let nameEQ = name + '=';
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
       while (c.charAt(0) == ' ') c = c.substring(1, c.length);
       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
@@ -169,15 +174,24 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
+    console.log("ngAfterContentInit");
+
     this.store.select('Metatags').subscribe((data: any) => {
+      console.log(data);
+
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
         // tslint:disable-next-line: max-line-length
         let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
-        metaarray[routerUrl[4]] = data;
+        console.log(routerUrl);
+        if (routerUrl != null)
+          metaarray[routerUrl[4]] = data;
+        else
+          metaarray['/'] = data;
       });
       this.metatagsObj = { ...metaarray };
+      console.log(this.metatagsObj)
     });
   }
 }
