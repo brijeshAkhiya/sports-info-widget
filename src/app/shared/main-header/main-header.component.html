@@ -50,6 +50,19 @@
     </div>
   </div>
   <ul class="navbar-nav navbar-rightside login-search">
+    <li ngbDropdown class="common-dropdown">
+      <a class="lang-select" ngbDropdownToggle></a>
+      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li ngbDropdownItem><a>English</a></li>
+        <li ngbDropdownItem><a>Hindi</a></li>
+        <li ngbDropdownItem><a>Gujarati</a></li>
+        <li ngbDropdownItem><a>Marathi</a></li>
+        <li ngbDropdownItem><a>Telugu</a></li>
+        <li ngbDropdownItem><a>Italian</a></li>
+        <li ngbDropdownItem><a>Spain</a></li>
+        <li ngbDropdownItem><a>Mexican</a></li>
+      </ul>
+    </li>
     <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
     <li *ngIf="!isLogin">
       <a class="login" (click)="openmodal()"></a>

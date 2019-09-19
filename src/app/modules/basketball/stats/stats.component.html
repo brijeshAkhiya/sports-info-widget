@@ -2,8 +2,37 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
+        <div class="common-title-btn nba-dropdown-title nba-stats-title big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{ 'Statistics' | translate }}</h1>
+          <div class="nba-common-selection d-flex">
+            <div ngbDropdown class="common-dropdown date-dropdown">
+              <button id="dropdownBasic1" ngbDropdownToggle>2019</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>2018</button>
+                <button ngbDropdownItem class="selected">2019</button>
+                <button ngbDropdownItem>2020</button>
+                <button ngbDropdownItem>2021</button>
+              </div>
+            </div>
+            <div ngbDropdown class="common-dropdown">
+              <button id="dropdownBasic1" ngbDropdownToggle>Regular</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>International</button>
+                <button ngbDropdownItem class="selected">Regular</button>
+                <button ngbDropdownItem>Regular2</button>
+                <button ngbDropdownItem>International2</button>
+              </div>
+            </div>
+            <div ngbDropdown class="common-dropdown">
+              <button id="dropdownBasic1" ngbDropdownToggle>Points</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Points</button>
+                <button ngbDropdownItem class="selected">Points2</button>
+                <button ngbDropdownItem>Points3</button>
+                <button ngbDropdownItem>Points4</button>
+              </div>
+            </div>
+          </div>
         </div>
         <app-loader *ngIf="isloading"></app-loader>
         <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'Basketball'"
@@ -11,9 +40,9 @@
 
         <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
               sport:'Basketball',
-              titles : [('Cricket_Module2.player' | translate),'GP'],
-              values : ['full_name', 'games_played'],
-              class : ['tour-stats-table'],
+              titles : [('Cricket_Module2.player' | translate),'GP','MIN','PTS','REB','OREB','DREB','AST','STL','BLK','TO','PF','PER'],
+              values : ['full_name', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played', 'games_played'],
+              class : ['nba-tour-stats-table'],
               class_light_row : ['light-row']
             }">
         </app-player-table>
