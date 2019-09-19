@@ -1,0 +1,9 @@
+.nba-stats-title,
+.nba-stats-title .nba-common-selection  { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
+
+@media (max-width: 1199px) {
+  .nba-stats-title .dropdown-toggle  { margin-top: 4px; margin-bottom: 4px; }
+}
+@media (max-width: 575px) {
+  .nba-stats-title .dropdown-toggle  { margin-top: 3px; margin-bottom: 3px; }
+}
