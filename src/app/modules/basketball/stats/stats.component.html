@@ -1,0 +1,30 @@
+<section class="common-section cricket-recentnews recentnews-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
+          <h1>{{ 'Statistics' | translate }}</h1>
+        </div>
+        <app-loader *ngIf="isloading"></app-loader>
+        <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'Basketball'"
+          [message]="'Coming Soon..!'"></app-no-data-widget>
+
+        <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
+              sport:'Basketball',
+              titles : [('Cricket_Module2.player' | translate),'GP'],
+              values : ['full_name', 'games_played'],
+              class : ['tour-stats-table'],
+              class_light_row : ['light-row']
+            }">
+        </app-player-table>
+      </div>
+      <!-- <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-points-table [sport]="'kabaddi'"></app-points-table>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>

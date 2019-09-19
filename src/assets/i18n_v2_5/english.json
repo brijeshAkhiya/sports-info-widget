@@ -330,5 +330,6 @@
   "Address": "address",
   "Coach": "Coach",
   "Conference": "Conference",
-  "Draft": "Draft"
+  "Draft": "Draft",
+  "Statistics": "Statistics"
 }
