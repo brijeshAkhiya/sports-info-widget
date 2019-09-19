@@ -331,5 +331,7 @@
   "Coach": "Coach",
   "Conference": "Conference",
   "Draft": "Draft",
-  "Statistics": "Statistics"
+  "Statistics": "Statistics",
+  "League": "League",
+  "Rank": "Rank"
 }

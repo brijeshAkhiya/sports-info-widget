@@ -119,7 +119,8 @@
 <ng-template #basketball let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td>
-      {{ (value == 'full_name' ?  item.player[value]  : item.total[value]) }}
+      <!-- {{ (value == 'full_name' ?  item.player[value]  : item.total[value]) }} -->
+      {{(item[value] && item[value] !='') ? item[value] : 0}}
     </td>
     <ng-template #link>
       <td>
