@@ -6,7 +6,7 @@ nav .navbar-brand               { margin-right: 48px; padding: 3px 0px 4px 48px;
 nav .navbar-brand:before        { content: ""; position: absolute; width: 200%; height: calc(100% + 0px); right: -38px; bottom: 0px; background: #fff; transform: skewX(24deg) perspective(1200px); -webkit-transform: skewX(24deg) perspective(1200px); border-radius: 0px 28px 0px 0px; }
 nav .navbar-brand img           { max-width: 143px; position: relative; z-index: 1;}
 .navbar-nav                     { position: relative; } 
-.navbar-nav .nav-link           { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; white-space: nowrap; }
+.navbar .navbar-nav .nav-link   { margin: 0px; padding: 16px 12px; font-size: 16px; line-height: 20px; color: #fff; cursor: pointer; opacity: 0.3; white-space: nowrap; }
 .navbar-nav li .nav-link.active,
 .navbar-nav li .nav-link:hover,
 .navbar-nav li .nav-link:focus   { opacity: 1; }
@@ -60,7 +60,8 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { padding: 3px 0px 3px 24px;}
-
+    .navbar .navbar-nav .nav-link   { padding: 16px 8.5px; }
+    .login-search                   { margin: 0px 24px 0px auto; }
 /* -------- Serch Box CSS ------- */
     .search-bar                     { padding: 32px 0px; background: #fff;}
     .search-bar input               { font-size: 26px; line-height: 34px; }
@@ -70,14 +71,14 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 
 /* -- Arabic CSS -- */
     .arabic nav .navbar-brand       { padding-right: 24px; }
-
+    .arabic .login-search           { margin-left: 24px; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
 /* -------- Navbar CSS ------- */
-    nav .navbar-brand               { padding: 3px 0px 4px 24px;}
+    nav .navbar-brand               { margin-right: 36px; padding: 3px 0px 4px 24px;}
     nav .navbar-brand:before        { right: -28px; }
-    .navbar-nav .nav-link           { padding: 15px 7px; font-size: 14px; }
+    .navbar .navbar-nav .nav-link   { padding: 15px 6px; font-size: 14px; }
     nav .navbar-brand img           { width: 140px;}
     .login-search                   { margin: 0px 16px 0px auto; }
     .login-search > li > a              { margin: 0px 8px; width: 24px; height: 24px; }
@@ -90,7 +91,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     .search-result .common-popular-list .img-block  { height: 110px; }
     .search-result .common-popular-list .item-desc  { min-height: 76px; padding: 8px; }
 /* -- Arabic CSS -- */
-    .arabic nav .navbar-brand           { padding-right: 24px; }
+    .arabic nav .navbar-brand           { margin-left: 36px; padding-right: 24px; }
     .arabic nav .navbar-brand:before    { left: -28px; }
     .arabic .login-search               { margin-left: 16px;}
 
@@ -113,17 +114,18 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 @media (min-width: 768px) and (max-width: 991px) {
 /* -------- Navbar CSS ------- */
     nav .navbar-brand               { margin-right: 28px; padding: 5px 8px 5px 12px; }
-    nav .navbar-brand:before        { right: -20px;}
-    .navbar-nav-container           { left: 8px; }
-    .navbar-nav .nav-link           { padding: 11px 5px; font-size: 11.7px; }
+    nav .navbar-brand:before        { right: -16px;}
+    .navbar-nav-container           { left: 0px; }
+    .navbar .navbar-nav .nav-link   { padding: 11px 4px; font-size: 11.7px; }
     nav .navbar-brand img           { width: 106px;}
     .login-search                   { margin: 0px 8px 0px auto; }
-    .login-search > li > a              { margin: 0px 5px; width: 18px; height: 18px; }
+    .login-search > li > a              { margin: 0px 4px; width: 18px; height: 18px; }
     .login-search li .dropdown-menu     { margin-top: 14px; }
 
 /* -- Arabic CSS -- */
     .arabic nav .navbar-brand           { margin-left: 30px; padding-right: 15px;}
-    .arabic nav .navbar-brand:before    { left: -20px; }
+    .arabic nav .navbar-brand:before    { left: -16px; }
+    .arabic .navbar-nav-container       { right: 0px; }
     .arabic .login-search               { margin-left: 8px;}
 }
 
@@ -144,7 +146,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     .navbar-nav-container                               { margin-top: 100px; left: 0px;}
     .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
     .menu-open .navbar-collapse.collapse                { left: 0px; }
-    .navbar-nav .nav-link                               { padding: 8px 30px; }
+    .navbar .navbar-nav .nav-link                       { padding: 8px 30px; }
     .login-search                                       { margin: 0px 50px 0px 0px; flex-direction: row; -webkit-flex-direction: row; }
     .login-search > li > a                              { margin: 0px 6px; width: 24px; height: 24px; }
     .login-search li .dropdown-menu                     { margin-top: 14px; }

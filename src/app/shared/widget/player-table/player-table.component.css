@@ -22,8 +22,8 @@
 .tour-stats-table .table tr th:nth-child(2)     { padding-left: 50px; }
 
 /* ----- NBA Stats ----- */
-.nba-tour-stats-table.common-table .table th, 
-.nba-tour-stats-table.common-table .table td    { width: 7%; padding: 9px 8px; font-size: 14px; line-height: 18px; }
+.nba-table.common-table .table th, 
+.nba-table.common-table .table td               { width: 7%; padding: 9px 8px; font-size: 14px; line-height: 18px; }
 .nba-tour-stats-table .table tr th:first-child,
 .nba-tour-stats-table .table tr td:first-child  { text-align: left; width: 48%; }
 
@@ -84,8 +84,8 @@
 /* -------- Player Stats Table ------- */
   .player-state .table tr th:after                { margin-top: -4px; margin-left: 6px; border-bottom-width: 8px; border-left-width: 4px; border-right-width: 4px; }
 /* ----- NBA Stats ----- */
-  .nba-tour-stats-table.common-table .table th, 
-  .nba-tour-stats-table.common-table .table td    { width: 6%; padding: 8px 6px; font-size: 13px; }
+  .nba-table.common-table .table th, 
+  .nba-table.common-table .table td    { width: 6%; padding: 8px 6px; font-size: 13px; }
 
 /* -- Arabic CSS -- */
   .arabic .tour-stats-table .table tr th:nth-child(2)     { padding-left: 6px; padding-right: 36px; }
