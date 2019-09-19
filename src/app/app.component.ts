@@ -88,8 +88,6 @@ export class AppComponent implements OnInit, AfterContentInit {
       window.scrollTo(0, 0);
       /* //change route get url */
       if (event instanceof NavigationEnd) {
-        console.log(event.url);
-
         if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
         /*         //set meta tags from here... */
@@ -102,14 +100,13 @@ export class AppComponent implements OnInit, AfterContentInit {
       }
     });
   }
-  setmetatags(routerURL) {
-    console.log('routee', routerURL);
 
+  setmetatags(routerURL) {
     let data = this.metatagsObj[routerURL];
     if (!data) {
       data = this.metatagsObj['/'];
     }
-    console.log(this.metatagsObj[routerURL]);
+    console.log(data);
 
     if (data) {
       if (data.title) {
@@ -142,8 +139,9 @@ export class AppComponent implements OnInit, AfterContentInit {
         this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
       if (data['twitter:card'])
         this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
-    }
+    } else {
 
+    }
   }
 
   /* //get cookie by name */
@@ -174,24 +172,18 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    console.log("ngAfterContentInit");
-
     this.store.select('Metatags').subscribe((data: any) => {
-      console.log(data);
-
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
         // tslint:disable-next-line: max-line-length
         let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
-        console.log(routerUrl);
-        if (routerUrl != null)
+        if (routerUrl != null && routerUrl[4] !== undefined)
           metaarray[routerUrl[4]] = data;
         else
           metaarray['/'] = data;
       });
       this.metatagsObj = { ...metaarray };
-      console.log(this.metatagsObj)
     });
   }
 }
