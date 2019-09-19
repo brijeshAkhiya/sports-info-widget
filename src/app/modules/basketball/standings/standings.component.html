@@ -39,8 +39,7 @@
                   sport:'Basketball',
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                   values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
-                  class : ['tour-stats-table'],
-                  class_light_row : ['light-row']
+                  class : ['nba-table tour-stats-table'],
                 }">
               </app-player-table>
             </ng-template>
@@ -55,7 +54,7 @@
                   <app-player-table *ngIf="conference?.teams?.length > 0" [data]="conference?.teams" [options]=" {
                           sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                           values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
-                          class : ['tour-stats-table'],
+                          class : ['nba-table tour-stats-table'],
                           header_title : conference.name
                         }">
                   </app-player-table>
@@ -73,7 +72,7 @@
                   <app-player-table *ngIf="divisions?.teams?.length > 0" [data]="divisions?.teams" [options]=" {
                               sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                               values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
-                              class : ['tour-stats-table'],
+                              class : ['nba-table tour-stats-table'],
                               header_title : divisions.name
                             }">
                   </app-player-table>
