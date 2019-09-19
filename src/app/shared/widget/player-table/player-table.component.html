@@ -24,7 +24,7 @@
             </ng-container>
           </ng-container>
           <ng-container *ngIf="options.sport == 'Basketball'">
-            <ng-container *ngTemplateOutlet="basketball;context:{item:item}">
+            <ng-container *ngTemplateOutlet="basketball;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
 
@@ -118,15 +118,13 @@
 
 <ng-template #basketball let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td>
-      <!-- {{ (value == 'full_name' ?  item.player[value]  : item.total[value]) }} -->
-      {{(item[value] && item[value] !='') ? item[value] : 0}}
+    <td *ngIf="(value != 'name'); else link">
+      {{ value == 'index' ?  index  : (item[value] && item[value] !='') ? item[value] : 0}}
     </td>
     <ng-template #link>
       <td>
-        <a
-          [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
+        <a [routerLink]="value == 'name' ? ['/basketball/team', item['sr_id'], (item.name | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['sr_id'] | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}
         </a>
