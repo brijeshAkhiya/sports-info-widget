@@ -1,5 +1,5 @@
 .fixtures-loadmore                          			{ margin-top: 32px; text-align: center; }
-.nba-common-selection                                 	{ column-gap: 16px; -webkit-column-gap: 16px; }
+.nba-common-selection                                 	{ }
 .nba-common-selection .dropdown-toggle                	{ min-width: 160px; }
 .nba-common-selection .date-dropdown .dropdown-toggle 	{ min-width: 130px; }
 .nba-fixtures-title .nba-common-selection             	{ margin-bottom: -40px; }
