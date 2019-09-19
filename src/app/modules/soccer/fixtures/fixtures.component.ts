@@ -123,8 +123,10 @@ export class FixturesSoccerComponent implements OnInit {
             if (data.sport_event.sport_event_context) {
               if (!category[data.sport_event.sport_event_context.category.id]) category[data.sport_event.sport_event_context.category.id] = data.sport_event.sport_event_context.category;
 
-              if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
-              obj[data.sport_event.sport_event_context.season.id].matches.push(data);
+              if (data.sport_event.sport_event_context.season) {
+                if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
+                obj[data.sport_event.sport_event_context.season.id].matches.push(data);
+              }
             }
 
           });
