@@ -176,7 +176,10 @@
 
 
               <section class="common-section top-padding quick-stats" *ngIf="stats">
-                <h4>{{ 'Shared_module.quick_stats' | translate }}</h4>
+                <div class="nba-title d-flex justify-content-between">
+                  <h4>{{ 'Shared_module.quick_stats' | translate }}</h4>
+                  <h6 class="light-text no-margin">2018-19 Season Stats</h6>
+                </div>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
                 </ng-container>
               </section>
@@ -254,7 +257,7 @@
     <div [ngClass]="sport == 'Basketball' ? 'col-md-3' : 'col-md-4'" *ngFor="let stat of stats">
       <div class="common-shadow rounded-box stat-item">
         <h1>{{stat.data}}</h1>
-        <p>{{stat.key}}</p>
+        <p class="light-text">{{stat.key}}</p>
       </div>
     </div>
   </div>
