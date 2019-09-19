@@ -52,26 +52,26 @@
   <ul class="navbar-nav navbar-rightside login-search">
     <li ngbDropdown class="common-dropdown">
       <a class="lang-select" ngbDropdownToggle></a>
-      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <li ngbDropdownItem><a>English</a></li>
-        <li ngbDropdownItem><a>Hindi</a></li>
-        <li ngbDropdownItem><a>Gujarati</a></li>
-        <li ngbDropdownItem><a>Marathi</a></li>
-        <li ngbDropdownItem><a>Telugu</a></li>
-        <li ngbDropdownItem><a>Italian</a></li>
-        <li ngbDropdownItem><a>Spain</a></li>
-        <li ngbDropdownItem><a>Mexican</a></li>
-      </ul>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <a ngbDropdownItem class="selected">English</a>
+        <a ngbDropdownItem>Hindi</a>
+        <a ngbDropdownItem>Gujarati</a>
+        <a ngbDropdownItem>Marathi</a>
+        <a ngbDropdownItem>Telugu</a>
+        <a ngbDropdownItem>Italian</a>
+        <a ngbDropdownItem>Spain</a>
+        <a ngbDropdownItem>Mexican</a>
+      </div>
     </li>
     <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
     <li *ngIf="!isLogin">
       <a class="login" (click)="openmodal()"></a>
     </li>
-    <li ngbDropdown *ngIf="isLogin">
+    <li ngbDropdown class="common-dropdown" *ngIf="isLogin">
       <a class="login" [ngClass]="{'logged': isLogin}" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
-      <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <li ngbDropdownItem><a (click)="logout()">{{'Header_menu.Logout' | translate}}</a></li>
-      </ul>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <a ngbDropdownItem (click)="logout()">{{'Header_menu.Logout' | translate}}</a>
+      </div>
     </li>
   </ul>
   <!-- <ul class="navbar-nav navbar-rightside login-search">
