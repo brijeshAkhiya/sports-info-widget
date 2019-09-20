@@ -6,6 +6,7 @@
 .tour-stand-table .table tr td:nth-child(2)     { text-align: left; width: 40%; }
 .tour-stand-table .table tr td:nth-child(2) img,
 .tour-stats-table .table tr td:nth-child(2) img { margin: -12px 8px -9px 0px; height: 32px; width: auto; border-radius: 2px; }
+.nba-tour-stats-table .table tr td:first-child,
 .tour-stand-table .table tr td:nth-child(2),
 .tour-stats-table .table tr td:nth-child(2)     { padding-right: 48px; }
 .tour-stand-table .table tr td:first-child:before   { content: ""; display: block; position: absolute; width: 8px; height: 100%; top: 0; left: 0;}
@@ -55,6 +56,7 @@
 .arabic .tour-stats-table .table tr td:nth-child(2),
 .arabic .player-state .table tr th:first-child,
 .arabic .player-state .table tr td:first-child          { text-align: right; }
+.arabic .nba-tour-stats-table .table tr td:first-child,
 .arabic .tour-stand-table .table tr td:nth-child(2),
 .arabic .tour-stats-table .table tr td:nth-child(2)       { padding-right: 10px; padding-left: 48px; }
 .arabic .tour-stand-table .table tr td:nth-child(2) img,

@@ -1,4 +1,4 @@
-<section class="common-section cricket-recentnews recentnews-section">
+<section class="common-section">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
@@ -41,7 +41,6 @@
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                   values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                   class : ['nba-table tour-stand-table'],
-                  class_light_row : ['light-row'],
                   tbl_type:'standing'
                 }">
               </app-player-table>
@@ -55,11 +54,11 @@
 
               <ng-container *ngIf="standings?.conferences?.length > 0 ">
                 <ng-container *ngFor="let conference of standings?.conferences">
+                  <h4 class="nba-table-title">{{conference.name}}</h4>
                   <app-player-table *ngIf="conference?.teams?.length > 0" [data]="conference?.teams" [options]=" {
                           sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                           values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                           class : ['nba-table tour-stand-table'],
-                          header_title : conference.name,
                           tbl_type:'standing'
                         }">
                   </app-player-table>
@@ -75,11 +74,11 @@
             <ng-template ngbTabContent>
               <ng-container *ngIf="standings?.divisions?.length > 0 ">
                 <ng-container *ngFor="let divisions of standings?.divisions">
+                  <h4 class="nba-table-title">{{divisions.name}}</h4>
                   <app-player-table *ngIf="divisions?.teams?.length > 0" [data]="divisions?.teams" [options]=" {
                               sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                               values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                               class : ['nba-table tour-stats-table'],
-                              header_title : divisions.name,
                               tbl_type:'standing'
                             }">
                   </app-player-table>
