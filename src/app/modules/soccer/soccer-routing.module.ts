@@ -10,10 +10,11 @@ import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
+import { PlayerComponent } from '@app/shared/pages/player/player.component';
+import { SliderFixtureComponent } from '@app/shared/pages/slider-fixture/slider-fixture.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
-import { PlayerComponent } from '@app/shared/pages/player/player.component';
 import { FixturesSoccerComponent } from './fixtures/fixtures.component';
 
 
@@ -28,7 +29,7 @@ const routes: Routes = [{
         },
         {
             path: 'fixtures',
-            component: FixturesSoccerComponent,
+            component: SliderFixtureComponent,
             data: { 'sport': 'Soccer' }
         },
         {
