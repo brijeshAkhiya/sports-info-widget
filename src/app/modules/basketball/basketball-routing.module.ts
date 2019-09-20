@@ -10,6 +10,7 @@ import { PlayerComponent } from '@app/shared/pages/player/player.component';
 import { FixturesComponent } from './fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { StandingsComponent } from './standings/standings.component';
+import { MatchComponent } from './match/match.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: 'standings',
         component: StandingsComponent
+      },
+      {
+        path: 'match/:id/:slug',
+        component: MatchComponent
       },
     ],
   }

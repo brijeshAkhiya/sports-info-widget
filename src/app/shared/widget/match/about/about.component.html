@@ -194,8 +194,8 @@
   <div class="team-col">
     <div class="current-team d-flex align-items-center">
       <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
-        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="team.tname" [defaultImage]="commonService.playerplaceholder"
-          [offset]="commonService.lazyloadoffset">
+        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="team.tname"
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <a [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
           {{data.match_info.gamestate != 0 ? team.shortname : team.tname}}
         </a>
@@ -256,7 +256,7 @@
       <ng-container *ngTemplateOutlet="soccerteam;context:{team:competitor?.home}">
       </ng-container>
       <div class="live-score" *ngIf="data.sport_event_status.status != 'not_started'">
-        <h5  *ngIf="data.sport_event_status.status != 'not_started'">
+        <h5 *ngIf="data.sport_event_status.status != 'not_started'">
           {{data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended' 
             ?  'FT' 
             : (data.sport_event_status.status == 'live' && data.sport_event_status.match_status == '2nd_half' ? 'HT' : '')}}
@@ -270,13 +270,76 @@
 </ng-container>
 
 
+<ng-container *ngIf="sport == 'Basketball' && data">
+  test
+  <!-- Start Animation -->
+  <div
+    class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+    <div class="teams-animation d-flex justify-content-around align-items-center">
+      <div class="team-anim">
+        <img [lazyLoad]="data.home.id | logosurl:'basketball'" alt="{{data.home.name}}"
+          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{data.home.name}}</h4>
+      </div>
+      <div class="team-anim vs-anim">
+        <h5>VS</h5>
+      </div>
+      <div class="team-anim">
+        <img [lazyLoad]="data.away.id | logosurl:'basketball'" alt="{{data.away.name}}"
+          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{data.away.name}}</h4>
+      </div>
+    </div>
+    <!-- End Animation -->
+
+    <!-- <div class="tour-match-title show-anim">
+      <p class="light-text">
+        <a
+          [routerLink]="['/soccer/tournament',(data?.sport_event?.sport_event_context?.season?.id | splitID),(data?.sport_event?.sport_event_context?.season?.name | slugify)]">
+          {{data?.sport_event?.sport_event_context?.season?.name}}
+        </a>
+      </p>
+    </div> -->
+
+    <div class="match-update show-anim">
+      <p class="light-text">
+        <ng-container *ngIf="data?.venue">
+          <span>{{data?.venue?.name}}, {{data?.venue?.city}} |</span>
+        </ng-container>
+        {{data?.scheduled | amDateFormat:'Do MMMM YYYY'}}
+      </p>
+      <p class="live-match" *ngIf="data?.status == 'live' ">{{ 'widgetModule.live' | translate }}
+        <!-- <span *ngIf="data.match_time"> | {{data.match_time}}</span> -->
+      </p>
+    </div>
+
+    <div class="current-match d-flex justify-content-between show-anim">
+      <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.home}">
+      </ng-container>
+      <div class="live-score" *ngIf="data?.status != 'scheduled'">
+        <!-- FINAL Score here -->
+
+        <!-- <h5 *ngIf="data?.status != 'scheduled'">
+          {{data?.status == 'closed' || data?.status == 'ended' 
+              ?  'FT' 
+              : (data?.status == 'live' && data?.match_status == '2nd_half' ? 'HT' : '')}}
+        </h5> -->
+        <h3>{{data?.home?.points}} - {{data?.away?.points}}</h3>
+      </div>
+      <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.away}">
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
 <ng-template #soccerteam let-team="team">
   <div class="team-col">
     <div class="current-team d-flex align-items-center">
       <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.sport_event_status?.winner_id == team?.id}">
-        <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}"
-          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <a [routerLink]=" data?.sport_event?.sport_event_context?.season.id  ?  ['/soccer/team', (data?.sport_event?.sport_event_context?.season.id | splitID),(team.id | splitID),(team.name | slugify)]  : ['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+        <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}" [defaultImage]="commonService.flagplaceholder"
+          [offset]="commonService.lazyloadoffset">
+        <a
+          [routerLink]=" data?.sport_event?.sport_event_context?.season.id  ?  ['/soccer/team', (data?.sport_event?.sport_event_context?.season.id | splitID),(team.id | splitID),(team.name | slugify)]  : ['/soccer/team',(team.id | splitID),(team.name | slugify)]">
           {{team.name}}
         </a>
       </h4>
@@ -285,5 +348,19 @@
         <li><span>Nitin Tomar </span>15</li>
         <li><span>Siddharth Desai </span>7</li>
       </ul> -->
+  </div>
+</ng-template>
+
+<ng-template #basektballteam let-team="team">
+  <div class="team-col">
+    <div class="current-team d-flex align-items-center">
+      <h4 class="d-flex align-items-center" [ngClass]="{'winner':false}">
+        <img [lazyLoad]="team?.sr_id | logosurl:'basketball'" alt="team.name"
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <a [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]">
+          {{ team.name}}
+        </a>
+      </h4>
+    </div>
   </div>
 </ng-template>

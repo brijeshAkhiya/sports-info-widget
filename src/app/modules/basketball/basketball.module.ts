@@ -11,9 +11,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { FixturesComponent } from './fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { StandingsComponent } from './standings/standings.component';
+import { MatchComponent } from './match/match.component';
 
 @NgModule({
-  declarations: [FixturesComponent, StatsComponent, StandingsComponent],
+  declarations: [FixturesComponent, StatsComponent, StandingsComponent, MatchComponent],
   imports: [
     CommonModule,
     TranslateModule,

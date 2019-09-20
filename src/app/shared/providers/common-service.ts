@@ -125,6 +125,8 @@ export class CommonService {
         return 'sr:team:' + id;
       } else if (type == 'player') {
         return 'sr:player:' + id;
+      } else if (type == 'match') {
+        return 'sr:match:' + id;
       }
     }
   }
