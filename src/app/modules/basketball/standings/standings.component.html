@@ -3,7 +3,7 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn nba-dropdown-title big-title-btn d-flex justify-content-between align-items-center">
-          <h1>{{ 'Statistics' | translate }}</h1>
+          <h1>{{ 'Standings' | translate }}</h1>
           <div class="nba-common-selection d-flex">
             <div ngbDropdown class="common-dropdown date-dropdown">
               <button id="dropdownBasic1" ngbDropdownToggle>2019</button>
@@ -29,7 +29,7 @@
         <app-no-data-widget *ngIf="!isloading && (!standings || standings?.length == 0)" [sport]="'kabaddi'"
           [message]="'Coming Soon..!'"></app-no-data-widget>
 
-        <ngb-tabset class="filled-tabs">
+        <ngb-tabset class="filled-tabs scorecard-tab">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div>{{ 'League' | translate }}</div>
@@ -38,8 +38,8 @@
               <app-player-table *ngIf="standings?.teams?.length > 0" [data]="standings?.teams" [options]=" {
                   sport:'Basketball',
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
-                  values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
-                  class : ['nba-table tour-stats-table'],
+                  values : ['name', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'home','division',  'wins', 'losses', 'win_pct', 'gb_league', 'home', 'home'],
+                  class : ['nba-table tour-stand-table']
                 }">
               </app-player-table>
             </ng-template>
@@ -49,35 +49,36 @@
               <div>{{ 'Conference' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+
               <ng-container *ngIf="standings?.conferences?.length > 0 ">
                 <ng-container *ngFor="let conference of standings?.conferences">
                   <app-player-table *ngIf="conference?.teams?.length > 0" [data]="conference?.teams" [options]=" {
-                          sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
-                          values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
-                          class : ['nba-table tour-stats-table'],
+                          sport:'Basketball',
+                          titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H'],
+                          values : ['name', 'name', 'wins', 'losses', 'win_pct', 'gb_conference'],
+                          class : ['nba-table tour-stand-table'],
                           header_title : conference.name
                         }">
                   </app-player-table>
                 </ng-container>
               </ng-container>
+
             </ng-template>
           </ngb-tab>
           <ngb-tab>
             <ng-template ngbTabTitle>
-              <div>{{ 'Division' | translate }}</div>
+              <div (click)="getTournamentStats('tackletotalpoint')">{{ 'Division' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <ng-container *ngIf="standings?.divisions?.length > 0 ">
-                <ng-container *ngFor="let divisions of standings?.divisions">
-                  <app-player-table *ngIf="divisions?.teams?.length > 0" [data]="divisions?.teams" [options]=" {
-                              sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
-                              values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
-                              class : ['nba-table tour-stats-table'],
-                              header_title : divisions.name
-                            }">
-                  </app-player-table>
-                </ng-container>
-              </ng-container>
+              adasdasddasda
+              <!-- <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
+                            sport:'kabaddi',
+                            titles : ['POS',('Cricket_Module2.player' | translate),('Kabaddi_Module2.Successfull_tackles' | translate),('Kabaddi_Module2.Super_Tackles' | translate),('Kabaddi_Module2.Tackle_Points' | translate)],
+                            values : ['pid', 'name', 'tacklesuccessful','supertackles','tackletotalpoint'],
+                            class : ['nba-table tour-stand-table'],
+                            class_light_row : ['light-row']
+                          }">
+              </app-player-table> -->
             </ng-template>
           </ngb-tab>
 
