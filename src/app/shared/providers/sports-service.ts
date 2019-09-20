@@ -660,4 +660,10 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/${year}/${season}/standings`
     );
   }
+
+  getBasketballseason() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/seasons`
+    );
+  }
 }

@@ -23,7 +23,11 @@
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="options.sport == 'Basketball'">
+          <ng-container *ngIf="options.sport == 'Basketball' && options.tbl_type == 'stats'">
+            <ng-container *ngTemplateOutlet="basketballStats;context:{item:item,index:i+1}">
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Basketball' && options.tbl_type == 'standing'">
             <ng-container *ngTemplateOutlet="basketball;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
@@ -128,6 +132,25 @@
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['sr_id'] | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}
+        </a>
+      </td>
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #basketballStats let-item="item" let-index="index">
+  <ng-container *ngFor="let value of options.values">
+    <td *ngIf="(value != 'full_name'); else link">
+      {{ (item.total[value] && item.total[value] !='') ? item.total[value] : 0}}
+    </td>
+    <ng-template #link>
+      <td>
+        <a *ngIf="item['player']['sr_id']"
+          [routerLink]="value == 'full_name' ? ['/basketball/player', (item.player.sr_id | splitID), (item.player.full_name | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="(item.player.sr_id | splitID) | logosurl:'basketball'"
+            [defaultImage]="commonService.flagplaceholder" alt="logo">
+          {{ item.player.full_name}}
         </a>
       </td>
     </ng-template>

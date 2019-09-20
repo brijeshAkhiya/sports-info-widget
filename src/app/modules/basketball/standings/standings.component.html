@@ -20,7 +20,8 @@
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                   values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                   class : ['tour-stats-table'],
-                  class_light_row : ['light-row']
+                  class_light_row : ['light-row'],
+                  tbl_type:'standing'
                 }">
               </app-player-table>
             </ng-template>
@@ -36,7 +37,8 @@
                           sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                           values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                           class : ['tour-stats-table'],
-                          header_title : conference.name
+                          header_title : conference.name,
+                          tbl_type:'standing'
                         }">
                   </app-player-table>
                 </ng-container>
@@ -54,7 +56,8 @@
                               sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                               values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                               class : ['tour-stats-table'],
-                              header_title : divisions.name
+                              header_title : divisions.name,
+                              tbl_type:'standing'
                             }">
                   </app-player-table>
                 </ng-container>
