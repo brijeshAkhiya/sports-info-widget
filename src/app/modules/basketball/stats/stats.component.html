@@ -7,17 +7,23 @@
           <h1>{{ 'Statistics' | translate }}</h1>
           <div class="nba-common-selection d-flex">
             <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons" #yearDrop="ngbDropdown">
-              <button id="dropdownBasic1" ngbDropdownToggle>{{seasons[0].year}}</button>
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons"
-                  (click)="yearDrop.close();filterData({year: season.year});">{{season.year}}</button>
+                  (click)="yearDrop.close();filterData({year: season.year});"
+                  [ngClass]="{'selected' : filter.year == season.year  }">
+                  {{season.year}}
+                </button>
               </div>
             </div>
             <div ngbDropdown class="common-dropdown" *ngIf="seasons" #typeDrop="ngbDropdown">
-              <button id="dropdownBasic1" ngbDropdownToggle>{{seasons[0].type.code}}</button>
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons"
-                  (click)="typeDrop.close();filterData({type: season.type.code});">{{season.type.code}}</button>
+                  (click)="typeDrop.close();filterData({type: season.type.code});"
+                  [ngClass]="{'selected' : filter.type == season.type.code  }">
+                  {{season.type.code}}
+                </button>
               </div>
             </div>
             <div ngbDropdown class="common-dropdown">
