@@ -1,0 +1,39 @@
+/* -- NBA Ground Lienup -- */
+.nba-map-block                  { margin-bottom: 24px; padding: 12px 16px; }
+.nba-map-block .title           { margin-bottom: 12px; font-weight: 600; }
+.nba-map-block .nba-map         { width: 59.3%; flex-shrink: 0; -webkit-flex-shrink: 0; position: relative; }
+.nba-map-block .nba-map img     { width: 100%; }
+.nba-map-block .goal-list li                        { position: absolute; top: 10%; left: 10%;  }
+.nba-map-block .goal-list .dropdown-toggle          { width: 8px; height: 8px; background: transparent; border: 2px solid #ED1A33; border-radius: 50%;}
+.nba-map-block .goal-list .opp-team .dropdown-toggle        { border-color: #22336F; }
+.nba-map-block .goal-list .made .dropdown-toggle            { background: #ED1A33; }
+.nba-map-block .goal-list .opp-team.made .dropdown-toggle   { background: #22336F; }
+.nba-map-block .goal-list .dropdown-toggle:after    { display: none; }
+.nba-map-block .goal-list .dropdown-menu            { padding: 2px 4px; min-width: initial; width: 120px; top: 0 !important; left: 12px !important; transform: translate(0) !important; -webkit-transform: translate(0) !important; box-shadow: 0px 4px 12px rgba(0,0,0,0.09); -webkit-box-shadow: 0px 4px 12px rgba(0,0,0,0.09); border: none; }
+.nba-map-block .goal-list p                         { margin-bottom: 2px; font-size: 10px; line-height: 12px; }
+.nba-map-block .goal-list p b                       { font-size: 12px; line-height: 15px; font-weight: 600; }
+.nba-map-block .goal-list p strong                  { font-weight: 700; color: #ED1A33;  }
+.nba-map-block .goal-list .opp-team p strong        { color: #22336F;  }
+.nba-map-block .goal-list .point                    { display: inline-block; height: 12px; width: 12px; font-size: 10px; line-height: 12px; color: #fff; border-radius: 50%; background: #ED1A33; text-align: center; }
+.nba-map-block .goal-list .opp-team .point          { background: #22336F; }
+.nba-map-block .map-selection                       { padding-left: 16px; flex-grow: 1; -webkit-flex-grow: 1; }
+.nba-map-block .map-selection p                     { margin-bottom: 8px; font-weight: 500; }
+.nba-map-block .dropdown                            { margin-bottom: 24px; }
+.nba-map-block .dropdown-toggle                     { width: 100%; border-radius: 2px; font-size: 18px; line-height: 23px; }
+.nba-map-block .map-selection li span,
+.nba-map-block .map-selection li                    { display: inline-block; vertical-align: middle; }
+.nba-map-block .map-selection li                    { margin-right: 24px; }
+
+@media (min-width: 1200px) and (max-width: 1379px) {
+  .nba-map-block .dropdown-toggle           { font-size: 16px; line-height: 22px; }
+  .nba-map-block .dropdown                  { margin-bottom: 20px; }
+}
+@media (max-width: 1199px) {
+  .nba-map-block .dropdown-toggle           { font-size: 14px; line-height: 20px; }
+  .nba-map-block .dropdown                  { margin-bottom: 14px; }
+}
+@media (max-width: 767px) {
+  .nba-map-block .nba-map             { width: 100%;}
+  .nba-map-block .nba-map-inner       { flex-direction: column; -webkit-flex-direction: column; }
+  .nba-map-block .map-selection       { padding-left: 0px; padding-top: 16px; }
+}
