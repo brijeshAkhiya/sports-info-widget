@@ -59,13 +59,14 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   langauges = [
     { title: 'English', link: 'https://www.sports.info' },
+    { title: 'Bengali', link: 'https://bengali.sports.info' },
     { title: 'Hindi', link: 'https://hindi.sports.info' },
     { title: 'Gujarati', link: 'https://gujarati.sports.info' },
     { title: 'Marathi', link: 'https://marathi.sports.info' },
     { title: 'Telugu', link: 'https://telugu.sports.info' },
-    { title: 'Italian', link: 'https://italian.sports.info' },
-    { title: 'Spain', link: 'https://spain.sports.info' },
-    { title: 'Mexican', link: 'https://mexican.sports.info' },
+    // { title: 'Italian', link: 'https://italian.sports.info' },
+    // { title: 'Spain', link: 'https://spain.sports.info' },
+    // { title: 'Mexican', link: 'https://mexican.sports.info' },
   ];
 
 

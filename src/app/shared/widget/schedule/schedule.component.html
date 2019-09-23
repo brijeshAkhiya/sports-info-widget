@@ -92,7 +92,7 @@
 
 <ng-template #kabaddi let-match="match" let-type="type">
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
-    [ngClass]="{'complete-match' : match?.match_result}"
+    [ngClass]="{'complete-match' : match?.status == 2}"
     *ngIf="match?.teams?.home?.tid != '' && match?.teams?.away?.tid != ''">
     <div class="match-desc">
       <h6>

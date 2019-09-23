@@ -20,7 +20,7 @@
               <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
                 <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0"
-                  [commentry]="matchInfo?.timeline" [sport]="'soccer'" [team]="team"></app-goal-commentry>
+                  [commentry]="matchInfo?.timeline" [sport]="'Soccer'" [team]="team"></app-goal-commentry>
                 <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
                   [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
                 <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
