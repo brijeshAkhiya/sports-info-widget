@@ -6,22 +6,22 @@
           class="common-title-btn nba-dropdown-title big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{ 'Standings' | translate }}</h1>
           <div class="nba-common-selection d-flex">
-            <div ngbDropdown class="common-dropdown date-dropdown">
-              <button id="dropdownBasic1" ngbDropdownToggle>2019</button>
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem>2018</button>
-                <button ngbDropdownItem class="selected">2019</button>
-                <button ngbDropdownItem>2020</button>
-                <button ngbDropdownItem>2021</button>
+                <button ngbDropdownItem *ngFor="let season of seasons?.year[0]" (click)="yearDrop.close();filterData({year: season});"
+                  [ngClass]="{'selected' : filter.year == season  }">
+                  {{season}}
+                </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown">
-              <button id="dropdownBasic1" ngbDropdownToggle>Regular</button>
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem>International</button>
-                <button ngbDropdownItem class="selected">Regular</button>
-                <button ngbDropdownItem>Regular2</button>
-                <button ngbDropdownItem>International2</button>
+              <button ngbDropdownItem *ngFor="let season of seasons?.type[0]" (click)="typeDrop.close();filterData({type: season});"
+                [ngClass]="{'selected' : filter.type == season  }">
+                {{season}}
+              </button>
               </div>
             </div>
           </div>
@@ -30,13 +30,13 @@
         <app-no-data-widget *ngIf="!isloading && (!standings || standings?.length == 0)" [sport]="'kabaddi'"
           [message]="'Coming Soon..!'"></app-no-data-widget>
 
-        <ngb-tabset class="filled-tabs scorecard-tab">
+        <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="!isloading">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div>{{ 'League' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-player-table *ngIf="standings?.teams?.length > 0" [data]="standings?.teams" [options]=" {
+              <app-player-table *ngIf="standings?.teams?.length > 0 " [data]="standings?.teams" [options]=" {
                   sport:'Basketball',
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
                   values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
