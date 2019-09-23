@@ -19,6 +19,7 @@ const routes: Routes = [
     {
         path: '',
         component: RouterComponent,
+        data: { 'sport': 'Cricket' },
         children: [
             {
                 path: '',

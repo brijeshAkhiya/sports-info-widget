@@ -97,15 +97,15 @@
 
 <!-- soccer score table -->
 
-  <ng-template #soccersidebarScore let-scoredata="scoredata">
-    <app-loader *ngIf="isloading"></app-loader>
-    <app-no-data-widget [message]="'No Data Available'" *ngIf="(!scoredata || scoredata?.length == 0)">
-    </app-no-data-widget>
-    <ul class="common-list player-score-list">
-      <li class="top-player d-flex" *ngFor="let item of (scoredata | slice:0:1);let i = index;">
-           <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="commonService.playerplaceholder"
-          [defaultImage]="commonService.playerplaceholder">
-        <ng-container *ngFor="let player of item.competitors">
+<ng-template #soccersidebarScore let-scoredata="scoredata">
+  <app-loader *ngIf="isloading"></app-loader>
+  <app-no-data-widget [message]="'No Data Available'" *ngIf="(!scoredata || scoredata?.length == 0)">
+  </app-no-data-widget>
+  <ul class="common-list player-score-list">
+    <li class="top-player d-flex" *ngFor="let item of (scoredata | slice:0:1);let i = index;">
+      <img alt="player" [offset]="commonService.lazyloadoffset" [lazyLoad]="commonService.playerplaceholder"
+        [defaultImage]="commonService.playerplaceholder">
+      <ng-container *ngFor="let player of item.competitors">
         <div class="top-player-inner">
           <p class="num">{{item.rank}}.</p>
           <div class="player-names">
@@ -121,11 +121,11 @@
             <p class="score-property">{{ 'widgetModule.goals' | translate }}</p>
           </div>
         </div>
-        </ng-container>
-      </li>
-      <li class="common-player d-flex justify-content-between align-items-center"
-        *ngFor="let item of (scoredata | slice:1:5);let i = index;">
-        <ng-container *ngFor="let player of item.competitors">
+      </ng-container>
+    </li>
+    <li class="common-player d-flex justify-content-between align-items-center"
+      *ngFor="let item of (scoredata | slice:1:5);let i = index;">
+      <ng-container *ngFor="let player of item.competitors">
         <p class="num">{{item.rank}}.</p>
         <div class="player-names">
           <p class="name">
@@ -133,15 +133,14 @@
               {{item.name | split}}
             </a>
           </p>
-          <p class="team">{{player.abbreviation}}</p> 
+          <p class="team">{{player.abbreviation}}</p>
         </div>
-        <div class="player-score">  
+        <div class="player-score">
           <h3>{{player.datapoints[0].value}}</h3>
           <p class="score-property">{{ 'widgetModule.goals' | translate }}</p>
         </div>
-        </ng-container>
-      </li>
-     <li><a class="view-all-btn" [routerLink]="['./stats']">{{ 'widgetModule.view_all' | translate }}</a></li>
-    </ul>
-  </ng-template> 
-   
+      </ng-container>
+    </li>
+    <li><a class="view-all-btn" [routerLink]="['./stats']">{{ 'widgetModule.view_all' | translate }}</a></li>
+  </ul>
+</ng-template>

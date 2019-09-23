@@ -118,7 +118,7 @@ export class SliderFixtureComponent implements OnInit {
       .subscribe((res: any) => {
         this.paramData.loading = false;
         if (res) {
-          this.paramData.data = this.commonService.sortArr(res.data.games, 'Do MMMM YYYY', 'scheduled', 'asc');
+          this.paramData.data = res.data.games;
         }
         console.log(this.paramData.data);
 

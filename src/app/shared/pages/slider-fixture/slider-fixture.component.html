@@ -1,18 +1,17 @@
-<app-menu [options]="{ sport: params.sport, type: 'home' }"></app-menu>
 <section class="common-section cricket-recentnews recentnews-section">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
         <div
           class="common-title-btn soccer-fixtures-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
-          <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
+          <h1>{{('widgetModule.Fixtures' | translate)}}</h1>
         </div>
 
         <div class="soccer-fixture-filter d-flex align-items-center justify-content-between">
           <div class="fixture-slider-block d-flex align-items-center">
             <div class="soccer-fixture-slider text-center">
               <!-- Date Slider-->
-              <owl-carousel-o [options]="customOptions" #gallery (initialized)="initializedSlider($e)">
+              <owl-carousel-o [options]="customOptions" #gallery (initialized)="initializedSlider($event)">
                 <ng-container class="items">
                   <ng-template carouselSlide *ngFor="let date of customDate" [id]="date">
                     <div class="fix-slide" (click)="selectDate(date)"
@@ -27,7 +26,7 @@
             <!-- Date picker-->
             <div class="fixture-date">
               <input class="form-control d-none" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker
-                #d="ngbDatepicker" [placement]="bottom" (ngModelChange)="dateChange($event)">
+                #d="ngbDatepicker" [placement]="'bottom'" (ngModelChange)="dateChange($event)">
               <button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
             </div>
           </div>
@@ -60,7 +59,8 @@
         </div>
 
         <app-loader *ngIf="paramData.loading"></app-loader>
-        <app-no-data-widget *ngIf="!paramData.loading && (!paramData.data || paramData.data?.length == 0)">
+        <app-no-data-widget *ngIf="!paramData.loading && (!paramData.data || paramData.data?.length == 0)"
+          [sport]="params.sport">
         </app-no-data-widget>
         <app-schedule *ngIf="paramData.data.length > 0" [data]="paramData.data" [sport]="params.sport">
         </app-schedule>

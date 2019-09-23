@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-router',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RouterComponent implements OnInit {
 
-  constructor() { }
+  params: any;
+  tournamentid: any;
+
+  constructor(
+    private activatedroute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    const data: any = this.activatedroute.data;
+    this.params = data.value;
   }
 
 }

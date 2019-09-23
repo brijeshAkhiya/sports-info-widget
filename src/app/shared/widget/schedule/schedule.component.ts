@@ -19,12 +19,11 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.data);
-    console.log(this.sport);
-
     if (this.sport === 'Soccer') {
       if (typeof this.tournament === 'undefined' || this.tournament === '')
         this.listtype = 'datelist';
+    } else if (this.sport === 'Basketball') {
+      this.listtype = 'datelist';
     }
   }
   replace(str) {
