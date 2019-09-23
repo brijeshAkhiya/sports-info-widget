@@ -35,7 +35,7 @@ export class MatchComponent implements OnInit {
 
   getMatchInfo(id) {
     this.loading = true;
-    this.sportsService.getBasketballMatchSummary(id).subscribe((res: any) => {
+    this.sportsService.getBasketballMatchPlayByPlay(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
 

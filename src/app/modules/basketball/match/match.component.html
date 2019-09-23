@@ -116,14 +116,29 @@
                 </div>
 
               </div>
+
+              <!-- Quater Tabs -->
+              <ngb-tabset class="filled-tabs scorecard-tab">
+                <ngb-tab *ngFor="let period of matchInfo?.periods">
+                  <ng-template ngbTabTitle>
+                    <span>{{ 'Q' + period.sequence }}</span>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <app-goal-commentry *ngIf="period.events.length > 0" [commentry]="period.events"
+                      [sport]="'Basketball'"></app-goal-commentry>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+
             </ng-template>
           </ngb-tab>
           <!--END - PLAY BY PLAY  -->
+
           <!--START - NEWS TAB-->
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle" [sport]="'Basketball'">
               </app-blog-list>
             </ng-template>
           </ngb-tab>
