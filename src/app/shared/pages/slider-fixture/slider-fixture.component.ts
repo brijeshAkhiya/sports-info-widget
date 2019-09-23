@@ -10,19 +10,17 @@ import * as fromRoot from '@app/app-reducer';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-fixtures',
-  templateUrl: './fixtures.component.html',
-  styleUrls: ['./fixtures.component.css'],
+  selector: 'app-slider-fixture',
+  templateUrl: './slider-fixture.component.html',
+  styleUrls: ['./slider-fixture.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FixturesSoccerComponent implements OnInit {
+export class SliderFixtureComponent implements OnInit {
 
   @ViewChild('gallery') public gallery: CarouselComponent;
 
   params;
-  paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
-  paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
-  paramSoccer: any;
+  paramData: any;
   customDate;
   model: any;
   tournamentid: any;
@@ -38,15 +36,16 @@ export class FixturesSoccerComponent implements OnInit {
   ngOnInit() {
     const data: any = this.activatedroute.data;
     this.params = data.value;
+    console.log(this.params);
 
-    this.paramSoccer = {
+    this.paramData = {
       loading: false, loadmore: false, data: [], fullData: [],
       selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
       filterCategory: [],
       selectedCategory: { name: 'All' }
     };
-    this.loadDate(this.paramSoccer.selectedDate);
-    this.getSoccerData();
+    this.loadDate(this.paramData.selectedDate);
+    this.getFixturesData();
   }
   loadDate(current) {
     this.customDate = new Array<any>(moment(`${current.year}-${current.month}-${current.day.toString()}`).daysInMonth()).fill(0, 0).map((x, i) => i + 1);
@@ -61,61 +60,82 @@ export class FixturesSoccerComponent implements OnInit {
   initializedSlider($e) {
     setTimeout(() => {
       if (this.gallery.slidesOutputData.slides.length > 7)
-        this.gallery.to(this.paramSoccer.selectedDate.day.toString());
+        this.gallery.to(this.paramData.selectedDate.day.toString());
     });
   }
   selectDate(day) {
-    this.paramSoccer.data = [];
-    this.paramSoccer.selectedDate.day = this.checkDateWithZero(day);
-    this.loadDate(this.paramSoccer.selectedDate);
-    this.getSoccerData();
+    this.paramData.data = [];
+    this.paramData.selectedDate.day = this.checkDateWithZero(day);
+    this.loadDate(this.paramData.selectedDate);
+    this.getFixturesData();
   }
   dateChange($e) {
-    this.paramSoccer.data = [];
-    this.paramSoccer.selectedDate = {
+    this.paramData.data = [];
+    this.paramData.selectedDate = {
       year: this.model.year,
       month: this.checkDateWithZero(this.model.month),
       day: this.checkDateWithZero(this.model.day),
       monthStr: moment(`${this.model.year}-${this.checkDateWithZero(this.model.month)}-${this.checkDateWithZero(this.model.day)}`).format('MMM')
     };
-    this.loadDate(this.paramSoccer.selectedDate);
-    this.getSoccerData();
+    this.loadDate(this.paramData.selectedDate);
+    this.getFixturesData();
   }
   checkDateWithZero(value) {
     return (value != 0 && value.toString().length == 1) ? '0' + value : value;
   }
+  getFixturesData() {
+    if (this.params.sport == 'Soccer')
+      this.getSoccerData();
+    else if (this.params.sport == 'Basketball')
+      this.getBasketballDailySchedule();
+  }
+
   filter(category) {
     const obj = {};
-    this.paramSoccer.selectedCategory = category;
-    console.log(this.paramSoccer.selectedCategory);
+    this.paramData.selectedCategory = category;
+    console.log(this.paramData.selectedCategory);
     if (category.name == 'All') {
-      this.paramSoccer.fullData.map((data) => {
+      this.paramData.fullData.map((data) => {
         if (data.sport_event.sport_event_context) {
           if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
           obj[data.sport_event.sport_event_context.season.id].matches.push(data);
         }
       });
     } else {
-      this.paramSoccer.fullData.map((data) => {
+      this.paramData.fullData.map((data) => {
         if (data.sport_event.sport_event_context && category.id == data.sport_event.sport_event_context.category.id) {
           if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
           obj[data.sport_event.sport_event_context.season.id].matches.push(data);
         }
       });
     }
-    this.paramSoccer.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+    this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+  }
+  getBasketballDailySchedule() {
+    this.paramData.loading = true;
+    this.sportsService
+      .getBasketballDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
+      .subscribe((res: any) => {
+        this.paramData.loading = false;
+        if (res) {
+          this.paramData.data = res.data.games;
+        }
+        console.log(this.paramData.data);
+
+      },
+        error => this.paramData.loading = false);
   }
 
   getSoccerData() {
     console.log('getSoccerData');
 
-    this.paramSoccer.loading = true;
+    this.paramData.loading = true;
     this.sportsService
-      .getSoccerDailySummary(moment(`${this.paramSoccer.selectedDate.year}-${this.paramSoccer.selectedDate.month}-${this.paramSoccer.selectedDate.day}`).format('YYYY-MM-DD'))
+      .getSoccerDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
       .subscribe((res: any) => {
-        this.paramSoccer.loading = false;
+        this.paramData.loading = false;
         if (res.data && res.data.summaries && res.data.summaries.length > 0) {
-          this.paramSoccer.fullData = res.data.summaries;
+          this.paramData.fullData = res.data.summaries;
           const obj = {};
           const category = {};
           res.data.summaries.map((data) => {
@@ -133,35 +153,14 @@ export class FixturesSoccerComponent implements OnInit {
           console.log(category);
 
           // category = this.commonService.sortByName(category, 'name');
-          this.paramSoccer.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
-          this.paramSoccer.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
-          console.log(this.paramSoccer);
+          this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+          this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
+          console.log(this.paramData);
 
         }
       }, (error) => {
-        this.paramSoccer.loading = false;
+        this.paramData.loading = false;
       });
-  }
-
-  getSoccerTournamentData(id) {
-    this.paramsFixtures.loading = true;
-    this.paramsResults.loading = true;
-    this.sportsService
-      .getSoccerTournamentMatches(id)
-      .subscribe((res: any) => {
-        this.paramsFixtures.loading = false;
-        this.paramsResults.loading = false;
-        if (res.data.summaries && res.data.summaries.length > 0) {
-          this.paramsFixtures.data = this.paramsFixtures.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'), 'Do MMMM YYYY', 'start_time', 'asc'));
-          this.paramsResults.data = this.paramsResults.data.concat(this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'), 'Do MMMM YYYY', 'start_time', 'desc'));
-          // console.log(this.paramsFixtures.data);
-
-        }
-      }, (error) => {
-        this.paramsFixtures.loading = false;
-        this.paramsResults.loading = false;
-      });
-
   }
 
   sortArr(data, format, date_param, sort_type) {
@@ -206,3 +205,4 @@ export class FixturesSoccerComponent implements OnInit {
   };
 
 }
+

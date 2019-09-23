@@ -46,6 +46,28 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   public windowinnerWidth: any;
   isopen: boolean = false;
 
+  sportsMenu = [
+    { title: 'Cricket', link: '/cricket' },
+    { title: 'Kabaddi', link: '/kabaddi' },
+    { title: 'Soccer', link: '/soccer' },
+    { title: 'Badminton', link: '/coming-soon/badminton' },
+    { title: 'Basketball', link: '/basketball' },
+    { title: 'Field Hockey', link: '/coming-soon/field-Hockey' },
+    { title: 'Racing', link: '/coming-soon/racing' },
+    { title: 'Tennis sports', link: '/coming-soon/tennis-sports' },
+  ];
+
+  langauges = [
+    { title: 'English', link: 'https://www.sports.info' },
+    { title: 'Hindi', link: 'https://hindi.sports.info' },
+    { title: 'Gujarati', link: 'https://gujarati.sports.info' },
+    { title: 'Marathi', link: 'https://marathi.sports.info' },
+    { title: 'Telugu', link: 'https://telugu.sports.info' },
+    { title: 'Italian', link: 'https://italian.sports.info' },
+    { title: 'Spain', link: 'https://spain.sports.info' },
+    { title: 'Mexican', link: 'https://mexican.sports.info' },
+  ];
+
 
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
@@ -66,7 +88,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     private store: Store<fromRoot.State>,
     private commonService: CommonService,
   ) {
-    //get custom ads data Funtion call --->
+    /* //get custom ads data Funtion call ---> */
     this.getCustomAds();
   }
 
@@ -75,12 +97,11 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       console.log('checksocial', user);
       if (user == null) {
-        this.isLogin = false
+        this.isLogin = false;
         this.store.dispatch(new Auth.SetUnauthenticated);
-      }
-      else {
+      } else {
         this.socialUser = user;
-        this.isLogin = true
+        this.isLogin = true;
         this.store.dispatch(new Auth.SetAuthenticated);
       }
     });
@@ -108,8 +129,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     if (this.windowinnerWidth < 576) {
       this.responsiveSticky(163);
       console.log('width change' + innerWidth);
-    }
-    else {
+    } else {
       this.responsiveSticky(129);
     }
   }
@@ -118,7 +138,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.changeDetector.detectChanges();
   }
 
-  //get custom ads api call -Ngrx Store
+  /* //get custom ads api call -Ngrx Store */
   getCustomAds() {
     this.sportsService.getcustomadsbanner().subscribe(
       res => {
@@ -132,18 +152,18 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     );
   }
 
-  //nav bar click event
+  /* //nav bar click event */
   linkactive(linkid) {
-    var navel = this.navbarnav.nativeElement;
-    var navrect = navel.getBoundingClientRect();
-    var el = document.getElementById(`nav-link${linkid}`); //get particular id nav-element
-    var rect = el.getBoundingClientRect();
-    var curPoint = rect['x'] - navrect['x'];
+    let navel = this.navbarnav.nativeElement;
+    let navrect = navel.getBoundingClientRect();
+    let el = document.getElementById(`nav-link${linkid}`); /* //get particular id nav-element */
+    let rect = el.getBoundingClientRect();
+    let curPoint = rect['x'] - navrect['x'];
     this.renderer2.setStyle(
       this.navpointer.nativeElement,
       'width',
       rect.width + 'px'
-    ); //set
+    ); /* //set */
     this.renderer2.setStyle(
       this.navpointer.nativeElement,
       'left',
@@ -151,7 +171,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     );
   }
 
-  //dynamic routing
+  /* //dynamic routing */
   routing(routerlink) {
     if (routerlink) {
       this.router.navigate([`${routerlink}`]);
@@ -167,7 +187,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     }
 
   }
-  //search bar open
+  /* //search bar open */
   searchopen() {
     this.isapply = false;
     if (!this.issearch) {
@@ -181,7 +201,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   openmodal() {
     this.modalService.open(LoginModalComponent);
   }
-  //search close
+  /*  //search close */
   closesearch() {
     this.issearch = false;
     // this.searchkey = "";
@@ -192,15 +212,15 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.sportsService.userlogout(token).subscribe((res) => {
       console.log(res);
       this.store.dispatch(new Auth.SetUnauthenticated());
-    })
+    });
   }
 
   logout() {
     this.authService.signOut().then(res => {
       if (localStorage.getItem('userT')) {
         this.getuserLogout(localStorage.getItem('userT'));
-        localStorage.removeItem('userT')
-        localStorage.removeItem('userId')
+        localStorage.removeItem('userT');
+        localStorage.removeItem('userId');
       }
     });
   }

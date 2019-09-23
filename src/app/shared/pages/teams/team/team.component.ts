@@ -257,7 +257,7 @@ export class TeamComponent implements OnInit {
             this.paramsResults.data.push(match);
           }
         });
-        this.paramsResults.data = this.commonService.sortArr(this.paramsResults.data, 'Do MMMM YYYY', 'start_time', 'asc');
+        this.paramsResults.data = this.commonService.sortArr(this.paramsResults.data, 'Do MMMM YYYY', 'start_time', 'desc');
         break;
       }
     }

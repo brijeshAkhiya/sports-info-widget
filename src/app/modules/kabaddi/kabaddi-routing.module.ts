@@ -14,6 +14,7 @@ import { MatchComponent } from './match/match.component';
 const routes: Routes = [{
   path: '',
   component: RouterComponent,
+  data: { 'sport': 'Kabaddi' },
   children: [
     {
       path: '',

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import * as moment from 'moment';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
@@ -151,8 +152,28 @@ export class TournamentMatchComponent implements OnInit {
         }
       });
       this.headtohead = head;
-      this.teamvsteamdata = this.commonService.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc');
+      console.log(this.teamvsteamdata);
+      this.teamvsteamdata = this.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc');
+      console.log(this.teamvsteamdata);
+
     });
+  }
+
+  sortArr(data, format, date_param, sort_type) {
+    data.sort((a, b) => {
+      if (sort_type === 'asc') {
+        return new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? 1 : 0;
+      } else {
+        return new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? 1 : 0;
+      }
+    });
+    const dateObj = {};
+    data.map((data) => {
+      const mdate = moment(data['sport_event'][date_param]).format(format);
+      if (!dateObj[mdate]) dateObj[mdate] = [];
+      dateObj[mdate].push(data);
+    });
+    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
 
@@ -231,7 +252,8 @@ export class TournamentMatchComponent implements OnInit {
       let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
       this.team.home.squad = [];
       tempHomeSquad.forEach(element => {
-        (this.team.home.squad[element.type] = this.team.home.squad[element.type] || []).push(element);
+        let type: any = (element.type === undefined) ? 'Other' : element.type;
+        (this.team.home.squad[type] = this.team.home.squad[type] || []).push(element);
       });
       //Team with formated type
       if (this.team.home.formation && this.team.home.formation.type) {
@@ -246,7 +268,10 @@ export class TournamentMatchComponent implements OnInit {
       let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
       this.team.away.squad = [];
       tempAwaySquad.forEach(element => {
-        (this.team.away.squad[element.type] = this.team.away.squad[element.type] || []).push(element);
+        let type: any = (element.type === undefined) ? 'Other' : element.type;
+        (this.team.away.squad[
+          type] = this.team.away.squad[
+          type] || []).push(element);
       });
       //Team with formated type
       if (this.team.away.formation && this.team.away.formation.type) {

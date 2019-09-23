@@ -44,6 +44,7 @@ import { TeamsComponent } from './pages/teams/teams.component';
 import { TeamComponent } from './pages/teams/team/team.component';
 import { PlayerComponent } from './pages/player/player.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SliderFixtureComponent } from './pages/slider-fixture/slider-fixture.component';
 
 import { FlashCommentaryComponent } from './flash-commentary/flash-commentary.component';
 import { SportsHomeComponent } from './sports-home/sports-home.component';
@@ -146,6 +147,7 @@ import { LiveMatchTrackerComponent } from './widget/match/live-match-tracker/liv
         RouterComponent,
         FixturesComponent,
         LiveMatchTrackerComponent,
+        SliderFixtureComponent,
     ],
     providers: [
         /** All Pipes */

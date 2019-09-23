@@ -2,11 +2,11 @@
     "Header_menu": {
         "Soccer": "Calcio",
         "Racing": "Da corsa",
-        "Field_Hockey": "Hockey su prato",
+        "Field Hockey": "Hockey su prato",
         "Basketball": "Pallacanestro",
         "Cricket": "Cricket",
         "Logout": "Disconnettersi",
-        "Tennis_sports": "Sport da tennis",
+        "Tennis sports": "Sport da tennis",
         "Badminton": "Badminton",
         "Kabaddi": "Kabaddi"
     },
