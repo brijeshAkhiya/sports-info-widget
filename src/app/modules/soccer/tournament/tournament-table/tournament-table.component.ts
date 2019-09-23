@@ -12,6 +12,7 @@ export class TournamentTableComponent implements OnInit {
   tournamentid: any;
   pointstable: any;
   loading: boolean;
+  sport = 'Soccer';
 
   constructor(
     private sportsService: SportsService,
@@ -29,16 +30,15 @@ export class TournamentTableComponent implements OnInit {
     this.sportsService.getsoccerpointtable(this.tournamentid).subscribe((res: any) => {
       if (res.data) {
         this.loading = false;
-        this.pointstable = res.data.standings
+        this.pointstable = res.data.standings;
         res.data.standings.map((sData) => {
           if (sData.type == 'total') {
             sData.groups[0].standings.map((gData) => {
-              gData['teamname'] = gData.competitor.name
+              gData['teamname'] = gData.competitor.name;
               this.pointstable.push(gData);
-            })
+            });
           }
-        })
-        console.log('point table', this.pointstable)
+        });
       }
     }, (err) => { this.loading = false; }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { SportsService } from '@app/shared/providers/sports-service';
 import { CommonService } from '@app/shared/providers/common-service';
 import { ActivatedRoute } from '@angular/router';
@@ -24,19 +25,15 @@ export class TopScorerWidgetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.sport == 'kabaddi') {
+    if (this.sport == 'Kabaddi') {
       this.gettopscorer('raidtotalpoint');
-    }
-    else if (this.sport == 'soccer') {
+    } else if (this.sport == 'Soccer') {
       this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-      console.log(this.tournamentid);
       this.getsoccerTopScorer('goals');
-      console.log('soccer');
-
     }
   }
 
-  //get kabaddi scorers
+  /* get kabaddi scorers */
   gettopscorer(type) {
     this.kabadditype = type;
     this.isloading = true;
@@ -55,7 +52,7 @@ export class TopScorerWidgetComponent implements OnInit {
     });
   }
 
-  // get soccer top-scorers
+  /* // get soccer top-scorers */
   getsoccerTopScorer(type) {
     this.data = [];
     this.isloading = true;

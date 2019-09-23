@@ -143,12 +143,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       this.meta.updateTag({ name: 'title', content: 'title' });
       this.meta.updateTag({ property: 'og:title', content: 'title' });
       this.meta.updateTag({ name: 'twitter:title', content: 'title' });
-      this.meta.updateTag(
-        {
-          name: 'keywords', content: data.keywords ?
-            data.keywords :
-            'Sports.info'
-        });
+      this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
       this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
       this.meta.updateTag({ name: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
       this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });

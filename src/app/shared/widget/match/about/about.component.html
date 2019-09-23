@@ -319,12 +319,43 @@
       <div class="live-score" *ngIf="data?.status != 'scheduled'">
         <!-- FINAL Score here -->
 
-        <!-- <h5 *ngIf="data?.status != 'scheduled'">
-          {{data?.status == 'closed' || data?.status == 'ended' 
-              ?  'FT' 
-              : (data?.status == 'live' && data?.match_status == '2nd_half' ? 'HT' : '')}}
-        </h5> -->
-        <h3>{{data?.home?.points}} - {{data?.away?.points}}</h3>
+        <div class="live-score-table">
+          <p class="title light-text">Final</p>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>T</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <!-- add highlight class in high td -->
+                  <td>TOR</td>
+                  <td class="highlight">32</td>
+                  <td>24</td>
+                  <td>36</td>
+                  <td>20</td>
+                  <td>103</td>
+                </tr>
+                <tr>
+                  <td>GSW</td>
+                  <td>24</td>
+                  <td class="highlight">32</td>
+                  <td>36</td>
+                  <td>20</td>
+                  <td>103</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <h3>{{data?.home?.points}} - {{data?.away?.points}}</h3> -->
       </div>
       <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.away}">
       </ng-container>
@@ -358,7 +389,8 @@
         <img [lazyLoad]="team?.sr_id | logosurl:'basketball'" alt="team.name"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
-      <h4><a [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]"> {{ team.name}} </a> </h4>
+      <h4><a [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]"> {{ team.name}} State Warriors</a> </h4>
+      <h3>103</h3>
     </div>
   </div>
 </ng-template>
