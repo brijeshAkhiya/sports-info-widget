@@ -145,10 +145,10 @@
   <ul class="common-list cricket-list soccer" *ngIf="matches && matches.length > 0 && sport == 'Soccer' && type">
     <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
       <div class="title d-flex justify-content-between">
-        <p><b>{{match.sport_event.sport_event_context.season.name ? match.sport_event.sport_event_context.season.name : ''}}
-          </b>
+        <p *ngIf="match.sport_event.sport_event_context">
+          <b>{{match?.sport_event?.sport_event_context?.season?.name ? match?.sport_event?.sport_event_context?.season?.name : ''}}</b>
           <span
-            class="text-capitalize">{{ match.sport_event.sport_event_context.round.name ? '- '+(match.sport_event.sport_event_context.round.name | stringunder) : '' }}</span>
+            class="text-capitalize">{{ match?.sport_event.sport_event_context?.round?.name ? '- '+(match?.sport_event?.sport_event_context?.round?.name | stringunder) : '' }}</span>
         </p>
         <p>{{match.sport_event.start_time | amTimeAgo}}</p>
       </div>

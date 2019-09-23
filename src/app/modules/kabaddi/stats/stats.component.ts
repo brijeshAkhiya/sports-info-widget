@@ -12,6 +12,7 @@ export class StatsComponent implements OnInit {
 
   stats: any;
   isloading = false;
+  sport = 'Kabaddi';
 
   constructor(
     private commonService: CommonService,
@@ -28,7 +29,6 @@ export class StatsComponent implements OnInit {
       this.isloading = false;
       if (res) {
         this.stats = res.data;
-        console.log(this.stats);
       }
     },
       error => this.isloading = false);

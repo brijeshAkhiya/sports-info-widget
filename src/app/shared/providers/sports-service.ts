@@ -666,9 +666,19 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/seasons`
     );
   }
-  getBasketballSummary(id) {
+  getBasketballMatchSummary(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/nba/game/${id}/summary`
+    );
+  }
+  getBasketballSummary(year, season) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/${year}/${season}/summaries`
+    );
+  }
+  getBasketballDailySummary(date) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/daily/summaries/${date}`
     );
   }
 }

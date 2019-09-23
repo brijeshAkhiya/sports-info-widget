@@ -11,15 +11,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of data;let i = index;">
-          <ng-container *ngIf="options.sport == 'kabaddi'">
+          <ng-container *ngIf="options.sport == 'Kabaddi'">
             <ng-container *ngTemplateOutlet="kabaddi;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="options.sport == 'soccer'">
+          <ng-container *ngIf="options.sport == 'Soccer'">
             <ng-container *ngTemplateOutlet="soccer;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="options.sport == 'cricket'">
+          <ng-container *ngIf="options.sport == 'Cricket'">
             <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
           </ng-container>

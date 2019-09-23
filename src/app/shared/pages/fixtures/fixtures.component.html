@@ -1,4 +1,3 @@
-<app-menu *ngIf="!tournamentid" [options]="{ sport: params.sport, type: 'home' }"></app-menu>
 <section class="common-section">
   <div class="container">
     <div class="row sidebar-row">
@@ -54,18 +53,20 @@
       </div>
 
       <div class="sidebar-col">
-        <!-- <div [ngClass]="{'sticky-sidebar': params.sport != 'Soccer'}">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <!--points table widget
+        <div [ngClass]="{'sticky-sidebar': params.sport != 'Soccer'}">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <!-- <app-top-scorer-widget [sport]="sport" *ngIf="tournamentid"></app-top-scorer-widget> -->
+          <app-points-table [sport]="params.sport" *ngIf="tournamentid || params.sport == 'Kabaddi'"
+            [options]="{ tournament : tournamentid }">
+          </app-points-table>
+          <!--points table widget
             <app-top-scorer-widget [sport]="'Soccer'" *ngIf="sport == 'Soccer' && tournamentid"></app-top-scorer-widget>
             <app-sidebar-links *ngIf="sport == 'Soccer'" [sport]="'Soccer'" [link_type]="'tournament'"
               [options]="{type: 'current', title:('Soccer_Module.Current_Tournaments' | translate)}"></app-sidebar-links>
-            <app-points-table [sport]="'Soccer'" *ngIf="sport == 'Soccer' && tournamentid"
-              [options]="{ tournament : tournamentid }"></app-points-table>
             <!-- <app-top-scorer-widget [sport]="'Soccer'" *ngIf="sport == 'Soccer'"></app-top-scorer-widget>
             <app-points-table [sport]="'Kabaddi'" *ngIf="sport == 'Kabaddi'"></app-points-table>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          </div> -->
+            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
+        </div>
       </div>
     </div>
   </div>

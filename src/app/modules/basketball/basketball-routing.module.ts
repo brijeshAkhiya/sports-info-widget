@@ -6,8 +6,8 @@ import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/pages/player/player.component';
+import { SliderFixtureComponent } from '@app/shared/pages/slider-fixture/slider-fixture.component';
 
-import { FixturesComponent } from './fixtures/fixtures.component';
 import { StatsComponent } from './stats/stats.component';
 import { StandingsComponent } from './standings/standings.component';
 import { MatchComponent } from './match/match.component';
@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: RouterComponent,
+    data: { 'sport': 'Basketball' },
     children: [
       {
         path: '',
@@ -39,7 +40,8 @@ const routes: Routes = [
       },
       {
         path: 'fixtures',
-        component: FixturesComponent
+        component: SliderFixtureComponent,
+        data: { 'sport': 'Basketball' }
       },
       {
         path: 'stats',

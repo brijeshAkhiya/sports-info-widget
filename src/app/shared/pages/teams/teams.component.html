@@ -29,14 +29,15 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-top-scorer-widget [sport]="'kabaddi'" *ngIf="sport == 'kabaddi'"></app-top-scorer-widget>
-          <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"
-            [options]="{ tournament : tournamentid }"></app-points-table>
+
+          <app-top-scorer-widget [sport]="sport" *ngIf="tournamentid || sport == 'Kabaddi'"></app-top-scorer-widget>
+          <!-- <app-points-table [sport]="'soccer'" *ngIf="sport == 'soccer' && tournamentid"
+            [options]="{ tournament : tournamentid }"></app-points-table> -->
 
           <!--Current series widget-->
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+          <!-- <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
             [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"
-            *ngIf="sport == 'cricket'"></app-sidebar-links>
+            *ngIf="sport == 'cricket'"></app-sidebar-links> -->
           <!-- <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
         </div>
       </div>

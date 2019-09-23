@@ -1,17 +1,13 @@
 {
-  "Cricket": "Cricket",
-  "Kabaddi": "Kabaddi",
-  "Soccer": "Soccer",
-  "Basketball": "Basketball",
   "Header_menu": {
     "Cricket": "Cricket",
     "Kabaddi": "Kabaddi",
     "Soccer": "Soccer",
     "Badminton": "Badminton",
     "Basketball": "Basketball",
-    "Field_Hockey": "Field Hockey",
+    "Field Hockey": "Field Hockey",
     "Racing": "Racing",
-    "Tennis_sports": "Tennis sports",
+    "Tennis sports": "Tennis sports",
     "Logout": "Logout"
   },
   "Footer": {
@@ -333,5 +329,13 @@
   "Draft": "Draft",
   "Statistics": "Statistics",
   "League": "League",
-  "Rank": "Rank"
+  "Rank": "Rank",
+  "Cricket": "Cricket",
+  "Kabaddi": "Kabaddi",
+  "Soccer": "Soccer",
+  "Badminton": "Badminton",
+  "Basketball": "Basketball",
+  "Field Hockey": "Field Hockey",
+  "Racing": "Racing",
+  "Tennis sports": "Tennis sports"
 }

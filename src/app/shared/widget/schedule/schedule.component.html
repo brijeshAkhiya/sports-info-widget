@@ -1,4 +1,4 @@
-<div class="schedule-list schedule-tour-list" *ngIf="listtype == 'simple'; else soccer_list">
+<div class="schedule-list schedule-tour-list" *ngIf="listtype == 'simple'; else date_list">
   <div class="schedule-month d-flex" *ngFor="let item of data">
     <div class="month-title">
       <div class="sticky-month">
@@ -18,6 +18,10 @@
         <ng-container *ngIf="sport == 'Soccer'">
           <ng-container *ngTemplateOutlet="soccer;context:{match: match, type:type}">
           </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="sport == 'Basketball'">
+        <ng-container *ngTemplateOutlet="basketball;context:{match: match, type:type}">
         </ng-container>
       </ng-container>
     </div>
@@ -233,6 +237,17 @@
 
 </ng-template>
 
+<ng-template #date_list>
+  <ng-container *ngIf="sport == 'Basketball'">
+    <ng-container *ngTemplateOutlet="basketball_list">
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="sport == 'Soccer'">
+    <ng-container *ngTemplateOutlet="soccer_list">
+    </ng-container>
+  </ng-container>
+</ng-template>
+
 <ng-template #soccer_list>
   <div class="soccer-tour-list" *ngIf="data.length > 0">
     <div class="soccer-tour rounded-box common-shadow" *ngFor="let item of data">
@@ -304,6 +319,87 @@
             <p class="stadium-nm" *ngIf="match.sport_event.venue">
               {{match.sport_event.venue?.name}}, {{match.sport_event.venue?.city_name}},
               {{match.sport_event.venue?.country_name}}
+            </p>
+            <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
+            <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #basketball_list>
+
+  <div class="soccer-tour-list" *ngIf="data.length > 0">
+    <div class="soccer-tour rounded-box common-shadow">
+      <!-- <div class="soccer-tour-title">
+        <p>{{item?.data?.season?.name}}</p>
+      </div> -->
+      <div class="schedule-tour-list">
+        <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"
+          *ngFor="let match of data" [ngClass]="{'complete-match' : match?.status=='closed'}">
+          <div class="match-teams d-flex align-items-center" *ngIf="match?.home && match?.away">
+
+            <div class="match-team d-flex align-items-center" *ngIf="match?.home">
+              <div class="team-info">
+                <h5 [ngClass]="{'winner': match?.status == 'closed' && match?.home_points > match?.away_points}">
+                  {{match?.home?.name}}
+                </h5>
+              </div>
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="(match?.home?.sr_id | splitID) | logosurl:'basketball'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.name}}">
+              </div>
+            </div>
+
+            <!-- For Upcoming Match -->
+            <div class="vs-block" *ngIf="match?.status != 'closed'">
+              <h6>vs</h6>
+            </div>
+            <!-- For Complete/Result Match -->
+            <div class="score-center-block" *ngIf="match?.status == 'closed'">
+              <p>vs</p>
+              <div class="value d-flex justify-content-between">
+                <h4 class="dark-text">
+                  {{match?.home_points}}
+                </h4>
+                <h4 class="dark-text">-</h4>
+                <h4 class="dark-text">
+                  {{match?.away_points}}
+                </h4>
+              </div>
+            </div>
+
+            <div class="match-team d-flex align-items-center" *ngIf="match?.away">
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="(match?.away?.sr_id | splitID) | logosurl:'basketball'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.name}}">
+              </div>
+              <div class="team-info">
+                <h5 [ngClass]="{'winner':  match?.status == 'closed' && match?.away_points > match?.home_points}">
+                  {{match?.away?.name}}
+                </h5>
+              </div>
+            </div>
+
+            <a class="details-btn"
+              [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+            <a class="fullblock-link"
+              [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
+            </a>
+
+          </div>
+
+          <div class="match-desc text-center">
+            <h6>
+              <span class="text-capitalize">{{match?.start_time | date:'h:mm a'}}</span>
+            </h6>
+            <p class="stadium-nm" *ngIf="match?.venue">
+              {{match?.venue?.name}}, {{match?.venue?.city}},
+              {{match?.venue?.country}}
             </p>
             <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
             <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->

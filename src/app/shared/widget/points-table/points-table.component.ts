@@ -30,36 +30,33 @@ export class PointsTableComponent implements OnInit {
   ngOnInit() {
     console.log(this.sport);
     console.log(this.options);
-    if (this.sport == 'cricket') {
+    if (this.sport == 'Cricket') {
       this.loadCricketPoints();
       this.data = {
         header_title: this.translateService.get('Shared_Module2.Points_Table')['value'],
         titles: [this.translateService.get('Shared_Module2.TEAM')['value'], 'M', 'W', 'L', 'T', 'N/R', 'P', 'NRR'],
         values: ['image', 'played', 'win', 'loss', 'draw', 'no_result', 'points', 'net_run_rate'],
-        class: ['tour-stats-table'],
         class_light_row: ['light-row'],
-        sport: 'cricket',
+        sport: this.sport,
         tournamentId: this.options.tournament
       };
-    } else if (this.sport == 'kabaddi') {
+    } else if (this.sport == 'Kabaddi') {
       this.loadKabaddiPoints();
       this.data = {
         header_title: this.translateService.get('Shared_Module2.Points_Table')['value'],
         titles: [this.translateService.get('Shared_Module2.TEAM')['value'], 'P', 'W', 'L', 'D', 'SD'],
         values: ['tname', 'matchplayed', 'win', 'loss', 'draw', 'scoredifference'],
-        class: ['tour-stats-table'],
         class_light_row: ['light-row'],
-        sport: 'kabaddi'
+        sport: this.sport
       };
-    } else if (this.sport == 'soccer') {
+    } else if (this.sport == 'Soccer') {
       this.loadsoccerpointtable();
       this.data = {
         header_title: this.translateService.get('Shared_Module2.Points_Table')['value'],
         titles: [this.translateService.get('Shared_Module2.TEAM')['value'], 'P', 'W', 'L', 'D', 'GD', 'Pts'],
         values: ['image', 'played', 'win', 'loss', 'draw', 'goals_diff', 'points'],
-        class: ['tour-stats-table'],
         class_light_row: ['light-row'],
-        sport: 'soccer',
+        sport: this.sport,
         tournamentId: this.options.tournament
 
       };

@@ -16,7 +16,6 @@ import { TournamentHomeComponent } from './tournament/tournament-home/tournament
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
 import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
 import { TournamentMatchComponent } from './tournament/tournament-match/tournament-match.component';
-import { FixturesSoccerComponent } from './fixtures/fixtures.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { FixturesSoccerComponent } from './fixtures/fixtures.component';
     TournamentStatsComponent,
     TournamentTableComponent,
     TournamentMatchComponent,
-    FixturesSoccerComponent
   ],
 
   imports: [
