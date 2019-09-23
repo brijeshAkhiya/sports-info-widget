@@ -9,7 +9,8 @@
             <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem *ngFor="let season of seasons?.year[0]" (click)="yearDrop.close();filterData({year: season});"
+                <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
+                  (click)="yearDrop.close();filterData({year: season});"
                   [ngClass]="{'selected' : filter.year == season  }">
                   {{season}}
                 </button>
@@ -18,24 +19,24 @@
             <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem *ngFor="let season of seasons?.type[0]" (click)="typeDrop.close();filterData({type: season});"
-                [ngClass]="{'selected' : filter.type == season  }">
-                {{season}}
-              </button>
+                <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
+                  (click)="typeDrop.close();filterData({type: season});"
+                  [ngClass]="{'selected' : filter.type == season  }">
+                  {{season}}
+                </button>
               </div>
             </div>
           </div>
         </div>
         <app-loader *ngIf="isloading"></app-loader>
-        <app-no-data-widget *ngIf="!isloading && (!standings || standings?.length == 0)" [sport]="'kabaddi'"
-          [message]="'Coming Soon..!'"></app-no-data-widget>
-
         <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="!isloading">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div>{{ 'League' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-no-data-widget *ngIf="(standings?.teams?.length == 0)" [sport]="'Basketball'"
+                [message]="'Coming Soon..!'"></app-no-data-widget>
               <app-player-table *ngIf="standings?.teams?.length > 0 " [data]="standings?.teams" [options]=" {
                   sport:'Basketball',
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
@@ -51,7 +52,8 @@
               <div>{{ 'Conference' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-
+              <app-no-data-widget *ngIf="(standings?.conferences?.length == 0)" [sport]="'Basketball'"
+                [message]="'Coming Soon..!'"></app-no-data-widget>
               <ng-container *ngIf="standings?.conferences?.length > 0 ">
                 <ng-container *ngFor="let conference of standings?.conferences">
                   <h4 class="nba-table-title">{{conference.name}}</h4>
@@ -72,6 +74,8 @@
               <div (click)="getTournamentStats('tackletotalpoint')">{{ 'Division' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-no-data-widget *ngIf="(standings?.divisions?.length == 0)" [sport]="'Basketball'"
+                [message]="'Coming Soon..!'"></app-no-data-widget>
               <ng-container *ngIf="standings?.divisions?.length > 0 ">
                 <ng-container *ngFor="let divisions of standings?.divisions">
                   <h4 class="nba-table-title">{{divisions.name}}</h4>
