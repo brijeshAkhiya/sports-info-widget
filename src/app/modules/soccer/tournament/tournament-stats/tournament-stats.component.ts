@@ -14,6 +14,7 @@ export class TournamentStatsComponent implements OnInit {
   stats: any = [];
   players: any[];
   isloading;
+  sport = 'Soccer';
 
   constructor(
     private commonService: CommonService,
@@ -26,62 +27,56 @@ export class TournamentStatsComponent implements OnInit {
     this.getSoccerSeasonLeaders(this.tournamentid);
   }
 
-  //get soccer season leaders
+  /*  //get soccer season leaders */
   getSoccerSeasonLeaders(id) {
-   
     this.isloading = true;
     this.sportsService.getSoccerseasonleaders(id).subscribe((res: any) => {
-      console.log('soccer-leaders', res);
-      this.isloading = false
-      this.stats = res.data.lists
+      this.isloading = false;
+      this.stats = res.data.lists;
       this.getdata('goals');
-    },(error)=>{
-      this.isloading = false
-    })
+    }, (error) => {
+      this.isloading = false;
+    });
   }
 
   getdata(type) {
-    console.log('type:', type);
-    let array = []
-    this.players = []
-    this.isloading = true
+    let array = [];
+    this.players = [];
+    this.isloading = true;
     this.stats.map((data) => {
       if (data.type == type) {
         data.leaders.map((ldata) => {
           ldata.players.map((pdata) => {
-            pdata['rank'] = ldata.rank
-            pdata['value'] = pdata.competitors[0].datapoints[0].value
+            pdata['rank'] = ldata.rank;
+            pdata['value'] = pdata.competitors[0].datapoints[0].value;
             if (array.length < 10) {
-              array.push(pdata)
+              array.push(pdata);
             }
-          })
-        })
+          });
+        });
       }
-    })
-    this.isloading = false
-    this.players = array
-    console.log('stat-arr', this.players);
+    });
+    this.isloading = false;
+    this.players = array;
   }
 
-  getCarddata(){
-    let array = []
-    this.players = []
+  getCarddata() {
+    let array = [];
+    this.players = [];
     this.stats.map((data) => {
       if (data.type == 'red_cards' || data.type == 'yellow_cards') {
         data.leaders.map((ldata) => {
           ldata.players.map((pdata) => {
-            pdata['rank'] = ldata.rank
-            pdata[data.type] = pdata.competitors[0].datapoints[0].value
+            pdata['rank'] = ldata.rank;
+            pdata[data.type] = pdata.competitors[0].datapoints[0].value;
             if (array.length < 10) {
-              array.push(pdata)
+              array.push(pdata);
             }
-          })
-        })
+          });
+        });
       }
-    })
-
-    this.players = array
-    console.log('stat-arr', this.players);
+    });
+    this.players = array;
   }
 
 
