@@ -7,8 +7,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SplitPipe implements PipeTransform {
 
     transform(input: string): any {
-        if(typeof input == 'undefined' || input == null)
+        if (typeof input == 'undefined' || input == null)
             return '';
-        return (input.split(", ")).reverse().join(" ")
+        return (input.split(', ')).reverse().join(' ');
     }
 }

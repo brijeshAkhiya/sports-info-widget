@@ -1,7 +1,7 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: "dateparse"
+    name: 'dateparse'
 })
 export class DateParsePipe implements PipeTransform {
 
@@ -9,7 +9,7 @@ export class DateParsePipe implements PipeTransform {
 
     transform(value: any): any {
         if (value) {
-            return value.replace(/\s/g, "T");
+            return value.replace(/\s/g, 'T');
         }
     }
 }
