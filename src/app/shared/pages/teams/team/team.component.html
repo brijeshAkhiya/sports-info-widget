@@ -46,19 +46,25 @@
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.id | logosurl"
                       [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
-                  <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.abbreviation"><span
-                        class="title light-text">{{ 'Shared_module.Abbreviation' | translate }} :
-                      </span>{{teamProfile?.abbreviation}}</h5>
-                    <h5 *ngIf="teamProfile?.manager_name"><span
-                        class="title light-text">{{ 'Shared_module.Manager' | translate }} :
-                      </span>{{teamProfile?.manager_name | split}}</h5>
-                    <h5 *ngIf="teamProfile?.results">
-                      <span class="title light-text"> {{ 'Shared_module.Recent_matches' | translate }}: </span>
-                      <ul class="match-result">
-                        <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamProfile?.results">{{item}}</li>
-                      </ul>
-                    </h5>
+                  <div class="team-info d-flex rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.abbreviation">
+                        <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
+                        <p>{{teamProfile?.abbreviation}}</p>
+                      </div>
+                      <div class="info-item" *ngIf="teamProfile?.manager_name">
+                        <p class="title light-text">{{ 'Shared_module.Manager' | translate }}</p>
+                        <p>{{teamProfile?.manager_name | split}}</p>
+                      </div>
+                    </div>
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.results">
+                        <p class="title light-text">{{ 'Shared_module.Recent_matches' | translate }}</p>
+                        <ul class="match-result">
+                          <li [ngClass]="{'win': item == 'W'}" *ngFor="let item of teamProfile?.results">{{item}}</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </section>
 
@@ -67,15 +73,17 @@
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.tid | logosurl:'kabaddi'"
                       [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
-                  <div class="team-info align-items-center rounded-box common-shadow">
-                    <h5 *ngIf="teamProfile?.venue && teamProfile?.venue?.name"><span
-                        class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
-                      </span>{{teamProfile?.venue?.name}}
-                    </h5>
-                    <h5 *ngIf="teamProfile?.founded"><span class="title light-text">
-                        {{ 'Shared_module.Founded' | translate }}:
-                      </span>{{teamProfile?.founded}}
-                    </h5>
+                  <div class="team-info d-flex rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.venue && teamProfile?.venue?.name">
+                        <p class="title light-text">{{ 'Shared_module.Stadium' | translate }}</p>
+                        <p>{{teamProfile?.venue?.name}}</p>
+                      </div>
+                      <div class="info-item" *ngIf="teamProfile?.founded">
+                        <p class="title light-text">{{ 'Shared_module.Founded' | translate }}</p>
+                        <p *ngIf="teamProfile?.venue?.name">{{teamProfile?.founded}}</p>
+                      </div>
+                    </div>
                   </div>
                 </section>
 
@@ -84,7 +92,7 @@
                     <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'soccer'"
                       [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
-                  <div class="team-info soccer-team-info d-flex align-items-center rounded-box common-shadow">
+                  <div class="team-info d-flex rounded-box common-shadow">
                     <div class="info-col">
                       <div class="info-item">
                         <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>

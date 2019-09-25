@@ -19,7 +19,7 @@
 .schedule-list .schedule-item.schedule-hover:hover *       { color: #fff !important; } */
 
 /* -------- Tournament Fixtures List ------- */
-.schedule-tour-list .schedule-item      { padding-bottom: 16px; min-height: 112px; overflow: hidden; position: relative; background: #fff;}
+.schedule-tour-list .schedule-item      { padding-bottom: 16px; overflow: hidden; position: relative; background: #fff;}
 .schedule-item .match-desc              { width: 200px; align-self: flex-start; -webkit-align-self: flex-start; }
 .schedule-item .match-teams             { width: calc(100% - 208px); }
 .schedule-tour-list .schedule-item *:last-child         { margin-bottom: 0px; }

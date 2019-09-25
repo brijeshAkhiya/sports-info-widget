@@ -2,37 +2,42 @@
 .head-to-head                   { padding: 24px; text-align: center; }
 .head-to-head .head-team        { width: 50%; }
 .head-to-head .flag-block p     { margin: 8px 0px 0px; font-weight: 500;}
-.head-to-head .flag-block:first-child   { text-align: left; }
-.head-to-head .flag-block:last-child    { text-align: right;}
+.head-to-head .flag-block               { text-align: center; }
+/* .head-to-head .flag-block:first-child   { text-align: left; }
+.head-to-head .flag-block:last-child    { text-align: right;} */
 .head-to-head .head-center      { width: 30%; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .head-to-head h1                { margin: -10px 0px; font-family: inherit; font-style: normal; }
 .head-to-head .head-center h1   { font-size: 64px; line-height: 84px; }
-.head-to-head .flag-img         { height: 102px; border: 2px solid #EBEBEB; border-radius: 4px; }
+.head-to-head .flag-img         { padding: 0 28px; height: 100px; display: inline-block; border: 2px solid #EBEBEB; border-radius: 4px; }
+.head-to-head .flag-img img     { height: 100%;}
+
 /* -------- Match Form Section ------- */
 .form-teams-block                           { padding: 40px 0px; text-align: center; }
 .form-teams-block > div                     { width: 50%; }
 .form-teams-block > div:first-child         { border-right: 2px solid #EBEBEB; }
 .form-teams-block .flag-img                 { margin-bottom: 12px; height: 102px; border: 2px solid #EBEBEB; border-radius: 4px; }
+.form-teams-block h5                        { font-family: inherit; font-weight: 500; }
 .form-teams-block .form-match-list          { margin: 26px 0px 0px; }
 .form-teams-block .form-match-list li       { margin: 0px 18px; display: inline-block; }
-.form-teams-block .dropdown-toggle          { padding: 0px; height: 48px; width: 48px; background: #7A7A7A; font-size: 24px; line-height: 48px; color: #fff; border: none; border-radius: 50%; text-transform: uppercase; }
+.form-teams-block .dropdown-toggle          { padding: 0px; height: 48px; width: 48px; background: #7A7A7A; font-size: 24px; line-height: 48px; color: #fff; border: none; border-radius: 50%; text-transform: uppercase; font-family: inherit; font-weight: 700; }
 .form-teams-block .dropdown-toggle::after   { display: none; }
 .form-teams-block .dropdown-toggle.win      { background: #6DD400;}
 .form-teams-block .dropdown-toggle.loss     { background: #FA3000;}
 .form-teams-block .dropdown-menu            { padding: 4px 12px 12px; width: 240px; top: 100% !important; left: 50% !important; transform: translate(-50%, 0%) !important; -webkit-transform: translate(-50%, 0%) !important; font-size: inherit; line-height: inherit; color: #292929; border: 2px solid #EBEBEB; border-radius: 4px; text-align: center;}
-.form-teams-block .dropdown-menu h1         { margin: 0px 0px -3px; }
+.form-teams-block .dropdown-menu h1         { margin: 0px 0px -3px; font-family: inherit; font-weight: 600; font-style: normal; }
 .form-teams-block .t-name                   { margin-bottom: 8px; font-weight: 500; }
 .form-teams-block .t-name img               { margin-left: 2px; height: 20px; border-radius: 2px; }
+.form-teams-block .s-name                   { font-size: 14px; line-height: 18px; color: #7A7A7A; }
 
 /* -- Arabic CSS -- */
 .arabic .form-teams-block > div:first-child         { border-right: none; border-left: 2px solid #EBEBEB; }
-.arabic .head-to-head .flag-block:first-child       { text-align: right; }
-.arabic .head-to-head .flag-block:last-child        { text-align: left;}
+/* .arabic .head-to-head .flag-block:first-child       { text-align: right; }
+.arabic .head-to-head .flag-block:last-child        { text-align: left;} */
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Head-to-Head Section ------- */
-    .head-to-head .flag-img     { height: 92px; }
+    .head-to-head .flag-img             { padding: 0 24px; height: 92px; }
 /* -------- Match Form Section ------- */
     .form-teams-block                           { padding: 32px 0px;}
     .form-teams-block .flag-img                 { height: 92px; }
@@ -43,7 +48,7 @@
 @media (max-width: 1199px) {
 /* -------- Head-to-Head Section ------- */
     .head-to-head                   { padding: 20px; }
-    .head-to-head .flag-img         { height: 72px; }
+    .head-to-head .flag-img         { padding: 0 16px; height: 72px; }
     .head-to-head .head-center h1   { font-size: 52px; line-height: 72px; }
 /* -------- Match Form Section ------- */
     .form-teams-block                           { padding: 24px 0px;}
@@ -55,8 +60,8 @@
 
 @media (max-width: 768px) {
     .head-to-head                   { padding: 16px; }
-    .head-to-head .flag-img         { height: 62px; }
-    .head-to-head h1                { margin: -6px 0px; }
+    .head-to-head .flag-img         { padding: 0 12px; height: 62px; }
+    .head-to-head h1                { margin: -6px 0; }
     .head-to-head .head-center h1   { font-size: 42px; line-height: 56px; }
 /* -------- Match Form Section ------- */
     .form-teams-block                           { padding: 20px 0px;}
@@ -64,20 +69,22 @@
     .form-teams-block .form-match-list li       { margin: 0px 4px; }
     .form-teams-block .dropdown-menu            { padding: 4px 4px 12px; width: 180px; }
     .form-teams-block .dropdown-toggle          { height: 28px; width: 28px; font-size: 14px; line-height: 28px; }
-    .form-teams-block .form-match-list          { margin: 18px 0px 0px; }
+    .form-teams-block .form-match-list          { margin: 18px 0 0; }
+    .form-teams-block .t-name                   { margin-bottom: 4px; }
+    .form-teams-block .s-name                   { font-size: 12px; line-height: 16px; }
 }
 
 @media (max-width: 576px) {
     .head-to-head                   { padding: 12px 8px; }
-    .head-to-head .flag-img         { height: 36px; }
-    .head-to-head h1                { margin: -4px 0px; }
+    .head-to-head .flag-img         { padding: 0 6px; height: 36px; }
+    .head-to-head h1                { margin: -4px 0; }
     .head-to-head .head-center h1   { font-size: 30px; line-height: 42px; }
 /* -------- Match Form Section ------- */
-    .form-teams-block                           { padding: 20px 0px; flex-direction: column; -webkit-flex-direction: column; }
+    .form-teams-block                           { padding: 20px 0; flex-direction: column; -webkit-flex-direction: column; }
     .form-teams-block > div                     { width: 100%; }
     .form-teams-block > div:first-child         { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; border-right: none; }
     .form-teams-block .flag-img                 { height: 42px; }
-    .form-teams-block .form-match-list          { margin: 12px 0px 0px; }
+    .form-teams-block .form-match-list          { margin: 12px 0 0; }
 /* -- Arabic CSS -- */
     .arabic .form-teams-block > div:first-child         { border-left: none; }
 }

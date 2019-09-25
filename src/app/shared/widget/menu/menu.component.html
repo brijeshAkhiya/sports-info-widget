@@ -11,8 +11,8 @@
               routerLinkActive="active">{{ 'widgetModule.Fixtures' | translate }}</a></li>
           <li ngbDropdown *ngIf="series && series.length > 0">
             <a id="dropdownBasic1" ngbDropdownToggle>{{ 'widgetModule.Series' | translate }}</a>
-            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <li ngbDropdownItem *ngFor="let item of series | slice:0:4"><a
+            <ul ngbDropdownMenu aria-labelledby="dropdownBasic1" class="double-menu">
+              <li ngbDropdownItem *ngFor="let item of series | slice:0:8"><a
                   [routerLink]="['/cricket/tournament',(item.id | splitID),(item.name | slugify)]">{{item.name}}</a>
               </li>
             </ul>
