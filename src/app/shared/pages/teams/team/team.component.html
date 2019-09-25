@@ -305,7 +305,7 @@
                 [sport]="sport">
               </app-no-data-widget>
               <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="sport"
-                [tournament]="routeParams.tournamentid">
+                [tournament]="routeParams.tournamentid" [list_type]="'simple'">
               </app-schedule>
               <app-loader *ngIf="paramsFixtures.loading"></app-loader>
               <div class="fixtures-loadmore"
@@ -328,7 +328,7 @@
                 *ngIf="!paramsResults.loading && (!paramsResults.data || paramsResults.data?.length == 0)"
                 [sport]="sport">
               </app-no-data-widget>
-              <app-schedule [data]="paramsResults.data" [type]="'fixture'" [sport]="sport"
+              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="sport"
                 [tournament]="routeParams.tournamentid" [list_type]="'simple'"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
               <div class="fixtures-loadmore"
