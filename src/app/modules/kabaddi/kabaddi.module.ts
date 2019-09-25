@@ -12,9 +12,10 @@ import { StatsComponent } from './stats/stats.component';
 import { TableComponent } from './table/table.component';
 import { MatchComponent } from './match/match.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { KabaddiComponent } from './kabaddi.component';
 
 @NgModule({
-  declarations: [HomeComponent, StatsComponent, TableComponent, MatchComponent],
+  declarations: [HomeComponent, StatsComponent, TableComponent, MatchComponent, KabaddiComponent],
   imports: [
     LazyLoadImageModule,
     SharedModule,

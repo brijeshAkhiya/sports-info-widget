@@ -26,7 +26,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="'Basketball'">
             <ng-container
-              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'basketball',name:teamProfile?.name}}">
+              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.sr_id,type:'team',sport:'basketball',name:teamProfile?.name}}">
             </ng-container>
           </ng-container>
         </div>
@@ -123,7 +123,7 @@
 
                 <section class="team-about-head d-flex" *ngSwitchCase="'Basketball'">
                   <div class="team-logo align-self-start rounded-box common-shadow">
-                    <div class="team-logo-img" [lazyLoad]="teamProfile?.sr_id.id | logosurl:'basketball'"
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.sr_id | logosurl:'basketball'"
                       [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info soccer-team-info d-flex rounded-box common-shadow">
