@@ -1,7 +1,8 @@
 <div class="common-widget tab-widget">
   <div class="widget-title">
     <h5>
-      {{ sport == 'Cricket' ? ('Header_menu.Cricket' | translate) : sport == 'Kabaddi' ? ('Header_menu.Kabaddi' | translate) : sport == 'Soccer' ? ('Header_menu.Soccer' | translate) : ''}}
+      <!-- {{ sport == 'Cricket' ? ('Header_menu.Cricket' | translate) : sport == 'Kabaddi' ? ('Header_menu.Kabaddi' | translate) : sport == 'Soccer' ? ('Header_menu.Soccer' | translate) : ''}} -->
+      {{sport | translate}}
     </h5>
   </div>
   <ngb-tabset class="common-tabs">
@@ -183,6 +184,59 @@
     </li>
     <li>
       <a class="view-all-btn" [routerLink]="'/soccer/fixtures'">
+        {{ 'widgetModule.View_all' | translate }}
+        <span></span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="common-list cricket-list soccer" *ngIf="matches && matches.length > 0 && sport == 'Basketball' && type">
+    <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
+      <div class="title d-flex justify-content-between">
+        <p></p>
+        <p>{{match.scheduled | amTimeAgo}}</p>
+      </div>
+
+
+      <div *ngIf="match?.home">
+        <div class="match-info d-flex justify-content-between align-items-center">
+          <p [ngClass]="{'match-winner': match?.status == 'closed' && match?.home_points > match?.away_points}">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.home?.sr_id | logosurl:'basketball'"
+              [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.name}}">
+            {{ match?.home?.name}}
+          </p>
+          <p *ngIf="match?.status == 'closed' && match?.home_points">
+            {{match?.home_points}}
+          </p>
+        </div>
+      </div>
+      <div *ngIf="match?.away">
+        <div class="match-info d-flex justify-content-between align-items-center">
+          <p [ngClass]="{'match-winner': match?.status == 'closed' && match?.away_points > match?.home_points}">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.away?.sr_id | logosurl:'basketball'"
+              [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.name}}">
+            {{ match?.away?.name}}
+          </p>
+          <p *ngIf="match?.status == 'closed' && match?.away_points">
+            {{match?.away_points}}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <p class="result-line" *ngIf="type == 'fixture'">{{ 'widgetModule.starts' | translate }}
+            {{match.scheduled | amLocal | amDateFormat:'LT'}}
+            {{(match?.venue?.name) ? '| ' + match?.venue?.name : match?.venue?.city}}
+          </p>
+        </div>
+      </div>
+      <a class="fullblock-link"
+        [routerLink]="['/basketball/match', (match.sr_id | splitID) ,(match.home.alias + '-vs-' +match.away.alias)]">
+      </a>
+    </li>
+    <li>
+      <a class="view-all-btn" [routerLink]="'/basketball/fixtures'">
         {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>

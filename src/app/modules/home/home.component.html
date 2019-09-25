@@ -35,7 +35,8 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-sports-home [options]="{page_type:'home',reqParams :{nStart:0, nLimit:5, eType:'Article',bRemoveBannerPosts:true}}">
+        <app-sports-home
+          [options]="{page_type:'home',reqParams :{nStart:0, nLimit:5, eType:'Article',bRemoveBannerPosts:true}}">
         </app-sports-home>
       </div>
 
@@ -45,6 +46,7 @@
           <ng-template carouselSlide [id]="'Cricket'"></ng-template>
           <ng-template carouselSlide [id]="'Kabaddi'"></ng-template>
           <ng-template carouselSlide [id]="'Soccer'"></ng-template>
+          <ng-template carouselSlide [id]="'Basketball'"></ng-template>
         </owl-carousel-o>
         <app-fixtures-sidebar-widget [sport]="sport"></app-fixtures-sidebar-widget>
         <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
@@ -126,7 +128,8 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <app-sports-home [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4,bRemoveBannerPosts:true}}">
+        <app-sports-home
+          [options]="{page_type:'home', 'blog_type': 'recent', reqParams :{nStart:0, nLimit:4,bRemoveBannerPosts:true}}">
         </app-sports-home>
       </div>
       <div class="sidebar-col">
