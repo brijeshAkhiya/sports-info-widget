@@ -143,9 +143,10 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     nav .navbar-toggler.active .icon-bar:nth-child(3)   { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
     nav .navbar-toggler.active .icon-bar:nth-child(1),
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
-    .navbar-nav-container                               { margin-top: 100px; left: 0px;}
-    .navbar-collapse.collapse                           { display: block !important; position: fixed; top: 0px; left: -70%; height: 100vh; width: 70%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
-    .menu-open .navbar-collapse.collapse                { left: 0px; }
+    .navbar-nav-container                               { left: 0px;}
+    .navbar-collapse.collapse                           { display: block !important; position: absolute; top: 100%; left: 0%; max-height: 0; width: 100%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; text-align: center; overflow: hidden; }
+    .menu-open .navbar-collapse.collapse                { left: 0%; height: auto; max-height: 100vh; }
+    .navbar .navbar-collapse .navbar-nav                { padding: 16px 0px; }
     .navbar .navbar-nav .nav-link                       { padding: 8px 30px; }
     .login-search                                       { margin: 0px 50px 0px 0px; flex-direction: row; -webkit-flex-direction: row; }
     .login-search > li > a                              { margin: 0px 6px; width: 24px; height: 24px; }

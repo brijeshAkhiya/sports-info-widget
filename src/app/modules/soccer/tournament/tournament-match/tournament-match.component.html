@@ -71,9 +71,11 @@
                 <div class="head-to-head common-shadow rounded-box d-flex justify-content-between align-items-center">
                   <div class="head-team d-flex justify-content-between align-items-center">
                     <div class="flag-block">
-                      <img class="flag-img" [offset]="commonService.lazyloadoffset"
-                        [lazyLoad]="headtohead?.teams?.team1?.id | logosurl:'soccer'"
-                        [defaultImage]="commonService.flagplaceholder" alt="team-flag">
+                      <div class="flag-img">
+                        <img [offset]="commonService.lazyloadoffset"
+                          [lazyLoad]="headtohead?.teams?.team1?.id | logosurl:'soccer'"
+                          [defaultImage]="commonService.flagplaceholder" alt="team-flag">
+                      </div>
                       <p>
                         <a
                           [routerLink]="['/soccer/team', (headtohead?.teams?.team1?.id | splitID), (headtohead?.teams?.team1?.name | slugify )]">
@@ -97,9 +99,11 @@
                       <h1>{{headtohead?.teams?.team2?.total}}</h1>
                     </div>
                     <div class="flag-block">
-                      <img class="flag-img" [offset]="commonService.lazyloadoffset"
-                        [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
-                        [defaultImage]="commonService.flagplaceholder" alt="team-flag">
+                      <div class="flag-img">
+                        <img [offset]="commonService.lazyloadoffset"
+                          [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
+                          [defaultImage]="commonService.flagplaceholder" alt="team-flag">
+                      </div>
                       <p>
                         <a
                           [routerLink]="['/soccer/team', (headtohead?.teams?.team2?.id | splitID), (headtohead?.teams?.team2?.name | slugify )]">
