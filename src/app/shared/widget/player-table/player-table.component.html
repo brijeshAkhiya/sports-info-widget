@@ -7,7 +7,7 @@
       <thead>
         <tr [ngClass]="options.class_light_row">
           <th *ngFor="let title of options.titles" [innerHTML]="title" title="{{title}}" (click)="getname($event)"
-          [ngClass]="title == value ? toggleSort ?'sort-table':'':''"></th>
+          [ngClass]="(title == value && toggleSort) ?'sort-table':''"></th>
         </tr>
       </thead>
       <tbody>
@@ -67,11 +67,11 @@
 
 <ng-template #cricket let-item="item">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="value != 'image'; else data" [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value && toggleSort) ?'sort-table':''">
       {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[value] ) : item[value]}}
     </td>
     <ng-template #data>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td >
         <a
           [routerLink]="options.image_type == 'team' ? ['/cricket/team',(item.team.id | splitID),(item.team.name | slugify)] : ['/cricket/player',(item.player.id | splitID),(item.player.name | split | slugify)] ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.team?.id | logosurl"
@@ -85,12 +85,12 @@
 
 <ng-template #soccer let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'teamname' && value != 'name');else data" [ngClass]="object == value ? toggleSort ?'sort-table':'':''"
+    <td *ngIf="(value != 'teamname' && value != 'name');else data" [ngClass]="(object == value && toggleSort) ?'sort-table':''"
       [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
       {{ value == 'Index' ? index : (item[value] && item[value] !='') ? item[value]  : 0 }}
     </td>
     <ng-template #data>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td >
         <a
           [routerLink]="options.image_type == 'team' ? ['/soccer/team',(item?.competitor?.id | splitID),(item?.competitor?.name | slugify)] : ['/soccer/player',(item?.id | splitID),(item?.name | split | slugify)]">
           <img [offset]="commonService.lazyloadoffset"
@@ -105,11 +105,11 @@
 
 <ng-template #kabaddi let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'tname' && value != 'name'); else link"  [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="(value != 'tname' && value != 'name'); else link"  [ngClass]="(object == value && toggleSort) ?'sort-table':''">
       {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw'] : value == 'pid' ?  index : (item[value] && item[value] !='') ? item[value] : 0) }}
     </td>
     <ng-template #link>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''"> 
+      <td> 
         <a
           [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
@@ -123,11 +123,11 @@
 
 <ng-template #basketball let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'name'); else link " [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="(value != 'name'); else link " [ngClass]="(object == value && toggleSort )?'sort-table':''">
       {{ value == 'index' ?  index  : (item[value] && item[value] !='') ? item[value] : 0}}
     </td>
     <ng-template #link>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td >
         <a
           [routerLink]="value == 'name' ? ['/basketball/team', (item['sr_id'] | splitID), (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['sr_id'] | logosurl:'basketball'"
@@ -141,11 +141,11 @@
 
 <ng-template #basketballStats let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'full_name'); else link" [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="(value != 'full_name'); else link" [ngClass]="(object == value && toggleSort) ?'sort-table':''">
       {{item | arrToString: value}}
     </td>
     <ng-template #link>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td >
         <a *ngIf="item['sr_id']"
           [routerLink]="value == 'full_name' ? ['/basketball/player', (item.sr_id | splitID), (item.full_name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item.sr_id | splitID) | logosurl:'basketball'"

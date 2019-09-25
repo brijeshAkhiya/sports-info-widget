@@ -8,7 +8,7 @@
       <thead>
         <tr [ngClass]="data.class_light_row ">
           <th *ngFor="let title of data.titles" [innerHTML]="title" title="{{title}}" (click)="sorttable($event);" 
-           [ngClass]="title == value ? toggleSort ?'sort-table':'':''" ></th>
+           [ngClass]="(title == value && toggleSort) ?'sort-table':''" ></th>
         </tr>
       </thead>
       <tbody>
@@ -35,11 +35,11 @@
 
 <ng-template #cricket let-item="item">
   <ng-container *ngFor="let value of data.values">
-    <td *ngIf="value != 'image'; else data" [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value && toggleSort )?'sort-table':''">
       {{data.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[data.subParams][value] ) : item[value]}}
     </td>
     <ng-template #data>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td >
         <a
           [routerLink]="['/cricket/team', (options.tournament | splitID) ,(item.team.id | splitID),(item.team.name | slugify)]">
           {{item.team.abbreviation ? item.team.abbreviation : item.team.name}}</a>
@@ -50,10 +50,10 @@
 
 <ng-template #kabaddi let-item="item">
   <ng-container *ngFor="let value of data.values">
-    <td *ngIf="value != 'tname'; else link" [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="value != 'tname'; else link" [ngClass]="(object == value && toggleSort) ?'sort-table':''">
       {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value] ? item[value] : 0)}} </td>
     <ng-template #link>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td>
         <a [routerLink]="['/kabaddi/team', item['tid'], (item.tname | slugify)]">
           {{ item[value]}}
         </a>
@@ -64,11 +64,11 @@
 
 <ng-template #soccer let-item="item">
   <ng-container *ngFor="let value of data.values">
-    <td *ngIf="value != 'image'; else data" [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value && toggleSort) ?'sort-table':''">
       {{data.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[data.subParams][value] ) : item[value]}}
     </td>
     <ng-template #data>
-      <td [ngClass]="object == value ? toggleSort ?'sort-table':'':''">
+      <td>
         <a
           [routerLink]="['/soccer/team',(options.tournament | splitID) ,(item.competitor.id | splitID),(item.competitor.name | slugify)]">
           {{item.competitor.abbreviation ? item.competitor.abbreviation : item.competitor.name}}</a>
