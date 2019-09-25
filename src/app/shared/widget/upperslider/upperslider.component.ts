@@ -105,11 +105,12 @@ export class UppersliderComponent implements OnInit {
     this.store.dispatch(new Cricket.LoadCricketSlider());
 
     this.store.dispatch(new Soccer.LoadSoccerFixtures());
+    
+    this.store.dispatch(new Basketball.LoadBasketballSchedule());
 
     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
     this.store.dispatch(new Kabaddi.LoadKabaddiResults());
     this.store.dispatch(new Kabaddi.LoadKabaddiLive());
-    this.getBasketballSchedule();
   }
 
   // change slide select sport event
@@ -291,12 +292,6 @@ export class UppersliderComponent implements OnInit {
     });
   }
 
-  getBasketballSchedule() {
-    this.sportsService.getBasketballSchedule().subscribe((res: any) => {
-      console.log('basketball', res);
-      this.store.dispatch(new Basketball.BasketballSchedule(res.data));
-    });
-  }
 
   getLiveUpdateSlider(classThis) {
     this.interval = setInterval(() => {
