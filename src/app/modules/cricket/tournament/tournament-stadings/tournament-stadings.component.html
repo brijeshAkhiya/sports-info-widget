@@ -6,7 +6,8 @@
           <h1>{{'Cricket_Module.Standings' | translate}}</h1>
         </div>
         <app-loader *ngIf="isLoading"></app-loader>
-        <app-no-data-widget *ngIf="!isLoading && (!pointstable || pointstable?.length == 0)" [message]="('Cricket_Module.No_Standings_available' | translate)"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!isLoading && (!pointstable || pointstable?.length == 0)"
+          [message]="('Cricket_Module.No_Standings_available' | translate)"></app-no-data-widget>
         <app-player-table *ngIf="pointstable" [data]="pointstable" [options]="options"></app-player-table>
       </div>
       <div class="sidebar-col">
@@ -14,7 +15,8 @@
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <!--Recommended links-->
           <!-- <app-common-story-widget  [title]="'Current Series'" [type]="'currentseries'"></app-common-story-widget> -->
-          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'" [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
+          <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
       </div>

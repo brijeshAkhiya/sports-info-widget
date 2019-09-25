@@ -11,6 +11,8 @@ export class VenueMapCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.venuedetails);
+
   }
 
 }

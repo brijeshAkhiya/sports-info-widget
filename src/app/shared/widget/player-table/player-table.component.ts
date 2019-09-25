@@ -22,13 +22,9 @@ export class PlayerTableComponent implements OnInit {
     private commonService: CommonService) { }
 
   ngOnInit() {
-    console.log(this.data);
-
   }
 
   getname(event) {
-
-    console.log(this.data);
     this.value = event.target.attributes.title.nodeValue;
     this.index = this.options.titles.findIndex(element => element == this.value);
     this.object = this.options.values[this.index];

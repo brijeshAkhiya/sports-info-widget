@@ -19,9 +19,9 @@
           <ng-container *ngTemplateOutlet="soccer;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
-      </ng-container>
-      <ng-container *ngIf="sport == 'Basketball'">
-        <ng-container *ngTemplateOutlet="basketball;context:{match: match, type:type}">
+        <ng-container *ngIf="sport == 'Basketball'">
+          <ng-container *ngTemplateOutlet="basketball;context:{match: match, type:type}">
+          </ng-container>
         </ng-container>
       </ng-container>
     </div>
@@ -92,7 +92,7 @@
 
 <ng-template #kabaddi let-match="match" let-type="type">
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
-    [ngClass]="{'complete-match' : match?.match_result}"
+    [ngClass]="{'complete-match' : match?.status == 2}"
     *ngIf="match?.teams?.home?.tid != '' && match?.teams?.away?.tid != ''">
     <div class="match-desc">
       <h6>
@@ -193,8 +193,9 @@
             {{match.sport_event?.competitors[0].abbreviation}}</h5>
         </div>
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="" [defaultImage]="commonService.flagplaceholder"
-            alt="{{match.sport_event?.competitors[0].abbreviation}}">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="match.sport_event?.competitors[0].id | logosurl:'soccer'"
+            [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event?.competitors[0].abbreviation}}">
         </div>
       </div>
 
@@ -218,8 +219,9 @@
 
       <div class="match-team d-flex align-items-center">
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="" [defaultImage]="commonService.flagplaceholder"
-            alt="{{match.sport_event.competitors[1].abbreviation}}">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="match.sport_event?.competitors[1].id | logosurl:'soccer'"
+            [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event.competitors[1].abbreviation}}">
         </div>
         <div class="team-info">
           <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event.competitors[1]?.id}">
@@ -236,6 +238,77 @@
   </div>
 
 </ng-template>
+
+<ng-template #basketball let-match="match" let-type="type">
+  <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
+    [ngClass]="{'complete-match' : match?.status=='closed'}">
+    <div class="match-desc">
+      <!-- <h6 class="text-capitalize">
+        {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
+        <span
+          class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? match?.sport_event?.sport_event_context?.round?.name : '' }}</span>
+      </h6> -->
+      <p class="stadium-nm" *ngIf="match?.venue"> {{match?.venue?.name}},
+        {{match?.venue?.city}},{{match?.venue?.country}}</p>
+      <p class="time-line" *ngIf="type == 'fixture'">{{match?.scheduled | date:'h:mm a'}}</p>
+      <!-- <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+    </div>
+
+    <div class="match-teams d-flex align-items-center" *ngIf="match?.home">
+      <div class="match-team d-flex align-items-center">
+        <div class="team-info">
+          <h5 [ngClass]="{'winner': match?.status == 'closed' && match?.home_points > match?.away_points}">
+            {{match?.home?.name}}
+          </h5>
+        </div>
+        <div class="team-flag">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="(match?.home?.sr_id | splitID) | logosurl:'basketball'"
+            [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.name}}">
+        </div>
+      </div>
+
+      <!-- For Upcoming Match -->
+      <div class="vs-block" *ngIf="match?.status != 'closed'">
+        <h6>vs</h6>
+      </div>
+      <!-- For Complete/Result Match -->
+      <div class="score-center-block" *ngIf="match?.status == 'closed'">
+        <p>ft</p>
+        <div class="value d-flex justify-content-between">
+          <h4 class="dark-text">
+            {{match?.home_points}}
+          </h4>
+          <h4 class="dark-text">-</h4>
+          <h4 class="dark-text">
+            {{match?.away_points}}
+          </h4>
+        </div>
+      </div>
+
+      <div class="match-team d-flex align-items-center" *ngIf="match?.away">
+        <div class="team-flag">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="(match?.away?.sr_id | splitID) | logosurl:'basketball'"
+            [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.name}}">
+        </div>
+        <div class="team-info">
+          <h5 [ngClass]="{'winner': match?.status == 'closed' && match?.away_points > match?.home_points}">
+            {{match?.away?.name}}
+          </h5>
+        </div>
+      </div>
+
+      <a class="details-btn"
+        [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+      <a class="fullblock-link"
+        [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
+      </a>
+
+    </div>
+  </div>
+</ng-template>
+
 
 <ng-template #date_list>
   <ng-container *ngIf="sport == 'Basketball'">
@@ -264,12 +337,12 @@
               <div class="team-info">
                 <h5
                   [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event?.competitors[0]?.id}">
-                  {{match.sport_event?.competitors[0].abbreviation}}</h5>
+                  {{match.sport_event?.competitors[0].name}}</h5>
               </div>
               <div class="team-flag">
-                <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
-                  [defaultImage]="commonService.flagplaceholder"
-                  alt="{{match.sport_event?.competitors[0].abbreviation}}">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="match.sport_event?.competitors[0]?.id | logosurl:'soccer'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event?.competitors[0].name}}">
               </div>
             </div>
 
@@ -293,14 +366,14 @@
 
             <div class="match-team d-flex align-items-center">
               <div class="team-flag">
-                <img [offset]="commonService.lazyloadoffset" [lazyLoad]=""
-                  [defaultImage]="commonService.flagplaceholder"
-                  alt="{{match.sport_event.competitors[1].abbreviation}}">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="match.sport_event?.competitors[1]?.id | logosurl:'soccer'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event.competitors[1].name}}">
               </div>
               <div class="team-info">
                 <h5
                   [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event.competitors[1]?.id}">
-                  {{match.sport_event.competitors[1].abbreviation}}</h5>
+                  {{match.sport_event.competitors[1].name}}</h5>
               </div>
             </div>
 

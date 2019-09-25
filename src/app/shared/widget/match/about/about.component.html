@@ -269,6 +269,24 @@
   </div>
 </ng-container>
 
+<ng-template #soccerteam let-team="team">
+  <div class="team-col">
+    <div class="current-team d-flex align-items-center">
+      <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.sport_event_status?.winner_id == team?.id}">
+        <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}" [defaultImage]="commonService.flagplaceholder"
+          [offset]="commonService.lazyloadoffset">
+        <a
+          [routerLink]=" data?.sport_event?.sport_event_context?.season.id  ?  ['/soccer/team', (data?.sport_event?.sport_event_context?.season.id | splitID),(team.id | splitID),(team.name | slugify)]  : ['/soccer/team',(team.id | splitID),(team.name | slugify)]">
+          {{team.name}}
+        </a>
+      </h4>
+    </div>
+    <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
+          <li><span>Nitin Tomar </span>15</li>
+          <li><span>Siddharth Desai </span>7</li>
+        </ul> -->
+  </div>
+</ng-template>
 
 <ng-container *ngIf="sport == 'Basketball' && data">
 
@@ -279,7 +297,7 @@
       <div class="team-anim">
         <img [lazyLoad]="data.home.id | logosurl:'basketball'" alt="{{data.home.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <h4>{{data.home.name}}</h4>
+        <h4>{{data?.home?.market}} {{data.home.name}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
@@ -287,19 +305,19 @@
       <div class="team-anim">
         <img [lazyLoad]="data.away.id | logosurl:'basketball'" alt="{{data.away.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <h4>{{data.away.name}}</h4>
+        <h4>{{data?.away?.market}} {{data.away.name}}</h4>
       </div>
     </div>
     <!-- End Animation -->
 
-    <!-- <div class="tour-match-title show-anim">
-      <p class="light-text">
+    <div class="tour-match-title show-anim">
+      <!-- <p class="light-text">
         <a
           [routerLink]="['/soccer/tournament',(data?.sport_event?.sport_event_context?.season?.id | splitID),(data?.sport_event?.sport_event_context?.season?.name | slugify)]">
           {{data?.sport_event?.sport_event_context?.season?.name}}
         </a>
-      </p>
-    </div> -->
+      </p> -->
+    </div>
 
     <div class="match-update show-anim">
       <p class="light-text">
@@ -314,7 +332,7 @@
     </div>
 
     <div class="current-match d-flex justify-content-between show-anim">
-      <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.home}">
+      <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.home, oppTeam:data?.away}">
       </ng-container>
       <div class="live-score" *ngIf="data?.status != 'scheduled'">
         <!-- FINAL Score here -->
@@ -326,30 +344,27 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
+                  <th *ngFor="let period of data?.periods">{{period?.sequence}}</th>
                   <th>T</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <!-- add highlight class in high td -->
-                  <td>TOR</td>
-                  <td class="highlight">32</td>
-                  <td>24</td>
-                  <td>36</td>
-                  <td>20</td>
-                  <td>103</td>
+                  <td>{{data?.home?.alias}}</td>
+                  <td *ngFor="let period of data?.periods"
+                    [ngClass]="{'highlight' : period?.scoring?.home?.points >  period?.scoring?.away?.points}">
+                    {{period?.scoring?.home?.points}}
+                  </td>
+                  <td [ngClass]="{'highlight' : data?.home?.points >  data?.away?.points}">{{data?.home?.points}}</td>
                 </tr>
                 <tr>
-                  <td>GSW</td>
-                  <td>24</td>
-                  <td class="highlight">32</td>
-                  <td>36</td>
-                  <td>20</td>
-                  <td>103</td>
+                  <td>{{data?.away?.alias}}</td>
+                  <td *ngFor="let period of data?.periods"
+                    [ngClass]="{'highlight' : period?.scoring?.away?.points >  period?.scoring?.home?.points}">
+                    {{period?.scoring?.away?.points}}
+                  </td>
+                  <td [ngClass]="{'highlight' : data?.away?.points >  data?.home?.points}">{{data?.away?.points}}</td>
                 </tr>
               </tbody>
             </table>
@@ -357,40 +372,23 @@
         </div>
         <!-- <h3>{{data?.home?.points}} - {{data?.away?.points}}</h3> -->
       </div>
-      <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.away}">
+      <ng-container *ngTemplateOutlet="basektballteam;context:{team:data?.away, oppTeam:data?.home}">
       </ng-container>
     </div>
   </div>
 </ng-container>
 
-<ng-template #soccerteam let-team="team">
-  <div class="team-col">
-    <div class="current-team d-flex align-items-center">
-      <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.sport_event_status?.winner_id == team?.id}">
-        <img [lazyLoad]="team.id | logosurl:'soccer'" alt="{{team.name}}" [defaultImage]="commonService.flagplaceholder"
-          [offset]="commonService.lazyloadoffset">
-        <a
-          [routerLink]=" data?.sport_event?.sport_event_context?.season.id  ?  ['/soccer/team', (data?.sport_event?.sport_event_context?.season.id | splitID),(team.id | splitID),(team.name | slugify)]  : ['/soccer/team',(team.id | splitID),(team.name | slugify)]">
-          {{team.name}}
-        </a>
-      </h4>
-    </div>
-    <!-- <ul class="best-player-list" *ngIf="data.match_info.gamestate != 0">
-        <li><span>Nitin Tomar </span>15</li>
-        <li><span>Siddharth Desai </span>7</li>
-      </ul> -->
-  </div>
-</ng-template>
-
-<ng-template #basektballteam let-team="team">
+<ng-template #basektballteam let-team="team" let-oppTeam="oppTeam">
   <div class="team-col">
     <div class="current-team">
-      <h4 [ngClass]="{'winner':false}">
+      <h4>
         <img [lazyLoad]="team?.sr_id | logosurl:'basketball'" alt="team.name"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
-      <h4><a [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]"> {{ team.name}} State Warriors</a> </h4>
-      <h3>103</h3>
+      <h4 [ngClass]="{'winner':team?.points > oppTeam.points}"><a
+          [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]">
+          {{ team.market}} {{ team.name}}</a> </h4>
+      <h3>{{team.points}}</h3>
     </div>
   </div>
 </ng-template>

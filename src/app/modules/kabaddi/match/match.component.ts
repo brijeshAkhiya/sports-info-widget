@@ -82,8 +82,8 @@ export class MatchComponent implements OnInit {
       /* TEMP */
       this.dummyAPICall++;
       classThis.sportsService
-      .getMatchInfo(this.matchInfo.match_info.mid)
-      // .getKabaddiDummyCall(this.dummyAPICall)
+        .getMatchInfo(this.matchInfo.match_info.mid)
+        // .getKabaddiDummyCall(this.dummyAPICall)
         .subscribe(res => {
           console.log(res);
           // let matchData = res.data.data.items;
@@ -125,8 +125,8 @@ export class MatchComponent implements OnInit {
     if (remainingTime.days === 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
-      // }, 10);
-    }, remainingMiliSec);
+        // }, 10);
+      }, remainingMiliSec);
     }
   }
 
@@ -164,13 +164,14 @@ export class MatchComponent implements OnInit {
     let existsToss = this.commentry.filter((commentry) => commentry.event_type === 'toss');
     if (existsToss.length === 0) {
       let temp: any = this.team.filter(team => team.tid === this.matchInfo.match_info.toss.winner);
-      this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision });
+      if (temp.length > 0)
+        this.commentry.push({ event_type: 'toss', winner: temp[0].tname, decision: this.matchInfo.match_info.toss.decision });
     }
 
     this.matchInfo.event.forEach(event => {
       // let temp = this.commentry.filter(commentry => commentry.event_time == event.event_time);
       // if(temp.length == 0)
-        this.commentry.push(event);
+      this.commentry.push(event);
     });
 
     // this.commentry = this.commentry.concat(this.matchInfo.event);
@@ -199,13 +200,13 @@ export class MatchComponent implements OnInit {
         tempArr = this.matchInfo.squad.home;
       else
         tempArr = this.matchInfo.squad.away;
-        this.team[index].players = [];
+      this.team[index].players = [];
 
-        this.team[index].squad = this.matchInfo.lineup && this.matchInfo.lineup[team.qualifier] ?
-        this.sorting(this.matchInfo.lineup[team.qualifier].starting7) :  [];
-        tempArr.forEach(element => {
-          (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
-        });
+      this.team[index].squad = this.matchInfo.lineup && this.matchInfo.lineup[team.qualifier] ?
+        this.sorting(this.matchInfo.lineup[team.qualifier].starting7) : [];
+      tempArr.forEach(element => {
+        (this.team[index].players[element.role] = this.team[index].players[element.role] || []).push(element);
+      });
     });
 
     console.log(this.team);

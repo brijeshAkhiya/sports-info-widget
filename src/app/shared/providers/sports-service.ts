@@ -643,6 +643,11 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/teams/${teamid}/profile`
     );
   }
+  getBasketballteamFixtures(year, season, teamid) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/${year}/${season}/schedules/${teamid}`
+    );
+  }
   getBasketballPlayerInfo(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/nba/player/${id}/profile`
@@ -671,6 +676,16 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/game/${id}/summary`
     );
   }
+  getBasketballMatchPlayByPlay(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/game/${id}/playbyplay`
+    );
+  }
+  getBasketballMatchBoxScore(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/game/${id}`
+    );
+  }
   getBasketballSummary(year, season) {
     return this.http.get(
       environment.apiUrl + environment.version + `/nba/${year}/${season}/summaries`
@@ -679,6 +694,12 @@ export class SportsService {
   getBasketballDailySummary(date) {
     return this.http.get(
       environment.apiUrl + environment.version + `/nba/daily/summaries/${date}`
+    );
+  }
+
+  getBasketballSchedule() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/schedules`
     );
   }
 }

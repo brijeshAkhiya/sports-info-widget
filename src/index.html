@@ -73,6 +73,15 @@
       enable_page_level_ads: true
     });
   </script>
+  <div id="connectionmsg"></div>
+  <script>
+    window.addEventListener('offline', function (event) {
+      document.getElementById("connectionmsg").innerHTML = "Connection Lost ";
+    });
+    window.addEventListener('online', function (event) {
+      document.getElementById("connectionmsg").innerHTML = "";
+    });
+  </script>
   <script>
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
@@ -88,6 +97,9 @@
     ga('create', 'UA-140814144-1', 'auto');// add your tracking ID here.
     ga('send', 'pageview');
   </script>
+  <noscript>
+    <p>Please enable JavaScript in your browser for better use of the website.</p>
+  </noscript>
 </head>
 <script>
   if ('serviceWorker' in navigator) {
@@ -107,7 +119,6 @@
         autoplay loop muted></video>
     </div>
   </app-root>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 
 </html>

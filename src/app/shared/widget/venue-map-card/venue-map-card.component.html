@@ -9,8 +9,9 @@
       <span>{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
-    <p *ngIf="venuedetails?.bowling_ends"><span>{{ 'widgetModule.Ends' | translate }} 
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    </p>
+    <p *ngIf="venuedetails?.bowling_ends"><span>{{ 'widgetModule.Ends' | translate }}
         :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
   </ng-container>
 
@@ -24,7 +25,8 @@
       <span>{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    </p>
   </ng-container>
 
   <ng-container *ngIf="sport == 'soccer'">
@@ -37,7 +39,23 @@
       <span>{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}</p>
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    </p>
   </ng-container>
-  
+
+
+  <ng-container *ngIf="sport == 'Basketball'">
+    <ng-container *ngIf="venuedetails.lat && venuedetails.lng">
+      <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.lng">
+        <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.lng"></agm-marker>
+      </agm-map>
+    </ng-container>
+    <p *ngIf="venuedetails?.name">
+      <span>{{ 'widgetModule.venue' | translate }} :</span>
+      {{venuedetails?.name}}, {{venuedetails?.city}}, {{venuedetails?.country}}
+    </p>
+    <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    </p>
+  </ng-container>
+
 </section>

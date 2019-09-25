@@ -20,7 +20,7 @@
               <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
                 <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0"
-                  [commentry]="matchInfo?.timeline" [sport]="'soccer'" [team]="team"></app-goal-commentry>
+                  [commentry]="matchInfo?.timeline" [sport]="'Soccer'" [team]="team"></app-goal-commentry>
                 <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
                   [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
                 <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
@@ -72,7 +72,9 @@
                   <div class="head-team d-flex justify-content-between align-items-center">
                     <div class="flag-block">
                       <div class="flag-img">
-                        <img [offset]="commonService.lazyloadoffset" [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'" [defaultImage]="commonService.flagplaceholder" alt="team-flag">
+                        <img [offset]="commonService.lazyloadoffset"
+                          [lazyLoad]="headtohead?.teams?.team1?.id | logosurl:'soccer'"
+                          [defaultImage]="commonService.flagplaceholder" alt="team-flag">
                       </div>
                       <p>
                         <a
@@ -98,7 +100,9 @@
                     </div>
                     <div class="flag-block">
                       <div class="flag-img">
-                        <img [offset]="commonService.lazyloadoffset" [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'" [defaultImage]="commonService.flagplaceholder" alt="team-flag">
+                        <img [offset]="commonService.lazyloadoffset"
+                          [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
+                          [defaultImage]="commonService.flagplaceholder" alt="team-flag">
                       </div>
                       <p>
                         <a
@@ -126,73 +130,10 @@
                 *ngIf="teamssummary.team1.matches.length > 0 && teamssummary.team2.matches.length > 0 ">
                 <h4 class="line-title">Form</h4>
                 <div class="form-teams-block common-shadow rounded-box d-flex">
-                  <div>
-                    <div>
-                      <img class="flag-img" [lazyLoad]="teamssummary?.team1?.info?.id | logosurl:'soccer'"
-                        [defaultImage]="commonService.flagplaceholder" alt="team">
-                      <h5>
-                        <a
-                          [routerLink]="['/soccer/team', (teamssummary?.team1?.info?.id | splitID), (teamssummary?.team1?.info?.name | slugify )]">
-                          {{teamssummary?.team1?.info?.name}}
-                        </a>
-                      </h5>
-                    </div>
-                    <ul class="form-match-list">
-                      <li *ngFor="let match of teamssummary.team1.matches">
-
-                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                          <button id="dropdownBasic1" ngbDropdownAnchor (mouseover)="myDrop.open()"
-                            (mouseout)="myDrop.close();"
-                            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}">
-                            {{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}
-                          </button>
-                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <h1>
-                              {{ match?.sport_event_status?.home_score + '-' + match?.sport_event_status?.away_score  }}
-                            </h1>
-                            <p class="t-name">vs {{match?.oppteamname}}<img
-                                [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
-                                [defaultImage]="commonService.flagplaceholder" alt="team"></p>
-                            <p class="no-margin">{{match?.sport_event?.season?.name}}</p>
-                          </div>
-                        </div>
-
-                    </ul>
-                  </div>
-                  <div>
-
-                    <div class="">
-                      <img class="flag-img" [lazyLoad]="teamssummary?.team2?.info?.id | logosurl:'soccer'"
-                        [defaultImage]="commonService.flagplaceholder" alt="team">
-                      <h5>
-                        <a
-                          [routerLink]="['/soccer/team', (teamssummary?.team2?.info?.id | splitID), (teamssummary?.team2?.info?.name | slugify )]">
-                          {{teamssummary?.team2?.info?.name}}
-                        </a>
-                      </h5>
-                    </div>
-                    <ul class="form-match-list">
-                      <li *ngFor="let match of teamssummary.team2.matches">
-
-                        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                          <button id="dropdownBasic1" ngbDropdownAnchor (mouseover)="myDrop.open()"
-                            (mouseout)="myDrop.close();"
-                            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}">
-                            {{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}
-                          </button>
-                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <h1>
-                              {{ match?.sport_event_status?.home_score + '-' + match?.sport_event_status?.away_score  }}
-                            </h1>
-                            <p class="t-name">vs {{match?.oppteamname}}<img
-                                [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
-                                [defaultImage]="commonService.flagplaceholder" alt="team"></p>
-                            <p class="no-margin s-name">{{match?.sport_event?.season?.name}}</p>
-                          </div>
-                        </div>
-
-                    </ul>
-                  </div>
+                  <ng-container *ngTemplateOutlet="form;context:{team: teamssummary?.team1}">
+                  </ng-container>
+                  <ng-container *ngTemplateOutlet="form;context:{team: teamssummary?.team2}">
+                  </ng-container>
                 </div>
               </section>
               <!--Individual Team Form Section end-->
@@ -244,3 +185,34 @@
     </div>
   </div>
 </section>
+
+<ng-template #form let-team="team">
+  <div>
+    <div>
+      <img class="flag-img" [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.info?.id | logosurl:'soccer'"
+        [defaultImage]="commonService.flagplaceholder" alt="{{team?.info?.name}}">
+      <h5>
+        <a [routerLink]="['/soccer/team', (team?.info?.id | splitID), (team?.info?.name | slugify )]">
+          {{team?.info?.name}}ddd
+        </a>
+      </h5>
+    </div>
+    <ul class="form-match-list">
+      <li *ngFor="let match of team.matches">
+        <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+          <button id="dropdownBasic1" ngbDropdownAnchor (mouseover)="myDrop.open()" (mouseout)="myDrop.close();"
+            [ngClass]="{'win':match.result == 'winner', 'loss': match.result == 'loss', '':match.result == 'draw'}">
+            {{match.result == 'winner' ? 'w' : match.result == 'loss' ? 'L' : 'D' }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <h1>
+              {{ match?.sport_event_status?.home_score + '-' + match?.sport_event_status?.away_score  }}
+            </h1>
+            <p class="t-name">vs {{match?.oppteamname}}<img [lazyLoad]="match?.oppteamid | logosurl:'soccer'"
+                [defaultImage]="commonService.flagplaceholder" alt="team"></p>
+            <p class="no-margin">{{match?.sport_event?.season?.name}}</p>
+          </div>
+        </div>
+    </ul>
+  </div>
+</ng-template>

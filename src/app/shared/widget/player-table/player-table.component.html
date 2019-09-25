@@ -141,16 +141,15 @@
 <ng-template #basketballStats let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="(value != 'full_name'); else link">
-      {{ (item.total[value] && item.total[value] !='') ? item.total[value] : 0}}
+      {{item | arrToString: value}}
     </td>
     <ng-template #link>
       <td>
-        <a *ngIf="item['player']['sr_id']"
-          [routerLink]="value == 'full_name' ? ['/basketball/player', (item.player.sr_id | splitID), (item.player.full_name | slugify)] : '' ">
-          <img [offset]="commonService.lazyloadoffset"
-            [lazyLoad]="(item.player.sr_id | splitID) | logosurl:'basketball'"
+        <a *ngIf="item['sr_id']"
+          [routerLink]="value == 'full_name' ? ['/basketball/player', (item.sr_id | splitID), (item.full_name | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item.sr_id | splitID) | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
-          {{ item.player.full_name}}
+          {{ item.full_name}}
         </a>
       </td>
     </ng-template>

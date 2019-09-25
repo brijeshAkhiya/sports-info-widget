@@ -7,6 +7,7 @@ import { CarouselComponent } from 'ngx-owl-carousel-o';
 import * as Cricket from '@store/cricket/cricket.actions';
 import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 import * as Soccer from '@store/soccer/soccer.actions';
+import * as Basketball from '@store/basketball/basketball.actions';
 import * as fromRoot from '@app/app-reducer';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
@@ -104,13 +105,15 @@ export class UppersliderComponent implements OnInit {
     this.store.dispatch(new Cricket.LoadCricketSlider());
 
     this.store.dispatch(new Soccer.LoadSoccerFixtures());
+    
+    this.store.dispatch(new Basketball.LoadBasketballSchedule());
 
     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
     this.store.dispatch(new Kabaddi.LoadKabaddiResults());
     this.store.dispatch(new Kabaddi.LoadKabaddiLive());
   }
 
-  //change slide select sport event
+  // change slide select sport event
   changeSlide(event) {
     console.log('changeSlide');
     console.log(event, this.sport);
@@ -288,6 +291,8 @@ export class UppersliderComponent implements OnInit {
 
     });
   }
+
+
   getLiveUpdateSlider(classThis) {
     this.interval = setInterval(() => {
       classThis.sportsService.getheaderslider().subscribe((res: any) => {

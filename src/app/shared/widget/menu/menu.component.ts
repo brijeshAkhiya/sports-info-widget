@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { SportsService } from '@providers/sports-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -18,10 +19,12 @@ export class MenuComponent implements OnInit {
   public windowinnerWidth: any;
 
   constructor(
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    private activatedroute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    console.log(this.activatedroute.snapshot.params.id);
     if (typeof this.options !== 'undefined') {
       if (this.options.sport === 'Cricket') {
         this.getCricketSeries();

@@ -8,6 +8,8 @@ import { CommonService } from '@app/shared/providers/common-service';
   styleUrls: ['./standings.component.css']
 })
 export class StandingsComponent implements OnInit {
+  seasons: any = { 'year': [], 'type': [] };
+  filter: any = { };
 
   standings: any = { conferences: [], divisions: [], teams: [] };
   isloading = false;
@@ -20,12 +22,13 @@ export class StandingsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getTournamentStandings();
+    this.getSeasons();
+    this.getTournamentStandings(2019, 'REG');
   }
 
-  getTournamentStandings() {
+  getTournamentStandings(year, type) {
     this.isloading = true;
-    this.sportsService.getBasketballstandings(2018, 'REG').subscribe((res: any) => {
+    this.sportsService.getBasketballstandings(year, type).subscribe((res: any) => {
       this.isloading = false;
       if (res) {
         res.data.conferences.forEach((conference, index) => {
@@ -65,6 +68,42 @@ export class StandingsComponent implements OnInit {
       }
     },
       error => this.isloading = false);
+  }
+
+  getSeasons() {
+    this.sportsService.getBasketballseason().subscribe((res: any) => {
+      if (res.data && res.data.seasons) {
+        if (res.data.seasons) {
+          this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
+          this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
+        }
+
+        let years = [];
+        let typecode = [];
+        res.data.seasons.forEach(element => {
+          /* get unique seasons.type.code */
+          typecode.push(element.type.code);
+          /* get unique seasons.year */
+          years.push(element.year);
+        });
+        this.seasons.year.push(years.filter(this.onlyUnique));
+        this.seasons.type.push(typecode.filter(this.onlyUnique));
+      }
+    });
+  }
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  filterData(params) {
+    if (params.year)
+      this.filter.year = params.year;
+    if (params.type)
+      this.filter.type = params.type;
+    this.standings.conferences = [];
+    this.standings.teams = [];
+    this.standings.divisions = [];
+    this.getTournamentStandings(this.filter.year, this.filter.type);
   }
 
 }

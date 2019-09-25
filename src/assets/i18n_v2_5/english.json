@@ -337,5 +337,16 @@
   "Basketball": "Basketball",
   "Field Hockey": "Field Hockey",
   "Racing": "Racing",
-  "Tennis sports": "Tennis sports"
+  "Tennis sports": "Tennis sports",
+  "Box Score": "Box Score",
+  "No standing data available": "No standing data available",
+  "Field Goals": "Field Goals",
+  "Three Points ": "Three Points ",
+  "Free Throws": "Free Throws",
+  "Rebounds": "Rebounds",
+  "Assists": "Assists",
+  "Steals": "Steals",
+  "Blocks": "Blocks",
+  "Turnovers": "Turnovers",
+  "Fouls": "Fouls"
 }

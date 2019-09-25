@@ -109,7 +109,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="sport == 'soccer'">
+<ng-container *ngIf="sport == 'Soccer'">
   <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">
     <div class="stat-row head-row d-flex align-items-center">
       <div>
@@ -284,3 +284,113 @@
     </div>
   </div>
 </ng-container>
+
+
+<ng-container *ngIf="sport == 'Basketball'">
+  <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">
+    <div class="stat-row head-row d-flex align-items-center">
+      <div>
+        <p class="d-flex align-items-center justify-content-end">
+          <b>
+            <a
+              [routerLink]="['/basketball/team', (matchStats?.home?.sr_id | splitID), (matchStats?.home?.name | slugify )]">
+              {{matchStats?.home?.name}}
+            </a>
+          </b>
+          <img alt="{{matchStats?.home?.name}}" [lazyLoad]="matchStats?.home?.sr_id | logosurl:'basketball'"
+            [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+        </p>
+      </div>
+      <div class="center-col">
+        <h5>{{ 'Kabaddi_Module.match_stats' | translate }}</h5>
+      </div>
+      <div>
+        <p class="d-flex align-items-center">
+          <img alt="{{matchStats?.away?.name}}" [lazyLoad]="matchStats?.away?.sr_id | logosurl:'basketball'"
+            [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+          <b>
+            <a
+              [routerLink]="['/basketball/team', (matchStats?.away?.sr_id | splitID), (matchStats?.away?.name | slugify )]">
+              {{matchStats?.away?.name}}
+            </a>
+          </b>
+        </p>
+      </div>
+    </div>
+
+    <ng-container
+      *ngTemplateOutlet="perContainer;context:{options: {label:'Field Goals', key: 'field_goals_made', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="perContainer;context:{options: {label:'Three Points', key: 'three_points_made', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="perContainer;context:{options: {label:'Free Throws', key: 'free_throws_made', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Rebounds', key: 'total_rebounds', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Assists', key: 'assists', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Steals', key: 'steals', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Blocks', key: 'blocks', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Turnovers', key: 'turnovers', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Fouls', key: 'total_fouls', home: matchStats.home.statistics, away:  matchStats.away.statistics}}">
+    </ng-container>
+
+  </div>
+</ng-container>
+
+<ng-template #valueContainer let-options="options">
+  <div class="stat-row d-flex align-items-center" *ngIf="options.home.hasOwnProperty(options.key)">
+    <div>
+      <p [ngClass]="{'hightlight': options.home[options.key] > options.away[options.key]}">
+        <b>{{options.home[options.key]}}</b></p>
+    </div>
+    <div class="center-col">
+      <p>{{ options.label  | translate }}</p>
+    </div>
+    <div>
+      <p [ngClass]="{'hightlight': options.away[options.key] > options.home[options.key]}">
+        <b>{{options.away[options.key]}}</b></p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #perContainer let-options="options">
+  <div class="stat-row point-row d-flex align-items-center" *ngIf="options.home.hasOwnProperty(options.key)">
+    <div>
+      <p [ngClass]="{'hightlight': options.home[options.key] > options.away[options.key]}">
+        <b>{{ ((options.home[options.key]) / ((options.home[options.key] | strTonumber) + (options.away[options.key] | strTonumber)) * 100) | number:'2.0-0' }}</b><span
+          class="point-line"
+          [ngStyle]="{'width': 'calc('+ ((options.home[options.key]) / ((options.home[options.key] | strTonumber) + (options.away[options.key] | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+      </p>
+    </div>
+    <div class="center-col">
+      <p>{{ options.label  | translate }}%</p>
+    </div>
+    <div>
+      <p [ngClass]="{'hightlight': options.away[options.key] > options.home[options.key]}">
+        <span class="point-line"
+          [ngStyle]="{'width': 'calc('+ ((options.away[options.key]) / ((options.home[options.key] | strTonumber) + (options.away[options.key] | strTonumber)) * 100) +'% * 0.8 )'}"><span></span></span>
+        <b>{{ ((options.away[options.key]) / ((options.home[options.key] | strTonumber) + (options.away[options.key] | strTonumber)) * 100) | number:'2.0-0' }}</b>
+      </p>
+    </div>
+  </div>
+</ng-template>

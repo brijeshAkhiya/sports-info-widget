@@ -94,26 +94,26 @@
                   </div>
                   <div class="team-info d-flex rounded-box common-shadow">
                     <div class="info-col">
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.country">
                         <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
-                        <p *ngIf="teamProfile?.competitor?.country">{{teamProfile?.competitor?.country}}</p>
+                        <p>{{teamProfile?.competitor?.country}}</p>
                       </div>
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.venue?.name">
                         <p class="title light-text">{{ 'Shared_module.Stadium' | translate }}</p>
-                        <p *ngIf="teamProfile?.venue?.name"> {{teamProfile?.venue?.name}} </p>
+                        <p> {{teamProfile?.venue?.name}} </p>
                       </div>
                     </div>
                     <!-- <p *ngIf="teamProfile?.venue?.name"><p
                             class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
                           </p>{{teamProfile?.venue?.name}}</p> -->
                     <div class="info-col">
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.manager?.name">
                         <p class="title light-text">{{ 'Shared_module.Manager' | translate }}</p>
-                        <p *ngIf="teamProfile?.manager?.name"> {{teamProfile?.manager?.name}} </p>
+                        <p> {{teamProfile?.manager?.name}} </p>
                       </div>
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.abbreviation">
                         <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
-                        <p *ngIf="teamProfile?.competitor?.abbreviation"> {{teamProfile?.competitor?.abbreviation}}
+                        <p> {{teamProfile?.competitor?.abbreviation}}
                         </p>
                       </div>
                     </div>
@@ -308,12 +308,36 @@
               <div (click)="getSportFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+ 
+              <div class="nba-common-selection d-flex">
+                <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
+                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
+                      (click)="yearDrop.close();filterData({year: season});"
+                      [ngClass]="{'selected' : filter.year == season  }">
+                      {{season}}
+                    </button>
+                  </div>
+                </div>
+                <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
+                      (click)="typeDrop.close();filterData({type: season});"
+                      [ngClass]="{'selected' : filter.type == season  }">
+                      {{season}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                 *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)"
                 [sport]="sport">
               </app-no-data-widget>
               <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="sport"
-                [tournament]="routeParams.tournamentid">
+                [tournament]="routeParams.tournamentid" [list_type]="'simple'">
               </app-schedule>
               <app-loader *ngIf="paramsFixtures.loading"></app-loader>
               <div class="fixtures-loadmore"
@@ -332,12 +356,34 @@
               <div (click)="getSportResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+
+              <div class="nba-common-selection d-flex">
+                <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
+                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
+                      (click)="yearDrop.close();filterData({year: season});" [ngClass]="{'selected' : filter.year == season  }">
+                      {{season}}
+                    </button>
+                  </div>
+                </div>
+                <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
+                      (click)="typeDrop.close();filterData({type: season});" [ngClass]="{'selected' : filter.type == season  }">
+                      {{season}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
               <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                 *ngIf="!paramsResults.loading && (!paramsResults.data || paramsResults.data?.length == 0)"
                 [sport]="sport">
               </app-no-data-widget>
-              <app-schedule [data]="paramsResults.data" [type]="'fixture'" [sport]="sport"
-                [tournament]="routeParams.tournamentid"></app-schedule>
+              <app-schedule [data]="paramsResults.data" [type]="'result'" [sport]="sport"
+                [tournament]="routeParams.tournamentid" [list_type]="'simple'"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
               <div class="fixtures-loadmore"
                 *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">

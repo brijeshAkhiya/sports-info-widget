@@ -26,6 +26,8 @@ export class TeamComponent implements OnInit {
   soccerteamplayers = { midfielder: [], forward: [], goalkeeper: [], defender: [], playerstats: [] };
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 0 }, loading: false, loadmore: false, data: [] };
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 0 }, loading: false, loadmore: false, data: [] };
+  seasons: any = { 'year': [], 'type': [] };
+  filter: any = { };
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,6 +41,7 @@ export class TeamComponent implements OnInit {
     this.sport = data.value.sport;
     this.routeParams = this.activatedRoute.snapshot.params;
     this.getSportProfile();
+    this.getSeasons();
   }
 
   getSportProfile() {
@@ -164,7 +167,50 @@ export class TeamComponent implements OnInit {
       case 'Soccer':
         this.sportsService.getsoccerteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
+      case 'Basketball':
+        this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
+           this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.fixtureSuccess, this.fixtureError);
+        break;
     }
+  }
+
+  getSeasons() {
+    this.sportsService.getBasketballseason().subscribe((res: any) => {
+      if (res.data && res.data.seasons) {
+        if (res.data.seasons) {
+          this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
+          this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
+        }
+
+        let years = [];
+        let typecode = [];
+        res.data.seasons.forEach(element => {
+          /* get unique seasons.type.code */
+          typecode.push(element.type.code);
+          /* get unique seasons.year */
+          years.push(element.year);
+        });
+        this.seasons.year.push(years.filter(this.onlyUnique));
+        this.seasons.type.push(typecode.filter(this.onlyUnique));
+        this.getSportFixtures();
+        this.getSportResults();
+      }
+    });
+  }
+
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  filterData(params) {
+
+    if (params.year)
+      this.filter.year = params.year;
+    if (params.type)
+      this.filter.type = params.type;
+    this.getSportFixtures();
+    this.getSportResults();
+
   }
 
   fixtureSuccess = (res) => {
@@ -197,6 +243,12 @@ export class TeamComponent implements OnInit {
         this.paramsFixtures.data = this.commonService.sortArr(this.paramsFixtures.data, 'Do MMMM YYYY', 'start_time', 'asc');
         break;
       }
+      case 'Basketball': {
+        this.paramsFixtures.data = [];
+        let filteredData = res.data.filter((match) => match.status == 'scheduled');
+        this.paramsFixtures.data = this.commonService.sortArr(filteredData, 'Do MMMM YYYY', 'scheduled', 'asc');
+        break;
+      }
     }
     console.log(this.paramsFixtures.data);
 
@@ -209,6 +261,8 @@ export class TeamComponent implements OnInit {
 
 
   getSportResults() {
+    console.log(this.sport);
+
     this.paramsResults.reqParams.page += 1;
     this.paramsResults.loading = true;
     switch (this.sport) {
@@ -221,6 +275,10 @@ export class TeamComponent implements OnInit {
         break;
       case 'Soccer':
         this.sportsService.getsoccerteamfixtures(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')).subscribe(this.resultSuccess, this.resultError);
+        break;
+      case 'Basketball':
+        this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
+           this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.resultSuccess, this.resultError);
         break;
       default:
       // code block
@@ -258,6 +316,12 @@ export class TeamComponent implements OnInit {
           }
         });
         this.paramsResults.data = this.commonService.sortArr(this.paramsResults.data, 'Do MMMM YYYY', 'start_time', 'desc');
+        break;
+      }
+      case 'Basketball': {
+        this.paramsResults.data = [];
+        let filteredData = res.data.filter((match) => match.status == 'closed');
+        this.paramsResults.data = this.commonService.sortArr(filteredData, 'Do MMMM YYYY', 'scheduled', 'desc');
         break;
       }
     }

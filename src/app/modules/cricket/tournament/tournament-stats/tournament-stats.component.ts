@@ -12,7 +12,7 @@ import { CommonService } from '@app/shared/providers/common-service';
 export class TournamentStatsComponent implements OnInit {
 
   stats;
-  isLoading: boolean = false;
+  isLoading = false;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -31,7 +31,7 @@ export class TournamentStatsComponent implements OnInit {
     this.sportsService.gettournamentleaders(id).subscribe((res: any) => {
       this.isLoading = false;
       if (res.data) {
-        this.stats = res.data
+        this.stats = res.data;
       }
     }, (err) => this.isLoading = false);
   }

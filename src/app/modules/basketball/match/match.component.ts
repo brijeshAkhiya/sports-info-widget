@@ -12,8 +12,11 @@ import { CommonService } from '@providers/common-service';
 export class MatchComponent implements OnInit {
 
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'basketball', aIds: [] } };
-  loading: boolean = false;
+  loading = false;
   matchInfo;
+  boxScoreParams = { loading: false };
+  commentry = { loading: false, data: [] };
+  boxData: any;
 
   constructor(
     private sportsService: SportsService,
@@ -30,7 +33,7 @@ export class MatchComponent implements OnInit {
 
     let matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'basketball', 'match');
     this.getMatchInfo(matchid);
-    this.paramArticle.reqParams.aIds.push(this.activatedroute.snapshot.params.id);
+    this.paramArticle.reqParams.aIds.push(matchid);
   }
 
   getMatchInfo(id) {
@@ -38,20 +41,63 @@ export class MatchComponent implements OnInit {
     this.sportsService.getBasketballMatchSummary(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
-
-        // if (this.matchInfo.match_info.gamestate === 0) {
-        //   this.startLiveUpdateAfterTime();
-        // } else if (this.matchInfo.match_info.status === 3)
-        //   this.getLiveUpdate(this);
-
-        // this.getVenuedetails();
-        // this.initTeam();
-        // this.initCommentry();
-        // this.initSquads();
+        this.matchInfo.venuedetails = this.matchInfo.venue;
+        this.sportsService.getReverseGeo(this.matchInfo.venuedetails.name + ',' + this.matchInfo.venuedetails.city + ',' + this.matchInfo.venuedetails.country).subscribe((geo: any) => {
+          this.matchInfo.venuedetails.lat = geo.results[0].geometry.location.lat;
+          this.matchInfo.venuedetails.lng = geo.results[0].geometry.location.lng;
+        });
+        this.getMatchBoxScore(id);
+        this.getMatchCommentry(id);
       }
       this.loading = false;
     }, (error) => {
       this.loading = false;
+    });
+  }
+
+  getMatchCommentry(id) {
+    this.commentry.loading = true;
+    this.sportsService.getBasketballMatchPlayByPlay(id).subscribe((res: any) => {
+      if (res.data) {
+        this.commentry.data = res.data;
+        this.matchInfo.periods = res.data.periods;
+      }
+      this.commentry.loading = false;
+    }, (error) => {
+      this.commentry.loading = false;
+    });
+  }
+
+
+  getMatchBoxScore(id) {
+    // if (this.boxScoreParams.data.length > 0)
+    //   return false;
+
+    this.boxScoreParams.loading = true;
+    this.sportsService.getBasketballMatchBoxScore(id).subscribe((res: any) => {
+      this.boxScoreParams.loading = false;
+      if (res.data) {
+        this.boxData = res.data;
+        let that = this;
+        Object.keys(res.data.home.leaders).forEach(function (key) {
+          res.data.home.leaders[key].forEach(leader => {
+            if (!that.boxData.home.squads) that.boxData.home.squads = [];
+            leader.type = key;
+            that.boxData.home.squads.push(leader);
+          });
+        });
+        Object.keys(res.data.away.leaders).forEach(function (key) {
+          res.data.away.leaders[key].forEach(leader => {
+            if (!that.boxData.away.squads) that.boxData.away.squads = [];
+            leader.type = key;
+            that.boxData.away.squads.push(leader);
+          });
+        });
+        console.log(this.boxData);
+
+      }
+    }, (error) => {
+      this.boxScoreParams.loading = false;
     });
   }
 

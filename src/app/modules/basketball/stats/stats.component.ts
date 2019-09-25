@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
-import { CommonService } from '@app/shared/providers/common-service';
 
 @Component({
   selector: 'app-stats',
@@ -13,10 +12,7 @@ export class StatsComponent implements OnInit {
   stats: any;
   isloading = false;
   filter: any = { 'category': 'points' };
-  // yearunique:any=[];
-  // typeunique: any=[];
   constructor(
-    private commonService: CommonService,
     private sportsService: SportsService
   ) { }
 
@@ -33,18 +29,16 @@ export class StatsComponent implements OnInit {
         this.seasons.names = [];
         this.isloading = false;
         if (res.data.categories.length > 0) {
-          res.data.categories.forEach(element => {
-            if (this.filter.names === element.name) {
-              this.stats = element.ranks;
-            }
-          });
+          let stats = res.data.categories.filter((category) => category.name == this.filter.names && category.type == 'average');
+          if (stats.length > 0)
+            this.stats = stats[0].ranks;
         }
-        var name = []
+        let name = [];
         res.data.categories.forEach(element => {
-          // get unique seasons.type.code
-          name.push(element.name)
+          /* // get unique seasons.type.code */
+          name.push(element.name);
         });
-        this.seasons.names.push(name.filter(this.onlyUnique))
+        this.seasons.names.push(name.filter(this.onlyUnique));
       }
     },
       error => this.isloading = false);
@@ -53,23 +47,22 @@ export class StatsComponent implements OnInit {
   getSeasons() {
     this.sportsService.getBasketballseason().subscribe((res: any) => {
       if (res.data && res.data.seasons) {
-        // this.seasons = res.data.seasons;
         if (res.data.seasons) {
           this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
           this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
-          this.filter.names = 'points'
+          this.filter.names = 'points';
         }
 
-        var years = []
-        var typecode = []
+        let years = [];
+        let typecode = [];
         res.data.seasons.forEach(element => {
-          // get unique seasons.type.code
-          typecode.push(element.type.code)
-          //get unique seasons.year
-          years.push(element.year)
+          /* get unique seasons.type.code */
+          typecode.push(element.type.code);
+          /* get unique seasons.year */
+          years.push(element.year);
         });
-        this.seasons.year.push(years.filter(this.onlyUnique))
-        this.seasons.type.push(typecode.filter(this.onlyUnique))
+        this.seasons.year.push(years.filter(this.onlyUnique));
+        this.seasons.type.push(typecode.filter(this.onlyUnique));
         this.getTournamentStats();
       }
     });
