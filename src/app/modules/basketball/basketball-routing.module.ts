@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from '@app/shared/pages/home/home.component';
-import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/pages/player/player.component';
@@ -11,11 +10,12 @@ import { SliderFixtureComponent } from '@app/shared/pages/slider-fixture/slider-
 import { StatsComponent } from './stats/stats.component';
 import { StandingsComponent } from './standings/standings.component';
 import { MatchComponent } from './match/match.component';
+import { BasketballComponent } from './basketball.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: RouterComponent,
+    component: BasketballComponent,
     data: { 'sport': 'Basketball' },
     children: [
       {

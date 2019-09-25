@@ -65,7 +65,11 @@ export class AppComponent implements OnInit, AfterContentInit {
   ngOnInit() {
 
     let selectedLang = 'english';
-    if ((window.location.host != 'www.sports.info' && window.location.host != 'dev.sports.info' && !window.location.host.includes('localhost') && !window.location.host.includes('192.168'))) {
+    if ((window.location.host != 'www.sports.info'
+      && window.location.host != 'dev.sports.info'
+      && !window.location.host.includes('localhost')
+      && !window.location.host.includes('192.168')
+      && !window.location.host.includes('127.0.0.1'))) {
       if (window.location.host.split('.')[0])
         selectedLang = window.location.host.split('.')[0];
     }

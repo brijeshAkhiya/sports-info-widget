@@ -2,24 +2,23 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from '@app/shared/pages/home/home.component';
-import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { CricketFixturesComponent } from './fixtures/fixtures.component';
 import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component';
-
-import { TournamentComponent } from './tournament/tournament.component';
-import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
-import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
-import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
-import { MatchHomeComponent } from './match/match-home/match-home.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/pages/player/player.component';
 
+import { TournamentComponent } from './tournament/tournament.component';
+import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
+import { TournamentStadingsComponent } from './tournament/tournament-stadings/tournament-stadings.component';
+import { MatchHomeComponent } from './match/match-home/match-home.component';
+import { CricketComponent } from './cricket.component';
+
 const routes: Routes = [
     {
         path: '',
-        component: RouterComponent,
-        data: { 'sport': 'Cricket' },
+        component: CricketComponent,
+        data: { 'sport': 'Cricket', 'type': 'home' },
         children: [
             {
                 path: '',

@@ -26,7 +26,7 @@ export class BasketballEffects {
                 map((response: any) => new Basketball.LoadBasketballScheduleSuccess(response.data)),
                 tap(() => this.store.dispatch(new Basketball.BasketballStopLoading())),
                 catchError(() => {
-                    this.store.dispatch(new Basketball.LoadBasketballSchedule());
+                    this.store.dispatch(new Basketball.BasketballStopLoading());
                     return EMPTY;
                 })
             )),
