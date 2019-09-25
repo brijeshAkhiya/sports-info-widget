@@ -26,6 +26,9 @@
 .squad-item p span              { display: block; font-size: 12px; line-height: 18px; }
 .fixtures-loadmore              { margin-top: 32px; text-align: center; }
 
+/* -------- NBA Team Fixture ------- */
+.nba-common-selection .common-dropdown .dropdown-toggle { border-color: #D5D8DC; font-weight: 600; }
+
 /* -- Arabic CSS -- */
 .arabic .team-about-head .team-info     { margin-left: 0px; margin-right: 24px; }
 
