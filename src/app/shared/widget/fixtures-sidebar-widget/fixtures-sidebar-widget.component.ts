@@ -5,6 +5,7 @@ import * as fromRoot from '@app/app-reducer';
 import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 import * as Cricket from '@store/cricket/cricket.actions';
 import * as Soccer from '@store/soccer/soccer.actions';
+import * as Basketball from '@store/basketball/basketball.actions';
 import { Store } from '@ngrx/store';
 
 
@@ -69,7 +70,18 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
         }
       });
     } else if (this.sport === 'Basketball') {
-      this.loader = false;
+      this.store.dispatch(new Basketball.LoadBasketballSchedule());
+      this.store.select('Basketball').subscribe((data: any) => {
+        if (this.sport === 'Basketball') {
+          if (data.schedule) {
+            this.loader = data.loader;
+          }
+          if (data.schedule && data.schedule.length > 0) {
+            this.fixturesdata = data.schedule.filter((match) => match.status === 'scheduled');
+            this.resultsdata = data.schedule.filter((match) => match.status === 'closed');
+          }
+        }
+      });
     }
   }
 }
