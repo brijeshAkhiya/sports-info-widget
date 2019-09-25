@@ -1,23 +1,22 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 import { CommonService } from '@providers/common-service';
 
 @Pipe({
-  name: "logosurl"
+  name: 'logosurl'
 })
 export class LogosUrlPipe implements PipeTransform {
 
-  constructor(public commonService: CommonService) {}
+  constructor(public commonService: CommonService) { }
 
-  transform(value: any,sport:any): any {
-    if (value && sport == 'kabaddi' ) {
+  transform(value: any, sport: any): any {
+    if (value && sport !== undefined) {
       return (
         `${this.commonService.s3Url}logos/kabaddi-${value}.svg`
       );
-    }
-    else{
+    } else {
       return (
         `${this.commonService.s3Url}logos/${value}.png`
       );
-    } 
+    }
   }
 }

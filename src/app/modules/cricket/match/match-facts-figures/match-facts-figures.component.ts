@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SportsService } from "@providers/sports-service";
-import { CommonService } from "@providers/common-service";
+import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 
 import { Router } from '@angular/router';
 
@@ -25,13 +25,10 @@ export class MatchFactsFiguresComponent implements OnInit {
     private router: Router, private commonService: CommonService) { }
 
   ngOnInit() {
-    console.log(this.teamMatchResult);
-
     if (this.matchdata) {
       this.getVenueData();
       if (this.matchdata.sport_event_status.status != 'ended' || this.matchdata.sport_event_status.status != 'closed')
         this.getMatchProbability();
-
     }
   }
 
@@ -40,15 +37,15 @@ export class MatchFactsFiguresComponent implements OnInit {
     if (this.matchdata.sport_event.venue) {
       this.venuedetails = this.matchdata.sport_event.venue;
       if (this.matchdata.sport_event.venue.map_coordinates) {
-        this.venuedetails.lat = Number(this.matchdata.sport_event.venue.map_coordinates.split(",")[0]);
-        this.venuedetails.long = Number(this.matchdata.sport_event.venue.map_coordinates.split(",")[1]);
+        this.venuedetails.lat = Number(this.matchdata.sport_event.venue.map_coordinates.split(',')[0]);
+        this.venuedetails.long = Number(this.matchdata.sport_event.venue.map_coordinates.split(',')[1]);
       } else {
         // TODO - Reverse Geo coding
         console.log('reverse geo code');
         this.sportsService.getReverseGeo(this.venuedetails.name).subscribe((res: any) => {
           this.venuedetails.lat = res.results[0].geometry.location.lat;
           this.venuedetails.long = res.results[0].geometry.location.lng;
-        })
+        });
       }
     }
   }
@@ -72,10 +69,10 @@ export class MatchFactsFiguresComponent implements OnInit {
     });
   }
 
-  //get match detail
+  /* //get match detail */
   matchDetail(id, team1, team2) {
-    let teams = team1.concat("-", team2);
-    this.router.navigate(["/cricket/match", btoa(id), teams]);
+    let teams = team1.concat('-', team2);
+    this.router.navigate(['/cricket/match', btoa(id), teams]);
   }
 
 

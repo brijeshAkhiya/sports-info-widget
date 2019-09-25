@@ -86,26 +86,26 @@
                   </div>
                   <div class="team-info soccer-team-info d-flex align-items-center rounded-box common-shadow">
                     <div class="info-col">
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.country">
                         <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
-                        <p *ngIf="teamProfile?.competitor?.country">{{teamProfile?.competitor?.country}}</p>
+                        <p>{{teamProfile?.competitor?.country}}</p>
                       </div>
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.venue?.name">
                         <p class="title light-text">{{ 'Shared_module.Stadium' | translate }}</p>
-                        <p *ngIf="teamProfile?.venue?.name"> {{teamProfile?.venue?.name}} </p>
+                        <p> {{teamProfile?.venue?.name}} </p>
                       </div>
                     </div>
                     <!-- <p *ngIf="teamProfile?.venue?.name"><p
                             class="title light-text">{{ 'Shared_module.Stadium' | translate }} :
                           </p>{{teamProfile?.venue?.name}}</p> -->
                     <div class="info-col">
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.manager?.name">
                         <p class="title light-text">{{ 'Shared_module.Manager' | translate }}</p>
-                        <p *ngIf="teamProfile?.manager?.name"> {{teamProfile?.manager?.name}} </p>
+                        <p> {{teamProfile?.manager?.name}} </p>
                       </div>
-                      <div class="info-item">
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.abbreviation">
                         <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
-                        <p *ngIf="teamProfile?.competitor?.abbreviation"> {{teamProfile?.competitor?.abbreviation}}
+                        <p> {{teamProfile?.competitor?.abbreviation}}
                         </p>
                       </div>
                     </div>
@@ -329,7 +329,7 @@
                 [sport]="sport">
               </app-no-data-widget>
               <app-schedule [data]="paramsResults.data" [type]="'fixture'" [sport]="sport"
-                [tournament]="routeParams.tournamentid"></app-schedule>
+                [tournament]="routeParams.tournamentid" [list_type]="'simple'"></app-schedule>
               <app-loader *ngIf="paramsResults.loading"></app-loader>
               <div class="fixtures-loadmore"
                 *ngIf="!paramsResults.loading && paramsResults.data?.length > 0 && paramsResults.loadmore">

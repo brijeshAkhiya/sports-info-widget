@@ -1,5 +1,5 @@
 <app-loader *ngIf="loading"></app-loader>
-<app-no-data-widget *ngIf="!loading && (!matchInfo)"></app-no-data-widget>
+<app-no-data-widget *ngIf="!loading && (!matchInfo)" [sport]="'Basketball'"></app-no-data-widget>
 <section class="common-section cricket-recentnews recentnews-section" *ngIf="matchInfo">
   <div class="container">
     <div class="row sidebar-row">
@@ -14,6 +14,10 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Play-by-play' | translate }}</ng-template>
             <ng-template ngbTabContent>
+
+              <app-loader *ngIf="commentry?.loading"></app-loader>
+              <app-no-data-widget *ngIf="!commentry?.loading && (commentry?.data.length == 0)" [sport]="'Basketball'">
+              </app-no-data-widget>
 
               <!-- NBA Ground -->
               <div class="nba-map-block common-shadow rounded-box">
@@ -119,7 +123,7 @@
 
               <!-- Quater Tabs -->
               <ngb-tabset class="filled-tabs scorecard-tab">
-                <ngb-tab *ngFor="let period of matchInfo?.periods">
+                <ngb-tab *ngFor="let period of commentry?.data?.periods">
                   <ng-template ngbTabTitle>
                     <span>{{ 'Q' + period.sequence }}</span>
                   </ng-template>
@@ -133,6 +137,97 @@
             </ng-template>
           </ngb-tab>
           <!--END - PLAY BY PLAY  -->
+
+          <!--START - BOX SCORE  -->
+          <ngb-tab>
+            <ng-template ngbTabTitle>{{ 'Box Score' | translate }}</ng-template>
+            <ng-template ngbTabContent>
+              <app-loader *ngIf="boxScoreParams?.loading"></app-loader>
+              <app-no-data-widget *ngIf="!boxScoreParams?.loading && (!boxData)" [sport]="'Basketball'">
+              </app-no-data-widget>
+              <!-- Quater Tabs -->
+              <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="boxData">
+                <ngb-tab *ngIf="boxData?.home">
+                  <ng-template ngbTabTitle>
+                    <span>{{ boxData?.home?.market }} {{ boxData?.home?.name }}</span>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <app-player-table *ngIf="boxData?.home?.squads?.length > 0" [data]="boxData?.home?.squads"
+                      [options]=" {
+                          sport:'Basketball',
+                          titles : [('Cricket_Module2.player' | translate),'MIN','FG','3PT','FT','REB','OREB','DREB','AST','STL','BLK','TO','PF','PTS'],
+                          values : ['full_name', 'statistics.minutes', 'statistics.field_goals_made', 'statistics.three_points_made', 'statistics.free_throws_made', 'statistics.rebounds', 'statistics.offensive_rebounds', 'statistics.defensive_rebounds', 'statistics.assists', 'statistics.steals', 'statistics.blocks', 'statistics.turnovers', 'statistics.personal_fouls', 'statistics.points'],
+                          class : ['nba-table nba-tour-stats-table'],
+                          class_light_row : ['light-row'],
+                          tbl_type:'stats'
+                        }">
+                    </app-player-table>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab *ngIf="boxData?.away">
+                  <ng-template ngbTabTitle>
+                    <span>{{ boxData?.away?.market }} {{ boxData?.away?.name }}</span>
+                  </ng-template>
+                  <ng-template ngbTabContent>
+                    <app-player-table *ngIf="boxData?.away?.squads?.length > 0" [data]="boxData?.away?.squads"
+                      [options]=" {
+                          sport:'Basketball',
+                          titles : [('Cricket_Module2.player' | translate),'MIN','FG','3PT','FT','REB','OREB','DREB','AST','STL','BLK','TO','PF','PTS'],
+                          values : ['full_name', 'statistics.minutes', 'statistics.field_goals_made', 'statistics.three_points_made', 'statistics.free_throws_made', 'statistics.rebounds', 'statistics.offensive_rebounds', 'statistics.defensive_rebounds', 'statistics.assists', 'statistics.steals', 'statistics.blocks', 'statistics.turnovers', 'statistics.personal_fouls', 'statistics.points'],
+                          class : ['nba-table nba-tour-stats-table'],
+                          class_light_row : ['light-row'],
+                          tbl_type:'stats'
+                        }">
+                    </app-player-table>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+
+            </ng-template>
+          </ngb-tab>
+          <!--END - BOX SCORE  -->
+
+          <!--START - STATS -->
+          <ngb-tab *ngIf="matchInfo?.status === 'closed'">
+            <ng-template ngbTabTitle>
+              <div>{{ 'widgetModule.Stats' | translate }}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-match-stats [sport]="'Basketball'" [matchStats]="matchInfo"></app-match-stats>
+            </ng-template>
+          </ngb-tab>
+          <!--END - STATS -->
+
+          <!--START - LIVE MATCH TRACKER-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{'Cricket_Module.Hawk_Eye' | translate}}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-live-match-tracker [matchid]="matchInfo?.sr_id" *ngIf="matchInfo?.sr_id">
+              </app-live-match-tracker>
+            </ng-template>
+          </ngb-tab>
+          <!--END - LIVE MATCH TRACKER-->
+
+          <!--START - INFO-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{ 'Kabaddi_Module.Info' | translate }}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-match-info-card *ngIf="matchInfo" [data]="matchInfo"
+                [options]="{
+               sport:'Basketball',
+               titles : [('Cricket_Module.Match' | translate), ('widgetModule.venue' | translate)],
+               values : [ matchInfo?.home?.name + ' vs '+ matchInfo?.away?.name, matchInfo?.venue?.name +', '+matchInfo?.venue?.city +', '+matchInfo?.venue?.country] }">
+              </app-match-info-card>
+              <app-venue-map-card [sport]="'Basketball'" [venuedetails]="matchInfo?.venuedetails"
+                *ngIf="matchInfo?.venuedetails">
+              </app-venue-map-card>
+            </ng-template>
+          </ngb-tab>
+          <!--END - INFO-->
 
           <!--START - NEWS TAB-->
           <ngb-tab>

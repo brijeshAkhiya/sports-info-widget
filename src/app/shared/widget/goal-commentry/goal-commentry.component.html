@@ -87,31 +87,18 @@
       <div class="icon-block">
         <div class="icon default-icon" [ngClass]="event.event_type"></div>
         <p *ngIf="event.clock">{{event.clock}}'
-          <!-- <span *ngIf="event.stoppage_time"> +{{event.stoppage_time}}'</span> -->
         </p>
       </div>
 
       <div class="desc-block d-flex justify-content-between align-items-center">
         <div>
-          <!-- <p class="title" *ngIf="event.type == 'score_change'">{{team.home.name}} - {{event.home_score}},
-            {{team.away.name}} - {{event.away_score}}</p> -->
           <p class="desc">{{event.description}}</p>
         </div>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="event.type == 'break_start'">
-      <div class="icon-block">
-        <div class="icon" [ngClass]="event.type">
+
+        <div class="score">
+          <h6>{{event.home_points}} - {{event.away_points}}</h6>
         </div>
-        <p *ngIf="event.match_time">{{event.match_time}}' <span *ngIf="event.stoppage_time"> +
-            {{event.stoppage_time}}'</span></p>
-      </div>
-
-      <div class="desc-block d-flex justify-content-between align-items-center">
-        <p class="title">{{ 'Soccer_Module.half_time' | translate }}</p>
-        <p class="desc"></p>
       </div>
     </ng-container>
-
   </div>
 </div>

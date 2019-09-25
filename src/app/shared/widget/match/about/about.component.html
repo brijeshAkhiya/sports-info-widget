@@ -310,14 +310,14 @@
     </div>
     <!-- End Animation -->
 
-    <!-- <div class="tour-match-title show-anim">
-      <p class="light-text">
+    <div class="tour-match-title show-anim">
+      <!-- <p class="light-text">
         <a
           [routerLink]="['/soccer/tournament',(data?.sport_event?.sport_event_context?.season?.id | splitID),(data?.sport_event?.sport_event_context?.season?.name | slugify)]">
           {{data?.sport_event?.sport_event_context?.season?.name}}
         </a>
-      </p>
-    </div> -->
+      </p> -->
+    </div>
 
     <div class="match-update show-anim">
       <p class="light-text">
@@ -352,13 +352,19 @@
                 <tr>
                   <!-- add highlight class in high td -->
                   <td>{{data?.home?.alias}}</td>
-                  <td *ngFor="let period of data?.periods">{{period?.scoring?.home?.points}}</td>
-                  <td>{{data?.home?.points}}</td>
+                  <td *ngFor="let period of data?.periods"
+                    [ngClass]="{'highlight' : period?.scoring?.home?.points >  period?.scoring?.away?.points}">
+                    {{period?.scoring?.home?.points}}
+                  </td>
+                  <td [ngClass]="{'highlight' : data?.home?.points >  data?.away?.points}">{{data?.home?.points}}</td>
                 </tr>
                 <tr>
                   <td>{{data?.away?.alias}}</td>
-                  <td *ngFor="let period of data?.periods">{{period?.scoring?.away?.points}}</td>
-                  <td>{{data?.away?.points}}</td>
+                  <td *ngFor="let period of data?.periods"
+                    [ngClass]="{'highlight' : period?.scoring?.away?.points >  period?.scoring?.home?.points}">
+                    {{period?.scoring?.away?.points}}
+                  </td>
+                  <td [ngClass]="{'highlight' : data?.away?.points >  data?.home?.points}">{{data?.away?.points}}</td>
                 </tr>
               </tbody>
             </table>
