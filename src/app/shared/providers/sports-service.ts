@@ -696,4 +696,10 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/daily/summaries/${date}`
     );
   }
+
+  getBasketballSchedule() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/nba/schedules`
+    );
+  }
 }

@@ -6,6 +6,8 @@ import * as fromFavourites from '@store/favourites-management/favourites.reducer
 import * as fromCricket from '@store/cricket/cricket.reducer';
 import * as fromKabaddi from '@store/kabaddi/kabaddi.reducer';
 import * as fromSoccer from '@store/soccer/soccer.reducer';
+import * as fromBasketball from '@store/basketball/basketball.reducer';
+
 
 
 export interface State {
@@ -16,6 +18,7 @@ export interface State {
     Cricket: fromCricket.CricketData;
     Kabaddi: fromKabaddi.KabaddiData;
     Soccer: fromSoccer.SoccerData;
+    Basketball: fromBasketball.BasketballData;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -25,7 +28,8 @@ export const reducers: ActionReducerMap<State> = {
     Favourites: fromFavourites.favouritesReducer,
     Cricket: fromCricket.CircketReducer,
     Kabaddi: fromKabaddi.KabaddiReducer,
-    Soccer: fromSoccer.SoccerReducer
+    Soccer: fromSoccer.SoccerReducer,
+    Basketball: fromBasketball.BasketballReducer
 };
 
 
