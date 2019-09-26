@@ -33,18 +33,28 @@
                     <li [ngStyle]="{'left': '10%'}">
                       <div class="time-count">16</div>
                       <div ngbDropdown class="d-inline-block">
-                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>16</button>
+                        <button class="time-event goal" id="dropdownBasic1" ngbDropdownToggle></button>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                           <button ngbDropdownItem>GOAL</button>
                         </div>
                       </div>
                     </li>
                     <li [ngStyle]="{'left': '20%'}">
-                      <div class="time-count">17</div>
+                      <div class="time-count">18</div>
                       <div ngbDropdown class="d-inline-block">
-                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>16</button>
+                        <button class="time-event replace" id="dropdownBasic1" ngbDropdownToggle></button>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                          <button ngbDropdownItem>GOAL</button>
+                          <p>Yellow Card <span>: Lionel Messi</span></p>
+                        </div>
+                      </div>
+                    </li>
+                    <li [ngStyle]="{'left': '30%'}">
+                      <div class="time-count ">19</div>
+                      <div ngbDropdown class="d-inline-block">
+                        <button class="time-event red-card" id="dropdownBasic1" ngbDropdownToggle></button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <p>Out <span>: Lionel Messi</span></p>
+                            <p>In <span>: Lionel Messi</span></p>
                         </div>
                       </div>
                     </li>
