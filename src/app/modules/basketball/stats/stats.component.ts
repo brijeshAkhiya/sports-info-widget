@@ -48,8 +48,15 @@ export class StatsComponent implements OnInit {
     this.sportsService.getBasketballseason().subscribe((res: any) => {
       if (res.data && res.data.seasons) {
         if (res.data.seasons) {
-          this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
-          this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
+          if (!localStorage.getItem('filteryear')) {
+            this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
+            localStorage.setItem('filteryear', this.filter.year);
+            this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
+            localStorage.setItem('filtertype', this.filter.type);
+          } else {
+            this.filter.year = localStorage.getItem('filteryear');
+            this.filter.type = localStorage.getItem('filtertype');
+          }
           this.filter.names = 'points';
         }
 
@@ -82,7 +89,8 @@ export class StatsComponent implements OnInit {
     if (params.type)
       this.filter.category = params.category;
     this.getTournamentStats();
-
+    localStorage.setItem('filteryear', this.filter.year);
+    localStorage.setItem('filtertype', this.filter.type);
   }
 
 }
