@@ -9,7 +9,7 @@ import { CommonService } from '@app/shared/providers/common-service';
 })
 export class StandingsComponent implements OnInit {
   seasons: any = { 'year': [], 'type': [] };
-  filter: any = { };
+  filter: any = {};
 
   standings: any = { conferences: [], divisions: [], teams: [] };
   isloading = false;
@@ -23,7 +23,6 @@ export class StandingsComponent implements OnInit {
 
   ngOnInit() {
     this.getSeasons();
-    this.getTournamentStandings(2019, 'REG');
   }
 
   getTournamentStandings(year, type) {
@@ -82,6 +81,7 @@ export class StandingsComponent implements OnInit {
           } else {
             this.filter.year = localStorage.getItem('filteryear');
             this.filter.type = localStorage.getItem('filtertype');
+            this.getTournamentStandings(this.filter.year, this.filter.type);
           }
           // this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
           // this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;

@@ -26,7 +26,7 @@
                 <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
                   [sport]="'soccer'"></app-no-data-widget>
               </ng-container>
-              <div class="soccer-chart common-shadow rounded-box d-flex flex-column">
+              <!-- <div class="soccer-chart common-shadow rounded-box d-flex flex-column">
                 <div>
                   <p class="no-margin"><img [offset]="commonService.lazyloadoffset"
                       [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
@@ -67,7 +67,7 @@
                       [defaultImage]="commonService.flagplaceholder" alt="team-flag">{{headtohead?.teams?.team2?.name}}
                   </p>
                 </div>
-              </div>
+              </div> -->
             </ng-template>
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->

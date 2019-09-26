@@ -386,7 +386,7 @@
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
       <h4 [ngClass]="{'winner':team?.points > oppTeam.points}"><a
-          [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]">
+          [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.market+team.name | slugify)]">
           {{ team.market}} {{ team.name}}</a> </h4>
       <h3 *ngIf="data?.status != 'scheduled'">{{team.points}}</h3>
     </div>
