@@ -26,7 +26,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="'Basketball'">
             <ng-container
-              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'basketball',name:teamProfile?.name}}">
+              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.sr_id,type:'team',sport:'basketball',name:teamProfile?.name}}">
             </ng-container>
           </ng-container>
         </div>
@@ -123,7 +123,7 @@
 
                 <section class="team-about-head d-flex" *ngSwitchCase="'Basketball'">
                   <div class="team-logo align-self-start rounded-box common-shadow">
-                    <div class="team-logo-img" [lazyLoad]="teamProfile?.sr_id.id | logosurl:'basketball'"
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.sr_id | logosurl:'basketball'"
                       [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
                   </div>
                   <div class="team-info soccer-team-info d-flex rounded-box common-shadow">
@@ -308,30 +308,32 @@
               <div (click)="getSportFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-
-              <div class="nba-common-selection d-flex">
-                <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
-                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
-                      (click)="yearDrop.close();filterData({year: season});"
-                      [ngClass]="{'selected' : filter.year == season  }">
-                      {{season}}
-                    </button>
+              <div class="nba-team-fixture line-title d-flex justify-content-between align-items-center">
+                <h4 class="no-margin">Fixtures</h4>
+                <div class="nba-common-selection d-flex">
+                  <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]"
+                    #yearDrop="ngbDropdown">
+                    <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
+                        (click)="yearDrop.close();filterData({year: season});"
+                        [ngClass]="{'selected' : filter.year == season  }">
+                        {{season}}
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
-                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
-                      (click)="typeDrop.close();filterData({type: season});"
-                      [ngClass]="{'selected' : filter.type == season  }">
-                      {{season}}
-                    </button>
+                  <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+                    <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
+                        (click)="typeDrop.close();filterData({type: season});"
+                        [ngClass]="{'selected' : filter.type == season  }">
+                        {{season}}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-
               <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                 *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)"
                 [sport]="sport">
@@ -356,30 +358,32 @@
               <div (click)="getSportResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-
-              <div class="nba-common-selection d-flex">
-                <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
-                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
-                      (click)="yearDrop.close();filterData({year: season});"
-                      [ngClass]="{'selected' : filter.year == season  }">
-                      {{season}}
-                    </button>
+              <div class="nba-team-fixture line-title d-flex justify-content-between align-items-center">
+                <h4 class="no-margin">Results</h4>
+                <div class="nba-common-selection d-flex">
+                  <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]"
+                    #yearDrop="ngbDropdown">
+                    <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
+                        (click)="yearDrop.close();filterData({year: season});"
+                        [ngClass]="{'selected' : filter.year == season  }">
+                        {{season}}
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
-                  <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
-                      (click)="typeDrop.close();filterData({type: season});"
-                      [ngClass]="{'selected' : filter.type == season  }">
-                      {{season}}
-                    </button>
+                  <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+                    <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
+                        (click)="typeDrop.close();filterData({type: season});"
+                        [ngClass]="{'selected' : filter.type == season  }">
+                        {{season}}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-
               <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                 *ngIf="!paramsResults.loading && (!paramsResults.data || paramsResults.data?.length == 0)"
                 [sport]="sport">

@@ -29,6 +29,7 @@ import { UpcomingComponent } from './match/upcoming/upcoming.component';
 import { SportsService } from '@app/shared/providers/sports-service';
 import { SlugifyPipe } from '@app/shared/pipes/slugpipe';
 import { CommentryComponent } from './match/match-commentry/commentry/commentry.component';
+import { CricketComponent } from './cricket.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CommentryComponent } from './match/match-commentry/commentry/commentry.
     RecommendedComponent,
     UpcomingComponent,
     CommentryComponent,
+    CricketComponent,
   ],
   imports: [
     CommonModule,

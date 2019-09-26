@@ -26,6 +26,32 @@
                 <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
                   [sport]="'soccer'"></app-no-data-widget>
               </ng-container>
+              <div class="soccer-chart common-shadow rounded-box d-flex flex-column">
+                <div>
+                  <p class="no-margin">{{headtohead?.teams?.team1?.name}}</p>
+                  <ul class="no-margin">
+                    <li [ngStyle]="{'left': '10%'}">
+                      <div class="time-count">16</div>
+                      <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>16</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button ngbDropdownItem>GOAL</button>
+                        </div>
+                      </div>
+                    </li>
+                    <li [ngStyle]="{'left': '20%'}">
+                      <div class="time-count">17</div>
+                      <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>16</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button ngbDropdownItem>GOAL</button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <p class="no-margin">{{headtohead?.teams?.team2?.name}}</p>
+                </div>
+              </div>
             </ng-template>
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->

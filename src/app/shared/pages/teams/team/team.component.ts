@@ -27,7 +27,7 @@ export class TeamComponent implements OnInit {
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 0 }, loading: false, loadmore: false, data: [] };
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 0 }, loading: false, loadmore: false, data: [] };
   seasons: any = { 'year': [], 'type': [] };
-  filter: any = { };
+  filter: any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,7 +41,6 @@ export class TeamComponent implements OnInit {
     this.sport = data.value.sport;
     this.routeParams = this.activatedRoute.snapshot.params;
     this.getSportProfile();
-    this.getSeasons();
   }
 
   getSportProfile() {
@@ -67,6 +66,7 @@ export class TeamComponent implements OnInit {
         this.sportsService.getsoccerteamprofile(this.commonService.getIds(this.routeParams.teamid, 'soccer', 'team')).subscribe(this.profileSuccess, this.profileError);
         break;
       } case 'Basketball': {
+        this.getSeasons();
         this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')] } };
         this.sportsService.getBasketballteamprofile(this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.profileSuccess, this.profileError);
         break;
@@ -75,7 +75,6 @@ export class TeamComponent implements OnInit {
   }
 
   profileSuccess = (res) => {
-    console.log(res);
     this.loading = false;
     switch (this.sport) {
       case 'Cricket': {
@@ -113,12 +112,10 @@ export class TeamComponent implements OnInit {
         break;
       }
     }
-    console.log(this.paramsFixtures.data);
 
   }
 
   profileError = (err) => {
-    console.log(err);
     this.loading = false;
   }
 
@@ -144,7 +141,6 @@ export class TeamComponent implements OnInit {
               this.soccerteamplayers.playerstats.push(pdata);
             }
           });
-          console.log('playerstat', this.soccerteamplayers.playerstats);
         }
       }, (error) => {
         this.statsLoading = false;
@@ -169,7 +165,7 @@ export class TeamComponent implements OnInit {
         break;
       case 'Basketball':
         this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
-           this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.fixtureSuccess, this.fixtureError);
+          this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
     }
   }
@@ -210,7 +206,6 @@ export class TeamComponent implements OnInit {
   }
 
   filterData(params) {
-
     if (params.year)
       this.filter.year = params.year;
     if (params.type)
@@ -223,7 +218,6 @@ export class TeamComponent implements OnInit {
   }
 
   fixtureSuccess = (res) => {
-    console.log(res);
     this.paramsFixtures.loading = false;
     switch (this.sport) {
       case 'Cricket': {
@@ -259,19 +253,14 @@ export class TeamComponent implements OnInit {
         break;
       }
     }
-    console.log(this.paramsFixtures.data);
-
   }
 
   fixtureError = (err) => {
-    console.log(err);
     this.paramsFixtures.loading = false;
   }
 
 
   getSportResults() {
-    console.log(this.sport);
-
     this.paramsResults.reqParams.page += 1;
     this.paramsResults.loading = true;
     switch (this.sport) {
@@ -287,7 +276,7 @@ export class TeamComponent implements OnInit {
         break;
       case 'Basketball':
         this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
-           this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.resultSuccess, this.resultError);
+          this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.resultSuccess, this.resultError);
         break;
       default:
       // code block

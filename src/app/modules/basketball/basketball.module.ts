@@ -13,9 +13,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { StatsComponent } from './stats/stats.component';
 import { StandingsComponent } from './standings/standings.component';
 import { MatchComponent } from './match/match.component';
+import { BasketballComponent } from './basketball.component';
 
 @NgModule({
-  declarations: [StatsComponent, StandingsComponent, MatchComponent],
+  declarations: [StatsComponent, StandingsComponent, MatchComponent, BasketballComponent],
   imports: [
     CommonModule,
     TranslateModule,

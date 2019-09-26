@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RouterComponent } from '@app/shared/widget/router/router.component';
 import { HomeComponent } from '@app/shared/pages/home/home.component';
 import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component';
-import { StatsComponent } from './stats/stats.component';
-import { TableComponent } from './table/table.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/pages/player/player.component';
+
+import { StatsComponent } from './stats/stats.component';
+import { TableComponent } from './table/table.component';
 import { MatchComponent } from './match/match.component';
+import { KabaddiComponent } from './kabaddi.component';
 
 const routes: Routes = [{
   path: '',
-  component: RouterComponent,
+  component: KabaddiComponent,
   data: { 'sport': 'Kabaddi' },
   children: [
     {
