@@ -54,17 +54,19 @@ export class MatchFactsFiguresComponent implements OnInit {
   getMatchProbability() {
     this.sportsService.getmatchprobability(this.matchdata.sport_event.id).subscribe((res: any) => {
       this.matchprobability = res.data;
-      if (
-        this.matchprobability[0].probability >
-        this.matchprobability[1].probability
-      ) {
-        this.comp1 = this.matchprobability[0];
-        this.comp2 = this.matchprobability[1];
-        this.stylepercentage = `${this.matchprobability[0].probability}%`;
-      } else {
-        this.comp1 = this.matchprobability[1];
-        this.comp2 = this.matchprobability[0];
-        this.stylepercentage = `${this.matchprobability[1].probability}%`;
+      if (this.matchprobability.length > 0) {
+        if (
+          this.matchprobability[0].probability >
+          this.matchprobability[1].probability
+        ) {
+          this.comp1 = this.matchprobability[0];
+          this.comp2 = this.matchprobability[1];
+          this.stylepercentage = `${this.matchprobability[0].probability}%`;
+        } else {
+          this.comp1 = this.matchprobability[1];
+          this.comp2 = this.matchprobability[0];
+          this.stylepercentage = `${this.matchprobability[1].probability}%`;
+        }
       }
     });
   }

@@ -16,7 +16,11 @@
             <ng-template ngbTabTitle>{{'Cricket_Module.Commentary' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
-              <app-no-data-widget *ngIf="!inningWiseCommentry || inningWiseCommentry?.length == 0"></app-no-data-widget>
+              <app-no-data-widget
+                *ngIf="!inningWiseCommentry || inningWiseCommentry?.length == 0 && matchdata.sport_event_status.status != 'not_started'">
+              </app-no-data-widget>
+              <app-countdown *ngIf="matchdata.sport_event_status.status == 'not_started'"
+                [scheduled]="data.sport_event.scheduled"></app-countdown>
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
                 [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"
                 [showCommetry]="showCommetry">
@@ -303,7 +307,7 @@
             <ng-template ngbTabContent>
               <app-loader *ngIf="!nextmatches"></app-loader>
               <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
-              <app-schedule [data]="nextmatches" [type]="'fixture'" [sport]="'cricket'"></app-schedule>
+              <app-schedule [data]="nextmatches" [type]="'fixture'" [sport]="'Cricket'"></app-schedule>
             </ng-template>
           </ngb-tab>
           <!--END - UPCOMING-->

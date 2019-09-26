@@ -388,7 +388,7 @@
       <h4 [ngClass]="{'winner':team?.points > oppTeam.points}"><a
           [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.name | slugify)]">
           {{ team.market}} {{ team.name}}</a> </h4>
-      <h3>{{team.points}}</h3>
+      <h3 *ngIf="data?.status != 'scheduled'">{{team.points}}</h3>
     </div>
   </div>
 </ng-template>

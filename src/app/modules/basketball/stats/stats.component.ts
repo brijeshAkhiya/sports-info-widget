@@ -19,14 +19,12 @@ export class StatsComponent implements OnInit {
 
   ngOnInit() {
     this.getSeasons();
-
   }
 
   getTournamentStats() {
     this.isloading = true;
     this.sportsService.getBasketballstats(this.filter.year, this.filter.type).subscribe((res: any) => {
       if (res) {
-        this.seasons.names = [];
         this.isloading = false;
         if (res.data.categories.length > 0) {
           let stats = res.data.categories.filter((category) => category.name == this.filter.names && category.type == 'average');
@@ -38,7 +36,7 @@ export class StatsComponent implements OnInit {
           /* // get unique seasons.type.code */
           name.push(element.name);
         });
-        this.seasons.names.push(name.filter(this.onlyUnique));
+        this.seasons.names = name.filter(this.onlyUnique);
       }
     },
       error => this.isloading = false);
@@ -68,8 +66,8 @@ export class StatsComponent implements OnInit {
           /* get unique seasons.year */
           years.push(element.year);
         });
-        this.seasons.year.push(years.filter(this.onlyUnique));
-        this.seasons.type.push(typecode.filter(this.onlyUnique));
+        this.seasons.year = years.filter(this.onlyUnique);
+        this.seasons.type = typecode.filter(this.onlyUnique);
         this.getTournamentStats();
       }
     });

@@ -72,28 +72,6 @@
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->
 
-          <!--START - LIVE MATCH TRACKER-->
-          <ngb-tab>
-            <ng-template ngbTabTitle>
-              <div>{{'Cricket_Module.Hawk_Eye' | translate}}</div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <app-live-match-tracker [matchid]="matchInfo?.sport_event?.id" *ngIf="matchInfo?.sport_event?.id">
-              </app-live-match-tracker>
-            </ng-template>
-          </ngb-tab>
-          <!--END - LIVE MATCH TRACKER-->
-
-          <!-- START - LINEUPS-->
-          <ngb-tab id="lineups" *ngIf="matchLineups?.lineups && (matchLineups?.lineups | json) != '{}'">
-            <ng-template ngbTabTitle>
-              <div>{{ 'Kabaddi_Module.Lineups' | translate }} </div>
-            </ng-template>
-            <ng-template ngbTabContent>
-              <app-lineup [lineup]="matchLineups" [team]="team" [sport]="'soccer'"> </app-lineup>
-            </ng-template>
-          </ngb-tab>
-          <!-- END - LINEUPS-->
           <!--START - Stats-->
           <ngb-tab>
             <ng-template ngbTabTitle>
@@ -182,6 +160,30 @@
             </ng-template>
           </ngb-tab>
           <!--END - Stats-->
+
+          <!--START - LIVE MATCH TRACKER-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{'Cricket_Module.Hawk_Eye' | translate}}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-live-match-tracker [matchid]="matchInfo?.sport_event?.id" *ngIf="matchInfo?.sport_event?.id">
+              </app-live-match-tracker>
+            </ng-template>
+          </ngb-tab>
+          <!--END - LIVE MATCH TRACKER-->
+
+          <!-- START - LINEUPS-->
+          <ngb-tab id="lineups" *ngIf="matchLineups?.lineups && (matchLineups?.lineups | json) != '{}'">
+            <ng-template ngbTabTitle>
+              <div>{{ 'Kabaddi_Module.Lineups' | translate }} </div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-lineup [lineup]="matchLineups" [team]="team" [sport]="'soccer'"> </app-lineup>
+            </ng-template>
+          </ngb-tab>
+          <!-- END - LINEUPS-->
+
           <!-- START - Info-->
           <ngb-tab>
             <ng-template ngbTabTitle>

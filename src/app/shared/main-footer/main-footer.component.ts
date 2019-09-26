@@ -104,7 +104,7 @@ export class MainFooterComponent implements OnInit {
     } else {
       this.isapply = false;
       if (type == 'sport') {
-        this.router.navigate([id]);
+        this.router.navigate([id.toLowerCase()]);
       } else if (type == 'tournament' && sport == 'cricket') {
         let slugname = this.slugifyPipe.transform(name);
         this.router.navigate(['cricket/tournament', this.splitIDPipe.transform(id), slugname]);
@@ -132,6 +132,15 @@ export class MainFooterComponent implements OnInit {
       } else if (type == 'player' && sport == 'soccer') {
         let slugname = this.slugifyPipe.transform(name);
         this.router.navigate(['soccer/player', this.splitIDPipe.transform(id), slugname]);
+      } else if (type == 'tournament' && sport == 'basketball') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['basketball/tournament', this.splitIDPipe.transform(id), slugname]);
+      } else if (type == 'team' && sport == 'basketball') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['basketball/team', this.splitIDPipe.transform(id), slugname]);
+      } else if (type == 'player' && sport == 'basketball') {
+        let slugname = this.slugifyPipe.transform(name);
+        this.router.navigate(['basketball/player', this.splitIDPipe.transform(id), slugname]);
       }
     }
   }

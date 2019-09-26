@@ -1,76 +1,66 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SportsService } from "@providers/sports-service";
-import { Store } from "@ngrx/store";
-import * as fromRoot from '../../app-reducer'
-import * as favourites from '../../store/favourites-management/favourites.actions'
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { SportsService } from '@providers/sports-service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../app-reducer';
+import * as favourites from '../../store/favourites-management/favourites.actions';
 
 @Component({
   selector: 'app-favourites-widget',
   templateUrl: './favourites-widget.component.html',
   styleUrls: ['./favourites-widget.component.css']
 })
-export class FavouritesWidgetComponent implements OnInit {
-  @Input() value: any
-  isadded: boolean = false
+export class FavouritesWidgetComponent implements OnInit, OnDestroy {
+  @Input() value: any;
+  isadded = false;
   userfavourites = [];
-  isLogin: boolean = true;
+  isLogin = true;
+  favSubscription;
+
   constructor(private sportsService: SportsService, private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    this.store.select('Favourites').subscribe((data) => {
-      console.log(data);
-
-      this.userfavourites = (typeof data.Favourites != 'undefined' && data.Favourites != null) ? data.Favourites : []
-      this.isadded = false
+    this.favSubscription = this.store.select('Favourites').subscribe((data) => {
+      this.userfavourites = (typeof data.Favourites != 'undefined' && data.Favourites != null) ? data.Favourites : [];
+      this.isadded = false;
       this.userfavourites.map((data) => {
         if (data.id == this.value.id && data.type == this.value.type) {
-          this.isadded = true
+          this.isadded = true;
         }
-      })
-    })
+      });
+    });
   }
 
   addfav() {
     if (localStorage.getItem('userT')) {
       if (this.isadded) {
-        this.isadded = false
+        this.isadded = false;
         this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
-        console.log(this.userfavourites)
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
-
-        this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
-          if (res) {
-            console.log(res);
-          }
-        })
-      }
-      else {
-        this.isadded = true
-
+        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
+        this.sportsService.updatefavourites({ data: this.userfavourites });
+      } else {
+        this.isadded = true;
         this.updatefavourites(this.value);
       }
-    }
-    else {
+    } else {
       if (this.isadded) {
-        this.isadded = false
+        this.isadded = false;
         this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
+        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
-      }
-      else {
+      } else {
         if (JSON.parse(localStorage.getItem('favourites'))) {
           this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
         }
-        this.userfavourites.push(this.value)
+        this.userfavourites.push(this.value);
         this.userfavourites = this.userfavourites.map((singleitem) => {
           return {
             ...singleitem,
             isSelect: false
-          }
+          };
         });
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
+        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
-        this.isadded = true
+        this.isadded = true;
       }
       // this.isLogin = false
       // setTimeout(() => {
@@ -85,13 +75,17 @@ export class FavouritesWidgetComponent implements OnInit {
       return {
         ...singleitem,
         isSelect: false
-      }
+      };
     });
-    localStorage.setItem('favourites', JSON.stringify(this.userfavourites))
+    localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
     this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
       if (res) {
       }
-    })
+    });
+  }
+
+  ngOnDestroy() {
+    this.favSubscription.unsubscribe();
   }
 
 }

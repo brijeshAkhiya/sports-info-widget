@@ -22,6 +22,7 @@ export class PlayerTableComponent implements OnInit {
     private commonService: CommonService) { }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
   getname(event) {
