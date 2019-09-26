@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>chart-replace</title>
+    <desc>Created with Sketch.</desc>
+    <g id="chart-replace" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-27">
+            <rect id="Rectangle" fill="#EBEBEB" opacity="0" x="0" y="0" width="16" height="16"></rect>
+            <g id="Group-26" transform="translate(2.666667, 7.000000)" stroke="#525252" stroke-width="2">
+                <path d="M10.6666667,5.33333333 L2,5.33333333 C0.8954305,5.33333333 1.3527075e-16,4.43790283 0,3.33333333 L0,0 L0,0" id="Path" stroke-linejoin="round"></path>
+                <polyline id="Path-7" points="10.6666667 5.33333333 7.67736816 2.34403483 10.6666667 5.33333333 7.67736816 8.32263184"></polyline>
+            </g>
+            <g id="Group-26-Copy" transform="translate(7.833333, 4.500000) scale(-1, -1) translate(-7.833333, -4.500000) translate(2.333333, 0.000000)" stroke="#525252" stroke-width="2">
+                <path d="M10.6666667,5.33333333 L2,5.33333333 C0.8954305,5.33333333 1.3527075e-16,4.43790283 0,3.33333333 L0,0 L0,0" id="Path" stroke-linejoin="round"></path>
+                <polyline id="Path-7" points="10.6666667 5.33333333 7.67736816 2.34403483 10.6666667 5.33333333 7.67736816 8.32263184"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

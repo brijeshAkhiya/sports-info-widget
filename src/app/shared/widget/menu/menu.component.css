@@ -22,6 +22,7 @@
 /* .sub-navabar .dropdown-menu:before              { content: ""; position: absolute; display: block; width: 12px; left: calc(50% - 6px); top: -6px; border-bottom: 6px solid #fff; border-left: 6px solid transparent; border-right: 6px solid transparent; } */
 .sub-navabar .dropdown-menu li                  { padding: 0px 16px; background: transparent !important; }
 .sub-navabar .dropdown-menu li a                { padding: 16px 8px; display: block; font-size: 16px; line-height: 20px; color: #292929; font-weight: 500; border-bottom: 2px solid #F5F5F5; background: transparent; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.sub-navabar .dropdown-menu li:nth-last-child(2):nth-child(7) a,
 .sub-navabar .dropdown-menu li:last-child a     { border: none; }
 .sub-navabar .dropdown-menu li a:hover,
 .sub-navabar .dropdown-menu li a:focus          { background: transparent; color: #ED1A33; }

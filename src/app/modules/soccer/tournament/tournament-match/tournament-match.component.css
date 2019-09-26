@@ -1,12 +1,21 @@
 /* -------- Soccer Chart ------- */
 .soccer-chart                           { padding: 12px 16px; }
 .soccer-chart ul                        { padding: 62px 0; position: relative;}
-.soccer-chart ul li                     { position: absolute; left: 50px; top: 0; height: 100%; }
+.soccer-chart ul li                     { position: absolute; left: 50px; top: 0; width: 24px; height: 100%; }
 .soccer-chart ul:before                 { content: ""; display: block; position: absolute; width: 100%; height: 4px; border-radius: 2em; background: #ED1A33; }
 .soccer-chart .time-count               { height: 26px; width: 26px; position: absolute; background: #ED1A33; font-size: 12px; line-height: 26px; color: #fff; border-radius: 50%; font-weight: 600; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); box-shadow: 0px 2px 8px rgba(200, 14, 39, 0.29); -webkit-box-shadow: 0px 2px 8px rgba(200, 14, 39, 0.29); text-align: center; }
+.soccer-chart .dropdown                 { position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);}
 .soccer-chart .dropdown-toggle::after   { display: none; }
-
-
+.soccer-chart .time-event               { height: 16px; width: 16px; display: block; background: transparent no-repeat center center / cover; border: none; }
+.soccer-chart .time-event.goal          { background-image: url(assets/images/match/soccer/chart-goal.svg);}
+.soccer-chart .time-event.replace       { background-image: url(assets/images/match/soccer/chart-replace.svg);}
+.soccer-chart .time-event.red-card      { background-image: url(assets/images/match/soccer/chart-redcard.svg);}
+.soccer-chart .time-event.yellow-card   { background-image: url(assets/images/match/soccer/chart-redcard.svg);}
+.soccer-chart .dropdown-menu                { padding: 6px 8px; border: 2px solid #EBEBEB; top: auto !important; bottom: -2px; left: 120% !important; transform: translate(0,0%) !important; -webkit-transform: translate(0,0%) !important; }
+.soccer-chart .dropdown-menu p              { margin-bottom: 4px; font-size: 12px; line-height: 15px; }
+.soccer-chart .dropdown-menu p span         { font-weight: 500 }
+.soccer-chart .dropdown-menu p:last-child   { margin-bottom: 0; }
+.soccer-chart .dropdown-menu p.out          { opacity: 0.5;}
 /* -------- Head-to-Head Section ------- */
 .head-to-head                   { padding: 24px; text-align: center; }
 .head-to-head .head-team        { width: 50%; }
