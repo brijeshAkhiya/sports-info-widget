@@ -364,7 +364,7 @@
                 <h4 class="no-margin">Results</h4>
                 <div class="nba-common-selection d-flex">
                   <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]"
-                    #yearDrop="ngbDropdown">
+                    #yearDrop="ngbDropdown" placement="bottom">
                     <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                       <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
@@ -374,7 +374,8 @@
                       </button>
                     </div>
                   </div>
-                  <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+                  <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown"
+                    placement="bottom">
                     <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                       <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
