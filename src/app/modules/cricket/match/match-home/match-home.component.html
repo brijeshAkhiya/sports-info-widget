@@ -6,7 +6,8 @@
         <app-loader *ngIf="loader"></app-loader>
         <app-page-not-found *ngIf="!loader && !matchdata"></app-page-not-found>
         <!-- START - ABOUT MATCH-->
-        <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision" [sport]="'cricket'"></app-match-about>
+        <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision"
+          [sport]="'cricket'"></app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
@@ -15,6 +16,7 @@
             <ng-template ngbTabTitle>{{'Cricket_Module.Commentary' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
+              <app-no-data-widget *ngIf="!inningWiseCommentry || inningWiseCommentry?.length == 0"></app-no-data-widget>
               <app-match-commentry *ngIf="matchdata" [data]="matchdata" [commentry]="inningWiseCommentry"
                 [oversummery]="LiveOverSummery" [ballerList]="ballerList" [batsmanList]="batsmanList"
                 [showCommetry]="showCommetry">
@@ -128,7 +130,8 @@
                             <tr>
                               <td>
                                 <b>{{'Cricket_Module.Total' | translate}}</b>
-                                <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}} {{'Cricket_Module.runs_per_over' | translate}})</p>
+                                <p class="batsman-text">({{item?.teams[0]?.statistics?.batting?.run_rate}}
+                                  {{'Cricket_Module.runs_per_over' | translate}})</p>
                               </td>
                               <td>
                                 <b>{{item?.teams[1]?.statistics?.bowling?.extras > 0 ? item?.teams[0]?.statistics?.batting?.runs + item?.teams[1]?.statistics?.bowling?.extras : item?.teams[0]?.statistics?.batting?.runs}}</b>
@@ -137,8 +140,10 @@
                             </tr>
                             <tr *ngIf="checkYetBat(item?.teams[0]?.statistics?.batting?.players)">
                               <td colspan="6">
-                                <b> {{matchdata.sport_event_status.status == 'live' ? ('Cricket_Module2.Yet' | translate) : ('Cricket_Module2.Did' | translate)}}
-                                  {{matchdata.sport_event_status.status == 'live' ? ('Cricket_Module2.to' | translate) : ('Cricket_Module2.not' | translate)}} {{ 'Cricket_Module2.bat' | translate }} : </b>
+                                <b>
+                                  {{matchdata.sport_event_status.status == 'live' ? ('Cricket_Module2.Yet' | translate) : ('Cricket_Module2.Did' | translate)}}
+                                  {{matchdata.sport_event_status.status == 'live' ? ('Cricket_Module2.to' | translate) : ('Cricket_Module2.not' | translate)}}
+                                  {{ 'Cricket_Module2.bat' | translate }} : </b>
                                 <span class="batsman-text not-bat-text">
                                   <ng-container *ngFor="let notBat of item?.teams[0]?.statistics?.batting?.players">
                                     <ng-container *ngIf="notBat && notBat.statistics.length === 0">
@@ -269,10 +274,10 @@
                   <div class="common-table team-lineup d-flex common-shadow rounded-box">
                     <ng-container *ngFor="let key of objectKeys(playerList)">
                       <div *ngIf="playerList[key].team_type === team">
-                          <a
-                            [routerLink]="['/cricket/player', (playerList[key].id | splitID), ((playerList[key].name | split ) | slugify) ]">
-                            {{playerList[key].name | split}}
-                          </a>
+                        <a
+                          [routerLink]="['/cricket/player', (playerList[key].id | splitID), ((playerList[key].name | split ) | slugify) ]">
+                          {{playerList[key].name | split}}
+                        </a>
                       </div>
                     </ng-container>
                   </div>
@@ -323,7 +328,8 @@
       </div>
     </div>
   </div>
-  <div id="scoreline-block" class="scoreline-block d-flex justify-content-between"  *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
+  <div id="scoreline-block" class="scoreline-block d-flex justify-content-between"
+    *ngIf="matchdata && matchdata.sport_event_status.status == 'live'">
     <div class="item" *ngIf="batsmanList && batsmanList.length > 0">
       <p *ngFor="let batsman of batsmanList; let i = index;">
         {{batsman.name | split}} {{i == 0 ? "*" : ""}}
@@ -338,13 +344,13 @@
         {{oppoTeam[0].abbreviation}}
       </span>
       <span>vs</span>
-        {{currentTeam[0].abbreviation}}
+      {{currentTeam[0].abbreviation}}
       <span class="value"> {{matchdata.sport_event_status.display_score | cricketScore}}</span>
       <span class="dark-red">OV : </span> {{matchdata.sport_event_status.display_overs}}
     </div>
     <div class="item" *ngIf="ballerList && ballerList.length > 0">
       <p>{{ballerList[0].name | split}}
-        <span> 
+        <span>
           {{ballerList[0].statistics && ballerList[0].statistics.wickets ? ballerList[0].statistics.wickets : 0}}
           -
           {{ballerList[0].statistics && ballerList[0].statistics.runs_conceded ? ballerList[0].statistics.runs_conceded : 0}}
@@ -354,7 +360,7 @@
         </span>
       </p>
       <p *ngIf="matchdata.sport_event_status.current_inning == 2">
-        <span class="light-white target">{{'Cricket_Module.Target' | translate}}</span> 
+        <span class="light-white target">{{'Cricket_Module.Target' | translate}}</span>
         <span>{{matchdata.sport_event_status.target}}</span>
       </p>
     </div>

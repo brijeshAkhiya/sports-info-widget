@@ -38,7 +38,6 @@ export class SoccerEffects {
     @Effect()
     loadSoccerTournamentListSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Soccer.LOAD_SOCCER_TOURNAMENTS_LIST),
-        tap(() => console.log('in soccer tournament list effect')),
         switchMap((action: any) =>
             this.sportsService.getSoccerTournamentList().pipe(
                 map((response: any) => new Soccer.LoadSoccerTournamentListSuccess(response.data)),
