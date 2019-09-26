@@ -15,10 +15,12 @@
 /***** Responsive CSS Start ******/
 @media (max-width: 1379px) {
 /* -------- Teams List ------- */  
-    .team-list .team-item .team-flag img{ height: 64px;}
+    .team-list .team-item               { padding-left: 12px; padding-right: 20px; }
     .team-list .team-item:hover         { padding-left: 20px; padding-right: 12px; }
+    .team-list .team-item .team-flag img{ height: 64px;}
     .team-list .team-item .team-name    { padding-left: 12px;}
 /* -- Arabic CSS -- */
+    .arabic .team-list .team-item               { padding-right: 12px; padding-left: 20px;}
     .arabic .team-list .team-item:hover         { padding-right: 20px; padding-left: 12px;}
     .arabic .team-list .team-item .team-name    { padding-right: 12px;}
 }
