@@ -300,9 +300,9 @@
       </div>
 
       <a class="details-btn"
-        [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+        [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
-        [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
+        [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
       </a>
 
     </div>
@@ -459,9 +459,9 @@
             </div>
 
             <a class="details-btn"
-              [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+              [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
             <a class="fullblock-link"
-              [routerLink]="['/basketball/match', (match?.sr_id | splitID), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
+              [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
             </a>
 
           </div>

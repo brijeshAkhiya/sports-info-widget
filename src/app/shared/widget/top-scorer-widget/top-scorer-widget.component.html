@@ -79,7 +79,7 @@
         <div (click)="getsoccerTopScorer('goals')">{{ 'widgetModule.goals' | translate }}</div>
       </ng-template>
       <ng-template ngbTabContent>
-        <ng-container *ngTemplateOutlet="soccersidebarScore;context:{ scoredata:data,sport:sport}">
+        <ng-container *ngTemplateOutlet="soccersidebarScore;context:{ scoredata:data,sport:sport, type:'goals'}">
         </ng-container>
       </ng-template>
     </ngb-tab>
@@ -88,7 +88,7 @@
         <div (click)="getsoccerTopScorer('assists')">{{ 'widgetModule.assists' | translate }}</div>
       </ng-template>
       <ng-template ngbTabContent>
-        <ng-container *ngTemplateOutlet="soccersidebarScore;context:{ scoredata:data,sport:sport}">
+        <ng-container *ngTemplateOutlet="soccersidebarScore;context:{ scoredata:data,sport:sport, type:'assists'}">
         </ng-container>
       </ng-template>
     </ngb-tab>
@@ -97,7 +97,7 @@
 
 <!-- soccer score table -->
 
-<ng-template #soccersidebarScore let-scoredata="scoredata">
+<ng-template #soccersidebarScore let-scoredata="scoredata" let-scoretype="type">
   <app-loader *ngIf="isloading"></app-loader>
   <app-no-data-widget [message]="'No Data Available'" *ngIf="(!scoredata || scoredata?.length == 0)">
   </app-no-data-widget>
@@ -118,7 +118,8 @@
           </div>
           <div class="player-score">
             <h3>{{player.datapoints[0].value}}</h3>
-            <p class="score-property">{{ 'widgetModule.goals' | translate }}</p>
+            <p class="score-property" *ngIf="scoretype == 'goals'">{{ 'widgetModule.goals' | translate }}</p>
+            <p class="score-property" *ngIf="scoretype == 'assists'">{{ 'widgetModule.assists' | translate }}</p>
           </div>
         </div>
       </ng-container>
@@ -137,7 +138,8 @@
         </div>
         <div class="player-score">
           <h3>{{player.datapoints[0].value}}</h3>
-          <p class="score-property">{{ 'widgetModule.goals' | translate }}</p>
+          <p class="score-property" *ngIf="scoretype == 'goals'">{{ 'widgetModule.goals' | translate }}</p>
+          <p class="score-property" *ngIf="scoretype == 'assists'">{{ 'widgetModule.assists' | translate }}</p>
         </div>
       </ng-container>
     </li>

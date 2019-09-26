@@ -231,7 +231,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle" [sport]="sport">
               </app-blog-list>
             </ng-template>
           </ngb-tab>

@@ -59,22 +59,17 @@ export class TopScorerWidgetComponent implements OnInit {
     this.sportsService.getsoccerTopScorer(this.tournamentid).subscribe((res: any) => {
       this.isloading = false;
       this.soccerscoredata = res.data.lists;
-      this.soccerscoredata.map(element => {
-        if (element.type == type) {
-          if (element.leaders && element.leaders.length > 0) {
-            element.leaders.map(leader => {
-              if (leader.players && leader.players.length > 0) {
-                leader.players.map(value => {
-                  value['rank'] = leader.rank;
-                  if (this.data.length < 5) {
-                    this.data.push(value);
-                  }
-                });
-              }
-            });
-          }
-        }
-      });
+      let typeData = this.soccerscoredata.filter((list) => list.type == type)[0];
+      if (typeData && typeData.leaders && typeData.leaders.length > 0) {
+        typeData.leaders.map((leader) => {
+          leader.players.map(value => {
+            value['rank'] = leader.rank;
+            if (this.data.length < 5) {
+              this.data.push(value);
+            }
+          });
+        });
+      }
     }
       , err => { console.log(err); });
   }

@@ -11,16 +11,21 @@
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs">
           <!--START - PLAY BY PLAY  -->
+
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Play-by-play' | translate }}</ng-template>
             <ng-template ngbTabContent>
 
               <app-loader *ngIf="commentry?.loading"></app-loader>
-              <app-no-data-widget *ngIf="!commentry?.loading && (commentry?.data.length == 0)" [sport]="'Basketball'">
+              <app-no-data-widget
+                *ngIf="!commentry?.loading && (commentry?.data.length == 0) && matchInfo?.status != 'scheduled'"
+                [sport]="'Basketball'">
               </app-no-data-widget>
+              <app-countdown *ngIf="matchInfo?.status == 'scheduled'" [scheduled]="matchInfo?.scheduled">
+              </app-countdown>
 
               <!-- NBA Ground -->
-              <div class="nba-map-block common-shadow rounded-box">
+              <!-- <div class="nba-map-block common-shadow rounded-box">
                 <p class="title">Shot chart</p>
                 <div class="nba-map-inner d-flex">
                   <div class="nba-map">
@@ -119,7 +124,7 @@
                   </div>
                 </div>
 
-              </div>
+              </div> -->
 
               <!-- Quater Tabs -->
               <ngb-tabset class="filled-tabs scorecard-tab">
@@ -139,14 +144,15 @@
           <!--END - PLAY BY PLAY  -->
 
           <!--START - BOX SCORE  -->
-          <ngb-tab>
+          <ngb-tab *ngIf="matchInfo?.status == 'closed'">
             <ng-template ngbTabTitle>{{ 'Box Score' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="boxScoreParams?.loading"></app-loader>
-              <app-no-data-widget *ngIf="!boxScoreParams?.loading && (!boxData)" [sport]="'Basketball'">
+              <app-no-data-widget *ngIf="!boxScoreParams?.loading && (!boxData?.home?.squads && !boxData?.away?.squads)"
+                [sport]="'Basketball'">
               </app-no-data-widget>
               <!-- Quater Tabs -->
-              <ngb-tabset class="filled-tabs scorecard-tab" *ngIf="boxData">
+              <ngb-tabset class="filled-tabs scorecard-tab" *ngIf=" (boxData?.home?.squads || boxData?.away?.squads)">
                 <ngb-tab *ngIf="boxData?.home">
                   <ng-template ngbTabTitle>
                     <span>{{ boxData?.home?.market }} {{ boxData?.home?.name }}</span>
@@ -199,12 +205,12 @@
           <!--END - STATS -->
 
           <!--START - LIVE MATCH TRACKER-->
-          <ngb-tab>
+          <ngb-tab *ngIf="matchInfo?.id">
             <ng-template ngbTabTitle>
               <div>{{'Cricket_Module.Hawk_Eye' | translate}}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-live-match-tracker [matchid]="matchInfo?.sr_id" *ngIf="matchInfo?.sr_id">
+              <app-live-match-tracker [matchid]="matchInfo?.id">
               </app-live-match-tracker>
             </ng-template>
           </ngb-tab>

@@ -1,4 +1,3 @@
-<app-countdown *ngIf="data.sport_event_status.status == 'not_started'" [scheduled]="data.sport_event.scheduled"></app-countdown>
 <!-- <div *ngIf="!data.timeline && data.sport_event_status.status == 'closed'">
   No commentary data available for this match!
 </div> -->
@@ -6,8 +5,7 @@
 <div>
   <!-- Match is live-->
   <ng-container *ngIf="data.sport_event_status.status != 'closed'">
-    <div class="common-table batsman-table tour-stats-table common-shadow rounded-box"
-      *ngIf="batsmanList">
+    <div class="common-table batsman-table tour-stats-table common-shadow rounded-box" *ngIf="batsmanList">
       <div class="table-responsive">
         <table class="table" *ngIf="batsmanList.length > 0">
           <thead>
@@ -23,9 +21,10 @@
           <tbody>
             <tr *ngFor="let baller of batsmanList,let i = index">
               <td>
-                  <a [routerLink]="['/cricket/player',(baller.id | splitID), ((baller?.name | split ) | slugify) ]" [ngClass]="{'current-player': i == 0 }">
-                    {{baller.name | split}} 
-                  </a>
+                <a [routerLink]="['/cricket/player',(baller.id | splitID), ((baller?.name | split ) | slugify) ]"
+                  [ngClass]="{'current-player': i == 0 }">
+                  {{baller.name | split}}
+                </a>
               </td>
               <td>{{baller.statistics && baller.statistics.runs ? baller.statistics.runs : 0}}</td>
               <td>{{baller.statistics && baller.statistics.balls_faced ? baller.statistics.balls_faced : 0}}</td>
@@ -52,8 +51,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let baller of ballerList,let i = index">
-              <td> 
-                <a [routerLink]="['/cricket/player',(baller.id |splitID), ((baller?.name | split ) | slugify) ]" [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </a>
+              <td>
+                <a [routerLink]="['/cricket/player',(baller.id |splitID), ((baller?.name | split ) | slugify) ]"
+                  [ngClass]="{'current-player': i == 0 }">{{baller.name | split}} </a>
               </td>
               <td>{{baller.statistics && baller.statistics.overs_bowled ? baller.statistics.overs_bowled : 0}}</td>
               <td>{{baller.statistics && baller.statistics.maidens ? baller.statistics.maidens : 0}}</td>
@@ -83,27 +83,28 @@
   <!-- START - COMMENTRY -->
   <ng-container *ngIf="commentry">
     <ng-container *ngFor="let temp of commentry">
-      <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries" [oversummery]="oversummery"
-        [index]="i" [data]="data"></app-commentry>
+      <app-commentry *ngFor="let commentaries of temp.commentry; let i = index" [commentaries]="commentaries"
+        [oversummery]="oversummery" [index]="i" [data]="data"></app-commentry>
     </ng-container>
   </ng-container>
 
   <!-- Match is live, but not commentry available -->
-  <ng-container *ngIf="(data.sport_event_status.status == 'live' || data.sport_event_status.status == 'delayed' || data.sport_event_status.status == 'interrupted') && !showCommetry">
+  <ng-container
+    *ngIf="(data.sport_event_status.status == 'live' || data.sport_event_status.status == 'delayed' || data.sport_event_status.status == 'interrupted') && !showCommetry">
     <app-no-data-widget></app-no-data-widget>
   </ng-container>
   <!-- END - COMMENTRY -->
 
   <!-- No commentary data available for this match! -->
   <ng-container *ngIf="data.sport_event_status.status == 'closed' && !showCommetry">
-      <app-no-data-widget></app-no-data-widget>
-    </ng-container>
-    <!-- END - COMMENTRY -->
+    <app-no-data-widget></app-no-data-widget>
+  </ng-container>
+  <!-- END - COMMENTRY -->
 
   <!--If Match is cancelled -->
-  <ng-container *ngIf="data.sport_event_status.status == 'cancelled'" >
+  <ng-container *ngIf="data.sport_event_status.status == 'cancelled'">
     {{'Cricket_Module.Match_is_cancelled' | translate}}
-      <app-no-data-widget></app-no-data-widget>
+    <app-no-data-widget></app-no-data-widget>
   </ng-container>
 
   <!--If Match is cancelled -->

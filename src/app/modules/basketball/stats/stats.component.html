@@ -6,32 +6,33 @@
           class="common-title-btn nba-dropdown-title nba-stats-title big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{ 'Statistics' | translate }}</h1>
           <div class="nba-common-selection d-flex">
-            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown">
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year?.length > 0"
+              #yearDrop="ngbDropdown">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
+                <button ngbDropdownItem *ngFor="let season of seasons?.year"
                   (click)="yearDrop.close();filterData({year: season});"
                   [ngClass]="{'selected' : filter.year == season  }">
                   {{season}}
                 </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown">
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type?.length > 0" #typeDrop="ngbDropdown">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
+                <button ngbDropdownItem *ngFor="let season of seasons?.type"
                   (click)="typeDrop.close();filterData({type: season});"
                   [ngClass]="{'selected' : filter.type == season  }">
                   {{season}}
                 </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.names[0].length>0" #nameDrop="ngbDropdown" >
-              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.names}}</button>
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.names?.length > 0" #nameDrop="ngbDropdown">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.names | stringunder}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem  *ngFor="let season of seasons?.names[0]"
-                (click)="nameDrop.close();filterData({names: season});"
-                  [ngClass]="{'selected' : filter.names == season  }">{{season}}</button>
+                <button ngbDropdownItem *ngFor="let season of seasons?.names"
+                  (click)="nameDrop.close();filterData({names: season});"
+                  [ngClass]="{'selected' : filter.names == season  }">{{season | stringunder}}</button>
               </div>
             </div>
           </div>
@@ -43,20 +44,20 @@
         <app-player-table *ngIf="stats?.length > 0 && !isloading " [data]="stats" [options]=" {
               sport:'Basketball',
               titles : [('Cricket_Module2.player' | translate),'GP','MIN','PTS','REB','OREB','DREB','AST','STL','BLK','TO','PF','PER'],
-              values : ['full_name', 'games_played', 'minutes', 'points', 'rebounds', 'offensive_rebounds', 'defensive_rebounds', 'assists', 'steals', 'blocks', 'turnovers', 'personal_fouls', 'efficiency'],
+              values : ['full_name', 'total.games_played', 'total.minutes', 'total.points', 'total.rebounds', 'total.offensive_rebounds', 'total.defensive_rebounds', 'total.assists', 'total.steals', 'total.blocks', 'total.turnovers', 'total.personal_fouls', 'total.efficiency'],
               class : ['nba-table nba-tour-stats-table'],
               class_light_row : ['light-row'],
               tbl_type:'stats'
             }">
         </app-player-table>
       </div>
-      <!-- <div class="sidebar-col">
+      <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-points-table [sport]="'kabaddi'"></app-points-table>
+          <app-points-table [sport]="'Basketball'"></app-points-table>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </section>

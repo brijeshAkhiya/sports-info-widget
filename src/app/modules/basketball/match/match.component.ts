@@ -31,7 +31,7 @@ export class MatchComponent implements OnInit {
       return false;
     };
 
-    let matchid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'basketball', 'match');
+    let matchid = this.activatedroute.snapshot.params.id;//this.commonService.getIds(this.activatedroute.snapshot.params.id, 'basketball', 'match');
     this.getMatchInfo(matchid);
     this.paramArticle.reqParams.aIds.push(matchid);
   }
@@ -47,7 +47,8 @@ export class MatchComponent implements OnInit {
           this.matchInfo.venuedetails.lng = geo.results[0].geometry.location.lng;
         });
         this.getMatchBoxScore(id);
-        this.getMatchCommentry(id);
+        if (this.matchInfo.status == 'closed')
+          this.getMatchCommentry(id);
       }
       this.loading = false;
     }, (error) => {
@@ -79,22 +80,24 @@ export class MatchComponent implements OnInit {
       if (res.data) {
         this.boxData = res.data;
         let that = this;
-        Object.keys(res.data.home.leaders).forEach(function (key) {
-          res.data.home.leaders[key].forEach(leader => {
-            if (!that.boxData.home.squads) that.boxData.home.squads = [];
-            leader.type = key;
-            that.boxData.home.squads.push(leader);
+        if (res.data.home.leaders) {
+          Object.keys(res.data.home.leaders).forEach(function (key) {
+            res.data.home.leaders[key].forEach(leader => {
+              if (!that.boxData.home.squads) that.boxData.home.squads = [];
+              leader.type = key;
+              that.boxData.home.squads.push(leader);
+            });
           });
-        });
-        Object.keys(res.data.away.leaders).forEach(function (key) {
-          res.data.away.leaders[key].forEach(leader => {
-            if (!that.boxData.away.squads) that.boxData.away.squads = [];
-            leader.type = key;
-            that.boxData.away.squads.push(leader);
+        }
+        if (res.data.away.leaders) {
+          Object.keys(res.data.away.leaders).forEach(function (key) {
+            res.data.away.leaders[key].forEach(leader => {
+              if (!that.boxData.away.squads) that.boxData.away.squads = [];
+              leader.type = key;
+              that.boxData.away.squads.push(leader);
+            });
           });
-        });
-        console.log(this.boxData);
-
+        }
       }
     }, (error) => {
       this.boxScoreParams.loading = false;
