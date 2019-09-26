@@ -26,7 +26,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="'Basketball'">
             <ng-container
-              *ngTemplateOutlet="title; context: {title: teamProfile?.name, options : {id:teamProfile?.sr_id,type:'team',sport:'basketball',name:teamProfile?.name}}">
+              *ngTemplateOutlet="title; context: {title: teamProfile?.market+' '+teamProfile?.name, options : {id:teamProfile?.sr_id,type:'team',sport:'basketball',name:teamProfile?.name}}">
             </ng-container>
           </ng-container>
         </div>
@@ -297,7 +297,7 @@
               <div> {{ 'Shared_module.news' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle" [sport]="sport">
               </app-blog-list>
             </ng-template>
           </ngb-tab>

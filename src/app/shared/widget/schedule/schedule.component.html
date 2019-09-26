@@ -258,13 +258,13 @@
       <div class="match-team d-flex align-items-center">
         <div class="team-info">
           <h5 [ngClass]="{'winner': match?.status == 'closed' && match?.home_points > match?.away_points}">
-            {{match?.home?.name}}
+            {{match?.home?.alias}}
           </h5>
         </div>
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset"
             [lazyLoad]="(match?.home?.sr_id | splitID) | logosurl:'basketball'"
-            [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.name}}">
+            [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.alias}}">
         </div>
       </div>
 
@@ -274,7 +274,7 @@
       </div>
       <!-- For Complete/Result Match -->
       <div class="score-center-block" *ngIf="match?.status == 'closed'">
-        <p>ft</p>
+        <p>Final</p>
         <div class="value d-flex justify-content-between">
           <h4 class="dark-text">
             {{match?.home_points}}
@@ -290,11 +290,11 @@
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset"
             [lazyLoad]="(match?.away?.sr_id | splitID) | logosurl:'basketball'"
-            [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.name}}">
+            [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.alias}}">
         </div>
         <div class="team-info">
           <h5 [ngClass]="{'winner': match?.status == 'closed' && match?.away_points > match?.home_points}">
-            {{match?.away?.name}}
+            {{match?.away?.alias}}
           </h5>
         </div>
       </div>
@@ -433,7 +433,7 @@
             </div>
             <!-- For Complete/Result Match -->
             <div class="score-center-block" *ngIf="match?.status == 'closed'">
-              <p>vs</p>
+              <p>{{ 'Final' | translate }}</p>
               <div class="value d-flex justify-content-between">
                 <h4 class="dark-text">
                   {{match?.home_points}}
