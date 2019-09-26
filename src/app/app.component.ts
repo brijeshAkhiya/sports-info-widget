@@ -1,18 +1,10 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { AuthService } from 'angularx-social-login';
-import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import * as MetaTags from './store/meta-tags-management/meta-tags.actions';
 import * as fromRoot from './app-reducer';
-import * as Auth from './store/auth/auth.actions';
-import { environment } from '@env';
 import { TranslateService } from '@ngx-translate/core';
 
 /** Providers */
@@ -20,9 +12,6 @@ import { CommonService } from '@providers/common-service';
 import { SportsService } from '@providers/sports-service';
 import { SwUpdate } from '@angular/service-worker';
 
-/* vibrant import  */
-// declare var Vibrant: any;
-// import '../assets/js/vibrant.js';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,23 +19,17 @@ import { SwUpdate } from '@angular/service-worker';
 })
 
 export class AppComponent implements OnInit, AfterContentInit {
-  users$: Observable<any>;
-  socialUser: any;
-  socialUser2: any;
-  vibrantcolor: any;
-  mutedcolor: any;
   metatagsObj = {};
   isupdate: boolean;
   showCookiepopup = false;
+
   constructor(
-    private http: HttpClient,
     private swupdate: SwUpdate,
     private commonservice: CommonService,
     private sportsservice: SportsService,
     private router: Router,
     private meta: Meta,
     private pagetitle: Title,
-    private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
     private translate: TranslateService
   ) {
@@ -110,7 +93,6 @@ export class AppComponent implements OnInit, AfterContentInit {
     if (!data) {
       data = this.metatagsObj['/'];
     }
-    console.log(data);
 
     if (data) {
       if (data.title) {

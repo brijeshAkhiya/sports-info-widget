@@ -18,9 +18,7 @@ export class BasketballEffects {
     @Effect()
     loadBasketballScheduleSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Basketball.LOAD_BASKETBALL_SCHEDULE),
-        tap(() => this.store.dispatch(new Basketball.BasketballStartLoading())
-        ),
-        tap(() => { console.log('in effect basketball'); }),
+        tap(() => this.store.dispatch(new Basketball.BasketballStartLoading())),
         switchMap((action: any) =>
             this.sportsService.getBasketballSchedule().pipe(
                 map((response: any) => new Basketball.LoadBasketballScheduleSuccess(response.data)),

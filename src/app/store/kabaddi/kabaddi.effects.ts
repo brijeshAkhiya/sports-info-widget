@@ -33,7 +33,6 @@ export class KabaddiEffects {
     @Effect()
     loadKabaddiResultsSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Kabaddi.LOAD_KABADDI_RESULTS),
-        tap(() => console.log('in kabaddi effect')),
         switchMap((action: any) =>
             this.sportsService.getKabaddiMatchList('2', '10', '1').pipe(
                 map((response: any) => new Kabaddi.LoadKabaddiResultsSuccess(response.data)),
@@ -48,7 +47,6 @@ export class KabaddiEffects {
     @Effect()
     loadKabaddiLiveSuccess$: Observable<Action> = this.actions$.pipe(
         ofType(Kabaddi.LOAD_KABADDI_LIVE_MATCHES),
-        tap(() => console.log('in kabaddi effect')),
         switchMap((action: any) =>
             this.sportsService.getKabaddiMatchList('3', '10', '1').pipe(
                 map((response: any) => new Kabaddi.LoadKabaddiLiveSuccess(response.data)),

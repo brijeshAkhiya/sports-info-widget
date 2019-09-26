@@ -308,7 +308,7 @@
               <div (click)="getSportFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
-              <div class="nba-team-fixture line-title d-flex justify-content-between align-items-center"
+              <!-- <div class="nba-team-fixture line-title d-flex justify-content-between align-items-center"
                 *ngIf="sport == 'Basketball'">
                 <h4 class="no-margin">Fixtures</h4>
                 <div class="nba-common-selection d-flex">
@@ -334,7 +334,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)"
                 *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)"
                 [sport]="sport">
