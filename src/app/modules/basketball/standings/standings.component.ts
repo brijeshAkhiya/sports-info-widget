@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
-import { CommonService } from '@app/shared/providers/common-service';
 
 @Component({
   selector: 'app-standings',
@@ -10,16 +9,12 @@ import { CommonService } from '@app/shared/providers/common-service';
 export class StandingsComponent implements OnInit {
   seasons: any = { 'year': [], 'type': [] };
   filter: any = {};
-
   standings: any = { conferences: [], divisions: [], teams: [] };
   isloading = false;
 
-
   constructor(
-    private commonService: CommonService,
     private sportsService: SportsService
   ) { }
-
 
   ngOnInit() {
     this.getSeasons();
@@ -49,21 +44,14 @@ export class StandingsComponent implements OnInit {
               let team_less10 = team.records.filter(record => record.record_type == 'last_10')[0];
               if (typeof team_less10 != 'undefined') team.less10 = team_conf.wins + '-' + team_conf.losses;
 
-              console.log(index, divIndex);
-
               if (!this.standings.conferences[index].teams)
                 this.standings.conferences[index].teams = [];
               this.standings.conferences[index].teams.push(team);
-
-              // if (!this.standings.divisions[index][divIndex])
-              //   this.standings.divisions[index][divIndex].teams = [];
-              // this.standings.divisions[index][divIndex].teams.push(team);
 
               this.standings.teams.push(team);
             });
           });
         });
-        console.log(this.standings);
       }
     },
       error => this.isloading = false);
@@ -83,10 +71,7 @@ export class StandingsComponent implements OnInit {
             this.filter.type = localStorage.getItem('filtertype');
             this.getTournamentStandings(this.filter.year, this.filter.type);
           }
-          // this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
-          // this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
         }
-
         let years = [];
         let typecode = [];
         res.data.seasons.forEach(element => {
@@ -116,5 +101,4 @@ export class StandingsComponent implements OnInit {
     localStorage.setItem('filteryear', this.filter.year);
     localStorage.setItem('filtertype', this.filter.type);
   }
-
 }
