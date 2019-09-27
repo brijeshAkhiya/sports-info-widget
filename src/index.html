@@ -73,15 +73,7 @@
       enable_page_level_ads: true
     });
   </script>
-  <div id="connectionmsg"></div>
-  <script>
-    window.addEventListener('offline', function (event) {
-      document.getElementById("connectionmsg").innerHTML = "Connection Lost ";
-    });
-    window.addEventListener('online', function (event) {
-      document.getElementById("connectionmsg").innerHTML = "";
-    });
-  </script>
+  
   <script>
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
@@ -98,8 +90,22 @@
     ga('send', 'pageview');
   </script>
   <noscript>
-    <p>Please enable JavaScript in your browser for better use of the website.</p>
+    <div
+      style="position: absolute; top: 0; width: 100%; height: 100%; background-color:#fff; z-index: 1; text-align: center;">
+      <div
+        style="width: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); font-size: 24px; line-height: 32px; font-weight: 600;">
+        <img style="max-width: 0%;" src="assets/images/no-javascript.svg">
+        <p style="margin: 32px 0px 24px;">Ooops ! SportsInfo needs access to Javascript to render better experiences.
+        </p>
+        <p style="color: #476DF3;">Enable JS</p>
+      </div>
+    </div>
   </noscript>
+  <style>
+    body {
+      margin: 0px;
+    }
+  </style>
 </head>
 <script>
   if ('serviceWorker' in navigator) {
@@ -112,10 +118,10 @@
 <body ontouchstart id="main-body">
   <app-root>
     <div class="root-loader"
-      style="position: absolute; width: 100%; height: 100%; background-color:#fff; background-image: linear-gradient(#22336F 20%, #fff 20%, #fff 80%, #292929 80%); text-align: center;">
+      style="position: absolute; top: 0; width: 100%; height: 100%; background-color:#fff; text-align: center;">
       <!-- <img src="./assets/images/loader.mp4" alt="" /> -->
       <video src="./assets/images/loader.mp4"
-        style="width: 320px; max-width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);"
+        style="pointer-events: none; width: 320px; max-width: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);"
         autoplay loop muted></video>
     </div>
   </app-root>
