@@ -38,8 +38,6 @@ export class FixturesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.activatedroute);
-
     const routeData: any = this.activatedroute;
     this.params = routeData.data.value;
     if (this.params.sport == 'Cricket') {
