@@ -6,9 +6,6 @@ import { CarouselComponent } from 'ngx-owl-carousel-o';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 
-import * as fromRoot from '@app/app-reducer';
-import { Store } from '@ngrx/store';
-
 @Component({
   selector: 'app-slider-fixture',
   templateUrl: './slider-fixture.component.html',
@@ -29,15 +26,12 @@ export class SliderFixtureComponent implements OnInit {
   constructor(
     private activatedroute: ActivatedRoute,
     private sportsService: SportsService,
-    public commonService: CommonService,
-    private store: Store<fromRoot.State>
+    public commonService: CommonService
   ) { }
 
   ngOnInit() {
     const data: any = this.activatedroute.data;
     this.params = data.value;
-    console.log(this.params);
-
     this.paramData = {
       loading: false, loadmore: false, data: [], fullData: [],
       selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
@@ -49,8 +43,6 @@ export class SliderFixtureComponent implements OnInit {
   }
   loadDate(current) {
     this.customDate = new Array<any>(moment(`${current.year}-${current.month}-${current.day.toString()}`).daysInMonth()).fill(0, 0).map((x, i) => i + 1);
-    console.log(this.gallery);
-
     if (this.gallery && this.gallery.slidesOutputData) {
       const temp = this.gallery.slidesOutputData.slides.filter((slide) => parseInt(slide.id) == current.day);
       if (temp.length == 0 || this.gallery.slidesOutputData.slides.length > 7)
@@ -93,7 +85,6 @@ export class SliderFixtureComponent implements OnInit {
   filter(category) {
     const obj = {};
     this.paramData.selectedCategory = category;
-    console.log(this.paramData.selectedCategory);
     if (category.name == 'All') {
       this.paramData.fullData.map((data) => {
         if (data.sport_event.sport_event_context) {
@@ -120,15 +111,11 @@ export class SliderFixtureComponent implements OnInit {
         if (res) {
           this.paramData.data = res.data.games;
         }
-        console.log(this.paramData.data);
-
       },
         error => this.paramData.loading = false);
   }
 
   getSoccerData() {
-    console.log('getSoccerData');
-
     this.paramData.loading = true;
     this.sportsService
       .getSoccerDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
@@ -148,15 +135,10 @@ export class SliderFixtureComponent implements OnInit {
                 obj[data.sport_event.sport_event_context.season.id].matches.push(data);
               }
             }
-
           });
-          console.log(category);
-
           // category = this.commonService.sortByName(category, 'name');
           this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
           this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
-          console.log(this.paramData);
-
         }
       }, (error) => {
         this.paramData.loading = false;
@@ -188,7 +170,7 @@ export class SliderFixtureComponent implements OnInit {
     pullDrag: true,
     dots: false,
     autoHeight: true,
-    lazyLoad: true,
+    lazyLoad: false,
     navSpeed: 150,
     navText: ['', ''],
     responsive: {
