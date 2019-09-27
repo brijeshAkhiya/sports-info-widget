@@ -110,7 +110,7 @@
       <div class="match-team d-flex align-items-center">
         <div class="team-info">
           <h5>
-            {{match?.teams?.home?.shortname}}</h5>
+            {{match?.teams?.home?.tname}}</h5>
         </div>
         <div class="team-flag">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
@@ -143,7 +143,7 @@
         </div>
         <div class="team-info">
           <h5>
-            {{match?.teams?.away?.shortname}}</h5>
+            {{match?.teams?.away?.tname}}</h5>
 
         </div>
       </div>
