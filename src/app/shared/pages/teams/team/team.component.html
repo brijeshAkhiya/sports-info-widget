@@ -240,12 +240,12 @@
 
                     <div class="row row-size12" *ngSwitchCase="'Basketball'">
                       <div class="col-xl-3 col-sm-4" *ngFor="let player of teamProfile?.players">
-                        <div class="squad-item fullblock-link-container rounded-box common-shadow">
+                        <div class="squad-item nba-squad-item  fullblock-link-container rounded-box common-shadow">
                           <img alt="{{player.full_name}}" [lazyLoad]="player?.sr_id| playerimage:['m']"
                             [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
                           <div class="item-desc">
-                            <p>{{player.full_name | split}} - {{player?.primary_position}}
-                              <span class="light-text">{{player.jersey_number}}</span>
+                            <p><span class="num">{{player.jersey_number}}</span>
+                              {{player.full_name | split}} <b class="light-text"> {{player?.primary_position}}</b>
                             </p>
                             <a [routerLink]="" class="theme-btn">
                               {{ 'Shared_module.view_player' | translate }}<span></span></a>
