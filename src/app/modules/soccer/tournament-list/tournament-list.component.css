@@ -1,15 +1,15 @@
-.search-box                 { width: 210px; position: relative; }
-.search-box .form-control   { font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; border: 2px solid #D5D8DC; border-radius: 2em; }
-.search-box button          { position: absolute; width: 24px; height: 24px; right: 16px; bottom: 50%; transform: translateY(50%); -webkit-transform: translateY(50%); background: url(assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; }
-div.soccer-tournaments-list                { background: #fff; overflow: hidden; }
-div.soccer-tournaments-list .item          { padding: 24px; border: 1px solid #EBEBEB; border-left-width: 0px; border-top-width: 0px; }
-div.soccer-tournaments-list .item:nth-child(even)         { border-right-width: 0px; }
+.soccer-tournaments-title .search-box                   { width: 210px; position: relative; }
+.soccer-tournaments-title .search-box .form-control     { font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; border: 2px solid #D5D8DC; border-radius: 2em; }
+.soccer-tournaments-title .search-box button            { position: absolute; width: 24px; height: 24px; right: 16px; bottom: 50%; transform: translateY(50%); -webkit-transform: translateY(50%); background: url(assets/images/search-icon-gray.svg) no-repeat center center / cover; border: none; }
+div.soccer-tournaments-list                             { background: #fff; overflow: hidden; }
+div.soccer-tournaments-list .item                       { padding: 24px; border: 1px solid #EBEBEB; border-left-width: 0px; border-top-width: 0px; }
+div.soccer-tournaments-list .item:nth-child(even)       { border-right-width: 0px; }
 div.soccer-tournaments-list .item:nth-last-child(2),
-div.soccer-tournaments-list .item:last-child         { border-bottom-width: 0px; }
+div.soccer-tournaments-list .item:last-child            { border-bottom-width: 0px; }
 div.soccer-tournaments-list .item:nth-child(even):nth-last-child(2) { border-bottom-width: 1px;}
-div.soccer-tournaments-list .item li       { display: inline-block; }
-div.soccer-tournaments-list .item li a     { margin-right: 12px; display: block; position: relative; z-index: 5; }
-div.soccer-tournaments-list .item li:last-child a { margin: 0px; }
+div.soccer-tournaments-list .item li                    { display: inline-block; }
+div.soccer-tournaments-list .item li a                  { margin-right: 12px; display: block; position: relative; z-index: 5; }
+div.soccer-tournaments-list .item li:last-child a       { margin: 0px; }
 
 /* -- Arabic CSS -- */
 .arabic div.soccer-tournaments-list .item                  { border-left-width: 1px; border-right-width: 0px; }
@@ -17,22 +17,22 @@ div.soccer-tournaments-list .item li:last-child a { margin: 0px; }
 
 /***** Responsive CSS Start ******/
 @media (max-width: 1199px) {
-    div.soccer-tournaments-list .item          { padding: 20px; }
+    div.soccer-tournaments-list .item           { padding: 20px; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-    div.soccer-tournaments-list .item          { border-right-width: 0px;}
+    div.soccer-tournaments-list .item                   { border-right-width: 0px;}
     div.soccer-tournaments-list .item:nth-last-child(2) { border-bottom-width: 1px;}
 /* -- Arabic CSS -- */
-    .arabic div.soccer-tournaments-list .item                  { border-left-width: 0px;}
+    .arabic div.soccer-tournaments-list .item           { border-left-width: 0px;}
 }
 
 @media (max-width: 767px) {
-    div.soccer-tournaments-list .item          { padding: 16px; border-right-width: 0px;}
+    div.soccer-tournaments-list .item                   { padding: 16px; border-right-width: 0px;}
     div.soccer-tournaments-list .item:nth-last-child(2) { border-bottom-width: 1px;}
-    div.soccer-tournaments-list h6             { margin-bottom: 5px; }
+    div.soccer-tournaments-list h6                      { margin-bottom: 5px; }
 /* -- Arabic CSS -- */
-    .arabic div.soccer-tournaments-list .item                  { border-left-width: 0px; }
+    .arabic div.soccer-tournaments-list .item           { border-left-width: 0px; }
 }
 
 @media (max-width: 575px) {
