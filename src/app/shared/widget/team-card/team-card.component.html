@@ -61,8 +61,8 @@
         <!-- Basketball Teams-->
         <ng-container *ngIf="sport=='Basketball'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
-              [lazyLoad]="team?.tid | logosurl:'Basketball'" [defaultImage]="commonService.flagplaceholder"
-              alt="team?.tname">
+              [lazyLoad]="team?.sr_id | logosurl:'Basketball'" [defaultImage]="commonService.flagplaceholder"
+              alt="(team.market+' '+team.name | slugify)">
           </div>
           <div class="team-name">
             <h4>{{team.market}} {{team.name}}</h4>

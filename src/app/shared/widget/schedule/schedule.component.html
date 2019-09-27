@@ -262,8 +262,7 @@
           </h5>
         </div>
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset"
-            [lazyLoad]="(match?.home?.sr_id | splitID) | logosurl:'basketball'"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.home?.sr_id | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.alias}}">
         </div>
       </div>
@@ -288,8 +287,7 @@
 
       <div class="match-team d-flex align-items-center" *ngIf="match?.away">
         <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset"
-            [lazyLoad]="(match?.away?.sr_id | splitID) | logosurl:'basketball'"
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.away?.sr_id | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.alias}}">
         </div>
         <div class="team-info">
@@ -421,8 +419,7 @@
                 </h5>
               </div>
               <div class="team-flag">
-                <img [offset]="commonService.lazyloadoffset"
-                  [lazyLoad]="(match?.home?.sr_id | splitID) | logosurl:'basketball'"
+                <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.home?.sr_id | logosurl:'basketball'"
                   [defaultImage]="commonService.flagplaceholder" alt="{{match?.home?.name}}">
               </div>
             </div>
@@ -447,8 +444,7 @@
 
             <div class="match-team d-flex align-items-center" *ngIf="match?.away">
               <div class="team-flag">
-                <img [offset]="commonService.lazyloadoffset"
-                  [lazyLoad]="(match?.away?.sr_id | splitID) | logosurl:'basketball'"
+                <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.away?.sr_id | logosurl:'basketball'"
                   [defaultImage]="commonService.flagplaceholder" alt="{{match?.away?.name}}">
               </div>
               <div class="team-info">
