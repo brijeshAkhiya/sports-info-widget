@@ -294,7 +294,7 @@
           <b>
             <a
               [routerLink]="['/basketball/team', (matchStats?.home?.sr_id | splitID), (matchStats?.home?.name | slugify )]">
-              {{matchStats?.home?.name}}
+              {{matchStats?.home?.market}} {{matchStats?.home?.name}}
             </a>
           </b>
           <img alt="{{matchStats?.home?.name}}" [lazyLoad]="matchStats?.home?.sr_id | logosurl:'basketball'"
@@ -311,7 +311,7 @@
           <b>
             <a
               [routerLink]="['/basketball/team', (matchStats?.away?.sr_id | splitID), (matchStats?.away?.name | slugify )]">
-              {{matchStats?.away?.name}}
+              {{matchStats?.home?.market}} {{matchStats?.away?.name}}
             </a>
           </b>
         </p>
