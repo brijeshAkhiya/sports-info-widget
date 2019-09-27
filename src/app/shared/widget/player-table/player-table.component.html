@@ -38,7 +38,7 @@
     </table>
   </div>
 </div>
-<div class="table-title-info" *ngIf="options.sport == 'soccer'">
+<div class="table-title-info" *ngIf="options.sport == 'Soccer'">
   <!-- <ul>
     <li><span>P:</span> Matches played</li>
     <li><span>RP:</span> Raid Points</li>
@@ -48,14 +48,14 @@
     <li><span>H5:</span> High 5s</li>
     <li><span>S10:</span> Super 10s</li>
   </ul> -->
-  <ul *ngIf="options.sport == 'soccer' && options.teamstats == 'true' && data?.length > 0">
+  <ul *ngIf="options.sport == 'Soccer' && options.teamstats == 'true' && data?.length > 0">
     <li><span>P: </span>{{'Soccer_Module.Minutes_Played' | translate}}</li>
     <li><span>SI: </span>{{'Soccer_Module.Substituted_In' | translate}}</li>
     <li><span>SO: </span>{{'Soccer_Module.Substituted_Out' | translate}}</li>
     <li><span>GS: </span>{{'Soccer_Module.Goals_Scored' | translate}}</li>
     <li><span>AS: </span>{{'Soccer_Module.Assists' | translate}}</li>
   </ul>
-  <ul *ngIf="options.sport == 'soccer' && options.soccertable == 'true' && data?.length > 0">
+  <ul *ngIf="options.sport == 'Soccer' && options.soccertable == 'true' && data?.length > 0">
     <!-- <li><span class="game-card green"></span><span>:</span> Green Cards</li>
     <li><span class="game-card yellow"></span><span>:</span> Yellow Cards</li>
     <li><span class="game-card red"></span><span>:</span> Red Cards</li> -->

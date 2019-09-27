@@ -17,7 +17,8 @@
                 </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type?.length > 0" #typeDrop="ngbDropdown" placement="bottom">
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type?.length > 0" #typeDrop="ngbDropdown"
+              placement="bottom">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons?.type"
@@ -46,7 +47,6 @@
               titles : [('Cricket_Module2.player' | translate),'GP','MIN','PTS','REB','OREB','DREB','AST','STL','BLK','TO','PF','PER'],
               values : ['full_name', 'total.games_played', 'total.minutes', 'total.points', 'total.rebounds', 'total.offensive_rebounds', 'total.defensive_rebounds', 'total.assists', 'total.steals', 'total.blocks', 'total.turnovers', 'total.personal_fouls', 'total.efficiency'],
               class : ['nba-table nba-tour-stats-table'],
-              class_light_row : ['light-row'],
               tbl_type:'stats'
             }">
         </app-player-table>

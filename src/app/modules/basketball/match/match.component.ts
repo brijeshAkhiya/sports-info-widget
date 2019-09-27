@@ -31,7 +31,7 @@ export class MatchComponent implements OnInit {
       return false;
     };
 
-    let matchid = this.activatedroute.snapshot.params.id;//this.commonService.getIds(this.activatedroute.snapshot.params.id, 'basketball', 'match');
+    let matchid = this.activatedroute.snapshot.params.id;
     this.getMatchInfo(matchid);
     this.paramArticle.reqParams.aIds.push(matchid);
   }
@@ -103,6 +103,4 @@ export class MatchComponent implements OnInit {
       this.boxScoreParams.loading = false;
     });
   }
-
-
 }
