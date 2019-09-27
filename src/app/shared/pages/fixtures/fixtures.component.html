@@ -9,8 +9,8 @@
           <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
         </div>
 
-        <ngb-tabset class="common-tabs">
-          <ngb-tab>
+        <ngb-tabset class="common-tabs" [activeId]="activeTab">
+          <ngb-tab id="fixtures">
             <ng-template ngbTabTitle>
               <div>{{ 'widgetModule.Upcoming' | translate }}</div>
             </ng-template>
@@ -30,7 +30,7 @@
               </div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab>
+          <ngb-tab id="results">
             <ng-template ngbTabTitle>
               <div>{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>

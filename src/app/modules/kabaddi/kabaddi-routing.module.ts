@@ -28,6 +28,11 @@ const routes: Routes = [{
       data: { 'sport': 'Kabaddi' }
     },
     {
+      path: 'results',
+      component: FixturesComponent,
+      data: { 'sport': 'Kabaddi' }
+    },
+    {
       path: 'stats',
       component: StatsComponent
     },

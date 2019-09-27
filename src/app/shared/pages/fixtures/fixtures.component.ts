@@ -28,6 +28,7 @@ export class FixturesComponent implements OnInit {
   paramsFixtures = { reqParams: { 'status': 1, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   tournamentid: any;
+  activeTab: any = 'fixtures';
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -37,12 +38,13 @@ export class FixturesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.activatedroute);
+
     const routeData: any = this.activatedroute.data;
     this.params = routeData.value;
-    console.log(this.params.sport);
-
     if (this.params.sport == 'Cricket') {
       /* Tournaments Fixtures */
+      this.activeTab = this.activatedroute.params.value.type;
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
         this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
         this.getCricketMatchFixtures(this.tournamentid);
@@ -59,6 +61,7 @@ export class FixturesComponent implements OnInit {
         });
       }
     } else if (this.params.sport == 'Kabaddi') {
+      this.activeTab = this.activatedroute.url.value[0].path;
       this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
       this.store.dispatch(new Kabaddi.LoadKabaddiResults());
       this.store.select('Kabaddi').subscribe((data: any) => {

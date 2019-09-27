@@ -136,7 +136,8 @@
       </a>
     </li>
     <li>
-      <a class="view-all-btn" [routerLink]="'/kabaddi/fixtures'">
+      <a class="view-all-btn"
+        [routerLink]="(type == 'fixture') ? ['/kabaddi/fixtures'] :  (type == 'result') ?  ['/kabaddi/results'] : ''">
         {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>
