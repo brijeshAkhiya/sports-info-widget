@@ -67,8 +67,8 @@ export class TeamComponent implements OnInit {
         break;
       } case 'Basketball': {
         this.getSeasons();
-        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')] } };
-        this.sportsService.getBasketballteamprofile(this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.profileSuccess, this.profileError);
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: this.routeParams.teamid } };
+        this.sportsService.getBasketballteamprofile(this.routeParams.teamid).subscribe(this.profileSuccess, this.profileError);
         break;
       }
     }
@@ -165,7 +165,7 @@ export class TeamComponent implements OnInit {
         break;
       case 'Basketball':
         this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
-          this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.fixtureSuccess, this.fixtureError);
+          this.routeParams.teamid).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
     }
   }
@@ -276,7 +276,7 @@ export class TeamComponent implements OnInit {
         break;
       case 'Basketball':
         this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
-          this.commonService.getIds(this.routeParams.teamid, 'basketball', 'team')).subscribe(this.resultSuccess, this.resultError);
+          this.routeParams.teamid).subscribe(this.resultSuccess, this.resultError);
         break;
       default:
       // code block

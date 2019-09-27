@@ -130,8 +130,7 @@
     </td>
     <ng-template #link>
       <td>
-        <a
-          [routerLink]="value == 'name' ? ['/basketball/team', (item['sr_id'] | splitID), (item.name | slugify)] : '' ">
+        <a [routerLink]="value == 'name' ? ['/basketball/team', (item['id']), (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['sr_id'] | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}
