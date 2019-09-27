@@ -23,7 +23,8 @@
             <h1 class="white-text">{{blogdata?.sTitle}}</h1>
             <div class="author-info d-flex justify-content-between align-items-center">
               <p class="author">
-                <a [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}}
+                <a
+                  [routerLink]="['/writer', blogdata?.iId?._id,blogdata?.iId?.sFirstName+'-'+blogdata?.iId?.sLastName ]">{{blogdata?.iId?.sFirstName}}
                   {{blogdata?.iId?.sLastName}}</a>
                 {{blogdata?.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
               <ul class="count-list">
@@ -74,7 +75,8 @@
                     [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.writerPlaceholder"></div>
                   <div class="author-desc">
                     <h6>
-                      <a [routerLink]="['/writer', blogdata?.iId?._id ]">{{blogdata?.iId?.sFirstName}}
+                      <a
+                        [routerLink]="['/writer', blogdata?.iId?._id, blogdata?.iId?.sFirstName+'-'+blogdata?.iId?.sLastName ]">{{blogdata?.iId?.sFirstName}}
                         {{blogdata?.iId?.sLastName}}</a>
                     </h6>
                     <p>{{blogdata?.iId?.sBio}}</p>

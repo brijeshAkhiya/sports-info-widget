@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute, Router } from "@angular/router";
-import { SportsService } from "@providers/sports-service";
-import { CommonService } from "@providers/common-service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 
 
 @Component({
@@ -12,12 +12,13 @@ import { CommonService } from "@providers/common-service";
 })
 export class WriterComponent implements OnInit {
 
-  writerdata :any;
+  writerdata: any;
   writerid;
-  
+  loading: boolean = false;
+
   constructor(
     private sportsService: SportsService,
-    private activatedroute: ActivatedRoute, 
+    private activatedroute: ActivatedRoute,
     public commonService: CommonService
   ) { }
 
@@ -27,17 +28,18 @@ export class WriterComponent implements OnInit {
   }
 
 
-  //get writer info 
+  /* //get writer info */
   getWriterProfile() {
-    let data = {
-      _id:this.writerid,
-      nLimit:20
-    };
-    this.sportsService.getwriterprofile(data).subscribe(res => {
-      if (res["data"]) {
-        this.writerdata = res['data']
+    this.loading = true;
+    this.sportsService.getwriterprofile({
+      _id: this.writerid,
+      nLimit: 20
+    }).subscribe(res => {
+      this.loading = false;
+      if (res['data']) {
+        this.writerdata = res['data'];
       }
-    });
+    }, err => this.loading = false);
   }
 
 }

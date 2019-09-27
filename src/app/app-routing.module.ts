@@ -73,7 +73,7 @@ const routes: Routes = [
         redirectTo: ''
     },
     {
-        path: 'writer/:id',
+        path: 'writer/:id/:name',
         component: WriterComponent
     },
     {

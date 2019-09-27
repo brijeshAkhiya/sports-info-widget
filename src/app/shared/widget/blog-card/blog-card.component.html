@@ -9,13 +9,15 @@
         [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></a>
     </div>
     <div class="blog-desc">
-      <h4><a [state]="{ id: post._id, sport : sport }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a>
+      <h4><a [state]="{ id: post._id, sport : sport }"
+          [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a>
       </h4>
       <p [innerHtml]="post.sDescription | truncate:[240,'...'] | striphtml" [state]="{ id: post._id, sport : sport }"
         [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       <div class="author-info d-flex justify-content-between align-items-center">
         <p class="author">
-          <a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}} {{post.iId.sLastName}}</a>
+          <a [routerLink]="['/writer', post?.iId?._id, post?.iId?.sFirstName+'-'+post?.iId?.sLastName ]">{{post.iId.sFirstName}}
+            {{post.iId.sLastName}}</a>
           {{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}
         </p>
         <ul class="count-list">
@@ -66,13 +68,14 @@
     </div>
     <div class="common-news-desc">
       <div class="news-excerpt">
-        <h5><a [state]="{ id: post._id, sport : sport }" [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a>
+        <h5><a [state]="{ id: post._id, sport : sport }"
+            [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]">{{post.sTitle}}</a>
         </h5>
         <p [innerHtml]="post.sDescription | striphtml | truncate:[164,'...']" [state]="{ id: post._id, sport : sport }"
           [routerLink]="['/',(post.eType |lowercase) , post.sSlug ]"></p>
       </div>
       <div class="author-info d-flex justify-content-between align-items-center">
-        <p class="author"><a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}} 
+        <p class="author"><a [routerLink]="['/writer', post?.iId?._id ]">{{post.iId.sFirstName}}
             {{post.iId.sLastName}}</a>{{post.dUpdatedAt | amFromUtc | amLocal | amTimeAgo}}</p>
         <ul class="count-list">
           <li>
@@ -97,7 +100,8 @@
             <div class="common-zoom-img" [offset]="commonService.lazyloadoffset"
               [defaultImage]="commonService.smallblogPlaceholder" [lazyLoad]="post.sImage | resizeImage:['s']">
             </div>
-            <a class="fullblock-link" [state]="{ id: post._id, sport : sport }" [routerLink]="['/blog' , post.sSlug ]"></a>
+            <a class="fullblock-link" [state]="{ id: post._id, sport : sport }"
+              [routerLink]="['/blog' , post.sSlug ]"></a>
           </div>
           <div class="news-desc">
             <h5><a [state]="{ id: post._id, sport : sport }" [routerLink]="['/blog' , post.sSlug ]">{{post.sTitle}}</a>

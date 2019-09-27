@@ -1,57 +1,70 @@
-<section class="common-section" *ngIf="writerdata?.writerData ; else noDataBlock">
-    <div class="container">
-      <div class="row sidebar-row">
-        <div class="content-col">
-          <div class="writer-profile d-flex">
-            <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start"  [offset]="commonService.lazyloadoffset"  [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']" [defaultImage]="commonService.writerPlaceholder"></div>
-            <div class="writer-info rounded-box common-shadow d-flex flex-column">
-              <div>
-                <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
-                <p>{{writerdata?.writerData?.sBio}}</p>
-              </div>
-              <p class="view-info">{{'Blog_Module.Posts' | translate}} : <b>{{writerdata?.writerData?.nPostsCount}}</b> | {{'Blog_Module.Views' | translate}} : <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
+<app-loader *ngIf="loading"></app-loader>
+<app-page-not-found *ngIf="!loading && !writerdata?.writerData"></app-page-not-found>
+<section class="common-section" *ngIf="!loading && writerdata?.writerData">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="writer-profile d-flex">
+          <div *ngIf="writerdata?.writerData" class="writer-pic rounded-box common-shadow align-self-start"
+            [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="writerdata?.writerData?.sProfilePicture | resizeImage:['s']"
+            [defaultImage]="commonService.writerPlaceholder"></div>
+          <div class="writer-info rounded-box common-shadow d-flex flex-column">
+            <div>
+              <h1>{{writerdata?.writerData?.sFirstName}} {{writerdata?.writerData?.sLastName}}</h1>
+              <p>{{writerdata?.writerData?.sBio}}</p>
             </div>
+            <p class="view-info">{{'Blog_Module.Posts' | translate}} : <b>{{writerdata?.writerData?.nPostsCount}}</b> |
+              {{'Blog_Module.Views' | translate}} : <b>{{writerdata?.writerData?.nViewCounts}}</b> </p>
           </div>
-          <ngb-tabset class="common-tabs writer-tab">
-            <ngb-tab>
-              <ng-template ngbTabTitle>{{'Blog_Module.Latest' | translate}}</ng-template>
-              <ng-template ngbTabContent>             
-                  <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10 }, 'type':'writer'}"></app-blog-list>
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab>
-              <ng-template ngbTabTitle><div>{{'Blog_Module.Most_Read' | translate}}</div></ng-template>
-              <ng-template ngbTabContent>         
-                <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'MostViewed' }, 'type':'writer'}"></app-blog-list> 
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab>
-              <ng-template ngbTabTitle><div>{{'Blog_Module.Videos' | translate}}</div></ng-template>
-              <ng-template ngbTabContent>             
-                  <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'Videos' }, 'type':'writer'}"></app-blog-list>  
-              </ng-template>
-            </ngb-tab>
-          </ngb-tabset>
         </div>
-        <div class="sidebar-col">
-          <div class="sticky-sidebar">
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-            <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-            <div class="common-stories-widget common-shadow rounded-box">
-              <h5>{{'Blog_Module.From_this_writer' | translate}}</h5>
-              <ul class="common-list">
-                  <li *ngFor="let item of writerdata?.posts?.posts | slice:0:5"><a
-                    [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
-              </ul>
-            </div>
-            <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+        <ngb-tabset class="common-tabs writer-tab">
+          <ngb-tab>
+            <ng-template ngbTabTitle>{{'Blog_Module.Latest' | translate}}</ng-template>
+            <ng-template ngbTabContent>
+              <app-blog-list *ngIf="writerid" [options]="{'reqParams': { _id:writerid, nLimit:10 }, 'type':'writer'}">
+              </app-blog-list>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{'Blog_Module.Most_Read' | translate}}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-blog-list *ngIf="writerid"
+                [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'MostViewed' }, 'type':'writer'}">
+              </app-blog-list>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{'Blog_Module.Videos' | translate}}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-blog-list *ngIf="writerid"
+                [options]="{'reqParams': { _id:writerid, nLimit:10,eType: 'Videos' }, 'type':'writer'}"></app-blog-list>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <div class="common-stories-widget common-shadow rounded-box">
+            <h5>{{'Blog_Module.From_this_writer' | translate}}</h5>
+            <ul class="common-list">
+              <li *ngFor="let item of writerdata?.posts?.posts | slice:0:5"><a [state]="{ id: item._id }"
+                  [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
+            </ul>
           </div>
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
         </div>
       </div>
     </div>
-  </section>
-  
-  <ng-template #noDataBlock>
-    <app-no-data-widget [message]="'Writer data is not available'"></app-no-data-widget>
-  </ng-template>
-  
+  </div>
+</section>
+
+<ng-template #noDataBlock>
+  <app-no-data-widget [message]="'Writer data is not available'"></app-no-data-widget>
+</ng-template>
