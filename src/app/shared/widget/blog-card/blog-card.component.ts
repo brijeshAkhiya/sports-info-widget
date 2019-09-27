@@ -13,15 +13,12 @@ export class BlogCardComponent implements OnInit {
   @Input() end: any;
   @Input() card_type: any;
   @Input() sport: any;
-  
+
   constructor(
     public commonService: CommonService
   ) { }
 
   ngOnInit() {
-    console.log(this.posts);
-    console.log(this.card_type);
-    
   }
 
 }

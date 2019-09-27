@@ -1,12 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store, select } from "@ngrx/store";
+import { Store, select } from '@ngrx/store';
 
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider,SocialUser } from "angularx-social-login";
-import * as fromRoot from "../../../app-reducer";
-import * as Auth from "../../../store/auth/auth.actions";
-import { SportsService } from "@providers/sports-service";
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import * as fromRoot from '../../../app-reducer';
+import * as Auth from '../../../store/auth/auth.actions';
+import { SportsService } from '@providers/sports-service';
 
 
 @Component({
@@ -26,14 +26,13 @@ export class LoginModalComponent implements OnInit {
     private store: Store<fromRoot.State>,
     private modalService: NgbModal
 
- 
+
 
   ) { }
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      console.log(user);
     });
 
   }
@@ -42,25 +41,22 @@ export class LoginModalComponent implements OnInit {
     this.socialLoginService
       .signIn(FacebookLoginProvider.PROVIDER_ID)
       .then(res => {
-        console.log(res)
         if (res) {
           this.socialUser = res;
-          this.validateSocialLogin('fb', res.authToken)
+          this.validateSocialLogin('fb', res.authToken);
           this.modalService.dismissAll();
         }
       });
   }
 
   signInWithGoogle(): void {
-    console.log('google click')
     this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.socialLoginService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(res => {
-        console.log(res)
         if (res) {
           this.socialUser = res;
-          this.validateSocialLogin('google', res.idToken)
+          this.validateSocialLogin('google', res.idToken);
           this.modalService.dismissAll();
         }
       })
@@ -71,38 +67,37 @@ export class LoginModalComponent implements OnInit {
     if (type == 'fb') {
       let data = {
         sFbToken: token
-      }
+      };
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
-        localStorage.setItem('userT', res.Authorization)
-        localStorage.setItem('userId', res.data._id)
+        localStorage.setItem('userT', res.Authorization);
+        localStorage.setItem('userId', res.data._id);
         this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {
-          this.isuserblock = true
+          this.isuserblock = true;
           setTimeout(() => {
-            this.isuserblock = false
+            this.isuserblock = false;
           }, 4000);
           this.authService.signOut();
         }
-      })
-    }
-    else if (type == 'google') {
+      });
+    } else if (type == 'google') {
       let data = {
         sGoogleToken: token
-      }
+      };
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
-        localStorage.setItem('userT', res.Authorization)
-        localStorage.setItem('userId', res.data._id)
+        localStorage.setItem('userT', res.Authorization);
+        localStorage.setItem('userId', res.data._id);
         this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {
-          this.isuserblock = true
+          this.isuserblock = true;
           setTimeout(() => {
-            this.isuserblock = false
+            this.isuserblock = false;
           }, 4000);
           this.authService.signOut();
         }
-      })
+      });
     }
   }
 

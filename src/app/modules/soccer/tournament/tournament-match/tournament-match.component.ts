@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
 import { SportsService } from '@providers/sports-service';
@@ -11,20 +11,18 @@ import { CommonService } from '@providers/common-service';
   styleUrls: ['./tournament-match.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class TournamentMatchComponent implements OnInit {
+export class TournamentMatchComponent implements OnInit, OnDestroy {
 
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [] } };
-  loading: boolean = false;
-  statsLoading: boolean = false;
-  lineupLoading: boolean = false;
+  loading = false;
+  statsLoading = false;
+  lineupLoading = false;
   matchInfo;
   matchLineups;
   commentry = [];
   team: any = {};
-  // venuedetails = { lat: '', lng: '', name: '' };
   matchStats: any;
   info;
-  // dummyAPICall = 62;
   interval;
   timeout;
   teamvsteamdata: any;
@@ -55,7 +53,6 @@ export class TournamentMatchComponent implements OnInit {
     this.sportsService.getSoccerMatchTimeline(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
-        console.log(this.matchInfo);
         this.getSoccerTeamvsTeam(this.matchInfo.sport_event.competitors);
         this.getTeamsSummumaries(this.matchInfo.sport_event.competitors);
 
@@ -89,21 +86,10 @@ export class TournamentMatchComponent implements OnInit {
   }
 
   getMatchLineup(id) {
-    console.log('getMatchLineup');
     this.lineupLoading = true;
     this.sportsService.getSoccerMatchLineup(id).subscribe((res: any) => {
       if (res.data) {
         this.matchLineups = res.data;
-        console.log(this.matchLineups);
-        // if (this.matchInfo.match_info.gamestate == 0) {
-        //   this.startLiveUpdateAfterTime();
-        // }else if (this.matchInfo.match_info.status == 3)
-        //   this.getLiveUpdate(this);
-
-        // this.getVenuedetails();
-        // this.initTeam();
-        // this.initCommentry();
-        // if(Object.entries(this.matchLineups.lineups).length > 0)
         this.initSquads();
       }
       this.lineupLoading = false;
@@ -152,9 +138,7 @@ export class TournamentMatchComponent implements OnInit {
         }
       });
       this.headtohead = head;
-      console.log(this.teamvsteamdata);
       this.teamvsteamdata = this.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc');
-      console.log(this.teamvsteamdata);
 
     });
   }
@@ -230,7 +214,6 @@ export class TournamentMatchComponent implements OnInit {
 
     this.teamssummary = teamssummary;
 
-    console.log('final::', teamssummary);
 
 
   }
@@ -238,7 +221,6 @@ export class TournamentMatchComponent implements OnInit {
   initTeam() {
     this.team.home = this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'home')[0];
     this.team.away = this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'away')[0];
-    console.log(this.team);
 
   }
 
@@ -248,14 +230,14 @@ export class TournamentMatchComponent implements OnInit {
       this.team.home = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0];
       this.team.away = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0];
 
-      //Team with role
+      // Team with role
       let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
       this.team.home.squad = [];
       tempHomeSquad.forEach(element => {
         let type: any = (element.type === undefined) ? 'Other' : element.type;
         (this.team.home.squad[type] = this.team.home.squad[type] || []).push(element);
       });
-      //Team with formated type
+      // Team with formated type
       if (this.team.home.formation && this.team.home.formation.type) {
         let players = this.sortingByRole(this.team.home.players);
         (this.team.home.formated_players = this.team.home.formated_players || []).push(players.splice(0, 1));
@@ -264,7 +246,7 @@ export class TournamentMatchComponent implements OnInit {
         });
       }
 
-      //Team with role
+      // Team with role
       let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
       this.team.away.squad = [];
       tempAwaySquad.forEach(element => {
@@ -273,7 +255,7 @@ export class TournamentMatchComponent implements OnInit {
           type] = this.team.away.squad[
           type] || []).push(element);
       });
-      //Team with formated type
+      // Team with formated type
       if (this.team.away.formation && this.team.away.formation.type) {
         let players = window['players'] = this.sortingByRole(this.team.away.players);
         (this.team.away.formated_players = this.team.away.formated_players || []).push(players.splice(0, 1));
@@ -288,51 +270,32 @@ export class TournamentMatchComponent implements OnInit {
       this.matchStats = this.matchInfo.statistics;
     }
 
-    console.log(this.team);
 
   }
 
   getLiveUpdate(classThis) {
-    console.log('getLiveUpdate');
     this.interval = setInterval(() => {
-      //TEMP
-      // this.dummyAPICall++;
       classThis.sportsService
         .getSoccerMatchTimeline(this.matchInfo.sport_event.id)
-        // .getKabaddiDummyCall(this.dummyAPICall)
         .subscribe(res => {
-          console.log(res);
-          // let matchData = res.data.items;
-          // this.matchInfo = res.data.items;
           if (res.data.sport_event_status.status == 'live' || this.matchInfo.sport_event_status.status != res.data.sport_event_status.status) {
-            // this.initTeam();
-            // this.initSquads();
-            // this.commentry = [];
             this.matchInfo.statistics = res.data.statistics;
             if (res.data.timeline)
               this.initCommentry(res.data.timeline);
           }
-          // if(matchData.match_info.status == 2){
-          //   this.commentry = [];
-          //   this.initCommentry();
-          //   this.clearTimeInterval();
-          // }
         });
     }, classThis.commonService.miliseconds(0, 0, 8)); // TEMP
 
   }
 
   initCommentry(commentry) {
-    console.log('initCommentry');
     commentry.forEach(element => {
       if (this.matchInfo.timeline.findIndex((timeline) => timeline.id == element.id) == -1)
         this.matchInfo.timeline.push(element);
     });
-    //stoppage_time
+    // stoppage_time
     let tempTimeline: any = [...this.matchInfo.timeline];
-    console.log(tempTimeline);
     tempTimeline = tempTimeline.splice(this.matchInfo.timeline.length - 1, 1)[0];
-    console.log(tempTimeline);
     // tempTimeline = tempTimeline.pop();
     if (typeof tempTimeline.match_time != 'undefined') {
       if (typeof tempTimeline.stoppage_time != 'undefined')
@@ -344,11 +307,9 @@ export class TournamentMatchComponent implements OnInit {
 
   startLiveUpdateAfterTime() {
 
-    console.log('startLiveUpdateAfterTime');
     let remainingTime = this.commonService.getRemainigTimeofMatch(
       this.matchInfo.match_info.datestart
     );
-    console.log(remainingTime);
 
     let remainingMiliSec = this.commonService.miliseconds(
       remainingTime.hours,
@@ -360,20 +321,17 @@ export class TournamentMatchComponent implements OnInit {
     if (remainingTime.days == 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);
-        // }, 10);
       }, remainingMiliSec);
     }
   }
 
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
-    console.log('clearTimeInterval');
     clearInterval(this.interval);
     clearTimeout(this.timeout);
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
     this.clearTimeInterval();
   }
 

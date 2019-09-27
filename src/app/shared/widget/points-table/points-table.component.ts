@@ -28,8 +28,6 @@ export class PointsTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.sport);
-    console.log(this.options);
     if (this.sport == 'Cricket') {
       this.loadCricketPoints();
       this.data = {
@@ -68,7 +66,6 @@ export class PointsTableComponent implements OnInit {
       if (res.data) {
         res.data.map((data) => {
           this.pointstable = data.team_standings;
-          console.log(this.pointstable);
         });
       }
     });
@@ -78,7 +75,6 @@ export class PointsTableComponent implements OnInit {
     this.sportsService.getCompetitionInfo().subscribe((res: any) => {
       if (res.data) {
         this.pointstable = res.data.standings[0].tables;
-        console.log(this.pointstable);
       }
     });
   }
@@ -87,9 +83,8 @@ export class PointsTableComponent implements OnInit {
     this.sportsService.getsoccerpointtable(this.options.tournament).subscribe((res: any) => {
       if (res.data && res.data.standings && res.data.standings.length > 0) {
         this.pointstable = res.data.standings[0].groups[0].standings;
-        console.log('point table', this.pointstable);
       }
-    }, err => { console.log(err); });
+    });
   }
 
   sorttable(event) {

@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /* //slide change Event */
   changeSlide(event) {
-    console.log(event);
     if (event.slides.length > 0)
       this.sport = event.slides[0].id;
   }
@@ -87,7 +86,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
     clearInterval(this.highlightImageInterval);
   }
 

@@ -42,7 +42,7 @@ export class LiveMatchTrackerComponent implements AfterContentInit, OnInit {
         matchId: this.matchid.split(':')[2]
       });
       this.loader = false;
-    }).catch(error => console.log(error));
+    });
 
   }
 

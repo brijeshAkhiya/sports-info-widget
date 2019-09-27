@@ -173,7 +173,6 @@ export class FixturesComponent implements OnInit {
 
   /*
     loadKabaddi(type) {
-      console.log("loadKabaddi")
       if (type == 'fixture') {
         if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
           return false;

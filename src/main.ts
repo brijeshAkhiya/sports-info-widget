@@ -7,15 +7,15 @@ import { hmrBootstrap } from './hmr';
 import 'hammerjs';
 if (environment.production) {
   enableProdMode();
-  if(window){
-    window.console.log=function(){};
+  if (window) {
+    window.console.log = function () { };
   }
 }
 
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.log(err));
 
-  platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err));
+platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err));
 
 //   const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
 

@@ -149,8 +149,6 @@ export class MainFooterComponent implements OnInit {
     if (this.isedit) {
       let isselectedtags = this.userfavourites.some((data) => data.isSelect == true);
       if (isselectedtags) {
-        console.log('user fav::', this.userfavourites);
-        console.log('splice::', this.userfavourites.findIndex(v => v.isSelect == true));
         this.userfavourites = this.userfavourites.filter(data => data.isSelect == false);
         localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
@@ -158,7 +156,6 @@ export class MainFooterComponent implements OnInit {
         if (localStorage.getItem('userT')) {
           this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
             if (res) {
-              console.log(res);
             }
           });
         }

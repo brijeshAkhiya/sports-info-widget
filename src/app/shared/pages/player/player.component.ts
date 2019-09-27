@@ -38,26 +38,6 @@ export class PlayerComponent implements OnInit {
     this.sport = data.value.sport;
     this.teamid = data.value.team;
     this.getPlayerInfo();
-
-    // if (this.sport == 'cricket') {
-    //   this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
-    //   this.getPlayerInfo();
-    //   this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Cricket', aIds: [this.playerid] } };
-    // } else if (this.sport == 'kabaddi') {
-    //   this.playerid = this.activatedroute.snapshot.params.id;
-    //   this.getKabbadiPlayerInfo();
-    //   if (data.value.team) {
-    //     this.teamid = this.activatedroute.snapshot.params.teamid;
-    //   }
-    //   console.log(this.teamid);
-
-    //   this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [this.playerid] } };
-    // } else if (this.sport == 'soccer') {
-    //   this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, this.sport, 'player');
-    //   this.getSoccerPlayerInfo();
-    //   this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Soccer', aIds: [this.playerid] } };
-    // }
-
   }
 
   getPlayerInfo() {
@@ -94,7 +74,6 @@ export class PlayerComponent implements OnInit {
   }
 
   playerSuccess = (res) => {
-    console.log(res);
     this.loading = false;
     switch (this.sport) {
       case 'Cricket': {
@@ -169,7 +148,6 @@ export class PlayerComponent implements OnInit {
   }
 
   playerError = (err) => {
-    console.log(err);
     this.loading = false;
   }
 
@@ -179,7 +157,6 @@ export class PlayerComponent implements OnInit {
       this.loading = false;
       if (res.data) {
         this.playerData = res.data;
-        console.log('statas::', res);
 
         if (res.data.statistics) {
           let obj = { Matches: 0, Runs: 0, Wickets: 0 };
@@ -189,7 +166,6 @@ export class PlayerComponent implements OnInit {
             obj.Wickets += s.bowling.wickets;
           });
           this.stats = Object.keys(obj).map(key => ({ key, data: obj[key] }));
-          console.log(this.stats);
 
           /*  //short table batting & bowling */
           this.playerData.statistics.map(element => {
@@ -235,8 +211,6 @@ export class PlayerComponent implements OnInit {
     this.loading = true;
     this.sportsService.getsoccerplayerinfo(this.playerid).subscribe((res: any) => {
       this.loading = false;
-      console.log(res.data);
-
       if (res.data) {
         this.playerData = res.data;
       }

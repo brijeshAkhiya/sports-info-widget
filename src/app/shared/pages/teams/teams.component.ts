@@ -99,7 +99,6 @@ export class TeamsComponent implements OnInit {
   }
 
   teamError = (err) => {
-    console.log(err);
     this.isloading = false;
   }
 

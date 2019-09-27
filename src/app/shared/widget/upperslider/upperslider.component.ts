@@ -81,7 +81,6 @@ export class UppersliderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('ngOnInit');
 
     this.loadAllSportsData();
 
@@ -94,7 +93,6 @@ export class UppersliderComponent implements OnInit {
     }
     if (this.sportsSlider) {
       setTimeout(() => {
-        console.log('setTimeout');
         this.sportsSlider.to(this.sport.toString());
         // this.loadData();
       });
@@ -116,8 +114,6 @@ export class UppersliderComponent implements OnInit {
 
   // change slide select sport event
   changeSlide(event) {
-    console.log('changeSlide');
-    console.log(event, this.sport);
 
     if (event.slides.length > 0) {
       this.clearTimeInterval();
@@ -134,7 +130,6 @@ export class UppersliderComponent implements OnInit {
   }
 
   loadData() {
-    console.log('load Data');
 
     if (this.sport == 'Kabaddi')
       this.loadKabaddiData();
@@ -147,7 +142,6 @@ export class UppersliderComponent implements OnInit {
   }
 
   loadBasketballData() {
-    console.log('loadBasketballData');
 
     this.timerStartTime.Basketball.isLiveUpdate = false;
     this.timerStartTime.Basketball.isStartAfterTime = false;
@@ -172,7 +166,6 @@ export class UppersliderComponent implements OnInit {
     });
   }
   getLiveBasketballUpdate(classThis) {
-    console.log('getLiveBasketballUpdate');
     this.timerStartTime.Basketball.isLiveUpdate = true;
     let date = new Date();
     this.interval = setInterval(() => {
@@ -204,7 +197,6 @@ export class UppersliderComponent implements OnInit {
   }
 
   loadSoccerData() {
-    console.log('loadSoccerData');
 
     this.timerStartTime.Soccer.isLiveUpdate = false;
     this.timerStartTime.Soccer.isStartAfterTime = false;
@@ -229,7 +221,6 @@ export class UppersliderComponent implements OnInit {
     });
   }
   getLiveSoccerUpdate(classThis) {
-    console.log('getLiveSoccerUpdate');
     this.timerStartTime.Soccer.isLiveUpdate = true;
     let date = new Date();
     this.interval = setInterval(() => {
@@ -312,9 +303,6 @@ export class UppersliderComponent implements OnInit {
   getCricketHeader() {
     this.store.dispatch(new Cricket.LoadCricketSlider());
     this.store.select('Cricket').subscribe((res: any) => {
-      // console.log('res');
-      // console.log(res);
-      // console.log(this.slider);
       if (this.slider.length == 0) {
         this.slider = this.sortBySchedule(res.slider);
         this.slider.forEach((match, index) => {
@@ -332,7 +320,6 @@ export class UppersliderComponent implements OnInit {
         });
 
         let livematchcount = res.slider.filter(match => match.status == 'live' || match.status == 'interrupted' || match.status == 'delayed');
-        console.log('livematchcount', livematchcount);
 
         if (livematchcount.length > 0)
           this.getLiveUpdateSlider(this);
@@ -342,7 +329,6 @@ export class UppersliderComponent implements OnInit {
             let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function (e) {
               return new Date(e.scheduled);
             })));
-            console.log(minTime);
 
             this.startLiveUpdateAfterTime(minTime);
           }
@@ -373,21 +359,17 @@ export class UppersliderComponent implements OnInit {
         });
       });
     }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Cricket.interval)); // TEMP
-    console.log(this.interval);
   }
 
   /** Start Live Update after specific time - If match will start within 5 hours  */
   startLiveUpdateAfterTime(scheduled) {
-    console.log('startLiveUpdateAfterTime ', !this.timerStartTime[this.sport].isStartAfterTime);
     if (!this.timerStartTime[this.sport].isStartAfterTime) {
-      console.log('startLiveUpdateAfterTime');
 
       let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
 
       let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds);
       remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, this.timerStartTime[this.sport].beforeTimeStart, 0);
 
-      console.log('remainingMiliSec', remainingMiliSec);
       if (remainingTime.days == 0 && remainingTime.hours < this.timerStartTime[this.sport].timeout.hours) {
         this.timeout = setTimeout(() => {
           if (this.sport == 'Kabaddi') {
@@ -405,7 +387,6 @@ export class UppersliderComponent implements OnInit {
 
   }
   setPeriodScore(match, index, period_scores) {
-    // console.log("setPeriodScore");
     if (period_scores.length > 0) {
       period_scores.map(sPScore => {
         if (sPScore.home_score) {
@@ -421,14 +402,12 @@ export class UppersliderComponent implements OnInit {
         }
       });
     }
-    // console.log(this.slider);
   }
 
   replace(str) {
     return (str != null) ? str.replace(/_/g, ' ') : str;
   }
   sortBySchedule(arr) {
-    console.log(arr);
     return arr.sort(function (a, b) {
       if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
         return -1;
@@ -446,7 +425,6 @@ export class UppersliderComponent implements OnInit {
 
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
-    console.log('clearTimeInterval');
     clearInterval(this.interval);
     clearTimeout(this.timeout);
     this.timerStartTime.Soccer.isLiveUpdate = false;
@@ -454,7 +432,6 @@ export class UppersliderComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
     this.clearTimeInterval();
   }
 

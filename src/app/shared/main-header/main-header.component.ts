@@ -52,8 +52,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     { title: 'Kabaddi', link: '/kabaddi' },
     { title: 'Soccer', link: '/soccer' },
     { title: 'Basketball', link: '/basketball' },
+    { title: 'Field Hockey', link: '/hockey' },
     { title: 'Badminton', link: '/coming-soon/badminton' },
-    { title: 'Field Hockey', link: '/coming-soon/field-Hockey' },
     { title: 'Racing', link: '/coming-soon/racing' },
     { title: 'Tennis sports', link: '/coming-soon/tennis-sports' },
   ];
@@ -130,7 +130,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     this.windowinnerWidth = window.innerWidth;
     if (this.windowinnerWidth < 576) {
       this.responsiveSticky(163);
-      console.log('width change' + innerWidth);
     } else {
       this.responsiveSticky(129);
     }
@@ -212,7 +211,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
 
   getuserLogout(token) {
     this.sportsService.userlogout(token).subscribe((res) => {
-      console.log(res);
       this.store.dispatch(new Auth.SetUnauthenticated());
     });
   }

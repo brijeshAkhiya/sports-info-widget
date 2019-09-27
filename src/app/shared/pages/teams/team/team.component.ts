@@ -285,7 +285,6 @@ export class TeamComponent implements OnInit {
   }
 
   resultSuccess = (res) => {
-    console.log(res);
     this.paramsResults.loading = false;
     switch (this.sport) {
       case 'Cricket': {
@@ -323,12 +322,10 @@ export class TeamComponent implements OnInit {
         break;
       }
     }
-    console.log(this.paramsResults.data);
 
   }
 
   resultError = (err) => {
-    console.log(err);
     this.paramsResults.loading = false;
   }
 
