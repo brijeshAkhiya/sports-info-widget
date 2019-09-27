@@ -142,7 +142,7 @@ export class CommonService {
 
   sortByName(data, key) {
     return data.sort((a, b) => {
-      if (a.key < b.key) {
+      if (a.data[key] < b.data[key]) {
         return -1;
       } else {
         return 1;

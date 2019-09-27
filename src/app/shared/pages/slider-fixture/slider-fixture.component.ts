@@ -136,9 +136,10 @@ export class SliderFixtureComponent implements OnInit {
               }
             }
           });
-          // category = this.commonService.sortByName(category, 'name');
           this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
           this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
+          this.paramData.filterCategory = this.commonService.sortByName(this.paramData.filterCategory, 'name');
+
         }
       }, (error) => {
         this.paramData.loading = false;
