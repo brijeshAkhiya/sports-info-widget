@@ -13,6 +13,9 @@
           <ng-template carouselSlide [id]="'Soccer'">
             <div class="slide-item">{{ 'Header_menu.Soccer' | translate }}</div>
           </ng-template>
+          <ng-template carouselSlide [id]="'Basketball'">
+            <div class="slide-item">{{ 'Basketball' | translate }}</div>
+          </ng-template>
         </owl-carousel-o>
 
       </div>
@@ -22,8 +25,7 @@
             <ng-template carouselSlide>
               <!--Live matches-->
 
-              <div class="slider-item"
-                [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]">
+              <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{ slide?.competition?.cname ? slide?.competition?.cname : slide?.title}}
@@ -76,9 +78,7 @@
           <ng-container class="items" *ngFor="let slide of slider">
             <ng-template carouselSlide>
               <!--Live matches-->
-              <div class="slider-item"
-                [routerLink]="['/cricket/match',(slide.id | splitID),(slide?.competitorsObj?.home?.abbreviation + '-vs-' +slide?.competitorsObj?.away?.abbreviation)]">
-
+              <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
@@ -140,13 +140,11 @@
             </ng-template>
           </ng-container>
         </owl-carousel-o>
-
         <owl-carousel-o [options]="customOptions" *ngIf="sport == 'Soccer'">
           <ng-container class="items" *ngFor="let slide of slider">
             <ng-template carouselSlide>
               <!--Live matches-->
-              <div class="slider-item"
-                [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]">
+              <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name">
@@ -196,6 +194,60 @@
                   </div>
                   <a class="fullblock-link"
                     [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+        <owl-carousel-o [options]="customOptions" *ngIf="sport == 'Basketball'">
+          <ng-container class="items" *ngFor="let slide of slider">
+            <ng-template carouselSlide>
+              <!--Live matches-->
+              <div class="slider-item">
+                <div class="slider-item-inner fullblock-link-container">
+                  <div class="title d-flex justify-content-between">
+                    <p class="tour-name"></p>
+                    <p *ngIf="slide?.status == 'scheduled' || slide?.status == 'closed'; else matchStatus">
+                      {{slide.scheduled  | amTimeAgo}}</p>
+                    <ng-template #matchStatus>
+                      <p class="live-result">
+                        {{slide?.status ? slide?.status : slide?.match_status}}
+                      </p>
+                    </ng-template>
+                  </div>
+
+                  <ng-container
+                    *ngTemplateOutlet="teamBasketball;context:{competitor:slide?.home, oppo:slide?.away, match:slide, abbr:'home'}">
+                  </ng-container>
+                  <ng-container
+                    *ngTemplateOutlet="teamBasketball;context:{competitor:slide?.away, oppo:slide?.home, match:slide, abbr:'away'}">
+                  </ng-container>
+
+                  <ng-template #teamBasketball let-competitor="competitor" let-match="match" let-oppo="oppo"
+                    let-abbr="abbr">
+                    <div class="match-info d-flex justify-content-between align-items-center">
+                      <p
+                        [ngClass]="{'match-winner': abbr == 'home' ? (match?.home_points > match?.away_points) : (match?.away_points > match?.home_points)}">
+                        <img [lazyLoad]="competitor?.sr_id| logosurl:'basketball'"
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.name}}
+                      </p>
+                      <p><b>
+                          {{abbr == 'home' ? match?.home_points : match?.away_points}}
+                        </b>
+                      </p>
+                    </div>
+                  </ng-template>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <p class="result-line" *ngIf="slide?.venue?.name">
+                        {{slide?.venue?.name ? slide?.venue?.name : ''}}</p>
+                      <!-- <p class="result-line" *ngIf="slide.match_status != 'live'">
+                          {{slide.match_result ? slide.match_result : slide.venue_name}}</p> -->
+                    </div>
+                  </div>
+                  <a class="fullblock-link"
+                    [routerLink]="['/basketball/match', slide?.id, (slide?.home?.alias + '-vs-' +slide?.away?.alias)]"></a>
                 </div>
               </div>
             </ng-template>

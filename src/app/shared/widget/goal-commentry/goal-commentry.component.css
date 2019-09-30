@@ -41,7 +41,7 @@
 .goal-commentary-list .icon.freethrowmiss,
 .goal-commentary-list .icon.threepointmiss,
 .goal-commentary-list .icon.twopointmiss          { background-image: url(assets/images/match/basketball/rebound-icon.svg);}
-.goal-commentary-list .icon.score_change,
+.basketball.goal-commentary-list .icon.score_change,
 .goal-commentary-list .icon.freethrowmade,
 .goal-commentary-list .icon.threepointmade,
 .goal-commentary-list .icon.twopointmade          { background-image: url(assets/images/match/basketball/score-change-icon.svg);}
