@@ -369,7 +369,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 .line-title                                     { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #EBEBEB; }
 
 /******* Soccer Pages ******/
-.fixture-date .dropdown-menu                { left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
+.fixture-date .dropdown-menu                { top: 100% !important; left: 50% !important; transform: translateX(-50%) !important; -webkit-transform: translateX(-50%) !important; }
 ngb-datepicker .btn-link                    { color: #c4c4c4; }
 ngb-datepicker .btn-link:hover              { color: #ED1A33; }
 ngb-datepicker .ngb-dp-weekday              { font-weight: 700; font-style: normal; color: #22336F; }
@@ -566,7 +566,7 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
     .login-toast img                    { margin: 0px 8px; width: 24px; }
 
 /******* Soccer Pages ******/
-    .fixture-date .dropdown-menu                { left: auto; right: 0; transform: translateX(0%); -webkit-transform: translateX(0%); }
+    .fixture-date .dropdown-menu                { left: auto !important; right: 0 !important; transform: translateX(0%) !important; -webkit-transform: translateX(0%) !important; }
 
 /******* NBA Pages ******/
     .nba-common-selection .dropdown-toggle                	{ min-width: 120px; }
