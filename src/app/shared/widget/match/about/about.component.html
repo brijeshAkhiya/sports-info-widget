@@ -298,7 +298,7 @@
     class="common-title-btn nba-match-title match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="data.home.id | logosurl:'basketball'" alt="{{data.home.name}}"
+        <img [lazyLoad]="data.home.sr_id | logosurl:'basketball'" alt="{{data.home.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
         <h4>{{data?.home?.market}} {{data.home.name}}</h4>
       </div>
@@ -306,7 +306,7 @@
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img [lazyLoad]="data.away.id | logosurl:'basketball'" alt="{{data.away.name}}"
+        <img [lazyLoad]="data.away.sr_id | logosurl:'basketball'" alt="{{data.away.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
         <h4>{{data?.away?.market}} {{data.away.name}}</h4>
       </div>

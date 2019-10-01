@@ -33,8 +33,11 @@ export class HomeComponent implements OnInit {
       title: this.translateservice.get(title)['value'],
       type: 'sport'
     };
-    if (this.activatedRoute.snapshot.params.id)
+    if (this.activatedRoute.snapshot.params.id) {
       this.options.tournamentid = this.commonService.getIds(this.activatedRoute.snapshot.params.id, 'cricket', 'tournament');
+      if (this.activatedRoute.snapshot.params.slug)
+        this.options.title = this.activatedRoute.snapshot.params.slug.replace(/-/g, ' ');
+    }
   }
 
 }

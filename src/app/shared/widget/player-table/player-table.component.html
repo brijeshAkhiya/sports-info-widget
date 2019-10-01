@@ -89,8 +89,7 @@
 
 <ng-template #soccer let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'teamname' && value != 'name');else data"
-      [ngClass]="(object == value ) ?'sort-table':''"
+    <td *ngIf="(value != 'teamname' && value != 'name');else data" [ngClass]="(object == value ) ?'sort-table':''"
       [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
       {{ value == 'Index' ? index : (item[value] && item[value] !='') ? item[value]  : 0 }}
     </td>
@@ -110,8 +109,7 @@
 
 <ng-template #kabaddi let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'tname' && value != 'name'); else link"
-      [ngClass]="(object == value ) ?'sort-table':''">
+    <td *ngIf="(value != 'tname' && value != 'name'); else link" [ngClass]="(object == value ) ?'sort-table':''">
       {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw'] : value == 'pid' ?  index : (item[value] && item[value] !='') ? item[value] : 0) }}
     </td>
     <ng-template #link>
@@ -160,8 +158,7 @@
         <ng-template #playerID>
           <a *ngIf="item.player['sr_id']"
             [routerLink]="value == 'full_name' ? ['/basketball/player', (item?.player?.sr_id | splitID), (item?.player?.full_name | slugify)] : '' ">
-            <img [offset]="commonService.lazyloadoffset"
-              [lazyLoad]="(item?.player?.sr_id | splitID) | logosurl:'basketball'"
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item?.teams[0]?.sr_id) | logosurl:'basketball'"
               [defaultImage]="commonService.flagplaceholder" alt="logo">
             {{ item?.player?.full_name}}
           </a>
