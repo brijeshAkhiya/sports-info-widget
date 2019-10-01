@@ -367,7 +367,7 @@ export class SportsService {
 
   getReverseGeo(address) {
     return this.http.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${environment.mapsKey}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${environment.mapsKey}&address=${address}`
     );
   }
 

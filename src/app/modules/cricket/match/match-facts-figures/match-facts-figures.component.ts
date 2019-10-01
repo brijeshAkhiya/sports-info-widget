@@ -42,8 +42,10 @@ export class MatchFactsFiguresComponent implements OnInit {
       } else {
         // TODO - Reverse Geo coding
         this.sportsService.getReverseGeo(this.venuedetails.name).subscribe((res: any) => {
-          this.venuedetails.lat = res.results[0].geometry.location.lat;
-          this.venuedetails.long = res.results[0].geometry.location.lng;
+          if (res && res.results && res.results.length > 0) {
+            this.venuedetails.lat = res.results[0].geometry.location.lat;
+            this.venuedetails.long = res.results[0].geometry.location.lng;
+          }
         });
       }
     }

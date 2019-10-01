@@ -15,23 +15,16 @@
   <!-- <div class="flash-run active" style="color: blue;">WD</div> -->
 </div>
 <!-- [ngClass]="{'flash-comm-show': isapply}" -->
-<div class="flash-comm-box" [ngClass]="{'flash-comm-show': isapply}">
+<div class="flash-comm-box" [ngClass]="{'flash-comm-show': isapply}" *ngIf="!livematches || livematches.length == 0">
   <!-- flash-comm-show -->
   <div class="head-btn-list">
     <button class="close-btn" (click)="isapply = false"></button>
   </div>
   <div class="flash-comm-block">
     <h5>{{ 'Shared_module.flash_score' | translate }}</h5>
-    <!-- <form>      this section not used for now it will be used later when multiple sports are there
-      <div class="search-box">
-        <input type="text" placeholder="Select sport">
-        <button type="submit"></button>
-      </div>
-    </form> -->
     <ul class="flash-comm-list">
-      <li *ngIf="!livematches || livematches.length == 0">{{ 'Shared_module.no_live_commentry_available' | translate }}.</li>
-      <li *ngFor="let item of livematches"><button (click)="reqJoinRoom(item.id,item.competitors)"
-          [ngClass]="{'selected': item.id == currentmatchid}">{{item.competitors}}</button></li>
+      <li *ngIf="!livematches || livematches.length == 0">{{ 'Shared_module.no_live_commentry_available' | translate }}.
+      </li>
     </ul>
   </div>
 </div>

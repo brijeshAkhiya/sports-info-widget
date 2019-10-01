@@ -28,7 +28,8 @@
                 </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.names?.length > 0" #nameDrop="ngbDropdown" placement="bottom">
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.names?.length > 0" #nameDrop="ngbDropdown"
+              placement="bottom">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.names | stringunder}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons?.names"
@@ -44,9 +45,9 @@
 
         <app-player-table *ngIf="stats?.length > 0 && !isloading " [data]="stats" [options]=" {
               sport:'Basketball',
-              titles : [('Cricket_Module2.player' | translate),'GP','MIN','PTS','REB','OREB','DREB','AST','STL','BLK','TO','PF','PER'],
-              values : ['full_name', 'total.games_played', 'total.minutes', 'total.points', 'total.rebounds', 'total.offensive_rebounds', 'total.defensive_rebounds', 'total.assists', 'total.steals', 'total.blocks', 'total.turnovers', 'total.personal_fouls', 'total.efficiency'],
-              class : ['nba-table nba-tour-stats-table'],
+              titles : ['Rank',('Cricket_Module2.player' | translate),'GP','MIN','PTS','REB','OREB','DREB','AST','STL','BLK','TO','PF','PER'],
+              values : ['rank','full_name', 'total.games_played', 'total.minutes', 'total.points', 'total.rebounds', 'total.offensive_rebounds', 'total.defensive_rebounds', 'total.assists', 'total.steals', 'total.blocks', 'total.turnovers', 'total.personal_fouls', 'total.efficiency'],
+              class : ['nba-table tour-stats-table'],
               tbl_type:'stats'
             }">
         </app-player-table>
