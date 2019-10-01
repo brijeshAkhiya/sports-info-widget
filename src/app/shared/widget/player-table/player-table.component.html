@@ -7,7 +7,7 @@
       <thead>
         <tr [ngClass]="options.class_light_row">
           <th *ngFor="let title of options.titles" [innerHTML]="title" title="{{title}}" (click)="getname($event)"
-            [ngClass]="(title == value ) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''"></th>
+            [ngClass]="(title == value ) ? sorting == 'ASC'? 'sort-table table-asc' :'sort-table table-desc':''"></th>
         </tr>
       </thead>
       <tbody>
@@ -71,7 +71,7 @@
 
 <ng-template #cricket let-item="item">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value) ?'sort-table':''">
+    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{options.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[value] ) : item[value]}}
     </td>
     <ng-template #data>
@@ -90,7 +90,7 @@
 <ng-template #soccer let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="(value != 'teamname' && value != 'name');else data"
-      [ngClass]="(object == value ) ?'sort-table':''"
+      [ngClass]="(object == value ) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''"
       [ngClass]="{'relegation':item.current_outcome == 'Relegation', 'champions-league': item.current_outcome == 'Champions League', 'europa-league':item.current_outcome == 'Europa League'}">
       {{ value == 'Index' ? index : (item[value] && item[value] !='') ? item[value]  : 0 }}
     </td>
@@ -111,7 +111,7 @@
 <ng-template #kabaddi let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
     <td *ngIf="(value != 'tname' && value != 'name'); else link"
-      [ngClass]="(object == value ) ?'sort-table':''">
+      [ngClass]="(object == value ) ?sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw'] : value == 'pid' ?  index : (item[value] && item[value] !='') ? item[value] : 0) }}
     </td>
     <ng-template #link>
@@ -129,7 +129,7 @@
 
 <ng-template #basketball let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'name'); else link " [ngClass]="(object == value  )?'sort-table':''">
+    <td *ngIf="(value != 'name'); else link " [ngClass]="(object == value  )? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{ value == 'index' ?  index  : (item[value] && item[value] !='') ? item[value] : 0}}
     </td>
     <ng-template #link>
@@ -146,7 +146,7 @@
 
 <ng-template #basketballStats let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'full_name'); else link" [ngClass]="(object == value ) ?'sort-table':''">
+    <td *ngIf="(value != 'full_name'); else link" [ngClass]="(object == value ) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{item | arrToString: value}}
     </td>
     <ng-template #link>
@@ -174,7 +174,7 @@
 
 <ng-template #hockey let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values">
-    <td *ngIf="(value != 'name'); else link " [ngClass]="(object == value && toggleSort ) ? 'sort-table' : '' ">
+    <td *ngIf="(value != 'name'); else link " [ngClass]="(object == value ) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc' : '' ">
       {{ value == 'index' ?  index  : (item[value] && item[value] !='') ? item[value] : 0}}
     </td>
     <ng-template #link>
