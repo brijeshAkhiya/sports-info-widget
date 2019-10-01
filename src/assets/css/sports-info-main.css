@@ -515,6 +515,7 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 /* -------- Dropdown And Custom Checkbox Style ------- */
     .common-dropdown .dropdown-toggle           { padding: 6px 36px 6px 10px; font-size: 14px; line-height: 18px; }
     .common-dropdown .dropdown-toggle:after     { width: 18px; height: 18px; }
+    .common-dropdown .dropdown-item             { padding: 8px 12px; font-size: 14px; }
 /******* Header Section CSS Start ******/
     .signin-modal .modal-body           { padding: 16px; }
     .signin-modal button                { margin-bottom: 10px; width: 100%; padding: 10px; font-size: 16px; line-height: 24px; }
@@ -626,5 +627,5 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 /******* NBA Pages ******/
     .nba-dropdown-title								{ flex-direction: column; -webkit-flex-direction: column; align-items: initial !important; -webkit-align-items: initial !important; }
     .nba-common-selection .dropdown-toggle          { margin-right: 8px;}
-    
+    .nba-common-selection .date-dropdown .dropdown-menu            { min-width: 100%; }
 }
