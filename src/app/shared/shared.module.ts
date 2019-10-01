@@ -166,6 +166,7 @@ import { TournamentsComponent } from './widget/tournaments/tournaments.component
         SlugifyPipe,
         DateParsePipe,
         StringUnder,
+        ArrToStringPipe,
         StringsplitID,
         CricketScorePipe,
         StringtoNumberPipe,
@@ -195,6 +196,7 @@ import { TournamentsComponent } from './widget/tournaments/tournaments.component
         StringsplitID,
         CricketScorePipe,
         StringtoNumberPipe,
+        ArrToStringPipe,
         /** All Componenets */
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,

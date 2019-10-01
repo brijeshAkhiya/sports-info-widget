@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 import { TranslateService } from '@ngx-translate/core';
+import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
+
 
 @Component({
   selector: 'app-points-table',
@@ -20,11 +22,14 @@ export class PointsTableComponent implements OnInit {
   index: any;
   object: any;
   sort: number;
+  sorting = 'ASC';
+  prevstate: any;
 
   constructor(
     public commonService: CommonService,
     private sportsService: SportsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    public ArrToStringPipe: ArrToStringPipe
   ) { }
 
   ngOnInit() {
@@ -92,6 +97,7 @@ export class PointsTableComponent implements OnInit {
     this.data.titles.forEach(element => {
       if (element == this.value) {
         this.index = this.data.titles.findIndex(element => element == this.value);
+        this.prevstate = this.object;
         this.object = this.data.values[this.index];
         if (this.sport == 'kabaddi' && this.object == 'loss') {
           this.pointstable = this.pointstable.map(element => {
@@ -102,15 +108,32 @@ export class PointsTableComponent implements OnInit {
           });
         }
         this.sortArray();
-        this.toggleSort = !this.toggleSort;
       }
     });
   }
+  
   sortArray() {
-    if (this.toggleSort) {
-      this.pointstable.sort((a, b) => b[this.object] - a[this.object]);
+    if (this.prevstate === this.object) {
     } else {
-      this.pointstable.sort((a, b) => a[this.object] - b[this.object]);
+      this.sorting = 'ASC';
+    }
+    if (this.object.includes('.')) {
+      let filterPipe = new ArrToStringPipe();
+      if (this.sorting == 'DESC') {
+        this.data.sort((a, b) => filterPipe.transform(a, this.object) - filterPipe.transform(b, this.object));
+        this.sorting = 'ASC';
+      } else {
+        this.data.sort((a, b) => filterPipe.transform(b, this.object) - filterPipe.transform(a, this.object));
+        this.sorting = 'DESC';
+      }
+    } else {
+      if (this.sorting == 'DESC') {
+        this.data.sort((a, b) => a[this.object] - b[this.object]);
+        this.sorting = 'ASC';
+      } else {
+        this.data.sort((a, b) => b[this.object] - a[this.object]);
+        this.sorting = 'DESC';
+      }
     }
   }
 }

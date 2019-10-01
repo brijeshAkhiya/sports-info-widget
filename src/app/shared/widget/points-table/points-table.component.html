@@ -8,7 +8,7 @@
       <thead>
         <tr [ngClass]="data.class_light_row ">
           <th *ngFor="let title of data.titles" [innerHTML]="title" title="{{title}}" (click)="sorttable($event);" 
-           [ngClass]="(title == value) ?'sort-table':''" ></th>
+           [ngClass]="(title == value ) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''" ></th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +35,7 @@
 
 <ng-template #cricket let-item="item">
   <ng-container *ngFor="let value of data.values">
-    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value  )?'sort-table':''">
+    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value  )? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{data.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[data.subParams][value] ) : item[value]}}
     </td>
     <ng-template #data>
@@ -50,7 +50,7 @@
 
 <ng-template #kabaddi let-item="item">
   <ng-container *ngFor="let value of data.values">
-    <td *ngIf="value != 'tname'; else link" [ngClass]="(object == value ) ?'sort-table':''">
+    <td *ngIf="value != 'tname'; else link" [ngClass]="(object == value ) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value] ? item[value] : 0)}} </td>
     <ng-template #link>
       <td>
@@ -64,7 +64,7 @@
 
 <ng-template #soccer let-item="item">
   <ng-container *ngFor="let value of data.values">
-    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value && toggleSort) ?'sort-table':''">
+    <td *ngIf="value != 'image'; else data" [ngClass]="(object == value) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       {{data.subParams ? ((value == 'type') ? (item[value] | stringunder) : item[data.subParams][value] ) : item[value]}}
     </td>
     <ng-template #data>
