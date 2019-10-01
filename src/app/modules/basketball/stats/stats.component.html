@@ -28,7 +28,7 @@
                 </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.names?.length > 0" #nameDrop="ngbDropdown">
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.names?.length > 0" #nameDrop="ngbDropdown" placement="bottom">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.names | stringunder}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons?.names"
