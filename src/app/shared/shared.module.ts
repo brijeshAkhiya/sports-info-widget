@@ -164,6 +164,7 @@ import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
         SlugifyPipe,
         DateParsePipe,
         StringUnder,
+        ArrToStringPipe,
         StringsplitID,
         CricketScorePipe,
         StringtoNumberPipe,
@@ -193,6 +194,7 @@ import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
         StringsplitID,
         CricketScorePipe,
         StringtoNumberPipe,
+        ArrToStringPipe,
         /** All Componenets */
         CustomAdsWidgetComponent,
         NoDataWidgetComponent,

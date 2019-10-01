@@ -14,6 +14,7 @@ import { StatsComponent } from './stats/stats.component';
 import { StandingsComponent } from './standings/standings.component';
 import { MatchComponent } from './match/match.component';
 import { BasketballComponent } from './basketball.component';
+import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
 
 @NgModule({
   declarations: [StatsComponent, StandingsComponent, MatchComponent, BasketballComponent],
@@ -27,5 +28,7 @@ import { BasketballComponent } from './basketball.component';
     FormsModule,
     SharedModule
   ]
+  ,
+   providers:[ArrToStringPipe]
 })
 export class BasketballModule { }
