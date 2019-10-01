@@ -7,7 +7,8 @@
     </ng-container>
     <p *ngIf="venuedetails?.name">
       <span>{{ 'widgetModule.venue' | translate }} :</span>
-      {{venuedetails?.name}}, {{venuedetails?.city_name}}, {{venuedetails?.country_name}}
+      <span [innerHTML]="venuedetails?.name">{{venuedetails?.name}}</span>, {{venuedetails?.city_name}},
+      {{venuedetails?.country_name}}
     </p>
     <p *ngIf="venuedetails?.capacity"><span>{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
     </p>

@@ -36,8 +36,11 @@
 
     <div class="match-update show-anim">
       <p class="light-text">
-        <ng-container *ngIf="data.sport_event.venue">
-          <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
+        <ng-container *ngIf="data.sport_event.venue.name">
+          <span [innerHTML]="data.sport_event.venue.name">{{data.sport_event.venue.name}}</span>
+        </ng-container>
+        <ng-container *ngIf="data.sport_event.venue.city_name">
+          <span>, {{data.sport_event.venue.city_name}} |</span>
         </ng-container>
         {{data.sport_event.scheduled | amDateFormat:'Do MMMM YYYY'}}
       </p>

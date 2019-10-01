@@ -78,6 +78,7 @@ import { MatchStatsComponent } from './widget/match/match-stats/match-stats.comp
 import { RouterComponent } from './widget/router/router.component';
 import { LiveMatchTrackerComponent } from './widget/match/live-match-tracker/live-match-tracker.component';
 import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
+import { TournamentsComponent } from './widget/tournaments/tournaments.component';
 
 @NgModule({
     imports: [
@@ -150,6 +151,7 @@ import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
         LiveMatchTrackerComponent,
         SliderFixtureComponent,
         ArrToStringPipe,
+        TournamentsComponent,
     ],
     providers: [
         /** All Pipes */

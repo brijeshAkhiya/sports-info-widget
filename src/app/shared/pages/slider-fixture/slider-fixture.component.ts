@@ -80,6 +80,8 @@ export class SliderFixtureComponent implements OnInit {
       this.getSoccerData();
     else if (this.params.sport == 'Basketball')
       this.getBasketballDailySchedule();
+    else if (this.params.sport == 'Hockey')
+      this.getHockeyDailySchedule();
   }
 
   filter(category) {
@@ -110,6 +112,18 @@ export class SliderFixtureComponent implements OnInit {
         this.paramData.loading = false;
         if (res) {
           this.paramData.data = res.data.games;
+        }
+      },
+        error => this.paramData.loading = false);
+  }
+  getHockeyDailySchedule() {
+    this.paramData.loading = true;
+    this.sportsService
+      .getHocketDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
+      .subscribe((res: any) => {
+        this.paramData.loading = false;
+        if (res.data && res.data.summaries) {
+          this.paramData.data = res.data.summaries;
         }
       },
         error => this.paramData.loading = false);

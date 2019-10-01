@@ -10,7 +10,6 @@ import { SharedModule } from '@app/shared/shared.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { SoccerRoutingModule } from './soccer-routing.module';
-import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
@@ -19,7 +18,6 @@ import { TournamentMatchComponent } from './tournament/tournament-match/tourname
 
 @NgModule({
   declarations: [
-    TournamentListComponent,
     TournamentComponent,
     TournamentHomeComponent,
     TournamentStatsComponent,

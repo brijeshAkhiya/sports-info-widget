@@ -20,6 +20,8 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.data);
+
     if (this.list_type) {
       this.listtype = this.list_type;
       return false;
@@ -29,6 +31,8 @@ export class ScheduleComponent implements OnInit {
       if (typeof this.tournament === 'undefined' || this.tournament === '')
         this.listtype = 'datelist';
     } else if (this.sport === 'Basketball') {
+      this.listtype = 'datelist';
+    } else if (this.sport === 'Hockey') {
       this.listtype = 'datelist';
     }
   }

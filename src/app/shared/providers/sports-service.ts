@@ -698,4 +698,29 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/schedules`
     );
   }
+
+  /**
+   * Hockey Services
+   */
+  getCompetitions() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/competitions`
+    );
+  }
+  getHockeySeasonInfo(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/info`
+    );
+  }
+  getHockeySeasonStandings(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/standings`
+    );
+  }
+  getHocketDailySummary(date) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/daily/summaries/${date}`
+    );
+  }
+
 }

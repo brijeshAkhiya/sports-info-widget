@@ -28,8 +28,8 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdsenseModule } from 'ng2-adsense';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 /* store configuration modules import */
 import { StoreModule } from '@ngrx/store';
@@ -119,11 +119,11 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: (createTranslateLoader),
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
     }),
     BrowserAnimationsModule,
     AppRoutingModule,

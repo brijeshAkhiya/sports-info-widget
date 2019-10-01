@@ -252,7 +252,7 @@ export class UppersliderComponent implements OnInit {
       // this.slider = [];
       // this.clearTimeInterval();
       // let isLiveUpdate = false;
-      if (Object.entries(res.live).length > 0 && res.live.items.length > 0 && !this.timerStartTime.Kabaddi.isLiveUpdate) {
+      if (Object.entries(res.live).length > 0 && res.live.item && res.live.items.length > 0 && !this.timerStartTime.Kabaddi.isLiveUpdate) {
         this.slider = this.slider.concat(res.live.items);
         this.getLiveKabaddiUpdate(this);
         // isLiveUpdate = true;

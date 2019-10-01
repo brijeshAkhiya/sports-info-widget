@@ -128,6 +128,12 @@ export class CommonService {
       } else if (type == 'match') {
         return 'sr:match:' + id;
       }
+    } else if (sport == 'hockey') {
+      if (type == 'tournament') {
+        return 'sr:competitor:' + id;
+      } else if (type == 'season') {
+        return 'sr:season:' + id;
+      }
     }
   }
 
