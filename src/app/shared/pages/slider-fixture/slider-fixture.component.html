@@ -65,7 +65,8 @@
         <app-no-data-widget *ngIf="!paramData.loading && (!paramData.data || paramData.data?.length == 0)"
           [sport]="params.sport">
         </app-no-data-widget>
-        <app-schedule *ngIf="paramData.data.length > 0" [data]="paramData.data" [sport]="params.sport">
+        <app-schedule *ngIf="paramData.data.length > 0" [data]="paramData.data" [sport]="params.sport"
+          [list_type]="datelist">
         </app-schedule>
 
       </div>

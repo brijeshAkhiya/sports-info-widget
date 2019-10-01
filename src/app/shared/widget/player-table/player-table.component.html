@@ -32,6 +32,10 @@
             <ng-container *ngTemplateOutlet="basketball;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
+          <ng-container *ngIf="options.sport == 'Hockey'">
+            <ng-container *ngTemplateOutlet="hockey;context:{item:item}">
+            </ng-container>
+          </ng-container>
 
         </tr>
       </tbody>
@@ -130,8 +134,7 @@
     </td>
     <ng-template #link>
       <td>
-        <a
-          [routerLink]="value == 'name' ? ['/basketball/team', (item['sr_id'] | splitID), (item.name | slugify)] : '' ">
+        <a [routerLink]="value == 'name' ? ['/basketball/team', (item['id']), (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['sr_id'] | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}
@@ -163,6 +166,25 @@
             {{ item?.player?.full_name}}
           </a>
         </ng-template>
+      </td>
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+
+<ng-template #hockey let-item="item" let-index="index">
+  <ng-container *ngFor="let value of options.values">
+    <td *ngIf="(value != 'name'); else link " [ngClass]="(object == value && toggleSort ) ? 'sort-table' : '' ">
+      {{ value == 'index' ?  index  : (item[value] && item[value] !='') ? item[value] : 0}}
+    </td>
+    <ng-template #link>
+      <td>
+        <a
+          [routerLink]="value == 'name' ? ['/hockey/team', (item.competitor.id | splitID), (item.competitor.name | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitor.id | logosurl:'hockey'"
+            [defaultImage]="commonService.flagplaceholder" alt="logo">
+          {{ item.competitor.name}}
+        </a>
       </td>
     </ng-template>
   </ng-container>

@@ -21,7 +21,6 @@ export class MatchStatsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.matchStats);
   }
 
 }

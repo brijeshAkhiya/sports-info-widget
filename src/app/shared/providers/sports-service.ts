@@ -248,7 +248,6 @@ export class SportsService {
 
   /*   //get blog comments */
   getblogcommnets(data) {
-    console.log(data);
     return this.http.post(
       environment.apiUrl + environment.version + `/comments/list`,
       data
@@ -257,7 +256,6 @@ export class SportsService {
 
   /*   //add user comment  */
   addusercomment(data) {
-    console.log(data);
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
@@ -278,7 +276,6 @@ export class SportsService {
 
   /*   // deletecomment   */
   deleteusercomment(id) {
-    console.log(id);
     let headers = new HttpHeaders({
       'Authorization': localStorage.getItem('userT')
     });
@@ -506,7 +503,6 @@ export class SportsService {
   }
 
   getkabadditeamfixtures(teamid, params) {
-    console.log(params);
 
     return this.http.get(
       environment.apiUrl + environment.version + `/kabaddi/team/${teamid}/matches?per_page=${params.reqParams.per_page}&paged=${params.reqParams.page}&status=${params.reqParams.status}`
@@ -702,4 +698,29 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/schedules`
     );
   }
+
+  /**
+   * Hockey Services
+   */
+  getCompetitions() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/competitions`
+    );
+  }
+  getHockeySeasonInfo(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/info`
+    );
+  }
+  getHockeySeasonStandings(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/standings`
+    );
+  }
+  getHocketDailySummary(date) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/daily/summaries/${date}`
+    );
+  }
+
 }

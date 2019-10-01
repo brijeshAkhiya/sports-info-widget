@@ -8,8 +8,8 @@ import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
 import { TeamComponent } from '@app/shared/pages/teams/team/team.component';
 import { PlayerComponent } from '@app/shared/pages/player/player.component';
 import { SliderFixtureComponent } from '@app/shared/pages/slider-fixture/slider-fixture.component';
+import { TournamentsComponent } from '@app/shared/widget/tournaments/tournaments.component';
 
-import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
 import { TournamentStatsComponent } from './tournament/tournament-stats/tournament-stats.component';
@@ -34,7 +34,8 @@ const routes: Routes = [{
         },
         {
             path: 'tournaments',
-            component: TournamentListComponent
+            component: TournamentsComponent,
+            data: { 'sport': 'Soccer' }
         },
         {
             path: 'tournament/:id/:slug',

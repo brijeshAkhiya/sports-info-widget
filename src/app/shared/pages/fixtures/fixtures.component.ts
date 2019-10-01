@@ -80,6 +80,12 @@ export class FixturesComponent implements OnInit {
         this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
         this.getSoccerTournamentData(this.tournamentid);
       }
+    } else if (this.params.sport == 'Hockey') {
+      // Tournament Fixtures
+      if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
+        this.getSoccerTournamentData(this.tournamentid);
+      }
     }
   }
 
@@ -173,7 +179,6 @@ export class FixturesComponent implements OnInit {
 
   /*
     loadKabaddi(type) {
-      console.log("loadKabaddi")
       if (type == 'fixture') {
         if (this.paramsFixtures.data && this.paramsFixtures.data.length > 0)
           return false;

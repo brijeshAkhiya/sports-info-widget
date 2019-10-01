@@ -292,8 +292,7 @@
       <div>
         <p class="d-flex align-items-center justify-content-end">
           <b>
-            <a
-              [routerLink]="['/basketball/team', (matchStats?.home?.sr_id | splitID), (matchStats?.home?.name | slugify )]">
+            <a [routerLink]="['/basketball/team', (matchStats?.home?.id), (matchStats?.home?.name | slugify )]">
               {{matchStats?.home?.market}} {{matchStats?.home?.name}}
             </a>
           </b>
@@ -309,8 +308,7 @@
           <img alt="{{matchStats?.away?.name}}" [lazyLoad]="matchStats?.away?.sr_id | logosurl:'basketball'"
             [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           <b>
-            <a
-              [routerLink]="['/basketball/team', (matchStats?.away?.sr_id | splitID), (matchStats?.away?.name | slugify )]">
+            <a [routerLink]="['/basketball/team', (matchStats?.away?.id), (matchStats?.away?.name | slugify )]">
               {{matchStats?.home?.market}} {{matchStats?.away?.name}}
             </a>
           </b>

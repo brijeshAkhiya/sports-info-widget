@@ -70,8 +70,7 @@ export class TopScorerWidgetComponent implements OnInit {
           });
         });
       }
-    }
-      , err => { console.log(err); });
+    });
   }
 
 

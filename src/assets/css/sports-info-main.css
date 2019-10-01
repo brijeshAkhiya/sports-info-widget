@@ -369,7 +369,7 @@ form .has-error span                { margin: 4px 0px 0px; display: block; color
 .line-title                                     { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #EBEBEB; }
 
 /******* Soccer Pages ******/
-.fixture-date .dropdown-menu                { left: 50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); }
+.fixture-date .dropdown-menu                { top: 100% !important; left: 50% !important; transform: translateX(-50%) !important; -webkit-transform: translateX(-50%) !important; }
 ngb-datepicker .btn-link                    { color: #c4c4c4; }
 ngb-datepicker .btn-link:hover              { color: #ED1A33; }
 ngb-datepicker .ngb-dp-weekday              { font-weight: 700; font-style: normal; color: #22336F; }
@@ -515,6 +515,7 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 /* -------- Dropdown And Custom Checkbox Style ------- */
     .common-dropdown .dropdown-toggle           { padding: 6px 36px 6px 10px; font-size: 14px; line-height: 18px; }
     .common-dropdown .dropdown-toggle:after     { width: 18px; height: 18px; }
+    .common-dropdown .dropdown-item             { padding: 8px 12px; font-size: 14px; }
 /******* Header Section CSS Start ******/
     .signin-modal .modal-body           { padding: 16px; }
     .signin-modal button                { margin-bottom: 10px; width: 100%; padding: 10px; font-size: 16px; line-height: 24px; }
@@ -565,7 +566,7 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
     .login-toast img                    { margin: 0px 8px; width: 24px; }
 
 /******* Soccer Pages ******/
-    .fixture-date .dropdown-menu                { left: auto; right: 0; transform: translateX(0%); -webkit-transform: translateX(0%); }
+    .fixture-date .dropdown-menu                { left: auto !important; right: 0 !important; transform: translateX(0%) !important; -webkit-transform: translateX(0%) !important; }
 
 /******* NBA Pages ******/
     .nba-common-selection .dropdown-toggle                	{ min-width: 120px; }
@@ -626,5 +627,5 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 /******* NBA Pages ******/
     .nba-dropdown-title								{ flex-direction: column; -webkit-flex-direction: column; align-items: initial !important; -webkit-align-items: initial !important; }
     .nba-common-selection .dropdown-toggle          { margin-right: 8px;}
-    
+    .nba-common-selection .date-dropdown .dropdown-menu            { min-width: 100%; }
 }

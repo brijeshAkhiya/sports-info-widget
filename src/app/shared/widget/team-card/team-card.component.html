@@ -68,8 +68,20 @@
             <h4>{{team.market}} {{team.name}}</h4>
             <h5>{{team.alias}}</h5>
           </div>
-          <a class="fullblock-link"
-            [routerLink]="['/basketball/team',(team.sr_id | splitID),(team.market+' '+team.name | slugify)]">
+          <a class="fullblock-link" [routerLink]="['/basketball/team',(team.id),(team.market+' '+team.name | slugify)]">
+          </a>
+        </ng-container>
+
+        <!-- Basketball Teams-->
+        <ng-container *ngIf="sport=='Hockey'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl:'Hockey'"
+              [defaultImage]="commonService.flagplaceholder" alt="team.name | slugify">
+          </div>
+          <div class="team-name">
+            <h4>{{team.name}}</h4>
+            <h5>{{team.abbreviation}}</h5>
+          </div>
+          <a class="fullblock-link" [routerLink]="['/hockey/team',(team.id | splitID),(team.name | slugify)]">
           </a>
         </ng-container>
 

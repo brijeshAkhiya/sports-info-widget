@@ -24,7 +24,6 @@ export class TeamsComponent implements OnInit {
 
   ngOnInit() {
     const data: any = this.activatedRoute.data;
-    const routeParams = this.activatedRoute.snapshot.params;
     this.sport = data.value.sport;
     this.getSportTeams();
   }
@@ -47,6 +46,11 @@ export class TeamsComponent implements OnInit {
       }
       case 'Basketball': {
         this.sportsService.getBaskeballTeams().subscribe(this.teamSuccess, this.teamError);
+        break;
+      }
+      case 'Hockey': {
+        this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'Hockey', 'season');
+        this.sportsService.getHockeySeasonInfo('sr:season:31933').subscribe(this.teamSuccess, this.teamError);
         break;
       }
     }
@@ -95,11 +99,21 @@ export class TeamsComponent implements OnInit {
         }
         break;
       }
+      case 'Hockey': {
+        if (res.data && res.data.stages) {
+          this.teams = [];
+          res.data.stages.forEach(stage => {
+            stage.groups.forEach(group => {
+              this.teams.push(group);
+            });
+          });
+        }
+        break;
+      }
     }
   }
 
   teamError = (err) => {
-    console.log(err);
     this.isloading = false;
   }
 

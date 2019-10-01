@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 import { SportsService } from '@providers/sports-service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,10 +9,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./menu.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
-  @ViewChild('subnavpointer') subnavpointer: ElementRef
-  @ViewChild('subnavbarmenu') subnavbarmenu: ElementRef
+  @ViewChild('subnavpointer') subnavpointer: ElementRef;
+  @ViewChild('subnavbarmenu') subnavbarmenu: ElementRef;
   @Input() options;
   @Input() name;
   series;
@@ -24,7 +24,6 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.activatedroute.snapshot.params.id);
     if (typeof this.options !== 'undefined') {
       if (this.options.sport === 'Cricket') {
         this.getCricketSeries();
@@ -58,7 +57,6 @@ export class MenuComponent implements OnInit {
   /* get current cricket series  */
   getCricketSeries() {
     this.sportsService.getcurrentseries().subscribe((res: any) => {
-      console.log(res);
       if (res.data)
         this.series = res.data;
     });

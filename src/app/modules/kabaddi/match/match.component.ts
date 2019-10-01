@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
@@ -9,7 +9,7 @@ import { CommonService } from '@providers/common-service';
   templateUrl: './match.component.html',
   styleUrls: ['./match.component.css']
 })
-export class MatchComponent implements OnInit {
+export class MatchComponent implements OnInit, OnDestroy {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [] } };
   loading: boolean = false;
   statsLoading: boolean = false;
@@ -77,7 +77,6 @@ export class MatchComponent implements OnInit {
   }
 
   getLiveUpdate(classThis) {
-    console.log('getLiveUpdate');
     this.interval = setInterval(() => {
       /* TEMP */
       this.dummyAPICall++;
@@ -85,7 +84,6 @@ export class MatchComponent implements OnInit {
         .getMatchInfo(this.matchInfo.match_info.mid)
         // .getKabaddiDummyCall(this.dummyAPICall)
         .subscribe(res => {
-          console.log(res);
           // let matchData = res.data.data.items;
           // this.matchInfo = res.data.data.items;
           let matchData = res.data.items;
@@ -109,11 +107,9 @@ export class MatchComponent implements OnInit {
 
   startLiveUpdateAfterTime() {
 
-    console.log('startLiveUpdateAfterTime');
     let remainingTime = this.commonService.getRemainigTimeofMatch(
       this.matchInfo.match_info.datestart
     );
-    console.log(remainingTime);
 
     let remainingMiliSec = this.commonService.miliseconds(
       remainingTime.hours,
@@ -132,13 +128,11 @@ export class MatchComponent implements OnInit {
 
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
-    console.log('clearTimeInterval');
     clearInterval(this.interval);
     clearTimeout(this.timeout);
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
     this.clearTimeInterval();
   }
 
@@ -154,7 +148,6 @@ export class MatchComponent implements OnInit {
     }
   }
   initCommentry() {
-    console.log('initCommentry');
 
     if (!(this.matchInfo.event && this.matchInfo.event !== ''))
       return false;
@@ -181,7 +174,6 @@ export class MatchComponent implements OnInit {
     });
     if (this.matchInfo.match_info.result.text !== '')
       this.commentry.push({ event_type: 'result', result: this.matchInfo.match_info.result.text });
-    console.log(this.commentry);
 
 
   }
@@ -189,7 +181,6 @@ export class MatchComponent implements OnInit {
   initTeam() {
     this.team.push(Object.assign({ 'qualifier': 'home' }, this.matchInfo.match_info.teams.home));
     this.team.push(Object.assign({ 'qualifier': 'away' }, this.matchInfo.match_info.teams.away));
-    console.log(this.team);
 
   }
 
@@ -209,7 +200,6 @@ export class MatchComponent implements OnInit {
       });
     });
 
-    console.log(this.team);
   }
 
   sorting(arr) {

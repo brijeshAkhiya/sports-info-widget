@@ -34,13 +34,11 @@ export class SportsHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('options::', this.options);
     if (this.options) {
       this.popularArticlesParams = { ...this.popularArticlesParams, ...this.options.reqParams };
       this.recentArticlesParams = { ...this.recentArticlesParams, ...this.options.reqParams };
       this.videoArticlesParams = { ...this.videoArticlesParams, ...this.options.reqParams };
 
-      console.log(this.recentArticlesParams);
 
       if (this.options.reqParams.aIds)
         this.getRelatedPosts();

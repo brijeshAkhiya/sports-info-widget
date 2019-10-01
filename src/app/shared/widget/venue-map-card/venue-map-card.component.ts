@@ -10,9 +10,6 @@ export class VenueMapCardComponent implements OnInit {
   @Input() sport;
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.venuedetails);
-
-  }
+  ngOnInit() { }
 
 }

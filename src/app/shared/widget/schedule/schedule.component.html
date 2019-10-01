@@ -81,8 +81,7 @@
         </div>
       </div>
     </div>
-    <a class="details-btn"
-      [routerLink]="['/cricket/match', (match.id | splitID), (match.competitors[0].abbreviation + '-vs-' +match.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+    <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
     <a class="fullblock-link"
       [routerLink]="['/cricket/match', (match.id | splitID),  (match.competitors[0].abbreviation + '-vs-' +match.competitors[1].abbreviation)]">
     </a>
@@ -147,15 +146,10 @@
 
         </div>
       </div>
-      <a class="details-btn"
-        [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+      <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link" [routerLink]="['/kabaddi/match', match.mid, (match.shorttitle | slugify)]">
       </a>
     </div>
-    <!-- <a class="details-btn" [routerLink]=""><span>Details</span></a> -->
-    <!-- <a class="fullblock-link"
-        [routerLink]="">
-      </a> -->
   </div>
   <!-- Final Match Layout -->
   <div
@@ -229,8 +223,7 @@
         </div>
       </div>
 
-      <a class="details-btn"
-        [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+      <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
         [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
       </a>
@@ -297,8 +290,7 @@
         </div>
       </div>
 
-      <a class="details-btn"
-        [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+      <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
         [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
       </a>
@@ -315,6 +307,10 @@
   </ng-container>
   <ng-container *ngIf="sport == 'Soccer'">
     <ng-container *ngTemplateOutlet="soccer_list">
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="sport == 'Hockey'">
+    <ng-container *ngTemplateOutlet="hockey_list">
     </ng-container>
   </ng-container>
 </ng-template>
@@ -375,8 +371,7 @@
               </div>
             </div>
 
-            <a class="details-btn"
-              [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+            <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
             <a class="fullblock-link"
               [routerLink]="['/soccer/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
             </a>
@@ -454,8 +449,7 @@
               </div>
             </div>
 
-            <a class="details-btn"
-              [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]"><span>{{ 'widgetModule.details' | translate }}</span></a>
+            <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
             <a class="fullblock-link"
               [routerLink]="['/basketball/match', (match?.id), (match?.home?.alias + '-vs-' +match?.away?.alias)]">
             </a>
@@ -464,7 +458,7 @@
 
           <div class="match-desc text-center">
             <h6>
-              <span class="text-capitalize">{{match?.start_time | date:'h:mm a'}}</span>
+              <span class="text-capitalize">{{match?.scheduled | date:'h:mm a'}}</span>
             </h6>
             <p class="stadium-nm" *ngIf="match?.venue">
               {{match?.venue?.name}}, {{match?.venue?.city}},
@@ -472,6 +466,87 @@
             </p>
             <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
             <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #hockey_list>
+
+  <div class="soccer-tour-list" *ngIf="data.length > 0">
+    <div class="soccer-tour rounded-box common-shadow">
+      <!-- <div class="soccer-tour-title">
+        <p>{{item?.data?.season?.name}}</p>
+      </div> -->
+      <div class="schedule-tour-list">
+        <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"
+          *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
+          <div class="match-teams d-flex align-items-center"
+            *ngIf="match?.sport_event?.competitors[0] && match?.sport_event?.competitors[1]">
+
+            <div class="match-team d-flex align-items-center" *ngIf="match?.sport_event?.competitors[0]">
+              <div class="team-info">
+                <h5
+                  [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == match?.sport_event?.competitors[0].id }">
+                  {{match?.sport_event?.competitors[0]?.name}}
+                </h5>
+              </div>
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="match?.sport_event?.competitors[0].id | logosurl:'hockey'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match?.sport_event?.competitors[0].name}}">
+              </div>
+            </div>
+
+            <!-- For Upcoming Match -->
+            <div class="vs-block" *ngIf="match?.sport_event_status?.status!='closed'">
+              <h6>vs</h6>
+            </div>
+            <!-- For Complete/Result Match -->
+            <div class="score-center-block" *ngIf="match?.sport_event_status?.status == 'closed'">
+              <p>vs</p>
+              <div class="value d-flex justify-content-between">
+                <h4 class="dark-text">
+                  {{match?.sport_event_status?.home_score}}
+                </h4>
+                <h4 class="dark-text">-</h4>
+                <h4 class="dark-text">
+                  {{match?.sport_event_status?.away_score}}
+                </h4>
+              </div>
+            </div>
+
+            <div class="match-team d-flex align-items-center" *ngIf="match?.sport_event?.competitors[1]">
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="match?.sport_event?.competitors[1].id | logosurl:'hockey'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match?.sport_event?.competitors[1].name}}">
+              </div>
+              <div class="team-info">
+                <h5
+                  [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == match?.sport_event?.competitors[1].id }">
+                  {{match?.sport_event?.competitors[1].name}}
+                </h5>
+              </div>
+            </div>
+
+            <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
+            <a class="fullblock-link"
+              [routerLink]="['/hockey/match', (match?.sport_event?.id | splitID), (match?.sport_event?.competitors[0].abbreviation + '-vs-' +match?.sport_event?.competitors[0].abbreviation)]">
+            </a>
+
+          </div>
+
+          <div class="match-desc text-center">
+            <h6>
+              <span class="text-capitalize">{{match?.sport_event?.start_time | date:'h:mm a'}}</span>
+            </h6>
+            <p class="stadium-nm" *ngIf="match?.sport_event?.sport_event_context?.season">
+              {{match?.sport_event?.sport_event_context?.season?.name}}
+            </p>
           </div>
         </div>
       </div>

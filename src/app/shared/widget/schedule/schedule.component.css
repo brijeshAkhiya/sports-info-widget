@@ -129,7 +129,7 @@
     .schedule-item.complete-match .match-teams      { flex-direction: column; -webkit-flex-direction: column; }
     .schedule-tour-list .schedule-item              { padding: 10px 12px; }
     .complete-match .match-teams .match-team:first-child            { text-align: left; justify-content: start; -webkit-justify-content: start; }
-    .complete-match .match-teams .match-team .team-info     { display: flex; flex-grow: 1; -webkit-flex-grow: 1; justify-content: space-between; -webkit-justify-content: space-between;}
+    .complete-match .match-teams .match-team .team-info     { display: flex; display: -webkit-flex; flex-grow: 1; -webkit-flex-grow: 1; justify-content: space-between; -webkit-justify-content: space-between;}
     .complete-match .match-teams .match-team:first-child .team-info     { order: 2; }
     .complete-match .match-teams .match-team                { width: 100%; }
     .match-teams .vs-block h6                       { padding: 2px; }
@@ -141,6 +141,7 @@
     .schedule-item.goal-item .match-teams .match-team:first-child     { text-align: left; justify-content: start; -webkit-justify-content: start; }
     .schedule-item.goal-item .match-teams .match-team .team-info     { margin-top: 5px; text-align: center; }
     .schedule-item.goal-item .match-teams .match-team:first-child .team-info      { order: 2; }
+    .schedule-item.goal-item.complete-match .match-teams .match-team .team-info     { display: block;}
     .schedule-item.goal-item h5                          { font-size: 13px; line-height: 17px; }
 /* -------- Tournament Fixtures For Soccer ------- */
     .soccer-tour-list .soccer-tour              { margin-bottom: 16px; padding: 12px 16px 16px;}

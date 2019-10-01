@@ -37,6 +37,10 @@ const routes: Routes = [
         loadChildren: './modules/racing/racing.module#RacingModule',
     },
     {
+        path: 'hockey',
+        loadChildren: './modules/hockey/hockey.module#HockeyModule',
+    },
+    {
         path: 'blog',
         component: BlogsComponent
     },

@@ -78,7 +78,6 @@ export class AppComponent implements OnInit, AfterContentInit {
         if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
         /*         //set meta tags from here... */
-        /*         // console.log('tagsobj', this.metatagsObj); */
         /*         //set page title */
         let title = this.commonservice.getPagetitlebyurl(event.url);
         if (title != null) {

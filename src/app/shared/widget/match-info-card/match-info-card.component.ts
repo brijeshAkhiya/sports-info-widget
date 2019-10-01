@@ -11,9 +11,6 @@ export class MatchInfoCardComponent implements OnInit {
   @Input() options;
   constructor() { }
 
-  ngOnInit() {
-    console.log('infocard', this.options);
-    console.log('dataaa', this.data);
-  }
+  ngOnInit() { }
 
 }

@@ -1,10 +1,10 @@
-<app-menu [options]="{sport:'Soccer', type :'home'}"></app-menu>
+<app-menu [options]="{sport:sport, type :'home'}"></app-menu>
 <section class="common-section">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
         <div
-          class="common-title-btn soccer-tournaments-title big-title-btn d-flex justify-content-between align-items-center">
+          class="common-title-btn common-tournaments-title big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{'Soccer_Module.Tournaments' | translate}}</h1>
           <form>
             <div class="search-box">
@@ -18,33 +18,33 @@
         <app-no-data-widget *ngIf="tournamentlist?.length == 0"
           [message]="('Soccer_Module.No_tournaments_data_available' | translate)">
         </app-no-data-widget>
-        <div class="row no-gutters soccer-tournaments-list common-round common-shadow"
+        <div class="row no-gutters common-tournaments-list common-round common-shadow"
           *ngIf="tournamentlist?.length > 0">
           <div class="col-xl-6 col-lg-12 col-md-6 item fullblock-link-container"
             *ngFor="let tournament of (tournamentlist | filter : searchText)">
             <h6 class="one-line-text">
               <a
-                [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">{{tournament?.name}}</a>
+                [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament.id | splitID),(tournament.name | slugify)]">{{tournament?.name}}</a>
             </h6>
             <ul class="no-margin light-text">
               <li><a
-                  [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">Home</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament.id | splitID),(tournament.name | slugify)]">Home</a>
               </li>
               <li><a
-                  [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a>
               </li>
               <li><a
-                  [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">Clubs</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">Clubs</a>
               </li>
               <li><a
-                  [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">Stats</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">Stats</a>
               </li>
               <li><a
-                  [routerLink]="['/soccer/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">Table</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">Table</a>
               </li>
             </ul>
             <a class="fullblock-link"
-              [routerLink]="['/soccer/tournament',(tournament.id | splitID),(tournament.name | slugify)]">
+              [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament.id | splitID),(tournament.name | slugify)]">
             </a>
           </div>
         </div>

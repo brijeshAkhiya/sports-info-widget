@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CommonService } from "@providers/common-service";
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { CommonService } from '@providers/common-service';
 import * as moment from 'moment';
 
 @Component({
@@ -7,11 +7,11 @@ import * as moment from 'moment';
   templateUrl: './countdown.component.html',
   styleUrls: ['./countdown.component.css']
 })
-export class CountdownComponent implements OnInit {
+export class CountdownComponent implements OnInit, OnDestroy {
 
   @Input() scheduled;
   @Input() sport;
-  matchstartedcase: boolean = false;
+  matchstartedcase = false;
   remainingTime: any;
   interval;
 
@@ -21,37 +21,34 @@ export class CountdownComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.sport);
-    
+
     let starttime;
     if (this.sport == 'kabaddi') {
-      this.scheduled = moment.utc((this.scheduled)).format()
-      this.scheduled = this.scheduled.replace(/\s/g, "T");
+      this.scheduled = moment.utc((this.scheduled)).format();
+      this.scheduled = this.scheduled.replace(/\s/g, 'T');
       starttime = new Date(this.scheduled).getTime();
-    }
-    else {
-      this.scheduled = this.scheduled.replace(/\s/g, "T");
+    } else {
+      this.scheduled = this.scheduled.replace(/\s/g, 'T');
       starttime = new Date(this.scheduled).getTime();
     }
     let currenttime = new Date().getTime();
 
     if (currenttime > starttime) {
       this.matchstartedcase = true;
-    }
-    else {
+    } else {
       this.interval = setInterval(() => {
-        this.remainingTime = this.commonService.getRemainigTimeofMatch(this.scheduled)
+        this.remainingTime = this.commonService.getRemainigTimeofMatch(this.scheduled);
         if (this.remainingTime.days.toString().length == 1) {
-          this.remainingTime.days = "0" + this.remainingTime.days
+          this.remainingTime.days = '0' + this.remainingTime.days;
         }
         if (this.remainingTime.hours != 0 && this.remainingTime.hours.toString().length == 1) {
-          this.remainingTime.hours = "0" + this.remainingTime.hours
+          this.remainingTime.hours = '0' + this.remainingTime.hours;
         }
         if (this.remainingTime.minutes != 0 && this.remainingTime.minutes.toString().length == 1) {
-          this.remainingTime.minutes = "0" + this.remainingTime.minutes
+          this.remainingTime.minutes = '0' + this.remainingTime.minutes;
         }
         if (this.remainingTime.seconds.toString().length == 1) {
-          this.remainingTime.seconds = "0" + this.remainingTime.seconds
+          this.remainingTime.seconds = '0' + this.remainingTime.seconds;
         }
         if (this.remainingTime.days == 0 && this.remainingTime.hours == 0 && this.remainingTime.minutes == 0 && this.remainingTime.seconds == 0)
           this.clear();
