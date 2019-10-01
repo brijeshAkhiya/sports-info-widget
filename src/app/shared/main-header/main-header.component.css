@@ -146,11 +146,11 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     .navbar-nav-container                               { left: 0px;}
     .navbar-collapse.collapse                           { display: block !important; position: absolute; top: 100%; left: 0%; max-height: 0; width: 100%; background: #1B2A5A; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; text-align: center; overflow: hidden; }
     .menu-open .navbar-collapse.collapse                { left: 0%; height: auto; max-height: 100vh; }
-    .navbar .navbar-collapse .navbar-nav                { padding: 16px 0px; }
+    .navbar .navbar-collapse .navbar-nav                { padding: 16px 0px; min-height: 100vh; }
     .navbar .navbar-nav .nav-link                       { padding: 8px 30px; }
     .login-search                                       { margin: 0px 50px 0px 0px; flex-direction: row; -webkit-flex-direction: row; }
     .login-search > li > a                              { margin: 0px 6px; width: 24px; height: 24px; }
-    .login-search li .dropdown-menu                     { margin-top: 14px; }
+    .login-search li .dropdown-menu                     { margin-top: 10px; }
 
     /* .login-search > li > a                                  { margin: 8px 30px;}
     .login-search li .dropdown-menu                     { margin-left: 30px; min-width: 180px; right: auto !important; left: 0px !important; } */
@@ -171,6 +171,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 /* -------- Navbar CSS ------- */
     nav .navbar-brand:before                            { right: -22px; transform: skewX(20deg) perspective(1200px); -webkit-transform: skewX(20deg) perspective(1200px); border-radius: 0px 18px 0px 0px; }
     nav .navbar-brand img                               { max-width: 113px; }
+    .login-search li .dropdown-menu                     { margin-top: 8px; }
 /* -------- Serch Box CSS ------- */
     .search-bar input                               { font-size: 16px; line-height: 20px; }
     .search-result .common-title-btn h3             { font-size: 18px; }
