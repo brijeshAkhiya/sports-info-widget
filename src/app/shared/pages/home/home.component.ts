@@ -21,12 +21,16 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     const data: any = this.activatedRoute.data;
     this.params = data.value;
+    let title = this.params.sport;
+    if (this.params.sport == 'Basketball')
+      title = 'NBA';
     this.options = {
       reqParams:
         { eSport: this.params.sport },
-      title: this.translateservice.get(this.params.sport)['value'],
+      title: this.translateservice.get(title)['value'],
       type: 'sport'
     };
     if (this.activatedRoute.snapshot.params.id)
