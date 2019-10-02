@@ -7,7 +7,8 @@ import {
   ChangeDetectorRef,
   AfterViewInit,
   HostListener,
-  ViewEncapsulation
+  ViewEncapsulation,
+  OnDestroy
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -30,7 +31,7 @@ import { CommonService } from '@providers/common-service';
   styleUrls: ['./main-header.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class MainHeaderComponent implements OnInit, AfterViewInit {
+export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('navbarcontainer') navbarcontainer;
   @ViewChild('navbarButton') navbarButton;
   @ViewChild('navpointer') navpointer: ElementRef;
@@ -46,6 +47,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
   public windowinnerWidth: any;
   isopen: boolean = false;
   currentSite;
+  keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
 
   sportsMenu = [
     { title: 'Cricket', link: '/cricket' },
@@ -223,6 +225,57 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
         localStorage.removeItem('userId');
       }
     });
+  }
+
+
+  preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault)
+      e.preventDefault();
+    e.returnValue = false;
+  }
+
+  preventDefaultForScrollKeys(e) {
+    if (this.keys[e.keyCode]) {
+      this.preventDefault(e);
+      return false;
+    }
+  }
+
+  disableScroll() {
+    if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', this.preventDefault, false);
+    document.addEventListener('wheel', this.preventDefault, { passive: false }); // Disable scrolling in Chrome
+    window.onwheel = this.preventDefault; // modern standard
+    window.onmousewheel = document['onmousewheel'] = this.preventDefault; // older browsers, IE
+    window.ontouchmove = this.preventDefault; // mobile
+    document.onkeydown = this.preventDefaultForScrollKeys;
+  }
+
+  enableScroll() {
+    if (window.removeEventListener)
+      window.removeEventListener('DOMMouseScroll', this.preventDefault, false);
+    document.removeEventListener('wheel', this.preventDefault); // Enable scrolling in Chrome
+    window.onmousewheel = document['onmousewheel'] = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
+  }
+
+  openMenu() {
+    this.isapply = !this.isapply;
+    console.log(this.isapply)
+    if (this.isapply)
+      this.disableScroll();
+    else
+      this.enableScroll();
+  }
+  onRedirect() {
+    this.isapply = false;
+    this.enableScroll();
+  }
+  ngOnDestroy() {
+    this.enableScroll();
   }
 }
 
