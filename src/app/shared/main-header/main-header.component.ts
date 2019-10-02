@@ -201,6 +201,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.issearch = false;
       this.renderer2.removeClass(document.body, 'search-box-open');
     }
+
+    
   }
   openmodal() {
     this.modalService.open(LoginModalComponent);
