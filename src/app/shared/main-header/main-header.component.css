@@ -131,7 +131,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 
 @media (max-width: 767px) {
 /* -------- Navbar CSS ------- */
-    nav.navbar.menu-open                                { overflow: visible; z-index: 1113;}
+    nav.navbar.menu-open                                { overflow: visible; z-index: 1115;}
     nav .navbar-brand                                   { margin-right: 24px; padding: 3px 4px 3px 16px;}
     nav .navbar-brand:before                            { right: -28px; }
     nav .navbar-brand img                               { max-width: 126px; }
@@ -144,11 +144,10 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     nav .navbar-toggler.active .icon-bar:nth-child(1),
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
     .navbar-nav-container                               { left: 0px; min-height: 100vh;}
-    .navbar-collapse.collapse                           { display: block !important; position: absolute; top: 100%; left: 0%; max-height: 0; width: 100%; background: #ED1A33; z-index: 1111; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; text-align: center; overflow: hidden; }
-    .submenu-open .navbar-collapse.collapse             { transform: translateY(43px); -webkit-transform: translateY(43px); }    
+    .navbar-collapse.collapse                           { display: block !important; position: absolute; top: 100%; left: 0%; max-height: 0; width: 100%; background: #1B2A5A; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; text-align: center; overflow: hidden; }
+    /* .submenu-open .navbar-collapse.collapse             { transform: translateY(43px); -webkit-transform: translateY(43px); }     */
     .menu-open .navbar-collapse.collapse                { left: 0%; height: auto; max-height: 100vh; }
-    .navbar .navbar-collapse .navbar-nav                { padding: 9px 0px; min-height: 54vh; justify-content: space-between; -webkit-justify-content: space-between;}
-    .navbar .navbar-nav .nav-item                       { }
+    .navbar .navbar-collapse .navbar-nav                { padding: 9px 0px; min-height: 46vh; justify-content: space-between; -webkit-justify-content: space-between;}
     .navbar .navbar-nav .nav-link                       { padding: 9px 30px; opacity: 0.6; }
     .login-search                                       { margin: 0px 50px 0px 0px; flex-direction: row; -webkit-flex-direction: row; }
     .login-search > li > a                              { margin: 0px 6px; width: 24px; height: 24px; }
@@ -174,7 +173,8 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     nav .navbar-brand:before                            { right: -22px; transform: skewX(20deg) perspective(1200px); -webkit-transform: skewX(20deg) perspective(1200px); border-radius: 0px 18px 0px 0px; }
     nav .navbar-brand img                               { max-width: 113px; }
     .login-search li .dropdown-menu                     { margin-top: 8px; }
-    .submenu-open .navbar-collapse.collapse             { transform: translateY(41px); -webkit-transform: translateY(41px); }
+    /* .submenu-open .navbar-collapse.collapse             { transform: translateY(41px); -webkit-transform: translateY(41px); } */
+    .navbar .navbar-collapse .navbar-nav                { min-height: 54vh; }
 /* -------- Serch Box CSS ------- */
     .search-bar input                               { font-size: 16px; line-height: 20px; }
     .search-result .common-title-btn h3             { font-size: 18px; }
