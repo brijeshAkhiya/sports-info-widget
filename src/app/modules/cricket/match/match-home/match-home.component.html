@@ -255,7 +255,7 @@
                 values : [
                 matchdata.sport_event.competitors[0].name + ' ' +  'VS'  + ' ' + matchdata.sport_event.competitors[1].name,
                 matchdata.sport_event.season ? matchdata.sport_event.season.name : matchdata.sport_event.tournament.name,
-                tossdecision.toss_won_by_team + ('widgetModule.opt_to' | translate) + (tossdecision.toss_decision ? tossdecision.toss_decision : 'bat'),
+                tossdecision.toss_won_by_team + ' ' +('widgetModule.opt_to' | translate) + ' ' + (tossdecision.toss_decision ? tossdecision.toss_decision : 'bat'),
                 (matchdata.sport_event_conditions.weather_info.weather_conditions | stringunder),
                 (matchdata.sport_event_conditions.pitch_info.pitch_conditions | stringunder),
                 (matchdata.sport_event_conditions?.outfield_info?.outfield_conditions | stringunder),                
