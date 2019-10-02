@@ -53,7 +53,8 @@ app-player-table:last-child .player-state { margin-bottom: 0px; }
     .player-profile .player-info,
     .player-profile                         { flex-direction: column; -webkit-flex-direction: column; }
     .player-profile .player-info            { margin-left: 0px; margin-top: 16px;}
-    .player-profile .info-col:first-child p:last-child { margin-bottom: 12px; }
+    .player-profile .info-item:last-child p:last-child      { margin-bottom: 12px; }
+    .player-profile .info-col:last-child .info-item:last-child p:last-child      { margin-bottom: 0px; }
     .quick-stats .stat-item                 { padding: 10px 15px; }
     .quick-stats .stat-item:after           { height: 4px; }
 /* -- Arabic CSS -- */

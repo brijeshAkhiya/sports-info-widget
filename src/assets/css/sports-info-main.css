@@ -315,14 +315,14 @@ app-custom-ads-widget:last-child    { margin-bottom: 0px;}
 /* Sorting Style */
 .common-table .table th.sort-table,
 .common-table .table td.sort-table         { position: relative;}
-.common-table .table th.sort-table         { color: #14AE2D; cursor: pointer;}
-.common-table .table th.sort-table.table-desc { color: #ED1A33; }
+.common-table .table th.sort-table         { color: #ED1A33; cursor: pointer;}
+.common-table .table th.sort-table.table-desc { color: #14AE2D; }
 .common-table .table th.sort-table:after,
-.common-table .table td.sort-table:after   { content: ""; display: block; position: absolute; width: 100%; left: 0; background: #14AE2D; }
+.common-table .table td.sort-table:after   { content: ""; display: block; position: absolute; width: 100%; left: 0; background: #ED1A33; }
 .common-table .table th.sort-table:after   { height: 3px; bottom: 0;  }
 .common-table .table td.sort-table:after   { height: 100%; top: 0; opacity: 0.05; }
 .common-table .table th.sort-table.table-desc:after,
-.common-table .table td.sort-table.table-desc:after   { background: #ED1A33; }
+.common-table .table td.sort-table.table-desc:after   { background: #14AE2D; }
 
 app-player-table .common-table              { margin-bottom: 24px; }
 app-player-table:last-child .common-table   { margin-bottom: 0px; }

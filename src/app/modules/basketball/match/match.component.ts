@@ -11,7 +11,7 @@ import { CommonService } from '@providers/common-service';
 })
 export class MatchComponent implements OnInit {
 
-  paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'basketball', aIds: [] } };
+  paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [] } };
   loading = false;
   matchInfo;
   boxScoreParams = { loading: false };

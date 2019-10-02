@@ -152,7 +152,12 @@
       {{item | arrToString: value}}
     </td>
     <ng-template #link>
-      <td>
+      <td *ngIf="options.type == 'no_image'">
+        <a [routerLink]="item.sr_id ? ['/basketball/player', (item.sr_id | splitID), (item.full_name | slugify)] : ''">
+          {{ item.full_name}}
+        </a>
+      </td>
+      <td *ngIf="options.type != 'no_image'">
         <a *ngIf="item['sr_id']; else playerID"
           [routerLink]="value == 'full_name' ? ['/basketball/player', (item.sr_id | splitID), (item.full_name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item.sr_id | splitID) | logosurl:'basketball'"

@@ -127,10 +127,10 @@
 
                   <div class="row">
                     <div class="col-lg-12">
-                      <p class="result-line" *ngIf="slide.match_status == 'live'">
-                        {{slide.venue_name ? slide.venue_name : ''}}</p>
-                      <p class="result-line" *ngIf="slide.match_status != 'live'">
-                        {{slide.match_result ? slide.match_result : slide.venue_name}}</p>
+                      <p class="result-line" *ngIf="slide.match_status == 'live' || !slide.match_result"
+                        [innerHTML]="slide?.venue_name"></p>
+                      <p class="result-line" *ngIf="slide.match_status != 'live' && slide.match_result">
+                        {{ slide.match_result}}</p>
                     </div>
                   </div>
                   <a class="fullblock-link"
