@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-md" id="navbar" [ngClass]="{'menu-open': isapply}" (scroll)="onWindowScroll($event);">
   <a class="navbar-brand" routerLink="/"><img src="/assets/images/logo_v2.svg" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    [ngClass]="{'active': isapply}" (click)="isapply = !isapply" aria-controls="navbarSupportedContent" #navbarButton
+    [ngClass]="{'active': isapply}" (click)="openMenu()" aria-controls="navbarSupportedContent" #navbarButton
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -16,7 +16,7 @@
       <ul class="navbar-nav" #navbarnav>
         <li class="nav-item" *ngFor="let menuItem of sportsMenu">
           <a class="nav-link" routerLink="{{menuItem.link}}" routerLinkActive="active"
-            (click)="isapply = false">{{menuItem.title | translate}}</a>
+            (click)="onRedirect();">{{menuItem.title | translate}}</a>
         </li>
       </ul>
     </div>
