@@ -97,7 +97,9 @@
 @media (max-width: 575px) {
     .team-about-head                            { flex-direction: column; -webkit-flex-direction: column; }
     .team-about-head .team-logo                 { margin-bottom: 8px; }
-    .team-about-head .team-info                 { margin-left: 0px; }
+    .team-about-head .team-info                 { margin-left: 0px; flex-direction: column; -webkit-flex-direction: column; }
+    .team-about-head .info-item:last-child                          { margin-bottom: 16px; }
+    .team-about-head .info-col:last-child .info-item:last-child     { margin-bottom: 0; }
     .team-about-head .match-result li           { margin-bottom: 8px; font-size: 11px; }
 /* -------- Squad List ------- */
     .squad-list .row-size12                     { justify-content: space-evenly; -webkit-justify-content: space-evenly; }
