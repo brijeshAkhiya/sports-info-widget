@@ -24,13 +24,13 @@ export class MenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    document.getElementById('main-body').classList.add('submenu-open');
     if (typeof this.options !== 'undefined') {
       if (this.options.sport === 'Cricket') {
         this.getCricketSeries();
       }
     }
   }
-
   responsiveSticky(value) {
     const element = document.getElementById('sub-navabar');
     const bodyelement = document.getElementById('main-body');
@@ -53,6 +53,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     const bodyelement = document.getElementById('main-body');
     if (bodyelement != null) bodyelement.classList.remove('sticky-submenu');
+    bodyelement.classList.remove('submenu-open');
   }
   /* get current cricket series  */
   getCricketSeries() {

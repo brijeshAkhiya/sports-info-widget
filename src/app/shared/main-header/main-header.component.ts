@@ -52,7 +52,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit {
     { title: 'Kabaddi', link: '/kabaddi' },
     { title: 'Soccer', link: '/soccer' },
     { title: 'Basketball', link: '/basketball' },
-    { title: 'Field Hockey', link: '/hockey' },
+    { title: 'Field Hockey', link: '/coming-soon/hockey' },
     { title: 'Badminton', link: '/coming-soon/badminton' },
     { title: 'Racing', link: '/coming-soon/racing' },
     { title: 'Tennis sports', link: '/coming-soon/tennis-sports' },

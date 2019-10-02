@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { SportsService } from '@providers/sports-service'
+import { SportsService } from '@providers/sports-service';
 
 @Component({
   selector: 'app-sidebar-links',
@@ -31,15 +31,15 @@ export class SidebarLinksComponent implements OnInit {
     }
   }
 
-  //get recent posts
+  // get recent posts
   getRecentPosts() {
-    this.sportsService.getrecentpost({ eType: "", nLimit: 10 }).subscribe((res: any) => {
+    this.sportsService.getrecentpost({ eType: '', nLimit: 10 }).subscribe((res: any) => {
       if (res.data) {
         this.data = res.data;
       }
     });
   }
-  //get current cricket series
+  // get current cricket series
   getCurrentSeries() {
     this.sportsService.getcurrentseries().subscribe((res: any) => {
       if (res.data) {
@@ -48,7 +48,7 @@ export class SidebarLinksComponent implements OnInit {
     });
   }
 
-  //get popular cricket tags
+  // get popular cricket tags
   getPopularTags() {
     this.sportsService.getpopulartags(this.options.reqParams).subscribe((res: any) => {
       if (res.data) {
@@ -57,13 +57,13 @@ export class SidebarLinksComponent implements OnInit {
     });
   }
 
-  //get soccer current tournament 
+  // get soccer current tournament
   getSoccerCurrentTournament() {
     this.sportsService.getSoccerTournamentList().subscribe((res: any) => {
       if (res.data) {
-        this.data = res.data
+        this.data = res.data;
       }
-    })
+    });
   }
 
 }
