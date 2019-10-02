@@ -28,19 +28,19 @@
             </h6>
             <ul class="no-margin light-text">
               <li><a
-                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament.id | splitID),(tournament.name | slugify)]">Home</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament.id | splitID),(tournament.name | slugify)]">{{'widgetModule.Home' | translate }}</a>
               </li>
               <li><a
-                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">Fixtures</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">{{'widgetModule.Fixtures' | translate }}</a>
               </li>
               <li><a
-                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">Clubs</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">{{'Soccer_Module.Clubs' | translate }}</a>
               </li>
               <li><a
-                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">Stats</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">{{'widgetModule.Stats' | translate }}</a>
               </li>
               <li><a
-                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">Table</a>
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">{{'widgetModule.Table' | translate }}</a>
               </li>
             </ul>
             <a class="fullblock-link"

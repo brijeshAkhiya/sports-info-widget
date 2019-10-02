@@ -61,9 +61,10 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   langauges = [
-    { title: 'English', link: 'https://www.sports.info/' },
-    { title: 'Bengali', link: 'https://bengali.sports.info/' },
-    { title: 'Hindi', link: 'https://hindi.sports.info/' },
+    { title: 'local', link: 'http://192.168.11.31:4200' },
+    { title: 'English', link: 'https://www.sports.info' },
+    { title: 'Bengali', link: 'https://bengali.sports.info' },
+    { title: 'Hindi', link: 'https://hindi.sports.info' },
     // { title: 'Gujarati', link: 'https://gujarati.sports.info' },
     // { title: 'Marathi', link: 'https://marathi.sports.info' },
     // { title: 'Telugu', link: 'https://telugu.sports.info' },
@@ -244,27 +245,31 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   disableScroll() {
     if (window.addEventListener) // older FF
-      window.addEventListener('DOMMouseScroll', this.preventDefault, false);
+      window.addEventListener('DOMMouseScroll', this.preventDefault, { passive: false });
     document.addEventListener('wheel', this.preventDefault, { passive: false }); // Disable scrolling in Chrome
-    window.onwheel = this.preventDefault; // modern standard
-    window.onmousewheel = document['onmousewheel'] = this.preventDefault; // older browsers, IE
-    window.ontouchmove = this.preventDefault; // mobile
-    document.onkeydown = this.preventDefaultForScrollKeys;
+    // window.onwheel = this.preventDefault; // modern standard
+    // window.onmousewheel = document['onmousewheel'] = this.preventDefault; // older browsers, IE
+
+    document.addEventListener('touchmove', this.preventDefault, { passive: false });
+    // document.addEventListener('touchstart', function (e) { e.preventDefault(); }, { passive: false });
+    // window.ontouchmove = this.preventDefault; // mobile
+    // document.onkeydown = this.preventDefaultForScrollKeys;
   }
 
   enableScroll() {
     if (window.removeEventListener)
       window.removeEventListener('DOMMouseScroll', this.preventDefault, false);
     document.removeEventListener('wheel', this.preventDefault); // Enable scrolling in Chrome
-    window.onmousewheel = document['onmousewheel'] = null;
-    window.onwheel = null;
-    window.ontouchmove = null;
-    document.onkeydown = null;
+    document.removeEventListener('touchmove', this.preventDefault, false);
+    // window.onmousewheel = document['onmousewheel'] = null;
+    // window.onwheel = null;
+    // window.ontouchmove = null;
+    // document.onkeydown = null;
+
   }
 
   openMenu() {
     this.isapply = !this.isapply;
-    console.log(this.isapply)
     if (this.isapply)
       this.disableScroll();
     else

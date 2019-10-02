@@ -11,14 +11,14 @@ export class ComingSoonComponent implements OnInit {
   lottieConfig: any;
   sport: any;
   images = {
-    'kabaddi' : 'assets/images/coming-soon/kabaddi.jpg',
-    'soccer' :'assets/images/coming-soon/football.jpg',
-    'badminton' : 'assets/images/coming-soon/badminton.jpg',
-    'basketball' : 'assets/images/coming-soon/basketball.jpg',
-    'field-Hockey' : 'assets/images/coming-soon/hockey.jpg',
-    'racing' : 'assets/images/coming-soon/racing.jpg',
-    'tennis-sports' : 'assets/images/coming-soon/tennis.jpg',
-  }
+    'kabaddi': 'assets/images/coming-soon/kabaddi.jpg',
+    'soccer': 'assets/images/coming-soon/football.jpg',
+    'badminton': 'assets/images/coming-soon/badminton.jpg',
+    'basketball': 'assets/images/coming-soon/basketball.jpg',
+    'hockey': 'assets/images/coming-soon/hockey.jpg',
+    'racing': 'assets/images/coming-soon/racing.jpg',
+    'tennis-sports': 'assets/images/coming-soon/tennis.jpg',
+  };
 
   constructor(private activatedroute: ActivatedRoute) {
     this.lottieConfig = {
