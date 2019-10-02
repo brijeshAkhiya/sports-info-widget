@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, OnChanges } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,7 +11,7 @@ import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
   styleUrls: ['./points-table.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PointsTableComponent implements OnInit {
+export class PointsTableComponent implements OnInit,OnChanges {
 
   @Input() sport;
   @Input() options;
@@ -31,8 +31,13 @@ export class PointsTableComponent implements OnInit {
     private translateService: TranslateService,
     public ArrToStringPipe: ArrToStringPipe
   ) { }
-
+  ngOnChanges() {
+    // this.object = this.options.values[0];
+    // this.value = this.options.titles[0];
+    this.sorting = 'ASC';
+  }
   ngOnInit() {
+  
     if (this.sport == 'Cricket') {
       this.loadCricketPoints();
       this.data = {
@@ -64,6 +69,7 @@ export class PointsTableComponent implements OnInit {
 
       };
     }
+
   }
 
   loadCricketPoints() {
@@ -111,12 +117,13 @@ export class PointsTableComponent implements OnInit {
       }
     });
   }
-  
-  sortArray() {
+
+sortArray() {
     if (this.prevstate === this.object) {
     } else {
       this.sorting = 'ASC';
     }
+
     if (this.object.includes('.')) {
       let filterPipe = new ArrToStringPipe();
       if (this.sorting == 'DESC') {
