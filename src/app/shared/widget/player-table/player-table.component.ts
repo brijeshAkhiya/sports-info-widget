@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, Renderer, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Renderer, ViewEncapsulation, OnChanges } from '@angular/core';
 import { CommonService } from '@providers/common-service';
 import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
 
@@ -9,7 +9,7 @@ import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
   styleUrls: ['./player-table.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PlayerTableComponent implements OnInit {
+export class PlayerTableComponent implements OnInit,OnChanges {
 
   @Input() data: any[];
   @Input() options;
@@ -25,7 +25,14 @@ export class PlayerTableComponent implements OnInit {
     private commonService: CommonService, public ArrToStringPipe:ArrToStringPipe
    ) { }
 
+   ngOnChanges() {
+     this.object = this.options.values[0];
+     this.value = this.options.titles[0];
+     this.sorting = 'ASC';
+   }
   ngOnInit() {
+
+
   }
 
   getname(event) {
@@ -49,6 +56,8 @@ export class PlayerTableComponent implements OnInit {
     } else {
       this.sorting = 'ASC';
     }
+    console.log(this.sorting);
+    console.log(this.data);
     if (this.object.includes('.')) {
       let filterPipe = new ArrToStringPipe();
       if (this.sorting == 'DESC') {
