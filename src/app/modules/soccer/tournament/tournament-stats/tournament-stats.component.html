@@ -18,6 +18,7 @@
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Goals' | translate)],
+                          sort : [true,false,true],
                           values : ['rank','name','value'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -33,6 +34,7 @@
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Assists' | translate)],
+                          sort : [true,false,true],
                           values : ['rank','name','value'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -48,6 +50,7 @@
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Red_cards' | translate),('Soccer_Module.Yellow_cards' | translate)],
+                          sort : [true,false,false,true],
                           values : ['rank','name','red_cards','yellow_cards'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -63,6 +66,7 @@
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Assists' | translate)],
+                          sort : [true,false,true],
                           values : ['rank','name','value'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']

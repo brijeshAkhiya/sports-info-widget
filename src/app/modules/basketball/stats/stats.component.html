@@ -46,6 +46,7 @@
         <app-player-table *ngIf="stats?.length > 0 && !isloading " [data]="stats" [options]=" {
               sport:'Basketball',
               titles : ['Rank',('Cricket_Module2.player' | translate),'GP','MIN','PTS','REB','OREB','DREB','AST','STL','BLK','TO','PF','PER'],
+              sort : [true,false,true,true,true,true,true,true,true,true,true,true,true,true],
               values : ['rank','full_name', 'total.games_played', 'total.minutes', 'total.points', 'total.rebounds', 'total.offensive_rebounds', 'total.defensive_rebounds', 'total.assists', 'total.steals', 'total.blocks', 'total.turnovers', 'total.personal_fouls', 'total.efficiency'],
               class : ['nba-table tour-stats-table'],
               tbl_type:'stats'
