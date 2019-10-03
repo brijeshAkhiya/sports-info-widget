@@ -32,6 +32,7 @@
     </li>
 
     <li><a class="search" [ngClass]="{'active': issearch}" (click)="searchopen()" #searchOpen></a></li>
+    <!-- <li><a class="search" [ngClass]="{'active': issearch}"></a></li> -->
     <li *ngIf="!isLogin">
       <a class="login" (click)="openmodal()"></a>
     </li>

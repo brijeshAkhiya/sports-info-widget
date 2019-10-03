@@ -1,6 +1,6 @@
 
 /* -------- Serch Box CSS ------- */
-.common-serch-box               { z-index: -112; opacity: 0; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.common-serch-box               { z-index: -112; opacity: 0; position: absolute; width: 100%; min-height: calc(100vh - 10px); background: rgba(27, 42, 90, 0.9); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .common-serch-box.show          { z-index: 112; opacity: 1; }
 .search-bar                     { padding: 48px 0px; background: #fff; text-align: center; transform: translateY(-100%); -webkit-transform: translateY(-100%); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .common-serch-box.show .search-bar              { transform: translateY(0%); -webkit-transform: translateY(0%); }

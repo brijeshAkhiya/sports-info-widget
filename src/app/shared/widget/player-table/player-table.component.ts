@@ -9,7 +9,7 @@ import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
   styleUrls: ['./player-table.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PlayerTableComponent implements OnInit,OnChanges {
+export class PlayerTableComponent implements OnInit, OnChanges {
 
   @Input() data: any[];
   @Input() options;
@@ -18,15 +18,16 @@ export class PlayerTableComponent implements OnInit,OnChanges {
   object: any;
   value: any;
   sort: any;
-  sorting ='ASC';
+  sorting = 'ASC';
   prevstate: any;
   data1: any[];
   optionval: any[];
   arr=[{'name':'','sort':''}];
 
   constructor(
-    private commonService: CommonService, public ArrToStringPipe:ArrToStringPipe
-   ) { }
+    private commonService: CommonService,
+    public arrToStringPipe: ArrToStringPipe
+  ) { }
 
    ngOnChanges() {
      if (this.options.values[0] !== 'index') {
@@ -80,6 +81,6 @@ export class PlayerTableComponent implements OnInit,OnChanges {
         this.sorting = 'DESC';
       }
     }
-    }
+  }
 
 }

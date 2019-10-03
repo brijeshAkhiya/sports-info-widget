@@ -11,7 +11,7 @@ import { ArrToStringPipe } from '@app/shared/pipes/arr-to-string.pipe';
   styleUrls: ['./points-table.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PointsTableComponent implements OnInit,OnChanges {
+export class PointsTableComponent implements OnInit, OnChanges {
 
   @Input() sport;
   @Input() options;
@@ -37,7 +37,10 @@ export class PointsTableComponent implements OnInit,OnChanges {
     this.sorting = 'ASC';
   }
   ngOnInit() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6103cface01740bea4465a55ce5c7c2b75443078
     if (this.sport == 'Cricket') {
       this.loadCricketPoints();
       this.data = {
@@ -118,10 +121,7 @@ export class PointsTableComponent implements OnInit,OnChanges {
     });
   }
 
-sortArray() {
-  console.log(this.data);
-  console.log(this.sport);
-  
+  sortArray() {
     if (this.prevstate === this.object) {
     } else {
       this.sorting = 'ASC';
