@@ -17,6 +17,7 @@
               <app-player-table *ngIf="stats?.length > 0 " [data]="stats" [options]=" {
                           sport:sport,
                           titles : ['POS', ('Cricket_Module2.player' | translate),('widgetModule.points' | translate)],
+                          sort : [false, false, true],
                           values : ['pid', 'name', 'totalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -32,6 +33,7 @@
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]="{
                           sport:sport,
                           titles : ['POS', ('Cricket_Module2.player' | translate), ('Kabaddi_Module2.Successfull_raids' | translate),('Kabaddi_Module2.Super_Raids' | translate),('Kabaddi_Module2.Raids_Points' | translate)],
+                          sort : [false, false, true,true,true],
                           values : ['pid', 'name', 'raidsuccessful','superraid','raidtotalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -47,6 +49,7 @@
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
                           sport:sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Kabaddi_Module2.Successfull_tackles' | translate),('Kabaddi_Module2.Super_Tackles' | translate),('Kabaddi_Module2.Tackle_Points' | translate)],
+                        sort : [false, false, true,true,true],
                           values : ['pid', 'name', 'tacklesuccessful','supertackles','tackletotalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']
@@ -62,6 +65,7 @@
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
                             sport:sport,
                             titles : ['POS', ('Cricket_Module2.player' | translate), ('Kabaddi_Module2.Green' | translate) ,('Kabaddi_Module2.Yellow' | translate) , ('Kabaddi_Module2.Red' | translate)],
+                          sort : [false, false, true ,true,true],
                             values : ['pid', 'name', 'greencard' , 'yellowcard' ,'redcard'],
                             class : ['tour-stats-table'],
                             class_light_row : ['light-row']

@@ -37,7 +37,7 @@ export class PointsTableComponent implements OnInit,OnChanges {
     this.sorting = 'ASC';
   }
   ngOnInit() {
-  
+
     if (this.sport == 'Cricket') {
       this.loadCricketPoints();
       this.data = {
@@ -119,6 +119,9 @@ export class PointsTableComponent implements OnInit,OnChanges {
   }
 
 sortArray() {
+  console.log(this.data);
+  console.log(this.sport);
+  
     if (this.prevstate === this.object) {
     } else {
       this.sorting = 'ASC';

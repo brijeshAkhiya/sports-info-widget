@@ -16,6 +16,7 @@ export class TournamentStadingsComponent implements OnInit {
   options = {
     sport: 'Cricket',
     titles: ['POS', this.translateService.get('Shared_Module2.TEAM')['value'], 'M', 'W', 'L', 'D', 'N/R', 'P', 'NRR'],
+    sort: [true, false, true, true, true, true, true, true, true],
     values: ['rank', 'image', 'played', 'win', 'loss', 'draw', 'no_result', 'points', 'net_run_rate'],
     image_type: 'team',
     class: 'tour-stand-table',

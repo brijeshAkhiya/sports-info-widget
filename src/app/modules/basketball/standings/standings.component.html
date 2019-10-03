@@ -40,6 +40,7 @@
               <app-player-table *ngIf="standings?.teams?.length > 0 " [data]="standings?.teams" [options]=" {
                   sport:'Basketball',
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
+                  sort : [false, false,true, true, true, true, false, false,false,false, true, true,true, false, false],
                   values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_league', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                   class : ['nba-table tour-stand-table'],
                   tbl_type:'standing'
@@ -58,7 +59,9 @@
                 <ng-container *ngFor="let conference of standings?.conferences">
                   <h4 class="nba-table-title">{{conference.name}}</h4>
                   <app-player-table *ngIf="conference?.teams?.length > 0" [data]="conference?.teams" [options]=" {
-                          sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
+                          sport:'Basketball', 
+                          titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
+                          sort : [false, false,true, true, true, true, false, false,false,false, true, true,true, false, false],
                           values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                           class : ['nba-table tour-stand-table'],
                           tbl_type:'standing'
@@ -80,7 +83,9 @@
                 <ng-container *ngFor="let divisions of standings?.divisions">
                   <h4 class="nba-table-title">{{divisions.name}}</h4>
                   <app-player-table *ngIf="divisions?.teams?.length > 0" [data]="divisions?.teams" [options]=" {
-                              sport:'Basketball', titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
+                              sport:'Basketball', 
+                              titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
+                              sort : [false, false,true, true, true, true, false, false,false,false, true, true,true, false, false],
                               values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                               class : ['nba-table tour-stand-table'],
                               tbl_type:'standing'
