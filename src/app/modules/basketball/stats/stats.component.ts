@@ -24,6 +24,7 @@ export class StatsComponent implements OnInit {
 
   getTournamentStats() {
     this.isloading = true;
+    this.stats = [];
     this.sportsService.getBasketballstats(this.filter.year, this.filter.type).subscribe((res: any) => {
       if (res) {
         this.isloading = false;
@@ -92,11 +93,11 @@ export class StatsComponent implements OnInit {
       this.filter.year = params.year;
     if (params.type)
       this.filter.type = params.type;
-      if (!params.names) {
-        this.getTournamentStats();
-      } else {
-        this.namesfilter();
-      }
+    if (!params.names) {
+      this.getTournamentStats();
+    } else {
+      this.namesfilter();
+    }
     localStorage.setItem('filteryear', this.filter.year);
     localStorage.setItem('filtertype', this.filter.type);
     localStorage.setItem('filternames', this.filter.names);

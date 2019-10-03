@@ -158,7 +158,13 @@
         </a>
       </td>
       <td *ngIf="options.type != 'no_image'">
-        <a *ngIf="item['sr_id']; else playerID"
+        <a
+          [routerLink]="value == 'full_name' ? ['/basketball/player', (item?.player?.sr_id | splitID), (item?.player?.full_name | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item?.teams[0]?.sr_id) | logosurl:'basketball'"
+            [defaultImage]="commonService.flagplaceholder" alt="logo">
+          {{ item?.player?.full_name}}
+        </a>
+        <!-- <a *ngIf="item['sr_id']; else playerID"
           [routerLink]="value == 'full_name' ? ['/basketball/player', (item.sr_id | splitID), (item.full_name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item.sr_id | splitID) | logosurl:'basketball'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
@@ -170,8 +176,8 @@
             <img [offset]="commonService.lazyloadoffset" [lazyLoad]="(item?.teams[0]?.sr_id) | logosurl:'basketball'"
               [defaultImage]="commonService.flagplaceholder" alt="logo">
             {{ item?.player?.full_name}}
-          </a>
-        </ng-template>
+          </a> 
+    </ng-template>-->
       </td>
     </ng-template>
   </ng-container>
