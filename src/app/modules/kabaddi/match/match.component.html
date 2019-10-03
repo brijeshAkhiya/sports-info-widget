@@ -22,11 +22,19 @@
                 </app-no-data-widget> -->
 
                 <!-- Start - Chart -->
-                <div class="common-shadow rounded-box" style="padding: 16px;">
-                  <canvas baseChart width="400" height="100" [datasets]="lineChartData" [labels]="lineChartLabels"
-                    [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-                    [chartType]="lineChartType" [plugins]="lineChartPlugins">
-                  </canvas>
+                <div class="kabaddi-chart common-shadow rounded-box" style="padding: 16px;">
+                  <div class="chart-item">
+                    <canvas baseChart width="400" height="43" [datasets]="lineChartData" [labels]="lineChartLabels"
+                      [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                    </canvas>
+                  </div>
+                  <div class="chart-item">
+                    <canvas baseChart width="400" height="43" [datasets]="lineChartData" [labels]="lineChartLabels"
+                      [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                    </canvas>
+                  </div>
                 </div>
                 <!-- End  - Chart -->
 

@@ -6,6 +6,7 @@ import { Color, Label } from 'ng2-charts';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-match',
@@ -28,24 +29,38 @@ export class MatchComponent implements OnInit, OnDestroy {
 
 
   public lineChartData: ChartDataSets[] = [
-    { data: [0, 1, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2], label: '' },
+    { data: [0, 4, 0, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2, 0], label: '' },
   ];
-  public lineChartLabels: Label[] = ['temp', 'Raid by : Pardeep Narwal', 2, 4, 'All out', 'Raid by : Pavan Kumar', 10, 12, 14, 'All out', 18, 20];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+  public lineChartLabels: Label[] = ['Start','temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
+  public lineChartOptions: any = {
     responsive: true,
     scales: {
       yAxes: [{
-        display: false
+        display: false,
+        ticks: {
+          max: 5,
+          min: 0,
+          reverse: true
+        },
       }],
       xAxes: [{
         display: false
       }]
+    },
+    tooltips: {
+      borderWidth: 2,
+      backgroundColor: "#fff",
+      color: "#292929",
+      borderColor: '#EBEBEB',
     }
   };
   public lineChartColors: Color[] = [
     {
       borderColor: '#f2f2f2',
       backgroundColor: 'rgba(255,255,255,0.5)',
+      pointBackgroundColor: '#ED1A33',
+      pointBorderColor: '#ED1A33',
+      pointHoverBackgroundColor: '#ED1A33',
     },
   ];
   public lineChartLegend = false;
