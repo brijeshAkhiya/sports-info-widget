@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
 
 /** Internal Modules */
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { SharedModule } from "@app/shared/shared.module";
+import { SharedModule } from '@app/shared/shared.module';
 
 import { KabaddiRoutingModule } from './kabaddi-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -22,7 +23,8 @@ import { KabaddiComponent } from './kabaddi.component';
     KabaddiRoutingModule,
     NgbModule,
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    ChartsModule
   ],
   providers: []
 })
