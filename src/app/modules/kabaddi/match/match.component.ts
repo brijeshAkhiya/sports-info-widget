@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
+import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
 
 @Component({
   selector: 'app-match',
@@ -22,6 +25,33 @@ export class MatchComponent implements OnInit, OnDestroy {
   dummyAPICall = 62;
   interval;
   timeout;
+
+
+  public lineChartData: ChartDataSets[] = [
+    { data: [0, 1, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2], label: '' },
+  ];
+  public lineChartLabels: Label[] = ['temp', 'Raid by : Pardeep Narwal', 2, 4, 'All out', 'Raid by : Pavan Kumar', 10, 12, 14, 'All out', 18, 20];
+  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        display: false
+      }],
+      xAxes: [{
+        display: false
+      }]
+    }
+  };
+  public lineChartColors: Color[] = [
+    {
+      borderColor: '#f2f2f2',
+      backgroundColor: 'rgba(255,255,255,0.5)',
+    },
+  ];
+  public lineChartLegend = false;
+  public lineChartType = 'line';
+  public lineChartPlugins = [];
+
 
   constructor(
     private sportsService: SportsService,

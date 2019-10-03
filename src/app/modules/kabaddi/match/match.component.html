@@ -20,6 +20,16 @@
                 <!-- <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'"
                   [message]="'Coming Soon..!'">
                 </app-no-data-widget> -->
+
+                <!-- Start - Chart -->
+                <div class="common-shadow rounded-box" style="padding: 16px;">
+                  <canvas baseChart width="400" height="100" [datasets]="lineChartData" [labels]="lineChartLabels"
+                    [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                    [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                  </canvas>
+                </div>
+                <!-- End  - Chart -->
+
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry" [sport]="'Kabaddi'">
                 </app-goal-commentry>
                 <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
