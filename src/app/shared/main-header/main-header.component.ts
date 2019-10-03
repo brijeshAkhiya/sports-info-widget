@@ -61,7 +61,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   langauges = [
-    { title: 'local', link: 'http://192.168.11.31:4200' },
     { title: 'English', link: 'https://www.sports.info' },
     { title: 'Bengali', link: 'https://bengali.sports.info' },
     { title: 'Hindi', link: 'https://hindi.sports.info' },
@@ -202,7 +201,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.renderer2.removeClass(document.body, 'search-box-open');
     }
 
-    
+
   }
   openmodal() {
     this.modalService.open(LoginModalComponent);
