@@ -15,8 +15,8 @@ import { BrowserTransferStateModule } from '@angular/platform-browser';
 })
 export class MatchComponent implements OnInit, OnDestroy {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Kabaddi', aIds: [] } };
-  loading: boolean = false;
-  statsLoading: boolean = false;
+  loading = false;
+  statsLoading = false;
   matchInfo;
   commentry = [];
   team = [];
@@ -31,7 +31,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   public lineChartData: ChartDataSets[] = [
     { data: [0, 4, 0, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2, 0], label: '' },
   ];
-  public lineChartLabels: Label[] = ['Start','temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
+  public lineChartLabels: Label[] = ['Start', 'temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
   public lineChartOptions: any = {
     responsive: true,
     scales: {
@@ -49,8 +49,8 @@ export class MatchComponent implements OnInit, OnDestroy {
     },
     tooltips: {
       borderWidth: 2,
-      backgroundColor: "#fff",
-      color: "#292929",
+      backgroundColor: '#fff',
+      color: '#292929',
       borderColor: '#EBEBEB',
     }
   };
@@ -66,6 +66,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   public lineChartLegend = false;
   public lineChartType = 'line';
   public lineChartPlugins = [];
+  chartData = { 'home': [], 'away': [] };
 
 
   constructor(
@@ -210,6 +211,11 @@ export class MatchComponent implements OnInit, OnDestroy {
       // let temp = this.commentry.filter(commentry => commentry.event_time == event.event_time);
       // if(temp.length == 0)
       this.commentry.push(event);
+      if (event.point_home) {
+        let temp = event.event_time.split(':')[0];
+        this.chartData.home.push({ temp: false });
+      }
+
     });
 
     // this.commentry = this.commentry.concat(this.matchInfo.event);
@@ -226,7 +232,6 @@ export class MatchComponent implements OnInit, OnDestroy {
   initTeam() {
     this.team.push(Object.assign({ 'qualifier': 'home' }, this.matchInfo.match_info.teams.home));
     this.team.push(Object.assign({ 'qualifier': 'away' }, this.matchInfo.match_info.teams.away));
-
   }
 
   initSquads() {

@@ -198,8 +198,10 @@ export class FixturesComponent implements OnInit {
       .gettournamentfixtures(id)
       .subscribe((res: any) => {
         this.paramsFixtures.loading = false;
-        if (res.data)
-          this.paramsFixtures.data = this.commonService.sortArr(res.data, 'Do MMMM YYYY', 'scheduled', 'asc');
+        if (res.data) {
+          this.paramsFixtures.data = this.commonService.initCompetitorScore(res.data);
+          this.paramsFixtures.data = this.commonService.sortArr(this.paramsFixtures.data, 'Do MMMM YYYY', 'scheduled', 'asc');
+        }
       }, (error) => {
         this.paramsFixtures.loading = false;
         this.paramsFixtures.loadmore = false;
@@ -213,8 +215,10 @@ export class FixturesComponent implements OnInit {
       .gettournamentresults(id)
       .subscribe((res: any) => {
         this.paramsResults.loading = false;
-        if (res.data)
-          this.paramsResults.data = this.commonService.sortArr(res.data, 'Do MMMM YYYY', 'scheduled', 'desc');
+        if (res.data) {
+          this.paramsResults.data = this.commonService.initCompetitorScore(res.data);
+          this.paramsResults.data = this.commonService.sortArr(this.paramsResults.data, 'Do MMMM YYYY', 'scheduled', 'desc');
+        }
       }, (error) => {
         this.paramsResults.loading = false;
         this.paramsResults.loadmore = false;

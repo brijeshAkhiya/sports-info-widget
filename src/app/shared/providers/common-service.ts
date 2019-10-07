@@ -158,10 +158,20 @@ export class CommonService {
 
   initCompetitorScore(arr) {
     return arr.map((data, matchIndex) => {
+      console.log(data);
+
       let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
       let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
       if (data.period_scores) {
         data.period_scores.map((pscore, index) => {
+          if (pscore.home_score) {
+            (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore);
+          } else {
+            (data.competitors[away_scoreIndex].p_new = data.competitors[away_scoreIndex].p_new || []).push(pscore);
+          }
+        });
+      } else if (data.sport_event_status && data.sport_event_status.period_scores) {
+        data.sport_event_status.period_scores.map((pscore, index) => {
           if (pscore.home_score) {
             (data.competitors[home_scoreIndex].p_new = data.competitors[home_scoreIndex].p_new || []).push(pscore);
           } else {

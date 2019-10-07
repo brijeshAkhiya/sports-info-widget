@@ -785,6 +785,12 @@ export class MatchHomeComponent implements OnInit {
     }
   }
 
+  checkMatchDeclared() {
+    // if(this.matchdata.statistics && this.matchdata.statistics.innings && this.matchdata.statistics.innings.length > 0){
+    //   this.matchdata.statistics.innings
+    // }
+  }
+
   /** Get Abbreviation from competitor ID */
   getAbbreviation(id) {
     let competitor = this.data.sport_event.competitors.filter(

@@ -1,9 +1,9 @@
-import { Action } from "@ngrx/store";
-import { MetaTagsActions, SAVE_META_TAGS } from "./meta-tags.actions";
+import { Action } from '@ngrx/store';
+import { MetaTagsActions, SAVE_META_TAGS } from './meta-tags.actions';
 
 
 export interface MetaTags {
-    MetaTags: []
+    MetaTags: [];
 }
 
 const initialState = {
@@ -15,7 +15,7 @@ export function metaTagsReducer(state = initialState, action: MetaTagsActions) {
         case SAVE_META_TAGS:
             return { ...state, MetaTags: action.payload };
         default: {
-            return state
+            return state;
         }
     }
 }

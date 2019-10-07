@@ -11,7 +11,8 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-fixtures-sidebar-widget [sport]="params.sport"></app-fixtures-sidebar-widget>
+          <app-fixtures-sidebar-widget [sport]="params.sport" *ngIf="params.sport != 'Hockey'">
+          </app-fixtures-sidebar-widget>
 
           <app-sidebar-links [sport]="params.sport" [link_type]="'tournament'" [options]="{
               type: 'current',

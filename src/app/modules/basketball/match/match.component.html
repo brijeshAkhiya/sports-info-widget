@@ -15,7 +15,6 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Play-by-play' | translate }}</ng-template>
             <ng-template ngbTabContent>
-
               <app-loader *ngIf="commentry?.loading"></app-loader>
               <app-no-data-widget
                 *ngIf="!commentry?.loading && (commentry?.data.length == 0) && matchInfo?.status != 'scheduled'"
@@ -144,7 +143,7 @@
           <!--END - PLAY BY PLAY  -->
 
           <!--START - BOX SCORE  -->
-          <ngb-tab *ngIf="matchInfo?.status == 'closed'">
+          <ngb-tab *ngIf="boxData?.home?.squads?.length > 0 && boxData?.away?.squads?.length > 0">
             <ng-template ngbTabTitle>{{ 'Box Score' | translate }}</ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="boxScoreParams?.loading"></app-loader>
@@ -162,7 +161,7 @@
                       [options]=" {
                           sport:'Basketball',
                           titles : [('Cricket_Module2.player' | translate),'MIN','FG','3PT','FT','REB','OREB','DREB','AST','STL','BLK','TO','PF','PTS'],
-                          sort : [false,true,true,true,true,true,true,true,true,true,true,true,true,true],
+                          sort : [false,false,true,true,true,true,true,true,true,true,true,true,true,true],
                           values : ['full_name', 'statistics.minutes', 'statistics.field_goals_made', 'statistics.three_points_made', 'statistics.free_throws_made', 'statistics.rebounds', 'statistics.offensive_rebounds', 'statistics.defensive_rebounds', 'statistics.assists', 'statistics.steals', 'statistics.blocks', 'statistics.turnovers', 'statistics.personal_fouls', 'statistics.points'],
                           class : ['nba-table nba-tour-stats-table'],
                           class_light_row : ['light-row'],
@@ -181,7 +180,7 @@
                       [options]=" {
                           sport:'Basketball',
                           titles : [('Cricket_Module2.player' | translate),'MIN','FG','3PT','FT','REB','OREB','DREB','AST','STL','BLK','TO','PF','PTS'],
-                          sort : [false,true,true,true,true,true,true,true,true,true,true,true,true,true],
+                          sort : [false,false,true,true,true,true,true,true,true,true,true,true,true,true],
                           values : ['full_name', 'statistics.minutes', 'statistics.field_goals_made', 'statistics.three_points_made', 'statistics.free_throws_made', 'statistics.rebounds', 'statistics.offensive_rebounds', 'statistics.defensive_rebounds', 'statistics.assists', 'statistics.steals', 'statistics.blocks', 'statistics.turnovers', 'statistics.personal_fouls', 'statistics.points'],
                           class : ['nba-table nba-tour-stats-table'],
                           class_light_row : ['light-row'],

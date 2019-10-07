@@ -329,7 +329,8 @@
         </ng-container>
         {{data?.scheduled | amDateFormat:'Do MMMM YYYY'}}
       </p>
-      <p class="live-match" *ngIf="data?.status == 'live' ">{{ 'widgetModule.live' | translate }}
+      <p class="live-match text-capitalize" *ngIf="['inprogress', 'halftime', 'delayed'].indexOf(data.status) > -1">
+        {{ data?.status }}
         <!-- <span *ngIf="data.match_time"> | {{data.match_time}}</span> -->
       </p>
     </div>
@@ -388,7 +389,7 @@
         <img [lazyLoad]="team?.sr_id | logosurl:'basketball'" alt="team.name"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
-      <h4 [ngClass]="{'winner':team?.points > oppTeam.points}"><a
+      <h4 [ngClass]="{'winner':['closed', 'complete'].indexOf(data.status) > -1 && team?.points > oppTeam.points}"><a
           [routerLink]="['/basketball/team',(team.id),(team.name | slugify)]">
           {{ team.market}} {{ team.name}}</a> </h4>
       <h3 *ngIf="data?.status != 'scheduled'">{{team.points}}</h3>

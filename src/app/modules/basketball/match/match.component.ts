@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-match',
@@ -15,8 +16,10 @@ export class MatchComponent implements OnInit {
   loading = false;
   matchInfo;
   boxScoreParams = { loading: false };
-  commentry = { loading: false, data: [] };
+  commentry: any = { loading: false, data: {} };
   boxData: any;
+  interval;
+  timeout;
 
   constructor(
     private sportsService: SportsService,
@@ -41,14 +44,22 @@ export class MatchComponent implements OnInit {
     this.sportsService.getBasketballMatchSummary(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
+
+
+        if (this.matchInfo.status === 'scheduled') {
+          this.startLiveUpdateAfterTime();
+        } else
+          if (['inprogress', 'halftime', 'delayed'].indexOf(this.matchInfo.status) > -1)
+            this.getLiveUpdate(this);
+
         this.matchInfo.venuedetails = this.matchInfo.venue;
         this.sportsService.getReverseGeo(this.matchInfo.venuedetails.name + ',' + this.matchInfo.venuedetails.city + ',' + this.matchInfo.venuedetails.country).subscribe((geo: any) => {
           this.matchInfo.venuedetails.lat = geo.results[0].geometry.location.lat;
           this.matchInfo.venuedetails.lng = geo.results[0].geometry.location.lng;
         });
         this.getMatchBoxScore(id);
-        if (this.matchInfo.status == 'closed')
-          this.getMatchCommentry(id);
+        // if (this.matchInfo.status == 'closed')
+        this.getMatchCommentry(id);
       }
       this.loading = false;
     }, (error) => {
@@ -57,11 +68,22 @@ export class MatchComponent implements OnInit {
   }
 
   getMatchCommentry(id) {
-    this.commentry.loading = true;
+    if (Object.entries(this.commentry.data).length === 0)
+      this.commentry.loading = true;
     this.sportsService.getBasketballMatchPlayByPlay(id).subscribe((res: any) => {
       if (res.data) {
-        this.commentry.data = res.data;
-        this.matchInfo.periods = res.data.periods;
+        this.matchInfo.periods = this.commentry.data.periods;
+        if (['inprogress', 'halftime', 'delayed'].indexOf(this.matchInfo.status) > -1 && this.commentry.data.periods) {
+          let periodIndex = this.commentry.data.periods.findIndex((period) => period.sequence == res.data.quarter);
+          if (periodIndex > -1) {
+            this.commentry.data.periods[periodIndex].events = res.data.periods[res.data.quarter - 1].events;
+            this.matchInfo.periods[periodIndex].events = res.data.periods[res.data.quarter - 1].events;
+          } else {
+            this.commentry.data.periods.push(res.data.periods[res.data.quarter - 1]);
+            this.matchInfo.periods.push(res.data.periods[res.data.quarter - 1]);
+          }
+        } else
+          this.matchInfo.periods = this.commentry.data.periods = res.data.periods;
       }
       this.commentry.loading = false;
     }, (error) => {
@@ -102,5 +124,52 @@ export class MatchComponent implements OnInit {
     }, (error) => {
       this.boxScoreParams.loading = false;
     });
+  }
+
+  getLiveUpdate(classThis) {
+    this.interval = setInterval(() => {
+      classThis.sportsService
+        .getBasketballMatchSummary(this.matchInfo.id)
+        .subscribe(res => {
+          this.matchInfo = res.data;
+          this.matchInfo.periods = this.commentry.data.periods;
+
+          if (['inprogress', 'halftime', 'delayed'].indexOf(this.matchInfo.status) > -1) {
+            // this.getMatchBoxScore(this.matchInfo.id);
+            this.getMatchCommentry(this.matchInfo.id);
+          }
+          if (['closed', 'complete'].indexOf(this.matchInfo.status) > -1) {
+            this.getMatchCommentry(this.matchInfo.id);
+            this.clearTimeInterval();
+          }
+        });
+    }, classThis.commonService.miliseconds(0, 0, 8));
+  }
+
+  startLiveUpdateAfterTime() {
+
+    let remainingTime = this.commonService.getRemainigTimeofMatch(
+      this.matchInfo.scheduled
+    );
+
+    let remainingMiliSec = this.commonService.miliseconds(
+      remainingTime.hours,
+      remainingTime.minutes,
+      remainingTime.seconds
+    );
+    remainingMiliSec =
+      remainingMiliSec - this.commonService.miliseconds(0, 5, 0);
+    if (remainingTime.days === 0 && remainingTime.hours < 5) {
+      this.timeout = setTimeout(() => {
+        this.getLiveUpdate(this);
+      }, remainingMiliSec);
+    }
+  }
+
+
+  /** Clear Interval and timeout on destroy */
+  clearTimeInterval() {
+    clearInterval(this.interval);
+    // clearTimeout(this.timeout);
   }
 }
