@@ -1,4 +1,4 @@
-<ng-container *ngIf="sport == 'cricket'">
+<ng-container *ngIf="sport == 'Cricket'">
   <div
     class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
     *ngIf="data">
@@ -94,9 +94,13 @@
             </h4>
             <h4 class="score"
               [ngClass]="{'running' : competitor.period_scores[0].number == data.sport_event_status.current_inning}"
-              *ngIf="competitor.period_scores && competitor.period_scores[0]">
-              {{competitor.period_scores[0].display_score | cricketScore}}
-              ({{competitor.period_scores[0].display_overs}} ov)
+              *ngIf="competitor.period_scores && competitor">
+              <!-- {{competitor.period_scores[0].display_score | cricketScore}}
+              ({{competitor.period_scores[0].display_overs}} ov) -->
+              <ng-container *ngFor="let score of competitor.period_scores; let i = index">
+                {{score?.display_score | cricketScore}}
+                {{i == competitor.period_scores.length - 1 ?  ("(" + score?.display_overs + " ov)")   : '&'}}
+              </ng-container>
             </h4>
           </div>
         </ng-template>

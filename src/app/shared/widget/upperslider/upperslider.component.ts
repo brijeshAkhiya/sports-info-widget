@@ -147,13 +147,13 @@ export class UppersliderComponent implements OnInit {
     this.timerStartTime.Basketball.isStartAfterTime = false;
     this.store.dispatch(new Basketball.LoadBasketballSchedule());
     this.store.select('Basketball').subscribe((data: any) => {
-
       if (data.schedule && data.schedule.length > 0) {
 
         let liveMatches = this.slider = data.schedule.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
-        this.slider = this.slider.concat(data.schedule.filter((match) => match.status == 'closed' || match.status == 'complete'));
-        let fixtures = data.schedule.filter((match) => match.status == 'scheduled');
+        this.slider = this.commonService.sortBtDate(this.slider.concat(data.schedule.filter((match) => match.status == 'closed' || match.status == 'complete')), 'scheduled', 'asc');
+        let fixtures = this.commonService.sortBtDate(data.schedule.filter((match) => match.status == 'scheduled'), 'scheduled', 'asc');
         this.slider = this.slider.concat(fixtures);
+
         // if (liveMatches.length > 0 && !this.timerStartTime.Basketball.isLiveUpdate) {
         //   this.getLiveBasketballUpdate(this);
         // } else if (!this.timerStartTime.Basketball.isLiveUpdate && !this.timerStartTime.Basketball.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {

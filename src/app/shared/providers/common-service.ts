@@ -66,6 +66,18 @@ export class CommonService {
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
+  sortBtDate(data, date_param, sort_type) {
+    return data.sort((a, b) => {
+      // return Number(new Date(a[date_param])) - Number(new Date(b[date_param]));
+      if (sort_type === 'asc') {
+        return new Date(a[date_param]) < new Date(b[date_param]) ? -1 : new Date(a[date_param]) > new Date(b[date_param]) ? 1 : 0;
+      } else {
+        return new Date(a[date_param]) > new Date(b[date_param]) ? -1 : new Date(a[date_param]) < new Date(b[date_param]) ? 1 : 0;
+      }
+    });
+
+  }
+
   getPageTitles() {
     this.titleObj = {
       '/': { title: 'Sports.info' },
@@ -158,8 +170,6 @@ export class CommonService {
 
   initCompetitorScore(arr) {
     return arr.map((data, matchIndex) => {
-      console.log(data);
-
       let home_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'home');
       let away_scoreIndex = data.competitors.findIndex((comp) => comp.qualifier == 'away');
       if (data.period_scores) {

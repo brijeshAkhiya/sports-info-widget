@@ -22,32 +22,40 @@
                 </app-no-data-widget> -->
                 <!-- Start - Chart -->
                 <div class="common-chart common-shadow rounded-box">
-                    <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
-                      [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
-                      [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
-                      class="d-inline-block">Gujarat Fortunegiants</span>
+                  <p class="team-name no-margin" *ngIf="matchInfo?.match_info.teams?.home">
+                    <img alt="{{matchInfo?.match_info.teams?.home?.tname}}"
+                      [lazyLoad]="matchInfo?.match_info.teams?.home?.tid | logosurl:'kabaddi'"
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+                    <a class="d-inline-block"
+                      [routerLink]="['/kabaddi/team', matchInfo?.match_info.teams?.home?.tid, (matchInfo?.match_info.teams?.home?.tname | slugify )]">
+                      {{matchInfo?.match_info.teams?.home?.tname}}
+                    </a>
                   </p>
                   <div class="kabaddi-chart">
                     <div class="chart-inner">
                       <div class="chart-item">
-                        <canvas baseChart width="400" height="43" [datasets]="lineChartData" [labels]="lineChartLabels"
-                          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-                          [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                        <canvas baseChart width="400" height="43" [datasets]="lineChartDataHome"
+                          [labels]="lineChartLabelsHome" [options]="lineChartOptionsHome" [colors]="lineChartColors"
+                          [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
                         </canvas>
                       </div>
                       <div class="chart-item">
-                        <canvas baseChart width="400" height="43" [datasets]="lineChartData" [labels]="lineChartLabels"
-                          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-                          [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                        <canvas baseChart width="400" height="43" [datasets]="lineChartDataAway"
+                          [labels]="lineChartLabelsAway" [options]="lineChartOptionsAway" [colors]="lineChartColors"
+                          [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
                         </canvas>
                       </div>
                     </div>
                   </div>
-                  <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
-                    [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
-                    [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
-                    class="d-inline-block">U Mumba</span>
-                </p>
+                  <p class="team-name no-margin" *ngIf="matchInfo?.match_info.teams?.away">
+                    <img alt="{{matchInfo?.match_info.teams?.away?.tname}}"
+                      [lazyLoad]="matchInfo?.match_info.teams?.away?.tid | logosurl:'kabaddi'"
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
+                    <a class="d-inline-block"
+                      [routerLink]="['/kabaddi/team', matchInfo?.match_info.teams?.away?.tid, (matchInfo?.match_info.teams?.away?.tname | slugify )]">
+                      {{matchInfo?.match_info.teams?.away?.tname}}
+                    </a>
+                  </p>
                 </div>
                 <!-- End  - Chart -->
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry" [sport]="'Kabaddi'">

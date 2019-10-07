@@ -7,7 +7,7 @@
         <app-page-not-found *ngIf="!loader && !matchdata"></app-page-not-found>
         <!-- START - ABOUT MATCH-->
         <app-match-about *ngIf="matchdata" [data]="matchdata" [competitor]="competitor" [toss]="tossdecision"
-          [sport]="'cricket'"></app-match-about>
+          [sport]="'Cricket'"></app-match-about>
         <!-- END - ABOUT MATCH-->
         <!-- START - MATCH TABS-->
         <ngb-tabset class="common-tabs match-tabs" *ngIf="matchdata">
@@ -33,17 +33,17 @@
             <ng-template ngbTabTitle>{{'Cricket_Module.Scorecard' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <ngb-tabset class="filled-tabs scorecard-tab"
-                [ngClass]="{'test-match': matchdata.sport_event.tournament.type == 'first_class'}">
+                [ngClass]="{'test-match': ['first_class', 'test'].includes(matchdata.sport_event.tournament.type)}">
                 <ngb-tab *ngFor="let item of matchInnings,let i = index">
                   <ng-template ngbTabTitle>
                     <span>{{teamObj[item.batting_team].name}}
                       <span class="test-inng">
-                        {{matchdata.sport_event.tournament.type == 'first_class' ? (item.number === 1 || item.number === 2 ) ? '(' + ('Cricket_Module.1st_Inning' | translate) +')' : '(' + ('Cricket_Module.2nd_Inning' | translate) + ')' : ''}}
+                        {{['first_class', 'test'].includes(matchdata.sport_event.tournament.type) ? (item.number === 1 || item.number === 2 ) ? '(' + ('Cricket_Module.1st_Inning' | translate) +')' : '(' + ('Cricket_Module.2nd_Inning' | translate) + ')' : ''}}
                       </span>
                     </span>
                   </ng-template>
                   <ng-template ngbTabContent>
-                    <div class="common-table batsman-table tour-stats-table common-shadow rounded-box">
+                    <div class="common-table batsman-table common-shadow rounded-box">
                       <div class="table-responsive">
                         <table class="table">
                           <thead>
@@ -164,7 +164,7 @@
                     <!--Score card tab end-->
                     <!--Fall of wickets section starts-->
                     <div class="common-table common-shadow rounded-box"
-                      *ngIf="matchdata.sport_event.tournament.type != 'first_class' && fallofWickets[item.number]">
+                      *ngIf="!['first_class', 'test'].includes(matchdata.sport_event.tournament.type) && fallofWickets[item.number]">
                       <div class="table-title" *ngIf="fallofWickets.length > 0">
                         <h6 class="text-uppercase">{{'Cricket_Module.Fall_of_Wickets' | translate}}</h6>
                       </div>
@@ -250,7 +250,7 @@
             </ng-template>
             <ng-template ngbTabContent>
               <app-match-info-card [options]="{
-                sport:'cricket',
+                sport:'Cricket',
                 titles : [('Cricket_Module.Match' | translate),('Cricket_Module.Series' | translate),('Cricket_Module.Toss' | translate),('Cricket_Module.Weather_Condition' | translate),('Cricket_Module.Pitch_Condition' | translate),('Cricket_Module.Outfield_Conditions' | translate),('Cricket_Module.Umpires' | translate),('Cricket_Module.Match_Refree' | translate)],
                 values : [
                 matchdata.sport_event.competitors[0].name + ' ' +  'VS'  + ' ' + matchdata.sport_event.competitors[1].name,

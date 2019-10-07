@@ -27,11 +27,15 @@ export class MatchComponent implements OnInit, OnDestroy {
   interval;
   timeout;
 
-  public lineChartData: ChartDataSets[] = [
-    { data: [0, 4, 1, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2, 0], label: '' },
+  public lineChartDataHome: any = [
+    { data: [-1], label: '' },
   ];
-  public lineChartLabels: Label[] = ['Start', 'temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
-  public lineChartOptions: any = {
+  public lineChartDataAway: any = [
+    { data: [-1], label: '' },
+  ];
+  public lineChartLabelsHome: Label[] = ['Match Start'];
+  public lineChartLabelsAway: Label[] = ['Match Start'];
+  public lineChartOptionsHome: any = {
     responsive: true,
     // maintainAspectRatio: false,
     scales: {
@@ -39,7 +43,32 @@ export class MatchComponent implements OnInit, OnDestroy {
         display: false,
         ticks: {
           max: 5,
-          min: 0,
+          min: -1,
+          // reverse: true
+        },
+      }],
+      xAxes: [{
+        display: false
+      }]
+    },
+    stepped: true,
+    tooltips: {
+      borderWidth: 2,
+      backgroundColor: '#fff',
+      titleFontColor: '#292929',
+      bodyFontColor: '#292929',
+      borderColor: '#EBEBEB',
+    }
+  };
+  public lineChartOptionsAway: any = {
+    responsive: true,
+    // maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        display: false,
+        ticks: {
+          max: 5,
+          min: -1,
           reverse: true
         },
       }],
@@ -50,14 +79,9 @@ export class MatchComponent implements OnInit, OnDestroy {
     stepped: true,
     tooltips: {
       borderWidth: 2,
-<<<<<<< HEAD
       backgroundColor: '#fff',
-      color: '#292929',
-=======
-      backgroundColor: "#fff",
-      titleFontColor: "#292929",
-      bodyFontColor: "#292929",
->>>>>>> 595503bf9c18abe22fca8f9414dff576d70862f1
+      titleFontColor: '#292929',
+      bodyFontColor: '#292929',
       borderColor: '#EBEBEB',
     }
   };
@@ -72,13 +96,12 @@ export class MatchComponent implements OnInit, OnDestroy {
       pointRadius: 5,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: '#ED1A33',
-      
+
     },
   ];
   public lineChartLegend = false;
   public lineChartType = 'line';
   public lineChartPlugins = [];
-  chartData = { 'home': [], 'away': [] };
 
   constructor(
     private sportsService: SportsService,
@@ -161,7 +184,6 @@ export class MatchComponent implements OnInit, OnDestroy {
 
   }
 
-
   startLiveUpdateAfterTime() {
 
     let remainingTime = this.commonService.getRemainigTimeofMatch(
@@ -223,11 +245,18 @@ export class MatchComponent implements OnInit, OnDestroy {
       // if(temp.length == 0)
       this.commentry.push(event);
       if (event.point_home) {
-        let temp = event.event_time.split(':')[0];
-        this.chartData.home.push({ temp: false });
+        this.addTeamPoint(this.matchInfo.match_info.teams.home, event, event.point_home, 'home');
       }
-
+      if (event.point_away) {
+        this.addTeamPoint(this.matchInfo.match_info.teams.away, event, event.point_away, 'away');
+      }
     });
+    if (this.matchInfo.event.length > 0) {
+      this.lineChartDataHome[0].data.push(-1);
+      this.lineChartLabelsHome.push('Match End');
+      this.lineChartDataAway[0].data.push(-1);
+      this.lineChartLabelsAway.push('Match End');
+    }
 
     // this.commentry = this.commentry.concat(this.matchInfo.event);
     this.commentry.forEach((match, index) => {
@@ -236,9 +265,34 @@ export class MatchComponent implements OnInit, OnDestroy {
     });
     if (this.matchInfo.match_info.result.text !== '')
       this.commentry.push({ event_type: 'result', result: this.matchInfo.match_info.result.text });
-
-
   }
+
+  addTeamPoint(team, event, point, abbr) {
+    let desc;
+    if ((event.raid_event === 'successful' || event.raid_event == 'technical') && team.tid == event.raiding_team_id) {
+      desc = event.event_time + ' ' + event.raider_name;
+    }
+    if ((event.tackle_event === 'successful' || event.tackle_event == 'technical') && team.tid == event.defending_team_id) {
+      desc = event.event_time + ' ' + event.defender_name;
+    }
+    if (event.bounus != '') {
+      if (event.bounus == 'raider' && team.tid == event.raiding_team_id)
+        desc = event.event_time + ' ' + event.raider_name;
+      else if (event.bounus == 'defender' && team.tid == event.defending_team_id)
+        desc = event.event_time + ' ' + event.defender_name;
+    }
+
+    if (desc) {
+      if (abbr == 'home') {
+        this.lineChartDataHome[0].data.push(point);
+        this.lineChartLabelsHome.push(desc);
+      } else {
+        this.lineChartDataAway[0].data.push(point);
+        this.lineChartLabelsAway.push(desc);
+      }
+    }
+  }
+
 
   initTeam() {
     this.team.push(Object.assign({ 'qualifier': 'home' }, this.matchInfo.match_info.teams.home));
