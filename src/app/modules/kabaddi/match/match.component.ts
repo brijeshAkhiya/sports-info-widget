@@ -30,7 +30,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   public lineChartData: ChartDataSets[] = [
     { data: [0, 4, 1, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2, 0], label: '' },
   ];
-  public lineChartLabels: Label[] = ['Start','temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
+  public lineChartLabels: Label[] = ['Start', 'temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
   public lineChartOptions: any = {
     responsive: true,
     // maintainAspectRatio: false,
@@ -67,7 +67,7 @@ export class MatchComponent implements OnInit, OnDestroy {
       pointRadius: 5,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: '#ED1A33',
-      
+
     },
   ];
   public lineChartLegend = false;

@@ -1,6 +1,6 @@
 /* -------- Goal Commentary ------- */
 .goal-commentary-list                   { margin-top: 24px; padding: 0px 32px 0px 24px; background: #fff; }
-.goal-commentary-list .icon-block       { width: 100px; font-size: 12px; line-height: 15px; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.goal-commentary-list .icon-block       { padding: 6px 0px; width: 100px; font-size: 12px; line-height: 15px; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .goal-commentary-list .icon             { width: 32px; height: 32px; background: no-repeat center center / cover; display: inline-block; vertical-align: middle; }
 /* .goal-commentary-list .icon        { background-image: url(assets/images/match/whistle-icon.svg);} */
 .goal-commentary-list .icon.normal,
@@ -31,22 +31,20 @@
 .goal-commentary-list .icon.score_change    { background-image: url(assets/images/match/soccer/ic_goal.svg);}
 .goal-commentary-list .icon.result          { background-image: url(assets/images/match/result.svg);}
 /*Basketball icon*/
-.goal-commentary-list .icon.default-icon         { background-image: url(assets/images/match/whistle-icon.svg);}
-.goal-commentary-list .icon.endperiod         { background-image: url(assets/images/match/time-icon.svg);}
+.goal-commentary-list .icon.default-icon    { background-image: url(assets/images/match/whistle-icon.svg);}
+.goal-commentary-list .icon.endperiod       { background-image: url(assets/images/match/time-icon.svg);}
 .goal-commentary-list .icon.review          { background-image: url(assets/images/match/basketball/review-icon.svg);}
 .goal-commentary-list .icon.jumpball,
 .goal-commentary-list .icon.turnover,
-.goal-commentary-list .icon.possession          { background-image: url(assets/images/match/basketball/jumpball-icon.svg);}
+.goal-commentary-list .icon.possession      { background-image: url(assets/images/match/basketball/jumpball-icon.svg);}
 .goal-commentary-list .icon.rebound,
 .goal-commentary-list .icon.freethrowmiss,
 .goal-commentary-list .icon.threepointmiss,
-.goal-commentary-list .icon.twopointmiss          { background-image: url(assets/images/match/basketball/rebound-icon.svg);}
+.goal-commentary-list .icon.twopointmiss    { background-image: url(assets/images/match/basketball/rebound-icon.svg);}
 .basketball.goal-commentary-list .icon.score_change,
 .goal-commentary-list .icon.freethrowmade,
 .goal-commentary-list .icon.threepointmade,
-.goal-commentary-list .icon.twopointmade          { background-image: url(assets/images/match/basketball/score-change-icon.svg);}
-
-
+.goal-commentary-list .icon.twopointmade    { background-image: url(assets/images/match/basketball/score-change-icon.svg);}
 
 .goal-commentary-list .icon-block p         { margin-left: 4px; display: inline-block; vertical-align: middle; }
 .goal-commentary-list .desc-block           { padding: 24px 0px; border-bottom: 1px solid #EBEBEB; flex-grow: 1; -webkit-flex-grow: 1; }
@@ -57,9 +55,10 @@
 .goal-commentary-list .desc-block .score    { padding-left: 8px; flex-shrink: 0; -webkit-flex-shrink: 0; }
 
 /* -- Arabic CSS -- */
-.arabic .goal-commentary-list                   { padding-right: 24px; padding-left: 32px; }
-.arabic .goal-commentary-list .icon-block p     { margin-left: 0; margin-right: 4px;}
+.arabic .goal-commentary-list                       { padding-right: 24px; padding-left: 32px; }
+.arabic .goal-commentary-list .icon-block p         { margin-left: 0; margin-right: 4px;}
 .arabic .goal-commentary-list .desc-block .score    { padding-left: 0; padding-right: 8px; }
+
 /***** Responsive CSS Start ******/
 @media (max-width: 1199px) {
     .goal-commentary-list               { padding: 0px 18px 0px 20px; }
@@ -68,16 +67,19 @@
     .goal-commentary-list .desc-block   { padding: 20px 0px; }
 /* -- Arabic CSS -- */
     .arabic .goal-commentary-list       { padding-right: 18px; padding-left: 20px; }
-
 }
+
 @media (max-width: 767px) {
-    .goal-commentary-list               { padding: 0px 16px 0px 14px; }
-    .goal-commentary-list .icon-block   { width: 70px; }
+    .goal-commentary-list               { padding: 0px 16px 0px 6px; }
+    .goal-commentary-list .icon-block   { width: 70px; text-align: center; }
     .goal-commentary-list .icon         { width: 24px; height: 24px;}
+    .goal-commentary-list .icon-block p { margin-left: 0; margin-top: 4px; display: block; }
     .goal-commentary-list .desc-block   { padding: 16px 0px; }
 /* -- Arabic CSS -- */
-    .arabic .goal-commentary-list       { padding-right: 14px; padding-left: 16px; }
+    .arabic .goal-commentary-list                   { padding-right: 6px; padding-left: 16px; }
+    .arabic .goal-commentary-list .icon-block p     { margin-right: 0px; }
 }
+
 @media (max-width: 575px) {
     .goal-commentary-list .icon-block   { width: 56px; }
     .goal-commentary-list .desc-block   { padding: 12px 0px; }

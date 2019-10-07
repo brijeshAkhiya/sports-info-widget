@@ -22,7 +22,7 @@
                 </app-no-data-widget> -->
                 <!-- Start - Chart -->
                 <div class="common-chart common-shadow rounded-box">
-                    <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
+                  <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
                       [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
                       [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
                       class="d-inline-block">Gujarat Fortunegiants</span>
@@ -44,10 +44,10 @@
                     </div>
                   </div>
                   <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
-                    [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
-                    [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
-                    class="d-inline-block">U Mumba</span>
-                </p>
+                      [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
+                      [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span class="d-inline-block">U
+                      Mumba</span>
+                  </p>
                 </div>
                 <!-- End  - Chart -->
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry" [sport]="'Kabaddi'">
