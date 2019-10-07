@@ -379,6 +379,10 @@ ngb-datepicker .ngb-dp-weekday              { font-weight: 700; font-style: norm
 ngb-datepicker .ngb-dp-day                  { font-size: 14px; font-weight: 500; }
 ngb-datepicker .btn-light                   { color: #bfbfbf; }
 ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
+/* -------- Common Chart Style ------- */
+.common-chart                           { padding: 12px 16px; }
+.common-chart .team-name img            { margin-right: 8px; height: 32px; border: 1px solid #EBEBEB; border-radius: 1px; }
+.common-chart .team-name span           { vertical-align: middle; font-weight: 500; }
 
 /******* NBA Pages ******/
 .nba-common-selection .dropdown-toggle                	{ margin-right: 16px; min-width: 160px; }
@@ -570,7 +574,8 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 
 /******* Soccer Pages ******/
     .fixture-date .dropdown-menu                { left: auto !important; right: 0 !important; transform: translateX(0%) !important; -webkit-transform: translateX(0%) !important; }
-
+    /* -------- Common Chart Style ------- */
+    .common-chart .team-name img                { height: 24px; }
 /******* NBA Pages ******/
     .nba-common-selection .dropdown-toggle                	{ min-width: 120px; }
     .nba-common-selection .date-dropdown .dropdown-toggle 	{ min-width: 100px; }

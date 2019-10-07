@@ -134,7 +134,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     nav .navbar-toggler.active .icon-bar:nth-child(3)   { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
     nav .navbar-toggler.active .icon-bar:nth-child(1),
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
-    .navbar-nav-container                               { left: 0px; min-height: 100vh;}
+    .navbar-nav-container                               { position: relative; left: 0px; min-height: 100vh; transform: translate(0); -webkit-transform: translate(0); }
     .navbar-collapse.collapse                           { display: block !important; position: absolute; top: 100%; left: 0%; max-height: 0; width: 100%; background: #1B2A5A; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; text-align: center; overflow: hidden; }
     /* .submenu-open .navbar-collapse.collapse             { transform: translateY(43px); -webkit-transform: translateY(43px); }     */
     .menu-open .navbar-collapse.collapse                { left: 0%; height: auto; max-height: 100vh; }
