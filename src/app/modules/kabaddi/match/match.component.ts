@@ -85,7 +85,7 @@ export class MatchComponent implements OnInit, OnDestroy {
       borderColor: '#EBEBEB',
     }
   };
-  public lineChartColors: Color[] = [
+  public lineChartColorsHome: Color[] = [
     {
       borderColor: '#f2f2f2',
       backgroundColor: 'rgba(255,255,255,0.5)',
@@ -96,6 +96,20 @@ export class MatchComponent implements OnInit, OnDestroy {
       pointRadius: 5,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: '#ED1A33',
+
+    },
+  ];
+  public lineChartColorsAway: Color[] = [
+    {
+      borderColor: '#f2f2f2',
+      backgroundColor: 'rgba(255,255,255,0.5)',
+      pointBackgroundColor: '#FFF',
+      pointBorderWidth: 2,
+      pointHoverBorderWidth: 2,
+      pointBorderColor: '#22336F',
+      pointRadius: 5,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: '#22336F',
 
     },
   ];
