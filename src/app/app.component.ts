@@ -88,58 +88,57 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   setmetatags(routerURL) {
-    let data = this.metatagsObj[routerURL];
-    if (!data) {
-      data = this.metatagsObj['/'];
-    }
+    this.getBestMatchedUrl(routerURL).then(
+      (data: any) => {
+        if (data) {
+          if (data.title) {
+            this.meta.updateTag({ name: 'title', content: data.title });
+            this.meta.updateTag({ property: 'og:title', content: data.title });
+            this.meta.updateTag({ name: 'twitter:title', content: data.title });
+          }
+          this.meta.updateTag(
+            {
+              name: 'keywords', content: data.keywords ?
+                data.keywords :
+                'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports'
+            });
 
-    if (data) {
-      if (data.title) {
-        this.meta.updateTag({ name: 'title', content: data.title });
-        this.meta.updateTag({ property: 'og:title', content: data.title });
-        this.meta.updateTag({ name: 'twitter:title', content: data.title });
+          if (data.description) {
+            this.meta.updateTag({ name: 'description', content: data.description });
+            this.meta.updateTag({ name: 'og:description', content: data.description });
+            this.meta.updateTag({ name: 'twitter:description', content: data.description });
+          }
+          if (data.image) {
+            this.meta.updateTag({ name: 'twitter:image', content: data.image });
+            this.meta.updateTag({ name: 'twitter:image:src', content: data.image });
+            this.meta.updateTag({ name: 'og:image', content: data.image });
+          }
+          if (data.topic)
+            this.meta.updateTag({ name: 'topic', content: data.topic });
+          if (data.subject)
+            this.meta.updateTag({ name: 'subject', content: data.subject });
+          if (data['og:type'])
+            this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
+          if (data['twitter:card'])
+            this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
+        } else {
+          this.meta.updateTag({ name: 'title', content: 'title' });
+          this.meta.updateTag({ property: 'og:title', content: 'title' });
+          this.meta.updateTag({ name: 'twitter:title', content: 'title' });
+          this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
+          this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+          this.meta.updateTag({ name: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+          this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+          this.meta.updateTag({ name: 'twitter:image', content: 'https://sports.info/assets/images/logo.svg' });
+          this.meta.updateTag({ name: 'twitter:image:src', content: 'https://sports.info/assets/images/logo.svg' });
+          this.meta.updateTag({ name: 'og:image', content: 'https://sports.info/assets/images/logo.svg' });
+          this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
+          this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
+          this.meta.updateTag({ property: 'og:type', content: 'article' });
+          this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+        }
       }
-      this.meta.updateTag(
-        {
-          name: 'keywords', content: data.keywords ?
-            data.keywords :
-            'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports'
-        });
-
-      if (data.description) {
-        this.meta.updateTag({ name: 'description', content: data.description });
-        this.meta.updateTag({ name: 'og:description', content: data.description });
-        this.meta.updateTag({ name: 'twitter:description', content: data.description });
-      }
-      if (data.image) {
-        this.meta.updateTag({ name: 'twitter:image', content: data.image });
-        this.meta.updateTag({ name: 'twitter:image:src', content: data.image });
-        this.meta.updateTag({ name: 'og:image', content: data.image });
-      }
-      if (data.topic)
-        this.meta.updateTag({ name: 'topic', content: data.topic });
-      if (data.subject)
-        this.meta.updateTag({ name: 'subject', content: data.subject });
-      if (data['og:type'])
-        this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
-      if (data['twitter:card'])
-        this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
-    } else {
-      this.meta.updateTag({ name: 'title', content: 'title' });
-      this.meta.updateTag({ property: 'og:title', content: 'title' });
-      this.meta.updateTag({ name: 'twitter:title', content: 'title' });
-      this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-      this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ name: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-      this.meta.updateTag({ name: 'twitter:image', content: 'https://sports.info/assets/images/logo.svg' });
-      this.meta.updateTag({ name: 'twitter:image:src', content: 'https://sports.info/assets/images/logo.svg' });
-      this.meta.updateTag({ name: 'og:image', content: 'https://sports.info/assets/images/logo.svg' });
-      this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-      this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-      this.meta.updateTag({ property: 'og:type', content: 'article' });
-      this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    }
+    );
   }
 
   /* //get cookie by name */
@@ -182,6 +181,24 @@ export class AppComponent implements OnInit, AfterContentInit {
           metaarray['/'] = data;
       });
       this.metatagsObj = { ...metaarray };
+
     });
   }
+
+  getBestMatchedUrl(url) {
+    return new Promise((resolve, reject) => {
+      if (this.metatagsObj[url]) {
+        resolve(this.metatagsObj[url]);
+      } else if (url) {
+        this.getBestMatchedUrl(url.replace(new RegExp(url.substr(url.lastIndexOf('/')) + '$'), '')).then(resolve).catch(reject);
+      } else if (this.metatagsObj['/']) {
+        resolve(this.metatagsObj['/']);
+      } else {
+        reject('No Match Found');
+      }
+    });
+
+  }
+
+
 }

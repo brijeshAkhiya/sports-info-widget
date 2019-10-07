@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
+import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-match',
@@ -22,9 +26,6 @@ export class MatchComponent implements OnInit, OnDestroy {
   dummyAPICall = 62;
   interval;
   timeout;
-
-<<<<<<< Updated upstream
-=======
 
   public lineChartData: ChartDataSets[] = [
     { data: [0, 4, 1, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2, 0], label: '' },
@@ -73,8 +74,6 @@ export class MatchComponent implements OnInit, OnDestroy {
   public lineChartType = 'line';
   public lineChartPlugins = [];
 
-
->>>>>>> Stashed changes
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,

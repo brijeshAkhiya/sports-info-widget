@@ -20,9 +20,6 @@
                 <!-- <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'"
                   [message]="'Coming Soon..!'">
                 </app-no-data-widget> -->
-<<<<<<< Updated upstream
-=======
-
                 <!-- Start - Chart -->
                 <div class="common-chart common-shadow rounded-box">
                     <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
@@ -53,8 +50,6 @@
                 </p>
                 </div>
                 <!-- End  - Chart -->
-
->>>>>>> Stashed changes
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry" [sport]="'Kabaddi'">
                 </app-goal-commentry>
                 <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"

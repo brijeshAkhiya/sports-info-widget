@@ -20,7 +20,6 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.data);
 
     if (this.list_type) {
       this.listtype = this.list_type;
