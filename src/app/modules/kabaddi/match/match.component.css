@@ -14,7 +14,13 @@
 .match-stats .point-line                { margin-right: 8px; display: inline-block; width: calc(100% - 40px); height: 8px; background: #E0E0E0; }
 .match-stats .hightlight .point-line    { background: #ED1A33; }
 .match-stats .stat-row > :first-child .point-line { margin-right: 0px; margin-left: 8px; } */
+<<<<<<< Updated upstream
 
+=======
+.kabaddi-chart                          { padding: 8px 0px; overflow: auto; }
+.kabaddi-chart .chart-item:first-child  { border-bottom: 2px solid #ED1A33; }
+.kabaddi-chart .chart-inner             { min-width: 540px; display: flex; flex-direction: column; }
+>>>>>>> Stashed changes
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
 /* -------- Match Stats ------- */

@@ -19,54 +19,47 @@
               <!-- <h5>Match Commentary</h5> -->
               <!-- <app-loader *ngIf="loading"></app-loader> -->
               <ng-container *ngIf="matchInfo">
-                <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0"
-                  [commentry]="matchInfo?.timeline" [sport]="'Soccer'" [team]="team"></app-goal-commentry>
-                <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
-                  [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
-                <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
-                  [sport]="'soccer'"></app-no-data-widget>
-              </ng-container>
-              <!-- <div class="soccer-chart common-shadow rounded-box d-flex flex-column">
-                <div>
-                  <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
-                      [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
-                      [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
-                      class="d-inline-block">{{headtohead?.teams?.team1?.name}}</span>
-                  </p>
-                  <div class="chart-inner">
-                    <ul class="no-margin">
-                      <li [ngStyle]="{'left': '10%'}">
-                        <div class="time-count">16</div>
-                        <div ngbDropdown class="" #myDrop1="ngbDropdown">
-                          <button class="time-event goal" id="dropdownBasic1" ngbDropdownToggle
-                            (mouseover)="myDrop1.open()" (mouseout)="myDrop1.close();"></button>
-                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <p>Goal <span>: Lionel Messi</span></p>
+                <!-- <div class="common-chart soccer-chart common-shadow rounded-box d-flex flex-column">
+                  <div>
+                    <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
+                        [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
+                        [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
+                        class="d-inline-block">{{headtohead?.teams?.team1?.name}}</span>
+                    </p>
+                    <div class="chart-inner">
+                      <ul class="no-margin">
+                        <li [ngStyle]="{'left': '10%'}">
+                          <div class="time-count">16</div>
+                          <div ngbDropdown class="" #myDrop1="ngbDropdown">
+                            <button class="time-event goal" id="dropdownBasic1" ngbDropdownToggle
+                              (mouseover)="myDrop1.open()" (mouseout)="myDrop1.close();"></button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <p>Goal <span>: Lionel Messi</span></p>
+                            </div>
                           </div>
-                        </div>
-                      </li>
-                      <li [ngStyle]="{'left': '20%'}">
-                        <div class="time-count">16</div>
-                        <div ngbDropdown class="opp-team" #myDrop1="ngbDropdown">
-                          <button class="time-event goal" id="dropdownBasic1" ngbDropdownToggle
-                            (mouseover)="myDrop1.open()" (mouseout)="myDrop1.close();"></button>
-                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <p>Goal <span>: Lionel Messi</span></p>
+                        </li>
+                        <li [ngStyle]="{'left': '20%'}">
+                          <div class="time-count">16</div>
+                          <div ngbDropdown class="opp-team" #myDrop1="ngbDropdown">
+                            <button class="time-event goal" id="dropdownBasic1" ngbDropdownToggle
+                              (mouseover)="myDrop1.open()" (mouseout)="myDrop1.close();"></button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <p>Goal <span>: Lionel Messi</span></p>
+                            </div>
                           </div>
-                        </div>
-                      </li>
-                      <li [ngStyle]="{'left': '70%'}">
-                        <div class="time-count">18</div>
-                        <div ngbDropdown class="" #myDrop2="ngbDropdown">
-                          <button class="time-event replace" id="dropdownBasic1" ngbDropdownToggle
-                            (mouseover)="myDrop2.open()" (mouseout)="myDrop2.close();"></button>
-                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <p class="out">Out <span>: Lionel Messi</span></p>
-                            <p>In <span>: Lionel Messi</span></p>
+                        </li>
+                        <li [ngStyle]="{'left': '70%'}">
+                          <div class="time-count">18</div>
+                          <div ngbDropdown class="" #myDrop2="ngbDropdown">
+                            <button class="time-event replace" id="dropdownBasic1" ngbDropdownToggle
+                              (mouseover)="myDrop2.open()" (mouseout)="myDrop2.close();"></button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <p class="out">Out <span>: Lionel Messi</span></p>
+                              <p>In <span>: Lionel Messi</span></p>
+                            </div>
                           </div>
-                        </div>
-                      </li>
-                      <li [ngStyle]="{'left': '75%'}">
+                        </li>
+                        <li [ngStyle]="{'left': '75%'}">
                           <div class="time-count">18</div>
                           <div ngbDropdown class="opp-team" #myDrop2="ngbDropdown">
                             <button class="time-event replace" id="dropdownBasic1" ngbDropdownToggle
@@ -77,25 +70,32 @@
                             </div>
                           </div>
                         </li>
-                      <li [ngStyle]="{'left': '30%'}">
-                        <div class="time-count ">19</div>
-                        <div ngbDropdown class="" #myDrop3="ngbDropdown">
-                          <button class="time-event red-card" id="dropdownBasic1" ngbDropdownToggle
-                            (mouseover)="myDrop3.open()" (mouseout)="myDrop3.close();"></button>
-                          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <p>Red Card <span>: Lionel Messi</span></p>
+                        <li [ngStyle]="{'left': '30%'}">
+                          <div class="time-count ">19</div>
+                          <div ngbDropdown class="" #myDrop3="ngbDropdown">
+                            <button class="time-event red-card" id="dropdownBasic1" ngbDropdownToggle
+                              (mouseover)="myDrop3.open()" (mouseout)="myDrop3.close();"></button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <p>Red Card <span>: Lionel Messi</span></p>
+                            </div>
                           </div>
-                        </div>
-                      </li>
-                    </ul>
+                        </li>
+                      </ul>
+                    </div>
+                    <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
+                        [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
+                        [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
+                        class="d-inline-block">{{headtohead?.teams?.team2?.name}}</span>
+                    </p>
                   </div>
-                  <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
-                      [lazyLoad]="headtohead?.team2?.id | logosurl:'soccer'"
-                      [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
-                      class="d-inline-block">{{headtohead?.teams?.team2?.name}}</span>
-                  </p>
-                </div> 
-              </div>-->
+                </div> -->
+                <app-goal-commentry *ngIf="matchInfo?.timeline && matchInfo?.timeline.length > 0"
+                  [commentry]="matchInfo?.timeline" [sport]="'Soccer'" [team]="team"></app-goal-commentry>
+                <app-countdown *ngIf="!matchInfo?.timeline && matchInfo.sport_event_status?.status == 'not_started'"
+                  [scheduled]="matchInfo.sport_event?.start_time" [sport]="'soccer'"></app-countdown>
+                <app-no-data-widget *ngIf="(matchInfo.sport_event_status?.status == 'live' && !matchInfo?.timeline)"
+                  [sport]="'soccer'"></app-no-data-widget>
+              </ng-container>
             </ng-template>
           </ngb-tab>
           <!-- END - MATCH COMMENTRY-->

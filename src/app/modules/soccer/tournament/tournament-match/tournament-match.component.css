@@ -1,7 +1,4 @@
 /* -------- Soccer Chart ------- */
-.soccer-chart                           { padding: 12px 16px; }
-.soccer-chart .team-name img            { margin-right: 8px; height: 32px; border: 1px solid #EBEBEB; border-radius: 1px; }
-.soccer-chart .team-name span           { vertical-align: middle; font-weight: 500; }
 .soccer-chart .chart-inner              { overflow: auto; }
 .soccer-chart ul                        { padding: 62px 0; position: relative;}
 .soccer-chart ul li                     { position: absolute; left: 50px; top: 0; width: 24px; height: 100%; }

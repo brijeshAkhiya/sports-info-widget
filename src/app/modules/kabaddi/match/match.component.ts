@@ -23,6 +23,58 @@ export class MatchComponent implements OnInit, OnDestroy {
   interval;
   timeout;
 
+<<<<<<< Updated upstream
+=======
+
+  public lineChartData: ChartDataSets[] = [
+    { data: [0, 4, 1, 2, 1, 4, 2, 3, 1, 3, 4, 1, 2, 0], label: '' },
+  ];
+  public lineChartLabels: Label[] = ['Start','temp1', 'Raid by : Pardeep Narwal2', 'Raid by : Pardeep Narwal3', 'Raid by : Pardeep Narwal4', 'All out', 'Raid by : Pavan Kumar', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'All out', 'Raid by : Pardeep Narwal', 'Raid by : Pardeep Narwal', 'End'];
+  public lineChartOptions: any = {
+    responsive: true,
+    // maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        display: false,
+        ticks: {
+          max: 5,
+          min: 0,
+          reverse: true
+        },
+      }],
+      xAxes: [{
+        display: false
+      }]
+    },
+    stepped: true,
+    tooltips: {
+      borderWidth: 2,
+      backgroundColor: "#fff",
+      titleFontColor: "#292929",
+      bodyFontColor: "#292929",
+      borderColor: '#EBEBEB',
+    }
+  };
+  public lineChartColors: Color[] = [
+    {
+      borderColor: '#f2f2f2',
+      backgroundColor: 'rgba(255,255,255,0.5)',
+      pointBackgroundColor: '#FFF',
+      pointBorderWidth: 2,
+      pointHoverBorderWidth: 2,
+      pointBorderColor: '#ED1A33',
+      pointRadius: 5,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: '#ED1A33',
+      
+    },
+  ];
+  public lineChartLegend = false;
+  public lineChartType = 'line';
+  public lineChartPlugins = [];
+
+
+>>>>>>> Stashed changes
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,

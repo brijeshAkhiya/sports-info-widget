@@ -20,6 +20,41 @@
                 <!-- <app-no-data-widget *ngIf="!loading && commentry.length == 0" [sport]="'kabaddi'"
                   [message]="'Coming Soon..!'">
                 </app-no-data-widget> -->
+<<<<<<< Updated upstream
+=======
+
+                <!-- Start - Chart -->
+                <div class="common-chart common-shadow rounded-box">
+                    <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
+                      [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
+                      [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
+                      class="d-inline-block">Gujarat Fortunegiants</span>
+                  </p>
+                  <div class="kabaddi-chart">
+                    <div class="chart-inner">
+                      <div class="chart-item">
+                        <canvas baseChart width="400" height="43" [datasets]="lineChartData" [labels]="lineChartLabels"
+                          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                          [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                        </canvas>
+                      </div>
+                      <div class="chart-item">
+                        <canvas baseChart width="400" height="43" [datasets]="lineChartData" [labels]="lineChartLabels"
+                          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                          [chartType]="lineChartType" [plugins]="lineChartPlugins">
+                        </canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="team-name no-margin"><img [offset]="commonService.lazyloadoffset"
+                    [lazyLoad]="headtohead?.team1?.id | logosurl:'soccer'"
+                    [defaultImage]="commonService.flagplaceholder" alt="team-flag"><span
+                    class="d-inline-block">U Mumba</span>
+                </p>
+                </div>
+                <!-- End  - Chart -->
+
+>>>>>>> Stashed changes
                 <app-goal-commentry *ngIf="commentry.length > 0" [commentry]="commentry" [sport]="'Kabaddi'">
                 </app-goal-commentry>
                 <app-countdown *ngIf="commentry.length == 0 && matchInfo.match_info.gamestate == 0"
