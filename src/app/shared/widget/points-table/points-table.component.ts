@@ -37,10 +37,6 @@ export class PointsTableComponent implements OnInit, OnChanges {
     this.sorting = 'ASC';
   }
   ngOnInit() {
-<<<<<<< HEAD
-
-=======
->>>>>>> 6103cface01740bea4465a55ce5c7c2b75443078
     if (this.sport == 'Cricket') {
       this.loadCricketPoints();
       this.data = {
