@@ -140,11 +140,13 @@ export class CommonService {
       } else if (type == 'match') {
         return 'sr:match:' + id;
       }
-    } else if (sport == 'hockey') {
+    } else if (sport == 'hockey' || sport == 'Hockey') {
       if (type == 'tournament') {
-        return 'sr:competitor:' + id;
+        return 'sr:competition:' + id;
       } else if (type == 'season') {
         return 'sr:season:' + id;
+      } else if (type == 'match') {
+        return 'sr:sport_event:' + id;
       }
     }
   }

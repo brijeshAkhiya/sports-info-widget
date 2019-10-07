@@ -19,6 +19,8 @@ export class NoDataWidgetComponent implements OnInit {
       this.imagepath = { image: 'assets/images/match/soccer/no_data_football.svg' };
     } else if (this.sport === 'Basketball') {
       this.imagepath = { image: 'assets/images/match/basketball/no_data_basketball.svg' };
+    } else if (this.sport === 'Hockey') {
+      this.imagepath = { image: 'assets/images/match/hockey/no_data_hockey.svg' };
     } else {
       const array = [
         { image: 'assets/images/no_data_1.svg' },

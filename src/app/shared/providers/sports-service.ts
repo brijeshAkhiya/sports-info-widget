@@ -692,13 +692,16 @@ export class SportsService {
       environment.apiUrl + environment.version + `/nba/daily/summaries/${date}`
     );
   }
-
   getBasketballSchedule() {
     return this.http.get(
       environment.apiUrl + environment.version + `/nba/schedules`
     );
   }
-
+  tempBasketballAPI(type, counter) {
+    return this.http.get(
+      `http://13.235.4.242:3004/?type=${type}&counter=${counter}`
+    );
+  }
   /**
    * Hockey Services
    */
@@ -717,9 +720,24 @@ export class SportsService {
       environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/standings`
     );
   }
+  getHockeySeasonSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/summaries`
+    );
+  }
   getHocketDailySummary(date) {
     return this.http.get(
       environment.apiUrl + environment.version + `/fieldhockey/daily/summaries/${date}`
+    );
+  }
+  getHockeyMatchTimeline(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/match/${id}/timeline`
+    );
+  }
+  getHockeyMatchSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/match/${id}/summary`
     );
   }
 

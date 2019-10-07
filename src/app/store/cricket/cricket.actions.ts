@@ -1,4 +1,4 @@
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 export const CRICKET_FIXTURES_MATCHES = '[Cricket Fixtures Matches] Save Cricket Fixtures Matches';
 export const CRICKET_RESULTS_MATCHES = '[Cricket Results Matches] Save Cricket Results Matches';
 export const CRICKET_LIVE_MATCHES = '[Cricket Live Matches] Save Cricket Live Matches';
@@ -12,72 +12,68 @@ export const CRICKET_STOP_LOADING = '[UI] Cricket Stop Loading';
 export const LOAD_CRICKET_SLIDER = '[Cricket Slider] Load Cricket Slider Data';
 export const LOAD_CRICKET_SLIDER_SUCCESS = '[Cricket Slider] Load Success';
 
-
-
-
-
-
-
 export class CricketStartLoading implements Action {
-    readonly type = CRICKET_START_LOADING
+    readonly type = CRICKET_START_LOADING;
 }
 
 export class CricketStopLoading implements Action {
-    readonly type = CRICKET_STOP_LOADING
+    readonly type = CRICKET_STOP_LOADING;
 }
 
 export class CricketFixtures implements Action {
-    readonly type = CRICKET_FIXTURES_MATCHES
+    readonly type = CRICKET_FIXTURES_MATCHES;
     constructor(public payload: any) { }
 }
 
 export class CricketLiveMatches implements Action {
-    readonly type = CRICKET_LIVE_MATCHES
+    readonly type = CRICKET_LIVE_MATCHES;
     constructor(public payload: any) { }
 }
 
 export class CricketResults implements Action {
-    readonly type = CRICKET_RESULTS_MATCHES
+    readonly type = CRICKET_RESULTS_MATCHES;
     constructor(public payload: any) { }
 }
 
 
 export class CricketMatchInfo implements Action {
-    readonly type = CRICKET_MATCH_INFO
+    readonly type = CRICKET_MATCH_INFO;
     constructor(public payload: any) { }
 }
 
 
 export class LoadCricketFixtures implements Action {
-    readonly type = LOAD_CRICKET_FIXTURES
+    readonly type = LOAD_CRICKET_FIXTURES;
 
 }
 
 export class LoadCricketFixturesSuccess implements Action {
-    readonly type = LOAD_CRICKET_FIXTURES_SUCCESS
+    readonly type = LOAD_CRICKET_FIXTURES_SUCCESS;
     constructor(public payload: any) { }
 }
 
 
 export class LoadCricketResults implements Action {
-    readonly type = LOAD_CRICKET_RESULTS
+    readonly type = LOAD_CRICKET_RESULTS;
 
 }
 
 export class LoadCricketResultsSuccess implements Action {
-    readonly type = LOAD_CRICKET_RESULTS_SUCCESS
+    readonly type = LOAD_CRICKET_RESULTS_SUCCESS;
     constructor(public payload: any) { }
 }
 
 
 export class LoadCricketSlider implements Action {
-    readonly type = LOAD_CRICKET_SLIDER
+    readonly type = LOAD_CRICKET_SLIDER;
 }
 
 export class LoadCricketSliderSuccess implements Action {
-    readonly type = LOAD_CRICKET_SLIDER_SUCCESS
+    readonly type = LOAD_CRICKET_SLIDER_SUCCESS;
     constructor(public payload: any) { }
 }
 
-export type CricketActions = CricketFixtures | CricketLiveMatches | CricketResults | CricketMatchInfo | LoadCricketFixtures | LoadCricketFixturesSuccess | LoadCricketResults | LoadCricketResultsSuccess
-    | CricketStartLoading | CricketStopLoading | LoadCricketSlider | LoadCricketSliderSuccess
+export type CricketActions = CricketFixtures | CricketLiveMatches | CricketResults
+    | CricketMatchInfo | LoadCricketFixtures | LoadCricketFixturesSuccess
+    | LoadCricketResults | LoadCricketResultsSuccess
+    | CricketStartLoading | CricketStopLoading | LoadCricketSlider | LoadCricketSliderSuccess;

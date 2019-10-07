@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HockeyRoutingModule } from './hockey-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /** External Modules */
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,7 +20,8 @@ import { StandingsComponent } from './tournament/standings/standings.component';
     CommonModule,
     HockeyRoutingModule,
     SharedModule,
-    TranslateModule
+    TranslateModule,
+    NgbModule
   ]
 })
 export class HockeyModule { }
