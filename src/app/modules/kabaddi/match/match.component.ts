@@ -51,7 +51,7 @@ export class MatchComponent implements OnInit, OnDestroy {
         display: false
       }]
     },
-    stepped: true,
+    bezierCurve: false,
     tooltips: {
       borderWidth: 2,
       backgroundColor: '#fff',
@@ -76,7 +76,7 @@ export class MatchComponent implements OnInit, OnDestroy {
         display: false
       }]
     },
-    stepped: true,
+    bezierCurve: false,
     tooltips: {
       borderWidth: 2,
       backgroundColor: '#fff',
@@ -93,8 +93,8 @@ export class MatchComponent implements OnInit, OnDestroy {
       pointBorderWidth: 2,
       pointHoverBorderWidth: 2,
       pointBorderColor: '#ED1A33',
-      pointRadius: 5,
-      pointHoverRadius: 5,
+      pointRadius: 4,
+      pointHoverRadius: 4,
       pointHoverBackgroundColor: '#ED1A33',
 
     },
@@ -107,8 +107,8 @@ export class MatchComponent implements OnInit, OnDestroy {
       pointBorderWidth: 2,
       pointHoverBorderWidth: 2,
       pointBorderColor: '#22336F',
-      pointRadius: 5,
-      pointHoverRadius: 5,
+      pointRadius: 4,
+      pointHoverRadius: 4,
       pointHoverBackgroundColor: '#22336F',
 
     },

@@ -17,7 +17,7 @@
 
 .kabaddi-chart                          { padding: 8px 0px; overflow: auto; }
 .kabaddi-chart .chart-item:first-child  { border-bottom: 2px solid #ED1A33; }
-.kabaddi-chart .chart-inner             { min-width: 540px; display: flex; flex-direction: column; }
+.kabaddi-chart .chart-inner             { min-width: 640px; display: flex; flex-direction: column; }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
