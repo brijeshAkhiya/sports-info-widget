@@ -21,7 +21,7 @@
                   [message]="'Coming Soon..!'">
                 </app-no-data-widget> -->
                 <!-- Start - Chart -->
-                <div class="common-chart common-shadow rounded-box">
+                <div class="common-chart common-shadow rounded-box" *ngIf="matchInfo?.event?.length > 0">
                   <p class="team-name no-margin" *ngIf="matchInfo?.match_info.teams?.home">
                     <img alt="{{matchInfo?.match_info.teams?.home?.tname}}"
                       [lazyLoad]="matchInfo?.match_info.teams?.home?.tid | logosurl:'kabaddi'"

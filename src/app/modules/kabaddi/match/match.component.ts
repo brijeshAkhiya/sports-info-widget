@@ -287,7 +287,10 @@ export class MatchComponent implements OnInit, OnDestroy {
       desc = event.event_time + ' ' + event.raider_name;
     }
     if ((event.tackle_event === 'successful' || event.tackle_event == 'technical') && team.tid == event.defending_team_id) {
-      desc = event.event_time + ' ' + event.defender_name;
+      if (event.defender_name != '')
+        desc = event.event_time + ' ' + event.defender_name;
+      else if (event.allout == 'true')
+        desc = event.event_time + ' All Out';
     }
     if (event.bounus != '') {
       if (event.bounus == 'raider' && team.tid == event.raiding_team_id)
