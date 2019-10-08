@@ -242,7 +242,7 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-sidebar-links *ngIf="sport != 'kabaddi'" [sport]="'Cricket'" [link_type]="'tournament'"
+          <app-sidebar-links [sport]="sport" [link_type]="'tournament'"
             [options]="{type: 'current', title:('Cricket_Module.Current_Series' | translate)}"></app-sidebar-links>
 
           <!-- <app-common-story-widget [title]="'Current Series'" [type]="'cricketseries'" [data]="'cricketseries'">

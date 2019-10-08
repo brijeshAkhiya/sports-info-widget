@@ -33,10 +33,13 @@
               <li><a
                   [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify), 'fixtures']">{{'widgetModule.Fixtures' | translate }}</a>
               </li>
-              <li><a
+              <li *ngIf="sport == 'Soccer'"><a
                   [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'clubs']">{{'Soccer_Module.Clubs' | translate }}</a>
               </li>
-              <li><a
+              <li *ngIf="sport == 'Hockey'"><a
+                  [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'teams']">{{'Cricket_Module.Teams' | translate }}</a>
+              </li>
+              <li *ngIf="sport == 'Soccer'"><a
                   [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">{{'widgetModule.Stats' | translate }}</a>
               </li>
               <li><a

@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-match',

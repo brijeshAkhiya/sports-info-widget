@@ -29,12 +29,13 @@ export class HomeComponent implements OnInit {
       title = 'NBA';
     this.options = {
       reqParams:
-        { eSport: this.params.sport },
+        { eSport: this.params.sport, aIds: [] },
       title: this.translateservice.get(title)['value'],
       type: 'sport'
     };
     if (this.activatedRoute.snapshot.params.id) {
       this.options.tournamentid = this.commonService.getIds(this.activatedRoute.snapshot.params.id, 'cricket', 'tournament');
+      this.options.reqParams.aIds.push(this.commonService.getIds(this.activatedRoute.snapshot.params.id, this.params.sport, 'tournament'));
       if (this.activatedRoute.snapshot.params.slug)
         this.options.title = this.activatedRoute.snapshot.params.slug.replace(/-/g, ' ');
     }

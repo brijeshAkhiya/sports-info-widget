@@ -23,6 +23,10 @@
           <ng-container *ngTemplateOutlet="basketball;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
+        <ng-container *ngIf="sport == 'Hockey'">
+          <ng-container *ngTemplateOutlet="hockey;context:{match: match, type:type}">
+          </ng-container>
+        </ng-container>
       </ng-container>
     </div>
   </div>
@@ -299,6 +303,71 @@
 
     </div>
   </div>
+</ng-template>
+
+<ng-template #hockey let-match="match" let-type="type">
+  <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
+    [ngClass]="{'complete-match' : match?.sport_event_status?.status == 'closed'}">
+    <div class="match-desc">
+      <h6 class="text-capitalize">
+        {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
+        <span
+          class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? ', Round - ' + match?.sport_event?.sport_event_context?.round?.number : '' }}</span>
+      </h6>
+      <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
+      <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
+      </p>
+    </div>
+    <div class="match-teams d-flex align-items-center">
+      <div class="match-team d-flex align-items-center">
+        <div class="team-info">
+          <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event?.competitors[0]?.id}">
+            {{match.sport_event?.competitors[0].abbreviation}}</h5>
+        </div>
+        <div class="team-flag">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="match.sport_event?.competitors[0].id | logosurl:'hockey'"
+            [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event?.competitors[0].abbreviation}}">
+        </div>
+      </div>
+
+      <!-- For Upcoming Match -->
+      <div class="vs-block" *ngIf="match.sport_event_status?.status != 'closed'">
+        <h6>vs</h6>
+      </div>
+      <!-- For Complete/Result Match -->
+      <div class="score-center-block" *ngIf="match.sport_event_status?.status == 'closed'">
+        <p>ft</p>
+        <div class="value d-flex justify-content-between">
+          <h4 class="dark-text">
+            {{match.sport_event?.competitors[0].qualifier == 'home' ? match.sport_event_status?.home_score : match.sport_event_status?.away_score}}
+          </h4>
+          <h4 class="dark-text">-</h4>
+          <h4 class="dark-text">
+            {{match.sport_event.competitors[1].qualifier == 'home' ? match.sport_event_status?.home_score : match.sport_event_status?.away_score}}
+          </h4>
+        </div>
+      </div>
+
+      <div class="match-team d-flex align-items-center">
+        <div class="team-flag">
+          <img [offset]="commonService.lazyloadoffset"
+            [lazyLoad]="match.sport_event?.competitors[1].id | logosurl:'hockey'"
+            [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event.competitors[1].abbreviation}}">
+        </div>
+        <div class="team-info">
+          <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event.competitors[1]?.id}">
+            {{match.sport_event.competitors[1].abbreviation}}</h5>
+        </div>
+      </div>
+
+      <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
+      <a class="fullblock-link"
+        [routerLink]="['/hockey/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
+      </a>
+    </div>
+  </div>
+
 </ng-template>
 
 

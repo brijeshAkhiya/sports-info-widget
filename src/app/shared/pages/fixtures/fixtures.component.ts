@@ -40,6 +40,7 @@ export class FixturesComponent implements OnInit {
   ngOnInit() {
     const routeData: any = this.activatedroute;
     this.params = routeData.data.value;
+    console.log(this.params.sport);
     if (this.params.sport == 'Cricket') {
       /* Tournaments Fixtures */
       this.activeTab = routeData.params.value.type;
@@ -83,10 +84,35 @@ export class FixturesComponent implements OnInit {
     } else if (this.params.sport == 'Hockey') {
       // Tournament Fixtures
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
-        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-        this.getSoccerTournamentData(this.tournamentid);
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'hockey', 'season');
+        this.getHockeyTournamentData(this.tournamentid);
       }
     }
+  }
+
+  getHockeyTournamentData(id) {
+    this.paramsFixtures.loading = true;
+    this.paramsResults.loading = true;
+    this.sportsService
+      .getHockeySeasonSummary('sr:season:71218')
+      .subscribe((res: any) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+        if (res.data.summaries && res.data.summaries.length > 0) {
+          this.paramsFixtures.data = this.paramsFixtures.data.concat(
+            this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'),
+              'Do MMMM YYYY', 'start_time', 'asc')
+          );
+          this.paramsResults.data = this.paramsResults.data.concat(
+            this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'),
+              'Do MMMM YYYY', 'start_time', 'desc')
+          );
+        }
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+      });
+
   }
 
   getSoccerTournamentData(id) {
