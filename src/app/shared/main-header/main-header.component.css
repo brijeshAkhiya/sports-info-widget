@@ -83,9 +83,8 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 /* -- Arabic CSS -- */
     .arabic nav .navbar-brand           { margin-left: 36px; padding-right: 24px; }
     .arabic nav .navbar-brand:before    { left: -28px; }
-    .arabic .navbar-nav-container       { left: auto; right: 54%; }
+    .arabic .navbar-nav-container       { left: auto; right: 54%; transform: translateX(50%); -webkit-transform: translateX(50%); }
     .arabic .login-search               { margin-left: 16px;}
-
 }
 
 
@@ -116,7 +115,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 /* -- Arabic CSS -- */
     .arabic nav .navbar-brand           { margin-left: 30px; padding-right: 15px;}
     .arabic nav .navbar-brand:before    { left: -16px; }
-    .arabic .navbar-nav-container       { left: auto; right: 54%; }
+    .arabic .navbar-nav-container       { left: auto; right: 54%; transform: translateX(50%); -webkit-transform: translateX(50%); }
     .arabic .login-search               { margin-left: 8px;}
 }
 

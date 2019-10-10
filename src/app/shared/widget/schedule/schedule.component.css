@@ -41,6 +41,7 @@
 .schedule-item .details-btn             { position: absolute; width: 32px; height: 100%; background: #ED1A33; font-size: 14px; line-height: 32px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; color: #fff; right: 0px; transform: translateX(100%); -webkit-transform: translateX(100%); top: 0px; border-radius: 4px; text-transform: uppercase; }
 .schedule-item .details-btn span        { position: absolute; color: #fff; display: block; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); -webkit-transform: translate(-50%, -50%) rotate(-90deg); }
 .schedule-item:hover .details-btn       { transform: translateX(0%); -webkit-transform: translateX(0%); }
+.final-match-item.schedule-item .match-desc     { width: 210px; }
 
 /* -------- Tournament Fixtures For Kabaddi ------- */
 .schedule-tour-list .score-center-block     { margin: -10px 12px 0px; width: 100px; text-transform: uppercase; text-align: center; }
@@ -64,9 +65,10 @@
 .soccer-tour .score-center-block h4         { margin: 0px; font-size: 16px; line-height: 20px; }
 
 /* -- Arabic CSS -- */
-.arabic .schedule-list .month-title         { padding-right: 0px; padding-left: 16px; }
-.arabic .schedule-item .details-btn         { right: auto; left: 0; transform: translateX(-100%); -webkit-transform: translateX(-100%);  }
-.arabic .schedule-item:hover .details-btn   { transform: translateX(0%); -webkit-transform: translateX(0%); }
+.arabic .schedule-list .month-title             { padding-right: 0px; padding-left: 16px; }
+.arabic .match-teams .match-team:first-child    { text-align: left; }
+.arabic .schedule-item .details-btn             { right: auto; left: 0; transform: translateX(-100%); -webkit-transform: translateX(-100%);  }
+.arabic .schedule-item:hover .details-btn       { transform: translateX(0%); -webkit-transform: translateX(0%); }
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
@@ -96,6 +98,7 @@
     .match-teams .team-flag img             { height: 40px;}
     .match-teams .vs-block h6               { margin: 0px 10px; }
     .schedule-tour-list p                   { margin-bottom: 6px;}
+    .schedule-tour-list .schedule-item.final-match-item  { flex-direction: row; -webkit-flex-direction: row; }
 /* -------- Tournament Fixtures For Kabaddi ------- */
     .schedule-tour-list .score-center-block     { margin: -5px 8px 0px; padding-top: 5px; }
 /* -------- Tournament Fixtures For Soccer ------- */

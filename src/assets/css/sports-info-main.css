@@ -379,6 +379,9 @@ ngb-datepicker .ngb-dp-weekday              { font-weight: 700; font-style: norm
 ngb-datepicker .ngb-dp-day                  { font-size: 14px; font-weight: 500; }
 ngb-datepicker .btn-light                   { color: #bfbfbf; }
 ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
+/* -- Arabic CSS -- */
+.arabic ngb-datepicker                      { direction: ltr; }
+
 /* -------- Common Chart Style ------- */
 .common-chart                           { padding: 12px 16px; }
 .common-chart .team-name img            { margin-right: 8px; height: 32px; border: 1px solid #EBEBEB; border-radius: 1px; }
@@ -386,8 +389,11 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
 
 /******* NBA Pages ******/
 .nba-common-selection .dropdown-toggle                	{ margin-right: 16px; min-width: 160px; }
-.nba-common-selection .dropdown:last-child .dropdown-toggle { margin-right: 0px; }
+.nba-common-selection .dropdown:last-child .dropdown-toggle { margin: 0px; }
 .nba-common-selection .date-dropdown .dropdown-toggle 	{ min-width: 120px; }
+/* -- Arabic CSS -- */
+.arabic .nba-common-selection .dropdown-toggle          { margin-right: 0; margin-left: 16px;}
+
 
 /******** Middle Section CSS End *******/
 
@@ -541,7 +547,7 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
     .common-news-list .common-news-desc     { padding: 0px 0px 16px 0px; }
     .common-news-list .author-info          { padding: 0px; }
 /* -- Arabic CSS -- */
-    .common-news-list .author-info          { padding: 0px;}
+    .arabic .common-news-list .author-info          { padding: 0px;}
 
 /* -------- Common Widget Block ------- */
     .common-widget .widget-title                    { padding: 6px 6px 8px; }
@@ -576,6 +582,9 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
     .fixture-date .dropdown-menu                { left: auto !important; right: 0 !important; transform: translateX(0%) !important; -webkit-transform: translateX(0%) !important; }
     /* -------- Common Chart Style ------- */
     .common-chart .team-name img                { height: 24px; }
+    /* -- Arabic CSS -- */
+    .arabic .fixture-date .dropdown-menu        { right: auto !important; left: 0 !important; }
+
 /******* NBA Pages ******/
     .nba-common-selection .dropdown-toggle                	{ min-width: 120px; }
     .nba-common-selection .date-dropdown .dropdown-toggle 	{ min-width: 100px; }
@@ -636,4 +645,6 @@ ngb-datepicker .btn-light.bg-primary        { background: #ED1A33 !important; }
     .nba-dropdown-title								{ flex-direction: column; -webkit-flex-direction: column; align-items: initial !important; -webkit-align-items: initial !important; }
     .nba-common-selection .dropdown-toggle          { margin-right: 8px;}
     .nba-common-selection .date-dropdown .dropdown-menu            { min-width: 100%; }
+    /* -- Arabic CSS -- */
+    .arabic .nba-common-selection .dropdown-toggle          { margin-left: 8px;}
 }

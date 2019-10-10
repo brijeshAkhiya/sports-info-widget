@@ -72,7 +72,7 @@
 @media (max-width: 767px) {
     .goal-commentary-list               { padding: 0px 16px 0px 6px; }
     .goal-commentary-list .icon-block   { width: 70px; text-align: center; }
-    .goal-commentary-list .icon         { width: 24px; height: 24px;}
+    .goal-commentary-list .icon         { width: 20px; height: 20px;}
     .goal-commentary-list .icon-block p { margin-left: 0; margin-top: 4px; display: block; }
     .goal-commentary-list .desc-block   { padding: 16px 0px; }
 /* -- Arabic CSS -- */
