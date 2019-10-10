@@ -76,6 +76,9 @@
 .arabic .match-main-title .match-win-player         { padding-left: 0px; border-left: none; padding-right: 32px; border-right: 2px solid #ECECEC; }
 .arabic .match-main-title .player-pic               { margin-right: 0px; margin-left: 16px; }
 .arabic .goal-type .current-match > :last-child h4 img      { margin-left: 0px; margin-right: 4px; }
+.arabic .nba-match-title .current-match .team-col:last-child { text-align: left; }
+.arabic .match-main-title .team-anim:first-child    { animation-name: flag-last; -webkit-animation-name: flag-last; }
+.arabic .match-main-title .team-anim:last-child     { animation-name: flag-first; -webkit-animation-name: flag-first; }
 
 /* -------- Content Animation ------- */
 @-webkit-keyframes show-anim {
@@ -167,6 +170,7 @@
 /* -------- Goal Type Match Title ------- */
     .match-main-title.goal-type .current-match          { flex-direction: row; -webkit-flex-direction: row; }
 /* -------- NBA Match Title ------- */
+    .nba-match-title.match-main-title .match-update     { margin-bottom: 8px;}
     .nba-match-title.match-main-title .current-match    { flex-direction: inherit; -webkit-flex-direction: inherit; }
     .nba-match-title .table tr td                       { padding: 4px 8px; }
 /* -- Arabic CSS -- */
@@ -201,6 +205,7 @@
     .nba-match-title.match-main-title .current-match                { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
     .nba-match-title.match-main-title .current-match .team-col      { width: 46%; }
     .nba-match-title.match-main-title .current-match .live-score    { width: 100%; order: 3; }
+    .nba-match-title .table                                         { margin-bottom: 4px; }
     .nba-match-title .live-score .live-score-table                  { display: inline-block; }
 
 /* -- Arabic CSS -- */

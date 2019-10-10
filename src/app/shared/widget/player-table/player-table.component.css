@@ -54,8 +54,11 @@
 .arabic .tour-stand-table .table tr td:nth-child(2),
 .arabic .tour-stats-table .table tr th:nth-child(2),
 .arabic .tour-stats-table .table tr td:nth-child(2),
+.arabic .nba-tour-stats-table .table tr th:first-child,
+.arabic .nba-tour-stats-table .table tr td:first-child,
 .arabic .player-state .table tr th:first-child,
 .arabic .player-state .table tr td:first-child          { text-align: right; }
+.arabic .nba-tour-stats-table .table tr th:first-child,
 .arabic .nba-tour-stats-table .table tr td:first-child,
 .arabic .tour-stand-table .table tr td:nth-child(2),
 .arabic .tour-stats-table .table tr td:nth-child(2)       { padding-right: 10px; padding-left: 48px; }

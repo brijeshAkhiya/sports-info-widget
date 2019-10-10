@@ -53,7 +53,8 @@ form :-moz-placeholder                  { color: #8F8F8F; opacity: 1; }
 .arabic .scroll-flash-block             { right: auto; left: 32px; }
 .arabic .fav-block-box                  { right: auto; left: 0px; transform: translateX(-100%); -webkit-transform: translateX(-100%); }
 .arabic .fav-block-box.fav-show         { transform: translateX(0%); -webkit-transform: translateX(0%); }
-.arabic .fav-block-box .fav-btn-block           { left: auto; right: 1px; transform: translate(100% , -50%); }
+.arabic .fav-block-box .fav-btn-block   { left: auto; right: 1px; transform: translate(100% , -50%); }
+.arabic .fav-block-box .fav-list button { margin-right: 0; margin-left: 6px; }
 .arabic .fav-btn-block img              { transform: rotate(-180deg); -webkit-transform: rotate(-180deg); }
 
 /***** Responsive CSS Start ******/
