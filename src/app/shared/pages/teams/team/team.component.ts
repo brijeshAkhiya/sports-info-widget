@@ -67,7 +67,7 @@ export class TeamComponent implements OnInit {
         break;
       } case 'Basketball': {
         this.getSeasons();
-        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: this.routeParams.teamid } };
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [this.routeParams.teamid] } };
         this.sportsService.getBasketballteamprofile(this.routeParams.teamid).subscribe(this.profileSuccess, this.profileError);
         break;
       }

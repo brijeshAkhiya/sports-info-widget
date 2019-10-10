@@ -4,8 +4,8 @@ export const LOAD_BASKETBALL_SCHEDULE = '[Basketball Schedule] Load Basketball S
 export const LOAD_BASKETBALL_SCHEDULE_SUCCESS = '[Basketball Schedule] Load Success';
 export const BASKETBALL_START_LOADING = '[UI] Basketball Start Loading';
 export const BASKETBALL_STOP_LOADING = '[UI] Basketball Stop Loading';
-export const LOAD_BASKETBALL_MATCH_INFO = '[Basketball Match Info] Load Basketball Match Info';
-export const LOAD_BASKETBALL_MATCH_INFO_SUCCESS = '[Basketball Match Info] Load Basketball Match Info Success';
+export const SAVE_BASKETBALL_MATCHES = '[Basketball Matches] Save basketball matches';
+
 
 export class BasketballStartLoading implements Action {
     readonly type = BASKETBALL_START_LOADING;
@@ -24,14 +24,10 @@ export class LoadBasketballScheduleSuccess implements Action {
     constructor(public payload: any) { }
 }
 
-export class LoadBasketballMatchInfo implements Action {
-    readonly type = LOAD_BASKETBALL_MATCH_INFO;
+export class SaveBasketballMatches implements Action {
+    readonly type = SAVE_BASKETBALL_MATCHES;
     constructor(public payload: any) { }
 }
 
-export class LoadBasketballMatchInfoSuccess implements Action {
-    readonly type = LOAD_BASKETBALL_MATCH_INFO_SUCCESS;
-    constructor(public payload: any) { }
-}
 
-export type BasketballActions = BasketballStartLoading | BasketballStopLoading | LoadBasketballSchedule | LoadBasketballScheduleSuccess | LoadBasketballMatchInfo | LoadBasketballMatchInfoSuccess;
+export type BasketballActions = BasketballStartLoading | BasketballStopLoading | LoadBasketballSchedule | LoadBasketballScheduleSuccess | SaveBasketballMatches;

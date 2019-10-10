@@ -1,5 +1,6 @@
 <!-- START - MATCH PROBABAILITY-->
-<div *ngIf="['not_started', 'live', 'delayed'].includes(matchdata.sport_event_status.status)">
+<div
+  *ngIf="['not_started', 'live', 'delayed'].includes(matchdata.sport_event_status.status) && matchprobability?.length > 0">
   <h4 class="line-title">{{ 'Cricket_Module.Win_Probability' | translate}}</h4>
   <div class="probability-section rounded-box common-shadow" *ngIf="matchprobability?.length > 0">
     <div class="probability-block d-flex align-items-center justify-content-between">
@@ -23,9 +24,9 @@
       </div>
     </div>
   </div>
-  <p *ngIf="matchprobability?.length == 0">
+  <!-- <p *ngIf="matchprobability?.length == 0">
     {{'Cricket_Module.no_probability_msg' | translate}}
-  </p>
+  </p> -->
 </div>
 <!-- END - MATCH PROBABAILITY-->
 

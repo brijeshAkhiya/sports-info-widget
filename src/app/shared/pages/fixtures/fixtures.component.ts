@@ -61,8 +61,8 @@ export class FixturesComponent implements OnInit {
       }
     } else if (this.params.sport == 'Kabaddi') {
       this.activeTab = routeData.url.value[0].path;
-      this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
-      this.store.dispatch(new Kabaddi.LoadKabaddiResults());
+      // this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
+      // this.store.dispatch(new Kabaddi.LoadKabaddiResults());
       this.store.select('Kabaddi').subscribe((data: any) => {
         if (Object.entries(data.fixtures).length > 0 && data.fixtures.items.length > 0) {
           this.paramsFixtures.data = this.paramsFixtures.data.concat(this.commonService.sortArr(data.fixtures.items, 'Do MMMM YYYY', 'datestart', 'asc'));

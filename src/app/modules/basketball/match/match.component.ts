@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
+import * as fromRoot from '../../../app-reducer';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
+import * as Basketball from '@store/basketball/basketball.actions';
+import { appSelectors } from '@store/selectors/index';
 
 @Component({
   selector: 'app-match',
   templateUrl: './match.component.html',
   styleUrls: ['./match.component.css']
 })
-export class MatchComponent implements OnInit {
+export class MatchComponent implements OnInit, OnDestroy {
 
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [] } };
   loading = false;
@@ -19,12 +23,14 @@ export class MatchComponent implements OnInit {
   boxData: any;
   interval;
   timeout;
+  liveMatchSubscription;
 
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,
     private activatedroute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
@@ -44,6 +50,7 @@ export class MatchComponent implements OnInit {
       if (res.data) {
         this.matchInfo = res.data;
 
+        this.getLiveUpdate(this);
 
         if (this.matchInfo.status === 'scheduled') {
           this.startLiveUpdateAfterTime();
@@ -57,7 +64,6 @@ export class MatchComponent implements OnInit {
           this.matchInfo.venuedetails.lng = geo.results[0].geometry.location.lng;
         });
         this.getMatchBoxScore(id);
-        // if (this.matchInfo.status == 'closed')
         this.getMatchCommentry(id);
       }
       this.loading = false;
@@ -125,22 +131,38 @@ export class MatchComponent implements OnInit {
     });
   }
 
+  /**
+   * Update Match live Data
+   */
+  updateBasketballData(match, key) {
+    this.matchInfo = match[key];
+    this.matchInfo.periods = this.commentry.data.periods;
+    if (['inprogress', 'halftime', 'delayed'].indexOf(this.matchInfo.status) > -1) {
+      // this.getMatchBoxScore(this.matchInfo.id);
+      // this.getMatchCommentry(this.matchInfo.id); // TEMP
+    }
+    if (['closed', 'complete'].indexOf(this.matchInfo.status) > -1) {
+      this.getMatchCommentry(this.matchInfo.id);
+      this.clearTimeInterval();
+    }
+  }
+
   getLiveUpdate(classThis) {
+    /** Subscribe for Live Match info */
+    if (this.liveMatchSubscription) this.liveMatchSubscription.unsubscribe();
+    this.liveMatchSubscription = this.store.select(appSelectors.getBasketballMatches).subscribe((match) => {
+      if (Object.entries(match).length !== 0 && Object.keys(match).filter((id) => this.matchInfo.id == id).length > 0)
+        this.updateBasketballData(match, Object.keys(match).filter((id) => this.matchInfo.id == id)[0]);
+    });
+    /** If Upper slider has already Basketball, No need to start interval for Live match Info */
+    if (localStorage.getItem('selectedSport') == 'Basketball') return false;
+
+    /** Start interval to get Live data from API  */
     this.interval = setInterval(() => {
       classThis.sportsService
         .getBasketballMatchSummary(this.matchInfo.id)
         .subscribe(res => {
-          this.matchInfo = res.data;
-          this.matchInfo.periods = this.commentry.data.periods;
-
-          if (['inprogress', 'halftime', 'delayed'].indexOf(this.matchInfo.status) > -1) {
-            // this.getMatchBoxScore(this.matchInfo.id);
-            this.getMatchCommentry(this.matchInfo.id);
-          }
-          if (['closed', 'complete'].indexOf(this.matchInfo.status) > -1) {
-            this.getMatchCommentry(this.matchInfo.id);
-            this.clearTimeInterval();
-          }
+          this.store.dispatch(new Basketball.SaveBasketballMatches(res.data));
         });
     }, classThis.commonService.miliseconds(0, 0, 8));
   }
@@ -169,6 +191,11 @@ export class MatchComponent implements OnInit {
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
     clearInterval(this.interval);
-    // clearTimeout(this.timeout);
+    clearTimeout(this.timeout);
+    if (this.liveMatchSubscription) this.liveMatchSubscription.unsubscribe();
+  }
+
+  ngOnDestroy() {
+    this.clearTimeInterval();
   }
 }

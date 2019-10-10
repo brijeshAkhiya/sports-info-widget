@@ -1,5 +1,5 @@
 <section class="venue-info rounded-box common-shadow" *ngIf="venuedetails">
-  <ng-container *ngIf="sport == 'cricket'">
+  <ng-container *ngIf="sport == 'Cricket'">
     <ng-container *ngIf="venuedetails.lat && venuedetails.long">
       <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.long">
         <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.long"></agm-marker>
@@ -10,7 +10,8 @@
       <span [innerHTML]="venuedetails?.name">{{venuedetails?.name}}</span>, {{venuedetails?.city_name}},
       {{venuedetails?.country_name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }}
+        :</span>{{venuedetails?.capacity}}
     </p>
     <p *ngIf="venuedetails?.bowling_ends"><span class="title">{{ 'widgetModule.Ends' | translate }}
         :</span>{{venuedetails?.bowling_ends[0].name}}, {{venuedetails?.bowling_ends[1].name}}</p>
@@ -26,7 +27,8 @@
       <span class="title">{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }}
+        :</span>{{venuedetails?.capacity}}
     </p>
   </ng-container>
 
@@ -40,7 +42,8 @@
       <span class="title">{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }}
+        :</span>{{venuedetails?.capacity}}
     </p>
   </ng-container>
 
@@ -55,7 +58,8 @@
       <span class="title">{{ 'widgetModule.venue' | translate }} :</span>
       {{venuedetails?.name}}, {{venuedetails?.city}}, {{venuedetails?.country}}
     </p>
-    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }} :</span>{{venuedetails?.capacity}}
+    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }}
+        :</span>{{venuedetails?.capacity}}
     </p>
   </ng-container>
 
