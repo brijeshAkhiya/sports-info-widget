@@ -35,7 +35,7 @@
     </div>
 
     <div class="match-update show-anim">
-      <p class="light-text">
+      <p class="light-text" *ngIf="data.sport_event.venue">
         <ng-container *ngIf="data.sport_event.venue.name">
           <span [innerHTML]="data.sport_event.venue.name">{{data.sport_event.venue.name}}</span>
         </ng-container>
@@ -345,7 +345,7 @@
       <div class="live-score" *ngIf="data?.status != 'scheduled'">
         <!-- FINAL Score here -->
 
-        <div class="live-score-table">
+        <div class="live-score-table" *ngIf="['scheduled', 'created'].indexOf(data.status) == -1 && data?.periods">
           <p class="title light-text">Final</p>
           <div class="table-responsive">
             <table class="table">
@@ -396,7 +396,7 @@
       <h4 [ngClass]="{'winner':['closed', 'complete'].indexOf(data.status) > -1 && team?.points > oppTeam.points}"><a
           [routerLink]="['/basketball/team',(team.id),(team.name | slugify)]">
           {{ team.market}} {{ team.name}}</a> </h4>
-      <h3 *ngIf="data?.status != 'scheduled'">{{team.points}}</h3>
+      <h3 *ngIf="['scheduled', 'created'].indexOf(data.status) == -1">{{team.points}}</h3>
     </div>
   </div>
 </ng-template>

@@ -17,10 +17,11 @@
             <ng-template ngbTabContent>
               <app-loader *ngIf="commentry?.loading"></app-loader>
               <app-no-data-widget
-                *ngIf="!commentry?.loading && (commentry?.data.length == 0) && matchInfo?.status != 'scheduled'"
+                *ngIf="!commentry?.loading && (commentry?.data.length == 0) && ['scheduled', 'created'].indexOf(matchInfo?.status) == -1"
                 [sport]="'Basketball'">
               </app-no-data-widget>
-              <app-countdown *ngIf="matchInfo?.status == 'scheduled'" [scheduled]="matchInfo?.scheduled">
+              <app-countdown *ngIf="['scheduled', 'created'].indexOf(matchInfo?.status) > -1"
+                [scheduled]="matchInfo?.scheduled">
               </app-countdown>
 
               <!-- NBA Ground -->
