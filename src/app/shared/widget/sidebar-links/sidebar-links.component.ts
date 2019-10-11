@@ -53,6 +53,9 @@ export class SidebarLinksComponent implements OnInit {
     this.sportsService.getpopulartags(this.options.reqParams).subscribe((res: any) => {
       if (res.data) {
         this.data = res.data;
+        if (this.sport == 'Basketball') {
+          this.data = res.data.filter(tag => tag.type != 'Tournament');
+        }
       }
     });
   }
