@@ -62,5 +62,8 @@
     .header-live-section .header-live-inner                 { flex-direction: column-reverse; -webkit-flex-direction: column-reverse; }
     .header-live-slider .slider-item-inner                  { min-height: 105px; }
     .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
-
+/* -------- Arabic CSS ------- */
+    .arabic .slider-sports-selection .owl-theme .owl-nav [class*="owl-"] { transform: translateY(-50%) rotate(-90deg); -webkit-transform: translateY(-50%) rotate(-90deg);}
+    .arabic .slider-sports-selection .owl-theme .owl-nav .owl-prev  { right: auto; left: -30px;}
+    .arabic .slider-sports-selection .owl-theme .owl-nav .owl-next  { right: -30px;}
 }

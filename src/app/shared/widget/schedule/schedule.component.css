@@ -21,6 +21,8 @@
 /* -------- Tournament Fixtures List ------- */
 .schedule-tour-list .schedule-item      { padding-bottom: 16px; overflow: hidden; position: relative; background: #fff;}
 .schedule-item .match-desc              { width: 200px; align-self: flex-start; -webkit-align-self: flex-start; }
+.schedule-item .match-desc.side-desc    { min-height: 80px; justify-content: space-between; -webkit-justify-content: space-between; }
+.schedule-item .match-desc.side-desc > :first-child     { margin-bottom: 16px; }
 .schedule-item .match-teams             { width: calc(100% - 208px); }
 .schedule-tour-list .schedule-item *:last-child         { margin-bottom: 0px; }
 .schedule-tour-list h6,
@@ -49,20 +51,26 @@
 .schedule-tour-list .score-center-block h4  { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; }
 .schedule-tour-list .score-center-block h4.looser   { opacity: 0.5;}
 
-/* -------- Tournament Fixtures For Soccer ------- */
-.soccer-tour-list .soccer-tour              { margin-bottom: 24px; padding: 16px 24px 24px; background: #fff; }
-.soccer-tour-list .soccer-tour:last-child   { margin: 0px; }
-.soccer-tour-list .soccer-tour-title        { padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; }
-.soccer-tour-list .soccer-tour-title p      { margin: 0px; line-height: 20px; font-weight: 600; text-transform: uppercase; }
-.schedule-tour-list .soccer-item            { padding: 24px 16px 16px; flex-direction: column; -webkit-flex-direction: column; }
-.schedule-tour-list .soccer-item:nth-child(even) { background: #F7F7F8; }
-.schedule-item.soccer-item .match-desc,
-.schedule-item.soccer-item .match-teams     { width: 100%; }
-.schedule-item.soccer-item .match-desc      { padding-top: 16px; }
-.soccer-item .match-teams .team-flag img    { display: block; height: 24px;}
-.soccer-tour-list .soccer-tour .vs-block,
-.soccer-tour-list .soccer-tour .score-center-block { min-width: 124px; padding: 0px 26px; text-align: center; }
-.soccer-tour .score-center-block h4         { margin: 0px; font-size: 16px; line-height: 20px; }
+/* -------- Tournament Fixtures ------- */
+.common-tour-list .grp-item                             { margin-bottom: 24px; padding: 16px 24px 24px; background: #fff; }
+.common-tour-list .soccer-tour:last-child               { margin: 0px; }
+.common-tour-list .soccer-tour-title                    { padding-bottom: 14px; border-bottom: 2px solid #EBEBEB; }
+.common-tour-list .soccer-tour-title p                  { margin: 0px; line-height: 20px; font-weight: 600; text-transform: uppercase; }
+.schedule-tour-list .common-item                        { padding: 24px 16px 16px; flex-direction: column; -webkit-flex-direction: column; }
+.schedule-tour-list .common-item:nth-child(even)        { background: #F7F7F8; }
+.schedule-item.common-item .match-desc,
+.schedule-item.common-item .match-teams                 { width: 100%; }
+.schedule-item.common-item .match-desc                  { padding-top: 16px; }
+.common-item .match-teams .team-flag img                { display: block; height: 24px;}
+.common-tour-list .grp-item .vs-block,
+.common-tour-list .grp-item .score-center-block        { min-width: 124px; padding: 0px 26px; text-align: center; }
+.grp-item .score-center-block h4                       { margin: 0px; font-size: 16px; line-height: 20px; }
+.common-tour-list .schedule-tour-list .schedule-item h5 { font-family: inherit; font-weight: 500; }
+
+/* -------- Tournament Fixtures Without Group ------- */
+.common-tour-list .grp-item.tour-without-grp                       { padding: 0px; background: transparent; }
+.common-tour-list .tour-without-grp .common-item                    { margin-bottom: 24px; }
+.tour-without-grp .schedule-tour-list .common-item:nth-child(even)  { background: #fff; }
 
 /* -- Arabic CSS -- */
 .arabic .schedule-list .month-title             { padding-right: 0px; padding-left: 16px; }
@@ -81,6 +89,7 @@
     .match-teams .team-info                 { padding: 0px 10px; }
     .match-teams .team-flag img             { height: 42px;}
     .match-teams .vs-block h6               { margin: 0px 10px; }
+    .schedule-item .match-desc.side-desc > :first-child,
     .schedule-tour-list p                   { margin-bottom: 10px;}
 }
 
@@ -92,19 +101,23 @@
     .schedule-item .match-desc,
     .schedule-item .match-teams             { width: 100%; }
     .schedule-item .match-desc              { text-align: center; }
+    .schedule-item .match-desc.side-desc    { min-height: initial; }
     .match-teams .team-info                 { padding: 0px 10px; }
     .schedule-item .match-teams             { margin-top: 12px; }
     .match-teams .match-team                { width: calc(50% - 5px); }
     .match-teams .team-flag img             { height: 40px;}
     .match-teams .vs-block h6               { margin: 0px 10px; }
+    .schedule-item .match-desc.side-desc > :first-child,
     .schedule-tour-list p                   { margin-bottom: 6px;}
     .schedule-tour-list .schedule-item.final-match-item  { flex-direction: row; -webkit-flex-direction: row; }
+/* -------- Tournament Fixtures Without Group ------- */
+    .common-tour-list .tour-without-grp .common-item        { margin-bottom: 16px; }
 /* -------- Tournament Fixtures For Kabaddi ------- */
     .schedule-tour-list .score-center-block     { margin: -5px 8px 0px; padding-top: 5px; }
 /* -------- Tournament Fixtures For Soccer ------- */
-    .soccer-tour-list .soccer-tour .vs-block,
-    .soccer-tour-list .soccer-tour .score-center-block { min-width: 104px; padding: 0px 16px;}
-    .soccer-tour-list .schedule-item .match-teams { margin-top: 4px; }
+    .common-tour-list .grp-item .vs-block,
+    .common-tour-list .grp-item .score-center-block { min-width: 104px; padding: 0px 16px;}
+    .common-tour-list .schedule-item .match-teams { margin-top: 4px; }
 }
 
 @media (max-width: 767px) {
@@ -118,6 +131,7 @@
     .schedule-tour-list .complete-match h5  { margin-bottom: 2px; font-size: 15px; line-height: 19px; }
     .schedule-tour-list p                   { margin-bottom: 5px; font-size: 13px; line-height: 18px;}
     .schedule-tour-list .time-line          { font-size: 14px; line-height: 18px; }
+    .schedule-item .match-desc.side-desc > :first-child     { margin-bottom: 4px; }
 }
 
 @media (max-width: 575px) {
@@ -147,11 +161,11 @@
     .schedule-item.goal-item.complete-match .match-teams .match-team .team-info     { display: block;}
     .schedule-item.goal-item h5                          { font-size: 13px; line-height: 17px; }
 /* -------- Tournament Fixtures For Soccer ------- */
-    .soccer-tour-list .soccer-tour              { margin-bottom: 16px; padding: 12px 16px 16px;}
-    .schedule-tour-list .schedule-item.soccer-item  { padding: 10px 8px; }
-    .soccer-tour-list .soccer-tour-title        { padding-bottom: 8px;}
-    .soccer-tour-list .soccer-tour .vs-block,
-    .soccer-tour-list .soccer-tour .score-center-block { min-width: initial; padding: 0px 8px;}
-    .schedule-item.soccer-item .match-desc      { padding-top: 8px; }
+    .common-tour-list .grp-item              { margin-bottom: 16px; padding: 12px 16px 16px;}
+    .schedule-tour-list .schedule-item.common-item  { padding: 10px 8px; }
+    .common-tour-list .soccer-tour-title        { padding-bottom: 8px;}
+    .common-tour-list .grp-item .vs-block,
+    .common-tour-list .grp-item .score-center-block { min-width: initial; padding: 0px 8px;}
+    .schedule-item.common-item .match-desc      { padding-top: 8px; }
 
 }
