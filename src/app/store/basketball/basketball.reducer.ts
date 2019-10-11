@@ -1,11 +1,12 @@
 import {
-    BasketballActions, LOAD_BASKETBALL_SCHEDULE, LOAD_BASKETBALL_SCHEDULE_SUCCESS, SAVE_BASKETBALL_MATCHES, BASKETBALL_START_LOADING, BASKETBALL_STOP_LOADING
+    BasketballActions, LOAD_BASKETBALL_SCHEDULE, LOAD_BASKETBALL_SCHEDULE_SUCCESS, SAVE_BASKETBALL_MATCHES, BASKETBALL_START_LOADING, BASKETBALL_STOP_LOADING, REMOVE_BASKETBALL_UPDATE
 } from './basketball.actions';
 
 export interface BasketballData {
     schedule: [];
     loader: boolean;
     matches: { [id: string]: any };
+    ids: any;
 
 }
 
@@ -13,7 +14,8 @@ export interface BasketballData {
 const initialState = {
     schedule: [],
     loader: false,
-    matches: {}
+    matches: {},
+    ids: [],
 
 };
 
@@ -33,10 +35,19 @@ export function BasketballReducer(state = initialState, action: BasketballAction
                 ...state,
                 matches: Object.assign({}, state.matches, {
                     [match.id]: match
-                })
+                }),
+                ids: Object.assign({}, state.ids, {
+                    [match.id]: match.id
+                }),
             };
 
-        } default: {
+        }
+        case REMOVE_BASKETBALL_UPDATE: {
+            return Object.assign({}, state, {
+                ids: []
+            });
+        }
+        default: {
             return state;
         }
     }

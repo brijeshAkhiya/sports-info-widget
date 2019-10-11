@@ -13,3 +13,7 @@ export const getBasketballSchedule = createSelector(
     getBasketballState,
     (state: fromBasketball.BasketballData) => state.schedule
 );
+export const getBasketballLiveIds = createSelector(
+    getBasketballState,
+    (state: fromBasketball.BasketballData) => state.ids
+);

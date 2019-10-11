@@ -85,19 +85,20 @@
   </ul>
 
   <ul class="common-list cricket-list kabaddi" *ngIf="matches && matches.length > 0 && sport == 'Kabaddi' && type">
-    <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
+    <li *ngFor="let match of matches  | slice:0:4 " class="fullblock-link-container">
       <div class="title d-flex justify-content-between">
-        <p><b>{{match?.competition?.cname ? match?.competition?.cname: ''}}</b> <span class="text-capitalize"></span>
+        <p><b>{{match?.competition?.cname ? match?.competition?.cname: ''}}</b> <span class="text-capitalize">
+            {{match?.round ? (match?.round  | stringunder:"_")  : ''}}</span>
         </p>
         <p>{{match.timestampstart | amFromUnix | amTimeAgo}}</p>
       </div>
       <div>
         <div class="match-info d-flex justify-content-between align-items-center">
           <p
-            [ngClass]="{'match-winner': match?.result?.winner == match?.teams?.home?.tid &&  match?.result?.tie != 'true' }">
+            [ngClass]="{'match-winner': match?.result?.winner != '' && match?.result?.winner == match?.teams?.home?.tid &&  match?.result?.tie != 'true' }">
             <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
               [defaultImage]="commonService.flagplaceholder">
-            {{ match?.teams?.home?.tname}}
+            {{ match?.teams?.home?.tname ? match?.teams?.home?.tname : 'Qualifier 1'}}
           </p>
           <p *ngIf="match?.status == 2">
             <ng-container>
@@ -109,10 +110,10 @@
       <div>
         <div class="match-info d-flex justify-content-between align-items-center">
           <p
-            [ngClass]="{'match-winner': match?.result?.winner == match?.teams?.away?.tid &&  match?.result?.tie != 'true'}">
+            [ngClass]="{'match-winner':  match?.result?.winner != '' &&  match?.result?.winner == match?.teams?.away?.tid &&  match?.result?.tie != 'true'}">
             <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.tid | logosurl:'kabaddi'"
               [defaultImage]="commonService.flagplaceholder">
-            {{ match?.teams?.away?.tname}}
+            {{ match?.teams?.away?.tname ? match?.teams?.away?.tname : 'Qualifier 2'}}
           </p>
           <p *ngIf="match?.status == 2">
             <ng-container>

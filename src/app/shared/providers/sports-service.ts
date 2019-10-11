@@ -698,6 +698,12 @@ export class SportsService {
       // `http://localhost:3004/?type=json&counter=schedules`
     );
   }
+  getBasketballSchedule1() {
+    return this.http.get(
+      // environment.apiUrl + environment.version + `/nba/schedules`
+      `http://localhost:3004/?type=json&counter=schedules1`
+    );
+  }
   tempBasketballAPI(type, counter) {
     return this.http.get(
       // `http://13.235.4.242:3004/?type=${type}&counter=${counter}`

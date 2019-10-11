@@ -232,8 +232,7 @@
                titles : [('Cricket_Module.Match' | translate), ('widgetModule.venue' | translate)],
                values : [ matchInfo?.home?.name + ' vs '+ matchInfo?.away?.name, matchInfo?.venue?.name +', '+matchInfo?.venue?.city +', '+matchInfo?.venue?.country] }">
               </app-match-info-card>
-              <app-venue-map-card [sport]="'Basketball'" [venuedetails]="matchInfo?.venuedetails"
-                *ngIf="matchInfo?.venuedetails">
+              <app-venue-map-card [sport]="'Basketball'" [venuedetails]="matchInfo?.venue" *ngIf="matchInfo?.venue">
               </app-venue-map-card>
             </ng-template>
           </ngb-tab>

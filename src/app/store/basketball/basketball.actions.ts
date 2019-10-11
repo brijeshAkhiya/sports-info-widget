@@ -5,6 +5,7 @@ export const LOAD_BASKETBALL_SCHEDULE_SUCCESS = '[Basketball Schedule] Load Succ
 export const BASKETBALL_START_LOADING = '[UI] Basketball Start Loading';
 export const BASKETBALL_STOP_LOADING = '[UI] Basketball Stop Loading';
 export const SAVE_BASKETBALL_MATCHES = '[Basketball Matches] Save basketball matches';
+export const REMOVE_BASKETBALL_UPDATE = '[Basketball Matches] Remove basketball update';
 
 
 export class BasketballStartLoading implements Action {
@@ -29,5 +30,9 @@ export class SaveBasketballMatches implements Action {
     constructor(public payload: any) { }
 }
 
+export class RemoveBasketballUpdate implements Action {
+    readonly type = REMOVE_BASKETBALL_UPDATE;
+}
 
-export type BasketballActions = BasketballStartLoading | BasketballStopLoading | LoadBasketballSchedule | LoadBasketballScheduleSuccess | SaveBasketballMatches;
+
+export type BasketballActions = BasketballStartLoading | BasketballStopLoading | LoadBasketballSchedule | LoadBasketballScheduleSuccess | SaveBasketballMatches | RemoveBasketballUpdate;

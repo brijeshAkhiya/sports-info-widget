@@ -233,7 +233,10 @@
                         {{competitor?.market}} {{competitor?.name}}
                       </p>
                       <p><b>
-                          {{(['inprogress', 'halftime', 'delayed'].indexOf(match.status) > -1 ? competitor.points : (abbr == 'home' ? match?.home_points : match?.away_points))}}
+                          <!-- {{(['inprogress', 'halftime', 'delayed'].indexOf(match.status) > -1 ? 
+                          competitor.points : 
+                          (abbr == 'home' ? match?.home_points : match?.away_points))}} -->
+                          {{(abbr == 'home' ? (match?.home_points > -1 ? match?.home_points : competitor.point) : (match?.away_points > -1  ? match?.away_points : competitor.point) )}}
                         </b>
                       </p>
                     </div>
