@@ -1,7 +1,7 @@
 <app-menu *ngIf="!tournamentid && params.sport != 'Basketball'" [options]="{ sport: params.sport, type: 'home' }">
 </app-menu>
 
-<section class="common-section cricket-recentnews recentnews-section">
+<section class="common-section">
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
@@ -63,7 +63,7 @@
 
         <app-loader *ngIf="paramData.loading"></app-loader>
         <app-no-data-widget *ngIf="!paramData.loading && (!paramData.data || paramData.data?.length == 0)"
-          [sport]="params.sport">
+          [sport]="params.sport" [message]="'No match scheduled'">
         </app-no-data-widget>
         <app-schedule *ngIf="paramData.data.length > 0" [data]="paramData.data" [sport]="params.sport"
           [list_type]="datelist">

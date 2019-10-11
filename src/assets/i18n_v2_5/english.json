@@ -322,6 +322,9 @@
     "Substituted_Out": "Substituted Out",
     "Goals_Scored": "Goals Scored"
   },
+  "NBA_Module": {
+
+  },
   "Division": "Division",
   "Address": "address",
   "Coach": "Coach",
@@ -350,5 +353,6 @@
   "Turnovers": "Turnovers",
   "Fouls": "Fouls",
   "Final": "Final",
-  "NBA": "NBA"
+  "NBA": "NBA",
+  "No match scheduled": "No match scheduled"
 }

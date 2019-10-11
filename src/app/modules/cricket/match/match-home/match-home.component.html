@@ -306,7 +306,7 @@
             <ng-template ngbTabTitle>{{'Cricket_Module.Upcoming' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="!nextmatches"></app-loader>
-              <app-no-data-widget *ngIf="nextmatches?.length == 0"></app-no-data-widget>
+              <app-no-data-widget *ngIf="nextmatches?.length == 0" [message]="'No match scheduled'"></app-no-data-widget>
               <app-schedule [data]="nextmatches" [type]="'fixture'" [sport]="'Cricket'"></app-schedule>
             </ng-template>
           </ngb-tab>
