@@ -36,17 +36,21 @@
 
   <div class="schedule-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.match_result}">
-    <div class="match-desc">
-      <h6>{{match.tournament_name ? match.tournament_name : ''}} <span
-          class="text-capitalize">{{ match.tournament_round ? ((match.tournament_name) ? ' - '+match.tournament_round : match.tournament_round) : '' }}</span>
-        <span *ngIf="match?.tournament_type == 'test' && match?.sport_event_status?.match_day">
-          Day - {{match?.sport_event_status?.match_day}} </span>
-      </h6>
-      <p class="stadium-nm" *ngIf="match.venue_name" innerHTML="{{match.venue_name}}, {{match.city_name}}"></p>
-      <p class="time-line" *ngIf="type == 'fixture'">{{match.scheduled | date:'h:mm a'}}</p>
-      <p class="result-line" *ngIf="type == 'result'">
-        {{(match?.match_result) ? match?.match_result : 'Match is '+ match.match_status }}
-      </p>
+    <div class="match-desc side-desc d-flex flex-column">
+      <div>
+        <h6>{{match.tournament_name ? match.tournament_name : ''}} <span
+            class="text-capitalize">{{ match.tournament_round ? ((match.tournament_name) ? ' - '+match.tournament_round : match.tournament_round) : '' }}</span>
+          <span *ngIf="match?.tournament_type == 'test' && match?.sport_event_status?.match_day">
+            Day - {{match?.sport_event_status?.match_day}} </span>
+        </h6>
+        <p class="stadium-nm" *ngIf="match.venue_name" innerHTML="{{match.venue_name}}, {{match.city_name}}"></p>
+      </div>
+      <div>
+        <p class="time-line" *ngIf="type == 'fixture'">{{match.scheduled | date:'h:mm a'}}</p>
+        <p class="result-line" *ngIf="type == 'result'">
+          {{(match?.match_result) ? match?.match_result : 'Match is '+ match.match_status }}
+        </p>
+      </div>
     </div>
     <div class="match-teams d-flex align-items-center" *ngIf="match.competitors">
       <div class="match-team d-flex align-items-center">
@@ -99,17 +103,21 @@
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.status == 2}"
     *ngIf="match?.teams?.home?.tid != '' && match?.teams?.away?.tid != ''">
-    <div class="match-desc">
-      <h6>
-        <!-- {{match.tournament_name ? match.tournament_name : ''}}  -->
-        <span class="text-capitalize">{{ match.round ? match.round : '' }}
-          {{ (match?.subtitle ) ? ' - ' + match?.subtitle : ''}}</span>
-      </h6>
-      <p class="stadium-nm" *ngIf="match.venue && match.venue.name">{{match.venue.name}}</p>
-
-      <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}
-      </p>
-      <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p>
+    <div class="match-desc side-desc d-flex flex-column">
+      <div>
+        <h6>
+          <!-- {{match.tournament_name ? match.tournament_name : ''}}  -->
+          <span class="text-capitalize">{{ match.round ? match.round : '' }}
+            {{ (match?.subtitle ) ? ' - ' + match?.subtitle : ''}}</span>
+        </h6>
+        <p class="stadium-nm" *ngIf="match.venue && match.venue.name">{{match.venue.name}}</p>
+      </div>
+      <div>
+        <p class="time-line" *ngIf="type == 'fixture'">
+          {{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}
+        </p>
+        <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p>
+      </div>
     </div>
     <div class="match-teams d-flex align-items-center">
       <div class="match-team d-flex align-items-center">
@@ -175,16 +183,20 @@
 <ng-template #soccer let-match="match" let-type="type">
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.sport_event_status?.status == 'closed'}">
-    <div class="match-desc">
-      <h6 class="text-capitalize">
-        {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
-        <span
-          class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? match?.sport_event?.sport_event_context?.round?.name : '' }}</span>
-      </h6>
-      <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
-      <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
-      </p>
-      <!-- <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+    <div class="match-desc side-desc d-flex flex-column">
+      <div>
+        <h6 class="text-capitalize">
+          {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
+          <span
+            class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? match?.sport_event?.sport_event_context?.round?.name : '' }}</span>
+        </h6>
+        <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
+      </div>
+      <div>
+        <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
+        </p>
+        <!-- <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+      </div>
     </div>
     <div class="match-teams d-flex align-items-center">
       <div class="match-team d-flex align-items-center">
@@ -241,16 +253,20 @@
 <ng-template #basketball let-match="match" let-type="type">
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.status=='closed'}">
-    <div class="match-desc">
-      <!-- <h6 class="text-capitalize">
+    <div class="match-desc side-desc d-flex flex-column">
+      <div>
+        <!-- <h6 class="text-capitalize">
         {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
         <span
           class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? match?.sport_event?.sport_event_context?.round?.name : '' }}</span>
       </h6> -->
-      <p class="stadium-nm" *ngIf="match?.venue"> {{match?.venue?.name}},
-        {{match?.venue?.city}},{{match?.venue?.country}}</p>
-      <p class="time-line" *ngIf="type == 'fixture'">{{match?.scheduled | date:'h:mm a'}}</p>
-      <!-- <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+        <p class="stadium-nm" *ngIf="match?.venue"> {{match?.venue?.name}},
+          {{match?.venue?.city}},{{match?.venue?.country}}</p>
+      </div>
+      <div>
+        <p class="time-line" *ngIf="type == 'fixture'">{{match?.scheduled | date:'h:mm a'}}</p>
+        <!-- <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
+      </div>
     </div>
 
     <div class="match-teams d-flex align-items-center" *ngIf="match?.home">
@@ -308,15 +324,19 @@
 <ng-template #hockey let-match="match" let-type="type">
   <div class="schedule-item goal-item d-flex align-items-center rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.sport_event_status?.status == 'closed'}">
-    <div class="match-desc">
-      <h6 class="text-capitalize">
-        {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
-        <span
-          class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? ', Round - ' + match?.sport_event?.sport_event_context?.round?.number : '' }}</span>
-      </h6>
-      <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
-      <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
-      </p>
+    <div class="match-desc side-desc d-flex flex-column">
+      <div>
+        <h6 class="text-capitalize">
+          {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
+          <span
+            class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? ', Round - ' + match?.sport_event?.sport_event_context?.round?.number : '' }}</span>
+        </h6>
+        <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
+      </div>
+      <div>
+        <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
+        </p>
+      </div>
     </div>
     <div class="match-teams d-flex align-items-center">
       <div class="match-team d-flex align-items-center">
@@ -387,13 +407,13 @@
 </ng-template>
 
 <ng-template #soccer_list>
-  <div class="soccer-tour-list" *ngIf="data.length > 0">
-    <div class="soccer-tour rounded-box common-shadow" *ngFor="let item of data">
+  <div class="common-tour-list" *ngIf="data.length > 0">
+    <div class="grp-item" *ngFor="let item of data">
       <div class="soccer-tour-title">
         <p>{{item?.data?.season?.name}}</p>
       </div>
       <div class="schedule-tour-list">
-        <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"
+        <div class="schedule-item goal-item common-item d-flex align-items-center fullblock-link-container"
           *ngFor="let match of item.data.matches"
           [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
 
@@ -468,13 +488,13 @@
 
 <ng-template #basketball_list>
 
-  <div class="soccer-tour-list" *ngIf="data.length > 0">
-    <div class="soccer-tour rounded-box common-shadow">
+  <div class="common-tour-list" *ngIf="data.length > 0">
+    <div class="grp-item tour-without-grp">
       <!-- <div class="soccer-tour-title">
         <p>{{item?.data?.season?.name}}</p>
       </div> -->
       <div class="schedule-tour-list">
-        <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"
+        <div class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.status=='closed'}">
           <div class="match-teams d-flex align-items-center" *ngIf="match?.home && match?.away">
 
@@ -547,13 +567,13 @@
 
 <ng-template #hockey_list>
 
-  <div class="soccer-tour-list" *ngIf="data.length > 0">
-    <div class="soccer-tour rounded-box common-shadow">
+  <div class="common-tour-list" *ngIf="data.length > 0">
+    <div class="grp-item tour-without-grp">
       <!-- <div class="soccer-tour-title">
         <p>{{item?.data?.season?.name}}</p>
       </div> -->
       <div class="schedule-tour-list">
-        <div class="schedule-item goal-item  soccer-item d-flex align-items-center fullblock-link-container"
+        <div class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
           <div class="match-teams d-flex align-items-center"
             *ngIf="match?.sport_event?.competitors[0] && match?.sport_event?.competitors[1]">

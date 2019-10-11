@@ -55,7 +55,7 @@
 .goal-type .best-player-list li span                { color: #292929; font-weight: 500; }
 
 /* -------- NBA Match Title ------- */
-.nba-match-title.match-main-title .match-update         { margin-bottom: 16px;}
+.nba-match-title.match-main-title .match-update         { margin-bottom: 16px; width: 100%;}
 .nba-match-title .current-match .team-col:last-child    { text-align: right; }
 .nba-match-title.match-main-title .current-team h4      { text-transform: capitalize; }
 .nba-match-title.match-main-title .current-team img     { margin: 0px 0px 8px; }
