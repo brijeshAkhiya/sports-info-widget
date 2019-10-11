@@ -26,7 +26,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     'Cricket': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // from when to start fetching live data, interval in sec
     'Kabaddi': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
     'Soccer': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
-    'Basketball': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
+    'Basketball': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
   };
   sport = 'Cricket';
   interval;
@@ -76,6 +76,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   };
   liveMatchesSubscription;
   scheduleSubscription;
+  runningMatchFlagSubscription;
 
   @ViewChild('sportsSlider') public sportsSlider: CarouselComponent;
 
@@ -148,14 +149,23 @@ export class UppersliderComponent implements OnInit, OnDestroy {
       this.loadBasketballData();
   }
 
+  getBasketBallSchedule() {
+
+    this.sportsService.getBasketballSchedule1().subscribe((res: any) => {
+      if (res.data) {
+        this.store.dispatch(new Basketball.LoadBasketballScheduleSuccess(res.data));
+      }
+    });
+  }
+
   loadBasketballData() {
     this.timerStartTime.Basketball.isLiveUpdate = false;
     this.timerStartTime.Basketball.isStartAfterTime = false;
     this.scheduleSubscription = this.store.select(appSelectors.getBasketballSchedule).subscribe((data: any) => {
       if (data && data.length > 0) {
-        let liveMatches = this.slider = data.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
-        this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => match.status == 'closed' || match.status == 'complete')), 'scheduled', 'asc');
-        let fixtures = this.commonService.sortBtDate(data.filter((match) => match.status == 'scheduled'), 'scheduled', 'asc');
+        let liveMatches = this.slider = data.filter((match) => ['inprogress', 'halftime', 'delayed'].indexOf(match.status) > -1);
+        this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'asc');
+        let fixtures = this.commonService.sortBtDate(data.filter((match) => ['scheduled', 'created'].indexOf(match.status) > -1), 'scheduled', 'asc');
         this.slider = this.slider.concat(fixtures);
         if (liveMatches.length > 0 && !this.timerStartTime.Basketball.isLiveUpdate) {
           this.getLiveBasketballUpdate(this);
@@ -172,12 +182,15 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     Object.keys(matches).map(match => {
       let matchIndex = this.slider.findIndex((slide) => slide.id == matches[match].id);
       if (matchIndex >= 0) {
+        let status = this.slider[matchIndex].status;
         this.slider[matchIndex].home = matches[match].home;
         this.slider[matchIndex].away = matches[match].away;
         this.slider[matchIndex].status = matches[match].status;
-        if (['closed', 'complete'].indexOf(matches[match].status) > -1) {
+        this.slider[matchIndex].home_points = matches[match].home.points;
+        this.slider[matchIndex].away_points = matches[match].away.points;
+        if (['closed', 'complete'].indexOf(matches[match].status) > -1 && ['closed', 'complete'].indexOf(status) == 0) {
           this.clearTimeInterval();
-          // this.loadBasketballData();
+          this.getBasketBallSchedule();
         }
       }
     });
@@ -191,16 +204,22 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     /** If match info has already start interval */
     if (this.router.url.includes('/basketball/match/')) return false;
 
-    let liveMatches = this.slider.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
-    liveMatches.map((match) => {
-      this.interval = setInterval(() => {
-        classThis.sportsService
-          .getBasketballMatchSummary(match.id)
-          // .tempBasketballSummary('nba_summary', tempcount++, match.id)
-          .subscribe(res => {
-            this.store.dispatch(new Basketball.SaveBasketballMatches(res.data));
-          });
-      }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Soccer.interval));
+
+    /** If Basketball live update is already started, No need to start interval for Live match Info */
+    this.runningMatchFlagSubscription = this.store.select(appSelectors.getBasketballLiveIds).subscribe((matches) => {
+      let liveMatches = this.slider.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
+      liveMatches.map((match) => {
+        if (Object.entries(matches).length == 0 || Object.keys(matches).filter((id) => match.id == id).length == 0) {
+          this.interval = setInterval(() => {
+            classThis.sportsService
+              .getBasketballMatchSummary(match.id)
+              .subscribe(res => {
+                this.store.dispatch(new Basketball.SaveBasketballMatches(res.data));
+              });
+          }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Basketball.interval));
+
+        }
+      });
     });
   }
 
@@ -404,7 +423,20 @@ export class UppersliderComponent implements OnInit, OnDestroy {
             this.timerStartTime.Soccer.isStartAfterTime = true;
           }
         }, remainingMiliSec);
+      } else if (remainingMiliSec < 0) {
+        if (this.sport == 'Kabaddi') {
+          this.getLiveKabaddiUpdate(this);
+        } else if (this.sport == 'Cricket')
+          this.getLiveUpdateSlider(this);
+        else if (this.sport == 'Soccer') {
+          this.getLiveSoccerUpdate(this);
+          this.timerStartTime.Soccer.isStartAfterTime = true;
+        } else if (this.sport == 'Basketball') {
+          this.getLiveBasketballUpdate(this);
+          this.timerStartTime.Soccer.isStartAfterTime = true;
+        }
       }
+
     }
 
   }
@@ -447,6 +479,8 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
+    if (this.runningMatchFlagSubscription) this.runningMatchFlagSubscription.unsubscribe();
+    this.store.dispatch(new Basketball.RemoveBasketballUpdate());
     clearInterval(this.interval);
     clearTimeout(this.timeout);
     this.timerStartTime.Soccer.isLiveUpdate = false;

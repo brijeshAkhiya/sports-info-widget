@@ -1,4 +1,4 @@
 <div class="no-data-available">
-    <h5>{{ (message) ? message : ('widget_Module2.No_data_available' | translate)}}</h5>
+    <h5>{{ (message) ? (message | translate) : ('widget_Module2.No_data_available' | translate)}}</h5>
     <img [src]="imagepath?.image">
 </div>
