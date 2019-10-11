@@ -3,13 +3,13 @@
     <div class="row sidebar-row">
       <div class="content-col">
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
-          <!-- <h1>
+          <h1>
             {{blog_title}}
-          </h1> -->
-          <div class="result-search-box">
+          </h1>
+          <!-- <div class="result-search-box">
             <input class="form-control" value="Dhoni">
             <button type="submit"></button>
-          </div>
+          </div> -->
         </div>
         <app-blog-list *ngIf="options" [options]="options"> </app-blog-list>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
