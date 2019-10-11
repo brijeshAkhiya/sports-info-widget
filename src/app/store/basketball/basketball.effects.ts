@@ -31,18 +31,6 @@ export class BasketballEffects {
         take(1)
     );
 
-    /** Basketball Match Info effect */
-    // @Effect()
-    // LoadBasketballMatchInfoSuccess$: Observable<Action> = this.actions$.pipe(
-    //     ofType(Basketball.LOAD_BASKETBALL_MATCH_INFO),
-    //     tap(() => console.log("dasdasda")),
-    //     switchMap((action: any) =>
-    //         this.sportsService.getBasketballMatchSummary(action.payload).pipe(
-    //             map((response: any) => new Basketball.LoadBasketballMatchInfoSuccess(response.data))
-    //         )),
-    //     take(1)
-    // );
-
 }
 
 

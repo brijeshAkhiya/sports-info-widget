@@ -207,7 +207,7 @@
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
                     <p class="tour-name"></p>
-                    <p *ngIf="slide?.status == 'scheduled' || slide?.status == 'closed'; else matchStatus">
+                    <p *ngIf="['scheduled','closed', 'complete'].indexOf(slide.status) > -1; else matchStatus">
                       {{slide.scheduled  | amTimeAgo}}</p>
                     <ng-template #matchStatus>
                       <p class="live-result">
@@ -227,12 +227,13 @@
                     let-abbr="abbr">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p
-                        [ngClass]="{'match-winner': abbr == 'home' ? (match?.home_points > match?.away_points) : (match?.away_points > match?.home_points)}">
+                        [ngClass]="{'match-winner': ['closed', 'complete'].indexOf(match.status) > -1 ? (abbr == 'home' ? (match?.home_points > match?.away_points) : (match?.away_points > match?.home_points)) : ''}">
                         <img [lazyLoad]="competitor?.sr_id| logosurl:'basketball'"
-                          [defaultImage]="commonService.flagplaceholder">{{competitor?.name}}
+                          [defaultImage]="commonService.flagplaceholder">
+                        {{competitor?.market}} {{competitor?.name}}
                       </p>
                       <p><b>
-                          {{abbr == 'home' ? match?.home_points : match?.away_points}}
+                          {{(['inprogress', 'halftime', 'delayed'].indexOf(match.status) > -1 ? competitor.points : (abbr == 'home' ? match?.home_points : match?.away_points))}}
                         </b>
                       </p>
                     </div>

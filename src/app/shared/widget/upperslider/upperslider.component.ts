@@ -1,5 +1,6 @@
 
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
@@ -9,6 +10,7 @@ import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 import * as Soccer from '@store/soccer/soccer.actions';
 import * as Basketball from '@store/basketball/basketball.actions';
 import * as fromRoot from '@app/app-reducer';
+import { appSelectors } from '@store/selectors/index';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 
@@ -18,7 +20,7 @@ import { CommonService } from '@providers/common-service';
   styleUrls: ['./upperslider.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class UppersliderComponent implements OnInit {
+export class UppersliderComponent implements OnInit, OnDestroy {
 
   timerStartTime = {
     'Cricket': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // from when to start fetching live data, interval in sec
@@ -72,9 +74,14 @@ export class UppersliderComponent implements OnInit {
     },
     nav: true
   };
+  liveMatchesSubscription;
+  scheduleSubscription;
+
   @ViewChild('sportsSlider') public sportsSlider: CarouselComponent;
 
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private sportsService: SportsService,
     private commonService: CommonService,
     private store: Store<fromRoot.State>
@@ -142,58 +149,59 @@ export class UppersliderComponent implements OnInit {
   }
 
   loadBasketballData() {
-
     this.timerStartTime.Basketball.isLiveUpdate = false;
     this.timerStartTime.Basketball.isStartAfterTime = false;
-    this.store.dispatch(new Basketball.LoadBasketballSchedule());
-    this.store.select('Basketball').subscribe((data: any) => {
-      if (data.schedule && data.schedule.length > 0) {
-
-        let liveMatches = this.slider = data.schedule.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
-        this.slider = this.commonService.sortBtDate(this.slider.concat(data.schedule.filter((match) => match.status == 'closed' || match.status == 'complete')), 'scheduled', 'asc');
-        let fixtures = this.commonService.sortBtDate(data.schedule.filter((match) => match.status == 'scheduled'), 'scheduled', 'asc');
+    this.scheduleSubscription = this.store.select(appSelectors.getBasketballSchedule).subscribe((data: any) => {
+      if (data && data.length > 0) {
+        let liveMatches = this.slider = data.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
+        this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => match.status == 'closed' || match.status == 'complete')), 'scheduled', 'asc');
+        let fixtures = this.commonService.sortBtDate(data.filter((match) => match.status == 'scheduled'), 'scheduled', 'asc');
         this.slider = this.slider.concat(fixtures);
-
-        // if (liveMatches.length > 0 && !this.timerStartTime.Basketball.isLiveUpdate) {
-        //   this.getLiveBasketballUpdate(this);
-        // } else if (!this.timerStartTime.Basketball.isLiveUpdate && !this.timerStartTime.Basketball.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
-        //   let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
-        //     return new Date(moment.utc(e.scheduled).format());
-        //   })));
-        //   this.startLiveUpdateAfterTime(moment.utc(minTime).format());
-        // }
+        if (liveMatches.length > 0 && !this.timerStartTime.Basketball.isLiveUpdate) {
+          this.getLiveBasketballUpdate(this);
+        } else if (!this.timerStartTime.Basketball.isLiveUpdate && !this.timerStartTime.Basketball.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
+          let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
+            return new Date(moment.utc(e.scheduled).format());
+          })));
+          this.startLiveUpdateAfterTime(moment.utc(minTime).format());
+        }
+      }
+    });
+  }
+  updateBasketballSlider(matches) {
+    Object.keys(matches).map(match => {
+      let matchIndex = this.slider.findIndex((slide) => slide.id == matches[match].id);
+      if (matchIndex >= 0) {
+        this.slider[matchIndex].home = matches[match].home;
+        this.slider[matchIndex].away = matches[match].away;
+        this.slider[matchIndex].status = matches[match].status;
+        if (['closed', 'complete'].indexOf(matches[match].status) > -1) {
+          this.clearTimeInterval();
+          // this.loadBasketballData();
+        }
       }
     });
   }
   getLiveBasketballUpdate(classThis) {
-    this.timerStartTime.Basketball.isLiveUpdate = true;
-    let date = new Date();
-    this.interval = setInterval(() => {
-      classThis.sportsService
-        .getBasketballMatchSummary(this.commonService.convertDate(date)).subscribe((res: any) => {
-          if (res.data.summaries.length > 0) {
-            this.store.dispatch(
-              new Soccer.LoadSoccerLiveSuccess(
-                res.data.summaries.filter((match) =>
-                  match.sport_event_status
-                  && match.sport_event_status.status == 'inprogress'
-                  && match.sport_event.coverage.sport_event_properties.scores == 'live'
-                  && match.sport_event.sport_event_context
-                )
-              ));
-            res.data.summaries.forEach(match => {
-              let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.sport_event.id);
-              if (matchIndex >= 0) {
-                this.slider[matchIndex].sport_event = match.sport_event;
-                this.slider[matchIndex].sport_event_status = match.sport_event_status;
-              }
-            });
-          } else {
-            this.clearTimeInterval();
-            this.loadSoccerData();
-          }
-        });
-    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Soccer.interval));
+    /** Subscribe for Live Match info */
+    this.liveMatchesSubscription = this.store.select(appSelectors.getBasketballMatches).subscribe((match) => {
+      if (Object.entries(match).length !== 0)
+        this.updateBasketballSlider(match);
+    });
+    /** If match info has already start interval */
+    if (this.router.url.includes('/basketball/match/')) return false;
+
+    let liveMatches = this.slider.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
+    liveMatches.map((match) => {
+      this.interval = setInterval(() => {
+        classThis.sportsService
+          .getBasketballMatchSummary(match.id)
+          // .tempBasketballSummary('nba_summary', tempcount++, match.id)
+          .subscribe(res => {
+            this.store.dispatch(new Basketball.SaveBasketballMatches(res.data));
+          });
+      }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Soccer.interval));
+    });
   }
 
   loadSoccerData() {
@@ -205,9 +213,15 @@ export class UppersliderComponent implements OnInit {
 
       if (data.fixtures && data.fixtures.length > 0) {
 
-        let liveMatches = this.slider = data.fixtures.filter((match) => match.sport_event_status && match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context);
-        this.slider = this.slider.concat(data.fixtures.filter((match) => match.sport_event_status && match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled'));
-        let fixtures = data.fixtures.filter((match) => match.sport_event_status && match.sport_event_status.status == 'not_started' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context);
+        let liveMatches = this.slider = data.fixtures.filter((match) =>
+          match.sport_event_status && match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context
+        );
+        this.slider = this.slider.concat(data.fixtures.filter((match) =>
+          match.sport_event_status && match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled'
+        ));
+        let fixtures = data.fixtures.filter((match) =>
+          match.sport_event_status && match.sport_event_status.status == 'not_started' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context
+        );
         this.slider = this.slider.concat(fixtures);
         if (liveMatches.length > 0 && !this.timerStartTime.Soccer.isLiveUpdate) {
           this.getLiveSoccerUpdate(this);
@@ -227,7 +241,13 @@ export class UppersliderComponent implements OnInit {
       classThis.sportsService
         .getSoccerDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
           if (res.data.summaries.length > 0) {
-            this.store.dispatch(new Soccer.LoadSoccerLiveSuccess(res.data.summaries.filter((match) => match.sport_event_status && match.sport_event_status.status == 'live' && match.sport_event.coverage.sport_event_properties.scores == 'live' && match.sport_event.sport_event_context)));
+            this.store.dispatch(
+              new Soccer.LoadSoccerLiveSuccess(
+                res.data.summaries.filter((match) =>
+                  match.sport_event_status && match.sport_event_status.status == 'live' &&
+                  match.sport_event.coverage.sport_event_properties.scores == 'live' &&
+                  match.sport_event.sport_event_context
+                )));
             res.data.summaries.forEach(match => {
               let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.sport_event.id);
               if (matchIndex >= 0) {
@@ -431,6 +451,8 @@ export class UppersliderComponent implements OnInit {
     clearTimeout(this.timeout);
     this.timerStartTime.Soccer.isLiveUpdate = false;
     this.timerStartTime.Soccer.isStartAfterTime = false;
+    if (this.liveMatchesSubscription) this.liveMatchesSubscription.unsubscribe();
+    if (this.scheduleSubscription) this.scheduleSubscription.unsubscribe();
   }
 
   ngOnDestroy() {

@@ -695,11 +695,19 @@ export class SportsService {
   getBasketballSchedule() {
     return this.http.get(
       environment.apiUrl + environment.version + `/nba/schedules`
+      // `http://localhost:3004/?type=json&counter=schedules`
     );
   }
   tempBasketballAPI(type, counter) {
     return this.http.get(
-      `http://13.235.4.242:3004/?type=${type}&counter=${counter}`
+      // `http://13.235.4.242:3004/?type=${type}&counter=${counter}`
+      `http://localhost:3004/?type=${type}&counter=${counter}`
+    );
+  }
+  tempBasketballSummary(type, counter, id) {
+    return this.http.get(
+      // `http://13.235.4.242:3004/?type=${type}&counter=${counter}`
+      `http://localhost:3004/?type=${type}&id=${id}&counter=${counter}`
     );
   }
   /**

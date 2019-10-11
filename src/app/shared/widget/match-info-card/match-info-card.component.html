@@ -5,16 +5,16 @@
         <td>{{title}}</td>
         <td>
           <!-- For Cricket Umpires array-->
-          <div *ngIf="options.sport == 'cricket' && i == 6 ; else simpleValue">
-              <p *ngFor="let singleUmpire of options.values[i]">
-                {{singleUmpire.name | split}} <span
-                  class="light-text">{{ singleUmpire.type === 'on_field' ? '(On Field)' : singleUmpire.type === '3rd' ? '(3rd Umpire)' : ''}}</span>
-              </p>
+          <div *ngIf="options.sport == 'Cricket' && i == 6 ; else simpleValue">
+            <p *ngFor="let singleUmpire of options.values[i]">
+              {{singleUmpire.name | split}} <span
+                class="light-text">{{ singleUmpire.type === 'on_field' ? '(On Field)' : singleUmpire.type === '3rd' ? '(3rd Umpire)' : ''}}</span>
+            </p>
           </div>
-          
+
           <!-- Direct value for all the sports-->
           <ng-template #simpleValue>
-              {{options.values[i]}} 
+            {{options.values[i]}}
           </ng-template>
         </td>
       </tr>
