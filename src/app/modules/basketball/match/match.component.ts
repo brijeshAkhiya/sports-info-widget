@@ -209,7 +209,7 @@ export class MatchComponent implements OnInit, OnDestroy {
     clearTimeout(this.timeout);
     if (this.runningMatchFlagSubscription) this.runningMatchFlagSubscription.unsubscribe();
     if (this.liveMatchSubscription) this.liveMatchSubscription.unsubscribe();
-    this.store.dispatch(new Basketball.RemoveBasketballUpdate(this.matchInfo.id));
+    this.store.dispatch(new Basketball.RemoveBasketballUpdate());
   }
 
   ngOnDestroy() {
