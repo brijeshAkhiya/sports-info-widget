@@ -32,13 +32,13 @@ export class MatchComponent implements OnInit {
     };
 
     let matchid = this.activatedroute.snapshot.params.id;
-    this.getMatchInfo(matchid);
     this.paramArticle.reqParams.aIds.push(this.commonService.getIds(matchid, 'hockey', 'match'));
+    this.getMatchInfo(this.commonService.getIds(matchid, 'hockey', 'match'));
   }
 
   getMatchInfo(id) {
     this.loading = true;
-    this.sportsService.getHockeyMatchTimeline('sr:sport_event:19569644').subscribe((res: any) => {
+    this.sportsService.getHockeyMatchTimeline(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
       }

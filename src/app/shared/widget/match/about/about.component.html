@@ -466,13 +466,13 @@
   <div class="team-col">
     <div class="current-team">
       <h4>
-        <img [lazyLoad]="team?.id | logosurl:'hockey'" alt="team.name" [defaultImage]="commonService.playerplaceholder"
-          [offset]="commonService.lazyloadoffset">
+        <img [lazyLoad]="team?.id | logosurl:'hockey'" alt="{{team.name}}"
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
-      <h4
-        [ngClass]="{'winner':['closed', 'ended'].indexOf(data?.sport_event?.status) > -1 && data.sport_event_status.winner_id == team.id}">
+      <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
         <a [routerLink]="['/hockey/team',(team.id | splitID),(team.name | slugify)]">
-          {{ team.name}}</a> </h4>
+          {{ team.name }}
+        </a> </h4>
     </div>
   </div>
 </ng-template>
