@@ -759,5 +759,15 @@ export class SportsService {
       environment.apiUrl + environment.version + `/fieldhockey/match/${id}/summary`
     );
   }
+  getHockeyTeamProfile(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/team/${id}/profile`
+    );
+  }
+  getHockeyTeamSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/team/${id}/summaries`
+    );
+  }
 
 }

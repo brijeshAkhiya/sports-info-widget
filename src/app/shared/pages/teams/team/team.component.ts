@@ -70,6 +70,12 @@ export class TeamComponent implements OnInit {
         this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [this.routeParams.teamid] } };
         this.sportsService.getBasketballteamprofile(this.routeParams.teamid).subscribe(this.profileSuccess, this.profileError);
         break;
+      } case 'Hockey': {
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Hockey', aIds: [this.commonService.getIds(this.routeParams.teamid, 'Hockey', 'competitor')] } };
+        this.sportsService.getHockeyTeamProfile(this.commonService.getIds(this.routeParams.teamid, 'Hockey', 'competitor')).subscribe(this.profileSuccess, this.profileError);
+        this.paramsFixtures.loading = true;
+        this.sportsService.getHockeyTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Hockey', 'competitor')).subscribe(this.fixtureSuccess, this.fixtureError);
+        break;
       }
     }
   }
@@ -107,6 +113,11 @@ export class TeamComponent implements OnInit {
         break;
       }
       case 'Basketball': {
+        if (res.data)
+          this.teamProfile = res.data;
+        break;
+      }
+      case 'Hockey': {
         if (res.data)
           this.teamProfile = res.data;
         break;
@@ -167,6 +178,13 @@ export class TeamComponent implements OnInit {
         this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
           this.routeParams.teamid).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
+      case 'Hockey': {
+        if (this.paramsFixtures.data.length == 0)
+          this.sportsService.getHockeyTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Hockey', 'competitor')).subscribe(this.fixtureSuccess, this.fixtureError);
+        else
+          this.paramsFixtures.loading = false;
+        break;
+      }
     }
   }
 
@@ -252,6 +270,11 @@ export class TeamComponent implements OnInit {
         this.paramsFixtures.data = this.commonService.sortArr(filteredData, 'Do MMMM YYYY', 'scheduled', 'asc');
         break;
       }
+      case 'Hockey': {
+        this.paramsFixtures.data = [];
+        this.paramsFixtures.data = this.commonService.sortArrByEvent(res.data.summaries, 'Do MMMM YYYY', 'start_time', 'desc');
+        break;
+      }
     }
   }
 
@@ -278,6 +301,13 @@ export class TeamComponent implements OnInit {
         this.sportsService.getBasketballteamFixtures(this.filter.year, this.filter.type,
           this.routeParams.teamid).subscribe(this.resultSuccess, this.resultError);
         break;
+      case 'Hockey': {
+        if (this.paramsResults.data.length == 0)
+          this.sportsService.getHockeyTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Hockey', 'competitor')).subscribe(this.resultSuccess, this.resultError);
+        else
+          this.paramsResults.loading = false;
+        break;
+      }
       default:
       // code block
 
@@ -319,6 +349,15 @@ export class TeamComponent implements OnInit {
         this.paramsResults.data = [];
         let filteredData = res.data.filter((match) => match.status == 'closed');
         this.paramsResults.data = this.commonService.sortArr(filteredData, 'Do MMMM YYYY', 'scheduled', 'desc');
+        break;
+      }
+      case 'Hockey': {
+        this.paramsFixtures.data = [];
+        let filteredData = res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started');
+        this.paramsFixtures.data = this.commonService.sortArr(filteredData, 'Do MMMM YYYY', 'start_time', 'asc');
+        this.paramsResults.data = [];
+        filteredData = res.data.summaries.filter((match) => match.sport_event_status.status == 'closed');
+        this.paramsResults.data = this.commonService.sortArr(filteredData, 'Do MMMM YYYY', 'start_time', 'desc');
         break;
       }
     }

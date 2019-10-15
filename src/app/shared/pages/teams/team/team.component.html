@@ -29,6 +29,11 @@
               *ngTemplateOutlet="title; context: {title: teamProfile?.market+' '+teamProfile?.name, options : {id:teamProfile?.sr_id,type:'team',sport:'basketball',name:teamProfile?.name}}">
             </ng-container>
           </ng-container>
+          <ng-container *ngSwitchCase="'Hockey'">
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'hockey',name:teamProfile?.competitor?.name}}">
+            </ng-container>
+          </ng-container>
         </div>
 
         <ngb-tabset class="common-tabs" *ngIf="teamProfile">
@@ -157,10 +162,29 @@
                     </div>
                   </div>
                 </section>
+
+                <section class="team-about-head d-flex" *ngSwitchCase="'Hockey'">
+                  <div class="team-logo align-self-start rounded-box common-shadow">
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'hockey'"
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
+                  </div>
+                  <div class="team-info soccer-team-info d-flex rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.country">
+                        <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
+                        <p> {{teamProfile?.competitor?.country}} </p>
+                      </div>
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.abbreviation">
+                        <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
+                        <p>{{ teamProfile?.competitor?.abbreviation }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </ng-container>
 
               <!-- Squad Section-->
-              <section class="common-section squad-list">
+              <section class="common-section squad-list" *ngIf="sport != 'Hockey'">
                 <h4 class="squad-title"
                   *ngIf="teamProfile?.players?.length > 0 || teamProfile?.squads?.length > 0;then squadList else no_players">
                   {{ 'Shared_module.Squad' | translate }}
@@ -265,6 +289,19 @@
                 </app-no-data-widget>
               </ng-template>
 
+              <!-- Recent Matches-->
+              <section *ngIf="sport == 'Hockey'">
+                <h4 class="squad-title" *ngIf="paramsFixtures.data.length > 0">
+                  {{ 'Recent Matches' | translate }}
+                </h4>
+                <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
+                  *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)"
+                  [sport]="sport">
+                </app-no-data-widget>
+                <app-schedule [data]="paramsFixtures.data | slice:0:7" [type]="'result'" [sport]="sport"
+                  [tournament]="routeParams.tournamentid" [list_type]="'simple'"></app-schedule>
+                <app-loader *ngIf="paramsFixtures.loading"></app-loader>
+              </section>
             </ng-template>
           </ngb-tab>
 
@@ -304,7 +341,7 @@
           </ngb-tab>
 
           <!-- Fixtures Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'Hockey'">
             <ng-template ngbTabTitle>
               <div (click)="getSportFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
@@ -382,7 +419,7 @@
           </ngb-tab>
 
           <!-- Results Section-->
-          <ngb-tab>
+          <ngb-tab *ngIf="sport != 'Hockey'">
             <ng-template ngbTabTitle>
               <div (click)="getSportResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>
@@ -434,8 +471,6 @@
 
         </ngb-tabset>
       </div>
-
-
 
       <!-- Sidebar Section-->
       <div class="sidebar-col">

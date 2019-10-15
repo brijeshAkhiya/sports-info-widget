@@ -335,7 +335,8 @@
         <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
       </div>
       <div>
-        <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
+        <p class="time-line" *ngIf="type == 'fixture' ||  !match?.sport_event_status?.winner_id">
+          {{match.sport_event.start_time | date:'h:mm a'}}
         </p>
       </div>
     </div>
