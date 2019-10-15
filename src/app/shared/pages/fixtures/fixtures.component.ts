@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
+import { Store } from '@ngrx/store';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
@@ -9,7 +10,8 @@ import { CommonService } from '@providers/common-service';
 import * as fromRoot from '@app/app-reducer';
 import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 import * as Cricket from '@store/cricket/cricket.actions';
-import { Store } from '@ngrx/store';
+import * as Hockey from '@store/hockey/hockey.actions';
+import * as HockeySelectors from '@store/selectors/hockey.selectors';
 
 @Component({
   selector: 'app-fixtures',
@@ -17,7 +19,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./fixtures.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FixturesComponent implements OnInit {
+export class FixturesComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('gallery') public gallery: CarouselComponent;
@@ -29,6 +31,9 @@ export class FixturesComponent implements OnInit {
   paramsResults = { reqParams: { 'status': 2, 'per_page': 10, 'page': 1 }, loading: false, loadmore: false, data: [], tournamentid: '' };
   tournamentid: any;
   activeTab: any = 'fixtures';
+  seasons;
+  filter;
+  hockeySubscription: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -40,7 +45,6 @@ export class FixturesComponent implements OnInit {
   ngOnInit() {
     const routeData: any = this.activatedroute;
     this.params = routeData.data.value;
-    console.log(this.params.sport);
     if (this.params.sport == 'Cricket') {
       /* Tournaments Fixtures */
       this.activeTab = routeData.params.value.type;
@@ -85,28 +89,39 @@ export class FixturesComponent implements OnInit {
       // Tournament Fixtures
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
         this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'hockey', 'season');
-        this.getHockeyTournamentData(this.tournamentid);
+        this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+          if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
+            this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
+          else {
+            this.seasons = data[this.tournamentid];
+            this.filter = this.seasons[0];
+            this.getHockeyTournamentData();
+          }
+        });
       }
     }
   }
 
-  getHockeyTournamentData(id) {
+  filterHockeySeason(season) {
+    this.filter = season;
+    this.paramsFixtures.data = [];
+    this.paramsResults.data = [];
+    this.getHockeyTournamentData();
+  }
+
+  getHockeyTournamentData() {
     this.paramsFixtures.loading = true;
     this.paramsResults.loading = true;
     this.sportsService
-      .getHockeySeasonSummary('sr:season:71218')
+      .getHockeySeasonSummary(this.filter.id)
       .subscribe((res: any) => {
         this.paramsFixtures.loading = false;
         this.paramsResults.loading = false;
         if (res.data.summaries && res.data.summaries.length > 0) {
-          this.paramsFixtures.data = this.paramsFixtures.data.concat(
-            this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'),
-              'Do MMMM YYYY', 'start_time', 'asc')
-          );
-          this.paramsResults.data = this.paramsResults.data.concat(
-            this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'),
-              'Do MMMM YYYY', 'start_time', 'desc')
-          );
+          this.paramsFixtures.data = this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'),
+            'Do MMMM YYYY', 'start_time', 'asc');
+          this.paramsResults.data = this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'),
+            'Do MMMM YYYY', 'start_time', 'desc');
         }
       }, (error) => {
         this.paramsFixtures.loading = false;
@@ -274,4 +289,8 @@ export class FixturesComponent implements OnInit {
     nav: true
   };
 
+
+  ngOnDestroy() {
+    this.hockeySubscription.unsubscribe();
+  }
 }

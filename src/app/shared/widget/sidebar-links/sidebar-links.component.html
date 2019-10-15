@@ -39,6 +39,14 @@
       : ''">
         {{ item.name | split }}
       </a>
+
+      <a *ngIf="link_type != 'blogs' && link_type != 'tournament' && sport == 'Basketball'" [routerLink]="
+      item.type == 'Team' ? ['/basketball/team',(item._id),(item.name | slugify)] 
+      : item.type == 'Player'? ['/basketball/player',(item._id | splitID), ((item.name | split) | slugify)] 
+      : ''">
+        {{ item.name | split }}
+      </a>
+
     </li>
   </ul>
 </div>

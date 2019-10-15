@@ -164,7 +164,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.scheduleSubscription = this.store.select(appSelectors.getBasketballSchedule).subscribe((data: any) => {
       if (data && data.length > 0) {
         let liveMatches = this.slider = data.filter((match) => ['inprogress', 'halftime', 'delayed'].indexOf(match.status) > -1);
-        this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'asc');
+        this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'desc');
         let fixtures = this.commonService.sortBtDate(data.filter((match) => ['scheduled', 'created'].indexOf(match.status) > -1), 'scheduled', 'asc');
         this.slider = this.slider.concat(fixtures);
         if (liveMatches.length > 0 && !this.timerStartTime.Basketball.isLiveUpdate) {

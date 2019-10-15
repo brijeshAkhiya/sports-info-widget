@@ -7,7 +7,6 @@ export interface BasketballData {
     loader: boolean;
     matches: { [id: string]: any };
     ids: any;
-
 }
 
 
@@ -16,7 +15,6 @@ const initialState = {
     loader: false,
     matches: {},
     ids: [],
-
 };
 
 export function BasketballReducer(state = initialState, action: BasketballActions): any {

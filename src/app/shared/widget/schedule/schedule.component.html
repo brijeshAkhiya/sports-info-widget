@@ -329,12 +329,14 @@
         <h6 class="text-capitalize">
           {{match?.sport_event?.sport_event_context?.stage ? replace(match?.sport_event?.sport_event_context?.stage.phase) : ''}}
           <span
+            *ngIf="match?.sport_event?.sport_event_context?.round && match?.sport_event?.sport_event_context?.round?.number"
             class="text-capitalize">{{ match?.sport_event?.sport_event_context?.round ? ', Round - ' + match?.sport_event?.sport_event_context?.round?.number : '' }}</span>
         </h6>
         <p class="stadium-nm" *ngIf="match.sport_event.venue?.name">{{match.sport_event?.venue?.name}}</p>
       </div>
       <div>
-        <p class="time-line" *ngIf="type == 'fixture'">{{match.sport_event.start_time | date:'h:mm a'}}
+        <p class="time-line" *ngIf="type == 'fixture' ||  !match?.sport_event_status?.winner_id">
+          {{match.sport_event.start_time | date:'h:mm a'}}
         </p>
       </div>
     </div>
@@ -494,7 +496,8 @@
         <p>{{item?.data?.season?.name}}</p>
       </div> -->
       <div class="schedule-tour-list">
-        <div class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
+        <div
+          class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.status=='closed'}">
           <div class="match-teams d-flex align-items-center" *ngIf="match?.home && match?.away">
 
@@ -573,7 +576,8 @@
         <p>{{item?.data?.season?.name}}</p>
       </div> -->
       <div class="schedule-tour-list">
-        <div class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
+        <div
+          class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
           <div class="match-teams d-flex align-items-center"
             *ngIf="match?.sport_event?.competitors[0] && match?.sport_event?.competitors[1]">

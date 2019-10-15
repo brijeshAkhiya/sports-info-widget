@@ -724,6 +724,11 @@ export class SportsService {
       environment.apiUrl + environment.version + `/fieldhockey/competitions`
     );
   }
+  getCompetitionSeason(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/competitions/${id}/seasons`
+    );
+  }
   getHockeySeasonInfo(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/fieldhockey/seasons/${id}/info`
@@ -752,6 +757,16 @@ export class SportsService {
   getHockeyMatchSummary(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/fieldhockey/match/${id}/summary`
+    );
+  }
+  getHockeyTeamProfile(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/team/${id}/profile`
+    );
+  }
+  getHockeyTeamSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/team/${id}/summaries`
     );
   }
 

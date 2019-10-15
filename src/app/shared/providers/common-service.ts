@@ -66,6 +66,23 @@ export class CommonService {
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
+  sortArrByEvent(data, format, date_param, sort_type) {
+    data.sort((a, b) => {
+      if (sort_type === 'asc') {
+        return new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? 1 : 0;
+      } else {
+        return new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? 1 : 0;
+      }
+    });
+    const dateObj = {};
+    data.map((data) => {
+      const mdate = moment(data['sport_event'][date_param]).format(format);
+      if (!dateObj[mdate]) dateObj[mdate] = [];
+      dateObj[mdate].push(data);
+    });
+    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
+  }
+
   sortBtDate(data, date_param, sort_type) {
     return data.sort((a, b) => {
       // return Number(new Date(a[date_param])) - Number(new Date(b[date_param]));
@@ -112,6 +129,8 @@ export class CommonService {
   }
 
   getIds(id, sport, type) {
+    console.log(sport, type);
+
     if (sport == 'cricket') {
       if (type == 'tournament') {
         return 'sr:tournament:' + id;
@@ -147,6 +166,8 @@ export class CommonService {
         return 'sr:season:' + id;
       } else if (type == 'match') {
         return 'sr:sport_event:' + id;
+      } else if (type == 'competitor') {
+        return 'sr:competitor:' + id;
       }
     }
   }

@@ -322,9 +322,7 @@
     "Substituted_Out": "Substituted Out",
     "Goals_Scored": "Goals Scored"
   },
-  "NBA_Module": {
-
-  },
+  "NBA_Module": {},
   "Division": "Division",
   "Address": "address",
   "Coach": "Coach",
@@ -354,5 +352,8 @@
   "Fouls": "Fouls",
   "Final": "Final",
   "NBA": "NBA",
+  "No data available!": "No data available!",
+  "Tournaments": "Tournaments",
+  "Hockey": "Hockey",
   "No match scheduled": "No match scheduled"
 }

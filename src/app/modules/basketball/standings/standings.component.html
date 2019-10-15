@@ -6,7 +6,8 @@
           class="common-title-btn nba-dropdown-title big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{ 'Standings' | translate }}</h1>
           <div class="nba-common-selection d-flex">
-            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown" placement="bottom">
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.year[0]" #yearDrop="ngbDropdown"
+              placement="bottom">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.year}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons?.year[0]"
@@ -16,7 +17,8 @@
                 </button>
               </div>
             </div>
-            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown" placement="bottom">
+            <div ngbDropdown class="common-dropdown" *ngIf="seasons?.type[0]" #typeDrop="ngbDropdown"
+              placement="bottom">
               <button id="dropdownBasic1" ngbDropdownToggle>{{filter.type}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem *ngFor="let season of seasons?.type[0]"
@@ -36,7 +38,7 @@
             </ng-template>
             <ng-template ngbTabContent>
               <app-no-data-widget *ngIf="(standings?.teams?.length == 0)" [sport]="'Basketball'"
-                [message]="'No standing data available'"></app-no-data-widget>
+                [message]="'No standing data available' | translate"></app-no-data-widget>
               <app-player-table *ngIf="standings?.teams?.length > 0 " [data]="standings?.teams" [options]=" {
                   sport:'Basketball',
                   titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
