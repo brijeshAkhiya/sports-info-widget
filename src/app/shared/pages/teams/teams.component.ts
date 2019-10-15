@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 
+import * as fromRoot from '@app/app-reducer';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
+import * as HockeySelectors from '@store/selectors/hockey.selectors';
+import * as Hockey from '@store/hockey/hockey.actions';
 
 @Component({
   selector: 'app-teams',
@@ -15,11 +19,14 @@ export class TeamsComponent implements OnInit {
   tournamentid;
   teams;
   isloading: boolean = true;
+  seasons;
+  filter;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private sportsService: SportsService,
-    public commonService: CommonService
+    public commonService: CommonService,
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
@@ -50,10 +57,25 @@ export class TeamsComponent implements OnInit {
       }
       case 'Hockey': {
         this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'Hockey', 'season');
-        this.sportsService.getHockeySeasonInfo('sr:season:31933').subscribe(this.teamSuccess, this.teamError);
+        this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+          if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
+            this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
+          else {
+            this.seasons = data[this.tournamentid];
+            this.filter = this.seasons[0];
+            this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+          }
+        });
         break;
       }
     }
+  }
+
+  filterHockeySeason(season) {
+    this.filter = season;
+    this.teams = [];
+    this.isloading = true;
+    this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
   }
 
   teamSuccess = (res) => {

@@ -5,6 +5,19 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{  sport == 'Soccer' ?  ('Soccer_Module.Clubs' | translate)  : ('widgetModule.Teams' | translate) }}
           </h1>
+          <div class="nba-common-selection d-flex" *ngIf="sport == 'Hockey'">
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.length > 0" #seasonDrop="ngbDropdown"
+              placement="bottom">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.name}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let season of seasons"
+                  (click)="seasonDrop.close();filterHockeySeason(season);"
+                  [ngClass]="{'selected' : filter.name == season.name  }">
+                  {{season.name}}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <app-loader *ngIf="isloading"></app-loader>
         <app-no-data-widget *ngIf="!isloading && !teams"></app-no-data-widget>
