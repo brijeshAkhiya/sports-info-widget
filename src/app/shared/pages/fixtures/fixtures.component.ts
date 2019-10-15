@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
@@ -19,7 +19,7 @@ import * as HockeySelectors from '@store/selectors/hockey.selectors';
   styleUrls: ['./fixtures.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class FixturesComponent implements OnInit {
+export class FixturesComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('gallery') public gallery: CarouselComponent;
@@ -33,6 +33,7 @@ export class FixturesComponent implements OnInit {
   activeTab: any = 'fixtures';
   seasons;
   filter;
+  hockeySubscription: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -88,7 +89,7 @@ export class FixturesComponent implements OnInit {
       // Tournament Fixtures
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
         this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'hockey', 'season');
-        this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+        this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
           if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
@@ -288,4 +289,8 @@ export class FixturesComponent implements OnInit {
     nav: true
   };
 
+
+  ngOnDestroy() {
+    this.hockeySubscription.unsubscribe();
+  }
 }

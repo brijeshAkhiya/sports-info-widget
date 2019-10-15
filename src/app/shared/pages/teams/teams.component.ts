@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -13,7 +13,7 @@ import * as Hockey from '@store/hockey/hockey.actions';
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.css']
 })
-export class TeamsComponent implements OnInit {
+export class TeamsComponent implements OnInit, OnDestroy {
 
   sport;
   tournamentid;
@@ -21,6 +21,7 @@ export class TeamsComponent implements OnInit {
   isloading: boolean = true;
   seasons;
   filter;
+  hockeySubscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -57,7 +58,7 @@ export class TeamsComponent implements OnInit {
       }
       case 'Hockey': {
         this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'Hockey', 'season');
-        this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+        this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
           if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
@@ -137,6 +138,9 @@ export class TeamsComponent implements OnInit {
 
   teamError = (err) => {
     this.isloading = false;
+  }
+  ngOnDestroy() {
+    this.hockeySubscription.unsubscribe();
   }
 
 }

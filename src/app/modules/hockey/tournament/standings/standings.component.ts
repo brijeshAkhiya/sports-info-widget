@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -13,13 +13,14 @@ import * as Hockey from '@store/hockey/hockey.actions';
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.css']
 })
-export class StandingsComponent implements OnInit {
+export class StandingsComponent implements OnInit, OnDestroy {
 
   info: any;
   loading = false;
   standings;
   seasons;
   filter;
+  hockeySubscription: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -31,7 +32,7 @@ export class StandingsComponent implements OnInit {
   ngOnInit() {
     let id = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'hockey', 'tournament');
 
-    this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+    this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
       if (Object.keys(data).length == 0 || !Object.keys(data).includes(id))
         this.store.dispatch(new Hockey.LoadHockeyCompSeason(id));
       else {
@@ -61,6 +62,9 @@ export class StandingsComponent implements OnInit {
     this.standings = [];
     this.loading = true;
     this.getStandings();
+  }
+  ngOnDestroy() {
+    this.hockeySubscription.unsubscribe();
   }
 
 }
