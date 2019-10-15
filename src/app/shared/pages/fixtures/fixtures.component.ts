@@ -291,6 +291,6 @@ export class FixturesComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.hockeySubscription.unsubscribe();
+    if (this.hockeySubscription) this.hockeySubscription.unsubscribe();
   }
 }

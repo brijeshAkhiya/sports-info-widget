@@ -140,7 +140,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.isloading = false;
   }
   ngOnDestroy() {
-    this.hockeySubscription.unsubscribe();
+    if (this.hockeySubscription) this.hockeySubscription.unsubscribe();
   }
 
 }

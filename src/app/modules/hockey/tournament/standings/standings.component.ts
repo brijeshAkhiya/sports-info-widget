@@ -64,7 +64,7 @@ export class StandingsComponent implements OnInit, OnDestroy {
     this.getStandings();
   }
   ngOnDestroy() {
-    this.hockeySubscription.unsubscribe();
+    if (this.hockeySubscription) this.hockeySubscription.unsubscribe();
   }
 
 }
