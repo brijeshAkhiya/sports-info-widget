@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
     let title = this.params.sport;
     if (this.params.sport == 'Basketball')
       title = 'NBA';
+    else if (this.params.sport == 'Hockey')
+      title = 'Field Hockey';
     this.options = {
       reqParams:
         { eSport: this.params.sport, aIds: [] },

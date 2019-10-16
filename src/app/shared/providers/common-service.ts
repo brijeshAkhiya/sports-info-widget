@@ -129,8 +129,6 @@ export class CommonService {
   }
 
   getIds(id, sport, type) {
-    console.log(sport, type);
-
     if (sport == 'cricket') {
       if (type == 'tournament') {
         return 'sr:tournament:' + id;

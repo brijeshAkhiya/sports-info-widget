@@ -141,7 +141,6 @@ export class MatchComponent implements OnInit, OnDestroy {
    * Update Match live Data
    */
   updateBasketballData(match, key) {
-    console.log('updateBasketballData')
     let venue = this.matchInfo.venuedetails;
     this.matchInfo = match[key];
     this.matchInfo.venuedetails = venue;
@@ -166,7 +165,6 @@ export class MatchComponent implements OnInit, OnDestroy {
 
     /** If Basketball live update is already started, No need to start interval for Live match Info */
     this.runningMatchFlagSubscription = this.store.select(appSelectors.getBasketballLiveIds).subscribe((matches) => {
-      console.log(matches);
       if (Object.entries(matches).length !== 0 && Object.keys(matches).filter((id) => this.matchInfo.id == id).length > 0) {
         console.log('live update started already');
       } else {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { HomeComponent } from '@app/shared/pages/home/home.component';
 import { SliderFixtureComponent } from '@app/shared/pages/slider-fixture/slider-fixture.component';
 import { TeamsComponent } from '@app/shared/pages/teams/teams.component';
