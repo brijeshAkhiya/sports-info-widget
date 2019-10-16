@@ -61,16 +61,23 @@
 .schedule-item.common-item .match-desc,
 .schedule-item.common-item .match-teams                 { width: 100%; }
 .schedule-item.common-item .match-desc                  { padding-top: 16px; }
-.common-item .match-teams .team-flag img                { display: block; height: 24px;}
+.schedule-tour-list .common-item .match-teams .team-flag img    { display: block; height: 24px;}
 .common-tour-list .grp-item .vs-block,
 .common-tour-list .grp-item .score-center-block        { min-width: 124px; padding: 0px 26px; text-align: center; }
 .grp-item .score-center-block h4                       { margin: 0px; font-size: 16px; line-height: 20px; }
-.common-tour-list .schedule-tour-list .schedule-item h5 { font-family: inherit; font-weight: 500; }
+.common-tour-list .schedule-tour-list .schedule-item h5         { font-family: inherit; font-weight: 500; }
 
 /* -------- Tournament Fixtures Without Group ------- */
 .common-tour-list .grp-item.tour-without-grp                       { padding: 0px; background: transparent; }
 .common-tour-list .tour-without-grp .common-item                    { margin-bottom: 24px; }
 .tour-without-grp .schedule-tour-list .common-item:nth-child(even)  { background: #fff; }
+
+/* -------- Tournament Fixtures for Badminton ------- */
+.badminton-item .match-team                 { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
+.badminton-item .double-team                { margin-bottom: 8px; width: 100%; }
+.badminton-item .double-team:last-child                { margin-bottom: 0px; }
+.badminton-item .match-team:first-child .double-team    { justify-content: flex-end; -webkit-justify-content: flex-end; }
+
 
 /* -- Arabic CSS -- */
 .arabic .schedule-list .month-title             { padding-right: 0px; padding-left: 16px; }
@@ -154,12 +161,12 @@
     .schedule-item.goal-item .match-teams                {justify-content: space-between; -webkit-justify-content: space-between;}
     .schedule-item.complete-match.goal-item .match-teams      { flex-direction: row; -webkit-flex-direction: row; }
     .schedule-item.complete-match.goal-item .match-team,
-    .schedule-item.goal-item .match-team                 { width: calc(50% - 40px); flex-direction: column; -webkit-flex-direction: column; flex-shrink: 0; -webkit-flex-shrink: 0; }
+    .schedule-item.goal-item .match-team                 { width: calc(50% - 22px); flex-direction: column; -webkit-flex-direction: column; flex-shrink: 0; -webkit-flex-shrink: 0; }
     .schedule-item.goal-item .match-teams .match-team:first-child     { text-align: left; justify-content: start; -webkit-justify-content: start; }
     .schedule-item.goal-item .match-teams .match-team .team-info     { margin-top: 5px; text-align: center; }
     .schedule-item.goal-item .match-teams .match-team:first-child .team-info      { order: 2; }
     .schedule-item.goal-item.complete-match .match-teams .match-team .team-info     { display: block;}
-    .schedule-item.goal-item h5                          { font-size: 13px; line-height: 17px; }
+    .schedule-item.goal-item h5                          { font-size: 12px; line-height: 17px; }
 /* -------- Tournament Fixtures For Soccer ------- */
     .common-tour-list .grp-item              { margin-bottom: 16px; padding: 12px 16px 16px;}
     .schedule-tour-list .schedule-item.common-item  { padding: 10px 8px; }
@@ -167,5 +174,9 @@
     .common-tour-list .grp-item .vs-block,
     .common-tour-list .grp-item .score-center-block { min-width: initial; padding: 0px 8px;}
     .schedule-item.common-item .match-desc      { padding-top: 8px; }
+    .schedule-tour-list .common-item .match-teams .team-flag img    { height: 22px;}
+
+/* -------- Tournament Fixtures for Badminton ------- */
+    .badminton-item .double-team                { flex-direction: column; -webkit-flex-direction: column; } 
 
 }

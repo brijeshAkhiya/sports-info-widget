@@ -290,10 +290,12 @@
               </ng-template>
 
               <!-- Recent Matches-->
-              <section *ngIf="sport == 'Hockey'">
-                <h4 class="squad-title" *ngIf="paramsFixtures.data.length > 0">
-                  {{ 'Recent Matches' | translate }}
-                </h4>
+              <section class="common-section top-padding" *ngIf="sport == 'Hockey'">
+                <div class="line-title">
+                  <h4 class="no-margin" *ngIf="paramsFixtures.data.length > 0">
+                    {{ 'Recent Matches' | translate }}
+                  </h4>
+                </div>
                 <app-no-data-widget [message]="('Cricket_Module.No_recent_results' | translate)"
                   *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)"
                   [sport]="sport">
