@@ -759,36 +759,39 @@
         </div> -->
       <div class="schedule-tour-list">
         <div
-          class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
+          class="schedule-item goal-item badminton-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
           <div class="match-teams d-flex align-items-center"
             [ngClass]="{'doubles' : match?.sport_event?.sport_event_context?.stage?.phase == 'mixed_doubles' }"
             *ngIf="match?.sport_event?.competitors[0] && match?.sport_event?.competitors[1]">
 
-            <ng-container *ngIf="match?.sport_event?.competitors[0].players; else singleHomeComp">
-              <ng-container *ngFor="let competitor of match?.sport_event?.competitors[0].players">
-                <ng-container *ngTemplateOutlet="homeTeam;context:{ team:competitor}">
+            <div class="match-team d-flex align-items-center">
+              <ng-container *ngIf="match?.sport_event?.competitors[0].players; else singleHomeComp">
+                <ng-container *ngFor="let competitor of match?.sport_event?.competitors[0].players">
+                  <ng-container *ngTemplateOutlet="homeTeam;context:{ team:competitor}">
+                  </ng-container>
                 </ng-container>
               </ng-container>
-            </ng-container>
-            <ng-template #singleHomeComp>
-              <ng-container *ngTemplateOutlet="homeTeam;context:{ team:match?.sport_event?.competitors[0]}">
-              </ng-container>
-            </ng-template>
-            <ng-template #homeTeam let-team="team">
-              <div class="match-team d-flex align-items-center">
-                <div class="team-info">
-                  <h5
-                    [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == team.id }">
-                    {{team?.name}}
-                  </h5>
+
+              <ng-template #singleHomeComp>
+                <ng-container *ngTemplateOutlet="homeTeam;context:{ team:match?.sport_event?.competitors[0]}">
+                </ng-container>
+              </ng-template>
+              <ng-template #homeTeam let-team="team">
+                <div class="double-team d-flex">
+                  <div class="team-info">
+                    <h5
+                      [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == team.id }">
+                      {{team?.name}}
+                    </h5>
+                  </div>
+                  <div class="team-flag">
+                    <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'badminton'"
+                      [defaultImage]="commonService.flagplaceholder" alt="{{team.name}}">
+                  </div>
                 </div>
-                <div class="team-flag">
-                  <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'badminton'"
-                    [defaultImage]="commonService.flagplaceholder" alt="{{team.name}}">
-                </div>
-              </div>
-            </ng-template>
+              </ng-template>
+            </div>
 
             <!-- For Upcoming Match -->
             <div class="vs-block" *ngIf="match?.sport_event_status?.status!='closed'">
@@ -807,7 +810,7 @@
                 </h4>
               </div>
             </div>
-
+            <div class="match-team d-flex align-items-center">
             <ng-container *ngIf="match?.sport_event?.competitors[1].players; else singleAwayComp">
               <ng-container *ngFor="let competitor of match?.sport_event?.competitors[1].players">
                 <ng-container *ngTemplateOutlet="awayTeam;context:{ team:competitor}">
@@ -819,7 +822,7 @@
               </ng-container>
             </ng-template>
             <ng-template #awayTeam let-team="team">
-              <div class="match-team d-flex align-items-center" *ngIf="team">
+              <div class="double-team d-flex">
                 <div class="team-flag">
                   <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'badminton'"
                     [defaultImage]="commonService.flagplaceholder" alt="{{team.name}}">
@@ -832,6 +835,7 @@
                 </div>
               </div>
             </ng-template>
+          </div>
 
 
 

@@ -7,7 +7,7 @@
         </div>
         <app-loader *ngIf="isloading"></app-loader>
         <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="sport"
-          [message]="'Coming Soon..!'"></app-no-data-widget>
+          [message]="'No statistics data available'"></app-no-data-widget>
         <ngb-tabset class="common-tabs black-filled" *ngIf="stats?.length > 0">
           <ngb-tab>
             <ng-template ngbTabTitle>

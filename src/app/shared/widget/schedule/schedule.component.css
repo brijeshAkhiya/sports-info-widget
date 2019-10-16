@@ -72,6 +72,13 @@
 .common-tour-list .tour-without-grp .common-item                    { margin-bottom: 24px; }
 .tour-without-grp .schedule-tour-list .common-item:nth-child(even)  { background: #fff; }
 
+/* -------- Tournament Fixtures for Badminton ------- */
+.badminton-item .match-team                 { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
+.badminton-item .double-team                { width: 100%; }
+.badminton-item .double-team:first-child                { margin-bottom: 8px; }
+.badminton-item .match-team:first-child .double-team    { justify-content: flex-end; -webkit-justify-content: flex-end; }
+
+
 /* -- Arabic CSS -- */
 .arabic .schedule-list .month-title             { padding-right: 0px; padding-left: 16px; }
 .arabic .match-teams .match-team:first-child    { text-align: left; }

@@ -41,7 +41,7 @@
         </div>
         <app-loader *ngIf="isloading"></app-loader>
         <app-no-data-widget *ngIf="!isloading && (!stats || stats?.length == 0)" [sport]="'Basketball'"
-          [message]="'No data available!' | translate"></app-no-data-widget>
+          [message]="'No statistics data available!' | translate"></app-no-data-widget>
 
         <app-player-table *ngIf="stats?.length > 0 && !isloading " [data]="stats" [options]=" {
               sport:'Basketball',
