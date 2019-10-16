@@ -719,6 +719,11 @@ export class SportsService {
   /**
    * Hockey Services
    */
+  getHockeySchedule() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/fieldhockey/schedules`
+    );
+  }
   getCompetitions() {
     return this.http.get(
       environment.apiUrl + environment.version + `/fieldhockey/competitions`

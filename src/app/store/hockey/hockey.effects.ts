@@ -24,6 +24,23 @@ export class HockeyEffects {
                 })
             )),
     );
+
+    /** Hockey schedule effect */
+    @Effect()
+    LoadHockeyScheduleSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType(Hockey.LOAD_HOCKEY_SCHEDULE),
+        // tap(() => this.store.dispatch(new Hockey.HockeyStartLoading())),
+        switchMap((action: any) =>
+            this.sportsService.getHockeySchedule().pipe(
+                map((response: any) => new Hockey.LoadHockeyScheduleSuccess(response.data)),
+                // tap(() => this.store.dispatch(new Hockey.HockeyStopLoading())),
+                catchError(() => {
+                    // this.store.dispatch(new Hockey.HockeyStopLoading());
+                    return EMPTY;
+                })
+            )),
+        take(1)
+    );
 }
 
 

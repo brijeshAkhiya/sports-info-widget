@@ -1,10 +1,12 @@
 import * as HockeyActions from './hockey.actions';
 
 export interface HockeyData {
+    schedule: [];
     loader: boolean;
     seasons: { [id: string]: any };
 }
 const initialState = {
+    schedule: [],
     loader: false,
     seasons: {},
 };
@@ -23,6 +25,10 @@ export function HockeyReducer(state = initialState, action: HockeyActions.Hockey
                 }),
             };
         }
+        case HockeyActions.LOAD_HOCKEY_SCHEDULE:
+            return state;
+        case HockeyActions.LOAD_HOCKEY_SCHEDULE_SUCCESS:
+            return { ...state, schedule: action.payload };
         default: {
             return state;
         }

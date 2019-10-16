@@ -38,7 +38,12 @@ export class SliderFixtureComponent implements OnInit {
       filterCategory: [],
       selectedCategory: { name: 'All' }
     };
-    this.loadDate(this.paramData.selectedDate);
+    this.customDate = new Array<any>(
+      moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day.toString()}`)
+        .daysInMonth()).fill(0, 0).map((x, i) => i + 1);
+    setTimeout(() => {
+      this.loadDate(this.paramData.selectedDate);
+    });
     this.getFixturesData();
   }
   loadDate(current) {
@@ -73,7 +78,7 @@ export class SliderFixtureComponent implements OnInit {
     this.getFixturesData();
   }
   checkDateWithZero(value) {
-    return (value != 0 && value.toString().length == 1) ? '0' + value : value;
+    return (value != 0 && value.toString().length == 1) ? value : value;
   }
   getFixturesData() {
     if (this.params.sport == 'Soccer')

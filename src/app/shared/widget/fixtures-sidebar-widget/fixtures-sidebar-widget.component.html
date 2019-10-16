@@ -2,7 +2,7 @@
   <div class="widget-title">
     <h5>
       <!-- {{ sport == 'Cricket' ? ('Header_menu.Cricket' | translate) : sport == 'Kabaddi' ? ('Header_menu.Kabaddi' | translate) : sport == 'Soccer' ? ('Header_menu.Soccer' | translate) : ''}} -->
-      {{sport | translate}}
+      {{(sport == 'Hockey') ? 'Field Hockey' : sport | translate}}
     </h5>
   </div>
   <ngb-tabset class="common-tabs">
@@ -239,6 +239,53 @@
     </li>
     <li>
       <a class="view-all-btn" [routerLink]="'/basketball/fixtures'">
+        {{ 'widgetModule.View_all' | translate }}
+        <span></span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="common-list cricket-list soccer" *ngIf="matches && matches.length > 0 && sport == 'Hockey' && type">
+    <li *ngFor="let match of matches  | slice:0:4" class="fullblock-link-container">
+      <div class="title d-flex justify-content-between">
+        <p *ngIf="match.sport_event.sport_event_context">
+          <b>{{match?.sport_event?.sport_event_context?.season?.name ? match?.sport_event?.sport_event_context?.season?.name : ''}}</b>
+          <span
+            class="text-capitalize">{{ match?.sport_event.sport_event_context?.round?.number ? '- '+(match?.sport_event?.sport_event_context?.round?.number) : '' }}</span>
+        </p>
+        <p>{{match.sport_event.start_time | amTimeAgo}}</p>
+      </div>
+      <div *ngFor="let item of match?.sport_event?.competitors">
+        <div class="match-info d-flex justify-content-between align-items-center">
+          <p [ngClass]="{'match-winner': match?.sport_event_status?.winner_id == item?.id}"><img
+              [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.id | logosurl:'hockey'"
+              [defaultImage]="commonService.flagplaceholder">
+            {{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name}}
+          </p>
+          <p *ngIf="match.sport_event_status?.status == 'closed'">
+            <ng-container>
+              {{item.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}
+            </ng-container>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <!-- <p class="result-line" *ngIf="type == 'result'; else match_schedule ">
+              {{ match.match_result ? match.match_result : match.match_status }}
+            </p> -->
+          <p class="result-line" *ngIf="type == 'fixture'">{{ 'widgetModule.starts' | translate }}
+            {{match.sport_event.start_time | amLocal | amDateFormat:'LT'}}
+            {{(match.sport_event?.venue?.city_name) ? '| ' + match.sport_event?.venue?.city_name : match?.sport_event?.venue?.country_name}}
+          </p>
+        </div>
+      </div>
+      <a class="fullblock-link"
+        [routerLink]="['/hockey/match', (match.sport_event.id | splitID) ,(match.sport_event.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
+      </a>
+    </li>
+    <li>
+      <a class="view-all-btn" [routerLink]="'/hockey/fixtures'">
         {{ 'widgetModule.View_all' | translate }}
         <span></span>
       </a>
