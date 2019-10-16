@@ -416,17 +416,29 @@
       </div>
     </div>
     <div class="match-teams d-flex align-items-center">
-      <div class="match-team d-flex align-items-center">
-        <div class="team-info">
-          <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event?.competitors[0]?.id}">
-            {{match.sport_event?.competitors[0].abbreviation}}</h5>
+
+      <ng-container *ngIf="match?.sport_event?.competitors[0].players; else singleHomeComp">
+        <ng-container *ngFor="let competitor of match?.sport_event?.competitors[0].players">
+          <ng-container *ngTemplateOutlet="homeTeam;context:{ team:competitor}">
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-template #singleHomeComp>
+        <ng-container *ngTemplateOutlet="homeTeam;context:{ team:match?.sport_event?.competitors[0]}">
+        </ng-container>
+      </ng-template>
+      <ng-template #homeTeam let-team="team">
+        <div class="match-team d-flex align-items-center">
+          <div class="team-info">
+            <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == team?.id}">
+              {{team.abbreviation}}</h5>
+          </div>
+          <div class="team-flag">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'hockey'"
+              [defaultImage]="commonService.flagplaceholder" alt="{{team.abbreviation}}">
+          </div>
         </div>
-        <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset"
-            [lazyLoad]="match.sport_event?.competitors[0].id | logosurl:'hockey'"
-            [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event?.competitors[0].abbreviation}}">
-        </div>
-      </div>
+      </ng-template>
 
       <!-- For Upcoming Match -->
       <div class="vs-block" *ngIf="match.sport_event_status?.status != 'closed'">
@@ -446,17 +458,29 @@
         </div>
       </div>
 
-      <div class="match-team d-flex align-items-center">
-        <div class="team-flag">
-          <img [offset]="commonService.lazyloadoffset"
-            [lazyLoad]="match.sport_event?.competitors[1].id | logosurl:'hockey'"
-            [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event.competitors[1].abbreviation}}">
+      <ng-container *ngIf="match?.sport_event?.competitors[1].players; else singleAwayComp">
+        <ng-container *ngFor="let competitor of match?.sport_event?.competitors[1].players">
+          <ng-container *ngTemplateOutlet="awayTeam;context:{ team:competitor}">
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-template #singleAwayComp>
+        <ng-container *ngTemplateOutlet="awayTeam;context:{ team:match?.sport_event?.competitors[1]}">
+        </ng-container>
+      </ng-template>
+      <ng-template #awayTeam let-team="team">
+        <div class="match-team d-flex align-items-center">
+          <div class="team-flag">
+            <img [offset]="commonService.lazyloadoffset"
+              [lazyLoad]="match.sport_event?.competitors[1].id | logosurl:'hockey'"
+              [defaultImage]="commonService.flagplaceholder" alt="{{team.abbreviation}}">
+          </div>
+          <div class="team-info">
+            <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == team?.id}">
+              {{team.abbreviation}}</h5>
+          </div>
         </div>
-        <div class="team-info">
-          <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event.competitors[1]?.id}">
-            {{match.sport_event.competitors[1].abbreviation}}</h5>
-        </div>
-      </div>
+      </ng-template>
 
       <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
