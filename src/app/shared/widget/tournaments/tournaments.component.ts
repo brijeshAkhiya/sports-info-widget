@@ -52,6 +52,15 @@ export class TournamentsComponent implements OnInit {
         });
         break;
       }
+      case 'Badminton': {
+        this.sportsService.getBadmintonCompetitions().subscribe((res: any) => {
+          this.loading = false;
+          if (res.data.competitions && res.data.competitions.length > 0) {
+            this.tournamentlist = res.data.competitions;
+          }
+        });
+        break;
+      }
     }
   }
 

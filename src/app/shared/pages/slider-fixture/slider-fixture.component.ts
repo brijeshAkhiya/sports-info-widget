@@ -82,6 +82,8 @@ export class SliderFixtureComponent implements OnInit {
       this.getBasketballDailySchedule();
     else if (this.params.sport == 'Hockey')
       this.getHockeyDailySchedule();
+    else if (this.params.sport == 'Badminton')
+      this.getBadmintonDailySchedule();
   }
 
   filter(category) {
@@ -120,6 +122,19 @@ export class SliderFixtureComponent implements OnInit {
     this.paramData.loading = true;
     this.sportsService
       .getHocketDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
+      .subscribe((res: any) => {
+        this.paramData.loading = false;
+        if (res.data && res.data.summaries) {
+          this.paramData.data = res.data.summaries;
+        }
+      },
+        error => this.paramData.loading = false);
+  }
+
+  getBadmintonDailySchedule() {
+    this.paramData.loading = true;
+    this.sportsService
+      .getBadmintonDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
       .subscribe((res: any) => {
         this.paramData.loading = false;
         if (res.data && res.data.summaries) {

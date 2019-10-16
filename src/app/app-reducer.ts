@@ -8,6 +8,7 @@ import * as fromKabaddi from '@store/kabaddi/kabaddi.reducer';
 import * as fromSoccer from '@store/soccer/soccer.reducer';
 import * as fromBasketball from '@store/basketball/basketball.reducer';
 import * as fromHockey from '@store/hockey/hockey.reducer';
+import * as fromBadminton from '@store/badminton/badminton.reducer';
 
 
 
@@ -21,6 +22,7 @@ export interface State {
     Soccer: fromSoccer.SoccerData;
     Basketball: fromBasketball.BasketballData;
     Hockey: fromHockey.HockeyData;
+    Badminton: fromBadminton.BadmintonData;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -32,7 +34,8 @@ export const reducers: ActionReducerMap<State> = {
     Kabaddi: fromKabaddi.KabaddiReducer,
     Soccer: fromSoccer.SoccerReducer,
     Basketball: fromBasketball.BasketballReducer,
-    Hockey: fromHockey.HockeyReducer
+    Hockey: fromHockey.HockeyReducer,
+    Badminton: fromBadminton.BadmintonReducer
 };
 
 

@@ -11,7 +11,9 @@ import * as fromRoot from '@app/app-reducer';
 import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 import * as Cricket from '@store/cricket/cricket.actions';
 import * as Hockey from '@store/hockey/hockey.actions';
+import * as Badminton from '@store/badminton/badminton.actions';
 import * as HockeySelectors from '@store/selectors/hockey.selectors';
+import * as BadmintonSelectors from '@store/selectors/badminton.selectors';
 
 @Component({
   selector: 'app-fixtures',
@@ -33,7 +35,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
   activeTab: any = 'fixtures';
   seasons;
   filter;
-  hockeySubscription: any;
+  selectorSubscription: any;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -89,13 +91,27 @@ export class FixturesComponent implements OnInit, OnDestroy {
       // Tournament Fixtures
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
         this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'hockey', 'season');
-        this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+        this.selectorSubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
           if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
             this.filter = this.seasons[0];
             this.getHockeyTournamentData();
+          }
+        });
+      }
+    } else if (this.params.sport == 'Badminton') {
+      // Tournament Fixtures
+      if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'Badminton', 'season');
+        this.selectorSubscription = this.store.select(BadmintonSelectors.getBadmintonSeasons).subscribe((data: any) => {
+          if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
+            this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
+          else {
+            this.seasons = data[this.tournamentid];
+            this.filter = this.seasons[0];
+            this.getBadmintonTournamentData();
           }
         });
       }
@@ -106,7 +122,10 @@ export class FixturesComponent implements OnInit, OnDestroy {
     this.filter = season;
     this.paramsFixtures.data = [];
     this.paramsResults.data = [];
-    this.getHockeyTournamentData();
+    if (this.params.sport == 'Hockey')
+      this.getHockeyTournamentData();
+    else if (this.params.sport == 'Badminton')
+      this.getBadmintonTournamentData();
   }
 
   getHockeyTournamentData() {
@@ -114,6 +133,27 @@ export class FixturesComponent implements OnInit, OnDestroy {
     this.paramsResults.loading = true;
     this.sportsService
       .getHockeySeasonSummary(this.filter.id)
+      .subscribe((res: any) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+        if (res.data.summaries && res.data.summaries.length > 0) {
+          this.paramsFixtures.data = this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'),
+            'Do MMMM YYYY', 'start_time', 'asc');
+          this.paramsResults.data = this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed'),
+            'Do MMMM YYYY', 'start_time', 'desc');
+        }
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+      });
+  }
+
+
+  getBadmintonTournamentData() {
+    this.paramsFixtures.loading = true;
+    this.paramsResults.loading = true;
+    this.sportsService
+      .getBadmintonSeasonSummary(this.filter.id)
       .subscribe((res: any) => {
         this.paramsFixtures.loading = false;
         this.paramsResults.loading = false;
@@ -291,6 +331,6 @@ export class FixturesComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    if (this.hockeySubscription) this.hockeySubscription.unsubscribe();
+    if (this.selectorSubscription) this.selectorSubscription.unsubscribe();
   }
 }

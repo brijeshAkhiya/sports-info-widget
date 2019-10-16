@@ -41,6 +41,10 @@ const routes: Routes = [
         loadChildren: './modules/hockey/hockey.module#HockeyModule',
     },
     {
+        path: 'badminton',
+        loadChildren: './modules/badminton/badminton.module#BadmintonModule',
+    },
+    {
         path: 'blog',
         component: BlogsComponent
     },

@@ -169,6 +169,16 @@ export class CommonService {
       } else if (type == 'competitor') {
         return 'sr:competitor:' + id;
       }
+    } else if (sport == 'badminton' || sport == 'Badminton') {
+      if (type == 'tournament') {
+        return 'sr:competition:' + id;
+      } else if (type == 'season') {
+        return 'sr:season:' + id;
+      } else if (type == 'match') {
+        return 'sr:sport_event:' + id;
+      } else if (type == 'competitor') {
+        return 'sr:competitor:' + id;
+      }
     }
   }
 

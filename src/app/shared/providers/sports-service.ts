@@ -769,5 +769,33 @@ export class SportsService {
       environment.apiUrl + environment.version + `/fieldhockey/team/${id}/summaries`
     );
   }
+  /**
+   * Badminton Services
+   */
+  getBadmintonDailySummary(date) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/daily/summaries/${date}`
+    );
+  }
+  getBadmintonCompetitions() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/competitions`
+    );
+  }
+  getBadmintonCompetitionSeason(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/competitions/${id}/seasons`
+    );
+  }
+  getBadmintonSeasonSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/seasons/${id}/summaries`
+    );
+  }
+  getBadmintonSeasonStandings(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/seasons/${id}/standings`
+    );
+  }
 
 }
