@@ -754,9 +754,9 @@
 <ng-template #badminton_list>
   <div class="common-tour-list" *ngIf="data.length > 0">
     <div class="grp-item tour-without-grp">
-      <!-- <div class="soccer-tour-title">
-          <p>{{item?.data?.season?.name}}</p>
-        </div> -->
+      <div class="soccer-tour-title">
+          <p>{{match?.sport_event?.sport_event_context?.season?.name}}</p>
+        </div>
       <div class="schedule-tour-list">
         <div
           class="schedule-item goal-item badminton-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
@@ -778,7 +778,7 @@
                 </ng-container>
               </ng-template>
               <ng-template #homeTeam let-team="team">
-                <div class="double-team d-flex">
+                <div class="double-team d-flex align-items-center">
                   <div class="team-info">
                     <h5
                       [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == team.id }">
@@ -822,7 +822,7 @@
               </ng-container>
             </ng-template>
             <ng-template #awayTeam let-team="team">
-              <div class="double-team d-flex">
+              <div class="double-team d-flex align-items-center">
                 <div class="team-flag">
                   <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'badminton'"
                     [defaultImage]="commonService.flagplaceholder" alt="{{team.name}}">
@@ -851,7 +851,7 @@
               <span class="text-capitalize">{{match?.sport_event?.start_time | date:'h:mm a'}}</span>
             </h6>
             <p class="stadium-nm" *ngIf="match?.sport_event?.sport_event_context?.season">
-              {{match?.sport_event?.sport_event_context?.season?.name}}
+              <!-- {{match?.sport_event?.sport_event_context?.season?.name}} -->
             </p>
           </div>
         </div>
