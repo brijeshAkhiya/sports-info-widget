@@ -19,6 +19,9 @@
           <ng-template carouselSlide [id]="'Hockey'">
             <div class="slide-item">{{ 'Field Hockey' | translate }}</div>
           </ng-template>
+          <ng-template carouselSlide [id]="'Badminton'">
+            <div class="slide-item">{{ 'Badminton' | translate }}</div>
+          </ng-template>
         </owl-carousel-o>
 
       </div>
@@ -314,6 +317,65 @@
                   </div>
                   <a class="fullblock-link"
                     [routerLink]="['/hockey/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+        <owl-carousel-o [options]="customOptions" *ngIf="sport == 'Badminton'">
+          <ng-container class="items" *ngFor="let slide of slider">
+            <ng-template carouselSlide>
+              <!--Live matches-->
+              <div class="slider-item">
+                <div class="slider-item-inner fullblock-link-container">
+                  <div class="title d-flex justify-content-between">
+                    <p class="tour-name">
+                      <b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}}
+                      </b>
+                      <span
+                        class="text-capitalize">{{slide?.sport_event?.sport_event_context?.stage ? replace(slide?.sport_event?.sport_event_context?.stage.phase) : ''}}
+                      </span>
+                    </p>
+
+                    <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
+                    <p
+                      *ngIf="slide?.sport_event_status?.status == 'not_started' || slide?.sport_event_status?.status == 'closed'; else matchStatus">
+                      {{slide.sport_event.start_time  | amTimeAgo}}</p>
+                    <ng-template #matchStatus>
+                      <p class="live-result">
+                        {{slide?.sport_event_status?.status ? slide?.sport_event_status?.status : slide?.sport_event_status?.match_status}}
+                      </p>
+                    </ng-template>
+                  </div>
+
+                  <ng-container
+                    *ngTemplateOutlet="team;context:{competitor:slide?.sport_event?.competitors[0], match:slide}">
+                  </ng-container>
+                  <ng-container
+                    *ngTemplateOutlet="team;context:{competitor:slide?.sport_event?.competitors[1], match:slide}">
+                  </ng-container>
+
+                  <ng-template #team let-competitor="competitor" let-match="match">
+                    <div class="match-info d-flex justify-content-between align-items-center">
+                      <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
+                        <img [lazyLoad]="competitor?.id| logosurl"
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
+                      <p><b>
+                          {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
+                      </p>
+                    </div>
+                  </ng-template>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <p class="result-line" *ngIf="slide.sport_event?.venue?.name">
+                        {{slide.sport_event?.venue?.name ? slide.sport_event?.venue?.name : ''}}</p>
+                      <!-- <p class="result-line" *ngIf="slide.match_status != 'live'">
+                        {{slide.match_result ? slide.match_result : slide.venue_name}}</p> -->
+                    </div>
+                  </div>
+                  <a class="fullblock-link"
+                    [routerLink]="['/badminton/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
             </ng-template>

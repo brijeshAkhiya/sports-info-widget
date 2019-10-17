@@ -1,10 +1,12 @@
 import * as BadmintonActions from './badminton.actions';
 
 export interface BadmintonData {
+    schedule: [];
     loader: boolean;
     seasons: { [id: string]: any };
 }
 const initialState = {
+    schedule: [],
     loader: false,
     seasons: {},
 };
@@ -23,6 +25,10 @@ export function BadmintonReducer(state = initialState, action: BadmintonActions.
                 }),
             };
         }
+        case BadmintonActions.LOAD_BADMINTON_SCHEDULE:
+            return state;
+        case BadmintonActions.LOAD_BADMINTON_SCHEDULE_SUCCESS:
+            return { ...state, schedule: action.payload };
         default: {
             return state;
         }

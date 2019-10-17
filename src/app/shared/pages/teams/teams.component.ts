@@ -7,6 +7,8 @@ import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 import * as HockeySelectors from '@store/selectors/hockey.selectors';
 import * as Hockey from '@store/hockey/hockey.actions';
+import * as BadmintonSelectors from '@store/selectors/badminton.selectors';
+import * as Badminton from '@store/badminton/badminton.actions';
 
 @Component({
   selector: 'app-teams',
@@ -21,7 +23,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
   isloading: boolean = true;
   seasons;
   filter;
-  hockeySubscription;
+  subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,13 +60,26 @@ export class TeamsComponent implements OnInit, OnDestroy {
       }
       case 'Hockey': {
         this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'Hockey', 'season');
-        this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
+        this.subscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
           if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
             this.filter = this.seasons[0];
             this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+          }
+        });
+        break;
+      }
+      case 'Badminton': {
+        this.tournamentid = this.commonService.getIds(this.activatedRoute.parent.snapshot.params.id, 'Badminton', 'season');
+        this.subscription = this.store.select(BadmintonSelectors.getBadmintonSeasons).subscribe((data: any) => {
+          if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.tournamentid))
+            this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
+          else {
+            this.seasons = data[this.tournamentid];
+            this.filter = this.seasons[0];
+            this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });
         break;
@@ -76,7 +91,11 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.filter = season;
     this.teams = [];
     this.isloading = true;
-    this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+    if (this.sport == 'Hockey')
+      this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+    else if (this.sport == 'Badminton')
+      this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+
   }
 
   teamSuccess = (res) => {
@@ -133,6 +152,17 @@ export class TeamsComponent implements OnInit, OnDestroy {
         }
         break;
       }
+      case 'Badminton': {
+        if (res.data && res.data.stages) {
+          this.teams = [];
+          res.data.stages.forEach(stage => {
+            stage.groups.forEach(group => {
+              this.teams.push(group);
+            });
+          });
+        }
+        break;
+      }
     }
   }
 
@@ -140,7 +170,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.isloading = false;
   }
   ngOnDestroy() {
-    if (this.hockeySubscription) this.hockeySubscription.unsubscribe();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }

@@ -24,6 +24,23 @@ export class BadmintonEffects {
                 })
             )),
     );
+
+    /** Badminton schedule effect */
+    @Effect()
+    LoadBadmintonScheduleSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType(Badminton.LOAD_BADMINTON_SCHEDULE),
+        // tap(() => this.store.dispatch(new Badminton.BadmintonStartLoading())),
+        switchMap((action: any) =>
+            this.sportsService.getBadmintonSchedule().pipe(
+                map((response: any) => new Badminton.LoadBadmintonScheduleSuccess(response.data)),
+                // tap(() => this.store.dispatch(new Badminton.BadmintonStopLoading())),
+                catchError(() => {
+                    // this.store.dispatch(new Badminton.BadmintonStopLoading());
+                    return EMPTY;
+                })
+            )),
+        take(1)
+    );
 }
 
 

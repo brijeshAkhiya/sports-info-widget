@@ -462,6 +462,65 @@
 </ng-container>
 
 
+<ng-container *ngIf="sport == 'Badminton' && data">
+  <!-- Start Animation -->
+  <div
+    class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+    <div class="teams-animation d-flex justify-content-around align-items-center">
+      <div class="team-anim">
+        <img [lazyLoad]="competitor[0]?.id | logosurl:'badminton'" alt="{{competitor[0]?.name}}"
+          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{competitor[0]?.name}}</h4>
+      </div>
+      <div class="team-anim vs-anim">
+        <h5>VS</h5>
+      </div>
+      <div class="team-anim">
+        <img [lazyLoad]="competitor[1]?.id | logosurl:'badminton'" alt="{{competitor[1]?.name}}"
+          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <h4>{{competitor[1]?.name}}</h4>
+      </div>
+    </div>
+    <!-- End Animation -->
+
+    <div class="tour-match-title show-anim">
+      <p class="light-text">
+        <a
+          [routerLink]="['/badminton/tournament',(data?.sport_event?.sport_event_context?.season?.id | splitID),(data?.sport_event?.sport_event_context?.season?.name | slugify)]">
+          {{data?.sport_event?.sport_event_context?.season?.name}}
+        </a>
+      </p>
+    </div>
+
+    <div class="match-update show-anim">
+      <p class="light-text">
+        <ng-container *ngIf="data.sport_event.venue">
+          <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
+        </ng-container>
+        {{data.sport_event.start_time | amDateFormat:'Do MMMM YYYY'}}
+      </p>
+      <p class="live-match" *ngIf="data.sport_event_status?.status == 'live' ">{{ 'widgetModule.live' | translate }}
+        <span *ngIf="data.match_time"> | {{data.match_time}}</span>
+      </p>
+    </div>
+
+    <div class="current-match d-flex justify-content-between show-anim">
+      <ng-container *ngTemplateOutlet="badmintonTeam;context:{team:competitor[0]}">
+      </ng-container>
+      <div class="live-score" *ngIf="data.sport_event_status.status != 'not_started'">
+        <h5>
+          {{data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended' 
+              ?  'FT' 
+              : (data.sport_event_status.status == 'live' && data.sport_event_status.match_status == '2nd_half' ? 'HT' : '')}}
+        </h5>
+        <h3>{{data.sport_event_status?.home_score}} - {{data.sport_event_status?.away_score}}</h3>
+      </div>
+      <ng-container *ngTemplateOutlet="badmintonTeam;context:{team:competitor[1]}">
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
 <ng-template #hockeyTeam let-team="team" let-oppTeam="oppTeam">
   <div class="team-col">
     <div class="current-team">
@@ -471,6 +530,22 @@
       </h4>
       <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
         <a [routerLink]="['/hockey/team',(team.id | splitID),(team.name | slugify)]">
+          {{ team.name }}
+        </a> </h4>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #badmintonTeam let-team="team" let-oppTeam="oppTeam">
+  <div class="team-col">
+    <div class="current-team">
+      <h4>
+        <img [lazyLoad]="team?.id | logosurl:'badminton'" alt="{{team.name}}"
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+      </h4>
+      <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
+        <a [routerLink]="['/badminton/team',(team.id | splitID),(team.name | slugify)]">
           {{ team.name }}
         </a> </h4>
     </div>

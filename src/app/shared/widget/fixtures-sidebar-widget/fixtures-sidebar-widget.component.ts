@@ -7,6 +7,7 @@ import * as Cricket from '@store/cricket/cricket.actions';
 import * as Soccer from '@store/soccer/soccer.actions';
 import * as Basketball from '@store/basketball/basketball.actions';
 import * as Hockey from '@store/hockey/hockey.actions';
+import * as Badminton from '@store/badminton/badminton.actions';
 import { Store } from '@ngrx/store';
 
 
@@ -87,6 +88,19 @@ export class FixturesSidebarWidgetComponent implements OnInit, OnChanges {
       this.store.dispatch(new Hockey.LoadHockeySchedule());
       this.store.select('Hockey').subscribe((data: any) => {
         if (this.sport === 'Hockey') {
+          if (data.schedule) {
+            this.loader = data.loader;
+          }
+          if (data.schedule && data.schedule.length > 0) {
+            this.fixturesdata = data.schedule.filter((match) => match.sport_event_status.status === 'not_started');
+            this.resultsdata = data.schedule.filter((match) => match.sport_event_status.status === 'closed');
+          }
+        }
+      });
+    } else if (this.sport === 'Badminton') {
+      this.store.dispatch(new Badminton.LoadBadmintonSchedule());
+      this.store.select('Badminton').subscribe((data: any) => {
+        if (this.sport === 'Badminton') {
           if (data.schedule) {
             this.loader = data.loader;
           }

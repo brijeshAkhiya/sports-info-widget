@@ -438,7 +438,7 @@
                 {{team.abbreviation}}</h5>
             </div>
             <div class="team-flag">
-              <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'hockey'"
+              <img [offset]="commonService.lazyloadoffset" [lazyLoad]="team.id | logosurl:'badminton'"
                 [defaultImage]="commonService.flagplaceholder" alt="{{team.abbreviation}}">
             </div>
           </div>
@@ -480,7 +480,7 @@
           <div class="double-team d-flex align-items-center">
             <div class="team-flag">
               <img [offset]="commonService.lazyloadoffset"
-                [lazyLoad]="match.sport_event?.competitors[1].id | logosurl:'hockey'"
+                [lazyLoad]="match.sport_event?.competitors[1].id | logosurl:'badminton'"
                 [defaultImage]="commonService.flagplaceholder" alt="{{team.abbreviation}}">
             </div>
             <div class="team-info">
@@ -493,7 +493,7 @@
 
       <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
-        [routerLink]="['/hockey/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
+        [routerLink]="['/badminton/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
       </a>
     </div>
   </div>

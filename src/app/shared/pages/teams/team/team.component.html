@@ -34,6 +34,11 @@
               *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'hockey',name:teamProfile?.competitor?.name}}">
             </ng-container>
           </ng-container>
+          <ng-container *ngSwitchCase="'Badminton'">
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'badminton',name:teamProfile?.competitor?.name}}">
+            </ng-container>
+          </ng-container>
         </div>
 
         <ngb-tabset class="common-tabs" *ngIf="teamProfile">
@@ -181,10 +186,29 @@
                     </div>
                   </div>
                 </section>
+
+                <section class="team-about-head d-flex" *ngSwitchCase="'Badminton'">
+                  <div class="team-logo align-self-start rounded-box common-shadow">
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.competitor?.id | logosurl:'badminton'"
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
+                  </div>
+                  <div class="team-info soccer-team-info d-flex rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.country">
+                        <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
+                        <p> {{teamProfile?.competitor?.country}} </p>
+                      </div>
+                      <div class="info-item" *ngIf="teamProfile?.competitor?.abbreviation">
+                        <p class="title light-text">{{ 'Shared_module.Abbreviation' | translate }}</p>
+                        <p>{{ teamProfile?.competitor?.abbreviation }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </ng-container>
 
               <!-- Squad Section-->
-              <section class="common-section squad-list" *ngIf="sport != 'Hockey'">
+              <section class="common-section squad-list" *ngIf="sport != 'Hockey' && sport != 'Badminton'">
                 <h4 class="squad-title"
                   *ngIf="teamProfile?.players?.length > 0 || teamProfile?.squads?.length > 0;then squadList else no_players">
                   {{ 'Shared_module.Squad' | translate }}
@@ -290,7 +314,7 @@
               </ng-template>
 
               <!-- Recent Matches-->
-              <section class="common-section top-padding" *ngIf="sport == 'Hockey'">
+              <section class="common-section top-padding" *ngIf="sport == 'Hockey' || sport == 'Badminton'">
                 <div class="line-title">
                   <h4 class="no-margin" *ngIf="paramsFixtures.data.length > 0">
                     {{ 'Recent Matches' | translate }}
@@ -343,7 +367,7 @@
           </ngb-tab>
 
           <!-- Fixtures Section-->
-          <ngb-tab *ngIf="sport != 'Hockey'">
+          <ngb-tab *ngIf="sport != 'Hockey' && sport != 'Badminton'">
             <ng-template ngbTabTitle>
               <div (click)="getSportFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
@@ -421,7 +445,7 @@
           </ngb-tab>
 
           <!-- Results Section-->
-          <ngb-tab *ngIf="sport != 'Hockey'">
+          <ngb-tab *ngIf="sport != 'Hockey' && sport != 'Badminton'">
             <ng-template ngbTabTitle>
               <div (click)="getSportResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>

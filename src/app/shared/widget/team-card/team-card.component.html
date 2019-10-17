@@ -72,9 +72,9 @@
           </a>
         </ng-container>
 
-        <!-- Basketball Teams-->
+        <!-- Hockey Teams-->
         <ng-container *ngIf="sport=='Hockey'">
-          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl:'Hockey'"
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl:'hockey'"
               [defaultImage]="commonService.flagplaceholder" alt="team.name | slugify">
           </div>
           <div class="team-name">
@@ -82,6 +82,20 @@
             <h5>{{team.abbreviation}}</h5>
           </div>
           <a class="fullblock-link" [routerLink]="['/hockey/team',(team.id | splitID),(team.name | slugify)]">
+          </a>
+        </ng-container>
+
+        <!-- Badminton Teams-->
+        <ng-container *ngIf="sport=='Badminton'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
+              [lazyLoad]="team?.id | logosurl:'badminton'" [defaultImage]="commonService.flagplaceholder"
+              alt="team.name | slugify">
+          </div>
+          <div class="team-name">
+            <h4>{{team.name}}</h4>
+            <h5>{{team.abbreviation}}</h5>
+          </div>
+          <a class="fullblock-link" [routerLink]="['/badminton/team',(team.id | splitID),(team.name | slugify)]">
           </a>
         </ng-container>
 

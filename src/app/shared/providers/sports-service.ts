@@ -802,5 +802,35 @@ export class SportsService {
       environment.apiUrl + environment.version + `/badminton/seasons/${id}/standings`
     );
   }
+  getBadmintonMatchTimeline(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/match/${id}/timeline`
+    );
+  }
+  getBadmintonMatchSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/match/${id}/summary`
+    );
+  }
+  getBadmintonSeasonInfo(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/seasons/${id}/info`
+    );
+  }
+  getBadmintonTeamProfile(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/team/${id}/profile`
+    );
+  }
+  getBadmintonTeamSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/team/${id}/summaries`
+    );
+  }
+  getBadmintonSchedule() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/schedules`
+    );
+  }
 
 }

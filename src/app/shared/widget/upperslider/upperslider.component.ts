@@ -10,6 +10,7 @@ import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
 import * as Soccer from '@store/soccer/soccer.actions';
 import * as Basketball from '@store/basketball/basketball.actions';
 import * as Hockey from '@store/hockey/hockey.actions';
+import * as Badminton from '@store/badminton/badminton.actions';
 import * as fromRoot from '@app/app-reducer';
 import { appSelectors } from '@store/selectors/index';
 import { SportsService } from '@providers/sports-service';
@@ -29,6 +30,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     'Soccer': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '5', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
     'Basketball': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
     'Hockey': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
+    'Badminton': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
   };
   sport = 'Cricket';
   interval;
@@ -119,6 +121,8 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new Hockey.LoadHockeySchedule());
 
+    this.store.dispatch(new Badminton.LoadBadmintonSchedule());
+
     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
     this.store.dispatch(new Kabaddi.LoadKabaddiResults());
     this.store.dispatch(new Kabaddi.LoadKabaddiLive());
@@ -153,6 +157,8 @@ export class UppersliderComponent implements OnInit, OnDestroy {
       this.loadBasketballData();
     else if (this.sport == 'Hockey')
       this.loadHockeyData();
+    else if (this.sport == 'Badminton')
+      this.loadBadmintonData();
   }
 
   getBasketBallSchedule() {
@@ -163,6 +169,62 @@ export class UppersliderComponent implements OnInit, OnDestroy {
       }
     });
   }
+  loadBadmintonData() {
+
+    this.timerStartTime.Badminton.isLiveUpdate = false;
+    this.timerStartTime.Badminton.isStartAfterTime = false;
+    this.store.select('Badminton').subscribe((data: any) => {
+
+      if (data.schedule && data.schedule.length > 0) {
+
+        let liveMatches = this.slider = data.schedule.filter((match) =>
+          match.sport_event_status && match.sport_event_status.status == 'live' && match.sport_event.coverage.live == true);
+        this.slider = this.slider.concat(data.schedule.filter((match) =>
+          match.sport_event_status && match.sport_event_status.status == 'closed' && match.sport_event_status.match_status != 'cancelled'
+        ));
+        let fixtures = data.schedule.filter((match) =>
+          match.sport_event_status && match.sport_event_status.status == 'not_started');
+        this.slider = this.slider.concat(fixtures);
+        if (liveMatches.length > 0 && !this.timerStartTime.Badminton.isLiveUpdate) {
+          this.getLiveBadmintonUpdate(this);
+        } else if (!this.timerStartTime.Badminton.isLiveUpdate && !this.timerStartTime.Badminton.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
+          let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
+            return new Date(moment.utc(e.sport_event.start_time).format());
+          })));
+          this.startLiveUpdateAfterTime(moment.utc(minTime).format());
+        }
+      }
+    });
+  }
+  getLiveBadmintonUpdate(classThis) {
+    this.timerStartTime.Hockey.isLiveUpdate = true;
+    let date = new Date();
+    this.interval = setInterval(() => {
+      classThis.sportsService
+        .getHocketDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
+          if (res.data.summaries.length > 0) {
+            // this.store.dispatch(
+            // new Hockey.LoadSoccerLiveSuccess(
+            //   res.data.summaries.filter((match) =>
+            //     match.sport_event_status && match.sport_event_status.status == 'live' &&
+            //     match.sport_event.coverage.sport_event_properties.scores == 'live' &&
+            //     match.sport_event.sport_event_context
+            //   )));
+            res.data.summaries.forEach(match => {
+              let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.sport_event.id);
+              if (matchIndex >= 0) {
+                this.slider[matchIndex].sport_event = match.sport_event;
+                this.slider[matchIndex].sport_event_status = match.sport_event_status;
+              }
+            });
+          } else {
+            this.clearTimeInterval();
+            this.loadHockeyData();
+          }
+        });
+    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Hockey.interval));
+  }
+
 
   loadHockeyData() {
 
@@ -487,6 +549,9 @@ export class UppersliderComponent implements OnInit, OnDestroy {
           } else if (this.sport == 'Hockey') {
             this.getLiveHockeyUpdate(this);
             this.timerStartTime.Hockey.isStartAfterTime = true;
+          } else if (this.sport == 'Badminton') {
+            this.getLiveBadmintonUpdate(this);
+            this.timerStartTime.Badminton.isStartAfterTime = true;
           }
         }, remainingMiliSec);
       } else if (remainingMiliSec < 0) {
@@ -503,6 +568,9 @@ export class UppersliderComponent implements OnInit, OnDestroy {
         } else if (this.sport == 'Hockey') {
           this.getLiveHockeyUpdate(this);
           this.timerStartTime.Hockey.isStartAfterTime = true;
+        } else if (this.sport == 'Badminton') {
+          this.getLiveBadmintonUpdate(this);
+          this.timerStartTime.Badminton.isStartAfterTime = true;
         }
       }
 
