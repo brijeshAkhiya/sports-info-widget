@@ -69,6 +69,15 @@
 .nba-match-title .table tr th                           { border-bottom: 1px solid #E5E5E5; }
 .nba-match-title .table tbody tr:first-child td         { padding-top: 8px; }
 
+/* -------- Badminton Match Title ------- */
+.badminton-match-title.goal-type .live-score            { width: 148px; align-self: center; -webkit-align-self: center; }
+.badminton-match-title .gameset                         { margin-bottom: 8px;}
+.badminton-match-title .gameset:last-child              { margin-bottom: 0;}
+.badminton-match-title .live-score p                    { margin: 0; font-size: 14px; line-height: 18px; font-weight: 500; color: #292929; }
+.badminton-match-title .live-score .set-num             { color: #A3A3A3;}
+.badminton-match-title .live-score .theme-color         { color: #ED1A33;}
+
+
 /* -- Arabic CSS -- */
 .arabic .match-main-title .match-update             { text-align: left; }
 .arabic .match-main-title .current-teams            { padding-right: 0px; padding-left: 32px; }
@@ -202,11 +211,16 @@
     .goal-type .best-player-list li                 { margin-right: 0px; margin-bottom: 6px; font-size: 13px; line-height: 18px; }
 
 /* -------- NBA Match Title ------- */
+    .badminton-match-title.match-main-title .current-match,
     .nba-match-title.match-main-title .current-match                { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
+    .badminton-match-title.match-main-title .current-match .team-col,
     .nba-match-title.match-main-title .current-match .team-col      { width: 46%; }
     .nba-match-title.match-main-title .current-match .live-score    { width: 100%; order: 3; }
     .nba-match-title .table                                         { margin-bottom: 4px; }
     .nba-match-title .live-score .live-score-table                  { display: inline-block; }
+
+/* -------- NBA Match Title ------- */
+    .badminton-match-title.match-main-title .current-match .live-score    { margin: 2px auto 12px; width: 200px; order: 3; }
 
 /* -- Arabic CSS -- */
     .arabic .match-main-title .current-team img             { margin-left: 6px; }

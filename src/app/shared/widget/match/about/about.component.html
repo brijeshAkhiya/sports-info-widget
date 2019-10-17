@@ -465,7 +465,7 @@
 <ng-container *ngIf="sport == 'Badminton' && data">
   <!-- Start Animation -->
   <div
-    class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+    class="common-title-btn goal-type badminton-match-title match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
         <img [lazyLoad]="competitor[0]?.id | logosurl:'badminton'" alt="{{competitor[0]?.name}}"
@@ -508,12 +508,21 @@
       <ng-container *ngTemplateOutlet="badmintonTeam;context:{team:competitor[0]}">
       </ng-container>
       <div class="live-score" *ngIf="data.sport_event_status.status != 'not_started'">
-        <h5>
-          {{data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended' 
-              ?  'FT' 
-              : (data.sport_event_status.status == 'live' && data.sport_event_status.match_status == '2nd_half' ? 'HT' : '')}}
-        </h5>
-        <h3>{{data.sport_event_status?.home_score}} - {{data.sport_event_status?.away_score}}</h3>
+        <div class="gameset d-flex justify-content-between">
+          <p class="theme-color">21</p>
+          <p class="set-num">Game 1</p>
+          <p>16</p>
+        </div>
+        <div class="gameset d-flex justify-content-between">
+          <p>14</p>
+          <p class="set-num">Game 2</p>
+          <p class="theme-color">16</p>
+        </div>
+        <div class="gameset d-flex justify-content-between">
+          <p class="">21</p>
+          <p class="set-num">Game 3</p>
+          <p>18</p>
+        </div>
       </div>
       <ng-container *ngTemplateOutlet="badmintonTeam;context:{team:competitor[1]}">
       </ng-container>
