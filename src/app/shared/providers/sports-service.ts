@@ -832,5 +832,10 @@ export class SportsService {
       environment.apiUrl + environment.version + `/badminton/schedules`
     );
   }
+  getBadmintonLiveTimeline() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/badminton/live/timelines`
+    );
+  }
 
 }

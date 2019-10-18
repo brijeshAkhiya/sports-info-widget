@@ -21,6 +21,12 @@ export class NoDataWidgetComponent implements OnInit {
       this.imagepath = { image: 'assets/images/match/basketball/no_data_basketball.svg' };
     } else if (this.sport === 'Hockey') {
       this.imagepath = { image: 'assets/images/match/hockey/no_data_hockey.svg' };
+    } else if (this.sport === 'Badminton') {
+      this.imagepath = { image: 'assets/images/no_data_badminton.svg' };
+    } else if (this.sport === 'Racing') {
+      this.imagepath = { image: 'assets/images/no_data_racing.svg' };
+    } else if (this.sport === 'Tennis') {
+      this.imagepath = { image: 'assets/images/no_data_tennis.svg' };
     } else {
       const array = [
         { image: 'assets/images/no_data_1.svg' },

@@ -507,21 +507,17 @@
     <div class="current-match d-flex justify-content-between show-anim">
       <ng-container *ngTemplateOutlet="badmintonTeam;context:{team:competitor[0]}">
       </ng-container>
-      <div class="live-score" *ngIf="data.sport_event_status.status != 'not_started'">
-        <div class="gameset d-flex justify-content-between">
-          <p class="theme-color">21</p>
-          <p class="set-num">Game 1</p>
-          <p>16</p>
-        </div>
-        <div class="gameset d-flex justify-content-between">
-          <p>14</p>
-          <p class="set-num">Game 2</p>
-          <p class="theme-color">16</p>
-        </div>
-        <div class="gameset d-flex justify-content-between">
-          <p class="">21</p>
-          <p class="set-num">Game 3</p>
-          <p>18</p>
+      <div class="live-score"
+        *ngIf="data?.sport_event_status?.status != 'not_started' && data?.sport_event_status?.period_scores">
+        <div class="gameset d-flex justify-content-between"
+          *ngFor="let score of data?.sport_event_status?.period_scores">
+          <p
+            [ngClass]="{'theme-color' : competitor[0]?.qualifier == 'home' ? score.home_score > score.away_score : score.away_score > score.home_score }">
+            {{competitor[0]?.qualifier == 'home' ? score.home_score : score.away_score}}</p>
+          <p class="set-num">Game {{score.number}}</p>
+          <p
+            [ngClass]="{'theme-color' : competitor[1]?.qualifier == 'away' ? score.away_score > score.home_score : score.home_score > score.away_score }">
+            {{competitor[1]?.qualifier == 'home' ? score.home_score : score.away_score}}</p>
         </div>
       </div>
       <ng-container *ngTemplateOutlet="badmintonTeam;context:{team:competitor[1]}">

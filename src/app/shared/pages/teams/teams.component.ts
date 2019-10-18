@@ -65,7 +65,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = this.seasons[0];
+            this.filter = localStorage.getItem(this.sport) ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
             this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });
@@ -78,7 +78,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = this.seasons[0];
+            this.filter = localStorage.getItem(this.sport) ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
             this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });
@@ -95,7 +95,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
       this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
     else if (this.sport == 'Badminton')
       this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
-
+    localStorage.setItem(this.sport, JSON.stringify(season));
   }
 
   teamSuccess = (res) => {

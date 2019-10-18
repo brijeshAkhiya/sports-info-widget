@@ -37,7 +37,7 @@ export class StandingsComponent implements OnInit, OnDestroy {
         this.store.dispatch(new Badminton.LoadBadmintonCompSeason(id));
       else {
         this.seasons = data[id];
-        this.filter = this.seasons[0];
+        this.filter = localStorage.getItem('Badminton') ? JSON.parse(localStorage.getItem('Badminton')) : this.seasons[0];
         this.getStandings();
       }
     });
@@ -62,6 +62,8 @@ export class StandingsComponent implements OnInit, OnDestroy {
     this.standings = [];
     this.loading = true;
     this.getStandings();
+    localStorage.setItem('Badminton', JSON.stringify(season));
+
   }
   ngOnDestroy() {
     if (this.selectorSubscription) this.selectorSubscription.unsubscribe();

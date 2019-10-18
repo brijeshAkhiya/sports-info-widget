@@ -197,32 +197,27 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     });
   }
   getLiveBadmintonUpdate(classThis) {
-    this.timerStartTime.Hockey.isLiveUpdate = true;
-    let date = new Date();
+    this.timerStartTime.Badminton.isLiveUpdate = true;
     this.interval = setInterval(() => {
       classThis.sportsService
-        .getHocketDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
-          if (res.data.summaries.length > 0) {
-            // this.store.dispatch(
-            // new Hockey.LoadSoccerLiveSuccess(
-            //   res.data.summaries.filter((match) =>
-            //     match.sport_event_status && match.sport_event_status.status == 'live' &&
-            //     match.sport_event.coverage.sport_event_properties.scores == 'live' &&
-            //     match.sport_event.sport_event_context
-            //   )));
-            res.data.summaries.forEach(match => {
-              let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.sport_event.id);
+        .getBadmintonLiveTimeline().subscribe((res: any) => {
+          if (res.data.sport_event_timelines.length > 0) {
+            res.data.sport_event_timelines.forEach(match => {
+              let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.id);
               if (matchIndex >= 0) {
-                this.slider[matchIndex].sport_event = match.sport_event;
                 this.slider[matchIndex].sport_event_status = match.sport_event_status;
               }
             });
+            if (res.data.sport_event_timelines.filter(match => match.sport_event_status.status == 'live').length == 0) {
+              this.clearTimeInterval();
+              this.loadBadmintonData();
+            }
           } else {
             this.clearTimeInterval();
-            this.loadHockeyData();
+            this.loadBadmintonData();
           }
         });
-    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Hockey.interval));
+    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Badminton.interval));
   }
 
 

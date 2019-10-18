@@ -761,13 +761,14 @@
 <ng-template #badminton_list>
   <div class="common-tour-list" *ngIf="data.length > 0">
     <div class="grp-item tour-without-grp">
-      <div class="soccer-tour-title">
-        <p>{{match?.sport_event?.sport_event_context?.season?.name}}</p>
-      </div>
+
       <div class="schedule-tour-list">
         <div
           class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
+          <div class="match-desc">
+            <p>{{match?.sport_event?.sport_event_context?.season?.name}}</p>
+          </div>
           <div class="match-teams d-flex align-items-center"
             *ngIf="match?.sport_event?.competitors[0] && match?.sport_event?.competitors[1]">
 
@@ -820,10 +821,11 @@
                 *ngIf="match?.sport_event_status?.status != 'closed'">{{match?.sport_event?.start_time | date:'h:mm a'}}</span>
 
               <span class="text-capitalize" *ngIf="match?.sport_event_status?.status == 'closed'">
-                <ng-container *ngFor="let score of match?.sport_event_status?.period_scores">
+                <ng-container *ngFor="let score of match?.sport_event_status?.period_scores; let i = index">
                   {{match?.sport_event?.competitors[0]?.qualifier == 'home' ? score.home_score : score.away_score}}
-                  Game {{score.number}}
+                  -
                   {{match?.sport_event?.competitors[0]?.qualifier == 'home' ? score.away_score : score.home_score}}
+                  {{match?.sport_event_status?.period_scores.length == (i + 1) ? '' : ','}}
                 </ng-container>
               </span>
             </h6>

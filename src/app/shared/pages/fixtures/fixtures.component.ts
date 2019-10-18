@@ -96,7 +96,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = this.seasons[0];
+            this.filter = localStorage.getItem(this.params.sport) ? JSON.parse(localStorage.getItem(this.params.sport)) : this.seasons[0];
             this.getHockeyTournamentData();
           }
         });
@@ -110,7 +110,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = this.seasons[0];
+            this.filter = localStorage.getItem(this.params.sport) ? JSON.parse(localStorage.getItem(this.params.sport)) : this.seasons[0];
             this.getBadmintonTournamentData();
           }
         });
@@ -126,9 +126,12 @@ export class FixturesComponent implements OnInit, OnDestroy {
       this.getHockeyTournamentData();
     else if (this.params.sport == 'Badminton')
       this.getBadmintonTournamentData();
+    localStorage.setItem(this.params.sport, JSON.stringify(season));
   }
 
   getHockeyTournamentData() {
+    console.log(this.filter);
+
     this.paramsFixtures.loading = true;
     this.paramsResults.loading = true;
     this.sportsService
