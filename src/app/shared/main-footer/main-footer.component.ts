@@ -84,15 +84,15 @@ export class MainFooterComponent implements OnInit {
   }
 
   /* //favourites tags routing */
-  routingfromfav(type, id, name, sport, teamid) {
+  routing(url) {
     if (this.isedit) {
       this.userfavourites = this.userfavourites.map((singleitem) => {
-        if (singleitem.id == id && singleitem.isSelect == false) {
+        if (singleitem.url == url && singleitem.isSelect == false) {
           return {
             ...singleitem,
             isSelect: true
           };
-        } else if (singleitem.id == id && singleitem.isSelect == true) {
+        } else if (singleitem.url == url && singleitem.isSelect == true) {
           return {
             ...singleitem,
             isSelect: false
@@ -101,49 +101,10 @@ export class MainFooterComponent implements OnInit {
           return singleitem;
         }
       });
-    } else {
-      this.isapply = false;
-      if (type == 'sport') {
-        this.router.navigate([id.toLowerCase()]);
-      } else if (type == 'tournament' && sport == 'cricket') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['cricket/tournament', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'team' && sport == 'cricket') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['cricket/team', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'player' && sport == 'cricket') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['cricket/player', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'tournament' && sport == 'kabaddi') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['kabaddi/tournament', id, slugname]);
-      } else if (type == 'team' && sport == 'kabaddi') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['kabaddi/team', id, slugname]);
-      } else if (type == 'player' && sport == 'kabaddi') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['kabaddi/player', teamid, id, slugname]);
-      } else if (type == 'tournament' && sport == 'soccer') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['soccer/tournament', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'team' && sport == 'soccer') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['soccer/team', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'player' && sport == 'soccer') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['soccer/player', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'tournament' && sport == 'basketball') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['basketball/tournament', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'team' && sport == 'basketball') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['basketball/team', this.splitIDPipe.transform(id), slugname]);
-      } else if (type == 'player' && sport == 'basketball') {
-        let slugname = this.slugifyPipe.transform(name);
-        this.router.navigate(['basketball/player', this.splitIDPipe.transform(id), slugname]);
-      }
-    }
+    } else
+      this.router.navigate([url]);
   }
+
   /* //remove favourites function */
   removefavourite() {
     if (this.isedit) {

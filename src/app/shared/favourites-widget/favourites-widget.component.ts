@@ -3,6 +3,7 @@ import { SportsService } from '@providers/sports-service';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app-reducer';
 import * as favourites from '../../store/favourites-management/favourites.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favourites-widget',
@@ -16,72 +17,36 @@ export class FavouritesWidgetComponent implements OnInit, OnDestroy {
   isLogin = true;
   favSubscription;
 
-  constructor(private sportsService: SportsService, private store: Store<fromRoot.State>) { }
+  constructor(
+    private sportsService: SportsService,
+    private store: Store<fromRoot.State>,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.favSubscription = this.store.select('Favourites').subscribe((data) => {
       this.userfavourites = (typeof data.Favourites != 'undefined' && data.Favourites != null) ? data.Favourites : [];
       this.isadded = false;
       this.userfavourites.map((data) => {
-        if (data.id == this.value.id && data.type == this.value.type) {
+        if (data.url == this.router.url) {
           this.isadded = true;
         }
       });
     });
   }
 
-  addfav() {
-    if (localStorage.getItem('userT')) {
-      if (this.isadded) {
-        this.isadded = false;
-        this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
-        this.sportsService.updatefavourites({ data: this.userfavourites });
-      } else {
-        this.isadded = true;
-        this.updatefavourites(this.value);
-      }
+  add() {
+    if (this.isadded) {
+      this.userfavourites.splice(this.userfavourites.findIndex(v => v.url === this.router.url), 1);
     } else {
-      if (this.isadded) {
-        this.isadded = false;
-        this.userfavourites.splice(this.userfavourites.findIndex(v => v.id === this.value.id), 1);
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
-        this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
-      } else {
-        if (JSON.parse(localStorage.getItem('favourites'))) {
-          this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
-        }
-        this.userfavourites.push(this.value);
-        this.userfavourites = this.userfavourites.map((singleitem) => {
-          return {
-            ...singleitem,
-            isSelect: false
-          };
-        });
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
-        this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
-        this.isadded = true;
-      }
-      // this.isLogin = false
-      // setTimeout(() => {
-      //   this.isLogin = true
-      // }, 3000);
+      this.userfavourites.push({ name: this.value.name, url: this.router.url, isSelect: false });
     }
-  }
-
-  updatefavourites(data) {
-    this.userfavourites.push(data);
-    this.userfavourites = this.userfavourites.map((singleitem) => {
-      return {
-        ...singleitem,
-        isSelect: false
-      };
-    });
+    this.isadded = (this.isadded) ? false : true;
     localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
-    this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
-      if (res) {
-      }
-    });
+    if (localStorage.getItem('userT')) {
+      this.sportsService.updatefavourites({ data: this.userfavourites });
+    } else
+      this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
   }
 
   ngOnDestroy() {
