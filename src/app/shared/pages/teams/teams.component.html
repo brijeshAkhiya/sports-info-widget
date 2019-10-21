@@ -31,7 +31,7 @@
                 <app-team-card [teams]="team.teams" [sport]="sport" [tournament]="tournamentid"></app-team-card>
               </ng-container>
               <ng-container *ngIf="sport == 'Hockey' || sport == 'Badminton'">
-                <h4>{{team.name}}</h4>
+                <h4>{{team.name | split}}</h4>
                 <app-team-card [teams]="team.competitors" [sport]="sport" [tournament]="tournamentid"></app-team-card>
               </ng-container>
             </div>

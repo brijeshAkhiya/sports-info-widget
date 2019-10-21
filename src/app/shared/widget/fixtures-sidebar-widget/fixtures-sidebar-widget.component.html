@@ -307,7 +307,7 @@
           <p [ngClass]="{'match-winner': match?.sport_event_status?.winner_id == item?.id}"><img
               [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.id | logosurl:'badminton'"
               [defaultImage]="commonService.flagplaceholder">
-            {{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name}}
+            {{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name | split}}
           </p>
           <p *ngIf="match.sport_event_status?.status == 'closed'">
             <ng-container>

@@ -56,18 +56,19 @@ export class MatchComponent implements OnInit, OnDestroy {
 
   getLiveUpdate(classThis) {
     /** Start interval to get Live data from API  */
+    if (this.interval) clearInterval(this.interval);
     this.interval = setInterval(() => {
       classThis.sportsService
         .getBadmintonMatchTimeline(classThis.matchInfo.sport_event.id)
         .subscribe(res => {
           classThis.matchInfo = res.data;
         });
-    }, classThis.commonService.miliseconds(0, 0, 15));
+    }, classThis.commonService.miliseconds(0, 0, 10));
   }
 
   startLiveUpdateAfterTime() {
     let remainingTime = this.commonService.getRemainigTimeofMatch(
-      moment.utc(this.matchInfo.scheduled).format()
+      moment.utc(this.matchInfo.sport_event.start_time).format()
     );
     let remainingMiliSec = this.commonService.miliseconds(
       remainingTime.hours,
@@ -76,7 +77,6 @@ export class MatchComponent implements OnInit, OnDestroy {
     );
     remainingMiliSec =
       remainingMiliSec - this.commonService.miliseconds(0, 5, 0);
-
     if (remainingTime.days === 0 && remainingTime.hours < 5) {
       this.timeout = setTimeout(() => {
         this.getLiveUpdate(this);

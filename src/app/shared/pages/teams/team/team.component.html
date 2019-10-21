@@ -36,7 +36,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="'Badminton'">
             <ng-container
-              *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name, options : {id:teamProfile?.competitor?.id,type:'team',sport:'badminton',name:teamProfile?.competitor?.name}}">
+              *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name | split, options : {id:teamProfile?.competitor?.id,type:'team',sport:'badminton',name:teamProfile?.competitor?.name}}">
             </ng-container>
           </ng-container>
         </div>

@@ -130,8 +130,6 @@ export class FixturesComponent implements OnInit, OnDestroy {
   }
 
   getHockeyTournamentData() {
-    console.log(this.filter);
-
     this.paramsFixtures.loading = true;
     this.paramsResults.loading = true;
     this.sportsService

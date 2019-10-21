@@ -38,6 +38,10 @@
             <ng-container *ngTemplateOutlet="hockey;context:{item:item}">
             </ng-container>
           </ng-container>
+          <ng-container *ngIf="options.sport == 'Badminton'">
+            <ng-container *ngTemplateOutlet="badminton;context:{item:item}">
+            </ng-container>
+          </ng-container>
         </tr>
       </tbody>
     </table>
@@ -121,13 +125,13 @@
     </td>
     <ng-template #link>
       <td>
-        <a *ngIf ="value =='tname' || value =='name'"
+        <a *ngIf="value =='tname' || value =='name'"
           [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}
         </a>
-        <span *ngIf ="value=='pid'">
+        <span *ngIf="value=='pid'">
           {{index}}
         </span>
       </td>
@@ -196,7 +200,6 @@
   </ng-container>
 </ng-template>
 
-
 <ng-template #hockey let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values;let i=index">
     <td *ngIf="(value != 'name' && value !='index'); else link "
@@ -210,6 +213,28 @@
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitor.id | logosurl:'hockey'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item.competitor.name}}
+        </a>
+        <span *ngIf="value == 'index'">
+          {{index}}
+        </span>
+      </td>
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #badminton let-item="item" let-index="index">
+  <ng-container *ngFor="let value of options.values;let i=index">
+    <td *ngIf="(value != 'name' && value !='index'); else link "
+      [ngClass]="(object == value && options.sort[i]) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc' : '' ">
+      {{(item[value] && item[value] !='') ? item[value] : 0}}
+    </td>
+    <ng-template #link>
+      <td>
+        <a *ngIf="value == 'name'"
+          [routerLink]="value == 'name' ? ['/badminton/team', (item.competitor.id | splitID), ((item.competitor.name | split) | slugify)] : '' ">
+          <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.competitor.id | logosurl:'badminton'"
+            [defaultImage]="commonService.flagplaceholder" alt="logo">
+          {{ item.competitor.name | split}}
         </a>
         <span *ngIf="value == 'index'">
           {{index}}

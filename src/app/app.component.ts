@@ -194,7 +194,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       } else if (this.metatagsObj['/']) {
         resolve(this.metatagsObj['/']);
       } else {
-        reject('No Match Found');
+        reject();
       }
     });
 

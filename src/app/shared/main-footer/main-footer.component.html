@@ -49,8 +49,6 @@
 		</form>
 		<ul class="fav-list">
 			<li *ngFor="let item of (userfavourites | filter : searchText)">
-				<!-- <button [ngClass]="{'selected': item.isSelect}"
-					(click)="routingfromfav(item.type,item.id,item.name,item.sport,item.teamid)">{{item.name}}</button> -->
 				<button [ngClass]="{'selected': item.isSelect}" (click)="routing(item.url)">{{item.name}}</button>
 			</li>
 		</ul>

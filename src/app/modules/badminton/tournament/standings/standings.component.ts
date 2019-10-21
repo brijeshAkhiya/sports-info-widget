@@ -10,8 +10,7 @@ import * as Badminton from '@store/badminton/badminton.actions';
 
 @Component({
   selector: 'app-standings',
-  templateUrl: './standings.component.html',
-  styleUrls: ['./standings.component.css']
+  templateUrl: './standings.component.html'
 })
 export class StandingsComponent implements OnInit, OnDestroy {
 
@@ -32,10 +31,12 @@ export class StandingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let id = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'Badminton', 'tournament');
 
+    this.loading = true;
     this.selectorSubscription = this.store.select(BadmintonSelectors.getBadmintonSeasons).subscribe((data: any) => {
       if (Object.keys(data).length == 0 || !Object.keys(data).includes(id))
         this.store.dispatch(new Badminton.LoadBadmintonCompSeason(id));
       else {
+        this.loading = false;
         this.seasons = data[id];
         this.filter = localStorage.getItem('Badminton') ? JSON.parse(localStorage.getItem('Badminton')) : this.seasons[0];
         this.getStandings();

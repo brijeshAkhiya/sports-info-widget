@@ -776,7 +776,7 @@
               <div class="team-info">
                 <h5
                   [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == match?.sport_event?.competitors[0].id }">
-                  {{match?.sport_event?.competitors[0]?.name}}
+                  {{match?.sport_event?.competitors[0]?.name | split}}
                 </h5>
               </div>
             </div>
@@ -803,7 +803,7 @@
               <div class="team-info">
                 <h5
                   [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == match?.sport_event?.competitors[1].id }">
-                  {{match?.sport_event?.competitors[1]?.name}}
+                  {{match?.sport_event?.competitors[1]?.name | split}}
                 </h5>
               </div>
             </div>

@@ -470,7 +470,7 @@
       <div class="team-anim">
         <img [lazyLoad]="competitor[0]?.id | logosurl:'badminton'" alt="{{competitor[0]?.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <h4>{{competitor[0]?.name}}</h4>
+        <h4>{{competitor[0]?.name | split}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
@@ -478,7 +478,7 @@
       <div class="team-anim">
         <img [lazyLoad]="competitor[1]?.id | logosurl:'badminton'" alt="{{competitor[1]?.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <h4>{{competitor[1]?.name}}</h4>
+        <h4>{{competitor[1]?.name | split}}</h4>
       </div>
     </div>
     <!-- End Animation -->
@@ -486,8 +486,8 @@
     <div class="tour-match-title show-anim">
       <p class="light-text">
         <a
-          [routerLink]="['/badminton/tournament',(data?.sport_event?.sport_event_context?.season?.id | splitID),(data?.sport_event?.sport_event_context?.season?.name | slugify)]">
-          {{data?.sport_event?.sport_event_context?.season?.name}}
+          [routerLink]="['/badminton/tournament',(data?.sport_event?.sport_event_context?.competition?.id | splitID),(data?.sport_event?.sport_event_context?.competition?.name | slugify)]">
+          {{data?.sport_event?.sport_event_context?.competition?.name}}
         </a>
       </p>
     </div>
@@ -550,8 +550,8 @@
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
       <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
-        <a [routerLink]="['/badminton/team',(team.id | splitID),(team.name | slugify)]">
-          {{ team.name }}
+        <a [routerLink]="['/badminton/team',(team.id | splitID),((team.name | split) | slugify)]">
+          {{ team.name | split}}
         </a> </h4>
     </div>
   </div>
