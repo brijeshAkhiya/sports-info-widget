@@ -766,7 +766,7 @@
         <div
           class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
           *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
-          <div class="match-desc">
+          <div class="match-tour-name text-center">
             <p>{{match?.sport_event?.sport_event_context?.season?.name}}</p>
           </div>
           <div class="match-teams d-flex align-items-center"

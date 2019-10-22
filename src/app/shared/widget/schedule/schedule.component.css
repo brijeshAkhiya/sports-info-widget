@@ -66,6 +66,7 @@
 .common-tour-list .grp-item .score-center-block        { min-width: 124px; padding: 0px 26px; text-align: center; }
 .grp-item .score-center-block h4                       { margin: 0px; font-size: 16px; line-height: 20px; }
 .common-tour-list .schedule-tour-list .schedule-item h5         { font-family: inherit; font-weight: 500; }
+.schedule-tour-list .schedule-item .match-tour-name             { margin-bottom: 12px; }
 
 /* -------- Tournament Fixtures Without Group ------- */
 .common-tour-list .grp-item.tour-without-grp                       { padding: 0px; background: transparent; }
