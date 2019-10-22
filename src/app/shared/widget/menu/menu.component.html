@@ -223,3 +223,47 @@
   </div>
 
 </ng-container>
+
+
+<ng-container *ngIf="options.sport == 'Racing'">
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
+    <div class="sub-navabar-inner d-flex">
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu d-flex">
+          <li><a [routerLink]="['/racing/f1']" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">{{ 'F1' }}</a>
+          </li>
+          <li><a [routerLink]="['/racing/motogp']" routerLinkActive="active">{{ 'MotoGP' | translate }}</a></li>
+          <li ngbDropdown><a [routerLink]="['/racing/formulae']"
+              routerLinkActive="active">{{ 'Formula E' | translate }}</a>
+          <li ngbDropdown><a [routerLink]="['/racing/indycar']"
+              routerLinkActive="active">{{ 'Indy Car' | translate }}</a>
+          </li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="sub-navabar" id="sub-navabar">
+    <div class="sub-navabar-inner d-flex">
+      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <div class="sub-navbar-container" id="sub-navbar-nav">
+        <ul #subnavbarmenu class="subnavbarmenu d-flex">
+          <li><a [routerLink]="['./']" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">{{ 'widgetModule.Home' | translate }}</a></li>
+          <li><a [routerLink]="['./schedule']" routerLinkActive="active">{{ 'Schedule' | translate }}</a>
+          </li>
+          <li><a [routerLink]="['./teams']" routerLinkActive="active">{{ 'widgetModule.Teams' | translate }}</a></li>
+          <li><a [routerLink]="['./standings']" routerLinkActive="active">{{ 'widgetModule.Standings' | translate }}</a>
+          <li><a [routerLink]="['./probabilities']" routerLinkActive="active">{{ 'Probabilities' | translate }}</a>
+          </li>
+        </ul>
+        <div id="subnav-pointer" #subnavpointer></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+</ng-container>

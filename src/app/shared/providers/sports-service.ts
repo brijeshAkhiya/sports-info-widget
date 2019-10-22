@@ -837,5 +837,13 @@ export class SportsService {
       environment.apiUrl + environment.version + `/badminton/live/timelines`
     );
   }
+  /**
+   * Racing Services
+   */
 
+  getRacingF1Seasons(id) {
+    return this.http.get(
+      `https://api.sportradar.us/formula1/production/v2/en/seasons.json?api_key=cub6qud6wn2jwz3rntdc99vg`
+    );
+  }
 }

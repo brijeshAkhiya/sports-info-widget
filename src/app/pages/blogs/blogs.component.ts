@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import { SportsService } from '@providers/sports-service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,12 +13,16 @@ export class BlogsComponent implements OnInit {
   options: any = { reqParams: { nStart: 0, nLimit: 10 } };
   blog_title = '';
   widgetblogs: any;
+  searchkey;
+  prev;
+  noresults: boolean = false;
 
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
     private sportsService: SportsService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private cd: ChangeDetectorRef
   ) {
 
     /**To reload router if routing in same page */
@@ -56,7 +60,6 @@ export class BlogsComponent implements OnInit {
     }
   }
 
-
   getRecentArticles() {
     let data = {
       nstart: 0,
@@ -67,5 +70,41 @@ export class BlogsComponent implements OnInit {
         this.widgetblogs = res['data'];
       }
     });
+  }
+
+  valuechange($e) {
+    if (this.searchkey && this.searchkey.length > 2 && (this.searchkey != this.prev)) {
+      this.search();
+      this.prev = this.searchkey;
+    } else if (this.searchkey == '')
+      this.options.data = [];
+  }
+
+
+  // search api call
+  search() {
+    console.log('search');
+
+    if (this.searchkey.trim()) {
+      let data = {
+        sSearch: this.searchkey,
+        nLimit: 5,
+        nStart: 0
+      };
+      this.options.data = [];
+      this.noresults = false;
+      this.sportsService.getsearchresult(data).subscribe(res => {
+        console.log(res);
+
+        this.options.data = res['data'];
+        this.cd.detectChanges();
+        // if (res['data'].length > 0) {
+        //   this.options.data = res['data'];
+        // } else {
+        //   this.noresults = true;
+        // }
+        // console.log(this.options.data);
+      });
+    }
   }
 }

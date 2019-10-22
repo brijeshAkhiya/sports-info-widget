@@ -356,5 +356,10 @@
   "Tournaments": "Tournaments",
   "Hockey": "Hockey",
   "No match scheduled": "No match scheduled",
-  "No statistics data available": "No statistics data available"
+  "No statistics data available": "No statistics data available",
+  "MotoGP": "MotoGP",
+  "Formula E": "Formula E",
+  "Indy Car": "Indy Car",
+  "Schedule": "Schedule",
+  "Probabilities": "Probabilities"
 }

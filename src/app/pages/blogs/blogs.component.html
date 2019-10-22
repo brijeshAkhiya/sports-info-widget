@@ -6,10 +6,12 @@
           <h1>
             {{blog_title}}
           </h1>
-          <!-- <div class="result-search-box">
-            <input class="form-control" value="Dhoni">
-            <button type="submit"></button>
-          </div> -->
+          <div class="result-search-box">
+            <input class="form-control" type="text" #name placeholder="{{'Blog_Module2.Search_articles' | translate}} …"
+              [(ngModel)]="searchkey" [ngModelOptions]="{standalone: true}" autofocus="autofocus"
+              (keyup)="valuechange($event)">
+            <button type="submit" (click)="search()"></button>
+          </div>
         </div>
         <app-blog-list *ngIf="options" [options]="options"> </app-blog-list>
         <app-custom-ads-widget [type]="'Large'"></app-custom-ads-widget>
@@ -19,11 +21,12 @@
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
           <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs?.length > 0">
-              <h5>{{'Blog_Module.Recent_Stories' | translate}}</h5>
-              <ul class="common-list">
-                <li *ngFor="let item of widgetblogs | slice:0:5"><a [state]="{ id: item._id }" [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
-              </ul>
-            </div>
+            <h5>{{'Blog_Module.Recent_Stories' | translate}}</h5>
+            <ul class="common-list">
+              <li *ngFor="let item of widgetblogs | slice:0:5"><a [state]="{ id: item._id }"
+                  [routerLink]="['/',(item.eType |lowercase) , item.sSlug ]">{{item.sTitle}}</a></li>
+            </ul>
+          </div>
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
         </div>
       </div>

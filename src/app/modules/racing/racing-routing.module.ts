@@ -13,12 +13,12 @@ const routes: Routes = [
     component: RouterComponent,
     children: [
       {
-        path: '',
+        path: ':game',
         component: HomeComponent,
         data: { 'sport': 'Racing' }
       },
       {
-        path: 'teams',
+        path: ':game/teams',
         component: TeamsComponent,
         data: { 'sport': 'Racing' }
       },

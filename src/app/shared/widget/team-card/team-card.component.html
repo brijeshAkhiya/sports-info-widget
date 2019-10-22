@@ -100,6 +100,18 @@
           </a>
         </ng-container>
 
+        <!-- Racing Teams-->
+        <ng-container *ngIf="sport=='Racing'">
+          <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl:'racing'"
+              [defaultImage]="commonService.flagplaceholder" alt="team.name | slugify">
+          </div>
+          <div class="team-name">
+            <h4>{{team.name | split}}</h4>
+            <h5>{{team.country_code}}</h5>
+          </div>
+          <a class="fullblock-link" [routerLink]="['/racing/team',(team.id | splitID),(team.name | slugify)]">
+          </a>
+        </ng-container>
       </div>
     </div>
   </div>

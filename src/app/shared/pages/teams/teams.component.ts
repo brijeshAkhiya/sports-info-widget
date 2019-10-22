@@ -9,6 +9,8 @@ import * as HockeySelectors from '@store/selectors/hockey.selectors';
 import * as Hockey from '@store/hockey/hockey.actions';
 import * as BadmintonSelectors from '@store/selectors/badminton.selectors';
 import * as Badminton from '@store/badminton/badminton.actions';
+import * as RacingSelectors from '@store/selectors/racing.selectors';
+import * as Racing from '@store/racing/racing.actions';
 
 @Component({
   selector: 'app-teams',
@@ -84,6 +86,20 @@ export class TeamsComponent implements OnInit, OnDestroy {
         });
         break;
       }
+      case 'Racing': {
+        let params: any = this.activatedRoute.params;
+        let game = params.value.game;
+        this.subscription = this.store.select(RacingSelectors.getRacingSeasons).subscribe((data: any) => {
+          if (Object.keys(data).length == 0 || !Object.keys(data).includes(game))
+            this.store.dispatch(new Racing.LoadRacingCompSeason(game));
+          else {
+            this.seasons = data[game];
+            this.filter = localStorage.getItem(this.sport) ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
+            this.sportsService.getRacingF1Seasons(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+          }
+        });
+        break;
+      }
     }
   }
 
@@ -95,6 +111,8 @@ export class TeamsComponent implements OnInit, OnDestroy {
       this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
     else if (this.sport == 'Badminton')
       this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+    else if (this.sport == 'Racing')
+      this.sportsService.getRacingF1Seasons(this.filter.id).subscribe(this.teamSuccess, this.teamError);
     localStorage.setItem(this.sport, JSON.stringify(season));
   }
 
@@ -160,6 +178,12 @@ export class TeamsComponent implements OnInit, OnDestroy {
               this.teams.push(group);
             });
           });
+        }
+        break;
+      }
+      case 'Racing': {
+        if (res.data && res.data.stages) {
+          this.teams = res.data.stages;
         }
         break;
       }
