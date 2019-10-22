@@ -41,7 +41,12 @@ export class MatchFactsFiguresComponent implements OnInit {
         this.venuedetails.long = Number(this.matchdata.sport_event.venue.map_coordinates.split(',')[1]);
       } else {
         // TODO - Reverse Geo coding
-        this.sportsService.getReverseGeo(this.venuedetails.name).subscribe((res: any) => {
+        let address = this.venuedetails.name;
+        if (this.venuedetails.city_name)
+          address = address + ',' + this.venuedetails.city_name;
+        if (this.venuedetails.country_name)
+          address = address + ',' + this.venuedetails.country_name;
+        this.sportsService.getReverseGeo(address).subscribe((res: any) => {
           if (res && res.results && res.results.length > 0) {
             this.venuedetails.lat = res.results[0].geometry.location.lat;
             this.venuedetails.long = res.results[0].geometry.location.lng;

@@ -101,8 +101,10 @@ export class MainFooterComponent implements OnInit {
           return singleitem;
         }
       });
-    } else
+    } else {
+      this.isapply = false;
       this.router.navigate([url]);
+    }
   }
 
   /* //remove favourites function */

@@ -38,16 +38,6 @@
           </div>
         </ng-container>
 
-        <!-- For Group  -->
-        <!-- <ng-container *ngIf="sport == 'Hockey'; else commonList">
-          <div class="team-group-list">
-            <div class="team-group common-section top-padding" *ngFor="let team of teams">
-              <h4>{{team.name}}</h4>
-              <app-team-card [teams]="team.competitors" [sport]="sport" [tournament]="tournamentid"></app-team-card>
-            </div>
-          </div>
-        </ng-container> -->
-
         <!-- For Simple list  -->
         <ng-template #commonList>
           <app-team-card *ngIf="!isloading && teams && teams.length > 0" [teams]="teams" [sport]="sport"

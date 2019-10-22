@@ -5,16 +5,15 @@
         <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
           <h1>{{ 'Kabaddi_Module.Statistics' | translate }}</h1>
         </div>
-
-        <app-loader *ngIf="isloading"></app-loader>
-        <app-no-data-widget *ngIf="!isloading && (!players || players?.length == 0)" [sport]="'soccer'">
-        </app-no-data-widget>
-        <ngb-tabset class="common-tabs black-filled" *ngIf="players?.length > 0">
+        <ngb-tabset class="common-tabs black-filled">
           <ngb-tab>
             <ng-template ngbTabTitle>
               <div (click)="getdata('goals')">{{ 'Soccer_Module.Goals' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-loader *ngIf="isloading"></app-loader>
+              <app-no-data-widget *ngIf="!isloading && (!players || players?.length == 0)" [sport]="sport">
+              </app-no-data-widget>
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Goals' | translate)],
@@ -31,6 +30,9 @@
               <div (click)="getdata('assists')">{{ 'Soccer_Module.Assists' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-loader *ngIf="isloading"></app-loader>
+              <app-no-data-widget *ngIf="!isloading && (!players || players?.length == 0)" [sport]="sport">
+              </app-no-data-widget>
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Assists' | translate)],
@@ -47,6 +49,9 @@
               <div (click)="getCarddata()">{{ 'Soccer_Module.Cards' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-loader *ngIf="isloading"></app-loader>
+              <app-no-data-widget *ngIf="!isloading && (!players || players?.length == 0)" [sport]="sport">
+              </app-no-data-widget>
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Red_cards' | translate),('Soccer_Module.Yellow_cards' | translate)],
@@ -63,6 +68,9 @@
               <div (click)="getdata('own_goals')">{{ 'Soccer_Module.Own_Goals' | translate }}</div>
             </ng-template>
             <ng-template ngbTabContent>
+              <app-loader *ngIf="isloading"></app-loader>
+              <app-no-data-widget *ngIf="!isloading && (!players || players?.length == 0)" [sport]="sport">
+              </app-no-data-widget>
               <app-player-table *ngIf="players?.length > 0" [data]="players" [options]="{
                           sport: sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Soccer_Module.Assists' | translate)],

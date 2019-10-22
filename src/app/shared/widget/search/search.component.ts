@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2, ViewEncapsulation, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SportsService } from "@providers/sports-service";
+import { SportsService } from '@providers/sports-service';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +9,7 @@ import { SportsService } from "@providers/sports-service";
   styleUrls: ['./search.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
   searchkey: string;
   searchdata: any;
   noresults: boolean;
@@ -18,10 +18,10 @@ export class SearchComponent implements OnInit {
     private router: Router,
     private renderer2: Renderer2,
     private sportsService: SportsService
-    ) { }
-  
+  ) { }
+
   @ViewChild('searchBox') searchBox;
-  @ViewChild("name") nameField: ElementRef;
+  @ViewChild('name') nameField: ElementRef;
   @Input() issearch;
   @Input() searchOpen;
   @Output()
@@ -29,46 +29,45 @@ export class SearchComponent implements OnInit {
 
 
   @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {    
-      const clickedInside = this.searchBox.nativeElement.contains(targetElement);
-      if (targetElement != this.searchOpen && !clickedInside) {
-        this.searchkey = '';
-        this.searchdata = [];
-        this.issearch = false;
-          this.clickOutside.emit(false);
-      }
+  public onClick(targetElement) {
+    const clickedInside = this.searchBox.nativeElement.contains(targetElement);
+    if (targetElement != this.searchOpen && !clickedInside) {
+      this.searchkey = '';
+      this.searchdata = [];
+      this.issearch = false;
+      this.clickOutside.emit(false);
+    }
   }
-  
+
   ngOnInit() {
-  } 
+  }
 
   ngOnChanges() {
-    if(this.issearch)
+    if (this.issearch)
       this.nameField.nativeElement.focus();
   }
 
 
-  blogList(){
+  blogList() {
     this.issearch = false;
-    this.renderer2.removeClass(document.body, "search-box-open");
-    this.router.navigate(['search', this.searchkey],{ 
-      state: { data:  this.searchdata, sSearch : this.searchkey} 
+    this.renderer2.removeClass(document.body, 'search-box-open');
+    this.router.navigate(['search', this.searchkey], {
+      state: { data: this.searchdata, sSearch: this.searchkey }
     });
     this.searchkey = '';
     this.searchdata = [];
   }
   prev;
-  valuechange($e){
-    if(this.searchkey && this.searchkey.length > 2 && (this.searchkey != this.prev)){
+  valuechange($e) {
+    if (this.searchkey && this.searchkey.length > 2 && (this.searchkey != this.prev)) {
       this.search();
       this.prev = this.searchkey;
-    }
-    else if(this.searchkey == '')
+    } else if (this.searchkey == '')
       this.searchdata = [];
   }
 
 
-  //search api call
+  // search api call
   search() {
     if (this.searchkey.trim()) {
       let data = {
@@ -80,8 +79,8 @@ export class SearchComponent implements OnInit {
       // this.noresults = false;
       this.noresults = false;
       this.sportsService.getsearchresult(data).subscribe(res => {
-        if (res["data"].length != 0) {
-          this.searchdata = res["data"];
+        if (res['data'].length != 0) {
+          this.searchdata = res['data'];
         } else {
           // this.noresults = true;
           this.noresults = true;
