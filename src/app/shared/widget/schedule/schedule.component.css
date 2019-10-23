@@ -23,7 +23,7 @@
 .schedule-item .match-desc              { width: 200px; align-self: flex-start; -webkit-align-self: flex-start; }
 .schedule-item .match-desc.side-desc    { min-height: 80px; justify-content: space-between; -webkit-justify-content: space-between; }
 .schedule-item .match-desc.side-desc > :first-child     { margin-bottom: 16px; }
-.schedule-item .match-teams             { width: calc(100% - 208px); }
+.schedule-item .match-teams             { flex-grow: 1; -webkit-flex-grow: 1; }
 .schedule-tour-list .schedule-item *:last-child         { margin-bottom: 0px; }
 .schedule-tour-list h6,
 .schedule-tour-list .complete-match h5                  { margin-bottom: 4px; font-size: 16px; line-height: 20px; color: #292929; font-weight: 700; }
@@ -66,7 +66,7 @@
 .common-tour-list .grp-item .score-center-block        { min-width: 124px; padding: 0px 26px; text-align: center; }
 .grp-item .score-center-block h4                       { margin: 0px; font-size: 16px; line-height: 20px; }
 .common-tour-list .schedule-tour-list .schedule-item h5         { font-family: inherit; font-weight: 500; }
-.schedule-tour-list .schedule-item .match-tour-name             { margin-bottom: 12px; }
+.schedule-tour-list .schedule-item .match-tour-name             { margin-bottom: 12px;; }
 
 /* -------- Tournament Fixtures Without Group ------- */
 .common-tour-list .grp-item.tour-without-grp                       { padding: 0px; background: transparent; }
@@ -74,12 +74,9 @@
 .tour-without-grp .schedule-tour-list .common-item:nth-child(even)  { background: #fff; }
 
 /* -------- Tournament Fixtures for Badminton ------- */
-.badminton-item .match-team                 { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
-.badminton-item .double-team                { margin-bottom: 8px; width: 100%; }
-.badminton-item .double-team:last-child                { margin-bottom: 0px; }
-.badminton-item .match-team:first-child .double-team    { justify-content: flex-end; -webkit-justify-content: flex-end; }
-
-
+.schedule-tour-list .schedule-item.badminton-item h5        { font-weight: 500; }
+.schedule-tour-list .badminton-item .match-teams            { padding: 8px 0px;}
+.schedule-tour-list .badminton-item .time-block             { padding: 6px 0px;}
 /* -- Arabic CSS -- */
 .arabic .schedule-list .month-title             { padding-right: 0px; padding-left: 16px; }
 .arabic .match-teams .match-team:first-child    { text-align: left; }
@@ -92,7 +89,6 @@
     .schedule-list .month-title                 { width: 120px; }
 /* -------- Tournament Fixtures List ------- */
     .schedule-item .match-desc              { width: 160px; }
-    .schedule-item .match-teams             { width: calc(100% - 168px); }
     .match-teams .match-team                { width: calc(50% - 5px); }
     .match-teams .team-info                 { padding: 0px 10px; }
     .match-teams .team-flag img             { height: 42px;}
@@ -106,7 +102,6 @@
     .schedule-list .month-title                 { width: 100px; }
 /* -------- Tournament Fixtures List ------- */
     .schedule-tour-list .schedule-item      { padding: 16px 16px 16px 12px; flex-direction: column; -webkit-flex-direction: column; }
-    .schedule-item .match-desc,
     .schedule-item .match-teams             { width: 100%; }
     .schedule-item .match-desc              { text-align: center; }
     .schedule-item .match-desc.side-desc    { min-height: initial; }
@@ -126,6 +121,8 @@
     .common-tour-list .grp-item .vs-block,
     .common-tour-list .grp-item .score-center-block { min-width: 104px; padding: 0px 16px;}
     .common-tour-list .schedule-item .match-teams { margin-top: 4px; }
+/* -------- Tournament Fixtures for Badminton ------- */
+    .badminton-item.schedule-item .match-teams          { margin-top: 0px; }
 }
 
 @media (max-width: 767px) {
@@ -176,8 +173,8 @@
     .common-tour-list .grp-item .score-center-block { min-width: initial; padding: 0px 8px;}
     .schedule-item.common-item .match-desc      { padding-top: 8px; }
     .schedule-tour-list .common-item .match-teams .team-flag img    { height: 22px;}
-
 /* -------- Tournament Fixtures for Badminton ------- */
-    .badminton-item .double-team                { flex-direction: column; -webkit-flex-direction: column; } 
+    .schedule-tour-list .badminton-item .match-teams            { padding: 6px 0px;}
+    .schedule-tour-list .badminton-item .time-block             { padding: 4px 0px;}
 
 }

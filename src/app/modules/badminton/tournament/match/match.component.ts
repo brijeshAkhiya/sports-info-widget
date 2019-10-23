@@ -7,7 +7,8 @@ import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-match',
-  templateUrl: './match.component.html'
+  templateUrl: './match.component.html',
+  styleUrls: ['./match.component.css']
 })
 export class MatchComponent implements OnInit, OnDestroy {
 

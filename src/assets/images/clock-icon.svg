@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>Group 12</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Badminton" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Football-Match-Commentary" transform="translate(-1202.000000, -660.000000)">
+            <g id="Group-11" transform="translate(300.000000, 648.000000)">
+                <g id="Group-12" transform="translate(902.000000, 12.000000)">
+                    <rect id="Rectangle" fill="#EBEBEB" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                    <circle id="Oval" stroke="#B8B8B8" cx="8" cy="8" r="7"></circle>
+                    <polyline id="Path-4" stroke="#B8B8B8" points="8 4 8 8 11 10"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

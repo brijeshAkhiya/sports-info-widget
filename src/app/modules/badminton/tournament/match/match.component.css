@@ -1,0 +1,13 @@
+.badminton-commentry .commentry-item        		{ padding: 10px 0px; border-bottom: 1px solid #EBEBEB; position: relative; line-height: 20px; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out;}
+.badminton-commentry .commentry-item > * 			{ transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
+.badminton-commentry .commentry-item:hover 			{ box-shadow: 0px 2px 12px rgba(0,0,0,0.08); -webkit-box-shadow: 0px 2px 12px rgba(0,0,0,0.08); }
+.badminton-commentry .item-inner 					{ width: 104px; font-weight: 500; }
+.badminton-commentry .commentry-item .time  		{ opacity: 0; font-size: 14px; line-height: 20px; color: #B8B8B8; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); }
+.badminton-commentry .commentry-item .time:before 	{ margin: -2px 5px 0px 0px; content: ""; display: inline-block; position: relative; height: 16px; width: 16px; background: url(assets/images/clock-icon.svg) no-repeat center center / cover; vertical-align: middle; }
+.badminton-commentry .commentry-item:hover .time  	{ opacity: 1; }
+.badminton-commentry .commentry-item .highlight 	{ font-weight: 600; color: #292929;}
+.badminton-commentry .commentry-item:hover .highlight 	{ color: #ED1A33; }
+
+@media (max-width: 767px) {
+	.badminton-commentry .item-inner 					{ width: 74px; }
+}
