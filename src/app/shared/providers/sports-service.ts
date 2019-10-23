@@ -837,13 +837,37 @@ export class SportsService {
       environment.apiUrl + environment.version + `/badminton/live/timelines`
     );
   }
+
   /**
    * Racing Services
    */
-
-  getRacingF1Seasons(id) {
+  getRacingSeasons(type) {
     return this.http.get(
-      `https://api.sportradar.us/formula1/production/v2/en/seasons.json?api_key=cub6qud6wn2jwz3rntdc99vg`
+      environment.apiUrl + environment.version + `/racing/${type}/seasons`
+    );
+  }
+
+  getRacingSeasonsSummary(game, id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/racing/${game}/stage/${id}/summary`
+    );
+  }
+
+  getRacingF1SeasonsSchedule(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/racing/f1/stage/${id}/summary`
+    );
+  }
+
+  getRacingSeasonsProbability(game, id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/racing/${game}/stage/${id}/probabilities`
+    );
+  }
+
+  getRacingCompetitorProfile(game, id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/racing/${game}/competitor/${id}`
     );
   }
 }

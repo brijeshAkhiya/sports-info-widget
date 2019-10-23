@@ -39,6 +39,11 @@
               *ngTemplateOutlet="title; context: {title: teamProfile?.competitor?.name | split, options : {id:teamProfile?.competitor?.id,type:'team',sport:'badminton',name:teamProfile?.competitor?.name}}">
             </ng-container>
           </ng-container>
+          <ng-container *ngSwitchCase="'Racing'">
+            <ng-container
+              *ngTemplateOutlet="title; context: {title: teamProfile?.team?.name | split, options : {id:teamProfile?.team?.id,type:'team',sport:'racing',name:teamProfile?.team?.name}}">
+            </ng-container>
+          </ng-container>
         </div>
 
         <ngb-tabset class="common-tabs" *ngIf="teamProfile">
@@ -205,10 +210,46 @@
                     </div>
                   </div>
                 </section>
+
+                <section class="team-about-head d-flex" *ngSwitchCase="'Racing'">
+                  <div class="team-logo align-self-start rounded-box common-shadow">
+                    <div class="team-logo-img" [lazyLoad]="teamProfile?.team?.id | logosurl:'racing'"
+                      [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset"></div>
+                  </div>
+                  <div class="team-info soccer-team-info d-flex rounded-box common-shadow">
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.team?.country_code">
+                        <p class="title light-text">{{ 'Soccer_Module.Country' | translate }}</p>
+                        <p> {{teamProfile?.team?.country_code}} </p>
+                      </div>
+                      <div class="info-item" *ngIf="teamProfile?.info?.president">
+                        <p class="title light-text">{{ 'President' | translate }}</p>
+                        <p>{{ teamProfile?.info?.president }}</p>
+                      </div>
+                    </div>
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.info?.sports_director">
+                        <p class="title light-text">{{ 'Sports Director' | translate }}</p>
+                        <p> {{teamProfile?.info?.sports_director}} </p>
+                      </div>
+                      <div class="info-item" *ngIf="teamProfile?.info?.technical_director">
+                        <p class="title light-text">{{ 'Technical Director' | translate }}</p>
+                        <p>{{ teamProfile?.info?.technical_director }}</p>
+                      </div>
+                    </div>
+                    <div class="info-col">
+                      <div class="info-item" *ngIf="teamProfile?.info?.foundation_year">
+                        <p class="title light-text">{{ 'Shared_module.Founded' | translate }}</p>
+                        <p> {{teamProfile?.info?.foundation_year}} </p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </ng-container>
 
               <!-- Squad Section-->
-              <section class="common-section squad-list" *ngIf="sport != 'Hockey' && sport != 'Badminton'">
+              <section class="common-section squad-list"
+                *ngIf="sport != 'Hockey' && sport != 'Badminton' && sport != 'Racing'">
                 <h4 class="squad-title"
                   *ngIf="teamProfile?.players?.length > 0 || teamProfile?.squads?.length > 0;then squadList else no_players">
                   {{ 'Shared_module.Squad' | translate }}
@@ -328,6 +369,34 @@
                   [tournament]="routeParams.tournamentid" [list_type]="'simple'"></app-schedule>
                 <app-loader *ngIf="paramsFixtures.loading"></app-loader>
               </section>
+
+              <!-- Recent Matches-->
+              <section class="common-section top-padding" *ngIf="sport == 'Racing' && teamProfile?.info">
+                <div class="line-title">
+                  <h4 class="no-margin">
+                    {{ 'Info' | translate }}
+                  </h4>
+                </div>
+
+                <app-match-info-card [options]="{
+                sport: sport,
+                titles : [ 'Website', 'Country', 'Debut', 'Location', 'Car Name', 'Car Construction Year', 'Tyres', 'Chassis', 'Engine Size', 'Fuel Type', 'Engine Name'],
+                values : [ 
+                teamProfile?.info?.url_official, 
+                teamProfile?.info?.country_of_residence, 
+                teamProfile?.info?.debut, 
+                teamProfile?.info?.location,
+                teamProfile?.info?.car_name, 
+                teamProfile?.info?.car_construction_year, 
+                teamProfile?.info?.car_tyres, 
+                teamProfile?.info?.car_chassis, 
+                teamProfile?.info?.car_engine_size, 
+                teamProfile?.info?.car_fuel_type, 
+                teamProfile?.info?.car_engine_name
+                ] }
+                " [data]="teamProfile?.info" *ngIf="teamProfile?.info"></app-match-info-card>
+              </section>
+
             </ng-template>
           </ngb-tab>
 

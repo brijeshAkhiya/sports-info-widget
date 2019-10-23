@@ -7,6 +7,7 @@
       <div class="content-col">
         <div class="common-title-btn big-title-btn tab-title-btn common-dropdown-title d-flex justify-content-between align-items-center">
           <h1>{{title ? title : ('widgetModule.Fixtures' | translate)}}</h1>
+
           <div class="nba-common-selection d-flex" *ngIf="params.sport == 'Hockey' || params.sport == 'Badminton'">
             <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.length > 0" #seasonDrop="ngbDropdown"
               placement="bottom">
@@ -20,9 +21,23 @@
               </div>
             </div>
           </div>
+
+          <div class="nba-common-selection d-flex" *ngIf="params.sport == 'Racing'">
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.length > 0" #seasonDrop="ngbDropdown"
+              placement="bottom">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.description}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let season of seasons"
+                  (click)="seasonDrop.close();filterHockeySeason(season);"
+                  [ngClass]="{'selected' : filter.description == season.description  }">
+                  {{season.description}}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <ngb-tabset class="common-tabs" [activeId]="activeTab">
+        <ngb-tabset *ngIf="params.sport != 'Racing'" class="common-tabs" [activeId]="activeTab">
           <ngb-tab id="fixtures">
             <ng-template ngbTabTitle>
               <div>{{ 'widgetModule.Upcoming' | translate }}</div>
@@ -65,6 +80,15 @@
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
+
+        <ng-container *ngIf="params.sport == 'Racing'">
+          <app-no-data-widget [message]="('Cricket_Module.No_recent_fixtures' | translate)" [sport]="params.sport"
+            *ngIf="!paramsFixtures.loading && (!paramsFixtures.data || paramsFixtures.data?.length == 0)">
+          </app-no-data-widget>
+          <app-schedule [data]="paramsFixtures.data" [type]="'fixture'" [sport]="params.sport"
+            [tournament]="tournamentid"></app-schedule>
+          <app-loader *ngIf="paramsFixtures.loading"></app-loader>
+        </ng-container>
 
       </div>
 

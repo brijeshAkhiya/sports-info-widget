@@ -177,6 +177,10 @@ export class CommonService {
       } else if (type == 'competitor') {
         return 'sr:competitor:' + id;
       }
+    } else if (sport == 'racing' || sport == 'Racing') {
+      if (type == 'competitor') {
+        return 'sr:competitor:' + id;
+      }
     }
   }
 

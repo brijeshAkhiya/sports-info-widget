@@ -1,4 +1,5 @@
-<app-menu *ngIf="!options.tournamentid  && params.sport != 'Kabaddi' && params.sport != 'Basketball'"
+<app-menu
+  *ngIf="!options.tournamentid  && params.sport != 'Kabaddi' && params.sport != 'Basketball' && params.sport != 'Racing'"
   [options]="{ sport: params.sport, type: 'home' }">
 </app-menu>
 
@@ -11,7 +12,7 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
-          <app-fixtures-sidebar-widget [sport]="params.sport">
+          <app-fixtures-sidebar-widget [sport]="params.sport" *ngIf="params.sport != 'Racing'">
           </app-fixtures-sidebar-widget>
 
           <app-sidebar-links [sport]="params.sport" [link_type]="'tournament'" [options]="{

@@ -34,7 +34,8 @@
               <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name"><b>{{ slide?.competition?.cname ? slide?.competition?.cname : slide?.title}}
+                    <p class="tour-name" [ngClass]="sport">
+                      <b>{{ slide?.competition?.cname ? slide?.competition?.cname : slide?.title}}
                       </b>
                     </p>
 
@@ -87,7 +88,8 @@
               <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
+                    <p class="tour-name" [ngClass]="sport">
+                      <b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
                         class="text-capitalize">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span>
                     </p>
 
@@ -153,7 +155,7 @@
               <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name">
+                    <p class="tour-name" [ngClass]="sport">
                       <b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}}
                       </b>
                       <span
@@ -212,7 +214,7 @@
               <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name"></p>
+                    <p class="tour-name" [ngClass]="sport"> {{ 'Basketball' | translate}}</p>
                     <p *ngIf="['scheduled','closed', 'complete'].indexOf(slide.status) > -1; else matchStatus">
                       {{slide.scheduled  | amTimeAgo}}</p>
                     <ng-template #matchStatus>
@@ -270,7 +272,7 @@
               <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name">
+                    <p class="tour-name" [ngClass]="sport">
                       <b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}}
                       </b>
                       <span
@@ -329,7 +331,7 @@
               <div class="slider-item">
                 <div class="slider-item-inner fullblock-link-container">
                   <div class="title d-flex justify-content-between">
-                    <p class="tour-name">
+                    <p class="tour-name" [ngClass]="sport">
                       <b>{{slide?.sport_event?.sport_event_context?.season ? slide?.sport_event?.sport_event_context?.season.name : ''}}
                       </b>
                       <span

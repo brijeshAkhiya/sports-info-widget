@@ -246,9 +246,9 @@
     </div>
   </div>
 
-  <div class="sub-navabar" id="sub-navabar">
+  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'game'">
     <div class="sub-navabar-inner d-flex">
-      <a class="submenu-back" [routerLink]="['./']">{{name}}</a>
+      <a class="submenu-back" [routerLink]="['./']">{{options.game}}</a>
       <div class="sub-navbar-container" id="sub-navbar-nav">
         <ul #subnavbarmenu class="subnavbarmenu d-flex">
           <li><a [routerLink]="['./']" routerLinkActive="active"

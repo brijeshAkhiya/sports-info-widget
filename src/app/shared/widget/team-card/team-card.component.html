@@ -109,7 +109,8 @@
             <h4>{{team.name | split}}</h4>
             <h5>{{team.country_code}}</h5>
           </div>
-          <a class="fullblock-link" [routerLink]="['/racing/team',(team.id | splitID),(team.name | slugify)]">
+          <a class="fullblock-link"
+            [routerLink]="['/racing', game , 'team', (team.id | splitID),(team.name | slugify)]">
           </a>
         </ng-container>
       </div>

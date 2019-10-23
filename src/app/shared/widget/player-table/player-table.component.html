@@ -42,6 +42,10 @@
             <ng-container *ngTemplateOutlet="badminton;context:{item:item}">
             </ng-container>
           </ng-container>
+          <ng-container *ngIf="options.sport == 'Racing'">
+            <ng-container *ngTemplateOutlet="racing;context:{item:item,index:i+1}">
+            </ng-container>
+          </ng-container>
         </tr>
       </tbody>
     </table>
@@ -241,5 +245,30 @@
         </span>
       </td>
     </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #racing let-item="item" let-index="index">
+  <ng-container>
+    <ng-container *ngFor="let value of options.values;let i=index">
+      <td *ngIf="(value != 'name' && value !='index'); else link "
+        [ngClass]="(object == value && options.sort[i]) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc' : '' ">
+        {{item | arrToString: value}}
+      </td>
+      <ng-template #link>
+        <td>
+          <a *ngIf="value == 'name'" [routerLink]="options.tbl_type == 'team' ? 
+            ['/racing', options.game, 'team', (item.id | splitID), ((item.name | split) | slugify)] : 
+            ['/racing', options.game, 'player', (item.id | splitID), ((item.name | split) | slugify)] ">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.id | logosurl:'racing'"
+              [defaultImage]="commonService.flagplaceholder" alt="logo">
+            {{ item.name | split}}
+          </a>
+          <span *ngIf="value == 'index'">
+            {{index}}
+          </span>
+        </td>
+      </ng-template>
+    </ng-container>
   </ng-container>
 </ng-template>
