@@ -12,6 +12,7 @@ import { PlayerComponent } from '@app/shared/pages/player/player.component';
 import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component';
 import { RacingComponent } from './racing.component';
 import { GameComponent } from './game.component';
+import { MatchComponent } from './match/match.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
           {
             path: 'player/:id/:slug',
             component: PlayerComponent,
+            data: { 'sport': 'Racing' }
+          },
+          {
+            path: 'match/:id/:slug',
+            component: MatchComponent,
             data: { 'sport': 'Racing' }
           },
         ]

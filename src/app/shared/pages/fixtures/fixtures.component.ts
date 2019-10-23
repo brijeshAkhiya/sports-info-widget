@@ -158,7 +158,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
         this.paramsFixtures.loading = false;
         if (res.data.stage && res.data.stage.stages.length > 0) {
           this.paramsFixtures.data = this.commonService.sortArr(res.data.stage.stages,
-            'Do MMMM YYYY', 'scheduled', 'asc');
+            'Do MMMM YYYY', 'scheduled', 'desc');
         }
       }, (error) => {
         this.paramsFixtures.loading = false;

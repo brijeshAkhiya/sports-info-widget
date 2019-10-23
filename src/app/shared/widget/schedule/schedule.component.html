@@ -482,8 +482,7 @@
     </div>
     <p class="schedule-date">{{match.scheduled | amDateFormat:'MMM DD'}} -
       {{match.scheduled_end | amDateFormat:'MMM DD'}}</p>
-    <a class="fullblock-link"
-      [routerLink]="['/racing/tournament', (match.id | splitID) ,(match.description | slugify)]"></a>
+    <a class="fullblock-link" [routerLink]="['../match', (match.id | splitID) ,(match.description | slugify)]"></a>
   </div>
 </ng-template>
 

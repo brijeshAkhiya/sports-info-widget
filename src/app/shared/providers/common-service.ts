@@ -180,6 +180,8 @@ export class CommonService {
     } else if (sport == 'racing' || sport == 'Racing') {
       if (type == 'competitor') {
         return 'sr:competitor:' + id;
+      } else if (type == 'stage') {
+        return 'sr:stage:' + id;
       }
     }
   }
