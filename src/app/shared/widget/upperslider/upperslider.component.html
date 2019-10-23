@@ -385,6 +385,10 @@
         </owl-carousel-o>
       </div>
 
+      <div *ngIf="slider.length == 0">
+        <p> {{'No matches in recent period.' | translate}}</p>
+      </div>
+
     </div>
   </div>
 </div>
