@@ -19,7 +19,7 @@
           </div>
         </div>
         <app-loader *ngIf="loading"></app-loader>
-        <app-no-data-widget *ngIf="!loading && !standings"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!loading && !standings" [sport]="'Hockey'"></app-no-data-widget>
 
         <ng-container *ngIf="standings && standings.groups">
           <ng-container *ngFor="let group of standings.groups">

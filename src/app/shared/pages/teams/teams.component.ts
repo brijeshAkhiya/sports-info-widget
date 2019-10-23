@@ -68,7 +68,8 @@ export class TeamsComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = localStorage.getItem(this.sport) ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
+            this.filter = localStorage.getItem(this.sport) && localStorage.getItem(this.sport).includes(this.seasons)
+              ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
             this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });
@@ -81,7 +82,8 @@ export class TeamsComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = localStorage.getItem(this.sport) ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
+            this.filter = localStorage.getItem(this.sport) && localStorage.getItem(this.sport).includes(this.seasons)
+              ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
             this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });
@@ -97,7 +99,8 @@ export class TeamsComponent implements OnInit, OnDestroy {
           else {
             this.isloading = true;
             this.seasons = data[this.game];
-            this.filter = localStorage.getItem(this.game) ? JSON.parse(localStorage.getItem(this.game)) : this.seasons[0];
+            this.filter = localStorage.getItem(this.game) && localStorage.getItem(this.game).includes(this.seasons)
+              ? JSON.parse(localStorage.getItem(this.game)) : this.seasons[0];
             this.sportsService.getRacingSeasonsSummary(this.game, this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });

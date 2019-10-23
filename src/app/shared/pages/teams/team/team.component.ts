@@ -83,11 +83,10 @@ export class TeamComponent implements OnInit {
         this.sportsService.getBadmintonTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Badminton', 'competitor')).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
       } case 'Racing': {
+        let parentParams: any = this.activatedRoute.parent.params;
         this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')] } };
-        this.sportsService.getRacingCompetitorProfile(this.routeParams.game, this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')).
+        this.sportsService.getRacingCompetitorProfile(parentParams.value.game, this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')).
           subscribe(this.profileSuccess, this.profileError);
-        // this.paramsFixtures.loading = true;
-        // this.sportsService.getBadmintonTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
       }
     }

@@ -26,7 +26,7 @@ export class TeamCardComponent implements OnInit {
     if (this.sport == 'Soccer' && this.type == undefined) {
       this.type = 'teams';
     } else if (this.sport == 'Racing') {
-      let params: any = this.activatedRoute.params;
+      let params: any = this.activatedRoute.parent.params;
       this.game = params.value.game;
     }
 

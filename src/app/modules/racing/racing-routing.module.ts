@@ -53,16 +53,16 @@ const routes: Routes = [
             component: ProbabilityComponent,
             data: { 'sport': 'Racing' }
           },
+          {
+            path: 'player/:id/:slug',
+            component: PlayerComponent,
+            data: { 'sport': 'Racing' }
+          },
         ]
       },
       {
         path: 'team/:teamid/:slug',
         component: TeamComponent,
-        data: { 'sport': 'Racing' }
-      },
-      {
-        path: 'player/:id/:slug',
-        component: PlayerComponent,
         data: { 'sport': 'Racing' }
       },
     ],

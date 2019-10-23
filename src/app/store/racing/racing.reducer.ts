@@ -18,7 +18,6 @@ export function RacingReducer(state = initialState, action: RacingActions.Racing
         }
         case RacingActions.LOAD_RACING_COMP_SEASONS_SUCCESS: {
             const data = action.payload;
-            console.log(data)
             return {
                 ...state,
                 seasons: Object.assign({}, state.seasons, {

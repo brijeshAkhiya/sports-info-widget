@@ -69,6 +69,13 @@ export class PlayerComponent implements OnInit {
         this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Basketball', aIds: [this.playerid] } };
         this.sportsService.getBasketballPlayerInfo(this.playerid).subscribe(this.playerSuccess, this.playerError);
         break;
+      } case 'Racing': {
+        let parentParams: any = this.activatedroute.parent.params;
+        this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'Racing', 'competitor');
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [this.playerid] } };
+        this.sportsService.getRacingCompetitorProfile(parentParams.value.game, this.playerid).
+          subscribe(this.playerSuccess, this.playerError);
+        break;
       }
     }
   }
@@ -141,6 +148,12 @@ export class PlayerComponent implements OnInit {
             });
             this.stats = Object.keys(obj).map(key => ({ key, data: (obj[key] / res.data.seasons[0].teams.length).toFixed(2) }));
           }
+        }
+        break;
+      }
+      case 'Racing': {
+        if (res.data) {
+          this.playerData = res.data;
         }
         break;
       }

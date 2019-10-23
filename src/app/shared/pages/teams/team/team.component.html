@@ -436,7 +436,7 @@
           </ngb-tab>
 
           <!-- Fixtures Section-->
-          <ngb-tab *ngIf="sport != 'Hockey' && sport != 'Badminton'">
+          <ngb-tab *ngIf="sport != 'Hockey' && sport != 'Badminton' && sport != 'Racing'">
             <ng-template ngbTabTitle>
               <div (click)="getSportFixtures()">{{ 'widgetModule.Fixtures' | translate }}</div>
             </ng-template>
@@ -514,7 +514,7 @@
           </ngb-tab>
 
           <!-- Results Section-->
-          <ngb-tab *ngIf="sport != 'Hockey' && sport != 'Badminton'">
+          <ngb-tab *ngIf="sport != 'Hockey' && sport != 'Badminton' && sport != 'Racing'">
             <ng-template ngbTabTitle>
               <div (click)="getSportResults()">{{ 'widgetModule.Results' | translate }}</div>
             </ng-template>

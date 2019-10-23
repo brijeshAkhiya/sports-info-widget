@@ -257,12 +257,20 @@
       </td>
       <ng-template #link>
         <td>
-          <a *ngIf="value == 'name'" [routerLink]="options.tbl_type == 'team' ? 
+          <a *ngIf="value == 'name' && !options.sub_type" [routerLink]="options.tbl_type == 'team' ? 
             ['/racing', options.game, 'team', (item.id | splitID), ((item.name | split) | slugify)] : 
             ['/racing', options.game, 'player', (item.id | splitID), ((item.name | split) | slugify)] ">
             <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item.id | logosurl:'racing'"
               [defaultImage]="commonService.flagplaceholder" alt="logo">
             {{ item.name | split}}
+          </a>
+          <a *ngIf="value == 'name' && options.sub_type"
+            [routerLink]="options.tbl_type == 'team' ? 
+            ['/racing', options.game, 'team', (item[options.sub_type].id | splitID), ((item[options.sub_type].name | split) | slugify)] : 
+            ['/racing', options.game, 'player', (item[options.sub_type].id | splitID), ((item[options.sub_type].name | split) | slugify)]">
+            <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item[options.sub_type].id | logosurl:'racing'"
+              [defaultImage]="commonService.flagplaceholder" alt="logo">
+            {{ item[options.sub_type].name | split}}
           </a>
           <span *ngIf="value == 'index'">
             {{index}}

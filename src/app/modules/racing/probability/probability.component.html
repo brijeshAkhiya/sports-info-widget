@@ -29,13 +29,14 @@
               <ngb-tab title="{{ ((market.type == 'team') ? 'Constructors' : 'Drivers' )  | translate}}">
                 <ng-template ngbTabContent>
                   <app-player-table [data]="market.outcomes" [options]=" {
-                        titles : ['POS',('Shared_Module2.TEAM' | translate), 'Probability'],
+                        titles : ['POS', (market.type == 'team') ? 'Teams' : 'Player', 'Probability'],
                         sort : [false, false, true],
                         values : ['index', 'name',  'probability'],
                         class : ['tour-stand-table'],
                         sport : 'Racing',
                         game: game,
-                        tbl_type: (market.type == 'team') ? 'team' : 'player'
+                        tbl_type: (market.type == 'team') ? 'team' : 'player',
+                        sub_type: (market.type == 'team') ? 'team' : 'competitor'
                       }">
                   </app-player-table>
                 </ng-template>

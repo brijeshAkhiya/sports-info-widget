@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -16,15 +16,19 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private translateservice: TranslateService,
     private commonService: CommonService
   ) { }
 
   ngOnInit() {
+    /**To reload router if routing in same page */
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
 
     const data: any = this.activatedRoute.data;
     this.params = data.value;
-    console.log(this.activatedRoute)
     let title = this.params.sport;
     let sport = this.params.sport;
     if (this.params.sport == 'Basketball')

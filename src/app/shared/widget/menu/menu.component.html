@@ -226,8 +226,8 @@
 
 
 <ng-container *ngIf="options.sport == 'Racing'">
-  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'home'">
-    <div class="sub-navabar-inner d-flex">
+  <div class="sub-navabar" id="sub-navabar">
+    <div class="sub-navabar-inner d-flex" *ngIf="options.type == 'home'">
       <div class="sub-navbar-container" id="sub-navbar-nav">
         <ul #subnavbarmenu class="subnavbarmenu d-flex">
           <li><a [routerLink]="['/racing/f1']" routerLinkActive="active"
@@ -244,10 +244,8 @@
       </div>
       <div class="clearfix"></div>
     </div>
-  </div>
 
-  <div class="sub-navabar" id="sub-navabar" *ngIf="options.type == 'game'">
-    <div class="sub-navabar-inner d-flex">
+    <div class="sub-navabar-inner d-flex" *ngIf="options.type == 'game'">
       <a class="submenu-back" [routerLink]="['./']">{{options.game}}</a>
       <div class="sub-navbar-container" id="sub-navbar-nav">
         <ul #subnavbarmenu class="subnavbarmenu d-flex">
@@ -264,6 +262,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
+
   </div>
 
 </ng-container>

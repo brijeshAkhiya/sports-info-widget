@@ -31,13 +31,14 @@ export class StandingsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let id = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'hockey', 'tournament');
-
+    this.loading = true;
     this.hockeySubscription = this.store.select(HockeySelectors.getHockeySeasons).subscribe((data: any) => {
       if (Object.keys(data).length == 0 || !Object.keys(data).includes(id))
         this.store.dispatch(new Hockey.LoadHockeyCompSeason(id));
       else {
+        this.loading = false;
         this.seasons = data[id];
-        this.filter = localStorage.getItem('Hockey') ? JSON.parse(localStorage.getItem('Hockey')) : this.seasons[0];
+        this.filter = localStorage.getItem('Hockey') && localStorage.getItem('Hockey').includes(this.seasons) ? JSON.parse(localStorage.getItem('Hockey')) : this.seasons[0];
         this.getStandings();
       }
     });
