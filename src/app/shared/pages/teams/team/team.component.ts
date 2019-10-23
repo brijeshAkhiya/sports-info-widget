@@ -82,6 +82,13 @@ export class TeamComponent implements OnInit {
         this.paramsFixtures.loading = true;
         this.sportsService.getBadmintonTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Badminton', 'competitor')).subscribe(this.fixtureSuccess, this.fixtureError);
         break;
+      } case 'Racing': {
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')] } };
+        this.sportsService.getRacingCompetitorProfile(this.routeParams.game, this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')).
+          subscribe(this.profileSuccess, this.profileError);
+        // this.paramsFixtures.loading = true;
+        // this.sportsService.getBadmintonTeamSummary(this.commonService.getIds(this.routeParams.teamid, 'Racing', 'competitor')).subscribe(this.fixtureSuccess, this.fixtureError);
+        break;
       }
     }
   }
@@ -129,6 +136,11 @@ export class TeamComponent implements OnInit {
         break;
       }
       case 'Badminton': {
+        if (res.data)
+          this.teamProfile = res.data;
+        break;
+      }
+      case 'Racing': {
         if (res.data)
           this.teamProfile = res.data;
         break;

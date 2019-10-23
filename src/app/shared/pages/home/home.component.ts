@@ -24,14 +24,21 @@ export class HomeComponent implements OnInit {
 
     const data: any = this.activatedRoute.data;
     this.params = data.value;
+    console.log(this.activatedRoute)
     let title = this.params.sport;
+    let sport = this.params.sport;
     if (this.params.sport == 'Basketball')
       title = 'NBA';
-    else if (this.params.sport == 'Hockey')
+    else if (this.params.sport == 'Hockey') {
       title = 'Field Hockey';
+      sport = 'FieldHockey';
+    } else if (this.params.sport == 'Racing') {
+      let parentParams: any = this.activatedRoute.parent.params;
+      title = parentParams.value.game;
+    }
     this.options = {
       reqParams:
-        { eSport: this.params.sport, aIds: [] },
+        { eSport: sport, aIds: [] },
       title: this.translateservice.get(title)['value'],
       type: 'sport'
     };

@@ -9,6 +9,7 @@ export class ArrToStringPipe implements PipeTransform {
 
     key = key.split('.');
     let value = arr[key[0]];
+    if (!value) return 0;
     for (let i = 1; i < key.length; i++) {
       value = value[key[i]];
     }

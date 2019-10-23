@@ -361,5 +361,21 @@
   "Formula E": "Formula E",
   "Indy Car": "Indy Car",
   "Schedule": "Schedule",
-  "Probabilities": "Probabilities"
+  "Probabilities": "Probabilities",
+  "Drivers": "Drivers",
+  "Constructors": "Constructors",
+  "Probability": "Probability",
+  "President": "President",
+  "Sports Director": "Sports Director",
+  "Technical Director": "Technical Director",
+  "Website": "Website",
+  "Debut": "Debut",
+  "Location": "Location",
+  "Car Name": "Car Name",
+  "Car Construction Year": "Car Construction Year",
+  "Tyres": "Tyres",
+  "Chassis": "Chassis",
+  "Engine Size": "Engine Size",
+  "Engine Name": "Engine Name",
+  "Fuel Type": "Fuel Type"
 }

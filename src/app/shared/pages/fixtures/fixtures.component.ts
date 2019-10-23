@@ -14,6 +14,9 @@ import * as Hockey from '@store/hockey/hockey.actions';
 import * as Badminton from '@store/badminton/badminton.actions';
 import * as HockeySelectors from '@store/selectors/hockey.selectors';
 import * as BadmintonSelectors from '@store/selectors/badminton.selectors';
+import * as RacingSelectors from '@store/selectors/racing.selectors';
+import * as Racing from '@store/racing/racing.actions';
+
 
 @Component({
   selector: 'app-fixtures',
@@ -36,6 +39,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
   seasons;
   filter;
   selectorSubscription: any;
+  game;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -115,6 +119,18 @@ export class FixturesComponent implements OnInit, OnDestroy {
           }
         });
       }
+    } else if (this.params.sport == 'Racing') {
+      let params: any = this.activatedroute.parent.params;
+      this.game = params.value.game;
+      this.selectorSubscription = this.store.select(RacingSelectors.getRacingSeasons).subscribe((data: any) => {
+        if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.game))
+          this.store.dispatch(new Racing.LoadRacingCompSeason(this.game));
+        else {
+          this.seasons = data[this.game];
+          this.filter = localStorage.getItem(this.game) ? JSON.parse(localStorage.getItem(this.game)) : this.seasons[0];
+          this.getRacingData();
+        }
+      });
     }
   }
 
@@ -126,7 +142,24 @@ export class FixturesComponent implements OnInit, OnDestroy {
       this.getHockeyTournamentData();
     else if (this.params.sport == 'Badminton')
       this.getBadmintonTournamentData();
+    else if (this.params.sport == 'Racing')
+      this.getRacingData();
     localStorage.setItem(this.params.sport, JSON.stringify(season));
+  }
+
+  getRacingData() {
+    this.paramsFixtures.loading = true;
+    this.sportsService
+      .getRacingSeasonsSummary(this.game, this.filter.id)
+      .subscribe((res: any) => {
+        this.paramsFixtures.loading = false;
+        if (res.data.stage && res.data.stage.stages.length > 0) {
+          this.paramsFixtures.data = this.commonService.sortArr(res.data.stage.stages,
+            'Do MMMM YYYY', 'scheduled', 'asc');
+        }
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+      });
   }
 
   getHockeyTournamentData() {

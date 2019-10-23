@@ -31,6 +31,10 @@
           <ng-container *ngTemplateOutlet="badminton;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
+        <ng-container *ngIf="sport == 'Racing'">
+          <ng-container *ngTemplateOutlet="racing;context:{match: match, type:type}">
+          </ng-container>
+        </ng-container>
       </ng-container>
     </div>
   </div>
@@ -496,6 +500,19 @@
     </div>
   </div>
 
+</ng-template>
+
+<ng-template #racing let-match="match" let-type="type">
+  <div class="schedule-item full-hover rounded-box common-shadow fullblock-link-container">
+    <div class="schedule-title d-flex justify-content-between">
+      <h4><a>{{match.description}}</a></h4>
+      <!-- <h5>{{item.matches}} Matches</h5> -->
+    </div>
+    <p class="schedule-date">{{match.scheduled | amDateFormat:'MMM DD'}} -
+      {{match.scheduled_end | amDateFormat:'MMM DD'}}</p>
+    <a class="fullblock-link"
+      [routerLink]="['/racing/tournament', (match.id | splitID) ,(match.description | slugify)]"></a>
+  </div>
 </ng-template>
 
 

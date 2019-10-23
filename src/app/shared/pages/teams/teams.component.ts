@@ -26,6 +26,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
   seasons;
   filter;
   subscription;
+  game;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -87,15 +88,17 @@ export class TeamsComponent implements OnInit, OnDestroy {
         break;
       }
       case 'Racing': {
-        let params: any = this.activatedRoute.params;
-        let game = params.value.game;
+        this.isloading = false;
+        let params: any = this.activatedRoute.parent.params;
+        this.game = params.value.game;
         this.subscription = this.store.select(RacingSelectors.getRacingSeasons).subscribe((data: any) => {
-          if (Object.keys(data).length == 0 || !Object.keys(data).includes(game))
-            this.store.dispatch(new Racing.LoadRacingCompSeason(game));
+          if (Object.keys(data).length == 0 || !Object.keys(data).includes(this.game))
+            this.store.dispatch(new Racing.LoadRacingCompSeason(this.game));
           else {
-            this.seasons = data[game];
-            this.filter = localStorage.getItem(this.sport) ? JSON.parse(localStorage.getItem(this.sport)) : this.seasons[0];
-            this.sportsService.getRacingF1Seasons(this.filter.id).subscribe(this.teamSuccess, this.teamError);
+            this.isloading = true;
+            this.seasons = data[this.game];
+            this.filter = localStorage.getItem(this.game) ? JSON.parse(localStorage.getItem(this.game)) : this.seasons[0];
+            this.sportsService.getRacingSeasonsSummary(this.game, this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
         });
         break;
@@ -107,13 +110,15 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.filter = season;
     this.teams = [];
     this.isloading = true;
+    localStorage.setItem(this.sport, JSON.stringify(season));
     if (this.sport == 'Hockey')
       this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
     else if (this.sport == 'Badminton')
       this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
-    else if (this.sport == 'Racing')
-      this.sportsService.getRacingF1Seasons(this.filter.id).subscribe(this.teamSuccess, this.teamError);
-    localStorage.setItem(this.sport, JSON.stringify(season));
+    else if (this.sport == 'Racing') {
+      this.sportsService.getRacingSeasonsSummary(this.game, this.filter.id).subscribe(this.teamSuccess, this.teamError);
+      localStorage.setItem(this.game, JSON.stringify(season));
+    }
   }
 
   teamSuccess = (res) => {
@@ -182,8 +187,8 @@ export class TeamsComponent implements OnInit, OnDestroy {
         break;
       }
       case 'Racing': {
-        if (res.data && res.data.stages) {
-          this.teams = res.data.stages;
+        if (res.data && res.data.stage && res.data.stage.teams) {
+          this.teams = res.data.stage.teams;
         }
         break;
       }

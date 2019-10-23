@@ -18,9 +18,24 @@
               </div>
             </div>
           </div>
+
+          <div class="nba-common-selection d-flex" *ngIf="sport == 'Racing'">
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="seasons?.length > 0" #seasonDrop="ngbDropdown"
+              placement="bottom">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.description}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let season of seasons"
+                  (click)="seasonDrop.close();filterHockeySeason(season);"
+                  [ngClass]="{'selected' : filter.description == season.description  }">
+                  {{season.description}}
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
         <app-loader *ngIf="isloading"></app-loader>
-        <app-no-data-widget *ngIf="!isloading && !teams"></app-no-data-widget>
+        <app-no-data-widget *ngIf="!isloading && (!teams || teams.length == 0)" [sport]="sport"></app-no-data-widget>
 
         <!-- For Group  -->
         <ng-container *ngIf="['Basketball','Hockey', 'Badminton'].indexOf(sport) > -1; else commonList">

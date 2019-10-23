@@ -17,8 +17,8 @@ export class RacingEffects {
     LoadRacingCompSeason$: Observable<Action> = this.actions$.pipe(
         ofType(Racing.LOAD_RACING_COMP_SEASONS),
         switchMap((action: any) =>
-            this.sportsService.getRacingF1Seasons(action.payload).pipe(
-                map((response: any) => new Racing.LoadRacingCompSeasonSuccess({ 'comp': action.payload, 'season': response.stage.teams })),
+            this.sportsService.getRacingSeasons(action.payload).pipe(
+                map((response: any) => new Racing.LoadRacingCompSeasonSuccess({ 'comp': action.payload, 'season': response.data.stages })),
                 catchError(() => {
                     return EMPTY;
                 })
