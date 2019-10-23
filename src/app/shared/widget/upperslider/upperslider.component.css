@@ -23,6 +23,7 @@
 .header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; height: 16px; width: auto; display: inline-block; }
 .header-live-slider .slider-item .match-info p          { color: #292929; font-weight: 500; }
 .header-live-slider .slider-item .result-line           { margin: 1px 0px 0px; font-size: 11px; line-height: 14px; }
+.header-live-slider.no-matches p                        { color: rgba(255,255,255,0.7); font-weight: 500;}
 
 /* -------- Arabic CSS ------- */
 .arabic .header-live-slider .slider-item .title p:last-child            { padding-left: 0px; padding-right: 14px; }
