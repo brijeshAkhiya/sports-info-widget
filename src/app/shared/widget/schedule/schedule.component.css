@@ -104,7 +104,7 @@
     .schedule-tour-list .schedule-item      { padding: 16px 16px 16px 12px; flex-direction: column; -webkit-flex-direction: column; }
     .schedule-item .match-teams             { width: 100%; }
     .schedule-item .match-desc              { text-align: center; }
-    .schedule-item .match-desc.side-desc    { min-height: initial; }
+    .schedule-item .match-desc.side-desc    { min-height: initial; width: 100%; }
     .match-teams .team-info                 { padding: 0px 10px; }
     .schedule-item .match-teams             { margin-top: 12px; }
     .match-teams .match-team                { width: calc(50% - 5px); }

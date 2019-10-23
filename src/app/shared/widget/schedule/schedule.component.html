@@ -725,8 +725,8 @@
 
       <div class="schedule-tour-list">
         <div
-          class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center fullblock-link-container"
-          *ngFor="let match of data" [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
+          class="schedule-item goal-item common-item common-shadow rounded-box d-flex align-items-center complete-match fullblock-link-container"
+          *ngFor="let match of data">
           <div class="match-tour-name text-center">
             <p>{{match?.sport_event?.sport_event_context?.season?.name}}</p>
           </div>
@@ -743,23 +743,10 @@
             </div>
 
             <!-- For Upcoming Match -->
-            <div class="vs-block" *ngIf="match?.sport_event_status?.status!='closed'">
+            <div class="vs-block">
               <h6>vs</h6>
             </div>
-            <!-- For Complete/Result Match -->
-            <div class="score-center-block" *ngIf="match?.sport_event_status?.status == 'closed'">
-              <p>vs</p>
-              <div class="value d-flex justify-content-between">
-                <h4 class="dark-text">
-                  {{match?.sport_event_status?.home_score}}
-                </h4>
-                <h4 class="dark-text">-</h4>
-                <h4 class="dark-text">
-                  {{match?.sport_event_status?.away_score}}
-                </h4>
-              </div>
-            </div>
-
+            
             <div class="match-team d-flex align-items-center">
               <div class="team-info">
                 <h5

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row sidebar-row">
       <div class="content-col">
-        <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
+        <div class="common-title-btn big-title-btn common-dropdown-title d-flex justify-content-between align-items-center">
           <h1>{{  sport == 'Soccer' ?  ('Soccer_Module.Clubs' | translate)  : ('widgetModule.Teams' | translate) }}
           </h1>
           <div class="nba-common-selection d-flex" *ngIf="sport == 'Hockey' || sport == 'Badminton'">

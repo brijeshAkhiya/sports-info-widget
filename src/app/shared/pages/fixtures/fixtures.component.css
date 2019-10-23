@@ -1,8 +1,4 @@
-.fixtures-loadmore                          			{ margin-top: 32px; text-align: center; }
+.fixtures-loadmore          { margin-top: 32px; text-align: center; }
 
-@media (max-width: 767px) {
-	
-}
 @media (max-width: 575px) {
-	
 }
