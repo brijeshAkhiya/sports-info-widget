@@ -47,8 +47,22 @@
     </p>
   </ng-container>
 
-
   <ng-container *ngIf="sport == 'Basketball'">
+    <ng-container *ngIf="venuedetails.lat && venuedetails.lng">
+      <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.lng">
+        <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.lng"></agm-marker>
+      </agm-map>
+    </ng-container>
+    <p *ngIf="venuedetails?.name">
+      <span class="title">{{ 'widgetModule.venue' | translate }} :</span>
+      {{venuedetails?.name}}, {{venuedetails?.city}}, {{venuedetails?.country}}
+    </p>
+    <p *ngIf="venuedetails?.capacity"><span class="title">{{ 'widgetModule.Capacity' | translate }}
+        :</span>{{venuedetails?.capacity}}
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="sport == 'Racing'">
     <ng-container *ngIf="venuedetails.lat && venuedetails.lng">
       <agm-map [latitude]="venuedetails.lat" [longitude]="venuedetails.lng">
         <agm-marker [latitude]="venuedetails.lat" [longitude]="venuedetails.lng"></agm-marker>

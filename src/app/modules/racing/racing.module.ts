@@ -13,9 +13,10 @@ import { StandingsComponent } from './standings/standings.component';
 import { ProbabilityComponent } from './probability/probability.component';
 import { RacingComponent } from './racing.component';
 import { GameComponent } from './game.component';
+import { MatchComponent } from './match/match.component';
 
 @NgModule({
-  declarations: [StandingsComponent, ProbabilityComponent, RacingComponent, GameComponent],
+  declarations: [StandingsComponent, ProbabilityComponent, RacingComponent, GameComponent, MatchComponent],
   imports: [
     CommonModule,
     RacingRoutingModule,
