@@ -38,7 +38,7 @@ export class StandingsComponent implements OnInit, OnDestroy {
       else {
         this.loading = false;
         this.seasons = data[id];
-        this.filter = localStorage.getItem('Badminton') ? JSON.parse(localStorage.getItem('Badminton')) : this.seasons[0];
+        this.filter = localStorage.getItem('Badminton') && localStorage.getItem('Badminton').includes(this.seasons) ? JSON.parse(localStorage.getItem('Badminton')) : this.seasons[0];
         this.getStandings();
       }
     });

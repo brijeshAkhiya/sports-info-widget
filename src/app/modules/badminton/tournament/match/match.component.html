@@ -13,66 +13,54 @@
         <ngb-tabset class="common-tabs match-tabs">
           <!--START - COMMENTARY  -->
 
-          <!-- <ngb-tab>
+          <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Cricket_Module.Commentary' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <app-loader *ngIf="commentry?.loading"></app-loader>
               <app-no-data-widget
-                *ngIf="!commentry?.loading && (commentry?.data.length == 0) && matchInfo?.sport_event_status?.status != 'not_started'"
-                [sport]="'Hockey'">
+                *ngIf="(!matchInfo?.timeline || !matchInfo?.sport_event_status?.period_scores) && matchInfo?.sport_event_status?.status != 'not_started'"
+                [sport]="'Badminton'">
               </app-no-data-widget>
               <app-countdown *ngIf="matchInfo?.sport_event_status?.status == 'not_started'"
                 [scheduled]="matchInfo?.sport_event?.start_time">
               </app-countdown>
-              <app-goal-commentry *ngIf="matchInfo?.events?.length > 0" [commentry]="matchInfo?.events"
-                [sport]="'Hockey'">
-              </app-goal-commentry>
-            </ng-template>
-          </ngb-tab> -->
-          <!--END - COMMENTARY  -->
 
-          <!--START - STATS -->
-          <!-- <ngb-tab *ngIf="matchInfo?.status === 'closed'">
-            <ng-template ngbTabTitle>
-              <div>{{ 'widgetModule.Stats' | translate }}</div>
+              <ngb-tabset class="filled-tabs"
+                *ngIf="matchInfo?.timeline && matchInfo?.sport_event_status?.period_scores && matchInfo?.sport_event_status?.period_scores.length > 0">
+                <ng-container>
+                  <ng-container *ngFor="let period of matchInfo?.sport_event_status?.period_scores">
+                    <ngb-tab title="{{ 'Set ' + period.number}}">
+                      <ng-template ngbTabContent>
+                        <div class="badminton-commentry rounded-box common-shadow text-center">
+                          <ng-container *ngFor="let timeline of matchInfo?.timeline">
+                            <div class="commentry-item"
+                              *ngIf="timeline.period == period.number && timeline.home_score && timeline.away_score">
+                              <div class="item-inner d-flex justify-content-between mx-auto light-text">
+                                <span
+                                  [ngClass]="{'highlight' : timeline.home_score > timeline.away_score}">{{timeline.home_score}}</span>
+                                <span>-</span>
+                                <span
+                                  [ngClass]="{'highlight' : timeline.away_score > timeline.home_score}">{{timeline.away_score}}</span>
+                              </div>
+                              <span class="time">{{timeline.time | date:'h:mm a'}}</span>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </ng-template>
+                    </ngb-tab>
+                  </ng-container>
+                </ng-container>
+
+              </ngb-tabset>
+
             </ng-template>
-            <ng-template ngbTabContent>
-              <app-match-stats [sport]="'Hockey'" [matchStats]="matchInfo"></app-match-stats>
-            </ng-template>
-          </ngb-tab> -->
-          <!--END - STATS -->
+          </ngb-tab>
+          <!--END - COMMENTARY  -->
 
           <!--START - NEWS TAB-->
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <div class="badminton-commentry rounded-box common-shadow text-center">
-                <div class="commentry-item">
-                  <div class="item-inner d-flex justify-content-between mx-auto light-text">
-                    <span>1</span>
-                    <span>-</span>
-                    <span class="highlight">3</span>
-                  </div>
-                  <span class="time">00:41</span>
-                </div>
-                <div class="commentry-item">
-                  <div class="item-inner d-flex justify-content-between mx-auto light-text">
-                    <span class="highlight">4</span>
-                    <span>-</span>
-                    <span>3</span>
-                  </div>
-                  <span class="time">00:41</span>
-                </div>
-                <div class="commentry-item">
-                  <div class="item-inner d-flex justify-content-between mx-auto light-text">
-                    <span>1</span>
-                    <span>-</span>
-                    <span class="highlight">3</span>
-                  </div>
-                  <span class="time">00:41</span>
-                </div>
-              </div>
-              <app-blog-list *ngIf="paramArticle" [options]="paramArticle" [sport]="'Hockey'">
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle" [sport]="'Badminton'">
               </app-blog-list>
             </ng-template>
           </ngb-tab>
