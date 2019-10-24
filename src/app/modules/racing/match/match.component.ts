@@ -20,6 +20,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   timeout;
   game;
 
+
   constructor(
     private sportsService: SportsService,
     public commonService: CommonService,
@@ -37,7 +38,6 @@ export class MatchComponent implements OnInit, OnDestroy {
     this.game = params.value.game;
 
     let matchid = this.activatedroute.snapshot.params.id;
-    console.log(this.commonService.getIds(matchid, 'racing', 'stage'))
     this.paramArticle.reqParams.aIds.push(this.commonService.getIds(matchid, 'racing', 'stage'));
     this.getMatchInfo(this.commonService.getIds(matchid, 'racing', 'stage'));
   }
@@ -49,23 +49,31 @@ export class MatchComponent implements OnInit, OnDestroy {
         this.matchInfo = res.data.stage;
 
         if (this.matchInfo.venue && (!this.matchInfo.venue.lat || !this.matchInfo.venue.lng)) {
-          if (this.matchInfo.venue.coordinates) {
-            let coordinates = this.matchInfo.venue.coordinates.split(',');
-            this.matchInfo.venue.lng = coordinates[0];
-            this.matchInfo.venue.lat = coordinates[1];
-          } else {
-            this.sportsService.getReverseGeo(this.matchInfo.venue.name + ',' + this.matchInfo.venue.city + ',' + this.matchInfo.venue.country).subscribe((geo: any) => {
-              if (!geo.results) return false;
-              this.matchInfo.venue.lat = geo.results[0].geometry.location.lat;
-              this.matchInfo.venue.lng = geo.results[0].geometry.location.lng;
-            });
-          }
+          this.sportsService.getReverseGeo(this.matchInfo.venue.name + ',' + this.matchInfo.venue.city + ',' + this.matchInfo.venue.country).subscribe((geo: any) => {
+            if (!geo.results) return false;
+            this.matchInfo.venue.lat = geo.results[0].geometry.location.lat;
+            this.matchInfo.venue.lng = geo.results[0].geometry.location.lng;
+          });
         }
+        if (this.matchInfo.status == 'Finished' && this.matchInfo.stages.length > 0)
+          this.getStageData(this.matchInfo.stages[0].id);
 
       }
       this.loading = false;
     }, (error) => {
       this.loading = false;
+    });
+  }
+
+  getStageData(id) {
+    this.commentry.loading = true;
+    this.sportsService.getRacingSeasonsSummary(this.game, id).subscribe((res: any) => {
+      if (res.data) {
+        this.commentry.data[id] = res.data.stage.competitors;
+      }
+      this.commentry.loading = false;
+    }, (error) => {
+      this.commentry.loading = false;
     });
   }
 

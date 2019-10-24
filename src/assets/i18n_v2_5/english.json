@@ -382,5 +382,9 @@
   "No matches in recent period.": "No matches in recent period.",
   "No Commentary available": "No Commentary available",
   "Set": "Set",
-  "Circuit": "Circuit"
+  "Circuit": "Circuit",
+  "Race Time": "Race Time",
+  "Laps": "Laps",
+  "Pits": "Pits",
+  "Fastest Laps": "Fastest Laps"
 }

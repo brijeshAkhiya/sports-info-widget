@@ -556,3 +556,46 @@
     </div>
   </div>
 </ng-template>
+
+
+<ng-container *ngIf="sport == 'Racing'">
+  <div
+    class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
+    *ngIf="data">
+    <div class="teams-animation d-flex justify-content-around align-items-center">
+      <div class="team-anim">
+        <img [lazyLoad]="data.id | logosurl" [defaultImage]="commonService.flagplaceholder">
+        <h4>{{data.description}}</h4>
+      </div>
+    </div>
+
+    <div class="tour-match-title show-anim">
+      <p class="light-text" *ngIf="data.parents[0]">
+        <a [routerLink]="['/racing/f1/', (data.parents[0].id | splitID), (data.parents[0].description | slugify) ]">
+          {{ data.parents[0].description }}
+        </a>
+      </p>
+      <h1 *ngIf="data.description">
+        {{data.description}}
+        <p class="light-text" *ngIf="data.venue">
+          <ng-container *ngIf="data.venue.name">
+            <span [innerHTML]="data.venue.name">{{data.venue.name}}</span>
+          </ng-container>
+          <ng-container *ngIf="data.venue.city">
+            <span>, {{data.venue.city}} </span>
+          </ng-container>
+        </p>
+      </h1>
+    </div>
+
+    <div class="match-update show-anim">
+      <p class="light-text" *ngIf="data.venue">
+        {{data.scheduled | amDateFormat:'DD'}} -
+        {{data.scheduled_end | amDateFormat:'DD MMM YYYY'}}
+      </p>
+
+      <p *ngIf="data.status == 'live'" class="live-match">{{ 'widgetModule.live' | translate }}</p>
+    </div>
+
+  </div>
+</ng-container>
