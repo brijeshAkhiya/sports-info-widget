@@ -16,37 +16,61 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'widgetModule.Results' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <app-no-data-widget
-                *ngIf="(!matchInfo?.timeline || !matchInfo?.sport_event_status?.period_scores) && matchInfo?.sport_event_status?.status != 'not_started'"
-                [sport]="'Racing'" [message]="'No Commentary available'">
-              </app-no-data-widget>
-              <app-countdown *ngIf="matchInfo?.sport_event_status?.status == 'not_started'"
-                [scheduled]="matchInfo?.sport_event?.start_time">
+              <app-countdown *ngIf="matchInfo?.status != 'Finished'" [scheduled]="matchInfo?.scheduled_end">
               </app-countdown>
-
-              <ngb-tabset class="filled-tabs"
-                *ngIf="matchInfo?.timeline && matchInfo?.sport_event_status?.period_scores && matchInfo?.sport_event_status?.period_scores.length > 0">
+              <ngb-tabset class="filled-tabs" *ngIf="matchInfo?.stages && matchInfo?.status == 'Finished'">
                 <ng-container>
-                  <ng-container *ngFor="let period of matchInfo?.sport_event_status?.period_scores">
-                    <ngb-tab title="{{ ('Set' | translate) + ' ' + period.number}}">
-                      <ng-template ngbTabContent>
-                        <div class="badminton-commentry rounded-box common-shadow text-center">
-                          <ng-container *ngFor="let timeline of matchInfo?.timeline">
-                            <div class="commentry-item"
-                              *ngIf="timeline.period == period.number && timeline.home_score && timeline.away_score">
-                              <div class="item-inner d-flex justify-content-between mx-auto light-text">
-                                <span
-                                  [ngClass]="{'highlight' : timeline.home_score > timeline.away_score}">{{timeline.home_score}}</span>
-                                <span>-</span>
-                                <span
-                                  [ngClass]="{'highlight' : timeline.away_score > timeline.home_score}">{{timeline.away_score}}</span>
-                              </div>
-                              <span class="time">{{timeline.time | date:'h:mm a'}}</span>
-                            </div>
-                          </ng-container>
+                  <ng-container *ngFor="let stage of matchInfo?.stages">
+
+                    <ngb-tab>
+                      <ng-template ngbTabTitle>
+                        <div (click)="getStageData(stage.id)">{{ stage.description }}
                         </div>
                       </ng-template>
+                      <ng-template ngbTabContent>
+                        <app-loader *ngIf="commentry.loading"></app-loader>
+                        <app-no-data-widget *ngIf="!commentry.loading && !commentry.data[stage.id]" [sport]="'Racing'"
+                          [message]="'No Results available'">
+                        </app-no-data-widget>
+                        <app-player-table *ngIf="commentry.data[stage.id] && stage.type == 'practice'"
+                          [data]="commentry.data[stage.id]" [options]=" {
+                            sport:'Racing',
+                            titles : ['POS','Drivers', 'Race Time', 'Laps'],
+                            sort : [true, false, false, true],
+                            values : ['result.position', 'name', 'result.fastest_lap_time', 'result.laps'],
+                            class : ['tour-stats-table'],
+                            game: game,
+                            tbl_type:'competitor',
+                            class_light_row : ['light-row']
+                          }">
+                        </app-player-table>
+                        <app-player-table *ngIf="commentry.data[stage.id] && stage.type == 'qualifying'"
+                          [data]="commentry.data[stage.id]" [options]=" {
+                            sport:'Racing',
+                            titles : ['POS','Drivers', 'Laps'],
+                            sort : [true, false, true],
+                            values : ['result.position', 'name', 'result.laps'],
+                            class : ['tour-stats-table'],
+                            game: game,
+                            tbl_type:'competitor',
+                            class_light_row : ['light-row']
+                          }">
+                        </app-player-table>
+                        <app-player-table *ngIf="commentry.data[stage.id] && stage.type == 'race'"
+                          [data]="commentry.data[stage.id]" [options]=" {
+                            sport:'Racing',
+                            titles : ['POS','Drivers', 'Race Time', 'Laps', 'Pits', 'Fastest Laps'],
+                            sort : [true, false, false, true, true, false],
+                            values : ['result.position', 'name', 'result.time', 'result.laps', 'result.pitstop_count', 'result.fastest_lap_time'],
+                            class : ['tour-stats-table'],
+                            game: game,
+                            tbl_type:'competitor',
+                            class_light_row : ['light-row']
+                          }">
+                        </app-player-table>
+                      </ng-template>
                     </ngb-tab>
+
                   </ng-container>
                 </ng-container>
 
@@ -64,7 +88,7 @@
                 [options]="{
                  sport:'Racing',
                  titles : [ 'Race', 'Circuit', 'Circuit Length', 'Laps'],
-                 values : [ matchInfo?.description, matchInfo?.venue?.name + ' ' + matchInfo?.venue?.city + ' ' + matchInfo?.venue?.country, matchInfo?.venue?.length, matchInfo?.venue?.laps] }">
+                 values : [ matchInfo?.description, matchInfo?.venue?.name + ', ' + matchInfo?.venue?.city + ', ' + matchInfo?.venue?.country, matchInfo?.venue?.length, matchInfo?.venue?.laps] }">
               </app-match-info-card>
               <app-venue-map-card [sport]="'Racing'" [venuedetails]="matchInfo?.venue" *ngIf="matchInfo?.venue">
               </app-venue-map-card>
