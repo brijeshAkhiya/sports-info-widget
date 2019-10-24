@@ -42,7 +42,6 @@
     .slider-sports-dropdown .dropdown-menu .dropdown-item   { padding: 8px 12px; font-size: 13px; line-height: 16px;}
 }
 
-
 @media (max-width: 991px) {
 /* -------- Header Slider CSS ------- */
     .slider-sports-dropdown .dropdown-toggle            { padding: 7px 10px; width: 110px; font-size: 12px; line-height: 17px; }
