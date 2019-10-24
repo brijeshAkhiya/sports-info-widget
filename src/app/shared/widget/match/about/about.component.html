@@ -560,7 +560,7 @@
 
 <ng-container *ngIf="sport == 'Racing'">
   <div
-    class="common-title-btn match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
+    class="common-title-btn match-main-title racing-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center"
     *ngIf="data">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
@@ -575,17 +575,6 @@
           {{ data.parents[0].description }}
         </a>
       </p>
-      <h1 *ngIf="data.description">
-        {{data.description}}
-        <p class="light-text" *ngIf="data.venue">
-          <ng-container *ngIf="data.venue.name">
-            <span [innerHTML]="data.venue.name">{{data.venue.name}}</span>
-          </ng-container>
-          <ng-container *ngIf="data.venue.city">
-            <span>, {{data.venue.city}} </span>
-          </ng-container>
-        </p>
-      </h1>
     </div>
 
     <div class="match-update show-anim">
@@ -596,6 +585,73 @@
 
       <p *ngIf="data.status == 'live'" class="live-match">{{ 'widgetModule.live' | translate }}</p>
     </div>
-
+    <div class="current-match">
+      <div class="head-block text-center">
+        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="team.tname"
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <h5 *ngIf="data.description"> {{data.description}}</h5>
+        <p class="light-text" *ngIf="data.venue">
+          <ng-container *ngIf="data.venue.name">
+            <span [innerHTML]="data.venue.name">{{data.venue.name}}</span>
+          </ng-container>
+          <ng-container *ngIf="data.venue.city">
+            <span>, {{data.venue.city}} </span>
+          </ng-container>
+        </p>
+      </div>
+      <div class="main-block d-flex">
+        <div class="match-win-player d-flex align-items-center">
+          <div class="player-pic">
+            <img [lazyLoad]=" '' " [defaultImage]="commonService.playerplaceholder"
+              [offset]="commonService.lazyloadoffset">
+          </div>
+          <div class="player-info">
+            <p class="light-text">Race Winner</p>
+            <h5 class="theme-color"> <a>Lewis Hamilton</a> </h5>
+            <p>Mercedes</p>
+          </div>
+        </div>
+        <div class="racing-score-table">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Session</th>
+                  <th>Result</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Practice 1</td>
+                  <td>Lewis Hamilton</td>
+                  <td>1:23.599</td>
+                </tr>
+                <tr>
+                  <td>Practice 2</td>
+                  <td>Lewis Hamilton</td>
+                  <td>1:23.599</td>
+                </tr>
+                <tr>
+                  <td>Practice 3</td>
+                  <td>Lewis Hamilton</td>
+                  <td>1:23.599</td>
+                </tr>
+                <tr>
+                  <td>Qualifying </td>
+                  <td>Lewis Hamilton</td>
+                  <td>1:23.599</td>
+                </tr>
+                <tr>
+                  <td>Race</td>
+                  <td>Lewis Hamilton</td>
+                  <td>1:23.599</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>

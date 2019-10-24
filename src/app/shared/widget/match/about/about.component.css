@@ -11,7 +11,7 @@
 .match-main-title .match-update p.light-text:last-child     { color: #A3A3A3; }
 .match-main-title .match-update p.live-match        { color: #ED1A33; }
 .match-main-title .match-update p.live-match:before { content: ""; margin: -3px 8px 0px 0px; display: inline-block; width: 8px; height: 8px; background: #ED1A33; border-radius: 50%; vertical-align: middle; }
-.match-main-title .current-match                    { width: 100%; border-bottom: 2px solid #ECECEC; position: relative; }
+.match-main-title .current-match                    { width: 100%; border-bottom: 2px solid #ECECEC; position: relative; z-index: 2; }
 .match-main-title .current-teams                    { padding-right: 32px; width: 58%; }
 .match-main-title .current-team                     { margin-bottom: 24px; }
 .match-main-title .current-team img                 { margin-right: 12px; height: 40px; width: auto; border-radius: 2px; border: 2px solid #EBEBEB; }
@@ -77,6 +77,18 @@
 .badminton-match-title .live-score .set-num             { color: #A3A3A3;}
 .badminton-match-title .live-score .theme-color         { color: #ED1A33;}
 
+/* -------- Racing Match Title ------- */
+.racing-main-title .head-block                      { margin-top: -20px; }
+.racing-main-title .head-block img                  { height: 40px; }
+.racing-main-title .main-block                      { margin-bottom: 24px; padding: 0px 10%; }
+.racing-main-title .racing-score-table              { padding: 0px 24px; flex-grow: 1; -webkit-flex-grow: 1;}
+.racing-main-title .table                           { margin: 0px;}
+.racing-main-title .racing-score-table tr th,
+.racing-main-title .racing-score-table tr td        { padding: 4px; border: none; font-size: 12px; line-height: 15px; color: #292929; font-weight: 500;  }
+.racing-main-title .racing-score-table tr th        { color: #A3A3A3; font-weight: 600; text-transform: uppercase; }
+.racing-main-title .racing-score-table tr td        { }
+.match-main-title.racing-main-title .match-win-player   { padding-left: 0; border-left: none; padding-right: 24px; border-right: 2px solid #ECECEC;}
+.match-main-title.racing-main-title .match-update       { margin-bottom: 12px; }
 
 /* -- Arabic CSS -- */
 .arabic .match-main-title .match-update             { text-align: left; }
