@@ -77,6 +77,7 @@
 .schedule-tour-list .schedule-item.badminton-item h5        { font-weight: 500; }
 .schedule-tour-list .badminton-item .match-teams            { padding: 8px 0px;}
 .schedule-tour-list .badminton-item .time-block             { padding: 6px 0px;}
+
 /* -- Arabic CSS -- */
 .arabic .schedule-list .month-title             { padding-right: 0px; padding-left: 16px; }
 .arabic .match-teams .match-team:first-child    { text-align: left; }
