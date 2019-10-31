@@ -599,7 +599,7 @@
           </ng-container>
         </p>
       </div>
-      <div class="main-block d-flex">
+      <div class="main-block d-flex" *ngIf="commentry && commentry.data.length > 0">
         <div class="match-win-player d-flex align-items-center">
           <div class="player-pic">
             <img [lazyLoad]=" '' " [defaultImage]="commonService.playerplaceholder"
@@ -622,30 +622,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Practice 1</td>
-                  <td>Lewis Hamilton</td>
-                  <td>1:23.599</td>
-                </tr>
-                <tr>
-                  <td>Practice 2</td>
-                  <td>Lewis Hamilton</td>
-                  <td>1:23.599</td>
-                </tr>
-                <tr>
-                  <td>Practice 3</td>
-                  <td>Lewis Hamilton</td>
-                  <td>1:23.599</td>
-                </tr>
-                <tr>
-                  <td>Qualifying </td>
-                  <td>Lewis Hamilton</td>
-                  <td>1:23.599</td>
-                </tr>
-                <tr>
-                  <td>Race</td>
-                  <td>Lewis Hamilton</td>
-                  <td>1:23.599</td>
+                <tr *ngFor="let stage of data.stages">
+                  <ng-container *ngIf="commentry[stage.id]">
+                    <td>{{stage.description}}</td>
+                    <td>{{commentry[stage.id][0].name}}</td>
+                    <td>{{commentry[stage.id][0].result?.fastest_lap_time}}</td>
+                  </ng-container>
                 </tr>
               </tbody>
             </table>

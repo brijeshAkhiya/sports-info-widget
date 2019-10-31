@@ -37,11 +37,11 @@ export class MenuComponent implements OnInit, OnDestroy {
     const bodyelement = document.getElementById('main-body');
     if (window.pageYOffset > value) {
       if (element != null) element.classList.add('fixed-nav');
-      if (element != null) element2.classList.add('fixed-nav');
+      if (element2 != null) element2.classList.add('fixed-nav');
       if (bodyelement != null) bodyelement.classList.add('sticky-submenu');
     } else {
       if (element != null) element.classList.remove('fixed-nav');
-      if (element != null) element2.classList.remove('fixed-nav');
+      if (element2 != null) element2.classList.remove('fixed-nav');
       if (bodyelement != null) bodyelement.classList.remove('sticky-submenu');
     }
   }

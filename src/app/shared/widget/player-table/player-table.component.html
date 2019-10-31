@@ -42,7 +42,7 @@
             <ng-container *ngTemplateOutlet="badminton;context:{item:item}">
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="options.sport == 'Racing'">
+          <ng-container *ngIf="options.sport == 'Racing' && (options.type != 'result' || item.result)">
             <ng-container *ngTemplateOutlet="racing;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>

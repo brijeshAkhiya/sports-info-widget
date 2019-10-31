@@ -6,7 +6,7 @@
       <div class="content-col">
         <!-- START - ABOUT MATCH-->
         <app-match-about [data]="matchInfo" [competitor]="matchInfo?.sport_event?.competitors" [toss]=""
-          [sport]="'Racing'"></app-match-about>
+          [sport]="'Racing'" [commentry]="commentry"></app-match-about>
         <!-- END - ABOUT MATCH-->
 
         <!-- START - MATCH TABS-->
@@ -24,7 +24,7 @@
 
                     <ngb-tab>
                       <ng-template ngbTabTitle>
-                        <div (click)="getStageData(stage.id)">{{ stage.description }}
+                        <div>{{ stage.description }}
                         </div>
                       </ng-template>
                       <ng-template ngbTabContent>
