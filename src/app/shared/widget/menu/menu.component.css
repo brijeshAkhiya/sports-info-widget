@@ -1,6 +1,6 @@
 .sub-navabar                                    { width: 100%; background: #1B2A5A; font-size: 16px; line-height: 20px; font-family: 'IBM Plex Sans Condensed', sans-serif; font-weight: 500; white-space: nowrap; top: 51px; z-index: 1111;}
 .sub-navabar.fixed-nav                          { position: fixed; z-index: 1114; }
-.sub-navabar.racing-navabar2                       { top: 94px; } 
+.sub-navabar.racing-navabar2                    { top: 94px; background: #172550; } 
 .submenu-back                                   { padding: 12px 32px 12px 12px; max-width: 45%; display: block; color: #fff;  font-weight: 600; text-transform: uppercase; border-right: 4px solid #294089; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .submenu-back:hover                             { color: #fff; }
 .sub-navabar .sub-navabar-inner                 { justify-content: center; -webkit-justify-content: center; }
