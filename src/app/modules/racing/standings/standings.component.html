@@ -30,7 +30,8 @@
                       values : ['result.position', 'name', 'result.races', 'result.victories', 'result.polepositions', 'result.podiums', 'result.fastest_laps', 'result.points'],
                       class : ['tour-stats-table'],
                       game: game,
-                      tbl_type:'player'
+                      tbl_type:'player',
+                      type: 'result'
                     }">
               </app-player-table>
               <app-loader *ngIf="loading"></app-loader>
@@ -47,7 +48,8 @@
                         values : ['result.position', 'name', 'result.races', 'result.victories', 'result.polepositions', 'result.podiums', 'result.fastest_laps', 'result.points'],
                         class : ['tour-stats-table'],
                         game: game,
-                        tbl_type:'team'
+                        tbl_type:'team',
+                        type: 'result'
                       }">
               </app-player-table>
               <app-loader *ngIf="loading"></app-loader>

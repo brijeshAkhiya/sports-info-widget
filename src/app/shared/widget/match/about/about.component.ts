@@ -14,6 +14,7 @@ export class MatchAboutComponent implements OnInit {
   @Input() competitor: any;
   @Input() toss: any;
   @Input() sport: any;
+  @Input() commentry: any;
 
   teamsresultsscore;
 
@@ -22,6 +23,10 @@ export class MatchAboutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.commentry)
+    // this.commentry = Object.keys(this.commentry).map((val) => this.commentry[val]);
+
+    console.log(this.commentry)
     if (this.sport == 'cricket')
       this.initCricket();
 

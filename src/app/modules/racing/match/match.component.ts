@@ -15,7 +15,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [] } };
   loading = false;
   matchInfo;
-  commentry: any = { loading: false, data: {} };
+  commentry: any = { loading: false, data: [] };
   interval;
   timeout;
   game;
@@ -55,9 +55,11 @@ export class MatchComponent implements OnInit, OnDestroy {
             this.matchInfo.venue.lng = geo.results[0].geometry.location.lng;
           });
         }
-        if (this.matchInfo.status == 'Finished' && this.matchInfo.stages.length > 0)
-          this.getStageData(this.matchInfo.stages[0].id);
-
+        if (this.matchInfo.status == 'Finished' && this.matchInfo.stages.length > 0) {
+          this.matchInfo.stages.forEach(stage => {
+            this.getStageData(stage.id);
+          });
+        }
       }
       this.loading = false;
     }, (error) => {
@@ -66,6 +68,10 @@ export class MatchComponent implements OnInit, OnDestroy {
   }
 
   getStageData(id) {
+    /** If data already exists, do not call API */
+    if (Object.keys(this.commentry.data).filter((key) => key == id).length > 0) return false;
+
+    /** Call API to get Periods details */
     this.commentry.loading = true;
     this.sportsService.getRacingSeasonsSummary(this.game, id).subscribe((res: any) => {
       if (res.data) {

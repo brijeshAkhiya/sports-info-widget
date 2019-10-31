@@ -15,7 +15,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Badminton', aIds: [] } };
   loading = false;
   matchInfo;
-  commentry: any = { loading: false, data: {} };
+  commentry: any = { loading: false, data: [] };
   interval;
   timeout;
 
@@ -42,7 +42,7 @@ export class MatchComponent implements OnInit, OnDestroy {
     this.sportsService.getBadmintonMatchTimeline(id).subscribe((res: any) => {
       if (res.data) {
         this.matchInfo = res.data;
-
+        this.commentry.data = res.data.timeline;
         if (['not_started'].indexOf(this.matchInfo.sport_event_status.status) > -1) {
           this.startLiveUpdateAfterTime();
         } else
@@ -62,7 +62,13 @@ export class MatchComponent implements OnInit, OnDestroy {
       classThis.sportsService
         .getBadmintonMatchTimeline(classThis.matchInfo.sport_event.id)
         .subscribe(res => {
-          classThis.matchInfo = res.data;
+          classThis.matchInfo.sport_event_status = res.data.sport_event_status;
+          // let currentPeriod = classThis.matchInfo.sport_event_status.period_scores[classThis.matchInfo.sport_event_status.period_scores.length - 1].number;
+          // this.commentry.data = [...this.commentry.data, ...res.data.timeline];
+          if (res.data.sport_event_status.status != 'live') {
+            this.clearTimeInterval();
+          }
+
         });
     }, classThis.commonService.miliseconds(0, 0, 10));
   }

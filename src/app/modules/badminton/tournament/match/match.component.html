@@ -28,7 +28,7 @@
                 *ngIf="matchInfo?.timeline && matchInfo?.sport_event_status?.period_scores && matchInfo?.sport_event_status?.period_scores.length > 0">
                 <ng-container>
                   <ng-container *ngFor="let period of matchInfo?.sport_event_status?.period_scores">
-                    <ngb-tab title="{{ ('Set' | translate) + ' ' + period.number}}">
+                    <ngb-tab title="{{ ('Game' | translate) + ' ' + period.number}}">
                       <ng-template ngbTabContent>
                         <div class="badminton-commentry rounded-box common-shadow text-center">
                           <ng-container *ngFor="let timeline of matchInfo?.timeline">
