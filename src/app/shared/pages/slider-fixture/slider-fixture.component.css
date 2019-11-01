@@ -8,7 +8,7 @@
 .soccer-fixture-filter .fix-slide:hover,
 .soccer-fixture-filter .fix-slide.active-slide  { opacity: 1; }
 .soccer-fixture-filter .fix-slide p             { margin: 0px; font-size: 12px; line-height: 15px; font-weight: 600; }
-.soccer-fixture-filter .owl-item.active:last-child { opacity: 0.5;}
+/* .soccer-fixture-filter .owl-item.active:last-child { opacity: 0.5;} */
 .fixture-date                                   { position: relative;}
 .fixture-date button.calendar                   { margin: 0px 8px; display: block; width: 24px; height: 24px; background: transparent url(assets/images/calender-icon.svg) no-repeat center center / cover !important; border: none; }
 .soccer-fixture-selection .dropdown-menu        { margin-top: 5px; padding: 0; border-radius: 4px;  font-family: 'IBM Plex Sans Condensed', sans-serif; z-index: 111; top: 100% !important; transform: translate(0, 0) !important; -webkit-transform: translate(0, 0) !important; }

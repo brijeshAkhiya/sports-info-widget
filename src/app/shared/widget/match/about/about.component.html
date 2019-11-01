@@ -585,7 +585,7 @@
 
       <p *ngIf="data.status == 'live'" class="live-match">{{ 'widgetModule.live' | translate }}</p>
     </div>
-    <div class="current-match">
+    <div class="current-match show-anim">
       <div class="head-block text-center">
         <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="team.tname"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
@@ -615,7 +615,7 @@
                   [routerLink]="['/racing', racingGame, 'player',  (commentry.data[stage.id][0].id | splitID), ((commentry.data[stage.id][0].name | split) | slugify) ]">{{commentry.data[stage.id][0].name | split}}
                 </a>
               </h5>
-              <p>
+              <p class="team-name">
                 <a
                   [routerLink]="['/racing', racingGame, 'team', (commentry.data[stage.id][0].team.id | splitID), ((commentry.data[stage.id][0].team.name | split) | slugify) ]">{{commentry.data[stage.id][0].team.name | split}}
                 </a>
