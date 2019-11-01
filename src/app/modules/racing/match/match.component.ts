@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 
@@ -8,7 +8,9 @@ import { CommonService } from '@providers/common-service';
 @Component({
   selector: 'app-match',
   templateUrl: './match.component.html',
-  styleUrls: ['./match.component.css']
+  styleUrls: ['./match.component.css'],
+  encapsulation: ViewEncapsulation.None
+  
 })
 export class MatchComponent implements OnInit, OnDestroy {
 

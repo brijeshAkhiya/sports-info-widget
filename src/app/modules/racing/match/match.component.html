@@ -18,7 +18,7 @@
             <ng-template ngbTabContent>
               <app-countdown *ngIf="matchInfo?.status != 'Finished'" [scheduled]="matchInfo?.scheduled_end">
               </app-countdown>
-              <ngb-tabset class="filled-tabs" *ngIf="matchInfo?.stages && matchInfo?.status == 'Finished'">
+              <ngb-tabset class="filled-tabs scorecard-tab racing-scorecard" *ngIf="matchInfo?.stages && matchInfo?.status == 'Finished'">
                 <ng-container>
                   <ng-container *ngFor="let stage of matchInfo?.stages">
 
