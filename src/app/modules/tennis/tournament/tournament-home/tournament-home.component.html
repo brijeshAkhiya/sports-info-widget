@@ -1,0 +1,31 @@
+<section class="common-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <app-sports-home *ngIf="options" [options]="options" [sport]="'Tennis'"></app-sports-home>
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+          <app-points-table [sport]="'Tennis'" *ngIf="tournamentid" [options]="{ tournament : tournamentid }">
+          </app-points-table>
+          <app-top-scorer-widget [sport]="'Tennis'"></app-top-scorer-widget>
+          <!--Points table widget-->
+          <!-- <app-points-table *ngIf="tournamentid" [sport]="'cricket'" [options]="{
+              tournament : tournamentid
+            }"></app-points-table> -->
+          <!-- <div class="common-stories-widget common-shadow rounded-box" *ngIf="teamsname">
+              <h5>{{'Cricket_Module.Teams' | translate}}</h5>
+              <ul class="common-list">
+                <li *ngFor="let item of teamsname | slice:0:5"><a
+                    [routerLink]="['/cricket/team', (tournamentid | splitID) ,(item.id | splitID),(item.name | slugify)]">
+                    {{item.name}}</a>
+                </li>
+              </ul>
+            </div> -->
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

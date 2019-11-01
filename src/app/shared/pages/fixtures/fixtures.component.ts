@@ -100,8 +100,8 @@ export class FixturesComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = localStorage.getItem(this.params.sport) && localStorage.getItem(this.params.sport).includes(this.seasons)
-              ? JSON.parse(localStorage.getItem(this.params.sport)) : this.seasons[0];
+            let prevSelected: any = localStorage.getItem(this.params.sport);
+            this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.getHockeyTournamentData();
           }
         });
@@ -115,8 +115,8 @@ export class FixturesComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            this.filter = localStorage.getItem(this.params.sport) && localStorage.getItem(this.params.sport).includes(this.seasons)
-              ? JSON.parse(localStorage.getItem(this.params.sport)) : this.seasons[0];
+            let prevSelected: any = localStorage.getItem(this.params.sport);
+            this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.getBadmintonTournamentData();
           }
         });
@@ -129,11 +129,18 @@ export class FixturesComponent implements OnInit, OnDestroy {
           this.store.dispatch(new Racing.LoadRacingCompSeason(this.game));
         else {
           this.seasons = data[this.game];
-          this.filter = localStorage.getItem(this.params.sport) && localStorage.getItem(this.params.sport).includes(this.seasons)
-            ? JSON.parse(localStorage.getItem(this.params.sport)) : this.seasons[0];
+          let prevSelected: any = localStorage.getItem(this.game);
+          this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
           this.getRacingData();
         }
       });
+    } else if (this.params.sport == 'Tennis') {
+      // Tournament Fixtures
+      if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
+        this.tournamentid = 'sr:tournament:' + this.activatedroute.parent.snapshot.params.id;
+        this.getTennisTournamentFixtures(this.tournamentid);
+        this.getTennisTournamentResults(this.tournamentid);
+      }
     }
   }
 
@@ -141,14 +148,66 @@ export class FixturesComponent implements OnInit, OnDestroy {
     this.filter = season;
     this.paramsFixtures.data = [];
     this.paramsResults.data = [];
+    localStorage.setItem(this.params.sport, JSON.stringify(season));
     if (this.params.sport == 'Hockey')
       this.getHockeyTournamentData();
     else if (this.params.sport == 'Badminton')
       this.getBadmintonTournamentData();
-    else if (this.params.sport == 'Racing')
+    else if (this.params.sport == 'Racing') {
       this.getRacingData();
-    localStorage.setItem(this.params.sport, JSON.stringify(season));
+      localStorage.setItem(this.game, JSON.stringify(season));
+    }
   }
+
+
+  getTennisTournamentFixtures(id) {
+    this.paramsFixtures.loading = true;
+    this.sportsService
+      .getTennisTournamentSchedule(id)
+      .subscribe((res: any) => {
+        this.paramsFixtures.loading = false;
+        if (res.data.sport_events && res.data.sport_events.length > 0) {
+          this.paramsFixtures.data = this.commonService.sortArr(res.data.sport_events, 'Do MMMM YYYY', 'scheduled', 'asc');
+        }
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+      });
+  }
+
+  getTennisTournamentResults(id) {
+    this.paramsResults.loading = true;
+    this.sportsService
+      .getTennisTournamentResults(id)
+      .subscribe((res: any) => {
+        this.paramsResults.loading = false;
+        if (res.data.results && res.data.results.length > 0) {
+          this.paramsResults.data = this.commonService.sortArr(res.data.results, 'Do MMMM YYYY', 'scheduled', 'desc');
+        }
+      }, (error) => {
+        this.paramsResults.loading = false;
+      });
+  }
+
+
+  getTennisTournamentData(id) {
+    this.paramsFixtures.loading = true;
+    this.sportsService
+      .getTennisTournamentSchedule(id)
+      .subscribe((res: any) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+        if (res.data.sport_events && res.data.sport_events.length > 0) {
+          this.paramsFixtures.data = this.commonService.sortArr(res.data.sport_events.filter((match) => match.status == 'not_started'),
+            'Do MMMM YYYY', 'scheduled', 'asc');
+          this.paramsResults.data = this.commonService.sortArr(res.data.sport_events.filter((match) => match.status == 'closed'),
+            'Do MMMM YYYY', 'scheduled', 'desc');
+        }
+      }, (error) => {
+        this.paramsFixtures.loading = false;
+        this.paramsResults.loading = false;
+      });
+  }
+
 
   getRacingData() {
     this.paramsFixtures.loading = true;

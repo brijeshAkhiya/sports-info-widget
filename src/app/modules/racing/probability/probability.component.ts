@@ -39,7 +39,8 @@ export class ProbabilityComponent implements OnInit, OnDestroy {
       else {
         this.loading = false;
         this.seasons = data[this.game];
-        this.filter = localStorage.getItem(this.game) ? JSON.parse(localStorage.getItem(this.game)) : this.seasons[0];
+        let prevSelected: any = localStorage.getItem(this.game);
+        this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
         this.getStandings();
       }
     });

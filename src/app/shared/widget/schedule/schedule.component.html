@@ -35,6 +35,10 @@
           <ng-container *ngTemplateOutlet="racing;context:{match: match, type:type}">
           </ng-container>
         </ng-container>
+        <ng-container *ngIf="sport == 'Tennis'">
+          <ng-container *ngTemplateOutlet="tennis;context:{match: match, type:type}">
+          </ng-container>
+        </ng-container>
       </ng-container>
     </div>
   </div>
@@ -403,57 +407,28 @@
 <ng-template #badminton let-match="match" let-type="type">
   <div class="schedule-item goal-item badminton-item rounded-box common-shadow fullblock-link-container"
     [ngClass]="{'complete-match' : match?.sport_event_status?.status == 'closed'}">
-    <div class="match-teams d-flex align-items-center">
+
+    <ng-template #badmintonTeam let-team="team">
       <div class="match-team d-flex align-items-center"
-        [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == match?.sport_event?.competitors[0].id }">
-
-        <ng-container *ngIf="match?.sport_event?.competitors[0].players; else singleHomeComp">
-          <ng-container *ngFor="let competitor of match?.sport_event?.competitors[0].players">
-            <ng-container *ngTemplateOutlet="homeTeam;context:{ team:competitor}">
-            </ng-container>
-          </ng-container>
-        </ng-container>
-        <ng-template #singleHomeComp>
-          <ng-container *ngTemplateOutlet="homeTeam;context:{ team:match?.sport_event?.competitors[0]}">
-          </ng-container>
-        </ng-template>
-        <ng-template #homeTeam let-team="team">
-          <div class="double-team d-flex align-items-center">
-            <div class="team-info">
-              <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == team?.id}">
-                {{team.name}}</h5>
-            </div>
+        [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == team.id }">
+        <div class="double-team d-flex align-items-center">
+          <div class="team-info">
+            <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == team?.id}">
+              {{team.name}}</h5>
           </div>
-        </ng-template>
+        </div>
       </div>
+    </ng-template>
 
+    <div class="match-teams d-flex align-items-center">
+
+      <ng-container *ngTemplateOutlet="badmintonTeam;context:{ team:match?.sport_event?.competitors[0]}"></ng-container>
       <!-- For Upcoming Match -->
       <div class="vs-block">
         <h6>vs</h6>
       </div>
+      <ng-container *ngTemplateOutlet="badmintonTeam;context:{ team:match?.sport_event?.competitors[1]}"></ng-container>
 
-      <div class="match-team d-flex align-items-center"
-        [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == match?.sport_event?.competitors[1].id }">
-
-        <ng-container *ngIf="match?.sport_event?.competitors[1].players; else singleAwayComp">
-          <ng-container *ngFor="let competitor of match?.sport_event?.competitors[1].players">
-            <ng-container *ngTemplateOutlet="awayTeam;context:{ team:competitor}">
-            </ng-container>
-          </ng-container>
-        </ng-container>
-        <ng-template #singleAwayComp>
-          <ng-container *ngTemplateOutlet="awayTeam;context:{ team:match?.sport_event?.competitors[1]}">
-          </ng-container>
-        </ng-template>
-        <ng-template #awayTeam let-team="team">
-          <div class="double-team d-flex align-items-center">
-            <div class="team-info">
-              <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == team?.id}">
-                {{team.name}}</h5>
-            </div>
-          </div>
-        </ng-template>
-      </div>
       <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
         [routerLink]="['/badminton/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
@@ -502,6 +477,10 @@
   </ng-container>
   <ng-container *ngIf="sport == 'Badminton'">
     <ng-container *ngTemplateOutlet="badminton_list">
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="sport == 'Tennis'">
+    <ng-container *ngTemplateOutlet="tennis_list">
     </ng-container>
   </ng-container>
 </ng-template>
@@ -727,7 +706,7 @@
 
             <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
             <a class="fullblock-link"
-              [routerLink]="['/hockey/match', (match?.sport_event?.id | splitID), (match?.sport_event?.competitors[0].abbreviation + '-vs-' +match?.sport_event?.competitors[0].abbreviation)]">
+              [routerLink]="['/hockey/match', (match?.sport_event?.id | splitID), (match?.sport_event?.competitors[0].abbreviation + '-vs-' +match?.sport_event?.competitors[1].abbreviation)]">
             </a>
 
           </div>
@@ -784,7 +763,7 @@
 
             <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
             <a class="fullblock-link"
-              [routerLink]="['/badminton/match', (match?.sport_event?.id | splitID), (match?.sport_event?.competitors[0].abbreviation + '-vs-' +match?.sport_event?.competitors[0].abbreviation)]">
+              [routerLink]="['/badminton/match', (match?.sport_event?.id | splitID), (match?.sport_event?.competitors[0].abbreviation + '-vs-' +match?.sport_event?.competitors[1].abbreviation)]">
             </a>
 
           </div>
@@ -806,6 +785,86 @@
             <p class="stadium-nm" *ngIf="match?.sport_event?.sport_event_context?.season">
               <!-- {{match?.sport_event?.sport_event_context?.season?.name}} -->
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #tennis_list>
+  <div class="common-tour-list" *ngIf="data.length > 0">
+    <div class="grp-item" *ngFor="let item of data">
+      <div class="soccer-tour-title">
+        <p>{{item?.data?.season?.name}}</p>
+      </div>
+      <div class="schedule-tour-list">
+        <div class="schedule-item goal-item common-item d-flex align-items-center fullblock-link-container"
+          *ngFor="let match of item.data.matches"
+          [ngClass]="{'complete-match' : match?.sport_event_status?.status=='closed'}">
+
+          <div class="match-teams d-flex align-items-center" *ngIf="match.sport_event?.competitors">
+            <div class="match-team d-flex align-items-center">
+              <div class="team-info">
+                <h5
+                  [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event?.competitors[0]?.id}">
+                  {{match.sport_event?.competitors[0].name}}</h5>
+              </div>
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="match.sport_event?.competitors[0]?.id | logosurl:'soccer'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event?.competitors[0].name}}">
+              </div>
+            </div>
+
+            <!-- For Upcoming Match -->
+            <div class="vs-block" *ngIf="match.sport_event_status?.status != 'closed'">
+              <h6>vs</h6>
+            </div>
+            <!-- For Complete/Result Match -->
+            <div class="score-center-block" *ngIf="match.sport_event_status?.status == 'closed'">
+              <p>ft</p>
+              <div class="value d-flex justify-content-between">
+                <h4 class="dark-text">
+                  {{match.sport_event?.competitors[0].qualifier == 'home' ? match.sport_event_status?.home_score : match.sport_event_status?.away_score}}
+                </h4>
+                <h4 class="dark-text">-</h4>
+                <h4 class="dark-text">
+                  {{match.sport_event.competitors[1].qualifier == 'home' ? match.sport_event_status?.home_score : match.sport_event_status?.away_score}}
+                </h4>
+              </div>
+            </div>
+
+            <div class="match-team d-flex align-items-center">
+              <div class="team-flag">
+                <img [offset]="commonService.lazyloadoffset"
+                  [lazyLoad]="match.sport_event?.competitors[1]?.id | logosurl:'tennis'"
+                  [defaultImage]="commonService.flagplaceholder" alt="{{match.sport_event.competitors[1].name}}">
+              </div>
+              <div class="team-info">
+                <h5
+                  [ngClass]="{'winner': match?.sport_event_status?.winner_id == match.sport_event.competitors[1]?.id}">
+                  {{match.sport_event.competitors[1].name}}</h5>
+              </div>
+            </div>
+
+            <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
+            <a class="fullblock-link"
+              [routerLink]="['/tennis/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
+            </a>
+
+          </div>
+
+          <div class="match-desc text-center">
+            <h6>
+              <span class="text-capitalize">{{match.sport_event.scheduled | date:'h:mm a'}}</span>
+            </h6>
+            <p class="stadium-nm" *ngIf="match?.sport_event_conditions?.venue">
+              {{match?.sport_event_conditions?.venue?.name}}, {{match?.sport_event_conditions?.venue?.city_name}},
+              {{match?.sport_event_conditions?.venue?.country_name}}
+            </p>
+            <!-- <p class="time-line" *ngIf="type == 'fixture'">{{ (match.timestampstart | amFromUnix) | amDateFormat:'hh:mm A' }}</p>
+            <p class="result-line" *ngIf="type == 'result'">{{(match?.result) ? match?.result.text : '' }}</p> -->
           </div>
         </div>
       </div>
