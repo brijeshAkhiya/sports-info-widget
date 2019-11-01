@@ -37,6 +37,9 @@ export class ScheduleComponent implements OnInit {
     } else if (this.sport === 'Badminton') {
       if (typeof this.tournament === 'undefined' || this.tournament === '')
         this.listtype = 'datelist';
+    } else if (this.sport === 'Tennis') {
+      if (typeof this.tournament === 'undefined' || this.tournament === '')
+        this.listtype = 'datelist';
     }
   }
   replace(str) {

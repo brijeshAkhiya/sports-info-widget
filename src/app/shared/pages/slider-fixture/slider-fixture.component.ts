@@ -32,6 +32,8 @@ export class SliderFixtureComponent implements OnInit {
   ngOnInit() {
     const data: any = this.activatedroute.data;
     this.params = data.value;
+    console.log(this.params);
+
     this.paramData = {
       loading: false, loadmore: false, data: [], fullData: [],
       selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
@@ -81,6 +83,7 @@ export class SliderFixtureComponent implements OnInit {
     return (value != 0 && value.toString().length == 1) ? value : value;
   }
   getFixturesData() {
+    console.log(this.params.sport);
     if (this.params.sport == 'Soccer')
       this.getSoccerData();
     else if (this.params.sport == 'Basketball')
@@ -89,6 +92,8 @@ export class SliderFixtureComponent implements OnInit {
       this.getHockeyDailySchedule();
     else if (this.params.sport == 'Badminton')
       this.getBadmintonDailySchedule();
+    else if (this.params.sport == 'Tennis')
+      this.getTennisDailySchedule();
   }
 
   filter(category) {
@@ -110,6 +115,35 @@ export class SliderFixtureComponent implements OnInit {
       });
     }
     this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+  }
+  getTennisDailySchedule() {
+    this.paramData.loading = true;
+    this.sportsService
+      .getTennisDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
+      .subscribe((res: any) => {
+        this.paramData.loading = false;
+        if (res.data && res.data.results && res.data.results.length > 0) {
+          this.paramData.fullData = res.data.results;
+          const obj = {};
+          const category = {};
+          res.data.results.map((data) => {
+            // Category for filter
+            if (data.sport_event) {
+              // if (!category[data.sport_event.sport_event_context.category.id]) category[data.sport_event.sport_event_context.category.id] = data.sport_event.sport_event_context.category;
+
+              if (data.sport_event.season) {
+                if (!obj[data.sport_event.season.id]) obj[data.sport_event.season.id] = { 'season': data.sport_event.season, matches: [] };
+                obj[data.sport_event.season.id].matches.push(data);
+              }
+            }
+          });
+          this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+          this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
+          this.paramData.filterCategory = this.commonService.sortByName(this.paramData.filterCategory, 'name');
+          console.log(this.paramData.data)
+        }
+      },
+        error => this.paramData.loading = false);
   }
   getBasketballDailySchedule() {
     this.paramData.loading = true;
@@ -135,7 +169,6 @@ export class SliderFixtureComponent implements OnInit {
       },
         error => this.paramData.loading = false);
   }
-
   getBadmintonDailySchedule() {
     this.paramData.loading = true;
     this.sportsService

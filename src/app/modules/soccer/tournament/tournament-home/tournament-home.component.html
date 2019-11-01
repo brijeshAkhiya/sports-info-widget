@@ -7,8 +7,9 @@
       <div class="sidebar-col">
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
-          <app-points-table [sport]="'soccer'" *ngIf="tournamentid" [options]="{ tournament : tournamentid }"></app-points-table>
-          <app-top-scorer-widget [sport]="'soccer'" ></app-top-scorer-widget>
+          <app-points-table [sport]="'Soccer'" *ngIf="tournamentid" [options]="{ tournament : tournamentid }">
+          </app-points-table>
+          <app-top-scorer-widget [sport]="'Soccer'"></app-top-scorer-widget>
           <!--Points table widget-->
           <!-- <app-points-table *ngIf="tournamentid" [sport]="'cricket'" [options]="{
             tournament : tournamentid

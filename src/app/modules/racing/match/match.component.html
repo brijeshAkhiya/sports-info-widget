@@ -16,9 +16,10 @@
           <ngb-tab>
             <ng-template ngbTabTitle>{{ 'widgetModule.Results' | translate }}</ng-template>
             <ng-template ngbTabContent>
-              <app-countdown *ngIf="matchInfo?.status != 'Finished'" [scheduled]="matchInfo?.scheduled_end">
+              <app-countdown *ngIf="matchInfo?.status != 'Finished'" [scheduled]="matchInfo?.scheduled">
               </app-countdown>
-              <ngb-tabset class="filled-tabs scorecard-tab racing-scorecard" *ngIf="matchInfo?.stages && matchInfo?.status == 'Finished'">
+              <ngb-tabset class="filled-tabs scorecard-tab racing-scorecard"
+                *ngIf="matchInfo?.stages && matchInfo?.status == 'Finished'">
                 <ng-container>
                   <ng-container *ngFor="let stage of matchInfo?.stages">
 
@@ -41,7 +42,8 @@
                             class : ['tour-stats-table'],
                             game: game,
                             tbl_type:'competitor',
-                            class_light_row : ['light-row']
+                            class_light_row : ['light-row'],
+                            type: 'result'
                           }">
                         </app-player-table>
                         <app-player-table *ngIf="commentry.data[stage.id] && stage.type == 'qualifying'"
@@ -53,7 +55,8 @@
                             class : ['tour-stats-table'],
                             game: game,
                             tbl_type:'competitor',
-                            class_light_row : ['light-row']
+                            class_light_row : ['light-row'],
+                            type: 'result'
                           }">
                         </app-player-table>
                         <app-player-table *ngIf="commentry.data[stage.id] && stage.type == 'race'"
@@ -65,7 +68,8 @@
                             class : ['tour-stats-table'],
                             game: game,
                             tbl_type:'competitor',
-                            class_light_row : ['light-row']
+                            class_light_row : ['light-row'],
+                            type: 'result'
                           }">
                         </app-player-table>
                       </ng-template>

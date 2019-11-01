@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tournament',
-  templateUrl: './tournament.component.html',
-  styleUrls: ['./tournament.component.css']
+  template: `
+  <app-menu [options]="{sport:'Tennis', type : 'tournament'}" [name]="tournamentname"></app-menu>
+  <router-outlet></router-outlet>
+`
 })
 export class TournamentComponent implements OnInit {
   tournamentname: any;
@@ -15,4 +17,5 @@ export class TournamentComponent implements OnInit {
     let name = this.activatedroute.snapshot.params.slug;
     this.tournamentname = name.replace(/-/g, ' ');
   }
+
 }

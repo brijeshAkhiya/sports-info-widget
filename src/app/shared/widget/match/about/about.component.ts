@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { CommonService } from '@providers/common-service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,18 +18,21 @@ export class MatchAboutComponent implements OnInit {
   @Input() commentry: any;
 
   teamsresultsscore;
+  racingGame;
+  Object = Object;
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private activatedroute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    console.log(this.commentry)
-    // this.commentry = Object.keys(this.commentry).map((val) => this.commentry[val]);
-
-    console.log(this.commentry)
     if (this.sport == 'cricket')
       this.initCricket();
+    else if (this.sport == 'Racing') {
+      let params: any = this.activatedroute.parent.params;
+      this.racingGame = params.value.game;
+    }
 
   }
 

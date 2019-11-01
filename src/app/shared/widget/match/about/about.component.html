@@ -571,9 +571,9 @@
 
     <div class="tour-match-title show-anim">
       <p class="light-text" *ngIf="data.parents[0]">
-        <a [routerLink]="['/racing/f1/', (data.parents[0].id | splitID), (data.parents[0].description | slugify) ]">
-          {{ data.parents[0].description }}
-        </a>
+        <!-- <a [routerLink]="['/racing/f1/', (data.parents[0].id | splitID), (data.parents[0].description | slugify) ]"> -->
+        {{ data.parents[0].description }}
+        <!-- </a> -->
       </p>
     </div>
 
@@ -599,18 +599,31 @@
           </ng-container>
         </p>
       </div>
-      <div class="main-block d-flex" *ngIf="commentry && commentry.data.length > 0">
-        <div class="match-win-player d-flex align-items-center">
-          <div class="player-pic">
-            <img [lazyLoad]=" '' " [defaultImage]="commonService.playerplaceholder"
-              [offset]="commonService.lazyloadoffset">
+      <div class="main-block d-flex" *ngIf="commentry && Object.keys(commentry.data).length > 0">
+        <!-- Match Winner-->
+        <ng-container *ngFor="let stage of data.stages">
+          <div class="match-win-player d-flex align-items-center"
+            *ngIf="stage.type == 'race' && commentry.data[stage.id]">
+            <div class="player-pic">
+              <img [lazyLoad]=" '' " [defaultImage]="commonService.playerplaceholder"
+                [offset]="commonService.lazyloadoffset">
+            </div>
+            <div class="player-info">
+              <p class="light-text">Race Winner</p>
+              <h5 class="theme-color">
+                <a
+                  [routerLink]="['/racing', racingGame, 'player',  (commentry.data[stage.id][0].id | splitID), ((commentry.data[stage.id][0].name | split) | slugify) ]">{{commentry.data[stage.id][0].name | split}}
+                </a>
+              </h5>
+              <p class="team-name">
+                <a
+                  [routerLink]="['/racing', racingGame, 'team', (commentry.data[stage.id][0].team.id | splitID), ((commentry.data[stage.id][0].team.name | split) | slugify) ]">{{commentry.data[stage.id][0].team.name | split}}
+                </a>
+              </p>
+            </div>
           </div>
-          <div class="player-info">
-            <p class="light-text">Race Winner</p>
-            <h5 class="theme-color"> <a>Lewis Hamilton</a> </h5>
-            <p class="team-name">Mercedes</p>
-          </div>
-        </div>
+        </ng-container>
+        <!-- Stages scores-->
         <div class="racing-score-table">
           <div class="table-responsive">
             <table class="table">
@@ -623,10 +636,16 @@
               </thead>
               <tbody>
                 <tr *ngFor="let stage of data.stages">
-                  <ng-container *ngIf="commentry[stage.id]">
+                  <ng-container *ngIf="commentry.data[stage.id]">
                     <td>{{stage.description}}</td>
-                    <td>{{commentry[stage.id][0].name}}</td>
-                    <td>{{commentry[stage.id][0].result?.fastest_lap_time}}</td>
+                    <td>
+                      <a
+                        [routerLink]="['/racing', racingGame, 'player',  (commentry.data[stage.id][0].id | splitID), ((commentry.data[stage.id][0].name | split) | slugify) ]">{{commentry.data[stage.id][0].name | split}}
+                      </a>
+                    </td>
+                    <td>
+                      {{commentry.data[stage.id][0].result?.fastest_lap_time ? commentry.data[stage.id][0].result?.fastest_lap_time : '-'}}
+                    </td>
                   </ng-container>
                 </tr>
               </tbody>

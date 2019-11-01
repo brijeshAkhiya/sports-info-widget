@@ -870,4 +870,28 @@ export class SportsService {
       environment.apiUrl + environment.version + `/racing/${game}/competitor/${id}`
     );
   }
+
+  /**
+   * Tennis Services
+   */
+  getTennisTournaments() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/tournaments`
+    );
+  }
+  getTennisDailySummary(date) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/results/${date}`
+    );
+  }
+  getTennisTournamentSchedule(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/tournaments/${id}/schedule`
+    );
+  }
+  getTennisTournamentResults(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/tournaments/${id}/results`
+    );
+  }
 }
