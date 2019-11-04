@@ -884,6 +884,11 @@ export class SportsService {
       environment.apiUrl + environment.version + `/tennis/results/${date}`
     );
   }
+  getTennisTournamentSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/tournaments/${id}/summaries`
+    );
+  }
   getTennisTournamentSchedule(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/tennis/tournaments/${id}/schedule`
@@ -892,6 +897,16 @@ export class SportsService {
   getTennisTournamentResults(id) {
     return this.http.get(
       environment.apiUrl + environment.version + `/tennis/tournaments/${id}/results`
+    );
+  }
+  getTennisTeamRanking() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/team/rankings`
+    );
+  }
+  getTennisPlayerRanking() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/player/rankings`
     );
   }
 }

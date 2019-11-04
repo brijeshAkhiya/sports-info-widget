@@ -42,7 +42,7 @@
               <li *ngIf="sport == 'Soccer'"><a
                   [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'stats']">{{'widgetModule.Stats' | translate }}</a>
               </li>
-              <li><a
+              <li *ngIf="sport != 'Tennis'"><a
                   [routerLink]="['/'+ (sport | lowercase)+'/tournament',(tournament?.id | splitID),(tournament?.name | slugify),'table']">{{'widgetModule.Table' | translate }}</a>
               </li>
             </ul>

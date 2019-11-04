@@ -615,7 +615,7 @@
                   [routerLink]="['/racing', racingGame, 'player',  (commentry.data[stage.id][0].id | splitID), ((commentry.data[stage.id][0].name | split) | slugify) ]">{{commentry.data[stage.id][0].name | split}}
                 </a>
               </h5>
-              <p class="team-name">
+              <p class="team-name" *ngIf="commentry.data[stage.id][0].team">
                 <a
                   [routerLink]="['/racing', racingGame, 'team', (commentry.data[stage.id][0].team.id | splitID), ((commentry.data[stage.id][0].team.name | split) | slugify) ]">{{commentry.data[stage.id][0].team.name | split}}
                 </a>

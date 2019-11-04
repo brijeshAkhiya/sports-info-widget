@@ -1,4 +1,5 @@
-<div class="schedule-list schedule-tour-list" *ngIf="listtype == 'simple'; else date_list">
+<div class="schedule-list" [ngClass]="{'schedule-tour-list' : sport != 'Racing'}"
+  *ngIf="listtype == 'simple'; else date_list">
   <div class="schedule-month d-flex" *ngFor="let item of data">
     <div class="month-title">
       <div class="sticky-month">
@@ -458,6 +459,51 @@
     <p class="schedule-date">{{match.scheduled | amDateFormat:'MMM DD'}} -
       {{match.scheduled_end | amDateFormat:'MMM DD'}}</p>
     <a class="fullblock-link" [routerLink]="['../match', (match.id | splitID) ,(match.description | slugify)]"></a>
+  </div>
+</ng-template>
+
+<ng-template #tennis let-match="match" let-type="type">
+  <div class="schedule-item goal-item badminton-item rounded-box common-shadow fullblock-link-container"
+    [ngClass]="{'complete-match' : match?.sport_event_status?.status == 'closed'}">
+
+    <ng-template #tennisTeam let-team="team">
+      <div class="match-team d-flex align-items-center"
+        [ngClass]="{'winner': match?.sport_event_status?.status=='closed' && match?.sport_event_status?.winner_id == team.id }">
+        <div class="double-team d-flex align-items-center">
+          <div class="team-info">
+            <h5 [ngClass]="{'winner': match?.sport_event_status?.winner_id == team?.id}">
+              {{team.name}}</h5>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="match-teams d-flex align-items-center">
+
+      <ng-container *ngTemplateOutlet="tennisTeam;context:{ team:match?.sport_event?.competitors[0]}"></ng-container>
+      <!-- For Upcoming Match -->
+      <div class="vs-block">
+        <h6>vs</h6>
+      </div>
+      <ng-container *ngTemplateOutlet="tennisTeam;context:{ team:match?.sport_event?.competitors[1]}"></ng-container>
+
+      <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
+      <a class="fullblock-link"
+        [routerLink]="['/badminton/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
+      </a>
+    </div>
+    <p class="time-block text-center" *ngIf="match?.sport_event_status?.status != 'closed'">
+      {{match?.sport_event?.scheduled | date:'h:mm a'}}
+    </p>
+    <p class="time-block text-center" *ngIf="match?.sport_event_status?.status == 'closed'">
+      <ng-container *ngFor="let score of match?.sport_event_status?.period_scores; let i = index">
+        {{match?.sport_event?.competitors[0]?.qualifier == 'home' ? score.home_score : score.away_score}}
+        -
+        {{match?.sport_event?.competitors[0]?.qualifier == 'home' ? score.away_score : score.home_score}}
+        {{match?.sport_event_status?.period_scores.length == (i + 1) ? '' : ','}}
+      </ng-container>
+    </p>
+
   </div>
 </ng-template>
 

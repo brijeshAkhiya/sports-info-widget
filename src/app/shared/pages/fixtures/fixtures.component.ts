@@ -138,8 +138,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
       // Tournament Fixtures
       if (typeof this.activatedroute.parent.snapshot.params.id != 'undefined') {
         this.tournamentid = 'sr:tournament:' + this.activatedroute.parent.snapshot.params.id;
-        this.getTennisTournamentFixtures(this.tournamentid);
-        this.getTennisTournamentResults(this.tournamentid);
+        this.getTennisTournamentData(this.tournamentid);
       }
     }
   }
@@ -192,14 +191,14 @@ export class FixturesComponent implements OnInit, OnDestroy {
   getTennisTournamentData(id) {
     this.paramsFixtures.loading = true;
     this.sportsService
-      .getTennisTournamentSchedule(id)
+      .getTennisTournamentSummary(id)
       .subscribe((res: any) => {
         this.paramsFixtures.loading = false;
         this.paramsResults.loading = false;
-        if (res.data.sport_events && res.data.sport_events.length > 0) {
-          this.paramsFixtures.data = this.commonService.sortArr(res.data.sport_events.filter((match) => match.status == 'not_started'),
+        if (res.data.summaries && res.data.summaries.length > 0) {
+          this.paramsFixtures.data = this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'not_started'),
             'Do MMMM YYYY', 'scheduled', 'asc');
-          this.paramsResults.data = this.commonService.sortArr(res.data.sport_events.filter((match) => match.status == 'closed'),
+          this.paramsResults.data = this.sortArr(res.data.summaries.filter((match) => match.sport_event_status.status == 'closed' || match.sport_event_status.status == 'cancelled'),
             'Do MMMM YYYY', 'scheduled', 'desc');
         }
       }, (error) => {

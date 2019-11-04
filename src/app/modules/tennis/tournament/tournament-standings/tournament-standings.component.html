@@ -1,0 +1,75 @@
+<section class="common-section">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <div class="common-title-btn big-title-btn d-flex justify-content-between align-items-center">
+          <h1>{{ 'widgetModule.Table' | translate }}</h1>
+          <div class="nba-common-selection d-flex">
+            <!-- Season Filter -->
+            <div ngbDropdown class="common-dropdown date-dropdown" *ngIf="stats?.players?.length > 0"
+              #seasonDrop="ngbDropdown" placement="bottom">
+              <button id="dropdownBasic1" ngbDropdownToggle>{{filter.name}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngFor="let season of stats?.players"
+                  (click)="seasonDrop.close();filterSeason(season);"
+                  [ngClass]="{'selected' : filter.name == season.name  }">
+                  {{season.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ngb-tabset class="filled-tabs">
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{ 'Singles' | translate }}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-player-table *ngIf="stats?.selectedPlayers.length > 0" [data]="stats?.selectedPlayers" [options]=" {
+                        sport:'Tennis',
+                        titles : ['POS',('Cricket_Module2.player' | translate),'MOV', 'TP', 'PTS'],
+                        sort : [true, false, true, true, true],
+                        values : ['rank', 'name', 'ranking_movement', 'tournaments_played', 'points'],
+                        class : ['tour-stats-table'],
+                        tbl_type:'player'
+                      }">
+              </app-player-table>
+              <app-loader *ngIf="isloading"></app-loader>
+              <app-no-data-widget *ngIf="!isloading && stats?.selectedPlayers.length == 0" [sport]="'Tennis'">
+              </app-no-data-widget>
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab>
+            <ng-template ngbTabTitle>
+              <div>{{ 'Doubles' | translate }}</div>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <app-player-table *ngIf="stats?.selectedTeams.length > 0" [data]="stats?.selectedTeams" [options]=" {
+                        sport:'Tennis',
+                        titles : ['POS',('Cricket_Module2.player' | translate),'MOV', 'TP', 'PTS'],
+                        sort : [true, false, true, true, true],
+                        values : ['rank', 'name', 'ranking_movement', 'tournaments_played', 'points'],
+                        class : ['tour-stats-table'],
+                        tbl_type:'player'
+                        }">
+              </app-player-table>
+              <app-loader *ngIf="isloading"></app-loader>
+              <app-no-data-widget *ngIf="!isloading && stats?.selectedTeams.length == 0" [sport]="'Tennis'">
+              </app-no-data-widget>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <app-top-scorer-widget [sport]="'Tennis'"></app-top-scorer-widget>
+          <!-- <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

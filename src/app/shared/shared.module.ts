@@ -80,6 +80,9 @@ import { LiveMatchTrackerComponent } from './widget/match/live-match-tracker/liv
 import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
 import { TournamentsComponent } from './widget/tournaments/tournaments.component';
 
+
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -95,7 +98,8 @@ import { TournamentsComponent } from './widget/tournaments/tournaments.component
         LazyLoadImageModule,
         CarouselModule,
         LottieAnimationViewModule,
-        TranslateModule
+        TranslateModule,
+        ScrollingModule
     ],
     declarations: [
         /** All Pipes */
