@@ -49,7 +49,7 @@
               <app-player-table *ngIf="stats?.length > 0" [data]="stats" [options]=" {
                           sport:sport,
                           titles : ['POS',('Cricket_Module2.player' | translate),('Kabaddi_Module2.Successfull_tackles' | translate),('Kabaddi_Module2.Super_Tackles' | translate),('Kabaddi_Module2.Tackle_Points' | translate)],
-                        sort : [false, false, true,true,true],
+                          sort : [false, false, true,true,true],
                           values : ['pid', 'name', 'tacklesuccessful','supertackles','tackletotalpoint'],
                           class : ['tour-stats-table'],
                           class_light_row : ['light-row']

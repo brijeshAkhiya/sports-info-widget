@@ -56,7 +56,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     { title: 'Basketball', link: '/basketball' },
     { title: 'Field Hockey', link: '/hockey' },
     { title: 'Badminton', link: '/badminton' },
-    { title: 'Racing', link: '/racing' },
+    { title: 'Racing', link: '/racing/f1' },
     { title: 'Tennis sports', link: '/tennis' },
   ];
 

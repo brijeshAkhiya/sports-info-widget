@@ -38,7 +38,7 @@ export class BlogsComponent implements OnInit {
     /** Search post  */
     if (this.activatedroute.routeConfig.path == 'search/:key') {
       this.options.reqParams.sSearch = this.activatedroute.snapshot.url[1].path ? this.activatedroute.snapshot.url[1].path : blogState.sSearch;
-      this.blog_title = this.translateService.get('Blog_Module2.Search_results')['value'];
+      // this.blog_title = this.translateService.get('Blog_Module2.Search_results')['value'];
       this.options.reqParams.nLimit = 5;
       if (blogState.data)
         this.options.data = blogState.data;
