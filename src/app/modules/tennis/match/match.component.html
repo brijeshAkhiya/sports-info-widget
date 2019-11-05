@@ -1,0 +1,65 @@
+<app-loader *ngIf="loading"></app-loader>
+<app-no-data-widget *ngIf="!loading && (!matchInfo)"></app-no-data-widget>
+<section class="common-section" *ngIf="matchInfo">
+  <div class="container">
+    <div class="row sidebar-row">
+      <div class="content-col">
+        <!-- <app-loader *ngIf="!matchdata"></app-loader> -->
+        <!-- START - ABOUT MATCH-->
+        <app-match-about *ngIf="matchInfo" [data]="matchInfo" [competitor]="matchInfo?.sport_event?.competitors"
+          [toss]="" [sport]="'Tennis'">
+        </app-match-about>
+        <!-- END - ABOUT MATCH-->
+        <!-- START - MATCH TABS-->
+        <ngb-tabset class="common-tabs match-tabs">
+
+          <!--START - NEWS TAB-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>{{ 'Shared_module.news' | translate }}</ng-template>
+            <ng-template ngbTabContent>
+              <app-blog-list *ngIf="paramArticle" [options]="paramArticle">
+              </app-blog-list>
+            </ng-template>
+          </ngb-tab>
+          <!--END - NEWS TAB-->
+
+          <!--START - FIXTURES-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>{{'fixtures' | translate}}</ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget *ngIf="!nextmatches || nextmatches?.length == 0" [message]="'No match scheduled'">
+              </app-no-data-widget>
+              <app-schedule [data]="nextmatches" [type]="'result'" [sport]="'Tennis'"></app-schedule>
+            </ng-template>
+          </ngb-tab>
+          <!--END - FIXTURES-->
+
+          <!--START - RESULT-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>{{'Results' | translate}}</ng-template>
+            <ng-template ngbTabContent>
+              <app-no-data-widget *ngIf="!lastmatchesv || lastmatches?.length == 0" [message]="'No match scheduled'">
+              </app-no-data-widget>
+              <app-schedule [data]="lastmatches" [type]="'result'" [sport]="'Tennis'"></app-schedule>
+            </ng-template>
+          </ngb-tab>
+          <!--END - RESULT-->
+
+        </ngb-tabset>
+        <!-- END - MATCH TABS-->
+      </div>
+      <div class="sidebar-col">
+        <div class="sticky-sidebar">
+          <!--START - SIDERBAR ADS-->
+          <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
+          <!--END - SIDERBAR ADS-->
+          <!--START - SIDERBAR STORY-->
+          <!-- <app-sidebar-links [sport]="'Cricket'" [link_type]="'tournament'"
+            [options]="{type: 'current', title:'Recommended Links'}"></app-sidebar-links> -->
+          <!--START - SIDERBAR STORY-->
+          <app-custom-ads-widget [type]="'Rectangle'"></app-custom-ads-widget>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

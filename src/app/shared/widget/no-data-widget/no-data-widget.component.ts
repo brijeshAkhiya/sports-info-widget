@@ -27,12 +27,14 @@ export class NoDataWidgetComponent implements OnInit {
       this.imagepath = { image: 'assets/images/no_data_racing.svg' };
     } else if (this.sport === 'Tennis') {
       this.imagepath = { image: 'assets/images/no_data_tennis.svg' };
-    } else {
+    } else if (this.sport === 'Cricket') {
       const array = [
         { image: 'assets/images/no_data_1.svg' },
         { image: 'assets/images/no_data_2.svg' },
       ];
       this.imagepath = array[Math.floor(Math.random() * array.length)];
+    } else {
+      this.imagepath = { image: 'assets/images/no_data.svg' };
     }
   }
 

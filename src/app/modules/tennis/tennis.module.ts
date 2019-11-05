@@ -11,9 +11,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
 import { TournamentStandingsComponent } from './tournament/tournament-standings/tournament-standings.component';
+import { MatchComponent } from './match/match.component';
 
 @NgModule({
-  declarations: [TournamentComponent, TournamentHomeComponent, TournamentStandingsComponent],
+  declarations: [TournamentComponent, TournamentHomeComponent, TournamentStandingsComponent, MatchComponent],
   imports: [
     CommonModule,
     TennisRoutingModule,

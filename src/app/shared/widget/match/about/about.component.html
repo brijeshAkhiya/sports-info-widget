@@ -656,3 +656,76 @@
     </div>
   </div>
 </ng-container>
+
+
+<ng-container *ngIf="sport == 'Tennis' && data">
+  <!-- Start Animation -->
+  <div
+    class="common-title-btn goal-type badminton-match-title match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
+    <div class="teams-animation d-flex justify-content-around align-items-center">
+      <div class="team-anim">
+        <h4>{{competitor[0]?.name | split}}</h4>
+      </div>
+      <div class="team-anim vs-anim">
+        <h5>VS</h5>
+      </div>
+      <div class="team-anim">
+        <h4>{{competitor[1]?.name | split}}</h4>
+      </div>
+    </div>
+    <!-- End Animation -->
+
+    <div class="tour-match-title show-anim">
+      <p class="light-text">
+        <a
+          [routerLink]="['/tennis/tournament',(data?.sport_event?.season?.tournament_id | splitID),(data?.sport_event?.season?.name | slugify)]">
+          {{data?.sport_event?.season?.name}}
+        </a>
+      </p>
+    </div>
+
+    <div class="match-update show-anim">
+      <p class="light-text">
+        <ng-container *ngIf="data.sport_event.venue">
+          <span>{{data.sport_event.venue.name}}, {{data.sport_event.venue.city_name}} |</span>
+        </ng-container>
+        {{data.sport_event.scheduled | amDateFormat:'Do MMMM YYYY'}}
+      </p>
+      <p class="live-match" *ngIf="data.sport_event_status?.status == 'live' ">{{ 'widgetModule.live' | translate }}
+        <span *ngIf="data.match_time"> | {{data.match_time}}</span>
+      </p>
+    </div>
+
+    <div class="current-match d-flex justify-content-between show-anim">
+      <ng-container *ngTemplateOutlet="tennisTeam;context:{team:competitor[0]}">
+      </ng-container>
+      <div class="live-score"
+        *ngIf="data?.sport_event_status?.status != 'not_started' && data?.sport_event_status?.period_scores">
+        <div class="gameset d-flex justify-content-between"
+          *ngFor="let score of data?.sport_event_status?.period_scores">
+          <p
+            [ngClass]="{'theme-color' : competitor[0]?.qualifier == 'home' ? score.home_score > score.away_score : score.away_score > score.home_score }">
+            {{competitor[0]?.qualifier == 'home' ? score.home_score : score.away_score}}</p>
+          <p class="set-num">Game {{score.number}}</p>
+          <p
+            [ngClass]="{'theme-color' : competitor[1]?.qualifier == 'away' ? score.away_score > score.home_score : score.home_score > score.away_score }">
+            {{competitor[1]?.qualifier == 'home' ? score.home_score : score.away_score}}</p>
+        </div>
+      </div>
+      <ng-container *ngTemplateOutlet="tennisTeam;context:{team:competitor[1]}">
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #tennisTeam let-team="team">
+  <div class="team-col">
+    <div class="current-team">
+      <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
+        <a [routerLink]="['/tennis/team',(team.id | splitID),((team.name | split) | slugify)]">
+          {{ team.name | split}}
+        </a>
+      </h4>
+    </div>
+  </div>
+</ng-template>

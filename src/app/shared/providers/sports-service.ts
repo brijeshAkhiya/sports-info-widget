@@ -909,4 +909,14 @@ export class SportsService {
       environment.apiUrl + environment.version + `/tennis/player/rankings`
     );
   }
+  getTennisMatchSummary(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/match/${id}/summary`
+    );
+  }
+  getTennisTeamHeadToHead(team1, team2) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/team/headtohead/${team1}/${team2}`
+    );
+  }
 }

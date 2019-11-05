@@ -13,6 +13,7 @@ import { FixturesComponent } from '@app/shared/pages/fixtures/fixtures.component
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentHomeComponent } from './tournament/tournament-home/tournament-home.component';
 import { TournamentStandingsComponent } from './tournament/tournament-standings/tournament-standings.component';
+import { MatchComponent } from './match/match.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,11 @@ const routes: Routes = [
         data: { 'sport': 'Tennis' }
       },
       {
+        path: 'standings',
+        component: TournamentStandingsComponent,
+        data: { 'sport': 'Tennis' }
+      },
+      {
         path: 'tournament/:id/:slug',
         component: TournamentComponent,
         children: [
@@ -50,9 +56,8 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'standings',
-        component: TournamentStandingsComponent,
-        data: { 'sport': 'Tennis' }
+        path: 'match/:id/:slug',
+        component: MatchComponent
       },
       {
         path: 'teams',
