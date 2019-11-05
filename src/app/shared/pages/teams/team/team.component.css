@@ -1,11 +1,11 @@
-.team-about-head .team-logo                 { width: 208px; padding: 14px; background: #fff; flex-shrink: 0; -webkit-flex-shrink: 0; }
+.team-about-head .team-logo                 { width: 170px; padding: 14px; background: #fff; flex-shrink: 0; -webkit-flex-shrink: 0; }
 .team-about-head .team-logo .team-logo-img  { padding-top: 100%; background: no-repeat center center / cover; }
 .team-about-head .team-info                 { margin-left: 24px; padding: 24px 32px; background: #fff; flex-grow: 1; -webkit-flex-grow: 1; }
 .team-about-head .info-col                  { flex-grow: 1;}
-.team-about-head .info-item                 { margin-bottom: 40px; }
+.team-about-head .info-item                 { margin-bottom: 30px; }
 .team-about-head .info-item:last-child      { margin-bottom: 0px; }
 .team-about-head .info-col p                { margin: 0px; font-weight: 500; }
-.team-about-head .info-col .title           { margin-bottom: 6px;  font-size: 12px; line-height: 15px; font-weight: 600; text-transform: uppercase; }
+.team-about-head .info-col .title           { margin-bottom: 4px; font-size: 12px; line-height: 15px; font-weight: 600; text-transform: uppercase; }
 .team-about-head .match-result              { margin: 0px; display: inline-block; }
 .team-about-head .match-result li           { margin-right: 8px; display: inline-block; width: 24px; height: 24px; background: #292929; font-size: 14px; line-height: 24px; font-weight: 600; color: #fff; border-radius: 50%; text-transform: uppercase; text-align: center; }
 .team-about-head .match-result li.win       { background: #ED1A33; }
@@ -38,7 +38,6 @@
 
 /***** Responsive CSS Start ******/
 @media (min-width: 1200px) and (max-width: 1379px) {
-    .team-about-head .team-logo         { width: 190px; }
     .team-about-head .team-info         { padding: 22px 28px;}
 /* -------- Squad List ------- */
     .squad-item                         { margin-bottom: 24px; height: 270px; }
@@ -48,7 +47,7 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-    .team-about-head .team-logo         { width: 180px; padding: 12px;}
+    .team-about-head .team-logo         { width: 160px; padding: 12px;}
     .team-about-head .team-info         { padding: 20px 24px;}
     .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
 /* -------- Squad List ------- */
@@ -62,7 +61,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .team-about-head .team-logo         { width: 154px; padding: 12px;}
+    .team-about-head .team-logo         { width: 140px; padding: 12px;}
     .team-about-head .team-info         { margin-left: 16px; padding: 16px 16px;}
     .team-about-head .info-item         { margin-bottom: 20px; }
 /* -------- Squad List ------- */
@@ -76,9 +75,9 @@
 
 @media (max-width: 767px) {
     .team-about-head .info-item                    { margin-bottom: 16px; }
-    .team-about-head .info-col .title              { margin-bottom: 4px; }
+    .team-about-head .info-col .title              { margin-bottom: 1px; font-size: 11px; line-height: 14px;}
 /* -------- Squad List ------- */
-    .team-about-head .team-logo         { width: 130px; padding: 8px;}
+    .team-about-head .team-logo         { width: 122px; padding: 8px;}
     .team-about-head .team-info         { margin-left: 16px; padding: 14px 16px;}
     .team-about-head .team-info ul      { margin-top: 5px; vertical-align: middle; }
     .squad-list h4                      { padding-bottom: 12px; }

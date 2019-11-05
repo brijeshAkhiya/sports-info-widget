@@ -468,16 +468,12 @@
     class="common-title-btn goal-type badminton-match-title match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="competitor[0]?.id | logosurl:'badminton'" alt="{{competitor[0]?.name}}"
-          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
         <h4>{{competitor[0]?.name | split}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img [lazyLoad]="competitor[1]?.id | logosurl:'badminton'" alt="{{competitor[1]?.name}}"
-          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
         <h4>{{competitor[1]?.name | split}}</h4>
       </div>
     </div>
@@ -545,10 +541,10 @@
 <ng-template #badmintonTeam let-team="team" let-oppTeam="oppTeam">
   <div class="team-col">
     <div class="current-team">
-      <h4>
+      <!-- <h4>
         <img [lazyLoad]="team?.id | logosurl:'badminton'" alt="{{team.name}}"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
-      </h4>
+      </h4> -->
       <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
         <a [routerLink]="['/badminton/team',(team.id | splitID),((team.name | split) | slugify)]">
           {{ team.name | split}}
