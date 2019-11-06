@@ -392,3 +392,35 @@
     </div>
   </div>
 </ng-template>
+
+<ng-container *ngIf="sport == 'Tennis'">
+  <div class="match-stats common-shadow rounded-box" *ngIf="matchStats">
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Aces', key: 'aces', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Double Faults', key: 'double_faults', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="perContainer;context:{options: {label:'1st Serve', key: 'first_serve_successful', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'1st Serve Won (points)', key: 'first_serve_points_won', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="perContainer;context:{options: {label:'2nd Serve', key: 'second_serve_successful', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'2nd Serve Won (points)', key: 'second_serve_points_won', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="perContainer;context:{options: {label:'Breakpoints Won', key: 'breakpoints_won', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Max points in row', key: 'max_points_in_a_row', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+    <ng-container
+      *ngTemplateOutlet="valueContainer;context:{options: {label:'Max games in row', key: 'max_games_in_a_row', home: matchStats.statistics.teams[0].statistics, away:  matchStats.statistics.teams[1].statistics}}">
+    </ng-container>
+  </div>
+</ng-container>

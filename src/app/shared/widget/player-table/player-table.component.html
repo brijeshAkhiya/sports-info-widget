@@ -4,58 +4,58 @@
   </div>
   <div class="table-responsive" id="dtBasicExample">
 
-    <cdk-virtual-scroll-viewport style="height: 350px" itemSize="20">
-      <table class="table">
-        <thead>
-          <tr [ngClass]="options.class_light_row">
-            <th *ngFor="let title of options.titles; let i =index" [innerHTML]="title" title="{{title}}"
-              (click)="getname($event)"
-              [ngClass]="(title == value && options.sort[i]) ? sorting == 'ASC'? 'sort-table table-asc' :'sort-table table-desc':''">
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *cdkVirtualFor="let item of data;let i = index;">
-            <ng-container *ngIf="options.sport == 'Kabaddi'">
-              <ng-container *ngTemplateOutlet="kabaddi;context:{item:item,index:i+1}">
-              </ng-container>
+    <!-- <cdk-virtual-scroll-viewport style="height: 350px" itemSize="100"> -->
+    <table class="table">
+      <thead>
+        <tr [ngClass]="options.class_light_row">
+          <th *ngFor="let title of options.titles; let i =index" [innerHTML]="title" title="{{title}}"
+            (click)="getname($event)"
+            [ngClass]="(title == value && options.sort[i]) ? sorting == 'ASC'? 'sort-table table-asc' :'sort-table table-desc':''">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data;let i = index;">
+          <ng-container *ngIf="options.sport == 'Kabaddi'">
+            <ng-container *ngTemplateOutlet="kabaddi;context:{item:item,index:i+1}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Soccer'">
-              <ng-container *ngTemplateOutlet="soccer;context:{item:item,index:i+1}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Soccer'">
+            <ng-container *ngTemplateOutlet="soccer;context:{item:item,index:i+1}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Cricket'">
-              <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Cricket'">
+            <ng-container *ngTemplateOutlet="cricket;context:{item:item}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Basketball' && options.tbl_type == 'stats'">
-              <ng-container *ngTemplateOutlet="basketballStats;context:{item:item,index:i+1}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Basketball' && options.tbl_type == 'stats'">
+            <ng-container *ngTemplateOutlet="basketballStats;context:{item:item,index:i+1}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Basketball' && options.tbl_type == 'standing'">
-              <ng-container *ngTemplateOutlet="basketball;context:{item:item,index:i+1}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Basketball' && options.tbl_type == 'standing'">
+            <ng-container *ngTemplateOutlet="basketball;context:{item:item,index:i+1}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Hockey'">
-              <ng-container *ngTemplateOutlet="hockey;context:{item:item}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Hockey'">
+            <ng-container *ngTemplateOutlet="hockey;context:{item:item}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Badminton'">
-              <ng-container *ngTemplateOutlet="badminton;context:{item:item}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Badminton'">
+            <ng-container *ngTemplateOutlet="badminton;context:{item:item}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Racing' && (options.type != 'result' || item.result)">
-              <ng-container *ngTemplateOutlet="racing;context:{item:item,index:i+1}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Racing' && (options.type != 'result' || item.result)">
+            <ng-container *ngTemplateOutlet="racing;context:{item:item,index:i+1}">
             </ng-container>
-            <ng-container *ngIf="options.sport == 'Tennis'">
-              <ng-container *ngTemplateOutlet="tennis;context:{item:item}">
-              </ng-container>
+          </ng-container>
+          <ng-container *ngIf="options.sport == 'Tennis'">
+            <ng-container *ngTemplateOutlet="tennis;context:{item:item}">
             </ng-container>
-          </tr>
-        </tbody>
-      </table>
-    </cdk-virtual-scroll-viewport>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <!-- </cdk-virtual-scroll-viewport> -->
   </div>
 </div>
 <div class="table-title-info" *ngIf="options.sport == 'Soccer'">

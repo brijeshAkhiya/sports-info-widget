@@ -14,22 +14,12 @@ export class MatchComponent implements OnInit, OnDestroy {
 
   paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Tennis', aIds: [] } };
   loading = false;
-  lastmatches;
-  nextmatches;
-
-  statsLoading = false;
-  lineupLoading = false;
+  lastmatches = [];
+  nextmatches = [];
+  probabilityOptions: any = {};
   matchInfo;
-  matchLineups;
-  commentry = [];
-  team: any = {};
-  matchStats: any;
-  info;
   interval;
   timeout;
-  teamvsteamdata: any;
-  headtohead;
-  teamssummary: { team1: { info: any; matches: any[]; }; team2: { info: any; matches: any[]; }; };
 
   constructor(
     private sportsService: SportsService,
@@ -54,6 +44,7 @@ export class MatchComponent implements OnInit, OnDestroy {
       if (res.data) {
         this.matchInfo = res.data;
         this.getMatchHeadToHead();
+        this.getMatchProbability(id);
       }
       this.loading = false;
     }, (error) => {
@@ -62,210 +53,42 @@ export class MatchComponent implements OnInit, OnDestroy {
   }
 
   getMatchHeadToHead() {
-    // this.loading = true;
-    this.sportsService.getTennisTeamHeadToHead(this.matchInfo.sport_event.competitors[0].id, this.matchInfo.sport_event.competitors[1].id).subscribe((res: any) => {
+    let getHeadToHead;
+    if (this.matchInfo.sport_event.tournament.type == 'mixed')
+      getHeadToHead = this.sportsService.getTennisPlayerHeadToHead(this.matchInfo.sport_event.competitors[0].id, this.matchInfo.sport_event.competitors[1].id);
+    else
+      getHeadToHead = this.sportsService.getTennisTeamHeadToHead(this.matchInfo.sport_event.competitors[0].id, this.matchInfo.sport_event.competitors[1].id);
+
+    getHeadToHead.subscribe((res: any) => {
       if (res.data) {
         if (res.data.last_meetings && res.data.last_meetings.results)
-          this.lastmatches = this.commonService.sortArrByEvent(res.data.last_meetings.results.filter((match) => match.sport_event_status.status == 'not_started'),
-            'Do MMMM YYYY', 'scheduled', 'asc');
+          this.lastmatches = this.commonService.sortArrByEvent(res.data.last_meetings.results.filter((match) =>
+            match.sport_event_status.status == 'closed' || match.sport_event_status.status == 'cancelled'), 'Do MMMM YYYY', 'scheduled', 'asc');
         if (res.data.next_meetings && res.data.next_meetings.results)
           this.nextmatches = this.commonService.sortArrByEvent(res.data.next_meetings.results.filter((match) =>
-            match.sport_event_status.status == 'closed' || match.sport_event_status.status == 'cancelled'), 'Do MMMM YYYY', 'scheduled', 'desc');
-        console.log(this.lastmatches);
-        console.log(this.nextmatches);
-      }
-      // this.loading = false;
-    }, (error) => {
-      // this.loading = false;
-    });
-  }
-
-  getMatchLineup(id) {
-    this.lineupLoading = true;
-    this.sportsService.getSoccerMatchLineup(id).subscribe((res: any) => {
-      if (res.data) {
-        this.matchLineups = res.data;
-        this.initSquads();
-      }
-      this.lineupLoading = false;
-    }, (error) => {
-      this.lineupLoading = false;
-    });
-  }
-
-
-  getMatchstats(id) {
-    this.statsLoading = true;
-    this.sportsService.getSoccerMatchTimeline(id).subscribe((res: any) => {
-      this.statsLoading = false;
-      if (res.data && res.data.statistics) {
-        this.team.home.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier === 'home')[0].statistics;
-        this.team.away.statistics = res.data.statistics.totals.competitors.filter((comp) => comp.qualifier === 'away')[0].statistics;
-        this.matchStats = res.data.statistics;
-      }
-    }, (error) => {
-      this.statsLoading = false;
-    });
-  }
-
-  /* get team vs team data  */
-  getSoccerTeamvsTeam(teams) {
-    let head = {
-      teams:
-      {
-        team1: { id: teams[0].id, name: teams[0].name, total: 0 },
-        team2: { id: teams[1].id, name: teams[1].name, total: 0 }
-      },
-      draw: 0, totalmatches: 0
-    };
-    this.sportsService.getsoccerteamvsteamdata(teams[0].id, teams[1].id).subscribe((res: any) => {
-      this.teamvsteamdata = res.data.last_meetings ? res.data.last_meetings : [];
-      this.teamvsteamdata.map((match) => {
-        head.totalmatches += 1;
-        if (match.sport_event_status.winner_id) {
-          if (head.teams.team1.id === match.sport_event_status.winner_id) {
-            head.teams.team1.total += 1;
-          } else {
-            head.teams.team2.total += 1;
-          }
-        } else {
-          head.draw += 1;
-        }
-      });
-      this.headtohead = head;
-      this.teamvsteamdata = this.sortArr(this.teamvsteamdata, 'Do MMMM YYYY', 'start_time', 'desc');
-
-    });
-  }
-
-  sortArr(data, format, date_param, sort_type) {
-    data.sort((a, b) => {
-      if (sort_type === 'asc') {
-        return new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? 1 : 0;
-      } else {
-        return new Date(a['sport_event'][date_param]) > new Date(b['sport_event'][date_param]) ? -1 : new Date(a['sport_event'][date_param]) < new Date(b['sport_event'][date_param]) ? 1 : 0;
+            match.sport_event_status.status == 'not_started'), 'Do MMMM YYYY', 'scheduled', 'desc');
       }
     });
-    const dateObj = {};
-    data.map((data) => {
-      const mdate = moment(data['sport_event'][date_param]).format(format);
-      if (!dateObj[mdate]) dateObj[mdate] = [];
-      dateObj[mdate].push(data);
-    });
-    return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 
-
-  getTeamsSummumaries(teams) {
-    let teamssummary = { team1: { info: teams[0], matches: [] }, team2: { info: teams[1], matches: [] } };
-
-    this.sportsService.getsoccerteamsummaries(teams[0].id).subscribe((res: any) => {
-      let team1data = res.data.summaries;
-      team1data = team1data.filter((match) => match.sport_event_status.status == 'closed');
-      team1data = team1data.sort((a, b) => {
-        return new Date(a['start_time']) < new Date(b['start_time']) ? -1 : new Date(a['start_time']) > new Date(b['start_time']) ? 1 : 0;
-      });
-      teamssummary.team1.matches = team1data.slice(0, 5);
-      teamssummary.team1.matches.map((obj) => {
-        obj.sport_event.competitors.map((comp) => {
-          if (comp.id != teams[0].id) {
-            obj['oppteamid'] = comp.id;
-            obj['oppteamname'] = comp.name;
-          }
+  getMatchProbability(id) {
+    let matchProbability;
+    this.sportsService.getTennisMatchProbability(id).subscribe((res: any) => {
+      if (res.data && res.data.probabilities && res.data.probabilities.markets.length > 0 && res.data.probabilities.markets[0].outcomes) {
+        this.probabilityOptions.probability = matchProbability = this.matchInfo.sport_event.competitors;
+        res.data.probabilities.markets[0].outcomes.forEach(element => {
+          if (element.name == 'home_team_winner')
+            matchProbability.filter(comp => comp.qualifier == 'home')[0].probability = element.probability;
+          else
+            matchProbability.filter(comp => comp.qualifier != 'home')[0].probability = element.probability;
         });
-        if (obj.sport_event_status.winner_id == teams[0].id && obj.sport_event_status.winner_id) {
-          obj['result'] = 'winner';
-        } else if (!(obj.sport_event_status.winner_id == teams[0].id) && obj.sport_event_status.winner_id) {
-          obj['result'] = 'loss';
-        } else {
-          obj['result'] = 'draw';
-        }
-      });
-    });
 
-    this.sportsService.getsoccerteamsummaries(teams[1].id).subscribe((res: any) => {
-      let team2data = res.data.summaries;
-      team2data = team2data.filter((match) => match.sport_event_status.status == 'closed');
-      team2data = team2data.sort((a, b) => {
-        return new Date(a['start_time']) < new Date(b['start_time']) ? -1 : new Date(a['start_time']) > new Date(b['start_time']) ? 1 : 0;
-      });
-      teamssummary.team2.matches = team2data.slice(0, 5);
-      teamssummary.team2.matches.map((obj) => {
-        obj.sport_event.competitors.map((comp) => {
-          if (comp.id != teams[1].id) {
-            obj['oppteamid'] = comp.id;
-            obj['oppteamname'] = comp.name;
-          }
-        });
-        if (obj.sport_event_status.winner_id == teams[1].id && obj.sport_event_status.winner_id) {
-          obj['result'] = 'winner';
-        } else if (!(obj.sport_event_status.winner_id == teams[1].id) && obj.sport_event_status.winner_id) {
-          obj['result'] = 'loss';
-        } else {
-          obj['result'] = 'draw';
-        }
-      });
-    });
-
-    this.teamssummary = teamssummary;
-
-
-
-  }
-
-  initTeam() {
-    this.team.home = this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'home')[0];
-    this.team.away = this.matchInfo.sport_event.competitors.filter((comp) => comp.qualifier == 'away')[0];
-
-  }
-
-  initSquads() {
-
-    if (Object.entries(this.matchLineups.lineups).length > 0) {
-      this.team.home = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0];
-      this.team.away = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0];
-
-      // Team with role
-      let tempHomeSquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0].players;
-      this.team.home.squad = [];
-      tempHomeSquad.forEach(element => {
-        let type: any = (element.type === undefined) ? 'Other' : element.type;
-        (this.team.home.squad[type] = this.team.home.squad[type] || []).push(element);
-      });
-      // Team with formated type
-      if (this.team.home.formation && this.team.home.formation.type) {
-        let players = this.sortingByRole(this.team.home.players);
-        (this.team.home.formated_players = this.team.home.formated_players || []).push(players.splice(0, 1));
-        this.team.home.formation.type.split('-').forEach((formationType, index) => {
-          this.team.home.formated_players.push(players.splice(0, formationType));
-        });
+        if (matchProbability[0].probability > matchProbability[1].probability)
+          this.probabilityOptions.stylePer = `${matchProbability[0].probability}%`;
+        else
+          this.probabilityOptions.stylePer = `${matchProbability[1].probability}%`;
       }
-
-      // Team with role
-      let tempAwaySquad = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'away')[0].players;
-      this.team.away.squad = [];
-      tempAwaySquad.forEach(element => {
-        let type: any = (element.type === undefined) ? 'Other' : element.type;
-        (this.team.away.squad[
-          type] = this.team.away.squad[
-          type] || []).push(element);
-      });
-      // Team with formated type
-      if (this.team.away.formation && this.team.away.formation.type) {
-        let players = window['players'] = this.sortingByRole(this.team.away.players);
-        (this.team.away.formated_players = this.team.away.formated_players || []).push(players.splice(0, 1));
-        this.team.away.formation.type.split('-').forEach((formationType, index) => {
-          this.team.away.formated_players.push(players.splice(0, formationType));
-        });
-      }
-    }
-    if (this.matchInfo.statistics && Object.entries(this.matchInfo.statistics).length > 0) {
-      this.team.home.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'home')[0].statistics;
-      this.team.away.statistics = this.matchInfo.statistics.totals.competitors.filter((comp) => comp.qualifier == 'away')[0].statistics;
-      this.matchStats = this.matchInfo.statistics;
-    }
-
-
+    });
   }
 
   getLiveUpdate(classThis) {
@@ -330,22 +153,5 @@ export class MatchComponent implements OnInit, OnDestroy {
     this.clearTimeInterval();
   }
 
-  sorting(arr) {
-    return arr;
-    return arr.sort(function (a, b) {
-      if (a.role == 'raider')
-        return -1;
-      else if (a.role == 'allrounder')
-        return 0;
-      else
-        return 1;
-    });
-  }
-
-  sortingByRole(arr) {
-    return arr.sort(function (a, b) {
-      return a.order - b.order;
-    });
-  }
 }
 

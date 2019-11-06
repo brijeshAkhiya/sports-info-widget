@@ -32,8 +32,6 @@ export class SliderFixtureComponent implements OnInit {
   ngOnInit() {
     const data: any = this.activatedroute.data;
     this.params = data.value;
-    console.log(this.params);
-
     this.paramData = {
       loading: false, loadmore: false, data: [], fullData: [],
       selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
@@ -83,7 +81,6 @@ export class SliderFixtureComponent implements OnInit {
     return (value != 0 && value.toString().length == 1) ? value : value;
   }
   getFixturesData() {
-    console.log(this.params.sport);
     if (this.params.sport == 'Soccer')
       this.getSoccerData();
     else if (this.params.sport == 'Basketball')
@@ -140,7 +137,6 @@ export class SliderFixtureComponent implements OnInit {
           this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
           this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
           this.paramData.filterCategory = this.commonService.sortByName(this.paramData.filterCategory, 'name');
-          console.log(this.paramData.data)
         }
       },
         error => this.paramData.loading = false);

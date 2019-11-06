@@ -80,6 +80,7 @@ export class CommonService {
       if (!dateObj[mdate]) dateObj[mdate] = [];
       dateObj[mdate].push(data);
     });
+
     return Object.keys(dateObj).map(key => ({ key, data: dateObj[key] }));
   }
 

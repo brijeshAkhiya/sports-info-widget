@@ -914,9 +914,19 @@ export class SportsService {
       environment.apiUrl + environment.version + `/tennis/match/${id}/summary`
     );
   }
+  getTennisMatchProbability(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/match/${id}/probabilities`
+    );
+  }
   getTennisTeamHeadToHead(team1, team2) {
     return this.http.get(
       environment.apiUrl + environment.version + `/tennis/team/headtohead/${team1}/${team2}`
+    );
+  }
+  getTennisPlayerHeadToHead(team1, team2) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/player/headtohead/${team1}/${team2}`
     );
   }
 }

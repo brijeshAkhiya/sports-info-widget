@@ -23,27 +23,42 @@
           </ngb-tab>
           <!--END - NEWS TAB-->
 
+          <!--START - STATS-->
+          <ngb-tab>
+            <ng-template ngbTabTitle>{{'Stats' | translate}}</ng-template>
+            <ng-template ngbTabContent>
+              <app-probability [options]="probabilityOptions"
+                *ngIf="matchInfo?.sport_event_status?.status != 'closed' && probabilityOptions.probability">
+              </app-probability>
+
+              <app-match-stats *ngIf="matchInfo?.statistics" [sport]="'Tennis'" [matchStats]="matchInfo">
+              </app-match-stats>
+
+              <section class="last-meetings-section" *ngIf="lastmatches?.length > 0">
+                <h4 class="line-title">{{'Cricket_Module.Last_meetings' | translate}}</h4>
+                <app-schedule [data]="lastmatches" [type]="'result'" [sport]="'Tennis'"
+                  [tournament]="'matchInfo?.sport_event?.tournament?.id'"></app-schedule>
+              </section>
+
+              <app-no-data-widget
+                *ngIf="!probabilityOptions.probability && !matchInfo?.statistics && lastmatches?.length == 0">
+              </app-no-data-widget>
+
+            </ng-template>
+          </ngb-tab>
+          <!--END - STATS-->
+
           <!--START - FIXTURES-->
           <ngb-tab>
             <ng-template ngbTabTitle>{{'fixtures' | translate}}</ng-template>
             <ng-template ngbTabContent>
-              <app-no-data-widget *ngIf="!nextmatches || nextmatches?.length == 0" [message]="'No match scheduled'">
+              <app-no-data-widget *ngIf="nextmatches?.length == 0" [message]="'No match scheduled'">
               </app-no-data-widget>
-              <app-schedule [data]="nextmatches" [type]="'result'" [sport]="'Tennis'"></app-schedule>
+              <app-schedule [data]="nextmatches" [type]="'Fixtures'" [sport]="'Tennis'"
+                [tournament]="'matchInfo?.sport_event?.tournament?.id'"></app-schedule>
             </ng-template>
           </ngb-tab>
           <!--END - FIXTURES-->
-
-          <!--START - RESULT-->
-          <ngb-tab>
-            <ng-template ngbTabTitle>{{'Results' | translate}}</ng-template>
-            <ng-template ngbTabContent>
-              <app-no-data-widget *ngIf="!lastmatchesv || lastmatches?.length == 0" [message]="'No match scheduled'">
-              </app-no-data-widget>
-              <app-schedule [data]="lastmatches" [type]="'result'" [sport]="'Tennis'"></app-schedule>
-            </ng-template>
-          </ngb-tab>
-          <!--END - RESULT-->
 
         </ngb-tabset>
         <!-- END - MATCH TABS-->

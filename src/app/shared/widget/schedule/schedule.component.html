@@ -489,7 +489,7 @@
 
       <a class="details-btn"><span>{{ 'widgetModule.details' | translate }}</span></a>
       <a class="fullblock-link"
-        [routerLink]="['/badminton/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
+        [routerLink]="['/tennis/match', (match.sport_event.id | splitID), (match.sport_event?.competitors[0].abbreviation + '-vs-' +match.sport_event.competitors[1].abbreviation)]">
       </a>
     </div>
     <p class="time-block text-center" *ngIf="match?.sport_event_status?.status != 'closed'">

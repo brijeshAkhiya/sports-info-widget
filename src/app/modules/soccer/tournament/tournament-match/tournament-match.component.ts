@@ -225,6 +225,7 @@ export class TournamentMatchComponent implements OnInit, OnDestroy {
   }
 
   initSquads() {
+    if (!this.matchLineups.lineups) return false;
 
     if (Object.entries(this.matchLineups.lineups).length > 0) {
       this.team.home = this.matchLineups.lineups.competitors.filter((comp) => comp.qualifier == 'home')[0];

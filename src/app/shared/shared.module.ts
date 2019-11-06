@@ -82,6 +82,7 @@ import { TournamentsComponent } from './widget/tournaments/tournaments.component
 
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ProbabilityComponent } from './widget/match/probability/probability.component';
 
 @NgModule({
     imports: [
@@ -156,6 +157,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         SliderFixtureComponent,
         ArrToStringPipe,
         TournamentsComponent,
+        ProbabilityComponent,
     ],
     providers: [
         /** All Pipes */
@@ -230,8 +232,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         PageNotFoundComponent,
         LineupComponent,
         MatchStatsComponent,
-        LiveMatchTrackerComponent
-
+        LiveMatchTrackerComponent,
+        ProbabilityComponent
     ],
     entryComponents: [LoginModalComponent],
 
