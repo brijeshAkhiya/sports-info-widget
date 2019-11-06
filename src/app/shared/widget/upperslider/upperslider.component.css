@@ -1,6 +1,7 @@
 /* -------- Header Slider CSS ------- */
 .header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1113; }
-.header-live-inner                                      { min-height: 80px; }
+.header-live-section > .container                       { position: relative;}
+.header-live-inner                                      { min-height: 60px; }
 .slider-sports-selection                                { padding: 40px 0px; width: 150px; }
 .slider-sports-selection .slide-item                    { color: #fff; text-transform: uppercase; font-weight: 500; text-align: center; }
 .slider-sports-dropdown .dropdown-toggle                { padding: 11px 16px; background: transparent; width: 150px; line-height: 20px; color: #fff; font-weight: 600; font-family: 'IBM Plex Sans Condensed', sans-serif; border-radius: 2em; border: 2px solid #fff; text-align: left; }
@@ -31,6 +32,7 @@
 .header-live-slider .slider-item .match-info img        { margin: -3px 4px 0px 0px; height: 16px; width: auto; display: inline-block; }
 .header-live-slider .slider-item .match-info p          { color: #292929; font-weight: 500; }
 .header-live-slider .slider-item .result-line           { margin: 1px 0px 0px; font-size: 11px; line-height: 14px; }
+.header-live-slider.no-matches                          { position: absolute; right: 0; top: 0; height: 100%;}
 .header-live-slider.no-matches p                        { color: rgba(255,255,255,0.7); font-weight: 500;}
 
 /* -------- Arabic CSS ------- */
@@ -70,6 +72,7 @@
     .header-live-section .header-live-inner                 { flex-direction: column-reverse; -webkit-flex-direction: column-reverse; }
     .header-live-slider .slider-item-inner                  { min-height: 105px; }
     .header-live-slider .slider-item .match-winner::after   { margin: 0px 5px 4px; height: 12px; width: 12px; }
+    .header-live-slider.no-matches                          { position: relative; }
 /* -------- Arabic CSS ------- */
     .arabic .slider-sports-selection .owl-theme .owl-nav [class*="owl-"] { transform: translateY(-50%) rotate(-90deg); -webkit-transform: translateY(-50%) rotate(-90deg);}
     .arabic .slider-sports-selection .owl-theme .owl-nav .owl-prev  { right: auto; left: -30px;}
