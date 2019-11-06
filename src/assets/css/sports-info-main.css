@@ -135,6 +135,7 @@ app-favourites-widget   { align-self: flex-start; -webkit-align-self: flex-start
 /* -------- Loader Style ------- */
 .no-data-available                  { margin: 64px 0px 0px; text-align: center; }
 .no-data-available img              { width: 320px; max-width: 70%; }
+.no-data-available.no-sport img     { width: 540px;}
 .no-data-available-white h5         { margin: 64px 0px 0px; text-align: center;color: #fff !important; }
 
 /* -------- Dropdown And Custom Checkbox Style ------- */
