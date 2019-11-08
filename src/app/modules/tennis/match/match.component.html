@@ -41,7 +41,7 @@
               </section>
 
               <app-no-data-widget
-                *ngIf="!probabilityOptions.probability && !matchInfo?.statistics && lastmatches?.length == 0">
+                *ngIf="(matchInfo?.sport_event_status?.status == 'closed' || !probabilityOptions.probability) && !matchInfo?.statistics && lastmatches?.length == 0">
               </app-no-data-widget>
 
             </ng-template>

@@ -44,7 +44,8 @@
             <ng-container *ngTemplateOutlet="badminton;context:{item:item}">
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="options.sport == 'Racing' && (options.type != 'result' || item.result)">
+          <ng-container
+            *ngIf="options.sport == 'Racing' && (options.type != 'result' || item.result.status == 'Finished')">
             <ng-container *ngTemplateOutlet="racing;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
@@ -293,7 +294,7 @@
   <ng-container *ngFor="let value of options.values;let i=index">
     <td *ngIf="(value != 'name' && value !='index'); else link "
       [ngClass]="(object == value && options.sort[i]) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc' : '' ">
-      {{(item[value] && item[value] !='') ? item[value] : 0}}
+      {{item | arrToString: value}}
     </td>
     <ng-template #link>
       <td>

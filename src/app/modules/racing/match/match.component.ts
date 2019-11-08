@@ -10,7 +10,7 @@ import { CommonService } from '@providers/common-service';
   templateUrl: './match.component.html',
   styleUrls: ['./match.component.css'],
   encapsulation: ViewEncapsulation.None
-  
+
 })
 export class MatchComponent implements OnInit, OnDestroy {
 
@@ -21,6 +21,7 @@ export class MatchComponent implements OnInit, OnDestroy {
   interval;
   timeout;
   game;
+  qualifyTitle: any = ['POS', 'Drivers']
 
 
   constructor(
@@ -57,7 +58,7 @@ export class MatchComponent implements OnInit, OnDestroy {
             this.matchInfo.venue.lng = geo.results[0].geometry.location.lng;
           });
         }
-        if (this.matchInfo.status == 'Finished' && this.matchInfo.stages.length > 0) {
+        if (this.matchInfo.status == 'Finished' && this.matchInfo.stages && this.matchInfo.stages.length > 0) {
           this.matchInfo.stages.forEach(stage => {
             this.getStageData(stage.id);
           });
@@ -78,10 +79,28 @@ export class MatchComponent implements OnInit, OnDestroy {
     this.sportsService.getRacingSeasonsSummary(this.game, id).subscribe((res: any) => {
       if (res.data) {
         this.commentry.data[id] = res.data.stage.competitors;
+        console.log(res.data.type == 'qualifying', res.data.stage, res.data.stage.stages)
+        if (res.data.stage.type == 'qualifying' && res.data.stage.stages) {
+          res.data.stage.stages.forEach(stage => {
+            this.getChildStageData(id, stage.id);
+          });
+          // this.qualifyTitle.push('Laps');
+        }
       }
+      console.log(this.commentry.data)
       this.commentry.loading = false;
     }, (error) => {
       this.commentry.loading = false;
+    });
+  }
+
+  getChildStageData(parent, id) {
+    console.log(parent, id)
+    this.sportsService.getRacingSeasonsSummary(this.game, id).subscribe((res: any) => {
+      if (res.data) {
+        this.commentry.data[parent][id] = res.data.stage.competitors;
+        this.qualifyTitle.push(res.data.stage.description);
+      }
     });
   }
 

@@ -718,7 +718,8 @@
   <div class="team-col">
     <div class="current-team">
       <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
-        <a [routerLink]="['/tennis/team',(team.id | splitID),((team.name | split) | slugify)]">
+        <a
+          [routerLink]="(data.sport_event.tournament.type == 'doubles' || data.sport_event.tournament.type == 'mixed') ? ['/tennis/team',(team.id | splitID),((team.name | split) | slugify)] : ['/tennis/player',(team.id | splitID),((team.name | split) | slugify)]">
           {{ team.name | split}}
         </a>
       </h4>

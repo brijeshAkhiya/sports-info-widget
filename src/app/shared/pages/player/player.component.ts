@@ -21,6 +21,9 @@ export class PlayerComponent implements OnInit {
   teamid;
   battingdata = [];
   bowlingdata = [];
+  filter;
+  paramsFixtures = { loading: false, data: [] };
+  paramsResults = { loading: false, data: [] };
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -74,6 +77,12 @@ export class PlayerComponent implements OnInit {
         this.playerid = this.commonService.getIds(this.activatedroute.snapshot.params.id, 'Racing', 'competitor');
         this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [this.playerid] } };
         this.sportsService.getRacingCompetitorProfile(parentParams.value.game, this.playerid).
+          subscribe(this.playerSuccess, this.playerError);
+        break;
+      } case 'Tennis': {
+        this.playerid = 'sr:competitor:' + this.activatedroute.snapshot.params.id;
+        this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [this.playerid] } };
+        this.sportsService.getTennisPlayerProfile(this.playerid).
           subscribe(this.playerSuccess, this.playerError);
         break;
       }
@@ -157,6 +166,14 @@ export class PlayerComponent implements OnInit {
         }
         break;
       }
+      case 'Tennis': {
+        if (res.data) {
+          this.playerData = res.data;
+          if (res.data.statistics && res.data.statistics.periods)
+            this.filterTennisPeriods(res.data.statistics.periods[0])
+        }
+        break;
+      }
     }
   }
 
@@ -231,5 +248,30 @@ export class PlayerComponent implements OnInit {
       (error) => {
         this.loading = false;
       });
+  }
+
+  filterTennisPeriods(periods) {
+    this.filter = periods;
+    this.playerData.stats = periods;
+  }
+
+  getSportFixtures() {
+    this.paramsFixtures.loading = true;
+    this.sportsService.getTennisPlayerFixture(this.playerid).subscribe((res: any) => {
+      this.paramsFixtures.loading = false;
+      this.paramsFixtures.data = [];
+      if (res.data.schedule && res.data.schedule.length > 0)
+        this.paramsFixtures.data = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'desc');
+    }, (err) => this.paramsFixtures.loading = false);
+  }
+
+  getSportResults() {
+    this.paramsResults.loading = true;
+    this.sportsService.getTennisPlayerResults(this.playerid).subscribe((res: any) => {
+      this.paramsResults.loading = false;
+      this.paramsResults.data = [];
+      if (res.data.results && res.data.results.length > 0)
+        this.paramsResults.data = this.commonService.sortArrByEvent(res.data.results, 'Do MMMM YYYY', 'scheduled', 'desc');
+    }, (err) => this.paramsResults.loading = false);
   }
 }

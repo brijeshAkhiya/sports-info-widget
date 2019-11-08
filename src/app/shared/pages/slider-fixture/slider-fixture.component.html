@@ -34,7 +34,7 @@
             </div>
           </div>
           <!-- Category filter-->
-          <div class="soccer-fixture-selection" *ngIf="params.sport == 'Soccer' ">
+          <div class="soccer-fixture-selection" *ngIf="params.sport == 'Soccer' || params.sport == 'Tennis' ">
             <div ngbDropdown class="d-inline-block" autoClose="outside" #myDrop="ngbDropdown">
               <button class="btn btn-outline-primary" id="dropdownSoccerFixture" placement="right-bottom"
                 ngbDropdownToggle>{{paramData.selectedCategory?.name}}</button>

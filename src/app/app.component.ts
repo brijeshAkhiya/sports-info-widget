@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     });
     if (!this.readCookie('iscookieenabled')) {
       this.showCookiepopup = true;
-      document.cookie = 'iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC';
+      document.cookie = 'iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC; Secure; SameSite=None; ';
     } else {
       this.showCookiepopup = false;
     }

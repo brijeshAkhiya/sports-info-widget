@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
+import { forkJoin } from 'rxjs';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
@@ -33,7 +34,7 @@ export class SliderFixtureComponent implements OnInit {
     const data: any = this.activatedroute.data;
     this.params = data.value;
     this.paramData = {
-      loading: false, loadmore: false, data: [], fullData: [],
+      loading: false, loadmore: false, data: [], fullData: {},
       selectedDate: { year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD'), monthStr: moment().format('MMM') },
       filterCategory: [],
       selectedCategory: { name: 'All' }
@@ -94,52 +95,72 @@ export class SliderFixtureComponent implements OnInit {
   }
 
   filter(category) {
-    const obj = {};
+    let obj = {};
     this.paramData.selectedCategory = category;
-    if (category.name == 'All') {
-      this.paramData.fullData.map((data) => {
-        if (data.sport_event.sport_event_context) {
-          if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
-          obj[data.sport_event.sport_event_context.season.id].matches.push(data);
-        }
-      });
-    } else {
-      this.paramData.fullData.map((data) => {
-        if (data.sport_event.sport_event_context && category.id == data.sport_event.sport_event_context.category.id) {
-          if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
-          obj[data.sport_event.sport_event_context.season.id].matches.push(data);
-        }
-      });
+    if (this.params.sport == 'Soccer') {
+      if (category.name == 'All') {
+        this.paramData.fullData.map((data) => {
+          if (data.sport_event.sport_event_context) {
+            if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
+            obj[data.sport_event.sport_event_context.season.id].matches.push(data);
+          }
+        });
+      } else {
+        this.paramData.fullData.map((data) => {
+          if (data.sport_event.sport_event_context && category.id == data.sport_event.sport_event_context.category.id) {
+            if (!obj[data.sport_event.sport_event_context.season.id]) obj[data.sport_event.sport_event_context.season.id] = { 'season': data.sport_event.sport_event_context.season, matches: [] };
+            obj[data.sport_event.sport_event_context.season.id].matches.push(data);
+          }
+        });
+      }
+      this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+    } else if (this.params.sport == 'Tennis') {
+      if (category.name == 'All')
+        obj = this.paramData.fullData;
+      else
+        if (!obj[category.id]) obj[category.id] = this.paramData.fullData[category.id];
+      this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
     }
-    this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
   }
+
   getTennisDailySchedule() {
     this.paramData.loading = true;
-    this.sportsService
-      .getTennisDailySummary(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
+
+    forkJoin(
+      this.sportsService
+        .getTennisDailyResults(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD')),
+      this.sportsService
+        .getTennisDailySchedule(moment(`${this.paramData.selectedDate.year}-${this.paramData.selectedDate.month}-${this.paramData.selectedDate.day}`).format('YYYY-MM-DD'))
+    )
       .subscribe((res: any) => {
         this.paramData.loading = false;
-        if (res.data && res.data.results && res.data.results.length > 0) {
-          this.paramData.fullData = res.data.results;
-          const obj = {};
-          const category = {};
-          res.data.results.map((data) => {
-            // Category for filter
-            if (data.sport_event) {
-              // if (!category[data.sport_event.sport_event_context.category.id]) category[data.sport_event.sport_event_context.category.id] = data.sport_event.sport_event_context.category;
-
-              if (data.sport_event.season) {
-                if (!obj[data.sport_event.season.id]) obj[data.sport_event.season.id] = { 'season': data.sport_event.season, matches: [] };
-                obj[data.sport_event.season.id].matches.push(data);
-              }
-            }
-          });
-          this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
-          this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
-          this.paramData.filterCategory = this.commonService.sortByName(this.paramData.filterCategory, 'name');
-        }
-      },
-        error => this.paramData.loading = false);
+        let results = res[0].data.results;
+        let schedules = res[1].data.sport_events;
+        // let matches = [];
+        let obj = {};
+        const category = {};
+        schedules.map(match => {
+          if (match.status == 'closed') return;
+          // if (!matches[match.id]) matches[match.id] = match;
+          if (match.season) {
+            if (!category[match.season.id]) category[match.season.id] = match.season;
+            if (!obj[match.season.id]) obj[match.season.id] = { 'season': match.season, matches: [] };
+            obj[match.season.id].matches.push({ ...match, type: 'fixture' });
+          }
+        });
+        results.map(match => {
+          // if (!matches[match.sport_event.id]) matches[match.sport_event.id] = match;
+          if (match.sport_event.season) {
+            if (!category[match.sport_event.season.id]) category[match.sport_event.season.id] = match.sport_event.season;
+            if (!obj[match.sport_event.season.id]) obj[match.sport_event.season.id] = { 'season': match.sport_event.season, matches: [] };
+            obj[match.sport_event.season.id].matches.push({ ...match, type: 'result' });
+          }
+        });
+        this.paramData.fullData = obj;
+        this.paramData.data = Object.keys(obj).map(key => ({ key, data: obj[key] }));
+        this.paramData.filterCategory = Object.keys(category).map(key => ({ key, data: category[key] }));
+        this.paramData.filterCategory = this.commonService.sortByName(this.paramData.filterCategory, 'name');
+      });
   }
   getBasketballDailySchedule() {
     this.paramData.loading = true;
