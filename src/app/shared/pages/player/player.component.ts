@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
+import { SplitPipe } from '@app/shared/pipes/stringsplitpipe';
 
 @Component({
   selector: 'app-player',
@@ -24,12 +26,15 @@ export class PlayerComponent implements OnInit {
   filter;
   paramsFixtures = { loading: false, data: [] };
   paramsResults = { loading: false, data: [] };
+  type;
 
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
     private sportsService: SportsService,
     private commonService: CommonService,
+    private splitPipe: SplitPipe,
+    private translateservice: TranslateService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -40,6 +45,7 @@ export class PlayerComponent implements OnInit {
     let data: any = this.activatedroute.data;
     this.sport = data.value.sport;
     this.teamid = data.value.team;
+    this.type = data.value.type;
     this.getPlayerInfo();
   }
 
@@ -82,8 +88,10 @@ export class PlayerComponent implements OnInit {
       } case 'Tennis': {
         this.playerid = 'sr:competitor:' + this.activatedroute.snapshot.params.id;
         this.paramArticle = { reqParams: { nStart: 0, nLimit: 10, eSport: 'Racing', aIds: [this.playerid] } };
-        this.sportsService.getTennisPlayerProfile(this.playerid).
-          subscribe(this.playerSuccess, this.playerError);
+        if (this.type == 'team')
+          this.sportsService.getTennisTeamProfile(this.playerid).subscribe(this.playerSuccess, this.playerError);
+        else
+          this.sportsService.getTennisPlayerProfile(this.playerid).subscribe(this.playerSuccess, this.playerError);
         break;
       }
     }
@@ -170,7 +178,34 @@ export class PlayerComponent implements OnInit {
         if (res.data) {
           this.playerData = res.data;
           if (res.data.statistics && res.data.statistics.periods)
-            this.filterTennisPeriods(res.data.statistics.periods[0])
+            this.filterTennisPeriods(res.data.statistics.periods[0]);
+
+          if (this.playerData.rankings && this.playerData.rankings.length > 0) {
+            this.stats = [];
+            let obj = {};
+            if (this.type == 'team') {
+              this.playerData.double_team.players.map((player) => {
+                if (!obj[player.id]) obj[player.id] = player;
+              });
+              this.playerData.rankings.forEach(ranking => {
+                if (ranking.type == 'doubles') {
+                  this.stats.push({
+                    data: ranking.rank,
+                    key: this.splitPipe.transform(obj[ranking.player_id].name) + ' ' + this.translateservice.get('Doubles Rank')['value']
+                  });
+                }
+              });
+            } else {
+              this.playerData.rankings.forEach(ranking => {
+                if (ranking.race_ranking) return;
+                this.stats.push({
+                  data: ranking.rank,
+                  key: this.translateservice.get(ranking.type)['value'] + ' ' + this.translateservice.get('Rank')['value']
+                });
+              });
+            }
+
+          }
         }
         break;
       }
@@ -257,17 +292,32 @@ export class PlayerComponent implements OnInit {
 
   getSportFixtures() {
     this.paramsFixtures.loading = true;
-    this.sportsService.getTennisPlayerFixture(this.playerid).subscribe((res: any) => {
+    let getData;
+    if (this.type == 'team')
+      getData = this.sportsService.getTennisTeamFixture(this.playerid);
+    else
+      getData = this.sportsService.getTennisPlayerFixture(this.playerid);
+    getData.subscribe((res: any) => {
       this.paramsFixtures.loading = false;
       this.paramsFixtures.data = [];
-      if (res.data.schedule && res.data.schedule.length > 0)
-        this.paramsFixtures.data = this.commonService.sortArr(res.data.schedule, 'Do MMMM YYYY', 'scheduled', 'desc');
+      if (res.data.schedule && res.data.schedule.length > 0) {
+        let schedules = res.data.schedule.map((match) => {
+          return { ...match, type: 'fixture' };
+        });
+        this.paramsFixtures.data = this.commonService.sortArr(schedules, 'Do MMMM YYYY', 'scheduled', 'desc');
+
+      }
     }, (err) => this.paramsFixtures.loading = false);
   }
 
   getSportResults() {
     this.paramsResults.loading = true;
-    this.sportsService.getTennisPlayerResults(this.playerid).subscribe((res: any) => {
+    let getData;
+    if (this.type == 'team')
+      getData = this.sportsService.getTennisTeamResults(this.playerid);
+    else
+      getData = this.sportsService.getTennisPlayerResults(this.playerid);
+    getData.subscribe((res: any) => {
       this.paramsResults.loading = false;
       this.paramsResults.data = [];
       if (res.data.results && res.data.results.length > 0)

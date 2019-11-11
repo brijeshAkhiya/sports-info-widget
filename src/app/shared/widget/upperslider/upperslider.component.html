@@ -22,6 +22,9 @@
           <ng-template carouselSlide [id]="'Badminton'">
             <div class="slide-item">{{ 'Badminton' | translate }}</div>
           </ng-template>
+          <ng-template carouselSlide [id]="'Tennis'">
+            <div class="slide-item">{{ 'Tennis' | translate }}</div>
+          </ng-template>
         </owl-carousel-o>
       </div>
 
@@ -385,7 +388,8 @@
         </owl-carousel-o>
       </div>
     </div>
-    <div class="header-live-slider no-matches d-flex justify-content-center align-items-center" *ngIf="slider.length == 0">
+    <div class="header-live-slider no-matches d-flex justify-content-center align-items-center"
+      *ngIf="slider.length == 0">
       <p class="no-margin">{{'No matches in recent period.' | translate}}</p>
     </div>
   </div>

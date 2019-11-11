@@ -949,4 +949,24 @@ export class SportsService {
       environment.apiUrl + environment.version + `/tennis/player/${id}/results`
     );
   }
+  getTennisTeamProfile(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/team/${id}/profile`
+    );
+  }
+  getTennisTeamFixture(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/team/${id}/schedule`
+    );
+  }
+  getTennisTeamResults(id) {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/team/${id}/results`
+    );
+  }
+  getTennisLiveSummary() {
+    return this.http.get(
+      environment.apiUrl + environment.version + `/tennis/live/summaries`
+    );
+  }
 }

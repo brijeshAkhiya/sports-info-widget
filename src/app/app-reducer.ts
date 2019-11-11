@@ -10,6 +10,7 @@ import * as fromBasketball from '@store/basketball/basketball.reducer';
 import * as fromHockey from '@store/hockey/hockey.reducer';
 import * as fromBadminton from '@store/badminton/badminton.reducer';
 import * as fromRacing from '@store/racing/racing.reducer';
+import * as fromTennis from '@store/tennis/tennis.reducer';
 
 
 
@@ -25,6 +26,7 @@ export interface State {
     Hockey: fromHockey.HockeyData;
     Badminton: fromBadminton.BadmintonData;
     Racing: fromRacing.RacingData;
+    Tennis: fromTennis.TennisData;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -38,7 +40,8 @@ export const reducers: ActionReducerMap<State> = {
     Basketball: fromBasketball.BasketballReducer,
     Hockey: fromHockey.HockeyReducer,
     Badminton: fromBadminton.BadmintonReducer,
-    Racing: fromRacing.RacingReducer
+    Racing: fromRacing.RacingReducer,
+    Tennis: fromTennis.TennisReducer
 };
 
 

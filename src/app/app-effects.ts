@@ -5,7 +5,8 @@ import { BasketballEffects } from '@store/basketball/basketball.effects';
 import { HockeyEffects } from '@store/hockey/hockey.effects';
 import { BadmintonEffects } from '@store/badminton/badminton.effects';
 import { RacingEffects } from '@store/racing/racing.effects';
+import { TennisEffects } from '@store/tennis/tennis.effects';
 
 
-export const effects: any[] = [CricketsEffects, KabaddiEffects, SoccerEffects, BasketballEffects, HockeyEffects, BadmintonEffects, RacingEffects];
+export const effects: any[] = [CricketsEffects, KabaddiEffects, SoccerEffects, BasketballEffects, HockeyEffects, BadmintonEffects, RacingEffects, TennisEffects];
 

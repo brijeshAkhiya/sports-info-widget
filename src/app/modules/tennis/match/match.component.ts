@@ -54,7 +54,7 @@ export class MatchComponent implements OnInit, OnDestroy {
 
   getMatchHeadToHead() {
     let getHeadToHead;
-    if (this.matchInfo.sport_event.tournament.type == 'mixed')
+    if (this.matchInfo.sport_event.tournament.type == 'singles')
       getHeadToHead = this.sportsService.getTennisPlayerHeadToHead(this.matchInfo.sport_event.competitors[0].id, this.matchInfo.sport_event.competitors[1].id);
     else
       getHeadToHead = this.sportsService.getTennisTeamHeadToHead(this.matchInfo.sport_event.competitors[0].id, this.matchInfo.sport_event.competitors[1].id);

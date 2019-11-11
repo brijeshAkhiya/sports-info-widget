@@ -11,8 +11,10 @@ import * as Soccer from '@store/soccer/soccer.actions';
 import * as Basketball from '@store/basketball/basketball.actions';
 import * as Hockey from '@store/hockey/hockey.actions';
 import * as Badminton from '@store/badminton/badminton.actions';
+import * as Tennis from '@store/tennis/tennis.actions';
 import * as fromRoot from '@app/app-reducer';
 import { appSelectors } from '@store/selectors/index';
+import * as tennisSelector from '@store/selectors/tennis.selectors';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 
@@ -31,6 +33,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     'Basketball': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
     'Hockey': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
     'Badminton': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
+    'Tennis': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '5', 'interval': '18', 'isLiveUpdate': false, 'isStartAfterTime': false }, // interval in sec
   };
   sport = 'Cricket';
   interval;
@@ -126,6 +129,8 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
     this.store.dispatch(new Kabaddi.LoadKabaddiResults());
     this.store.dispatch(new Kabaddi.LoadKabaddiLive());
+
+    this.store.dispatch(new Tennis.LoadTennisSchedule());
   }
 
   // change slide select sport event
@@ -159,6 +164,60 @@ export class UppersliderComponent implements OnInit, OnDestroy {
       this.loadHockeyData();
     else if (this.sport == 'Badminton')
       this.loadBadmintonData();
+    else if (this.sport == 'Tennis')
+      this.loadTennisData();
+  }
+
+  loadTennisData() {
+    this.timerStartTime.Tennis.isLiveUpdate = false;
+    this.timerStartTime.Tennis.isStartAfterTime = false;
+    this.scheduleSubscription = this.store.select(tennisSelector.getTennisSchedule).subscribe((data: any) => {
+      console.log(data);
+      if (data && data.length > 0) {
+        let liveMatches = this.slider = data.filter((match) => ['live'].indexOf(match.status) > -1);
+        this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'desc');
+        let fixtures = this.commonService.sortBtDate(data.filter((match) => ['scheduled', 'created'].indexOf(match.status) > -1), 'scheduled', 'asc');
+        this.slider = this.slider.concat(fixtures);
+        if (liveMatches.length > 0 && !this.timerStartTime.Tennis.isLiveUpdate) {
+          this.getLiveTennisUpdate(this);
+        } else if (!this.timerStartTime.Tennis.isLiveUpdate && !this.timerStartTime.Tennis.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
+          let minTime = new Date(Math.min.apply(null, fixtures.map(function (e) {
+            return new Date(moment.utc(e.scheduled).format());
+          })));
+          this.startLiveUpdateAfterTime(moment.utc(minTime).format());
+        }
+      }
+    });
+  }
+  getLiveTennisUpdate(classThis) {
+    /** Subscribe for Live Match info */
+    this.liveMatchesSubscription = this.store.select(tennisSelector.getTennisMatches).subscribe((match) => {
+      if (Object.entries(match).length !== 0)
+        console.log(match);
+      // this.updateTennisSlider(match);
+    });
+    /** If match info has already start interval */
+    if (this.router.url.includes('/tennis/match/')) return false;
+
+
+    /** If Tennis live update is already started, No need to start interval for Live match Info */
+    // this.runningMatchFlagSubscription = this.store.select(tennisSelector.getTennisLiveIds).subscribe((matches) => {
+    this.interval = setInterval(() => {
+      classThis.sportsService
+        .getTennisLiveSummary()
+        .subscribe(res => {
+          let ids = [];
+          let schedules = [];
+          console.log(res.data.summaries)
+          res.data.summaries.map((match) => {
+            if (!schedules[match.sport_event.id]) schedules[match.sport_event.id] = match;
+            ids.push(match.sport_event.id);
+            console.log(schedules)
+          });
+          this.store.dispatch(new Tennis.SaveTennisMatches({ ids: ids, matches: schedules }));
+        });
+    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Tennis.interval));
+    // });
   }
 
   getBasketBallSchedule() {
@@ -219,7 +278,6 @@ export class UppersliderComponent implements OnInit, OnDestroy {
         });
     }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Badminton.interval));
   }
-
 
   loadHockeyData() {
 
@@ -613,6 +671,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   clearTimeInterval() {
     if (this.runningMatchFlagSubscription) this.runningMatchFlagSubscription.unsubscribe();
     this.store.dispatch(new Basketball.RemoveBasketballUpdate());
+    this.store.dispatch(new Tennis.RemoveTennisUpdate());
     clearInterval(this.interval);
     clearTimeout(this.timeout);
     this.timerStartTime.Soccer.isLiveUpdate = false;

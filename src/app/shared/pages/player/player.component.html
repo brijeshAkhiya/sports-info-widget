@@ -36,7 +36,8 @@
           </ng-container>
           <ng-container *ngSwitchCase="'Tennis'">
             <ng-container
-              *ngTemplateOutlet="title; context: {title: playerData?.player?.name | split, options : {name:playerData?.player?.name | split}}">
+              *ngTemplateOutlet="title; context: {title: (playerData?.player?.name) ? (playerData?.player?.name | split) : (playerData?.double_team?.name | split) , 
+                options : {name: (playerData?.player?.name) ? (playerData?.player?.name | split) : (playerData?.double_team?.name | split) }}">
             </ng-container>
           </ng-container>
         </div>
@@ -217,96 +218,100 @@
                 </div>
               </section>
 
-<<<<<<< HEAD
               <section class="player-profile d-flex" *ngIf="sport == 'Tennis'">
-                <div class="player-pic">
-                  <img class="common-shadow rounded-box" alt="{{playerData?.player?.name}}"
-                    [lazyLoad]="playerData?.player?.id | playerimage:['m']" [offset]="commonService.lazyloadoffset"
-                    [defaultImage]="commonService.playerplaceholder">
-                </div>
-                <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData">
-                  <div class="info-col">
-                    <ng-container *ngIf="playerData?.player?.name" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Contact_us.Full_Name' | translate), value:playerData?.player?.name | split}">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.player?.date_of_birth || playerData?.player?.dateofbirth"
-                      [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Born' | translate), value: playerData?.player?.date_of_birth | date }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.player?.nationality" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.player?.nationality }">
-                    </ng-container>
+                <ng-container *ngIf="type == 'team'">
+                  <div class="player-list d-flex">
+                    <div class="player-pic">
+                      <img class="common-shadow rounded-box" alt="{{playerData?.double_team?.players[0]?.name}}"
+                        [lazyLoad]="playerData?.double_team?.players[0]?.id | playerimage:['m']"
+                        [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.playerplaceholder">
+                    </div>
+                    <div class="player-pic sec-player">
+                      <img class="common-shadow rounded-box" alt="{{playerData?.double_team?.players[1]?.name}}"
+                        [lazyLoad]="playerData?.double_team?.players[1]?.id | playerimage:['m']"
+                        [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.playerplaceholder">
+                    </div>
                   </div>
-                  <div class="info-col">
-                    <ng-container *ngIf="playerData?.player?.handedness" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Plays' | translate), value: playerData?.player?.handedness }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.player?.height" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Height' | translate), value: playerData?.player?.height + ' ' +'cm' }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.player?.weight" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Weight' | translate), value: playerData?.player?.weight + ' ' +'kg' }">
-                    </ng-container>
+                  <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData?.double_team">
+                    <div class="info-col">
+                      <ng-container *ngIf="playerData?.double_team?.players[0]?.name"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Contact_us.Full_Name' | translate), value:playerData?.double_team?.players[0]?.name | split}">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.double_team?.players[0]?.abbreviation"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_module.Abbreviation' | translate), value: playerData?.double_team?.players[0]?.abbreviation}">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.double_team?.players[0]?.nationality"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.double_team?.players[0]?.nationality }">
+                      </ng-container>
+                    </div>
+                    <div class="info-col">
+                      <ng-container *ngIf="playerData?.double_team?.players[1]?.name"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Contact_us.Full_Name' | translate), value:playerData?.double_team?.players[1]?.name | split}">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.double_team?.players[1]?.abbreviation"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_module.Abbreviation' | translate), value: playerData?.double_team?.players[1]?.abbreviation}">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.double_team?.players[1]?.nationality"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.double_team?.players[1]?.nationality }">
+                      </ng-container>
+                    </div>
                   </div>
-                  <div class="info-col">
-                    <ng-container *ngIf="playerData?.player?.highest_singles_ranking"
-                      [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Best Singles Rank' | translate), value: playerData?.player?.highest_singles_ranking }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.player?.highest_doubles_ranking"
-                      [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Best Doubles Rank' | translate), value: playerData?.player?.highest_doubles_ranking}">
-                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="type != 'team'">
+                  <div class="player-pic">
+                    <img class="common-shadow rounded-box" alt="{{playerData?.player?.name}}"
+                      [lazyLoad]="playerData?.player?.id | playerimage:['m']" [offset]="commonService.lazyloadoffset"
+                      [defaultImage]="commonService.playerplaceholder">
                   </div>
-                </div>
+                  <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData">
+                    <div class="info-col">
+                      <ng-container *ngIf="playerData?.player?.name" [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Contact_us.Full_Name' | translate), value:playerData?.player?.name | split}">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.player?.date_of_birth" [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_Module2.Born' | translate), value: playerData?.player?.date_of_birth | date }">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.player?.nationality" [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.player?.nationality }">
+                      </ng-container>
+                    </div>
+                    <div class="info-col">
+                      <ng-container *ngIf="playerData?.player?.handedness" [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Plays' | translate), value: playerData?.player?.handedness }">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.player?.height" [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_Module2.Height' | translate), value: playerData?.player?.height + ' ' +'cm' }">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.player?.weight" [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Shared_Module2.Weight' | translate), value: playerData?.player?.weight + ' ' +'kg' }">
+                      </ng-container>
+                    </div>
+                    <div class="info-col">
+                      <ng-container *ngIf="playerData?.player?.highest_singles_ranking"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Best Singles Rank' | translate), value: playerData?.player?.highest_singles_ranking }">
+                      </ng-container>
+                      <ng-container *ngIf="playerData?.player?.highest_doubles_ranking"
+                        [ngTemplateOutlet]="playerInfoCardContent"
+                        [ngTemplateOutletContext]="{ title: ('Best Doubles Rank' | translate), value: playerData?.player?.highest_doubles_ranking}">
+                      </ng-container>
+                    </div>
+                  </div>
+                </ng-container>
               </section>
 
-=======
-              <!-- <section class="player-profile tennis-player d-flex" *ngIf="sport == 'Racing'">
-                <div class="player-list d-flex">
-                  <div class="player-pic">
-                    <img class="common-shadow rounded-box" alt="{{playerData?.competitor?.name}}"
-                      [lazyLoad]="playerData?.competitor?.id | playerimage:['m']"
-                      [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.playerplaceholder">
-                  </div>
-                  <div class="player-pic sec-player">
-                    <img class="common-shadow rounded-box" alt="{{playerData?.competitor?.name}}"
-                      [lazyLoad]="playerData?.competitor?.id | playerimage:['m']"
-                      [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.playerplaceholder">
-                  </div>
-                </div>
-                <div class="player-info d-flex common-shadow rounded-box" *ngIf="playerData">
-                  <div class="info-col">
-                    <ng-container *ngIf="playerData?.competitor?.name" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Contact_us.Full_Name' | translate), value:playerData?.competitor?.name | split}">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.info?.date_of_birth || playerData?.info?.dateofbirth"
-                      [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Born' | translate), value: (playerData?.info?.date_of_birth ? playerData?.info?.date_of_birth : playerData?.info?.dateofbirth)| date }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.competitor?.nationality" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Nationality' | translate), value: playerData?.competitor?.nationality }">
-                    </ng-container>
-                  </div>
-                  <div class="info-col">
-                    <ng-container *ngIf="playerData?.info?.wcs_won" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Championships Won' | translate), value: playerData?.info?.wcs_won }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.info?.height" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Height' | translate), value: playerData?.info?.height + ' ' +'cm' }">
-                    </ng-container>
-                    <ng-container *ngIf="playerData?.info?.weight" [ngTemplateOutlet]="playerInfoCardContent"
-                      [ngTemplateOutletContext]="{ title: ('Shared_Module2.Weight' | translate), value: playerData?.info?.weight + ' ' +'kg' }">
-                    </ng-container>
-                  </div>
-                </div>
-              </section> -->
->>>>>>> 5a6a483f7ad2c20e2c869fb908cb67d0a51f2c3a
 
               <section class="common-section top-padding quick-stats" *ngIf="stats">
                 <div class="nba-title d-flex justify-content-between">
                   <h4>{{ 'Shared_module.quick_stats' | translate }}</h4>
-                  <h6 class="light-text no-margin">2018-19 Season Stats</h6>
+                  <!-- <h6 class="light-text no-margin">2018-19 Season Stats</h6> -->
                 </div>
                 <ng-container *ngTemplateOutlet="quickStateCard;context:{ stats:stats}">
                 </ng-container>

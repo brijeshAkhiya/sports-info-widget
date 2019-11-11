@@ -65,9 +65,9 @@ const routes: Routes = [
         data: { 'sport': 'Tennis' }
       },
       {
-        path: 'team/:teamid/:slug',
-        component: TeamComponent,
-        data: { 'sport': 'Tennis' }
+        path: 'team/:id/:slug',
+        component: PlayerComponent,
+        data: { 'sport': 'Tennis', 'type': 'team' }
       },
       {
         path: 'player/:id/:slug',
