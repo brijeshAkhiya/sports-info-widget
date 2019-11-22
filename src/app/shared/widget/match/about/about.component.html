@@ -717,6 +717,10 @@
 <ng-template #tennisTeam let-team="team">
   <div class="team-col">
     <div class="current-team">
+      <h4>
+        <img [lazyLoad]="team?.id | logosurl:'tennis'" alt="{{team.name | split}}"
+          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+      </h4>
       <h4 [ngClass]="{'winner':data.sport_event_status.winner_id == team.id}">
         <a
           [routerLink]="(data.sport_event.tournament.type == 'doubles' || data.sport_event.tournament.type == 'mixed') ? ['/tennis/team',(team.id | splitID),((team.name | split) | slugify)] : ['/tennis/player',(team.id | splitID),((team.name | split) | slugify)]">

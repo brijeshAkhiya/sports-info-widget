@@ -386,6 +386,67 @@
             </ng-template>
           </ng-container>
         </owl-carousel-o>
+        <owl-carousel-o [options]="customOptions" *ngIf="sport == 'Tennis'">
+          <ng-container class="items" *ngFor="let slide of slider">
+            <ng-template carouselSlide>
+              <!--Live matches-->
+              <div class="slider-item">
+                <div class="slider-item-inner fullblock-link-container">
+                  <div class="title d-flex justify-content-between">
+                    <p class="tour-name" [ngClass]="sport | lowercase">
+                      <b>{{slide?.season ? slide?.season.name : ''}} {{slide.sport_event ? 1 : 0}}
+                      </b>
+                      <!-- <span
+                        class="text-capitalize">{{slide?.sport_event?.sport_event_context?.stage ? replace(slide?.sport_event?.sport_event_context?.stage.phase) : ''}}
+                      </span> -->
+                    </p>
+
+                    <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
+                    <p
+                      *ngIf="slide?.sport_event_status?.status == 'not_started' || slide?.sport_event_status?.status == 'closed'; ">
+                      {{slide.scheduled  | amTimeAgo}}</p>
+                    <!-- <ng-template #matchStatus>
+                      <p class="live-result">
+                        {{slide?.sport_event_status?.status ? slide?.sport_event_status?.status : slide?.sport_event_status?.match_status}}
+                      </p>
+                    </ng-template> -->
+                  </div>
+
+                  <ng-container
+                    *ngTemplateOutlet="team;context:{competitor:(slide?.competitors) ? slide?.competitors[0] : slide?.sport_event?.competitors[0], match:slide}">
+                  </ng-container>
+                  <ng-container
+                    *ngTemplateOutlet="team;context:{competitor:(slide?.competitors) ? slide?.competitors[1] : slide?.sport_event?.competitors[1], match:slide}">
+                  </ng-container>
+
+                  <ng-template #team let-competitor="competitor" let-match="match">
+                    <div class="match-info d-flex justify-content-between align-items-center">
+                      <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
+                        <img [lazyLoad]="competitor?.id| logosurl"
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
+                      <p>
+                        <!-- <b>{{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b> -->
+                      </p>
+                    </div>
+                  </ng-template>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <p class="result-line" *ngIf="slide.sport_event?.venue || slide?.venue">
+                        {{slide?.venue ? slide?.venue?.name : slide.sport_event?.venue?.name}}</p>
+                    </div>
+                  </div>
+                  <a class="fullblock-link" *ngIf="slide.sport_event; else fixtureLink"
+                    [routerLink]="['/tennis/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
+                  <ng-template #fixtureLink>
+                    <a class="fullblock-link"
+                      [routerLink]="['/tennis/match',(slide.id | splitID),(slide.competitors[0].abbreviation + '-vs-' +slide.competitors[1].abbreviation)]"></a>
+                  </ng-template>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
       </div>
     </div>
     <div class="header-live-slider no-matches d-flex justify-content-center align-items-center"
