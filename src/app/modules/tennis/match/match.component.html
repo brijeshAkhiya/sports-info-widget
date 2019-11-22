@@ -34,7 +34,7 @@
               <app-match-stats *ngIf="matchInfo?.statistics" [sport]="'Tennis'" [matchStats]="matchInfo">
               </app-match-stats>
 
-              <section class="last-meetings-section" *ngIf="lastmatches?.length > 0">
+              <section class="last-meetings-section common-section top-padding" *ngIf="lastmatches?.length > 0">
                 <h4 class="line-title">{{'Cricket_Module.Last_meetings' | translate}}</h4>
                 <app-schedule [data]="lastmatches" [type]="'result'" [sport]="'Tennis'"
                   [tournament]="'matchInfo?.sport_event?.tournament?.id'"></app-schedule>
