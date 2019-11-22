@@ -1,5 +1,5 @@
 /* -------- Header Slider CSS ------- */
-.header-live-section                                    { background: #1B2A5A; position: relative; z-index: 1113; }
+.header-live-section                                    { background: #f53c66; position: relative; z-index: 1113; }
 .header-live-section > .container                       { position: relative;}
 .header-live-inner                                      { min-height: 60px; }
 .slider-sports-selection                                { padding: 40px 0px; width: 150px; }
