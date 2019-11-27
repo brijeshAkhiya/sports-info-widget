@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   constructor(
     private swupdate: SwUpdate,
-    private commonservice: CommonService,
+    private commonService: CommonService,
     private sportsservice: SportsService,
     private router: Router,
     private meta: Meta,
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, AfterContentInit {
       element.classList.add('arabic');
     }
     /* //save language to localstorage */
-    localStorage.setItem('userLng', selectedLang);
+    this.commonService.setInStorage('userLng', selectedLang);
     this.translate.setDefaultLang(selectedLang);
 
     /* //get data from ngrx store through meta tags actions */
@@ -79,7 +79,7 @@ export class AppComponent implements OnInit, AfterContentInit {
           this.setmetatags(event.url);
         /*         //set meta tags from here... */
         /*         //set page title */
-        let title = this.commonservice.getPagetitlebyurl(event.url);
+        let title = this.commonService.getPagetitlebyurl(event.url);
         if (title != null) {
           this.pagetitle.setTitle(title);
         }

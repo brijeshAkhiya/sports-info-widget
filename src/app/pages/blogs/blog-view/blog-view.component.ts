@@ -67,7 +67,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.store.select('auth').subscribe((data) => {
       this.isAuth$ = data.isAuthenticated;
-      this.userId = localStorage.getItem('userId') ? localStorage.getItem('userId') : '';
+      this.userId = this.commonService.getFromStorage('userId') ? this.commonService.getFromStorage('userId') : '';
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == 'blog-preview') ? 'preview' : 'detail';
@@ -176,7 +176,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
 
   clicksubmit() {
     if (this.usercommentvalue.trim()) {
-      if (localStorage.getItem('userT')) {
+      if (this.commonService.getFromStorage('userT')) {
         this.isloggedin = true;
         this.isNocomment = false;
         let data = {
@@ -202,7 +202,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         }, 3000);
       }
     } else {
-      if (localStorage.getItem('userT')) {
+      if (this.commonService.getFromStorage('userT')) {
         this.isloggedin = true;
         this.isNocomment = true;
         setTimeout(() => {

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,7 +22,9 @@ export class FlashCommentaryComponent implements OnInit {
   flashscorecolor: any;
   flashstockcolor: any;
 
-  constructor(private io: SportsService) { }
+  constructor(private io: SportsService,
+    private commonService: CommonService
+  ) { }
 
   ngOnInit() {
     this.socket = this.io.connect();
@@ -92,8 +95,8 @@ export class FlashCommentaryComponent implements OnInit {
     this.currentmatchid = matchid;
     this.socket.emit('reqJoinRoom', matchid, (error, res) => {
       if (res) {
-        localStorage.setItem('Matchid', this.currentmatchid);
-        localStorage.setItem('matchteams', JSON.stringify(this.teamsname));
+        this.commonService.setInStorage('Matchid', this.currentmatchid);
+        this.commonService.setInStorage('matchteams', JSON.stringify(this.teamsname));
         this.reqFetchRooms();
         this.isshow = true;
         this.isapply = false;

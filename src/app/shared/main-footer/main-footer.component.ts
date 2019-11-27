@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
 import { SocketService } from '@providers/socket.service';
+import { CommonService } from '@providers/common-service';
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { SlugifyPipe } from '@pipes/slugpipe';
@@ -43,7 +44,9 @@ export class MainFooterComponent implements OnInit {
     private socket: Socket,
     private slugifyPipe: SlugifyPipe,
     private splitIDPipe: StringsplitID,
-    private store: Store<fromRoot.State>) { }
+    private store: Store<fromRoot.State>,
+    private commonService: CommonService
+  ) { }
 
   ngOnInit() {
     this.getContactDetails();
@@ -52,7 +55,7 @@ export class MainFooterComponent implements OnInit {
       if (this.isAuth$ == true) {
         this.getUserfavourites();
       } else {
-        this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
+        this.userfavourites = JSON.parse(this.commonService.getFromStorage('favourites'));
         if (this.userfavourites && this.userfavourites.length > 0) {
           this.userfavourites = this.userfavourites.map((singleitem) => {
             return {
@@ -72,7 +75,7 @@ export class MainFooterComponent implements OnInit {
   /* //get user favourites */
   getUserfavourites() {
     this.sportsService.getuserfavourite().subscribe((res: any) => {
-      this.userfavourites = JSON.parse(localStorage.getItem('favourites'));
+      this.userfavourites = JSON.parse(this.commonService.getFromStorage('favourites'));
       this.userfavourites = this.userfavourites.map((singleitem) => {
         return {
           ...singleitem,
@@ -113,10 +116,10 @@ export class MainFooterComponent implements OnInit {
       let isselectedtags = this.userfavourites.some((data) => data.isSelect == true);
       if (isselectedtags) {
         this.userfavourites = this.userfavourites.filter(data => data.isSelect == false);
-        localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
+        this.commonService.setInStorage('favourites', JSON.stringify(this.userfavourites));
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
 
-        if (localStorage.getItem('userT')) {
+        if (this.commonService.getFromStorage('userT')) {
           this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
             if (res) {
             }

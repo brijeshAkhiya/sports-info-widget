@@ -7,6 +7,8 @@ import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } f
 import * as fromRoot from '../../../app-reducer';
 import * as Auth from '../../../store/auth/auth.actions';
 import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
+
 
 
 @Component({
@@ -24,10 +26,8 @@ export class LoginModalComponent implements OnInit {
     private authService: AuthService,
     private socialLoginService: AuthService,
     private store: Store<fromRoot.State>,
-    private modalService: NgbModal
-
-
-
+    private modalService: NgbModal,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -69,8 +69,8 @@ export class LoginModalComponent implements OnInit {
         sFbToken: token
       };
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
-        localStorage.setItem('userT', res.Authorization);
-        localStorage.setItem('userId', res.data._id);
+        this.commonService.setInStorage('userT', res.Authorization);
+        this.commonService.setInStorage('userId', res.data._id);
         this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {
@@ -86,8 +86,8 @@ export class LoginModalComponent implements OnInit {
         sGoogleToken: token
       };
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
-        localStorage.setItem('userT', res.Authorization);
-        localStorage.setItem('userId', res.data._id);
+        this.commonService.setInStorage('userT', res.Authorization);
+        this.commonService.setInStorage('userId', res.data._id);
         this.store.dispatch(new Auth.SetAuthenticated());
       }, (error) => {
         if (error.status == 401) {

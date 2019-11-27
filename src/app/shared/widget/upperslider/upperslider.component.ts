@@ -99,10 +99,10 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
     this.loadAllSportsData();
 
-    if (localStorage.getItem('selectedSport') != null) {
-      this.sport = localStorage.getItem('selectedSport');
+    if (this.commonService.getFromStorage('selectedSport') != null) {
+      this.sport = this.commonService.getFromStorage('selectedSport');
     }
-    if (localStorage.getItem('userLng') === 'arabic') {
+    if (this.commonService.getFromStorage('userLng') === 'arabic') {
       this.customOptions.rtl = true;
       this.customOptions1.rtl = true;
     }
@@ -139,12 +139,12 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     if (event.slides.length > 0) {
       this.clearTimeInterval();
       this.sport = event.slides[0].id;
-      localStorage.setItem('selectedSport', this.sport);
+      this.commonService.setInStorage('selectedSport', this.sport);
       this.slider = [];
       this.loadData();
     } else if (this.sport == 'Cricket') {
       this.clearTimeInterval();
-      localStorage.setItem('selectedSport', this.sport);
+      this.commonService.setInStorage('selectedSport', this.sport);
       this.slider = [];
       this.loadData();
     }

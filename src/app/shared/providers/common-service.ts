@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { environment } from '@env';
 import * as moment from 'moment';
 
@@ -17,11 +18,26 @@ export class CommonService {
   public siteUrl;
   titleObj;
 
-  constructor() {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.s3Url = environment.s3Url;
     this.siteUrl = environment.siteUrl;
     this.getPageTitles();
   }
+
+  /** Get Locastoarage Item */
+  getFromStorage(key) {
+    if (isPlatformBrowser(this.platformId))
+      return localStorage.getItem(key);
+  }
+
+  /** Store Item in Locastoarage */
+  setInStorage(key, value) {
+    if (!isPlatformBrowser(this.platformId)) return false;
+    localStorage.setItem(key, value);
+  }
+
 
   /** Get Milli seconds from Hr, min and seconds */
   miliseconds(hrs, min, sec) {

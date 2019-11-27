@@ -39,7 +39,7 @@ export class ProbabilityComponent implements OnInit, OnDestroy {
       else {
         this.loading = false;
         this.seasons = data[this.game];
-        let prevSelected: any = localStorage.getItem(this.game);
+        let prevSelected: any = this.commonService.getFromStorage(this.game);
         this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
         this.getStandings();
       }
@@ -65,7 +65,7 @@ export class ProbabilityComponent implements OnInit, OnDestroy {
     this.standings = [];
     this.loading = true;
     this.getStandings();
-    localStorage.setItem(this.game, JSON.stringify(season));
+    this.commonService.setInStorage(this.game, JSON.stringify(season));
 
   }
   ngOnDestroy() {

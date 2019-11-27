@@ -68,7 +68,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            let prevSelected: any = localStorage.getItem(this.sport);
+            let prevSelected: any = this.commonService.getFromStorage(this.sport);
             this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
@@ -82,7 +82,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            let prevSelected: any = localStorage.getItem(this.sport);
+            let prevSelected: any = this.commonService.getFromStorage(this.sport);
             this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
@@ -99,7 +99,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
           else {
             this.isloading = true;
             this.seasons = data[this.game];
-            let prevSelected: any = localStorage.getItem(this.game);
+            let prevSelected: any = this.commonService.getFromStorage(this.game);
             this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.sportsService.getRacingSeasonsSummary(this.game, this.filter.id).subscribe(this.teamSuccess, this.teamError);
           }
@@ -113,14 +113,14 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.filter = season;
     this.teams = [];
     this.isloading = true;
-    localStorage.setItem(this.sport, JSON.stringify(season));
+    this.commonService.setInStorage(this.sport, JSON.stringify(season));
     if (this.sport == 'Hockey')
       this.sportsService.getHockeySeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
     else if (this.sport == 'Badminton')
       this.sportsService.getBadmintonSeasonInfo(this.filter.id).subscribe(this.teamSuccess, this.teamError);
     else if (this.sport == 'Racing') {
       this.sportsService.getRacingSeasonsSummary(this.game, this.filter.id).subscribe(this.teamSuccess, this.teamError);
-      localStorage.setItem(this.game, JSON.stringify(season));
+      this.commonService.setInStorage(this.game, JSON.stringify(season));
     }
   }
 

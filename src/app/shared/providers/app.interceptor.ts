@@ -7,18 +7,22 @@ import {
     HttpResponse
 } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { CommonService } from '@providers/common-service';
+
 
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor(
+        private commonService: CommonService
+    ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler) {
 /*         //google maps api doesnt allow extra header params - Fix condition --->
  */        if (!request.url.includes('maps.googleapis.com/maps/api')) {
             request = request.clone({
                 setHeaders: {
-                    Language: localStorage.getItem('userLng') ? localStorage.getItem('userLng') : null
+                    Language: this.commonService.getFromStorage('userLng') ? this.commonService.getFromStorage('userLng') : null
                 }
             });
         }

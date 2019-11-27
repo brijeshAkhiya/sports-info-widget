@@ -4,6 +4,8 @@ import { environment } from '@env';
 import { Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
 import * as io from 'socket.io-client';
+import { CommonService } from '@providers/common-service';
+
 
 export interface Config {
   componentType: string;
@@ -14,7 +16,9 @@ export interface Config {
 export class SportsService {
   configs: Observable<any>;
   currentseries: Observable<any>;
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private commonService: CommonService
+  ) { }
 
   /*   //<----home page services starts --------> */
 
@@ -257,7 +261,7 @@ export class SportsService {
   /*   //add user comment  */
   addusercomment(data) {
     let headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('userT')
+      'Authorization': this.commonService.getFromStorage('userT')
     });
     return this.http.post(
       environment.apiUrl + environment.version + `/comments`,
@@ -268,7 +272,7 @@ export class SportsService {
   /*   //editcomment */
   Editcomment(id, data) {
     let headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('userT')
+      'Authorization': this.commonService.getFromStorage('userT')
     });
     const Body = { 'sComment': data };
     return this.http.put(environment.apiUrl + environment.version + `/comments/${id}`, Body, { headers: headers });
@@ -277,7 +281,7 @@ export class SportsService {
   /*   // deletecomment   */
   deleteusercomment(id) {
     let headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('userT')
+      'Authorization': this.commonService.getFromStorage('userT')
     });
     return this.http.delete(
       environment.apiUrl + environment.version + `/comments/${id}`, { headers: headers });
@@ -399,7 +403,7 @@ export class SportsService {
   /*   //update favourites  */
   updatefavourites(data) {
     let headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('userT')
+      'Authorization': this.commonService.getFromStorage('userT')
     });
     return this.http.put(
       environment.apiUrl + environment.version + `/favorites`,
@@ -410,7 +414,7 @@ export class SportsService {
   /*   //get user favourites */
   getuserfavourite() {
     let headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('userT')
+      'Authorization': this.commonService.getFromStorage('userT')
     });
     return this.http.get(
       environment.apiUrl + environment.version + `/favorites`, { headers: headers }

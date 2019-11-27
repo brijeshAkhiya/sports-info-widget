@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-stats',
@@ -14,7 +15,8 @@ export class StatsComponent implements OnInit {
   filter: any = { 'category': 'points' };
   namesdata: any;
   constructor(
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    private commonService: CommonService
   ) { }
 
 
@@ -45,17 +47,17 @@ export class StatsComponent implements OnInit {
     this.sportsService.getBasketballseason().subscribe((res: any) => {
       if (res.data && res.data.seasons) {
         if (res.data.seasons) {
-          if (!localStorage.getItem('filteryear') || !localStorage.getItem('filtertype') || !localStorage.getItem('filternames')) {
+          if (!this.commonService.getFromStorage('filteryear') || !this.commonService.getFromStorage('filtertype') || !this.commonService.getFromStorage('filternames')) {
             this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
-            localStorage.setItem('filteryear', this.filter.year);
+            this.commonService.setInStorage('filteryear', this.filter.year);
             this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
-            localStorage.setItem('filtertype', this.filter.type);
+            this.commonService.setInStorage('filtertype', this.filter.type);
             this.filter.names = 'points';
-            localStorage.setItem('filternames', this.filter.names);
+            this.commonService.setInStorage('filternames', this.filter.names);
           } else {
-            this.filter.year = localStorage.getItem('filteryear');
-            this.filter.type = localStorage.getItem('filtertype');
-            this.filter.names = localStorage.getItem('filternames');
+            this.filter.year = this.commonService.getFromStorage('filteryear');
+            this.filter.type = this.commonService.getFromStorage('filtertype');
+            this.filter.names = this.commonService.getFromStorage('filternames');
           }
           // this.filter.names = 'points';
         }
@@ -98,9 +100,9 @@ export class StatsComponent implements OnInit {
     } else {
       this.namesfilter();
     }
-    localStorage.setItem('filteryear', this.filter.year);
-    localStorage.setItem('filtertype', this.filter.type);
-    localStorage.setItem('filternames', this.filter.names);
+    this.commonService.setInStorage('filteryear', this.filter.year);
+    this.commonService.setInStorage('filtertype', this.filter.type);
+    this.commonService.setInStorage('filternames', this.filter.names);
   }
 
 }

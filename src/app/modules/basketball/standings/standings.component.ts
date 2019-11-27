@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 
 @Component({
   selector: 'app-standings',
@@ -13,7 +14,8 @@ export class StandingsComponent implements OnInit {
   isloading = false;
 
   constructor(
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -61,14 +63,14 @@ export class StandingsComponent implements OnInit {
     this.sportsService.getBasketballseason().subscribe((res: any) => {
       if (res.data && res.data.seasons) {
         if (res.data.seasons) {
-          if (!localStorage.getItem('filteryear')) {
+          if (!this.commonService.getFromStorage('filteryear')) {
             this.filter.year = res.data.seasons[res.data.seasons.length - 1].year;
-            localStorage.setItem('filteryear', this.filter.year);
+            this.commonService.setInStorage('filteryear', this.filter.year);
             this.filter.type = res.data.seasons[res.data.seasons.length - 1].type.code;
-            localStorage.setItem('filtertype', this.filter.type);
+            this.commonService.setInStorage('filtertype', this.filter.type);
           } else {
-            this.filter.year = localStorage.getItem('filteryear');
-            this.filter.type = localStorage.getItem('filtertype');
+            this.filter.year = this.commonService.getFromStorage('filteryear');
+            this.filter.type = this.commonService.getFromStorage('filtertype');
             this.getTournamentStandings(this.filter.year, this.filter.type);
           }
         }
@@ -98,7 +100,7 @@ export class StandingsComponent implements OnInit {
     this.standings.teams = [];
     this.standings.divisions = [];
     this.getTournamentStandings(this.filter.year, this.filter.type);
-    localStorage.setItem('filteryear', this.filter.year);
-    localStorage.setItem('filtertype', this.filter.type);
+    this.commonService.setInStorage('filteryear', this.filter.year);
+    this.commonService.setInStorage('filtertype', this.filter.type);
   }
 }

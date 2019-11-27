@@ -217,8 +217,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   logout() {
     this.authService.signOut().then(res => {
-      if (localStorage.getItem('userT')) {
-        this.getuserLogout(localStorage.getItem('userT'));
+      if (this.commonService.getFromStorage('userT')) {
+        this.getuserLogout(this.commonService.getFromStorage('userT'));
         localStorage.removeItem('userT');
         localStorage.removeItem('userId');
       }

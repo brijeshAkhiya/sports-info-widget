@@ -39,7 +39,7 @@ export class StandingsComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.seasons = data[id];
         if (this.seasons.length > 0) {
-          let prevSelected: any = localStorage.getItem('Badminton');
+          let prevSelected: any = this.commonService.getFromStorage('Badminton');
           this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
         }
         this.getStandings();
@@ -66,7 +66,7 @@ export class StandingsComponent implements OnInit, OnDestroy {
     this.standings = [];
     this.loading = true;
     this.getStandings();
-    localStorage.setItem('Badminton', JSON.stringify(season));
+    this.commonService.setInStorage('Badminton', JSON.stringify(season));
 
   }
   ngOnDestroy() {

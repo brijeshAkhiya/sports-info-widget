@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
+
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app-reducer';
 import * as favourites from '../../store/favourites-management/favourites.actions';
@@ -20,7 +22,8 @@ export class FavouritesWidgetComponent implements OnInit, OnDestroy {
   constructor(
     private sportsService: SportsService,
     private store: Store<fromRoot.State>,
-    private router: Router
+    private router: Router,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -42,8 +45,8 @@ export class FavouritesWidgetComponent implements OnInit, OnDestroy {
       this.userfavourites.push({ name: this.value.name, url: this.router.url, isSelect: false });
     }
     this.isadded = (this.isadded) ? false : true;
-    localStorage.setItem('favourites', JSON.stringify(this.userfavourites));
-    if (localStorage.getItem('userT')) {
+    this.commonService.setInStorage('favourites', JSON.stringify(this.userfavourites));
+    if (this.commonService.getFromStorage('userT')) {
       this.sportsService.updatefavourites({ data: this.userfavourites });
     } else
       this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));

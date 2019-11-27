@@ -100,7 +100,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Hockey.LoadHockeyCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            let prevSelected: any = localStorage.getItem(this.params.sport);
+            let prevSelected: any = this.commonService.getFromStorage(this.params.sport);
             this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.getHockeyTournamentData();
           }
@@ -115,7 +115,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Badminton.LoadBadmintonCompSeason(this.tournamentid));
           else {
             this.seasons = data[this.tournamentid];
-            let prevSelected: any = localStorage.getItem(this.params.sport);
+            let prevSelected: any = this.commonService.getFromStorage(this.params.sport);
             this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
             this.getBadmintonTournamentData();
           }
@@ -129,7 +129,7 @@ export class FixturesComponent implements OnInit, OnDestroy {
           this.store.dispatch(new Racing.LoadRacingCompSeason(this.game));
         else {
           this.seasons = data[this.game];
-          let prevSelected: any = localStorage.getItem(this.game);
+          let prevSelected: any = this.commonService.getFromStorage(this.game);
           this.filter = prevSelected && this.seasons.filter(season => season.id == JSON.parse(prevSelected).id).length > 0 ? JSON.parse(prevSelected) : this.seasons[0];
           this.getRacingData();
         }
@@ -147,14 +147,14 @@ export class FixturesComponent implements OnInit, OnDestroy {
     this.filter = season;
     this.paramsFixtures.data = [];
     this.paramsResults.data = [];
-    localStorage.setItem(this.params.sport, JSON.stringify(season));
+    this.commonService.setInStorage(this.params.sport, JSON.stringify(season));
     if (this.params.sport == 'Hockey')
       this.getHockeyTournamentData();
     else if (this.params.sport == 'Badminton')
       this.getBadmintonTournamentData();
     else if (this.params.sport == 'Racing') {
       this.getRacingData();
-      localStorage.setItem(this.game, JSON.stringify(season));
+      this.commonService.setInStorage(this.game, JSON.stringify(season));
     }
   }
 
