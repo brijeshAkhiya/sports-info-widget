@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, Injector, PLATFORM_ID, Inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Meta, Title } from '@angular/platform-browser';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import * as MetaTags from './store/meta-tags-management/meta-tags.actions';
 import * as fromRoot from './app-reducer';
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   metatagsObj = {};
   isupdate: boolean;
   showCookiepopup = false;
+  requestedUrl;
 
   constructor(
     private swupdate: SwUpdate,
@@ -31,39 +33,64 @@ export class AppComponent implements OnInit, AfterContentInit {
     private meta: Meta,
     private pagetitle: Title,
     private store: Store<fromRoot.State>,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private injector: Injector,
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.getMetaTags();
     this.swupdate.available.subscribe((res) => {
       this.isupdate = true;
     });
-    if (!this.readCookie('iscookieenabled')) {
-      this.showCookiepopup = true;
-      document.cookie = 'iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC; Secure; SameSite=None; ';
-    } else {
-      this.showCookiepopup = false;
+    if (isPlatformBrowser(this.platformId)) {
+      if (!this.readCookie('iscookieenabled')) {
+        this.showCookiepopup = true;
+        document.cookie = 'iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC; Secure; SameSite=None; ';
+      } else {
+        this.showCookiepopup = false;
+      }
     }
   }
 
   ngOnInit() {
 
     let selectedLang = 'english';
-    if ((window.location.host != 'www.sports.info'
-      && window.location.host != 'dev.sports.info'
-      && !window.location.host.includes('localhost')
-      && !window.location.host.includes('192.168')
-      && !window.location.host.includes('127.0.0.1'))) {
-      if (window.location.host.split('.')[0])
-        selectedLang = window.location.host.split('.')[0];
+    let host;
+    if (isPlatformServer(this.platformId)) {
+      host = this.injector.get('req') ? this.injector.get('req').headers.host : 'http://www.sports.info';
+    } else {
+      host = window.location.origin;
+    }
+    this.commonService.siteUrl = host;
+    console.log(host);
+
+    if ((host != 'www.sports.info'
+      && host != 'dev.sports.info'
+      && !host.includes('localhost')
+      && !host.includes('192.168')
+      && !host.includes('127.0.0.1'))) {
+      if (host.split('.')[0]
+        && ['english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0]))
+        selectedLang = host.split('.')[0];
     }
     let element = document.getElementById('main-body');
     if (selectedLang === 'arabic' && element != null) {
       element.classList.add('arabic');
     }
-    /* //save language to localstorage */
-    this.commonService.setInStorage('userLng', selectedLang);
+
     this.translate.setDefaultLang(selectedLang);
 
+    /* //get data from ngrx store through meta tags actions */
+    if (isPlatformServer(this.platformId)) {
+      const requestUrl = this.injector.get('req').url;
+      if (!requestUrl.includes('svg') && !requestUrl.includes('css')) {
+        this.requestedUrl = requestUrl;
+        this.setmetatags(requestUrl);
+      }
+    }
+    else {
+      /* //save language to localstorage */
+      this.commonService.setInStorage('userLng', selectedLang);
+    }
     /* //get data from ngrx store through meta tags actions */
 
     /*  //susbcribe to router events */
@@ -72,7 +99,8 @@ export class AppComponent implements OnInit, AfterContentInit {
       if (!(event instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0);
+      if (isPlatformBrowser(this.platformId))
+        window.scrollTo(0, 0);
       /* //change route get url */
       if (event instanceof NavigationEnd) {
         if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
@@ -121,7 +149,7 @@ export class AppComponent implements OnInit, AfterContentInit {
             this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
           if (data['twitter:card'])
             this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
-        } else {
+        } else if (isPlatformBrowser(this.platformId)) {
           this.meta.updateTag({ name: 'title', content: 'title' });
           this.meta.updateTag({ property: 'og:title', content: 'title' });
           this.meta.updateTag({ name: 'twitter:title', content: 'title' });
@@ -181,7 +209,8 @@ export class AppComponent implements OnInit, AfterContentInit {
           metaarray['/'] = data;
       });
       this.metatagsObj = { ...metaarray };
-
+      if (Object.keys(this.metatagsObj).length != 0 && this.requestedUrl)
+        this.setmetatags(this.requestedUrl);
     });
   }
 
@@ -197,8 +226,5 @@ export class AppComponent implements OnInit, AfterContentInit {
         reject();
       }
     });
-
   }
-
-
 }

@@ -15,14 +15,14 @@ export class CommonService {
   public teamPlaceholder = '/assets/images/logo-placeholder.svg';
   public lazyloadoffset = '1500';
   public s3Url;
-  public siteUrl;
+  public siteUrl = 'https://www.sports.info/';
   titleObj;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.s3Url = environment.s3Url;
-    this.siteUrl = environment.siteUrl;
+    // this.siteUrl = environment.siteUrl;
     this.getPageTitles();
   }
 

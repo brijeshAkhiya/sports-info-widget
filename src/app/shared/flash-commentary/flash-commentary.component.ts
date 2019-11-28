@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, PLATFORM_ID, Inject } from '@angular/core';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 import { Observable } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-flash-commentary',
@@ -23,18 +24,21 @@ export class FlashCommentaryComponent implements OnInit {
   flashstockcolor: any;
 
   constructor(private io: SportsService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit() {
-    this.socket = this.io.connect();
-    this.socket.on('connect', res => {
-      this.reqFetchRooms();
-      this.onNewScore();
-    });
-    this.onNewScore().subscribe(res => { });
-    this.onNewCommentary().subscribe(res => { });
-    this.onStopCommentary().subscribe(res => { });
+    if (isPlatformBrowser(this.platformId)) {
+      this.socket = this.io.connect();
+      this.socket.on('connect', res => {
+        this.reqFetchRooms();
+        this.onNewScore();
+      });
+      this.onNewScore().subscribe(res => { });
+      this.onNewCommentary().subscribe(res => { });
+      this.onStopCommentary().subscribe(res => { });
+    }
   }
 
   /* //request fetch rooms/matches */

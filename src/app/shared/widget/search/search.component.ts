@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2, ViewEncapsulation, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, Input, ViewChild, Renderer2, ViewEncapsulation, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { isPlatformBrowser } from '@angular/common';
 import { SportsService } from '@providers/sports-service';
 
 @Component({
@@ -17,7 +17,8 @@ export class SearchComponent implements OnInit, OnChanges {
     private el: ElementRef,
     private router: Router,
     private renderer2: Renderer2,
-    private sportsService: SportsService
+    private sportsService: SportsService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   @ViewChild('searchBox') searchBox;
@@ -30,12 +31,14 @@ export class SearchComponent implements OnInit, OnChanges {
 
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
-    const clickedInside = this.searchBox.nativeElement.contains(targetElement);
-    if (targetElement != this.searchOpen && !clickedInside) {
-      this.searchkey = '';
-      this.searchdata = [];
-      this.issearch = false;
-      this.clickOutside.emit(false);
+    if (isPlatformBrowser(this.platformId)) {
+      const clickedInside = this.searchBox.nativeElement.contains(targetElement);
+      if (targetElement != this.searchOpen && !clickedInside) {
+        this.searchkey = '';
+        this.searchdata = [];
+        this.issearch = false;
+        this.clickOutside.emit(false);
+      }
     }
   }
 

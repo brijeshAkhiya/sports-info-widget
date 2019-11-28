@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation, OnDestroy } from '@angular/core';
-
+import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, ViewEncapsulation, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { SportsService } from '@providers/sports-service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -21,13 +21,16 @@ export class MenuComponent implements OnInit, OnDestroy {
   constructor(
     private sportsService: SportsService,
     private activatedroute: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit() {
-    document.getElementById('main-body').classList.add('submenu-open');
-    if (typeof this.options !== 'undefined') {
-      if (this.options.sport === 'Cricket') {
-        this.getCricketSeries();
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById('main-body').classList.add('submenu-open');
+      if (typeof this.options !== 'undefined') {
+        if (this.options.sport === 'Cricket') {
+          this.getCricketSeries();
+        }
       }
     }
   }

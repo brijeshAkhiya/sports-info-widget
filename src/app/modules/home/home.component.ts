@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonService } from '@providers/common-service';
 import { SportsService } from '@providers/sports-service';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as fromRoot from '@app/app-reducer';
 import { Store } from '@ngrx/store';
@@ -39,7 +40,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     public commonService: CommonService,
     private sportsService: SportsService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit() {
@@ -64,17 +66,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   /** Highlight Blog in interval */
   initHighlightInterval(initValue) {
-    let i = initValue;
-    this.highlightImageInterval = setInterval(() => {
-      this.highlightImage = i;
-      i = (this.banners.length - 1 === i) ? 0 : i + 1;
-    }, 3000);
+    if (isPlatformBrowser(this.platformId)) {
+      let i = initValue;
+      this.highlightImageInterval = setInterval(() => {
+        this.highlightImage = i;
+        i = (this.banners.length - 1 === i) ? 0 : i + 1;
+      }, 3000);
+    }
   }
 
   /** Stop Highlight Blog on mouseover */
   stopHighlightInterval(highlightIndex) {
     this.highlightImage = highlightIndex;
-    clearInterval(this.highlightImageInterval);
+    if (this.highlightImageInterval) clearInterval(this.highlightImageInterval);
   }
 
   /* //get popular videos */
@@ -86,7 +90,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.highlightImageInterval);
+    if (this.highlightImageInterval) clearInterval(this.highlightImageInterval);
   }
 
 }

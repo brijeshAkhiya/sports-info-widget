@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { SportsService } from '@providers/sports-service';
 import { SocketService } from '@providers/socket.service';
 import { CommonService } from '@providers/common-service';
@@ -45,31 +46,34 @@ export class MainFooterComponent implements OnInit {
     private slugifyPipe: SlugifyPipe,
     private splitIDPipe: StringsplitID,
     private store: Store<fromRoot.State>,
-    private commonService: CommonService
+    private commonService: CommonService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit() {
     this.getContactDetails();
-    this.store.select('auth').subscribe((data: any) => {
-      this.isAuth$ = data.isAuthenticated;
-      if (this.isAuth$ == true) {
-        this.getUserfavourites();
-      } else {
-        this.userfavourites = JSON.parse(this.commonService.getFromStorage('favourites'));
-        if (this.userfavourites && this.userfavourites.length > 0) {
-          this.userfavourites = this.userfavourites.map((singleitem) => {
-            return {
-              ...singleitem,
-              isSelect: false
-            };
-          });
+    if (isPlatformBrowser(this.platformId)) {
+      this.store.select('auth').subscribe((data: any) => {
+        this.isAuth$ = data.isAuthenticated;
+        if (this.isAuth$ == true) {
+          this.getUserfavourites();
+        } else {
+          this.userfavourites = JSON.parse(this.commonService.getFromStorage('favourites'));
+          if (this.userfavourites && this.userfavourites.length > 0) {
+            this.userfavourites = this.userfavourites.map((singleitem) => {
+              return {
+                ...singleitem,
+                isSelect: false
+              };
+            });
+          }
+          this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
         }
-        this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
-      }
-    });
-    this.store.select('Favourites').subscribe((data: any) => {
-      this.userfavourites = data.Favourites ? data.Favourites : [];
-    });
+      });
+      this.store.select('Favourites').subscribe((data: any) => {
+        this.userfavourites = data.Favourites ? data.Favourites : [];
+      });
+    }
   }
 
   /* //get user favourites */
@@ -149,15 +153,17 @@ export class MainFooterComponent implements OnInit {
     // window의 scroll top
     // Both window.pageYOffset and document.documentElement.scrollTop returns the same result in all the cases. window.pageYOffset is not supported below IE 9.
 
-    const scrollPosition =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
-    if (scrollPosition >= this.topPosToStartShowing) {
-      this.isShow = true;
-    } else {
-      this.isShow = false;
+    if (isPlatformBrowser(this.platformId)) {
+      const scrollPosition =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      if (scrollPosition >= this.topPosToStartShowing) {
+        this.isShow = true;
+      } else {
+        this.isShow = false;
+      }
     }
   }
 

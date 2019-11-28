@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Store } from "@ngrx/store";
-import { SportsService } from "@providers/sports-service";
-declare var document: any;
+import { Component, OnInit, Input, PLATFORM_ID, Inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { isPlatformBrowser } from '@angular/common';
+import { SportsService } from '@providers/sports-service';
+
 declare var window: any;
 @Component({
   selector: 'app-custom-ads-widget',
@@ -16,21 +17,27 @@ export class CustomAdsWidgetComponent implements OnInit {
   defaultImageRectangle = '/assets/images/ad-320-267.jpg'
   defaultImageBanner = '/assets/images/ad-320-80.jpg'
 
-  constructor(private store: Store<any>, private sportsService: SportsService, ) { }
+  constructor(
+    private store: Store<any>,
+    private sportsService: SportsService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   ngOnInit() {
-    //ngrx store code
-    this.store.select('ads').subscribe((data: any) => {
-      let arr = data.Ads;
-      arr.map(data => {
-        if (!this.adsObj[data.eType])
-          this.adsObj[data.eType] = [];
-        this.adsObj[data.eType].push(data);
-      });
-      //pick random custom ad from ngrx store data obj
-      if (this.adsObj[this.type])
-        this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
-    })
+    if (isPlatformBrowser(this.platformId)) {
+      //ngrx store code
+      this.store.select('ads').subscribe((data: any) => {
+        let arr = data.Ads;
+        arr.map(data => {
+          if (!this.adsObj[data.eType])
+            this.adsObj[data.eType] = [];
+          this.adsObj[data.eType].push(data);
+        });
+        //pick random custom ad from ngrx store data obj
+        if (this.adsObj[this.type])
+          this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
+      })
+    }
   }
 
   /** For load custom js */

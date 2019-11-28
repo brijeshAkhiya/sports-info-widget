@@ -1,9 +1,10 @@
 
-import { Component, OnInit, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as Cricket from '@store/cricket/cricket.actions';
 import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
@@ -84,6 +85,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   liveMatchesSubscription;
   scheduleSubscription;
   runningMatchFlagSubscription;
+  isBrowser: boolean = true;
 
   @ViewChild('sportsSlider') public sportsSlider: CarouselComponent;
 
@@ -92,27 +94,31 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private sportsService: SportsService,
     private commonService: CommonService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
 
-    this.loadAllSportsData();
+      this.loadAllSportsData();
 
-    if (this.commonService.getFromStorage('selectedSport') != null) {
-      this.sport = this.commonService.getFromStorage('selectedSport');
+      if (this.commonService.getFromStorage('selectedSport') != null) {
+        this.sport = this.commonService.getFromStorage('selectedSport');
+      }
+      if (this.commonService.getFromStorage('userLng') === 'arabic') {
+        this.customOptions.rtl = true;
+        this.customOptions1.rtl = true;
+      }
+      if (this.sportsSlider) {
+        setTimeout(() => {
+          this.sportsSlider.to(this.sport.toString());
+          // this.loadData();
+        });
+      }
     }
-    if (this.commonService.getFromStorage('userLng') === 'arabic') {
-      this.customOptions.rtl = true;
-      this.customOptions1.rtl = true;
-    }
-    if (this.sportsSlider) {
-      setTimeout(() => {
-        this.sportsSlider.to(this.sport.toString());
-        // this.loadData();
-      });
-    }
-
+    else
+      this.isBrowser = true;
   }
 
   loadAllSportsData() {
@@ -135,18 +141,19 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
   // change slide select sport event
   changeSlide(event) {
-
-    if (event.slides.length > 0) {
-      this.clearTimeInterval();
-      this.sport = event.slides[0].id;
-      this.commonService.setInStorage('selectedSport', this.sport);
-      this.slider = [];
-      this.loadData();
-    } else if (this.sport == 'Cricket') {
-      this.clearTimeInterval();
-      this.commonService.setInStorage('selectedSport', this.sport);
-      this.slider = [];
-      this.loadData();
+    if (isPlatformBrowser(this.platformId)) {
+      if (event.slides.length > 0) {
+        this.clearTimeInterval();
+        this.sport = event.slides[0].id;
+        this.commonService.setInStorage('selectedSport', this.sport);
+        this.slider = [];
+        this.loadData();
+      } else if (this.sport == 'Cricket') {
+        this.clearTimeInterval();
+        this.commonService.setInStorage('selectedSport', this.sport);
+        this.slider = [];
+        this.loadData();
+      }
     }
   }
 
@@ -690,15 +697,17 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
   /** Clear Interval and timeout on destroy */
   clearTimeInterval() {
-    if (this.runningMatchFlagSubscription) this.runningMatchFlagSubscription.unsubscribe();
-    this.store.dispatch(new Basketball.RemoveBasketballUpdate());
-    this.store.dispatch(new Tennis.RemoveTennisUpdate());
-    clearInterval(this.interval);
-    clearTimeout(this.timeout);
-    this.timerStartTime.Soccer.isLiveUpdate = false;
-    this.timerStartTime.Soccer.isStartAfterTime = false;
-    if (this.liveMatchesSubscription) this.liveMatchesSubscription.unsubscribe();
-    if (this.scheduleSubscription) this.scheduleSubscription.unsubscribe();
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.runningMatchFlagSubscription) this.runningMatchFlagSubscription.unsubscribe();
+      this.store.dispatch(new Basketball.RemoveBasketballUpdate());
+      this.store.dispatch(new Tennis.RemoveTennisUpdate());
+      clearInterval(this.interval);
+      clearTimeout(this.timeout);
+      this.timerStartTime.Soccer.isLiveUpdate = false;
+      this.timerStartTime.Soccer.isStartAfterTime = false;
+      if (this.liveMatchesSubscription) this.liveMatchesSubscription.unsubscribe();
+      if (this.scheduleSubscription) this.scheduleSubscription.unsubscribe();
+    }
   }
 
   ngOnDestroy() {

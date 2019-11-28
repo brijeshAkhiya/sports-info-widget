@@ -8,13 +8,17 @@ import {
   AfterViewInit,
   HostListener,
   ViewEncapsulation,
-  OnDestroy
+  OnDestroy,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'angularx-social-login';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+
 
 import { LoginModalComponent } from '../widget/login-modal/login-modal.component';
 
@@ -91,6 +95,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private authService: AuthService,
     private store: Store<fromRoot.State>,
     private commonService: CommonService,
+    @Inject(PLATFORM_ID) private platformId: Object
+
   ) {
     /* //get custom ads data Funtion call ---> */
     this.getCustomAds();
@@ -98,18 +104,19 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this.currentSite = window.location.origin;
-    this.authService.authState.subscribe((user) => {
-      if (user == null) {
-        this.isLogin = false;
-        this.store.dispatch(new Auth.SetUnauthenticated);
-      } else {
-        this.socialUser = user;
-        this.isLogin = true;
-        this.store.dispatch(new Auth.SetAuthenticated);
-      }
-    });
-
+    if (isPlatformBrowser(this.platformId)) {
+      this.currentSite = window.location.origin;
+      this.authService.authState.subscribe((user) => {
+        if (user == null) {
+          this.isLogin = false;
+          this.store.dispatch(new Auth.SetUnauthenticated);
+        } else {
+          this.socialUser = user;
+          this.isLogin = true;
+          this.store.dispatch(new Auth.SetAuthenticated);
+        }
+      });
+    }
     // this.innerWidth = window.innerWidth;
   }
 

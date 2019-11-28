@@ -112,7 +112,7 @@ export function createTranslateLoader(http: HttpClient) {
     WriterComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AdsenseModule.forRoot({
       adClient: 'ca-pub-6381087658260439',
       adSlot: 7259870550,
