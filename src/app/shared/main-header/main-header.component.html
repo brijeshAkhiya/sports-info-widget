@@ -82,13 +82,9 @@
     </ul>
     <ul class="sidebar-nav lang-nav" #navbarnav>
       <li>
-        <a>English</a>
-      </li>
-      <li>
-        <a>Hindi</a>
-      </li>
-      <li>
-        <a>Bengali</a>
+        <a *ngFor="let langauge of langauges" target="_blank" [ngClass]="{'selected' : currentSite == langauge.link}"
+          href="{{langauge.link}}">{{langauge.title}}
+        </a>
       </li>
     </ul>
   </div>
