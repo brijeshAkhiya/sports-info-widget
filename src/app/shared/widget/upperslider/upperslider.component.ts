@@ -174,10 +174,12 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.scheduleSubscription = this.store.select(tennisSelector.getTennisSchedule).subscribe((data: any) => {
       console.log(data);
       if (data && data.length > 0) {
-        let liveMatches = this.slider = data.filter((match) => ['live'].indexOf(match.status) > -1);
+        let liveMatches = this.slider = data.filter((match) => ['match_about_to_start'].indexOf(match.status) > -1);
         this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'desc');
         let fixtures = this.commonService.sortBtDate(data.filter((match) => ['scheduled', 'created'].indexOf(match.status) > -1), 'scheduled', 'asc');
         this.slider = this.slider.concat(fixtures);
+        this.slider = this.slider.concat(liveMatches);
+        console.log(this.slider)
         if (liveMatches.length > 0 && !this.timerStartTime.Tennis.isLiveUpdate) {
           this.getLiveTennisUpdate(this);
         } else if (!this.timerStartTime.Tennis.isLiveUpdate && !this.timerStartTime.Tennis.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
@@ -192,9 +194,8 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   getLiveTennisUpdate(classThis) {
     /** Subscribe for Live Match info */
     this.liveMatchesSubscription = this.store.select(tennisSelector.getTennisMatches).subscribe((match) => {
-      if (Object.entries(match).length !== 0)
-        console.log(match);
-      // this.updateTennisSlider(match);
+      if (match.length !== 0)
+        this.updateTennisSlider(match);
     });
     /** If match info has already start interval */
     if (this.router.url.includes('/tennis/match/')) return false;
@@ -208,16 +209,36 @@ export class UppersliderComponent implements OnInit, OnDestroy {
         .subscribe(res => {
           let ids = [];
           let schedules = [];
-          console.log(res.data.summaries)
+          // console.log(res.data.summaries)
           res.data.summaries.map((match) => {
             if (!schedules[match.sport_event.id]) schedules[match.sport_event.id] = match;
             ids.push(match.sport_event.id);
-            console.log(schedules)
+            // console.log(schedules)
           });
-          this.store.dispatch(new Tennis.SaveTennisMatches({ ids: ids, matches: schedules }));
+
+          console.log(res.data.summaries.filter((match) => match.sport_event.status == 'live'));
+          this.store.dispatch(new Tennis.SaveTennisMatches({ ids: ids, matches: res.data.summaries }));
         });
     }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Tennis.interval));
     // });
+  }
+  updateTennisSlider(matches) {
+    console.log(matches)
+    matches.map(match => {
+      let matchIndex = this.slider.findIndex((slide) => slide.id == match.sport_event.id);
+      if (matchIndex >= 0) {
+        let status = this.slider[matchIndex].status;
+        // this.slider[matchIndex].home = matches[match].home;
+        // this.slider[matchIndex].away = matches[match].away;
+        this.slider[matchIndex].status = match.sport_event_status.status;
+        // this.slider[matchIndex].home_points = matches[match].home.points;
+        // this.slider[matchIndex].away_points = matches[match].away.points;
+        if (['closed', 'complete'].indexOf(match.sport_event_status.status) > -1 && ['closed', 'complete'].indexOf(status) == 0) {
+          this.clearTimeInterval();
+          // this.getBasketBallSchedule();
+        }
+      }
+    });
   }
 
   getBasketBallSchedule() {

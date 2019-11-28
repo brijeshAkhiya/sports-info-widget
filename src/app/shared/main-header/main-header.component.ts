@@ -56,8 +56,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     { title: 'Basketball', link: '/basketball' },
     { title: 'Field Hockey', link: '/hockey' },
     { title: 'Badminton', link: '/badminton' },
-    // { title: 'Racing', link: '/coming-soon/racing' },
-    // { title: 'Tennis sports', link: '/coming-soon/tennis-sports' },
     { title: 'Racing', link: '/racing/f1' },
     { title: 'Tennis sports', link: '/tennis' },
   ];
@@ -150,11 +148,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         if (res['data']) {
           this.store.dispatch(new Ads.SaveAds(res['data']));
         }
-      },
-      error => {
-        this.getCustomAds();
-      }
-    );
+      });
   }
 
   /* //nav bar click event */

@@ -5,7 +5,7 @@ import {
 export interface TennisData {
     schedule: [];
     loader: boolean;
-    matches: { [id: string]: any };
+    matches: [];
     ids: any;
 }
 
@@ -13,7 +13,7 @@ export interface TennisData {
 const initialState = {
     schedule: [],
     loader: false,
-    matches: {},
+    matches: [],
     ids: [],
 };
 

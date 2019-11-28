@@ -22,7 +22,7 @@ export class TennisEffects {
         tap(() => this.store.dispatch(new Tennis.TennisStartLoading())),
         switchMap((action: any) =>
             this.sportsService.getTennisDailySchedule(this.commonService.convertDate(this.date)).pipe(
-                map((response: any) => new Tennis.LoadTennisScheduleSuccess(response.data.sport_events.filter((match) => match.status == 'live'))),
+                map((response: any) => new Tennis.LoadTennisScheduleSuccess(response.data.sport_events.filter((match) => match.status == 'match_about_to_start' || match.status == 'live'))),
                 tap(() => this.store.dispatch(new Tennis.TennisStopLoading())),
                 catchError(() => {
                     this.store.dispatch(new Tennis.TennisStopLoading());

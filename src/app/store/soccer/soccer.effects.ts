@@ -25,8 +25,6 @@ export class SoccerEffects {
                 map((response: any) => new Soccer.LoadSoccerFixturesSuccess(response.data.summaries)),
                 tap(() => this.store.dispatch(new Soccer.SoccerStopLoading())),
                 catchError(() => {
-                    this.store.dispatch(new Soccer.LoadSoccerFixtures());
-
                     return EMPTY;
                 })
             )),
