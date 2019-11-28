@@ -1,16 +1,12 @@
 import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { SportsService } from '@providers/sports-service';
-import { SocketService } from '@providers/socket.service';
-import { CommonService } from '@providers/common-service';
-import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
-import { SlugifyPipe } from '@pipes/slugpipe';
-import { StringsplitID } from '@pipes/stringsplitID.pipe';
 import { Store } from '@ngrx/store';
+
+import { SportsService } from '@providers/sports-service';
+import { CommonService } from '@providers/common-service';
 import * as fromRoot from '../../app-reducer';
 import * as favourites from '../../store/favourites-management/favourites.actions';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -39,14 +35,11 @@ export class MainFooterComponent implements OnInit {
     }
   }
 
-  constructor(private sportsService: SportsService,
-    private router: Router,
-    private socketservice: SocketService,
-    private socket: Socket,
-    private slugifyPipe: SlugifyPipe,
-    private splitIDPipe: StringsplitID,
-    private store: Store<fromRoot.State>,
+  constructor(
+    private sportsService: SportsService,
     private commonService: CommonService,
+    private router: Router,
+    private store: Store<fromRoot.State>,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -58,7 +51,7 @@ export class MainFooterComponent implements OnInit {
         if (this.isAuth$ == true) {
           this.getUserfavourites();
         } else {
-          this.userfavourites = JSON.parse(this.commonService.getFromStorage('favourites'));
+          this.userfavourites = (this.commonService.getFromStorage('favourites')) ? JSON.parse(this.commonService.getFromStorage('favourites')) : [];
           if (this.userfavourites && this.userfavourites.length > 0) {
             this.userfavourites = this.userfavourites.map((singleitem) => {
               return {
@@ -79,7 +72,7 @@ export class MainFooterComponent implements OnInit {
   /* //get user favourites */
   getUserfavourites() {
     this.sportsService.getuserfavourite().subscribe((res: any) => {
-      this.userfavourites = JSON.parse(this.commonService.getFromStorage('favourites'));
+      this.userfavourites = (this.commonService.getFromStorage('favourites')) ? JSON.parse(this.commonService.getFromStorage('favourites')) : [];
       this.userfavourites = this.userfavourites.map((singleitem) => {
         return {
           ...singleitem,
@@ -153,17 +146,15 @@ export class MainFooterComponent implements OnInit {
     // window의 scroll top
     // Both window.pageYOffset and document.documentElement.scrollTop returns the same result in all the cases. window.pageYOffset is not supported below IE 9.
 
-    if (isPlatformBrowser(this.platformId)) {
-      const scrollPosition =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
-      if (scrollPosition >= this.topPosToStartShowing) {
-        this.isShow = true;
-      } else {
-        this.isShow = false;
-      }
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
     }
   }
 

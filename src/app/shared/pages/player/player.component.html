@@ -388,9 +388,9 @@
 
               <app-player-table *ngIf="playerData?.stats?.surfaces" [data]="playerData?.stats?.surfaces" [options]="{
                     titles : ['Surface', 'TP', 'TW', 'MP', 'MW'],
-                    sort : [false, true, true, true, true],
-                    values : ['type', 'statistics.tournaments_played', 'statistics.tournaments_won', 'statistics.matches_played', 'statistics.matches_won'],
-                    class_light_row : ['light-row'],
+                    sort : [false, false, true, true, true, true],
+                    values : ['index', 'type', 'statistics.tournaments_played', 'statistics.tournaments_won', 'statistics.matches_played', 'statistics.matches_won'],
+                    class : ['nba-table tour-stats-table'],
                     sport:'Tennis'
                     }">
               </app-player-table>

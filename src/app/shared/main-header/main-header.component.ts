@@ -38,6 +38,9 @@ import { CommonService } from '@providers/common-service';
 export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('navbarcontainer') navbarcontainer;
   @ViewChild('navbarButton') navbarButton;
+  @ViewChild('langmenuContainer') langmenuContainer;
+  @ViewChild('sidemenucontainer') sidemenucontainer;
+  @ViewChild('sidemenuLangcontainer') sidemenuLangcontainer;
   @ViewChild('navpointer') navpointer: ElementRef;
   @ViewChild('navbarnav') navbarnav: ElementRef;
   @ViewChild('navbarmenu') navbarmenu: ElementRef;
@@ -52,6 +55,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   isopen: boolean = false;
   currentSite;
   keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+  langMenu: boolean = false;
 
   sportsMenu = [
     { title: 'Cricket', link: '/cricket' },
@@ -79,9 +83,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement) {
-    const clickedInside = this.navbarcontainer.nativeElement.contains(targetElement);
     const navbarButtonInside = this.navbarButton.nativeElement.contains(targetElement);
-    if (!clickedInside && !navbarButtonInside) {
+    if (
+      !navbarButtonInside &&
+      !this.langmenuContainer.nativeElement.contains(targetElement) &&
+      !this.sidemenucontainer.nativeElement.contains(targetElement) &&
+      !this.sidemenuLangcontainer.nativeElement.contains(targetElement)
+    ) {
       this.isapply = false;
     }
   }
@@ -270,6 +278,9 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     // window.ontouchmove = null;
     // document.onkeydown = null;
 
+  }
+  openLangMenu(val) {
+    this.langMenu = val;
   }
 
   openMenu() {

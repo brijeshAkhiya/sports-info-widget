@@ -118,7 +118,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
       }
     }
     else
-      this.isBrowser = true;
+      this.isBrowser = false;
   }
 
   loadAllSportsData() {
