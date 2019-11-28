@@ -44,4 +44,52 @@
     </li>
   </ul>
 </nav>
+<div class="sidebar-menu-outer active">
+  <div class="sidebar-menu active">
+    <div class="sidebar-head">
+      <div class="sign-block d-flex align-items-center">
+        <div class="profile-pic" style="background-image: url();"></div>
+        <p>Hie, Soheb</p>
+      </div>
+    </div>
+    <ul class="sidebar-nav" #navbarnav>
+      <li *ngFor="let menuItem of sportsMenu">
+        <a routerLink="{{menuItem.link}}" routerLinkActive="active"
+          (click)="onRedirect();">{{menuItem.title | translate}}</a>
+      </li>
+      <li class="border-item">
+        <a class="d-flex justify-content-between">
+          <span>Language</span>
+          <span class="selected-lang">English</span>
+        </a>
+      </li>
+      <li class="border-item">
+        <a>Logout</a>
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-menu">
+    <div class="sidebar-head">
+      <div class="sign-block d-flex align-items-center">
+        <a class="back-btn"><img src="../../../assets/images/back-btn.svg"> <span>Main menu</span></a>
+      </div>
+    </div>
+    <ul class="sidebar-nav" #navbarnav>
+      <li>
+        <a class="active lang-label">Language</a>
+      </li>
+    </ul>
+    <ul class="sidebar-nav lang-nav" #navbarnav>
+      <li>
+        <a>English</a>
+      </li>
+      <li>
+        <a>Hindi</a>
+      </li>
+      <li>
+        <a>Bengali</a>
+      </li>
+    </ul>
+  </div>
+</div>
 <app-search [issearch]="issearch" [searchOpen]="searchOpen" (clickOutside)="close($event)"></app-search>

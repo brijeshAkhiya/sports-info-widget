@@ -24,7 +24,7 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
 .login-search .common-dropdown a.login.logged   { border-radius: 50%; border: 2px solid #fff; opacity: 1; }
 .login-search .common-dropdown.show .dropdown-toggle { opacity: 1;}
 .login-search li .dropdown-menu                 { margin-top: 10px; top: 100% !important; left: auto !important; right: 0; transform: translate(0) !important; -webkit-transform: translate(0) !important; }
-
+.sidebar-menu-outer             { display: none;}
 /* -------- Serch Box CSS ------- */
 /* .common-serch-box               { z-index: -112; opacity: 0; position: absolute; width: 100%; min-height: calc(100vh - 100px); background: rgba(27, 42, 90, 0.9); transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
 .common-serch-box.show          { z-index: 112; opacity: 1; }
@@ -135,7 +135,6 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     nav .navbar-toggler.active .icon-bar:nth-child(4)   { top: calc(50% - 1px); opacity: 0; }
     .navbar-nav-container                               { position: relative; left: 0px; min-height: 100vh; transform: translate(0); -webkit-transform: translate(0); }
     .navbar-collapse.collapse                           { display: block !important; position: absolute; top: 100%; left: 0%; max-height: 0; width: 100%; background: #1B2A5A; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; text-align: center; overflow: hidden; }
-    /* .submenu-open .navbar-collapse.collapse             { transform: translateY(43px); -webkit-transform: translateY(43px); }     */
     .menu-open .navbar-collapse.collapse                { left: 0%; height: auto; max-height: 100vh; }
     .navbar .navbar-collapse .navbar-nav                { padding: 9px 0px; min-height: 46vh; justify-content: space-between; -webkit-justify-content: space-between;}
     .navbar .navbar-nav .nav-link                       { padding: 9px 30px; opacity: 0.6; }
@@ -143,12 +142,31 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     .login-search > li > a                              { margin: 0px 6px; width: 24px; height: 24px; }
     .login-search li .dropdown-menu                     { margin-top: 10px; }
 
-    /* .login-search > li > a                                  { margin: 8px 30px;}
-    .login-search li .dropdown-menu                     { margin-left: 30px; min-width: 180px; right: auto !important; left: 0px !important; } */
 /* -------- Serch Box CSS ------- */
     .search-bar .search-close                           { display: inline-block; }
     .search-result                                      { padding: 16px 0px; }
 
+/* -------- Sidebar CSS ------- */
+    .sidebar-menu-outer                     { display: block; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); position: fixed; left: 100%; top: 0; z-index: 11111; transition: all 0.4s ease-in-out; -webkit-transition: all 0.4s ease-in-out; }
+    .sidebar-menu-outer.active              { left: 0; }
+    .sidebar-menu                           { width: 80%; height: 100vh; background: #fff; position: absolute; right: 0; top: 0; z-index: 11111; transform: translateX(100%); -webkit-transform: translateX(100%); transition: all 0.4s ease-in-out; -webkit-transition: all 0.4s ease-in-out; }
+    .sidebar-menu.active                    { transform: translateX(0); -webkit-transform: translateX(0); }
+    .sidebar-menu .sidebar-head             { padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .sidebar-menu .profile-pic              { margin-right: 12px; height: 36px; width: 36px; background: #EAEAEA no-repeat center center / cover; border: 1.71px solid #fff; border-radius: 50%; box-shadow: 0px 2px 3px rgba(0,0,0,0.08); -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.08); }
+    .sidebar-menu .sign-block p             { margin: 0; font-size: 16px; line-height: 24px; font-family: 'IBM Plex Sans Condensed', sans-serif; color: #000; font-weight: 600; }
+    .sidebar-menu .back-btn                 { margin: 7px 0; font-size: 14px;}
+    .sidebar-menu .back-btn span            { margin-left: 8px; display: inline-block; vertical-align: middle; }
+    .sidebar-menu ul                        { margin: 0;}
+    .sidebar-menu .sidebar-nav li a         { padding: 12px 28px; display: block; font-size: 16px; line-height: 20px; border-left: 4px solid transparent; }
+    .sidebar-menu .sidebar-nav li a:hover,
+    .sidebar-menu .sidebar-nav li a.active  { border-left-color: #ED1933; font-weight: 600;}
+    .sidebar-menu .sidebar-nav .border-item { padding: 4px 0; border-top: 1px solid rgba(0,0,0,0.08); }
+    .sidebar-menu .sidebar-nav .border-item:last-child { border-bottom: 1px solid rgba(0,0,0,0.08);}
+    .sidebar-menu .sidebar-nav .selected-lang   { color: #2990F8; font-size: 14px;}
+    .sidebar-menu .sidebar-nav .lang-label      { background: #FAFAFA; font-weight: 400; }
+    .sidebar-menu .sidebar-nav.lang-nav li a    { font-size: 13px; line-height: 17px; }
+    .sidebar-menu .sidebar-nav.lang-nav li a:hover,
+    .sidebar-menu .sidebar-nav.lang-nav li a.active { color: #2990F8; font-weight: 400;}
 /* -- Arabic CSS -- */
     .arabic nav .navbar-brand               { margin-left: 24px; padding-right: 12px;}
     .arabic nav .navbar-brand:before        { left: -28px; }
@@ -163,7 +181,6 @@ nav .navbar-brand img           { max-width: 143px; position: relative; z-index:
     nav .navbar-brand:before                            { right: -22px; transform: skewX(20deg) perspective(1200px); -webkit-transform: skewX(20deg) perspective(1200px); border-radius: 0px 18px 0px 0px; }
     nav .navbar-brand img                               { max-width: 113px; }
     .login-search li .dropdown-menu                     { margin-top: 8px; }
-    /* .submenu-open .navbar-collapse.collapse             { transform: translateY(41px); -webkit-transform: translateY(41px); } */
     .navbar .navbar-collapse .navbar-nav                { min-height: 54vh; }
 /* -------- Serch Box CSS ------- */
     .search-bar input                               { font-size: 16px; line-height: 20px; }
