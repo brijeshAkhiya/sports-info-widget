@@ -3,9 +3,10 @@
     <div class="container">
       <div class="search-box">
         <form>
-          <input type="text" #name placeholder="{{'Blog_Module2.Search_articles' | translate}} …" [(ngModel)]="searchkey"
-            [ngModelOptions]="{standalone: true}" autofocus="autofocus" (keyup)="valuechange($event)">
-          <button type="submit" (click)="search()"></button>
+          <input type="text" #name placeholder="{{'Blog_Module2.Search_articles' | translate}} …"
+            [(ngModel)]="searchkey" [ngModelOptions]="{standalone: true}" autofocus="autofocus"
+            (keyup)="valuechange($event)">
+          <button type="submit" title="{{'Blog_Module2.Search_articles' | translate}}" (click)="search()"></button>
         </form>
       </div>
       <button class="search-close" (click)="closesearch()"></button>
@@ -17,11 +18,11 @@
         *ngIf="searchdata?.length != 0 && searchdata">
         <h3 class="white-text">{{ 'widgetModule.search_result' | translate }}</h3>
         <button class="theme-btn" *ngIf="searchdata && searchdata?.length > 4" (click)="blogList()">
-            {{ 'widgetModule.view_all' | translate }}<span></span></button>
+          {{ 'widgetModule.view_all' | translate }}<span></span></button>
       </div>
       <div class="no-data-available-white" *ngIf="searchdata && searchdata?.length == 0 && noresults">
         <h5>
-            {{ 'widgetModule.no_result_found' | translate }}
+          {{ 'widgetModule.no_result_found' | translate }}
         </h5>
       </div>
       <app-blog-card [posts]="searchdata" [start]="0" [end]="4" [card_type]="'search'"></app-blog-card>

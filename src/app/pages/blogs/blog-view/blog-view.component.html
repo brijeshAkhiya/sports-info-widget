@@ -121,11 +121,11 @@
                   *ngIf="!isAuth$">{{'Blog_Module.Login' | translate}}<span></span></button>
               </form>
               <div class="login-toast active d-flex align-items-center" *ngIf="!isloggedin">
-                <img src="assets/images/blog/error-icon.svg">
+                <img src="assets/images/blog/error-icon.svg" alt="error">
                 <p class="dark-text">{{'Blog_Module.must_be_login_text' | translate}}</p>
               </div>
               <div class="login-toast active d-flex align-items-center" *ngIf="isNocomment">
-                <img src="assets/images/blog/error-icon.svg">
+                <img src="assets/images/blog/error-icon.svg" alt="error">
                 <p class="dark-text">{{'Blog_Module.Please_enter_your_comment' | translate}}</p>
               </div>
             </div>

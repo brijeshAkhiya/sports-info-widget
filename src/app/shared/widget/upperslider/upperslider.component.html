@@ -63,7 +63,7 @@
                   <ng-template #kabaddi_team let-competitor="competitor" let-match="match" let-qualifier="qualifier">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner':  match?.result?.winner == competitor?.tid }">
-                        <img [lazyLoad]="competitor?.logo"
+                        <img [lazyLoad]="competitor?.logo" alt="{{competitor?.shortname}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.shortname}}</p>
                       <p *ngIf="match?.result[qualifier] != 0"><b>{{match?.result[qualifier]}}</b></p>
                     </div>
@@ -127,7 +127,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p *ngIf="competitor?.period_scores"><b>
                           {{competitor?.period_scores.display_score | cricketScore}}
@@ -187,7 +187,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
@@ -239,7 +239,7 @@
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p
                         [ngClass]="{'match-winner': ['closed', 'complete'].indexOf(match.status) > -1 ? (abbr == 'home' ? (match?.home_points > match?.away_points) : (match?.away_points > match?.home_points)) : ''}">
-                        <img [lazyLoad]="competitor?.sr_id| logosurl:'basketball'"
+                        <img [lazyLoad]="competitor?.sr_id| logosurl:'basketball'" alt="{{competitor?.name}}"
                           [defaultImage]="commonService.flagplaceholder">
                         {{competitor?.market}} {{competitor?.name}}
                       </p>
@@ -304,7 +304,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
@@ -363,7 +363,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
@@ -422,7 +422,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p>
                         <!-- <b>{{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b> -->

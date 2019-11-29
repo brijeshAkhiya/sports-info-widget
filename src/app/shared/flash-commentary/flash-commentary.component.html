@@ -18,7 +18,7 @@
 <div class="flash-comm-box" [ngClass]="{'flash-comm-show': isapply}" *ngIf="!livematches || livematches.length == 0">
   <!-- flash-comm-show -->
   <div class="head-btn-list">
-    <button class="close-btn" (click)="isapply = false"></button>
+    <button class="close-btn" aria-label="close" (click)="isapply = false"></button>
   </div>
   <div class="flash-comm-block">
     <h5>{{ 'Shared_module.flash_score' | translate }}</h5>

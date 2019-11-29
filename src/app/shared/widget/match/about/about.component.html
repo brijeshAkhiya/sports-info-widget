@@ -4,14 +4,16 @@
     *ngIf="data">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="competitor.home.id | logosurl" [defaultImage]="commonService.flagplaceholder">
+        <img alt="{{competitor.home.name}}" [lazyLoad]="competitor.home.id | logosurl"
+          [defaultImage]="commonService.flagplaceholder">
         <h4>{{competitor.home.name}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img [lazyLoad]="competitor.away.id | logosurl" [defaultImage]="commonService.flagplaceholder">
+        <img alt="{{competitor.away.name}}" [lazyLoad]="competitor.away.id | logosurl"
+          [defaultImage]="commonService.flagplaceholder">
         <h4>{{competitor.away.name}}</h4>
       </div>
     </div>
@@ -87,7 +89,7 @@
             <h4 *ngIf="data.sport_event.competitors"
               [ngClass]="{'winner': (data.sport_event_status.status == 'closed' || data.sport_event_status.status == 'ended') && competitor.id == data.sport_event_status.winner_id}">
               <img [lazyLoad]="competitor.id | logosurl" [defaultImage]="commonService.flagplaceholder"
-                [offset]="commonService.lazyloadoffset">
+                alt="{{competitor.abbreviation}}" [offset]="commonService.lazyloadoffset">
               <a [ngClass]="{'win-toss': competitor.id == toss.toss_won_by && (data.sport_event_status.status != 'closed' && data.sport_event_status.status != 'ended') }"
                 [routerLink]="data.sport_event.tournament.id ? ['/cricket/team', (data.sport_event.tournament.id | splitID) ,(competitor.id | splitID),(competitor.name | slugify)] : ['/cricket/team',(competitor.id | splitID),(competitor.name | slugify)]">
                 {{data.sport_event_status.status == 'not_started' ? competitor.name : competitor.abbreviation}} </a>
@@ -111,7 +113,8 @@
         *ngIf="data.sport_event_status.status != 'live'  && data.statistics && data.statistics.man_of_the_match">
         <div class="player-pic">
           <img [lazyLoad]="data.statistics.man_of_the_match[0]?.id| playerimage:['m']"
-            [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+            alt="{{data.statistics.man_of_the_match[0]?.name | split}}" [defaultImage]="commonService.playerplaceholder"
+            [offset]="commonService.lazyloadoffset">
         </div>
         <div class="player-info">
           <p class="light-text">{{ 'widgetModule.player_of_the_match' | translate }}</p>
@@ -150,16 +153,18 @@
     class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="data.match_info.teams?.home?.tid | logosurl:'kabaddi'" alt="data.match_info.teams?.home?.tname"
-          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <img [lazyLoad]="data.match_info.teams?.home?.tid | logosurl:'kabaddi'"
+          alt="{{data.match_info.teams?.home?.tname}}" [defaultImage]="commonService.playerplaceholder"
+          [offset]="commonService.lazyloadoffset">
         <h4>{{data.match_info.teams?.home?.tname}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img [lazyLoad]="data.match_info.teams?.away?.tid | logosurl:'kabaddi'" alt="data.match_info.teams?.away?.tname"
-          [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
+        <img [lazyLoad]="data.match_info.teams?.away?.tid | logosurl:'kabaddi'"
+          alt="{{data.match_info.teams?.away?.tname}}" [defaultImage]="commonService.playerplaceholder"
+          [offset]="commonService.lazyloadoffset">
         <h4>{{data.match_info.teams?.away?.tname}}</h4>
       </div>
     </div>
@@ -201,7 +206,7 @@
   <div class="team-col">
     <div class="current-team d-flex align-items-center">
       <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
-        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="team.tname"
+        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="{{team.tname}}"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <a [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
           {{data.match_info.gamestate != 0 ? team.shortname : team.tname}}
@@ -390,7 +395,7 @@
   <div class="team-col">
     <div class="current-team">
       <h4>
-        <img [lazyLoad]="team?.sr_id | logosurl:'basketball'" alt="team.name"
+        <img [lazyLoad]="team?.sr_id | logosurl:'basketball'" alt="{{team.name}}"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
       </h4>
       <h4 [ngClass]="{'winner':['closed', 'complete'].indexOf(data.status) > -1 && team?.points > oppTeam.points}"><a
@@ -560,7 +565,7 @@
     *ngIf="data">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="data.id | logosurl" [defaultImage]="commonService.flagplaceholder">
+        <img [lazyLoad]="data.id | logosurl" [defaultImage]="commonService.flagplaceholder" alt="{{data.description}}">
         <h4>{{data.description}}</h4>
       </div>
     </div>
@@ -583,7 +588,7 @@
     </div>
     <div class="current-match show-anim">
       <div class="head-block text-center">
-        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="team.tname"
+        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="{{team.tname}}"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <h5 *ngIf="data.description"> {{data.description}}</h5>
         <p class="light-text" *ngIf="data.venue">
@@ -602,7 +607,7 @@
             *ngIf="stage.type == 'race' && commentry.data[stage.id]">
             <div class="player-pic">
               <img [lazyLoad]=" '' " [defaultImage]="commonService.playerplaceholder"
-                [offset]="commonService.lazyloadoffset">
+                [offset]="commonService.lazyloadoffset" alt="">
             </div>
             <div class="player-info">
               <p class="light-text">Race Winner</p>
