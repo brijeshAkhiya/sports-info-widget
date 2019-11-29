@@ -47,9 +47,13 @@
 <div class="sidebar-menu-outer" [ngClass]="{'active': isapply}">
   <div class="sidebar-menu" [ngClass]="{'active': isapply}" #sidemenucontainer>
     <div class="sidebar-head">
-      <div class="sign-block d-flex align-items-center">
+      <div class="sign-block d-flex align-items-center" *ngIf="isLogin">
+        <div class="profile-pic" style="background-image: url();" [lazyLoad]="socialUser.photoUrl"></div>
+        <p>Hie, {{socialUser.username}}</p>
+      </div>
+      <div class="sign-block d-flex align-items-center" *ngIf="!isLogin">
         <div class="profile-pic" style="background-image: url();"></div>
-        <p>Hie, Soheb</p>
+        <p class="login" (click)="openmodal()">{{'Login' | translate}}</p>
       </div>
     </div>
     <ul class="sidebar-nav" #navbarnav>
@@ -63,8 +67,8 @@
           <span class="selected-lang">English</span>
         </a>
       </li>
-      <li class="border-item">
-        <a>Logout</a>
+      <li class="border-item" *ngIf="isLogin">
+        <a ngbDropdownItem (click)="logout()">{{'Header_menu.Logout' | translate}}</a>
       </li>
     </ul>
   </div>

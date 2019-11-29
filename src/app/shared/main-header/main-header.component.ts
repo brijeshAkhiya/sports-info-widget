@@ -91,6 +91,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       !this.sidemenuLangcontainer.nativeElement.contains(targetElement)
     ) {
       this.isapply = false;
+      this.enableScroll();
     }
   }
 
