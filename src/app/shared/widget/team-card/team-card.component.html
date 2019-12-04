@@ -23,7 +23,7 @@
         <ng-container *ngIf="sport=='Kabaddi'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
               [lazyLoad]="team?.tid | logosurl:'kabaddi'" [defaultImage]="commonService.flagplaceholder"
-              alt="team?.tname">
+              alt="{{team?.tname}}">
           </div>
           <div class="team-name">
             <h4>{{team.tname}}</h4>
@@ -35,7 +35,7 @@
 
         <ng-container *ngIf="sport=='Soccer' && type == 'teams'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl"
-              [defaultImage]="commonService.flagplaceholder" alt="team?.name">
+              [defaultImage]="commonService.flagplaceholder" alt="{{team?.name}}">
           </div>
           <div class="team-name">
             <h4>{{team.name}}</h4>
@@ -49,7 +49,7 @@
         <ng-container *ngIf="sport=='Soccer' && type == 'player'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
               [lazyLoad]="team?.competitor?.id | logosurl:'soccer'" [defaultImage]="commonService.flagplaceholder"
-              alt="team?.competitor?.name">
+              alt="{{team?.competitor?.name}}">
           </div>
           <div class="team-name">
             <h4>{{team?.competitor?.name}}</h4>
@@ -76,7 +76,7 @@
         <!-- Hockey Teams-->
         <ng-container *ngIf="sport=='Hockey'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl:'hockey'"
-              [defaultImage]="commonService.flagplaceholder" alt="team.name | slugify">
+              [defaultImage]="commonService.flagplaceholder" alt="{{team.name | slugify}}">
           </div>
           <div class="team-name">
             <h4>{{team.name}}</h4>
@@ -90,7 +90,7 @@
         <ng-container *ngIf="sport=='Badminton'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset"
               [lazyLoad]="team?.id | logosurl:'badminton'" [defaultImage]="commonService.flagplaceholder"
-              alt="team.name | slugify">
+              alt="{{team.name | slugify}}">
           </div>
           <div class="team-name">
             <h4>{{team.name | split}}</h4>
@@ -104,7 +104,7 @@
         <!-- Racing Teams-->
         <ng-container *ngIf="sport=='Racing'">
           <div class="team-flag"><img [offset]="commonService.lazyloadoffset" [lazyLoad]="team?.id | logosurl:'racing'"
-              [defaultImage]="commonService.flagplaceholder" alt="team.name | slugify">
+              [defaultImage]="commonService.flagplaceholder" alt="{{team.name | slugify}}">
           </div>
           <div class="team-name">
             <h4>{{team.name | split}}</h4>

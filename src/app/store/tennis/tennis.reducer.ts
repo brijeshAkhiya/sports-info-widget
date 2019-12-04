@@ -29,8 +29,6 @@ export function TennisReducer(state = initialState, action: TennisActions): any 
             return { ...state, loader: false };
         case SAVE_TENNIS_MATCHES: {
             const payload = action.payload;
-            console.log(payload)
-            console.log(payload.matches.length)
             return {
                 ...state,
                 matches: payload.matches,

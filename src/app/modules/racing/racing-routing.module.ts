@@ -20,6 +20,12 @@ const routes: Routes = [
     component: RacingComponent,
     children: [
       {
+        path: '/',
+        component: HomeComponent,
+        redirectTo: '/racing/f1',
+        data: { 'sport': 'Racing' }
+      },
+      {
         path: ':game',
         component: GameComponent,
         data: { 'sport': 'Racing' },

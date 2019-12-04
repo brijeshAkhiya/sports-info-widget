@@ -2,17 +2,19 @@
   <div class="modal-body">
     <h1>{{ 'widgetModule.sign_in' | translate }}</h1>
     <ul>
-      <li><button (click)="signInWithGoogle()"><img src="/assets/images/google-signin.svg">{{ 'widgetModule.sign_in_with_google' | translate }}</button>
+      <li><button (click)="signInWithGoogle()"><img alt="google"
+            src="/assets/images/google-signin.svg">{{ 'widgetModule.sign_in_with_google' | translate }}</button>
       </li>
-      <li><button class="fb-button" (click)="signInWithFB()"><img src="/assets/images/facebook-signin.svg">{{ 'widgetModule.continue_with_fb' | translate }}</button></li>
+      <li><button class="fb-button" (click)="signInWithFB()"><img alt="facebook"
+            src="/assets/images/facebook-signin.svg">{{ 'widgetModule.continue_with_fb' | translate }}</button></li>
     </ul>
     <p class="signin-text">{{ 'widgetModule.agree_with_facebook' | translate }}
-       <a [routerLink]="['/terms-and-conditions']" (click)="closemodal()">{{ 'widgetModule.terms' | translate }}</a>
-       {{ 'widgetModule.and' | translate }} <a [routerLink]="['/privacy-policy']" (click)="closemodal()">
+      <a [routerLink]="['/terms-and-conditions']" (click)="closemodal()">{{ 'widgetModule.terms' | translate }}</a>
+      {{ 'widgetModule.and' | translate }} <a [routerLink]="['/privacy-policy']" (click)="closemodal()">
         {{ 'widgetModule.Privacy_policy' | translate }}</a>.</p>
   </div>
 </div>
 <div class="login-toast active d-flex align-items-center" *ngIf="isuserblock">
-  <img src="assets/images/blog/error-icon.svg">
+  <img src="assets/images/blog/error-icon.svg" alt="error">
   <p class="dark-text">{{ 'widgetModule.block_by_admin' | translate }}</p>
 </div>

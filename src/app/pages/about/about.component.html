@@ -50,7 +50,7 @@
               <ng-container class="items">
                 <ng-template carouselSlide *ngFor="let reader of readers">
                   <div class="reader-item common-shadow rounded-box">
-                    <img src="{{ (reader.image)? reader.image : 'assets/images/placeholder-author.svg'}}">
+                    <img src="{{ (reader.image)? reader.image : 'assets/images/placeholder-author.svg'}}" alt="reader">
                     <h5>{{reader.name}}</h5>
                     <p>“ {{ reader.view}} ”</p>
                   </div>

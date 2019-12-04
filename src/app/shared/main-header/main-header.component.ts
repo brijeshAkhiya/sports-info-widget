@@ -18,6 +18,8 @@ import { AuthService } from 'angularx-social-login';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 import { LoginModalComponent } from '../widget/login-modal/login-modal.component';
@@ -56,6 +58,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   currentSite;
   keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
   langMenu: boolean = false;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   sportsMenu = [
     { title: 'Cricket', link: '/cricket' },
@@ -64,7 +67,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     { title: 'Basketball', link: '/basketball' },
     { title: 'Field Hockey', link: '/hockey' },
     { title: 'Badminton', link: '/badminton' },
-    { title: 'Racing', link: '/racing/f1' },
+    { title: 'Racing', link: '/racing' },
     { title: 'Tennis sports', link: '/tennis' },
   ];
 
@@ -91,6 +94,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       !this.sidemenuLangcontainer.nativeElement.contains(targetElement)
     ) {
       this.isapply = false;
+      this.enableScroll();
     }
   }
 
@@ -114,7 +118,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.currentSite = window.location.origin;
-      this.authService.authState.subscribe((user) => {
+      this.authService.authState.pipe(takeUntil(this.destroy$)).subscribe((user) => {
         if (user == null) {
           this.isLogin = false;
           this.store.dispatch(new Auth.SetUnauthenticated);
@@ -158,7 +162,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* //get custom ads api call -Ngrx Store */
   getCustomAds() {
-    this.sportsService.getcustomadsbanner().subscribe(
+    this.sportsService.getcustomadsbanner().pipe(takeUntil(this.destroy$)).subscribe(
       res => {
         if (res['data']) {
           this.store.dispatch(new Ads.SaveAds(res['data']));
@@ -225,7 +229,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getuserLogout(token) {
-    this.sportsService.userlogout(token).subscribe((res) => {
+    this.sportsService.userlogout(token).pipe(takeUntil(this.destroy$)).subscribe((res) => {
       this.store.dispatch(new Auth.SetUnauthenticated());
     });
   }

@@ -63,7 +63,7 @@
                   <ng-template #kabaddi_team let-competitor="competitor" let-match="match" let-qualifier="qualifier">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner':  match?.result?.winner == competitor?.tid }">
-                        <img [lazyLoad]="competitor?.logo"
+                        <img [lazyLoad]="competitor?.logo" alt="{{competitor?.shortname}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.shortname}}</p>
                       <p *ngIf="match?.result[qualifier] != 0"><b>{{match?.result[qualifier]}}</b></p>
                     </div>
@@ -78,6 +78,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))"
                     [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]"></a>
                 </div>
               </div>
@@ -127,7 +128,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p *ngIf="competitor?.period_scores"><b>
                           {{competitor?.period_scores.display_score | cricketScore}}
@@ -145,6 +146,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)}}"
                     [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)]"></a>
                 </div>
               </div>
@@ -187,7 +189,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
@@ -204,6 +206,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation}}"
                     [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
@@ -239,7 +242,7 @@
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p
                         [ngClass]="{'match-winner': ['closed', 'complete'].indexOf(match.status) > -1 ? (abbr == 'home' ? (match?.home_points > match?.away_points) : (match?.away_points > match?.home_points)) : ''}">
-                        <img [lazyLoad]="competitor?.sr_id| logosurl:'basketball'"
+                        <img [lazyLoad]="competitor?.sr_id| logosurl:'basketball'" alt="{{competitor?.name}}"
                           [defaultImage]="commonService.flagplaceholder">
                         {{competitor?.market}} {{competitor?.name}}
                       </p>
@@ -261,7 +264,7 @@
                           {{slide.match_result ? slide.match_result : slide.venue_name}}</p> -->
                     </div>
                   </div>
-                  <a class="fullblock-link"
+                  <a class="fullblock-link" title="{{(slide?.home?.alias + '-vs-' +slide?.away?.alias)}}"
                     [routerLink]="['/basketball/match', slide?.id, (slide?.home?.alias + '-vs-' +slide?.away?.alias)]"></a>
                 </div>
               </div>
@@ -304,7 +307,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
@@ -321,6 +324,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)}}"
                     [routerLink]="['/hockey/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
@@ -363,7 +367,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.sport_event_status.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p><b>
                           {{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b>
@@ -380,6 +384,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)}}"
                     [routerLink]="['/badminton/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
@@ -422,7 +427,7 @@
                   <ng-template #team let-competitor="competitor" let-match="match">
                     <div class="match-info d-flex justify-content-between align-items-center">
                       <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
-                        <img [lazyLoad]="competitor?.id| logosurl"
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
                           [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
                       <p>
                         <!-- <b>{{competitor?.qualifier == 'home' ? match.sport_event_status.home_score : match.sport_event_status.away_score}}</b> -->
@@ -437,9 +442,11 @@
                     </div>
                   </div>
                   <a class="fullblock-link" *ngIf="slide.sport_event; else fixtureLink"
+                    title="{{(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)}}"
                     [routerLink]="['/tennis/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                   <ng-template #fixtureLink>
                     <a class="fullblock-link"
+                      title="{{(slide.competitors[0].abbreviation + '-vs-' +slide.competitors[1].abbreviation)}}"
                       [routerLink]="['/tennis/match',(slide.id | splitID),(slide.competitors[0].abbreviation + '-vs-' +slide.competitors[1].abbreviation)]"></a>
                   </ng-template>
                 </div>

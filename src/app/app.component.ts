@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterContentInit, Injector, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, AfterContentInit, Injector, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import * as MetaTags from './store/meta-tags-management/meta-tags.actions';
 import * as fromRoot from './app-reducer';
@@ -19,11 +21,13 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, AfterContentInit {
+export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   metatagsObj = {};
   isupdate: boolean;
   showCookiepopup = false;
   requestedUrl;
+  subscription = { swupdate: null, router: null, metatags: null, storeMeta: null };
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private swupdate: SwUpdate,
@@ -38,7 +42,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.getMetaTags();
-    this.swupdate.available.subscribe((res) => {
+    this.subscription.swupdate = this.swupdate.available.pipe(takeUntil(this.destroy$)).subscribe((res) => {
       this.isupdate = true;
     });
     if (isPlatformBrowser(this.platformId)) {
@@ -50,26 +54,29 @@ export class AppComponent implements OnInit, AfterContentInit {
       }
     }
   }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 
   ngOnInit() {
 
     let selectedLang = 'english';
     let host;
     if (isPlatformServer(this.platformId)) {
-      host = this.injector.get('req') ? this.injector.get('req').headers.host : 'http://www.sports.info';
+      host = this.injector.get('req') ? this.injector.get('req').headers.host : 'www.sports.info';
     } else {
-      host = window.location.origin;
+      host = window.location.host;
     }
-    this.commonService.siteUrl = host;
-    console.log(host);
-
+    this.commonService.siteUrl = `https://${host}/`;
+    // console.log(this.injector.get('req').headers);
     if ((host != 'www.sports.info'
       && host != 'dev.sports.info'
       && !host.includes('localhost')
       && !host.includes('192.168')
       && !host.includes('127.0.0.1'))) {
       if (host.split('.')[0]
-        && ['english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0]))
+        && ['temp', 'english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0]))
         selectedLang = host.split('.')[0];
     }
     let element = document.getElementById('main-body');
@@ -77,24 +84,24 @@ export class AppComponent implements OnInit, AfterContentInit {
       element.classList.add('arabic');
     }
 
+    // console.log(host, selectedLang)
     this.translate.setDefaultLang(selectedLang);
 
     /* //get data from ngrx store through meta tags actions */
     if (isPlatformServer(this.platformId)) {
-      const requestUrl = this.injector.get('req').url;
-      if (!requestUrl.includes('svg') && !requestUrl.includes('css')) {
-        this.requestedUrl = requestUrl;
-        this.setmetatags(requestUrl);
-      }
-    }
-    else {
+      this.requestedUrl = this.injector.get('req').url;
+      // if (!(requestUrl.match('^(?:[^/][\d\w\s\.\\.\-:]+)$(?<=\.\w{2,4})$'))) {
+      //   this.requestedUrl = requestUrl;
+      //   this.setmetatags(requestUrl);
+      // }
+    } else {
       /* //save language to localstorage */
       this.commonService.setInStorage('userLng', selectedLang);
     }
     /* //get data from ngrx store through meta tags actions */
 
     /*  //susbcribe to router events */
-    this.router.events.subscribe((event) => {
+    this.subscription.router = this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       /*  //scroll to top navigation related */
       if (!(event instanceof NavigationEnd)) {
         return;
@@ -103,7 +110,7 @@ export class AppComponent implements OnInit, AfterContentInit {
         window.scrollTo(0, 0);
       /* //change route get url */
       if (event instanceof NavigationEnd) {
-        if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
+        if ((!(/(?:[^/][\d\w\s\.\\.\-:]+)$(?<=\.\w{2,4})/.test(event.url)) && !event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
         /*         //set meta tags from here... */
         /*         //set page title */
@@ -166,7 +173,7 @@ export class AppComponent implements OnInit, AfterContentInit {
           this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
         }
       }
-    );
+    ).catch(e => { });
   }
 
   /* //get cookie by name */
@@ -184,7 +191,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   /* //get meta tags */
   getMetaTags() {
-    this.sportsservice.getmetatags().subscribe((res: any) => {
+    this.subscription.metatags = this.sportsservice.getmetatags().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if (res.data.length > 0) {
         this.store.dispatch(new MetaTags.SaveMetaTags(res.data));
       }
@@ -197,7 +204,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.store.select('Metatags').subscribe((data: any) => {
+    this.subscription.storeMeta = this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
@@ -216,6 +223,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   getBestMatchedUrl(url) {
     return new Promise((resolve, reject) => {
+      if (Object.keys(this.metatagsObj).length == 0) reject();
       if (this.metatagsObj[url]) {
         resolve(this.metatagsObj[url]);
       } else if (url) {

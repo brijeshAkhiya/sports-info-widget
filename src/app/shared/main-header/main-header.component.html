@@ -1,7 +1,7 @@
 <app-upperslider></app-upperslider>
 
 <nav class="navbar navbar-expand-md" id="navbar" (scroll)="onWindowScroll($event);">
-  <a class="navbar-brand" routerLink="/"><img src="/assets/images/logo_v2.svg" alt=""></a>
+  <a class="navbar-brand" routerLink="/" title="home"><img src="/assets/images/logo_v2.svg" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     (click)="openMenu()" aria-controls="navbarSupportedContent" #navbarButton aria-expanded="false"
     aria-label="Toggle navigation">
@@ -47,12 +47,22 @@
 <div class="sidebar-menu-outer" [ngClass]="{'active': isapply}">
   <div class="sidebar-menu" [ngClass]="{'active': isapply}" #sidemenucontainer>
     <div class="sidebar-head">
-      <div class="sign-block d-flex align-items-center">
-        <div class="profile-pic" style="background-image: url();"></div>
-        <p>Hie, Soheb</p>
+      <div class="sign-block d-flex align-items-center" *ngIf="isLogin">
+        <img class="profile-pic" [lazyLoad]="socialUser.photoUrl" alt="user"
+          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <p>Hie, {{socialUser.username}}</p>
+      </div>
+      <div class="sign-block d-flex align-items-center" *ngIf="!isLogin" (click)="openmodal()">
+        <img class="profile-pic" [lazyLoad]="commonService.commenterPlaceholder" alt="user"
+          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+        <p class="login">{{'Login' | translate}}</p>
       </div>
     </div>
     <ul class="sidebar-nav" #navbarnav>
+      <li>
+        <a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"
+          (click)="onRedirect();">{{'Home' | translate}}</a>
+      </li>
       <li *ngFor="let menuItem of sportsMenu">
         <a routerLink="{{menuItem.link}}" routerLinkActive="active"
           (click)="onRedirect();">{{menuItem.title | translate}}</a>
@@ -63,15 +73,17 @@
           <span class="selected-lang">English</span>
         </a>
       </li>
-      <li class="border-item">
-        <a>Logout</a>
+      <li class="border-item" *ngIf="isLogin">
+        <a ngbDropdownItem (click)="logout()">{{'Header_menu.Logout' | translate}}</a>
       </li>
     </ul>
   </div>
   <div class="sidebar-menu lang-menu" [ngClass]="{'active': langMenu}" #sidemenuLangcontainer>
     <div class="sidebar-head">
       <div class="sign-block d-flex align-items-center">
-        <a class="back-btn" (click)="openLangMenu(false)"><img src="../../../assets/images/back-btn.svg"> <span>Main
+        <a class="back-btn" class="Menu" (click)="openLangMenu(false)"><img alt="Back"
+            src="../../../assets/images/back-btn.svg">
+          <span>Main
             menu</span></a>
       </div>
     </div>
@@ -83,7 +95,7 @@
     <ul class="sidebar-nav lang-nav" #navbarnav>
       <li>
         <a *ngFor="let langauge of langauges" target="_blank" [ngClass]="{'selected' : currentSite == langauge.link}"
-          href="{{langauge.link}}">{{langauge.title}}
+          href="{{langauge.link}}" rel="noopener">{{langauge.title}}
         </a>
       </li>
     </ul>

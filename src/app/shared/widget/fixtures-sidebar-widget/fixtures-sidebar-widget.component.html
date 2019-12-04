@@ -46,7 +46,7 @@
         </ng-container> -->
         <div class="match-info d-flex justify-content-between align-items-center">
           <p [ngClass]="{'match-winner': match?.winner_id == item?.id}"><img [offset]="commonService.lazyloadoffset"
-              [lazyLoad]="item?.id | logosurl" [defaultImage]="commonService.flagplaceholder">
+              [lazyLoad]="item?.id | logosurl" [defaultImage]="commonService.flagplaceholder" alt="{{item?.name}}">
             {{(match.match_result) ? item?.abbreviation : item?.name}}
           </p>
           <p *ngIf="match.match_result">
@@ -97,7 +97,8 @@
           <p
             [ngClass]="{'match-winner': match?.result?.winner != '' && match?.result?.winner == match?.teams?.home?.tid &&  match?.result?.tie != 'true' }">
             <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.home?.tid | logosurl:'kabaddi'"
-              [defaultImage]="commonService.flagplaceholder">
+              [defaultImage]="commonService.flagplaceholder"
+              alt="{{match?.teams?.home?.tname ? match?.teams?.home?.tname : 'Qualifier 1'}}">
             {{ match?.teams?.home?.tname ? match?.teams?.home?.tname : 'Qualifier 1'}}
           </p>
           <p *ngIf="match?.status == 2">
@@ -112,7 +113,8 @@
           <p
             [ngClass]="{'match-winner':  match?.result?.winner != '' &&  match?.result?.winner == match?.teams?.away?.tid &&  match?.result?.tie != 'true'}">
             <img [offset]="commonService.lazyloadoffset" [lazyLoad]="match?.teams?.away?.tid | logosurl:'kabaddi'"
-              [defaultImage]="commonService.flagplaceholder">
+              [defaultImage]="commonService.flagplaceholder"
+              alt="{{ match?.teams?.away?.tname ? match?.teams?.away?.tname : 'Qualifier 2'}}">
             {{ match?.teams?.away?.tname ? match?.teams?.away?.tname : 'Qualifier 2'}}
           </p>
           <p *ngIf="match?.status == 2">
@@ -159,7 +161,8 @@
         <div class="match-info d-flex justify-content-between align-items-center">
           <p [ngClass]="{'match-winner': match?.sport_event_status?.winner_id == item?.id}"><img
               [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.id | logosurl:'soccer'"
-              [defaultImage]="commonService.flagplaceholder">
+              [defaultImage]="commonService.flagplaceholder"
+              alt="{{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name}}">
             {{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name}}
           </p>
           <p *ngIf="match.sport_event_status?.status == 'closed'">
@@ -259,7 +262,8 @@
         <div class="match-info d-flex justify-content-between align-items-center">
           <p [ngClass]="{'match-winner': match?.sport_event_status?.winner_id == item?.id}"><img
               [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.id | logosurl:'hockey'"
-              [defaultImage]="commonService.flagplaceholder">
+              [defaultImage]="commonService.flagplaceholder"
+              alt="{{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name}}">
             {{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name}}
           </p>
           <p *ngIf="match.sport_event_status?.status == 'closed'">
@@ -306,7 +310,8 @@
         <div class="match-info d-flex justify-content-between align-items-center">
           <p [ngClass]="{'match-winner': match?.sport_event_status?.winner_id == item?.id}"><img
               [offset]="commonService.lazyloadoffset" [lazyLoad]="item?.id | logosurl:'badminton'"
-              [defaultImage]="commonService.flagplaceholder">
+              [defaultImage]="commonService.flagplaceholder"
+              alt="{{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name | split}}">
             {{(match.sport_event_status.status == 'closed') ? item?.abbreviation : item?.name | split}}
           </p>
           <p *ngIf="match.sport_event_status?.status == 'closed'">

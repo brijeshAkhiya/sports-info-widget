@@ -1,5 +1,5 @@
 /** Angular Core Modules */
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule, TransferState } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -61,6 +61,7 @@ import { LoginModalComponent } from './shared/widget/login-modal/login-modal.com
 import { EffectsModule } from '@ngrx/effects';
 
 import { AppInterceptor } from './shared/providers/app.interceptor';
+import { TranslateBrowserLoader } from './translate-browser-loader.service';
 
 
 
@@ -95,6 +96,9 @@ export function provideConfig() {
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n_v2_5/', '.json');
 }
+export function exportTranslateStaticLoader(http: HttpClient, transferState: TransferState) {
+  return new TranslateBrowserLoader('/assets/i18n_v2_5/', '.json', transferState, http);
+}
 
 
 @NgModule({
@@ -113,16 +117,22 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserTransferStateModule,
     AdsenseModule.forRoot({
       adClient: 'ca-pub-6381087658260439',
       adSlot: 7259870550,
     }),
     SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
+      // loader: {
+      //   provide: TranslateLoader,
+      //   useFactory: (createTranslateLoader),
+      //   deps: [HttpClient]
+      // }
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
+        useFactory: exportTranslateStaticLoader,
+        deps: [HttpClient, TransferState]
       }
     }),
     BrowserAnimationsModule,

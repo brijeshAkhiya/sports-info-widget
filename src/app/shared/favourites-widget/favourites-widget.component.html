@@ -1,6 +1,7 @@
 <button class="add-to-fav-btn" [ngClass]="{'added': isadded}"
+  title="{{('widget_Module2.Add_to_favourites' | translate)}}"
   (click)="add()"><span>{{ isadded ? ('widget_Module2.Added_to_favourites' | translate) : ('widget_Module2.Add_to_favourites' | translate)}}</span></button>
 <div class="login-toast active d-flex align-items-center" *ngIf="!isLogin">
-  <img src="assets/images/blog/error-icon.svg">
+  <img src="assets/images/blog/error-icon.svg" alt="error">
   <p class="dark-text"> {{ 'Shared_module.must_login_for_fav' | translate }}</p>
 </div>

@@ -5,12 +5,12 @@
     <ng-template #teamBlock let-team1="team1" let-team2="team2">
       <div class="team-block">
         <img class="team-flag" [lazyLoad]="team1.id | logosurl" [defaultImage]="commonService.flagplaceholder"
-          [offset]="commonService.lazyloadoffset">
+          [offset]="commonService.lazyloadoffset" alt="{{team1.probability}}%">
         <h3>{{team1.probability}}%</h3>
       </div>
       <div class="team-block">
         <img class="team-flag" [lazyLoad]="team2.id | logosurl" [defaultImage]="commonService.flagplaceholder"
-          [offset]="commonService.lazyloadoffset">
+          [offset]="commonService.lazyloadoffset" alt="{{team2.probability}}%">
         <h3>{{team2.probability}}%</h3>
       </div>
     </ng-template>

@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { CarouselComponent } from 'ngx-owl-carousel-o';
 import { isPlatformBrowser } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import * as Cricket from '@store/cricket/cricket.actions';
 import * as Kabaddi from '@store/kabaddi/kabaddi.actions';
@@ -88,6 +90,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   isBrowser: boolean = true;
 
   @ViewChild('sportsSlider') public sportsSlider: CarouselComponent;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -178,7 +181,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   loadTennisData() {
     this.timerStartTime.Tennis.isLiveUpdate = false;
     this.timerStartTime.Tennis.isStartAfterTime = false;
-    this.scheduleSubscription = this.store.select(tennisSelector.getTennisSchedule).subscribe((data: any) => {
+    this.scheduleSubscription = this.store.select(tennisSelector.getTennisSchedule).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       console.log(data);
       if (data && data.length > 0) {
         let liveMatches = this.slider = data.filter((match) => ['match_about_to_start'].indexOf(match.status) > -1);
@@ -200,7 +203,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   }
   getLiveTennisUpdate(classThis) {
     /** Subscribe for Live Match info */
-    this.liveMatchesSubscription = this.store.select(tennisSelector.getTennisMatches).subscribe((match) => {
+    this.liveMatchesSubscription = this.store.select(tennisSelector.getTennisMatches).pipe(takeUntil(this.destroy$)).subscribe((match) => {
       if (match.length !== 0)
         this.updateTennisSlider(match);
     });
@@ -250,7 +253,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
   getBasketBallSchedule() {
 
-    this.sportsService.getBasketballSchedule1().subscribe((res: any) => {
+    this.sportsService.getBasketballSchedule1().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if (res.data) {
         this.store.dispatch(new Basketball.LoadBasketballScheduleSuccess(res.data));
       }
@@ -260,7 +263,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
     this.timerStartTime.Badminton.isLiveUpdate = false;
     this.timerStartTime.Badminton.isStartAfterTime = false;
-    this.store.select('Badminton').subscribe((data: any) => {
+    this.store.select('Badminton').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
 
       if (data.schedule && data.schedule.length > 0) {
 
@@ -287,7 +290,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.timerStartTime.Badminton.isLiveUpdate = true;
     this.interval = setInterval(() => {
       classThis.sportsService
-        .getBadmintonLiveTimeline().subscribe((res: any) => {
+        .getBadmintonLiveTimeline().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
           if (res.data.sport_event_timelines.length > 0) {
             res.data.sport_event_timelines.forEach(match => {
               let matchIndex = this.slider.findIndex((slide) => slide.sport_event.id == match.id);
@@ -311,7 +314,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
     this.timerStartTime.Hockey.isLiveUpdate = false;
     this.timerStartTime.Hockey.isStartAfterTime = false;
-    this.store.select('Hockey').subscribe((data: any) => {
+    this.store.select('Hockey').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
 
       if (data.schedule && data.schedule.length > 0) {
 
@@ -340,7 +343,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     let date = new Date();
     this.interval = setInterval(() => {
       classThis.sportsService
-        .getHocketDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
+        .getHocketDailySummary(this.commonService.convertDate(date)).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
           if (res.data.summaries.length > 0) {
             // this.store.dispatch(
             // new Hockey.LoadSoccerLiveSuccess(
@@ -367,7 +370,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   loadBasketballData() {
     this.timerStartTime.Basketball.isLiveUpdate = false;
     this.timerStartTime.Basketball.isStartAfterTime = false;
-    this.scheduleSubscription = this.store.select(appSelectors.getBasketballSchedule).subscribe((data: any) => {
+    this.scheduleSubscription = this.store.select(appSelectors.getBasketballSchedule).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       if (data && data.length > 0) {
         let liveMatches = this.slider = data.filter((match) => ['inprogress', 'halftime', 'delayed'].indexOf(match.status) > -1);
         this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'desc');
@@ -403,7 +406,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   }
   getLiveBasketballUpdate(classThis) {
     /** Subscribe for Live Match info */
-    this.liveMatchesSubscription = this.store.select(appSelectors.getBasketballMatches).subscribe((match) => {
+    this.liveMatchesSubscription = this.store.select(appSelectors.getBasketballMatches).pipe(takeUntil(this.destroy$)).subscribe((match) => {
       if (Object.entries(match).length !== 0)
         this.updateBasketballSlider(match);
     });
@@ -412,14 +415,14 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
 
     /** If Basketball live update is already started, No need to start interval for Live match Info */
-    this.runningMatchFlagSubscription = this.store.select(appSelectors.getBasketballLiveIds).subscribe((matches) => {
+    this.runningMatchFlagSubscription = this.store.select(appSelectors.getBasketballLiveIds).pipe(takeUntil(this.destroy$)).subscribe((matches) => {
       let liveMatches = this.slider.filter((match) => match.status == 'inprogress' || match.status == 'halftime' || match.status == 'delayed');
       liveMatches.map((match) => {
         if (Object.entries(matches).length == 0 || Object.keys(matches).filter((id) => match.id == id).length == 0) {
           this.interval = setInterval(() => {
             classThis.sportsService
               .getBasketballMatchSummary(match.id)
-              .subscribe(res => {
+              .pipe(takeUntil(this.destroy$)).subscribe(res => {
                 this.store.dispatch(new Basketball.SaveBasketballMatches(res.data));
               });
           }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Basketball.interval));
@@ -434,7 +437,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.timerStartTime.Soccer.isLiveUpdate = false;
     this.timerStartTime.Soccer.isStartAfterTime = false;
     this.store.dispatch(new Soccer.LoadSoccerFixtures());
-    this.store.select('Soccer').subscribe((data: any) => {
+    this.store.select('Soccer').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
 
       if (data.fixtures && data.fixtures.length > 0) {
 
@@ -464,7 +467,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     let date = new Date();
     this.interval = setInterval(() => {
       classThis.sportsService
-        .getSoccerDailySummary(this.commonService.convertDate(date)).subscribe((res: any) => {
+        .getSoccerDailySummary(this.commonService.convertDate(date)).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
           if (res.data.summaries.length > 0) {
             this.store.dispatch(
               new Soccer.LoadSoccerLiveSuccess(
@@ -492,7 +495,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.store.dispatch(new Kabaddi.LoadKabaddiFixtures());
     this.store.dispatch(new Kabaddi.LoadKabaddiResults());
     this.store.dispatch(new Kabaddi.LoadKabaddiLive());
-    this.store.select('Kabaddi').subscribe((res: any) => {
+    this.store.select('Kabaddi').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
 
       // this.slider = [];
       // this.clearTimeInterval();
@@ -524,7 +527,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
       classThis.sportsService
         // .getKabaddiMatchDummyList('live_list')
-        .getKabaddiMatchList(paramsLive.reqParams.status, paramsLive.reqParams.per_page, paramsLive.reqParams.page).subscribe((res: any) => {
+        .getKabaddiMatchList(paramsLive.reqParams.status, paramsLive.reqParams.per_page, paramsLive.reqParams.page).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
           res = res;
           if (res.data.items.length > 0) {
 
@@ -547,7 +550,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
   getCricketHeader() {
     this.store.dispatch(new Cricket.LoadCricketSlider());
-    this.store.select('Cricket').subscribe((res: any) => {
+    this.store.select('Cricket').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if (this.slider.length == 0) {
         this.slider = this.sortBySchedule(res.slider);
         this.slider.forEach((match, index) => {
@@ -586,7 +589,7 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
   getLiveUpdateSlider(classThis) {
     this.interval = setInterval(() => {
-      classThis.sportsService.getheaderslider().subscribe((res: any) => {
+      classThis.sportsService.getheaderslider().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
 
         this.store.dispatch(new Cricket.LoadCricketSliderSuccess(res.data));
         // this.slider = this.sortBySchedule(res.data);

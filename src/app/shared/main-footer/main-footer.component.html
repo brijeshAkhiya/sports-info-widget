@@ -59,9 +59,9 @@
 			(click)="isedit = !isedit">{{ isedit ? ('Shared_Module3.Save' | translate) : ('Blog_Module2.Edit' | translate) }}</button>
 	</div>
 	<div class="fav-btn-block">
-		<button class="fav-btn" [ngClass]="{'active': isapply}" (click)="isapply = !isapply">
+		<button class="fav-btn" [ngClass]="{'active': isapply}" (click)="isapply = !isapply" title="Favourite">
 			<span></span>
 		</button>
-		<img src="assets/images/fav-btn-shape.svg">
+		<img alt="favourites" src="assets/images/fav-btn-shape.svg">
 	</div>
 </div>

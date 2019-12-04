@@ -267,7 +267,8 @@
                 <div *ngFor="let team of objectKeys(competitor)">
                   <div class="d-flex match-info-title align-items-center">
                     <img class="common-shadow" [lazyLoad]="competitor[team].id | logosurl"
-                      [defaultImage]="commonService.flagplaceholder">
+                      [defaultImage]="commonService.flagplaceholder"
+                      alt="{{((competitor[team].name | split ) | slugify)}}">
                     <h4>
                       <a
                         [routerLink]="['/cricket/player', (competitor[team].id | splitID), ((competitor[team].name | split ) | slugify) ]">
@@ -306,7 +307,8 @@
             <ng-template ngbTabTitle>{{'Cricket_Module.Upcoming' | translate}}</ng-template>
             <ng-template ngbTabContent>
               <app-loader *ngIf="!nextmatches"></app-loader>
-              <app-no-data-widget *ngIf="nextmatches?.length == 0" [message]="'No match scheduled'"></app-no-data-widget>
+              <app-no-data-widget *ngIf="nextmatches?.length == 0" [message]="'No match scheduled'">
+              </app-no-data-widget>
               <app-schedule [data]="nextmatches" [type]="'fixture'" [sport]="'Cricket'"></app-schedule>
             </ng-template>
           </ngb-tab>
