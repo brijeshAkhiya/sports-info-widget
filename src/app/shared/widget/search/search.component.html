@@ -3,13 +3,13 @@
     <div class="container">
       <div class="search-box">
         <form>
-          <input type="text" #name placeholder="{{'Blog_Module2.Search_articles' | translate}} …"
+          <input type="text" #name placeholder="{{'Blog_Module2.Search_articles' | translate}} …" name="searchkey"
             [(ngModel)]="searchkey" [ngModelOptions]="{standalone: true}" autofocus="autofocus"
             (keyup)="valuechange($event)">
           <button type="submit" title="{{'Blog_Module2.Search_articles' | translate}}" (click)="search()"></button>
         </form>
       </div>
-      <button class="search-close" (click)="closesearch()"></button>
+      <button class="search-close" (click)="closesearch()" title="Close"></button>
     </div>
   </div>
   <div class="search-result">

@@ -78,6 +78,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))"
                     [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]"></a>
                 </div>
               </div>
@@ -145,6 +146,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)}}"
                     [routerLink]="['/cricket/match',(slide.id | splitID),(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)]"></a>
                 </div>
               </div>
@@ -204,6 +206,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation}}"
                     [routerLink]="['/soccer/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
@@ -261,7 +264,7 @@
                           {{slide.match_result ? slide.match_result : slide.venue_name}}</p> -->
                     </div>
                   </div>
-                  <a class="fullblock-link"
+                  <a class="fullblock-link" title="{{(slide?.home?.alias + '-vs-' +slide?.away?.alias)}}"
                     [routerLink]="['/basketball/match', slide?.id, (slide?.home?.alias + '-vs-' +slide?.away?.alias)]"></a>
                 </div>
               </div>
@@ -321,6 +324,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)}}"
                     [routerLink]="['/hockey/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
@@ -380,6 +384,7 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
+                    title="{{(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)}}"
                     [routerLink]="['/badminton/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                 </div>
               </div>
@@ -437,9 +442,11 @@
                     </div>
                   </div>
                   <a class="fullblock-link" *ngIf="slide.sport_event; else fixtureLink"
+                    title="{{(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)}}"
                     [routerLink]="['/tennis/match',(slide.sport_event.id | splitID),(slide.sport_event.competitors[0].abbreviation + '-vs-' +slide.sport_event.competitors[1].abbreviation)]"></a>
                   <ng-template #fixtureLink>
                     <a class="fullblock-link"
+                      title="{{(slide.competitors[0].abbreviation + '-vs-' +slide.competitors[1].abbreviation)}}"
                       [routerLink]="['/tennis/match',(slide.id | splitID),(slide.competitors[0].abbreviation + '-vs-' +slide.competitors[1].abbreviation)]"></a>
                   </ng-template>
                 </div>
