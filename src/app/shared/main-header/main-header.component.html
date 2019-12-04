@@ -45,6 +45,7 @@
   </ul>
 </nav>
 <div class="sidebar-menu-outer" [ngClass]="{'active': isapply}">
+  <div class="sidebar-overlay" [ngClass]="{'active': isapply}"></div>
   <div class="sidebar-menu" [ngClass]="{'active': isapply}" #sidemenucontainer>
     <div class="sidebar-head">
       <div class="sign-block d-flex align-items-center" *ngIf="isLogin">
