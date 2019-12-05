@@ -212,11 +212,11 @@ export class UppersliderComponent implements OnInit, OnDestroy {
 
 
     /** If Tennis live update is already started, No need to start interval for Live match Info */
-    // this.runningMatchFlagSubscription = this.store.select(tennisSelector.getTennisLiveIds).subscribe((matches) => {
+    // this.runningMatchFlagSubscription = this.store.select(tennisSelector.getTennisLiveIds).pipe(takeUntil(this.destroy$)).subscribe((matches) => {
     this.interval = setInterval(() => {
       classThis.sportsService
         .getTennisLiveSummary()
-        .subscribe(res => {
+        .pipe(takeUntil(this.destroy$)).subscribe(res => {
           let ids = [];
           let schedules = [];
           // console.log(res.data.summaries)

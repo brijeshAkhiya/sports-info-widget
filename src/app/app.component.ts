@@ -110,7 +110,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
         window.scrollTo(0, 0);
       /* //change route get url */
       if (event instanceof NavigationEnd) {
-        if ((!(/(?:[^/][\d\w\s\.\\.\-:]+)$(?<=\.\w{2,4})/.test(event.url)) && !event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
+        if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
         /*         //set meta tags from here... */
         /*         //set page title */
