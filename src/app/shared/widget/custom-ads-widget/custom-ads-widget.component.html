@@ -1,8 +1,8 @@
-<div class="ad-block" *ngIf="addata?.sImage">
+<div class="ad-block" *ngIf="addata?.eAdType == 'Image'">
     <a (click)="adclick(addata._id,addata.sLink)">
-        <img *ngIf="addata?.sImage" [lazyLoad]="addata?.sImage | resizeImage" alt="AD"
+        <img *ngIf="addata?.sContent" [lazyLoad]="addata?.sContent | resizeImage" alt="AD"
             [defaultImage]="addata?.eType == 'Large' ? defaultImageLarge : defaultImageLarge || addata.eType == 'Rectangle' ? defaultImageRectangle : defaultImageRectangle || addata.eType == 'Banner' ? defaultImageBanner : defaultImageBanner">
     </a>
 </div>
-<div class="ad-block html-ads" *ngIf="addata?.sHtml" [innerHTML]="addata?.sHtml">
+<div class="ad-block html-ads" *ngIf="addata?.eAdType == 'HTML'" [innerHTML]="addata?.sContent">
 </div>

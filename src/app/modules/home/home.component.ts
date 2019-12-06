@@ -3,8 +3,8 @@ import { CommonService } from '@providers/common-service';
 import { SportsService } from '@providers/sports-service';
 import { isPlatformBrowser } from '@angular/common';
 
-import * as fromRoot from '@app/app-reducer';
-import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +15,11 @@ import { Store } from '@ngrx/store';
 export class HomeComponent implements OnInit, OnDestroy {
 
   highlightImage: Number = 0;
-  highlightImageInterval;
   popularvideos = [];
   banners = [];
   sport: any;
+  counter: Observable<number>;
+  private unsubscribe: Subject<void> = new Subject();
 
   customOptions: any = {
     loop: true,
@@ -40,7 +41,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     public commonService: CommonService,
     private sportsService: SportsService,
-    private store: Store<fromRoot.State>,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /* //get banner posts */
   getBannerPost() {
-    this.sportsService.getbannerpost().subscribe((res: any) => {
+    this.sportsService.getbannerpost().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
       if (res.data)
         this.banners = res.data;
       this.initHighlightInterval(0);
@@ -67,30 +67,42 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Highlight Blog in interval */
   initHighlightInterval(initValue) {
     if (isPlatformBrowser(this.platformId)) {
-      let i = initValue;
-      this.highlightImageInterval = setInterval(() => {
-        this.highlightImage = i;
-        i = (this.banners.length - 1 === i) ? 0 : i + 1;
-      }, 3000);
+      this.counter = new Observable<number>(observer => {
+        let i = initValue;
+        const interval = setInterval(() => {
+          i = (this.banners.length - 1 === i) ? 0 : i + 1;
+          observer.next(i);
+        }, 3000);
+        return () => {
+          clearInterval(interval);
+        }
+      });
+
+      this.counter
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe(
+          (value) => this.highlightImage = value,
+          (error) => console.error(error),
+        );
     }
   }
 
   /** Stop Highlight Blog on mouseover */
   stopHighlightInterval(highlightIndex) {
     this.highlightImage = highlightIndex;
-    if (this.highlightImageInterval) clearInterval(this.highlightImageInterval);
   }
 
   /* //get popular videos */
   getPopularVideos() {
-    this.sportsService.getpopularpost({ eType: 'Video', bRemoveBannerPosts: true }).subscribe((res: any) => {
+    this.sportsService.getpopularpost({ eType: 'Video', bRemoveBannerPosts: true }).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
       if (res.data)
         this.popularvideos = res.data;
     });
   }
 
   ngOnDestroy() {
-    if (this.highlightImageInterval) clearInterval(this.highlightImageInterval);
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
 }

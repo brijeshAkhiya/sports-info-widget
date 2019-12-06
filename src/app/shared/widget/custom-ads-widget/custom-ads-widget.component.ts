@@ -37,8 +37,8 @@ export class CustomAdsWidgetComponent implements OnInit {
         // pick random custom ad from ngrx store data obj
         if (this.adsObj[this.type]) {
           this.addata = this.adsObj[this.type][Math.floor(Math.random() * this.adsObj[this.type].length)];
-          if (this.addata.sJS) {
-            this.loadJS(this.addata.sJS);
+          if (this.addata.eAdType == 'JS') {
+            this.loadJS(this.addata.sContent);
           }
         }
 

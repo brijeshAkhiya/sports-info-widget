@@ -51,18 +51,18 @@
       <div class="sign-block d-flex align-items-center" *ngIf="isLogin">
         <img class="profile-pic" [lazyLoad]="socialUser.photoUrl" alt="user"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <p>Hie, {{socialUser.username}}</p>
+        <p>Hie, {{socialUser.name}}</p>
       </div>
       <div class="sign-block d-flex align-items-center" *ngIf="!isLogin" (click)="openmodal()">
         <img class="profile-pic" [lazyLoad]="commonService.commenterPlaceholder" alt="user"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <p class="login">{{'Login' | translate}}</p>
+        <p class="login">{{'Blog_Module.Login' | translate}}</p>
       </div>
     </div>
     <ul class="sidebar-nav" #navbarnav>
       <li>
         <a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"
-          (click)="onRedirect();">{{'Home' | translate}}</a>
+          (click)="onRedirect();">{{'widgetModule.Home' | translate}}</a>
       </li>
       <li *ngFor="let menuItem of sportsMenu">
         <a routerLink="{{menuItem.link}}" routerLinkActive="active"
@@ -70,8 +70,8 @@
       </li>
       <li class="border-item" #langmenuContainer>
         <a class="d-flex justify-content-between" (click)="openLangMenu(true)">
-          <span>Language</span>
-          <span class="selected-lang">English</span>
+          <span>{{ 'Language' | translate}}</span>
+          <span class="selected-lang text-capitalize">{{currentLang}}</span>
         </a>
       </li>
       <li class="border-item" *ngIf="isLogin">
@@ -84,13 +84,12 @@
       <div class="sign-block d-flex align-items-center">
         <a class="back-btn" class="Menu" (click)="openLangMenu(false)"><img alt="Back"
             src="../../../assets/images/back-btn.svg">
-          <span>Main
-            menu</span></a>
+          <span>{{ 'Main menu' | translate}}</span></a>
       </div>
     </div>
     <ul class="sidebar-nav" #navbarnav>
       <li>
-        <a class="active lang-label">Language</a>
+        <a class="active lang-label">{{ 'Language' | translate}}</a>
       </li>
     </ul>
     <ul class="sidebar-nav lang-nav" #navbarnav>
