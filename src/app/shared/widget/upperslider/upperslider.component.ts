@@ -714,6 +714,8 @@ export class UppersliderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
     this.clearTimeInterval();
   }
 

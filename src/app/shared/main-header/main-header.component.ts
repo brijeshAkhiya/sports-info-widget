@@ -59,6 +59,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
   langMenu: boolean = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  currentLang;
 
   sportsMenu = [
     { title: 'Cricket', link: '/cricket' },
@@ -117,6 +118,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      this.currentLang = this.commonService.getFromStorage('userLng');
       this.currentSite = window.location.origin;
       this.authService.authState.pipe(takeUntil(this.destroy$)).subscribe((user) => {
         if (user == null) {
@@ -133,15 +135,13 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   responsiveSticky(value) {
+    let element = document.getElementById('navbar');
+    let bodyelement = document.getElementById('main-body');
     if (window.pageYOffset > value) {
-      let element = document.getElementById('navbar');
       element.classList.add('sticky');
-      let bodyelement = document.getElementById('main-body');
       bodyelement.classList.add('sticky-mainmenu');
     } else {
-      let element = document.getElementById('navbar');
       element.classList.remove('sticky');
-      let bodyelement = document.getElementById('main-body');
       bodyelement.classList.remove('sticky-mainmenu');
     }
   }
@@ -263,13 +263,7 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     if (window.addEventListener) // older FF
       window.addEventListener('DOMMouseScroll', this.preventDefault, { passive: false });
     document.addEventListener('wheel', this.preventDefault, { passive: false }); // Disable scrolling in Chrome
-    // window.onwheel = this.preventDefault; // modern standard
-    // window.onmousewheel = document['onmousewheel'] = this.preventDefault; // older browsers, IE
-
     document.addEventListener('touchmove', this.preventDefault, { passive: false });
-    // document.addEventListener('touchstart', function (e) { e.preventDefault(); }, { passive: false });
-    // window.ontouchmove = this.preventDefault; // mobile
-    // document.onkeydown = this.preventDefaultForScrollKeys;
   }
 
   enableScroll() {
@@ -277,11 +271,6 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       window.removeEventListener('DOMMouseScroll', this.preventDefault, false);
     document.removeEventListener('wheel', this.preventDefault); // Enable scrolling in Chrome
     document.removeEventListener('touchmove', this.preventDefault, false);
-    // window.onmousewheel = document['onmousewheel'] = null;
-    // window.onwheel = null;
-    // window.ontouchmove = null;
-    // document.onkeydown = null;
-
   }
   openLangMenu(val) {
     this.langMenu = val;
@@ -299,6 +288,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.enableScroll();
   }
   ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
     this.enableScroll();
   }
 }

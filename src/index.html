@@ -89,7 +89,7 @@
     let host = window.location.host;
     let selectedLang = 'english';
     if (host.split('.')[0]
-      && ['temp', 'english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0])) {
+      && ['english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0])) {
       selectedLang = host.split('.')[0];
     }
     document.querySelector('#my-manifest-placeholder').setAttribute('href', './assets/manifest/manifest_' + selectedLang + '.json');

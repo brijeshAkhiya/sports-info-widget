@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ViewEncapsulation, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,6 +7,8 @@ import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
 import * as fromRoot from '../../app-reducer';
 import * as favourites from '../../store/favourites-management/favourites.actions';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -15,7 +17,7 @@ import * as favourites from '../../store/favourites-management/favourites.action
   styleUrls: ['./main-footer.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class MainFooterComponent implements OnInit {
+export class MainFooterComponent implements OnInit, OnDestroy {
   isapply = false;
   contactObj: {};
   userfavourites: any;
@@ -24,6 +26,7 @@ export class MainFooterComponent implements OnInit {
   topPosToStartShowing = 100;
   searchText;
   isAuth$: any;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild('favContainer') favContainer;
 
@@ -46,7 +49,7 @@ export class MainFooterComponent implements OnInit {
   ngOnInit() {
     this.getContactDetails();
     if (isPlatformBrowser(this.platformId)) {
-      this.store.select('auth').subscribe((data: any) => {
+      this.store.select('auth').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
         this.isAuth$ = data.isAuthenticated;
         if (this.isAuth$ == true) {
           this.getUserfavourites();
@@ -63,7 +66,7 @@ export class MainFooterComponent implements OnInit {
           this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
         }
       });
-      this.store.select('Favourites').subscribe((data: any) => {
+      this.store.select('Favourites').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
         this.userfavourites = data.Favourites ? data.Favourites : [];
       });
     }
@@ -71,7 +74,7 @@ export class MainFooterComponent implements OnInit {
 
   /* //get user favourites */
   getUserfavourites() {
-    this.sportsService.getuserfavourite().subscribe((res: any) => {
+    this.sportsService.getuserfavourite().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.userfavourites = (this.commonService.getFromStorage('favourites')) ? JSON.parse(this.commonService.getFromStorage('favourites')) : [];
       this.userfavourites = this.userfavourites.map((singleitem) => {
         return {
@@ -117,10 +120,7 @@ export class MainFooterComponent implements OnInit {
         this.store.dispatch(new favourites.SaveFavourites(this.userfavourites));
 
         if (this.commonService.getFromStorage('userT')) {
-          this.sportsService.updatefavourites({ data: this.userfavourites }).subscribe((res: any) => {
-            if (res) {
-            }
-          });
+          this.sportsService.updatefavourites({ data: this.userfavourites });
         }
       } else {
         this.isedit = false;
@@ -131,7 +131,7 @@ export class MainFooterComponent implements OnInit {
   }
 
   getContactDetails() {
-    this.sportsService.getcontactdetails().subscribe(res => {
+    this.sportsService.getcontactdetails().pipe(takeUntil(this.destroy$)).subscribe(res => {
       if (res['data']) {
         this.contactObj = {};
         res['data'].map(s => {
@@ -165,5 +165,9 @@ export class MainFooterComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

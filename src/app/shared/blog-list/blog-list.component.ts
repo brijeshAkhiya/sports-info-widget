@@ -1,23 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SportsService } from '@providers/sports-service';
 
 @Component({
   selector: 'app-blog-list',
-  templateUrl: './blog-list.component.html',
-  styleUrls: ['./blog-list.component.css']
+  templateUrl: './blog-list.component.html'
 })
-export class BlogListComponent implements OnInit {
+export class BlogListComponent implements OnInit, OnDestroy {
 
   @Input() options;
   @Input() sport;
   isLoading = false;
   isLoadMore = true;
   articles = [];
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private sportsService: SportsService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     if (this.options) {
@@ -60,14 +61,14 @@ export class BlogListComponent implements OnInit {
 
   getSearchPosts() {
     this.isLoading = true;
-    this.sportsService.getsearchresult(this.options.reqParams).subscribe((res: any) => {
+    this.sportsService.getsearchresult(this.options.reqParams).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.loadData(res);
     });
   }
 
   getAdminPosts() {
     this.isLoading = true;
-    this.sportsService.getadminposts(this.options.reqParams).subscribe((res: any) => {
+    this.sportsService.getadminposts(this.options.reqParams).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.loadData(res);
     });
   }
@@ -76,14 +77,14 @@ export class BlogListComponent implements OnInit {
   /* //get popular posts */
   getPopularArticles() {
     this.isLoading = true;
-    this.sportsService.getpopularpost(this.options.reqParams).subscribe((res: any) => {
+    this.sportsService.getpopularpost(this.options.reqParams).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.loadData(res);
     });
   }
   /* //get articles */
   getArticles() {
     this.isLoading = true;
-    this.sportsService.getrecentpost(this.options.reqParams).subscribe((res: any) => {
+    this.sportsService.getrecentpost(this.options.reqParams).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.loadData(res);
     });
   }
@@ -91,14 +92,14 @@ export class BlogListComponent implements OnInit {
   /* //get related posts */
   getRelatedPosts() {
     this.isLoading = true;
-    this.sportsService.getrelatedpost(this.options.reqParams).subscribe((res: any) => {
+    this.sportsService.getrelatedpost(this.options.reqParams).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.loadData(res);
     });
   }
 
   getWriterPosts() {
     this.isLoading = true;
-    this.sportsService.getwriterprofile(this.options.reqParams).subscribe((res: any) => {
+    this.sportsService.getwriterprofile(this.options.reqParams).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.isLoading = false;
       if (res.data.posts && res.data.posts.posts.length > 0) {
         this.articles = this.articles.concat(res.data.posts.posts);
@@ -109,11 +110,13 @@ export class BlogListComponent implements OnInit {
     });
 
   }
-
-
   loadmore() {
     this.options.reqParams.nStart = (this.options.data && this.options.data.length > this.articles.length) ? this.options.data.length : this.articles.length;
     this.getData();
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

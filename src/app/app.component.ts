@@ -26,7 +26,6 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   isupdate: boolean;
   showCookiepopup = false;
   requestedUrl;
-  subscription = { swupdate: null, router: null, metatags: null, storeMeta: null };
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -42,7 +41,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.getMetaTags();
-    this.subscription.swupdate = this.swupdate.available.pipe(takeUntil(this.destroy$)).subscribe((res) => {
+    this.swupdate.available.pipe(takeUntil(this.destroy$)).subscribe((res) => {
       this.isupdate = true;
     });
     if (isPlatformBrowser(this.platformId)) {
@@ -83,8 +82,6 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     if (selectedLang === 'arabic' && element != null) {
       element.classList.add('arabic');
     }
-
-    // console.log(host, selectedLang)
     this.translate.setDefaultLang(selectedLang);
 
     /* //get data from ngrx store through meta tags actions */
@@ -101,7 +98,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     /* //get data from ngrx store through meta tags actions */
 
     /*  //susbcribe to router events */
-    this.subscription.router = this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       /*  //scroll to top navigation related */
       if (!(event instanceof NavigationEnd)) {
         return;
@@ -191,7 +188,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
   /* //get meta tags */
   getMetaTags() {
-    this.subscription.metatags = this.sportsservice.getmetatags().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.sportsservice.getmetatags().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if (res.data.length > 0) {
         this.store.dispatch(new MetaTags.SaveMetaTags(res.data));
       }
@@ -204,7 +201,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
-    this.subscription.storeMeta = this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+    this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
