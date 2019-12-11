@@ -50,12 +50,12 @@
     <div class="sidebar-head">
       <div class="sign-block d-flex align-items-center" *ngIf="isLogin">
         <img class="profile-pic" [lazyLoad]="socialUser.photoUrl" alt="user"
-          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+          [defaultImage]="commonService.commenterPlaceholder" [offset]="commonService.lazyloadoffset">
         <p>Hie, {{socialUser.name}}</p>
       </div>
       <div class="sign-block d-flex align-items-center" *ngIf="!isLogin" (click)="openmodal()">
         <img class="profile-pic" [lazyLoad]="commonService.commenterPlaceholder" alt="user"
-          [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
+          [defaultImage]="commonService.commenterPlaceholder" [offset]="commonService.lazyloadoffset">
         <p class="login">{{'Blog_Module.Login' | translate}}</p>
       </div>
     </div>

@@ -105,20 +105,21 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
 
       this.loadAllSportsData();
-
       if (this.commonService.getFromStorage('selectedSport') != null) {
         this.sport = this.commonService.getFromStorage('selectedSport');
+      } else if (this.commonService.readCookie('selectedSport')) {
+        this.sport = this.commonService.readCookie('selectedSport');
       }
       if (this.commonService.getFromStorage('userLng') === 'arabic') {
         this.customOptions.rtl = true;
         this.customOptions1.rtl = true;
       }
-      if (this.sportsSlider) {
-        setTimeout(() => {
+      setTimeout(() => {
+        if (this.sportsSlider) {
           this.sportsSlider.to(this.sport.toString());
-          // this.loadData();
-        });
-      }
+        }
+        // this.loadData();
+      });
     }
     else
       this.isBrowser = false;
@@ -149,11 +150,13 @@ export class UppersliderComponent implements OnInit, OnDestroy {
         this.clearTimeInterval();
         this.sport = event.slides[0].id;
         this.commonService.setInStorage('selectedSport', this.sport);
+        document.cookie = 'selectedSport=' + this.sport + ' ; expires=Thu, 31 Dec 2050 12:00:00 UTC; ';
         this.slider = [];
         this.loadData();
       } else if (this.sport == 'Cricket') {
         this.clearTimeInterval();
         this.commonService.setInStorage('selectedSport', this.sport);
+        document.cookie = 'selectedSport=' + this.sport + ' ; expires=Thu, 31 Dec 2050 12:00:00 UTC; ';
         this.slider = [];
         this.loadData();
       }
@@ -182,14 +185,12 @@ export class UppersliderComponent implements OnInit, OnDestroy {
     this.timerStartTime.Tennis.isLiveUpdate = false;
     this.timerStartTime.Tennis.isStartAfterTime = false;
     this.scheduleSubscription = this.store.select(tennisSelector.getTennisSchedule).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      console.log(data);
       if (data && data.length > 0) {
         let liveMatches = this.slider = data.filter((match) => ['match_about_to_start'].indexOf(match.status) > -1);
         this.slider = this.commonService.sortBtDate(this.slider.concat(data.filter((match) => ['closed', 'complete'].indexOf(match.status) > -1)), 'scheduled', 'desc');
         let fixtures = this.commonService.sortBtDate(data.filter((match) => ['scheduled', 'created'].indexOf(match.status) > -1), 'scheduled', 'asc');
         this.slider = this.slider.concat(fixtures);
         this.slider = this.slider.concat(liveMatches);
-        console.log(this.slider)
         if (liveMatches.length > 0 && !this.timerStartTime.Tennis.isLiveUpdate) {
           this.getLiveTennisUpdate(this);
         } else if (!this.timerStartTime.Tennis.isLiveUpdate && !this.timerStartTime.Tennis.isStartAfterTime && (Object.entries(fixtures).length > 0 && fixtures.length > 0)) {
@@ -226,14 +227,12 @@ export class UppersliderComponent implements OnInit, OnDestroy {
             // console.log(schedules)
           });
 
-          console.log(res.data.summaries.filter((match) => match.sport_event.status == 'live'));
           this.store.dispatch(new Tennis.SaveTennisMatches({ ids: ids, matches: res.data.summaries }));
         });
     }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Tennis.interval));
     // });
   }
   updateTennisSlider(matches) {
-    console.log(matches)
     matches.map(match => {
       let matchIndex = this.slider.findIndex((slide) => slide.id == match.sport_event.id);
       if (matchIndex >= 0) {

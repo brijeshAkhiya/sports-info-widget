@@ -390,7 +390,7 @@
               </div>
 
               <app-player-table *ngIf="playerData?.stats?.surfaces" [data]="playerData?.stats?.surfaces" [options]="{
-                    titles : ['Surface', 'TP', 'TW', 'MP', 'MW'],
+                    titles : ['Rank', 'Surface', 'TP', 'TW', 'MP', 'MW'],
                     sort : [false, false, true, true, true, true],
                     values : ['index', 'type', 'statistics.tournaments_played', 'statistics.tournaments_won', 'statistics.matches_played', 'statistics.matches_won'],
                     class : ['nba-table tour-stats-table'],

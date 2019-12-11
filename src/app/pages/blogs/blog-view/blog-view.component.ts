@@ -258,7 +258,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
       nLimit: 10,
       aIds: this.blogdata.aIds
     };
-    if (window.history.state.sport)
+    if (window.history.state && window.history.state.sport)
       data.eSport = window.history.state.sport.charAt(0).toUpperCase() + window.history.state.sport.slice(1);
     this.sportsService.getrelatedpost(data).subscribe((res: any) => {
       if (res['data']) {

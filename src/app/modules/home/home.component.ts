@@ -18,8 +18,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   popularvideos = [];
   banners = [];
   sport: any;
-  counter: Observable<number>;
   private unsubscribe: Subject<void> = new Subject();
+  highlightImageInterval;
+
 
   customOptions: any = {
     loop: true,
@@ -67,29 +68,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Highlight Blog in interval */
   initHighlightInterval(initValue) {
     if (isPlatformBrowser(this.platformId)) {
-      this.counter = new Observable<number>(observer => {
-        let i = initValue;
-        const interval = setInterval(() => {
-          i = (this.banners.length - 1 === i) ? 0 : i + 1;
-          observer.next(i);
-        }, 3000);
-        return () => {
-          clearInterval(interval);
-        }
-      });
-
-      this.counter
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe(
-          (value) => this.highlightImage = value,
-          (error) => console.error(error),
-        );
+      let i = initValue;
+      this.highlightImageInterval = setInterval(() => {
+        this.highlightImage = i;
+        i = (this.banners.length - 1 === i) ? 0 : i + 1;
+      }, 3000);
     }
   }
 
   /** Stop Highlight Blog on mouseover */
   stopHighlightInterval(highlightIndex) {
     this.highlightImage = highlightIndex;
+    if (this.highlightImageInterval) clearInterval(this.highlightImageInterval);
+
   }
 
   /* //get popular videos */
@@ -101,6 +92,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.highlightImageInterval) clearInterval(this.highlightImageInterval);
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }

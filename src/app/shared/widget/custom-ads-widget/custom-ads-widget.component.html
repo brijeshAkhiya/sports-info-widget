@@ -4,5 +4,6 @@
             [defaultImage]="addata?.eType == 'Large' ? defaultImageLarge : defaultImageLarge || addata.eType == 'Rectangle' ? defaultImageRectangle : defaultImageRectangle || addata.eType == 'Banner' ? defaultImageBanner : defaultImageBanner">
     </a>
 </div>
-<div class="ad-block html-ads" *ngIf="addata?.eAdType == 'HTML'" [innerHTML]="addata?.sContent">
+<div class="ad-block html-ads" *ngIf="addata?.eAdType == 'HTML'" style="border: none;">
+    <iframe [src]="htmlContent"></iframe>
 </div>
