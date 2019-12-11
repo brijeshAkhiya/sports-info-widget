@@ -50,7 +50,7 @@
             </ng-container>
           </ng-container>
           <ng-container *ngIf="options.sport == 'Tennis'">
-            <ng-container *ngTemplateOutlet="tennis;context:{item:item}">
+            <ng-container *ngTemplateOutlet="tennis;context:{item:item,index:i+1}">
             </ng-container>
           </ng-container>
         </tr>
@@ -290,7 +290,7 @@
 </ng-template>
 
 
-<ng-template #tennis let-item="item">
+<ng-template #tennis let-item="item" let-index="index">
   <ng-container *ngFor="let value of options.values;let i=index">
     <td *ngIf="(value != 'name' && value !='index'); else link "
       [ngClass]="(object == value && options.sort[i]) ? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc' : '' ">

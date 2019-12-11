@@ -21,7 +21,7 @@
   <meta http-equiv="Expires" content="0">
   <meta property="fb:pages" content="385227135407894">
   <meta property="fb:app_id" content="392165904733265">
-  <link rel="alternate" hreflang="en" href="https://sports.info" />
+  <link rel="alternate" hreflang="en" href="https://www.sports.info" />
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="apple-touch-icon" href="assets/images/favicon.png">
   <!-- <link rel="manifest" href="manifest.json"> -->
@@ -36,6 +36,7 @@
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli:700,800,900,900i&display=swap" rel="stylesheet"> -->
   <link rel="dns-prefetch" href="https://www.sports.info">
+  <link rel="dns-prefetch" href="https://backend.sports.info">
   <!-- iPhone Xs Max (1242px x 2688px) -->
   <link rel="apple-touch-startup-image"
     media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
@@ -60,7 +61,7 @@
   <link rel="apple-touch-startup-image"
     media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
     href="assets/icons/apple-launch-2048x2732.png">
-  <!-- iPad Pro 11” (1668px x 2388px) -->
+  <!-- iPad Pro 11" (1668px x 2388px) -->
   <link rel="apple-touch-startup-image"
     media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
     href="assets/icons/apple-launch-1668x2388.png">
@@ -72,7 +73,8 @@
   <link rel="apple-touch-startup-image"
     media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
     href="assets/icons/apple-launch-1536x2048.png">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script data-ad-client="ca-pub-6381087658260439" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
   <script>
@@ -89,22 +91,54 @@
     })();
   </script>
 
-
-  <script>
-    let host = window.location.host;
-    let selectedLang = 'english';
-    if (host.split('.')[0]
-      && ['english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0])) {
-      selectedLang = host.split('.')[0];
+  <script type="application/ld+json">
+    {
+    "@context": "http://schema.xn--org-9o0a",
+    "@type": "WebSite",
+    "url": "https://www.sports.info/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.sports.info/search/{search_term_string}",
+      "query-input": "required name=search_term_string"
+      }
     }
-    document.querySelector('#my-manifest-placeholder').setAttribute('href', './assets/manifest/manifest_' + selectedLang + '.json');
   </script>
 
   <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "ca-pub-6381087658260439",
-      enable_page_level_ads: true
-    });
+    let host = window.location.host.split('.')[0];
+    let selectedLang = 'english';
+    if (host
+      && ['english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host)) {
+      selectedLang = host;
+    }
+    document.querySelector('#my-manifest-placeholder').setAttribute('href', './assets/manifest/manifest_' + selectedLang + '.json');
+  </script>
+</head>
+
+<body ontouchstart id="main-body" style="margin: 0px;">
+  <app-root>
+    <div class="root-loader"
+      style="position: absolute; top: 0; width: 100%; height: 100%; background-color:#fff; text-align: center;">
+      <!-- <img src="./assets/images/loader.mp4" alt="" /> -->
+      <video src="./assets/images/loader.mp4"
+        style="pointer-events: none; width: 320px; max-width: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);"
+        loop="loop" autoplay muted></video>
+    </div>
+  </app-root>
+
+  <noscript>
+    <div class="white-text d-flex align-items-center justify-content-between"
+      style="padding: 16px 24px; background: #1F1F1F; position: fixed; width: 100%; bottom: 0px; left: 0; z-index: 6; color: #fff;">
+      <p class="no-margin" style="margin: 0;">Ooops ! SportsInfo needs access to Javascript to render better
+        experiences. <b>Enable JS</b></p>
+    </div>
+  </noscript>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('ngsw-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.error('Error', err));
+    }
   </script>
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -121,37 +155,13 @@
     ga('create', 'UA-140814144-1', 'auto');// add your tracking ID here.
     ga('send', 'pageview');
   </script>
-  <noscript>
-    <div class="white-text d-flex align-items-center justify-content-between"
-      style="padding: 16px 24px; background: #1F1F1F; position: fixed; width: 100%; bottom: 0px; left: 0; z-index: 6; color: #fff;">
-      <p class="no-margin" style="margin: 0;">Ooops ! SportsInfo needs access to Javascript to render better
-        experiences. <b>Enable JS</b></p>
-    </div>
-  </noscript>
-  <style>
-    body {
-      margin: 0px;
-    }
-  </style>
-</head>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('ngsw-worker.js')
-      .then(() => console.log('service worker installed'))
-      .catch(err => console.error('Error', err));
-  }
-</script>
+  <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js"
+    integrity="sha384-ssBfXiBvlVC7bdA/VX03S88B5MwXQWdnpJRbUYFPgswlOBwETwTp6F3SMUNpo9M9" crossorigin="anonymous">
+    </script>
+  <script>
+    Sentry.init({ dsn: 'https://2ad2fc8c91544b2cab93caff2174f76f@sentry.io/1852366' });
+  </script>
 
-<body ontouchstart id="main-body">
-  <app-root>
-    <div class="root-loader"
-      style="position: absolute; top: 0; width: 100%; height: 100%; background-color:#fff; text-align: center;">
-      <!-- <img src="./assets/images/loader.mp4" alt="" /> -->
-      <video src="./assets/images/loader.mp4"
-        style="pointer-events: none; width: 320px; max-width: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);"
-        loop="loop" autoplay muted></video>
-    </div>
-  </app-root>
 </body>
 
 </html>
