@@ -11,7 +11,7 @@
 *                       { margin: 0px; padding: 0px; outline: none; }
 ::-moz-selection        { color: #fff; background: #ED1A33; }
 ::selection             { color: #fff; background: #ED1A33; }
-body                    { font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252; }
+body                    { font-family: 'IBM Plex Sans', sans-serif; font-display: swap; -webkit-font-smoothing: antialiased; background: #F4F4F5; font-size: 16px; line-height: 26px; color: #525252; }
 .arabic                 { direction: rtl; text-align: right; }
 .sticky-mainmenu        { padding-top: 50px; }
 .sticky-mainmenu.sticky-submenu         { padding-top: 95px; }
