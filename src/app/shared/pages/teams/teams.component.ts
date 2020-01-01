@@ -128,7 +128,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.isloading = false;
     switch (this.sport) {
       case 'Cricket': {
-        if (res.data) {
+        if (res.data && res.data.groups) {
           res.data.groups.map((data) => {
             this.teams = data.teams;
           });

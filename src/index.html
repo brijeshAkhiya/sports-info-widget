@@ -93,13 +93,13 @@
 
   <script type="application/ld+json">
     {
-    "@context": "http://schema.xn--org-9o0a",
-    "@type": "WebSite",
-    "url": "https://www.sports.info/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.sports.info/search/{search_term_string}",
-      "query-input": "required name=search_term_string"
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.sports.info/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.sports.info/search/{search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
   </script>
@@ -155,12 +155,13 @@
     ga('create', 'UA-140814144-1', 'auto');// add your tracking ID here.
     ga('send', 'pageview');
   </script>
-  <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js"
+  <!-- Sentry
+    <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js"
     integrity="sha384-ssBfXiBvlVC7bdA/VX03S88B5MwXQWdnpJRbUYFPgswlOBwETwTp6F3SMUNpo9M9" crossorigin="anonymous">
     </script>
   <script>
     Sentry.init({ dsn: 'https://2ad2fc8c91544b2cab93caff2174f76f@sentry.io/1852366' });
-  </script>
+  </script> -->
 
 </body>
 

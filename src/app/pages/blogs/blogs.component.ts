@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class BlogsComponent implements OnInit {
 
-  options: any = { reqParams: { nStart: 0, nLimit: 10 } };
+  options: any = { reqParams: { nStart: 0, nLimit: 10 }, data: [] };
   blog_title = '';
   widgetblogs: any;
   searchkey;
@@ -42,6 +42,8 @@ export class BlogsComponent implements OnInit {
       this.options.reqParams.nLimit = 5;
       if (blogState.data)
         this.options.data = blogState.data;
+
+      console.log(this.options);
     } else if (this.activatedroute.routeConfig.path == 'article' || this.activatedroute.routeConfig.path == 'video') {
       /** Article and Videos Blog post  */
       if (this.activatedroute.routeConfig.path == 'video') {
@@ -83,7 +85,8 @@ export class BlogsComponent implements OnInit {
 
   // search api call
   search() {
-    console.log('search');
+    // console.log('search');
+    // console.log(this.options);
 
     if (this.searchkey.trim()) {
       let data = {
@@ -91,13 +94,19 @@ export class BlogsComponent implements OnInit {
         nLimit: 5,
         nStart: 0
       };
-      this.options.data = [];
       this.noresults = false;
-      this.sportsService.getsearchresult(data).subscribe(res => {
-        console.log(res);
+      this.sportsService.getsearchresult(data).subscribe((res: any) => {
+        // console.log(res);
 
-        this.options.data = res['data'];
+        this.options.data = [];
+        if (res.data.length > 0) {
+          res.data.forEach(element => {
+            this.options.data.push(element);
+          });
+        }
+        // this.options.data.push(res.data[0]);
         this.cd.detectChanges();
+        console.log(this.options);
         // if (res['data'].length > 0) {
         //   this.options.data = res['data'];
         // } else {

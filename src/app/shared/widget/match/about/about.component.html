@@ -4,17 +4,17 @@
     *ngIf="data">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img alt="{{competitor.home.name}}" [lazyLoad]="competitor.home.id | logosurl"
+        <img alt="{{competitor?.home?.name}}" [lazyLoad]="competitor?.home?.id | logosurl"
           [defaultImage]="commonService.flagplaceholder">
-        <h4>{{competitor.home.name}}</h4>
+        <h4>{{competitor?.home?.name}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img alt="{{competitor.away.name}}" [lazyLoad]="competitor.away.id | logosurl"
+        <img alt="{{competitor?.away?.name}}" [lazyLoad]="competitor?.away?.id | logosurl"
           [defaultImage]="commonService.flagplaceholder">
-        <h4>{{competitor.away.name}}</h4>
+        <h4>{{competitor?.away?.name}}</h4>
       </div>
     </div>
     <!-- <h1 *ngIf="data.sport_event.competitors">
@@ -48,7 +48,8 @@
       </p>
       <p *ngIf="data.sport_event_status.match_result">{{data.sport_event_status.match_result}}</p>
       <!-- TODO Delay class-->
-      <p *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed'">
+      <p
+        *ngIf="data.sport_event_status.status == 'cancelled' || data.sport_event_status.status == 'delayed' || data.sport_event_status.status == 'abandoned'">
         {{ 'widgetModule.match_is' | translate }}
         {{ data.sport_event_status.status }}</p>
       <p *ngIf="data.sport_event_status.status == 'not_started' && toss.toss_won_by_team">
@@ -228,17 +229,17 @@
     class="common-title-btn goal-type match-main-title big-title-btn tab-title-btn d-flex justify-content-between align-items-center">
     <div class="teams-animation d-flex justify-content-around align-items-center">
       <div class="team-anim">
-        <img [lazyLoad]="competitor.home.id | logosurl:'soccer'" alt="{{competitor.home.name}}"
+        <img [lazyLoad]="competitor?.home?.id | logosurl:'soccer'" alt="{{competitor?.home?.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <h4>{{competitor.home.name}}</h4>
+        <h4>{{competitor?.home?.name}}</h4>
       </div>
       <div class="team-anim vs-anim">
         <h5>VS</h5>
       </div>
       <div class="team-anim">
-        <img [lazyLoad]="competitor.away.id | logosurl:'soccer'" alt="{{competitor.away.name}}"
+        <img [lazyLoad]="competitor?.away?.id | logosurl:'soccer'" alt="{{competitor?.away?.name}}"
           [defaultImage]="commonService.flagplaceholder" [offset]="commonService.lazyloadoffset">
-        <h4>{{competitor.away.name}}</h4>
+        <h4>{{competitor?.away?.name}}</h4>
       </div>
     </div>
     <!-- End Animation -->

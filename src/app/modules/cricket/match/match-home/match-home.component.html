@@ -85,21 +85,24 @@
                                     <!--if batsman is catch out-->
                                     {{ batting?.statistics?.dismissal?.type == 'caught' ? 'c' : '' || batting?.statistics?.dismissal?.type == 'retired_hurt' ? 'retired hurt' : ''}}
                                     {{ batting?.statistics?.dismissal?.type == 'caught' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
-                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id]?.name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id]?.name | split) 
                                         : ''  
                                     : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
+                                    {{ batting?.statistics?.dismissal?.type == 'caught_bowled' ? 
+                                      (batting?.statistics?.dismissal?.bowler_id ==  batting?.statistics?.dismissal?.fieldsman_id ? 'c & ' : 'c')
+                                    : ''  }}
 
                                     <!--if batsman is stumped out-->
                                     {{ batting?.statistics?.dismissal?.type == 'stumped' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
-                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id]?.name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id]?.name | split) 
                                         : ''  
                                     : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
                                     <!--if batsman is runout-->
                                     {{ batting?.statistics?.dismissal?.type == 'run_out' ? batting?.statistics?.dismissal?.fieldsman_id ?
-                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id].name) ? 
-                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id].name | split) 
+                                    (playerList[batting?.statistics?.dismissal?.fieldsman_id]?.name) ? 
+                                      (playerList[batting?.statistics?.dismissal?.fieldsman_id]?.name | split) 
                                         : ''  
                                     : (playerList[batting?.statistics?.dismissal?.bowler_id]?.name | split) : ''}}
                                     {{ batting?.statistics?.dismissal ? batting?.statistics?.dismissal?.type !== 'retired_hurt' ? 'b' : '' : '' }}
@@ -204,7 +207,7 @@
                               </td>
                               <td>{{bowling?.statistics?.overs_bowled ? bowling?.statistics.overs_bowled : '0'}}</td>
                               <td>{{bowling?.statistics?.maidens ? bowling?.statistics.maidens : '0'}}</td>
-                              <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '0'}}</td>
+                              <td>{{bowling?.statistics?.dot_balls ? bowling?.statistics.dot_balls : '-'}}</td>
                               <td>{{bowling?.statistics?.runs_conceded ? bowling?.statistics.runs_conceded : '0'}}</td>
                               <td>{{bowling?.statistics?.wickets ? bowling?.statistics.wickets : '0'}}</td>
                               <td>
@@ -346,11 +349,11 @@
       </p>
     </div>
     <div class="score">
-      <span class="dark-red">
+      <span class="dark-red" *ngIf="oppoTeam">
         {{oppoTeam[0].abbreviation}}
       </span>
       <span>vs</span>
-      {{currentTeam[0].abbreviation}}
+      {{currentTeam ? currentTeam[0].abbreviation : ''}}
       <span class="value"> {{matchdata.sport_event_status.display_score | cricketScore}}</span>
       <span class="dark-red">OV : </span> {{matchdata.sport_event_status.display_overs}}
     </div>

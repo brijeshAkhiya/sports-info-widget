@@ -64,7 +64,7 @@ img                     { max-width: 100%; }
 
 /* -------- Button Style ------- */
 button                  { outline: none !important; cursor: pointer; transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; }
-.theme-btn              { display: inline-block; padding: 12px 60px 12px 16px; background: #ED1A33; font-size: 16px; line-height: 20px; color: #fff; font-family: 'Muli', sans-serif; font-weight: 800; border: none; text-transform: capitalize; text-align: center; border-radius: 4px; position: relative; }
+.theme-btn              { display: inline-block; padding: 12px 60px 12px 16px; background: #ED1A33; font-size: 16px; line-height: 20px; color: #fff !important; font-family: 'Muli', sans-serif; font-weight: 800; border: none; text-transform: capitalize; text-align: center; border-radius: 4px; position: relative; }
 .theme-btn:hover,
 .theme-btn:focus        { background: #ED1A33; color: #fff; box-shadow: 0px 2px 8px rgba(208,16,39,0.24); -webkit-box-shadow: 0px 2px 8px rgba(208,16,39,0.24); border: none;  }
 .theme-btn span         { position: absolute; display: block; background: #B80E23; width: 44px; height: 100%; top: 0px; right: 0px; border-radius: 4px; overflow: hidden; }

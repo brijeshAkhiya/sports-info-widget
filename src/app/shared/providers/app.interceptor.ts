@@ -12,6 +12,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
@@ -20,14 +21,16 @@ export class AppInterceptor implements HttpInterceptor {
     constructor(
         private transferState: TransferState,
         @Inject(PLATFORM_ID) private platformId: Object,
-        private commonService: CommonService
+        private commonService: CommonService,
+        private translate: TranslateService,
     ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler) {
         /*         //google maps api doesnt allow extra header params - Fix condition --->*/
-        if (!request.url.includes('maps.googleapis.com/maps/api') && isPlatformBrowser(this.platformId)) {
+        if (!request.url.includes('maps.googleapis.com/maps/api')) {
             request = request.clone({
                 setHeaders: {
-                    Language: this.commonService.getFromStorage('userLng') ? this.commonService.getFromStorage('userLng') : null
+                    Language: this.translate.getDefaultLang() ? this.translate.getDefaultLang() :
+                        this.commonService.getFromStorage('userLng') ? this.commonService.getFromStorage('userLng') : ''
                 }
             });
         }

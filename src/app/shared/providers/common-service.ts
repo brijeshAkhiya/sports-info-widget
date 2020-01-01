@@ -26,6 +26,11 @@ export class CommonService {
     this.getPageTitles();
   }
 
+  isUrl(str) {
+    let regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    return regexp.test(str);
+  }
+
   /** Get Locastoarage Item */
   getFromStorage(key) {
     if (isPlatformBrowser(this.platformId))

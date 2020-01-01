@@ -1,9 +1,11 @@
-import { Component, OnInit, HostListener, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, HostListener, ViewEncapsulation, PLATFORM_ID, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Title } from '@angular/platform-browser';
+import * as moment from 'moment';
+
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
-import * as moment from 'moment';
-import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-match-home',
   templateUrl: './match-home.component.html',
@@ -45,7 +47,8 @@ export class MatchHomeComponent implements OnInit {
     private sportsService: SportsService,
     private router: Router,
     private title: Title,
-    private commonService: CommonService
+    private commonService: CommonService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -95,13 +98,15 @@ export class MatchHomeComponent implements OnInit {
           this.getFallWickets();
           this.getScores();
           this.getTossDecision();
-          if (this.matchdata.sport_event_status.status == 'not_started') {
-            this.startLiveUpdateAfterTime();
+          if (isPlatformBrowser(this.platformId)) {
+            if (this.matchdata.sport_event_status.status == 'not_started') {
+              this.startLiveUpdateAfterTime();
+            }
+            if (this.matchdata.sport_event_status.status == 'live' || this.matchdata.sport_event_status.status == 'interrupted' || this.matchdata.sport_event_status.status == 'delayed') {
+              this.getLiveUpdate(this);
+            }
+            this.setTitle();
           }
-          if (this.matchdata.sport_event_status.status == 'live' || this.matchdata.sport_event_status.status == 'interrupted' || this.matchdata.sport_event_status.status == 'delayed') {
-            this.getLiveUpdate(this);
-          }
-          this.setTitle();
         }
       },
       error => {
@@ -130,16 +135,18 @@ export class MatchHomeComponent implements OnInit {
       let arrWickets = this.matchdata.timeline.filter((timeline) => timeline.type == 'wicket');
       if (arrWickets.length > 0) {
         arrWickets.reverse().map(data => {
-          if (!this.fallofWickets[data.inning])
-            this.fallofWickets[data.inning] = [];
-          let find = this.fallofWickets[data.inning].filter((wicket) => wicket.playerid == data.dismissal_params.player.id);
-          if (find.length == 0) {
-            this.fallofWickets[data.inning].push({
-              playerid: data.dismissal_params.player.id,
-              playername: data.dismissal_params.player.name,
-              displayover: data.display_overs,
-              displayscore: data.display_score
-            });
+          if (data.dismissal_params) {
+            if (!this.fallofWickets[data.inning])
+              this.fallofWickets[data.inning] = [];
+            let find = this.fallofWickets[data.inning].filter((wicket) => wicket.playerid == data.dismissal_params.player.id);
+            if (find.length == 0) {
+              this.fallofWickets[data.inning].push({
+                playerid: data.dismissal_params.player.id,
+                playername: data.dismissal_params.player.name,
+                displayover: data.display_overs,
+                displayscore: data.display_score
+              });
+            }
           }
         });
       }

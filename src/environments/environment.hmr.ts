@@ -7,7 +7,7 @@ export const environment = {
         baseUrl: 'https://backend.sports.info',
         config: {}
     },
-    s3Url: 'https://d1ldsx0apuyt84.cloudfront.net/',
+    s3Url: 'https://media.sports.info/',
     // siteUrl: 'https://' + window.location.host + '/',
     mapsKey: 'AIzaSyCaY_0TRHF11ObThc4RAcvNo-3kI-HSCbc',
     facebookId: '392165904733265',

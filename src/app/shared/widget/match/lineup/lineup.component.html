@@ -106,7 +106,7 @@
             <ul class="ground-player-list" *ngFor="let formated_players of team.home.formated_players">
               <li *ngFor="let player of formated_players">
                 <div class="number"
-                  [ngStyle]="{'background':'#'+team.home?.jersey.base, 'color': '#'+team.home?.jersey.number }">
+                  [ngStyle]="{'background':'#'+team.home?.jersey?.base, 'color': '#'+team.home?.jersey?.number }">
                   {{player?.jersey_number}}</div>
                 <p>
                   <a
@@ -121,7 +121,7 @@
             <ul class="ground-player-list list-2" *ngFor="let formated_players of team.away.formated_players">
               <li *ngFor="let player of formated_players">
                 <div class="number"
-                  [ngStyle]="{'background':'#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">
+                  [ngStyle]="{'background':'#'+team.away?.jersey?.base, 'color': '#'+team.away?.jersey?.number }">
                   {{player?.jersey_number}}</div>
                 <p>
                   <a
@@ -160,11 +160,11 @@
               <p class="text-capitalize">
                 <a
                   [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                  {{player.name}}
+                  {{player.name | split}}
                 </a>
               </p>
               <span class="filled"
-                [ngStyle]="{'background':'#'+team.home?.jersey.base, 'border-color': (team.home?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.home?.jersey.base, 'color': '#'+team.home?.jersey.number }">{{player?.jersey_number}}</span>
+                [ngStyle]="{'background':'#'+team.home?.jersey?.base, 'border-color': (team.home?.jersey?.base == 'ffffff') ? '#E0E0E0' : '#'+team.home?.jersey?.base, 'color': '#'+team.home?.jersey?.number }">{{player?.jersey_number}}</span>
             </li>
           </ul>
         </ng-container>
@@ -191,11 +191,11 @@
           <ul class="lienup-list">
             <li *ngFor="let player of team.away?.squad[role]">
               <span class="filled"
-                [ngStyle]="{'background':'#'+team.away?.jersey.base, 'border-color': (team.away?.jersey.base == 'ffffff') ? '#E0E0E0' : '#'+team.away?.jersey.base, 'color': '#'+team.away?.jersey.number }">{{player?.jersey_number}}</span>
+                [ngStyle]="{'background':'#'+team.away?.jersey?.base, 'border-color': (team.away?.jersey?.base == 'ffffff') ? '#E0E0E0' : '#'+team.away?.jersey?.base, 'color': '#'+team.away?.jersey?.number }">{{player?.jersey_number}}</span>
               <p class="text-capitalize">
                 <a
                   [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                  {{player.name}}
+                  {{player.name | split}}
                 </a>
               </p>
             </li>

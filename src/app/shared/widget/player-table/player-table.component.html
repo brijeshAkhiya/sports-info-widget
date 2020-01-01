@@ -156,7 +156,8 @@
     <td *ngIf="(value != 'name' && value!= 'index'); else link "
       [ngClass]="(object == value && options.sort[i] )? sorting == 'ASC'?' sort-table table-asc' :'sort-table table-desc':''">
       <!-- {{ value == 'index' ? index : (item[value] && item[value] !='') ? item[value] : 0}} -->
-      {{(item[value] && item[value] !='') ? item[value] : 0}}
+      <!-- {{(item[value] && item[value] !='') ? item[value] : 0}} -->
+      {{item | arrToString: value}}
     </td>
     <ng-template #link>
       <td>

@@ -31,10 +31,10 @@ export class PlayerTableComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.options.values[0] !== 'index') {
-
       this.object = this.options.values[0];
       this.value = this.options.titles[0];
-      this.sorting = 'ASC';
+      this.sorting = 'DESC';
+      this.sortData('Rank', '0');
     }
   }
   ngOnInit() {
@@ -42,9 +42,14 @@ export class PlayerTableComponent implements OnInit, OnChanges {
   }
 
   getname(event) {
-
     this.value = event.target.attributes.title.nodeValue;
     this.index = this.options.titles.findIndex(element => element == this.value);
+    this.sortData(this.value, this.index);
+  }
+
+  sortData(value, index) {
+    this.value = value;
+    this.index = index;
     if (this.index > -1 && this.options.sort[this.index]) {
       this.prevstate = this.object;
       this.object = this.options.values[this.index];
@@ -58,6 +63,7 @@ export class PlayerTableComponent implements OnInit, OnChanges {
       }
       this.sortArray();
     }
+
   }
 
   sortArray() {

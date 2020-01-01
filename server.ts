@@ -9,6 +9,12 @@ import * as express from 'express';
 import { join } from 'path';
 import { renderModuleFactory } from '@angular/platform-server';
 
+
+const AWS = require('aws-sdk');
+AWS.config.update({ signatureVersion: 'v4', accessKeyId: 'AKIAV6VRMHPBNM35PK6N', secretAccessKey: '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', region: 'ap-south-1' });
+const s3 = new AWS.S3();
+
+
 /**
  * Changes Start
  */
@@ -70,6 +76,19 @@ app.set('views', DIST_FOLDER);
 // Example Express Rest API endpoints
 // app.get('/api/**', (req, res) => { });
 // Serve static files from /browser
+app.get('/xmls/*', (req, res) => {
+  while (req.url.charAt(0) === '/') {
+    req.url = req.url.substr(1);
+  }
+  s3.getObject({ Bucket: 'sports.info', Key: req.url }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return res.set('Content-Type', 'text/xml').send(data.Body);
+    }
+  });
+});
+
 app.get('*.*', express.static(DIST_FOLDER, {
   maxAge: '1y'
 }));

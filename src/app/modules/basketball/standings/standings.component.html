@@ -63,8 +63,8 @@
                   <app-player-table *ngIf="conference?.teams?.length > 0" [data]="conference?.teams" [options]=" {
                           sport:'Basketball', 
                           titles : ['Rank', ('Cricket_Module.Teams' | translate),'W', 'L', 'PCT', 'GB', 'H', 'A','DIV','CONF', 'PPG', 'OPPG', 'DIFF', 'STRK', 'L10'],
-                          sort : [false, false,true, true, true, true, false, false,false,false, true, true,true, false, false],
-                          values : ['index', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
+                          sort : [true, false,true, true, true, true, false, false,false,false, true, true,true, false, false],
+                          values : ['calc_rank.conf_rank', 'name', 'wins', 'losses', 'win_pct', 'gb_conference', 'home', 'away','division', 'conference', 'points_for', 'points_against', 'point_diff', 'streak', 'less10'],
                           class : ['nba-table tour-stand-table'],
                           tbl_type:'standing'
                         }">

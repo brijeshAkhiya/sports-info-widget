@@ -69,14 +69,17 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     }
     this.commonService.siteUrl = `https://${host}/`;
     // console.log(this.injector.get('req').headers);
+    let splitedHost = host.split('.')[0];
     if ((host != 'www.sports.info'
       && host != 'dev.sports.info'
       && !host.includes('localhost')
       && !host.includes('192.168')
       && !host.includes('127.0.0.1'))) {
-      if (host.split('.')[0]
-        && ['temp', 'english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(host.split('.')[0]))
-        selectedLang = host.split('.')[0];
+      if (splitedHost
+        && ['temp', 'english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(splitedHost))
+        selectedLang = splitedHost;
+      else
+        selectedLang = host.includes('192.168.11.31:5500') ? 'hindi' : selectedLang;
     }
     let element = document.getElementById('main-body');
     if (selectedLang === 'arabic' && element != null) {
@@ -141,9 +144,10 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
             this.meta.updateTag({ name: 'twitter:description', content: data.description });
           }
           if (data.image) {
-            this.meta.updateTag({ name: 'twitter:image', content: data.image });
-            this.meta.updateTag({ name: 'twitter:image:src', content: data.image });
-            this.meta.updateTag({ name: 'og:image', content: data.image });
+            let image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
+            this.meta.updateTag({ name: 'twitter:image', content: image });
+            this.meta.updateTag({ name: 'twitter:image:src', content: image });
+            this.meta.updateTag({ name: 'og:image', content: image });
           }
           if (data.topic)
             this.meta.updateTag({ name: 'topic', content: data.topic });
@@ -220,15 +224,20 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
   getBestMatchedUrl(url) {
     return new Promise((resolve, reject) => {
-      if (Object.keys(this.metatagsObj).length == 0) reject();
-      if (this.metatagsObj[url]) {
-        resolve(this.metatagsObj[url]);
-      } else if (url) {
-        this.getBestMatchedUrl(url.replace(new RegExp(url.substr(url.lastIndexOf('/')) + '$'), '')).then(resolve).catch(reject);
-      } else if (this.metatagsObj['/']) {
-        resolve(this.metatagsObj['/']);
-      } else {
-        reject();
+      try {
+        if (Object.keys(this.metatagsObj).length == 0) reject();
+        if (this.metatagsObj[url]) {
+          resolve(this.metatagsObj[url]);
+        } else if (url) {
+          this.getBestMatchedUrl(url.replace(new RegExp(url.substr(url.lastIndexOf('/')) + '$'), '')).then(resolve).catch(reject);
+        } else if (this.metatagsObj['/']) {
+          resolve(this.metatagsObj['/']);
+        } else {
+          reject();
+        }
+      }
+      catch (e) {
+        console.log(e); reject(e);
       }
     });
   }

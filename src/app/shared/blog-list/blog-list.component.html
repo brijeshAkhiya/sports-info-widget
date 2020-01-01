@@ -7,10 +7,8 @@
 <app-no-data-widget *ngIf="!isLoading && articles?.length == 0 || !articles" [sport]="sport"></app-no-data-widget>
 
 <div class="text-center">
-  <button class="theme-btn down-btn" (click)="loadmore()" *ngIf="!isLoading && articles?.length > 0 && isLoadMore">
-    {{ 'widgetModule.Load_more' | translate }}
-    <span></span>
-  </button>
+  <a class="theme-btn down-btn" (click)="loadmore()" *ngIf="!isLoading && articles?.length > 0 && isLoadMore">
+    {{'widgetModule.Load_more' | translate}}<span></span></a>
 
   <!-- <div class="common-stories-widget common-shadow rounded-box" *ngIf="widgetblogs?.length > 0">
     <h5>Recent Stories</h5>

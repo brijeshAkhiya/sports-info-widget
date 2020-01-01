@@ -27,7 +27,8 @@
       <a class="lang-select" ngbDropdownToggle></a>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <a ngbDropdownItem *ngFor="let langauge of langauges" target="_blank"
-          [ngClass]="{'selected' : currentSite == langauge.link}" href="{{langauge.link}}">{{langauge.title}}</a>
+          [ngClass]="{'selected' : currentSite == langauge.link}" href="{{langauge.link}}"
+          rel="noopener">{{langauge.title}}</a>
       </div>
     </li>
 

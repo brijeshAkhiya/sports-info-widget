@@ -13,9 +13,9 @@
 <div class="cookies-notification white-text d-flex align-items-center justify-content-between"
   [ngClass]="{'cookies-hide': !showCookiepopup}">
   <div>
-    <p class="no-margin">{{'Shared_Module3.cookie_text' | translate}}, {{'Shared_Module3.go' | translate}}<a
+    <p class="no-margin">{{'Shared_Module3.cookie_text' | translate}}, {{'Visit' | translate}} <a
         [routerLink]="['/terms-and-conditions']">
-        {{'Shared_Module3.here' | translate}}</a>.</p>
+        {{'Footer.Terms_and_Conditions' | translate}}</a>.</p>
     <p class="no-margin">{{'Shared_Module3.cookie_continue_use_text' | translate}}</p>
   </div>
   <button class="cookies-close" (click)="showCookiepopup = false" title="Close"></button>

@@ -16,6 +16,8 @@
             *ngIf="params.sport != 'Racing' && params.sport != 'Tennis'">
           </app-fixtures-sidebar-widget>
 
+          <app-top-scorer-widget [sport]="params.sport"></app-top-scorer-widget>
+
           <app-sidebar-links [sport]="params.sport" [link_type]="'tournament'" [options]="{
               type: 'current',
               title: 'Cricket_Module.Current_Series' | translate

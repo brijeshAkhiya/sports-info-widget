@@ -16,7 +16,7 @@ export class TopScorerWidgetComponent implements OnInit {
   kabadditype: any;
   tournamentid: any;
   soccerscoredata: any;
-  data = [];
+  data;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -30,6 +30,9 @@ export class TopScorerWidgetComponent implements OnInit {
     } else if (this.sport == 'Soccer') {
       this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
       this.getsoccerTopScorer('goals');
+    } else if (this.sport == 'Cricket') {
+      this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
+      this.getCricketLeaders();
     }
   }
 
@@ -69,6 +72,14 @@ export class TopScorerWidgetComponent implements OnInit {
             }
           });
         });
+      }
+    });
+  }
+
+  getCricketLeaders() {
+    this.sportsService.gettournamentleaders(this.tournamentid).subscribe((res: any) => {
+      if (res.data) {
+        this.data = res.data;
       }
     });
   }

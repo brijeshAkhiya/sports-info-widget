@@ -135,31 +135,34 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   }
 
   initSEOTags() {
-    this.meta.updateTag({ name: 'name', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ name: 'title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ property: 'og:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ name: 'twitter:title', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ name: 'subject', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
-    this.meta.updateTag({ name: 'keywords', content: this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info' });
+    let title = this.blogdata.sTitle ? this.blogdata.sTitle : 'Sports.info';
+    this.meta.updateTag({ name: 'name', content: title });
+    this.meta.updateTag({ name: 'title', content: title });
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ name: 'twitter:title', content: title });
+    this.meta.updateTag({ name: 'subject', content: title });
+    this.meta.updateTag({ name: 'keywords', content: title });
 
+    let desc = (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info')
     this.meta.updateTag({
       name: 'description',
-      content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info')
+      content: desc
     });
     this.meta.updateTag({
       property: 'og:description',
-      content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info')
+      content: desc
     });
     this.meta.updateTag({
       name: 'twitter:description',
-      content: (this.blogdata.sShortDesc) ? this.blogdata.sShortDesc : (this.blogdata.sDescription ? this.blogdata.sDescription.substring(0, 250) : 'Sports.info')
+      content: desc
     });
 
     this.meta.updateTag({ property: 'og:type', content: 'article' });
-    this.meta.updateTag({ name: 'twitter:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
-    this.meta.updateTag({ name: 'twitter:image:src', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
-    this.meta.updateTag({ property: 'og:image', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
-    this.meta.updateTag({ property: 'og:image:secure_url', content: this.commonService.s3Url + this.blogdata.sImage ? this.blogdata.sImage : '' });
+    let image = this.commonService.isUrl(this.blogdata.sImage) ? this.blogdata.sImage : this.commonService.s3Url + this.blogdata.sImage;
+    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:image:src', content: image });
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:image:secure_url', content: image });
     this.meta.updateTag({ property: 'og:image:width', content: '640' });
     this.meta.updateTag({ property: 'og:image:height', content: '400' });
 

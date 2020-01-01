@@ -11,13 +11,13 @@
 				<li><a [routerLink]="['/privacy-policy']">{{'Footer.Privacy_Policy' | translate}}</a></li>
 			</ul>
 			<ul class="footer-social-links">
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sFbPageLink']"><img
+				<li *ngIf="contactObj"><a target="_blank" rel="noopener" [href]="contactObj['sFbPageLink']"><img
 							src="/assets/images/facebook-icon.svg" alt="facebook"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sTwitterLink']"><img
+				<li *ngIf="contactObj"><a target="_blank" rel="noopener" [href]="contactObj['sTwitterLink']"><img
 							src="/assets/images/twitter-icon.svg" alt="twitter"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sLinkdinLink']"><img
+				<li *ngIf="contactObj"><a target="_blank" rel="noopener" [href]="contactObj['sLinkdinLink']"><img
 							src="/assets/images/linkedin-icon.svg" alt="linkedin"></a></li>
-				<li *ngIf="contactObj"><a target="_blank" [href]="contactObj['sInstagramLink']"><img
+				<li *ngIf="contactObj"><a target="_blank" rel="noopener" [href]="contactObj['sInstagramLink']"><img
 							src="/assets/images/instagram-icon.svg" alt="instagram"></a></li>
 			</ul>
 		</div>
