@@ -26,14 +26,19 @@
 .main-popular-video .play-btn, */
 .main-popular-video .play-btn                           { position: absolute; display: block; width: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: url(assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
 .main-popular-video .play-btn:before                    { content: ""; opacity: 0; display: block; position: absolute; width: 50%; height: 50%; border-radius: 50%; background: #ED1A33; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  }
-.main-popular-video:hover .play-btn:before              { opacity: 0.3; animation: videoAnimation 1.5s infinite cubic-bezier(.4,.6,.4,.6); }
+.main-popular-video:hover .play-btn:before              { opacity: 0.3; animation: videoAnimation 1.5s infinite cubic-bezier(.4,.6,.4,.6); -webkit-animation: videoAnimation 1.5s infinite cubic-bezier(.4,.6,.4,.6); }
 
 @keyframes videoAnimation {
-    0%   { width: 20%; height: 20%; opacity: 0; }
+    0%      { width: 20%; height: 20%; opacity: 0; }
     80%     { opacity: 0.3;}
-    100% { width: 100%; height: 100%; opacity: 0;}
+    100%    { width: 100%; height: 100%; opacity: 0;}
 }
-
+@-webkit-keyframes videoAnimation {
+    0%      { width: 20%; height: 20%; opacity: 0; }
+    80%     { opacity: 0.3;}
+    100%    { width: 100%; height: 100%; opacity: 0;}
+}
+  
 .main-popular-video .author-info p,
 .main-popular-video .author-info p.author a             { color: #fff;}
 .home-popular-vid-list                                  { padding-right: 16px; height: 550px; }
