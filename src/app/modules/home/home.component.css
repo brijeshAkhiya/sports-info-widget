@@ -24,7 +24,7 @@
 .main-popular-video .video-desc                         { padding: 24px; position: absolute; width: 100%; bottom: 0px; }
 /* .main-popular-video:before,
 .main-popular-video .play-btn, */
-.main-popular-video .play-btn                           { position: absolute; display: block; width: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); background: url(assets/images/play-btn.svg) no-repeat center center / cover; z-index: 1; }
+.main-popular-video .play-btn                           { position: absolute; display: block; width: 190px; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); z-index: 1; }
 .main-popular-video .play-btn:before                    { content: ""; opacity: 0; display: block; position: absolute; width: 50%; height: 50%; border-radius: 50%; background: #ED1A33; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%);  }
 .main-popular-video:hover .play-btn:before              { opacity: 0.3; animation: videoAnimation 1.5s infinite cubic-bezier(.4,.6,.4,.6); -webkit-animation: videoAnimation 1.5s infinite cubic-bezier(.4,.6,.4,.6); }
 
