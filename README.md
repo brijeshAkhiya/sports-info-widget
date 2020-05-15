@@ -6,12 +6,12 @@ Widget ID - 046d029afbaa353404d1b7a898dc5f0b
 1. ng add @nguniversal/express-engine --clientProject sports-web
 2. Added Document, window, Element DOM APi reference on server side to avoid Compile error.
 
-# // ReferenceError: Element is not defined
+#  ReferenceError: Element is not defined
 ```
  const domino = require('domino');
  global['Element'] = domino.impl.Element; // etc
 ``` 
-# // ReferenceError: window is not defined
+#  ReferenceError: window is not defined
 ```
  const fs = require('fs');
  const template = fs.readFileSync(join(process.cwd(), 'dist/browser/index.html')).toString();
@@ -19,7 +19,7 @@ Widget ID - 046d029afbaa353404d1b7a898dc5f0b
  global['window'] = win;
 ```
 
-# // ReferenceError: document is not defined
+#  ReferenceError: document is not defined
 ``` global['document'] = win.document;```
 
 3. Check in code if platform is browser while code is using DOM API like Document, window, Interval specially in app.component.ts
