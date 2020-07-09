@@ -70,6 +70,8 @@ export class MainHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     { title: 'Badminton', link: '/badminton' },
     { title: 'Racing', link: '/racing' },
     { title: 'Tennis sports', link: '/tennis' },
+    { title: 'ESports', link: '/esports' },
+    { title: 'WWE', link: '/wwe' },
   ];
 
   langauges = [

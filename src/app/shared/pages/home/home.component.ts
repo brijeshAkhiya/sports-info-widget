@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   params;
   options;
+  preventFixturesSidebarWidget: any = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,6 +40,8 @@ export class HomeComponent implements OnInit {
     } else if (this.params.sport == 'Racing') {
       let parentParams: any = this.activatedRoute.parent.params;
       title = parentParams.value.game;
+    } else if (this.params.sport.toLowerCase() == 'wwe') {
+      title = 'WWE';
     }
     this.options = {
       reqParams:
@@ -52,6 +55,7 @@ export class HomeComponent implements OnInit {
       if (this.activatedRoute.snapshot.params.slug)
         this.options.title = this.activatedRoute.snapshot.params.slug.replace(/-/g, ' ');
     }
+    this.preventFixturesSidebarWidget = ['racing', 'tennis', 'wwe', 'esports'];
   }
 
 }
