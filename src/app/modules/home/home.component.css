@@ -139,6 +139,8 @@ ng-scrollbar.custom-scrollbar                           { --scrollbar-padding: 0
 
 @media (max-width: 575px) {
 /* -------- Banner Section ------- */
+    .home-banner .banner-images             { width: 100%; }
+    .home-banner .banner-image::after       { background-image: linear-gradient( to right, #1B2A5A 30%, rgba(27,42,90,0.00) 84%); }
     .home-banner:after                      { height: 16px;}
     .home-banner .common-banner-pattern     { left: -105%; top: 40%; transform: rotate(-164deg) translate(-40% , 43%) scale(1.1); -webkit-transform: rotate(-164deg) translate(-40% , 43%) scale(1.1); }
     .popular-video-section .pattern         { display: none; }
