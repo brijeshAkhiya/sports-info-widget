@@ -46,6 +46,7 @@
 .blog-author h6,
 .blog-author p              { margin: 0px; }
 .blog-author h6             { text-transform: uppercase; }
+.link-section a             { color: #ED1A33 }
 
 /* -------- Comment Section ------- */
 .comment-item                       { margin: 40px 0px; }
