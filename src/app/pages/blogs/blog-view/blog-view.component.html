@@ -70,10 +70,13 @@
                     </a>
                   </li>
                 </ul>
+                <div class="source-text d-flex justify-content-end">
+                  <p *ngIf="blogdata?.oSource?.sName && blogdata?.oSource?.sLink">
+                    Source: The source of this content is our cricket news platform <a
+                      [href]="blogdata.oSource.sLink">{{blogdata?.oSource?.sName}}.</a>
+                  </p>
+                </div>
 
-                <p class="source-text text-right" *ngIf="blogdata?.oSource?.sName && blogdata?.oSource?.sLink">
-                  Source: The source of this content is our cricket news platform <a [href]="blogdata.oSource.sLink">{{blogdata?.oSource?.sName}}.</a>
-                </p>
                 <div class="blog-author d-flex align-items-center">
                   <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.writerPlaceholder"></div>
