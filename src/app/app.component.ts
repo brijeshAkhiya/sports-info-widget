@@ -123,6 +123,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   setmetatags(routerURL) {
+    let image = "https://dev.sports.info/assets/images/sports-info.jpg";
     this.getBestMatchedUrl(routerURL).then(
       (data: any) => {
         if (data) {
@@ -143,8 +144,8 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
             this.meta.updateTag({ name: 'og:description', content: data.description });
             this.meta.updateTag({ name: 'twitter:description', content: data.description });
           }
-          
-          let image = "https://dev.sports.info/assets/images/sports-info.jpg";
+
+
           if (data.image) {
             image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
           }
@@ -161,23 +162,30 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
           if (data['twitter:card'])
             this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
         } else if (isPlatformBrowser(this.platformId)) {
-          this.meta.updateTag({ name: 'title', content: 'title' });
-          this.meta.updateTag({ property: 'og:title', content: 'title' });
-          this.meta.updateTag({ name: 'twitter:title', content: 'title' });
-          this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'twitter:image', content: 'https://sports.info/assets/images/logo.svg' });
-          this.meta.updateTag({ name: 'twitter:image:src', content: 'https://sports.info/assets/images/logo.svg' });
-          this.meta.updateTag({ name: 'og:image', content: 'https://sports.info/assets/images/logo.svg' });
-          this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-          this.meta.updateTag({ property: 'og:type', content: 'article' });
-          this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+          this.setDefaultMetaFields(image);
         }
       }
-    ).catch(e => { });
+    ).catch(e => {
+      this.setDefaultMetaFields(image);
+    });
+  }
+
+  setDefaultMetaFields(image) {
+    this.meta.updateTag({ name: 'title', content: 'title' });
+    this.meta.updateTag({ property: 'og:title', content: 'title' });
+    this.meta.updateTag({ name: 'twitter:title', content: 'title' });
+    this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
+    this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    this.meta.updateTag({ name: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:image:src', content: image });
+    this.meta.updateTag({ name: 'og:image', content: image });
+    this.meta.updateTag({ name: 'mimage', content: image });
+    this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
+    this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
+    this.meta.updateTag({ property: 'og:type', content: 'article' });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
   }
 
   /* //get cookie by name */
