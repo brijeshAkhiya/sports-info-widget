@@ -143,12 +143,15 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
             this.meta.updateTag({ name: 'og:description', content: data.description });
             this.meta.updateTag({ name: 'twitter:description', content: data.description });
           }
+          
+          let image = "https://dev.sports.info/assets/images/sports-info.jpg";
           if (data.image) {
-            let image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
-            this.meta.updateTag({ name: 'twitter:image', content: image });
-            this.meta.updateTag({ name: 'twitter:image:src', content: image });
-            this.meta.updateTag({ name: 'og:image', content: image });
+            image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
           }
+          this.meta.updateTag({ name: 'twitter:image', content: image });
+          this.meta.updateTag({ name: 'twitter:image:src', content: image });
+          this.meta.updateTag({ name: 'og:image', content: image });
+
           if (data.topic)
             this.meta.updateTag({ name: 'topic', content: data.topic });
           if (data.subject)
