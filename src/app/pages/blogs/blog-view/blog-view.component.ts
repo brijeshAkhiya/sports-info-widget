@@ -161,7 +161,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     let image = this.commonService.isUrl(this.blogdata.sImage) ? this.blogdata.sImage : this.commonService.s3Url + this.blogdata.sImage;
     this.meta.updateTag({ name: 'twitter:image', content: image });
     this.meta.updateTag({ name: 'twitter:image:src', content: image });
-    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ name: 'og:image', content: image });
     this.meta.updateTag({ property: 'og:image:secure_url', content: image });
     this.meta.updateTag({ property: 'og:image:width', content: '640' });
     this.meta.updateTag({ property: 'og:image:height', content: '400' });

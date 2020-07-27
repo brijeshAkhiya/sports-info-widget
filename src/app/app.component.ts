@@ -217,11 +217,12 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
         // tslint:disable-next-line: max-line-length
-        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,2}(:[0-9]{1,5})?(\/.*)?$');
         if (routerUrl != null && routerUrl[4] !== undefined)
           metaarray[routerUrl[4]] = data;
         else
