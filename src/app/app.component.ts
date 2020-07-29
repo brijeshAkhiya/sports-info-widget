@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CommonService } from '@providers/common-service';
 import { SportsService } from '@providers/sports-service';
 import { SwUpdate } from '@angular/service-worker';
+import { SchemaService } from './shared/schema/schema.service';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     private translate: TranslateService,
     private injector: Injector,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private schemaService: SchemaService
   ) {
     this.getMetaTags();
     this.swupdate.available.pipe(takeUntil(this.destroy$)).subscribe((res) => {
@@ -59,7 +61,6 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit() {
-
     let selectedLang = 'english';
     let host;
     if (isPlatformServer(this.platformId)) {
@@ -145,7 +146,6 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
             this.meta.updateTag({ name: 'twitter:description', content: data.description });
           }
 
-
           if (data.image) {
             image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
           }
@@ -164,9 +164,11 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
         } else if (isPlatformBrowser(this.platformId)) {
           this.setDefaultMetaFields(image);
         }
+        this.setSchema();
       }
     ).catch(e => {
       this.setDefaultMetaFields(image);
+      this.setSchema();
     });
   }
 
@@ -186,6 +188,18 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
     this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+  }
+
+  setSchema() {
+    
+    let data = {
+      context: 'http://schema.org',
+      type: 'WebSite',
+      name: this.meta.getTag("name='title'").getAttribute('content'),
+      url: location.href,
+      description: this.meta.getTag("name='description'").getAttribute('content')
+    };
+    this.schemaService.updateSchema(data);
   }
 
   /* //get cookie by name */
@@ -217,7 +231,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      
+
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {

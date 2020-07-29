@@ -63,10 +63,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppInterceptor } from './shared/providers/app.interceptor';
 import { TranslateBrowserLoader } from './translate-browser-loader.service';
 
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+import { SchemaComponent } from './shared/schema/schema.component';
 
 
 /* socket config */
 const config: SocketIoConfig = { url: environment.socket.baseUrl, options: {} };
+
 
 // const googleLoginOptions: LoginOpt = {
 //   client_id: '504140892785-j5u4ed8b9rv3vl2ibvto9c1hljqg05sg.apps.googleusercontent.com',
@@ -114,9 +117,11 @@ export function exportTranslateStaticLoader(http: HttpClient, transferState: Tra
     MainFooterComponent,
     BlogViewComponent,
     WriterComponent,
+    SchemaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    NgxJsonLdModule,
     BrowserTransferStateModule,
     AdsenseModule.forRoot({
       adClient: 'ca-pub-6381087658260439',
@@ -133,7 +138,7 @@ export function exportTranslateStaticLoader(http: HttpClient, transferState: Tra
         provide: TranslateLoader,
         useFactory: exportTranslateStaticLoader,
         deps: [HttpClient, TransferState]
-      }
+      },
     }),
     BrowserAnimationsModule,
     AppRoutingModule,

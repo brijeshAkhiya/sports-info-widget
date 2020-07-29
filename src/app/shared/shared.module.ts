@@ -84,6 +84,8 @@ import { TournamentsComponent } from './widget/tournaments/tournaments.component
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ProbabilityComponent } from './widget/match/probability/probability.component';
 
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -100,7 +102,8 @@ import { ProbabilityComponent } from './widget/match/probability/probability.com
         CarouselModule,
         LottieAnimationViewModule,
         TranslateModule,
-        ScrollingModule
+        ScrollingModule,
+        NgxJsonLdModule
     ],
     declarations: [
         /** All Pipes */
