@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CommonService } from '@providers/common-service';
+import { SchemaService } from '@app/shared/schema/schema.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,7 +21,8 @@ export class HomeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private translateservice: TranslateService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    public schemaService: SchemaService
   ) { }
 
   ngOnInit() {
@@ -56,6 +59,23 @@ export class HomeComponent implements OnInit {
         this.options.title = this.activatedRoute.snapshot.params.slug.replace(/-/g, ' ');
     }
     this.preventFixturesSidebarWidget = ['racing', 'tennis', 'wwe', 'esports'];
+
+    this.setSchema();
+  }
+
+  setSchema() {
+    let data = {
+      '@context': 'http://schema.org',
+      '@type': 'Organization',
+      url: this.params.sport + " URL",
+      name: this.params.sport + " Page",
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+1-000-000-0000',
+        contactType: 'Customer service'
+      }
+    };
+    this.schemaService.prepareSchema(data);
   }
 
 }

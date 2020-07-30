@@ -16,6 +16,7 @@ import { Meta } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { ObsEvent } from 'ng-lazyload-image/src/types';
 import { userInfo } from 'os';
+import { SchemaService } from '@app/shared/schema/schema.service';
 
 @Component({
   selector: 'app-blog-view',
@@ -56,7 +57,8 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     public commonService: CommonService,
     private modalService: NgbModal,
     private authService: AuthService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private schemaService: SchemaService
   ) {
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -81,7 +83,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
     });
-
+    this.setSchema();
   }
 
 
@@ -175,6 +177,17 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   videoplay() {
     this.isplay = true;
     this.videoplayer.nativeElement.play();
+  }
+
+  setSchema() {
+    
+    let data = {
+      '@context': 'http://schema.org',
+      "@type": "NewsArticle",
+      headline: this.previewtype,
+      url: location.href  
+    };
+    this.schemaService.prepareSchema(data);
   }
 
   clicksubmit() {

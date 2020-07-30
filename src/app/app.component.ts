@@ -113,6 +113,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
+          this.setSchema();
         /*         //set meta tags from here... */
         /*         //set page title */
         let title = this.commonService.getPagetitlebyurl(event.url);
@@ -164,11 +165,9 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
         } else if (isPlatformBrowser(this.platformId)) {
           this.setDefaultMetaFields(image);
         }
-        this.setSchema();
       }
     ).catch(e => {
       this.setDefaultMetaFields(image);
-      this.setSchema();
     });
   }
 
@@ -193,13 +192,12 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   setSchema() {
     
     let data = {
-      context: 'http://schema.org',
-      type: 'WebSite',
-      name: this.meta.getTag("name='title'").getAttribute('content'),
-      url: location.href,
-      description: this.meta.getTag("name='description'").getAttribute('content')
+      '@context': 'http://schema.org',
+      "@type": "Root",
+      headline: this.meta.getTag("name='title'").getAttribute('content'),
+      url: location.href  
     };
-    this.schemaService.updateSchema(data);
+    this.schemaService.prepareSchema(data);
   }
 
   /* //get cookie by name */

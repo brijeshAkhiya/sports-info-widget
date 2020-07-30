@@ -12,9 +12,8 @@ export class SchemaComponent implements OnInit {
     public schemaService: SchemaService
   ) { }
 
-  ngOnInit() {
-    this.schemaService.updateSchema();
+  ngOnInit(): void {
+   
   }
 
-  
 }
