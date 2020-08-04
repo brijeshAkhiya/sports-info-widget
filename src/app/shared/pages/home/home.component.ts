@@ -59,23 +59,6 @@ export class HomeComponent implements OnInit {
         this.options.title = this.activatedRoute.snapshot.params.slug.replace(/-/g, ' ');
     }
     this.preventFixturesSidebarWidget = ['racing', 'tennis', 'wwe', 'esports'];
-
-    this.setSchema();
-  }
-
-  setSchema() {
-    let data = {
-      '@context': 'http://schema.org',
-      '@type': 'Organization',
-      url: this.params.sport + " URL",
-      name: this.params.sport + " Page",
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: '+1-000-000-0000',
-        contactType: 'Customer service'
-      }
-    };
-    this.schemaService.prepareSchema(data);
   }
 
 }

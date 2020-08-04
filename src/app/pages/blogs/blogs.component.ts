@@ -60,8 +60,10 @@ export class BlogsComponent implements OnInit {
       this.blog_title = this.translateService.get('Blog_Module.blogs')['value'];
       this.options.type = this.options.card_type = 'admin';
     }
+    
   }
 
+  
   getRecentArticles() {
     let data = {
       nstart: 0,

@@ -113,7 +113,6 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
           this.setmetatags(event.url);
-          this.setSchema();
         /*         //set meta tags from here... */
         /*         //set page title */
         let title = this.commonService.getPagetitlebyurl(event.url);
@@ -162,12 +161,21 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
             this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
           if (data['twitter:card'])
             this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
+
+          if (data.title && data.description) {
+            this.setSchema(data);
+          } else {
+            this.setSchema();
+          }
+
         } else if (isPlatformBrowser(this.platformId)) {
           this.setDefaultMetaFields(image);
+          this.setSchema();
         }
       }
     ).catch(e => {
       this.setDefaultMetaFields(image);
+      this.setSchema();
     });
   }
 
@@ -189,15 +197,53 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
   }
 
-  setSchema() {
-    
-    let data = {
-      '@context': 'http://schema.org',
-      "@type": "Root",
-      headline: this.meta.getTag("name='title'").getAttribute('content'),
-      url: location.href  
-    };
-    this.schemaService.prepareSchema(data);
+  setSchema(param: any = null) {
+    if (param == null) {
+      this.schemaService.prepareSchema();
+    } else {
+      let data = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.sports.info/#website",
+            "url": "https://www.sports.info/",
+            "name": param.title,
+            "description": param.description,
+            "potentialAction": [
+              {
+                "@type": "SearchAction",
+                "target": "https://www.sports.info/?s={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            ],
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.sports.info/#webpage",
+            "url": "https://www.sports.info/",
+            "name": param.title,
+            "isPartOf": {
+              "@id": "https://www.sports.info/#website"
+            },
+            "datePublished": "2018-01-10T16:34:21+00:00",
+            "dateModified": "2020-07-06T15:47:05+00:00",
+            "description": param.title,
+            "inLanguage": "en-US",
+            "potentialAction": [
+              {
+                "@type": "ReadAction",
+                "target": [
+                  "https://www.sports.info/"
+                ]
+              }
+            ]
+          }
+        ]
+      };
+      this.schemaService.prepareSchema(data);
+    }
   }
 
   /* //get cookie by name */

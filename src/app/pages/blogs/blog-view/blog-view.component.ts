@@ -1,5 +1,5 @@
 // import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input, HostListener } from '@angular/core';
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +17,8 @@ import { filter } from 'rxjs/operators';
 import { ObsEvent } from 'ng-lazyload-image/src/types';
 import { userInfo } from 'os';
 import { SchemaService } from '@app/shared/schema/schema.service';
+import { Location, DOCUMENT, LocationStrategy } from '@angular/common';
+
 
 @Component({
   selector: 'app-blog-view',
@@ -58,7 +60,10 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal,
     private authService: AuthService,
     private store: Store<fromRoot.State>,
-    private schemaService: SchemaService
+    private schemaService: SchemaService,
+    @Inject(Location) private readonly location: Location,
+    @Inject(DOCUMENT) private _document: Document,
+    private readonly locationStrategy: LocationStrategy
   ) {
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -83,7 +88,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
     });
-    this.setSchema();
   }
 
 
@@ -109,7 +113,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     ngFjs.parentNode.insertBefore(ngJs, ngFjs);
   }
 
-
   getBlogview(id) {
     if (id) {
       this.loader = true;
@@ -118,6 +121,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         this.blogdata = res.data;
         this.initSEOTags();
         this.getPopularArticles();
+        this.setSchema();
 
         if (this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id);
@@ -173,21 +177,108 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }
 
+  setSchema() {
+    const pathAfterDomainName = this.location.path();
+    let blogTitle = this.locationStrategy.getBaseHref() + pathAfterDomainName;
+    let authorData: any = this.blogdata.iId;
+    authorData.urlName = authorData.sFirstName + "-" + authorData.sLastName;
+    authorData.displayName = authorData.sFirstName + " " + authorData.sLastName;
+    let logoUrl = "https://dev.sports.info/assets/images/sports-info.jpg";
+
+    let schema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.sports.info/#website",
+          "url": "https://www.sports.info/",
+          "name": "Sports.info",
+          "description": "Cricket|Soccer|Football|NBA|Sports News Live Scores|Players & Team Rankings",
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": "https://www.sports.info/?s={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          ],
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "ImageObject",
+          "@id": blogTitle + "#primaryimage",
+          "inLanguage": "en-US",
+          "url": this.blogdata.sImage,
+          "width": 640,
+          "height": 400
+        },
+        {
+          "@type": "WebPage",
+          "@id": blogTitle + "#webpage",
+          "url": blogTitle + "",
+          "name": this.blogdata.sTitle,
+          "isPartOf": {
+            "@id": "https://www.sports.info/#website"
+          },
+          "primaryImageOfPage": {
+            "@id": blogTitle + "#primaryimage"
+          },
+          "datePublished": this.blogdata.dCreatedAt,
+          "dateModified": this.blogdata.dUpdatedAt,
+          "author": {
+            "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+          },
+          "description": this.blogdata.sTitle,
+          "inLanguage": "en-US",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": [
+                blogTitle + ""
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "NewsArticle",
+          "@id": blogTitle + "#article",
+          "mainEntityOfPage": {
+            "@id": blogTitle + "#webpage"
+          },
+          "headline": this.blogdata.sTitle,
+          "image": {
+            "@type": "ImageObject",
+            "url": this.blogdata.sImage,
+            "width": "800",
+            "height": "600"
+          },
+          "datePublished": this.blogdata.dCreatedAt,
+          "dateModified": this.blogdata.dUpdatedAt,
+          "author": {
+            "@type": "Person",
+            "name": authorData.displayName,
+            "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Sports Info",
+            "logo": {
+              "@type": "ImageObject",
+              "url": logoUrl,
+              "width": "115",
+              "height": "60"
+            }
+          },
+          "description": this.blogdata.sDescription
+        }
+      ]
+    };
+    this.schemaService.prepareSchema(schema);
+  }
+
   // video play event
   videoplay() {
     this.isplay = true;
     this.videoplayer.nativeElement.play();
-  }
-
-  setSchema() {
-    
-    let data = {
-      '@context': 'http://schema.org',
-      "@type": "NewsArticle",
-      headline: this.previewtype,
-      url: location.href  
-    };
-    this.schemaService.prepareSchema(data);
   }
 
   clicksubmit() {
