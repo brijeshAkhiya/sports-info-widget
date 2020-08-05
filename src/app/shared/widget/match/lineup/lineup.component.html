@@ -110,8 +110,8 @@
                   {{player?.jersey_number}}</div>
                 <p>
                   <a
-                    [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                    {{player.name | slice:0:15}}
+                    [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
+                    {{player.name | split}}
                   </a>
                 </p>
               </li>
@@ -125,8 +125,8 @@
                   {{player?.jersey_number}}</div>
                 <p>
                   <a
-                    [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                    {{player.name | slice:0:15}}
+                    [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
+                    {{player.name | split}}
                   </a>
                 </p>
               </li>
@@ -145,7 +145,7 @@
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
             <span><b><a
-                  [routerLink]="['/soccer/team', (team.home?.id | splitID), (team.home?.name | slugify )]">{{team.home.name}}</a></b>
+                  [routerLink]="['/soccer/team', (team.home?.id | splitID), (team.home?.name | split | slugify )]">{{team.home.name}}</a></b>
               <span *ngIf="team.home?.formation?.type">{{team.home?.formation?.type}}</span>
             </span>
             <img alt="{{team.home.name}}" [lazyLoad]="" [defaultImage]="commonService.teamPlaceholder"
@@ -159,7 +159,7 @@
             <li *ngFor="let player of team.home?.squad[role]">
               <p class="text-capitalize">
                 <a
-                  [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                  [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
                   {{player.name | split}}
                 </a>
               </p>
@@ -194,7 +194,7 @@
                 [ngStyle]="{'background':'#'+team.away?.jersey?.base, 'border-color': (team.away?.jersey?.base == 'ffffff') ? '#E0E0E0' : '#'+team.away?.jersey?.base, 'color': '#'+team.away?.jersey?.number }">{{player?.jersey_number}}</span>
               <p class="text-capitalize">
                 <a
-                  [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                  [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
                   {{player.name | split}}
                 </a>
               </p>

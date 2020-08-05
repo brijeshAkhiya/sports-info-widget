@@ -179,7 +179,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
 
   setSchema() {
     const pathAfterDomainName = this.location.path();
-    let blogTitle = this.locationStrategy.getBaseHref() + pathAfterDomainName;
+    let blogTitle = this.commonService.siteUrl.replace(/\/$/, "") + pathAfterDomainName;
     let authorData: any = this.blogdata.iId;
     authorData.urlName = authorData.sFirstName + "-" + authorData.sLastName;
     authorData.displayName = authorData.sFirstName + " " + authorData.sLastName;
