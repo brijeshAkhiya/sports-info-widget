@@ -185,12 +185,99 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     authorData.displayName = authorData.sFirstName + " " + authorData.sLastName;
     let logoUrl = "https://dev.sports.info/assets/images/sports-info.jpg";
 
+    // let schema = {
+    //   "@context": "https://schema.org",
+    //   "@graph": [
+    //     {
+    //       "@type": "WebSite",
+    //       "@id": "https://www.sports.info/#website",
+    //       "url": "https://www.sports.info/",
+    //       "name": "Sports.info",
+    //       "description": "Cricket|Soccer|Football|NBA|Sports News Live Scores|Players & Team Rankings",
+    //       "potentialAction": [
+    //         {
+    //           "@type": "SearchAction",
+    //           "target": "https://www.sports.info/?s={search_term_string}",
+    //           "query-input": "required name=search_term_string"
+    //         }
+    //       ],
+    //       "inLanguage": "en-US"
+    //     },
+    //     {
+    //       "@type": "ImageObject",
+    //       "@id": blogTitle + "#primaryimage",
+    //       "inLanguage": "en-US",
+    //       "url": this.blogdata.sImage,
+    //       "width": 640,
+    //       "height": 400
+    //     },
+    //     {
+    //       "@type": "WebPage",
+    //       "@id": blogTitle + "#webpage",
+    //       "url": blogTitle + "",
+    //       "name": this.blogdata.sTitle,
+    //       "isPartOf": {
+    //         "@id": "https://www.sports.info/#website"
+    //       },
+    //       "primaryImageOfPage": {
+    //         "@id": blogTitle + "#primaryimage"
+    //       },
+    //       "datePublished": this.blogdata.dCreatedAt,
+    //       "dateModified": this.blogdata.dUpdatedAt,
+    //       "author": {
+    //         "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+    //       },
+    //       "description": this.blogdata.sTitle,
+    //       "inLanguage": "en-US",
+    //       "potentialAction": [
+    //         {
+    //           "@type": "ReadAction",
+    //           "target": [
+    //             blogTitle + ""
+    //           ]
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       "@type": "NewsArticle",
+    //       "@id": blogTitle + "#article",
+    //       "mainEntityOfPage": {
+    //         "@id": blogTitle + "#webpage"
+    //       },
+    //       "headline": this.blogdata.sTitle,
+    //       "image": {
+    //         "@type": "ImageObject",
+    //         "url": this.blogdata.sImage,
+    //         "width": "800",
+    //         "height": "600"
+    //       },
+    //       "datePublished": this.blogdata.dCreatedAt,
+    //       "dateModified": this.blogdata.dUpdatedAt,
+    //       "author": {
+    //         "@type": "Person",
+    //         "name": authorData.displayName,
+    //         "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+    //       },
+    //       "publisher": {
+    //         "@type": "Organization",
+    //         "name": "Sports Info",
+    //         "logo": {
+    //           "@type": "ImageObject",
+    //           "url": logoUrl,
+    //           "width": "115",
+    //           "height": "60"
+    //         }
+    //       },
+    //       "description": this.blogdata.sDescription
+    //     }
+    //   ]
+    // };
     let schema = {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "https://www.sports.info/#website",
+          "@id": "https://www.sports.info/",
           "url": "https://www.sports.info/",
           "name": "Sports.info",
           "description": "Cricket|Soccer|Football|NBA|Sports News Live Scores|Players & Team Rankings",
@@ -205,7 +292,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         },
         {
           "@type": "ImageObject",
-          "@id": blogTitle + "#primaryimage",
+          "@id": blogTitle,
           "inLanguage": "en-US",
           "url": this.blogdata.sImage,
           "width": 640,
@@ -213,14 +300,14 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         },
         {
           "@type": "WebPage",
-          "@id": blogTitle + "#webpage",
+          "@id": blogTitle,
           "url": blogTitle + "",
           "name": this.blogdata.sTitle,
           "isPartOf": {
-            "@id": "https://www.sports.info/#website"
+            "@id": "https://www.sports.info/"
           },
           "primaryImageOfPage": {
-            "@id": blogTitle + "#primaryimage"
+            "@id": blogTitle
           },
           "datePublished": this.blogdata.dCreatedAt,
           "dateModified": this.blogdata.dUpdatedAt,
@@ -240,9 +327,9 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         },
         {
           "@type": "NewsArticle",
-          "@id": blogTitle + "#article",
+          "@id": blogTitle,
           "mainEntityOfPage": {
-            "@id": blogTitle + "#webpage"
+            "@id": blogTitle
           },
           "headline": this.blogdata.sTitle,
           "image": {
