@@ -149,6 +149,8 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
           if (data.image) {
             image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
           }
+
+          //Code update here for image
           this.meta.updateTag({ name: 'twitter:image', content: image });
           this.meta.updateTag({ name: 'twitter:image:src', content: image });
           this.meta.updateTag({ property: 'og:image', content: image });

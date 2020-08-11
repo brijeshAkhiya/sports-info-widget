@@ -1,23 +1,23 @@
 // import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input, HostListener } from '@angular/core';
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit, Inject, PLATFORM_ID, Injector } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'angularx-social-login';
-
+import { takeUntil } from 'rxjs/operators';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
-
+import { Subject } from 'rxjs';
 import * as fromRoot from '../../../app-reducer';
 import * as Auth from '@store/auth/auth.actions';
 
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { ObsEvent } from 'ng-lazyload-image/src/types';
 import { userInfo } from 'os';
 import { SchemaService } from '@app/shared/schema/schema.service';
-import { Location, DOCUMENT, LocationStrategy } from '@angular/common';
+import { Location, DOCUMENT, LocationStrategy, isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 
 @Component({
@@ -49,7 +49,9 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   loader = false;
   commentid: any;
   userId: string;
-
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  metatagsObj = {};
+  requestedUrl;
 
   constructor(
     private router: Router,
@@ -63,7 +65,10 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     private schemaService: SchemaService,
     @Inject(Location) private readonly location: Location,
     @Inject(DOCUMENT) private _document: Document,
-    private readonly locationStrategy: LocationStrategy
+    private readonly locationStrategy: LocationStrategy,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private pagetitle: Title,
+    private injector: Injector
   ) {
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -78,7 +83,27 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == 'blog-preview') ? 'preview' : 'detail';
-
+    /*  //susbcribe to router events */
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
+      
+      /*  //scroll to top navigation related */
+      if (!(event instanceof NavigationEnd)) {
+        return;
+      }
+      if (isPlatformBrowser(this.platformId))
+        window.scrollTo(0, 0);
+      /* //change route get url */
+      if (event instanceof NavigationEnd) {
+        if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
+          this.setmetatags(event.url);
+        /*         //set meta tags from here... */
+        /*         //set page title */
+        let title = this.commonService.getPagetitlebyurl(event.url);
+        if (title != null) {
+          this.pagetitle.setTitle(title);
+        }
+      }
+    });
 
     if (window.history.state && window.history.state.id) {
       this.getBlogview(window.history.state.id);
@@ -113,16 +138,34 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     ngFjs.parentNode.insertBefore(ngJs, ngFjs);
   }
 
+  getSEOData() {
+    this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+
+      let metadata = data.MetaTags;
+      let metaarray = [];
+      metadata.map((data) => {
+        // tslint:disable-next-line: max-line-length
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,2}(:[0-9]{1,5})?(\/.*)?$');
+        if (routerUrl != null && routerUrl[4] !== undefined)
+          metaarray[routerUrl[4]] = data;
+        else
+          metaarray['/'] = data;
+      });
+      this.metatagsObj = { ...metaarray };
+      this.requestedUrl = this.router.url;
+      if (Object.keys(this.metatagsObj).length != 0 && this.requestedUrl)
+        this.setmetatags(this.requestedUrl);
+    });
+  }
+
   getBlogview(id) {
     if (id) {
       this.loader = true;
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.loader = false;
         this.blogdata = res.data;
-        this.initSEOTags();
         this.getPopularArticles();
-        this.setSchema();
-
+        this.getSEOData();
         if (this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id);
 
@@ -167,7 +210,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     let image = this.commonService.isUrl(this.blogdata.sImage) ? this.blogdata.sImage : this.commonService.s3Url + this.blogdata.sImage;
     this.meta.updateTag({ name: 'twitter:image', content: image });
     this.meta.updateTag({ name: 'twitter:image:src', content: image });
-    this.meta.updateTag({ name: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:image', content: image });
     this.meta.updateTag({ property: 'og:image:secure_url', content: image });
     this.meta.updateTag({ property: 'og:image:width', content: '640' });
     this.meta.updateTag({ property: 'og:image:height', content: '400' });
@@ -177,7 +220,86 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }
 
-  setSchema() {
+  setmetatags(routerURL) {
+    debugger;
+    this.getBestMatchedUrl(routerURL).then(
+      (data: any) => {
+        if (data) {
+          debugger;
+          if (data.title) {
+            this.meta.updateTag({ name: 'title', content: data.title });
+            this.meta.updateTag({ property: 'og:title', content: data.title });
+            this.meta.updateTag({ name: 'twitter:title', content: data.title });
+          }
+          this.meta.updateTag(
+            {
+              name: 'keywords', content: data.keywords ?
+                data.keywords :
+                'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports'
+            });
+
+          if (data.description) {
+            this.meta.updateTag({ name: 'description', content: data.description });
+            this.meta.updateTag({ property: 'og:description', content: data.description });
+            this.meta.updateTag({ name: 'twitter:description', content: data.description });
+          }
+
+          let image = this.commonService.isUrl(this.blogdata.sImage) ? this.blogdata.sImage : this.commonService.s3Url + this.blogdata.sImage;
+
+          //Code update here for image
+          this.meta.updateTag({ name: 'twitter:image', content: image });
+          this.meta.updateTag({ name: 'twitter:image:src', content: image });
+          this.meta.updateTag({ property: 'og:image', content: image });
+
+          if (data.topic)
+            this.meta.updateTag({ name: 'topic', content: data.topic });
+          if (data.subject)
+            this.meta.updateTag({ name: 'subject', content: data.subject });
+          if (data['og:type'])
+            this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
+          if (data['twitter:card'])
+            this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
+
+          if (data.title && data.description) {
+            this.setSchema(data);
+          } else {
+            this.setSchema(null);
+          }
+
+        } else if (isPlatformBrowser(this.platformId)) {
+          debugger;
+          this.initSEOTags();
+          this.setSchema(null);
+        }
+      }
+    ).catch(e => {
+      debugger;
+      this.initSEOTags();
+      this.setSchema(null);
+    });
+  }
+
+  getBestMatchedUrl(url) {
+    return new Promise((resolve, reject) => {
+      try {
+        if (Object.keys(this.metatagsObj).length == 0) reject();
+        if (this.metatagsObj[url]) {
+          resolve(this.metatagsObj[url]);
+        } else if (url) {
+          this.getBestMatchedUrl(url.replace(new RegExp(url.substr(url.lastIndexOf('/')) + '$'), '')).then(resolve).catch(reject);
+        } else if (this.metatagsObj['/']) {
+          resolve(this.metatagsObj['/']);
+        } else {
+          reject();
+        }
+      }
+      catch (e) {
+        console.log(e); reject(e);
+      }
+    });
+  }
+
+  setSchema(data) {
     const pathAfterDomainName = this.location.path();
     let blogTitle = this.commonService.siteUrl.replace(/\/$/, "") + pathAfterDomainName;
     let authorData: any = this.blogdata.iId;
@@ -302,7 +424,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
           "@type": "WebPage",
           "@id": blogTitle,
           "url": blogTitle + "",
-          "name": this.blogdata.sTitle,
+          "name": data != null ? data.title : this.blogdata.sTitle,
           "isPartOf": {
             "@id": "https://www.sports.info/"
           },
@@ -314,7 +436,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
           "author": {
             "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
           },
-          "description": this.blogdata.sTitle,
+          "description": data != null ? data.description : this.blogdata.sTitle,
           "inLanguage": "en-US",
           "potentialAction": [
             {
