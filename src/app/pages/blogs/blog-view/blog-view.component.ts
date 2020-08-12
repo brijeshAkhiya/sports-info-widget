@@ -83,27 +83,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == 'blog-preview') ? 'preview' : 'detail';
-    /*  //susbcribe to router events */
-    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
-      
-      /*  //scroll to top navigation related */
-      if (!(event instanceof NavigationEnd)) {
-        return;
-      }
-      if (isPlatformBrowser(this.platformId))
-        window.scrollTo(0, 0);
-      /* //change route get url */
-      if (event instanceof NavigationEnd) {
-        if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
-          this.setmetatags(event.url);
-        /*         //set meta tags from here... */
-        /*         //set page title */
-        let title = this.commonService.getPagetitlebyurl(event.url);
-        if (title != null) {
-          this.pagetitle.setTitle(title);
-        }
-      }
-    });
 
     if (window.history.state && window.history.state.id) {
       this.getBlogview(window.history.state.id);
