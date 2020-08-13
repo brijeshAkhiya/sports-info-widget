@@ -70,10 +70,12 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     private pagetitle: Title,
     private injector: Injector
   ) {
+    
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
+    
   }
 
   ngOnInit() {
@@ -92,6 +94,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
     });
+    
   }
 
 
@@ -101,10 +104,14 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     const ngFjs = document.getElementsByTagName('script')[0];
     const ngP = 'https';
     // Twitter
-    ngJs = document.createElement('script');
-    ngJs.id = 'twitter-wjs';
-    ngJs.src = ngP + '://platform.twitter.com/widgets.js';
-    ngFjs.parentNode.insertBefore(ngJs, ngFjs);
+    setTimeout(() => {
+      let ngTwitterJs = document.createElement('script');
+      let sourceEle = document.getElementsByTagName('script')[0]
+      ngTwitterJs.id = 'twitter-wjs';
+      ngTwitterJs.src = 'https://platform.twitter.com/widgets.js';
+      sourceEle.parentNode.insertBefore(ngTwitterJs, sourceEle);
+    }, 1000);
+    
 
     // Instagram
     ngJs = document.createElement('script');
@@ -200,11 +207,9 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   }
 
   setmetatags(routerURL) {
-    debugger;
     this.getBestMatchedUrl(routerURL).then(
       (data: any) => {
         if (data) {
-          debugger;
           if (data.title) {
             this.meta.updateTag({ name: 'title', content: data.title });
             this.meta.updateTag({ property: 'og:title', content: data.title });
