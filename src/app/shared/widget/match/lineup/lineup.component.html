@@ -42,8 +42,8 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
-            <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
-            <img alt="{{team[0].tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'"
+            <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0]?.tname}}</a></b>
+            <img alt="{{team[0]?.tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'"
               [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           </p>
         </div>
@@ -69,9 +69,9 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center">
-            <img alt="{{team[1].tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'"
+            <img alt="{{team[1]?.tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'"
               [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
-            <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
+            <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1]?.tname}}</a></b>
           </p>
         </div>
         <!-- <ng-container *ngIf="team[1]?.players?.length > 0"> -->
@@ -176,7 +176,7 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center">
-            <img alt="{{team.away.tname}}" [lazyLoad]="team.away.logo" [defaultImage]="commonService.teamPlaceholder"
+            <img alt="{{team?.away?.tname}}" [lazyLoad]="team.away.logo" [defaultImage]="commonService.teamPlaceholder"
               [offset]="commonService.lazyloadoffset">
             <span><b><a
                   [routerLink]="['/soccer/team', (team.away?.id | splitID), (team.away?.name | slugify )]">{{team.away.name}}</a></b>

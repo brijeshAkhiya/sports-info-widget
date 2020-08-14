@@ -74,19 +74,27 @@ export class PlayerTableComponent implements OnInit, OnChanges {
     if (this.object.includes('.')) {
       let filterPipe = new ArrToStringPipe();
       if (this.sorting == 'DESC') {
-        this.data.sort((a, b) => filterPipe.transform(a, this.object) - filterPipe.transform(b, this.object));
-        this.sorting = 'ASC';
+        if(this.data){
+          this.data.sort((a, b) => filterPipe.transform(a, this.object) - filterPipe.transform(b, this.object));
+          this.sorting = 'ASC';
+        }
       } else {
-        this.data.sort((a, b) => filterPipe.transform(b, this.object) - filterPipe.transform(a, this.object));
-        this.sorting = 'DESC';
+        if(this.data){
+          this.data.sort((a, b) => filterPipe.transform(b, this.object) - filterPipe.transform(a, this.object));
+          this.sorting = 'DESC';
+        }
       }
     } else {
       if (this.sorting == 'DESC') {
-        this.data.sort((a, b) => a[this.object] - b[this.object]);
-        this.sorting = 'ASC';
+        if(this.data){
+          this.data.sort((a, b) => a[this.object] - b[this.object]);
+          this.sorting = 'ASC';
+        }
       } else {
-        this.data.sort((a, b) => b[this.object] - a[this.object]);
-        this.sorting = 'DESC';
+        if(this.data){
+          this.data.sort((a, b) => b[this.object] - a[this.object]);
+          this.sorting = 'DESC';
+        }
       }
     }
   }

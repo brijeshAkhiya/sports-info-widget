@@ -6,7 +6,7 @@
           <b>
             <a
               [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.home?.tid, (matchStats?.match_info?.teams?.home?.tname | slugify )]">
-              {{matchStats.match_info.teams.home.tname}}
+              {{matchStats.match_info.teams?.home?.tname}}
             </a>
           </b>
           <img alt="{{matchStats?.match_info?.teams?.home?.tname}}"
@@ -25,7 +25,7 @@
           <b>
             <a
               [routerLink]="['/kabaddi/team', matchStats?.match_info?.teams?.away?.tid, (matchStats?.match_info?.teams?.away?.tname | slugify )]">
-              {{matchStats.match_info.teams.away.tname}}
+              {{matchStats.match_info.teams?.away?.tname}}
             </a>
           </b>
         </p>
