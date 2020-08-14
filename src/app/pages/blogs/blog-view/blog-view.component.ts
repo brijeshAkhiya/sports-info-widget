@@ -251,13 +251,11 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
           }
 
         } else if (isPlatformBrowser(this.platformId)) {
-          debugger;
           this.initSEOTags();
           this.setSchema(null);
         }
       }
     ).catch(e => {
-      debugger;
       this.initSEOTags();
       this.setSchema(null);
     });
@@ -269,10 +267,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         if (Object.keys(this.metatagsObj).length == 0) reject();
         if (this.metatagsObj[url]) {
           resolve(this.metatagsObj[url]);
-        } else if (url) {
-          this.getBestMatchedUrl(url.replace(new RegExp(url.substr(url.lastIndexOf('/')) + '$'), '')).then(resolve).catch(reject);
-        } else if (this.metatagsObj['/']) {
-          resolve(this.metatagsObj['/']);
         } else {
           reject();
         }
