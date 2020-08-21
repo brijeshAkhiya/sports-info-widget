@@ -80,7 +80,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.store.select('auth').subscribe((data) => {
-      console.log(data);
       this.isAuth$ = data.isAuthenticated;
       this.userId = this.commonService.getFromStorage('userId') ? this.commonService.getFromStorage('userId') : '';
     });
