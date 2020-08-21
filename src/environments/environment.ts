@@ -7,7 +7,7 @@ export const environment = {
   hmr: true,
   // apiUrl: 'http://localhost:3000',
   apiUrl: 'https://backend.sports.info',
-  //  apiUrl: 'https://dev.backend.sports.info',
+  // apiUrl: 'https://dev.backend.sports.info',
   version: '/api/v1',
   socket: {
     baseUrl: 'https://backend.sports.info',
