@@ -70,12 +70,12 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     private pagetitle: Title,
     private injector: Injector
   ) {
-    
+
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-    
+
   }
 
   ngOnInit() {
@@ -94,7 +94,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
     });
-    
+
   }
 
 
@@ -111,7 +111,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
       ngTwitterJs.src = 'https://platform.twitter.com/widgets.js';
       sourceEle.parentNode.insertBefore(ngTwitterJs, sourceEle);
     }, 1000);
-    
+
 
     // Instagram
     ngJs = document.createElement('script');
@@ -149,6 +149,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
       this.loader = true;
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.loader = false;
+        console.log(res.data);
         this.blogdata = res.data;
         this.getPopularArticles();
         this.getSEOData();
@@ -481,6 +482,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
           if (res) {
             this.usercommentvalue = '';
             this.getBlogComments(this.blogdata._id, { iPostId: this.blogdata._id, nStart: 0, nLimit: this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
+
           }
         }, (error: any) => {
           if (error.status == 401) {
@@ -566,6 +568,8 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
         if (res.data && res.data.length > 0) {
+          console.log(res.data);
+
           this.blogcomments = res.data;
           if (this.commentsParam.nLimit > res.data.length)
             this.isLoadMoreComments = false;
