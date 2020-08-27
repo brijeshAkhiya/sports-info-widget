@@ -207,10 +207,10 @@
   <div class="team-col">
     <div class="current-team d-flex align-items-center">
       <h4 class="d-flex align-items-center" [ngClass]="{'winner':data.match_info.result?.winner == team?.tid}">
-        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="{{team.tname}}"
+        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="{{team?.tname}}"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
-        <a [routerLink]="['/kabaddi/team',(team.tid),(team.tname | slugify)]">
-          {{data.match_info.gamestate != 0 ? team.shortname : team.tname}}
+        <a [routerLink]="['/kabaddi/team',(team.tid),(team?.tname | slugify)]">
+          {{data.match_info.gamestate != 0 ? team.shortname : team?.tname}}
         </a>
       </h4>
     </div>
@@ -589,7 +589,7 @@
     </div>
     <div class="current-match show-anim">
       <div class="head-block text-center">
-        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="{{team.tname}}"
+        <img [lazyLoad]="team?.tid | logosurl:'kabaddi'" alt="{{team?.tname}}"
           [defaultImage]="commonService.playerplaceholder" [offset]="commonService.lazyloadoffset">
         <h5 *ngIf="data.description"> {{data.description}}</h5>
         <p class="light-text" *ngIf="data.venue">

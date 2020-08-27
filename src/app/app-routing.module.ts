@@ -49,6 +49,14 @@ const routes: Routes = [
         loadChildren: './modules/tennis/tennis.module#TennisModule',
     },
     {
+        path: 'esports',
+        loadChildren: './modules/esports/esports.module#EsportsModule',
+    },
+    {
+        path: 'wwe',
+        loadChildren: './modules/wwe/wwe.module#WweModule',
+    },
+    {
         path: 'blog',
         component: BlogsComponent
     },

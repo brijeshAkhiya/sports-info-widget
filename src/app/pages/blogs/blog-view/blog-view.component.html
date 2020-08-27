@@ -70,6 +70,13 @@
                     </a>
                   </li>
                 </ul>
+                <div class="source-text d-flex justify-content-end">
+                  <p *ngIf="blogdata?.oSource?.sName && blogdata?.oSource?.sLink">
+                    Source: The source of this content is our cricket news platform <a
+                      [href]="blogdata.oSource.sLink">{{blogdata?.oSource?.sName}}.</a>
+                  </p>
+                </div>
+
                 <div class="blog-author d-flex align-items-center">
                   <div class="author-img" [lazyLoad]="blogdata?.iId?.sProfilePicture | resizeImage:['s']"
                     [offset]="commonService.lazyloadoffset" [defaultImage]="commonService.writerPlaceholder"></div>
@@ -86,7 +93,7 @@
             </div>
           </div>
 
-          <div class="sidebar-col">
+          <div class="sidebar-col" *ngIf="widgetblogs?.length">
             <div class="sticky-sidebar">
               <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
               <div class="common-stories-widget common-shadow rounded-box">

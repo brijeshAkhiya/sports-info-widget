@@ -78,8 +78,8 @@
                     </div>
                   </div>
                   <a class="fullblock-link"
-                    title="((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))"
-                    [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams.home.tname | slugify) + '-' + (slide.teams.away.tname | slugify))]"></a>
+                    title="((slide.teams?.home?.tname | slugify) + '-' + (slide.teams?.away?.tname | slugify))"
+                    [routerLink]="['/kabaddi/match',(slide.mid),((slide.teams?.home?.tname | slugify) + '-' + (slide.teams?.away?.tname | slugify))]"></a>
                 </div>
               </div>
             </ng-template>

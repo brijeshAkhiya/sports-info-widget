@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CommonService } from '@providers/common-service';
 import { SportsService } from '@providers/sports-service';
 import { SwUpdate } from '@angular/service-worker';
+import { SchemaService } from './shared/schema/schema.service';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     private translate: TranslateService,
     private injector: Injector,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private schemaService: SchemaService
   ) {
     this.getMetaTags();
     this.swupdate.available.pipe(takeUntil(this.destroy$)).subscribe((res) => {
@@ -59,7 +61,6 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit() {
-
     let selectedLang = 'english';
     let host;
     if (isPlatformServer(this.platformId)) {
@@ -123,6 +124,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   setmetatags(routerURL) {
+    let image = "https://dev.sports.info/assets/images/sports-info.jpg";
     this.getBestMatchedUrl(routerURL).then(
       (data: any) => {
         if (data) {
@@ -140,15 +142,19 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
           if (data.description) {
             this.meta.updateTag({ name: 'description', content: data.description });
-            this.meta.updateTag({ name: 'og:description', content: data.description });
+            this.meta.updateTag({ property: 'og:description', content: data.description });
             this.meta.updateTag({ name: 'twitter:description', content: data.description });
           }
+
           if (data.image) {
-            let image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
-            this.meta.updateTag({ name: 'twitter:image', content: image });
-            this.meta.updateTag({ name: 'twitter:image:src', content: image });
-            this.meta.updateTag({ name: 'og:image', content: image });
+            image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
           }
+
+          //Code update here for image
+          this.meta.updateTag({ name: 'twitter:image', content: image });
+          this.meta.updateTag({ name: 'twitter:image:src', content: image });
+          this.meta.updateTag({ property: 'og:image', content: image });
+
           if (data.topic)
             this.meta.updateTag({ name: 'topic', content: data.topic });
           if (data.subject)
@@ -157,24 +163,89 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
             this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
           if (data['twitter:card'])
             this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
+
+          if (data.title && data.description) {
+            this.setSchema(data);
+          } else {
+            this.setSchema();
+          }
+
         } else if (isPlatformBrowser(this.platformId)) {
-          this.meta.updateTag({ name: 'title', content: 'title' });
-          this.meta.updateTag({ property: 'og:title', content: 'title' });
-          this.meta.updateTag({ name: 'twitter:title', content: 'title' });
-          this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-          this.meta.updateTag({ name: 'twitter:image', content: 'https://sports.info/assets/images/logo.svg' });
-          this.meta.updateTag({ name: 'twitter:image:src', content: 'https://sports.info/assets/images/logo.svg' });
-          this.meta.updateTag({ name: 'og:image', content: 'https://sports.info/assets/images/logo.svg' });
-          this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-          this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-          this.meta.updateTag({ property: 'og:type', content: 'article' });
-          this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+          this.setDefaultMetaFields(image);
+          this.setSchema();
         }
       }
-    ).catch(e => { });
+    ).catch(e => {
+      this.setDefaultMetaFields(image);
+      this.setSchema();
+    });
+  }
+
+  setDefaultMetaFields(image) {
+    this.meta.updateTag({ name: 'title', content: 'title' });
+    this.meta.updateTag({ property: 'og:title', content: 'title' });
+    this.meta.updateTag({ name: 'twitter:title', content: 'title' });
+    this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
+    this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:image:src', content: image });
+    this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ name: 'mimage', content: image });
+    this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
+    this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
+    this.meta.updateTag({ property: 'og:type', content: 'article' });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+  }
+
+  setSchema(param: any = null) {
+    if (param == null) {
+      this.schemaService.prepareSchema();
+    } else {
+      let data = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.sports.info/#website",
+            "url": "https://www.sports.info/",
+            "name": param.title,
+            "description": param.description,
+            "potentialAction": [
+              {
+                "@type": "SearchAction",
+                "target": "https://www.sports.info/?s={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            ],
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.sports.info/#webpage",
+            "url": "https://www.sports.info/",
+            "name": param.title,
+            "isPartOf": {
+              "@id": "https://www.sports.info/#website"
+            },
+            "datePublished": "2018-01-10T16:34:21+00:00",
+            "dateModified": "2020-07-06T15:47:05+00:00",
+            "description": param.title,
+            "inLanguage": "en-US",
+            "potentialAction": [
+              {
+                "@type": "ReadAction",
+                "target": [
+                  "https://www.sports.info/"
+                ]
+              }
+            ]
+          }
+        ]
+      };
+      this.schemaService.prepareSchema(data);
+    }
   }
 
   /* //get cookie by name */
@@ -206,11 +277,12 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+
       let metadata = data.MetaTags;
       let metaarray = [];
       metadata.map((data) => {
         // tslint:disable-next-line: max-line-length
-        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$');
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,2}(:[0-9]{1,5})?(\/.*)?$');
         if (routerUrl != null && routerUrl[4] !== undefined)
           metaarray[routerUrl[4]] = data;
         else

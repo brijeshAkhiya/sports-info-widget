@@ -138,7 +138,7 @@
     <ng-template #link>
       <td>
         <a *ngIf="value =='tname' || value =='name'"
-          [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
+          [routerLink]="value == 'tname' ? ['/kabaddi/team', item['tid'], (item?.tname | slugify)] : value == 'name' ? ['/kabaddi/player',item['tid'] ,item['pid'], (item.name | slugify)] : '' ">
           <img [offset]="commonService.lazyloadoffset" [lazyLoad]="item['tid'] | logosurl:'kabaddi'"
             [defaultImage]="commonService.flagplaceholder" alt="logo">
           {{ item[value]}}

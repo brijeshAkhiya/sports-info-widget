@@ -42,8 +42,8 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
-            <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0].tname}}</a></b>
-            <img alt="{{team[0].tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'"
+            <b><a [routerLink]="['/kabaddi/team', team[0]?.tid, (team[0]?.tname | slugify )]">{{team[0]?.tname}}</a></b>
+            <img alt="{{team[0]?.tname}}" [lazyLoad]="team[0].tid | logosurl:'kabaddi'"
               [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
           </p>
         </div>
@@ -69,9 +69,9 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center">
-            <img alt="{{team[1].tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'"
+            <img alt="{{team[1]?.tname}}" [lazyLoad]="team[1].tid | logosurl:'kabaddi'"
               [defaultImage]="commonService.teamPlaceholder" [offset]="commonService.lazyloadoffset">
-            <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1].tname}}</a></b>
+            <b><a [routerLink]="['/kabaddi/team', team[1]?.tid, (team[1]?.tname | slugify )]">{{team[1]?.tname}}</a></b>
           </p>
         </div>
         <!-- <ng-container *ngIf="team[1]?.players?.length > 0"> -->
@@ -110,8 +110,8 @@
                   {{player?.jersey_number}}</div>
                 <p>
                   <a
-                    [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                    {{player.name | slice:0:15}}
+                    [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
+                    {{player.name | split}}
                   </a>
                 </p>
               </li>
@@ -125,8 +125,8 @@
                   {{player?.jersey_number}}</div>
                 <p>
                   <a
-                    [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
-                    {{player.name | slice:0:15}}
+                    [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
+                    {{player.name | split}}
                   </a>
                 </p>
               </li>
@@ -145,7 +145,7 @@
         <div class="heading">
           <p class="d-flex align-items-center justify-content-end">
             <span><b><a
-                  [routerLink]="['/soccer/team', (team.home?.id | splitID), (team.home?.name | slugify )]">{{team.home.name}}</a></b>
+                  [routerLink]="['/soccer/team', (team.home?.id | splitID), (team.home?.name | split | slugify )]">{{team.home.name}}</a></b>
               <span *ngIf="team.home?.formation?.type">{{team.home?.formation?.type}}</span>
             </span>
             <img alt="{{team.home.name}}" [lazyLoad]="" [defaultImage]="commonService.teamPlaceholder"
@@ -159,7 +159,7 @@
             <li *ngFor="let player of team.home?.squad[role]">
               <p class="text-capitalize">
                 <a
-                  [routerLink]="['/soccer/player', (team.home?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                  [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
                   {{player.name | split}}
                 </a>
               </p>
@@ -176,7 +176,7 @@
       <div>
         <div class="heading">
           <p class="d-flex align-items-center">
-            <img alt="{{team.away.tname}}" [lazyLoad]="team.away.logo" [defaultImage]="commonService.teamPlaceholder"
+            <img alt="{{team?.away?.tname}}" [lazyLoad]="team.away.logo" [defaultImage]="commonService.teamPlaceholder"
               [offset]="commonService.lazyloadoffset">
             <span><b><a
                   [routerLink]="['/soccer/team', (team.away?.id | splitID), (team.away?.name | slugify )]">{{team.away.name}}</a></b>
@@ -194,7 +194,7 @@
                 [ngStyle]="{'background':'#'+team.away?.jersey?.base, 'border-color': (team.away?.jersey?.base == 'ffffff') ? '#E0E0E0' : '#'+team.away?.jersey?.base, 'color': '#'+team.away?.jersey?.number }">{{player?.jersey_number}}</span>
               <p class="text-capitalize">
                 <a
-                  [routerLink]="['/soccer/player', (team.away?.id | splitID), (player?.id | splitID), (player?.name | slugify )]">
+                  [routerLink]="['/soccer/player', (player?.id | splitID), (player?.name | split | slugify )]">
                   {{player.name | split}}
                 </a>
               </p>

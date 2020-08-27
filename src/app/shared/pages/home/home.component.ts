@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CommonService } from '@providers/common-service';
+import { SchemaService } from '@app/shared/schema/schema.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,12 +15,14 @@ export class HomeComponent implements OnInit {
 
   params;
   options;
+  preventFixturesSidebarWidget: any = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private translateservice: TranslateService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    public schemaService: SchemaService
   ) { }
 
   ngOnInit() {
@@ -39,6 +43,8 @@ export class HomeComponent implements OnInit {
     } else if (this.params.sport == 'Racing') {
       let parentParams: any = this.activatedRoute.parent.params;
       title = parentParams.value.game;
+    } else if (this.params.sport.toLowerCase() == 'wwe') {
+      title = 'WWE';
     }
     this.options = {
       reqParams:
@@ -52,6 +58,7 @@ export class HomeComponent implements OnInit {
       if (this.activatedRoute.snapshot.params.slug)
         this.options.title = this.activatedRoute.snapshot.params.slug.replace(/-/g, ' ');
     }
+    this.preventFixturesSidebarWidget = ['racing', 'tennis', 'wwe', 'esports'];
   }
 
 }

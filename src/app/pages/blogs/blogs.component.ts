@@ -42,8 +42,6 @@ export class BlogsComponent implements OnInit {
       this.options.reqParams.nLimit = 5;
       if (blogState.data)
         this.options.data = blogState.data;
-
-      console.log(this.options);
     } else if (this.activatedroute.routeConfig.path == 'article' || this.activatedroute.routeConfig.path == 'video') {
       /** Article and Videos Blog post  */
       if (this.activatedroute.routeConfig.path == 'video') {
@@ -60,8 +58,10 @@ export class BlogsComponent implements OnInit {
       this.blog_title = this.translateService.get('Blog_Module.blogs')['value'];
       this.options.type = this.options.card_type = 'admin';
     }
+    
   }
 
+  
   getRecentArticles() {
     let data = {
       nstart: 0,
@@ -106,7 +106,6 @@ export class BlogsComponent implements OnInit {
         }
         // this.options.data.push(res.data[0]);
         this.cd.detectChanges();
-        console.log(this.options);
         // if (res['data'].length > 0) {
         //   this.options.data = res['data'];
         // } else {

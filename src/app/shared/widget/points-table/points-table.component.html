@@ -54,7 +54,7 @@
       {{ (value == 'loss' ?  item['matchplayed'] - item['win'] - item['draw']  : item[value] ? item[value] : 0)}} </td>
     <ng-template #link>
       <td>
-        <a [routerLink]="['/kabaddi/team', item['tid'], (item.tname | slugify)]">
+        <a [routerLink]="['/kabaddi/team', item['tid'], (item?.tname | slugify)]">
           {{ item[value]}}
         </a>
       </td>

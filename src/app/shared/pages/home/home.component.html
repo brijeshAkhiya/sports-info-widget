@@ -13,7 +13,7 @@
         <div class="sticky-sidebar">
           <app-custom-ads-widget [type]="'Banner'"></app-custom-ads-widget>
           <app-fixtures-sidebar-widget [sport]="params.sport"
-            *ngIf="params.sport != 'Racing' && params.sport != 'Tennis'">
+            *ngIf="preventFixturesSidebarWidget.indexOf(params.sport.toLowerCase()) == -1">
           </app-fixtures-sidebar-widget>
 
           <app-top-scorer-widget [sport]="params.sport"></app-top-scorer-widget>

@@ -37,6 +37,7 @@
     "@ngrx/store-devtools": "^7.4.0",
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",
+    "@ngx-lite/json-ld": "^0.6.2",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "angularx-social-login": "^1.2.6",

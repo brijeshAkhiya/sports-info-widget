@@ -27,6 +27,7 @@ export class MainFooterComponent implements OnInit, OnDestroy {
   searchText;
   isAuth$: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  year = new Date().getFullYear();
 
   @ViewChild('favContainer') favContainer;
 

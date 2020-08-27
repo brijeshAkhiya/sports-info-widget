@@ -50,12 +50,13 @@ export class LoginModalComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    // this.socialLoginService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.socialLoginService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(res => {
         if (res) {
           this.socialUser = res;
+          // console.log(res.idToken);
           this.validateSocialLogin('google', res.idToken);
           this.modalService.dismissAll();
         }
@@ -69,6 +70,7 @@ export class LoginModalComponent implements OnInit {
         sFbToken: token
       };
       this.sportsService.sociallogin(type, data).subscribe((res: any) => {
+       // console.log(res.Authorization);
         this.commonService.setInStorage('userT', res.Authorization);
         this.commonService.setInStorage('userId', res.data._id);
         this.store.dispatch(new Auth.SetAuthenticated());

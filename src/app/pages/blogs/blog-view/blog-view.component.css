@@ -46,6 +46,8 @@
 .blog-author h6,
 .blog-author p              { margin: 0px; }
 .blog-author h6             { text-transform: uppercase; }
+.source-text                { margin-top: 20px; font-size: 14px; line-height: 20px;}
+.source-text a              { color: #ED1A33 }
 
 /* -------- Comment Section ------- */
 .comment-item                       { margin: 40px 0px; }
@@ -169,6 +171,7 @@
     .blog-content figcaption        { position: static; padding: 10px 10px 0px; font-size: 14px; }
     .blog-content figcaption:after  { display: none; }
     .blog-author .author-img        { margin-right: 12px; width: 66px; height: 66px; }
+    .source-text                    { font-size: 13px; line-height: 19px;}
 /* -------- Comment Section ------- */
     .comment-item                       { margin: 20px 0px; }
     .write-comments                     { margin-top: 24px;}

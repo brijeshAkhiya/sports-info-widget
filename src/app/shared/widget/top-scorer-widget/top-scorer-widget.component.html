@@ -40,7 +40,7 @@
               {{item.name | split}}
             </a>
           </p>
-          <p class="team">{{item.tname}}</p>
+          <p class="team">{{item?.tname}}</p>
         </div>
         <div class="player-score">
           <h3>{{kabadditype == 'raidtotalpoint' ? item.raidtotalpoint : item.tackletotalpoint}}</h3>
@@ -57,7 +57,7 @@
             {{item.name | split}}
           </a>
         </p>
-        <p class="team">{{item.tname}}</p>
+        <p class="team">{{item?.tname}}</p>
       </div>
       <div class="player-score">
         <h3>{{kabadditype == 'raidtotalpoint' ? item.raidtotalpoint : item.tackletotalpoint}}</h3>

@@ -28,11 +28,15 @@ export class TopScorerWidgetComponent implements OnInit {
     if (this.sport == 'Kabaddi') {
       this.gettopscorer('raidtotalpoint');
     } else if (this.sport == 'Soccer') {
-      this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
-      this.getsoccerTopScorer('goals');
+      if(this.activatedroute.parent.snapshot.params && this.activatedroute.parent.snapshot.params.id){
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'soccer', 'tournament');
+        this.getsoccerTopScorer('goals');
+      }
     } else if (this.sport == 'Cricket') {
-      this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
-      this.getCricketLeaders();
+      if(this.activatedroute.parent.snapshot.params && this.activatedroute.parent.snapshot.params.id){
+        this.tournamentid = this.commonService.getIds(this.activatedroute.parent.snapshot.params.id, 'cricket', 'tournament');
+        this.getCricketLeaders();
+      }
     }
   }
 

@@ -1,21 +1,24 @@
 // import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input, HostListener } from '@angular/core';
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit, Inject, PLATFORM_ID, Injector } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'angularx-social-login';
-
+import { takeUntil } from 'rxjs/operators';
 import { SportsService } from '@providers/sports-service';
 import { CommonService } from '@providers/common-service';
-
+import { Subject } from 'rxjs';
 import * as fromRoot from '../../../app-reducer';
 import * as Auth from '@store/auth/auth.actions';
 
 import { LoginModalComponent } from '../../../shared/widget/login-modal/login-modal.component';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { ObsEvent } from 'ng-lazyload-image/src/types';
 import { userInfo } from 'os';
+import { SchemaService } from '@app/shared/schema/schema.service';
+import { Location, DOCUMENT, LocationStrategy, isPlatformBrowser, isPlatformServer } from '@angular/common';
+
 
 @Component({
   selector: 'app-blog-view',
@@ -46,7 +49,9 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   loader = false;
   commentid: any;
   userId: string;
-
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  metatagsObj = {};
+  requestedUrl;
 
   constructor(
     private router: Router,
@@ -56,12 +61,21 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     public commonService: CommonService,
     private modalService: NgbModal,
     private authService: AuthService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private schemaService: SchemaService,
+    @Inject(Location) private readonly location: Location,
+    @Inject(DOCUMENT) private _document: Document,
+    private readonly locationStrategy: LocationStrategy,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private pagetitle: Title,
+    private injector: Injector
   ) {
+
     /**To reload router if routing in same page */
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
+
   }
 
   ngOnInit() {
@@ -71,7 +85,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     });
     let url: any = this.activatedroute.url;
     this.previewtype = (url.value[0].path == 'blog-preview') ? 'preview' : 'detail';
-
 
     if (window.history.state && window.history.state.id) {
       this.getBlogview(window.history.state.id);
@@ -91,10 +104,14 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     const ngFjs = document.getElementsByTagName('script')[0];
     const ngP = 'https';
     // Twitter
-    ngJs = document.createElement('script');
-    ngJs.id = 'twitter-wjs';
-    ngJs.src = ngP + '://platform.twitter.com/widgets.js';
-    ngFjs.parentNode.insertBefore(ngJs, ngFjs);
+    setTimeout(() => {
+      let ngTwitterJs = document.createElement('script');
+      let sourceEle = document.getElementsByTagName('script')[0]
+      ngTwitterJs.id = 'twitter-wjs';
+      ngTwitterJs.src = 'https://platform.twitter.com/widgets.js';
+      sourceEle.parentNode.insertBefore(ngTwitterJs, sourceEle);
+    }, 1000);
+
 
     // Instagram
     ngJs = document.createElement('script');
@@ -107,16 +124,35 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     ngFjs.parentNode.insertBefore(ngJs, ngFjs);
   }
 
+  getSEOData() {
+    this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+
+      let metadata = data.MetaTags;
+      let metaarray = [];
+      metadata.map((data) => {
+        // tslint:disable-next-line: max-line-length
+        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,2}(:[0-9]{1,5})?(\/.*)?$');
+        if (routerUrl != null && routerUrl[4] !== undefined)
+          metaarray[routerUrl[4]] = data;
+        else
+          metaarray['/'] = data;
+      });
+      this.metatagsObj = { ...metaarray };
+      this.requestedUrl = this.router.url;
+      if (Object.keys(this.metatagsObj).length != 0 && this.requestedUrl)
+        this.setmetatags(this.requestedUrl);
+    });
+  }
 
   getBlogview(id) {
     if (id) {
       this.loader = true;
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.loader = false;
+        console.log(res.data);
         this.blogdata = res.data;
-        this.initSEOTags();
         this.getPopularArticles();
-
+        this.getSEOData();
         if (this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id);
 
@@ -171,6 +207,262 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     // this.meta.updateTag({ property: 'twitter:card', content: data['twitter:card'] ? data['twitter:card'] : 'Sports.info' });
   }
 
+  setmetatags(routerURL) {
+    this.getBestMatchedUrl(routerURL).then(
+      (data: any) => {
+        if (data) {
+          if (data.title) {
+            this.meta.updateTag({ name: 'title', content: data.title });
+            this.meta.updateTag({ property: 'og:title', content: data.title });
+            this.meta.updateTag({ name: 'twitter:title', content: data.title });
+          }
+          this.meta.updateTag(
+            {
+              name: 'keywords', content: data.keywords ?
+                data.keywords :
+                'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports'
+            });
+
+          if (data.description) {
+            this.meta.updateTag({ name: 'description', content: data.description });
+            this.meta.updateTag({ property: 'og:description', content: data.description });
+            this.meta.updateTag({ name: 'twitter:description', content: data.description });
+          }
+
+          let image = this.commonService.isUrl(this.blogdata.sImage) ? this.blogdata.sImage : this.commonService.s3Url + this.blogdata.sImage;
+
+          //Code update here for image
+          this.meta.updateTag({ name: 'twitter:image', content: image });
+          this.meta.updateTag({ name: 'twitter:image:src', content: image });
+          this.meta.updateTag({ property: 'og:image', content: image });
+
+          if (data.topic)
+            this.meta.updateTag({ name: 'topic', content: data.topic });
+          if (data.subject)
+            this.meta.updateTag({ name: 'subject', content: data.subject });
+          if (data['og:type'])
+            this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
+          if (data['twitter:card'])
+            this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
+
+          if (data.title && data.description) {
+            this.setSchema(data);
+          } else {
+            this.setSchema(null);
+          }
+
+        } else if (isPlatformBrowser(this.platformId)) {
+          this.initSEOTags();
+          this.setSchema(null);
+        }
+      }
+    ).catch(e => {
+      this.initSEOTags();
+      this.setSchema(null);
+    });
+  }
+
+  getBestMatchedUrl(url) {
+    return new Promise((resolve, reject) => {
+      try {
+        if (Object.keys(this.metatagsObj).length == 0) reject();
+        if (this.metatagsObj[url]) {
+          resolve(this.metatagsObj[url]);
+        } else {
+          reject();
+        }
+      }
+      catch (e) {
+        console.log(e); reject(e);
+      }
+    });
+  }
+
+  setSchema(data) {
+    const pathAfterDomainName = this.location.path();
+    let blogTitle = this.commonService.siteUrl.replace(/\/$/, "") + pathAfterDomainName;
+    let authorData: any = this.blogdata.iId;
+    authorData.urlName = authorData.sFirstName + "-" + authorData.sLastName;
+    authorData.displayName = authorData.sFirstName + " " + authorData.sLastName;
+    let logoUrl = "https://dev.sports.info/assets/images/sports-info.jpg";
+
+    // let schema = {
+    //   "@context": "https://schema.org",
+    //   "@graph": [
+    //     {
+    //       "@type": "WebSite",
+    //       "@id": "https://www.sports.info/#website",
+    //       "url": "https://www.sports.info/",
+    //       "name": "Sports.info",
+    //       "description": "Cricket|Soccer|Football|NBA|Sports News Live Scores|Players & Team Rankings",
+    //       "potentialAction": [
+    //         {
+    //           "@type": "SearchAction",
+    //           "target": "https://www.sports.info/?s={search_term_string}",
+    //           "query-input": "required name=search_term_string"
+    //         }
+    //       ],
+    //       "inLanguage": "en-US"
+    //     },
+    //     {
+    //       "@type": "ImageObject",
+    //       "@id": blogTitle + "#primaryimage",
+    //       "inLanguage": "en-US",
+    //       "url": this.blogdata.sImage,
+    //       "width": 640,
+    //       "height": 400
+    //     },
+    //     {
+    //       "@type": "WebPage",
+    //       "@id": blogTitle + "#webpage",
+    //       "url": blogTitle + "",
+    //       "name": this.blogdata.sTitle,
+    //       "isPartOf": {
+    //         "@id": "https://www.sports.info/#website"
+    //       },
+    //       "primaryImageOfPage": {
+    //         "@id": blogTitle + "#primaryimage"
+    //       },
+    //       "datePublished": this.blogdata.dCreatedAt,
+    //       "dateModified": this.blogdata.dUpdatedAt,
+    //       "author": {
+    //         "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+    //       },
+    //       "description": this.blogdata.sTitle,
+    //       "inLanguage": "en-US",
+    //       "potentialAction": [
+    //         {
+    //           "@type": "ReadAction",
+    //           "target": [
+    //             blogTitle + ""
+    //           ]
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       "@type": "NewsArticle",
+    //       "@id": blogTitle + "#article",
+    //       "mainEntityOfPage": {
+    //         "@id": blogTitle + "#webpage"
+    //       },
+    //       "headline": this.blogdata.sTitle,
+    //       "image": {
+    //         "@type": "ImageObject",
+    //         "url": this.blogdata.sImage,
+    //         "width": "800",
+    //         "height": "600"
+    //       },
+    //       "datePublished": this.blogdata.dCreatedAt,
+    //       "dateModified": this.blogdata.dUpdatedAt,
+    //       "author": {
+    //         "@type": "Person",
+    //         "name": authorData.displayName,
+    //         "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+    //       },
+    //       "publisher": {
+    //         "@type": "Organization",
+    //         "name": "Sports Info",
+    //         "logo": {
+    //           "@type": "ImageObject",
+    //           "url": logoUrl,
+    //           "width": "115",
+    //           "height": "60"
+    //         }
+    //       },
+    //       "description": this.blogdata.sDescription
+    //     }
+    //   ]
+    // };
+    let schema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://www.sports.info/",
+          "url": "https://www.sports.info/",
+          "name": "Sports.info",
+          "description": "Cricket|Soccer|Football|NBA|Sports News Live Scores|Players & Team Rankings",
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": "https://www.sports.info/?s={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          ],
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "ImageObject",
+          "@id": blogTitle,
+          "inLanguage": "en-US",
+          "url": this.blogdata.sImage,
+          "width": 640,
+          "height": 400
+        },
+        {
+          "@type": "WebPage",
+          "@id": blogTitle,
+          "url": blogTitle + "",
+          "name": data != null ? data.title : this.blogdata.sTitle,
+          "isPartOf": {
+            "@id": "https://www.sports.info/"
+          },
+          "primaryImageOfPage": {
+            "@id": blogTitle
+          },
+          "datePublished": this.blogdata.dCreatedAt,
+          "dateModified": this.blogdata.dUpdatedAt,
+          "author": {
+            "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+          },
+          "description": data != null ? data.description : this.blogdata.sTitle,
+          "inLanguage": "en-US",
+          "potentialAction": [
+            {
+              "@type": "ReadAction",
+              "target": [
+                blogTitle + ""
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "NewsArticle",
+          "@id": blogTitle,
+          "mainEntityOfPage": {
+            "@id": blogTitle
+          },
+          "headline": this.blogdata.sTitle,
+          "image": {
+            "@type": "ImageObject",
+            "url": this.blogdata.sImage,
+            "width": "800",
+            "height": "600"
+          },
+          "datePublished": this.blogdata.dCreatedAt,
+          "dateModified": this.blogdata.dUpdatedAt,
+          "author": {
+            "@type": "Person",
+            "name": authorData.displayName,
+            "@id": "https://www.sports.info/writer/" + authorData._id + "/" + authorData.urlName
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Sports Info",
+            "logo": {
+              "@type": "ImageObject",
+              "url": logoUrl,
+              "width": "115",
+              "height": "60"
+            }
+          },
+          "description": this.blogdata.sDescription
+        }
+      ]
+    };
+    this.schemaService.prepareSchema(schema);
+  }
+
   // video play event
   videoplay() {
     this.isplay = true;
@@ -190,6 +482,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
           if (res) {
             this.usercommentvalue = '';
             this.getBlogComments(this.blogdata._id, { iPostId: this.blogdata._id, nStart: 0, nLimit: this.blogcomments.length > 4 ? this.blogcomments.length : 4 });
+
           }
         }, (error: any) => {
           if (error.status == 401) {
@@ -275,6 +568,8 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
         if (res.data && res.data.length > 0) {
+          console.log(res.data);
+
           this.blogcomments = res.data;
           if (this.commentsParam.nLimit > res.data.length)
             this.isLoadMoreComments = false;
