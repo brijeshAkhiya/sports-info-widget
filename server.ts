@@ -76,6 +76,15 @@ app.set('views', DIST_FOLDER);
 // Example Express Rest API endpoints
 // app.get('/api/**', (req, res) => { });
 // Serve static files from /browser
+app.get('/sitemap.xml', (req, res) => {
+  s3.getObject({ Bucket: 'sports.info', Key: 'xmls/sitemap.xml' }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return res.set('Content-Type', 'text/xml').send(data.Body);
+    }
+  });
+});
 app.get('/xmls/*', (req, res) => {
   while (req.url.charAt(0) === '/') {
     req.url = req.url.substr(1);

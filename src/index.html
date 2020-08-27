@@ -113,6 +113,7 @@
     }
     document.querySelector('#my-manifest-placeholder').setAttribute('href', './assets/manifest/manifest_' + selectedLang + '.json');
   </script>
+
 </head>
 
 <body ontouchstart id="main-body" style="margin: 0px;">
@@ -152,7 +153,10 @@
       a.src = g;
       m.parentNode.insertBefore(a, m)
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-140814144-1', 'auto');// add your tracking ID here.
+
+    if (host == 'hindi') ga('create', 'UA-140814144-2', 'auto');
+    else if (host == 'bengali') ga('create', 'UA-140814144-3', 'auto');
+    else ga('create', 'UA-140814144-1', 'auto');
     ga('send', 'pageview');
   </script>
   <!-- Sentry

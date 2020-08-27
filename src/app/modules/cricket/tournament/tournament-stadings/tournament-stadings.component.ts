@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class TournamentStadingsComponent implements OnInit {
 
-  pointstable: any;
+  pointstable: any = [];
   options = {
     sport: 'Cricket',
     titles: ['POS', this.translateService.get('Shared_Module2.TEAM')['value'], 'M', 'W', 'L', 'D', 'N/R', 'P', 'NRR'],
@@ -43,7 +43,7 @@ export class TournamentStadingsComponent implements OnInit {
       this.isLoading = false;
       if (res.data) {
         res.data.map((data) => {
-          this.pointstable = data.team_standings;
+          this.pointstable = [...this.pointstable, ...data.team_standings];
         });
       }
     },
