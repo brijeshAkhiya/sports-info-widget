@@ -1,5 +1,5 @@
 // import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, Input, HostListener } from '@angular/core';
-import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit, Inject, PLATFORM_ID, Injector } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation, HostListener, AfterViewInit, Inject, PLATFORM_ID, Injector, Input } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -52,7 +52,13 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   metatagsObj = {};
   requestedUrl;
-
+  relatedArticles: any;
+  start = 1;
+  end = 5;
+  notEmptyPost = true;
+  notScrolly = true;
+  loading = false;
+  view = true;
   constructor(
     private router: Router,
     private meta: Meta,
@@ -94,9 +100,39 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
     });
+    this.getRelatedArticles();
 
   }
 
+  onScroll(type?: string) {
+      if (this.notEmptyPost && this.notScrolly) {
+        if (!this.view) {
+          this.loading = true;
+          this.end += 4;
+          this.loading = false;
+        }
+        if (type) {
+          this.view = false;
+          this.end += 4;
+          this.loading = false;
+        }
+    } else {
+      this.end = null;
+    }
+  }
+  getRelatedArticles() {
+    let data: any = {
+      nstart: 0
+    };
+    if (window.history.state && window.history.state.sport)
+      data.eSport = window.history.state.sport.charAt(0).toUpperCase() + window.history.state.sport.slice(1);
+    this.sportsService.getrelatedpost(data).subscribe((res: any) => {
+      if (res['data']) {
+        this.relatedArticles = res.data.filter((blog) => blog._id != this.blogdata._id);
+        console.log("Related",res.data)
+      }
+    });
+  }
 
   ngAfterViewInit() {
     /** for load social media widgets */
@@ -149,7 +185,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
       this.loader = true;
       this.sportsService.getblogview(id).subscribe((res: any) => {
         this.loader = false;
-        console.log(res.data);
         this.blogdata = res.data;
         this.getPopularArticles();
         this.getSEOData();
@@ -559,6 +594,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.sportsService.getrelatedpost(data).subscribe((res: any) => {
       if (res['data']) {
         this.widgetblogs = res.data.filter((blog) => blog._id != this.blogdata._id);
+        console.log(res.data)
       }
     });
   }

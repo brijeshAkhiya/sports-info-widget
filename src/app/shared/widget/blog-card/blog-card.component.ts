@@ -19,6 +19,7 @@ export class BlogCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
   }
 
 }
