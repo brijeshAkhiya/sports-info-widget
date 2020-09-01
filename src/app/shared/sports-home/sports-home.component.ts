@@ -38,6 +38,7 @@ export class SportsHomeComponent implements OnInit {
       this.popularArticlesParams = { ...this.popularArticlesParams, ...this.options.reqParams };
       this.recentArticlesParams = { ...this.recentArticlesParams, ...this.options.reqParams };
       this.videoArticlesParams = { ...this.videoArticlesParams, ...this.options.reqParams };
+      console.log(this.options.reqParams.aIds)
       if (this.options.reqParams.aIds)
         this.getRelatedPosts();
       else if (this.options.page_type === 'home' && this.options.blog_type !== 'recent')
@@ -80,7 +81,4 @@ export class SportsHomeComponent implements OnInit {
       }
     });
   }
-
-
-
 }

@@ -40,7 +40,7 @@
     <li ngbDropdown class="common-dropdown" *ngIf="isLogin">
       <a class="login" [ngClass]="{'logged': isLogin}" ngbDropdownToggle [lazyLoad]="socialUser.photoUrl"></a>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <a ngbDropdownItem  class="collapse-logout" (click)="logout()">{{'Header_menu.Logout' | translate}}</a>
+        <a ngbDropdownItem  class="collapse-logout"click)="logout()">{{'Header_menu.Logout' | translate}}</a>
       </div>
     </li>
   </ul>

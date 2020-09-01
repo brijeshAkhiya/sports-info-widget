@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit, OnChanges {
     if (this.searchkey.trim()) {
       let data = {
         sSearch: this.searchkey,
-        nLimit: 5,
+        nLimit: 10,
         nStart: 0
       };
       this.searchdata = [];
@@ -84,6 +84,7 @@ export class SearchComponent implements OnInit, OnChanges {
       this.sportsService.getsearchresult(data).subscribe(res => {
         if (res['data'].length != 0) {
           this.searchdata = res['data'];
+         // console.log(this.searchdata)
         } else {
           // this.noresults = true;
           this.noresults = true;

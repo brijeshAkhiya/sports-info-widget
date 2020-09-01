@@ -6,7 +6,6 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
 /** External Modules */
 import {
   SocialLoginModule,
@@ -30,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdsenseModule } from 'ng2-adsense';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 /* store configuration modules import */
 import { StoreModule } from '@ngrx/store';
@@ -163,7 +163,8 @@ export function exportTranslateStaticLoader(http: HttpClient, transferState: Tra
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25 // Retains last 25 states
-    })
+    }),
+    InfiniteScrollModule
   ],
   providers: [
     AuthService,

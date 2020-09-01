@@ -39,7 +39,7 @@ export class BlogsComponent implements OnInit {
     if (this.activatedroute.routeConfig.path == 'search/:key') {
       this.options.reqParams.sSearch = this.activatedroute.snapshot.url[1].path ? this.activatedroute.snapshot.url[1].path : blogState.sSearch;
       this.blog_title = this.translateService.get('Blog_Module2.Search_results')['value'];
-      this.options.reqParams.nLimit = 5;
+      this.options.reqParams.nLimit = 10;
       if (blogState.data)
         this.options.data = blogState.data;
     } else if (this.activatedroute.routeConfig.path == 'article' || this.activatedroute.routeConfig.path == 'video') {
@@ -58,10 +58,10 @@ export class BlogsComponent implements OnInit {
       this.blog_title = this.translateService.get('Blog_Module.blogs')['value'];
       this.options.type = this.options.card_type = 'admin';
     }
-    
+
   }
 
-  
+
   getRecentArticles() {
     let data = {
       nstart: 0,
@@ -91,7 +91,7 @@ export class BlogsComponent implements OnInit {
     if (this.searchkey.trim()) {
       let data = {
         sSearch: this.searchkey,
-        nLimit: 5,
+        nLimit: 10,
         nStart: 0
       };
       this.noresults = false;

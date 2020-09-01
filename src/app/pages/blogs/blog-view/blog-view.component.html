@@ -178,6 +178,24 @@
       </div>
     </div>
   </section>
+
+  <section class="common-section comments-section">
+    <div class="container">
+      <div class="common-title-btn d-flex justify-content-between align-items-center">
+        <h4>{{'More From Sports' | translate}}</h4>
+        <button type= "submit" class="theme-btn" *ngIf = "view" (click) = "onScroll('button')">View More <span></span></button>
+      </div>
+      <div
+        infinite-scroll
+        [infiniteScrollDistance] = "2"
+        [infiniteScrollThrottle] = "1000"
+        (scrolled) = "onScroll()">
+          <app-blog-card [posts]="relatedArticles" [start]="start" [end]="end" [card_type]="'small'">
+          </app-blog-card>
+      </div>
+      <app-loader *ngIf="loading"></app-loader>
+    </div>
+  </section>
 </ng-container>
 
 <ng-template #content let-modal>

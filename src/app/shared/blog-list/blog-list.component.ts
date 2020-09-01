@@ -22,6 +22,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.options) {
+
       if (this.options.data && this.options.data.length > 0) {
         this.articles = (this.options.start) ? this.options.data.slice(this.options.start) : this.options.data;
         if (this.options.reqParams.nLimit > this.options.data.length)
