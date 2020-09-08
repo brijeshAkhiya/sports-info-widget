@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment.hmr';
 import { Component, OnInit, AfterContentInit, Injector, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -61,6 +62,7 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log(environment.version)
     let selectedLang = 'english';
     let host;
     if (isPlatformServer(this.platformId)) {

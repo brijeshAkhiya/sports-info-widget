@@ -53,8 +53,8 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
   metatagsObj = {};
   requestedUrl;
   relatedArticles: any;
-  start = 1;
-  end = 5;
+  start = 0;
+  end = 4;
   notEmptyPost = true;
   notScrolly = true;
   loading = false;
@@ -100,8 +100,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
     });
-    this.getRelatedArticles();
-
   }
 
   onScroll(type?: string) {
@@ -119,19 +117,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     } else {
       this.end = null;
     }
-  }
-  getRelatedArticles() {
-    let data: any = {
-      nstart: 0
-    };
-    if (window.history.state && window.history.state.sport)
-      data.eSport = window.history.state.sport.charAt(0).toUpperCase() + window.history.state.sport.slice(1);
-    this.sportsService.getrelatedpost(data).subscribe((res: any) => {
-      if (res['data']) {
-        this.relatedArticles = res.data.filter((blog) => blog._id != this.blogdata._id);
-        console.log("Related",res.data)
-      }
-    });
   }
 
   ngAfterViewInit() {
@@ -188,6 +173,7 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
         this.blogdata = res.data;
         this.getPopularArticles();
         this.getSEOData();
+        this.getRelatedArticles();
         if (this.previewtype == 'detail')
           this.updatePostCount(this.blogdata._id);
 
@@ -594,7 +580,22 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     this.sportsService.getrelatedpost(data).subscribe((res: any) => {
       if (res['data']) {
         this.widgetblogs = res.data.filter((blog) => blog._id != this.blogdata._id);
-        console.log(res.data)
+      }
+    });
+  }
+
+  getRelatedArticles() {
+    let data: any = {
+      nstart: 0
+    };
+    if (window.history.state && window.history.state.sport)
+      data.eSport = window.history.state.sport.charAt(0).toUpperCase() + window.history.state.sport.slice(1);
+    this.sportsService.getrelatedpost(data).subscribe((res: any) => {
+      if (res['data']) {
+        this.relatedArticles = res.data.filter((blog) => blog._id != this.blogdata._id);
+        if(this.relatedArticles.length < 4 || this.relatedArticles.length == 4){
+          this.view = false;
+        }
       }
     });
   }
@@ -604,8 +605,6 @@ export class BlogViewComponent implements OnInit, AfterViewInit {
     if (id) {
       this.sportsService.getblogcommnets(data).subscribe((res: any) => {
         if (res.data && res.data.length > 0) {
-          console.log(res.data);
-
           this.blogcomments = res.data;
           if (this.commentsParam.nLimit > res.data.length)
             this.isLoadMoreComments = false;
