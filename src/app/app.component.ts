@@ -102,7 +102,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.getCricketHeader();
   }
   navigate(id, match) {
-    window.location.replace('https://www.sports.info/cricket/match/' + id.split(':')[2] + '/' + match);
+    // window.location.replace('https://www.sports.info/cricket/match/' + id.split(':')[2] + '/' + match);
+    window.open(('https://www.sports.info/cricket/match/' + id.split(':')[2] + '/' + match), '_blank');
   }
 
   getCricketHeader() {
