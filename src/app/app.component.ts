@@ -1,21 +1,14 @@
-import { environment } from './../environments/environment.hmr';
-import { Component, OnInit, AfterContentInit, Injector, PLATFORM_ID, Inject, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Meta, Title } from '@angular/platform-browser';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { CarouselComponent } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CommonService } from './shared/providers/common-service';
+import { SportsService } from './shared/providers/sports-service';
+import * as Cricket from '@store/cricket/cricket.actions';
+import * as fromRoot from '@app/app-reducer';
 
-import * as MetaTags from './store/meta-tags-management/meta-tags.actions';
-import * as fromRoot from './app-reducer';
-import { TranslateService } from '@ngx-translate/core';
-
-/** Providers */
-import { CommonService } from '@providers/common-service';
-import { SportsService } from '@providers/sports-service';
-import { SwUpdate } from '@angular/service-worker';
-import { SchemaService } from './shared/schema/schema.service';
 
 @Component({
   selector: 'app-root',
@@ -23,296 +16,229 @@ import { SchemaService } from './shared/schema/schema.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
-  metatagsObj = {};
-  isupdate: boolean;
-  showCookiepopup = false;
-  requestedUrl;
+export class AppComponent implements OnInit, OnDestroy {
+  timerStartTime = {
+    'Cricket': { 'timeout': { 'hours': 5 }, 'beforeTimeStart': '10', 'interval': '8', 'isLiveUpdate': false, 'isStartAfterTime': false }, // from when to start fetching live data, interval in sec
+  };
+  sport = 'Cricket';
+  interval;
+  slider = [];
+  timeout;
+  customOptions: any = {
+    loop: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    lazyLoad: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    // rtl:true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      450: {
+        items: 2
+      },
+      656: {
+        items: 3
+      },
+      856: {
+        items: 4
+      },
+      1046: {
+        items: 5
+      }
+    },
+    nav: true
+  };
+  customOptions1: any = {
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    // rtl:true,
+    responsive: {
+      0: {
+        items: 1
+      }
+    },
+    nav: true
+  };
+  liveMatchesSubscription;
+  scheduleSubscription;
+  runningMatchFlagSubscription;
+  isBrowser = true;
+
+  @ViewChild('sportsSlider') public sportsSlider: CarouselComponent;
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private swupdate: SwUpdate,
-    private commonService: CommonService,
-    private sportsservice: SportsService,
-    private router: Router,
-    private meta: Meta,
-    private pagetitle: Title,
+    public commonService: CommonService,
     private store: Store<fromRoot.State>,
-    private translate: TranslateService,
-    private injector: Injector,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private schemaService: SchemaService
-  ) {
-    this.getMetaTags();
-    this.swupdate.available.pipe(takeUntil(this.destroy$)).subscribe((res) => {
-      this.isupdate = true;
-    });
+    private sportsService: SportsService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
+
+  ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      if (!this.readCookie('iscookieenabled')) {
-        this.showCookiepopup = true;
-        document.cookie = 'iscookieenabled=true ; expires=Thu, 31 Dec 2050 12:00:00 UTC; Secure; SameSite=None; ';
-      } else {
-        this.showCookiepopup = false;
+      this.loadData();
+      if (this.commonService.getFromStorage('userLng') === 'arabic') {
+        this.customOptions.rtl = true;
+        this.customOptions1.rtl = true;
       }
+    } else
+      this.isBrowser = false;
+  }
+
+  loadAllSportsData() {
+    this.store.dispatch(new Cricket.LoadCricketSlider());
+  }
+  loadData() {
+    this.getCricketHeader();
+  }
+  navigate(id, match) {
+    window.location.replace('https://www.sports.info/cricket/match/' + id.split(':')[2] + '/' + match);
+  }
+
+  getCricketHeader() {
+    this.store.dispatch(new Cricket.LoadCricketSlider());
+    this.store.select('Cricket').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      if (this.slider.length == 0) {
+        this.slider = this.sortBySchedule(res.slider);
+        this.slider.forEach((match, index) => {
+          let compObj = {};
+          match.competitors.map(s => {
+            compObj[s.qualifier] = s;
+          });
+          this.slider[index].competitorsObj = compObj;
+          if (match.match_data && match.match_data.period_scores)
+            this.setPeriodScore(match, index, match.match_data.period_scores);
+          else if (match.period_scores)
+            this.setPeriodScore(match, index, match.period_scores);
+          else
+            this.slider[index].competitorsObj['home'].show_first = true;
+        });
+
+        let livematchcount = res.slider.filter(match => match.status == 'live' || match.status == 'interrupted' || match.status == 'delayed');
+
+        if (livematchcount.length > 0)
+          this.getLiveUpdateSlider(this);
+        else {
+          let upcomingMatchcount = res.slider.filter(match => match.status == 'not_started');
+          if (upcomingMatchcount.length > 0) {
+            let minTime = new Date(Math.min.apply(null, upcomingMatchcount.map(function (e) {
+              return new Date(e.scheduled);
+            })));
+
+            this.startLiveUpdateAfterTime(minTime);
+          }
+        }
+      }
+
+    });
+  }
+
+
+  getLiveUpdateSlider(classThis) {
+    this.interval = setInterval(() => {
+      classThis.sportsService.getheaderslider().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+
+        this.store.dispatch(new Cricket.LoadCricketSliderSuccess(res.data));
+        // this.slider = this.sortBySchedule(res.data);
+        res.data.forEach((match, index) => {
+          let indexSlider = this.slider.findIndex((slide) => slide.id == match.id);
+          if (indexSlider >= 0) {
+            this.slider[indexSlider].status = match.status;
+            if (match.match_data && match.match_data.period_scores) {
+              this.setPeriodScore(match, indexSlider, match.match_data.period_scores);
+            } else if (match.period_scores)
+              this.setPeriodScore(match, indexSlider, match.period_scores);
+            else
+              this.slider[indexSlider].competitorsObj['home'].show_first = true;
+          }
+        });
+      });
+    }, classThis.commonService.miliseconds(0, 0, this.timerStartTime.Cricket.interval)); // TEMP
+  }
+
+  /** Start Live Update after specific time - If match will start within 5 hours  */
+  startLiveUpdateAfterTime(scheduled) {
+    if (!this.timerStartTime[this.sport].isStartAfterTime) {
+
+      let remainingTime = this.commonService.getRemainigTimeofMatch(scheduled);
+      let remainingMiliSec = this.commonService.miliseconds(remainingTime.hours, remainingTime.minutes, remainingTime.seconds);
+      remainingMiliSec = remainingMiliSec - this.commonService.miliseconds(0, this.timerStartTime[this.sport].beforeTimeStart, 0);
+
+      if (remainingTime.days == 0 && remainingTime.hours < this.timerStartTime[this.sport].timeout.hours) {
+        this.timeout = setTimeout(() => {
+          if (this.sport == 'Cricket')
+            this.getLiveUpdateSlider(this);
+        }, remainingMiliSec);
+      } else if (remainingMiliSec < 0) {
+        if (this.sport == 'Cricket')
+          this.getLiveUpdateSlider(this);
+      }
+
+    }
+
+  }
+  setPeriodScore(match, index, period_scores) {
+    if (period_scores.length > 0) {
+      period_scores.map(sPScore => {
+        if (sPScore.home_score) {
+          this.slider[index].competitorsObj['home'].period_scores = sPScore;
+          if (sPScore.number === 1) {
+            this.slider[index].competitorsObj['home'].show_first = true;
+          }
+        } else if (sPScore.away_score) {
+          if (sPScore.number === 1) {
+            this.slider[index].competitorsObj['away'].show_first = true;
+          }
+          this.slider[index].competitorsObj['away'].period_scores = sPScore;
+        }
+      });
     }
   }
+
+  replace(str) {
+    return (str != null) ? str.replace(/_/g, ' ') : str;
+  }
+  sortBySchedule(arr) {
+    return arr.sort(function (a, b) {
+      if (a.status == 'live' || a.status == 'interrupted' || a.status == 'abandoned' || a.status == 'postponded' || a.status == 'delayed') {
+        return -1;
+      } else if (a.status == 'not_started') {
+        if (a.scheduled && b.scheduled) {
+          let aDate: any = new Date(a.scheduled);
+          let bDate: any = new Date(b.scheduled);
+          return aDate - bDate;
+        }
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  /** Clear Interval and timeout on destroy */
+  clearTimeInterval() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.runningMatchFlagSubscription) this.runningMatchFlagSubscription.unsubscribe();
+      clearInterval(this.interval);
+      clearTimeout(this.timeout);
+      if (this.liveMatchesSubscription) this.liveMatchesSubscription.unsubscribe();
+      if (this.scheduleSubscription) this.scheduleSubscription.unsubscribe();
+    }
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+    this.clearTimeInterval();
   }
 
-  ngOnInit() {
-    console.log(environment.version)
-    let selectedLang = 'english';
-    let host;
-    if (isPlatformServer(this.platformId)) {
-      host = this.injector.get('req') ? this.injector.get('req').headers.host : 'www.sports.info';
-    } else {
-      host = window.location.host;
-    }
-    this.commonService.siteUrl = `https://${host}/`;
-    // console.log(this.injector.get('req').headers);
-    let splitedHost = host.split('.')[0];
-    if ((host != 'www.sports.info'
-      && host != 'dev.sports.info'
-      && !host.includes('localhost')
-      && !host.includes('192.168')
-      && !host.includes('127.0.0.1'))) {
-      if (splitedHost
-        && ['temp', 'english', 'arabic', 'bengali', 'brazil', 'colombia', 'french', 'gujarati', 'hindi', 'italian', 'marathi', 'mexico', 'portugal', 'russia', 'spain', 'telugu'].includes(splitedHost))
-        selectedLang = splitedHost;
-      else
-        selectedLang = host.includes('192.168.11.31:5500') ? 'hindi' : selectedLang;
-    }
-    let element = document.getElementById('main-body');
-    if (selectedLang === 'arabic' && element != null) {
-      element.classList.add('arabic');
-    }
-    this.translate.setDefaultLang(selectedLang);
-
-    /* //get data from ngrx store through meta tags actions */
-    if (isPlatformServer(this.platformId)) {
-      this.requestedUrl = this.injector.get('req').url;
-      // if (!(requestUrl.match('^(?:[^/][\d\w\s\.\\.\-:]+)$(?<=\.\w{2,4})$'))) {
-      //   this.requestedUrl = requestUrl;
-      //   this.setmetatags(requestUrl);
-      // }
-    } else {
-      /* //save language to localstorage */
-      this.commonService.setInStorage('userLng', selectedLang);
-    }
-    /* //get data from ngrx store through meta tags actions */
-
-    /*  //susbcribe to router events */
-    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
-      /*  //scroll to top navigation related */
-      if (!(event instanceof NavigationEnd)) {
-        return;
-      }
-      if (isPlatformBrowser(this.platformId))
-        window.scrollTo(0, 0);
-      /* //change route get url */
-      if (event instanceof NavigationEnd) {
-        if ((!event.url.includes('/article') && !event.url.includes('/video') && !event.url.includes('/blog')))
-          this.setmetatags(event.url);
-        /*         //set meta tags from here... */
-        /*         //set page title */
-        let title = this.commonService.getPagetitlebyurl(event.url);
-        if (title != null) {
-          this.pagetitle.setTitle(title);
-        }
-      }
-    });
-  }
-
-  setmetatags(routerURL) {
-    let image = "https://dev.sports.info/assets/images/sports-info.jpg";
-    this.getBestMatchedUrl(routerURL).then(
-      (data: any) => {
-        if (data) {
-          if (data.title) {
-            this.meta.updateTag({ name: 'title', content: data.title });
-            this.meta.updateTag({ property: 'og:title', content: data.title });
-            this.meta.updateTag({ name: 'twitter:title', content: data.title });
-          }
-          this.meta.updateTag(
-            {
-              name: 'keywords', content: data.keywords ?
-                data.keywords :
-                'Cricket, Kabaddi, Soccer, Bad Minton, BasketBall, Field Hockey, Racing, Tennis Sports'
-            });
-
-          if (data.description) {
-            this.meta.updateTag({ name: 'description', content: data.description });
-            this.meta.updateTag({ property: 'og:description', content: data.description });
-            this.meta.updateTag({ name: 'twitter:description', content: data.description });
-          }
-
-          if (data.image) {
-            image = this.commonService.isUrl(data.image) ? data.image : this.commonService.s3Url + data.image;
-          }
-
-          //Code update here for image
-          this.meta.updateTag({ name: 'twitter:image', content: image });
-          this.meta.updateTag({ name: 'twitter:image:src', content: image });
-          this.meta.updateTag({ property: 'og:image', content: image });
-
-          if (data.topic)
-            this.meta.updateTag({ name: 'topic', content: data.topic });
-          if (data.subject)
-            this.meta.updateTag({ name: 'subject', content: data.subject });
-          if (data['og:type'])
-            this.meta.updateTag({ property: 'og:type', content: data['og:type'] });
-          if (data['twitter:card'])
-            this.meta.updateTag({ name: 'twitter:card', content: data['twitter:card'] });
-
-          if (data.title && data.description) {
-            this.setSchema(data);
-          } else {
-            this.setSchema();
-          }
-
-        } else if (isPlatformBrowser(this.platformId)) {
-          this.setDefaultMetaFields(image);
-          this.setSchema();
-        }
-      }
-    ).catch(e => {
-      this.setDefaultMetaFields(image);
-      this.setSchema();
-    });
-  }
-
-  setDefaultMetaFields(image) {
-    this.meta.updateTag({ name: 'title', content: 'title' });
-    this.meta.updateTag({ property: 'og:title', content: 'title' });
-    this.meta.updateTag({ name: 'twitter:title', content: 'title' });
-    this.meta.updateTag({ name: 'keywords', content: 'Sports.info' });
-    this.meta.updateTag({ name: 'description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-    this.meta.updateTag({ property: 'og:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-    this.meta.updateTag({ name: 'twitter:description', content: 'Sports.info | Cricket unites, but is there no world beyond? Sports.info brings the experience of a world beyond cricket!' });
-    this.meta.updateTag({ name: 'twitter:image', content: image });
-    this.meta.updateTag({ name: 'twitter:image:src', content: image });
-    this.meta.updateTag({ property: 'og:image', content: image });
-    this.meta.updateTag({ name: 'mimage', content: image });
-    this.meta.updateTag({ name: 'topic', content: 'Sports.info' });
-    this.meta.updateTag({ name: 'subject', content: 'Sports.info' });
-    this.meta.updateTag({ property: 'og:type', content: 'article' });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-  }
-
-  setSchema(param: any = null) {
-    if (param == null) {
-      this.schemaService.prepareSchema();
-    } else {
-      let data = {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "@id": "https://www.sports.info/#website",
-            "url": "https://www.sports.info/",
-            "name": param.title,
-            "description": param.description,
-            "potentialAction": [
-              {
-                "@type": "SearchAction",
-                "target": "https://www.sports.info/?s={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            ],
-            "inLanguage": "en-US"
-          },
-          {
-            "@type": "WebPage",
-            "@id": "https://www.sports.info/#webpage",
-            "url": "https://www.sports.info/",
-            "name": param.title,
-            "isPartOf": {
-              "@id": "https://www.sports.info/#website"
-            },
-            "datePublished": "2018-01-10T16:34:21+00:00",
-            "dateModified": "2020-07-06T15:47:05+00:00",
-            "description": param.title,
-            "inLanguage": "en-US",
-            "potentialAction": [
-              {
-                "@type": "ReadAction",
-                "target": [
-                  "https://www.sports.info/"
-                ]
-              }
-            ]
-          }
-        ]
-      };
-      this.schemaService.prepareSchema(data);
-    }
-  }
-
-  /* //get cookie by name */
-  readCookie(name) {
-    let nameEQ = name + '=';
-    let ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-  }
-
-
-  /* //get meta tags */
-  getMetaTags() {
-    this.sportsservice.getmetatags().pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      if (res.data.length > 0) {
-        this.store.dispatch(new MetaTags.SaveMetaTags(res.data));
-      }
-    });
-  }
-
-  updatewebsite() {
-    this.isupdate = false;
-    window.location.reload(true);
-  }
-
-  ngAfterContentInit() {
-    this.store.select('Metatags').pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-
-      let metadata = data.MetaTags;
-      let metaarray = [];
-      metadata.map((data) => {
-        // tslint:disable-next-line: max-line-length
-        let routerUrl = data.sUrl.match('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,2}(:[0-9]{1,5})?(\/.*)?$');
-        if (routerUrl != null && routerUrl[4] !== undefined)
-          metaarray[routerUrl[4]] = data;
-        else
-          metaarray['/'] = data;
-      });
-      this.metatagsObj = { ...metaarray };
-      if (Object.keys(this.metatagsObj).length != 0 && this.requestedUrl)
-        this.setmetatags(this.requestedUrl);
-    });
-  }
-
-  getBestMatchedUrl(url) {
-    return new Promise((resolve, reject) => {
-      try {
-        if (Object.keys(this.metatagsObj).length == 0) reject();
-        if (this.metatagsObj[url]) {
-          resolve(this.metatagsObj[url]);
-        } else if (url) {
-          this.getBestMatchedUrl(url.replace(new RegExp(url.substr(url.lastIndexOf('/')) + '$'), '')).then(resolve).catch(reject);
-        } else if (this.metatagsObj['/']) {
-          resolve(this.metatagsObj['/']);
-        } else {
-          reject();
-        }
-      }
-      catch (e) {
-        console.log(e); reject(e);
-      }
-    });
-  }
 }

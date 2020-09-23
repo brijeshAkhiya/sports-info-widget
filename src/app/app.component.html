@@ -1,23 +1,82 @@
-<app-main-header></app-main-header>
-<div class="main-container">
-  <router-outlet></router-outlet>
-</div>
-<app-schema></app-schema>
-<app-main-footer></app-main-footer>
+<div class="header-live-section" *ngIf="isBrowser">
+  <div class="container">
+    <div class="header-live-inner d-flex align-items-center">
+      <div class="header-live-slider" *ngIf="slider.length > 0">
+        <owl-carousel-o [options]="customOptions">
+          <ng-container class="items" *ngFor="let slide of slider">
+            <ng-template carouselSlide>
+              <!--Live matches-->
+              <div class="slider-item">
+                <div (click)="navigate(slide.id, slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)" class="slider-item-inner fullblock-link-container">
+                  <div class="title d-flex justify-content-between">
+                    <p class="tour-name" [ngClass]="sport | lowercase">
+                      <b>{{slide.season_name ? slide.season_name : slide.tournament_name}} </b> <span
+                        class="text-capitalize">{{ slide.tournament_round ? ' - '+slide.tournament_round : '' }}</span>
+                    </p>
 
-<app-api-store></app-api-store>
-<div class="new-ver-toast d-flex justify-content-between align-items-center" [ngClass]="{active: isupdate}">
-  <p>{{'Shared_Module3.new_version_available' | translate}}</p>
-  <p><a (click)="updatewebsite()">{{'Shared_Module3.Take_me_there' | translate}} <span></span></a></p>
-</div>
+                    <!-- <p class="tour-name"><b>{{slide.season_name ? slide.season_name : slide.tournament_name}}</b></p> -->
+                    <p
+                      *ngIf="slide.status == 'not_started' || slide.status == 'closed' || slide.status == 'ended'; else matchStatus">
+                      {{slide.scheduled | amTimeAgo}}</p>
+                    <ng-template #matchStatus>
+                      <p class="live-result">{{slide.status ? slide.status : slide.match_status}}</p>
+                    </ng-template>
+                  </div>
 
-<div class="cookies-notification white-text d-flex align-items-center justify-content-between"
-  [ngClass]="{'cookies-hide': !showCookiepopup}">
-  <div>
-    <p class="no-margin">{{'Shared_Module3.cookie_text' | translate}}, {{'Visit' | translate}} <a
-        [routerLink]="['/terms-and-conditions']">
-        {{'Footer.Terms_and_Conditions' | translate}}</a>.</p>
-    <p class="no-margin">{{'Shared_Module3.cookie_continue_use_text' | translate}}</p>
+                  <ng-container *ngIf="slide?.competitorsObj?.away?.show_first; else home_first">
+                    <ng-container
+                      *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
+                    </ng-container>
+                    <ng-container
+                      *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #home_first>
+                    <ng-container>
+                      <ng-container
+                        *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.home, match:slide}">
+                      </ng-container>
+                      <ng-container
+                        *ngTemplateOutlet="team;context:{competitor:slide?.competitorsObj?.away, match:slide}">
+                      </ng-container>
+                    </ng-container>
+                  </ng-template>
+
+                  <ng-template #team let-competitor="competitor" let-match="match">
+                    <div class="match-info d-flex justify-content-between align-items-center">
+                      <p [ngClass]="{'match-winner': match.winner_id == competitor?.id}">
+                        <img [lazyLoad]="competitor?.id| logosurl" alt="{{competitor?.abbreviation}}"
+                          [defaultImage]="commonService.flagplaceholder">{{competitor?.abbreviation}}</p>
+                      <p *ngIf="competitor?.period_scores"><b>
+                          {{competitor?.period_scores.display_score | cricketScore}}
+                          ({{competitor?.period_scores.display_overs}}
+                          ov)</b></p>
+                    </div>
+                  </ng-template>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <p class="result-line" *ngIf="slide.match_status == 'live' || !slide.match_result"
+                        [innerHTML]="slide?.venue_name"></p>
+                      <p class="result-line" *ngIf="slide.match_status != 'live' && slide.match_result">
+                        {{ slide.match_result}}</p>
+                    </div>
+                  </div>
+                  <a class="fullblock-link"
+                    title="{{(slide.competitorsObj.home.abbreviation + '-vs-' +slide.competitorsObj.away.abbreviation)}}"></a>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+    <div class="header-live-slider no-matches d-flex justify-content-center align-items-center"
+      *ngIf="slider.length == 0">
+      <p class="no-margin">{{'No matches in recent period.' | translate}}</p>
+    </div>
   </div>
-  <button class="cookies-close" (click)="showCookiepopup = false" title="Close"></button>
+  <p class="sportsinfo-poweredby">Powered by
+    <a href="https://www.sports.info/?utm_source=crictracker&utm_medium=banner&utm_campaign=livescore" target="_blank"><img src="https://www.sports.info/assets/images/logo_v2.svg"></a>
+  </p>
 </div>

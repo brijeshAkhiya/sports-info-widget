@@ -25,6 +25,7 @@ export class AppInterceptor implements HttpInterceptor {
         private translate: TranslateService,
     ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler) {
+      console.log('Interceptore called');
         /*         //google maps api doesnt allow extra header params - Fix condition --->*/
         if (!request.url.includes('maps.googleapis.com/maps/api')) {
             request = request.clone({

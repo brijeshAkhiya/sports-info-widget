@@ -11,16 +11,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/browser",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "resourcesOutputPath": "assets/images",
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
-              "src/favicon.ico",
-              "src/manifest.json",
-              "src/robots.txt"
+              "src/favicon.ico"
             ],
             "styles": [
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
@@ -28,7 +27,7 @@
               "src/assets/css/sports-info-main.css"
             ],
             "scripts": [
-              
+
             ]
           },
           "configurations": {
@@ -47,9 +46,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "src/ngsw-config.json"
+              "buildOptimizer": true
             },
             "hmr": {
               "fileReplacements": [
@@ -96,7 +93,6 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/manifest.json",
               "src/robots.txt"
             ]
           }

@@ -7,11 +7,8 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable, Observer } from 'rxjs';
-import { readFileSync } from 'fs';
 import { AppInterceptor } from './shared/providers/app.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TransferState } from '@angular/platform-browser';
-import { TranslateServerLoader } from './translate-server-loader.service';
 let english = require('../assets/i18n_v2_5/english.json');
 let arabic = require('../assets/i18n_v2_5/arabic.json');
 let bengali = require('../assets/i18n_v2_5/bengali.json');
@@ -30,10 +27,6 @@ export function universalLoader(): TranslateLoader {
     }
   } as TranslateLoader;
 }
-export function translateFactory(transferState: TransferState) {
-  return new TranslateServerLoader('/assets/i18n_v2_5', '.json', transferState);
-}
-
 
 @NgModule({
   imports: [
@@ -41,14 +34,6 @@ export function translateFactory(transferState: TransferState) {
     ServerModule,
     ModuleMapLoaderModule,
     ServerTransferStateModule,
-    TranslateModule.forRoot({
-      // loader: { provide: TranslateLoader, useFactory: universalLoader }
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translateFactory,
-        deps: [TransferState]
-      }
-    })
   ],
   providers: [
     {
